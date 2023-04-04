@@ -1,2 +1,6 @@
 import './bootstrap';
-import '../blocks/button/button';
+import.meta.glob([
+    '../images/**',
+]);
+
+import '../blocks/ui/button/button';

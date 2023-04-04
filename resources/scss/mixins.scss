@@ -1,0 +1,48 @@
+@use 'sass:math';
+
+@mixin tablet {
+    @media only screen and (min-width: $tablet * 1px) {
+        @content;
+    }
+}
+
+@mixin large {
+    @media only screen and (min-width: $large * 1px) {
+        @content;
+    }
+}
+
+@mixin desktop {
+    @media only screen and (min-width: $desktop * 1px) {
+        @content;
+    }
+}
+
+@mixin fade($type) {
+    @if $type== "hide" {
+        visibility: hidden;
+        opacity: 0;
+        transition: visibility 1s, opacity 1s;
+    } @else if $type== "show" {
+        visibility: visible;
+        opacity: 1;
+        transition: visibility 1s, opacity 1s;
+    }
+}
+
+
+@mixin font-size($font-size, $line-height: normal) {
+    font-size: rem($font-size);
+
+    @if $line-height==normal {
+        line-height: normal;
+    } @else {
+        line-height: math.div($line-height, $font-size);
+    }
+}
+
+@mixin pseudo($display: block, $position: absolute, $content: '') {
+    content: $content;
+    display: $display;
+    position: $position;
+}

@@ -10,6 +10,7 @@
         "vite": "^4.0.0"
     },
     "dependencies": {
+        "modern-normalize": "^1.1.0",
         "sass": "^1.60.0"
     }
 }

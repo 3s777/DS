@@ -1,5 +1,14 @@
-@import "font";
+@import '~/modern-normalize/modern-normalize.css';
+@import "functions";
+@import "mixins";
+@import "fonts";
+@import "colors";
+@import "variables";
 @import "common";
+@import "grid";
 
+
+@import "../blocks/header/header";
+@import "../blocks/main-menu/main-menu";
 @import "../blocks/logo/logo";
-@import "../blocks/button/button";
+@import "../blocks/ui/button/button";
