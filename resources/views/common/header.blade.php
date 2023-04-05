@@ -1,9 +1,9 @@
 <div class="container">
     <div class="grid">
-        <div class="col-desk-3 col-tab-6">dfssfd</div>
-        <div class="col-desk-3 col-tab-6">dfssfd</div>
-        <div class="col-desk-3 col-tab-6">dfssfd</div>
-        <div class="col-desk-3 col-tab-6" style="text-align: right">dfssfddfssfddfssfddfssfddfssfd dfssfd dfssfd dfssfddfssfd dfssfddfssfd</div>
+        <div class="col-xl-3 col-lg-4 col-md-6 col-sm-12">dfssfd</div>
+        <div class="col-xl-3 col-lg-4 col-md-6 col-sm-12">1dfssfd</div>
+        <div class="col-xl-3 col-lg-4 col-md-6 col-sm-12">dfssfd</div>
+        <div class="col-xl-3 col-lg-4 col-md-6 col-sm-12" style="text-align: right">dfssfddfssfddfssfddfssfddfssfd dfssfd dfssfd dfssfddfssfd dfssfddfssfd</div>
     </div>
 </div>
 

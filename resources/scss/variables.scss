@@ -1,23 +1,27 @@
-$tablet: 768px;
-$large: 1024px;
-$desktop: 1380px;
+$sm: 576px;
+$md: 768px;
+$lg: 1024px;
+$xl: 1400px;
 
-// desktop grid
-$grid-desktop-columns: 12;
-$grid-desktop-sideMargin: 80px;
-$grid-desktop-gutter: 30px;
-$grid-desktop-breakpoint: $desktop;
+$grid-xl-columns: 12;
+$grid-xl-gutter: 40px;
+$grid-xl-breakpoint: $xl;
 
-// tablet grid
-$grid-tablet-columns: 12;
-$grid-tablet-sideMargin: 60px;
-$grid-tablet-gutter: 30px;
-$grid-tablet-breakpoint: 1020px;
+$grid-lg-columns: 12;
+$grid-lg-gutter: 40px;
+$grid-lg-breakpoint: $lg;
 
-// mobile grid
-$grid-mobile-columns: 4;
-$grid-mobile-sideMargin: 32px;
-$grid-mobile-gutter: 20px;
-$grid-mobile-breakpoint: 620px;
+$grid-md-columns: 12;
+$grid-md-gutter: 40px;
+$grid-md-breakpoint: $md;
+
+$grid-sm-columns: 12;
+$grid-sm-gutter: 40px;
+$grid-sm-breakpoint: $sm;
 
 $base-font-size: 16px;
+
+$small-border-radius: 8px;
+$big-border-radius: 32px;
+
+$base-box-shadow: 0 6px 16px 0 rgba(0,0,0,.08), 0 3px 6px -4px rgba(0,0,0,.12), 0 9px 28px 8px rgba(0,0,0,.05);

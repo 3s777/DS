@@ -1,43 +1,27 @@
-// FLEXBOX CSS GRID
-// by Laptev Pavel
+@use 'sass:math';
 
-// VARiABLES
-
-
-// pixels to % variables
-$desk-grid-width: 100%;
-$tab-grid-width: 100%;
-$mob-grid-width: 100%;
-
-$desk-gutter: (
-    (
-      $grid-desktop-gutter /
-        ($grid-desktop-breakpoint - ($grid-desktop-sideMargin * 2))
-    ) * 100%
+$xl-gutter: (
+    (math.div($grid-xl-gutter, $grid-xl-breakpoint)) * 100%
 );
-$tab-gutter: (
-    (
-      $grid-tablet-gutter /
-        ($grid-tablet-breakpoint - ($grid-tablet-sideMargin * 2))
-    ) * 100%
+$lg-gutter: (
+    (math.div($grid-lg-gutter, $grid-lg-breakpoint)) * 100%
 );
-$mob-gutter: (
-    (
-      $grid-mobile-gutter /
-        ($grid-mobile-breakpoint - ($grid-mobile-sideMargin * 2))
-    ) * 100%
+$md-gutter: (
+    (math.div($grid-md-gutter, $grid-md-breakpoint)) * 100%
+);
+$sm-gutter: (
+    (math.div($grid-sm-gutter, $grid-sm-breakpoint)) * 100%
 );
 
-// FUNCTIONS AND MiXINS
 @function col-width($i, $columns) {
-    @return 100% / $columns * $i;
+    @return math.div(100%, $columns)  * $i;
 }
 
 @mixin col-props($i, $columns, $gutter) {
     box-sizing: border-box;
     width: col-width($i, $columns);
-    padding-left: $gutter/2;
-    padding-right: $gutter/2;
+    padding-left: math.div($gutter, 2);
+    padding-right: math.div($gutter, 2);
 }
 
 @mixin columns-loop($name, $columns, $gutter) {
@@ -51,38 +35,47 @@ $mob-gutter: (
     }
 }
 
-@mixin grid-base($width, $grid-desktop-gutter) {
+@mixin grid-base($width, $grid-xl-gutter) {
     box-sizing: border-box;
     display: flex;
-    margin-left: -$grid-desktop-gutter/2;
-    margin-right: -$grid-desktop-gutter/2;
+    margin-left: -(math.div($grid-xl-gutter, 2));
+    margin-right: -(math.div($grid-xl-gutter, 2));
     flex-wrap: wrap;
-    max-width: $grid-desktop-breakpoint;
+    max-width: $grid-xl-breakpoint;
     width: auto;
 }
 
-// CLASSES
 .grid {
-    @include grid-base($desk-grid-width, $grid-desktop-gutter);
-    @media screen and (max-width: $grid-tablet-breakpoint) {
-        margin-left: auto;
-        margin-right: auto;
-        width: $tab-grid-width;
+    @include grid-base(100%, $grid-xl-gutter);
+    @media screen and (max-width: $grid-lg-breakpoint) {
+        margin-left: -(math.div($grid-lg-gutter, 2));
+        margin-right: -(math.div($grid-lg-gutter, 2));
+        width: auto;
     }
-    @media screen and (max-width: $grid-mobile-breakpoint) {
-        width: $mob-grid-width;
+    @media screen and (max-width: $grid-md-breakpoint) {
+        margin-left: -(math.div($grid-md-gutter, 2));
+        margin-right: -(math.div($grid-md-gutter, 2));
+        width: auto;
+    }
+    @media screen and (max-width: $grid-sm-breakpoint) {
+        margin-left: -(math.div($grid-sm-gutter, 2));
+        margin-right: -(math.div($grid-sm-gutter, 2));
+        width: auto;
     }
     &-0 {
-        @include grid-base(100%, $grid-desktop-gutter);
+        @include grid-base(100%, $grid-xl-gutter);
     }
 }
 
 .col {
-    @include columns-loop(desk, $grid-desktop-columns, $desk-gutter);
-    @media screen and (max-width: $grid-tablet-breakpoint) {
-        @include columns-loop(tab, $grid-tablet-columns, $tab-gutter);
+    @include columns-loop(xl, $grid-xl-columns, $xl-gutter);
+    @media screen and (max-width: $grid-lg-breakpoint) {
+        @include columns-loop(lg, $grid-lg-columns, $lg-gutter);
     }
-    @media screen and (max-width: $grid-mobile-breakpoint) {
-        @include columns-loop(mob, $grid-mobile-columns, $mob-gutter);
+    @media screen and (max-width: $grid-md-breakpoint) {
+        @include columns-loop(md, $grid-md-columns, $md-gutter);
+    }
+    @media screen and (max-width: $grid-sm-breakpoint) {
+        @include columns-loop(sm, $grid-sm-columns, $sm-gutter);
     }
 }
