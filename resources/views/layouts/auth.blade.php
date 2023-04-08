@@ -6,11 +6,11 @@
         @vite(['resources/scss/app.scss'])
     </head>
     <body>
-        <div id="app">
+        <div class="auth">
             @include('common.header')
 
 
-            <main>
+            <main class="main">
                 @yield('content')
             </main>
 

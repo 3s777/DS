@@ -1,0 +1,12 @@
+.auth-menu {
+    display: flex;
+}
+
+.auth-menu__item {
+    margin: 0 8px;
+
+    &:last-child {
+        margin-right: 0;
+     }
+}
+

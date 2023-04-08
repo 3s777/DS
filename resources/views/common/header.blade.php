@@ -1,14 +1,15 @@
-<div class="container">
-    <div class="grid">
-        <div class="col-xl-3 col-lg-4 col-md-6 col-sm-12">dfssfd</div>
-        <div class="col-xl-3 col-lg-4 col-md-6 col-sm-12">1dfssfd</div>
-        <div class="col-xl-3 col-lg-4 col-md-6 col-sm-12">dfssfd</div>
-        <div class="col-xl-3 col-lg-4 col-md-6 col-sm-12" style="text-align: right">dfssfddfssfddfssfddfssfddfssfd dfssfd dfssfd dfssfddfssfd dfssfddfssfd</div>
-    </div>
-</div>
+{{--<div class="container">--}}
+{{--    <div class="grid">--}}
+{{--        <div class="col-xl-3 col-lg-4 col-md-6 col-sm-12">dfssfd</div>--}}
+{{--        <div class="col-xl-3 col-lg-4 col-md-6 col-sm-12">1dfssfd</div>--}}
+{{--        <div class="col-xl-3 col-lg-4 col-md-6 col-sm-12">dfssfd</div>--}}
+{{--        <div class="col-xl-3 col-lg-4 col-md-6 col-sm-12" style="text-align: right">dfssfddfssfddfssfddfssfddfssfd dfssfd dfssfd dfssfddfssfd dfssfddfssfd</div>--}}
+{{--    </div>--}}
+{{--</div>--}}
 
 
 <header class="header">
+    <div class="sfd"></div>
     <div class="container">
         <div class="header__inner">
             <div class="logo">
@@ -19,28 +20,38 @@
             </div>
 
             <nav class="main-menu">
-                <a class="button main-menu__item" href="#">Shelfs</a>
-                <a class="button main-menu__item" href="#">Blog</a>
-                <a class="button main-menu__item" href="#">Feed</a>
-                <a class="button main-menu__item" href="#">Users</a>
-                <a class="button main-menu__item" href="#">Add</a>
+                <div class="main-menu__item">
+                    <a class="button main-menu__link" href="#">Shelfs</a>
+                </div>
+                <div class="main-menu__item">
+                    <a class="button main-menu__link" href="#">Blog</a>
+                </div>
+                <div class="main-menu__item">
+                    <a class="button main-menu__link" href="#">Feed</a>
+                </div>
+                <div class="main-menu__item">
+                    <a class="button main-menu__link" href="#">Users</a>
+                </div>
+                <div class="main-menu__item">
+                    <a class="button button-submit main-menu__link" href="#">Add</a>
+                </div>
             </nav>
 
-            <div class="user-profile">
-                <!-- Right Side Of Navbar -->
-                <ul class="navbar-nav ml-auto">
-                    <!-- Authentication Links -->
+            <div class="profile-menu">
+                <div class="auth-menu">
                     @guest
-                        <li class="nav-item">
-                            <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
-                        </li>
-                        @if (Route::has('register'))
-                            <li class="nav-item">
-                                <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
-                            </li>
+                        @if(Route::currentRouteName() != 'login')
+                            <div class="auth-menu__item">
+                                <a class="button auth-menu__link" href="{{ route('login') }}">{{ __('Login') }}</a>
+                            </div>
+                        @endif
+                        @if (Route::has('register') && Route::currentRouteName() != 'register')
+                            <div class="auth-menu__item">
+                                <a class="button auth-menu__link" href="{{ route('register') }}">{{ __('Register') }}</a>
+                            </div>
                         @endif
                     @else
-                        <li class="nav-item dropdown">
+                        <div class="nav-item dropdown">
                             <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                                 {{ Auth::user()->name }}
                             </a>
@@ -56,9 +67,9 @@
                                     @csrf
                                 </form>
                             </div>
-                        </li>
+                        </div>
                     @endguest
-                </ul>
+                </div>
             </div>
         </div>
 

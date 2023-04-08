@@ -1,7 +1,26 @@
 .button {
-    padding: 12px 24px;
-    border-radius: $small-border-radius;
+    display: block;
+    padding: 14px 32px;
+    border: 0;
     font-size: rem(16);
+    line-height: 1;
+    color: $font-color;
     text-decoration: none;
     background-color: $base-light-transparent;
+    transition: $base-transition;
+    cursor: pointer;
+    box-shadow: none;
+    border-radius: $extra-small-border-radius;
+
+    &:hover {
+        background-color: $base-success;
+    }
+}
+
+.button-submit {
+    background-color: $base-success;
+
+    &:hover {
+        background-color: $base-success-light;
+    }
 }
