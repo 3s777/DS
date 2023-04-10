@@ -1,9 +1,13 @@
+::selection {
+    background-color: $base-success-light;
+}
+
 html {
     font-size: 16px;
 }
 
 body {
-    font-family: 'GolosUIWebRegular', sans-serif;
+    font-family: 'GolosUIWebVF', sans-serif;
     background-color: $base-main;
     color: $font-color;
 }

@@ -3,4 +3,4 @@ import.meta.glob([
     '../images/**',
 ]);
 
-import '../blocks/ui/button/button';
+import '../blocks/ui/input-text/input-text';

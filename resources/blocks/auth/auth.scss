@@ -1,9 +1,20 @@
 .auth__content {
     display: flex;
     justify-content: center;
-    padding-top: 200px;
+    padding-top: 150px;
 }
 
 .auth__card {
     width: 400px;
+}
+
+.auth__forgot-link {
+    display: block;
+    margin-top: 12px;
+    color: $font-color-50;
+    transition: $base-transition;
+
+    &:hover {
+        color: $font-color;
+    }
 }

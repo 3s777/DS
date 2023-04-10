@@ -1,34 +1,48 @@
-.input-text {                      /* This keeps the label and input field together*/
+.input-text {
     position: relative;
 }
 
-.input-text__field         {             /* This styles the actual input box */
-    padding:12px 16px;
-    margin-top: 20px;
-    margin-bottom: 12px;
-    width:100%;
+.input-text__field {
+    width: 100%;
+    padding: 14px 20px;
+    border: 2px solid transparent;
+    color: $font-color;
+    background-color: $base-main-dark-transparent;
     border-radius: $extra-small-border-radius;
-    border: 0;
-    background-color: $base-main-dark;
+    outline: none;
+    transition: $base-transition ease all;
 }
 
-.input-text__label         {            /* This styles the label before interaction */
+.dg {
+    background-color: $base-main-dark-like-transparent;
+}
 
-    font-weight:normal;
-    position:absolute;
-    left: 12px;
-    top: 32px;
+.input-text__label {
+    position: absolute;
+    left: 20px;
+    top: 16px;
+    color: $font-color;
     pointer-events: none;
-    transition:0.2s ease all;
-    -moz-transition:0.2s ease all;
-    -webkit-transition:0.2s ease all;
-    color: #fff;
+    transition: $base-transition ease all;
+    opacity: .5;
+}
+
+.input-text__field:focus,
+.input-text__field:active {
+    border: 2px solid $font-color;
+}
+
+.input-text__field_filled  {
+    outline: none;
 }
 
 .input-text__field:focus ~ .input-text__label,
-.input-text__field:valid ~ .input-text__label  {   /* This styles the label after interaction */
-    top:0;
+.input-text__field:active ~ .input-text__label,
+.input-text__field:valid ~ .input-text__label,
+.input-text__field_filled ~ .input-text__label {
+    top: -17px;
     left: 0;
-    font-size:14px;
-    color: #fff;
+    font-size: rem(12);
+    line-height: 1;
+    color: $font-color;
 }

@@ -17,10 +17,14 @@
     }
 }
 
-.button-submit {
+.button_submit {
     background-color: $base-success;
 
     &:hover {
         background-color: $base-success-light;
     }
+}
+
+.button_full_width {
+    width: 100%;
 }

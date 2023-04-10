@@ -33,7 +33,7 @@
                     <a class="button main-menu__link" href="#">Users</a>
                 </div>
                 <div class="main-menu__item">
-                    <a class="button button-submit main-menu__link" href="#">Add</a>
+                    <a class="button button_submit main-menu__link" href="#">Add</a>
                 </div>
             </nav>
 

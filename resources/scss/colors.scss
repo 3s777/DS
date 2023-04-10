@@ -1,21 +1,41 @@
 $base: 238;
 $additional: 129;
 $alternative: 0;
+$font: 0;
 $success: 129;
 $danger: 0;
 $warning: 0;
 $info: 0;
 
 $base-main: hsla($base+3, 25%, 31%, 1);
-$base-main-dark: hsla($base, 30%, 23%, 1);
 $base-main-dark: hsla($base, 27%, 27%, 1);
+$base-main-dark-transparent: hsla($base, 27%, 27%, .6);
+$base-main-dark-like-transparent: hsla($base, 22%, 32%);
+$base-light-transparent: hsla($base, 15%, 41%, .8);
+//$base-main-dark: hsla($base, 30%, 23%, 1);
 //hsl(238.38deg 38.14% 19.02%);
 //$base-main: hsla(242, 25%, 30%, 1);
 //$base-main: hsla(242, 27%, 27%, 1);
 //$base-main-light: hsla(238, 27%, 27%, 1);
-$base-light-transparent: hsla($base, 15%, 41%, .8);
-$base-extra-light-transparent: hsla($base, 10%, 65%, .8);
+//$base-extra-light-transparent: hsla($base, 10%, 65%, .8);
 $additional-main: hsla($additional, 87%, 32%, 1);
-$font-color: hsla($alternative, 0%, 100%, 1);
+$alternative-main: hsla($alternative, 0%, 100%, 1);
+
+
+
+$font-color: hsla($font, 0%, 100%, 1);
+$font-color-10: hsla($font, 0%, 100%, .1);
+$font-color-20: hsla($font, 0%, 100%, .2);
+$font-color-30: hsla($font, 0%, 100%, .3);
+$font-color-40: hsla($font, 0%, 100%, .4);
+$font-color-50: hsla($font, 0%, 100%, .5);
+$font-color-60: hsla($font, 0%, 100%, .6);
+$font-color-70: hsla($font, 0%, 100%, .7);
+$font-color-80: hsla($font, 0%, 100%, .8);
+$font-color-90: hsla($font, 0%, 100%, .9);
+
+
+
 $base-success: hsla($additional, 87%, 32%, 1);
 $base-success-light: hsla($additional, 87%, 40%, 1);
+$base-disabled: hsla($alternative, 0%, 50%, 1);
