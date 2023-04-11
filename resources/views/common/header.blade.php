@@ -9,13 +9,12 @@
 
 
 <header class="header">
-    <div class="sfd"></div>
     <div class="container">
         <div class="header__inner">
-            <div class="logo">
+            <div class="logo header__logo">
                 <a class="logo__link" href="{{ url('/') }}">
-                    @include('inline-svg/logo-img')
-                    @include('inline-svg/logo-text')
+                    @include('inline-svg/site-icon', ['class' => 'header__site-icon'])
+                    @include('inline-svg/site-name', ['class' => 'header__site-name'])
                 </a>
             </div>
 

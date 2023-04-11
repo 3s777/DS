@@ -10,7 +10,7 @@
         height: 600px;
         background-color: $base-main-dark;
         border-radius: 0 0 85% 30%;
-        animation: border 10s infinite linear;
+        animation: buble 10s infinite linear;
         animation-direction: alternate;
         animation-delay: 2s;
     }
@@ -24,7 +24,16 @@
     padding: 32px 0;
 }
 
-@keyframes border {
+.header__site-icon {
+    height: 44px;
+    margin-right: 12px;
+}
+
+.header__site-name {
+    height: 44px;
+}
+
+@keyframes buble {
     0% {
         transform: translateY(-150px);
         border-radius: 0 0 85% 30%;

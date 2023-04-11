@@ -22,7 +22,6 @@ $additional-main: hsla($additional, 87%, 32%, 1);
 $alternative-main: hsla($alternative, 0%, 100%, 1);
 
 
-
 $font-color: hsla($font, 0%, 100%, 1);
 $font-color-10: hsla($font, 0%, 100%, .1);
 $font-color-20: hsla($font, 0%, 100%, .2);
@@ -34,7 +33,27 @@ $font-color-70: hsla($font, 0%, 100%, .7);
 $font-color-80: hsla($font, 0%, 100%, .8);
 $font-color-90: hsla($font, 0%, 100%, .9);
 
-
+// LOGO
+$logo-1: hsl(1, 79%, 51%);
+$logo-2: hsl(0, 0%, 10%);
+$logo-3: hsl(0, 0%, 36%);
+$logo-4: hsl(208, 95%, 32%);
+$logo-5: hsl(0, 0%, 100%);
+$logo-6: hsl(0, 0%, 36%);
+$logo-7: hsl(32, 90%, 53%);
+$logo-8: hsl(0, 0%, 36%);
+$logo-9: hsl(330, 2%, 75%);
+$logo-10: hsl(105, 55%, 44%);
+$logo-11: hsl(208, 64%, 70%);
+$logo-12: hsl(0, 78%, 57%);
+$logo-13: hsl(0, 0%, 26%);
+$logo-14: hsl(28, 82%, 44%);
+$logo-stroke: hsl(0, 0%, 100%);
+$logo-stroke-1: hsl(50, 100%, 73%);
+$logo-stroke-2: hsl(42, 100%, 63%);
+$logo-stroke-3:  hsl(0, 100%, 89%);
+$logo-stroke-4: hsl(202, 100%, 91%);
+$logo-stroke-5: hsl(111deg, 52%, 80%);
 
 $base-success: hsla($additional, 87%, 32%, 1);
 $base-success-light: hsla($additional, 87%, 40%, 1);
