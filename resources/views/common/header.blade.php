@@ -37,40 +37,55 @@
             </nav>
 
             <div class="profile-menu">
-                <div class="auth-menu">
-                    @guest
-                        @if(Route::currentRouteName() != 'login')
-                            <div class="auth-menu__item">
-                                <a class="button auth-menu__link" href="{{ route('login') }}">{{ __('Login') }}</a>
-                            </div>
-                        @endif
-                        @if (Route::has('register') && Route::currentRouteName() != 'register')
-                            <div class="auth-menu__item">
-                                <a class="button auth-menu__link" href="{{ route('register') }}">{{ __('Register') }}</a>
-                            </div>
-                        @endif
-                    @else
-                        <div class="nav-item dropdown">
-                            <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                                {{ Auth::user()->name }}
-                            </a>
-
-                            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                                <a class="dropdown-item" href="{{ route('logout') }}"
-                                   onclick="event.preventDefault();
-                                                         document.getElementById('logout-form').submit();">
-                                    {{ __('Logout') }}
+                <div class="profile-menu__inner">
+                    <nav class="auth-menu">
+                        @guest
+                            @if(Route::currentRouteName() != 'login')
+                                <div class="auth-menu__item">
+                                    <a class="button auth-menu__link" href="{{ route('login') }}">{{ __('Login') }}</a>
+                                </div>
+                            @endif
+                            @if (Route::has('register') && Route::currentRouteName() != 'register')
+                                <div class="auth-menu__item">
+                                    <a class="button auth-menu__link" href="{{ route('register') }}">{{ __('Register') }}</a>
+                                </div>
+                            @endif
+                        @else
+                            <div class="nav-item dropdown">
+                                <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                                    {{ Auth::user()->name }}
                                 </a>
 
-                                <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
-                                    @csrf
-                                </form>
+                                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                                    <a class="dropdown-item" href="{{ route('logout') }}"
+                                       onclick="event.preventDefault();
+                                                         document.getElementById('logout-form').submit();">
+                                        {{ __('Logout') }}
+                                    </a>
+
+                                    <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                                        @csrf
+                                    </form>
+                                </div>
+                            </div>
+                        @endguest
+                    </nav>
+
+                    <div class="site-settings">
+                        <div class="site-settings__inner" x-data="{ siteSettingsHidden: true }">
+                            <div class="site-settings__button" x-on:click.stop="siteSettingsHidden = ! siteSettingsHidden" title="Settings">
+                                @include('inline-svg/settings', ['class' => 'site-settings__icon'])
+                            </div>
+                            <div class="popover site-settings__popover" x-on:click.outside="siteSettingsHidden = true" :class="siteSettingsHidden ? '' : 'site-settings__popover_visible'">
+                                fg
                             </div>
                         </div>
-                    @endguest
+                    </div>
                 </div>
             </div>
         </div>
+
+
 
     </div>
 </header>

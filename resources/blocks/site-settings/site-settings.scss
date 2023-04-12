@@ -1,0 +1,34 @@
+.site-settings {
+    display: flex;
+    align-items: center;
+}
+
+.site-settings__inner {
+    position: relative;
+}
+
+.site-settings__button {
+    margin-left: 16px;
+    line-height: 1;
+    cursor: pointer;
+}
+
+.site-settings__icon {
+    width: 30px;
+    height: 30px;
+    transition: $base-transition;
+    fill: $alternative-main;
+
+    &:hover {
+        rotate: 90deg;
+        fill: $additional-main;
+    }
+}
+
+.site-settings__popover {
+    display: none;
+}
+
+.site-settings__popover_visible {
+    display: block;
+}
