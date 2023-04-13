@@ -11,10 +11,10 @@
 .auth__forgot-link {
     display: block;
     margin-top: 12px;
-    color: $font-color-50;
+    color: $font-main-50;
     transition: $base-transition;
 
     &:hover {
-        color: $font-color;
+        color: $font-main;
     }
 }

@@ -6,22 +6,22 @@
     width: 100%;
     padding: 14px 20px;
     border: 2px solid transparent;
-    color: $font-color;
-    background-color: $base-main-dark-transparent;
+    color: $font-main;
+    background-color: $base-dark-transparent;
     border-radius: $extra-small-border-radius;
     outline: none;
     transition: $base-transition ease all;
 }
 
 .dg {
-    background-color: $base-main-dark-like-transparent;
+    background-color: $base-dark-like-transparent;
 }
 
 .input-text__label {
     position: absolute;
     left: 20px;
     top: 16px;
-    color: $font-color;
+    color: $font-main;
     pointer-events: none;
     transition: $base-transition ease all;
     opacity: .5;
@@ -29,7 +29,7 @@
 
 .input-text__field:focus,
 .input-text__field:active {
-    border: 2px solid $font-color;
+    border: 2px solid $font-main;
 }
 
 .input-text__field_filled  {
@@ -44,5 +44,5 @@
     left: 0;
     font-size: rem(12);
     line-height: 1;
-    color: $font-color;
+    color: $font-main;
 }

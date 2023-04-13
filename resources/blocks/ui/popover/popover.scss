@@ -1,0 +1,45 @@
+.popover {
+    padding: 12px;
+    color: $font-base;
+    background-color: $opposite-main;
+    border-radius: 8px;
+    box-shadow: 0 6px 16px 0 rgba(0,0,0,.08), 0 3px 6px -4px rgba(0,0,0,.12), 0 9px 28px 8px rgba(0,0,0,.05);
+
+    &::before {
+        content: '';
+        position: absolute;
+        top: -16px;
+        right: calc(50% - 8px);
+        border: 8px solid transparent;
+        border-bottom: 8px solid $opposite-main;
+    }
+}
+
+.popover__innder {
+    position: relative;
+}
+
+.popover_tail_right {
+    &::before {
+        top: -16px;
+        right: 8px;
+    }
+}
+
+.popover__title {
+    margin-bottom: 8px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid $base-main-20;
+    font-size: rem(18);
+    font-weight: 600;
+}
+
+.popover__close {
+    position: absolute;
+    top: 3px;
+    right: 7px;
+    width: 20px;
+    height: 20px;
+    fill: $base-main;
+    cursor: pointer;
+}

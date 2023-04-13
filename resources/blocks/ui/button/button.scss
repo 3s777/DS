@@ -4,7 +4,7 @@
     border: 0;
     font-size: rem(16);
     line-height: 1;
-    color: $font-color;
+    color: $font-main;
     text-decoration: none;
     background-color: $base-light-transparent;
     transition: $base-transition;
@@ -13,15 +13,15 @@
     border-radius: $extra-small-border-radius;
 
     &:hover {
-        background-color: $base-success;
+        background-color: $additional-main;
     }
 }
 
 .button_submit {
-    background-color: $base-success;
+    background-color: $additional-main;
 
     &:hover {
-        background-color: $base-success-light;
+        background-color: $additional-light;
     }
 }
 

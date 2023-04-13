@@ -76,8 +76,33 @@
                             <div class="site-settings__button" x-on:click.stop="siteSettingsHidden = ! siteSettingsHidden" title="Settings">
                                 @include('inline-svg/settings', ['class' => 'site-settings__icon'])
                             </div>
-                            <div class="popover site-settings__popover" x-on:click.outside="siteSettingsHidden = true" :class="siteSettingsHidden ? '' : 'site-settings__popover_visible'">
-                                fg
+                            <div class="popover popover_tail_right site-settings__popover" x-on:click.outside="siteSettingsHidden = true" :class="siteSettingsHidden ? '' : 'site-settings__popover_visible'">
+                                <div class="popover__inner">
+                                    <div class="popover__title">
+                                        Choose language
+                                    </div>
+                                    <div class="popover__content">
+                                        <nav class="site-settings__flags">
+                                            <a href="">@include('inline-svg/en', ['class' => 'site-settings__flag'])</a>
+                                            <a href="">@include('inline-svg/ru', ['class' => 'site-settings__flag site-settings__flag_active'])</a>
+                                            <a href="">@include('inline-svg/ua', ['class' => 'site-settings__flag'])</a>
+                                        </nav>
+                                    </div>
+                                    <div class="popover__title">
+                                        Choose theme color
+                                    </div>
+                                    <div class="popover__content">
+                                        <nav class="site-settings__colors">
+                                            <a class="site-settings__color" href=""></a>
+                                            <a class="site-settings__color site-settings__color_1" href=""></a>
+                                            <a class="site-settings__color site-settings__color_2" href=""></a>
+                                        </nav>
+                                    </div>
+                                    <div class="popover__close" x-on:click="siteSettingsHidden = true">
+                                        @include('inline-svg/close', ['class' => 'site-settings__popover-close'])
+                                    </div>
+                                </div>
+
                             </div>
                         </div>
                     </div>

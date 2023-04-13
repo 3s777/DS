@@ -1,5 +1,5 @@
 ::selection {
-    background-color: $base-success-light;
+    background-color: $additional-light;
 }
 
 html {
@@ -9,11 +9,11 @@ html {
 body {
     font-family: 'GolosUIWebVF', sans-serif;
     background-color: $base-main;
-    color: $font-color;
+    color: $font-main;
 }
 
 a {
-    color: $font-color;
+    color: $font-main;
 }
 
 .container {
