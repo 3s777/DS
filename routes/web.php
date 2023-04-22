@@ -2,17 +2,17 @@
 
 use Illuminate\Support\Facades\Route;
 
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider and all of them will
-| be assigned to the "web" middleware group. Make something great!
-|
-*/
+//require_once "web/auth.php";
 
-Route::get('/', function () {
+Route::get('/{locale?}', function () {
     return view('welcome');
+})->whereIn('locale', config('app.available_locales'));
+
+Route::prefix('{locale}')->whereIn('locale', config('app.available_locales'))->group(function () {
+
+    Route::get('/dashboard', function () {
+        return view('welcome');
+    })->middleware(['auth'])->name('dashboard');
+
+
 });

@@ -12,6 +12,8 @@
                     </div>
                 </div>
 
+                {{ __('auth.tu') }}
+
                 <div class="card__body">
                     <form class="form" method="POST" action="{{ route('login') }}">
                         @csrf
