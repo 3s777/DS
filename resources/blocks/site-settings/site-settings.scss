@@ -50,7 +50,6 @@
 
 .site-settings__flag {
     display: block;
-    width: 30px;
     margin-right: 8px;
     border: 2px solid $base-main;
     line-height: 0;
@@ -59,6 +58,13 @@
 .site-settings__flag_active {
     border: 2px solid $additional-main;
 }
+
+.site-settings__flag-icon {
+    display: block;
+    width: 30px;
+}
+
+
 
 .site-settings__colors {
     display: flex;

@@ -83,9 +83,21 @@
                                     </div>
                                     <div class="popover__content">
                                         <nav class="site-settings__flags">
-                                            <a href="">@include('inline-svg/en', ['class' => 'site-settings__flag'])</a>
-                                            <a href="">@include('inline-svg/ru', ['class' => 'site-settings__flag site-settings__flag_active'])</a>
-                                            <a href="">@include('inline-svg/ua', ['class' => 'site-settings__flag'])</a>
+                                            <a href="{{ route(Route::currentRouteName(), ['locale' => 'en']) }}">
+                                                <div class="site-settings__flag @if(app()->getLocale() == 'en') site-settings__flag_active @endif">
+                                                    @include('inline-svg/en', ['class' => 'site-settings__flag-icon'])
+                                                </div>
+                                            </a>
+                                            <a href="{{ route(Route::currentRouteName(), ['locale' => 'ru']) }}">
+                                                <div class="site-settings__flag @if(app()->getLocale() == 'ru') site-settings__flag_active @endif">
+                                                    @include('inline-svg/ru', ['class' => 'site-settings__flag-icon'])
+                                                </div>
+                                            </a>
+                                            <a href="{{ route(Route::currentRouteName(), ['locale' => 'ua']) }}">
+                                                <div class="site-settings__flag @if(app()->getLocale() == 'ua') site-settings__flag_active @endif">
+                                                    @include('inline-svg/ua', ['class' => 'site-settings__flag-icon'])
+                                                </div>
+                                            </a>
                                         </nav>
                                     </div>
                                     <div class="popover__title">
