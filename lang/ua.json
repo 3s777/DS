@@ -1,0 +1,12 @@
+{
+    "auth.failed": "Неверный логин или пароль",
+    "auth.password": "Неверный пароль",
+    "auth.throttle": "Слишком много попыток. Попробуйте через :seconds секунд.",
+    "pagination.previous": "&laquo; Предыдущие",
+    "pagination.next": "Следующие &raquo;",
+    "password.reset": "Ваш пароль сброшен.",
+    "password.sent": "Мы отправили на ваш Email ссылку для сброса пароля.",
+    "password.throttled": "Пожалуйста подождите, перед повторной попыткой.",
+    "password.token": "Неверный токен.",
+    "password.user": "Мы не можем найти такого пользователя"
+}

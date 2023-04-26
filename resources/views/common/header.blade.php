@@ -20,19 +20,19 @@
 
             <nav class="main-menu">
                 <div class="main-menu__item">
-                    <a class="button main-menu__link" href="#">Shelfs</a>
+                    <a class="button main-menu__link" href="#">{{ __('Shelfs') }}</a>
                 </div>
                 <div class="main-menu__item">
-                    <a class="button main-menu__link" href="#">Blog</a>
+                    <a class="button main-menu__link" href="#">{{ __('Blog') }}</a>
                 </div>
                 <div class="main-menu__item">
-                    <a class="button main-menu__link" href="#">Feed</a>
+                    <a class="button main-menu__link" href="#">{{ __('Feed') }}</a>
                 </div>
                 <div class="main-menu__item">
-                    <a class="button main-menu__link" href="#">Users</a>
+                    <a class="button main-menu__link" href="#">{{ __('Users') }}</a>
                 </div>
                 <div class="main-menu__item">
-                    <a class="button button_submit main-menu__link" href="#">Add</a>
+                    <a class="button button_submit main-menu__link" href="#">{{ __('Add') }}</a>
                 </div>
             </nav>
 
@@ -73,13 +73,13 @@
 
                     <div class="site-settings">
                         <div class="site-settings__inner" x-data="{ siteSettingsHidden: true }">
-                            <div class="site-settings__button" x-on:click.stop="siteSettingsHidden = ! siteSettingsHidden" title="Settings">
+                            <div class="site-settings__button" x-on:click.stop="siteSettingsHidden = ! siteSettingsHidden" title="{{ __('Settings') }}">
                                 @include('inline-svg/settings', ['class' => 'site-settings__icon'])
                             </div>
                             <div class="popover popover_tail_right site-settings__popover" x-on:click.outside="siteSettingsHidden = true" :class="siteSettingsHidden ? '' : 'site-settings__popover_visible'">
                                 <div class="popover__inner">
                                     <div class="popover__title">
-                                        Choose language
+                                        {{ __('Choose language') }}
                                     </div>
                                     <div class="popover__content">
                                         <nav class="site-settings__flags">
@@ -101,7 +101,7 @@
                                         </nav>
                                     </div>
                                     <div class="popover__title">
-                                        Choose theme color
+                                        {{ __('Choose theme color') }}
                                     </div>
                                     <div class="popover__content">
                                         <nav class="site-settings__colors">

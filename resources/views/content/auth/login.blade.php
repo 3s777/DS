@@ -1,6 +1,6 @@
 @extends('layouts.auth')
 
-@section('title', 'Авторизация')
+@section('title', __('Authorization'))
 
 @section('content')
     <div class="container">
@@ -11,8 +11,6 @@
                         {{ __('Login') }}
                     </div>
                 </div>
-
-                {{ __('auth.tu') }}
 
                 <div class="card__body">
                     <form class="form" method="POST" action="{{ route('login') }}">
