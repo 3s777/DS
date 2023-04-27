@@ -46,6 +46,11 @@ $sm-gutter: (
 }
 
 .grid {
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+.row {
     @include grid-base(100%, $grid-xl-gutter);
     @media screen and (max-width: $grid-lg-breakpoint) {
         margin-left: -(math.div($grid-lg-gutter, 2));

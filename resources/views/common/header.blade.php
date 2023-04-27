@@ -1,13 +1,3 @@
-{{--<div class="container">--}}
-{{--    <div class="grid">--}}
-{{--        <div class="col-xl-3 col-lg-4 col-md-6 col-sm-12">dfssfd</div>--}}
-{{--        <div class="col-xl-3 col-lg-4 col-md-6 col-sm-12">1dfssfd</div>--}}
-{{--        <div class="col-xl-3 col-lg-4 col-md-6 col-sm-12">dfssfd</div>--}}
-{{--        <div class="col-xl-3 col-lg-4 col-md-6 col-sm-12" style="text-align: right">dfssfddfssfddfssfddfssfddfssfd dfssfd dfssfd dfssfddfssfd dfssfddfssfd</div>--}}
-{{--    </div>--}}
-{{--</div>--}}
-
-
 <header class="header">
     <div class="container">
         <div class="header__inner">
@@ -111,7 +101,7 @@
                                         </nav>
                                     </div>
                                     <div class="popover__close" x-on:click="siteSettingsHidden = true">
-                                        @include('inline-svg/close', ['class' => 'site-settings__popover-close'])
+                                        @include('inline-svg/close', ['class' => 'popover__close-icon site-settings__popover-close'])
                                     </div>
                                 </div>
 

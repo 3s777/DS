@@ -7,10 +7,13 @@
 @import "common";
 @import "grid";
 
+@import "../blocks/ui/container/container";
 @import "../blocks/ui/form-group/form-group";
 @import "../blocks/ui/input-text/input-text";
 @import "../blocks/ui/input-checkbox/input-checkbox";
 @import "../blocks/ui/button/button";
+@import "../blocks/ui/title/title";
+@import "../blocks/ui/message/message";
 @import "../blocks/ui/card/card";
 @import "../blocks/ui/popover/popover";
 
@@ -23,4 +26,6 @@
 @import "../blocks/profile-menu/profile-menu";
 @import "../blocks/site-settings/site-settings";
 @import "../blocks/main/main";
+@import "../blocks/content/content";
 @import "../blocks/auth/auth";
+@import "../blocks/ui/ui";

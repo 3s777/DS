@@ -14,5 +14,8 @@ Route::prefix('{locale}')->whereIn('locale', config('app.available_locales'))->g
         return view('welcome');
     })->middleware(['auth'])->name('dashboard');
 
+    Route::get('/ui', function () {
+        return view('content.ui');
+    })->name('ui');
 
 });

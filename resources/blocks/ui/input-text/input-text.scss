@@ -2,6 +2,8 @@
     position: relative;
 }
 
+
+
 .input-text__field {
     width: 100%;
     padding: 14px 20px;
@@ -13,8 +15,8 @@
     transition: $base-transition ease all;
 }
 
-.dg {
-    background-color: $base-dark-like-transparent;
+.input-text__field_error {
+    border: 2px solid $main-danger;
 }
 
 .input-text__label {

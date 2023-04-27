@@ -1,0 +1,36 @@
+.title {
+    margin: 0;
+    font-size: rem(48);
+    font-weight: 500;
+    line-height: 1.2;
+}
+
+.title_indent_big {
+    margin-bottom: 24px;
+}
+
+.title_indent_normal {
+    margin-bottom: 16px;
+}
+
+.title_size_large {
+    font-size: rem(56);
+}
+
+.title_size_big {
+    font-size: rem(40);
+}
+
+.title_size_normal {
+    font-size: rem(32);
+}
+
+.title_size_small {
+    font-size: rem(24);
+    font-weight: 400;
+}
+
+.title_size_extra_small {
+    font-size: rem(16);
+    font-weight: 400;
+}

@@ -5,8 +5,8 @@ $opposite: 0;
 $font: 0;
 $success: 129;
 $danger: 0;
-$warning: 0;
-$info: 0;
+$warning: 32;
+$info: 210;
 $disabled: 0;
 
 $base-main: hsl($base+3, 25%, 31%);
@@ -71,5 +71,8 @@ $logo-stroke-3:  hsl(0, 100%, 89%);
 $logo-stroke-4: hsl(202, 100%, 91%);
 $logo-stroke-5: hsl(111deg, 52%, 80%);
 
-$main-success: hsl($additional, 87%, 32%);
+$main-success: hsl($success, 60%, 45%);
 $main-disabled: hsl($disabled, 0%, 50%);
+$main-info: hsl($info, 100%, 60%);
+$main-danger: hsl($danger, 100%, 66%);
+$main-warning: hsl($warning, 100%, 50%);

@@ -36,10 +36,14 @@
 
 .popover__close {
     position: absolute;
-    top: 3px;
-    right: 7px;
+    top: 2px;
+    right: 5px;
+    line-height: 0;
+    cursor: pointer;
+}
+
+.popover__close-icon {
     width: 20px;
     height: 20px;
     fill: $base-main;
-    cursor: pointer;
 }

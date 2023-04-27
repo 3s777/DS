@@ -1,0 +1,82 @@
+.message {
+    padding: 16px;
+    overflow: hidden;
+    font-size: rem(16);
+    color: $font-main;
+    line-height: 1.4;
+    border-radius: $small-border-radius;
+}
+
+.message_info {
+    background-color: $main-info;
+}
+
+.message__info-icon {
+    width: 50px;
+    height: 50px;
+    fill: $opposite-main;
+}
+
+.message_danger {
+    background-color: $main-danger;
+}
+
+.message__danger-icon {
+    width: 50px;
+    height: 50px;
+    fill: $opposite-main;
+}
+
+.message_success {
+    background-color: $main-success;
+}
+
+.message__success-icon {
+    width: 50px;
+    height: 50px;
+    fill: $opposite-main;
+}
+
+.message_warning {
+    background-color: $main-warning;
+}
+
+.message__warning-icon {
+    width: 50px;
+    height: 50px;
+    fill: $opposite-main;
+}
+
+.message_icon {
+    position: relative;
+    padding-left: 80px;
+}
+
+.message__icon {
+    position: absolute;
+    left: 14px;
+    top: calc(50% - 25px);
+}
+
+.message_disabled {
+    background-color: $main-disabled;
+    color: $font-main-50;
+}
+
+.message_closed {
+    position: relative;
+    padding: 24px;
+}
+
+.message__close {
+    position: absolute;
+    top: 7px;
+    right: 7px;
+    cursor: pointer;
+}
+
+.message__close-icon {
+    width: 24px;
+    height: 24px;
+    fill: $opposite-main;
+}

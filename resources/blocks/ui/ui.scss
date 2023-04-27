@@ -1,0 +1,29 @@
+.ui__title_big {
+    margin-bottom: 32px;
+}
+
+.ui__section {
+    margin-bottom: 40px;
+}
+
+.ui__grid {
+    margin-bottom: 16px;
+
+    &:last-child {
+        margin-bottom: 0;
+    }
+}
+
+.ui__col {
+    padding: 10px;
+    border: 1px solid $opposite-main;
+    background-color: $base-dark;
+}
+
+.ui__message {
+    margin-bottom: 16px;
+
+    &:last-child {
+        margin-bottom: 0;
+    }
+}
