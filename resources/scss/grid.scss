@@ -24,6 +24,11 @@ $sm-gutter: (
     padding-right: math.div($gutter, 2);
 }
 
+@mixin col-props-reserve($gutter) {
+    padding-left: math.div($gutter, 2);
+    padding-right: math.div($gutter, 2);
+}
+
 @mixin columns-loop($name, $columns, $gutter) {
     @for $i from 0 through $columns {
         &-#{$name}-#{$i} {
@@ -31,6 +36,14 @@ $sm-gutter: (
         }
         &-#{$name}-shift-#{$i} {
             margin-left: col-width($i, $columns);
+        }
+    }
+}
+
+@mixin columns-loop-reserve ($name, $columns, $gutter) {
+    @for $i from 0 through $columns {
+        &-#{$name}-#{$i} {
+            @include col-props-reserve($gutter);
         }
     }
 }
@@ -47,7 +60,61 @@ $sm-gutter: (
 
 .grid {
     margin: 0 auto;
-    padding: 0 20px;
+    padding: 0 (math.div($grid-xl-gutter, 2));
+
+    @media screen and (max-width: $grid-lg-breakpoint) {
+        padding: 0 (math.div($grid-lg-gutter, 2));
+    }
+    @media screen and (max-width: $grid-md-breakpoint) {
+        padding: 0 (math.div($grid-md-gutter, 2));
+    }
+    @media screen and (max-width: $grid-sm-breakpoint) {
+        padding: 0 (math.div($grid-sm-gutter, 2));
+    }
+}
+
+//.grid_c {
+//    margin-left: -(math.div($xl-gutter, 2));
+//    margin-right: -(math.div($xl-gutter, 2));
+//    padding: 0 (math.div($grid-xl-gutter, 2));
+//
+//    @media screen and (max-width: $grid-lg-breakpoint) {
+//        margin-left: -(math.div($lg-gutter, 2));
+//        margin-right: -(math.div($lg-gutter, 2));
+//        padding: 0 (math.div($grid-lg-gutter, 2));
+//    }
+//    @media screen and (max-width: $grid-md-breakpoint) {
+//        margin-left: -(math.div($md-gutter, 2));
+//        margin-right: -(math.div($md-gutter, 2));
+//        padding: 0 (math.div($grid-md-gutter, 2));
+//    }
+//    @media screen and (max-width: $grid-sm-breakpoint) {
+//        margin-left: -(math.div($sm-gutter, 2));
+//        margin-right: -(math.div($sm-gutter, 2));
+//        padding: 0 (math.div($grid-sm-gutter, 2));
+//    }
+//}
+
+.grid_c {
+    margin-left: -(math.div($grid-xl-gutter, 2));
+    margin-right: -(math.div($grid-xl-gutter, 2));
+    padding: 0 (math.div($grid-xl-gutter, 2));
+
+    @media screen and (max-width: $grid-lg-breakpoint) {
+        margin-left: -(math.div($grid-lg-gutter, 2));
+        margin-right: -(math.div($grid-lg-gutter, 2));
+        padding: 0 (math.div($grid-lg-gutter, 2));
+    }
+    @media screen and (max-width: $grid-md-breakpoint) {
+        margin-left: -(math.div($grid-md-gutter, 2));
+        margin-right: -(math.div($grid-md-gutter, 2));
+        padding: 0 (math.div($grid-md-gutter, 2));
+    }
+    @media screen and (max-width: $grid-sm-breakpoint) {
+        margin-left: -(math.div($grid-sm-gutter, 2));
+        margin-right: -(math.div($grid-sm-gutter, 2));
+        padding: 0 (math.div($grid-sm-gutter, 2));
+    }
 }
 
 .row {
@@ -72,15 +139,53 @@ $sm-gutter: (
     }
 }
 
+//.col {
+//    @include columns-loop(xl, $grid-xl-columns, $xl-gutter);
+//    @media screen and (max-width: $grid-lg-breakpoint) {
+//        @include columns-loop-reserve(xl, $grid-xl-columns, $lg-gutter);
+//        @include columns-loop(lg, $grid-lg-columns, $lg-gutter);
+//    }
+//    @media screen and (max-width: $grid-md-breakpoint) {
+//        @include columns-loop-reserve(xl, $grid-xl-columns, $md-gutter);
+//        @include columns-loop-reserve(lg, $grid-lg-columns, $md-gutter);
+//        @include columns-loop(md, $grid-md-columns, $md-gutter);
+//    }
+//    @media screen and (max-width: $grid-sm-breakpoint) {
+//        @include columns-loop-reserve(xl, $grid-xl-columns, $sm-gutter);
+//        @include columns-loop-reserve(lg, $grid-lg-columns, $sm-gutter);
+//        @include columns-loop-reserve(md, $grid-md-columns, $sm-gutter);
+//        @include columns-loop(sm, $grid-sm-columns, $sm-gutter);
+//    }
+//}
+
 .col {
-    @include columns-loop(xl, $grid-xl-columns, $xl-gutter);
+    @include columns-loop(xl, $grid-xl-columns, $grid-xl-gutter);
     @media screen and (max-width: $grid-lg-breakpoint) {
-        @include columns-loop(lg, $grid-lg-columns, $lg-gutter);
+        @include columns-loop-reserve(xl, $grid-xl-columns, $grid-lg-gutter);
+        @include columns-loop(lg, $grid-lg-columns, $grid-lg-gutter);
     }
     @media screen and (max-width: $grid-md-breakpoint) {
-        @include columns-loop(md, $grid-md-columns, $md-gutter);
+        @include columns-loop-reserve(xl, $grid-xl-columns, $grid-md-gutter);
+        @include columns-loop-reserve(lg, $grid-lg-columns, $grid-md-gutter);
+        @include columns-loop(md, $grid-md-columns, $grid-md-gutter);
     }
     @media screen and (max-width: $grid-sm-breakpoint) {
-        @include columns-loop(sm, $grid-sm-columns, $sm-gutter);
+        @include columns-loop-reserve(xl, $grid-xl-columns, $grid-sm-gutter);
+        @include columns-loop-reserve(lg, $grid-lg-columns, $grid-sm-gutter);
+        @include columns-loop-reserve(md, $grid-md-columns, $grid-sm-gutter);
+        @include columns-loop(sm, $grid-sm-columns, $grid-sm-gutter);
+    }
+}
+
+.col-ng {
+    @include columns-loop(xl, $grid-xl-columns, 0);
+    @media screen and (max-width: $grid-lg-breakpoint) {
+        @include columns-loop(lg, $grid-lg-columns, 0);
+    }
+    @media screen and (max-width: $grid-md-breakpoint) {
+        @include columns-loop(md, $grid-md-columns, 0);
+    }
+    @media screen and (max-width: $grid-sm-breakpoint) {
+        @include columns-loop(sm, $grid-sm-columns, 0);
     }
 }

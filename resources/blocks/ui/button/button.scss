@@ -1,12 +1,13 @@
 .button {
-    display: block;
+    display: inline-block;
     padding: 14px 32px;
     border: 0;
     font-size: rem(16);
     line-height: 1;
     color: $font-main;
     text-decoration: none;
-    background-color: $base-light-transparent;
+    text-align: center;
+    background-color: $base-light-like-transparent;
     transition: $base-transition;
     cursor: pointer;
     box-shadow: none;
@@ -17,6 +18,54 @@
     }
 }
 
+.button_full_width {
+    width: 100%;
+}
+
+.button_size_small {
+    font-size: rem(12);
+    padding: 10px 26px;
+}
+
+.button_size_big {
+    font-size: rem(24);
+}
+
+.button_size_large {
+    font-size: rem(32);
+}
+
+.button__icon {
+    display: flex;
+    align-items: center;
+    margin-right: 8px;
+}
+
+.button_icon {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    padding: 8px 32px;
+}
+
+.button_big_icon {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    padding: 13px 32px;
+}
+
+.button_large_icon {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    padding: 14px 40px;
+}
+
+.button_dark {
+    background-color: $base-dark-like-transparent;
+}
+
 .button_submit {
     background-color: $additional-main;
 
@@ -25,6 +74,36 @@
     }
 }
 
-.button_full_width {
-    width: 100%;
+.button__submit-icon {
+    width: 27px;
+    height: 27px;
+    fill: $opposite-main;
+}
+
+.button_cancel {
+    background-color: $danger-main;
+
+    &:hover {
+        background-color: $danger-dark;
+    }
+}
+
+.button__icon_cancel {
+    margin-right: 8px;
+}
+
+.button__cancel-icon {
+    width: 27px;
+    height: 27px;
+    fill: $opposite-main;
+}
+
+.button_disabled {
+    background-color: $disabled-main;
+    color: $font-main-60;
+    cursor: not-allowed;
+
+    &:hover {
+        background-color: $disabled-main;
+    }
 }

@@ -101,10 +101,149 @@
                 </div>
 
                 <h3 class="title title_size_small">Buttons</h3>
-                <div class="form-group">
-                    <button type="submit" class="button button_submit button_full_width">
-                        {{ __('Login') }}
-                    </button>
+                <div class="grid grid_c">
+                    <div class="row">
+                        <div class="col-xl-2 col-lg-4 col-md-6 col-sm-12">
+                            <div class="form-group">
+                                <button type="submit" class="button button_submit button_full_width">
+                                    {{ __('Submit') }}
+                                </button>
+                            </div>
+                        </div>
+                        <div class="col-xl-2 col-lg-4 col-md-6 col-sm-12">
+                            <div class="form-group">
+                                <input class="button button_cancel button_full_width" type="submit" value="{{ __('Cancel') }}">
+                            </div>
+                        </div>
+                        <div class="col-xl-2 col-lg-4 col-md-6 col-sm-12">
+                            <div class="form-group">
+                                <button type="submit" class="button button_disabled button_full_width">
+                                    {{ __('Disabled') }}
+                                </button>
+                            </div>
+                        </div>
+                        <div class="col-xl-2 col-lg-4 col-md-6 col-sm-12">
+                            <div class="form-group">
+                                <button type="submit" class="button button_full_width">
+                                    {{ __('Light') }}
+                                </button>
+                            </div>
+                        </div>
+                        <div class="col-xl-2 col-lg-4 col-md-6 col-sm-12">
+                            <div class="form-group">
+                                <button type="submit" class="button button_dark button_full_width">
+                                    {{ __('Dark') }}
+                                </button>
+                            </div>
+                        </div>
+                        <div class="col-xl-2 col-lg-4 col-md-6 col-sm-12">
+                            <div class="form-group">
+                                <button type="submit" class="button button_submit button_icon button_full_width">
+                                    <div class="button__icon button__icon_submit">
+                                        @include('inline-svg/success', ['class' => 'button__submit-icon'])
+                                    </div>
+                                    {{ __('With icon') }}
+                                </button>
+                            </div>
+                        </div>
+                        <div class="col-xl-2 col-lg-4 col-md-6 col-sm-12">
+                            <div class="form-group">
+                                <button type="submit" class="button button_cancel button_icon button_full_width">
+                                    <div class="button__icon button__icon_cancel">
+                                        @include('inline-svg/cancel', ['class' => 'button__cancel-icon'])
+                                    </div>
+                                    {{ __('With icon') }}
+                                </button>
+                            </div>
+                        </div>
+                        <div class="col-xl-2 col-lg-4 col-md-6 col-sm-12">
+                            <div class="form-group">
+                                <button type="submit" class="button button_dark button_icon button_full_width">
+                                    <div class="button__icon button__icon_cancel">
+                                        @include('inline-svg/warning', ['class' => 'button__cancel-icon'])
+                                    </div>
+                                    {{ __('Dark') }}
+                                </button>
+                            </div>
+                        </div>
+
+                        <div class="col-xl-2 col-lg-4 col-md-6 col-sm-12">
+                            <div class="form-group">
+                                <a class="button button_submit button_full_width">
+                                    {{ __('Normal size') }}
+                                </a>
+                            </div>
+                        </div>
+                        <div class="col-xl-6 col-lg-4 col-md-6 col-sm-12">
+                            <div class="form-group">
+                                <div class="button button_submit button_full_width">
+                                    {{ __('Full width button') }}
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xl-3 col-lg-4 col-md-6 col-sm-12">
+                            <div class="form-group">
+                                <div class="button button_submit">
+                                    {{ __('Content width button') }}
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-xl-3 col-lg-4 col-md-6 col-sm-12">
+                            <div class="form-group">
+                                <div class="button button_submit button_icon">
+                                    <div class="button__icon button__icon_submit">
+                                        @include('inline-svg/success', ['class' => 'button__submit-icon'])
+                                    </div>
+                                    {{ __('Content width button') }}
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-xl-2 col-lg-4 col-sm-6">
+                            <div class="form-group">
+                                <div class="button button_submit button_size_small">
+                                    {{ __('Small size') }}
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xl-2 col-lg-4 col-sm-12">
+                            <div class="form-group">
+                                <div class="button button_submit button_size_big button_full_width">
+                                    {{ __('Big size') }}
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xl-2 col-lg-4 col-sm-12">
+                            <div class="form-group">
+                                <div class="button button_big_icon button_cancel button_size_big button_full_width">
+                                    <div class="button__icon button__icon_cancel">
+                                        @include('inline-svg/cancel', ['class' => 'button__cancel-icon'])
+                                    </div>
+                                    {{ __('Big size') }}
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xl-3 col-lg-6 col-md-6 col-sm-12">
+                            <div class="form-group">
+                                <div class="button button_submit button_size_large button_full_width">
+                                    {{ __('Large size') }}
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-xl-3 col-lg-6 col-md-6 col-sm-12">
+                            <div class="form-group">
+                                <div class="button button_large_icon button_cancel button_size_large button_full_width">
+                                    <div class="button__icon button__icon_cancel">
+                                        @include('inline-svg/success', ['class' => 'button__cancel-icon'])
+                                    </div>
+                                    {{ __('Large size') }}
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
                 </div>
 
             </div>

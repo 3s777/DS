@@ -58,7 +58,7 @@
     }
 
     &:disabled + .input-checkbox__label::before {
-        background-color: $main-disabled;
+        background-color: $disabled-main;
     }
 }
 
