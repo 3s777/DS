@@ -100,6 +100,13 @@
                     </div>
                 </div>
 
+                <h3 class="title title_size_small">Select</h3>
+                <select class="choices-select" name="select-test" >
+                    <option value="1">Test1</option>
+                    <option value="2">Test2</option>
+                    <option value="3">Test3</option>
+                </select>
+
                 <h3 class="title title_size_small">Buttons</h3>
                 <div class="grid grid_c">
                     <div class="row">
@@ -357,4 +364,13 @@
 
 
     </div>
+
+
 @endsection
+@push('scripts')
+    <script type="module">
+        const element = document.querySelector('.choices-select');
+        const choices = new Choices(element);
+
+    </script>
+@endpush

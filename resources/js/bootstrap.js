@@ -36,3 +36,6 @@ import Alpine from 'alpinejs'
 window.Alpine = Alpine
 
 Alpine.start()
+
+import Choices from "choices.js";
+window.Choices = Choices;
