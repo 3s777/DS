@@ -1,6 +1,4 @@
 @import '~/modern-normalize/modern-normalize.css';
-@import '~/choices.js/public/assets/styles/base.min.css';
-@import '~/choices.js/public/assets/styles/choices.min.css';
 @import "functions";
 @import "mixins";
 @import "fonts";
@@ -19,6 +17,9 @@
 @import "../blocks/ui/card/card";
 @import "../blocks/ui/popover/popover";
 
+@import '~/choices.js/public/assets/styles/choices.min.css';
+@import "libraries/choices";
+
 @import "../blocks/header/header";
 @import "../blocks/site-icon/site-icon";
 @import "../blocks/site-name/site-name";
@@ -31,3 +32,4 @@
 @import "../blocks/content/content";
 @import "../blocks/auth/auth";
 @import "../blocks/ui/ui";
+

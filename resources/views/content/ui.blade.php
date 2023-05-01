@@ -101,11 +101,29 @@
                 </div>
 
                 <h3 class="title title_size_small">Select</h3>
-                <select class="choices-select" name="select-test" >
-                    <option value="1">Test1</option>
-                    <option value="2">Test2</option>
-                    <option value="3">Test3</option>
-                </select>
+                <div class="grid grid_c">
+                    <div class="row">
+                        <div class="col-xl-3 col-lg-4 col-md-6 col-sm-12">
+                            <div class="form-group">
+                                <select class="choices-select-1" name="select-test" >
+                                    <option value="1">Test1</option>
+                                    <option value="2" selected>Test2</option>
+                                    <option value="3">Test3</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="col-xl-3 col-lg-4 col-md-6 col-sm-12">
+                            <div class="form-group">
+                                <select class="choices-select-2" name="select-test" >
+                                    <option value="1">Test1</option>
+                                    <option value="2">Test2</option>
+                                    <option value="3">Test3</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                </div>
 
                 <h3 class="title title_size_small">Buttons</h3>
                 <div class="grid grid_c">
@@ -369,8 +387,11 @@
 @endsection
 @push('scripts')
     <script type="module">
-        const element = document.querySelector('.choices-select');
-        const choices = new Choices(element);
+        const element1 = document.querySelector('.choices-select-1');
+        const choices1 = new Choices(element1);
+
+        const element2 = document.querySelector('.choices-select-2');
+        const choices2 = new Choices(element2);
 
     </script>
 @endpush

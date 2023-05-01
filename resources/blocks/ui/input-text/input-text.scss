@@ -2,14 +2,13 @@
     position: relative;
 }
 
-
-
 .input-text__field {
     width: 100%;
     padding: 14px 20px;
+    min-height: 50px;
     border: 2px solid transparent;
     color: $font-main;
-    background-color: $base-dark-transparent;
+    background-color: $base-dark-like-transparent;
     border-radius: $extra-small-border-radius;
     outline: none;
     transition: $base-transition ease all;
