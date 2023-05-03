@@ -105,23 +105,58 @@
                     <div class="row">
                         <div class="col-xl-3 col-lg-4 col-md-6 col-sm-12">
                             <div class="form-group">
-                                <select class="choices-select-1" name="select-test" >
-                                    <option value="1">Test1</option>
-                                    <option value="2" selected>Test2</option>
-                                    <option value="3">Test3</option>
-                                </select>
+                                <div class="choices-block">
+                                    <label class="choices-block__label" for="select-test">Choose something</label>
+                                    <select class="choices-select-1" id="select-test" name="select-test" >
+                                        <option value="">Classic select</option>
+                                        <option value="1">Test1</option>
+                                        <option value="2">Test2</option>
+                                        <option value="3">Test3</option>
+                                    </select>
+                                </div>
                             </div>
                         </div>
 
                         <div class="col-xl-3 col-lg-4 col-md-6 col-sm-12">
                             <div class="form-group">
-                                <select class="choices-select-2" name="select-test" >
-                                    <option value="1">Test1</option>
-                                    <option value="2">Test2</option>
-                                    <option value="3">Test3</option>
-                                </select>
+                                <div class="choices-block">
+                                    <label class="choices-block__label" for="select-test">Choose something</label>
+                                    <select class="choices-select-2" name="select-test" multiple >
+                                        <option value="">Add multiple</option>
+                                        <option value="1" selected>Test1</option>
+                                        <option value="2">Test2 test test</option>
+                                        <option value="3">Test3 words test bigwordwidth</option>
+                                    </select>
+                                </div>
                             </div>
                         </div>
+
+                        <div class="col-xl-3 col-lg-4 col-md-6 col-sm-12">
+                            <div class="form-group">
+                                <div class="choices-block">
+                                    <label class="choices-block__label" for="select-test">Choose something</label>
+                                    <select class="choices-select-3" id="select-test" name="select-test" >
+                                        <option value="">Select with search</option>
+                                        <option value="1">Test1</option>
+                                        <option value="2">Test2</option>
+                                        <option value="3">Test3</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-xl-3 col-lg-4 col-md-6 col-sm-12">
+                            <div class="form-group">
+                                <div class="choices-block">
+                                    <label class="choices-block__label" for="select-test">Choose something</label>
+                                    <input class="choices-select-4"
+                                           id="text" type="text" name="text" placeholder="Input with items"
+                                           value="{{ old('text') }}" required >
+
+                                </div>
+                            </div>
+                        </div>
+
                     </div>
                 </div>
 
@@ -388,10 +423,37 @@
 @push('scripts')
     <script type="module">
         const element1 = document.querySelector('.choices-select-1');
-        const choices1 = new Choices(element1);
+        const choices1 = new Choices(element1, {
+            itemSelectText: '',
+            searchEnabled: false,
+            noResultsText: '{{ __('Не найдено') }}',
+            noChoicesText: '{{ __('Больше ничего нет') }}',
+        });
 
         const element2 = document.querySelector('.choices-select-2');
-        const choices2 = new Choices(element2);
+        const choices2 = new Choices(element2, {
+            itemSelectText: '',
+            removeItems: true,
+            removeItemButton: true,
+            noResultsText: '{{ __('Не найдено') }}',
+            noChoicesText: '{{ __('Больше ничего нет') }}',
+        });
+
+        const element3 = document.querySelector('.choices-select-3');
+        const choices3 = new Choices(element3, {
+            itemSelectText: '',
+            noResultsText: '{{ __('Не найдено') }}',
+            noChoicesText: '{{ __('Больше ничего нет') }}',
+        });
+
+        const element4 = document.querySelector('.choices-select-4');
+        const choices4 = new Choices(element4, {
+            itemSelectText: '',
+            placeholder: true,
+            placeholderValue: 'Input with items',
+            noResultsText: '{{ __('Не найдено') }}',
+            noChoicesText: '{{ __('Больше ничего нет') }}',
+        });
 
     </script>
 @endpush

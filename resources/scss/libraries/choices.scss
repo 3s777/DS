@@ -1,3 +1,16 @@
+.choices-block {
+    position: relative;
+}
+
+.choices-block__label {
+    position: absolute;
+    top: -17px;
+    left: 0;
+    font-size: rem(12);
+    line-height: 1;
+    color: $font-main-50;
+}
+
 .choices__inner {
     padding: 14px 20px;
     min-height: 50px;
@@ -19,20 +32,88 @@
     .is-flipped.is-open & {
         border-radius: 0 0 $extra-small-border-radius $extra-small-border-radius;
     }
+
+    .choices[data-type*=text] & {
+        padding: 10px 20px;
+    }
+
+    .choices[data-type*=select-multiple] & {
+        padding: 10px 20px;
+        cursor: pointer;
+    }
+
+    .choices[data-type*=select-one] & {
+        padding-bottom: 14px;
+    }
+}
+
+.choices[data-type*=select-multiple] {
+    cursor: pointer;
+
+    &::after {
+        content: "";
+        height: 0;
+        width: 0;
+        border-style: solid;
+        border-color: $opposite-main transparent transparent transparent;
+        border-width: 5px;
+        position: absolute;
+        right: 11.5px;
+        top: 50%;
+        margin-top: -2.5px;
+        pointer-events: none;
+    }
+
+    &.is-open::after {
+        border-color: transparent transparent $opposite-main transparent;
+        margin-top: -7.5px;
+    }
 }
 
 
 
-.choices[data-type*=select-one]::after {
-    border-color: $opposite-main transparent transparent;
+
+.choices__list--multiple {
+    .choices__item {
+        margin-top: 2px;
+        margin-bottom: 2px;
+        padding-top: 2px;
+        padding-bottom: 2px;
+        font-size: rem(14);
+        border-radius: $extra-small-border-radius;
+        background-color: $additional-main;
+        border-color: $additional-main;
+
+        &.is-highlighted {
+            background-color: $additional-light;
+            border: 1px solid $additional-light;
+        }
+
+        .is-disabled & {
+            background-color: $disabled-main;
+            border: 1px solid $disabled-main;
+        }
+    }
 }
 
-.choices[data-type*=select-one].is-open::after {
-    border-color: transparent transparent $opposite-main;
+
+
+
+
+.choices[data-type*=select-multiple] .choices__button,
+.choices[data-type*=text] .choices__button {
+    border-left: 0;
+    margin-left: 2px;
 }
 
-.choices[data-type*=select-one] .choices__inner {
-    padding-bottom: 14px;
+.choices[data-type*=select-one] {
+    &::after {
+        border-color: $opposite-main transparent transparent;
+    }
+
+    &.is-open::after {
+        border-color: transparent transparent $opposite-main;
+    }
 }
 
 .choices__list--single {
@@ -54,8 +135,36 @@
     background-color: $additional-main;
 }
 
-.choices[data-type*=select-one] .choices__input {
-    border-bottom: 1px solid $opposite-main;
+.choices__input {
+    margin-bottom: 0;
+    padding: 0;
+    font-size: rem(16);
     color: $font-main;
-    background-color: $base-dark;
+    background: none;
+
+    .choices[data-type*=select-one] & {
+        border-bottom: 1px solid $opposite-main;
+        color: $font-main;
+        background-color: $base-dark;
+    }
+
+    .choices[data-type*=text] & {
+        position: relative;
+        top: 3px
+    }
+
+    &::placeholder {
+        position: relative;
+        top: 2px;
+        color: $font-main-50;
+    }
+}
+
+
+
+@media (min-width:640px) {
+    .choices__list--dropdown .choices__item--selectable,
+    .choices__list[aria-expanded] .choices__item--selectable {
+        padding-right: 10px
+    }
 }
