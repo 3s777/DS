@@ -89,6 +89,10 @@
                 </div>
 
                 <h3 class="title title_size_small">Switchers</h3>
+
+                <div class="grid grid_c">
+                    <div class="row">
+                        <div class="col-xl-3 col-lg-4 col-md-6 col-sm-12">
                 <div class="form-group">
                     <div class="input-checkbox">
                         <input class="input-checkbox__field" type="checkbox" name="remember"
@@ -99,6 +103,42 @@
                         </label>
                     </div>
                 </div>
+                        </div>
+
+                        <div class="col-xl-3 col-lg-4 col-md-6 col-sm-12">
+                            <div class="form-group">
+                                <label class="switcher">
+                                    <input class="switcher__checkbox" type="checkbox">
+                                    <span class="switcher__button"></span>
+                                    <span class="switcher__label">Switcher Off</span>
+                                </label>
+                            </div>
+                        </div>
+
+                        <div class="col-xl-3 col-lg-4 col-md-6 col-sm-12">
+                            <div class="form-group">
+                                <label class="switcher">
+                                    <input class="switcher__checkbox" type="checkbox" checked>
+                                    <span class="switcher__button"></span>
+                                    <span class="switcher__label">Switcher On</span>
+                                </label>
+                            </div>
+                        </div>
+
+                        <div class="col-xl-3 col-lg-4 col-md-6 col-sm-12">
+                            <div class="form-group">
+                                <label class="switcher">
+                                    <input class="switcher__checkbox" type="checkbox" disabled>
+                                    <span class="switcher__button"></span>
+                                    <span class="switcher__label">Switcher Disabled</span>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+
 
                 <h3 class="title title_size_small">Select</h3>
                 <div class="grid grid_c">

@@ -1,0 +1,83 @@
+.switcher {
+    display: inline-block;
+    cursor: pointer;
+
+    &:hover .switcher__button {
+        border: 2px solid $opposite-main;
+    }
+
+    &:hover .switcher__label {
+        color: $font-main;
+    }
+
+    &:hover .switcher__checkbox:disabled + .switcher__button {
+        border: 2px solid transparent;
+    }
+
+    &:hover .switcher__checkbox:disabled + .switcher__button + .switcher__label {
+        color: $font-main-50;
+    }
+}
+
+.switcher__button {
+    position: relative;
+    display: inline-block;
+    width: 56px;
+    height: 30px;
+    margin-right: 5px;
+    border: 2px solid transparent;
+    vertical-align: middle;
+    background: $danger-main;
+    border-radius: 15px;
+    transition: $base-transition;
+
+    &:before {
+        content: "";
+        position: absolute;
+        top: 2px;
+        left: 2px;
+        display: block;
+        width: 22px;
+        height: 22px;
+        background: $opposite-main;
+        border-radius: 50%;
+        transition: left 0.25s;
+    }
+
+    &:after {
+        content: "";
+    }
+}
+
+.switcher__checkbox {
+    position: absolute;
+    visibility: hidden;
+
+    &:checked + .switcher__button {
+        background: $additional-main;
+    }
+
+    &:checked + .switcher__button:before {
+        left: 28px;
+    }
+
+    &:checked + .switcher__button + .switcher__label {
+        color: $font-main;
+    }
+
+    &:disabled + .switcher__button {
+        background: $disabled-main;
+
+        &:before {
+            opacity: .5;
+        }
+    }
+}
+
+.switcher__label {
+    position: relative;
+    top: 2px;
+    font-size: rem(16);
+    color: $font-main-50;
+    transition: $base-transition;
+}
