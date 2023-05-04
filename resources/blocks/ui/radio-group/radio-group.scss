@@ -1,0 +1,27 @@
+.radio-group {
+    display: flex;
+}
+
+.radio-group__button {
+    &:first-child .radio-group__label {
+        border-radius: $small-border-radius 0 0 $small-border-radius;
+    }
+
+    &:last-child .radio-group__label {
+        border-right: 0;
+        border-radius: 0 $small-border-radius $small-border-radius 0;
+    }
+}
+
+.radio-group__input {
+    display: none;
+
+    &:checked + .radio-group__label {
+        background: $additional-main;
+    }
+}
+
+.radio-group__label {
+    border-right: 1px solid $opposite-main-50;
+    border-radius: 0;
+}

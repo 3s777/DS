@@ -13,10 +13,6 @@
     &:hover .switcher__checkbox:disabled + .switcher__button {
         border: 2px solid transparent;
     }
-
-    &:hover .switcher__checkbox:disabled + .switcher__button + .switcher__label {
-        color: $font-main-50;
-    }
 }
 
 .switcher__button {
@@ -71,6 +67,10 @@
         &:before {
             opacity: .5;
         }
+    }
+
+    &:disabled + .switcher__button + .switcher__label {
+        color: $disabled-main;
     }
 }
 

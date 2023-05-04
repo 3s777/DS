@@ -1,0 +1,17 @@
+.radio-button {
+    display: inline-block;
+}
+
+.radio-button_indent_right {
+    margin-right: 8px;
+}
+
+.radio-button__input {
+    display: none;
+
+    &:checked + .radio-button__label {
+        background: $additional-main;
+    }
+}
+
+

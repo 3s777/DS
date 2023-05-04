@@ -64,8 +64,11 @@
 
         </section>
 
+
+
+
         <section class="ui__section">
-            <h2 class="title title_big title_indent_big">{{ __('Forms') }}</h2>
+            <h2 class="title title_big title_indent_big">{{ __('Inputs') }}</h2>
 
             <div class="card">
                 <h3 class="title title_size_small">Text input</h3>
@@ -88,21 +91,27 @@
                     </div>
                 </div>
 
-                <h3 class="title title_size_small">Switchers</h3>
+            </div>
 
+        </section>
+
+
+        <section class="ui__section">
+            <h2 class="title title_big title_indent_big">{{ __('Switchers') }}</h2>
+            <div class="card">
                 <div class="grid grid_c">
                     <div class="row">
                         <div class="col-xl-3 col-lg-4 col-md-6 col-sm-12">
-                <div class="form-group">
-                    <div class="input-checkbox">
-                        <input class="input-checkbox__field" type="checkbox" name="remember"
-                               id="remember" {{ old('remember') ? 'checked' : '' }}>
+                            <div class="form-group">
+                                <div class="input-checkbox">
+                                    <input class="input-checkbox__field" type="checkbox" name="remember"
+                                           id="remember" {{ old('remember') ? 'checked' : '' }}>
 
-                        <label class="input-checkbox__label" for="remember">
-                            {{ __('Remember Me') }}
-                        </label>
-                    </div>
-                </div>
+                                    <label class="input-checkbox__label" for="remember">
+                                        {{ __('Remember Me') }}
+                                    </label>
+                                </div>
+                            </div>
                         </div>
 
                         <div class="col-xl-3 col-lg-4 col-md-6 col-sm-12">
@@ -134,13 +143,86 @@
                                 </label>
                             </div>
                         </div>
+
+                        <div class="col-xl-3 col-lg-4 col-md-6 col-sm-12">
+                            <div class="form-group">
+                                <nav>
+                                    <div class="radio">
+                                        <input class="radio__input" type="radio" name="choice" id="a-opt" />
+                                        <label class="radio__label" for="a-opt">radio switcher</label>
+                                    </div>
+
+                                    <div class="radio">
+                                        <input class="radio__input" type="radio" name="choice" id="b-opt" checked />
+                                        <label class="radio__label" for="b-opt">radio switcher 2</label>
+                                    </div>
+
+                                    <div class="radio">
+                                        <input class="radio__input" type="radio" name="choice" id="c-opt" />
+                                        <label class="radio__label" for="c-opt" >radio switcher 3</label>
+                                    </div>
+
+                                    <div class="radio">
+                                        <input class="radio__input" type="radio" name="choice" id="d-opt" disabled />
+                                        <label class="radio__label" for="d-opt">radio switcher disabled</label>
+                                    </div>
+                                </nav>
+                            </div>
+                        </div>
+
+
+                        <div class="col-xl-9 col-lg-4 col-md-6 col-sm-12">
+                            <div class="form-group">
+                                <div class="radio-button radio-button_indent_right">
+                                    <input class="radio-button__input" id="radio-1" type="radio" name="radio" value="1" checked>
+                                    <label class="radio-button__label button button_dark" for="radio-1">Radio button 1</label>
+                                </div>
+
+                                <div class="radio-button radio-button_indent_right">
+                                    <input class="radio-button__input" id="radio-2" type="radio" name="radio" value="2">
+                                    <label class="radio-button__label button button_dark" for="radio-2">Radio button 2</label>
+                                </div>
+
+                                <div class="radio-button radio-button_indent_right">
+                                    <input class="radio-button__input" id="radio-3" type="radio" name="radio" value="3">
+                                    <label class="radio-button__label button button_dark" for="radio-3">Radio button 3</label>
+                                </div>
+
+                                <div class="radio-button">
+                                    <input class="radio-button__input" id="radio-4" type="radio" name="radio" value="4" disabled>
+                                    <label class="radio-button__label button button_disabled" for="radio-4">Disabled</label>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <div class="radio-group">
+                                    <div class="radio-group__button">
+                                        <input class="radio-group__input" id="radio-11" type="radio" name="radio1" value="1" checked>
+                                        <label class="radio-group__label button button_dark" for="radio-11">Radio button 1</label>
+                                    </div>
+                                    <div class="radio-group__button">
+                                        <input class="radio-group__input" id="radio-12" type="radio" name="radio1" value="2">
+                                        <label class="radio-group__label button button_dark" for="radio-12">Radio button 2</label>
+                                    </div>
+                                    <div class="radio-group__button">
+                                        <input class="radio-group__input" id="radio-13" type="radio" name="radio1" value="3">
+                                        <label class="radio-group__label button button_dark" for="radio-13">Radio button 3</label>
+                                    </div>
+                                    <div class="radio-group__button">
+                                        <input class="radio-group__input" id="radio-14" type="radio" name="radio1" value="4" disabled>
+                                        <label class="radio-group__label button button_disabled" for="radio-14">Disabled</label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
+            </div>
+        </section>
 
-
-
-
-                <h3 class="title title_size_small">Select</h3>
+        <section class="ui__section">
+            <h2 class="title title_big title_indent_big">{{ __('Select') }}</h2>
+            <div class="card">
                 <div class="grid grid_c">
                     <div class="row">
                         <div class="col-xl-3 col-lg-4 col-md-6 col-sm-12">
@@ -199,8 +281,12 @@
 
                     </div>
                 </div>
+            </div>
+        </section>
 
-                <h3 class="title title_size_small">Buttons</h3>
+        <section class="ui__section">
+            <h2 class="title title_big title_indent_big">{{ __('Buttons') }}</h2>
+            <div class="card">
                 <div class="grid grid_c">
                     <div class="row">
                         <div class="col-xl-2 col-lg-4 col-md-6 col-sm-12">
@@ -345,10 +431,12 @@
 
                     </div>
                 </div>
-
             </div>
-
         </section>
+
+
+
+
 
         <section class="ui__section">
             <h2 class="title title_big title_indent_big">{{ __('Messages') }}</h2>
