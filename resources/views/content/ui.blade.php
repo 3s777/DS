@@ -91,6 +91,29 @@
                     </div>
                 </div>
 
+                <h3 class="title title_size_small">Textarea</h3>
+                <div class="form-group">
+                    <div class="textarea">
+                        <textarea class="textarea__field" placeholder="Description for textarea" name="" id="textarea"></textarea>
+                        <label class="textarea__label" for="textarea">Description for textarea</label>
+                    </div>
+                </div>
+
+
+                <!-- Create the editor container -->
+                <div id="editor">
+                    <p>Hello World!</p>
+                    <p>Some initial <strong>bold</strong> text</p>
+                    <p><br></p>
+                </div>
+
+
+
+
+
+<div id="editorjs"></div>
+
+
             </div>
 
         </section>
@@ -549,6 +572,7 @@
 
 @endsection
 @push('scripts')
+
     <script type="module">
         const element1 = document.querySelector('.choices-select-1');
         const choices1 = new Choices(element1, {
@@ -581,6 +605,21 @@
             placeholderValue: 'Input with items',
             noResultsText: '{{ __('Не найдено') }}',
             noChoicesText: '{{ __('Больше ничего нет') }}',
+        });
+
+        const editor = new EditorJS({
+            /**
+             * Id of Element that should contain Editor instance
+             */
+            holder: 'editorjs',
+        })
+
+
+        var quill = new Quill('#editor', {
+
+            placeholder: 'Compose an epic...',
+
+            theme: 'snow'
         });
 
     </script>

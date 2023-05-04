@@ -4,6 +4,7 @@
         @include('common.meta')
 
         @vite(['resources/scss/app.scss'])
+
     </head>
     <body>
         <div class="auth">
