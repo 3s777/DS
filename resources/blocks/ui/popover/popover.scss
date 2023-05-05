@@ -26,6 +26,20 @@
     }
 }
 
+.popover_tail_left {
+    &::before {
+        top: -16px;
+        left: 8px;
+        right: auto;
+    }
+}
+
+.popover_tail_none {
+    &::before {
+        display: none;
+    }
+}
+
 .popover__title {
     margin-bottom: 8px;
     padding-bottom: 8px;
@@ -46,4 +60,30 @@
     width: 20px;
     height: 20px;
     fill: $base-main;
+}
+
+.popover__footer {
+    margin-top: 12px;
+}
+
+.popover__buttons {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.popover__button {
+    margin-left: 8px;
+}
+
+.popover_hidden {
+    position: absolute;
+    z-index: 10;
+    transition: $base-transition;
+    visibility: hidden;
+    opacity: 0;
+}
+
+.popover_visible {
+    visibility: visible;
+    opacity: 1;
 }

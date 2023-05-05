@@ -14,6 +14,10 @@
     }
 }
 
+.ui__item-wrapper {
+    padding: 18px 0;
+}
+
 .ui__col {
     padding-top: 10px;
     padding-bottom: 10px;
@@ -27,4 +31,17 @@
     &:last-child {
         margin-bottom: 0;
     }
+}
+
+.ui__popover {
+    position: relative;
+}
+
+.ui__popover-test {
+    position: relative;
+}
+
+.ui__popover_visible {
+    top: 130%;
+    left: 0;
 }

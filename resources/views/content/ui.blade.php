@@ -105,7 +105,6 @@
                                     <input class="datepicker__field"
                                            id="date" type="date" name="date"
                                            value="{{ old('text') }}" required >
-
                                 </div>
                             </div>
                         </div>
@@ -587,7 +586,130 @@
 
     </div>
 
+        <section class="ui__section">
+            <h2 class="title title_big title_indent_big">{{ __('Popover') }}</h2>
+            <div class="card">
+                <div class="grid">
+                    <div class="row">
+                        <div class="col-xl-3 col-lg-4 col-md-6 col-sm-12">
+                            <div class="ui__item-wrapper">
+                                <div class="popover popover_tail_none ui__popover">
+                                    <div class="popover__inner">
+                                        <div class="popover__title">
+                                            {{ __('Popover title') }}
+                                        </div>
+                                        <div class="popover__content">
+                                            Lorem ipsum dolor sit amet, sxcv sdf consectetur adipisicing elit
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
 
+                        <div class="col-xl-3 col-lg-4 col-md-6 col-sm-12">
+                            <div class="ui__item-wrapper">
+                                <div class="popover ui__popover">
+                                    <div class="popover__inner">
+                                        <div class="popover__title">
+                                            {{ __('Popover title') }}
+                                        </div>
+                                        <div class="popover__content">
+                                            Lorem ipsum dolor sit amet, sxcv sdf consectetur adipisicing elit
+                                        </div>
+                                        <div class="popover__close">
+                                            @include('inline-svg/close', ['class' => 'popover__close-icon'])
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-xl-3 col-lg-4 col-md-6 col-sm-12">
+                            <div class="ui__item-wrapper">
+                                <div class="popover popover_tail_left ui__popover">
+                                    <div class="popover__inner">
+                                        <div class="popover__title">
+                                            {{ __('Popover title') }}
+                                        </div>
+                                        <div class="popover__content">
+                                            Lorem ipsum dolor sit amet, sxcv sdf consectetur adipisicing elit
+                                        </div>
+                                        <div class="popover__close">
+                                            @include('inline-svg/close', ['class' => 'popover__close-icon'])
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-xl-3 col-lg-4 col-md-6 col-sm-12">
+                            <div class="ui__item-wrapper">
+                                <div class="popover popover_tail_right ui__popover">
+                                    <div class="popover__inner">
+                                        <div class="popover__title">
+                                            {{ __('Popover title') }}
+                                        </div>
+                                        <div class="popover__content">
+                                            Lorem ipsum dolor sit amet, sxcv sdf consectetur adipisicing elit
+                                        </div>
+                                        <div class="popover__close">
+                                            @include('inline-svg/close', ['class' => 'popover__close-icon'])
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-xl-3 col-lg-4 col-md-6 col-sm-12">
+                            <div class="ui__item-wrapper">
+                                <div class="popover ui__popover">
+                                    <div class="popover__inner">
+                                        <div class="popover__title">
+                                            {{ __('Popover title') }}
+                                        </div>
+                                        <div class="popover__content">
+                                            Lorem ipsum dolor sit amet, sxcv sdf consectetur adipisicing elit
+                                        </div>
+                                        <div class="popover__footer">
+                                            <div class="popover__buttons">
+                                                <button class="popover__button button button_size_small button_submit">Submit</button>
+                                                <button class="popover__button button button_size_small button_cancel">Cancel</button>
+                                            </div>
+                                        </div>
+                                        <div class="popover__button popover__close">
+                                            @include('inline-svg/close', ['class' => 'popover__close-icon'])
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-xl-3 col-lg-4 col-md-6 col-sm-12">
+                            <div class="ui__item-wrapper">
+                                <div class="ui__popover-test" x-data="{ testPopoverHidden: true }">
+                                    <div class="button button_submit" x-on:click.stop="testPopoverHidden = ! testPopoverHidden">Click me for popover</div>
+                                    <div class="popover popover_tail_left popover_hidden ui__popover_visible" x-on:click.outside="testPopoverHidden = true" :class="testPopoverHidden ? '' : 'popover_visible'">
+                                        <div class="popover__inner">
+                                            <div class="popover__title">
+                                                {{ __('Popover title') }}
+                                            </div>
+                                            <div class="popover__content">
+                                                Lorem ipsum dolor sit amet, sxcv sdf consectetur adipisicing elit
+                                            </div>
+                                            <div class="popover__button popover__close" x-on:click="testPopoverHidden = true">
+                                                @include('inline-svg/close', ['class' => 'popover__close-icon'])
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+        </section>
 
 
 
