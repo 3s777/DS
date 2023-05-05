@@ -1,8 +1,8 @@
-.input-text {
+.datepicker {
     position: relative;
 }
 
-.input-text__field {
+.datepicker__field {
     width: 100%;
     padding: 14px 20px;
     min-height: 50px;
@@ -13,33 +13,25 @@
     outline: none;
     transition: $base-transition ease all;
 
+    &::-webkit-calendar-picker-indicator {
+        background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="15" viewBox="0 0 24 24"><path fill="%23bbbbbb" d="M20 3h-1V1h-2v2H7V1H5v2H4c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 18H4V8h16v13z"/></svg>');
+    }
+
     &:focus,
     &:active {
         border: 2px solid $font-main;
     }
 }
 
-.input-text__field_error {
+.datepicker__field_error {
     border: 2px solid $danger-main;
 }
 
-.input-text__label {
+.datepicker__label {
     position: absolute;
-    left: 20px;
-    top: 16px;
-    color: $font-main;
-    pointer-events: none;
-    transition: $base-transition ease all;
-    opacity: .5;
-}
-
-.input-text__field:focus ~ .input-text__label,
-.input-text__field:active ~ .input-text__label,
-.input-text__field:valid ~ .input-text__label,
-.input-text__field_filled ~ .input-text__label {
     top: -17px;
     left: 0;
     font-size: rem(12);
     line-height: 1;
-    color: $font-main;
+    color: $font-main-50;
 }

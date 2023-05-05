@@ -71,25 +71,52 @@
             <h2 class="title title_big title_indent_big">{{ __('Inputs') }}</h2>
 
             <div class="card">
-                <h3 class="title title_size_small">Text input</h3>
-                <div class="form-group">
-                    <div class="input-text">
-                        <input class="input-text__field"
-                               id="text" type="text" name="text"
-                               value="{{ old('text') }}" required autocomplete="text">
-                        <label class="input-text__label" for="text">{{ __('Text') }}</label>
+                <div class="grid grid_c">
+                    <div class="row">
+                        <div class="col-xl-3 col-lg-4 col-md-6 col-sm-12">
+                            <h3 class="title title_size_small">Text input</h3>
+                            <div class="form-group">
+                                <div class="input-text">
+                                    <input class="input-text__field"
+                                           id="text" type="text" name="text"
+                                           value="{{ old('text') }}" required autocomplete="text">
+                                    <label class="input-text__label" for="text">{{ __('Text') }}</label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-xl-3 col-lg-4 col-md-6 col-sm-12">
+                            <h3 class="title title_size_small">Text input with error</h3>
+                            <div class="form-group">
+                                <div class="input-text">
+                                    <input class="input-text__field  input-text__field_error"
+                                           id="text" type="text" name="text"
+                                           value="{{ old('text') }}" required autocomplete="text">
+                                    <label class="input-text__label" for="text">{{ __('Text') }}</label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-xl-3 col-lg-4 col-md-6 col-sm-12">
+                            <h3 class="title title_size_small">Datepicker</h3>
+                            <div class="form-group">
+                                <div class="datepicker">
+                                    <label class="datepicker__label" for="date">{{ __('Select date') }}</label>
+                                    <input class="datepicker__field"
+                                           id="date" type="date" name="date"
+                                           value="{{ old('text') }}" required >
+
+                                </div>
+                            </div>
+                        </div>
+
                     </div>
                 </div>
 
-                <h3 class="title title_size_small">Text input with error</h3>
-                <div class="form-group">
-                    <div class="input-text">
-                        <input class="input-text__field  input-text__field_error"
-                               id="text" type="text" name="text"
-                               value="{{ old('text') }}" required autocomplete="text">
-                        <label class="input-text__label" for="text">{{ __('Text') }}</label>
-                    </div>
-                </div>
+
+
+
+
 
                 <h3 class="title title_size_small">Textarea</h3>
                 <div class="form-group">
@@ -99,20 +126,17 @@
                     </div>
                 </div>
 
-
-                <!-- Create the editor container -->
-                <div id="editor">
-                    <p>Hello World!</p>
-                    <p>Some initial <strong>bold</strong> text</p>
-                    <p><br></p>
+                <h3 class="title title_size_small">Quill</h3>
+                <div class="form-group">
+                    <div id="editor">
+                        <h1>Hello World!</h1>
+                        <p>Some initial <strong>bold</strong> text</p>
+                        <p><br></p>
+                    </div>
                 </div>
 
 
-
-
-
-<div id="editorjs"></div>
-
+                {{--<div id="editorjs"></div>--}}
 
             </div>
 
@@ -613,12 +637,31 @@
              */
             holder: 'editorjs',
         })
+        var toolbarOptions = [
+            ['bold', 'italic', 'underline', 'strike'],        // toggled buttons
+            ['blockquote', 'code-block'],
 
+            [{ 'header': 1 }, { 'header': 2 }],               // custom button values
+            [{ 'list': 'ordered'}, { 'list': 'bullet' }],
+            [{ 'script': 'sub'}, { 'script': 'super' }],      // superscript/subscript
+            [{ 'indent': '-1'}, { 'indent': '+1' }],          // outdent/indent
+            [{ 'direction': 'rtl' }],                         // text direction
+
+            [{ 'size': ['small', false, 'large', 'huge'] }],  // custom dropdown
+            [{ 'header': [1, 2, 3, 4, 5, 6, false] }],
+
+            [{ 'color': [] }, { 'background': [] }],          // dropdown with defaults from theme
+            [{ 'font': [] }],
+            [{ 'align': [] }],
+
+            ['clean']                                         // remove formatting button
+        ];
 
         var quill = new Quill('#editor', {
-
+            modules: {
+                toolbar: toolbarOptions
+            },
             placeholder: 'Compose an epic...',
-
             theme: 'snow'
         });
 
