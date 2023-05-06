@@ -711,6 +711,63 @@
             </div>
         </section>
 
+        <section class="ui__section">
+            <h2 class="title title_big title_indent_big">{{ __('Tabs') }}</h2>
+            <div class="card">
+                <div class="grid grid_c">
+                    <div class="row">
+                        <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12">
+                            <div class="tabs">
+                                <ul class="tabs__header">
+                                    <li class="tabs__header-link">First</li>
+                                    <li class="tabs__header-link">Second</li>
+                                    <li class="tabs__header-link">Third</li>
+                                </ul>
+                                <ul class="tabs__content">
+                                    <li class="tabs__content-block">
+                                        <h2 class="title title_indent_normal title_size_normal">First tab content</h2>
+                                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Doloribus inventore itaque nemo veniam veritatis! Accusantium alias aperiam assumenda aut deserunt doloremque, fugit iusto libero, nostrum porro possimus quisquam? Iure, nisi!</p>
+                                    </li>
+                                    <li class="tabs__content-block">
+                                        <h2 class="title title_indent_normal title_size_normal">Second tab content</h2>
+                                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Doloribus inventore itaque nemo veniam veritatis! Accusantium alias.</p>
+                                    </li>
+                                    <li class="tabs__content-block">
+                                        <h2 class="title title_indent_normal title_size_normal">Third tab content</h2>
+                                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Doloribus inventore itaque nemo veniam veritatis! Accusantium alias aperiam assumenda aut deserunt doloremque, fugit iusto libero, nostrum porro possimus quisquam? Iure, nisi!</p>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12">
+                            <div class="tabs">
+                                <ul class="tabs__header">
+                                    <li class="tabs__header-link tabs__header-link_button button button_dark">First</li>
+                                    <li class="tabs__header-link tabs__header-link_button button button_dark tabs__header-link_active">Second</li>
+                                    <li class="tabs__header-link tabs__header-link_button button button_dark">Third</li>
+                                </ul>
+                                <ul class="tabs__content">
+                                    <li class="tabs__content-block">
+                                        <h2 class="title title_indent_normal title_size_normal">First button tab content</h2>
+                                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Doloribus inventore itaque nemo veniam veritatis! Accusantium alias aperiam assumenda aut deserunt doloremque, fugit iusto libero, nostrum porro possimus quisquam? Iure, nisi!</p>
+                                    </li>
+                                    <li class="tabs__content-block tabs__content-block_active">
+                                        <h2 class="title title_indent_normal title_size_normal">Buttons second tab</h2>
+                                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Doloribus inventore itaque nemo veniam veritatis! Accusantium alias.</p>
+                                    </li>
+                                    <li class="tabs__content-block">
+                                        <h2 class="title title_indent_normal title_size_normal">Third button tab content</h2>
+                                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Doloribus inventore itaque nemo veniam veritatis! Accusantium alias aperiam assumenda aut deserunt doloremque, fugit iusto libero, nostrum porro possimus quisquam? Iure, nisi!</p>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
 
 
     </div>
@@ -718,6 +775,8 @@
 
 @endsection
 @push('scripts')
+
+
 
     <script type="module">
         const element1 = document.querySelector('.choices-select-1');
