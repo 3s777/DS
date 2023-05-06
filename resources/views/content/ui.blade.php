@@ -22,6 +22,60 @@
         </section>
 
         <section class="ui__section">
+            <h2 class="title title_big title_indent_big">{{ __('Post') }}</h2>
+            <div class="card">
+                <article class="post post_standard">
+                    <p>
+                        Lorem ipsum dolor sit amet, <a href="">consectetur</a> adipisicing elit. Alias aliquam, assumenda corporis delectus dolor, dolore dolores dolorum ea eligendi ex fuga inventore magni, molestias odio quas saepe similique sunt tenetur.
+                        <strong>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</strong> Alias aliquam, assumenda corporis delectus dolor, dolore dolores dolorum ea eligendi ex fuga inventore magni, molestias odio quas saepe similique sunt tenetur.
+                        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Alias aliquam, assumenda corporis delectus dolor, dolore dolores dolorum ea eligendi ex fuga inventore magni, molestias odio quas saepe similique sunt tenetur.
+                        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Alias aliquam, assumenda corporis delectus dolor, dolore dolores dolorum ea eligendi ex fuga inventore magni, molestias odio quas saepe similique sunt tenetur.
+                        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Alias aliquam, assumenda corporis delectus dolor, dolore dolores dolorum ea eligendi ex fuga inventore magni, molestias odio quas saepe similique sunt tenetur.
+                    </p>
+                    <p>
+                        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Alias aliquam, assumenda corporis delectus dolor, dolore dolores dolorum ea eligendi ex fuga inventore magni, molestias odio quas saepe similique sunt tenetur.
+                        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Alias aliquam, assumenda corporis delectus dolor, dolore dolores dolorum ea eligendi ex fuga inventore magni, molestias odio quas saepe similique sunt tenetur.
+                    </p>
+                    <h3 class="title title_size_big title_indent_normal">Title in content</h3>
+                    <p>
+                        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Alias aliquam, assumenda corporis delectus dolor, dolore dolores dolorum ea eligendi ex fuga inventore magni, molestias odio quas saepe similique sunt tenetur.
+                        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Alias aliquam, assumenda corporis delectus dolor, dolore dolores dolorum ea eligendi ex fuga inventore magni, molestias odio quas saepe similique sunt tenetur.
+                    </p>
+                    <ul>
+                        <li>Li test item</li>
+                        <li>Li test item Lorem ipsum dolor sit amet</li>
+                        <li>Li test item</li>
+                        <li>Li test item Lorem ipsum dolor sit amet</li>
+                        <li>Li test item Lorem ipsum dolor sit amet</li>
+                        <li>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Alias aliquam, assumenda corporis delectus dolor, dolore dolores dolorum ea eligendi ex fuga inventore magni, molestias odio quas saepe similique sunt tenetur.</li>
+                        <li>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Alias aliquam, assumenda corporis delectus dolor, dolore dolores dolorum ea eligendi ex fuga inventore magni, molestias odio quas saepe similique sunt tenetur.</li>
+                        <li>Li test item Lorem ipsum dolor sit amet</li>
+                    </ul>
+                    <h4 class="title title_size_normal title_indent_normal">Title in content</h4>
+                    <p>
+                        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Alias aliquam, assumenda corporis delectus dolor, dolore dolores dolorum ea eligendi ex fuga inventore magni, molestias odio quas saepe similique sunt tenetur.
+                        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Alias aliquam, assumenda corporis delectus dolor, dolore dolores dolorum ea eligendi ex fuga inventore magni, molestias odio quas saepe similique sunt tenetur.
+                    </p>
+                    <ol>
+                        <li>Li test item</li>
+                        <li>Li test item Lorem ipsum dolor sit amet</li>
+                        <li>Li test item</li>
+                        <li>Li test item Lorem ipsum dolor sit amet</li>
+                        <li>Li test item Lorem ipsum dolor sit amet</li>
+                        <li>Li test item</li>
+                        <li>Li test item Lorem ipsum dolor sit amet</li>
+                        <li>Li test item</li>
+                        <li>Li test item Lorem ipsum dolor sit amet</li>
+                        <li>Li test item Lorem ipsum dolor sit amet</li>
+                        <li>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Alias aliquam, assumenda corporis delectus dolor, dolore dolores dolorum ea eligendi ex fuga inventore magni, molestias odio quas saepe similique sunt tenetur.</li>
+                        <li>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Alias aliquam, assumenda corporis delectus dolor, dolore dolores dolorum ea eligendi ex fuga inventore magni, molestias odio quas saepe similique sunt tenetur.</li>
+                        <li>Li test item Lorem ipsum dolor sit amet</li>
+                    </ol>
+                </article>
+            </div>
+        </section>
+
+        <section class="ui__section">
             <h2 class="title title_big title_indent_big">{{ __('Grid') }}</h2>
             <div class="card">
                 <div class="grid ui__grid">
@@ -724,7 +778,7 @@
                                     <li class="tabs__header-link">Third</li>
                                 </ul>
                                 <ul class="tabs__content">
-                                    <li class="tabs__content-block">
+                                    <li class="tabs__content-block post">
                                         <h2 class="title title_indent_normal title_size_normal">First tab content</h2>
                                         <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Doloribus inventore itaque nemo veniam veritatis! Accusantium alias aperiam assumenda aut deserunt doloremque, fugit iusto libero, nostrum porro possimus quisquam? Iure, nisi!</p>
                                     </li>
