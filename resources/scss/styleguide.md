@@ -58,6 +58,10 @@
 - порядок объявления свойств
 ```
 .selector {
+    /* Содержимое */
+    content: counter(num);
+    counter-increment: num;
+                
     /* Позиционирование */
     position: absolute;
     z-index: 10;

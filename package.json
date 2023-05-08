@@ -11,6 +11,7 @@
     },
     "dependencies": {
         "@editorjs/editorjs": "^2.26.5",
+        "@fancyapps/ui": "^5.0.17",
         "alpinejs": "^3.12.0",
         "choices.js": "^10.2.0",
         "modern-normalize": "^1.1.0",

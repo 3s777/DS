@@ -18,17 +18,21 @@
 @import "../blocks/ui/radio/radio";
 @import "../blocks/ui/radio-button/radio-button";
 @import "../blocks/ui/radio-group/radio-group";
+@import "../blocks/ui/image/image";
 @import "../blocks/ui/post/post";
 @import "../blocks/ui/title/title";
 @import "../blocks/ui/message/message";
 @import "../blocks/ui/card/card";
 @import "../blocks/ui/popover/popover";
 @import "../blocks/ui/tabs/tabs";
+@import "../blocks/ui/table/table";
+
 
 @import '~/choices.js/public/assets/styles/choices.min.css';
 @import "libraries/choices";
 @import '~/quill/dist/quill.snow.css';
 @import "libraries/quill";
+@import "~/@fancyapps/ui/dist/fancybox/fancybox.css";
 
 @import "../blocks/header/header";
 @import "../blocks/site-icon/site-icon";

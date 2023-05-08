@@ -1,0 +1,29 @@
+.image {
+    display: block;
+
+    &_standard {
+        margin-bottom: 16px;
+        padding: 16px;
+        background-color: $base-dark;
+        border-radius: $small-border-radius;
+    }
+
+    &_align_left {
+        float: left;
+        margin-right: 16px;
+    }
+
+    &_align_right {
+        float: right;
+        margin-left: 16px;
+    }
+
+    &_align_center {
+        margin: 0 auto 16px auto;
+    }
+
+    &__caption {
+        padding-top: 12px;
+        text-align: center;
+    }
+}

@@ -1,0 +1,41 @@
+.table {
+    width: 100%;
+    font-size: 1rem;
+    text-align: center;
+    border-collapse: collapse;
+
+    &__wrapper {
+        margin-bottom: 16px;
+        overflow-x:auto;
+    }
+
+    &_color_td {
+        td:first-child {
+            background: $base-dark;
+        }
+    }
+
+    &_color_th {
+        th {
+            background: $base-dark;
+        }
+    }
+
+    &_color_nth {
+        tr:nth-child(odd) {
+            background: $base-main-50;
+        }
+    }
+
+    th,
+    td {
+        padding: 10px 20px;
+        border: 1px solid $opposite-main-50;
+        color: $font-main;
+    }
+
+    th:first-child,
+    td:first-child {
+        text-align: left;
+    }
+}

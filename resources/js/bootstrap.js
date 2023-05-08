@@ -42,3 +42,6 @@ window.Choices = Choices;
 
 import EditorJS from '@editorjs/editorjs';
 window.EditorJS = EditorJS;
+
+import { Fancybox } from "@fancyapps/ui";
+window.Fancybox = Fancybox;
