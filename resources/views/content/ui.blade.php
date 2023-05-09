@@ -1078,6 +1078,127 @@
             </div>
         </section>
 
+        <section class="ui__section">
+            <h2 class="title title_big title_indent_big">{{ __('Badges') }}</h2>
+            <div class="card">
+                <div class="grid grid_c">
+                    <div class="row">
+                        <div class="col-xl-2 col-lg-6 col-md-6 col-sm-12">
+                            <div class="button button_submit ui__button_badge">
+                                Badge round
+                                <div class="badge badge_standard_size_mini ui__badge_standard"></div>
+                            </div>
+                        </div>
+                        <div class="col-xl-2 col-lg-6 col-md-6 col-sm-12">
+                            <div class="button button_submit ui__button_badge">
+                                Badge round
+                                <div class="badge badge_standard ui__badge_standard"></div>
+                            </div>
+                        </div>
+                        <div class="col-xl-2 col-lg-6 col-md-6 col-sm-12">
+                            <div class="button button_submit ui__button_badge">
+                                Badge round
+                                <div class="badge badge_standard_size_big ui__badge_standard"></div>
+                            </div>
+                        </div>
+                        <div class="col-xl-2 col-lg-6 col-md-6 col-sm-12">
+                            <div class="button button_dark ui__button_badge">
+                                Badge round
+                                <div class="badge badge_standard badge_success ui__badge_standard"></div>
+                            </div>
+                        </div>
+                        <div class="col-xl-2 col-lg-6 col-md-6 col-sm-12">
+                            <div class="button button_dark ui__button_badge">
+                                Badge round
+                                <div class="badge badge_number badge_success ui__badge_standard">12</div>
+                            </div>
+                        </div>
+                        <div class="col-xl-2 col-lg-6 col-md-6 col-sm-12">
+                            <div class="button button_dark ui__button_badge">
+                                Badge round
+                                <div class="badge badge_number ui__badge_standard">5</div>
+                            </div>
+                        </div>
+
+                        <div class="col-xl-3 col-lg-6 col-md-6 col-sm-12">
+                            <div class="image image_standard ui__image_badge">
+                                <picture>
+                                    <source
+                                        type="image/webp"
+                                        srcset="
+                                    {{ asset('/storage/test-300.webp') }} 300w,
+                                    {{ asset('/storage/test-650.webp') }} 650w,
+
+                                "
+                                        sizes="
+                                    (max-width: 700px) 280px,
+                                    100vw
+                                "
+                                    />
+                                    <img
+                                        src="{{ asset('/storage/test-650.jpg') }}"
+                                        srcset="
+                                    {{ asset('/storage/test-300.jpg') }} 300w,
+                                    {{ asset('/storage/test-650.jpg') }} 650w,,
+                                "
+                                        sizes="
+                                    (max-width: 700px) 280px,,
+                                    100vw
+                                "
+                                        loading="lazy"
+                                        decoding="async"
+                                        alt="Test image"
+                                        title="Test image"
+                                    />
+                                </picture>
+                                <div class="image__caption">Image description</div>
+                                <div class="badge badge_ribbon badge_ribbon_left">Ribbon badge</div>
+                            </div>
+                        </div>
+
+
+                        <div class="col-xl-3 col-lg-6 col-md-6 col-sm-12">
+                            <div class="image image_standard ui__image_badge">
+                                <picture>
+                                    <source
+                                        type="image/webp"
+                                        srcset="
+                                    {{ asset('/storage/test-300.webp') }} 300w,
+                                    {{ asset('/storage/test-650.webp') }} 650w,
+
+                                "
+                                        sizes="
+                                    (max-width: 700px) 280px,
+                                    100vw
+                                "
+                                    />
+                                    <img
+                                        src="{{ asset('/storage/test-650.jpg') }}"
+                                        srcset="
+                                    {{ asset('/storage/test-300.jpg') }} 300w,
+                                    {{ asset('/storage/test-650.jpg') }} 650w,,
+                                "
+                                        sizes="
+                                    (max-width: 700px) 280px,,
+                                    100vw
+                                "
+                                        loading="lazy"
+                                        decoding="async"
+                                        alt="Test image"
+                                        title="Test image"
+                                    />
+                                </picture>
+                                <div class="image__caption">Image description</div>
+                                <div class="badge badge_ribbon badge_success badge_ribbon_right badge_ribbon_right_danger">Ribbon badge</div>
+
+
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </section>
 
     </div>
 

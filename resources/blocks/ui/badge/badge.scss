@@ -1,0 +1,92 @@
+.badge {
+    display: block;
+    background-color: $danger-main;
+
+    &:after {
+        border-color: $danger-main;
+    }
+
+    &_success {
+        background-color: $success-main;
+
+        &:after {
+            border-color: $success-main;
+        }
+    }
+
+    &_info {
+        background-color: $info-main;
+    }
+
+    &_warning {
+        background-color: $warning-main;
+    }
+
+    &_standard {
+        width: 16px;
+        height: 16px;
+        border-radius: 50%;
+    }
+
+    &_standard_size_mini {
+        width: 12px;
+        height: 12px;
+        border-radius: 50%;
+    }
+
+    &_standard_size_big {
+        width: 20px;
+        height: 20px;
+        border-radius: 50%;
+    }
+
+    &_number {
+        padding: 3px 5px;
+        font-size: .75rem;
+        border-radius: $extra-small-border-radius;
+    }
+
+    &_ribbon {
+        position: absolute;
+        padding: 5px 20px;
+        font-size: .75rem;
+
+        &:after {
+            @include pseudo();
+            width: 0;
+            height: 0;
+            line-height: 0;
+            opacity: .5;
+        }
+    }
+
+    &_ribbon_left {
+        top: 20px;
+        left: -10px;
+        border-radius: 0 $extra-small-border-radius $extra-small-border-radius 0;
+
+        &:after {
+            bottom: -5px;
+            left: 0;
+            border-left: 10px solid transparent;
+            border-top-width: 5px;
+            border-top-style: solid;
+        }
+    }
+
+    &_ribbon_right {
+        top: 20px;
+        right: -10px;
+        border-radius: $extra-small-border-radius 0 0 $extra-small-border-radius;
+
+        &:after {
+            bottom: -5px;
+            right: 0;
+            border-right: 10px solid transparent;
+            border-top-width: 5px;
+            border-top-style: solid;
+        }
+    }
+
+
+}
