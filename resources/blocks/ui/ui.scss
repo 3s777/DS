@@ -71,5 +71,19 @@
 .ui__image_badge {
     position: relative;
     margin-bottom: 0;
-    margin-top: 16px;
+}
+
+.ui__ribbon_test_1 {
+    top: 60px;
+}
+
+.ui__ribbon_test_2 {
+    top: 100px;
+}
+
+.ui__badge_placeholder {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 2 / 2.2;
+    background-color: $base-dark;
 }

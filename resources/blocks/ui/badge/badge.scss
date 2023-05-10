@@ -16,10 +16,18 @@
 
     &_info {
         background-color: $info-main;
+
+        &:after {
+            border-color: $info-main;
+        }
     }
 
     &_warning {
         background-color: $warning-main;
+
+        &:after {
+            border-color: $warning-main;
+        }
     }
 
     &_standard {
@@ -28,7 +36,7 @@
         border-radius: 50%;
     }
 
-    &_standard_size_mini {
+    &_standard_size_small {
         width: 12px;
         height: 12px;
         border-radius: 50%;
@@ -50,6 +58,7 @@
         position: absolute;
         padding: 5px 20px;
         font-size: .75rem;
+        box-shadow: 0 2px 5px $shadow;
 
         &:after {
             @include pseudo();
@@ -88,5 +97,24 @@
         }
     }
 
+    &_bookmark {
+        position: absolute;
+        left: 10px;
+        top: -3px;
+        min-width: 20px;
+        padding: 10px 10px 15px 10px;
+        text-align: center;
+        clip-path: polygon(0 0, 100% 0, 100% 75%, 50% 100%, 0 75%);
+    }
 
+    &_bookmark_right {
+        left: auto;
+        right: 10px;
+    }
+
+    &__star {
+        fill: $opposite-main;
+        width: 15px;
+        height: 15px;
+    }
 }
