@@ -1197,6 +1197,74 @@
             </div>
         </section>
 
+        <section class="ui__section">
+            <h2 class="title title_big title_indent_big">{{ __('Tabulator') }}</h2>
+            <div class="card">
+                <table id="example-table">
+                    <thead>
+                    <tr>
+                        <th width="200">Name</th>
+                        <th>Age</th>
+                        <th>Gender</th>
+                        <th>Height</th>
+                        <th>Favourite Color</th>
+                        <th>Date of Birth</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td>Billy Bob</td>
+                        <td>12</td>
+                        <td>male</td>
+                        <td>1</td>
+                        <td>red</td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td>Mary May</td>
+                        <td>1</td>
+                        <td>female</td>
+                        <td>2</td>
+                        <td>blue</td>
+                        <td>14/05/1982</td>
+                    </tr>
+                    <tr>
+                        <td>Billy Bob</td>
+                        <td>12</td>
+                        <td>male</td>
+                        <td>1</td>
+                        <td>red</td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td>Mary May</td>
+                        <td>1</td>
+                        <td>female</td>
+                        <td>2</td>
+                        <td>blue</td>
+                        <td>14/05/1982</td>
+                    </tr>
+                    <tr>
+                        <td>Billy Bob</td>
+                        <td>12</td>
+                        <td>male</td>
+                        <td>1</td>
+                        <td>red</td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td>Mary May</td>
+                        <td>1</td>
+                        <td>female</td>
+                        <td>2</td>
+                        <td>blue</td>
+                        <td>14/05/1982</td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
     </div>
 
 
@@ -1275,6 +1343,22 @@
 
         Fancybox.bind("[data-fancybox]", {
             // Your custom options
+        });
+
+
+
+
+        //create Tabulator on DOM element with id "example-table"
+        var table = new Tabulator("#example-table", {
+            layout:"fitColumns",
+            responsiveLayout:"collapse",  //fit columns to width of table (optional)
+            columns:[ //Define Table Columns
+            ],
+        });
+
+        //trigger an alert message when the row is clicked
+        table.on("rowClick", function(e, row){
+            alert("Row " + row.getData().id + " Clicked!!!!");
         });
 
     </script>

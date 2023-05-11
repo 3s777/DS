@@ -45,3 +45,12 @@ window.EditorJS = EditorJS;
 
 import { Fancybox } from "@fancyapps/ui";
 window.Fancybox = Fancybox;
+
+import {TabulatorFull as Tabulator} from 'tabulator-tables';
+window.Tabulator = Tabulator;
+
+import {HtmlTableImportModule} from 'tabulator-tables';
+window.HtmlTableImportModule = HtmlTableImportModule;
+
+import {ResponsiveLayoutModule} from 'tabulator-tables';
+window.ResponsiveLayoutModule = ResponsiveLayoutModule;
