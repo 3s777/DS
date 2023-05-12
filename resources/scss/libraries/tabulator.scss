@@ -1,36 +1,15 @@
-//Main Theme Variables
-$backgroundColor: #888 !default; //background color of tabulator
-$borderColor:#999 !default; //border to tabulator
-$textSize:14px !default; //table text size
+.tabulator {
+    border-radius: $small-border-radius;
 
-//header theming
-$headerBackgroundColor:$base-dark; //border to tabulator
-$headerTextColor:$opposite-main; //header text color
-$headerBorderColor:#000;  //header border color
-$headerSeparatorColor:#999 !default; //header bottom separator color
-$headerMargin:4px !default; //padding round header
+    & .tabulator-header .tabulator-col .tabulator-col-content {
+        padding: 10px;
+    }
 
-//column header arrows
-$sortArrowHover: #555 !default;
-$sortArrowActive: #666 !default;
-$sortArrowInactive: #bbb !default;
+    & .tabulator-footer .tabulator-footer-contents {
+        padding: 10px;
+    }
+}
 
-//row theming
-$rowBackgroundColor:#fff !default; //table row background color
-$rowAltBackgroundColor:#EFEFEF !default; //table row background color
-$rowBorderColor:#aaa !default; //table border color
-$rowTextColor:#333 !default; //table text color
-$rowHoverBackground:#bbb !default; //row background color on hover
-
-$rowSelectedBackground: #9ABCEA !default; //row background color when selected
-$rowSelectedBackgroundHover: #769BCC !default;//row background color when selected and hovered
-
-$editBoxColor:#1D68CD !default; //border color for edit boxes
-$errorColor:#dd0000 !default; //error indication
-
-//footer theming
-$footerBackgroundColor:#e6e6e6 !default; //border to tabulator
-$footerTextColor:#555 !default; //footer text color
-$footerBorderColor:#aaa !default; //footer border color
-$footerSeparatorColor:#999 !default; //footer bottom separator color
-$footerActiveColor:#d00 !default; //footer bottom active text color
+.tabulator-row .tabulator-cell {
+    padding: 10px;
+}

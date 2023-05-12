@@ -680,7 +680,7 @@
                         <div class="col-xl-2 col-lg-4 col-md-6 col-sm-12">
                             <div class="form-group">
                                 <button type="submit" class="button button_submit button_icon button_full_width">
-                                    <div class="button__icon button__icon_submit">
+                                    <div class="button__icon-wrapper button__icon-wrapper_submit">
                                         @include('inline-svg/success', ['class' => 'button__submit-icon'])
                                     </div>
                                     {{ __('With icon') }}
@@ -690,7 +690,7 @@
                         <div class="col-xl-2 col-lg-4 col-md-6 col-sm-12">
                             <div class="form-group">
                                 <button type="submit" class="button button_cancel button_icon button_full_width">
-                                    <div class="button__icon button__icon_cancel">
+                                    <div class="button__icon-wrapper button__icon-wrapper_cancel">
                                         @include('inline-svg/cancel', ['class' => 'button__cancel-icon'])
                                     </div>
                                     {{ __('With icon') }}
@@ -700,7 +700,7 @@
                         <div class="col-xl-2 col-lg-4 col-md-6 col-sm-12">
                             <div class="form-group">
                                 <button type="submit" class="button button_dark button_icon button_full_width">
-                                    <div class="button__icon button__icon_cancel">
+                                    <div class="button__icon-wrapper button__icon-wrapper_cancel">
                                         @include('inline-svg/warning', ['class' => 'button__cancel-icon'])
                                     </div>
                                     {{ __('Dark') }}
@@ -733,7 +733,7 @@
                         <div class="col-xl-3 col-lg-4 col-md-6 col-sm-12">
                             <div class="form-group">
                                 <div class="button button_submit button_icon">
-                                    <div class="button__icon button__icon_submit">
+                                    <div class="button__icon-wrapper button__icon-wrapper_submit">
                                         @include('inline-svg/success', ['class' => 'button__submit-icon'])
                                     </div>
                                     {{ __('Content width button') }}
@@ -758,7 +758,7 @@
                         <div class="col-xl-2 col-lg-4 col-sm-12">
                             <div class="form-group">
                                 <div class="button button_big_icon button_cancel button_size_big button_full_width">
-                                    <div class="button__icon button__icon_cancel">
+                                    <div class="button__icon-wrapper button__icon-wrapper_cancel">
                                         @include('inline-svg/cancel', ['class' => 'button__cancel-icon'])
                                     </div>
                                     {{ __('Big size') }}
@@ -776,15 +776,87 @@
                         <div class="col-xl-3 col-lg-6 col-md-6 col-sm-12">
                             <div class="form-group">
                                 <div class="button button_large_icon button_cancel button_size_large button_full_width">
-                                    <div class="button__icon button__icon_cancel">
-                                        @include('inline-svg/success', ['class' => 'button__cancel-icon'])
+                                    <div class="button__icon-wrapper button__icon-wrapper_cancel">
+                                        @include('inline-svg/cancel', ['class' => 'button__cancel-icon'])
                                     </div>
                                     {{ __('Large size') }}
                                 </div>
                             </div>
                         </div>
 
+                        <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12">
+                            <div class="form-group ui__form-group_buttons">
+
+                                <div class="button button_info button_only_icon button_only_icon_extra-small">
+                                    <div class="button__icon-wrapper">
+                                        @include('inline-svg/view', ['class' => 'button__icon button__icon_extra-small button__view-icon'])
+                                    </div>
+                                </div>
+
+                                <div class="button button_warning button_only_icon button_only_icon_extra-small">
+                                    <div class="button__icon-wrapper">
+                                        @include('inline-svg/edit', ['class' => 'button__icon button__icon_extra-small button__edit-icon'])
+                                    </div>
+                                </div>
+
+                                <div class="button button_cancel button_only_icon button_only_icon_extra-small">
+                                    <div class="button__icon-wrapper">
+                                        @include('inline-svg/close', ['class' => 'button__icon button__icon_extra-small button__close-icon'])
+                                    </div>
+                                </div>
+
+                                <div class="button button_info button_only_icon button_only_icon_small">
+                                    <div class="button__icon-wrapper">
+                                        @include('inline-svg/view', ['class' => 'button__icon button__icon_small button__view-icon'])
+                                    </div>
+                                </div>
+
+                                <div class="button button_warning button_only_icon button_only_icon_small">
+                                    <div class="button__icon-wrapper">
+                                        @include('inline-svg/edit', ['class' => 'button__icon button__icon_small button__edit-icon'])
+                                    </div>
+                                </div>
+
+                                <div class="button button_cancel button_only_icon button_only_icon_small">
+                                    <div class="button__icon-wrapper">
+                                        @include('inline-svg/close', ['class' => 'button__icon button__icon_small button__close-icon'])
+                                    </div>
+                                </div>
+
+                                <div class="button button_info button_only_icon">
+                                    <div class="button__icon-wrapper">
+                                        @include('inline-svg/view', ['class' => 'button__icon button__view-icon'])
+                                    </div>
+                                </div>
+
+                                <div class="button button_cancel button_only_icon">
+                                    <div class="button__icon-wrapper">
+                                        @include('inline-svg/close', ['class' => 'button__icon button__close-icon'])
+                                    </div>
+                                </div>
+
+
+                                <div class="button button_warning button_only_icon button_only_icon_big">
+                                    <div class="button__icon-wrapper">
+                                        @include('inline-svg/edit', ['class' => 'button__icon button__icon_big button__edit-icon'])
+                                    </div>
+                                </div>
+
+                                <div class="button button_cancel button_only_icon button_only_icon_big">
+                                    <div class="button__icon-wrapper">
+                                        @include('inline-svg/close', ['class' => 'button__icon button__icon_big button__close-icon'])
+                                    </div>
+                                </div>
+
+                                <div class="button button_info button_only_icon button_only_icon_large">
+                                    <div class="button__icon-wrapper">
+                                        @include('inline-svg/cancel', ['class' => 'button__icon button__icon_large button__close-icon'])
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
+
                 </div>
             </div>
         </section>
@@ -1204,11 +1276,12 @@
                     <thead>
                     <tr>
                         <th width="200">Name</th>
-                        <th>Age</th>
+                        <th width="100">Age</th>
                         <th>Gender</th>
                         <th>Height</th>
                         <th>Favourite Color</th>
-                        <th>Date of Birth</th>
+                        <th width="140">Date of Birth</th>
+                        <th width="140">Edit</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -1219,6 +1292,27 @@
                         <td>1</td>
                         <td>red</td>
                         <td></td>
+                        <td>
+                            <div class="ui__table-buttons">
+                                <div class="button button_icon button_info button_only_icon button_only_icon_small">
+                                    <div class="button__icon-wrapper">
+                                        @include('inline-svg/view', ['class' => 'button__icon button__icon_small'])
+                                    </div>
+                                </div>
+
+                                <div class="button button_icon button_warning button_only_icon button_only_icon_small">
+                                    <div class="button__icon-wrapper">
+                                        @include('inline-svg/edit', ['class' => 'button__icon button__icon_small'])
+                                    </div>
+                                </div>
+
+                                <div class="button button_icon button_cancel button_only_icon button_only_icon_small">
+                                    <div class="button__icon-wrapper">
+                                        @include('inline-svg/close', ['class' => 'button__icon button__icon_small'])
+                                    </div>
+                                </div>
+                            </div>
+                        </td>
                     </tr>
                     <tr>
                         <td>Mary May</td>
@@ -1227,6 +1321,27 @@
                         <td>2</td>
                         <td>blue</td>
                         <td>14/05/1982</td>
+                        <td>
+                            <div class="ui__table-buttons">
+                                <div class="button button_icon button_info button_only_icon button_only_icon_small">
+                                    <div class="button__icon-wrapper">
+                                        @include('inline-svg/view', ['class' => 'button__icon button__icon_small'])
+                                    </div>
+                                </div>
+
+                                <div class="button button_icon button_warning button_only_icon button_only_icon_small">
+                                    <div class="button__icon-wrapper">
+                                        @include('inline-svg/edit', ['class' => 'button__icon button__icon_small'])
+                                    </div>
+                                </div>
+
+                                <div class="button button_icon button_cancel button_only_icon button_only_icon_small">
+                                    <div class="button__icon-wrapper">
+                                        @include('inline-svg/close', ['class' => 'button__icon button__icon_small'])
+                                    </div>
+                                </div>
+                            </div>
+                        </td>
                     </tr>
                     <tr>
                         <td>Billy Bob</td>
@@ -1235,6 +1350,27 @@
                         <td>1</td>
                         <td>red</td>
                         <td></td>
+                        <td>
+                            <div class="ui__table-buttons">
+                                <div class="button button_icon button_info button_only_icon button_only_icon_small">
+                                    <div class="button__icon-wrapper">
+                                        @include('inline-svg/view', ['class' => 'button__icon button__icon_small'])
+                                    </div>
+                                </div>
+
+                                <div class="button button_icon button_warning button_only_icon button_only_icon_small">
+                                    <div class="button__icon-wrapper">
+                                        @include('inline-svg/edit', ['class' => 'button__icon button__icon_small'])
+                                    </div>
+                                </div>
+
+                                <div class="button button_icon button_cancel button_only_icon button_only_icon_small">
+                                    <div class="button__icon-wrapper">
+                                        @include('inline-svg/close', ['class' => 'button__icon button__icon_small'])
+                                    </div>
+                                </div>
+                            </div>
+                        </td>
                     </tr>
                     <tr>
                         <td>Mary May</td>
@@ -1243,6 +1379,27 @@
                         <td>2</td>
                         <td>blue</td>
                         <td>14/05/1982</td>
+                        <td>
+                            <div class="ui__table-buttons">
+                                <div class="button button_icon button_info button_only_icon button_only_icon_small">
+                                    <div class="button__icon-wrapper">
+                                        @include('inline-svg/view', ['class' => 'button__icon button__icon_small'])
+                                    </div>
+                                </div>
+
+                                <div class="button button_icon button_warning button_only_icon button_only_icon_small">
+                                    <div class="button__icon-wrapper">
+                                        @include('inline-svg/edit', ['class' => 'button__icon button__icon_small'])
+                                    </div>
+                                </div>
+
+                                <div class="button button_icon button_cancel button_only_icon button_only_icon_small">
+                                    <div class="button__icon-wrapper">
+                                        @include('inline-svg/close', ['class' => 'button__icon button__icon_small'])
+                                    </div>
+                                </div>
+                            </div>
+                        </td>
                     </tr>
                     <tr>
                         <td>Billy Bob</td>
@@ -1251,6 +1408,27 @@
                         <td>1</td>
                         <td>red</td>
                         <td></td>
+                        <td>
+                            <div class="ui__table-buttons">
+                                <div class="button button_icon button_info button_only_icon button_only_icon_small">
+                                    <div class="button__icon-wrapper">
+                                        @include('inline-svg/view', ['class' => 'button__icon button__icon_small'])
+                                    </div>
+                                </div>
+
+                                <div class="button button_icon button_warning button_only_icon button_only_icon_small">
+                                    <div class="button__icon-wrapper">
+                                        @include('inline-svg/edit', ['class' => 'button__icon button__icon_small'])
+                                    </div>
+                                </div>
+
+                                <div class="button button_icon button_cancel button_only_icon button_only_icon_small">
+                                    <div class="button__icon-wrapper">
+                                        @include('inline-svg/close', ['class' => 'button__icon button__icon_small'])
+                                    </div>
+                                </div>
+                            </div>
+                        </td>
                     </tr>
                     <tr>
                         <td>Mary May</td>
@@ -1259,6 +1437,27 @@
                         <td>2</td>
                         <td>blue</td>
                         <td>14/05/1982</td>
+                        <td>
+                            <div class="ui__table-buttons">
+                                <div class="button button_icon button_info button_only_icon button_only_icon_small">
+                                    <div class="button__icon-wrapper">
+                                        @include('inline-svg/view', ['class' => 'button__icon button__icon_small'])
+                                    </div>
+                                </div>
+
+                                <div class="button button_icon button_warning button_only_icon button_only_icon_small">
+                                    <div class="button__icon-wrapper">
+                                        @include('inline-svg/edit', ['class' => 'button__icon button__icon_small'])
+                                    </div>
+                                </div>
+
+                                <div class="button button_icon button_cancel button_only_icon button_only_icon_small">
+                                    <div class="button__icon-wrapper">
+                                        @include('inline-svg/close', ['class' => 'button__icon button__icon_small'])
+                                    </div>
+                                </div>
+                            </div>
+                        </td>
                     </tr>
                     </tbody>
                 </table>
@@ -1351,8 +1550,32 @@
         //create Tabulator on DOM element with id "example-table"
         var table = new Tabulator("#example-table", {
             layout:"fitColumns",
+            rowHeight:'auto',
+            footerElement:"<button class='button button_submit'>Custom Button</button>",
             responsiveLayout:"collapse",  //fit columns to width of table (optional)
-            columns:[ //Define Table Columns
+            columns:[
+                {
+                    title: "Name"
+                },
+                {
+                    title: "Age"
+                },
+                {
+                    title: "Gender"
+                },
+                {
+                    title: "Height"
+                },
+                {
+                    title: "Favourite Color"
+                },
+                {
+                    title: "Date of Birth"
+                },
+                {
+                    title: "Edit",
+                    formatter: (cell) => cell.getValue()
+                },
             ],
         });
 
@@ -1360,6 +1583,8 @@
         table.on("rowClick", function(e, row){
             alert("Row " + row.getData().id + " Clicked!!!!");
         });
+
+
 
     </script>
 @endpush

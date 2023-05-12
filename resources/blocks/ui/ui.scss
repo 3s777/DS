@@ -87,3 +87,20 @@
     aspect-ratio: 2 / 2.2;
     background-color: $base-dark;
 }
+
+.ui__form-group_buttons {
+    display: flex;
+    align-items: flex-end;
+    flex-wrap: wrap;
+
+    .button {
+        margin-right: 5px;
+        margin-bottom: 10px;
+    }
+}
+
+.ui__table-buttons {
+    .button {
+        margin-right: 5px;
+    }
+}

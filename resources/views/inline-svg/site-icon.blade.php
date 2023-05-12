@@ -1,4 +1,4 @@
-<svg class="site-icon {{ $class }}" width="44" height="44" xml:space="preserve" viewBox="0 0 880 880">
+<svg class="icon site-icon {{ $class }}" width="44" height="44" xml:space="preserve" viewBox="0 0 880 880">
     <g class="site-icon__item site-icon__item-1 site-icon__item_animated site-icon__item-1_animated">
         <path class="site-icon__top site-icon__top_1" d="M854.6 34.5v133.6H743.8V34.5c0-6.6 5.4-12 12-12h86.8c6.6 0 12 5.4 12 12z" />
         <path class="site-icon__bottom site-icon__bottom_1" d="M854.6 168.1v679.3c0 6.6-5.4 12-12 12h-86.8c-6.6 0-12-5.4-12-12V168.1h110.8z" />

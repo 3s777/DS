@@ -35,18 +35,19 @@
     font-size: rem(32);
 }
 
-.button__icon {
-    display: flex;
-    align-items: center;
-    margin-right: 8px;
-}
-
 .button_icon {
     display: inline-flex;
     justify-content: center;
     align-items: center;
     padding: 8px 32px;
 }
+
+.button__icon-wrapper {
+    display: flex;
+    align-items: center;
+    margin-right: 8px;
+}
+
 
 .button_big_icon {
     display: inline-flex;
@@ -88,14 +89,79 @@
     }
 }
 
-.button__icon_cancel {
-    margin-right: 8px;
+.button_warning {
+    background-color: $warning-main;
+
+    &:hover {
+        background-color: $warning-dark;
+    }
+}
+
+.button_info {
+    background-color: $info-main;
+
+    &:hover {
+        background-color: $info-dark;
+    }
 }
 
 .button__cancel-icon {
     width: 27px;
     height: 27px;
     fill: $opposite-main;
+}
+
+.button_only_icon {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    padding: 8px;
+
+    .button__icon-wrapper {
+        margin-right: 0;
+    }
+}
+
+.button_only_icon_extra-small {
+    padding: 4px;
+}
+
+.button_only_icon_small {
+    padding: 6px;
+}
+
+.button_only_icon_big {
+    padding: 12px;
+}
+
+.button_only_icon_large {
+    padding: 10px;
+}
+
+.button__icon {
+    width: 27px;
+    height: 27px;
+    fill: $font-main;
+}
+
+.button__icon_extra-small {
+    width: 14px;
+    height: 14px;
+}
+
+.button__icon_small {
+    width: 20px;
+    height: 20px;
+}
+
+.button__icon_big {
+    width: 28px;
+    height: 28px;
+}
+
+.button__icon_large {
+    width: 40px;
+    height: 40px;
 }
 
 .button_disabled {
