@@ -1,6 +1,7 @@
 .main-menu {
     display: flex;
     justify-content: space-between;
+    flex-wrap: wrap;
 }
 
 .main-menu__item {

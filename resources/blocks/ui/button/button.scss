@@ -12,8 +12,14 @@
     cursor: pointer;
     box-shadow: none;
     border-radius: $extra-small-border-radius;
+    appearance: none;
+    outline: none;
 
     &:hover {
+        background-color: $additional-main;
+    }
+
+    &:focus {
         background-color: $additional-main;
     }
 }
@@ -70,9 +76,11 @@
 .button_submit {
     background-color: $additional-main;
 
-    &:hover {
+    &:hover,
+    &:focus {
         background-color: $additional-light;
     }
+
 }
 
 .button__submit-icon {
@@ -84,7 +92,8 @@
 .button_cancel {
     background-color: $danger-main;
 
-    &:hover {
+    &:hover,
+    &:focus  {
         background-color: $danger-dark;
     }
 }
@@ -100,7 +109,8 @@
 .button_info {
     background-color: $info-main;
 
-    &:hover {
+    &:hover,
+    &:focus  {
         background-color: $info-dark;
     }
 }
@@ -169,7 +179,16 @@
     color: $font-main-60;
     cursor: not-allowed;
 
-    &:hover {
+    &:hover,
+    &:focus  {
         background-color: $disabled-main;
     }
+}
+
+.button_indent_right {
+    margin-right: 8px;
+}
+
+.button_indent_left {
+    margin-left: 8px;
 }

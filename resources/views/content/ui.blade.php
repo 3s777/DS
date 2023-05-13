@@ -1461,6 +1461,181 @@
                     </tr>
                     </tbody>
                 </table>
+
+            </div>
+        </section>
+
+        <section class="ui__section">
+            <h2 class="title title_big title_indent_big">{{ __('Modal') }}</h2>
+            <div class="card">
+                <div class="grid">
+                    <div class="row">
+                        <div class="col-xl-3 col-lg-6 col-md-6 col-sm-12">
+                            <div x-data="{modalHide: true}" x-on:keydown.escape.window="modalHide = true">
+                                <div class="form-group">
+                                    <button x-on:click.stop="modalHide = ! modalHide" class="button button_submit">Open Extra Small Modal</button>
+                                </div>
+                                <section  class="modal" :class="modalHide ? '' : 'modal_show'">
+                                    <div  x-on:click.outside="modalHide = true" class="modal__content modal__content_size_extra_small">
+
+                                        <div x-on:click="modalHide = true" class="modal__close">
+                                            @include('inline-svg/close', ['class' => 'modal__close-icon'])
+                                        </div>
+
+                                        <div class="modal__header">
+                                            <div class="title title_indent_normal">Header</div>
+                                        </div>
+                                        <div class="modal__body">
+                                            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ab alias animi aperiam architecto commodi, cum earum fugit hic ipsum maxime neque quasi quia recusandae reiciendis rem. Facilis nemo quia sunt!
+                                        </div>
+                                        <div class="modal__footer modal__footer_buttons">
+                                            <div class="button button_submit button_only_icon button_only_icon button_indent_right">
+                                                <div class="button__icon-wrapper">
+                                                    @include('inline-svg/success', ['class' => 'button__icon button__icon_big button__edit-icon'])
+                                                </div>
+                                            </div>
+
+                                            <div x-on:click="modalHide = true" class="button button_cancel button_only_icon button_only_icon">
+                                                <div class="button__icon-wrapper">
+                                                    @include('inline-svg/cancel', ['class' => 'button__icon button__icon_big button__close-icon'])
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </section>
+                            </div>
+                        </div>
+
+                        <div class="col-xl-3 col-lg-6 col-md-6 col-sm-12">
+                            <div x-data="{modalHide: true}" x-on:keydown.escape.window="modalHide = true">
+                                <div class="form-group">
+                                    <button x-on:click.stop="modalHide = ! modalHide" class="button button_submit">Open Small Modal</button>
+                                </div>
+                                <section  class="modal" :class="modalHide ? '' : 'modal_show'">
+                                    <div  x-on:click.outside="modalHide = true" class="modal__content modal__content_size_small">
+
+                                        <div x-on:click="modalHide = true" class="modal__close">
+                                            @include('inline-svg/close', ['class' => 'modal__close-icon'])
+                                        </div>
+
+                                        <div class="modal__header">
+                                            <div class="title title_indent_normal">Header</div>
+                                        </div>
+                                        <div class="modal__body">
+                                            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ab alias animi aperiam architecto commodi, cum earum fugit hic ipsum maxime neque quasi quia recusandae reiciendis rem. Facilis nemo quia sunt!
+                                        </div>
+                                        <div class="modal__footer modal__footer_buttons">
+                                            <div class="button button_submit button button_indent_right">Submit</div>
+                                            <div x-on:click="modalHide = true" class="button button_cancel">Cancel</div>
+                                        </div>
+                                    </div>
+                                </section>
+                            </div>
+                        </div>
+
+                        <div class="col-xl-3 col-lg-6 col-md-6 col-sm-12">
+                            <div x-data="{modalHide: true}" x-on:keydown.escape.window="modalHide = true">
+                                <div class="form-group">
+                                    <button x-on:click.stop="modalHide = ! modalHide" class="button button_submit">Open Normal Modal</button>
+                                </div>
+                                <section  class="modal" :class="modalHide ? '' : 'modal_show'">
+                                    <div  x-on:click.outside="modalHide = true" class="modal__content modal__content_size_normal">
+
+                                        <div x-on:click="modalHide = true" class="modal__close">
+                                            @include('inline-svg/close', ['class' => 'modal__close-icon'])
+                                        </div>
+
+                                        <div class="modal__header">
+                                            <div class="title title_indent_normal">Header</div>
+                                        </div>
+                                        <div class="modal__body">
+                                            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ab alias animi aperiam architecto commodi, cum earum fugit hic ipsum maxime neque quasi quia recusandae reiciendis rem. Facilis nemo quia sunt!
+                                        </div>
+                                        <div class="modal__footer modal__footer_buttons">
+                                            <div class="button button_submit button button_indent_right">Submit</div>
+                                            <div x-on:click="modalHide = true" class="button button_cancel">Cancel</div>
+                                        </div>
+                                    </div>
+                                </section>
+                            </div>
+                        </div>
+
+                        <div class="col-xl-3 col-lg-6 col-md-6 col-sm-12">
+                            <div x-data="{modalHide: true}" x-on:keydown.escape.window="modalHide = true">
+                                <div class="form-group">
+                                    <button x-on:click.stop="modalHide = ! modalHide" class="button button_submit">Open Big Modal</button>
+                                </div>
+                                <section  class="modal" :class="modalHide ? '' : 'modal_show'">
+                                    <div  x-on:click.outside="modalHide = true" class="modal__content modal__content_size_big">
+
+                                        <div x-on:click="modalHide = true" class="modal__close">
+                                            @include('inline-svg/close', ['class' => 'modal__close-icon'])
+                                        </div>
+
+                                        <div class="modal__header">
+                                            <div class="title title_indent_normal">Header</div>
+                                        </div>
+                                        <div class="modal__body">
+                                            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ab alias animi aperiam architecto commodi, cum earum fugit hic ipsum maxime neque quasi quia recusandae reiciendis rem. Facilis nemo quia sunt!
+                                        </div>
+                                        <div class="modal__footer modal__footer_buttons">
+                                            <div class="button button_submit button button_indent_right">Submit</div>
+                                            <div x-on:click="modalHide = true" class="button button_cancel">Cancel</div>
+                                        </div>
+                                    </div>
+                                </section>
+                            </div>
+                        </div>
+
+                        <div class="col-xl-3 col-lg-6 col-md-6 col-sm-12">
+                            <div x-data="{modalHide: true}" x-on:keydown.escape.window="modalHide = true">
+                                <div class="form-group">
+                                    <button x-on:click.stop="modalHide = ! modalHide" class="button button_submit">Open Large Modal</button>
+                                </div>
+                                <section  class="modal" :class="modalHide ? '' : 'modal_show'">
+                                    <div  x-on:click.outside="modalHide = true" class="modal__content modal__content_size_large">
+
+                                        <div x-on:click="modalHide = true" class="modal__close">
+                                            @include('inline-svg/close', ['class' => 'modal__close-icon'])
+                                        </div>
+
+                                        <div class="modal__header">
+                                            <div class="title title_indent_normal">Header</div>
+                                        </div>
+                                        <div class="modal__body">
+                                            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ab alias animi aperiam architecto commodi, cum earum fugit hic ipsum maxime neque quasi quia recusandae reiciendis rem. Facilis nemo quia sunt!
+                                        </div>
+                                        <div class="modal__footer modal__footer_buttons">
+                                            <div class="button button_submit button button_indent_right">Submit</div>
+                                            <div x-on:click="modalHide = true" class="button button_cancel">Cancel</div>
+                                        </div>
+                                    </div>
+                                </section>
+                            </div>
+                        </div>
+
+                        <div class="col-xl-3 col-lg-6 col-md-6 col-sm-12">
+                            <div x-data="{toastHide: true}">
+                                <div class="form-group">
+                                    <button x-on:click.stop="toastHide = ! toastHide; setTimeout(() => toastHide = true, 3000)" class="button button_info">Show Toast</button>
+                                </div>
+                                <div  class="toast" :class="toastHide ? '' : 'toast_show'" >
+                                    <div class="message message_info message_closed ui__message">
+                                        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aperiam doloremque nemo
+                                        non possimus quae quas quasi. Ab atque commodi dicta eos, nam nulla numquam obcaecati quis, rem
+                                        veritatis vero voluptate!
+                                        <div class="message__close" x-on:click="toastHide = true">
+                                            @include('inline-svg/close', ['class' => 'message__close-icon'])
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+
             </div>
         </section>
 
@@ -1585,6 +1760,44 @@
         });
 
 
+
+        // const button = document.querySelector('[data-modal]');
+        //
+        // const onKeydown = (e) => {
+        //     if (e.keyCode === 27) {
+        //         closeModal();
+        //     }
+        // }
+        //
+        // const onScroll = (e) => {
+        //     e.preventDefault();
+        //     e.stopPropagation();
+        // }
+        //
+        // button.onclick = () => {
+        //     const id = button.dataset.modal;
+        //
+        //     const modal = document.getElementById(id);
+        //
+        //     modal.classList.add('modal--show');
+        //
+        //     document.documentElement.classList.add('no-scroll');
+        //
+        //     document.addEventListener('keydown', onKeydown);
+        // }
+        //
+        // const modal = document.getElementById('#dialog-1');
+        // const modalClose = modal.querySelector('.modal__close');
+        // const modalOverlay = modal.querySelector('.modal__overlay');
+        //
+        // const closeModal = () => {
+        //     modal.classList.remove('modal--show');
+        //     document.documentElement.classList.remove('no-scroll');
+        //     document.removeEventListener('keydown', onKeydown);
+        // }
+        //
+        // modalClose.onclick = closeModal;
+        // modalOverlay.onclick = closeModal;
 
     </script>
 @endpush
