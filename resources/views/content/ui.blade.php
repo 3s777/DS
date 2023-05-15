@@ -1473,7 +1473,7 @@
                         <div class="col-xl-3 col-lg-6 col-md-6 col-sm-12">
                             <div x-data="{modalHide: true}" x-on:keydown.escape.window="modalHide = true">
                                 <div class="form-group">
-                                    <button x-on:click.stop="modalHide = ! modalHide" class="button button_submit">Open Extra Small Modal</button>
+                                    <button x-on:click.stop="modalHide = ! modalHide" class="button button_submit button_full_width">Open Extra Small Modal</button>
                                 </div>
                                 <section  class="modal" :class="modalHide ? '' : 'modal_show'">
                                     <div  x-on:click.outside="modalHide = true" class="modal__content modal__content_size_extra_small">
@@ -1483,7 +1483,7 @@
                                         </div>
 
                                         <div class="modal__header">
-                                            <div class="title title_indent_normal">Header</div>
+                                            <div class="title title_size_big title_indent_normal">Header</div>
                                         </div>
                                         <div class="modal__body">
                                             Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ab alias animi aperiam architecto commodi, cum earum fugit hic ipsum maxime neque quasi quia recusandae reiciendis rem. Facilis nemo quia sunt!
@@ -1509,7 +1509,7 @@
                         <div class="col-xl-3 col-lg-6 col-md-6 col-sm-12">
                             <div x-data="{modalHide: true}" x-on:keydown.escape.window="modalHide = true">
                                 <div class="form-group">
-                                    <button x-on:click.stop="modalHide = ! modalHide" class="button button_submit">Open Small Modal</button>
+                                    <button x-on:click.stop="modalHide = ! modalHide" class="button button_info button_full_width">Open Small Modal</button>
                                 </div>
                                 <section  class="modal" :class="modalHide ? '' : 'modal_show'">
                                     <div  x-on:click.outside="modalHide = true" class="modal__content modal__content_size_small">
@@ -1536,7 +1536,7 @@
                         <div class="col-xl-3 col-lg-6 col-md-6 col-sm-12">
                             <div x-data="{modalHide: true}" x-on:keydown.escape.window="modalHide = true">
                                 <div class="form-group">
-                                    <button x-on:click.stop="modalHide = ! modalHide" class="button button_submit">Open Normal Modal</button>
+                                    <button x-on:click.stop="modalHide = ! modalHide" class="button button_warning button_full_width">Open Normal Modal</button>
                                 </div>
                                 <section  class="modal" :class="modalHide ? '' : 'modal_show'">
                                     <div  x-on:click.outside="modalHide = true" class="modal__content modal__content_size_normal">
@@ -1563,7 +1563,7 @@
                         <div class="col-xl-3 col-lg-6 col-md-6 col-sm-12">
                             <div x-data="{modalHide: true}" x-on:keydown.escape.window="modalHide = true">
                                 <div class="form-group">
-                                    <button x-on:click.stop="modalHide = ! modalHide" class="button button_submit">Open Big Modal</button>
+                                    <button x-on:click.stop="modalHide = ! modalHide" class="button button_submit button_full_width">Open Big Modal</button>
                                 </div>
                                 <section  class="modal" :class="modalHide ? '' : 'modal_show'">
                                     <div  x-on:click.outside="modalHide = true" class="modal__content modal__content_size_big">
@@ -1590,7 +1590,7 @@
                         <div class="col-xl-3 col-lg-6 col-md-6 col-sm-12">
                             <div x-data="{modalHide: true}" x-on:keydown.escape.window="modalHide = true">
                                 <div class="form-group">
-                                    <button x-on:click.stop="modalHide = ! modalHide" class="button button_submit">Open Large Modal</button>
+                                    <button x-on:click.stop="modalHide = ! modalHide" class="button button_cancel button_full_width">Open Large Modal</button>
                                 </div>
                                 <section  class="modal" :class="modalHide ? '' : 'modal_show'">
                                     <div  x-on:click.outside="modalHide = true" class="modal__content modal__content_size_large">
@@ -1617,7 +1617,7 @@
                         <div class="col-xl-3 col-lg-6 col-md-6 col-sm-12">
                             <div x-data="{toastHide: true}">
                                 <div class="form-group">
-                                    <button x-on:click.stop="toastHide = ! toastHide; setTimeout(() => toastHide = true, 3000)" class="button button_info">Show Toast</button>
+                                    <button x-on:click.stop="toastHide = ! toastHide; setTimeout(() => toastHide = true, 3000)" class="button button_info button_full_width">Show Toast</button>
                                 </div>
                                 <div  class="toast" :class="toastHide ? '' : 'toast_show'" >
                                     <div class="message message_info message_closed ui__message">
@@ -1636,6 +1636,67 @@
                 </div>
 
 
+            </div>
+        </section>
+
+        <section class="ui__section">
+            <h2 class="title title_big title_indent_big">{{ __('Accordion') }}</h2>
+            <div class="card">
+                <div class="accordion accordion_light">
+                    <details class="accordion__item">
+                        <summary  class="accordion__title">Lorem ipsum dolor sit amet?</summary>
+                        <div class="accordion__text">
+                            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aut delectus error eum iste suscipit! Amet cupiditate dignissimos hic ipsa iusto natus perspiciatis quisquam reprehenderit vitae? Accusantium earum nobis quaerat quod!
+                        </div>
+                    </details>
+
+                    <details class="accordion__item accordion__item_light">
+                        <summary  class="accordion__title">Aut delectus error eum iste suscipit?</summary>
+                        <div class="accordion__text">
+                            <p>
+                                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aut delectus error eum iste suscipit! Amet cupiditate dignissimos hic ipsa iusto natus perspiciatis quisquam reprehenderit vitae? Accusantium earum nobis quaerat quod!
+                            </p>
+                            <p>
+                                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aut delectus error eum iste suscipit! Amet cupiditate dignissimos hic ipsa iusto natus perspiciatis quisquam reprehenderit vitae? Accusantium earum nobis quaerat quod!
+                            </p>
+                        </div>
+                    </details>
+
+                    <details class="accordion__item">
+                        <summary  class="accordion__title">Lorem ipsum dolor sit amet, consectetur adipisicing elit?</summary>
+                        <div class="accordion__text">
+                            <p>
+                                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aut delectus error eum iste suscipit! Amet cupiditate dignissimos hic ipsa iusto natus perspiciatis quisquam reprehenderit vitae? Accusantium earum nobis quaerat quod!
+                            </p>
+                            <p>
+                                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aut delectus error eum iste suscipit! Amet cupiditate dignissimos hic ipsa iusto natus perspiciatis quisquam reprehenderit vitae? Accusantium earum nobis quaerat quod!
+                            </p>
+                            <p>
+                                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aut delectus error eum iste suscipit! Amet cupiditate dignissimos hic ipsa iusto natus perspiciatis quisquam reprehenderit vitae? Accusantium earum nobis quaerat quod!
+                            </p>
+                            <p>
+                                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aut delectus error eum iste suscipit! Amet cupiditate dignissimos hic ipsa iusto natus perspiciatis quisquam reprehenderit vitae? Accusantium earum nobis quaerat quod!
+                            </p>
+                        </div>
+                    </details>
+
+                    <details class="accordion__item">
+                        <summary  class="accordion__title">Amet cupiditate dignissimos hic ipsa?</summary>
+                        <div class="accordion__text">
+                            <p>
+                                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aut delectus error eum iste suscipit! Amet cupiditate dignissimos hic ipsa iusto natus perspiciatis quisquam reprehenderit vitae? Accusantium earum nobis quaerat quod!
+                            </p>
+                        </div>
+                    </details>
+
+                    <details class="accordion__item" open>
+                        <summary  class="accordion__title"><span class="accordion__question">Cupiditate dignissimos hic ipsa?</span></summary>
+                        <div class="accordion__text">
+                            <p>
+                                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aut delectus error eum iste suscipit! Amet cupiditate dignissimos hic ipsa iusto natus perspiciatis quisquam reprehenderit vitae? Accusantium earum nobis quaerat quod!
+                            </p>                        </div>
+                    </details>
+                </div>
             </div>
         </section>
 
@@ -1759,45 +1820,6 @@
             alert("Row " + row.getData().id + " Clicked!!!!");
         });
 
-
-
-        // const button = document.querySelector('[data-modal]');
-        //
-        // const onKeydown = (e) => {
-        //     if (e.keyCode === 27) {
-        //         closeModal();
-        //     }
-        // }
-        //
-        // const onScroll = (e) => {
-        //     e.preventDefault();
-        //     e.stopPropagation();
-        // }
-        //
-        // button.onclick = () => {
-        //     const id = button.dataset.modal;
-        //
-        //     const modal = document.getElementById(id);
-        //
-        //     modal.classList.add('modal--show');
-        //
-        //     document.documentElement.classList.add('no-scroll');
-        //
-        //     document.addEventListener('keydown', onKeydown);
-        // }
-        //
-        // const modal = document.getElementById('#dialog-1');
-        // const modalClose = modal.querySelector('.modal__close');
-        // const modalOverlay = modal.querySelector('.modal__overlay');
-        //
-        // const closeModal = () => {
-        //     modal.classList.remove('modal--show');
-        //     document.documentElement.classList.remove('no-scroll');
-        //     document.removeEventListener('keydown', onKeydown);
-        // }
-        //
-        // modalClose.onclick = closeModal;
-        // modalOverlay.onclick = closeModal;
 
     </script>
 @endpush
