@@ -1,0 +1,23 @@
+.tooltip {
+    position: absolute;
+    top: 0;
+    left: 0;
+    display: none;
+    max-width: 320px;
+    padding: 10px;
+    border: 1px solid $base-dark;
+    color: $font-base;
+    background: $opposite-main;
+    border-radius: $extra-small-border-radius;
+    pointer-events: none;
+    box-shadow: $base-box-shadow;
+
+    &__arrow {
+        position: absolute;
+        width: 10px;
+        height: 10px;
+        background: $opposite-main;
+        transform: rotate(45deg);
+    }
+}
+

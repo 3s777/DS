@@ -1086,6 +1086,23 @@
                             </div>
                         </div>
 
+                        <div class="col-xl-3 col-lg-4 col-md-6 col-sm-12">
+                            <div class="ui__item-wrapper">
+
+                                <button id="button" class="button button_submit tooltip_button" data-tooltip="tooltip_1" aria-describedby="tooltip">Click</button>
+                                <div id="tooltip" role="tooltip" class="tooltip tooltip_1" style="display: none">
+                                    Tooltip tooltip tooltip tooltip tooltip tooltip tooltip tooltip tooltip tooltip tooltip tooltip tooltip tooltip tooltip tooltip tooltip
+                                    <div id="arrow" class="tooltip__arrow"></div>
+                                </div>
+
+                                <button id="button" class="button button_submit tooltip_button" data-tooltip="tooltip_2" aria-describedby="tooltip">Click</button>
+                                <div id="tooltip" role="tooltip" class="tooltip tooltip_2" style="display: none">
+                                    Tooltip11 tooltip tooltip tooltip tooltip tooltip tooltip tooltip tooltip tooltip tooltip tooltip tooltip tooltip tooltip tooltip tooltip
+                                    <div id="arrow" class="tooltip__arrow"></div>
+                                </div>
+                            </div>
+                        </div>
+
                     </div>
                 </div>
 
@@ -1742,12 +1759,12 @@
             noChoicesText: '{{ __('Больше ничего нет') }}',
         });
 
-        const editor = new EditorJS({
-            /**
-             * Id of Element that should contain Editor instance
-             */
-            holder: 'editorjs',
-        })
+        // const editor = new EditorJS({
+        //     /**
+        //      * Id of Element that should contain Editor instance
+        //      */
+        //     holder: 'editorjs',
+        // })
         var toolbarOptions = [
             ['bold', 'italic', 'underline', 'strike'],        // toggled buttons
             ['blockquote', 'code-block'],
@@ -1819,6 +1836,13 @@
         table.on("rowClick", function(e, row){
             alert("Row " + row.getData().id + " Clicked!!!!");
         });
+
+
+
+
+
+
+
 
 
     </script>

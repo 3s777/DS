@@ -54,3 +54,10 @@ window.HtmlTableImportModule = HtmlTableImportModule;
 
 import {ResponsiveLayoutModule} from 'tabulator-tables';
 window.ResponsiveLayoutModule = ResponsiveLayoutModule;
+
+import {computePosition, shift, offset, flip, arrow} from "@floating-ui/dom";
+window.computePosition = computePosition;
+window.shift = shift;
+window.offset = offset;
+window.flip = flip;
+window.arrow = arrow;
