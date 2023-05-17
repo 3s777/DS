@@ -192,3 +192,27 @@
 .button_indent_left {
     margin-left: 8px;
 }
+
+.button_tooltip {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    width: 30px;
+    height: 30px;
+    padding: 0;
+    border-radius: 50%;
+    font-size: 1.4rem;
+    font-weight: 700;
+}
+
+.button_tooltip_extra_small {
+    width: 20px;
+    height: 20px;
+    font-size: 0.8rem;
+}
+
+.button_tooltip_big {
+    width: 40px;
+    height: 40px;
+    font-size: 1.6rem;
+}

@@ -55,9 +55,15 @@ window.HtmlTableImportModule = HtmlTableImportModule;
 import {ResponsiveLayoutModule} from 'tabulator-tables';
 window.ResponsiveLayoutModule = ResponsiveLayoutModule;
 
-import {computePosition, shift, offset, flip, arrow} from "@floating-ui/dom";
+import {computePosition, shift, offset, flip, arrow, autoUpdate} from "@floating-ui/dom";
 window.computePosition = computePosition;
 window.shift = shift;
 window.offset = offset;
 window.flip = flip;
 window.arrow = arrow;
+window.autoUpdate = autoUpdate;
+
+import Swiper from 'swiper/bundle';
+window.Swiper = Swiper;
+
+

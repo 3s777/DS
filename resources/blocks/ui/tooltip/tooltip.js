@@ -1,4 +1,4 @@
-document.querySelectorAll('.tooltip_button').forEach(function(tooltipButton) {
+document.querySelectorAll('.tooltip_trigger').forEach(function(tooltipButton) {
     let tooltip = document.querySelector('.'+tooltipButton.getAttribute('data-tooltip'));
     let arrowElement = tooltip.querySelector('.tooltip__arrow');
     console.log(arrowElement);
@@ -12,7 +12,6 @@ document.querySelectorAll('.tooltip_button').forEach(function(tooltipButton) {
     tooltipButton.onblur = function() {
         hideTooltip(tooltip);
     };
-
 });
 
 
@@ -22,7 +21,7 @@ function updateTooltip(tooltipButton, tooltip, arrowElement) {
         middleware: [
             offset(6),
             flip(),
-            shift({padding: 5}),
+            shift({padding: 16}),
             arrow({element: arrowElement}),
         ],
     }).then(({x, y, placement, middlewareData}) => {

@@ -811,6 +811,7 @@
                                     </div>
                                 </div>
 
+
                                 <div class="button button_warning button_only_icon button_only_icon_small">
                                     <div class="button__icon-wrapper">
                                         @include('inline-svg/edit', ['class' => 'button__icon button__icon_small button__edit-icon'])
@@ -852,6 +853,18 @@
                                     <div class="button__icon-wrapper">
                                         @include('inline-svg/cancel', ['class' => 'button__icon button__icon_large button__close-icon'])
                                     </div>
+                                </div>
+
+                                <button class="button button_info button_tooltip">
+                                    ?
+                                </button>
+
+                                <button class="button button_submit button_tooltip button_tooltip_extra_small">
+                                    ?
+                                </button>
+
+                                <div class="button button_cancel button_tooltip button_tooltip_big">
+                                    ?
                                 </div>
                             </div>
                         </div>
@@ -1089,17 +1102,24 @@
                         <div class="col-xl-3 col-lg-4 col-md-6 col-sm-12">
                             <div class="ui__item-wrapper">
 
-                                <button id="button" class="button button_submit tooltip_button" data-tooltip="tooltip_1" aria-describedby="tooltip">Click</button>
+                                <button class="button button_info button_tooltip tooltip_trigger" data-tooltip="tooltip_1">?</button>
                                 <div id="tooltip" role="tooltip" class="tooltip tooltip_1" style="display: none">
                                     Tooltip tooltip tooltip tooltip tooltip tooltip tooltip tooltip tooltip tooltip tooltip tooltip tooltip tooltip tooltip tooltip tooltip
                                     <div id="arrow" class="tooltip__arrow"></div>
                                 </div>
 
-                                <button id="button" class="button button_submit tooltip_button" data-tooltip="tooltip_2" aria-describedby="tooltip">Click</button>
+                                <button class="button button_cancel button_tooltip button_tooltip_big tooltip_trigger" data-tooltip="tooltip_2">?</button>
                                 <div id="tooltip" role="tooltip" class="tooltip tooltip_2" style="display: none">
-                                    Tooltip11 tooltip tooltip tooltip tooltip tooltip tooltip tooltip tooltip tooltip tooltip tooltip tooltip tooltip tooltip tooltip tooltip
+                                    Big tooltip tooltip tooltip tooltip tooltip tooltip tooltip tooltip tooltip tooltip tooltip tooltip tooltip tooltip tooltip tooltip tooltip
                                     <div id="arrow" class="tooltip__arrow"></div>
                                 </div>
+
+                                <button class="button button_submit button_tooltip button_tooltip_extra_small tooltip_trigger" data-tooltip="tooltip_3">?</button>
+                                <div id="tooltip" role="tooltip" class="tooltip tooltip_3" style="display: none">
+                                    Small tooltip tooltip tooltip tooltip tooltip tooltip tooltip tooltip tooltip tooltip tooltip tooltip tooltip tooltip tooltip tooltip tooltip
+                                    <div id="arrow" class="tooltip__arrow"></div>
+                                </div>
+
                             </div>
                         </div>
 
@@ -1717,6 +1737,33 @@
             </div>
         </section>
 
+        <section class="ui__section">
+            <h2 class="title title_big title_indent_big">{{ __('Heading') }}</h2>
+            <div class="card">
+                <!-- Slider main container -->
+                <div class="swiper" style="width: 600px;
+  height: 300px;">
+                    <!-- Additional required wrapper -->
+                    <div class="swiper-wrapper">
+                        <!-- Slides -->
+                        <div class="swiper-slide">Slide 1</div>
+                        <div class="swiper-slide">Slide 2</div>
+                        <div class="swiper-slide">Slide 3</div>
+
+                    </div>
+                    <!-- If we need pagination -->
+                    <div class="swiper-pagination"></div>
+
+                    <!-- If we need navigation buttons -->
+                    <div class="swiper-button-prev"></div>
+                    <div class="swiper-button-next"></div>
+
+                    <!-- If we need scrollbar -->
+                    <div class="swiper-scrollbar"></div>
+                </div>
+            </div>
+        </section>
+
     </div>
 
 
@@ -1840,7 +1887,27 @@
 
 
 
+        const swiper = new Swiper('.swiper', {
+            // Optional parameters
+            direction: 'horizontal',
+            loop: true,
 
+            // If we need pagination
+            pagination: {
+                el: '.swiper-pagination',
+            },
+
+            // Navigation arrows
+            navigation: {
+                nextEl: '.swiper-button-next',
+                prevEl: '.swiper-button-prev',
+            },
+
+            // And if we need scrollbar
+            scrollbar: {
+                el: '.swiper-scrollbar',
+            },
+        });
 
 
 
