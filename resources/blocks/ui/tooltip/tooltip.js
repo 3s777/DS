@@ -1,7 +1,6 @@
 document.querySelectorAll('.tooltip_trigger').forEach(function(tooltipButton) {
     let tooltip = document.querySelector('.'+tooltipButton.getAttribute('data-tooltip'));
     let arrowElement = tooltip.querySelector('.tooltip__arrow');
-    console.log(arrowElement);
 
     updateTooltip(tooltipButton, tooltip, arrowElement);
 

@@ -1,0 +1,34 @@
+.swiper {
+
+    &__carousel {
+        padding-bottom: 32px;
+    }
+
+    &__img {
+        max-width: 100%;
+    }
+
+    &-pagination-bullet {
+        width: 12px;
+        height: 12px;
+    }
+
+    &-pagination-bullet-active {
+        background: $opposite-main;
+    }
+
+    &-button-next,
+    &-button-prev {
+        width: auto;
+        height: auto;
+        padding:10px 15px;
+        color: $opposite-main;
+        background: $additional-main;
+        border-radius: $small-border-radius;
+    }
+
+    &-button-next:after,
+    &-button-prev:after {
+        font-size: 1.4rem;
+    }
+}

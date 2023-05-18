@@ -1738,29 +1738,163 @@
         </section>
 
         <section class="ui__section">
-            <h2 class="title title_big title_indent_big">{{ __('Heading') }}</h2>
+            <h2 class="title title_big title_indent_big">{{ __('Swiper') }}</h2>
             <div class="card">
-                <!-- Slider main container -->
-                <div class="swiper" style="width: 600px;
-  height: 300px;">
-                    <!-- Additional required wrapper -->
-                    <div class="swiper-wrapper">
-                        <!-- Slides -->
-                        <div class="swiper-slide">Slide 1</div>
-                        <div class="swiper-slide">Slide 2</div>
-                        <div class="swiper-slide">Slide 3</div>
+
+                <div class="swiper ui__swiper">
+                    <div class="swiper__carousel">
+                        <div class="swiper-wrapper">
+                            <div class="swiper-slide">
+                                <img
+                                    class="swiper__img"
+                                    src="{{ asset('/storage/test.jpg') }}"
+                                    srcset="
+                                    {{ asset('/storage/test-300.jpg') }} 300w,
+                                    {{ asset('/storage/test-650.jpg') }} 650w,
+                                    {{ asset('/storage/test-800.jpg') }} 800w,
+                                    {{ asset('/storage/test-1200.jpg') }} 1200w,
+                                    {{ asset('/storage/test.jpg') }} 1500w,
+                                    {{ asset('/storage/test.jpg') }} 3000w,
+                                "
+                                    sizes="
+                                    (max-width: 700px) 280px,
+                                    (max-width: 1000px) 740px,
+                                    (max-width: 1900px) 1500px,
+                                    100vw
+                                "
+                                    loading="lazy"
+                                    decoding="async"
+                                    alt="Test image"
+                                    title="Test image"
+                                />
+                            </div>
+                            <div class="swiper-slide">
+                                <img
+                                    class="swiper__img"
+                                    src="{{ asset('/storage/test-2.jpg') }}"
+                                    loading="lazy"
+                                    decoding="async"
+                                    alt="Test image"
+                                    title="Test image"
+                                />
+                            </div>
+                            <div class="swiper-slide">
+                                <img
+                                    class="swiper__img"
+                                    src="{{ asset('/storage/test-3.jpg') }}"
+                                    loading="lazy"
+                                    decoding="async"
+                                    alt="Test image"
+                                    title="Test image"
+                                />
+                            </div>
+                            <div class="swiper-slide">
+                                <img
+                                    class="swiper__img"
+                                    src="{{ asset('/storage/test-4.jpg') }}"
+                                    loading="lazy"
+                                    decoding="async"
+                                    alt="Test image"
+                                    title="Test image"
+                                />
+                            </div>
+                            <div class="swiper-slide">
+                                <img
+                                    class="swiper__img"
+                                    src="{{ asset('/storage/test-5.jpg') }}"
+                                    loading="lazy"
+                                    decoding="async"
+                                    alt="Test image"
+                                    title="Test image"
+                                />
+                            </div>
+                        </div>
+
+                        <div class="swiper-pagination swiper-pagination_1"></div>
+
+                        <div class="swiper-button-prev"></div>
+                        <div class="swiper-button-next"></div>
 
                     </div>
-                    <!-- If we need pagination -->
-                    <div class="swiper-pagination"></div>
 
-                    <!-- If we need navigation buttons -->
-                    <div class="swiper-button-prev"></div>
-                    <div class="swiper-button-next"></div>
-
-                    <!-- If we need scrollbar -->
-                    <div class="swiper-scrollbar"></div>
                 </div>
+
+                <div class="swiper">
+                    <div class="swiper__full">
+                        <div class="swiper-wrapper">
+                            <div class="swiper-slide ui__test-swiper-slide">
+                                <img
+                                    class="swiper__img"
+                                    src="{{ asset('/storage/test.jpg') }}"
+                                    srcset="
+                                    {{ asset('/storage/test-300.jpg') }} 300w,
+                                    {{ asset('/storage/test-650.jpg') }} 650w,
+                                    {{ asset('/storage/test-800.jpg') }} 800w,
+                                    {{ asset('/storage/test-1200.jpg') }} 1200w,
+                                    {{ asset('/storage/test.jpg') }} 1500w,
+                                    {{ asset('/storage/test.jpg') }} 3000w,
+                                "
+                                    sizes="
+                                    (max-width: 700px) 280px,
+                                    (max-width: 1000px) 740px,
+                                    (max-width: 1900px) 1500px,
+                                    100vw
+                                "
+                                    loading="lazy"
+                                    decoding="async"
+                                    alt="Test image"
+                                    title="Test image"
+                                />
+                            </div>
+                            <div class="swiper-slide ui__test-swiper-slide">
+                                <img
+                                    class="swiper__img"
+                                    src="{{ asset('/storage/test-2.jpg') }}"
+                                    loading="lazy"
+                                    decoding="async"
+                                    alt="Test image"
+                                    title="Test image"
+                                />
+                            </div>
+                            <div class="swiper-slide ui__test-swiper-slide">
+                                <img
+                                    class="swiper__img"
+                                    src="{{ asset('/storage/test-3.jpg') }}"
+                                    loading="lazy"
+                                    decoding="async"
+                                    alt="Test image"
+                                    title="Test image"
+                                />
+                            </div>
+                            <div class="swiper-slide ui__test-swiper-slide">
+                                <img
+                                    class="swiper__img"
+                                    src="{{ asset('/storage/test-4.jpg') }}"
+                                    loading="lazy"
+                                    decoding="async"
+                                    alt="Test image"
+                                    title="Test image"
+                                />
+                            </div>
+                            <div class="swiper-slide ui__test-swiper-slide">
+                                <img
+                                    class="swiper__img"
+                                    src="{{ asset('/storage/test-5.jpg') }}"
+                                    loading="lazy"
+                                    decoding="async"
+                                    alt="Test image"
+                                    title="Test image"
+                                />
+                            </div>
+                        </div>
+
+                        <div class="swiper-pagination swiper-pagination_2"></div>
+
+                        <div class="swiper-button-prev"></div>
+                        <div class="swiper-button-next"></div>
+                    </div>
+                </div>
+
             </div>
         </section>
 
@@ -1887,14 +2021,16 @@
 
 
 
-        const swiper = new Swiper('.swiper', {
+        const swiper = new Swiper('.swiper__carousel', {
             // Optional parameters
             direction: 'horizontal',
-            loop: true,
+            spaceBetween: 16,
+            slidesPerView: 3,
 
             // If we need pagination
             pagination: {
-                el: '.swiper-pagination',
+                el: '.swiper-pagination_1',
+                clickable: true
             },
 
             // Navigation arrows
@@ -1903,10 +2039,28 @@
                 prevEl: '.swiper-button-prev',
             },
 
-            // And if we need scrollbar
-            scrollbar: {
-                el: '.swiper-scrollbar',
+
+        });
+
+        const swiperFull = new Swiper('.swiper__full', {
+            // Optional parameters
+            direction: 'horizontal',
+            slidesPerView: 1,
+            height: "300px",
+
+            // If we need pagination
+            pagination: {
+                el: '.swiper-pagination_2',
+                clickable: true
             },
+
+            // Navigation arrows
+            navigation: {
+                nextEl: '.swiper-button-next',
+                prevEl: '.swiper-button-prev',
+            },
+
+
         });
 
 
