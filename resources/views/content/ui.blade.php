@@ -1898,6 +1898,42 @@
             </div>
         </section>
 
+        <section class="ui__section">
+            <h2 class="title title_big title_indent_big">{{ __('Filepond') }}</h2>
+            <div class="card">
+                <div class="grid">
+                    <div class="row">
+                        <div class="col-xl-3 col-lg-6 col-md-6 col-sm-12">
+                            <input class="filepond1"
+                                    type="file"
+                                    name="filepond"
+                                    accept="image/png, image/jpeg, image/gif"
+                                    multiple />
+                        </div>
+                        <div class="col-xl-3 col-lg-6 col-md-6 col-sm-12">
+                            <input type="file"
+                                   class="filepond2"
+                                   name="filepond"
+                                   multiple
+                                   data-allow-reorder="true"
+                                   data-max-file-size="3MB"
+                                   data-max-files="3">
+                        </div>
+                        <div class="col-xl-2 col-lg-6 col-md-6 col-sm-12">
+                            <input type="file"
+                                   class="filepond3"
+                                   name="filepond"
+                                   accept="image/png, image/jpeg, image/gif"
+                                   data-allow-reorder="true"
+                                   data-max-file-size="3MB">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+
     </div>
 
 
@@ -2063,7 +2099,49 @@
 
         });
 
+        const inputElement = document.querySelector('.filepond1');
+        const pond = FilePond.create(inputElement, {
+            credits: false,
+            labelIdle: '{{ __('Перетащите файлы или') }} <span class="filepond--label-action"> {{ __('загрузите') }}</span>'
+        });
 
+        const inputElement2 = document.querySelector('.filepond2');
+        FilePond.registerPlugin(
+            FilePondPluginFileValidateType,
+            FilePondPluginImagePreview,
+            FilePondPluginImageExifOrientation,
+            FilePondPluginFileValidateSize,
+            FilePondPluginImageCrop,
+            FilePondPluginImageResize,
+            FilePondPluginImageTransform,
+        );
+        const pond2 = FilePond.create(inputElement2, {
+            credits: false,
+            labelIdle: '{{ __('Перетащите файлы или') }} <span class="filepond--label-action"> {{ __('загрузите') }}</span>',
+            labelMaxFileSizeExceeded: 'Файл слишком большой',
+            labelMaxFileSize: 'Максимальный размер {filesize}',
+            labelFileLoading: 'Загрузка',
+            labelTapToCancel: 'отменить',
+            labelFileWaitingForSize: 'подождите'
+        });
+
+
+        const inputElement3 = document.querySelector('.filepond3');
+        const pond3 = FilePond.create(inputElement3, {
+            credits: false,
+            labelIdle: '{{ __('Перетащите файлы или') }} <span class="filepond--label-action"> {{ __('загрузите') }}</span>',
+            labelMaxFileSizeExceeded: 'Файл слишком большой',
+            labelMaxFileSize: 'Максимальный размер {filesize}',
+            imagePreviewHeight: 170,
+            imageCropAspectRatio: '1:1',
+            imageResizeTargetWidth: 200,
+            imageResizeTargetHeight: 200,
+            stylePanelLayout: 'compact circle',
+            styleLoadIndicatorPosition: 'center bottom',
+            styleProgressIndicatorPosition: 'right bottom',
+            styleButtonRemoveItemPosition: 'left bottom',
+            styleButtonProcessItemPosition: 'right bottom',
+        });
 
 
     </script>

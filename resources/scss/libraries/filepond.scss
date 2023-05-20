@@ -1,0 +1,80 @@
+/* use a hand cursor intead of arrow for the action buttons */
+.filepond--file-action-button {
+    cursor: pointer;
+}
+
+/* the text color of the drop label*/
+.filepond--drop-label {
+    color: $font-main;
+}
+
+/* underline color for "Browse" button */
+.filepond--label-action {
+    text-decoration-color: $font-main;
+}
+
+/* the background color of the filepond drop area */
+.filepond--panel-root {
+    background-color: $base-dark;
+    border-radius: $small-border-radius;
+}
+
+/* the border radius of the file item */
+.filepond--item-panel {
+    border-radius: $small-border-radius;
+}
+
+/* the background color of the file and file panel (used when dropping an image) */
+.filepond--item-panel {
+    background-color: $additional-main;
+}
+
+/* the background color of the drop circle */
+.filepond--drip-blob {
+    background-color: $base-dark;
+}
+
+/* the background color of the black action buttons */
+.filepond--file-action-button {
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
+/* the icon color of the black action buttons */
+.filepond--file-action-button {
+    color: $font-main;
+}
+
+/* the color of the focus ring */
+.filepond--file-action-button:hover,
+.filepond--file-action-button:focus {
+    box-shadow: 0 0 0 0.125em rgba(255, 255, 255, 0.9);
+}
+
+/* the text color of the file status and info labels */
+.filepond--file {
+    color: $font-main;
+}
+
+/* error state color */
+[data-filepond-item-state*='error'] .filepond--item-panel,
+[data-filepond-item-state*='invalid'] .filepond--item-panel {
+    background-color: $danger-main;
+}
+
+[data-filepond-item-state='processing-complete'] .filepond--item-panel {
+    background-color: $success-main;
+}
+
+/* bordered drop area */
+.filepond--panel-root {
+    background-color: $base-dark;
+    border: 0;
+}
+
+.filepond--drop-label.filepond--drop-label label {
+    padding: 0;
+}
+
+.filepond--image-preview-overlay-idle {
+    display: none;
+}

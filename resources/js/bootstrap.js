@@ -66,4 +66,28 @@ window.autoUpdate = autoUpdate;
 import Swiper from 'swiper/bundle';
 window.Swiper = Swiper;
 
+import * as FilePond from 'filepond';
+window.FilePond = FilePond;
+
+import FilePondPluginImagePreview from 'filepond-plugin-image-preview';
+window.FilePondPluginImagePreview = FilePondPluginImagePreview;
+
+import FilePondPluginImageExifOrientation from 'filepond-plugin-image-exif-orientation';
+window.FilePondPluginImageExifOrientation = FilePondPluginImageExifOrientation;
+
+import FilePondPluginFileValidateSize from 'filepond-plugin-file-validate-size';
+window.FilePondPluginFileValidateSize = FilePondPluginFileValidateSize;
+
+import FilePondPluginFileValidateType from 'filepond-plugin-file-validate-type';
+window.FilePondPluginFileValidateType = FilePondPluginFileValidateType;
+
+import FilePondPluginImageCrop from 'filepond-plugin-image-crop';
+window.FilePondPluginImageCrop = FilePondPluginImageCrop;
+
+import FilePondPluginImageTransform from 'filepond-plugin-image-transform';
+window.FilePondPluginImageTransform = FilePondPluginImageTransform;
+
+import FilePondPluginImageResize from 'filepond-plugin-image-resize';
+window.FilePondPluginImageResize = FilePondPluginImageResize;
+
 
