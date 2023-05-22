@@ -67,8 +67,8 @@
 
 /* bordered drop area */
 .filepond--panel-root {
-    background-color: $base-dark;
     border: 0;
+    background-color: $base-dark;
 }
 
 .filepond--drop-label.filepond--drop-label label {
@@ -78,3 +78,8 @@
 .filepond--image-preview-overlay-idle {
     display: none;
 }
+
+.filepond--root .filepond--drop-label {
+    min-height: 50px;
+}
+

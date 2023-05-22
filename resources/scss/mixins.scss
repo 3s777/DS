@@ -1,20 +1,8 @@
 @use 'sass:math';
 
-@mixin tablet {
-    @media only screen and (min-width: $tablet * 1px) {
-        @content;
-    }
-}
-
-@mixin large {
-    @media only screen and (min-width: $large * 1px) {
-        @content;
-    }
-}
-
-@mixin desktop {
-    @media only screen and (min-width: $desktop * 1px) {
-        @content;
+@mixin breakpoint-max($width) {
+    @media screen and (max-width: $width) {
+        @content
     }
 }
 

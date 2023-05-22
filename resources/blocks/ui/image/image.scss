@@ -11,15 +11,31 @@
     &_align_left {
         float: left;
         margin-right: 16px;
+
+        @include breakpoint-max($sm) {
+            width: 100%;
+            margin-right: 0;
+            float: none;
+        }
     }
 
     &_align_right {
         float: right;
         margin-left: 16px;
+
+        @include breakpoint-max($sm) {
+            width: 100%;
+            margin-left: 0;
+            float: none;
+        }
     }
 
     &_align_center {
         margin: 0 auto 16px auto;
+
+        @include breakpoint-max($sm) {
+            width: 100%;
+        }
     }
 
     &__caption {

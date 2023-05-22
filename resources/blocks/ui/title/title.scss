@@ -1,6 +1,6 @@
 .title {
     margin: 0;
-    font-size: rem(48);
+    font-size: rem(32);
     font-weight: 500;
     line-height: 1.2;
 }
@@ -15,14 +15,38 @@
 
 .title_size_large {
     font-size: rem(56);
+
+    @include breakpoint-max($lg) {
+        font-size: rem(48);
+    }
+
+    @include breakpoint-max($md) {
+        font-size: rem(38);
+    }
 }
 
 .title_size_big {
-    font-size: rem(40);
+    font-size: rem(48);
+
+    @include breakpoint-max($lg) {
+        font-size: rem(40);
+    }
+
+    @include breakpoint-max($md) {
+        font-size: rem(32);
+    }
 }
 
 .title_size_normal {
-    font-size: rem(32);
+    font-size: rem(38);
+
+    @include breakpoint-max($lg) {
+        font-size: rem(34);
+    }
+
+    @include breakpoint-max($md) {
+        font-size: rem(28);
+    }
 }
 
 .title_size_small {

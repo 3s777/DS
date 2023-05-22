@@ -52,6 +52,10 @@
 
 .ui__image_2 {
     width: 500px;
+
+    @include breakpoint-max($sm) {
+        width: 100%;
+    }
 }
 
 .ui__image_3 {

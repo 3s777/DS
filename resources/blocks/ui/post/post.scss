@@ -91,7 +91,11 @@
     }
 
     img {
-        max-width: 100%
+        max-width: 100%;
+
+        @include breakpoint-max($md) {
+            width: 100%;
+        }
     }
 
 }

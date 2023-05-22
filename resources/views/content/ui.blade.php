@@ -13,9 +13,9 @@
             <h2 class="title title_big title_indent_big">{{ __('Heading') }}</h2>
             <div class="card">
                 <h3 class="title title_size_large title_indent_big">Heading Large</h3>
-                <h3 class="title title_indent_big">Heading Standard</h3>
                 <h3 class="title title_size_big title_indent_big">Heading Big</h3>
                 <h3 class="title title_size_normal title_indent_big">Heading Normal</h3>
+                <h3 class="title title_indent_big">Heading Standard</h3>
                 <h3 class="title title_size_small title_indent_big">Heading Small</h3>
                 <h3 class="title title_size_extra_small title_indent_big">Heading Extra Small</h3>
             </div>

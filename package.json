@@ -7,7 +7,9 @@
     "devDependencies": {
         "axios": "^1.1.2",
         "laravel-vite-plugin": "^0.7.2",
-        "vite": "^4.0.0"
+        "postcss-combine-media-query": "^1.0.1",
+        "vite": "^4.0.0",
+        "vite-join-media-queries": "^0.1.1"
     },
     "dependencies": {
         "@editorjs/editorjs": "^2.26.5",
