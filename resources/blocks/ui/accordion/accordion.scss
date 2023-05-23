@@ -35,17 +35,18 @@
         &:after {
             content: "❯";
             position: absolute;
+            top: 50%;
             right: 0;
             display: inline-block;
             text-align: right;
             background-repeat: no-repeat;
             background-position: right center;
-            transform: rotate(90deg);
+            transform: translate(-50%, -50%) rotate(90deg);
             transition: $base-transition;
         }
 
         .accordion__item[open] &:after {
-            transform: rotate(270deg);
+            transform: translate(-50%, -50%) rotate(270deg);
         }
 
         &:focus {

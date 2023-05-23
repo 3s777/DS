@@ -52,6 +52,7 @@
 
 /* the text color of the file status and info labels */
 .filepond--file {
+    overflow: hidden;
     color: $font-main;
 }
 
@@ -73,6 +74,11 @@
 
 .filepond--drop-label.filepond--drop-label label {
     padding: 0;
+
+    @include breakpoint-max($md) {
+        line-height: 1.3;
+        font-size: rem(14);
+    }
 }
 
 .filepond--image-preview-overlay-idle {

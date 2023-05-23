@@ -13,6 +13,7 @@
     opacity: 0;
     transition: $base-transition;
 
+
     &_show {
         visibility: visible;
         opacity: 1;
@@ -25,6 +26,10 @@
         background-color: $base-light-like-transparent;
         border-radius: $big-border-radius;
         box-shadow: $base-box-shadow;
+
+        @include breakpoint-max($xl) {
+            width: 90%;
+        }
     }
 
     &__content_size_extra_small {

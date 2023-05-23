@@ -115,4 +115,8 @@
 
 .ui__test-swiper-slide {
     height: 400px;
+
+    @include breakpoint-max($xl) {
+        height: auto;
+    }
 }

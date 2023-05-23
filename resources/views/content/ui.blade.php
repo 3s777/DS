@@ -741,7 +741,7 @@
                             </div>
                         </div>
 
-                        <div class="col-xl-2 col-lg-4 col-sm-6">
+                        <div class="col-xl-2 col-lg-4 col-sm-12">
                             <div class="form-group">
                                 <div class="button button_submit button_size_small">
                                     {{ __('Small size') }}
@@ -1748,20 +1748,6 @@
                                 <img
                                     class="swiper__img"
                                     src="{{ asset('/storage/test.jpg') }}"
-                                    srcset="
-                                    {{ asset('/storage/test-300.jpg') }} 300w,
-                                    {{ asset('/storage/test-650.jpg') }} 650w,
-                                    {{ asset('/storage/test-800.jpg') }} 800w,
-                                    {{ asset('/storage/test-1200.jpg') }} 1200w,
-                                    {{ asset('/storage/test.jpg') }} 1500w,
-                                    {{ asset('/storage/test.jpg') }} 3000w,
-                                "
-                                    sizes="
-                                    (max-width: 700px) 280px,
-                                    (max-width: 1000px) 740px,
-                                    (max-width: 1900px) 1500px,
-                                    100vw
-                                "
                                     loading="lazy"
                                     decoding="async"
                                     alt="Test image"
@@ -1826,20 +1812,6 @@
                                 <img
                                     class="swiper__img"
                                     src="{{ asset('/storage/test.jpg') }}"
-                                    srcset="
-                                    {{ asset('/storage/test-300.jpg') }} 300w,
-                                    {{ asset('/storage/test-650.jpg') }} 650w,
-                                    {{ asset('/storage/test-800.jpg') }} 800w,
-                                    {{ asset('/storage/test-1200.jpg') }} 1200w,
-                                    {{ asset('/storage/test.jpg') }} 1500w,
-                                    {{ asset('/storage/test.jpg') }} 3000w,
-                                "
-                                    sizes="
-                                    (max-width: 700px) 280px,
-                                    (max-width: 1000px) 740px,
-                                    (max-width: 1900px) 1500px,
-                                    100vw
-                                "
                                     loading="lazy"
                                     decoding="async"
                                     alt="Test image"
@@ -2061,7 +2033,7 @@
             // Optional parameters
             direction: 'horizontal',
             spaceBetween: 16,
-            slidesPerView: 3,
+            slidesPerView: 1,
 
             // If we need pagination
             pagination: {
@@ -2074,6 +2046,15 @@
                 nextEl: '.swiper-button-next',
                 prevEl: '.swiper-button-prev',
             },
+
+            breakpoints: {
+                768: {
+                    slidesPerView: 3,
+                },
+                576: {
+                    slidesPerView: 2,
+                },
+            }
 
 
         });
