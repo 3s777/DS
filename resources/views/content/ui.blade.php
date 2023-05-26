@@ -7,23 +7,23 @@
 
     <div class="content ui">
 
-        <h1 class="title title_size_large ui__title_big">UI examples</h1>
+        <x-ui.title class="ui__title_big" tag="h2" size="large" >{{ __('UI examples') }}</x-ui.title>
 
         <section class="ui__section">
-            <h2 class="title title_big title_indent_big">{{ __('Heading') }}</h2>
-            <div class="card">
-                <h3 class="title title_size_large title_indent_big">Heading Large</h3>
-                <h3 class="title title_size_big title_indent_big">Heading Big</h3>
-                <h3 class="title title_size_normal title_indent_big">Heading Normal</h3>
-                <h3 class="title title_indent_big">Heading Standard</h3>
-                <h3 class="title title_size_small title_indent_big">Heading Small</h3>
-                <h3 class="title title_size_extra_small title_indent_big">Heading Extra Small</h3>
-            </div>
+            <x-ui.title size="big" indent="big" >{{ __('Heading') }}</x-ui.title>
+            <x-ui.card>
+                <x-ui.title size="large" indent="big" >{{ __('Heading Large') }}</x-ui.title>
+                <x-ui.title size="big" indent="big" >{{ __('Heading Large') }}</x-ui.title>
+                <x-ui.title size="normal" indent="big" >{{ __('Heading Large') }}</x-ui.title>
+                <x-ui.title indent="big" >{{ __('Heading No Size') }}</x-ui.title>
+                <x-ui.title size="small" indent="big" >{{ __('Heading Large') }}</x-ui.title>
+                <x-ui.title size="extra_small" indent="big" >{{ __('Heading Large') }}</x-ui.title>
+            </x-ui.card>
         </section>
 
         <section class="ui__section">
-            <h2 class="title title_big title_indent_big">{{ __('Post') }}</h2>
-            <div class="card">
+            <x-ui.title size="big" indent="big" >{{ __('Post') }}</x-ui.title>
+            <x-ui.card>
                 <article class="post post_standard">
                     <p>
                         Lorem ipsum dolor sit amet, <a href="">consectetur</a> adipisicing elit. Alias aliquam, assumenda corporis delectus dolor, dolore dolores dolorum ea eligendi ex fuga inventore magni, molestias odio quas saepe similique sunt tenetur.
@@ -327,49 +327,43 @@
                         </table>
                     </div>
                 </article>
-            </div>
+            </x-ui.card>
         </section>
 
         <section class="ui__section">
-            <h2 class="title title_big title_indent_big">{{ __('Grid') }}</h2>
-            <div class="card">
-                <div class="grid ui__grid">
-                    <div class="row">
-                        <div class="col-xl-3 col-lg-4 col-md-6 col-sm-12 ui__col">Column 4-3-6-12</div>
-                        <div class="col-xl-3 col-lg-4 col-md-6 col-sm-12 ui__col">Column 4-3-6-12</div>
-                        <div class="col-xl-3 col-lg-4 col-md-6 col-sm-12 ui__col">Column 4-3-6-12</div>
-                        <div class="col-xl-3 col-lg-4 col-md-6 col-sm-12 ui__col">Column 4-3-6-12</div>
-                    </div>
-                </div>
+            <x-ui.title size="big" indent="big" >{{ __('Grid') }}</x-ui.title>
+            <x-ui.card>
+                <x-grid class="ui__grid">
+                    <x-grid.col class="ui__col" xl="3" lg="4" md="6" sm="12">Column 4-3-6-12</x-grid.col>
+                    <x-grid.col class="ui__col" xl="3" lg="4" md="6" sm="12" no-gap="true">Column 4-3-6-12</x-grid.col>
+                    <x-grid.col class="ui__col" xl="3" lg="4" md="6" sm="12" no-gap="true">Column 4-3-6-12</x-grid.col>
+                    <x-grid.col class="ui__col" xl="3" lg="4" md="6" sm="12">Column 4-3-6-12</x-grid.col>
+                </x-grid>
 
-                <div class="grid ui__grid">
-                    <div class="row">
-                        <div class="col-xl-2 col-lg-3 col-md-4 col-sm-6 ui__col">Column 2-3-4-6</div>
-                        <div class="col-xl-2 col-lg-3 col-md-4 col-sm-6 ui__col">Column 2-3-4-6</div>
-                        <div class="col-xl-2 col-lg-3 col-md-4 col-sm-6 ui__col">Column 2-3-4-6</div>
-                        <div class="col-xl-2 col-lg-3 col-md-4 col-sm-6 ui__col">Column 2-3-4-6</div>
-                        <div class="col-xl-2 col-lg-3 col-md-4 col-sm-6 ui__col">Column 2-3-4-6</div>
-                        <div class="col-xl-2 col-lg-3 col-md-4 col-sm-6 ui__col">Column 2-3-4-6</div>
-                    </div>
-                </div>
+                <x-grid class="ui__grid">
+                    <div class="col-xl-2 col-lg-3 col-md-4 col-sm-6 ui__col">Column 2-3-4-6</div>
+                    <div class="col-xl-2 col-lg-3 col-md-4 col-sm-6 ui__col">Column 2-3-4-6</div>
+                    <div class="col-xl-2 col-lg-3 col-md-4 col-sm-6 ui__col">Column 2-3-4-6</div>
+                    <div class="col-xl-2 col-lg-3 col-md-4 col-sm-6 ui__col">Column 2-3-4-6</div>
+                    <div class="col-xl-2 col-lg-3 col-md-4 col-sm-6 ui__col">Column 2-3-4-6</div>
+                    <div class="col-xl-2 col-lg-3 col-md-4 col-sm-6 ui__col">Column 2-3-4-6</div>
+                </x-grid>
 
-                <div class="grid ui__grid">
-                    <div class="row">
-                        <div class="col-xl-1 col-lg-2 col-md-3 col-sm-4 ui__col">Column 1-2-3-4</div>
-                        <div class="col-xl-1 col-lg-2 col-md-3 col-sm-4 ui__col">Column 1-2-3-4</div>
-                        <div class="col-xl-1 col-lg-2 col-md-3 col-sm-4 ui__col">Column 1-2-3-4</div>
-                        <div class="col-xl-1 col-lg-2 col-md-3 col-sm-4 ui__col">Column 1-2-3-4</div>
-                        <div class="col-xl-1 col-lg-2 col-md-3 col-sm-4 ui__col">Column 1-2-3-4</div>
-                        <div class="col-xl-1 col-lg-2 col-md-3 col-sm-4 ui__col">Column 1-2-3-4</div>
-                        <div class="col-xl-1 col-lg-2 col-md-3 col-sm-4 ui__col">Column 1-2-3-4</div>
-                        <div class="col-xl-1 col-lg-2 col-md-3 col-sm-4 ui__col">Column 1-2-3-4</div>
-                        <div class="col-xl-1 col-lg-2 col-md-3 col-sm-4 ui__col">Column 1-2-3-4</div>
-                        <div class="col-xl-1 col-lg-2 col-md-3 col-sm-4 ui__col">Column 1-2-3-4</div>
-                        <div class="col-xl-1 col-lg-2 col-md-3 col-sm-4 ui__col">Column 1-2-3-4</div>
-                        <div class="col-xl-1 col-lg-2 col-md-3 col-sm-4 ui__col">Column 1-2-3-4</div>
-                    </div>
-                </div>
-            </div>
+                <x-grid class="ui__grid">
+                    <div class="col-xl-1 col-lg-2 col-md-3 col-sm-4 ui__col">Column 1-2-3-4</div>
+                    <div class="col-xl-1 col-lg-2 col-md-3 col-sm-4 ui__col">Column 1-2-3-4</div>
+                    <div class="col-xl-1 col-lg-2 col-md-3 col-sm-4 ui__col">Column 1-2-3-4</div>
+                    <div class="col-xl-1 col-lg-2 col-md-3 col-sm-4 ui__col">Column 1-2-3-4</div>
+                    <div class="col-xl-1 col-lg-2 col-md-3 col-sm-4 ui__col">Column 1-2-3-4</div>
+                    <div class="col-xl-1 col-lg-2 col-md-3 col-sm-4 ui__col">Column 1-2-3-4</div>
+                    <div class="col-xl-1 col-lg-2 col-md-3 col-sm-4 ui__col">Column 1-2-3-4</div>
+                    <div class="col-xl-1 col-lg-2 col-md-3 col-sm-4 ui__col">Column 1-2-3-4</div>
+                    <div class="col-xl-1 col-lg-2 col-md-3 col-sm-4 ui__col">Column 1-2-3-4</div>
+                    <div class="col-xl-1 col-lg-2 col-md-3 col-sm-4 ui__col">Column 1-2-3-4</div>
+                    <div class="col-xl-1 col-lg-2 col-md-3 col-sm-4 ui__col">Column 1-2-3-4</div>
+                    <div class="col-xl-1 col-lg-2 col-md-3 col-sm-4 ui__col">Column 1-2-3-4</div>
+                </x-grid>
+            </x-ui.card>
 
         </section>
 
@@ -380,7 +374,7 @@
             <h2 class="title title_big title_indent_big">{{ __('Inputs') }}</h2>
 
             <div class="card">
-                <div class="grid grid_c">
+                <div class="grid grid_container">
                     <div class="row">
                         <div class="col-xl-3 col-lg-4 col-md-6 col-sm-12">
                             <h3 class="title title_size_small">Text input</h3>
@@ -454,7 +448,7 @@
         <section class="ui__section">
             <h2 class="title title_big title_indent_big">{{ __('Switchers') }}</h2>
             <div class="card">
-                <div class="grid grid_c">
+                <div class="grid grid_container">
                     <div class="row">
                         <div class="col-xl-3 col-lg-4 col-md-6 col-sm-12">
                             <div class="form-group">
@@ -578,7 +572,7 @@
         <section class="ui__section">
             <h2 class="title title_big title_indent_big">{{ __('Select') }}</h2>
             <div class="card">
-                <div class="grid grid_c">
+                <div class="grid grid_container">
                     <div class="row">
                         <div class="col-xl-3 col-lg-4 col-md-6 col-sm-12">
                             <div class="form-group">
@@ -642,7 +636,7 @@
         <section class="ui__section">
             <h2 class="title title_big title_indent_big">{{ __('Buttons') }}</h2>
             <div class="card">
-                <div class="grid grid_c">
+                <div class="grid grid_container">
                     <div class="row">
                         <div class="col-xl-2 col-lg-4 col-md-6 col-sm-12">
                             <div class="form-group">
@@ -1132,7 +1126,7 @@
         <section class="ui__section">
             <h2 class="title title_big title_indent_big">{{ __('Tabs') }}</h2>
             <div class="card">
-                <div class="grid grid_c">
+                <div class="grid grid_container">
                     <div class="row">
                         <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12">
                             <div class="tabs">
@@ -1190,7 +1184,7 @@
         <section class="ui__section">
             <h2 class="title title_big title_indent_big">{{ __('Badges') }}</h2>
             <div class="card">
-                <div class="grid grid_c">
+                <div class="grid grid_container">
                     <div class="row">
                         <div class="col-xl-2 col-lg-6 col-md-6 col-sm-12">
                             <div class="form-group">

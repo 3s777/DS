@@ -95,7 +95,7 @@ $sm-gutter: (
 //    }
 //}
 
-.grid_c {
+.grid_container {
     margin-left: -(math.div($grid-xl-gutter, 2));
     margin-right: -(math.div($grid-xl-gutter, 2));
     padding: 0 (math.div($grid-xl-gutter, 2));

@@ -5,14 +5,14 @@
 @section('content')
     <div class="container">
         <div class="auth__content">
-            <div class="card auth__card">
-                <div class="card__header">
-                    <div class="card__title">
+            <x-ui.card class="auth__card">
+                <x-slot:header>
+                    <x-ui.title tag="h1" class="card__title">
                         {{ __('Login') }}
-                    </div>
-                </div>
+                    </x-ui.title>
+                </x-slot>
 
-                <div class="card__body">
+
                     <form class="form" method="POST" action="{{ route('login') }}">
                         @csrf
 
@@ -73,8 +73,8 @@
                             @endif
                         </div>
                     </form>
-                </div>
-            </div>
+
+            </x-ui.card>
         </div>
     </div>
 @endsection
