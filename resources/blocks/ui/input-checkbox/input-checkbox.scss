@@ -31,6 +31,24 @@
         }
     }
 
+    &_error + .input-checkbox__label {
+        color: $danger-main;
+
+        &:before {
+            border: 2px solid $danger-main;
+        }
+    }
+
+    &_error {
+        &:checked + .input-checkbox__label {
+            color: $font-main;
+
+            &::before {
+                border: 0;
+            }
+        }
+    }
+
     &:checked + .input-checkbox__label {
         color: $font-main;
 
@@ -60,6 +78,8 @@
     &:disabled + .input-checkbox__label::before {
         background-color: $disabled-main;
     }
+
+
 }
 
 

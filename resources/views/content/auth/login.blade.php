@@ -18,9 +18,21 @@
 
                         <div class="form-group">
                             <div class="input-text">
-                                <input class="input-text__field @error('email') input-text__error @enderror"
-                                       id="email" type="email" name="email"
-                                       value="{{ old('email') }}" required autocomplete="email" autofocus>
+
+
+                                <x-ui.form.input-text
+                                    :errors="$errors"
+                                    id="email"
+                                    name="email"
+                                    type="email"
+                                    value="{{ old('email') }}"
+                                    placeholder="{{ __('Email') }}"
+                                    required
+                                    autofocus
+                                    autocomplete="email">
+                                </x-ui.form.input-text>
+
+
 
                                 @error('email')
                                 <span class="invalid-feedback" role="alert">
@@ -28,7 +40,7 @@
                                         </span>
                                 @enderror
 
-                                <label class="input-text__label" for="email">{{ __('E-Mail Address') }}</label>
+
                             </div>
                         </div>
 

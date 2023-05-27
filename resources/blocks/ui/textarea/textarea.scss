@@ -1,44 +1,48 @@
 .textarea {
     position: relative;
-}
 
-.textarea__field {
-    display: block;
-    width: 100%;
-    max-width: 100%;
-    min-height: 100px;
-    padding: 14px 20px;
-    border: 2px solid transparent;
-    outline: none;
-    color: $font-main;
-    background-color: $base-dark-like-transparent;
-    border-radius: $extra-small-border-radius;
-    transition: .3s;
+    &__field {
+        display: block;
+        width: 100%;
+        max-width: 100%;
+        min-height: 100px;
+        padding: 14px 20px;
+        border: 2px solid transparent;
+        outline: none;
+        color: $font-main;
+        background-color: $base-dark-like-transparent;
+        border-radius: $extra-small-border-radius;
+        transition: .3s;
 
-    &::placeholder {
+        &::placeholder {
+            color: $font-main-50;
+        }
+
+        &:focus,
+        &:active {
+            border: 2px solid $opposite-main;
+        }
+    }
+
+    &__field_error {
+        border: 2px solid $danger-main;
+    }
+
+    &__field_filled {
+        & + .textarea__label {
+            opacity: 1;
+            visibility: visible;
+        }
+    }
+
+    &__label {
+        position: absolute;
+        top: -17px;
+        left: 0;
+        font-size: rem(12);
+        line-height: 1;
+        opacity: 0;
+        visibility: hidden;
         color: $font-main-50;
     }
-
-    &:focus,
-    &:active {
-        border: 2px solid $opposite-main;
-    }
-}
-
-.textarea__field_filled {
-    & + .textarea__label {
-        opacity: 1;
-        visibility: visible;
-    }
-}
-
-.textarea__label {
-    position: absolute;
-    top: -17px;
-    left: 0;
-    font-size: rem(12);
-    line-height: 1;
-    opacity: 0;
-    visibility: hidden;
-    color: $font-main-50;
 }

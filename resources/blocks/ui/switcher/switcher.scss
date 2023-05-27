@@ -80,4 +80,8 @@
     font-size: rem(16);
     color: $font-main-50;
     transition: $base-transition;
+
+    &_error {
+        color: $danger-main;
+    }
 }

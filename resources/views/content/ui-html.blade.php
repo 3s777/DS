@@ -367,76 +367,71 @@
 
         </section>
 
+
+
+
         <section class="ui__section">
             <x-ui.title size="big" indent="big" >{{ __('Inputs') }}</x-ui.title>
 
             <x-ui.card class="card">
-                <x-grid type="container">
-                    <x-grid.col xl="3" lg="4" md="6" sm="12">
-                        <x-ui.title size="small" >{{ __('Text input') }}</x-ui.title>
-                        <x-ui.form.form-group>
-                            <x-ui.form.input-text
-                                :errors="$errors"
-                                placeholder="Enter here text"
-                                id="text"
-                                name="text"
-                                value="{{ old('text') }}"
-                                required
-                                autocomplete="on">
-                            </x-ui.form.input-text>
-                        </x-ui.form.form-group>
-                    </x-grid.col>
+                <div class="grid grid_container">
+                    <div class="row">
+                        <div class="col-xl-3 col-lg-4 col-md-6 col-sm-12">
+                            <x-ui.title size="small" >{{ __('Text input') }}</x-ui.title>
+                            <div class="form-group">
+                                <div class="input-text">
+                                    <input class="input-text__field"
+                                           id="text" type="text" name="text"
+                                           value="{{ old('text') }}" required autocomplete="text">
+                                    <label class="input-text__label" for="text">{{ __('Text') }}</label>
+                                </div>
+                            </div>
+                        </div>
 
-                    <x-grid.col xl="3" lg="4" md="6" sm="12">
-                        <x-ui.title size="small" >{{ __('Text input with error') }}</x-ui.title>
+                        <div class="col-xl-3 col-lg-4 col-md-6 col-sm-12">
+                            <x-ui.title size="small" >{{ __('Text input with error') }}</x-ui.title>
+                            <div class="form-group">
+                                <div class="input-text">
+                                    <input class="input-text__field  input-text__field_error"
+                                           id="text" type="text" name="text"
+                                           value="{{ old('text') }}" required autocomplete="text">
+                                    <label class="input-text__label" for="text">{{ __('Text') }}</label>
+                                </div>
+                            </div>
+                        </div>
 
-                        <x-ui.form.form-group>
-                            <x-ui.form.input-text
-                                class="input-text__field_error"
-                                :errors="$errors"
-                                id="text"
-                                name="text"
-                                value="{{ old('text') }}"
-                                placeholder="Test"
-                                required
-                                autocomplete="on">
-                            </x-ui.form.input-text>
-                        </x-ui.form.form-group>
-                    </x-grid.col>
+                        <div class="col-xl-3 col-lg-4 col-md-6 col-sm-12">
+                            <x-ui.title size="small" >{{ __('Datepicker') }}</x-ui.title>
+                            <div class="form-group">
+                                <div class="datepicker">
+                                    <label class="datepicker__label" for="date">{{ __('Select date') }}</label>
+                                    <input class="datepicker__field"
+                                           id="date" type="date" name="date"
+                                           value="{{ old('text') }}" required >
+                                </div>
+                            </div>
+                        </div>
 
-                    <x-grid.col xl="3" lg="4" md="6" sm="12">
-                        <x-ui.title size="small" >{{ __('Datepicker') }}</x-ui.title>
-
-                        <x-ui.form.form-group>
-                            <x-ui.form.datepicker
-                                :errors="$errors"
-                                id="date"
-                                name="date"
-                                value="{{ old('date') }}"
-                                required>
-                            </x-ui.form.datepicker>
-                        </x-ui.form.form-group>
-                    </x-grid.col>
-                </x-grid>
+                    </div>
+                </div>
 
                 <x-ui.title size="small" >{{ __('Textarea') }}</x-ui.title>
-                <x-ui.form.form-group>
-                    <x-ui.form.textarea
-                        :errors="$errors"
-                        id="textarea"
-                        name="textarea"
-                        placeholder="{{ __('Textarea placeholder') }}">
-                        {{ old('textarea') }}
-                    </x-ui.form.textarea>
-                </x-ui.form.form-group>
+                <div class="form-group">
+                    <div class="textarea">
+                        <textarea class="textarea__field" placeholder="Description for textarea" name="" id="textarea"></textarea>
+                        <label class="textarea__label" for="textarea">Description for textarea</label>
+                    </div>
+                </div>
 
                 <x-ui.title size="small" >{{ __('Quill') }}</x-ui.title>
-                <x-ui.form.form-group>
+                <div class="form-group">
                     <div id="editor">
                         <h1>Hello World!</h1>
                         <p>Some initial <strong>bold</strong> text</p>
+                        <p><br></p>
                     </div>
-                </x-ui.form.form-group>
+                </div>
+
 
                 {{--<div id="editorjs"></div>--}}
 
@@ -444,90 +439,80 @@
 
         </section>
 
+
         <section class="ui__section">
-            <x-ui.title size="big" indent="big" >{{ __('Switchers') }}</x-ui.title>
-            <x-ui.card>
-                <x-grid type="container">
-                        <x-grid.col xl="3" lg="4" md="6" sm="12">
-                            <x-ui.form.form-group>
-                                <x-ui.form.input-checkbox
-                                    id="remember"
-                                    name="remember"
-                                    label="{{ __('Remember me') }}"
-                                >
-                                </x-ui.form.input-checkbox>
-                            </x-ui.form.form-group>
-                        </x-grid.col>
+            <h2 class="title title_big title_indent_big">{{ __('Switchers') }}</h2>
+            <div class="card">
+                <div class="grid grid_container">
+                    <div class="row">
+                        <div class="col-xl-3 col-lg-4 col-md-6 col-sm-12">
+                            <div class="form-group">
+                                <div class="input-checkbox">
+                                    <input class="input-checkbox__field" type="checkbox" name="remember"
+                                           id="remember" {{ old('remember') ? 'checked' : '' }}>
 
-                        <x-grid.col xl="3" lg="4" md="6" sm="12">
-                            <x-ui.form.form-group>
-                                <x-ui.form.switcher
-                                    name="switcher1"
-                                    label="{{ __('Switcher Off') }}"
-                                >
-                                </x-ui.form.switcher>
-                            </x-ui.form.form-group>
-                        </x-grid.col>
+                                    <label class="input-checkbox__label" for="remember">
+                                        {{ __('Remember Me') }}
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
 
-                        <x-grid.col xl="3" lg="4" md="6" sm="12">
-                            <x-ui.form.form-group>
-                                <x-ui.form.switcher
-                                    name="switcher2"
-                                    label="{{ __('Switcher On') }}"
-                                    checked
-                                >
-                                </x-ui.form.switcher>
-                            </x-ui.form.form-group>
-                        </x-grid.col>
+                        <div class="col-xl-3 col-lg-4 col-md-6 col-sm-12">
+                            <div class="form-group">
+                                <label class="switcher">
+                                    <input class="switcher__checkbox" type="checkbox">
+                                    <span class="switcher__button"></span>
+                                    <span class="switcher__label">Switcher Off</span>
+                                </label>
+                            </div>
+                        </div>
 
-                        <x-grid.col xl="3" lg="4" md="6" sm="12">
-                            <x-ui.form.form-group>
-                                <x-ui.form.switcher
-                                    name="switcher3"
-                                    label="{{ __('Switcher Disabled') }}"
-                                    disabled
-                                >
-                                </x-ui.form.switcher>
-                            </x-ui.form.form-group>
-                        </x-grid.col>
+                        <div class="col-xl-3 col-lg-4 col-md-6 col-sm-12">
+                            <div class="form-group">
+                                <label class="switcher">
+                                    <input class="switcher__checkbox" type="checkbox" checked>
+                                    <span class="switcher__button"></span>
+                                    <span class="switcher__label">Switcher On</span>
+                                </label>
+                            </div>
+                        </div>
 
-                    <x-grid.col xl="3" lg="4" md="6" sm="12">
-                        <x-ui.form.form-group>
-                            <nav>
-                                <x-ui.form.radio
-                                id="a-opt"
-                                name="choice"
-                                label="radio switcher"
-                                >
-                                </x-ui.form.radio>
+                        <div class="col-xl-3 col-lg-4 col-md-6 col-sm-12">
+                            <div class="form-group">
+                                <label class="switcher">
+                                    <input class="switcher__checkbox" type="checkbox" disabled>
+                                    <span class="switcher__button"></span>
+                                    <span class="switcher__label">Switcher Disabled</span>
+                                </label>
+                            </div>
+                        </div>
 
-                                <x-ui.form.radio
-                                    id="b-opt"
-                                    name="choice"
-                                    label="radio switcher 2"
-                                    checked
-                                >
-                                </x-ui.form.radio>
+                        <div class="col-xl-3 col-lg-4 col-md-6 col-sm-12">
+                            <div class="form-group">
+                                <nav>
+                                    <div class="radio">
+                                        <input class="radio__input" type="radio" name="choice" id="a-opt" />
+                                        <label class="radio__label" for="a-opt">radio switcher</label>
+                                    </div>
 
-                                <x-ui.form.radio
-                                    id="c-opt"
-                                    name="choice"
-                                    label="radio switcher 3"
-                                >
-                                </x-ui.form.radio>
+                                    <div class="radio">
+                                        <input class="radio__input" type="radio" name="choice" id="b-opt" checked />
+                                        <label class="radio__label" for="b-opt">radio switcher 2</label>
+                                    </div>
 
-                                <x-ui.form.radio
-                                    id="c-opt"
-                                    name="choice"
-                                    label="radio switcher disabled"
-                                    disabled
-                                >
-                                </x-ui.form.radio>
-                            </nav>
-                        </x-ui.form.form-group>
-                    </x-grid.col>
+                                    <div class="radio">
+                                        <input class="radio__input" type="radio" name="choice" id="c-opt" />
+                                        <label class="radio__label" for="c-opt" >radio switcher 3</label>
+                                    </div>
 
-
+                                    <div class="radio">
+                                        <input class="radio__input" type="radio" name="choice" id="d-opt" disabled />
+                                        <label class="radio__label" for="d-opt">radio switcher disabled</label>
+                                    </div>
+                                </nav>
+                            </div>
+                        </div>
 
 
                         <div class="col-xl-9 col-lg-4 col-md-6 col-sm-12">
@@ -574,9 +559,9 @@
                                 </div>
                             </div>
                         </div>
-
-                </x-grid>
-            </x-ui.card>
+                    </div>
+                </div>
+            </div>
         </section>
 
         <section class="ui__section">
@@ -602,7 +587,7 @@
                             <div class="form-group">
                                 <div class="choices-block">
                                     <label class="choices-block__label" for="select-test">Choose something</label>
-                                    <select class="choices-select-2" id="select-test" name="select-test" multiple >
+                                    <select class="choices-select-2" name="select-test" multiple >
                                         <option value="">Add multiple</option>
                                         <option value="1" selected>Test1</option>
                                         <option value="2">Test2 test test</option>
@@ -629,9 +614,9 @@
                         <div class="col-xl-3 col-lg-4 col-md-6 col-sm-12">
                             <div class="form-group">
                                 <div class="choices-block">
-                                    <label class="choices-block__label" for="select-test-4">Choose something</label>
+                                    <label class="choices-block__label" for="select-test">Choose something</label>
                                     <input class="choices-select-4"
-                                           id="select-test-4" type="text" name="text" placeholder="Input with items"
+                                           id="text" type="text" name="text" placeholder="Input with items"
                                            value="{{ old('text') }}" required >
 
                                 </div>
@@ -644,75 +629,53 @@
         </section>
 
         <section class="ui__section">
-            <x-ui.title size="big" indent="big" >{{ __('Buttons') }}</x-ui.title>
-            <x-ui.card>
-                <x-grid type="container" class="grid grid_container">
-                    <x-grid.col xl="2" lg="4" md="6" sm="12">
-                        <x-ui.form.form-group>
-                            <x-ui.form.button
-                                full_width="true"
-                            >
-                                {{ __('Submit') }}
-                            </x-ui.form.button>
-                        </x-ui.form.form-group>
-                    </x-grid.col>
-
-                    <x-grid.col xl="2" lg="4" md="6" sm="12">
-                        <x-ui.form.form-group>
-                            <x-ui.form.button
-                                full_width="true"
-                                color="cancel"
-                            >
-                                {{ __('Cancel') }}
-                            </x-ui.form.button>
-                        </x-ui.form.form-group>
-                    </x-grid.col>
-
-                    <x-grid.col xl="2" lg="4" md="6" sm="12">
-                        <x-ui.form.form-group>
-                            <x-ui.form.button
-                                full_width="true"
-                                color="disabled"
-                                disabled
-                            >
-                                {{ __('Disabled') }}
-                            </x-ui.form.button>
-                        </x-ui.form.form-group>
-                    </x-grid.col>
-
-                    <x-grid.col xl="2" lg="4" md="6" sm="12">
-                        <x-ui.form.form-group>
-                            <x-ui.form.button
-                                full_width="true"
-                                color="light">
-                                {{ __('Light') }}
-                            </x-ui.form.button>
-                        </x-ui.form.form-group>
-                    </x-grid.col>
-
-                    <x-grid.col xl="2" lg="4" md="6" sm="12">
-                        <x-ui.form.form-group>
-                            <x-ui.form.button
-                                full_width="true"
-                                color="dark">
-                                {{ __('Dark') }}
-                            </x-ui.form.button>
-                        </x-ui.form.form-group>
-                    </x-grid.col>
-
-                    <x-grid.col xl="2" lg="4" md="6" sm="12">
-                        <x-ui.form.form-group>
-                            <x-ui.form.button
-                                full_width="true"
-                            >
-                                <x-slot:icon class="button__icon-wrapper_submit">
-                                    @include('inline-svg/success', ['class' => 'button__submit-icon'])
-                                </x-slot:icon>
-                                {{ __('With icon') }}
-                            </x-ui.form.button>
-                        </x-ui.form.form-group>
-                    </x-grid.col>
-
+            <h2 class="title title_big title_indent_big">{{ __('Buttons') }}</h2>
+            <div class="card">
+                <div class="grid grid_container">
+                    <div class="row">
+                        <div class="col-xl-2 col-lg-4 col-md-6 col-sm-12">
+                            <div class="form-group">
+                                <button type="submit" class="button button_submit button_full_width">
+                                    {{ __('Submit') }}
+                                </button>
+                            </div>
+                        </div>
+                        <div class="col-xl-2 col-lg-4 col-md-6 col-sm-12">
+                            <div class="form-group">
+                                <input class="button button_cancel button_full_width" type="submit" value="{{ __('Cancel') }}">
+                            </div>
+                        </div>
+                        <div class="col-xl-2 col-lg-4 col-md-6 col-sm-12">
+                            <div class="form-group">
+                                <button type="submit" class="button button_disabled button_full_width">
+                                    {{ __('Disabled') }}
+                                </button>
+                            </div>
+                        </div>
+                        <div class="col-xl-2 col-lg-4 col-md-6 col-sm-12">
+                            <div class="form-group">
+                                <button type="submit" class="button button_full_width">
+                                    {{ __('Light') }}
+                                </button>
+                            </div>
+                        </div>
+                        <div class="col-xl-2 col-lg-4 col-md-6 col-sm-12">
+                            <div class="form-group">
+                                <button type="submit" class="button button_dark button_full_width">
+                                    {{ __('Dark') }}
+                                </button>
+                            </div>
+                        </div>
+                        <div class="col-xl-2 col-lg-4 col-md-6 col-sm-12">
+                            <div class="form-group">
+                                <button type="submit" class="button button_submit button_icon button_full_width">
+                                    <div class="button__icon-wrapper button__icon-wrapper_submit">
+                                        @include('inline-svg/success', ['class' => 'button__submit-icon'])
+                                    </div>
+                                    {{ __('With icon') }}
+                                </button>
+                            </div>
+                        </div>
                         <div class="col-xl-2 col-lg-4 col-md-6 col-sm-12">
                             <div class="form-group">
                                 <button type="submit" class="button button_cancel button_icon button_full_width">
@@ -894,10 +857,10 @@
                                 </div>
                             </div>
                         </div>
+                    </div>
 
-
-                </x-grid>
-            </x-ui.card>
+                </div>
+            </div>
         </section>
 
 
