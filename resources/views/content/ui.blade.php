@@ -527,76 +527,116 @@
                         </x-ui.form.form-group>
                     </x-grid.col>
 
+                        <x-grid.col xl="9" lg="4" md="6" sm="12">
+                            <x-ui.form.form-group>
+                                <x-ui.form.radio-button
+                                    id="radio-1"
+                                    name="radio"
+                                    value="1"
+                                    color="dark"
+                                    indent="right"
+                                    checked="true"
+                                    label="{{ __('Radio button 1') }}">
+                                </x-ui.form.radio-button>
 
+                                <x-ui.form.radio-button
+                                    id="radio-2"
+                                    name="radio"
+                                    value="2"
+                                    color="dark"
+                                    indent="right"
+                                    label="{{ __('Radio button 2') }}">
+                                </x-ui.form.radio-button>
 
+                                <x-ui.form.radio-button
+                                    id="radio-3"
+                                    name="radio"
+                                    value="3"
+                                    color="dark"
+                                    indent="right"
+                                    label="{{ __('Radio button 3') }}">
+                                </x-ui.form.radio-button>
 
-                        <div class="col-xl-9 col-lg-4 col-md-6 col-sm-12">
-                            <div class="form-group">
-                                <div class="radio-button radio-button_indent_right">
-                                    <input class="radio-button__input" id="radio-1" type="radio" name="radio" value="1" checked>
-                                    <label class="radio-button__label button button_dark" for="radio-1">Radio button 1</label>
-                                </div>
+                                <x-ui.form.radio-button
+                                    id="radio-4"
+                                    name="radio"
+                                    value="4"
+                                    color="disabled"
+                                    indent="right"
+                                    label="{{ __('Disabled') }}">
+                                </x-ui.form.radio-button>
+                            </x-ui.form.form-group>
 
-                                <div class="radio-button radio-button_indent_right">
-                                    <input class="radio-button__input" id="radio-2" type="radio" name="radio" value="2">
-                                    <label class="radio-button__label button button_dark" for="radio-2">Radio button 2</label>
-                                </div>
+                            <x-ui.form.form-group>
+                                <x-ui.form.radio-group>
 
-                                <div class="radio-button radio-button_indent_right">
-                                    <input class="radio-button__input" id="radio-3" type="radio" name="radio" value="3">
-                                    <label class="radio-button__label button button_dark" for="radio-3">Radio button 3</label>
-                                </div>
+                                    <x-ui.form.radio-button
+                                        class="radio-group__button"
+                                        id="radio-11"
+                                        name="radio"
+                                        value="11"
+                                        color="dark"
+                                        checked="true"
+                                        label_class="radio-group__label"
+                                        label="{{ __('Radio button 1') }}">
+                                    </x-ui.form.radio-button>
 
-                                <div class="radio-button">
-                                    <input class="radio-button__input" id="radio-4" type="radio" name="radio" value="4" disabled>
-                                    <label class="radio-button__label button button_disabled" for="radio-4">Disabled</label>
-                                </div>
-                            </div>
+                                    <x-ui.form.radio-button
+                                        class="radio-group__button"
+                                        id="radio-12"
+                                        name="radio"
+                                        value="12"
+                                        color="dark"
+                                        label_class="radio-group__label"
+                                        label="{{ __('Radio button 2') }}">
+                                    </x-ui.form.radio-button>
 
-                            <div class="form-group">
-                                <div class="radio-group">
-                                    <div class="radio-group__button">
-                                        <input class="radio-group__input" id="radio-11" type="radio" name="radio1" value="1" checked>
-                                        <label class="radio-group__label button button_dark" for="radio-11">Radio button 1</label>
-                                    </div>
-                                    <div class="radio-group__button">
-                                        <input class="radio-group__input" id="radio-12" type="radio" name="radio1" value="2">
-                                        <label class="radio-group__label button button_dark" for="radio-12">Radio button 2</label>
-                                    </div>
-                                    <div class="radio-group__button">
-                                        <input class="radio-group__input" id="radio-13" type="radio" name="radio1" value="3">
-                                        <label class="radio-group__label button button_dark" for="radio-13">Radio button 3</label>
-                                    </div>
-                                    <div class="radio-group__button">
-                                        <input class="radio-group__input" id="radio-14" type="radio" name="radio1" value="4" disabled>
-                                        <label class="radio-group__label button button_disabled" for="radio-14">Disabled</label>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                                    <x-ui.form.radio-button
+                                        class="radio-group__button"
+                                        id="radio-13"
+                                        name="radio"
+                                        value="13"
+                                        color="dark"
+                                        label_class="radio-group__label"
+                                        label="{{ __('Radio button 3') }}">
+                                    </x-ui.form.radio-button>
+
+                                    <x-ui.form.radio-button
+                                        class="radio-group__button"
+                                        id="radio-14"
+                                        name="radio"
+                                        value="14"
+                                        color="disabled"
+                                        label_class="radio-group__label"
+                                        label="{{ __('Disabled') }}">
+                                    </x-ui.form.radio-button>
+
+                                </x-ui.form.radio-group>
+                            </x-ui.form.form-group>
+                        </x-grid.col>
 
                 </x-grid>
             </x-ui.card>
         </section>
 
         <section class="ui__section">
-            <h2 class="title title_big title_indent_big">{{ __('Select') }}</h2>
-            <div class="card">
-                <div class="grid grid_container">
-                    <div class="row">
-                        <div class="col-xl-3 col-lg-4 col-md-6 col-sm-12">
-                            <div class="form-group">
-                                <div class="choices-block">
-                                    <label class="choices-block__label" for="select-test">Choose something</label>
-                                    <select class="choices-select-1" id="select-test" name="select-test" >
-                                        <option value="">Classic select</option>
-                                        <option value="1">Test1</option>
-                                        <option value="2">Test2</option>
-                                        <option value="3">Test3</option>
-                                    </select>
-                                </div>
-                            </div>
-                        </div>
+            <x-ui.title size="big" indent="big" >{{ __('Select') }}</x-ui.title>
+            <x-ui.card>
+                <x-grid type="container">
+                    <x-grid.col xl="3" lg="4" md="6" sm="12">
+                        <x-ui.form.form-group>
+                            <x-libraries.choices
+                                id="select-test"
+                                name="select-test"
+                                label="Choose something">
+                                <option value="">Classic select</option>
+                                <option value="1">Test1</option>
+                                <option value="2">Test2</option>
+                                <option value="3">Test3</option>
+                            </x-libraries.choices>
+                        </x-ui.form.form-group>
+                    </x-grid.col>
+
 
                         <div class="col-xl-3 col-lg-4 col-md-6 col-sm-12">
                             <div class="form-group">
@@ -633,14 +673,13 @@
                                     <input class="choices-select-4"
                                            id="select-test-4" type="text" name="text" placeholder="Input with items"
                                            value="{{ old('text') }}" required >
-
                                 </div>
                             </div>
                         </div>
 
-                    </div>
-                </div>
-            </div>
+
+                </x-grid>
+            </x-ui.card>
         </section>
 
         <section class="ui__section">
@@ -650,8 +689,7 @@
                     <x-grid.col xl="2" lg="4" md="6" sm="12">
                         <x-ui.form.form-group>
                             <x-ui.form.button
-                                full_width="true"
-                            >
+                                full_width="true">
                                 {{ __('Submit') }}
                             </x-ui.form.button>
                         </x-ui.form.form-group>
@@ -661,8 +699,7 @@
                         <x-ui.form.form-group>
                             <x-ui.form.button
                                 full_width="true"
-                                color="cancel"
-                            >
+                                color="cancel">
                                 {{ __('Cancel') }}
                             </x-ui.form.button>
                         </x-ui.form.form-group>
@@ -673,8 +710,7 @@
                             <x-ui.form.button
                                 full_width="true"
                                 color="disabled"
-                                disabled
-                            >
+                                disabled>
                                 {{ __('Disabled') }}
                             </x-ui.form.button>
                         </x-ui.form.form-group>
@@ -703,8 +739,7 @@
                     <x-grid.col xl="2" lg="4" md="6" sm="12">
                         <x-ui.form.form-group>
                             <x-ui.form.button
-                                full_width="true"
-                            >
+                                full_width="true">
                                 <x-slot:icon class="button__icon-wrapper_submit">
                                     @include('inline-svg/success', ['class' => 'button__submit-icon'])
                                 </x-slot:icon>
@@ -713,194 +748,255 @@
                         </x-ui.form.form-group>
                     </x-grid.col>
 
-                        <div class="col-xl-2 col-lg-4 col-md-6 col-sm-12">
-                            <div class="form-group">
-                                <button type="submit" class="button button_cancel button_icon button_full_width">
-                                    <div class="button__icon-wrapper button__icon-wrapper_cancel">
-                                        @include('inline-svg/cancel', ['class' => 'button__cancel-icon'])
-                                    </div>
-                                    {{ __('With icon') }}
-                                </button>
-                            </div>
-                        </div>
-                        <div class="col-xl-2 col-lg-4 col-md-6 col-sm-12">
-                            <div class="form-group">
-                                <button type="submit" class="button button_dark button_icon button_full_width">
-                                    <div class="button__icon-wrapper button__icon-wrapper_cancel">
-                                        @include('inline-svg/warning', ['class' => 'button__cancel-icon'])
-                                    </div>
-                                    {{ __('Dark') }}
-                                </button>
-                            </div>
-                        </div>
+                    <x-grid.col xl="2" lg="4" md="6" sm="12">
+                        <x-ui.form.form-group>
+                            <x-ui.form.button
+                                full_width="true"
+                                color="cancel">
+                                <x-slot:icon class="button__icon-wrapper_cancel">
+                                    @include('inline-svg/cancel', ['class' => 'button__cancel-icon'])
+                                </x-slot:icon>
+                                {{ __('With icon') }}
+                            </x-ui.form.button>
+                        </x-ui.form.form-group>
+                    </x-grid.col>
 
-                        <div class="col-xl-2 col-lg-4 col-md-6 col-sm-12">
-                            <div class="form-group">
-                                <a class="button button_submit button_full_width">
-                                    {{ __('Normal size') }}
-                                </a>
-                            </div>
-                        </div>
-                        <div class="col-xl-6 col-lg-4 col-md-6 col-sm-12">
-                            <div class="form-group">
-                                <div class="button button_submit button_full_width">
-                                    {{ __('Full width button') }}
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-xl-3 col-lg-4 col-md-6 col-sm-12">
-                            <div class="form-group">
-                                <div class="button button_submit">
-                                    {{ __('Content width button') }}
-                                </div>
-                            </div>
-                        </div>
+                    <x-grid.col xl="2" lg="4" md="6" sm="12">
+                        <x-ui.form.form-group>
+                            <x-ui.form.button
+                                full_width="true"
+                                color="dark">
+                                <x-slot:icon class="button__icon-wrapper_cancel">
+                                    @include('inline-svg/warning', ['class' => 'button__cancel-icon'])
+                                </x-slot:icon>
+                                {{ __('Dark') }}
+                            </x-ui.form.button>
+                        </x-ui.form.form-group>
+                    </x-grid.col>
 
-                        <div class="col-xl-3 col-lg-4 col-md-6 col-sm-12">
-                            <div class="form-group">
-                                <div class="button button_submit button_icon">
-                                    <div class="button__icon-wrapper button__icon-wrapper_submit">
-                                        @include('inline-svg/success', ['class' => 'button__submit-icon'])
-                                    </div>
-                                    {{ __('Content width button') }}
-                                </div>
-                            </div>
-                        </div>
+                    <x-grid.col xl="2" lg="4" md="6" sm="12">
+                        <x-ui.form.form-group>
+                            <x-ui.form.button
+                                full_width="true">
+                                {{ __('Normal size') }}
+                            </x-ui.form.button>
+                        </x-ui.form.form-group>
+                    </x-grid.col>
 
-                        <div class="col-xl-2 col-lg-4 col-sm-12">
-                            <div class="form-group">
-                                <div class="button button_submit button_size_small">
-                                    {{ __('Small size') }}
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-xl-2 col-lg-4 col-sm-12">
-                            <div class="form-group">
-                                <div class="button button_submit button_size_big button_full_width">
-                                    {{ __('Big size') }}
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-xl-2 col-lg-4 col-sm-12">
-                            <div class="form-group">
-                                <div class="button button_big_icon button_cancel button_size_big button_full_width">
-                                    <div class="button__icon-wrapper button__icon-wrapper_cancel">
-                                        @include('inline-svg/cancel', ['class' => 'button__cancel-icon'])
-                                    </div>
-                                    {{ __('Big size') }}
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-xl-3 col-lg-6 col-md-6 col-sm-12">
-                            <div class="form-group">
-                                <div class="button button_submit button_size_large button_full_width">
-                                    {{ __('Large size') }}
-                                </div>
-                            </div>
-                        </div>
+                    <x-grid.col xl="6" lg="4" md="6" sm="12">
+                        <x-ui.form.form-group>
+                            <x-ui.form.button
+                                full_width="true">
+                                {{ __('Full width button') }}
+                            </x-ui.form.button>
+                        </x-ui.form.form-group>
+                    </x-grid.col>
 
-                        <div class="col-xl-3 col-lg-6 col-md-6 col-sm-12">
-                            <div class="form-group">
-                                <div class="button button_large_icon button_cancel button_size_large button_full_width">
-                                    <div class="button__icon-wrapper button__icon-wrapper_cancel">
-                                        @include('inline-svg/cancel', ['class' => 'button__cancel-icon'])
-                                    </div>
-                                    {{ __('Large size') }}
-                                </div>
-                            </div>
-                        </div>
+                    <x-grid.col xl="3" lg="4" md="6" sm="12">
+                        <x-ui.form.form-group>
+                            <x-ui.form.button>
+                                {{ __('Content width button') }}
+                            </x-ui.form.button>
+                        </x-ui.form.form-group>
+                    </x-grid.col>
 
-                        <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12">
-                            <div class="form-group ui__form-group_buttons">
+                    <x-grid.col xl="3" lg="4" md="6" sm="12">
+                        <x-ui.form.form-group>
+                            <x-ui.form.button>
+                                <x-slot:icon class="button__icon-wrapper_submit">
+                                    @include('inline-svg/success', ['class' => 'button__submit-icon'])
+                                </x-slot:icon>
+                                {{ __('Content width button') }}
+                            </x-ui.form.button>
+                        </x-ui.form.form-group>
+                    </x-grid.col>
 
-                                <div class="button button_info button_only_icon button_only_icon_extra-small">
-                                    <div class="button__icon-wrapper">
-                                        @include('inline-svg/view', ['class' => 'button__icon button__icon_extra-small button__view-icon'])
-                                    </div>
-                                </div>
+                    <x-grid.col xl="2" lg="4" md="6" sm="12">
+                        <x-ui.form.form-group>
+                            <x-ui.form.button
+                                size="small">
+                                {{ __('Small size') }}
+                            </x-ui.form.button>
+                        </x-ui.form.form-group>
+                    </x-grid.col>
 
-                                <div class="button button_warning button_only_icon button_only_icon_extra-small">
-                                    <div class="button__icon-wrapper">
-                                        @include('inline-svg/edit', ['class' => 'button__icon button__icon_extra-small button__edit-icon'])
-                                    </div>
-                                </div>
+                    <x-grid.col xl="2" lg="4" md="6" sm="12">
+                        <x-ui.form.form-group>
+                            <x-ui.form.button
+                                full_width="true"
+                                size="big">
+                                {{ __('Big size') }}
+                            </x-ui.form.button>
+                        </x-ui.form.form-group>
+                    </x-grid.col>
 
-                                <div class="button button_cancel button_only_icon button_only_icon_extra-small">
-                                    <div class="button__icon-wrapper">
-                                        @include('inline-svg/close', ['class' => 'button__icon button__icon_extra-small button__close-icon'])
-                                    </div>
-                                </div>
+                    <x-grid.col xl="2" lg="4" md="6" sm="12">
+                        <x-ui.form.form-group>
+                            <x-ui.form.button
+                                full_width="true"
+                                color="cancel"
+                                icon_size="big"
+                                size="big">
+                                <x-slot:icon class="button__icon-wrapper_cancel">
+                                    @include('inline-svg/cancel', ['class' => 'button__cancel-icon'])
+                                </x-slot:icon>
+                                {{ __('Big size') }}
+                            </x-ui.form.button>
+                        </x-ui.form.form-group>
+                    </x-grid.col>
 
-                                <div class="button button_info button_only_icon button_only_icon_small">
-                                    <div class="button__icon-wrapper">
-                                        @include('inline-svg/view', ['class' => 'button__icon button__icon_small button__view-icon'])
-                                    </div>
-                                </div>
+                    <x-grid.col xl="3" lg="4" md="6" sm="12">
+                        <x-ui.form.form-group>
+                            <x-ui.form.button
+                                full_width="true"
+                                size="large">
+                                {{ __('Large size') }}
+                            </x-ui.form.button>
+                        </x-ui.form.form-group>
+                    </x-grid.col>
 
+                    <x-grid.col xl="3" lg="4" md="6" sm="12">
+                        <x-ui.form.form-group>
+                            <x-ui.form.button
+                                tag="a"
+                                link="/"
+                                full_width="true"
+                                color="cancel"
+                                icon_size="large"
+                                size="large">
+                                <x-slot:icon class="button__icon-wrapper_cancel">
+                                    @include('inline-svg/cancel', ['class' => 'button__cancel-icon'])
+                                </x-slot:icon>
+                                {{ __('Large size') }}
+                            </x-ui.form.button>
+                        </x-ui.form.form-group>
+                    </x-grid.col>
 
-                                <div class="button button_warning button_only_icon button_only_icon_small">
-                                    <div class="button__icon-wrapper">
-                                        @include('inline-svg/edit', ['class' => 'button__icon button__icon_small button__edit-icon'])
-                                    </div>
-                                </div>
+                    <x-grid.col xl="6" lg="6" md="6" sm="12">
+                        <x-ui.form.form-group class="ui__form-group_buttons">
 
-                                <div class="button button_cancel button_only_icon button_only_icon_small">
-                                    <div class="button__icon-wrapper">
-                                        @include('inline-svg/close', ['class' => 'button__icon button__icon_small button__close-icon'])
-                                    </div>
-                                </div>
+                            <x-ui.form.button
+                                color="info"
+                                only_icon="true"
+                                only_icon_size="extra-small">
+                                <x-slot:icon class="button__icon-wrapper_cancel">
+                                    @include('inline-svg/view', ['class' => 'button__icon button__icon_extra-small button__view-icon'])
+                                </x-slot:icon>
+                            </x-ui.form.button>
 
-                                <div class="button button_info button_only_icon">
-                                    <div class="button__icon-wrapper">
-                                        @include('inline-svg/view', ['class' => 'button__icon button__view-icon'])
-                                    </div>
-                                </div>
+                            <x-ui.form.button
+                                color="warning"
+                                only_icon="true"
+                                only_icon_size="extra-small">
+                                <x-slot:icon class="button__icon-wrapper_cancel">
+                                    @include('inline-svg/edit', ['class' => 'button__icon button__icon_extra-small button__edit-icon'])
+                                </x-slot:icon>
+                            </x-ui.form.button>
 
-                                <div class="button button_cancel button_only_icon">
-                                    <div class="button__icon-wrapper">
-                                        @include('inline-svg/close', ['class' => 'button__icon button__close-icon'])
-                                    </div>
-                                </div>
+                            <x-ui.form.button
+                                color="cancel"
+                                only_icon="true"
+                                only_icon_size="extra-small">
+                                <x-slot:icon class="button__icon-wrapper_cancel">
+                                    @include('inline-svg/close', ['class' => 'button__icon button__icon_extra-small button__close-icon'])
+                                </x-slot:icon>
+                            </x-ui.form.button>
 
+                            <x-ui.form.button
+                                color="info"
+                                only_icon="true"
+                                only_icon_size="small">
+                                <x-slot:icon class="button__icon-wrapper_cancel">
+                                    @include('inline-svg/view', ['class' => 'button__icon button__icon_small button__view-icon'])
+                                </x-slot:icon>
+                            </x-ui.form.button>
 
-                                <div class="button button_warning button_only_icon button_only_icon_big">
-                                    <div class="button__icon-wrapper">
-                                        @include('inline-svg/edit', ['class' => 'button__icon button__icon_big button__edit-icon'])
-                                    </div>
-                                </div>
+                            <x-ui.form.button
+                                color="warning"
+                                only_icon="true"
+                                only_icon_size="small">
+                                <x-slot:icon class="button__icon-wrapper_cancel">
+                                    @include('inline-svg/edit', ['class' => 'button__icon button__icon_small button__edit-icon'])
+                                </x-slot:icon>
+                            </x-ui.form.button>
 
-                                <div class="button button_cancel button_only_icon button_only_icon_big">
-                                    <div class="button__icon-wrapper">
-                                        @include('inline-svg/close', ['class' => 'button__icon button__icon_big button__close-icon'])
-                                    </div>
-                                </div>
+                            <x-ui.form.button
+                                color="cancel"
+                                only_icon="true"
+                                only_icon_size="small">
+                                <x-slot:icon class="button__icon-wrapper_cancel">
+                                    @include('inline-svg/close', ['class' => 'button__icon button__icon_small button__close-icon'])
+                                </x-slot:icon>
+                            </x-ui.form.button>
 
-                                <div class="button button_info button_only_icon button_only_icon_large">
-                                    <div class="button__icon-wrapper">
-                                        @include('inline-svg/cancel', ['class' => 'button__icon button__icon_large button__close-icon'])
-                                    </div>
-                                </div>
+                            <x-ui.form.button
+                                color="info"
+                                only_icon="true">
+                                <x-slot:icon class="button__icon-wrapper_cancel">
+                                    @include('inline-svg/view', ['class' => 'button__icon button__view-icon'])
+                                </x-slot:icon>
+                            </x-ui.form.button>
 
-                                <button class="button button_info button_tooltip">
-                                    ?
-                                </button>
+                            <x-ui.form.button
+                                color="cancel"
+                                only_icon="true">
+                                <x-slot:icon class="button__icon-wrapper_cancel">
+                                    @include('inline-svg/close', ['class' => 'button__icon button__close-icon'])
+                                </x-slot:icon>
+                            </x-ui.form.button>
 
-                                <button class="button button_submit button_tooltip button_tooltip_extra_small">
-                                    ?
-                                </button>
+                            <x-ui.form.button
+                                color="warning"
+                                only_icon="true"
+                                only_icon_size="big">
+                                <x-slot:icon class="button__icon-wrapper_cancel">
+                                    @include('inline-svg/edit', ['class' => 'button__icon button__icon_big button__edit-icon'])
+                                </x-slot:icon>
+                            </x-ui.form.button>
 
-                                <div class="button button_cancel button_tooltip button_tooltip_big">
-                                    ?
-                                </div>
-                            </div>
-                        </div>
+                            <x-ui.form.button
+                                color="cancel"
+                                only_icon="true"
+                                only_icon_size="big">
+                                <x-slot:icon class="button__icon-wrapper_cancel">
+                                    @include('inline-svg/close', ['class' => 'button__icon button__icon_big button__close-icon'])
+                                </x-slot:icon>
+                            </x-ui.form.button>
 
+                            <x-ui.form.button
+                                color="info"
+                                only_icon="true"
+                                only_icon_size="large">
+                                <x-slot:icon class="button__icon-wrapper_cancel">
+                                    @include('inline-svg/cancel', ['class' => 'button__icon button__icon_large button__close-icon'])
+                                </x-slot:icon>
+                            </x-ui.form.button>
+
+                            <x-ui.form.button
+                                tooltip="true"
+                                color="info">
+                                ?
+                            </x-ui.form.button>
+
+                            <x-ui.form.button
+                                tooltip="true"
+                                tooltip_size="extra_small">
+                                ?
+                            </x-ui.form.button>
+
+                            <x-ui.form.button
+                                color="cancel"
+                                tooltip="true"
+                                tooltip_size="big">
+                                ?
+                            </x-ui.form.button>
+
+                        </x-ui.form.form-group>
+                    </x-grid.col>
 
                 </x-grid>
             </x-ui.card>
         </section>
-
-
 
 
 

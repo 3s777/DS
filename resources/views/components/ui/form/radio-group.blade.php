@@ -1,6 +1,6 @@
 <div
     {{ $attributes->class([
-        'form-group',
+        'radio-group',
         ])
     }}>
     {{ $slot }}
