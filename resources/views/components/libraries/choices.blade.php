@@ -2,12 +2,38 @@
     'id',
     'name',
     'label' => false,
-    'checked' => false
+    'input' => false,
+    'value' => false
 ])
 
 <div class="choices-block">
     <label class="choices-block__label" for="{{ $id }}">{{ $label }}</label>
-    <select class="choices-select-1" id="{{ $id }}" name="{{ $name }}" >
-        {{ $slot }}
-    </select>
+    @if($input)
+        <input
+            {{ $attributes->class([
+                    'choices-block__select',
+                ])
+                ->merge([
+                    'id' => $id,
+                    'name' => $name,
+                    'value' => $value,
+                    'type' => 'text'
+                ])
+            }}>
+    @else
+        <x-ui.form.select
+            {{ $attributes->class([
+                    'choices-block__select',
+                ])
+                ->merge([
+                    'id' => $id,
+                    'name' => $name,
+                ])
+            }}>
+            {{ $slot }}
+        </x-ui.form.select>
+    @endif
+
+
+
 </div>

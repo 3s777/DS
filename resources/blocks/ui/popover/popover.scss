@@ -71,6 +71,24 @@
     justify-content: flex-end;
 }
 
+.popover__buttons_left {
+    justify-content: flex-start;
+
+    .popover__button {
+        margin-left: 0;
+        margin-right: 8px;
+    }
+}
+
+.popover__buttons_center {
+    justify-content: center;
+
+    .popover__button {
+        margin-left: 4px;
+        margin-right: 4px;
+    }
+}
+
 .popover__button {
     margin-left: 8px;
 }

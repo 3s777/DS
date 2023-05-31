@@ -10,7 +10,7 @@
     'only_icon' => false,
     'only_icon_size' => false,
     'tooltip' => false,
-    'tooltip_size' => false,
+    'tooltip_size' => false
 ])
 
 <{{ $tag }}

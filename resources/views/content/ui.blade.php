@@ -626,58 +626,61 @@
                     <x-grid.col xl="3" lg="4" md="6" sm="12">
                         <x-ui.form.form-group>
                             <x-libraries.choices
+                                class="choices-select-1"
                                 id="select-test"
                                 name="select-test"
                                 label="Choose something">
-                                <option value="">Classic select</option>
-                                <option value="1">Test1</option>
-                                <option value="2">Test2</option>
-                                <option value="3">Test3</option>
+                                <x-ui.form.option>Classic select</x-ui.form.option>
+                                <x-ui.form.option value="1">Test 1</x-ui.form.option>
+                                <x-ui.form.option value="2">Test 2</x-ui.form.option>
+                                <x-ui.form.option value="3">Test 3</x-ui.form.option>
                             </x-libraries.choices>
                         </x-ui.form.form-group>
                     </x-grid.col>
 
+                    <x-grid.col xl="3" lg="4" md="6" sm="12">
+                        <x-ui.form.form-group>
+                            <x-libraries.choices
+                                class="choices-select-2"
+                                id="select-test-2"
+                                name="select-test-2"
+                                label="Choose something" multiple>
+                                <x-ui.form.option>Add multiple</x-ui.form.option>
+                                <x-ui.form.option value="1" selected>Test 1</x-ui.form.option>
+                                <x-ui.form.option value="2">Test2 test test</x-ui.form.option>
+                                <x-ui.form.option value="3">Test3 words test bigwordwidth</x-ui.form.option>
+                            </x-libraries.choices>
+                        </x-ui.form.form-group>
+                    </x-grid.col>
 
-                        <div class="col-xl-3 col-lg-4 col-md-6 col-sm-12">
-                            <div class="form-group">
-                                <div class="choices-block">
-                                    <label class="choices-block__label" for="select-test">Choose something</label>
-                                    <select class="choices-select-2" id="select-test" name="select-test" multiple >
-                                        <option value="">Add multiple</option>
-                                        <option value="1" selected>Test1</option>
-                                        <option value="2">Test2 test test</option>
-                                        <option value="3">Test3 words test bigwordwidth</option>
-                                    </select>
-                                </div>
-                            </div>
-                        </div>
+                    <x-grid.col xl="3" lg="4" md="6" sm="12">
+                        <x-ui.form.form-group>
+                            <x-libraries.choices
+                                class="choices-select-3"
+                                id="select-test-3"
+                                name="select-test-3"
+                                label="Choose something">
+                                <x-ui.form.option>Select with search</x-ui.form.option>
+                                <x-ui.form.option value="1">Test 1</x-ui.form.option>
+                                <x-ui.form.option value="2">Test 2</x-ui.form.option>
+                                <x-ui.form.option value="3">Test 3</x-ui.form.option>
+                            </x-libraries.choices>
+                        </x-ui.form.form-group>
+                    </x-grid.col>
 
-                        <div class="col-xl-3 col-lg-4 col-md-6 col-sm-12">
-                            <div class="form-group">
-                                <div class="choices-block">
-                                    <label class="choices-block__label" for="select-test">Choose something</label>
-                                    <select class="choices-select-3" id="select-test" name="select-test" >
-                                        <option value="">Select with search</option>
-                                        <option value="1">Test1</option>
-                                        <option value="2">Test2</option>
-                                        <option value="3">Test3</option>
-                                    </select>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="col-xl-3 col-lg-4 col-md-6 col-sm-12">
-                            <div class="form-group">
-                                <div class="choices-block">
-                                    <label class="choices-block__label" for="select-test-4">Choose something</label>
-                                    <input class="choices-select-4"
-                                           id="select-test-4" type="text" name="text" placeholder="Input with items"
-                                           value="{{ old('text') }}" required >
-                                </div>
-                            </div>
-                        </div>
-
-
+                    <x-grid.col xl="3" lg="4" md="6" sm="12">
+                        <x-ui.form.form-group>
+                            <x-libraries.choices
+                                class="choices-select-4"
+                                id="select-test-4"
+                                name="select-test-4"
+                                label="Choose something"
+                                input="true"
+                                value="{{ old('text') }}"
+                                required >
+                            </x-libraries.choices>
+                        </x-ui.form.form-group>
+                    </x-grid.col>
                 </x-grid>
             </x-ui.card>
         </section>
@@ -1001,254 +1004,270 @@
 
 
         <section class="ui__section">
-            <h2 class="title title_big title_indent_big">{{ __('Messages') }}</h2>
 
-            <div class="card">
+            <x-ui.title size="big" indent="big" >{{ __('Messages') }}</x-ui.title>
 
-                <h3 class="title title_size_small title_indent_normal">Message Info</h3>
-
-                <div class="message message_info ui__message">
+            <x-ui.card>
+                <x-ui.title tag="h3" size="small" indent="normal" >{{ __('Message Info') }}</x-ui.title>
+                <x-ui.message class="ui__message" type="info">
                     Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aperiam doloremque nemo
                     non possimus quae quas quasi. Ab atque commodi dicta eos, nam nulla numquam obcaecati quis, rem
                     veritatis vero voluptate!
-                </div>
+                </x-ui.message>
 
-                <h3 class="title title_size_small title_indent_normal">Message Danger</h3>
-                <div class="message message_danger ui__message">
+                <x-ui.title tag="h3" size="small" indent="normal" >{{ __('Message Danger') }}</x-ui.title>
+                <x-ui.message class="ui__message" type="danger">
                     Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aperiam doloremque nemo
                     non possimus quae quas quasi. Ab atque commodi dicta eos, nam nulla numquam obcaecati quis, rem
                     veritatis vero voluptate!
-                </div>
+                </x-ui.message>
 
-                <h3 class="title title_size_small title_indent_normal">Message Success</h3>
-                <div class="message message_success ui__message">
+                <x-ui.title tag="h3" size="small" indent="normal" >{{ __('Message Success') }}</x-ui.title>
+                <x-ui.message class="ui__message">
                     Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aperiam doloremque nemo
                     non possimus quae quas quasi. Ab atque commodi dicta eos, nam nulla numquam obcaecati quis, rem
                     veritatis vero voluptate!
-                </div>
+                </x-ui.message>
 
-                <h3 class="title title_size_small title_indent_normal">Message Warning</h3>
-                <div class="message message_warning ui__message">
+                <x-ui.title tag="h3" size="small" indent="normal" >{{ __('Message Warning') }}</x-ui.title>
+                <x-ui.message class="ui__message" type="warning">
                     Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aperiam doloremque nemo
                     non possimus quae quas quasi. Ab atque commodi dicta eos, nam nulla numquam obcaecati quis, rem
                     veritatis vero voluptate!
-                </div>
+                </x-ui.message>
 
-                <h3 class="title title_size_small title_indent_normal">Message Disabled</h3>
-                <div class="message message_disabled ui__message">
+                <x-ui.title tag="h3" size="small" indent="normal" >{{ __('Message Disabled') }}</x-ui.title>
+                <x-ui.message class="ui__message" type="disabled">
                     Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aperiam doloremque nemo
                     non possimus quae quas quasi. Ab atque commodi dicta eos, nam nulla numquam obcaecati quis, rem
                     veritatis vero voluptate!
-                </div>
+                </x-ui.message>
 
-                <h3 class="title title_size_small title_indent_normal">Message Info with icon</h3>
-                <div class="message message_icon message_info ui__message">
-                    <div class="message__icon message__icon_info">
+                <x-ui.title tag="h3" size="small" indent="normal" >{{ __('Message Info with icon') }}</x-ui.title>
+                <x-ui.message class="ui__message" type="info">
+                    <x-slot:icon class="message__icon_info">
                         @include('inline-svg/info', ['class' => 'message__info-icon'])
-                    </div>
+                    </x-slot:icon>
                     Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aperiam doloremque nemo
                     non possimus quae quas quasi. Ab atque commodi dicta eos, nam nulla numquam obcaecati quis, rem
                     veritatis vero voluptate!
-                </div>
+                </x-ui.message>
 
-                <h3 class="title title_size_small title_indent_normal">Message Danger with icon</h3>
-                <div class="message message_icon message_danger ui__message">
-                    <div class="message__icon message__icon_danger">
+                <x-ui.title tag="h3" size="small" indent="normal" >{{ __('Message Danger with icon') }}</x-ui.title>
+                <x-ui.message class="ui__message" type="danger">
+                    <x-slot:icon class="message__icon_danger">
                         @include('inline-svg/danger', ['class' => 'message__danger-icon'])
-                    </div>
+                    </x-slot:icon>
                     Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aperiam doloremque nemo
                     non possimus quae quas quasi. Ab atque commodi dicta eos, nam nulla numquam obcaecati quis, rem
                     veritatis vero voluptate!
-                </div>
+                </x-ui.message>
 
-                <h3 class="title title_size_small title_indent_normal">Message Success with icon</h3>
-                <div class="message message_icon message_success ui__message">
-                    <div class="message__icon message__icon_success">
+                <x-ui.title tag="h3" size="small" indent="normal" >{{ __('Message Success with icon') }}</x-ui.title>
+                <x-ui.message class="ui__message">
+                    <x-slot:icon class="message__icon_success">
                         @include('inline-svg/success', ['class' => 'message__success-icon'])
-                    </div>
+                    </x-slot:icon>
                     Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aperiam doloremque nemo
                     non possimus quae quas quasi. Ab atque commodi dicta eos, nam nulla numquam obcaecati quis, rem
                     veritatis vero voluptate!
-                </div>
+                </x-ui.message>
 
-                <h3 class="title title_size_small title_indent_normal">Message Warning with icon</h3>
-                <div class="message message_icon message_warning ui__message">
-                    <div class="message__icon message__icon_warning">
+
+                <x-ui.title tag="h3" size="small" indent="normal" >{{ __('Message Warning with icon') }}</x-ui.title>
+                <x-ui.message class="ui__message" type="warning">
+                    <x-slot:icon class="message__icon_warning">
                         @include('inline-svg/warning', ['class' => 'message__warning-icon'])
-                    </div>
+                    </x-slot:icon>
                     Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aperiam doloremque nemo
                     non possimus quae quas quasi. Ab atque commodi dicta eos, nam nulla numquam obcaecati quis, rem
                     veritatis vero voluptate!
-                </div>
+                </x-ui.message>
 
+                <x-ui.title tag="h3" size="small" indent="normal" >{{ __('Message with close') }}</x-ui.title>
+                <x-ui.message
+                    class="ui__message"
+                    type="info"
+                    close="true"
+                    x-show="show_message">
+                    <x-slot:icon class="message__icon_info">
+                        @include('inline-svg/info', ['class' => 'message__info-icon'])
+                    </x-slot:icon>
+                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aperiam doloremque nemo
+                    non possimus quae quas quasi. Ab atque commodi dicta eos, nam nulla numquam obcaecati quis, rem
+                    veritatis vero voluptate!
+                </x-ui.message>
 
-
-                <h3 class="title title_size_small title_indent_normal">Message with close</h3>
-                <div class="message__wrapper" x-data="{ show_message: true }">
-                    <div class="message message_info message_closed ui__message" x-show="show_message">
-                        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aperiam doloremque nemo
-                        non possimus quae quas quasi. Ab atque commodi dicta eos, nam nulla numquam obcaecati quis, rem
-                        veritatis vero voluptate!
-                        <div class="message__close" x-on:click="show_message = ! show_message">
-                            @include('inline-svg/close', ['class' => 'message__close-icon'])
-                        </div>
-                    </div>
-                </div>
-
-
-            </div>
-
+            </x-ui.card>
         </section>
-
     </div>
 
         <section class="ui__section">
-            <h2 class="title title_big title_indent_big">{{ __('Popover') }}</h2>
-            <div class="card">
-                <div class="grid">
-                    <div class="row">
-                        <div class="col-xl-3 col-lg-4 col-md-6 col-sm-12">
-                            <div class="ui__item-wrapper">
-                                <div class="popover popover_tail_none ui__popover">
-                                    <div class="popover__inner">
-                                        <div class="popover__title">
-                                            {{ __('Popover title') }}
-                                        </div>
-                                        <div class="popover__content">
-                                            Lorem ipsum dolor sit amet, sxcv sdf consectetur adipisicing elit
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+            <x-ui.title size="big" indent="big" >{{ __('Popover') }}</x-ui.title>
 
-                        <div class="col-xl-3 col-lg-4 col-md-6 col-sm-12">
-                            <div class="ui__item-wrapper">
-                                <div class="popover ui__popover">
-                                    <div class="popover__inner">
-                                        <div class="popover__title">
-                                            {{ __('Popover title') }}
-                                        </div>
-                                        <div class="popover__content">
-                                            Lorem ipsum dolor sit amet, sxcv sdf consectetur adipisicing elit
-                                        </div>
-                                        <div class="popover__close">
-                                            @include('inline-svg/close', ['class' => 'popover__close-icon'])
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
+            <x-ui.card>
+                <x-grid>
+                    <x-grid.col xl="3" lg="4" md="6" sm="12">
+                        <div class="ui__item-wrapper">
+                            <x-ui.popover
+                                class="ui__popover"
+                                content_class="popover__content_test"
+                                title="{{ __('Popover title') }}"
+                                tail="none">
+                                Lorem ipsum dolor sit amet, sxcv sdf consectetur adipisicing elit
+                            </x-ui.popover>
                         </div>
+                    </x-grid.col>
 
-                        <div class="col-xl-3 col-lg-4 col-md-6 col-sm-12">
-                            <div class="ui__item-wrapper">
-                                <div class="popover popover_tail_left ui__popover">
-                                    <div class="popover__inner">
-                                        <div class="popover__title">
-                                            {{ __('Popover title') }}
-                                        </div>
-                                        <div class="popover__content">
-                                            Lorem ipsum dolor sit amet, sxcv sdf consectetur adipisicing elit
-                                        </div>
-                                        <div class="popover__close">
-                                            @include('inline-svg/close', ['class' => 'popover__close-icon'])
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
+                    <x-grid.col xl="3" lg="4" md="6" sm="12">
+                        <div class="ui__item-wrapper">
+                            <x-ui.popover
+                                class="ui__popover"
+                                content_class="popover__content_test"
+                                title="{{ __('Popover title') }}">
+                                Lorem ipsum dolor sit amet, sxcv sdf consectetur adipisicing elit
+                                <x-slot:close x-on:click="show_message = ! show_message">
+                                    @include('inline-svg/close', ['class' => 'popover__close-icon'])
+                                </x-slot:close>
+                            </x-ui.popover>
                         </div>
+                    </x-grid.col>
 
-                        <div class="col-xl-3 col-lg-4 col-md-6 col-sm-12">
-                            <div class="ui__item-wrapper">
-                                <div class="popover popover_tail_right ui__popover">
-                                    <div class="popover__inner">
-                                        <div class="popover__title">
-                                            {{ __('Popover title') }}
-                                        </div>
-                                        <div class="popover__content">
-                                            Lorem ipsum dolor sit amet, sxcv sdf consectetur adipisicing elit
-                                        </div>
-                                        <div class="popover__close">
-                                            @include('inline-svg/close', ['class' => 'popover__close-icon'])
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
+                    <x-grid.col xl="3" lg="4" md="6" sm="12">
+                        <div class="ui__item-wrapper">
+                            <x-ui.popover
+                                class="ui__popover"
+                                content_class="popover__content_test"
+                                title="{{ __('Popover title') }}"
+                                tail="left">
+                                Lorem ipsum dolor sit amet, sxcv sdf consectetur adipisicing elit
+                                <x-slot:close x-on:click="show_message = ! show_message">
+                                    @include('inline-svg/close', ['class' => 'popover__close-icon'])
+                                </x-slot:close>
+                            </x-ui.popover>
                         </div>
+                    </x-grid.col>
 
-                        <div class="col-xl-3 col-lg-4 col-md-6 col-sm-12">
-                            <div class="ui__item-wrapper">
-                                <div class="popover ui__popover">
-                                    <div class="popover__inner">
-                                        <div class="popover__title">
-                                            {{ __('Popover title') }}
-                                        </div>
-                                        <div class="popover__content">
-                                            Lorem ipsum dolor sit amet, sxcv sdf consectetur adipisicing elit
-                                        </div>
-                                        <div class="popover__footer">
-                                            <div class="popover__buttons">
-                                                <button class="popover__button button button_size_small button_submit">Submit</button>
-                                                <button class="popover__button button button_size_small button_cancel">Cancel</button>
-                                            </div>
-                                        </div>
-                                        <div class="popover__button popover__close">
-                                            @include('inline-svg/close', ['class' => 'popover__close-icon'])
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
+                    <x-grid.col xl="3" lg="4" md="6" sm="12">
+                        <div class="ui__item-wrapper">
+                            <x-ui.popover
+                                class="ui__popover"
+                                content_class="popover__content_test"
+                                title="{{ __('Popover title') }}"
+                                tail="right">
+                                Lorem ipsum dolor sit amet, sxcv sdf consectetur adipisicing elit
+                                <x-slot:close x-on:click="show_message = ! show_message">
+                                    @include('inline-svg/close', ['class' => 'popover__close-icon'])
+                                </x-slot:close>
+                            </x-ui.popover>
                         </div>
+                    </x-grid.col>
 
-                        <div class="col-xl-3 col-lg-4 col-md-6 col-sm-12">
+                    <x-grid.col xl="3" lg="4" md="6" sm="12">
+                        <div class="ui__item-wrapper">
+                            <x-ui.popover
+                                class="ui__popover"
+                                content_class="popover__content_test"
+                                title="{{ __('Popover title') }}">
+                                Lorem ipsum dolor sit amet, sxcv sdf consectetur adipisicing elit
+                                <x-slot:footer>
+                                    <x-ui.popover-buttons align="center">
+                                        <x-ui.form.button class="popover__button" size="small">Submit</x-ui.form.button>
+                                        <x-ui.form.button class="popover__button" color="cancel" size="small">Cancel</x-ui.form.button>
+                                    </x-ui.popover-buttons>
+                                </x-slot:footer>
+                                <x-slot:close x-on:click="show_message = ! show_message">
+                                    @include('inline-svg/close', ['class' => 'popover__close-icon'])
+                                </x-slot:close>
+                            </x-ui.popover>
+                        </div>
+                    </x-grid.col>
+
+                    <x-grid.col xl="3" lg="4" md="6" sm="12">
+                        <div class="ui__item-wrapper">
+                            <x-ui.popover
+                                class="ui__popover"
+                                content_class="popover__content_test"
+                                title="{{ __('Popover title') }}">
+                                Lorem ipsum dolor sit amet, sxcv sdf consectetur adipisicing elit
+                                <x-slot:footer>
+                                    <x-ui.popover-buttons>
+                                        <x-ui.form.button class="popover__button" size="small">Submit</x-ui.form.button>
+                                        <x-ui.form.button class="popover__button" color="cancel" size="small">Cancel</x-ui.form.button>
+                                    </x-ui.popover-buttons>
+                                </x-slot:footer>
+                                <x-slot:close x-on:click="show_message = ! show_message">
+                                    @include('inline-svg/close', ['class' => 'popover__close-icon'])
+                                </x-slot:close>
+                            </x-ui.popover>
+                        </div>
+                    </x-grid.col>
+
+                        <x-grid.col xl="3" lg="4" md="6" sm="12">
                             <div class="ui__item-wrapper">
                                 <div class="ui__popover-test" x-data="{ testPopoverHidden: true }">
-                                    <div class="button button_submit" x-on:click.stop="testPopoverHidden = ! testPopoverHidden">Click me for popover</div>
-                                    <div class="popover popover_tail_left popover_hidden ui__popover_visible" x-on:click.outside="testPopoverHidden = true" :class="testPopoverHidden ? '' : 'popover_visible'">
-                                        <div class="popover__inner">
-                                            <div class="popover__title">
-                                                {{ __('Popover title') }}
-                                            </div>
-                                            <div class="popover__content">
-                                                Lorem ipsum dolor sit amet, sxcv sdf consectetur adipisicing elit
-                                            </div>
-                                            <div class="popover__button popover__close" x-on:click="testPopoverHidden = true">
-                                                @include('inline-svg/close', ['class' => 'popover__close-icon'])
-                                            </div>
-                                        </div>
-                                    </div>
+                                    <x-ui.form.button x-on:click.stop="testPopoverHidden = ! testPopoverHidden">Click me for popover</x-ui.form.button>
+                                    <x-ui.popover
+                                        x-on:click.outside="testPopoverHidden = true" ::class="testPopoverHidden ? '' : 'popover_visible'"
+                                        class="popover_hidden ui__popover_visible"
+                                        content_class="popover__content_test"
+                                        title="{{ __('Popover title') }}"
+                                        tail="left">
+                                        Lorem ipsum dolor sit amet, sxcv sdf consectetur adipisicing elit
+                                        <x-slot:close x-on:click="testPopoverHidden = true">
+                                            @include('inline-svg/close', ['class' => 'popover__close-icon'])
+                                        </x-slot:close>
+                                    </x-ui.popover>
                                 </div>
                             </div>
-                        </div>
+                        </x-grid.col>
 
-                        <div class="col-xl-3 col-lg-4 col-md-6 col-sm-12">
+                        <x-grid.col xl="3" lg="4" md="6" sm="12">
                             <div class="ui__item-wrapper">
-
-                                <button class="button button_info button_tooltip tooltip_trigger" data-tooltip="tooltip_1">?</button>
-                                <div id="tooltip" role="tooltip" class="tooltip tooltip_1" style="display: none">
-                                    Tooltip tooltip tooltip tooltip tooltip tooltip tooltip tooltip tooltip tooltip tooltip tooltip tooltip tooltip tooltip tooltip tooltip
-                                    <div id="arrow" class="tooltip__arrow"></div>
-                                </div>
-
-                                <button class="button button_cancel button_tooltip button_tooltip_big tooltip_trigger" data-tooltip="tooltip_2">?</button>
-                                <div id="tooltip" role="tooltip" class="tooltip tooltip_2" style="display: none">
+                                <x-ui.form.button
+                                    class="tooltip_trigger"
+                                    color="info"
+                                    tooltip="true"
+                                    data-tooltip="tooltip_1">
+                                    ?
+                                </x-ui.form.button>
+                                <x-ui.tooltip
+                                    class="tooltip_1"
+                                    id="tooltip">
                                     Big tooltip tooltip tooltip tooltip tooltip tooltip tooltip tooltip tooltip tooltip tooltip tooltip tooltip tooltip tooltip tooltip tooltip
-                                    <div id="arrow" class="tooltip__arrow"></div>
-                                </div>
+                                </x-ui.tooltip>
 
-                                <button class="button button_submit button_tooltip button_tooltip_extra_small tooltip_trigger" data-tooltip="tooltip_3">?</button>
-                                <div id="tooltip" role="tooltip" class="tooltip tooltip_3" style="display: none">
-                                    Small tooltip tooltip tooltip tooltip tooltip tooltip tooltip tooltip tooltip tooltip tooltip tooltip tooltip tooltip tooltip tooltip tooltip
-                                    <div id="arrow" class="tooltip__arrow"></div>
-                                </div>
+                                <x-ui.form.button
+                                    class="tooltip_trigger"
+                                    color="cancel"
+                                    tooltip_size="big"
+                                    tooltip="true"
+                                    data-tooltip="tooltip_2">
+                                    ?
+                                </x-ui.form.button>
+                                <x-ui.tooltip
+                                    class="tooltip_2"
+                                    id="tooltip2">
+                                    Big tooltip tooltip tooltip tooltip tooltip tooltip tooltip tooltip tooltip tooltip tooltip tooltip tooltip tooltip tooltip tooltip tooltip
+                                </x-ui.tooltip>
 
+                                <x-ui.form.button
+                                    class="tooltip_trigger"
+                                    tooltip_size="extra-small"
+                                    tooltip="true"
+                                    data-tooltip="tooltip_3">
+                                    ?
+                                </x-ui.form.button>
+                                <x-ui.tooltip
+                                    class="tooltip_3"
+                                    id="tooltip3">
+                                    Big tooltip tooltip tooltip tooltip tooltip tooltip tooltip tooltip tooltip tooltip tooltip tooltip tooltip tooltip tooltip tooltip tooltip
+                                </x-ui.tooltip>
                             </div>
-                        </div>
+                        </x-grid.col>
 
-                    </div>
-                </div>
-
-            </div>
+                </x-grid>
+            </x-ui.card>
         </section>
 
         <section class="ui__section">
