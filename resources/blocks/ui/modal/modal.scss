@@ -70,7 +70,15 @@
         padding-bottom: 8px;
     }
 
-    &__footer_buttons {
+    &__footer_buttons_right {
         text-align: right;
+    }
+
+    &__footer_buttons_left {
+        text-align: left;
+    }
+
+    &__footer_buttons_center{
+        text-align: center;
     }
 }

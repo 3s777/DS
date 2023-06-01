@@ -10,7 +10,8 @@
     'only_icon' => false,
     'only_icon_size' => false,
     'tooltip' => false,
-    'tooltip_size' => false
+    'tooltip_size' => false,
+    'indent' => false
 ])
 
 <{{ $tag }}
@@ -25,6 +26,7 @@
             'button_only_icon_'.$only_icon_size => $only_icon_size,
             'button_tooltip' => $tooltip,
             'button_tooltip_'.$tooltip_size => $tooltip_size,
+            'button_indent_'.$indent => $indent
         ])
         ->merge([
             'href' => $link,

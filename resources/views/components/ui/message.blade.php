@@ -28,7 +28,10 @@
         {{ $slot }}
 
         @if($close)
-            <div class="message__close" x-on:click="show_message = ! show_message">
+            <div
+                {{ $close->attributes->class([
+                        'message__close'
+                    ]) }}>
                 @include('inline-svg/close', ['class' => 'message__close-icon'])
             </div>
         @endif

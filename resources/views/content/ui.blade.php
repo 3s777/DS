@@ -374,7 +374,7 @@
                 <x-grid type="container">
                     <x-grid.col xl="3" lg="4" md="6" sm="12">
                         <x-ui.title size="small" >{{ __('Text input') }}</x-ui.title>
-                        <x-ui.form.form-group>
+                        <x-ui.form.group>
                             <x-ui.form.input-text
                                 :errors="$errors"
                                 placeholder="Enter here text"
@@ -384,13 +384,13 @@
                                 required
                                 autocomplete="on">
                             </x-ui.form.input-text>
-                        </x-ui.form.form-group>
+                        </x-ui.form.group>
                     </x-grid.col>
 
                     <x-grid.col xl="3" lg="4" md="6" sm="12">
                         <x-ui.title size="small" >{{ __('Text input with error') }}</x-ui.title>
 
-                        <x-ui.form.form-group>
+                        <x-ui.form.group>
                             <x-ui.form.input-text
                                 class="input-text__field_error"
                                 :errors="$errors"
@@ -401,13 +401,13 @@
                                 required
                                 autocomplete="on">
                             </x-ui.form.input-text>
-                        </x-ui.form.form-group>
+                        </x-ui.form.group>
                     </x-grid.col>
 
                     <x-grid.col xl="3" lg="4" md="6" sm="12">
                         <x-ui.title size="small" >{{ __('Datepicker') }}</x-ui.title>
 
-                        <x-ui.form.form-group>
+                        <x-ui.form.group>
                             <x-ui.form.datepicker
                                 :errors="$errors"
                                 id="date"
@@ -415,12 +415,12 @@
                                 value="{{ old('date') }}"
                                 required>
                             </x-ui.form.datepicker>
-                        </x-ui.form.form-group>
+                        </x-ui.form.group>
                     </x-grid.col>
                 </x-grid>
 
                 <x-ui.title size="small" >{{ __('Textarea') }}</x-ui.title>
-                <x-ui.form.form-group>
+                <x-ui.form.group>
                     <x-ui.form.textarea
                         :errors="$errors"
                         id="textarea"
@@ -428,15 +428,15 @@
                         placeholder="{{ __('Textarea placeholder') }}">
                         {{ old('textarea') }}
                     </x-ui.form.textarea>
-                </x-ui.form.form-group>
+                </x-ui.form.group>
 
                 <x-ui.title size="small" >{{ __('Quill') }}</x-ui.title>
-                <x-ui.form.form-group>
+                <x-ui.form.group>
                     <div id="editor">
                         <h1>Hello World!</h1>
                         <p>Some initial <strong>bold</strong> text</p>
                     </div>
-                </x-ui.form.form-group>
+                </x-ui.form.group>
 
                 {{--<div id="editorjs"></div>--}}
 
@@ -449,50 +449,50 @@
             <x-ui.card>
                 <x-grid type="container">
                         <x-grid.col xl="3" lg="4" md="6" sm="12">
-                            <x-ui.form.form-group>
+                            <x-ui.form.group>
                                 <x-ui.form.input-checkbox
                                     id="remember"
                                     name="remember"
                                     label="{{ __('Remember me') }}"
                                 >
                                 </x-ui.form.input-checkbox>
-                            </x-ui.form.form-group>
+                            </x-ui.form.group>
                         </x-grid.col>
 
                         <x-grid.col xl="3" lg="4" md="6" sm="12">
-                            <x-ui.form.form-group>
+                            <x-ui.form.group>
                                 <x-ui.form.switcher
                                     name="switcher1"
                                     label="{{ __('Switcher Off') }}"
                                 >
                                 </x-ui.form.switcher>
-                            </x-ui.form.form-group>
+                            </x-ui.form.group>
                         </x-grid.col>
 
                         <x-grid.col xl="3" lg="4" md="6" sm="12">
-                            <x-ui.form.form-group>
+                            <x-ui.form.group>
                                 <x-ui.form.switcher
                                     name="switcher2"
                                     label="{{ __('Switcher On') }}"
                                     checked
                                 >
                                 </x-ui.form.switcher>
-                            </x-ui.form.form-group>
+                            </x-ui.form.group>
                         </x-grid.col>
 
                         <x-grid.col xl="3" lg="4" md="6" sm="12">
-                            <x-ui.form.form-group>
+                            <x-ui.form.group>
                                 <x-ui.form.switcher
                                     name="switcher3"
                                     label="{{ __('Switcher Disabled') }}"
                                     disabled
                                 >
                                 </x-ui.form.switcher>
-                            </x-ui.form.form-group>
+                            </x-ui.form.group>
                         </x-grid.col>
 
                     <x-grid.col xl="3" lg="4" md="6" sm="12">
-                        <x-ui.form.form-group>
+                        <x-ui.form.group>
                             <nav>
                                 <x-ui.form.radio
                                 id="a-opt"
@@ -524,11 +524,11 @@
                                 >
                                 </x-ui.form.radio>
                             </nav>
-                        </x-ui.form.form-group>
+                        </x-ui.form.group>
                     </x-grid.col>
 
                         <x-grid.col xl="9" lg="4" md="6" sm="12">
-                            <x-ui.form.form-group>
+                            <x-ui.form.group>
                                 <x-ui.form.radio-button
                                     id="radio-1"
                                     name="radio"
@@ -565,9 +565,9 @@
                                     indent="right"
                                     label="{{ __('Disabled') }}">
                                 </x-ui.form.radio-button>
-                            </x-ui.form.form-group>
+                            </x-ui.form.group>
 
-                            <x-ui.form.form-group>
+                            <x-ui.form.group>
                                 <x-ui.form.radio-group>
 
                                     <x-ui.form.radio-button
@@ -612,7 +612,7 @@
                                     </x-ui.form.radio-button>
 
                                 </x-ui.form.radio-group>
-                            </x-ui.form.form-group>
+                            </x-ui.form.group>
                         </x-grid.col>
 
                 </x-grid>
@@ -624,7 +624,7 @@
             <x-ui.card>
                 <x-grid type="container">
                     <x-grid.col xl="3" lg="4" md="6" sm="12">
-                        <x-ui.form.form-group>
+                        <x-ui.form.group>
                             <x-libraries.choices
                                 class="choices-select-1"
                                 id="select-test"
@@ -635,11 +635,11 @@
                                 <x-ui.form.option value="2">Test 2</x-ui.form.option>
                                 <x-ui.form.option value="3">Test 3</x-ui.form.option>
                             </x-libraries.choices>
-                        </x-ui.form.form-group>
+                        </x-ui.form.group>
                     </x-grid.col>
 
                     <x-grid.col xl="3" lg="4" md="6" sm="12">
-                        <x-ui.form.form-group>
+                        <x-ui.form.group>
                             <x-libraries.choices
                                 class="choices-select-2"
                                 id="select-test-2"
@@ -650,11 +650,11 @@
                                 <x-ui.form.option value="2">Test2 test test</x-ui.form.option>
                                 <x-ui.form.option value="3">Test3 words test bigwordwidth</x-ui.form.option>
                             </x-libraries.choices>
-                        </x-ui.form.form-group>
+                        </x-ui.form.group>
                     </x-grid.col>
 
                     <x-grid.col xl="3" lg="4" md="6" sm="12">
-                        <x-ui.form.form-group>
+                        <x-ui.form.group>
                             <x-libraries.choices
                                 class="choices-select-3"
                                 id="select-test-3"
@@ -665,11 +665,11 @@
                                 <x-ui.form.option value="2">Test 2</x-ui.form.option>
                                 <x-ui.form.option value="3">Test 3</x-ui.form.option>
                             </x-libraries.choices>
-                        </x-ui.form.form-group>
+                        </x-ui.form.group>
                     </x-grid.col>
 
                     <x-grid.col xl="3" lg="4" md="6" sm="12">
-                        <x-ui.form.form-group>
+                        <x-ui.form.group>
                             <x-libraries.choices
                                 class="choices-select-4"
                                 id="select-test-4"
@@ -679,7 +679,7 @@
                                 value="{{ old('text') }}"
                                 required >
                             </x-libraries.choices>
-                        </x-ui.form.form-group>
+                        </x-ui.form.group>
                     </x-grid.col>
                 </x-grid>
             </x-ui.card>
@@ -690,57 +690,57 @@
             <x-ui.card>
                 <x-grid type="container" class="grid grid_container">
                     <x-grid.col xl="2" lg="4" md="6" sm="12">
-                        <x-ui.form.form-group>
+                        <x-ui.form.group>
                             <x-ui.form.button
                                 full_width="true">
                                 {{ __('Submit') }}
                             </x-ui.form.button>
-                        </x-ui.form.form-group>
+                        </x-ui.form.group>
                     </x-grid.col>
 
                     <x-grid.col xl="2" lg="4" md="6" sm="12">
-                        <x-ui.form.form-group>
+                        <x-ui.form.group>
                             <x-ui.form.button
                                 full_width="true"
                                 color="cancel">
                                 {{ __('Cancel') }}
                             </x-ui.form.button>
-                        </x-ui.form.form-group>
+                        </x-ui.form.group>
                     </x-grid.col>
 
                     <x-grid.col xl="2" lg="4" md="6" sm="12">
-                        <x-ui.form.form-group>
+                        <x-ui.form.group>
                             <x-ui.form.button
                                 full_width="true"
                                 color="disabled"
                                 disabled>
                                 {{ __('Disabled') }}
                             </x-ui.form.button>
-                        </x-ui.form.form-group>
+                        </x-ui.form.group>
                     </x-grid.col>
 
                     <x-grid.col xl="2" lg="4" md="6" sm="12">
-                        <x-ui.form.form-group>
+                        <x-ui.form.group>
                             <x-ui.form.button
                                 full_width="true"
                                 color="light">
                                 {{ __('Light') }}
                             </x-ui.form.button>
-                        </x-ui.form.form-group>
+                        </x-ui.form.group>
                     </x-grid.col>
 
                     <x-grid.col xl="2" lg="4" md="6" sm="12">
-                        <x-ui.form.form-group>
+                        <x-ui.form.group>
                             <x-ui.form.button
                                 full_width="true"
                                 color="dark">
                                 {{ __('Dark') }}
                             </x-ui.form.button>
-                        </x-ui.form.form-group>
+                        </x-ui.form.group>
                     </x-grid.col>
 
                     <x-grid.col xl="2" lg="4" md="6" sm="12">
-                        <x-ui.form.form-group>
+                        <x-ui.form.group>
                             <x-ui.form.button
                                 full_width="true">
                                 <x-slot:icon class="button__icon-wrapper_submit">
@@ -748,11 +748,11 @@
                                 </x-slot:icon>
                                 {{ __('With icon') }}
                             </x-ui.form.button>
-                        </x-ui.form.form-group>
+                        </x-ui.form.group>
                     </x-grid.col>
 
                     <x-grid.col xl="2" lg="4" md="6" sm="12">
-                        <x-ui.form.form-group>
+                        <x-ui.form.group>
                             <x-ui.form.button
                                 full_width="true"
                                 color="cancel">
@@ -761,11 +761,11 @@
                                 </x-slot:icon>
                                 {{ __('With icon') }}
                             </x-ui.form.button>
-                        </x-ui.form.form-group>
+                        </x-ui.form.group>
                     </x-grid.col>
 
                     <x-grid.col xl="2" lg="4" md="6" sm="12">
-                        <x-ui.form.form-group>
+                        <x-ui.form.group>
                             <x-ui.form.button
                                 full_width="true"
                                 color="dark">
@@ -774,67 +774,67 @@
                                 </x-slot:icon>
                                 {{ __('Dark') }}
                             </x-ui.form.button>
-                        </x-ui.form.form-group>
+                        </x-ui.form.group>
                     </x-grid.col>
 
                     <x-grid.col xl="2" lg="4" md="6" sm="12">
-                        <x-ui.form.form-group>
+                        <x-ui.form.group>
                             <x-ui.form.button
                                 full_width="true">
                                 {{ __('Normal size') }}
                             </x-ui.form.button>
-                        </x-ui.form.form-group>
+                        </x-ui.form.group>
                     </x-grid.col>
 
                     <x-grid.col xl="6" lg="4" md="6" sm="12">
-                        <x-ui.form.form-group>
+                        <x-ui.form.group>
                             <x-ui.form.button
                                 full_width="true">
                                 {{ __('Full width button') }}
                             </x-ui.form.button>
-                        </x-ui.form.form-group>
+                        </x-ui.form.group>
                     </x-grid.col>
 
                     <x-grid.col xl="3" lg="4" md="6" sm="12">
-                        <x-ui.form.form-group>
+                        <x-ui.form.group>
                             <x-ui.form.button>
                                 {{ __('Content width button') }}
                             </x-ui.form.button>
-                        </x-ui.form.form-group>
+                        </x-ui.form.group>
                     </x-grid.col>
 
                     <x-grid.col xl="3" lg="4" md="6" sm="12">
-                        <x-ui.form.form-group>
+                        <x-ui.form.group>
                             <x-ui.form.button>
                                 <x-slot:icon class="button__icon-wrapper_submit">
                                     @include('inline-svg/success', ['class' => 'button__submit-icon'])
                                 </x-slot:icon>
                                 {{ __('Content width button') }}
                             </x-ui.form.button>
-                        </x-ui.form.form-group>
+                        </x-ui.form.group>
                     </x-grid.col>
 
                     <x-grid.col xl="2" lg="4" md="6" sm="12">
-                        <x-ui.form.form-group>
+                        <x-ui.form.group>
                             <x-ui.form.button
                                 size="small">
                                 {{ __('Small size') }}
                             </x-ui.form.button>
-                        </x-ui.form.form-group>
+                        </x-ui.form.group>
                     </x-grid.col>
 
                     <x-grid.col xl="2" lg="4" md="6" sm="12">
-                        <x-ui.form.form-group>
+                        <x-ui.form.group>
                             <x-ui.form.button
                                 full_width="true"
                                 size="big">
                                 {{ __('Big size') }}
                             </x-ui.form.button>
-                        </x-ui.form.form-group>
+                        </x-ui.form.group>
                     </x-grid.col>
 
                     <x-grid.col xl="2" lg="4" md="6" sm="12">
-                        <x-ui.form.form-group>
+                        <x-ui.form.group>
                             <x-ui.form.button
                                 full_width="true"
                                 color="cancel"
@@ -845,21 +845,21 @@
                                 </x-slot:icon>
                                 {{ __('Big size') }}
                             </x-ui.form.button>
-                        </x-ui.form.form-group>
+                        </x-ui.form.group>
                     </x-grid.col>
 
                     <x-grid.col xl="3" lg="4" md="6" sm="12">
-                        <x-ui.form.form-group>
+                        <x-ui.form.group>
                             <x-ui.form.button
                                 full_width="true"
                                 size="large">
                                 {{ __('Large size') }}
                             </x-ui.form.button>
-                        </x-ui.form.form-group>
+                        </x-ui.form.group>
                     </x-grid.col>
 
                     <x-grid.col xl="3" lg="4" md="6" sm="12">
-                        <x-ui.form.form-group>
+                        <x-ui.form.group>
                             <x-ui.form.button
                                 tag="a"
                                 link="/"
@@ -872,11 +872,11 @@
                                 </x-slot:icon>
                                 {{ __('Large size') }}
                             </x-ui.form.button>
-                        </x-ui.form.form-group>
+                        </x-ui.form.group>
                     </x-grid.col>
 
                     <x-grid.col xl="6" lg="6" md="6" sm="12">
-                        <x-ui.form.form-group class="ui__form-group_buttons">
+                        <x-ui.form.group class="ui__form-group_buttons">
 
                             <x-ui.form.button
                                 color="info"
@@ -994,7 +994,7 @@
                                 ?
                             </x-ui.form.button>
 
-                        </x-ui.form.form-group>
+                        </x-ui.form.group>
                     </x-grid.col>
 
                 </x-grid>
@@ -1088,7 +1088,6 @@
                 <x-ui.message
                     class="ui__message"
                     type="info"
-                    close="true"
                     x-show="show_message">
                     <x-slot:icon class="message__icon_info">
                         @include('inline-svg/info', ['class' => 'message__info-icon'])
@@ -1096,6 +1095,7 @@
                     Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aperiam doloremque nemo
                     non possimus quae quas quasi. Ab atque commodi dicta eos, nam nulla numquam obcaecati quis, rem
                     veritatis vero voluptate!
+                    <x-slot:close x-on:click="show_message = ! show_message"></x-slot:close>
                 </x-ui.message>
 
             </x-ui.card>
@@ -1106,7 +1106,7 @@
             <x-ui.title size="big" indent="big" >{{ __('Popover') }}</x-ui.title>
 
             <x-ui.card>
-                <x-grid>
+                <x-grid type="container">
                     <x-grid.col xl="3" lg="4" md="6" sm="12">
                         <div class="ui__item-wrapper">
                             <x-ui.popover
@@ -1171,10 +1171,10 @@
                                 title="{{ __('Popover title') }}">
                                 Lorem ipsum dolor sit amet, sxcv sdf consectetur adipisicing elit
                                 <x-slot:footer>
-                                    <x-ui.popover-buttons align="center">
+                                    <x-ui.popover.buttons align="center">
                                         <x-ui.form.button class="popover__button" size="small">Submit</x-ui.form.button>
                                         <x-ui.form.button class="popover__button" color="cancel" size="small">Cancel</x-ui.form.button>
-                                    </x-ui.popover-buttons>
+                                    </x-ui.popover.buttons>
                                 </x-slot:footer>
                                 <x-slot:close x-on:click="show_message = ! show_message">
                                     @include('inline-svg/close', ['class' => 'popover__close-icon'])
@@ -1191,10 +1191,10 @@
                                 title="{{ __('Popover title') }}">
                                 Lorem ipsum dolor sit amet, sxcv sdf consectetur adipisicing elit
                                 <x-slot:footer>
-                                    <x-ui.popover-buttons>
+                                    <x-ui.popover.buttons>
                                         <x-ui.form.button class="popover__button" size="small">Submit</x-ui.form.button>
                                         <x-ui.form.button class="popover__button" color="cancel" size="small">Cancel</x-ui.form.button>
-                                    </x-ui.popover-buttons>
+                                    </x-ui.popover.buttons>
                                 </x-slot:footer>
                                 <x-slot:close x-on:click="show_message = ! show_message">
                                     @include('inline-svg/close', ['class' => 'popover__close-icon'])
@@ -1271,119 +1271,154 @@
         </section>
 
         <section class="ui__section">
-            <h2 class="title title_big title_indent_big">{{ __('Tabs') }}</h2>
-            <div class="card">
-                <div class="grid grid_container">
-                    <div class="row">
-                        <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12">
-                            <div class="tabs">
-                                <ul class="tabs__header">
-                                    <li class="tabs__header-link">First</li>
-                                    <li class="tabs__header-link">Second</li>
-                                    <li class="tabs__header-link">Third</li>
-                                </ul>
-                                <ul class="tabs__content">
-                                    <li class="tabs__content-block post">
+            <x-ui.title size="big" indent="big" >{{ __('Tabs') }}</x-ui.title>
+            <x-ui.card>
+                <x-grid type="container">
+
+                        <x-grid.col xl="6" lg="6" md="6" sm="12">
+                            <x-ui.tabs>
+                                <x-ui.tabs.header>
+                                    <x-ui.tabs.link>First</x-ui.tabs.link>
+                                    <x-ui.tabs.link>Second</x-ui.tabs.link>
+                                    <x-ui.tabs.link>Third</x-ui.tabs.link>
+                                </x-ui.tabs.header>
+                                <x-ui.tabs.content>
+                                    <x-ui.tabs.content-block class="post">
                                         <h2 class="title title_indent_normal title_size_normal">First tab content</h2>
                                         <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Doloribus inventore itaque nemo veniam veritatis! Accusantium alias aperiam assumenda aut deserunt doloremque, fugit iusto libero, nostrum porro possimus quisquam? Iure, nisi!</p>
-                                    </li>
-                                    <li class="tabs__content-block">
+                                    </x-ui.tabs.content-block>
+                                    <x-ui.tabs.content-block>
                                         <h2 class="title title_indent_normal title_size_normal">Second tab content</h2>
                                         <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Doloribus inventore itaque nemo veniam veritatis! Accusantium alias.</p>
-                                    </li>
-                                    <li class="tabs__content-block">
+                                    </x-ui.tabs.content-block>
+                                    <x-ui.tabs.content-block>
                                         <h2 class="title title_indent_normal title_size_normal">Third tab content</h2>
                                         <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Doloribus inventore itaque nemo veniam veritatis! Accusantium alias aperiam assumenda aut deserunt doloremque, fugit iusto libero, nostrum porro possimus quisquam? Iure, nisi!</p>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
+                                    </x-ui.tabs.content-block>
+                                </x-ui.tabs.content>
+                            </x-ui.tabs>
+                        </x-grid.col>
 
-                        <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12">
-                            <div class="tabs">
-                                <ul class="tabs__header">
-                                    <li class="tabs__header-link tabs__header-link_button button button_dark">First</li>
-                                    <li class="tabs__header-link tabs__header-link_button button button_dark tabs__header-link_active">Second</li>
-                                    <li class="tabs__header-link tabs__header-link_button button button_dark">Third</li>
-                                </ul>
-                                <ul class="tabs__content">
-                                    <li class="tabs__content-block">
+                        <x-grid.col xl="6" lg="6" md="6" sm="12">
+                            <x-ui.tabs>
+                                <x-ui.tabs.header>
+                                    <x-ui.form.button
+                                        class="tabs__header-link tabs__header-link_button"
+                                        color="dark">
+                                        First
+                                    </x-ui.form.button>
+                                    <x-ui.tabs.link
+                                        button="true"
+                                        color="dark"
+                                        active="true">
+                                        Second
+                                    </x-ui.tabs.link>
+                                    <x-ui.tabs.link
+                                        button="true"
+                                        color="dark">
+                                        Third
+                                    </x-ui.tabs.link>
+                                </x-ui.tabs.header>
+                                <x-ui.tabs.content>
+                                    <x-ui.tabs.content-block>
                                         <h2 class="title title_indent_normal title_size_normal">First button tab content</h2>
                                         <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Doloribus inventore itaque nemo veniam veritatis! Accusantium alias aperiam assumenda aut deserunt doloremque, fugit iusto libero, nostrum porro possimus quisquam? Iure, nisi!</p>
-                                    </li>
-                                    <li class="tabs__content-block tabs__content-block_active">
+                                    </x-ui.tabs.content-block>
+                                    <x-ui.tabs.content-block active="true">
                                         <h2 class="title title_indent_normal title_size_normal">Buttons second tab</h2>
                                         <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Doloribus inventore itaque nemo veniam veritatis! Accusantium alias.</p>
-                                    </li>
-                                    <li class="tabs__content-block">
+                                    </x-ui.tabs.content-block>
+                                    <x-ui.tabs.content-block>
                                         <h2 class="title title_indent_normal title_size_normal">Third button tab content</h2>
                                         <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Doloribus inventore itaque nemo veniam veritatis! Accusantium alias aperiam assumenda aut deserunt doloremque, fugit iusto libero, nostrum porro possimus quisquam? Iure, nisi!</p>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-
-                </div>
-            </div>
+                                    </x-ui.tabs.content-block>
+                                </x-ui.tabs.content>
+                            </x-ui.tabs>
+                        </x-grid.col>
+                </x-grid>
+            </x-ui.card>
         </section>
 
         <section class="ui__section">
-            <h2 class="title title_big title_indent_big">{{ __('Badges') }}</h2>
-            <div class="card">
-                <div class="grid grid_container">
-                    <div class="row">
-                        <div class="col-xl-2 col-lg-6 col-md-6 col-sm-12">
-                            <div class="form-group">
-                                <div class="button button_submit ui__button_badge">
-                                    Badge round
-                                    <div class="badge badge_standard_size_small ui__badge_standard"></div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-xl-2 col-lg-6 col-md-6 col-sm-12">
-                            <div class="form-group">
-                                <div class="button button_submit ui__button_badge">
-                                    Badge round
-                                    <div class="badge badge_standard ui__badge_standard"></div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-xl-2 col-lg-6 col-md-6 col-sm-12">
-                            <div class="form-group">
-                                <div class="button button_submit ui__button_badge">
-                                    Badge round
-                                    <div class="badge badge_standard_size_big ui__badge_standard"></div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-xl-2 col-lg-6 col-md-6 col-sm-12">
-                            <div class="form-group">
-                                <div class="button button_dark ui__button_badge">
-                                    Badge round
-                                    <div class="badge badge_standard badge_success ui__badge_standard"></div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-xl-2 col-lg-6 col-md-6 col-sm-12">
-                            <div class="form-group">
-                                <div class="button button_dark ui__button_badge">
-                                    Badge round
-                                    <div class="badge badge_number badge_success ui__badge_standard">12</div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-xl-2 col-lg-6 col-md-6 col-sm-12">
-                            <div class="form-group">
-                                <div class="button button_dark ui__button_badge">
-                                    Badge round
-                                    <div class="badge badge_number ui__badge_standard">5</div>
-                                </div>
-                            </div>
-                        </div>
+            <x-ui.title size="big" indent="big" >{{ __('Badges') }}</x-ui.title>
+            <x-ui.card>
+                <x-grid type="container">
 
-                        <div class="col-xl-3 col-lg-6 col-md-6 col-sm-12">
-                            <div class="form-group">
+                        <x-grid.col xl="2" lg="6" md="6" sm="12">
+                            <x-ui.form.group>
+                                <x-ui.form.button class="ui__button_badge">
+                                    Badge round
+                                    <x-ui.badge
+                                        class="ui__badge_standard"
+                                        size="small">
+                                    </x-ui.badge>
+                                </x-ui.form.button>
+                            </x-ui.form.group>
+                        </x-grid.col>
+                        <x-grid.col xl="2" lg="6" md="6" sm="12">
+                            <x-ui.form.group>
+                                <x-ui.form.button class="ui__button_badge">
+                                    Badge round
+                                    <x-ui.badge
+                                        class="ui__badge_standard">
+                                    </x-ui.badge>
+                                </x-ui.form.button>
+                            </x-ui.form.group>
+                        </x-grid.col>
+                        <x-grid.col xl="2" lg="6" md="6" sm="12">
+                            <x-ui.form.group>
+                                <x-ui.form.button class="ui__button_badge">
+                                    Badge round
+                                    <x-ui.badge
+                                        class="ui__badge_standard"
+                                        size="big">
+                                    </x-ui.badge>
+                                </x-ui.form.button>
+                            </x-ui.form.group>
+                        </x-grid.col>
+
+                        <x-grid.col xl="2" lg="6" md="6" sm="12">
+                            <x-ui.form.group>
+                                <x-ui.form.button class="ui__button_badge" color="dark">
+                                    Badge round
+                                    <x-ui.badge
+                                        class="ui__badge_standard"
+                                        color="success"
+                                        size="big">
+                                    </x-ui.badge>
+                                </x-ui.form.button>
+                            </x-ui.form.group>
+                        </x-grid.col>
+
+                        <x-grid.col xl="2" lg="6" md="6" sm="12">
+                            <x-ui.form.group>
+                                <x-ui.form.button class="ui__button_badge" color="dark">
+                                    Badge number
+                                    <x-ui.badge
+                                        class="ui__badge_standard"
+                                        type="number"
+                                        color="success">
+                                        12
+                                    </x-ui.badge>
+                                </x-ui.form.button>
+                            </x-ui.form.group>
+                        </x-grid.col>
+
+                        <x-grid.col xl="2" lg="6" md="6" sm="12">
+                            <x-ui.form.group>
+                                <x-ui.form.button class="ui__button_badge" color="dark">
+                                    Badge number
+                                    <x-ui.badge
+                                        class="ui__badge_standard"
+                                        type="number">
+                                        5
+                                    </x-ui.badge>
+                                </x-ui.form.button>
+                            </x-ui.form.group>
+                        </x-grid.col>
+
+                        <x-grid.col xl="3" lg="6" md="6" sm="12">
+                            <x-ui.form.group>
                                 <div class="image image_standard ui__image_badge">
                                     <picture>
                                         <source
@@ -1415,41 +1450,69 @@
                                         />
                                     </picture>
                                     <div class="image__caption">Image description</div>
-                                    <div class="badge badge_ribbon badge_ribbon_left">Ribbon badge</div>
+                                    <x-ui.badge
+                                        type="ribbon"
+                                        ribbon_align="left">
+                                        Ribbon badge
+                                    </x-ui.badge>
                                 </div>
-                            </div>
-                        </div>
+                            </x-ui.form.group>
+                        </x-grid.col>
 
-
-                        <div class="col-xl-3 col-lg-6 col-md-6 col-sm-12">
-                            <div class="form-group">
+                        <x-grid.col xl="3" lg="6" md="6" sm="12">
+                            <x-ui.form.group>
                                 <div class="image image_standard ui__badge_placeholder">
-                                    <div class="badge badge_bookmark"><span class="badge__bookmark-wrapper">new</span></div>
-                                    <div class="badge badge_ribbon badge_success badge_ribbon_right badge_ribbon_right_danger">Ribbon badge</div>
-                                    <div class="badge badge_ribbon badge_info badge_ribbon_right badge_ribbon_right_danger ui__ribbon_test_1">Ribbon badge</div>
-                                    <div class="badge badge_ribbon badge_warning badge_ribbon_right badge_ribbon_right_danger ui__ribbon_test_2">Ribbon badge</div>
+                                    <x-ui.badge type="bookmark">
+                                        new
+                                    </x-ui.badge>
+                                    <x-ui.badge
+                                        type="ribbon"
+                                        ribbon_align="right"
+                                        color="success">
+                                        Ribbon badge
+                                    </x-ui.badge>
+                                    <x-ui.badge
+                                        class="ui__ribbon_test_1"
+                                        type="ribbon"
+                                        ribbon_align="right"
+                                        color="info">
+                                        Ribbon badge
+                                    </x-ui.badge>
+                                    <x-ui.badge
+                                        class="ui__ribbon_test_2"
+                                        type="ribbon"
+                                        ribbon_align="right"
+                                        color="warning">
+                                        Ribbon badge
+                                    </x-ui.badge>
                                 </div>
-                            </div>
-                        </div>
+                            </x-ui.form.group>
+                        </x-grid.col>
 
-                        <div class="col-xl-3 col-lg-6 col-md-6 col-sm-12">
-                            <div class="form-group">
+                        <x-grid.col xl="3" lg="6" md="6" sm="12">
+                            <x-ui.form.group>
                                 <div class="image image_standard ui__badge_placeholder">
-                                    <div class="badge badge_bookmark">@include('inline-svg/star', ['class' => 'badge__star'])</div>
-                                    <div class="badge badge_success badge_bookmark badge_bookmark_right">new</div>
+                                    <x-ui.badge type="bookmark">
+                                        @include('inline-svg/star', ['class' => 'badge__star'])
+                                    </x-ui.badge>
+                                    <x-ui.badge
+                                        color="success"
+                                        type="bookmark"
+                                        bookmark_align="right">
+                                        new
+                                    </x-ui.badge>
                                 </div>
-                            </div>
-                        </div>
+                            </x-ui.form.group>
+                        </x-grid.col>
 
-
-                    </div>
-                </div>
-            </div>
+                </x-grid>
+            </x-ui.card>
         </section>
 
         <section class="ui__section">
-            <h2 class="title title_big title_indent_big">{{ __('Tabulator') }}</h2>
-            <div class="card">
+            <x-ui.title size="big" indent="big" >{{ __('Tabulator') }}</x-ui.title>
+
+            <x-ui.card>
                 <table id="example-table">
                     <thead>
                     <tr>
@@ -1640,181 +1703,265 @@
                     </tbody>
                 </table>
 
-            </div>
+            </x-ui.card>
         </section>
 
         <section class="ui__section">
-            <h2 class="title title_big title_indent_big">{{ __('Modal') }}</h2>
-            <div class="card">
-                <div class="grid">
-                    <div class="row">
-                        <div class="col-xl-3 col-lg-6 col-md-6 col-sm-12">
+            <x-ui.title size="big" indent="big" >{{ __('Modal') }}</x-ui.title>
+
+            <x-ui.card>
+                <x-grid type="container">
+
+                        <x-grid.col xl="3" lg="6" md="6" sm="12">
                             <div x-data="{modalHide: true}" x-on:keydown.escape.window="modalHide = true">
-                                <div class="form-group">
-                                    <button x-on:click.stop="modalHide = ! modalHide" class="button button_submit button_full_width">Open Extra Small Modal</button>
-                                </div>
-                                <section  class="modal" :class="modalHide ? '' : 'modal_show'">
-                                    <div  x-on:click.outside="modalHide = true" class="modal__content modal__content_size_extra_small">
+                                <x-ui.form.group>
+                                    <x-ui.form.button
+                                        x-on:click.stop="modalHide = ! modalHide"
+                                        full_width="true">
+                                        Open Extra Small Modal
+                                    </x-ui.form.button>
+                                </x-ui.form.group>
+                                <x-ui.modal tag="section" ::class="modalHide ? '' : 'modal_show'">
+                                    <x-ui.modal.content
+                                        x-on:click.outside="modalHide = true"
+                                        size="extra_small">
 
-                                        <div x-on:click="modalHide = true" class="modal__close">
-                                            @include('inline-svg/close', ['class' => 'modal__close-icon'])
-                                        </div>
+                                        <x-ui.modal.close x-on:click="modalHide = true">
+                                        </x-ui.modal.close>
 
-                                        <div class="modal__header">
-                                            <div class="title title_size_big title_indent_normal">Header</div>
-                                        </div>
-                                        <div class="modal__body">
+                                        <x-ui.modal.header>
+                                            <x-ui.title indent="normal">Header</x-ui.title>
+                                        </x-ui.modal.header>
+
+                                        <x-ui.modal.body>
                                             Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ab alias animi aperiam architecto commodi, cum earum fugit hic ipsum maxime neque quasi quia recusandae reiciendis rem. Facilis nemo quia sunt!
-                                        </div>
-                                        <div class="modal__footer modal__footer_buttons">
-                                            <div class="button button_submit button_only_icon button_only_icon button_indent_right">
-                                                <div class="button__icon-wrapper">
+                                        </x-ui.modal.body>
+
+                                        <x-ui.modal.footer align_buttons="center">
+                                            <x-ui.form.button
+                                                only_icon="true"
+                                                indent="right">
                                                     @include('inline-svg/success', ['class' => 'button__icon button__icon_big button__edit-icon'])
-                                                </div>
-                                            </div>
+                                            </x-ui.form.button>
 
-                                            <div x-on:click="modalHide = true" class="button button_cancel button_only_icon button_only_icon">
-                                                <div class="button__icon-wrapper">
-                                                    @include('inline-svg/cancel', ['class' => 'button__icon button__icon_big button__close-icon'])
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </section>
+                                            <x-ui.form.button
+                                                x-on:click="modalHide = true"
+                                                color="cancel"
+                                                only_icon="true"
+                                                indent="right">
+                                                @include('inline-svg/cancel', ['class' => 'button__icon button__icon_big button__close-icon'])
+                                            </x-ui.form.button>
+                                        </x-ui.modal.footer>
+                                    </x-ui.modal.content>
+                                </x-ui.modal>
                             </div>
-                        </div>
+                        </x-grid.col>
 
-                        <div class="col-xl-3 col-lg-6 col-md-6 col-sm-12">
+                        <x-grid.col xl="3" lg="6" md="6" sm="12">
                             <div x-data="{modalHide: true}" x-on:keydown.escape.window="modalHide = true">
-                                <div class="form-group">
-                                    <button x-on:click.stop="modalHide = ! modalHide" class="button button_info button_full_width">Open Small Modal</button>
-                                </div>
-                                <section  class="modal" :class="modalHide ? '' : 'modal_show'">
-                                    <div  x-on:click.outside="modalHide = true" class="modal__content modal__content_size_small">
+                                <x-ui.form.group>
+                                    <x-ui.form.button
+                                        x-on:click.stop="modalHide = ! modalHide"
+                                        color="info"
+                                        full_width="true">
+                                        Open Small Modal
+                                    </x-ui.form.button>
+                                </x-ui.form.group>
+                                <x-ui.modal tag="section" ::class="modalHide ? '' : 'modal_show'">
+                                    <x-ui.modal.content
+                                        x-on:click.outside="modalHide = true"
+                                        size="small">
 
-                                        <div x-on:click="modalHide = true" class="modal__close">
-                                            @include('inline-svg/close', ['class' => 'modal__close-icon'])
-                                        </div>
+                                        <x-ui.modal.close x-on:click="modalHide = true">
+                                        </x-ui.modal.close>
 
-                                        <div class="modal__header">
-                                            <div class="title title_indent_normal">Header</div>
-                                        </div>
-                                        <div class="modal__body">
+                                        <x-ui.modal.header>
+                                            <x-ui.title
+                                                size="normal"
+                                                indent="normal">
+                                                Header
+                                            </x-ui.title>
+                                        </x-ui.modal.header>
+
+                                        <x-ui.modal.body>
                                             Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ab alias animi aperiam architecto commodi, cum earum fugit hic ipsum maxime neque quasi quia recusandae reiciendis rem. Facilis nemo quia sunt!
-                                        </div>
-                                        <div class="modal__footer modal__footer_buttons">
-                                            <div class="button button_submit button button_indent_right">Submit</div>
-                                            <div x-on:click="modalHide = true" class="button button_cancel">Cancel</div>
-                                        </div>
-                                    </div>
-                                </section>
+                                        </x-ui.modal.body>
+
+                                        <x-ui.modal.footer align_buttons="right">
+                                            <x-ui.form.button>
+                                                Submit
+                                            </x-ui.form.button>
+
+                                            <x-ui.form.button
+                                                x-on:click="modalHide = true"
+                                                color="cancel"
+                                                indent="left">
+                                                Cancel
+                                            </x-ui.form.button>
+                                        </x-ui.modal.footer>
+                                    </x-ui.modal.content>
+                                </x-ui.modal>
                             </div>
+                        </x-grid.col>
+
+                    <x-grid.col xl="3" lg="6" md="6" sm="12">
+                        <div x-data="{modalHide: true}" x-on:keydown.escape.window="modalHide = true">
+                            <x-ui.form.group>
+                                <x-ui.form.button
+                                    x-on:click.stop="modalHide = ! modalHide"
+                                    color="warning"
+                                    full_width="true">
+                                    Open Normal Modal
+                                </x-ui.form.button>
+                            </x-ui.form.group>
+                            <x-ui.modal tag="section" ::class="modalHide ? '' : 'modal_show'">
+                                <x-ui.modal.content
+                                    x-on:click.outside="modalHide = true"
+                                    size="normal">
+
+                                    <x-ui.modal.close x-on:click="modalHide = true">
+                                    </x-ui.modal.close>
+
+                                    <x-ui.modal.header>
+                                        <x-ui.title
+                                            size="normal"
+                                            indent="normal">
+                                            Header
+                                        </x-ui.title>
+                                    </x-ui.modal.header>
+
+                                    <x-ui.modal.body>
+                                        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ab alias animi aperiam architecto commodi, cum earum fugit hic ipsum maxime neque quasi quia recusandae reiciendis rem. Facilis nemo quia sunt!
+                                    </x-ui.modal.body>
+
+                                    <x-ui.modal.footer align_buttons="right">
+                                        <x-ui.form.button>
+                                            Submit
+                                        </x-ui.form.button>
+
+                                        <x-ui.form.button
+                                            x-on:click="modalHide = true"
+                                            color="cancel"
+                                            indent="left">
+                                            Cancel
+                                        </x-ui.form.button>
+                                    </x-ui.modal.footer>
+                                </x-ui.modal.content>
+                            </x-ui.modal>
                         </div>
+                    </x-grid.col>
 
-                        <div class="col-xl-3 col-lg-6 col-md-6 col-sm-12">
-                            <div x-data="{modalHide: true}" x-on:keydown.escape.window="modalHide = true">
-                                <div class="form-group">
-                                    <button x-on:click.stop="modalHide = ! modalHide" class="button button_warning button_full_width">Open Normal Modal</button>
-                                </div>
-                                <section  class="modal" :class="modalHide ? '' : 'modal_show'">
-                                    <div  x-on:click.outside="modalHide = true" class="modal__content modal__content_size_normal">
+                    <x-grid.col xl="3" lg="6" md="6" sm="12">
+                        <div x-data="{modalHide: true}" x-on:keydown.escape.window="modalHide = true">
+                            <x-ui.form.group>
+                                <x-ui.form.button
+                                    x-on:click.stop="modalHide = ! modalHide"
+                                    full_width="true">
+                                    Open Big Modal
+                                </x-ui.form.button>
+                            </x-ui.form.group>
+                            <x-ui.modal tag="section" ::class="modalHide ? '' : 'modal_show'">
+                                <x-ui.modal.content
+                                    x-on:click.outside="modalHide = true"
+                                    size="big">
 
-                                        <div x-on:click="modalHide = true" class="modal__close">
-                                            @include('inline-svg/close', ['class' => 'modal__close-icon'])
-                                        </div>
+                                    <x-ui.modal.close x-on:click="modalHide = true">
+                                    </x-ui.modal.close>
 
-                                        <div class="modal__header">
-                                            <div class="title title_indent_normal">Header</div>
-                                        </div>
-                                        <div class="modal__body">
-                                            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ab alias animi aperiam architecto commodi, cum earum fugit hic ipsum maxime neque quasi quia recusandae reiciendis rem. Facilis nemo quia sunt!
-                                        </div>
-                                        <div class="modal__footer modal__footer_buttons">
-                                            <div class="button button_submit button button_indent_right">Submit</div>
-                                            <div x-on:click="modalHide = true" class="button button_cancel">Cancel</div>
-                                        </div>
-                                    </div>
-                                </section>
-                            </div>
+                                    <x-ui.modal.header>
+                                        <x-ui.title
+                                            size="normal"
+                                            indent="normal">
+                                            Header
+                                        </x-ui.title>
+                                    </x-ui.modal.header>
+
+                                    <x-ui.modal.body>
+                                        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ab alias animi aperiam architecto commodi, cum earum fugit hic ipsum maxime neque quasi quia recusandae reiciendis rem. Facilis nemo quia sunt!
+                                    </x-ui.modal.body>
+
+                                    <x-ui.modal.footer>
+                                        Footer Text
+                                    </x-ui.modal.footer>
+                                </x-ui.modal.content>
+                            </x-ui.modal>
                         </div>
+                    </x-grid.col>
 
-                        <div class="col-xl-3 col-lg-6 col-md-6 col-sm-12">
-                            <div x-data="{modalHide: true}" x-on:keydown.escape.window="modalHide = true">
-                                <div class="form-group">
-                                    <button x-on:click.stop="modalHide = ! modalHide" class="button button_submit button_full_width">Open Big Modal</button>
-                                </div>
-                                <section  class="modal" :class="modalHide ? '' : 'modal_show'">
-                                    <div  x-on:click.outside="modalHide = true" class="modal__content modal__content_size_big">
+                    <x-grid.col xl="3" lg="6" md="6" sm="12">
+                        <div x-data="{modalHide: true}" x-on:keydown.escape.window="modalHide = true">
+                            <x-ui.form.group>
+                                <x-ui.form.button
+                                    x-on:click.stop="modalHide = ! modalHide"
+                                    color="warning"
+                                    full_width="true">
+                                    Open Large Modal
+                                </x-ui.form.button>
+                            </x-ui.form.group>
+                            <x-ui.modal tag="section" ::class="modalHide ? '' : 'modal_show'">
+                                <x-ui.modal.content
+                                    x-on:click.outside="modalHide = true"
+                                    size="large">
 
-                                        <div x-on:click="modalHide = true" class="modal__close">
-                                            @include('inline-svg/close', ['class' => 'modal__close-icon'])
-                                        </div>
+                                    <x-ui.modal.close x-on:click="modalHide = true">
+                                    </x-ui.modal.close>
 
-                                        <div class="modal__header">
-                                            <div class="title title_indent_normal">Header</div>
-                                        </div>
-                                        <div class="modal__body">
-                                            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ab alias animi aperiam architecto commodi, cum earum fugit hic ipsum maxime neque quasi quia recusandae reiciendis rem. Facilis nemo quia sunt!
-                                        </div>
-                                        <div class="modal__footer modal__footer_buttons">
-                                            <div class="button button_submit button button_indent_right">Submit</div>
-                                            <div x-on:click="modalHide = true" class="button button_cancel">Cancel</div>
-                                        </div>
-                                    </div>
-                                </section>
-                            </div>
+                                    <x-ui.modal.header>
+                                        <x-ui.title
+                                            size="normal"
+                                            indent="normal">
+                                            Header
+                                        </x-ui.title>
+                                    </x-ui.modal.header>
+
+                                    <x-ui.modal.body>
+                                        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ab alias animi aperiam architecto commodi, cum earum fugit hic ipsum maxime neque quasi quia recusandae reiciendis rem. Facilis nemo quia sunt!
+                                    </x-ui.modal.body>
+
+                                    <x-ui.modal.footer align_buttons="left">
+                                        <x-ui.form.button
+                                            indent="right">
+                                            Submit
+                                        </x-ui.form.button>
+
+                                        <x-ui.form.button
+                                            x-on:click="modalHide = true"
+                                            color="cancel">
+                                            Cancel
+                                        </x-ui.form.button>
+                                    </x-ui.modal.footer>
+                                </x-ui.modal.content>
+                            </x-ui.modal>
                         </div>
+                    </x-grid.col>
 
-                        <div class="col-xl-3 col-lg-6 col-md-6 col-sm-12">
-                            <div x-data="{modalHide: true}" x-on:keydown.escape.window="modalHide = true">
-                                <div class="form-group">
-                                    <button x-on:click.stop="modalHide = ! modalHide" class="button button_cancel button_full_width">Open Large Modal</button>
-                                </div>
-                                <section  class="modal" :class="modalHide ? '' : 'modal_show'">
-                                    <div  x-on:click.outside="modalHide = true" class="modal__content modal__content_size_large">
 
-                                        <div x-on:click="modalHide = true" class="modal__close">
-                                            @include('inline-svg/close', ['class' => 'modal__close-icon'])
-                                        </div>
-
-                                        <div class="modal__header">
-                                            <div class="title title_indent_normal">Header</div>
-                                        </div>
-                                        <div class="modal__body">
-                                            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ab alias animi aperiam architecto commodi, cum earum fugit hic ipsum maxime neque quasi quia recusandae reiciendis rem. Facilis nemo quia sunt!
-                                        </div>
-                                        <div class="modal__footer modal__footer_buttons">
-                                            <div class="button button_submit button button_indent_right">Submit</div>
-                                            <div x-on:click="modalHide = true" class="button button_cancel">Cancel</div>
-                                        </div>
-                                    </div>
-                                </section>
-                            </div>
-                        </div>
-
-                        <div class="col-xl-3 col-lg-6 col-md-6 col-sm-12">
+                        <x-grid.col xl="3" lg="6" md="6" sm="12">
                             <div x-data="{toastHide: true}">
-                                <div class="form-group">
-                                    <button x-on:click.stop="toastHide = ! toastHide; setTimeout(() => toastHide = true, 3000)" class="button button_info button_full_width">Show Toast</button>
-                                </div>
-                                <div  class="toast" :class="toastHide ? '' : 'toast_show'" >
-                                    <div class="message message_info message_closed ui__message">
+                                <x-ui.form.group >
+                                    <x-ui.form.button
+                                        x-on:click.stop="toastHide = ! toastHide; setTimeout(() => toastHide = true, 3000)"
+                                        color="info"
+                                        full_width="true">
+                                        Show Toast
+                                    </x-ui.form.button>
+                                </x-ui.form.group>
+                                <x-ui.toast ::class="toastHide ? '' : 'toast_show'" >
+                                    <x-ui.message
+                                        class="ui__message"
+                                        type="info"
+                                        close="true">
                                         Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aperiam doloremque nemo
                                         non possimus quae quas quasi. Ab atque commodi dicta eos, nam nulla numquam obcaecati quis, rem
                                         veritatis vero voluptate!
-                                        <div class="message__close" x-on:click="toastHide = true">
-                                            @include('inline-svg/close', ['class' => 'message__close-icon'])
-                                        </div>
-                                    </div>
-                                </div>
+                                        <x-slot:close x-on:click="toastHide = true">
+                                        </x-slot:close>
+                                    </x-ui.message>
+                                </x-ui.toast>
                             </div>
-                        </div>
-
-                    </div>
-                </div>
-
-
-            </div>
+                        </x-grid.col>
+                </x-grid>
+            </x-ui.card>
         </section>
 
         <section class="ui__section">
@@ -2134,7 +2281,7 @@
         var table = new Tabulator("#example-table", {
             layout:"fitColumns",
             rowHeight:'auto',
-            footerElement:"<button class='button button_submit'>Custom Button</button>",
+            footerElement:"<button class='button button_submit'>Custom Button</button class='button button_submit'>",
             responsiveLayout:"collapse",  //fit columns to width of table (optional)
             columns:[
                 {
