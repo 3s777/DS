@@ -3,8 +3,8 @@
         <div class="header__inner">
             <div class="logo header__logo">
                 <a class="logo__link" href="{{ url('/') }}">
-                    @include('inline-svg/site-icon', ['class' => 'header__site-icon'])
-                    @include('inline-svg/site-name', ['class' => 'header__site-name'])
+                    <x-svg.logo.site-icon class="header__site-icon"></x-svg.logo.site-icon>
+                    <x-svg.logo.site-name class="header__site-name-icon"></x-svg.logo.site-name>
                 </a>
             </div>
 
@@ -64,7 +64,7 @@
                     <div class="site-settings">
                         <div class="site-settings__inner" x-data="{ siteSettingsHidden: true }">
                             <div class="site-settings__button" x-on:click.stop="siteSettingsHidden = ! siteSettingsHidden" title="{{ __('Settings') }}">
-                                @include('inline-svg/settings', ['class' => 'site-settings__icon'])
+                                <x-svg.settings class="site-settings__icon"></x-svg.settings>
                             </div>
                             <div class="popover popover_tail_right site-settings__popover" x-on:click.outside="siteSettingsHidden = true" :class="siteSettingsHidden ? '' : 'site-settings__popover_visible'">
                                 <div class="popover__inner">
@@ -75,17 +75,17 @@
                                         <nav class="site-settings__flags">
                                             <a href="{{ route(Route::currentRouteName(), ['locale' => 'en']) }}">
                                                 <div class="site-settings__flag @if(app()->getLocale() == 'en') site-settings__flag_active @endif">
-                                                    @include('inline-svg/en', ['class' => 'site-settings__flag-icon'])
+                                                    <x-svg.flags.en class="site-settings__flag-icon"></x-svg.flags.en>
                                                 </div>
                                             </a>
                                             <a href="{{ route(Route::currentRouteName(), ['locale' => 'ru']) }}">
                                                 <div class="site-settings__flag @if(app()->getLocale() == 'ru') site-settings__flag_active @endif">
-                                                    @include('inline-svg/ru', ['class' => 'site-settings__flag-icon'])
+                                                    <x-svg.flags.ru class="site-settings__flag-icon"></x-svg.flags.ru>
                                                 </div>
                                             </a>
                                             <a href="{{ route(Route::currentRouteName(), ['locale' => 'ua']) }}">
                                                 <div class="site-settings__flag @if(app()->getLocale() == 'ua') site-settings__flag_active @endif">
-                                                    @include('inline-svg/ua', ['class' => 'site-settings__flag-icon'])
+                                                    <x-svg.flags.ua class="site-settings__flag-icon"></x-svg.flags.ua>
                                                 </div>
                                             </a>
                                         </nav>

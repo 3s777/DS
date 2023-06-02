@@ -32,7 +32,7 @@
                 {{ $close->attributes->class([
                         'message__close'
                     ]) }}>
-                @include('inline-svg/close', ['class' => 'message__close-icon'])
+                <x-svg.close class="message__close-icon"></x-svg.close>
             </div>
         @endif
     </{{ $tag }}>
