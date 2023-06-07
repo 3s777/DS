@@ -1,0 +1,23 @@
+.tag {
+    display: inline-block;
+    padding: 5px 15px;
+    font-size: rem(14);
+    text-decoration: none;
+    background-color: $base-light-like-transparent;
+    border-radius: $small-border-radius;
+    transition: $base-transition;
+    cursor: pointer;
+
+    &:hover {
+        background-color: $additional-light;
+    }
+
+    &_standard {
+        margin-right: 4px;
+        margin-bottom: 4px;
+    }
+
+    &_color_dark {
+        background-color: $base-dark;
+    }
+}

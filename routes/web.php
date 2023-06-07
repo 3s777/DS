@@ -18,4 +18,8 @@ Route::prefix('{locale}')->whereIn('locale', config('app.available_locales'))->g
         return view('content.ui');
     })->name('ui');
 
+    Route::get('/game-carrier', function () {
+        return view('content.game-carrier');
+    })->name('game-carrier');
+
 });
