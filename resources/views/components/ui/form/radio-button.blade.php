@@ -5,6 +5,7 @@
     'value' => false,
     'color' => false,
     'indent' => false,
+    'size' => false,
     'label_class' => false,
     'checked' => false
 ])
@@ -28,6 +29,7 @@
         tag="label"
         class="radio-button__label {{ $label_class }}"
         color="{{ $color }}"
+        size="{{ $size }}"
         for="{{ $id }}">
         {{ $label }}
     </x-ui.form.button>

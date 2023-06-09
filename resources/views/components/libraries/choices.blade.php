@@ -3,11 +3,15 @@
     'name',
     'label' => false,
     'input' => false,
-    'value' => false
+    'value' => false,
+    'show_label' => true,
+    'wrapper_class' => false,
 ])
 
-<div class="choices-block">
-    <label class="choices-block__label" for="{{ $id }}">{{ $label }}</label>
+<div class="choices-block {{ $wrapper_class }}">
+    @if($show_label)
+        <label class="choices-block__label" for="{{ $id }}">{{ $label }}</label>
+    @endif
     @if($input)
         <input
             {{ $attributes->class([

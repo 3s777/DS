@@ -3,12 +3,14 @@
     padding: 32px;
     background-color: $base-light-transparent;
     border-radius: $big-border-radius;
+
+    &__header {
+        margin-bottom: 12px;
+    }
+
+    &_indent_bottom {
+        margin-bottom: 32px;
+    }
 }
 
-.card__header {
-    margin-bottom: 12px;
-}
 
-.card__title {
-
-}

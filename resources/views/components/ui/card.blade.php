@@ -2,10 +2,14 @@
     'header' => false,
     'footer' => false,
     'tag' => 'div',
-    'title' => false
+    'title' => false,
+    'indent_bottom' => false
 ])
 
-<{{ $tag }} {{ $attributes->class(['card']) }}>
+<{{ $tag }} {{ $attributes->class([
+        'card',
+        'card_indent_bottom' => $indent_bottom
+    ]) }}>
     @if($title)
         <header class="card__header">
             <h2 class="title card__title">
@@ -19,7 +23,6 @@
             {{ $header }}
         </header>
     @endif
-
 
     <div class="card__body">
         {{ $slot }}

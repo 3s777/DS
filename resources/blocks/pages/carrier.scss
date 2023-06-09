@@ -1,0 +1,39 @@
+.carrier__add-buttons {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 24px;
+}
+
+.carrier__add-select {
+    min-width: 200px;
+
+    .choices[data-type*=select-one] .choices__inner {
+        min-height: 44px;
+        padding: 10px 20px;
+    }
+}
+
+.carrier__add-rating {
+
+    .star-rating__icon {
+        width: 100%;
+        height: auto;
+    }
+
+    .star-rating__label {
+        width: 9%;
+        padding: 0 2px;
+    }
+
+    .star-rating__icon_none {
+        width: 100%;
+        height: auto;
+    }
+
+    .star-rating__label_none {
+        width: 10%;
+        padding-left: 0;
+        padding-right: 4px;
+    }
+}

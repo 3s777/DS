@@ -34,7 +34,7 @@
 }
 
 .button_size_big {
-    font-size: rem(24);
+    font-size: rem(22);
 }
 
 .button_size_large {
@@ -84,8 +84,8 @@
 }
 
 .button__submit-icon {
-    width: 27px;
-    height: 27px;
+    width: 24px;
+    height: 24px;
     fill: $opposite-main;
 }
 
@@ -116,10 +116,11 @@
 }
 
 .button__cancel-icon {
-    width: 27px;
-    height: 27px;
+    width: 28px;
+    height: 28px;
     fill: $opposite-main;
 }
+
 
 .button_only_icon {
     display: inline-flex;
@@ -172,6 +173,22 @@
 .button__icon_large {
     width: 40px;
     height: 40px;
+}
+
+.button__dollar-icon {
+    padding: 5px;
+}
+
+.button__star-icon {
+    padding: 5px;
+}
+
+.button__whishlist-icon {
+    padding: 3px;
+}
+
+.button__edit-icon {
+    padding: 1px;
 }
 
 .button_disabled {

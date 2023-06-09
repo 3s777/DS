@@ -47,6 +47,23 @@
     }
 }
 
+
+.choices-block_color_success {
+    .choices__inner {
+        background-color: $success-main;
+    }
+
+    .choices__placeholder {
+        opacity: 1;
+    }
+
+    .choices__list--dropdown {
+        .choices__placeholder {
+            opacity: .3;
+        }
+    }
+}
+
 .choices[data-type*=select-multiple] {
     cursor: pointer;
 
