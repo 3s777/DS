@@ -18,48 +18,123 @@
         <x-grid type="container">
             <x-grid.col lg="6" xl="6" md="6" sm="12">
                 <x-ui.card indent_bottom="true">
-                    <a href="{{ asset('/storage/test.jpg') }}" data-fancybox data-caption="Single image">
-                        <picture class="image">
-                            <source
-                                type="image/webp"
-                                srcset="
-                                        {{ asset('/storage/test-300.webp') }} 300w,
-                                        {{ asset('/storage/test-650.webp') }} 650w,
-                                        {{ asset('/storage/test-800.webp') }} 800w,
-                                        {{ asset('/storage/test-1200.webp') }} 1200w,
-                                        {{ asset('/storage/test-1500.webp') }} 1500w,
-                                        {{ asset('/storage/test.webp') }} 3000w,
-                                    "
-                                sizes="
-                                        (max-width: 700px) 280px,
-                                        (max-width: 1000px) 740px,
-                                        (max-width: 1900px) 1500px,
-                                        100vw
-                                    "
-                            />
+                    <x-libraries.swiper type="full" class="carrier__swiper-main">
+
+                        <x-libraries.swiper.slide >
                             <img
+                                class="swiper__img"
                                 src="{{ asset('/storage/test.jpg') }}"
-                                srcset="
-                                        {{ asset('/storage/test-300.jpg') }} 300w,
-                                        {{ asset('/storage/test-650.jpg') }} 650w,
-                                        {{ asset('/storage/test-800.jpg') }} 800w,
-                                        {{ asset('/storage/test-1200.jpg') }} 1200w,
-                                        {{ asset('/storage/test-1jpg') }} 1500w,
-                                        {{ asset('/storage/test.jpg') }} 3000w,
-                                    "
-                                sizes="
-                                        (max-width: 700px) 280px,
-                                        (max-width: 1000px) 740px,
-                                        (max-width: 1900px) 1500px,
-                                        100vw
-                                    "
                                 loading="lazy"
                                 decoding="async"
                                 alt="Test image"
                                 title="Test image"
                             />
-                        </picture>
-                    </a>
+                        </x-libraries.swiper.slide>
+                        <x-libraries.swiper.slide class="ui__test-swiper-slide">
+                            <img
+                                class="swiper__img"
+                                src="{{ asset('/storage/test-2.jpg') }}"
+                                loading="lazy"
+                                decoding="async"
+                                alt="Test image"
+                                title="Test image"
+                            />
+                        </x-libraries.swiper.slide>
+                        <x-libraries.swiper.slide class="ui__test-swiper-slide">
+                            <img
+                                class="swiper__img"
+                                src="{{ asset('/storage/test-3.jpg') }}"
+                                loading="lazy"
+                                decoding="async"
+                                alt="Test image"
+                                title="Test image"
+                            />
+                        </x-libraries.swiper.slide>
+                        <x-libraries.swiper.slide class="ui__test-swiper-slide">
+                            <img
+                                class="swiper__img"
+                                src="{{ asset('/storage/test-4.jpg') }}"
+                                loading="lazy"
+                                decoding="async"
+                                alt="Test image"
+                                title="Test image"
+                            />
+                        </x-libraries.swiper.slide>
+                        <x-libraries.swiper.slide class="ui__test-swiper-slide">
+                            <img
+                                class="swiper__img"
+                                src="{{ asset('/storage/test-5.jpg') }}"
+                                loading="lazy"
+                                decoding="async"
+                                alt="Test image"
+                                title="Test image"
+                            />
+                        </x-libraries.swiper.slide>
+
+                        <x-slot:pagination class="swiper-pagination_2"></x-slot:pagination>
+                        <x-slot:navigation></x-slot:navigation>
+
+                    </x-libraries.swiper>
+
+                    <x-libraries.swiper class="swiper">
+
+                        <x-libraries.swiper.slide>
+                            <img
+                                class="swiper__img"
+                                src="{{ asset('/storage/test.jpg') }}"
+                                loading="lazy"
+                                decoding="async"
+                                alt="Test image"
+                                title="Test image"
+                            />
+                        </x-libraries.swiper.slide>
+                        <x-libraries.swiper.slide>
+                            <img
+                                class="swiper__img"
+                                src="{{ asset('/storage/test-2.jpg') }}"
+                                loading="lazy"
+                                decoding="async"
+                                alt="Test image"
+                                title="Test image"
+                            />
+                        </x-libraries.swiper.slide>
+                        <x-libraries.swiper.slide>
+                            <img
+                                class="swiper__img"
+                                src="{{ asset('/storage/test-3.jpg') }}"
+                                loading="lazy"
+                                decoding="async"
+                                alt="Test image"
+                                title="Test image"
+                            />
+                        </x-libraries.swiper.slide>
+                        <x-libraries.swiper.slide>
+                            <img
+                                class="swiper__img"
+                                src="{{ asset('/storage/test-4.jpg') }}"
+                                loading="lazy"
+                                decoding="async"
+                                alt="Test image"
+                                title="Test image"
+                            />
+                        </x-libraries.swiper.slide>
+                        <x-libraries.swiper.slide>
+                            <img
+                                class="swiper__img"
+                                src="{{ asset('/storage/test-5.jpg') }}"
+                                loading="lazy"
+                                decoding="async"
+                                alt="Test image"
+                                title="Test image"
+                            />
+                        </x-libraries.swiper.slide>
+
+                        <x-slot:pagination class="swiper-pagination_1"></x-slot:pagination>
+                        <x-slot:navigation>1</x-slot:navigation>
+
+                    </x-libraries.swiper>
+
+
                 </x-ui.card>
             </x-grid.col>
             <x-grid.col lg="6" xl="6" md="6" sm="12">
@@ -148,7 +223,7 @@
                             </x-ui.form.button>
                         </div>
                         <div class="carrier__add-form">
-                            <x-ui.title indent="small">Добавить в коллекцию</x-ui.title>
+                            <x-ui.title indent="normal">Добавить в коллекцию</x-ui.title>
                             <x-grid type="container">
                                 <x-grid.col lg="6" xl="6" md="6" sm="12">
                                     <x-ui.form.group>
@@ -188,20 +263,24 @@
                                         </x-ui.form.input-text>
                                     </x-ui.form.group>
                                 </x-grid.col>
+
                                 <x-grid.col lg="6" xl="6" md="6" sm="12">
                                     <x-ui.form.group>
-                                        <x-ui.form.input-text
-                                            :errors="$errors"
-                                            placeholder="Цена покупки"
-                                            id="text"
-                                            name="text"
-                                            value="{{ old('text') }}"
-                                            type="number"
-                                            required
-                                            autocomplete="on">
-                                        </x-ui.form.input-text>
+                                        <x-libraries.choices
+                                            class="choices-select-state"
+                                            id="select-test-state"
+                                            name="select-test-state"
+                                            label="Состояние">
+                                            <x-ui.form.option value="1">Б/У</x-ui.form.option>
+                                            <x-ui.form.option value="2">Новый (силд)</x-ui.form.option>
+                                            <x-ui.form.option value="3">Перепак</x-ui.form.option>
+                                            <x-ui.form.option value="4">Промо</x-ui.form.option>
+                                            <x-ui.form.option value="5">Кастом</x-ui.form.option>
+                                        </x-libraries.choices>
                                     </x-ui.form.group>
                                 </x-grid.col>
+
+
                                 <x-grid.col xl="6" lg="6" md="12" sm="12">
                                     <x-ui.form.group>
                                         <x-ui.star-rating
@@ -227,8 +306,6 @@
 
                                 <x-grid.col xl="6" lg="6" md="12" sm="12">
                                     <x-ui.form.group>
-
-
                                         <x-ui.star-rating
                                             class="carrier__add-rating"
                                             title="Коробка"
@@ -237,6 +314,158 @@
                                     </x-ui.form.group>
                                 </x-grid.col>
 
+                                <x-grid.col xl="6" lg="6" md="12" sm="12">
+                                    <x-ui.form.group>
+                                        <x-ui.star-rating
+                                            class="carrier__add-rating"
+                                            title="Обложка"
+                                            name="cover">
+                                        </x-ui.star-rating>
+                                    </x-ui.form.group>
+                                </x-grid.col>
+
+                                <x-grid.col lg="6" xl="6" md="6" sm="12">
+                                    <x-ui.form.group>
+                                        <x-ui.form.input-text
+                                            :errors="$errors"
+                                            placeholder="Цена покупки"
+                                            id="text"
+                                            name="text"
+                                            value="{{ old('text') }}"
+                                            type="number"
+                                            required
+                                            autocomplete="on">
+                                        </x-ui.form.input-text>
+                                    </x-ui.form.group>
+                                </x-grid.col>
+
+                                <x-grid.col lg="6" xl="6" md="6" sm="12">
+                                    <x-ui.form.group>
+                                        <x-ui.form.input-text
+                                            :errors="$errors"
+                                            placeholder="Место покупки"
+                                            id="text"
+                                            name="text"
+                                            value="{{ old('text') }}"
+                                            required
+                                            autocomplete="on">
+                                        </x-ui.form.input-text>
+                                    </x-ui.form.group>
+                                </x-grid.col>
+
+
+                                <x-grid.col xl="6" lg="6" md="6" sm="12">
+                                    <x-ui.form.group>
+                                        <x-ui.form.datepicker
+                                            :errors="$errors"
+                                            id="date"
+                                            name="date"
+                                            placeholder="Дата покупки"
+                                            value="{{ old('date') }}"
+                                            required>
+                                        </x-ui.form.datepicker>
+                                    </x-ui.form.group>
+                                </x-grid.col>
+
+                                <x-grid.col lg="6" xl="6" md="6" sm="12">
+                                    <x-ui.form.group>
+                                        <x-libraries.choices
+                                            class="choices-select-box"
+                                            id="select-test-box"
+                                            name="select-test-box"
+                                            label="Тип бокса">
+                                            <x-ui.form.option value="">Не указывать</x-ui.form.option>
+                                            <x-ui.form.option value="1">Red Label</x-ui.form.option>
+                                            <x-ui.form.option value="2">Black Label</x-ui.form.option>
+                                            <x-ui.form.option value="3">Black Label Мягкий</x-ui.form.option>
+                                            <x-ui.form.option value="4">Промо</x-ui.form.option>
+                                            <x-ui.form.option value="5">Blue Ray</x-ui.form.option>
+                                        </x-libraries.choices>
+                                    </x-ui.form.group>
+                                </x-grid.col>
+
+                                <x-grid.col lg="6" xl="6" md="6" sm="12">
+                                    <x-ui.form.group>
+                                        <x-ui.form.input-text
+                                            :errors="$errors"
+                                            placeholder="Свое поле"
+                                            id="text"
+                                            name="text"
+                                            value="{{ old('text') }}"
+                                            required
+                                            autocomplete="on">
+                                        </x-ui.form.input-text>
+                                    </x-ui.form.group>
+                                </x-grid.col>
+
+                                <x-grid.col lg="6" xl="6" md="6" sm="12">
+                                    <x-ui.form.group>
+                                        <x-ui.form.input-text
+                                            :errors="$errors"
+                                            placeholder="Свое поле"
+                                            id="text"
+                                            name="text"
+                                            value="{{ old('text') }}"
+                                            required
+                                            autocomplete="on">
+                                        </x-ui.form.input-text>
+                                    </x-ui.form.group>
+                                </x-grid.col>
+
+                                <x-grid.col lg="6" xl="6" md="6" sm="12">
+                                    <x-ui.form.group>
+                                        <x-ui.form.switcher
+                                            name="switcher1"
+                                            label="{{ __('Игра пройдена') }}"
+                                        >
+                                        </x-ui.form.switcher>
+                                    </x-ui.form.group>
+                                </x-grid.col>
+
+                                <x-grid.col lg="6" xl="6" md="6" sm="12">
+                                    <x-ui.form.group>
+                                        <x-ui.form.switcher
+                                            name="switcher2"
+                                            label="{{ __('Наличие цифровой версии') }}"
+                                        >
+                                        </x-ui.form.switcher>
+                                    </x-ui.form.group>
+                                </x-grid.col>
+
+                                <x-grid.col xl="6" lg="6" md="6" sm="12">
+                                    <x-ui.form.group>
+                                        <x-libraries.filepond
+                                            class="filepond1"
+                                            name="filepond"
+                                            accept="image/png, image/jpeg, image/gif"
+                                            multiple>
+                                        </x-libraries.filepond>
+                                    </x-ui.form.group>
+                                </x-grid.col>
+                                <x-grid.col xl="6" lg="6" md="6" sm="12">
+                                    <x-ui.form.group>
+                                        <x-libraries.filepond
+                                            class="filepond2"
+                                            name="filepond"
+                                            multiple
+                                            data-allow-reorder="true"
+                                            data-max-file-size="3MB"
+                                            data-max-files="3">
+                                        </x-libraries.filepond>
+                                    </x-ui.form.group>
+                                </x-grid.col>
+
+                                <x-grid.col lg="12" xl="12" md="12" sm="12">
+                                    <x-ui.form.group>
+                                        <x-ui.form.textarea
+                                            :errors="$errors"
+                                            id="textarea"
+                                            name="textarea"
+                                            placeholder="{{ __('Заметки и коментарии') }}">
+                                            {{ old('textarea') }}
+                                        </x-ui.form.textarea>
+                                    </x-ui.form.group>
+                                </x-grid.col>
 
                             </x-grid>
 
@@ -315,6 +544,7 @@
         const choices1 = new Choices(element1, {
             itemSelectText: '',
             searchEnabled: false,
+            shouldSort: false,
             noResultsText: '{{ __('Не найдено') }}',
             noChoicesText: '{{ __('Больше ничего нет') }}',
         });
@@ -323,6 +553,25 @@
         const choices2 = new Choices(element2, {
             itemSelectText: '',
             searchEnabled: false,
+            shouldSort: false,
+            noResultsText: '{{ __('Не найдено') }}',
+            noChoicesText: '{{ __('Больше ничего нет') }}',
+        });
+
+        const element3 = document.querySelector('.choices-select-state');
+        const choices3 = new Choices(element3, {
+            itemSelectText: '',
+            searchEnabled: false,
+            shouldSort: false,
+            noResultsText: '{{ __('Не найдено') }}',
+            noChoicesText: '{{ __('Больше ничего нет') }}',
+        });
+
+        const element4 = document.querySelector('.choices-select-box');
+        const choices4 = new Choices(element4, {
+            itemSelectText: '',
+            searchEnabled: false,
+            shouldSort: false,
             noResultsText: '{{ __('Не найдено') }}',
             noChoicesText: '{{ __('Больше ничего нет') }}',
         });
@@ -337,8 +586,84 @@
             console.log(value);
         };
 
+        const inputElement2 = document.querySelector('.filepond2');
+
+        const pond2 = FilePond.create(inputElement2, {
+            credits: false,
+            labelIdle: '<span class="filepond--label-action"> {{ __('Загрузите') }}</span> {{ __('дополнительные фото') }}',
+            labelMaxFileSizeExceeded: 'Файл слишком большой',
+            labelMaxFileSize: 'Максимальный размер {filesize}',
+            labelFileLoading: 'Загрузка',
+            labelTapToCancel: 'отменить',
+            labelFileWaitingForSize: 'подождите'
+        });
+
+        FilePond.registerPlugin(
+            FilePondPluginFileValidateType,
+            FilePondPluginImagePreview,
+            FilePondPluginImageExifOrientation,
+            FilePondPluginFileValidateSize,
+            FilePondPluginImageCrop,
+            FilePondPluginImageResize,
+            FilePondPluginImageTransform,
+        );
+
+        const inputElement = document.querySelector('.filepond1');
+        const pond = FilePond.create(inputElement, {
+            credits: false,
+            labelIdle: '<span class="filepond--label-action"> {{ __('Загрузите') }}</span> {{ __('главное фото') }} '
+        });
 
 
+        const swiperFull = new Swiper('.swiper__full', {
+            // Optional parameters
+            direction: 'horizontal',
+            slidesPerView: 1,
+
+            // If we need pagination
+            pagination: {
+                el: '.swiper-pagination_2',
+                clickable: true
+            },
+
+            // Navigation arrows
+            navigation: {
+                nextEl: '.swiper-button-next',
+                prevEl: '.swiper-button-prev',
+            },
+
+
+        });
+
+        const swiper = new Swiper('.swiper__carousel', {
+            // Optional parameters
+            direction: 'horizontal',
+            spaceBetween: 16,
+            slidesPerView: 1,
+
+            // If we need pagination
+            pagination: {
+                el: '.swiper-pagination_1',
+                clickable: true
+            },
+
+            // Navigation arrows
+            navigation: {
+                nextEl: '.swiper-button-next',
+                prevEl: '.swiper-button-prev',
+            },
+
+            breakpoints: {
+                768: {
+                    slidesPerView: 3,
+                },
+                576: {
+                    slidesPerView: 2,
+                },
+            }
+
+
+        });
     </script>
 
 

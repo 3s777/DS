@@ -2,7 +2,7 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    margin-bottom: 24px;
+    margin-bottom: 28px;
 }
 
 .carrier__add-select {
@@ -36,4 +36,8 @@
         padding-left: 0;
         padding-right: 4px;
     }
+}
+
+.carrier__swiper-main {
+    margin-bottom: 24px;
 }

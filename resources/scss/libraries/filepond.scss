@@ -5,12 +5,12 @@
 
 /* the text color of the drop label*/
 .filepond--drop-label {
-    color: $font-main;
+    color: $font-main-50;
 }
 
 /* underline color for "Browse" button */
 .filepond--label-action {
-    text-decoration-color: $font-main;
+    text-decoration-color: $font-main-50;
 }
 
 /* the background color of the filepond drop area */
@@ -69,7 +69,7 @@
 /* bordered drop area */
 .filepond--panel-root {
     border: 0;
-    background-color: $base-dark;
+    background-color: $base-dark-like-transparent;
 }
 
 .filepond--drop-label.filepond--drop-label label {
@@ -83,6 +83,10 @@
 
 .filepond--image-preview-overlay-idle {
     display: none;
+}
+
+.filepond--root {
+    margin-bottom: 0;
 }
 
 .filepond--root .filepond--drop-label {
