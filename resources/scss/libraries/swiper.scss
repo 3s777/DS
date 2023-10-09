@@ -19,6 +19,7 @@
 
     &-button-next,
     &-button-prev {
+        top: var(--swiper-navigation-top-offset,45%);
         width: auto;
         height: auto;
         padding:10px 15px;

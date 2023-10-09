@@ -1,0 +1,36 @@
+.like {
+    display: flex;
+    align-items: center;
+    background: none;
+    cursor: pointer;
+    transition: $base-transition;
+
+    &:hover {
+        color: $additional-main;
+    }
+
+    &:hover &__icon {
+        fill: $additional-main;
+    }
+
+    &_active {
+        .like__icon {
+            fill: $danger-main;
+        }
+    }
+
+    &_size_small {
+        .like__icon {
+            width: 18px;
+            height: 18px;
+            margin-right: 4px;
+        }
+    }
+
+    &__icon {
+        fill: $opposite-main;
+        transition: $base-transition;
+    }
+}
+
+
