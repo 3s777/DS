@@ -15,7 +15,7 @@ Route::prefix('{locale}')->whereIn('locale', config('app.available_locales'))->g
     })->middleware(['auth'])->name('dashboard');
 
     Route::get('/ui', function () {
-        return view('content.ui');
+        return view('content.ui.index');
     })->name('ui');
 
     Route::get('/game-carrier', function () {
