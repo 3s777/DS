@@ -1,3 +1,13 @@
+.ql-editor {
+    font-size: rem(16);
+}
+
 .ql-toolbar.ql-snow {
     background-color: $opposite-main-50;
+}
+
+.ql-editor.ql-blank::before {
+    color: $opposite-main-20;
+    font-style: normal;
+    font-size: rem(16);
 }

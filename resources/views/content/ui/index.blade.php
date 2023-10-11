@@ -121,6 +121,14 @@
             theme: 'snow'
         });
 
+        var quill = new Quill('#new-comment', {
+            modules: {
+                toolbar: toolbarOptions
+            },
+            placeholder: 'Leave your comment',
+            theme: 'snow'
+        });
+
         Fancybox.bind("[data-fancybox]", {
             // Your custom options
         });
