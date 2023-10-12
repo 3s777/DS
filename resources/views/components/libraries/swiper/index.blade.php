@@ -1,4 +1,5 @@
 @props([
+    'id' => false,
     'type' => 'carousel',
     'pagination' => false,
     'navigation' => false
@@ -9,7 +10,7 @@
             'swiper',
         ])
     }}>
-    <div class="swiper__{{ $type }}">
+    <div class="swiper__{{ $type }}" id="{{ $id }}">
         <div class="swiper-wrapper">
             {{ $slot }}
         </div>

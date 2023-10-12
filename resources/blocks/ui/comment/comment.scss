@@ -1,7 +1,7 @@
 .comment {
     display: flex;
     margin-bottom: 16px;
-    padding: 24px 18px;
+    padding: 16px;
     background-color: $base-dark-like-transparent;
     border-radius: $border-radius;
 
@@ -31,16 +31,9 @@
 
     &__avatar {
         flex-shrink: 0;
-        width: 80px;
-        height: 80px;
+        width: 70px;
+        height: 70px;
         margin-right: 16px;
-        border-radius: 50%;
-        overflow: hidden;
-
-        img {
-            max-width: 100%;
-            height: auto;
-        }
     }
 
     &__content {

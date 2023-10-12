@@ -32,4 +32,9 @@
     &-button-prev:after {
         font-size: 1.4rem;
     }
+
+    &-button-next.swiper-button-disabled,
+    &-button-prev.swiper-button-disabled {
+        pointer-events: auto;
+    }
 }

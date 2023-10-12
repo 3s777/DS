@@ -9,6 +9,7 @@
     'likes_count',
     'likes_status',
 ])
+
 <div
     {{ $attributes->class([
             'comment',
@@ -18,12 +19,14 @@
         ])
     }}>
 
+        <x-ui.avatar
+            class="comment__avatar"
+            link="{{ $user_link }}"
+            src="{{ $avatar_url }}"
+            username="{{ $username }}"
+        >
+        </x-ui.avatar>
 
-        <div class="comment__avatar">
-            <a href="{{ $user_link }}">
-                <img src="{{ $avatar_url }}" alt="">
-            </a>
-        </div>
         <div class="comment__content">
             <div class="comment__header">
                 <div class="comment__username">
