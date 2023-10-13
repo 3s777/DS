@@ -7,6 +7,6 @@
     {{ $attributes->class([
             'modal',
         ])
-    }}>
+    }}  >
     {{ $slot }}
 </{{ $tag }}>

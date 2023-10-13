@@ -5,6 +5,7 @@
     'icon_size' => false,
     'type' => false,
     'size' => '',
+    'not_clickable' => false,
     'color' => 'submit',
     'full_width' => false,
     'only_icon' => false,
@@ -26,7 +27,8 @@
             'button_only_icon_'.$only_icon_size => $only_icon_size,
             'button_tooltip' => $tooltip,
             'button_tooltip_'.$tooltip_size => $tooltip_size,
-            'button_indent_'.$indent => $indent
+            'button_indent_'.$indent => $indent,
+            'button_not_clickable' => $not_clickable
         ])
         ->merge([
             'href' => $link,

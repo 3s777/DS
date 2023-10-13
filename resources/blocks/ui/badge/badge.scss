@@ -52,6 +52,12 @@
         border-radius: $extra-small-border-radius;
     }
 
+    &_align_standard {
+        position: absolute;
+        top: -6px;
+        right: -6px;
+    }
+
     &_ribbon {
         position: absolute;
         padding: 5px 20px;

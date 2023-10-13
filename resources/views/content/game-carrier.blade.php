@@ -6,13 +6,73 @@
 <div class="container">
     <div class="content carrier">
         <div class="content__title">
-            <x-ui.title tag="h1" size="large" >
-                {{ __('Resonance of Fate') }}
+            <x-ui.title tag="h1" size="big" >
+                {{ __('BLES00789, Resonance of Fate, Playstation 3') }}
             </x-ui.title>
-            <div class="content__title-tags carrier__title-tags">
-                <x-ui.tag href="/">Playstation 3</x-ui.tag>
-                <x-ui.tag href="">BLES00789</x-ui.tag>
-                <x-ui.tag indent="" href="">BLUS30484</x-ui.tag>
+
+            <button x-data @click="$store.modal.toggle()">Toggle Dark Mode</button>
+
+            <div class="content__title-buttons carrier__title-buttons">
+                <x-ui.form.button class="carrier__title-button" tag="a" size="small" color="dark">
+                    {{ __('На полках') }}
+                    <x-ui.badge
+                        class="carrier__title-badge"
+                        type="number"
+                        align="standard"
+                        color="success">
+                        12
+                    </x-ui.badge>
+                </x-ui.form.button>
+                <x-ui.form.button class="carrier__title-button" tag="a" href="/" size="small" color="dark">
+                    {{ __('Желают') }}
+                    <x-ui.badge
+                        class="carrier__title-badge"
+                        type="number"
+                        align="standard"
+                        color="success">
+                        1200
+                    </x-ui.badge>
+                </x-ui.form.button>
+                <x-ui.form.button class="carrier__title-button" tag="a" href="/" size="small" color="dark">
+                    {{ __('Продажа') }}
+                    <x-ui.badge
+                        class="carrier__title-badge"
+                        type="number"
+                        align="standard"
+                        color="success">
+                        5
+                    </x-ui.badge>
+                </x-ui.form.button>
+                <x-ui.form.button class="carrier__title-button" tag="a" href="/" size="small" color="dark">
+                    {{ __('Аукционы') }}
+                    <x-ui.badge
+                        class="carrier__title-badge"
+                        type="number"
+                        align="standard"
+                        color="success">
+                        2
+                    </x-ui.badge>
+                </x-ui.form.button>
+                <x-ui.form.button class="carrier__title-button" tag="a" href="/" size="small" color="dark">
+                    {{ __('Обмен') }}
+                    <x-ui.badge
+                        class="carrier__title-badge"
+                        type="number"
+                        align="standard"
+                        color="success">
+                        2
+                    </x-ui.badge>
+                </x-ui.form.button>
+                <x-ui.form.button class="carrier__title-button" tag="a" size="small" color="dark" not_clickable="true">
+                    {{ __('В избранном') }}
+                    <x-ui.badge
+                        class="carrier__title-badge"
+                        type="number"
+                        align="standard"
+                        color="success">
+                       153
+                    </x-ui.badge>
+                </x-ui.form.button>
             </div>
         </div>
         <x-grid type="container">
@@ -83,27 +143,30 @@
                     <x-ui.title indent="normal">Видео</x-ui.title>
 
                     <x-libraries.swiper
-                        class="carrier__swiper-relative"
+                        class="carrier__swiper-video"
                         id="carrier_video"
                         type="carousel">
 
                         <x-libraries.swiper.slide>
-                            <a href="/">
-                                <x-ui.video-thumbnail class="carrier__video-thumbnail">
-                                    <img
-                                        class="swiper__img"
-                                        src="{{ asset('/storage/test.jpg') }}"
-                                        loading="lazy"
-                                        decoding="async"
-                                        alt="Test image"
-                                        title="Test image"
-                                    />
-                                </x-ui.video-thumbnail>
-                                <span class="carrier__relative-link">Xbox One 505550</span>
-                            </a>
+                            <div x-data x-on:keydown.escape.window="$store.modal.hide = true, handleClick(carrier_video1)">
+                                <div x-on:click.stop="$store.modal.hide = ! $store.modal.hide">
+                                    <x-ui.video-thumbnail class="carrier__video-thumbnail">
+                                        <img
+                                            class="swiper__img"
+                                            src="{{ asset('/storage/test.jpg') }}"
+                                            loading="lazy"
+                                            decoding="async"
+                                            alt="Test image"
+                                            title="Test image"
+                                        />
+                                    </x-ui.video-thumbnail>
+                                    <span class="carrier__video-link">Xbox One 505550</span>
+                                </div>
+                            </div>
                         </x-libraries.swiper.slide>
                         <x-libraries.swiper.slide>
-                            <a href="/">
+                            <div x-data x-on:keydown.escape.window="$store.modal1.hide = true, handleClick(carrier_video2)">
+                                <div x-on:click.stop="$store.modal1.hide = ! $store.modal1.hide">
                                 <x-ui.video-thumbnail class="carrier__video-thumbnail">
                                     <img
                                         class="swiper__img"
@@ -114,11 +177,13 @@
                                         title="Test image"
                                     />
                                 </x-ui.video-thumbnail>
-                                <span class="carrier__relative-link">Коллекционное издание Xbox One 505550 Xbox One 505550</span>
-                            </a>
+                                <span class="carrier__video-link">Коллекционное издание Xbox One 505550 Xbox One 505550</span>
+                            </div>
+                            </div>
                         </x-libraries.swiper.slide>
                         <x-libraries.swiper.slide>
-                            <a href="/">
+                            <div x-data x-on:keydown.escape.window="$store.modal2.hide = true, handleClick(carrier_video3)">
+                                <div x-on:click.stop="$store.modal2.hide = ! $store.modal2.hide">
                                 <x-ui.video-thumbnail class="carrier__video-thumbnail">
                                     <img
                                         class="swiper__img"
@@ -129,8 +194,9 @@
                                         title="Test image"
                                     />
                                 </x-ui.video-thumbnail>
-                                <span class="carrier__relative-link" >Тест Xbox One 505550</span>
-                            </a>
+                                <span class="carrier__video-link" >Тест Xbox One 505550</span>
+    </div>
+</div>
                         </x-libraries.swiper.slide>
 
                         <x-slot:pagination class="swiper-pagination_1"></x-slot:pagination>
@@ -138,8 +204,6 @@
 
                     </x-libraries.swiper>
                 </x-ui.card>
-
-
 
 
 
@@ -693,6 +757,60 @@
         </x-grid>
     </div>
 </div>
+
+    <div class="carrier__modals">
+        <x-ui.modal x-data id="carrier_video1" tag="section"  ::class="$store.modal.hide ? '' : 'modal_show'">
+            <x-ui.modal.content
+                x-on:click.outside="$store.modal.hide = true, handleClick(carrier_video1)">
+
+                <x-ui.modal.close x-on:click="$store.modal.hide = true, handleClick(carrier_video1)">
+                </x-ui.modal.close>
+
+                <x-ui.modal.header>
+                    <x-ui.title indent="normal">Видео1</x-ui.title>
+                </x-ui.modal.header>
+
+                <x-ui.modal.body>
+                    <iframe width="560" height="315" src="https://www.youtube.com/embed/n2SWbVlzu8w?si=5iAVDmiXY6q8LYZk" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+                </x-ui.modal.body>
+
+            </x-ui.modal.content>
+        </x-ui.modal>
+
+        <x-ui.modal x-data id="carrier_video2" tag="section"  ::class="$store.modal1.hide ? '' : 'modal_show'">
+            <x-ui.modal.content
+                x-on:click.outside="$store.modal1.hide = true, handleClick(carrier_video2)">
+
+                <x-ui.modal.close x-on:click="$store.modal1.hide = true, handleClick(carrier_video2)">
+                </x-ui.modal.close>
+
+                <x-ui.modal.header>
+                    <x-ui.title indent="normal">Видео2</x-ui.title>
+                </x-ui.modal.header>
+
+                <x-ui.modal.body>
+                    <iframe width="560" height="315" src="https://www.youtube.com/embed/n2SWbVlzu8w?si=5iAVDmiXY6q8LYZk" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>                </x-ui.modal.body>
+
+            </x-ui.modal.content>
+        </x-ui.modal>
+
+        <x-ui.modal x-data id="carrier_video3" tag="section" ::class="$store.modal2.hide ? '' : 'modal_show'">
+            <x-ui.modal.content
+                x-on:click.outside="$store.modal2.hide = true, handleClick(carrier_video3)">
+                <x-ui.modal.close x-on:click="$store.modal2.hide = true, handleClick(carrier_video3)">
+                </x-ui.modal.close>
+
+                <x-ui.modal.header>
+                    <x-ui.title indent="normal">Видео3</x-ui.title>
+                </x-ui.modal.header>
+
+                <x-ui.modal.body>
+                    <iframe width="560" height="315" src="https://www.youtube.com/embed/n2SWbVlzu8w?si=5iAVDmiXY6q8LYZk" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>                </x-ui.modal.body>
+
+            </x-ui.modal.content>
+        </x-ui.modal>
+</div>
+
 @endsection
 
 @push('scripts')
@@ -856,6 +974,36 @@
             placeholder: 'Leave your comment',
             theme: 'snow'
         });
+
+
+
+
+
+
+
+    </script>
+
+    <script>
+        document.addEventListener('alpine:init', () => {
+            Alpine.store('modal', {
+                hide: true,
+
+            });
+            Alpine.store('modal1', {
+                hide: true,
+            });
+            Alpine.store('modal2', {
+                hide: true,
+            })
+        })
+
+        function handleClick(element) {
+            var iframe = element.querySelector('iframe');
+            if ( iframe ) {
+                var iframeSrc = iframe.src;
+                iframe.src = iframeSrc;
+            }
+        }
     </script>
 
 

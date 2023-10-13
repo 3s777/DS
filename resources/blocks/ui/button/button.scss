@@ -15,21 +15,32 @@
     appearance: none;
     outline: none;
 
-    &:hover {
-        background-color: $additional-main;
-    }
-
+    &:hover,
     &:focus {
         background-color: $additional-main;
     }
+
+    &:hover.button_not_clickable,
+    &:focus.button_not_clickable {
+        background-color: $base-light-like-transparent;
+    }
+
 }
 
 .button_full_width {
     width: 100%;
 }
 
+.button_not_clickable {
+    cursor: default;
+
+    &:hover {
+
+    }
+}
+
 .button_size_small {
-    font-size: rem(12);
+    font-size: rem(14);
     padding: 10px 26px;
 }
 
@@ -69,6 +80,10 @@
     padding: 14px 40px;
 }
 
+.button_not_clickable {
+    pointer-events: none;
+}
+
 .button_dark {
     background-color: $base-dark-like-transparent;
 }
@@ -80,7 +95,6 @@
     &:focus {
         background-color: $additional-light;
     }
-
 }
 
 .button__submit-icon {
@@ -101,9 +115,11 @@
 .button_warning {
     background-color: $warning-main;
 
-    &:hover {
+    &:hover,
+    &:focus {
         background-color: $warning-dark;
     }
+
 }
 
 .button_info {
@@ -113,6 +129,7 @@
     &:focus  {
         background-color: $info-dark;
     }
+
 }
 
 .button__cancel-icon {

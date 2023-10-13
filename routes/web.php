@@ -22,4 +22,8 @@ Route::prefix('{locale}')->whereIn('locale', config('app.available_locales'))->g
         return view('content.game-carrier');
     })->name('game-carrier');
 
+    Route::get('/test', function () {
+        return view('content.test');
+    })->name('test');
+
 });
