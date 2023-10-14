@@ -17,4 +17,8 @@
         padding-bottom: 4px;
         border-bottom: 1px dashed $opposite-main-20;
     }
+
+    &__item-value {
+        margin: 0;
+    }
 }

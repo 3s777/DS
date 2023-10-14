@@ -8,10 +8,10 @@
             'specifications__item',
         ])
     }}>
-    <div class="specifications__item-title {{ $title_class }}">
+    <dt class="specifications__item-title {{ $title_class }}">
         {{ $title }}:
-    </div>
-    <div class="specifications__item-value {{ $value_class }}">
+    </dt>
+    <dd class="specifications__item-value {{ $value_class }}">
         {{ $slot }}
-    </div>
+    </dd>
 </div>
