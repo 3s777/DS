@@ -107,5 +107,11 @@
 
     &__grid {
         display: grid;
+        grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    }
+
+    .test-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
     }
 }

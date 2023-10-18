@@ -1,21 +1,21 @@
 <div class="carrier__add-buttons">
-    <x-libraries.choices
-        class="choices-select-1"
-        wrapper_class="choices-block_color_success carrier__add-select"
-        id="select-test"
-        name="select-test"
-        show_label=""
-        color="additional"
-        label="На полку">
-        <x-ui.form.option>Добавить</x-ui.form.option>
-        <x-ui.form.option value="1">В коллекцию</x-ui.form.option>
-        <x-ui.form.option value="2">Продать</x-ui.form.option>
-        <x-ui.form.option value="3">Аукцион</x-ui.form.option>
-        <x-ui.form.option value="4">Обменять</x-ui.form.option>
-        <x-ui.form.option value="6">Список желаний</x-ui.form.option>
-        <x-ui.form.option value="7">Создать пост</x-ui.form.option>
-        <x-ui.form.option value="8">Избранное</x-ui.form.option>
-    </x-libraries.choices>
+        <x-libraries.choices
+            class="choices-select-1"
+            wrapper_class="choices-block_color_success carrier__add-select"
+            id="select-test"
+            name="select-test"
+            show_label=""
+            color="additional"
+            label="На полку">
+            <x-ui.form.option>Добавить</x-ui.form.option>
+            <x-ui.form.option value="1">В коллекцию</x-ui.form.option>
+            <x-ui.form.option value="2">Продать</x-ui.form.option>
+            <x-ui.form.option value="3">Аукцион</x-ui.form.option>
+            <x-ui.form.option value="4">Обменять</x-ui.form.option>
+            <x-ui.form.option value="6">Список желаний</x-ui.form.option>
+            <x-ui.form.option value="7">Создать пост</x-ui.form.option>
+            <x-ui.form.option value="8">Избранное</x-ui.form.option>
+        </x-libraries.choices>
 
     <x-ui.form.button
         color="dark"

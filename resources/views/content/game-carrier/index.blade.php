@@ -7,6 +7,13 @@
         <div class="content carrier">
             @include('content.game-carrier.title')
 
+            <div class="test-grid">
+                <div>1</div>
+                <div>
+
+                </div>
+            </div>
+
 <div class="carrier__grid">
     @include('content.game-carrier.photos')
 
@@ -79,14 +86,13 @@
         });
 
 
+
+
         Fancybox.bind("[data-fancybox]", {
             // Your custom options
         });
 
-        document.getElementById("select-test").onchange = function(){
-            var value = document.getElementById("select-test").value;
-            console.log(value);
-        };
+
 
         const inputElement2 = document.querySelector('.filepond2');
 

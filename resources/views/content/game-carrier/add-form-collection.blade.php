@@ -243,15 +243,6 @@
             </x-ui.form.group>
         </x-grid.col>
 
-        <x-grid.col xl="12" lg="12" md="12" sm="12">
-            <x-ui.form.group>
-                <x-ui.form.button
-                    full_width="true">
-                    {{ __('Добавить на полку') }}
-                </x-ui.form.button>
-            </x-ui.form.group>
-        </x-grid.col>
-
     </x-grid>
 
 
