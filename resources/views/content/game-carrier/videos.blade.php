@@ -1,4 +1,4 @@
-<x-ui.card indent_bottom="true">
+<x-ui.card>
     <x-ui.title indent="normal">Видео</x-ui.title>
 
     <x-libraries.swiper

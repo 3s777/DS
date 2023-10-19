@@ -1,5 +1,5 @@
 
-<x-ui.card indent_bottom="true" style="overflow: hidden;">
+<x-ui.card style="overflow: hidden;">
     <div style="width:100%; overflow: hidden;">
         <x-libraries.swiper type="full" class="carrier__swiper-main">
 

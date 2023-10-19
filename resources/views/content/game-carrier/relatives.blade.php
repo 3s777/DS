@@ -1,4 +1,4 @@
-<x-ui.card indent_bottom="true">
+<x-ui.card>
     <x-ui.title indent="normal">Другие издания</x-ui.title>
 
     <x-libraries.swiper class="carrier__swiper-relative" id="swiper_relative">

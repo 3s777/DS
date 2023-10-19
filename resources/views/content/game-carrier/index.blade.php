@@ -7,34 +7,42 @@
         <div class="content carrier">
             @include('content.game-carrier.title')
 
-            <div class="test-grid">
-                <div>1</div>
-                <div>
-
-                </div>
-            </div>
-
 <div class="carrier__grid">
-    @include('content.game-carrier.photos')
+    <div class="gr-photos">
+        @include('content.game-carrier.photos')
+    </div>
 
-    @include('content.game-carrier.videos')
+    <div class="gr-buttons">
+        <x-ui.card indent_bottom="true">
+            <div class="carrier__add">
+                @include('content.game-carrier.add-buttons')
+                @include('content.game-carrier.add-form-collection')
+            </div>
+        </x-ui.card>
 
-    @include('content.game-carrier.relatives')
+            @include('content.game-carrier.specifications')
+    </div>
 
-    @include('content.game-carrier.comments')
+    <div class="gr-videos">
+        @include('content.game-carrier.videos')
+    </div>
+
+
+
+    <div class="gr-relatives">
+        @include('content.game-carrier.relatives')
+    </div>
+
+    <div class="gr-comments">
+        @include('content.game-carrier.comments')
+    </div>
 
 
 
 
 
-    <x-ui.card indent_bottom="true">
-        <div class="carrier__add">
-            @include('content.game-carrier.add-buttons')
-            @include('content.game-carrier.add-form-collection')
-        </div>
-    </x-ui.card>
 
-    @include('content.game-carrier.specifications')
+
 </div>
 
 
