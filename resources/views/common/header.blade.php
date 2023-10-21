@@ -42,6 +42,16 @@
                             @endif
                         @else
                             <div class="nav-item dropdown">
+
+                                <x-ui.avatar
+                                    class="comment__avatar"
+                                    link="{{ route('ui') }}"
+                                    src="{{ asset('/storage/test-5.jpg') }}"
+                                    username="{{ Auth::user()->name }}"
+                                >
+                                </x-ui.avatar>
+
+
                                 <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                                     {{ Auth::user()->name }}
                                 </a>

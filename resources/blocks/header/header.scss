@@ -12,24 +12,24 @@
         animation-direction: alternate;
         animation-delay: 2s;
     }
-}
 
-.header__inner {
-    position: relative;
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-end;
-    flex-wrap: wrap;
-    padding: 32px 0;
-}
+    &__inner {
+        position: relative;
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-end;
+        flex-wrap: wrap;
+        padding: 32px 0;
+    }
 
-.header__site-icon {
-    height: 44px;
-    margin-right: 12px;
-}
+    &__site-icon {
+        height: 44px;
+        margin-right: 12px;
+    }
 
-.header__site-name {
-    height: 44px;
+    &__site-name {
+        height: 44px;
+    }
 }
 
 @keyframes buble {

@@ -2,8 +2,14 @@
     display: flex;
     justify-content: space-between;
     flex-wrap: wrap;
-}
 
-.main-menu__item {
-   margin: 0 8px;
+    &__item {
+        margin: 0 8px;
+    }
+
+    @media (max-width: $xl) {
+        &__link {
+            padding: 14px 20px;
+        }
+    }
 }

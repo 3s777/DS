@@ -2,3 +2,9 @@
     display: flex;
     justify-content: space-between;
 }
+
+@media (max-width: $xl) {
+    .auth-menu__link {
+        padding: 14px 20px;
+    }
+}
