@@ -31,14 +31,16 @@ window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 //     enabledTransports: ['ws', 'wss'],
 // });
 
+import Choices from "choices.js";
+window.Choices = Choices;
+
+
 import Alpine from 'alpinejs'
 
 window.Alpine = Alpine
 
 Alpine.start()
 
-import Choices from "choices.js";
-window.Choices = Choices;
 
 import EditorJS from '@editorjs/editorjs';
 window.EditorJS = EditorJS;

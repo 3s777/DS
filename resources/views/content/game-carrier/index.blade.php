@@ -5,48 +5,43 @@
 @section('content')
     <div class="container">
         <div class="content carrier">
+
             @include('content.game-carrier.title')
 
-<div class="carrier__grid">
-    <div class="gr-photos">
-        @include('content.game-carrier.photos')
-    </div>
+            <div class="carrier__grid">
+                <div class="carrier__photo">
+                    @include('content.game-carrier.photos')
+                </div>
 
-    <div class="gr-buttons">
-        <x-ui.card indent_bottom="true">
-            <div class="carrier__add">
-                @include('content.game-carrier.add-buttons')
-                @include('content.game-carrier.add-form-collection')
+                <div class="carrier__buttons">
+
+                    <x-ui.card indent_bottom="true">
+                        <div x-data = "addButtonsAttributes()"
+                            x-init="initButtonChoices()"
+                            class="carrier__add"
+                        >
+                            @include('content.game-carrier.add-buttons')
+                            @include('content.game-carrier.add-form-collection')
+                        </div>
+                    </x-ui.card>
+
+                    <div class="carrier__specifications">
+                        @include('content.game-carrier.specifications')
+                    </div>
+                </div>
+
+                <div class="carrier__videos">
+                    @include('content.game-carrier.videos')
+                </div>
+
+                <div class="carrier__relatives">
+                    @include('content.game-carrier.relatives')
+                </div>
+
+                <div class="carrier__comments">
+                    @include('content.game-carrier.comments')
+                </div>
             </div>
-        </x-ui.card>
-
-            @include('content.game-carrier.specifications')
-    </div>
-
-    <div class="gr-videos">
-        @include('content.game-carrier.videos')
-    </div>
-
-
-
-    <div class="gr-relatives">
-        @include('content.game-carrier.relatives')
-    </div>
-
-    <div class="gr-comments">
-        @include('content.game-carrier.comments')
-    </div>
-
-
-
-
-
-
-
-</div>
-
-
-
 
         </div>
     </div>
@@ -57,50 +52,23 @@
 
 @push('scripts')
     <script type="module">
-        const element1 = document.querySelector('.choices-select-1');
-        const choices1 = new Choices(element1, {
-            itemSelectText: '',
-            searchEnabled: false,
-            shouldSort: false,
-            noResultsText: '{{ __('Не найдено') }}',
-            noChoicesText: '{{ __('Больше ничего нет') }}',
-        });
 
-        const element2 = document.querySelector('.choices-select-shelf');
-        const choices2 = new Choices(element2, {
-            itemSelectText: '',
-            searchEnabled: false,
-            shouldSort: false,
-            noResultsText: '{{ __('Не найдено') }}',
-            noChoicesText: '{{ __('Больше ничего нет') }}',
-        });
+        var selects = document.getElementsByClassName("choices-select-auto");
+        for (var i = 0; i < selects.length; i++) {
 
-        const element3 = document.querySelector('.choices-select-state');
-        const choices3 = new Choices(element3, {
-            itemSelectText: '',
-            searchEnabled: false,
-            shouldSort: false,
-            noResultsText: '{{ __('Не найдено') }}',
-            noChoicesText: '{{ __('Больше ничего нет') }}',
-        });
-
-        const element4 = document.querySelector('.choices-select-box');
-        const choices4 = new Choices(element4, {
-            itemSelectText: '',
-            searchEnabled: false,
-            shouldSort: false,
-            noResultsText: '{{ __('Не найдено') }}',
-            noChoicesText: '{{ __('Больше ничего нет') }}',
-        });
-
-
-
+            new Choices(selects.item(i), {
+                itemSelectText: '',
+                searchEnabled: false,
+                shouldSort: false,
+                allowHTML: true,
+                noResultsText: '{{ __('Не найдено') }}',
+                noChoicesText: '{{ __('Больше ничего нет') }}',
+            });
+        }
 
         Fancybox.bind("[data-fancybox]", {
             // Your custom options
         });
-
-
 
         const inputElement2 = document.querySelector('.filepond2');
 
@@ -129,7 +97,6 @@
             credits: false,
             labelIdle: '<span class="filepond--label-action"> {{ __('Загрузите') }}</span> {{ __('главное фото') }} '
         });
-
 
         const swiperFull = new Swiper('.swiper__full', {
             // Optional parameters
@@ -177,8 +144,6 @@
                     slidesPerView: 2,
                 },
             }
-
-
         });
 
         const swiperVideo = new Swiper('#carrier_video', {
@@ -207,21 +172,12 @@
                     slidesPerView: 1,
                 },
             }
-
-
         });
 
         var quill = new Quill('#new-comment', {
             placeholder: 'Leave your comment',
             theme: 'snow'
         });
-
-
-
-
-
-
-
     </script>
 
     <script>
@@ -235,7 +191,8 @@
             });
             Alpine.store('modal2', {
                 hide: true,
-            })
+            });
+
         })
 
         function handleClick(element) {
@@ -244,6 +201,36 @@
                 var iframeSrc = iframe.src;
                 iframe.src = iframeSrc;
             }
+        }
+
+        const addButtonsAttributes = () => {
+            return {
+                form: 'add',
+                currentForm(form) {
+                    return form = form.value ? form.value : form;
+                },
+                activateButton(buttonForm) {
+                    if(this.currentForm(this.form) === buttonForm) {
+                        return 'button_submit';
+                    }
+                },
+                setForm(form) {
+                    this.form = form;
+                    choices1.setChoiceByValue(form);
+                }
+            }
+        }
+
+        function initButtonChoices() {
+            element1 = document.querySelector('.choices-select-1');
+            choices1 = new Choices(element1, {
+                itemSelectText: '',
+                searchEnabled: false,
+                shouldSort: false,
+                allowHTML: true,
+                noResultsText: '{{ __('Не найдено') }}',
+                noChoicesText: '{{ __('Больше ничего нет') }}',
+            });
         }
     </script>
 
