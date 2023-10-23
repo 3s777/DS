@@ -6,6 +6,12 @@
     }
 }
 
+@mixin breakpoint-min($width) {
+    @media screen and (min-width: $width) {
+        @content
+    }
+}
+
 @mixin fade($type) {
     @if $type== "hide" {
         visibility: hidden;

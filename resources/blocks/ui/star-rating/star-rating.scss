@@ -26,6 +26,8 @@
     }
 
     &__label {
+        display: flex;
+        align-items: flex-start;
         padding: 0 2px;
         cursor: pointer;
     }

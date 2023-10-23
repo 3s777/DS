@@ -161,7 +161,7 @@
         </x-grid.col>
 
 
-        <x-grid.col xl="6" lg="6" md="12" sm="12">
+        <x-grid.col xl="6" lg="6" md="6" sm="12">
             <x-ui.form.group>
                 <x-ui.star-rating
                     class="carrier__add-rating"
@@ -172,7 +172,7 @@
             </x-ui.form.group>
         </x-grid.col>
 
-        <x-grid.col xl="6" lg="6" md="12" sm="12">
+        <x-grid.col xl="6" lg="6" md="6" sm="12">
             <x-ui.form.group>
                 <x-ui.star-rating
                     class="carrier__add-rating"
@@ -184,7 +184,7 @@
         </x-grid.col>
 
 
-        <x-grid.col xl="6" lg="6" md="12" sm="12">
+        <x-grid.col xl="6" lg="6" md="6" sm="12">
             <x-ui.form.group>
                 <x-ui.star-rating
                     class="carrier__add-rating"
@@ -194,7 +194,7 @@
             </x-ui.form.group>
         </x-grid.col>
 
-        <x-grid.col xl="6" lg="6" md="12" sm="12">
+        <x-grid.col xl="6" lg="6" md="6" sm="12">
             <x-ui.form.group>
                 <x-ui.star-rating
                     class="carrier__add-rating"

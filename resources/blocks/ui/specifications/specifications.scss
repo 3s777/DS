@@ -13,6 +13,7 @@
     }
 
     &__item-title {
+        flex-shrink: 0;
         margin-right: 8px;
         padding-bottom: 4px;
         border-bottom: 1px dashed $opposite-main-20;

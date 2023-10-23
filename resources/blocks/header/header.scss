@@ -27,8 +27,38 @@
         margin-right: 12px;
     }
 
-    &__site-name {
+    &__site-name-icon {
         height: 44px;
+    }
+
+    @include breakpoint-max($ml) {
+        &__site-icon {
+            height: 36px;
+            margin-right: 10px;
+        }
+
+        &__site-name-icon {
+            height: 36px;
+        }
+
+        &__logo {
+            order: 0;
+        }
+    }
+
+    @include breakpoint-max($sm) {
+        &__site-icon {
+            height: 30px;
+            margin-right: 2px;
+        }
+
+        &__site-name-icon {
+            height: 30px;
+        }
+
+        &__logo {
+            order: 0;
+        }
     }
 }
 

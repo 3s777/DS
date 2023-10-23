@@ -1,12 +1,24 @@
 .auth-menu {
     display: flex;
-}
 
-.auth-menu__item {
-    margin: 0 8px;
+    &__item {
+        margin: 0 8px;
 
-    &:last-child {
-        margin-right: 0;
-     }
+        &:last-child {
+            margin-right: 0;
+        }
+    }
+
+    @include breakpoint-max($xl) {
+        &__link {
+            padding: 14px 20px;
+        }
+    }
+
+    @include breakpoint-max($ml) {
+        &__link {
+            padding: 10px 16px;
+        }
+    }
 }
 

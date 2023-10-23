@@ -7,9 +7,21 @@
         margin: 0 8px;
     }
 
-    @media (max-width: $xl) {
+    @include breakpoint-max($xl) {
         &__link {
             padding: 14px 20px;
         }
+    }
+
+    @include breakpoint-max($ml) {
+        order: 2;
+
+        &__link {
+            padding: 10px 16px;
+        }
+    }
+
+    @include breakpoint-max($lg) {
+        display: none;
     }
 }

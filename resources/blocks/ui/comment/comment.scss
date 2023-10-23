@@ -43,6 +43,7 @@
     &__header {
         display: flex;
         align-items: flex-end;
+        flex-wrap: wrap;
         padding-bottom: 12px;
         margin-bottom: 12px;
         border-bottom: 1px solid $opposite-main-20;
@@ -58,6 +59,7 @@
 
     &__date {
         font-size: rem(12);
+        padding-top: 8px;
     }
 
     &__text {
@@ -79,6 +81,26 @@
         &:hover {
             color: $additional-main;
             text-decoration: none;
+        }
+    }
+
+    @include breakpoint-max($ml) {
+        &__avatar {
+            width: 50px;
+            height: 50px;
+            margin-right: 12px;
+        }
+    }
+
+    @include breakpoint-max($sm) {
+        &__avatar {
+            width: 40px;
+            height: 40px;
+            margin-right: 8px;
+        }
+
+        &_answer {
+            margin-left: 30px;
         }
     }
 }

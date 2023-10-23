@@ -2,6 +2,8 @@ import { defineConfig } from 'vite';
 import laravel from 'laravel-vite-plugin';
 // import viteJoinMediaQueries from 'vite-join-media-queries';
 import postcssCombineMediaQuery from 'postcss-combine-media-query'
+import cssmqpacker from 'css-mqpacker';
+import sortMediaQueries from 'postcss-sort-media-queries';
 
 
 export default defineConfig({
@@ -13,7 +15,9 @@ export default defineConfig({
     css: {
         postcss: {
             plugins: [
-                postcssCombineMediaQuery
+                sortMediaQueries({sort: 'desktop-first'}),
+                // cssmqpacker({ sort: true }),
+                // postcssCombineMediaQuery
             ],
         },
         // preprocessorOptions: {

@@ -1,4 +1,4 @@
-<x-ui.card indent_bottom="true">
+<x-ui.card>
     <x-grid type="container">
         <x-grid.col xl="12" lg="12" md="12" sm="12">
             <x-ui.specifications>

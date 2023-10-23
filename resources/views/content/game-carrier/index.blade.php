@@ -14,20 +14,26 @@
                 </div>
 
                 <div class="carrier__buttons">
-
-                    <x-ui.card indent_bottom="true">
-                        <div x-data = "addButtonsAttributes()"
-                            x-init="initButtonChoices()"
-                            class="carrier__add"
-                        >
-                            @include('content.game-carrier.add-buttons')
-                            @include('content.game-carrier.add-form-collection')
-                        </div>
-                    </x-ui.card>
-
-                    <div class="carrier__specifications">
-                        @include('content.game-carrier.specifications')
-                    </div>
+                    <x-grid type="container">
+                        <x-grid.col xl="12" lg="12" md="12" sm="12">
+                            <div class="carrier__forms">
+                                <x-ui.card>
+                                    <div x-data = "addButtonsAttributes()"
+                                         x-init="initButtonChoices()"
+                                         class="carrier__add"
+                                    >
+                                        @include('content.game-carrier.add-buttons')
+                                        @include('content.game-carrier.add-form-collection')
+                                    </div>
+                                </x-ui.card>
+                            </div>
+                        </x-grid.col>
+                        <x-grid.col xl="12" lg="12" md="12" sm="12">
+                            <div class="carrier__specifications">
+                                @include('content.game-carrier.specifications')
+                            </div>
+                        </x-grid.col>
+                    </x-grid>
                 </div>
 
                 <div class="carrier__videos">
@@ -115,7 +121,16 @@
                 prevEl: '.swiper-button-prev',
             },
 
+            breakpoints: {
+                1024: {
+                    slidesPerView: 1,
+                },
 
+                576: {
+                    slidesPerView: 2,
+                    spaceBetween: 16,
+                },
+            }
         });
 
         const swiper = new Swiper('#swiper_relative', {
@@ -165,11 +180,8 @@
             },
 
             breakpoints: {
-                768: {
-                    slidesPerView: 2,
-                },
                 576: {
-                    slidesPerView: 1,
+                    slidesPerView: 2,
                 },
             }
         });

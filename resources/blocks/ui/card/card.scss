@@ -11,6 +11,15 @@
     &_indent_bottom {
         margin-bottom: 32px;
     }
+
+    @include breakpoint-max($ml) {
+        padding: 24px;
+    }
+
+    @include breakpoint-max($sm) {
+        padding: 12px;
+        border-radius: $small-border-radius;
+    }
 }
 
 
