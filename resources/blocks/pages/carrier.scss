@@ -1,5 +1,6 @@
 .carrier {
     &__title-buttons {
+        display: flex;
         margin-top: 12px;
     }
 
@@ -89,7 +90,6 @@
     &__video-link {
         cursor: pointer;
     }
-
 
     &__swiper-video .swiper-button-next,
     &__swiper-video .swiper-button-prev {
@@ -188,6 +188,10 @@
             gap: 20px;
         }
 
+        &__title-button {
+            padding: 10px 16px;
+        }
+
         &__add-select {
             min-width: 200px;
         }
@@ -207,10 +211,6 @@
         &__swiper-relative .swiper-button-prev {
             top: 40%;
         }
-
-        &__title-button {
-            margin-bottom: 12px;
-        }
     }
 
     @include breakpoint-max($md) {
@@ -222,17 +222,38 @@
             width: 100%;
             margin-bottom: 12px;
         }
+
+        &__title-badge {
+            padding: 2px 4px;
+            font-size: rem(10);
+        }
+
+        &__title-button {
+            & svg {
+                width: 32px;
+                height: 32px;
+                fill: $opposite-main;
+            }
+
+            & .wishlist-icon {
+                padding: 5px;
+            }
+
+            & .dollar-icon {
+                padding: 6px;
+            }
+
+            & .star-icon {
+                padding: 6px;
+            }
+        }
     }
 
     @include breakpoint-max($sm) {
         &__add-buttons {
-            .button_only_icon {
-                padding: 2px;
+            .button {
+                padding: 4px;
             }
         }
     }
 }
-
-[x-cloak] { display: none; }
-
-

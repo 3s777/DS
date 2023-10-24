@@ -17,7 +17,7 @@
     }
 
     @include breakpoint-max($sm) {
-        padding: 12px;
+        padding: 20px 12px;
         border-radius: $small-border-radius;
     }
 }

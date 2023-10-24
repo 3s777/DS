@@ -3,62 +3,66 @@
     font-size: rem(32);
     font-weight: 500;
     line-height: 1.2;
-}
 
-.title_indent_big {
-    margin-bottom: 24px;
-}
+    @include breakpoint-max($md) {
+        font-size: rem(24);
+    }
 
-.title_indent_normal {
-    margin-bottom: 16px;
-}
+    &_indent_big {
+        margin-bottom: 24px;
+    }
 
-.title_indent_small {
-    margin-bottom: 8px;
-}
+    &_indent_normal {
+        margin-bottom: 16px;
+    }
 
-.title_size_large {
-    font-size: rem(56);
+    &_indent_small {
+        margin-bottom: 8px;
+    }
 
-    @include breakpoint-max($lg) {
+    &_size_large {
+        font-size: rem(56);
+
+        @include breakpoint-max($lg) {
+            font-size: rem(48);
+        }
+
+        @include breakpoint-max($md) {
+            font-size: rem(38);
+        }
+    }
+
+    &_size_big {
         font-size: rem(48);
+
+        @include breakpoint-max($lg) {
+            font-size: rem(40);
+        }
+
+        @include breakpoint-max($md) {
+            font-size: rem(32);
+        }
     }
 
-    @include breakpoint-max($md) {
+    &_size_normal {
         font-size: rem(38);
-    }
-}
 
-.title_size_big {
-    font-size: rem(48);
+        @include breakpoint-max($lg) {
+            font-size: rem(34);
+        }
 
-    @include breakpoint-max($lg) {
-        font-size: rem(40);
-    }
-
-    @include breakpoint-max($md) {
-        font-size: rem(32);
-    }
-}
-
-.title_size_normal {
-    font-size: rem(38);
-
-    @include breakpoint-max($lg) {
-        font-size: rem(34);
+        @include breakpoint-max($md) {
+            font-size: rem(28);
+        }
     }
 
-    @include breakpoint-max($md) {
-        font-size: rem(28);
+    &_size_small {
+        font-size: rem(24);
+        font-weight: 400;
     }
-}
 
-.title_size_small {
-    font-size: rem(24);
-    font-weight: 400;
-}
-
-.title_size_extra_small {
-    font-size: rem(16);
-    font-weight: 400;
+    &_size_extra_small {
+        font-size: rem(16);
+        font-weight: 400;
+    }
 }

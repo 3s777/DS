@@ -78,7 +78,7 @@
         only_icon="true"
         title="Добавить в список желаемого">
         <x-slot:icon>
-            <x-svg.whishlist class="button__icon button__icon_big button__whishlist-icon"></x-svg.whishlist>
+            <x-svg.wishlist class="button__icon button__icon_big button__wishlist-icon"></x-svg.wishlist>
         </x-slot:icon>
     </x-ui.form.button>
 

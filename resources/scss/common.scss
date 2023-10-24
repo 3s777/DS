@@ -20,10 +20,4 @@ p {
     margin-top: 0;
 }
 
-
-
-@include breakpoint-max($sm) {
-    p {
-        margin-top: 0;
-    }
-}
+[x-cloak] { display: none; }

@@ -20,8 +20,7 @@
                                 <x-ui.card>
                                     <div x-data = "addButtonsAttributes()"
                                          x-init="initButtonChoices()"
-                                         class="carrier__add"
-                                    >
+                                         class="carrier__add">
                                         @include('content.game-carrier.add-buttons')
                                         @include('content.game-carrier.add-form-collection')
                                     </div>

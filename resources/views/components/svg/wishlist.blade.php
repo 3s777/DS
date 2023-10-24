@@ -1,6 +1,6 @@
 <svg {{ $attributes->class([
                 'icon',
-                'whishlist-icon',
+                'wishlist-icon',
             ])
         }}
      width="24px"
