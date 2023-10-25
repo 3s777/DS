@@ -88,6 +88,9 @@
     }
 
     &__video-link {
+        display: block;
+        padding: 4px 0 8px 0;
+        text-decoration: none;
         cursor: pointer;
     }
 
@@ -211,6 +214,11 @@
         &__swiper-relative .swiper-button-prev {
             top: 40%;
         }
+
+        &__swiper-video .swiper-button-next,
+        &__swiper-video .swiper-button-prev {
+            top: 40%;
+        }
     }
 
     @include breakpoint-max($md) {
@@ -252,7 +260,23 @@
     @include breakpoint-max($sm) {
         &__add-buttons {
             .button {
-                padding: 4px;
+                padding: 6px;
+            }
+        }
+    }
+
+    @include breakpoint-max($sl) {
+
+        &__title-button {
+            & svg {
+                width: 26px;
+                height: 26px;
+            }
+        }
+
+        &__add-buttons {
+            .button {
+                padding: 3px;
             }
         }
     }

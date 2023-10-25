@@ -10,19 +10,19 @@
 
             <nav class="main-menu">
                 <div class="main-menu__item">
-                    <a class="button main-menu__link" href="#">{{ __('Shelfs') }}</a>
+                    <a class="button button_dark main-menu__link" href="#">{{ __('Shelfs') }}</a>
                 </div>
                 <div class="main-menu__item">
-                    <a class="button main-menu__link" href="#">{{ __('Blog') }}</a>
+                    <a class="button button_dark main-menu__link" href="#">{{ __('Blog') }}</a>
                 </div>
                 <div class="main-menu__item">
-                    <a class="button main-menu__link" href="#">{{ __('Feed') }}</a>
+                    <a class="button button_dark main-menu__link" href="#">{{ __('Feed') }}</a>
                 </div>
                 <div class="main-menu__item">
-                    <a class="button main-menu__link" href="#">{{ __('Users') }}</a>
+                    <a class="button button_dark main-menu__link" href="#">{{ __('Users') }}</a>
                 </div>
                 <div class="main-menu__item">
-                    <a class="button button_submit main-menu__link" href="#">{{ __('Add') }}</a>
+                    <a class="button button_dark button_submit main-menu__link" href="#">{{ __('Add') }}</a>
                 </div>
             </nav>
 
@@ -32,12 +32,12 @@
                         @guest
                             @if(Route::currentRouteName() != 'login')
                                 <div class="auth-menu__item">
-                                    <a class="button auth-menu__link" href="{{ route('login') }}">{{ __('Login') }}</a>
+                                    <a class="button button_dark auth-menu__link" href="{{ route('login') }}">{{ __('Login') }}</a>
                                 </div>
                             @endif
                             @if (Route::has('register') && Route::currentRouteName() != 'register')
                                 <div class="auth-menu__item">
-                                    <a class="button auth-menu__link" href="{{ route('register') }}">{{ __('Register') }}</a>
+                                    <a class="button button_dark auth-menu__link" href="{{ route('register') }}">{{ __('Register') }}</a>
                                 </div>
                             @endif
                         @else
@@ -129,3 +129,12 @@
 
     </div>
 </header>
+
+<div class="main-search">
+    <div class="container">
+        <x-ui.search
+            link="/"
+            placeholder="{{ __('Что будем искать?') }}">
+        </x-ui.search>
+    </div>
+</div>

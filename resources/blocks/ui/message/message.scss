@@ -81,3 +81,38 @@
     height: 24px;
     fill: $opposite-main;
 }
+
+@include breakpoint-max($sm) {
+    .message {
+        padding-left: 16px;
+    }
+
+    .message__icon {
+        position: relative;
+        top: auto;
+        left: auto;
+        float: left;
+        margin-right: 12px;
+        margin-top: 8px;
+    }
+
+    .message__info-icon {
+        width: 25px;
+        height: 25px;
+    }
+
+    .message__danger-icon {
+        width: 25px;
+        height: 25px;
+    }
+
+    .message__success-icon {
+        width: 25px;
+        height: 25px;
+    }
+
+    .message__warning-icon {
+        width: 25px;
+        height: 25px;
+    }
+}

@@ -18,6 +18,7 @@
     &__title {
         position: relative;
         display: block;
+        padding-right: 24px;
         font-size: 1.4rem;
         text-align: left;
         list-style: none;
@@ -70,6 +71,12 @@
             &:last-child {
                 margin-bottom: 0;
             }
+        }
+    }
+
+    @include breakpoint-max($sm) {
+        .accordion__title {
+            font-size: rem(20);
         }
     }
 

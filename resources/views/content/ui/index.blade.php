@@ -16,6 +16,8 @@
 
             @include('content.ui.inputs')
 
+            @include('content.ui.search')
+
             @include('content.ui.switchers')
 
             @include('content.ui.select')

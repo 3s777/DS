@@ -93,6 +93,12 @@
     }
 
     @include breakpoint-max($sm) {
+        padding: 16px 12px;
+
+        &__text {
+            margin-left: -45px;
+        }
+
         &__avatar {
             width: 40px;
             height: 40px;

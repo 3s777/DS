@@ -10,7 +10,8 @@
             link="/"
             size="small"
             color="dark"
-            mobile_icon="true">
+            mobile_icon="true"
+            title="{{ __('На полках') }}">
                 <x-slot:icon>
                     <x-svg.check></x-svg.check>
                 </x-slot:icon>
