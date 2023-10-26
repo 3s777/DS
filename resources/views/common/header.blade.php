@@ -132,9 +132,9 @@
 
 <div class="main-search">
     <div class="container">
-        <x-ui.search
+        <x-ui.input-search
             link="/"
             placeholder="{{ __('Что будем искать?') }}">
-        </x-ui.search>
+        </x-ui.input-search>
     </div>
 </div>
