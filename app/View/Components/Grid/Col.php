@@ -10,7 +10,7 @@ class Col extends Component
 {
     public bool $noGap;
     public int $xl;
-    public int $ml;
+    public int $ls;
     public int $lg;
     public int $md;
     public int $sm;
@@ -18,7 +18,7 @@ class Col extends Component
     public function __construct(
         bool $noGap = false,
         int $xl = 0,
-        int $ml = 0,
+        int $ls = 0,
         int $lg = 0,
         int $md = 0,
         int $sm = 0,
@@ -26,7 +26,7 @@ class Col extends Component
     {
         $this->noGap = $noGap;
         $this->xl = $xl;
-        $this->ml = $ml;
+        $this->ls = $ls;
         $this->lg = $lg;
         $this->md = $md;
         $this->sm = $sm;
@@ -42,7 +42,7 @@ class Col extends Component
 
         $sizes = [
             'xl' => $this->xl,
-            'ml' => $this->ml,
+            'ls' => $this->ls,
             'lg' => $this->lg,
             'md' => $this->md,
             'sm' => $this->sm,

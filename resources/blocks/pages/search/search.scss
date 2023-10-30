@@ -1,3 +1,21 @@
 .search {
 
+    &__result {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        grid-template-rows: 1fr auto;
+        gap: 16px;
+
+        & .card {
+            align-self: start;
+        }
+    }
+
+    @include breakpoint-max($xl) {
+        &__result {
+            grid-template-columns: repeat(3, 1fr);
+            gap: 24px;
+        }
+    }
+
 }

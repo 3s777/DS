@@ -12,16 +12,23 @@
     }
 
     &__details {
+        display: flex;
+        justify-content: flex-start;
+        flex-wrap: wrap;
         font-size: rem(14);
     }
 
     &__detail {
         margin-bottom: 4px;
+        margin-right: 4px;
+        padding: 4px 8px;
+        border-radius: $small-border-radius;
+        background: $base-dark-like-transparent;
     }
 
     &__thumbnail {
         flex-shrink: 0;
-        width: 80px;
+        width: 70px;
         margin-right: 12px;
     }
 

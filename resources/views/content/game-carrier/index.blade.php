@@ -14,25 +14,20 @@
                 </div>
 
                 <div class="carrier__buttons">
-                    <x-grid type="container">
-                        <x-grid.col xl="12" lg="12" md="12" sm="12">
-                            <div class="carrier__forms">
-                                <x-ui.card>
-                                    <div x-data = "addButtonsAttributes()"
-                                         x-init="initButtonChoices()"
-                                         class="carrier__add">
-                                        @include('content.game-carrier.add-buttons')
-                                        @include('content.game-carrier.add-form-collection')
-                                    </div>
-                                </x-ui.card>
+                    <div class="carrier__forms">
+                        <x-ui.card>
+                            <div x-data = "addButtonsAttributes()"
+                                 x-init="initButtonChoices()"
+                                 class="carrier__add">
+                                @include('content.game-carrier.add-buttons')
+                                @include('content.game-carrier.add-form-collection')
                             </div>
-                        </x-grid.col>
-                        <x-grid.col xl="12" lg="12" md="12" sm="12">
-                            <div class="carrier__specifications">
-                                @include('content.game-carrier.specifications')
-                            </div>
-                        </x-grid.col>
-                    </x-grid>
+                        </x-ui.card>
+                    </div>
+
+                    <div class="carrier__specifications">
+                        @include('content.game-carrier.specifications')
+                    </div>
                 </div>
 
                 <div class="carrier__videos">

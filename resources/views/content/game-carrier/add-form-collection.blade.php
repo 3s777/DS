@@ -204,11 +204,6 @@
             </x-ui.form.group>
         </x-grid.col>
 
-
-
-
-
-
         <x-grid.col xl="6" lg="6" md="6" sm="12">
             <x-ui.form.group>
                 <x-libraries.filepond
@@ -375,8 +370,6 @@
             </x-ui.form.group>
         </x-grid.col>
 
-
     </x-grid>
-
 
 </div>
