@@ -1,14 +1,38 @@
 .search-card {
+    align-self: start;
+    position: relative;
+    overflow: hidden;
+    background: $base-light-like-transparent;
+    border-radius: $small-border-radius;
+    transition: $base-transition;
+
+    &:hover &__info {
+        transform: translate(0, -50px);
+    }
+
+    &:hover &__more {
+        opacity: 1;
+        visibility: visible;
+    }
+
+    &__footer {
+
+        padding: 12px;
+    }
 
     &__main {
-        display: flex;
-        margin-bottom: 12px;
+        background: $base-light-like-transparent;
+        transition: $base-transition;
     }
 
     &__title {
         margin-bottom: 8px;
         font-size: rem(18);
         font-weight: 700;
+
+        a {
+            text-decoration: none;
+        }
     }
 
     &__details {
@@ -19,17 +43,39 @@
     }
 
     &__detail {
+        align-self: start;
         margin-bottom: 4px;
         margin-right: 4px;
+        max-width: 100%;
         padding: 4px 8px;
         border-radius: $small-border-radius;
+        word-wrap: break-word;
         background: $base-dark-like-transparent;
     }
 
+    &__more {
+        display: flex;
+        justify-content: flex-start;
+        flex-wrap: wrap;
+        min-height: 50px;
+        margin-bottom: -55px;
+        overflow: hidden;
+        font-size: rem(14);
+        transition: $base-transition;
+        opacity: 0;
+        visibility: hidden;
+    }
+
     &__thumbnail {
-        flex-shrink: 0;
-        width: 70px;
-        margin-right: 12px;
+        width: 100%;
+        line-height: 0;
+    }
+
+    &__info {
+        position: relative;
+        padding: 12px;
+        background: $base-light-like-transparent;
+        transition: $base-transition;
     }
 
     &__img {
@@ -38,14 +84,81 @@
 
     &__buttons {
         display: flex;
-        justify-content: space-between;
+        justify-content: flex-start;
+        flex-wrap: wrap;
+        width: 100%;
+        padding: 0 12px 12px 12px;
     }
 
     &__button {
         position: relative;
+        padding: 4px;
+        margin-right: 6px;
+        margin-bottom: 4px;
+        background: none;
+        border: 1px solid $opposite-main-20;
+
+        &:hover {
+            background: $base-dark-like-transparent;
+        }
+
+        &:hover .search-card__badge {
+            background: $additional-main;
+        }
 
         & svg {
             fill: $opposite-main;
+            width: 20px;
+            height: 20px;
+        }
+
+        & .dollar-icon {
+            width: 14px;
+            height: 14px;
+        }
+
+        & .wishlist-icon {
+            width: 16px;
+            height: 16px;
+        }
+
+        & .star-icon {
+            width: 14px;
+            height: 14px;
+        }
+
+        & .button__icon-wrapper {
+            margin-right: 2px;
         }
     }
+
+    &__badge {
+        position: relative;
+        top: auto;
+        right: auto;
+        background: none;
+    }
+
+    @include breakpoint-max($xl) {
+        &__result {
+            grid-template-columns: repeat(4, 1fr);
+            gap: 24px;
+        }
+    }
+
+    @include breakpoint-max($ml) {
+        &__result {
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+        }
+    }
+
+    @include breakpoint-max($md) {
+        &__result {
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+        }
+    }
+
+
 }

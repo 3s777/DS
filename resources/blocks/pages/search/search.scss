@@ -2,19 +2,38 @@
 
     &__result {
         display: grid;
-        grid-template-columns: repeat(4, 1fr);
+        grid-template-columns: repeat(5, 1fr);
         grid-template-rows: 1fr auto;
         gap: 16px;
 
-        & .card {
-            align-self: start;
-        }
+
     }
 
     @include breakpoint-max($xl) {
         &__result {
+            grid-template-columns: repeat(4, 1fr);
+            gap: 24px;
+        }
+    }
+
+    @include breakpoint-max($ml) {
+        &__result {
             grid-template-columns: repeat(3, 1fr);
             gap: 24px;
+        }
+    }
+
+    @include breakpoint-max($md) {
+        &__result {
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+        }
+    }
+
+    @include breakpoint-max($sm) {
+        &__result {
+            grid-template-columns:1fr;
+
         }
     }
 
