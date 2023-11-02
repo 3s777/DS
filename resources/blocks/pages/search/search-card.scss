@@ -43,7 +43,6 @@
     }
 
     &__detail {
-        align-self: start;
         margin-bottom: 4px;
         margin-right: 4px;
         max-width: 100%;
@@ -138,27 +137,4 @@
         right: auto;
         background: none;
     }
-
-    @include breakpoint-max($xl) {
-        &__result {
-            grid-template-columns: repeat(4, 1fr);
-            gap: 24px;
-        }
-    }
-
-    @include breakpoint-max($ml) {
-        &__result {
-            grid-template-columns: repeat(3, 1fr);
-            gap: 20px;
-        }
-    }
-
-    @include breakpoint-max($md) {
-        &__result {
-            grid-template-columns: repeat(2, 1fr);
-            gap: 20px;
-        }
-    }
-
-
 }

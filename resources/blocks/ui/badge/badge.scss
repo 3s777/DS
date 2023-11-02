@@ -6,6 +6,10 @@
         border-color: $danger-main;
     }
 
+    &_color_dark {
+        background-color: $base-dark-like-transparent;
+    }
+
     &_color_success {
         background-color: $success-main;
 
@@ -120,5 +124,11 @@
         fill: $opposite-main;
         width: 18px;
         height: 18px;
+    }
+
+    &_tag {
+        padding: 4px 8px;
+        border-radius: $small-border-radius;
+        word-wrap: break-word;
     }
 }

@@ -164,6 +164,13 @@
                 </x-ui.form.group>
             </x-grid.col>
 
+            <x-grid.col xl="3" lg="6" md="6" sm="12">
+                <x-ui.form.group>
+                    <x-ui.badge type="tag" color="dark">
+                        Test label tag
+                    </x-ui.badge>
+                </x-ui.form.group>
+            </x-grid.col>
 
 
         </x-grid>

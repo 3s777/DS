@@ -3,10 +3,11 @@
     'placeholder',
     'id_input' => '',
     'id_form' => '',
-    'color'=>''
+    'color'=>'',
+    'wrapper_class'=>false
 ])
 
-<div class="input-search" x-data="{ search_active: false }">
+<div class="input-search @if($wrapper_class) {{ $wrapper_class }} @endif" x-data="{ search_active: false }">
     <div class="input-search__inner" x-on:click.outside="search_active = false">
         <form
             {{ $attributes->class([
