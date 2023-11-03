@@ -2,12 +2,24 @@
     @guest
         @if(Route::currentRouteName() != 'login')
             <div class="auth-menu__item">
-                <a class="button button_dark auth-menu__link" href="{{ route('login') }}">{{ __('Login') }}</a>
+                <x-ui.form.button
+                    tag="a"
+                    color="dark"
+                    class="auth-menu__link"
+                    href="{{ route('login') }}">
+                    {{ __('Login') }}
+                </x-ui.form.button>
             </div>
         @endif
         @if (Route::has('register') && Route::currentRouteName() != 'register')
             <div class="auth-menu__item">
-                <a class="button button_dark auth-menu__link" href="{{ route('register') }}">{{ __('Register') }}</a>
+                <x-ui.form.button
+                    tag="a"
+                    color="dark"
+                    class="auth-menu__link"
+                    href="{{ route('register') }}">
+                    {{ __('Register') }}
+                </x-ui.form.button>
             </div>
         @endif
     @else
@@ -29,8 +41,7 @@
                     <a class="profile-menu__logout-link"
                        href="{{ route('logout') }}"
                        onclick="event.preventDefault();
-                                           document.getElementById('logout-form').submit();
-                                        ">
+                       document.getElementById('logout-form').submit(); ">
                         {{ __('Logout') }}
                     </a>
 
@@ -39,7 +50,6 @@
                     </form>
                 </div>
             </div>
-
         </div>
     @endguest
 </nav>

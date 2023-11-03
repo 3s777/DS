@@ -1,8 +1,4 @@
-@extends('layouts.auth')
-
-@section('title', __('Search'))
-
-@section('content')
+<x-layouts.main title="Search">
     <div class="container">
         <div class="content search">
             <div class="search__title">
@@ -572,21 +568,22 @@
             </div>
         </div>
     </div>
-@endsection
+    @push('scripts')
+        <script type="module">
+            var selects = document.getElementsByClassName("choices-select-auto");
+            for (var i = 0; i < selects.length; i++) {
 
-@push('scripts')
-    <script type="module">
-        var selects = document.getElementsByClassName("choices-select-auto");
-        for (var i = 0; i < selects.length; i++) {
+                new Choices(selects.item(i), {
+                    itemSelectText: '',
+                    searchEnabled: false,
+                    shouldSort: false,
+                    allowHTML: true,
+                    noResultsText: '{{ __('Не найдено') }}',
+                    noChoicesText: '{{ __('Больше ничего нет') }}',
+                });
+            }
+        </script>
+    @endpush
+</x-layouts.main>
 
-            new Choices(selects.item(i), {
-                itemSelectText: '',
-                searchEnabled: false,
-                shouldSort: false,
-                allowHTML: true,
-                noResultsText: '{{ __('Не найдено') }}',
-                noChoicesText: '{{ __('Больше ничего нет') }}',
-            });
-        }
-    </script>
-@endpush
+

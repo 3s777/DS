@@ -125,6 +125,8 @@
                         <x-ui.form.group>
                             <div class="main-search__footer">
                                 <x-ui.form.button>{{ __('Отфильтровать') }}</x-ui.form.button>
+                                <x-ui.form.button color="warning">{{ __('Сбросить') }}</x-ui.form.button>
+                                <x-ui.form.button color="cancel" x-on:click="filters_hide = true">{{ __('Закрыть') }}</x-ui.form.button>
                             </div>
                         </x-ui.form.group>
                     </x-grid.col>

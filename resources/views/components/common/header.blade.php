@@ -1,7 +1,6 @@
 <header class="header">
     <div class="container">
         <div class="header__inner">
-
             <x-common.logo
                 class="header__logo"
                 class_site_icon="header__site-icon"
@@ -15,7 +14,6 @@
                     <x-common.site-settings />
                 </div>
             </div>
-
         </div>
     </div>
 </header>
