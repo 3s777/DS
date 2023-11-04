@@ -1,9 +1,5 @@
-@extends('layouts.auth')
-
-@section('title', __('Game Carrier'))
-
-@section('content')
-    <div class="container">
+<x-layouts.main title="Game Carrier">
+    <x-grid.container>
         <div class="content carrier">
 
             @include('content.game-carrier.title')
@@ -44,11 +40,9 @@
             </div>
 
         </div>
-    </div>
+    </x-grid.container>
 
     @include('content.game-carrier.modals')
-
-@endsection
 
 @push('scripts')
     <script type="module">
@@ -239,6 +233,5 @@
             });
         }
     </script>
-
-
 @endpush
+</x-layouts.main>

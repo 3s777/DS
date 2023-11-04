@@ -19,15 +19,15 @@ Route::prefix('{locale}')->whereIn('locale', config('app.available_locales'))->g
     })->name('ui');
 
     Route::get('/game-carrier', function () {
-        return view('content.game-carrier.index');
+        return view('content.game-carrier');
     })->name('game-carrier');
 
     Route::get('/search', function () {
         return view('content.search.index');
     })->name('search');
 
-    Route::get('/test', function () {
-        return view('content.test');
-    })->name('test');
+    Route::get('/users', function () {
+        return view('content.users.index');
+    })->name('users');
 
 });

@@ -1,5 +1,5 @@
 <x-layouts.main title="Search">
-    <div class="container">
+    <x-grid.container>
         <div class="content search">
             <div class="search__title">
                 <x-ui.title size="big">
@@ -567,12 +567,11 @@
                 <x-ui.form.button size="big">{{ __('Показать больше') }}</x-ui.form.button>
             </div>
         </div>
-    </div>
+    </x-grid.container>
     @push('scripts')
         <script type="module">
             var selects = document.getElementsByClassName("choices-select-auto");
             for (var i = 0; i < selects.length; i++) {
-
                 new Choices(selects.item(i), {
                     itemSelectText: '',
                     searchEnabled: false,
@@ -585,5 +584,3 @@
         </script>
     @endpush
 </x-layouts.main>
-
-

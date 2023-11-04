@@ -1,65 +1,84 @@
-@extends('layouts.auth')
+<x-layouts.main title="Reset Password">
+    <x-grid.container>
+        <div class="auth__content">
+            <x-ui.card>
+                <x-slot:header>
+                    <x-ui.title tag="h1">
+                        {{ __('Reset Password') }}
+                    </x-ui.title>
+                </x-slot>
 
-@section('content')
-    <div class="container">
-        <div class="row justify-content-center">
-            <div class="col-md-8">
-                <div class="card">
-                    <div class="card-header">{{ __('Reset Password') }}</div>
+                <form method="POST" action="{{ route('password.update') }}">
+                    @csrf
+                    <input type="hidden" name="token" value="{{ request()->route('token') }}">
 
-                    <div class="card-body">
-                        <form method="POST" action="{{ route('password.update') }}">
-                            @csrf
+                    <x-ui.form.group>
+                        <x-ui.form.input-text
+                            :errors="$errors"
+                            id="email"
+                            name="email"
+                            type="email"
+                            value="{{ old('email') }}"
+                            placeholder="{{ __('Email') }}"
+                            required
+                            autofocus
+                            autocomplete="email">
+                        </x-ui.form.input-text>
 
-                            <input type="hidden" name="token" value="{{ request()->route('token') }}">
+                        @error('email')
+                        <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
+                    </x-ui.form.group>
 
-                            <div class="form-group row">
-                                <label for="email" class="col-md-4 col-form-label text-md-right">{{ __('E-Mail Address') }}</label>
+                    <x-ui.form.group>
+                        <x-ui.form.input-text
+                            :errors="$errors"
+                            id="password"
+                            name="password"
+                            type="password"
+                            value=""
+                            placeholder="{{ __('Password') }}"
+                            required
+                            autofocus
+                            autocomplete="new-password">
+                        </x-ui.form.input-text>
 
-                                <div class="col-md-6">
-                                    <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ request()->get('email') ?? old('email') }}" required autocomplete="email" autofocus>
+                        @error('password')
+                        <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
+                    </x-ui.form.group>
 
-                                    @error('email')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                    @enderror
-                                </div>
-                            </div>
+                    <x-ui.form.group>
+                        <x-ui.form.input-text
+                            :errors="$errors"
+                            id="password-confirm"
+                            name="password_confirmation"
+                            type="password"
+                            value=""
+                            placeholder="{{ __('Confirm Password') }}"
+                            required
+                            autofocus
+                            autocomplete="new-password">
+                        </x-ui.form.input-text>
 
-                            <div class="form-group row">
-                                <label for="password" class="col-md-4 col-form-label text-md-right">{{ __('Password') }}</label>
+                        @error('password')
+                        <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
+                    </x-ui.form.group>
 
-                                <div class="col-md-6">
-                                    <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="new-password">
-
-                                    @error('password')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                    @enderror
-                                </div>
-                            </div>
-
-                            <div class="form-group row">
-                                <label for="password-confirm" class="col-md-4 col-form-label text-md-right">{{ __('Confirm Password') }}</label>
-
-                                <div class="col-md-6">
-                                    <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required autocomplete="new-password">
-                                </div>
-                            </div>
-
-                            <div class="form-group row mb-0">
-                                <div class="col-md-6 offset-md-4">
-                                    <button type="submit" class="btn btn-primary">
-                                        {{ __('Reset Password') }}
-                                    </button>
-                                </div>
-                            </div>
-                        </form>
-                    </div>
-                </div>
-            </div>
+                    <x-ui.from.group>
+                        <x-ui.form.button full_width="true">
+                            {{ __('Reset Password') }}
+                        </x-ui.form.button>
+                    </x-ui.from.group>
+                </form>
+            </x-ui.card>
         </div>
-    </div>
-@endsection
+    </x-grid.container>
+</x-layouts.main>
