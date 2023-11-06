@@ -1,5 +1,6 @@
 @props([
     'title' => '',
+    'search' => true,
 ])
 
 <!doctype html>
@@ -11,6 +12,10 @@
     </head>
     <body>
         <x-common.header />
+
+        @if($search)
+            <x-common.main-search />
+        @endif
 
         <main class="main">
             {{ $slot }}

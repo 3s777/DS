@@ -1,0 +1,86 @@
+.user-search {
+
+    &__thumbnail {
+        margin-right: 12px;
+    }
+
+    &__img {
+        width: 100px;
+        height: 100px;
+    }
+
+    &__main {
+        display: flex;
+    }
+
+    &__name {
+        font-size: rem(18);
+        font-weight: 700;
+    }
+
+    &__nickname {
+        margin-top: 8px;
+        font-size: rem(18);
+    }
+
+    &__main-buttons {
+        margin-top: 8px;
+    }
+
+    &__buttons {
+        display: flex;
+        justify-content: flex-start;
+        flex-wrap: wrap;
+        width: 100%;
+        padding: 0 12px 12px 12px;
+    }
+
+    &__button {
+        position: relative;
+        padding: 4px;
+        margin-right: 6px;
+        margin-bottom: 4px;
+        background: none;
+        border: 1px solid $opposite-main-20;
+
+        &:hover {
+            background: $base-dark-like-transparent;
+        }
+
+        &:hover .search-card__badge {
+            background: $additional-main;
+        }
+
+        & svg {
+            fill: $opposite-main;
+            width: 20px;
+            height: 20px;
+        }
+
+        & .dollar-icon {
+            width: 14px;
+            height: 14px;
+        }
+
+        & .wishlist-icon {
+            width: 16px;
+            height: 16px;
+        }
+
+        & .star-icon {
+            width: 14px;
+            height: 14px;
+        }
+
+        & .button__icon-wrapper {
+            margin-right: 2px;
+        }
+    }
+
+    &__badge {
+        position: relative;
+        top: auto;
+        right: auto;
+        background: none;
+    }
+}

@@ -147,6 +147,7 @@
 
                     <x-common.counter-buttons
                         class="search-card__buttons"
+                        type="light"
                         button_class="search-card__button"
                         badge_class="search-card__badge"
                         add="12"

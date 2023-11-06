@@ -1,3 +1,7 @@
+@props([
+    'search' => true
+])
+
 <header class="header">
     <div class="container">
         <div class="header__inner">
@@ -17,5 +21,3 @@
         </div>
     </div>
 </header>
-
-<x-common.main-search />

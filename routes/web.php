@@ -19,7 +19,7 @@ Route::prefix('{locale}')->whereIn('locale', config('app.available_locales'))->g
     })->name('ui');
 
     Route::get('/game-carrier', function () {
-        return view('content.game-carrier');
+        return view('content.game-carrier.index');
     })->name('game-carrier');
 
     Route::get('/search', function () {

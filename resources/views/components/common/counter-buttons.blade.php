@@ -1,4 +1,5 @@
 @props([
+    'type' => 'standard',
     'button_class' => false,
     'badge_class' => false,
     'add' => false,
@@ -11,12 +12,15 @@
 
 <div
     {{ $attributes->class([
-            'counter-buttons'
+            'counter-buttons',
+            'counter-buttons_'.$type => $type
         ])
     }}>
     @if($add)
         <x-ui.form.button
-            class="counter-buttons__button {{ $button_class }}"
+            class="counter-buttons__badge
+                {{ $button_class }}
+                @if($type == 'light') counter-buttons__button_light @endif"
             tag="a"
             link="/"
             only_icon="true"
@@ -28,7 +32,9 @@
             </x-slot:icon>
             <x-slot:badge>
                 <x-ui.badge
-                    class="counter-buttons__badge {{ $badge_class }}"
+                    class="counter-buttons__badge
+                        {{ $badge_class }}
+                        @if($type == 'light') counter-buttons__badge_light @endif"
                     type="number"
                     align="standard"
                     color="success">
@@ -40,7 +46,9 @@
 
     @if($wishlist)
         <x-ui.form.button
-            class="counter-buttons__button {{ $button_class }}"
+            class="counter-buttons__badge
+                {{ $button_class }}
+                @if($type == 'light') counter-buttons__button_light @endif"
             tag="a"
             link="/"
             only_icon="true"
@@ -52,7 +60,9 @@
             </x-slot:icon>
             <x-slot:badge>
                 <x-ui.badge
-                    class="counter-buttons__badge {{ $badge_class }}"
+                    class="counter-buttons__badge
+                        {{ $badge_class }}
+                        @if($type == 'light') counter-buttons__badge_light @endif"
                     type="number"
                     align="standard"
                     color="success">
@@ -64,7 +74,9 @@
 
     @if($sale)
         <x-ui.form.button
-            class="counter-buttons__button {{ $button_class }}"
+            class="counter-buttons__badge
+                {{ $button_class }}
+                @if($type == 'light') counter-buttons__button_light @endif"
             tag="a"
             link="/"
             only_icon="true"
@@ -76,7 +88,9 @@
             </x-slot:icon>
             <x-slot:badge>
                 <x-ui.badge
-                    class="counter-buttons__badge {{ $badge_class }}"
+                    class="counter-buttons__badge
+                        {{ $badge_class }}
+                        @if($type == 'light') counter-buttons__badge_light @endif"
                     type="number"
                     align="standard"
                     color="success">
@@ -88,7 +102,9 @@
 
     @if($auction)
         <x-ui.form.button
-            class="counter-buttons__button {{ $button_class }}"
+            class="counter-buttons__badge
+                {{ $button_class }}
+                @if($type == 'light') counter-buttons__button_light @endif"
             tag="a"
             link="/"
             only_icon="true"
@@ -100,7 +116,9 @@
             </x-slot:icon>
             <x-slot:badge>
                 <x-ui.badge
-                    class="counter-buttons__badge {{ $badge_class }}"
+                    class="counter-buttons__badge
+                        {{ $badge_class }}
+                        @if($type == 'light') counter-buttons__badge_light @endif"
                     type="number"
                     align="standard"
                     color="success">
@@ -112,7 +130,9 @@
 
     @if($exchange)
         <x-ui.form.button
-            class="counter-buttons__button {{ $button_class }}"
+            class="counter-buttons__badge
+                {{ $button_class }}
+                @if($type == 'light') counter-buttons__button_light @endif"
             tag="a"
             link="/"
             only_icon="true"
@@ -124,7 +144,9 @@
             </x-slot:icon>
             <x-slot:badge>
                 <x-ui.badge
-                    class="counter-buttons__badge {{ $badge_class }}"
+                    class="counter-buttons__badge
+                        {{ $badge_class }}
+                        @if($type == 'light') counter-buttons__badge_light @endif"
                     type="number"
                     align="standard"
                     color="success">
@@ -136,7 +158,9 @@
 
     @if($favorite)
         <x-ui.form.button
-            class="counter-buttons__button {{ $button_class }}"
+            class="counter-buttons__badge
+                {{ $button_class }}
+                @if($type == 'light') counter-buttons__button_light @endif"
             tag="a"
             link="/"
             only_icon="true"
@@ -148,7 +172,9 @@
             </x-slot:icon>
             <x-slot:badge>
                 <x-ui.badge
-                    class="counter-buttons__badge {{ $badge_class }}"
+                    class="counter-buttons__badge
+                        {{ $badge_class }}
+                        @if($type == 'light') counter-buttons__badge_light @endif"
                     type="number"
                     align="standard"
                     color="success">
