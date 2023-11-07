@@ -1,11 +1,11 @@
 @props([
-    'align_buttons' => false
+    'alignButtons' => false
 ])
 
 <div
     {{ $attributes->class([
             'modal__footer',
-            'modal__footer_buttons_'.$align_buttons => $align_buttons
+            'modal__footer_buttons_'.$alignButtons => $alignButtons
         ])
     }}>
     {{ $slot }}

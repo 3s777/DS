@@ -37,7 +37,7 @@
                     </x-ui.form.group>
 
                     <x-ui.form.group>
-                        <x-ui.form.button full_width="true">
+                        <x-ui.form.button full-width="true">
                             {{ __('Send Password Reset Link') }}
                         </x-ui.form.button>
                     </x-ui.form.group>

@@ -111,7 +111,7 @@
                         <div class="image__caption">Image description</div>
                         <x-ui.badge
                             type="ribbon"
-                            ribbon_align="left">
+                            ribbon-align="left">
                             Ribbon badge
                         </x-ui.badge>
                     </div>
@@ -126,21 +126,21 @@
                         </x-ui.badge>
                         <x-ui.badge
                             type="ribbon"
-                            ribbon_align="right"
+                            ribbon-align="right"
                             color="success">
                             Ribbon badge
                         </x-ui.badge>
                         <x-ui.badge
                             class="ui__ribbon_test_1"
                             type="ribbon"
-                            ribbon_align="right"
+                            ribbon-align="right"
                             color="info">
                             Ribbon badge
                         </x-ui.badge>
                         <x-ui.badge
                             class="ui__ribbon_test_2"
                             type="ribbon"
-                            ribbon_align="right"
+                            ribbon-align="right"
                             color="warning">
                             Ribbon badge
                         </x-ui.badge>
@@ -157,7 +157,7 @@
                         <x-ui.badge
                             color="success"
                             type="bookmark"
-                            bookmark_align="right">
+                            bookmark-align="right">
                             new
                         </x-ui.badge>
                     </div>

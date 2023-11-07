@@ -7,7 +7,7 @@
                 <div class="ui__item-wrapper">
                     <x-ui.popover
                         class="ui__popover"
-                        content_class="popover__content_test"
+                        content-class="popover__content_test"
                         title="{{ __('Popover title') }}"
                         tail="none">
                         Lorem ipsum dolor sit amet, sxcv sdf consectetur adipisicing elit
@@ -19,7 +19,7 @@
                 <div class="ui__item-wrapper">
                     <x-ui.popover
                         class="ui__popover"
-                        content_class="popover__content_test"
+                        content-class="popover__content_test"
                         title="{{ __('Popover title') }}">
                         Lorem ipsum dolor sit amet, sxcv sdf consectetur adipisicing elit
                         <x-slot:close x-on:click="show_message = ! show_message">
@@ -33,7 +33,7 @@
                 <div class="ui__item-wrapper">
                     <x-ui.popover
                         class="ui__popover"
-                        content_class="popover__content_test"
+                        content-class="popover__content_test"
                         title="{{ __('Popover title') }}"
                         tail="left">
                         Lorem ipsum dolor sit amet, sxcv sdf consectetur adipisicing elit
@@ -48,7 +48,7 @@
                 <div class="ui__item-wrapper">
                     <x-ui.popover
                         class="ui__popover"
-                        content_class="popover__content_test"
+                        content-class="popover__content_test"
                         title="{{ __('Popover title') }}"
                         tail="right">
                         Lorem ipsum dolor sit amet, sxcv sdf consectetur adipisicing elit
@@ -63,7 +63,7 @@
                 <div class="ui__item-wrapper">
                     <x-ui.popover
                         class="ui__popover"
-                        content_class="popover__content_test"
+                        content-class="popover__content_test"
                         title="{{ __('Popover title') }}">
                         Lorem ipsum dolor sit amet, sxcv sdf consectetur adipisicing elit
                         <x-slot:footer>
@@ -83,7 +83,7 @@
                 <div class="ui__item-wrapper">
                     <x-ui.popover
                         class="ui__popover"
-                        content_class="popover__content_test"
+                        content-class="popover__content_test"
                         title="{{ __('Popover title') }}">
                         Lorem ipsum dolor sit amet, sxcv sdf consectetur adipisicing elit
                         <x-slot:footer>
@@ -106,7 +106,7 @@
                         <x-ui.popover
                             x-on:click.outside="testPopoverHidden = true" ::class="testPopoverHidden ? '' : 'popover_visible'"
                             class="popover_hidden ui__popover_visible"
-                            content_class="popover__content_test"
+                            content-class="popover__content_test"
                             title="{{ __('Popover title') }}"
                             tail="left">
                             Lorem ipsum dolor sit amet, sxcv sdf consectetur adipisicing elit
@@ -136,7 +136,7 @@
                     <x-ui.form.button
                         class="tooltip_trigger"
                         color="cancel"
-                        tooltip_size="big"
+                        tooltip-size="big"
                         tooltip="true"
                         data-tooltip="tooltip_2">
                         ?
@@ -149,7 +149,7 @@
 
                     <x-ui.form.button
                         class="tooltip_trigger"
-                        tooltip_size="extra-small"
+                        tooltip-size="extra-small"
                         tooltip="true"
                         data-tooltip="tooltip_3">
                         ?

@@ -2,12 +2,12 @@
     'footer' => false,
     'type' => 'parent',
     'color' => false,
-    'avatar_url',
+    'avatarUrl',
     'username',
-    'user_link',
+    'userLink',
     'date',
-    'likes_count',
-    'likes_status',
+    'likesCount',
+    'likesStatus',
 ])
 
 <div
@@ -21,8 +21,8 @@
 
         <x-ui.avatar
             class="comment__avatar"
-            link="{{ $user_link }}"
-            src="{{ $avatar_url }}"
+            link="{{ $userLink }}"
+            src="{{ $avatarUrl }}"
             username="{{ $username }}"
         >
         </x-ui.avatar>
@@ -30,7 +30,7 @@
         <div class="comment__content">
             <div class="comment__header">
                 <div class="comment__username">
-                    <a class="comment__user-button button button_submit" href="{{ $user_link }}">{{ $username }}</a>
+                    <a class="comment__user-button button button_submit" href="{{ $userLink }}">{{ $username }}</a>
                 </div>
                 <div class="comment__date">{{ $date }}</div>
             </div>
@@ -40,9 +40,9 @@
             <div class="comment__footer">
                 <x-ui.like
                     class="comment__like"
-                    count="{{ $likes_count }}"
+                    count="{{ $likesCount }}"
                     size="small"
-                    status="{{ $likes_status }}"
+                    status="{{ $likesStatus }}"
                     type="like">
                     <x-svg.like class="like__icon"></x-svg.like>
                 </x-ui.like>

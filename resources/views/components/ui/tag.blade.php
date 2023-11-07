@@ -2,7 +2,6 @@
     'tag' => 'a',
     'standard' => true,
     'indent' => 'right',
-    'bottom_indent' => false,
     'color' => false
 ])
 

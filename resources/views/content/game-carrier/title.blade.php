@@ -10,7 +10,7 @@
             link="/"
             size="small"
             color="dark"
-            mobile_icon="true"
+            mobile-icon="true"
             title="{{ __('На полках') }}">
                 <x-slot:icon>
                     <x-svg.check></x-svg.check>
@@ -33,7 +33,7 @@
             link="/"
             size="small"
             color="dark"
-            mobile_icon="true"
+            mobile-icon="true"
             title="{{ __('Желают') }}">
             <x-slot:icon>
                 <x-svg.wishlist></x-svg.wishlist>
@@ -56,7 +56,7 @@
             link="/"
             size="small"
             color="dark"
-            mobile_icon="true"
+            mobile-icon="true"
             title="{{ __('Продажа') }}">
             <x-slot:icon>
                 <x-svg.dollar></x-svg.dollar>
@@ -79,7 +79,7 @@
             link="/"
             size="small"
             color="dark"
-            mobile_icon="true"
+            mobile-icon="true"
             title="{{ __('Аукционы') }}">
             <x-slot:icon>
                 <x-svg.auction></x-svg.auction>
@@ -102,7 +102,7 @@
             link="/"
             size="small"
             color="dark"
-            mobile_icon="true"
+            mobile-icon="true"
             title="{{ __('Обмен') }}">
             <x-slot:icon>
                 <x-svg.exchange></x-svg.exchange>
@@ -125,7 +125,7 @@
             link="/"
             size="small"
             color="dark"
-            mobile_icon="true"
+            mobile-icon="true"
             title="{{ __('В избранном') }}">
             <x-slot:icon>
                 <x-svg.star></x-svg.star>

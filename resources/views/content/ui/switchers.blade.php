@@ -131,7 +131,7 @@
                             value="11"
                             color="dark"
                             checked="true"
-                            label_class="radio-group__label"
+                            label-class="radio-group__label"
                             label="{{ __('Radio button 1') }}">
                         </x-ui.form.radio-button>
 
@@ -141,7 +141,7 @@
                             name="radio"
                             value="12"
                             color="dark"
-                            label_class="radio-group__label"
+                            label-class="radio-group__label"
                             label="{{ __('Radio button 2') }}">
                         </x-ui.form.radio-button>
 
@@ -151,7 +151,7 @@
                             name="radio"
                             value="13"
                             color="dark"
-                            label_class="radio-group__label"
+                            label-class="radio-group__label"
                             label="{{ __('Radio button 3') }}">
                         </x-ui.form.radio-button>
 
@@ -161,7 +161,7 @@
                             name="radio"
                             value="14"
                             color="disabled"
-                            label_class="radio-group__label"
+                            label-class="radio-group__label"
                             label="{{ __('Disabled') }}">
                         </x-ui.form.radio-button>
 

@@ -2,7 +2,7 @@
     <div class="users__search">
         <x-grid.container>
             <x-ui.input-search
-                wrapper_class="users-search__input-search"
+                wrapper-class="users-search__input-search"
                 link="{{ route('users') }}"
                 placeholder="{{ __('Введите имя пользователя?') }}">
             </x-ui.input-search>
@@ -18,26 +18,253 @@
             </div>
 
             <div class="users__list">
-                <x-ui.card size="small">
+                <x-ui.card class="users__card" size="small">
                     <div class="users__item user-search">
                         <div class="user-search__main">
                             <div class="user-search__thumbnail">
-                                <img class="user-search__img" src="{{ asset('/storage/test-300.jpg') }}" alt="">
+                                <a href=""><img class="user-search__img" src="{{ asset('/storage/test-300.jpg') }}" alt=""></a>
                             </div>
                             <div class="user-search__info">
-                                <div class="user-search__name">Иванов Иван</div>
-                                <div class="user-search__nickname">@test-user</div>
-                                <div class="user-search__main-buttons">
+                                <div class="user-search__name"><a href="">Иванов Иван</a></div>
+                                <div class="user-search__nickname"><a href="">@test-user</a></div>
+                                <div class="user-search__subscribe">
                                     <x-ui.form.button size="small">Подписаться</x-ui.form.button>
-                                    <x-ui.form.button size="small">Сообщение</x-ui.form.button>
-                                    <x-ui.form.button size="small">Перейти в блог</x-ui.form.button>
+                                    <x-ui.form.button class="user-search__button-message" tag="a" href="{{ route('users') }}" only-icon="true" size="small" title="Написать сообщение">
+                                        <x-svg.message class="user-search__message-icon"></x-svg.message>
+                                    </x-ui.form.button>
                                 </div>
                             </div>
                         </div>
+
                         <x-common.counter-buttons
-                            class="users-search__buttons"
-                            button_class="users-search__button"
-                            badge_class="users-search__badge"
+                            type="light"
+                            class="user-search__buttons"
+                            button-class="user-search__button"
+                            badge-class="user-search__badge"
+                            add="12"
+                            wishlist="50"
+                            sale="5"
+                            auction="25"
+                            exchange="2"
+                        />
+                    </div>
+                </x-ui.card>
+
+                <x-ui.card class="users__card" size="small">
+                    <div class="users__item user-search">
+                        <div class="user-search__main">
+                            <div class="user-search__thumbnail">
+                                <a href=""><img class="user-search__img" src="{{ asset('/storage/test-300.jpg') }}" alt=""></a>
+                            </div>
+                            <div class="user-search__info">
+                                <div class="user-search__name"><a href="">Иванов Иван</a></div>
+                                <div class="user-search__nickname"><a href="">@test-user</a></div>
+                                <div class="user-search__subscribe">
+                                    <x-ui.form.button color="cancel" size="small">Отписаться</x-ui.form.button>
+                                    <x-ui.form.button class="user-search__button-message" tag="a" href="{{ route('users') }}" only-icon="true" size="small" title="Написать сообщение">
+                                        <x-svg.message class="user-search__message-icon"></x-svg.message>
+                                    </x-ui.form.button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <x-common.counter-buttons
+                            type="light"
+                            class="user-search__buttons"
+                            button-class="user-search__button"
+                            badge-class="user-search__badge"
+                            add="12"
+                            wishlist="50"
+                            sale="5"
+                            auction="25"
+                            exchange="2"
+                        />
+                    </div>
+                </x-ui.card>
+
+                <x-ui.card class="users__card" size="small">
+                    <div class="users__item user-search">
+                        <div class="user-search__main">
+                            <div class="user-search__thumbnail">
+                                <a href=""><img class="user-search__img" src="{{ asset('/storage/test-300.jpg') }}" alt=""></a>
+                            </div>
+                            <div class="user-search__info">
+                                <div class="user-search__name"><a href="">Тестов Тест Тестович</a></div>
+                                <div class="user-search__nickname"><a href="">@testovichhhh</a></div>
+                                <div class="user-search__subscribe">
+                                    <x-ui.form.button size="small">Подписаться</x-ui.form.button>
+                                    <x-ui.form.button class="user-search__button-message" tag="a" href="{{ route('users') }}" only-icon="true" size="small" title="Написать сообщение">
+                                        <x-svg.message class="user-search__message-icon"></x-svg.message>
+                                    </x-ui.form.button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <x-common.counter-buttons
+                            type="light"
+                            class="user-search__buttons"
+                            button-class="user-search__button"
+                            badge-class="user-search__badge"
+                            add="1200"
+                            wishlist="5000"
+                            sale="500000"
+                            auction="2500"
+                            exchange="2"
+                        />
+                    </div>
+                </x-ui.card>
+
+                <x-ui.card class="users__card" size="small">
+                    <div class="users__item user-search">
+                        <div class="user-search__main">
+                            <div class="user-search__thumbnail">
+                                <a href=""><img class="user-search__img" src="{{ asset('/storage/test-300.jpg') }}" alt=""></a>
+                            </div>
+                            <div class="user-search__info">
+                                <div class="user-search__name"><a href="">Иванов Иван</a></div>
+                                <div class="user-search__nickname"><a href="">@test-user</a></div>
+                                <div class="user-search__subscribe">
+                                    <x-ui.form.button size="small">Подписаться</x-ui.form.button>
+                                    <x-ui.form.button class="user-search__button-message" tag="a" href="{{ route('users') }}" only-icon="true" size="small" title="Написать сообщение">
+                                        <x-svg.message class="user-search__message-icon"></x-svg.message>
+                                    </x-ui.form.button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <x-common.counter-buttons
+                            type="light"
+                            class="user-search__buttons"
+                            button-class="user-search__button"
+                            badge-class="user-search__badge"
+                            add="12"
+                            wishlist="50"
+                            sale="5"
+                            auction="25"
+                            exchange="2"
+                        />
+                    </div>
+                </x-ui.card>
+
+                <x-ui.card class="users__card" size="small">
+                    <div class="users__item user-search">
+                        <div class="user-search__main">
+                            <div class="user-search__thumbnail">
+                                <a href=""><img class="user-search__img" src="{{ asset('/storage/test-300.jpg') }}" alt=""></a>
+                            </div>
+                            <div class="user-search__info">
+                                <div class="user-search__name"><a href="">Иванов Иван</a></div>
+                                <div class="user-search__nickname"><a href="">@test-user</a></div>
+                                <div class="user-search__subscribe">
+                                    <x-ui.form.button color="cancel" size="small">Отписаться</x-ui.form.button>
+                                    <x-ui.form.button class="user-search__button-message" tag="a" href="{{ route('users') }}" only-icon="true" size="small" title="Написать сообщение">
+                                        <x-svg.message class="user-search__message-icon"></x-svg.message>
+                                    </x-ui.form.button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <x-common.counter-buttons
+                            type="light"
+                            class="user-search__buttons"
+                            button-class="user-search__button"
+                            badge-class="user-search__badge"
+                            add="12"
+                            wishlist="50"
+                            sale="5"
+                            auction="25"
+                            exchange="2"
+                        />
+                    </div>
+                </x-ui.card>
+
+                <x-ui.card class="users__card" size="small">
+                    <div class="users__item user-search">
+                        <div class="user-search__main">
+                            <div class="user-search__thumbnail">
+                                <a href=""><img class="user-search__img" src="{{ asset('/storage/test-300.jpg') }}" alt=""></a>
+                            </div>
+                            <div class="user-search__info">
+                                <div class="user-search__name"><a href="">Тестов Тест Тестович</a></div>
+                                <div class="user-search__nickname"><a href="">@testovichhhh</a></div>
+                                <div class="user-search__subscribe">
+                                    <x-ui.form.button size="small">Подписаться</x-ui.form.button>
+                                    <x-ui.form.button class="user-search__button-message" tag="a" href="{{ route('users') }}" only-icon="true" size="small" title="Написать сообщение">
+                                        <x-svg.message class="user-search__message-icon"></x-svg.message>
+                                    </x-ui.form.button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <x-common.counter-buttons
+                            type="light"
+                            class="user-search__buttons"
+                            button-class="user-search__button"
+                            badge-class="user-search__badge"
+                            add="1200"
+                            wishlist="5000"
+                            sale="500000"
+                            auction="2500"
+                            exchange="2"
+                        />
+                    </div>
+                </x-ui.card>
+
+                <x-ui.card class="users__card" size="small">
+                    <div class="users__item user-search">
+                        <div class="user-search__main">
+                            <div class="user-search__thumbnail">
+                                <a href=""><img class="user-search__img" src="{{ asset('/storage/test-300.jpg') }}" alt=""></a>
+                            </div>
+                            <div class="user-search__info">
+                                <div class="user-search__name"><a href="">Иванов Иван</a></div>
+                                <div class="user-search__nickname"><a href="">@test-user</a></div>
+                                <div class="user-search__subscribe">
+                                    <x-ui.form.button size="small">Подписаться</x-ui.form.button>
+                                    <x-ui.form.button class="user-search__button-message" tag="a" href="{{ route('users') }}" only-icon="true" size="small" title="Написать сообщение">
+                                        <x-svg.message class="user-search__message-icon"></x-svg.message>
+                                    </x-ui.form.button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <x-common.counter-buttons
+                            type="light"
+                            class="user-search__buttons"
+                            button-class="user-search__button"
+                            badge-class="user-search__badge"
+                            add="12"
+                            wishlist="50"
+                            sale="5"
+                            auction="25"
+                            exchange="2"
+                        />
+                    </div>
+                </x-ui.card>
+
+                <x-ui.card class="users__card" size="small">
+                    <div class="users__item user-search">
+                        <div class="user-search__main">
+                            <div class="user-search__thumbnail">
+                                <a href=""><img class="user-search__img" src="{{ asset('/storage/test-300.jpg') }}" alt=""></a>
+                            </div>
+                            <div class="user-search__info">
+                                <div class="user-search__name"><a href="">Иванов Иван</a></div>
+                                <div class="user-search__nickname"><a href="">@test-user</a></div>
+                                <div class="user-search__subscribe">
+                                    <x-ui.form.button size="small">Подписаться</x-ui.form.button>
+                                    <x-ui.form.button class="user-search__button-message" tag="a" href="{{ route('users') }}" only-icon="true" size="small" title="Написать сообщение">
+                                        <x-svg.message class="user-search__message-icon"></x-svg.message>
+                                    </x-ui.form.button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <x-common.counter-buttons
+                            type="light"
+                            class="user-search__buttons"
+                            button-class="user-search__button"
+                            badge-class="user-search__badge"
                             add="12"
                             wishlist="50"
                             sale="5"
@@ -49,11 +276,6 @@
             </div>
         </div>
     </x-grid.container>
-
-
-
-
-
 
     @push('scripts')
         <script type="module">

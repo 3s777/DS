@@ -9,7 +9,7 @@
                     <x-ui.form.group>
                         <x-ui.form.button
                             x-on:click.stop="modalHide = ! modalHide"
-                            full_width="true">
+                            full-width="true">
                             Open Extra Small Modal
                         </x-ui.form.button>
                     </x-ui.form.group>
@@ -29,9 +29,9 @@
                                 Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ab alias animi aperiam architecto commodi, cum earum fugit hic ipsum maxime neque quasi quia recusandae reiciendis rem. Facilis nemo quia sunt!
                             </x-ui.modal.body>
 
-                            <x-ui.modal.footer align_buttons="center">
+                            <x-ui.modal.footer align-buttons="center">
                                 <x-ui.form.button
-                                    only_icon="true"
+                                    only-icon="true"
                                     indent="right">
                                     <x-svg.success class="button__icon button__icon_big button__edit-icon"></x-svg.success>
                                 </x-ui.form.button>
@@ -39,7 +39,7 @@
                                 <x-ui.form.button
                                     x-on:click="modalHide = true"
                                     color="cancel"
-                                    only_icon="true">
+                                    only-icon="true">
                                     <x-svg.cancel class="button__icon button__icon_big button__close-icon"></x-svg.cancel>
                                 </x-ui.form.button>
                             </x-ui.modal.footer>
@@ -54,7 +54,7 @@
                         <x-ui.form.button
                             x-on:click.stop="modalHide = ! modalHide"
                             color="info"
-                            full_width="true">
+                            full-width="true">
                             Open Small Modal
                         </x-ui.form.button>
                     </x-ui.form.group>
@@ -78,7 +78,7 @@
                                 Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ab alias animi aperiam architecto commodi, cum earum fugit hic ipsum maxime neque quasi quia recusandae reiciendis rem. Facilis nemo quia sunt!
                             </x-ui.modal.body>
 
-                            <x-ui.modal.footer align_buttons="right">
+                            <x-ui.modal.footer align-buttons="right">
                                 <x-ui.form.button>
                                     Submit
                                 </x-ui.form.button>
@@ -101,7 +101,7 @@
                         <x-ui.form.button
                             x-on:click.stop="modalHide = ! modalHide"
                             color="warning"
-                            full_width="true">
+                            full-width="true">
                             Open Normal Modal
                         </x-ui.form.button>
                     </x-ui.form.group>
@@ -125,7 +125,7 @@
                                 Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ab alias animi aperiam architecto commodi, cum earum fugit hic ipsum maxime neque quasi quia recusandae reiciendis rem. Facilis nemo quia sunt!
                             </x-ui.modal.body>
 
-                            <x-ui.modal.footer align_buttons="right">
+                            <x-ui.modal.footer align-buttons="right">
                                 <x-ui.form.button>
                                     Submit
                                 </x-ui.form.button>
@@ -147,7 +147,7 @@
                     <x-ui.form.group>
                         <x-ui.form.button
                             x-on:click.stop="modalHide = ! modalHide"
-                            full_width="true">
+                            full-width="true">
                             Open Big Modal
                         </x-ui.form.button>
                     </x-ui.form.group>
@@ -185,7 +185,7 @@
                         <x-ui.form.button
                             x-on:click.stop="modalHide = ! modalHide"
                             color="warning"
-                            full_width="true">
+                            full-width="true">
                             Open Large Modal
                         </x-ui.form.button>
                     </x-ui.form.group>
@@ -209,7 +209,7 @@
                                 Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ab alias animi aperiam architecto commodi, cum earum fugit hic ipsum maxime neque quasi quia recusandae reiciendis rem. Facilis nemo quia sunt!
                             </x-ui.modal.body>
 
-                            <x-ui.modal.footer align_buttons="left">
+                            <x-ui.modal.footer align-buttons="left">
                                 <x-ui.form.button
                                     indent="right">
                                     Submit
@@ -233,7 +233,7 @@
                         <x-ui.form.button
                             x-on:click.stop="toastHide = ! toastHide; setTimeout(() => toastHide = true, 3000)"
                             color="info"
-                            full_width="true">
+                            full-width="true">
                             Show Toast
                         </x-ui.form.button>
                     </x-ui.form.group>

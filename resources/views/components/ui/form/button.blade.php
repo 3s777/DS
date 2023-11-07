@@ -2,16 +2,16 @@
     'tag' => 'button',
     'link' => false,
     'icon' => false,
-    'mobile_icon' => false,
-    'icon_size' => false,
+    'mobileIcon' => false,
+    'iconSize' => false,
     'type' => false,
     'size' => '',
-    'not_clickable' => false,
+    'notClickable' => false,
     'color' => 'submit',
-    'full_width' => false,
-    'only_icon' => false,
+    'fullWidth' => false,
+    'onlyIcon' => false,
     'tooltip' => false,
-    'tooltip_size' => false,
+    'tooltipSize' => false,
     'indent' => false,
     'badge' => false
 ])
@@ -21,16 +21,16 @@
             'button',
             'button_'.$color => $color,
             'button_size_'.$size => $size,
-            'button_'.$icon_size.'_icon' => $icon_size,
-            'button_full_width' => $full_width,
-            'button_icon' => $icon && !$mobile_icon,
-            'button_icon_mobile' => $mobile_icon,
-            'button_only_icon' => $only_icon,
-            'button_only_icon_'.$size => $only_icon && $size,
+            'button_'.$iconSize.'_icon' => $iconSize,
+            'button_full_width' => $fullWidth,
+            'button_icon' => $icon && !$mobileIcon,
+            'button_icon_mobile' => $mobileIcon,
+            'button_only_icon' => $onlyIcon,
+            'button_only_icon_'.$size => $onlyIcon && $size,
             'button_tooltip' => $tooltip,
-            'button_tooltip_'.$tooltip_size => $tooltip_size,
+            'button_tooltip_'.$tooltipSize => $tooltipSize,
             'button_indent_'.$indent => $indent,
-            'button_not_clickable' => $not_clickable
+            'button_not_clickable' => $notClickable
         ])
         ->merge([
             'href' => $link,
@@ -42,13 +42,13 @@
     @if($icon)
         <div {{ $icon->attributes->class([
                 'button__icon-wrapper',
-                'button__icon-mobile-wrapper' => $mobile_icon,
+                'button__icon-mobile-wrapper' => $mobileIcon,
             ]) }}>
             {{ $icon }}
         </div>
     @endif
 
-    @if($mobile_icon)
+    @if($mobileIcon)
         <span class="button__icon-mobile-text-wrapper">
             {{ $slot }}
         </span>

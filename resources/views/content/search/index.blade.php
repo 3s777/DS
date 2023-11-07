@@ -87,8 +87,9 @@
 
                     <x-common.counter-buttons
                         class="search-card__buttons"
-                        button_class="search-card__button"
-                        badge_class="search-card__badge"
+                        button-class="search-card__button"
+                        badge-class="search-card__badge"
+                        type="light"
                         add="12"
                         wishlist="50"
                         sale="5"
@@ -147,9 +148,9 @@
 
                     <x-common.counter-buttons
                         class="search-card__buttons"
+                        button-class="search-card__button"
+                        badge-class="search-card__badge"
                         type="light"
-                        button_class="search-card__button"
-                        badge_class="search-card__badge"
                         add="12"
                         wishlist="17"
                         sale="20"
@@ -193,8 +194,9 @@
 
                     <x-common.counter-buttons
                         class="search-card__buttons"
-                        button_class="search-card__button"
-                        badge_class="search-card__badge"
+                        button-class="search-card__button"
+                        badge-class="search-card__badge"
+                        type="light"
                         add="12"
                         wishlist="1200"
                         sale="5"
@@ -244,8 +246,9 @@
 
                     <x-common.counter-buttons
                         class="search-card__buttons"
-                        button_class="search-card__button"
-                        badge_class="search-card__badge"
+                        button-class="search-card__button"
+                        badge-class="search-card__badge"
+                        type="light"
                         add="12"
                         wishlist="1200"
                         sale="5"
@@ -295,8 +298,9 @@
 
                     <x-common.counter-buttons
                         class="search-card__buttons"
-                        button_class="search-card__button"
-                        badge_class="search-card__badge"
+                        button-class="search-card__button"
+                        badge-class="search-card__badge"
+                        type="light"
                         add="12"
                         wishlist="1200"
                         sale="5"
@@ -355,8 +359,9 @@
 
                     <x-common.counter-buttons
                         class="search-card__buttons"
-                        button_class="search-card__button"
-                        badge_class="search-card__badge"
+                        button-class="search-card__button"
+                        badge-class="search-card__badge"
+                        type="light"
                         add="12"
                         wishlist="1200"
                         sale="5"
@@ -400,8 +405,9 @@
 
                     <x-common.counter-buttons
                         class="search-card__buttons"
-                        button_class="search-card__button"
-                        badge_class="search-card__badge"
+                        button-class="search-card__button"
+                        badge-class="search-card__badge"
+                        type="light"
                         add="12"
                         wishlist="1200"
                         sale="5"
@@ -451,8 +457,9 @@
 
                     <x-common.counter-buttons
                         class="search-card__buttons"
-                        button_class="search-card__button"
-                        badge_class="search-card__badge"
+                        button-class="search-card__button"
+                        badge-class="search-card__badge"
+                        type="light"
                         add="12"
                         wishlist="1200"
                         sale="5"
@@ -502,8 +509,9 @@
 
                     <x-common.counter-buttons
                         class="search-card__buttons"
-                        button_class="search-card__button"
-                        badge_class="search-card__badge"
+                        button-class="search-card__button"
+                        badge-class="search-card__badge"
+                        type="light"
                         add="12"
                         wishlist="1200"
                         sale="5"
@@ -553,8 +561,9 @@
 
                     <x-common.counter-buttons
                         class="search-card__buttons"
-                        button_class="search-card__button"
-                        badge_class="search-card__badge"
+                        button-class="search-card__button"
+                        badge-class="search-card__badge"
+                        type="light"
                         add="12"
                         wishlist="1200"
                         sale="5"

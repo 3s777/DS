@@ -7,8 +7,8 @@
         <div class="header__inner">
             <x-common.logo
                 class="header__logo"
-                class_site_icon="header__site-icon"
-                class_site_name="header__site-name" />
+                class-site-icon="header__site-icon"
+                class-site-name="header__site-name" />
 
             <x-common.main-menu />
 

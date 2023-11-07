@@ -5,7 +5,6 @@
         justify-content: flex-start;
         flex-wrap: wrap;
         width: 100%;
-        padding: 0 12px 12px 12px;
     }
 
     &__button_light {
@@ -16,11 +15,15 @@
         background: none;
         border: 1px solid $opposite-main-20;
 
+        &:last-child {
+            margin-right: 0;
+        }
+
         &:hover {
             background: $base-dark-like-transparent;
         }
 
-        &:hover .search-card__badge {
+        &:hover .counter-buttons__badge {
             background: $additional-main;
         }
 

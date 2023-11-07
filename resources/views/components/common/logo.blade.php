@@ -1,7 +1,7 @@
 @props([
     'link' => '/',
-    'class_site_icon' => false,
-    'class_site_name' => false,
+    'classSiteIcon' => false,
+    'classSiteName' => false,
 ])
 
 <div
@@ -10,7 +10,7 @@
         )
     }}>
     <a class="logo__link" href="{{ $link }}">
-        <x-svg.logo.site-icon class="{{ $class_site_icon }}" ></x-svg.logo.site-icon>
-        <x-svg.logo.site-name class="{{ $class_site_name }}" ></x-svg.logo.site-name>
+        <x-svg.logo.site-icon class="{{ $classSiteIcon }}" ></x-svg.logo.site-icon>
+        <x-svg.logo.site-name class="{{ $classSiteName }}" ></x-svg.logo.site-name>
     </a>
 </div>

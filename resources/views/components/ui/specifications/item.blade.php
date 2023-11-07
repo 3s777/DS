@@ -1,17 +1,17 @@
 @props([
     'title',
-    'title_class' => false,
-    'value_class' => false,
+    'titleClass' => false,
+    'valueClass' => false,
 ])
 
 <div {{ $attributes->class([
             'specifications__item',
         ])
     }}>
-    <dt class="specifications__item-title {{ $title_class }}">
+    <dt class="specifications__item-title {{ $titleClass }}">
         {{ $title }}:
     </dt>
-    <dd class="specifications__item-value {{ $value_class }}">
+    <dd class="specifications__item-value {{ $valueClass }}">
         {{ $slot }}
     </dd>
 </div>

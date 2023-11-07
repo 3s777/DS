@@ -1,9 +1,9 @@
 @props([
-    'tag_title' => 'div',
+    'tagTitle' => 'div',
     'title' => false,
     'close' => false,
     'tail' => false,
-    'content_class' => false,
+    'contentClass' => false,
     'footer' => false
 ])
 
@@ -15,11 +15,11 @@
     }}>
     <div class="popover__inner">
         @if($title)
-            <{{ $tag_title }} class="popover__title">
+            <{{ $tagTitle }} class="popover__title">
                 {{ $title }}
-            </{{ $tag_title }}>
+            </{{ $tagTitle }}>
         @endif
-        <div class="popover__content {{ $content_class }}">
+        <div class="popover__content {{ $contentClass }}">
             {{ $slot }}
         </div>
 

@@ -1,13 +1,12 @@
 @props([
     'link' => '#',
     'placeholder',
-    'id_input' => '',
-    'id_form' => '',
+    'idInput' => '',
     'color'=>'',
-    'wrapper_class'=>false
+    'wrapperClass'=>false
 ])
 
-<div class="input-search @if($wrapper_class) {{ $wrapper_class }} @endif" x-data="{ search_active: false }">
+<div class="input-search @if($wrapperClass) {{ $wrapperClass }} @endif" x-data="{ search_active: false }">
     <div class="input-search__inner" x-on:click.outside="search_active = false">
         <form
             {{ $attributes->class([
@@ -18,7 +17,7 @@
             :class="search_active ? 'input-search__form_active' : ''"
             action="{{ $link }}">
             <input
-                id="{{ $id_input }}"
+                id="{{ $idInput }}"
                 x-on:click="search_active = true"
                 class="input-search__form-input"
                 type="search"

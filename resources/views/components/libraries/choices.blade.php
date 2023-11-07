@@ -4,12 +4,12 @@
     'label' => false,
     'input' => false,
     'value' => false,
-    'show_label' => true,
-    'wrapper_class' => false,
+    'showLabel' => true,
+    'wrapperClass' => false,
 ])
 
-<div class="choices-block {{ $wrapper_class }}">
-    @if($show_label)
+<div class="choices-block {{ $wrapperClass }}">
+    @if($showLabel)
         <label class="choices-block__label" for="{{ $id }}">{{ $label }}</label>
     @endif
     @if($input)
@@ -37,7 +37,4 @@
             {{ $slot }}
         </x-ui.form.select>
     @endif
-
-
-
 </div>

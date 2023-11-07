@@ -3,13 +3,13 @@
         <div class="main-search" x-data="{ filters_hide: true }">
             <div class="main-search__header">
                 <x-ui.input-search
-                    wrapper_class="main-search__input-search"
+                    wrapper-class="main-search__input-search"
                     link="{{ route('search') }}"
                     placeholder="{{ __('Что будем искать?') }}">
                 </x-ui.input-search>
                 <x-ui.form.button
                     class="main-search__filter-button"
-                    only_icon="true"
+                    only-icon="true"
                     color="dark"
                     ::class="filters_hide ? '' : 'button_submit'"
                     x-on:click="filters_hide = !filters_hide">

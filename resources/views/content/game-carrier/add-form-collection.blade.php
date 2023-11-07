@@ -366,7 +366,7 @@
 
         <x-grid.col lg="12" xl="12" md="12" sm="12">
             <x-ui.form.group>
-                <x-ui.form.button type="submit" full_width="true">Добавить</x-ui.form.button>
+                <x-ui.form.button type="submit" full-width="true">Добавить</x-ui.form.button>
             </x-ui.form.group>
         </x-grid.col>
 

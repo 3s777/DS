@@ -1,7 +1,16 @@
 .user-search {
 
+    &__main {
+        display: flex;
+
+        a {
+            text-decoration: none;
+        }
+    }
+
     &__thumbnail {
         margin-right: 12px;
+        line-height: 0;
     }
 
     &__img {
@@ -9,22 +18,46 @@
         height: 100px;
     }
 
-    &__main {
+    &__info {
         display: flex;
+        flex-wrap: wrap;
+        width: 100%;
     }
 
     &__name {
+        width: 100%;
         font-size: rem(18);
         font-weight: 700;
     }
 
     &__nickname {
+        width: 100%;
         margin-top: 8px;
         font-size: rem(18);
     }
 
     &__main-buttons {
+        display: flex;
+        justify-content: space-between;
+        width: 100%;
         margin-top: 8px;
+    }
+
+    &__subscribe {
+        display: flex;
+        justify-content: space-between;
+        width: 100%;
+        margin-top: 8px;
+    }
+
+    &__message-icon {
+        fill: $opposite-main;
+        width: 18px;
+        height: 18px;
+    }
+
+    &__button-message {
+        padding: 6px 12px;
     }
 
     &__buttons {
@@ -32,55 +65,6 @@
         justify-content: flex-start;
         flex-wrap: wrap;
         width: 100%;
-        padding: 0 12px 12px 12px;
-    }
-
-    &__button {
-        position: relative;
-        padding: 4px;
-        margin-right: 6px;
-        margin-bottom: 4px;
-        background: none;
-        border: 1px solid $opposite-main-20;
-
-        &:hover {
-            background: $base-dark-like-transparent;
-        }
-
-        &:hover .search-card__badge {
-            background: $additional-main;
-        }
-
-        & svg {
-            fill: $opposite-main;
-            width: 20px;
-            height: 20px;
-        }
-
-        & .dollar-icon {
-            width: 14px;
-            height: 14px;
-        }
-
-        & .wishlist-icon {
-            width: 16px;
-            height: 16px;
-        }
-
-        & .star-icon {
-            width: 14px;
-            height: 14px;
-        }
-
-        & .button__icon-wrapper {
-            margin-right: 2px;
-        }
-    }
-
-    &__badge {
-        position: relative;
-        top: auto;
-        right: auto;
-        background: none;
+        margin-top: 16px;
     }
 }
