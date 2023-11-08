@@ -39,7 +39,7 @@
         <x-ui.form.button
             tag="a"
             class="main-menu__link"
-            href="{{ __('search') }}">
+            href="{{ route('search') }}">
             {{ __('Add') }}
         </x-ui.form.button>
     </div>

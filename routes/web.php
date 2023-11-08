@@ -30,4 +30,11 @@ Route::prefix('{locale}')->whereIn('locale', config('app.available_locales'))->g
         return view('content.users.index');
     })->name('users');
 
+    Route::prefix('admin')->group(function () {
+        Route::get('/', function () {
+            return view('admin.index');
+        })->name('admin');
+    });
+
+
 });
