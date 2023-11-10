@@ -1,6 +1,6 @@
 <x-layouts.main>
     <div class="container">
-        <div class="content ui">
+        <x-common.content class="ui">
 
             <x-ui.title class="ui__title_big" tag="h2" size="large" >{{ __('UI examples') }}</x-ui.title>
 
@@ -44,7 +44,7 @@
 
             @include('content.ui.comments')
 
-        </div>
+        </x-common.content>
     </div>
 
     @push('scripts')

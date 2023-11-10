@@ -4,23 +4,4 @@
         display: flex;
     }
 
-    &__sidebar {
-        width: 300px;
-        padding: 24px 16px;
-        background: $base-dark-like-transparent;
-        border-radius: $big-border-radius 0 0 $big-border-radius;
-    }
-
-    &__content {
-        width: 100%;
-        padding: 24px;
-        background: $base-light-like-transparent;
-        border-radius: 0 $big-border-radius $big-border-radius 0;
-    }
-
-    &__menu-link {
-        width: 100%;
-        margin-bottom: 8px;
-        padding: 12px;
-    }
 }

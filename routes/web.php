@@ -34,11 +34,18 @@ Route::prefix('{locale}')->whereIn('locale', config('app.available_locales'))->g
         return view('content.profile.index');
     })->name('profile');
 
+    Route::get('/rules', function () {
+        return view('content.page.index');
+    })->name('rules');
+
+    Route::get('/qa', function () {
+        return view('content.page.qa');
+    })->name('qa');
+
     Route::prefix('admin')->group(function () {
         Route::get('/', function () {
             return view('admin.index');
         })->name('admin');
     });
-
 
 });

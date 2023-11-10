@@ -2,46 +2,44 @@
 
 
     <x-grid.container>
-        <div class="content admin">
-            <div class="admin__main">
-                <aside class="admin__sidebar">
+
+            <x-common.content class="admin" wrapper-class="admin__content">
+                <x-slot:sidebar>
                     <nav class="admin__menu">
-                        <div class="admin__menu-item">
-                            <x-ui.form.button
-                                class="admin__menu-link"
-                                tag="a"
-                                color="light">
-                                Статистика
-                            </x-ui.form.button>
-                            <x-ui.form.button
-                                class="admin__menu-link"
-                                tag="a"
-                                color="light">
-                                Добавить носитель
-                            </x-ui.form.button>
-                            <x-ui.form.button
-                                class="admin__menu-link"
-                                tag="a"
-                                color="light">
-                                Добавить игру
-                            </x-ui.form.button>
-                            <x-ui.form.button
-                                class="admin__menu-link"
-                                tag="a"
-                                color="light">
-                                Добавить разработчика
-                            </x-ui.form.button>
-                            <x-ui.form.button
-                                class="admin__menu-link"
-                                tag="a"
-                                color="light">
-                                Добавить издание
-                            </x-ui.form.button>
-                        </div>
+                        <x-ui.form.button
+                            class="content__sidebar-link"
+                            tag="a"
+                            color="light">
+                            Статистика
+                        </x-ui.form.button>
+                        <x-ui.form.button
+                            class="content__sidebar-link"
+                            tag="a"
+                            color="light">
+                            Добавить носитель
+                        </x-ui.form.button>
+                        <x-ui.form.button
+                            class="content__sidebar-link"
+                            tag="a"
+                            color="light">
+                            Добавить игру
+                        </x-ui.form.button>
+                        <x-ui.form.button
+                            class="content__sidebar-link"
+                            tag="a"
+                            color="light">
+                            Добавить разработчика
+                        </x-ui.form.button>
+                        <x-ui.form.button
+                            class="content__sidebar-link"
+                            tag="a"
+                            color="light">
+                            Добавить издание
+                        </x-ui.form.button>
                     </nav>
-                </aside>
-                <section class="admin__content">
-                    <x-ui.title>Добавить игровой носитель</x-ui.title>
+                </x-slot:sidebar>
+
+                    <x-ui.title size="normal" indent="big">Добавить игровой носитель</x-ui.title>
                     <div class="add-game-carrier">
                         <form action="">
                             <x-grid type="container">
@@ -163,9 +161,8 @@
                             </x-grid>
                         </form>
                     </div>
-                </section>
-            </div>
-        </div>
+            </x-common.content>
+
     </x-grid.container>
 
     @push('scripts')

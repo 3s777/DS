@@ -1,6 +1,6 @@
 <x-layouts.main title="Reset Password">
     <x-grid.container>
-        <div class="auth__content">
+        <x-common.content class="auth__content">
             <x-ui.card>
                 <x-slot:header>
                     <x-ui.title tag="h1">
@@ -79,6 +79,6 @@
                     </x-ui.from.group>
                 </form>
             </x-ui.card>
-        </div>
+        </x-common.content>
     </x-grid.container>
 </x-layouts.main>

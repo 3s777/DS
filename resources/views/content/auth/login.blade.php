@@ -1,6 +1,6 @@
 <x-layouts.main title="Login">
     <x-grid.container>
-        <div class="auth__content">
+        <x-common.content class="auth__content">
             <x-ui.card class="auth__card">
                 <x-slot:header>
                     <x-ui.title tag="h1">
@@ -74,7 +74,7 @@
                     </x-ui.form.group>
                 </form>
             </x-ui.card>
-        </div>
+        </x-common.content>
     </x-grid.container>
     @push('scripts')
         <script type="module">

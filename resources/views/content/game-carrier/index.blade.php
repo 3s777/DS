@@ -1,6 +1,6 @@
 <x-layouts.main title="Game Carrier">
     <x-grid.container>
-        <div class="content carrier">
+        <x-common.content class="carrier">
 
             @include('content.game-carrier.title')
 
@@ -39,7 +39,7 @@
                 </div>
             </div>
 
-        </div>
+        </x-common.content>
     </x-grid.container>
 
     @include('content.game-carrier.modals')

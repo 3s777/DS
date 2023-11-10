@@ -1,6 +1,6 @@
 <x-layouts.main title="Search">
     <x-grid.container>
-        <div class="content search">
+        <x-common.content class="search">
             <div class="search__title">
                 <x-ui.title size="big">
                     Результаты поиска: Naruto Shippuden Ultimate Ninja Storm
@@ -576,7 +576,7 @@
             <div class="search__show-more">
                 <x-ui.form.button size="big">{{ __('Показать больше') }}</x-ui.form.button>
             </div>
-        </div>
+        </x-common.content>
     </x-grid.container>
     @push('scripts')
         <script type="module">

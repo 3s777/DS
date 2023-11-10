@@ -10,7 +10,7 @@
     </div>
 
     <x-grid.container>
-        <div class="content users">
+        <x-common.content class="users">
             <div class="users__title">
                 <x-ui.title size="big">
                     Список пользователей
@@ -274,7 +274,7 @@
                     </div>
                 </x-ui.card>
             </div>
-        </div>
+        </x-common.content>
     </x-grid.container>
 
     @push('scripts')
