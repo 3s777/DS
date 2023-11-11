@@ -23,5 +23,10 @@
     "Feed": "Лента",
     "Users": "Пользователи",
     "Add": "Добавить",
-    "Comments": "Комментарии"
+    "Comments": "Комментарии",
+    "Username or email": "Имя пользователя или email",
+    "Username": "Имя пользователя",
+    "Confirm Password": "Повторите пароль",
+    "E-Mail Address": "Email",
+    "The name must be lowercase.": "Поле имя должно быть в нижнем регистре"
 }

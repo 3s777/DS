@@ -13,17 +13,17 @@
                     <x-ui.form.group>
                         <x-ui.form.input-text
                             :errors="$errors"
-                            id="email"
-                            name="email"
-                            type="email"
-                            value="{{ old('email') }}"
-                            placeholder="{{ __('Email') }}"
+                            id="username"
+                            name="username"
+                            type="text"
+                            value="{{ old('username') }}"
+                            placeholder="{{ __('Username or email') }}"
                             required
                             autofocus
-                            autocomplete="email">
+                            autocomplete="username">
                         </x-ui.form.input-text>
 
-                        @error('email')
+                        @error('username')
                             <span class="invalid-feedback" role="alert">
                                 <strong>{{ $message }}</strong>
                             </span>

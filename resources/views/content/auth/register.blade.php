@@ -17,7 +17,7 @@
                             name="name"
                             type="text"
                             value="{{ old('name') }}"
-                            placeholder="{{ __('Name') }}"
+                            placeholder="{{ __('Username') }}"
                             required
                             autofocus
                             autocomplete="name">
@@ -25,7 +25,7 @@
 
                         @error('name')
                         <span class="invalid-feedback" role="alert">
-                                <strong>{{ $message }}</strong>
+                                <strong>{{ __($message) }}</strong>
                             </span>
                         @enderror
                     </x-ui.form.group>
