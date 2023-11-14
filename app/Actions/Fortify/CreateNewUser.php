@@ -3,7 +3,7 @@
 namespace App\Actions\Fortify;
 
 use App\Models\User;
-use App\Rules\LatinLowercase;
+use App\Rules\LatinLowercaseRule;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\Rule;
@@ -21,7 +21,7 @@ class CreateNewUser implements CreatesNewUsers
     public function create(array $input): User
     {
         Validator::make($input, [
-            'name' => ['required', 'string', 'max:255','min:3', new LatinLowercase, Rule::unique(User::class)],
+            'name' => ['required', 'string', 'max:255','min:3', new LatinLowercaseRule, Rule::unique(User::class)],
             'email' => [
                 'required',
                 'string',
