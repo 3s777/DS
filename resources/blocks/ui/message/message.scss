@@ -5,6 +5,10 @@
     color: $font-main;
     line-height: 1.4;
     border-radius: $small-border-radius;
+
+    p:last-child {
+        margin-bottom: 0;
+    }
 }
 
 .message_info {

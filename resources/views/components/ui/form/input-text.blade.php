@@ -4,10 +4,14 @@
     'placeholder' => '',
     'value' => '',
     'type' => 'text',
-    'errors' => false
+    'errors' => false,
+    'wrapperClass' => false,
+    'fullWidth' => true
 ])
 
-<div class="input-text">
+<div class="input-text
+    @if($fullWidth) input-text_full-width @endif
+    @if($wrapperClass) {{ $wrapperClass }} @endif ">
     <input
            {{ $attributes->class(['input-text__field', 'input-text__field_error' => $errors->has($name)]) }}
            value="{{ $value }}"

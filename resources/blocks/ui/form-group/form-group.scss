@@ -1,7 +1,13 @@
 .form-group {
     padding: 16px 0;
-}
 
-.form-group_size_small {
-    padding: 8px 0;
+    &_size_small {
+        padding: 8px 0;
+    }
+
+    &_type_flex {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+    }
 }

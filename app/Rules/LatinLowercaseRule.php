@@ -14,10 +14,8 @@ class LatinLowercaseRule implements ValidationRule
      */
     public function validate(string $attribute, mixed $value, Closure $fail): void
     {
-        $pattern = '/^[a-z0-9.]+$/u';
-
-        if (!preg_match($pattern, $value)) {
-            $fail('The :attribute must be lowercase.');
+        if (!preg_match('/^[a-z0-9.]+$/u', $value)) {
+            $fail('validation.incorrect_login_format')->translate();
         }
     }
 }

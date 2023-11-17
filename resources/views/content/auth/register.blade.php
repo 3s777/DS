@@ -8,9 +8,17 @@
                     </x-ui.title>
                 </x-slot>
 
+                    @if ($errors->any())
+                        <x-ui.message class="auth__message">
+                            @foreach ($errors->all() as $error)
+                                <p>{{ $error }}</p>
+                            @endforeach
+                        </x-ui.message>
+                    @endif
+
                 <form class="form" method="POST" action="{{ route('register') }}">
                     @csrf
-                    <x-ui.form.group>
+                    <x-ui.form.group type="flex">
                         <x-ui.form.input-text
                             :errors="$errors"
                             id="name"
@@ -22,12 +30,20 @@
                             autofocus
                             autocomplete="name">
                         </x-ui.form.input-text>
+                        <x-ui.form.button
+                            tag="div"
+                            class="tooltip_trigger"
+                            color="info"
+                            tooltip="true"
+                            data-tooltip="tooltip_1">
+                            ?
+                        </x-ui.form.button>
+                        <x-ui.tooltip
+                            class="tooltip_1"
+                            id="tooltip">
+                            Неверный формат имени пользователя. Имя пользователя должно быть в нижнем регистре, латиницей, может содержать цифры и знак "."
+                        </x-ui.tooltip>
 
-                        @error('name')
-                        <span class="invalid-feedback" role="alert">
-                                <strong>{{ __($message) }}</strong>
-                            </span>
-                        @enderror
                     </x-ui.form.group>
 
                     <x-ui.form.group>
@@ -42,12 +58,6 @@
                             autofocus
                             autocomplete="email">
                         </x-ui.form.input-text>
-
-                        @error('email')
-                        <span class="invalid-feedback" role="alert">
-                                <strong>{{ $message }}</strong>
-                            </span>
-                        @enderror
                     </x-ui.form.group>
 
                     <x-ui.form.group>
@@ -62,12 +72,6 @@
                             autofocus
                             autocomplete="new-password">
                         </x-ui.form.input-text>
-
-                        @error('password')
-                        <span class="invalid-feedback" role="alert">
-                                <strong>{{ $message }}</strong>
-                            </span>
-                        @enderror
                     </x-ui.form.group>
 
                     <x-ui.form.group>
@@ -82,7 +86,6 @@
                             autofocus
                             autocomplete="new-password">
                         </x-ui.form.input-text>
-
                     </x-ui.form.group>
 
                     <x-ui.form.group>
@@ -94,4 +97,21 @@
             </x-ui.card>
         </x-common.content>
     </x-grid.container>
+
+    @push('scripts')
+        <script type="module">
+            var selects = document.getElementsByClassName("choices-select-auto");
+            for (var i = 0; i < selects.length; i++) {
+
+                new Choices(selects.item(i), {
+                    itemSelectText: '',
+                    searchEnabled: false,
+                    shouldSort: false,
+                    allowHTML: true,
+                    noResultsText: '{{ __('Не найдено') }}',
+                    noChoicesText: '{{ __('Больше ничего нет') }}',
+                });
+            }
+        </script>
+    @endpush
 </x-layouts.main>

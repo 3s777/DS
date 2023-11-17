@@ -1,5 +1,9 @@
 .input-text {
     position: relative;
+
+    &_full-width {
+        width: 100%;
+    }
 }
 
 .input-text__field {

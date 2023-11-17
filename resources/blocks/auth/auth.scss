@@ -1,20 +1,26 @@
-.auth__content {
-    display: flex;
-    justify-content: center;
-    padding-top: 50px;
-}
+.auth {
+    &__content {
+        display: flex;
+        justify-content: center;
+        padding-top: 50px;
+    }
 
-.auth__card {
-    width: 400px;
-}
+    &__card {
+        width: 400px;
+    }
 
-.auth__forgot-link {
-    display: block;
-    margin-top: 12px;
-    color: $font-main-50;
-    transition: $base-transition;
+    &__forgot-link {
+        display: block;
+        margin-top: 12px;
+        color: $font-main-50;
+        transition: $base-transition;
 
-    &:hover {
-        color: $font-main;
+        &:hover {
+            color: $font-main;
+        }
+    }
+
+    &__message {
+        margin-bottom: 16px;
     }
 }
