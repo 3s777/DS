@@ -1,4 +1,4 @@
-<x-layouts.main title="Forgot Password">
+<x-layouts.main title="{{ __('Forgot Password') }}">
     <x-grid.container>
         <x-common.content class="auth__content">
             <x-ui.card class="auth__card">
@@ -12,6 +12,14 @@
                     <div class="alert alert-success" role="alert">
                         {{ session('status') }}
                     </div>
+                @endif
+
+                @if ($errors->any())
+                    <x-ui.message class="auth__message" type="danger">
+                        @foreach ($errors->all() as $error)
+                            <p>{{ $error }}</p>
+                        @endforeach
+                    </x-ui.message>
                 @endif
 
                 <form class="form" method="POST" action="{{ route('password.email') }}">
@@ -28,12 +36,6 @@
                             autofocus
                             autocomplete="email">
                         </x-ui.form.input-text>
-
-                        @error('email')
-                        <span class="invalid-feedback" role="alert">
-                                <strong>{{ $message }}</strong>
-                            </span>
-                        @enderror
                     </x-ui.form.group>
 
                     <x-ui.form.group>

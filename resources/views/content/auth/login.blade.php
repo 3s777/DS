@@ -8,6 +8,14 @@
                     </x-ui.title>
                 </x-slot>
 
+                @if ($errors->any())
+                    <x-ui.message class="auth__message" type="danger">
+                        @foreach ($errors->all() as $error)
+                            <p>{{ $error }}</p>
+                        @endforeach
+                    </x-ui.message>
+                @endif
+
                 <form class="form" method="POST" action="{{ route('login') }}">
                     @csrf
                     <x-ui.form.group>
@@ -22,12 +30,6 @@
                             autofocus
                             autocomplete="username">
                         </x-ui.form.input-text>
-
-                        @error('username')
-                            <span class="invalid-feedback" role="alert">
-                                <strong>{{ $message }}</strong>
-                            </span>
-                        @enderror
                     </x-ui.form.group>
 
                     <x-ui.form.group>
@@ -42,12 +44,6 @@
                             autofocus
                             autocomplete="current-password">
                         </x-ui.form.input-text>
-
-                        @error('password')
-                            <span class="invalid-feedback" role="alert">
-                                <strong>{{ $message }}</strong>
-                            </span>
-                        @enderror
                     </x-ui.form.group>
 
                     <x-ui.form.group size="small">

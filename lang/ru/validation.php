@@ -113,7 +113,7 @@ return [
     'not_regex' => 'The :attribute field format is invalid.',
     'numeric' => 'Поле :attribute должно быть числом.',
     'password' => [
-        'letters' => 'The :attribute field must contain at least one letter.',
+        'letters' => 'Поле :attribute field must contain at least one letter.',
         'mixed' => 'The :attribute field must contain at least one uppercase and one lowercase letter.',
         'numbers' => 'The :attribute field must contain at least one number.',
         'symbols' => 'The :attribute field must contain at least one symbol.',
@@ -179,10 +179,10 @@ return [
     |
     */
 
-    'attributes' => [],
-
-
-
+    'attributes' => [
+        'user_name' => 'Имя пользователя',
+        'password' => 'Пароль'
+    ],
 
 
     /*
@@ -190,6 +190,6 @@ return [
     | Custom Validation
     |--------------------------------------------------------------------------
     */
-    'incorrect_login_format' => 'Неверный формат имени пользователя. Имя пользователя должно быть в нижнем регистре, латиницей, может содержать цифры и знак "."'
+    'incorrect_login_format' => 'Неверный формат. Поле :attribute должно быть в нижнем регистре, латиницей, может содержать цифры и знак "."'
 
 ];

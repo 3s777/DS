@@ -8,13 +8,13 @@
                     </x-ui.title>
                 </x-slot>
 
-                    @if ($errors->any())
-                        <x-ui.message class="auth__message">
-                            @foreach ($errors->all() as $error)
-                                <p>{{ $error }}</p>
-                            @endforeach
-                        </x-ui.message>
-                    @endif
+                @if ($errors->any())
+                    <x-ui.message class="auth__message" type="danger">
+                        @foreach ($errors->all() as $error)
+                            <p>{{ $error }}</p>
+                        @endforeach
+                    </x-ui.message>
+                @endif
 
                 <form class="form" method="POST" action="{{ route('register') }}">
                     @csrf
@@ -30,20 +30,21 @@
                             autofocus
                             autocomplete="name">
                         </x-ui.form.input-text>
+
                         <x-ui.form.button
-                            tag="div"
                             class="tooltip_trigger"
+                            type="button"
                             color="info"
                             tooltip="true"
                             data-tooltip="tooltip_1">
                             ?
                         </x-ui.form.button>
+
                         <x-ui.tooltip
                             class="tooltip_1"
                             id="tooltip">
-                            Неверный формат имени пользователя. Имя пользователя должно быть в нижнем регистре, латиницей, может содержать цифры и знак "."
+                            Имя пользователя должно быть в нижнем регистре, латиницей, может содержать цифры и знак "."
                         </x-ui.tooltip>
-
                     </x-ui.form.group>
 
                     <x-ui.form.group>
