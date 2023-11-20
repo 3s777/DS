@@ -33,7 +33,7 @@
                             <x-ui.accordion.content>
                                 Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aut delectus error eum iste suscipit! Amet cupiditate dignissimos hic ipsa iusto natus perspiciatis quisquam reprehenderit vitae? Accusantium earum nobis quaerat quod!
                             </x-ui.accordion.content>
-                        </x-ui.accordion.item>
+                        </x-ui.accordion.item>z
 
                         <x-ui.accordion.item color="light">
                             <x-ui.accordion.title>Aut delectus error eum iste suscipit?</x-ui.accordion.title>

@@ -9,9 +9,9 @@
                 </x-slot>
 
                 @if (session('status'))
-                    <div class="alert alert-success" role="alert">
+                    <x-ui.message class="auth__message" type="info">
                         {{ session('status') }}
-                    </div>
+                    </x-ui.message>
                 @endif
 
                 @if ($errors->any())

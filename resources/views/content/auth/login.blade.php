@@ -8,6 +8,12 @@
                     </x-ui.title>
                 </x-slot>
 
+                @if (session('status'))
+                    <x-ui.message class="auth__message" type="info">
+                        {{ session('status') }}
+                    </x-ui.message>
+                @endif
+
                 @if ($errors->any())
                     <x-ui.message class="auth__message" type="danger">
                         @foreach ($errors->all() as $error)

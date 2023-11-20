@@ -9,23 +9,23 @@
             class="site-settings__popover"
             title="{{ __('Choose language') }}"
             tail="right">
-            <nav class="site-settings__flags">
-                <a href="{{ route(Route::currentRouteName(), ['locale' => 'en']) }}">
-                    <div class="site-settings__flag @if(app()->getLocale() == 'en') site-settings__flag_active @endif">
-                        <x-svg.flags.en class="site-settings__flag-icon"></x-svg.flags.en>
-                    </div>
-                </a>
-                <a href="{{ route(Route::currentRouteName(), ['locale' => 'ru']) }}">
-                    <div class="site-settings__flag @if(app()->getLocale() == 'ru') site-settings__flag_active @endif">
-                        <x-svg.flags.ru class="site-settings__flag-icon"></x-svg.flags.ru>
-                    </div>
-                </a>
-                <a href="{{ route(Route::currentRouteName(), ['locale' => 'ua']) }}">
-                    <div class="site-settings__flag @if(app()->getLocale() == 'ua') site-settings__flag_active @endif">
-                        <x-svg.flags.ua class="site-settings__flag-icon"></x-svg.flags.ua>
-                    </div>
-                </a>
-            </nav>
+{{--            <nav class="site-settings__flags">--}}
+{{--                <a href="{{ route(Route::currentRouteName(), ['locale' => 'en']) }}">--}}
+{{--                    <div class="site-settings__flag @if(app()->getLocale() == 'en') site-settings__flag_active @endif">--}}
+{{--                        <x-svg.flags.en class="site-settings__flag-icon"></x-svg.flags.en>--}}
+{{--                    </div>--}}
+{{--                </a>--}}
+{{--                <a href="{{ route(Route::currentRouteName(), ['locale' => 'ru']) }}">--}}
+{{--                    <div class="site-settings__flag @if(app()->getLocale() == 'ru') site-settings__flag_active @endif">--}}
+{{--                        <x-svg.flags.ru class="site-settings__flag-icon"></x-svg.flags.ru>--}}
+{{--                    </div>--}}
+{{--                </a>--}}
+{{--                <a href="{{ route(Route::currentRouteName(), ['locale' => 'ua']) }}">--}}
+{{--                    <div class="site-settings__flag @if(app()->getLocale() == 'ua') site-settings__flag_active @endif">--}}
+{{--                        <x-svg.flags.ua class="site-settings__flag-icon"></x-svg.flags.ua>--}}
+{{--                    </div>--}}
+{{--                </a>--}}
+{{--            </nav>--}}
 
             <div class="popover__title">
                 {{ __('Choose theme color') }}

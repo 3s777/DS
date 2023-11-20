@@ -12,7 +12,7 @@ Route::prefix('{locale}')->whereIn('locale', config('app.available_locales'))->g
 
     Route::get('/dashboard', function () {
         return view('welcome');
-    })->middleware(['auth'])->name('dashboard');
+    })->middleware(['auth', 'verified'])->name('dashboard');
 
     Route::get('/ui', function () {
         return view('content.ui.index');
@@ -42,7 +42,7 @@ Route::prefix('{locale}')->whereIn('locale', config('app.available_locales'))->g
         return view('content.page.qa');
     })->name('qa');
 
-    Route::prefix('admin')->group(function () {
+    Route::prefix('admin')->middleware(['auth', 'verified'])->group(function () {
         Route::get('/', function () {
             return view('admin.index');
         })->name('admin');
