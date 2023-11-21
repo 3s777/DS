@@ -12,6 +12,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\RateLimiter;
 use Illuminate\Support\ServiceProvider;
+use Illuminate\Validation\ValidationException;
 use Laravel\Fortify\Fortify;
 
 class FortifyServiceProvider extends ServiceProvider
@@ -26,6 +27,10 @@ class FortifyServiceProvider extends ServiceProvider
             $user = User::where('email', $request->username)
                 ->orWhere('name', $request->username )
                 ->first();
+
+            if (!$user->hasVerifiedEmail()) {
+                throw ValidationException::withMessages(['email' => __('You need to verify your email')]);
+            }
 
             if ($user &&
                 Hash::check($request->password, $user->password)) {
@@ -72,7 +77,7 @@ class FortifyServiceProvider extends ServiceProvider
 
         // Email Verification
         Fortify::verifyEmailView(function () { // <--- this
-            return view('content.auth.login');
+            return view('content.auth.verify');
         });
     }
 }
