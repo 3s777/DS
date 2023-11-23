@@ -22,7 +22,7 @@
             tag="a"
             color="dark"
             class="main-menu__link"
-            href="#">
+            href="{{ route('feed') }}">
             {{ __('Feed') }}
         </x-ui.form.button>
     </div>

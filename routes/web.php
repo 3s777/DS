@@ -22,6 +22,10 @@ Route::prefix('{locale}')->whereIn('locale', config('app.available_locales'))->g
         return view('content.game-carrier.index');
     })->name('game-carrier');
 
+    Route::get('/feed', function () {
+        return view('content.feed.index');
+    })->name('feed');
+
     Route::get('/search', function () {
         return view('content.search.index');
     })->name('search');

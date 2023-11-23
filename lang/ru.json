@@ -43,5 +43,6 @@
     "Verify Email Address": "Подтвердите ваш Email",
     "Please click the button below to verify your email address.": "Пожалуйста, нажмите кнопку ниже чтобы подтвердить ваш Email",
     "If you did not create an account, no further action is required.": "Если вы не создаете аккаунт, то не предпринимайте никаких действий",
-    "You need to verify your email": "Вам необходимо подтвердить ваш Email"
+    "You need to verify your email": "Вам необходимо подтвердить ваш Email",
+    "Congratulations, you have been registered. Now you need to verify your account. Check your email address": "Поздравляем, вы зарегистрированы. Теперь вам нужно подтвердить ваш аккаунт. Мы отправили вам инструкцию на электронную почту."
 }
