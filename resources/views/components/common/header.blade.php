@@ -15,7 +15,7 @@
             <div class="profile-menu">
                 <div class="profile-menu__inner">
                     <x-common.auth-menu />
-                    <x-common.site-settings />
+
                 </div>
             </div>
         </div>

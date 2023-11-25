@@ -113,7 +113,7 @@ return [
     'not_regex' => 'The :attribute field format is invalid.',
     'numeric' => 'Поле :attribute должно быть числом.',
     'password' => [
-        'letters' => 'Поле :attribute field must contain at least one letter.',
+        'letters' => 'Поле :attribute должно содержать минимум одну букву',
         'mixed' => 'The :attribute field must contain at least one uppercase and one lowercase letter.',
         'numbers' => 'The :attribute field must contain at least one number.',
         'symbols' => 'The :attribute field must contain at least one symbol.',

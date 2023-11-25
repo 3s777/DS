@@ -8,7 +8,7 @@
                         <div class="feed-item__main-photo">
                             <img
                                 class="feed-item__img"
-                                src="{{ asset('/storage/620_1.jpg') }}"
+                                src="{{ Vite::image('620_1.jpg') }}"
                                 loading="lazy"
                                 decoding="async"
                                 alt="Test image"

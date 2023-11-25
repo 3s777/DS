@@ -6,7 +6,7 @@
                     tag="a"
                     color="dark"
                     class="auth-menu__link"
-                    href="">
+                    href="{{ route('login') }}">
                     {{ __('Login') }}
                 </x-ui.form.button>
             </div>
@@ -17,7 +17,7 @@
                     tag="a"
                     color="dark"
                     class="auth-menu__link"
-                    href="">
+                    href="{{ route('register') }}">
                     {{ __('Register') }}
                 </x-ui.form.button>
             </div>

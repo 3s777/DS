@@ -1,6 +1,7 @@
 import './bootstrap';
 import.meta.glob([
     '../images/**',
+    '../fonts/**'
 ]);
 
 import '../blocks/ui/input-text/input-text';

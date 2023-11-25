@@ -15,7 +15,7 @@
                 ])
                 ->merge([
                     'type'=>'checkbox',
-                    'checked' => $value,
+                    'checked' => $value == 1,
                     'name' => $name,
                     'id' => $id
                 ]) }}

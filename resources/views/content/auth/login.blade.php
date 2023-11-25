@@ -56,6 +56,7 @@
                         <x-ui.form.input-checkbox
                             id="remember"
                             name="remember"
+                            value=""
                             label="{{ __('Remember Me') }}"
                         >
                         </x-ui.form.input-checkbox>

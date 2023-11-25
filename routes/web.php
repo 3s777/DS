@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AuthController;
 use Illuminate\Support\Facades\Route;
 
 //require_once "web/auth.php";
@@ -9,6 +10,12 @@ Route::get('/{locale?}', function () {
 })->whereIn('locale', config('app.available_locales'));
 
 Route::prefix('{locale}')->whereIn('locale', config('app.available_locales'))->group(function () {
+
+    Route::get('/register', [AuthController::class, 'register'])->name('register');
+    Route::post('/register', [AuthController::class, 'register_user'])->name('register_user');
+    Route::get('/login', [AuthController::class, 'login'])->name('login');
+    Route::post('/login', [AuthController::class, 'login_user'])->name('login_user');
+    Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 
     Route::get('/dashboard', function () {
         return view('welcome');

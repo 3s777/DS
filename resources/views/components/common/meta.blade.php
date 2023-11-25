@@ -8,10 +8,10 @@
 <meta name="csrf-token" content="{{ csrf_token() }}">
 <title>{{ $title ?? config('app.name', 'Laravel') }}</title>
 
-<link rel="apple-touch-icon" sizes="180x180" href="{{ asset('images/favicons/apple-touch-icon.png') }}">
-<link rel="icon" type="image/png" sizes="32x32" href="{{ asset('images/favicons/favicon-32x32.png') }}">
-<link rel="icon" type="image/png" sizes="16x16" href="{{ asset('images/favicons/favicon-16x16.png') }}">
-<link rel="manifest" href="{{ asset('images/favicons/site.webmanifest') }}">
+<link rel="apple-touch-icon" sizes="180x180" href="{{ Vite::image('favicons/apple-touch-icon.png') }}">
+<link rel="icon" type="image/png" sizes="32x32" href="{{ Vite::image('favicons/favicon-32x32.png') }}">
+<link rel="icon" type="image/png" sizes="16x16" href="{{ Vite::image('favicons/favicon-16x16.png') }}">
+<link rel="manifest" href="{{ Vite::image('favicons/site.webmanifest') }}">
 <meta name="msapplication-TileColor" content="#333458">
 <meta name="theme-color" content="#333458">
 {{ $slot }}

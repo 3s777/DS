@@ -6,6 +6,7 @@ use App\Models\User;
 use App\Rules\LatinLowercaseRule;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
+use Illuminate\Validation\Rules\Password;
 
 class CreateUserRequest extends FormRequest
 {
@@ -33,7 +34,14 @@ class CreateUserRequest extends FormRequest
                 'max:255',
                 Rule::unique(User::class),
             ],
-            'password' => $this->passwordRules(),
+            'password' => ['required','confirmed', Password::min(8)->letters()],
+        ];
+    }
+
+    public function attributes(): array
+    {
+        return [
+            'name' => __('validation.attributes.user_name')
         ];
     }
 }
