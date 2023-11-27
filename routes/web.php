@@ -11,11 +11,16 @@ Route::get('/{locale?}', function () {
 
 Route::prefix('{locale}')->whereIn('locale', config('app.available_locales'))->group(function () {
 
-    Route::get('/register', [AuthController::class, 'register'])->name('register');
-    Route::post('/register', [AuthController::class, 'register_user'])->name('register_user');
-    Route::get('/login', [AuthController::class, 'login'])->name('login');
-    Route::post('/login', [AuthController::class, 'login_user'])->name('login_user');
-    Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
+    Route::controller(AuthController::class)->group(function () {
+        Route::get('/register', 'register')->name('register');
+        Route::post('/register', 'signUp')->name('signUp');
+        Route::get('/login', 'login')->name('login');
+        Route::post('/login', 'signIn')->name('signIn');
+        Route::delete('/logout', 'logout')->name('logout');
+        Route::get('/forgot-password', 'forgot')->middleware('guest')->name('password.request');
+        Route::post('/forgot-password', 'forgotPassword')->middleware('guest')->name('password.email');
+    });
+
 
     Route::get('/dashboard', function () {
         return view('welcome');

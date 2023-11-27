@@ -8,14 +8,14 @@ use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
 use Illuminate\Validation\Rules\Password;
 
-class CreateUserRequest extends FormRequest
+class SignUpRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
      */
     public function authorize(): bool
     {
-        return true;
+        return auth()->guest();
     }
 
     /**
@@ -26,7 +26,13 @@ class CreateUserRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name' => ['required', 'string', 'max:255','min:3', new LatinLowercaseRule, Rule::unique(User::class)],
+            'name' => ['required',
+                'string',
+                'max:255',
+                'min:3',
+                new LatinLowercaseRule,
+                Rule::unique(User::class)
+            ],
             'email' => [
                 'required',
                 'string',
@@ -34,8 +40,25 @@ class CreateUserRequest extends FormRequest
                 'max:255',
                 Rule::unique(User::class),
             ],
-            'password' => ['required','confirmed', Password::min(8)->letters()],
+            'password' => ['required',
+                'confirmed',
+                Password::min(8)->letters()
+            ],
         ];
+    }
+
+    protected function prepareForValidation()
+    {
+        $this->merge([
+            'name' => str(request('name'))
+                ->squish()
+                ->lower()
+                ->value(),
+            'email' => str(request('email'))
+                ->squish()
+                ->lower()
+                ->value(),
+        ]);
     }
 
     public function attributes(): array

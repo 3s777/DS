@@ -2,14 +2,16 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\CreateUserRequest;
-use App\Http\Requests\LoginUserRequest;
+use App\Http\Requests\SignUpRequest;
+use App\Http\Requests\SignInRequest;
 use App\Models\User;
+use Illuminate\Auth\Events\Registered;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
 use Illuminate\Foundation\Application;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Routing\Redirector;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 
@@ -20,7 +22,7 @@ class AuthController extends Controller
         return view('content.auth.register');
     }
 
-    public function register_user(CreateUserRequest $request): RedirectResponse
+    public function signUp(SignUpRequest $request): RedirectResponse
     {
 
         $input = $request->only(['name', 'email', 'password']);
@@ -31,6 +33,8 @@ class AuthController extends Controller
             'password' => Hash::make($input['password']),
         ]);
 
+        event(new Registered($user));
+
         return redirect()->route('login')->with('status', __('You need to verify your email'));
     }
 
@@ -39,7 +43,8 @@ class AuthController extends Controller
         return view('content.auth.login');
     }
 
-    public function login_user(Request $request) {
+    public function signIn(SignInRequest $request): RedirectResponse
+    {
         $credentials = $request->only(['username', 'password', 'remember']);
 
         $remember = false;
@@ -60,13 +65,32 @@ class AuthController extends Controller
         ])->onlyInput('username');
     }
 
-    public function logout(Request $request) {
-        Auth::logout();
+    public function logout(): Application|Redirector|RedirectResponse|\Illuminate\Contracts\Foundation\Application
+    {
+        auth()->logout();
 
-        $request->session()->invalidate();
+        request()->session()->invalidate();
 
-        $request->session()->regenerateToken();
+        request()->session()->regenerateToken();
 
         return redirect('/');
     }
+
+    public function forgot(): View|Application|Factory|\Illuminate\Contracts\Foundation\Application
+    {
+        return view('content.auth.forgot-password');
+    }
+
+    public function forgotPassword(Request $request) {
+        $request->validate(['email' => 'required|email']);
+
+        $status = Password::sendResetLink(
+            $request->only('email')
+        );
+
+        return $status === Password::RESET_LINK_SENT
+            ? back()->with(['status' => __($status)])
+            : back()->withErrors(['email' => __($status)]);
+    }
+
 }
