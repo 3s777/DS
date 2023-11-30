@@ -93,8 +93,8 @@ window.FilePondPluginImageTransform = FilePondPluginImageTransform;
 import FilePondPluginImageResize from 'filepond-plugin-image-resize';
 window.FilePondPluginImageResize = FilePondPluginImageResize;
 
-import StarRating from "../blocks/ui/star-rating/star-rating";
-window.StarRating = StarRating;
+// import StarRating from "../blocks/ui/star-rating/star-rating";
+// window.StarRating = StarRating;
 
 import Quill from "quill";
 window.Quill = Quill;

@@ -3,6 +3,25 @@
     padding: 0;
     border: 0;
 
+    &_10 {
+        .star-rating__group {
+            justify-content: space-between;
+        }
+
+        .star-rating__label_none {
+            width: 10%;
+        }
+
+        .star-rating__label {
+            width: 9%;
+            justify-content: center;
+        }
+    }
+
+    &_disabled {
+        pointer-events: none;
+    }
+
     &__group {
         display: inline-flex;
         width: 100%;

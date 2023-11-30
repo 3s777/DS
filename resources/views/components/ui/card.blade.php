@@ -4,14 +4,16 @@
     'tag' => 'div',
     'title' => false,
     'indentBottom' => false,
-    'size' => false
+    'size' => false,
+    'color' => false
 ])
 
 <{{ $tag }}
     {{ $attributes->class([
             'card',
             'card_indent-bottom' => $indentBottom,
-            'card_size_'.$size => $size
+            'card_size_'.$size => $size,
+            'card_color_'.$color => $color
         ])
     }}>
     @if($title)

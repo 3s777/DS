@@ -2,10 +2,15 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\ForgotPasswordRequest;
+use App\Http\Requests\ResetPasswordRequest;
 use App\Http\Requests\SignUpRequest;
 use App\Http\Requests\SignInRequest;
+use App\Http\Requests\VerifyEmailRequest;
 use App\Models\User;
+use Illuminate\Auth\Events\PasswordReset;
 use Illuminate\Auth\Events\Registered;
+use Illuminate\Auth\Events\Verified;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
 use Illuminate\Foundation\Application;
@@ -13,7 +18,9 @@ use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Redirector;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Hash;
+
+use Illuminate\Support\Facades\Password;
+
 
 class AuthController extends Controller
 {
@@ -30,7 +37,7 @@ class AuthController extends Controller
         $user = User::create([
             'name' => $input['name'],
             'email' => $input['email'],
-            'password' => Hash::make($input['password']),
+            'password' => bcrypt($input['password']),
         ]);
 
         event(new Registered($user));
@@ -81,8 +88,8 @@ class AuthController extends Controller
         return view('content.auth.forgot-password');
     }
 
-    public function forgotPassword(Request $request) {
-        $request->validate(['email' => 'required|email']);
+    public function forgotPassword(ForgotPasswordRequest $request): RedirectResponse
+    {
 
         $status = Password::sendResetLink(
             $request->only('email')
@@ -93,4 +100,42 @@ class AuthController extends Controller
             : back()->withErrors(['email' => __($status)]);
     }
 
+    public function reset( string $token): View|Application|Factory|\Illuminate\Contracts\Foundation\Application
+    {
+        return view('content.auth.reset-password', [
+            'token' => $token
+        ]);
+    }
+
+    public function updatePassword(ResetPasswordRequest $request): RedirectResponse
+    {
+
+        $status = Password::reset(
+            $request->only('email', 'password', 'password_confirmation', 'token'),
+            function (User $user, string $password) {
+                $user->forceFill([
+                    'password' => bcrypt($password)
+                ])->setRememberToken(str()->random(60));
+
+                $user->save();
+
+                event(new PasswordReset($user));
+            }
+        );
+
+        return $status === Password::PASSWORD_RESET
+            ? redirect()->route('login')->with('status', __($status))
+            : back()->withErrors(['email' => [__($status)]]);
+    }
+
+    public function verifyEmail(VerifyEmailRequest $request, $id, $hash)
+    {
+        $user = User::find($id);
+
+        if (! $user->hasVerifiedEmail()) {
+            $user->markEmailAsVerified();
+
+            event(new Verified($user));
+        }
+    }
 }

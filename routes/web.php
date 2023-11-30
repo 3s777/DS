@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AuthController;
+use Illuminate\Foundation\Auth\EmailVerificationRequest;
 use Illuminate\Support\Facades\Route;
 
 //require_once "web/auth.php";
@@ -19,6 +20,22 @@ Route::prefix('{locale}')->whereIn('locale', config('app.available_locales'))->g
         Route::delete('/logout', 'logout')->name('logout');
         Route::get('/forgot-password', 'forgot')->middleware('guest')->name('password.request');
         Route::post('/forgot-password', 'forgotPassword')->middleware('guest')->name('password.email');
+        Route::get('/reset-password/{token}', 'reset')->middleware('guest', 'remove.locale')->name('password.reset');
+        Route::post('/reset-password', 'updatePassword')->middleware('guest')->name('password.update');
+        Route::get('/email/verify', function () {
+            return view('content.auth.verify');
+        })->middleware('auth')->name('verification.notice');
+
+//        Route::get('/email/verify/{id}/{hash}', function (EmailVerificationRequest $request) {
+//            $request->fulfill();
+//
+//            return redirect('/home');
+//        })->middleware(['remove.locale'])->name('verification.verify');
+
+
+        Route::get('/email/verify/{id}/{hash}', 'verifyEmail')->middleware(['remove.locale'])->name('verification.verify');
+
+
     });
 
 
