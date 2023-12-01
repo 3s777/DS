@@ -22,7 +22,34 @@
                     </x-ui.message>
                 @endif
 
-                Подтвердите Ваш эмейл
+                    <x-ui.form.group>
+                        <x-ui.message type="info">
+                            <p>{{ __('You need verify your Email') }}</p>
+                            <p>{{ __('Если вы не получили письмо, запросите письмо еще раз, заполнив форму ниже') }}</p>
+                        </x-ui.message>
+                    </x-ui.form.group>
+
+                    <form action="{{ route('verification.send') }}" method="POST">
+                        @csrf
+
+                        <x-ui.form.group>
+                            <x-ui.form.input-text
+                                :errors="$errors"
+                                id="email"
+                                name="email"
+                                type="email"
+                                value="{{ old('email') }}"
+                                placeholder="{{ __('E-Mail Address') }}"
+                                required
+                                autocomplete="email">
+                            </x-ui.form.input-text>
+                        </x-ui.form.group>
+
+                        <x-ui.form.group>
+                            <x-ui.form.button full-width="true">Отправить письмо повторно</x-ui.form.button>
+                        </x-ui.form.group>
+                    </form>
+
             </x-ui.card>
         </x-common.content>
     </x-grid.container>

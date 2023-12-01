@@ -1,6 +1,21 @@
 <x-layouts.main title="Search">
     <x-grid.container>
         <x-common.content class="search">
+
+            @if (session('status'))
+                <x-ui.message class="search__message" type="info">
+                    {{ session('status') }}
+                </x-ui.message>
+            @endif
+
+            @if ($errors->any())
+                <x-ui.message class="search__message" type="danger">
+                    @foreach ($errors->all() as $error)
+                        <p>{{ $error }}</p>
+                    @endforeach
+                </x-ui.message>
+            @endif
+
             <div class="search__title">
                 <x-ui.title size="big">
                     Результаты поиска: Naruto Shippuden Ultimate Ninja Storm

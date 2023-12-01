@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\ForgotPasswordRequest;
 use App\Http\Requests\ResetPasswordRequest;
+use App\Http\Requests\SendEmailVerifyRequest;
 use App\Http\Requests\SignUpRequest;
 use App\Http\Requests\SignInRequest;
 use App\Http\Requests\VerifyEmailRequest;
@@ -128,7 +129,7 @@ class AuthController extends Controller
             : back()->withErrors(['email' => [__($status)]]);
     }
 
-    public function verifyEmail(VerifyEmailRequest $request, $id, $hash)
+    public function verifyEmail(VerifyEmailRequest $request, $id)
     {
         $user = User::find($id);
 
@@ -136,6 +137,27 @@ class AuthController extends Controller
             $user->markEmailAsVerified();
 
             event(new Verified($user));
+
+            Auth::loginUsingId($user->id);
         }
+
+        return redirect()->route('search')->with('status', __('Your email is verified'));
+    }
+
+    public function emailVerify()
+    {
+        return view('content.auth.verify');
+    }
+
+    public function sendVerifyNotification(SendEmailVerifyRequest $request) {
+        $user = User::where('email', $request->only(['email']))->first();
+
+        if ($user->hasVerifiedEmail()) {
+            return redirect()->route('verification.notice')->with('status', __('Your email is already verificated'));
+        }
+
+        $user->sendEmailVerificationNotification();
+
+        return redirect()->route('verification.notice')->with('status', __('We retry send verification link to your email'));
     }
 }
