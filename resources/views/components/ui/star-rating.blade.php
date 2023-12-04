@@ -2,6 +2,7 @@
     'name',
     'type' => false,
     'title' => false,
+    'responsive' => true,
     'count' => 10,
     'numClass'=> false,
     'noneButton' => false,
@@ -12,7 +13,8 @@
     <fieldset {{ $attributes->class([
             'star-rating',
             'star-rating_'.$type => $type,
-            'star-rating_'.$numClass => $numClass
+            'star-rating_'.$numClass => $numClass,
+            'star-rating_responsive' => $responsive
         ]) }}>
 
         <legend class="star-rating__title">{{ $title }}:</legend>

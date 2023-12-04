@@ -88,7 +88,7 @@
                             <div class="author-info sale-item__author">
                                 <div class="author-info__main">
                                     <div class="author-info__thumbnail">
-                                        <a href=""><img class="author-info__img" src="{{ asset('/storage/test-300.jpg') }}" alt=""></a>
+                                        <a href=""><img class="author-info__img" src="{{ Vite::image('620_1.jpg') }}" alt=""></a>
                                     </div>
                                     <div class="author-info__content">
                                         <div class="author-info__name"><a href="">Ивановіваффіва Иван</a></div>
@@ -109,8 +109,8 @@
 <x-ui.card class="sale-item__specifications" color="dark">
 
     <div class="sale-item__specifications-wrapper">
-        <x-grid type="container">
-            <x-grid.col xl="6" lg="6" md="6" sm="12">
+
+            <div class="sale-item__main-specifications">
 
 
 
@@ -138,11 +138,11 @@
 
 
                 </x-ui.specifications>
-            </x-grid.col>
+            </div>
 
 
 
-            <x-grid.col xl="6" lg="6" md="6" sm="12">
+            <div class="sale-item__star-ratings">
 
                 <x-ui.star-rating
                     class="sale-item__star-rating"
@@ -184,8 +184,8 @@
                     name="cover">
                 </x-ui.star-rating>
 
-            </x-grid.col>
-        </x-grid>
+            </div>
+
     </div>
 
 
@@ -198,10 +198,11 @@
         </p>
     </div>
 <div class="sale-item__buttons">
-    <x-ui.form.button>Купить</x-ui.form.button>
-    <x-ui.form.button>Забронировать</x-ui.form.button>
-    <x-ui.form.button color="info">Написать продавцу</x-ui.form.button>
+    <x-ui.form.button class="sale-item__button">Купить</x-ui.form.button>
+    <x-ui.form.button class="sale-item__button">Забронировать</x-ui.form.button>
+    <x-ui.form.button class="sale-item__button" color="info">Написать продавцу</x-ui.form.button>
     <x-ui.form.button
+        class="sale-item__button"
         title="{{ __('Добавить в список желаний') }}"
         size="big"
         color="light"

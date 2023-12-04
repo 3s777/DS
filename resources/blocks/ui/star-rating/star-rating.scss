@@ -51,6 +51,22 @@
         cursor: pointer;
     }
 
+    &_responsive {
+        .star-rating__group {
+            gap: 4px;
+        }
+        
+        .star-rating__icon_star {
+            width: 100%;
+            height: auto;
+        }
+
+        .star-rating__icon_none {
+            width: 100%;
+            height: auto;
+        }
+    }
+
     &__icon_star {
         fill: $rating-active;
     }
