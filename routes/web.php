@@ -14,7 +14,7 @@ Route::prefix('{locale}')->whereIn('locale', config('app.available_locales'))->g
 
     Route::controller(AuthController::class)->group(function () {
         Route::get('/register', 'register')->name('register');
-        Route::post('/register', 'signUp')->name('signUp');
+        Route::post('/register', 'signUp')->middleware('throttle:auth')->name('signUp');
         Route::get('/login', 'login')->name('login');
         Route::post('/login', 'signIn')->name('signIn');
         Route::delete('/logout', 'logout')->name('logout');

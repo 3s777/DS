@@ -18,6 +18,7 @@
            name="{{ $name }}"
            id="{{ $id }}"
            type="{{ $type }}"
+           placeholder=""
     >
     <label class="input-text__label" for="{{ $id }}">{{ $placeholder }}</label>
 </div>

@@ -26,6 +26,7 @@
                                     title="Test image"
                                 />
                             </div>
+
                             <div class="feed-item__additional-photo">
                                 <img
                                     class="feed-item__img"
@@ -36,6 +37,7 @@
                                     title="Test image"
                                 />
                             </div>
+
                             <div class="feed-item__additional-photo">
                                 <img
                                     class="feed-item__img"
@@ -46,6 +48,7 @@
                                     title="Test image"
                                 />
                             </div>
+
                             <div class="feed-item__additional-photo">
                                 <img
                                     class="feed-item__img"
@@ -56,8 +59,6 @@
                                     title="Test image"
                                 />
                             </div>
-
-
                         </div>
 
                         <x-ui.message type="warning">
@@ -97,7 +98,7 @@
                                 </div>
                                 <div class="author-info__rating">
                                     <div class="author-info__rating-title">Рейтинг</div>
-                                    <div class="author-info__rating-value"><a href="">9.5/10</a></div>
+                                    <div class="author-info__rating-value"><a href="#">9.5/10</a></div>
                                 </div>
                             </div>
                         </div>
@@ -198,28 +199,33 @@
         </p>
     </div>
 <div class="sale-item__buttons">
-    <x-ui.form.button class="sale-item__button">Купить</x-ui.form.button>
-    <x-ui.form.button class="sale-item__button">Забронировать</x-ui.form.button>
-    <x-ui.form.button class="sale-item__button" color="info">Написать продавцу</x-ui.form.button>
-    <x-ui.form.button
-        class="sale-item__button"
-        title="{{ __('Добавить в список желаний') }}"
-        size="big"
-        color="light"
-        only-icon="true">
-        <x-slot:icon class="button__icon-wrapper_cancel">
-            <x-svg.wishlist class="button__icon button__icon_small"></x-svg.wishlist>
-        </x-slot:icon>
-    </x-ui.form.button>
-    <x-ui.form.button
-        title="{{ __('Добавить в избранное') }}"
-        size="big"
-        color="light"
-        only-icon="true">
-        <x-slot:icon class="button__icon-wrapper_cancel">
-            <x-svg.star class="button__icon button__icon_small"></x-svg.star>
-        </x-slot:icon>
-    </x-ui.form.button>
+    <div class="sale-item__conversation-buttons">
+        <x-ui.form.button class="sale-item__button">Купить</x-ui.form.button>
+        <x-ui.form.button class="sale-item__button">Забронировать</x-ui.form.button>
+        <x-ui.form.button class="sale-item__button" color="info">Написать продавцу</x-ui.form.button>
+    </div>
+    <div class="sale-item__save-buttons">
+        <x-ui.form.button
+            class="sale-item__button"
+            title="{{ __('Добавить в список желаний') }}"
+            size="big"
+            color="light"
+            only-icon="true">
+            <x-slot:icon class="button__icon-wrapper_wishlist">
+                <x-svg.wishlist class="button__icon button__icon_small"></x-svg.wishlist>
+            </x-slot:icon>
+        </x-ui.form.button>
+        <x-ui.form.button
+            class="sale-item__button"
+            title="{{ __('Добавить в избранное') }}"
+            size="big"
+            color="light"
+            only-icon="true">
+            <x-slot:icon class="button__icon-wrapper_star">
+                <x-svg.star class="button__icon button__icon_small"></x-svg.star>
+            </x-slot:icon>
+        </x-ui.form.button>
+    </div>
 </div>
 
 

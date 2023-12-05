@@ -2,11 +2,13 @@
 
 namespace App\Providers;
 
+use http\Client\Response;
 use Illuminate\Cache\RateLimiting\Limit;
 use Illuminate\Foundation\Support\Providers\RouteServiceProvider as ServiceProvider;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\RateLimiter;
 use Illuminate\Support\Facades\Route;
+use Symfony\Component\HttpFoundation\Response as ResponseAlias;
 
 class RouteServiceProvider extends ServiceProvider
 {
@@ -43,6 +45,13 @@ class RouteServiceProvider extends ServiceProvider
     {
         RateLimiter::for('api', function (Request $request) {
             return Limit::perMinute(60)->by($request->user()?->id ?: $request->ip());
+        });
+
+        RateLimiter::for('auth', function (Request $request) {
+            return Limit::perMinute(10)->by($request->ip)
+                ->response(function (Request $request, array $headers) {
+                    return response('Полегче', ResponseAlias::HTTP_TOO_MANY_REQUESTS);
+                });
         });
     }
 }

@@ -28,18 +28,17 @@
     &__additional-photos {
         margin-bottom: 12px;
     }
-}
 
-@include breakpoint-max($lg) {
-    .feed-item {
+    @include breakpoint-max($lg) {
+
         flex-wrap: wrap;
-    }
 
-    .feed-item__photos {
-        width: 100%;
-    }
+        &__photos {
+            width: 100%;
+        }
 
-    .feed-item__info {
-        width: 100%;
+        &__info {
+            width: 100%;
+        }
     }
 }

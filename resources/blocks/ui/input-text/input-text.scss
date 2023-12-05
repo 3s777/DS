@@ -40,6 +40,7 @@
 .input-text__field:focus ~ .input-text__label,
 .input-text__field:active ~ .input-text__label,
 //.input-text__field:valid ~ .input-text__label,
+.input-text__field:not(:placeholder-shown) ~ .input-text__label,
 .input-text__field_error ~ .input-text__label,
 .input-text__field_filled ~ .input-text__label {
     top: -17px;
