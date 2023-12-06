@@ -1,0 +1,18 @@
+.item-photos {
+
+    &__main {
+        margin-bottom: 12px;
+        line-height: 0;
+    }
+
+    &__additional {
+        display: flex;
+        gap: 12px;
+        margin-bottom: 12px;
+        line-height: 0;
+    }
+
+    &__img {
+        max-width: 100%;
+    }
+}
