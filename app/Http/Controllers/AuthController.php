@@ -27,6 +27,7 @@ class AuthController extends Controller
 {
     public function register(): View|Application|Factory|\Illuminate\Contracts\Foundation\Application
     {
+
         return view('content.auth.register');
     }
 
@@ -43,7 +44,9 @@ class AuthController extends Controller
 
         event(new Registered($user));
 
-        return redirect()->route('login')->with('status', __('You need to verify your email'));
+        flash()->info(__('You need to verify your email'));
+
+        return redirect()->route('login');
     }
 
     public function login(): View|Application|Factory|\Illuminate\Contracts\Foundation\Application
@@ -69,7 +72,7 @@ class AuthController extends Controller
         }
 
         return back()->withErrors([
-            'username' => 'The provided credentials do not match our records.',
+            'username' => __('The provided credentials do not match our records.'),
         ])->onlyInput('username');
     }
 
@@ -96,9 +99,13 @@ class AuthController extends Controller
             $request->only('email')
         );
 
-        return $status === Password::RESET_LINK_SENT
-            ? back()->with(['status' => __($status)])
-            : back()->withErrors(['email' => __($status)]);
+        if($status === Password::RESET_LINK_SENT) {
+            flash()->info(__($status), 'warning');
+
+            return back();
+        }
+
+        return back()->withErrors(['email' => __($status)]);
     }
 
     public function reset( string $token): View|Application|Factory|\Illuminate\Contracts\Foundation\Application
@@ -124,9 +131,13 @@ class AuthController extends Controller
             }
         );
 
-        return $status === Password::PASSWORD_RESET
-            ? redirect()->route('login')->with('status', __($status))
-            : back()->withErrors(['email' => [__($status)]]);
+        if($status === Password::PASSWORD_RESET) {
+            flash()->info(__($status));
+
+            return redirect()->route('login');
+        }
+
+        return back()->withErrors(['email' => __($status)]);
     }
 
     public function verifyEmail(VerifyEmailRequest $request, $id)
@@ -153,11 +164,16 @@ class AuthController extends Controller
         $user = User::where('email', $request->only(['email']))->first();
 
         if ($user->hasVerifiedEmail()) {
-            return redirect()->route('verification.notice')->with('status', __('Your email is already verificated'));
+
+            flash()->info(__('Your email is already verificated'));
+
+            return redirect()->route('verification.notice');
         }
 
         $user->sendEmailVerificationNotification();
 
-        return redirect()->route('verification.notice')->with('status', __('We retry send verification link to your email'));
+        flash()->info(__('We retry send verification link to your email'));
+
+        return redirect()->route('verification.notice');
     }
 }

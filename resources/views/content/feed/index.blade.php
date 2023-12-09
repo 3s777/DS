@@ -1,7 +1,7 @@
 <x-layouts.main title="Feed">
     <x-grid.container>
         <x-common.content class="feed">
-
+            <x-common.messages />
             <x-ui.card>
                 <x-content.item-card class="feed-item sale-item">
                     <x-slot:photos>

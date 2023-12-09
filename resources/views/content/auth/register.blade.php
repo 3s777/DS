@@ -8,13 +8,7 @@
                     </x-ui.title>
                 </x-slot>
 
-                @if ($errors->any())
-                    <x-ui.message class="auth__message" type="danger">
-                        @foreach ($errors->all() as $error)
-                            <p>{{ $error }}</p>
-                        @endforeach
-                    </x-ui.message>
-                @endif
+                <x-common.messages />
 
                 <form class="form" method="POST" action="{{ route('register') }}">
                     @csrf
