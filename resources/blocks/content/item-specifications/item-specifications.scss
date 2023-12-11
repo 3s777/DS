@@ -1,0 +1,137 @@
+.item-specifications {
+
+    &_indent {
+        margin-bottom: 20px;
+    }
+
+    &__wrapper {
+        display: flex;
+        justify-content: space-between;
+        gap: 16px;
+        margin-bottom: 20px;
+    }
+
+    &__main {
+        width: 50%;
+    }
+
+    &__star-ratings {
+        width: 50%;
+    }
+
+    &__star-rating {
+        margin-bottom: 20px;
+
+        &:last-child {
+            margin-bottom: 0;
+        }
+    }
+
+    &__description {
+        margin-bottom: 20px;
+
+        p:last-child {
+            margin-bottom: 0;
+        };
+    }
+
+    &__buttons {
+        display: flex;
+        justify-content: flex-end;
+        gap: 8px;
+    }
+
+    &__conversation-buttons {
+        display: flex;
+        justify-content: flex-end;
+        gap: 8px;
+    }
+
+    &__save-buttons {
+        display: flex;
+        justify-content: flex-end;
+        gap: 8px;
+    }
+
+    @include breakpoint-max($xl) {
+        &__button {
+            padding: 12px 20px;
+        }
+
+        &__button.button_only_icon_big {
+            padding: 12px;
+        }
+    }
+
+    @include breakpoint-max($ml) {
+        &__main {
+            width: 45%;
+        }
+
+        &__star-ratings {
+            width: 55%;
+        }
+
+        &__button {
+            padding: 10px;
+        }
+
+        &__button.button_only_icon_big {
+            padding: 10px;
+        }
+    }
+
+    @include breakpoint-max($lg) {
+        &__main {
+            width: 50%;
+        }
+
+        &__star-ratings {
+            width: 50%;
+        }
+
+        &__buttons {
+            flex-wrap: wrap;
+        }
+    }
+
+    @include breakpoint-max($md) {
+        &__buttons {
+            flex-wrap: wrap;
+        }
+
+        &__conversation-buttons {
+            flex-basis: 100%;
+        }
+
+        &__save-buttons {
+            flex-basis: 100%;
+        }
+    }
+
+    @include breakpoint-max($sm) {
+        &__specifications {
+            padding: 12px;
+        }
+
+        &__wrapper {
+            flex-wrap: wrap;
+        }
+
+        &__main {
+            width: 100%;
+        }
+
+        &__star-ratings {
+            width: 100%;
+        }
+
+        &__conversation-buttons {
+            flex-wrap: wrap;
+        }
+
+        &__button {
+            width: 100%;
+        }
+    }
+}

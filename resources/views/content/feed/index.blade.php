@@ -2,10 +2,11 @@
     <x-grid.container>
         <x-common.content class="feed">
             <x-common.messages />
+
             <x-ui.card>
-                <x-content.item-card class="feed-item sale-item">
+                <x-content.item.card class="feed-item sale-item">
                     <x-slot:photos>
-                        <x-content.item-photos>
+                        <x-content.item.photos>
                             <x-slot:main-photo>
                                 <x-ui.image
                                     class="item-photos__img"
@@ -55,7 +56,7 @@
                                 Администрация сайта не имеет отношения к товарам и услугам продаваемым на сайте. Будьте предельно внимательны при общении с продавцами и проводите сделку только при полной уверенности в продавце
                             </x-ui.message>
 
-                        </x-content.item-photos>
+                        </x-content.item.photos>
                     </x-slot:photos>
 
                     <x-slot:info>
@@ -75,150 +76,92 @@
                                 </x-ui.tag>
                             </div>
 
-                            <div class="author-info sale-item__author">
-                                <div class="author-info__main">
-                                    <div class="author-info__thumbnail">
-                                        <a href=""><img class="author-info__img" src="{{ Vite::image('620_1.jpg') }}" alt=""></a>
-                                    </div>
-                                    <div class="author-info__content">
-                                        <div class="author-info__name"><a href="">Ивановіваффіва Иван</a></div>
-                                        <div class="author-info__nickname"><a href="">@test-user</a></div>
-                                    </div>
-                                </div>
-                                <div class="author-info__rating">
-                                    <div class="author-info__rating-title">Рейтинг</div>
-                                    <div class="author-info__rating-value"><a href="#">9.5/10</a></div>
-                                </div>
-                            </div>
+                            <x-content.author-info
+                                class="sale-item__author"
+                                photo="{{ Vite::image('620_1.jpg') }}"
+                                name="Иванов Иван Иванович"
+                                username="test-user"
+                                rating="8">
+                            </x-content.author-info>
                         </div>
 
+                        <x-content.item.specifications
+                            class="card card_color_dark"
+                            save-buttons="">
+                            <x-slot:specifications>
+                                <x-ui.specifications>
+                                    <x-ui.specifications.item title="Состояние">
+                                        <x-ui.tag>Б/У</x-ui.tag>
+                                    </x-ui.specifications.item>
 
+                                    <x-ui.specifications.item title="Торг">
+                                        <x-ui.tag>Возможен</x-ui.tag>
+                                    </x-ui.specifications.item>
 
+                                    <x-ui.specifications.item title="Доставка">
+                                        <x-ui.tag>По всему миру</x-ui.tag>
+                                    </x-ui.specifications.item>
 
+                                    <x-ui.specifications.item title="Самовывоз">
+                                        <x-ui.tag>Москва</x-ui.tag>
+                                    </x-ui.specifications.item>
 
-<x-ui.card class="sale-item__specifications" color="dark">
+                                    <x-ui.specifications.item title="Бронь">
+                                        <x-ui.tag>По предоплате</x-ui.tag>
+                                    </x-ui.specifications.item>
+                                </x-ui.specifications>
+                            </x-slot:specifications>
+                            <x-slot:starRating>
+                                <x-ui.star-rating
+                                    class="item-specifications__star-rating"
+                                    type="disabled"
+                                    value="10"
+                                    title="Диск"
+                                    num-class="10"
+                                    name="disk-1">
+                                </x-ui.star-rating>
 
-    <div class="sale-item__specifications-wrapper">
+                                <x-ui.star-rating
+                                    class="item-specifications__star-rating"
+                                    type="disabled"
+                                    value="9"
+                                    title="Мануал"
+                                    num-class="10"
+                                    name="manual-1">
+                                </x-ui.star-rating>
 
-            <div class="sale-item__main-specifications">
+                                <x-ui.star-rating
+                                    class="item-specifications__star-rating"
+                                    type="disabled"
+                                    title="Коробка"
+                                    value="3"
+                                    num-class="10"
+                                    name="box-1">
+                                </x-ui.star-rating>
 
-
-
-                <x-ui.specifications>
-
-                    <x-ui.specifications.item title="Состояние">
-                        <x-ui.tag>Б/У</x-ui.tag>
-                    </x-ui.specifications.item>
-
-                    <x-ui.specifications.item title="Торг">
-                        <x-ui.tag>Возможен</x-ui.tag>
-                    </x-ui.specifications.item>
-
-                    <x-ui.specifications.item title="Доставка">
-                        <x-ui.tag>По всему миру</x-ui.tag>
-                    </x-ui.specifications.item>
-
-                    <x-ui.specifications.item title="Самовывоз">
-                        <x-ui.tag>Москва</x-ui.tag>
-                    </x-ui.specifications.item>
-
-                    <x-ui.specifications.item title="Бронь">
-                        <x-ui.tag>По предоплате</x-ui.tag>
-                    </x-ui.specifications.item>
-
-
-                </x-ui.specifications>
-            </div>
-
-
-
-            <div class="sale-item__star-ratings">
-
-                <x-ui.star-rating
-                    class="sale-item__star-rating"
-                    type="disabled"
-                    value="10"
-                    title="Диск"
-                    num-class="10"
-                    name="disk-1">
-                </x-ui.star-rating>
-
-
-
-                <x-ui.star-rating
-                    class="sale-item__star-rating"
-                    type="disabled"
-                    value="9"
-                    title="Мануал"
-                    num-class="10"
-                    name="manual-1">
-                </x-ui.star-rating>
-
-                <x-ui.star-rating
-                    class="sale-item__star-rating"
-                    type="disabled"
-                    title="Коробка"
-                    value="3"
-                    num-class="10"
-                    name="box-1">
-                </x-ui.star-rating>
-
-
-                <x-ui.star-rating
-                    class="sale-item__star-rating"
-                    title="Обложка"
-                    type="disabled"
-                    value="8"
-                    num-class="10"
-                    name="cover-1">
-                </x-ui.star-rating>
-
-            </div>
-
-    </div>
-
-
-    <div class="sale-item__description">
-        <p>
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Amet atque, blanditiis consequatur deleniti dolores, eligendi eveniet harum iste magnam minima minus nobis possimus quae quo quod sit ut vel voluptates.
-        </p>
-        <p>
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Amet atque, blanditiis consequatur deleniti dolores, eligendi eveniet harum iste magnam minima minus nobis possimus quae quo quod sit ut vel voluptates.
-        </p>
-    </div>
-<div class="sale-item__buttons">
-    <div class="sale-item__conversation-buttons">
-        <x-ui.form.button class="sale-item__button">Купить</x-ui.form.button>
-        <x-ui.form.button class="sale-item__button">Забронировать</x-ui.form.button>
-        <x-ui.form.button class="sale-item__button" color="info">Написать продавцу</x-ui.form.button>
-    </div>
-    <div class="sale-item__save-buttons">
-        <x-ui.form.button
-            class="sale-item__button"
-            title="{{ __('Добавить в список желаний') }}"
-            size="big"
-            color="light"
-            only-icon="true">
-            <x-slot:icon class="button__icon-wrapper_wishlist">
-                <x-svg.wishlist class="button__icon button__icon_small"></x-svg.wishlist>
-            </x-slot:icon>
-        </x-ui.form.button>
-        <x-ui.form.button
-            class="sale-item__button"
-            title="{{ __('Добавить в избранное') }}"
-            size="big"
-            color="light"
-            only-icon="true">
-            <x-slot:icon class="button__icon-wrapper_star">
-                <x-svg.star class="button__icon button__icon_small"></x-svg.star>
-            </x-slot:icon>
-        </x-ui.form.button>
-    </div>
-</div>
-
-
-
-</x-ui.card>
+                                <x-ui.star-rating
+                                    class="item-specifications__star-rating"
+                                    title="Обложка"
+                                    type="disabled"
+                                    value="8"
+                                    num-class="10"
+                                    name="cover-1">
+                                </x-ui.star-rating>
+                            </x-slot:starRating>
+                            <x-slot:description>
+                                <p>
+                                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Amet atque, blanditiis consequatur deleniti dolores, eligendi eveniet harum iste magnam minima minus nobis possimus quae quo quod sit ut vel voluptates.
+                                </p>
+                                <p>
+                                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Amet atque, blanditiis consequatur deleniti dolores, eligendi eveniet harum iste magnam minima minus nobis possimus quae quo quod sit ut vel voluptates.
+                                </p>
+                            </x-slot:description>
+                            <x-slot:buttons>
+                                <x-ui.form.button class="item-specifications__button">Купить</x-ui.form.button>
+                                <x-ui.form.button class="item-specifications__button">Забронировать</x-ui.form.button>
+                                <x-ui.form.button class="item-specifications__button" color="info">Написать продавцу</x-ui.form.button>
+                            </x-slot:buttons>
+                        </x-content.item.specifications>
 
                         <x-ui.specifications>
                             <x-ui.specifications.item title="Языки">
@@ -243,7 +186,7 @@
                         </div>
 
                     </x-slot:info>
-                </x-content.item-card>
+                </x-content.item.card>
             </x-ui.card>
 
             <x-ui.card>
