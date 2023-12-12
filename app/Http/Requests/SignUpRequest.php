@@ -7,9 +7,12 @@ use App\Rules\LatinLowercaseRule;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
 use Illuminate\Validation\Rules\Password;
+use Worksome\RequestFactories\Concerns\HasFactory;
 
 class SignUpRequest extends FormRequest
 {
+    use HasFactory;
+
     /**
      * Determine if the user is authorized to make this request.
      */
