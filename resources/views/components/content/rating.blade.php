@@ -12,9 +12,9 @@
         ])
     }}>
     @if($title)
-        <div class="rating__title {{ ($classPrefix) ? $classPrefix.'__rating-title': '' }}">{{ __($title) }}</div>
+        <div class="rating__title {{ $classPrefix ? $classPrefix.'__rating-title': '' }}">{{ __($title) }}</div>
     @endif
-    <div class="rating__value {{ ($classPrefix) ? $classPrefix.'__rating-value': '' }}">
+    <div class="rating__value {{ $classPrefix ? $classPrefix.'__rating-value': '' }}">
         <a href="#">{{ $rating }}/{{ $maxValue }}</a>
     </div>
 </div>

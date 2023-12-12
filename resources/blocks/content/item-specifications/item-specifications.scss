@@ -110,10 +110,6 @@
     }
 
     @include breakpoint-max($sm) {
-        &__specifications {
-            padding: 12px;
-        }
-
         &__wrapper {
             flex-wrap: wrap;
         }

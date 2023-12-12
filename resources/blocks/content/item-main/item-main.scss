@@ -1,0 +1,9 @@
+.item-main {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 12px;
+
+    @include breakpoint-max($ml) {
+        flex-wrap: wrap;
+    }
+}

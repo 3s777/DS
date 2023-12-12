@@ -1,0 +1,32 @@
+.price {
+    position: relative;
+    margin: 0;
+    font-size: rem(24);
+
+    &__currency {
+        font-size: rem(16);
+    }
+
+    &__value_old {
+        text-decoration: line-through;
+    }
+
+    &__discount {
+        position: absolute;
+        top: -10px;
+        right: -10px;
+        padding: 2px 10px;
+        font-size: rem(12);
+        background-color: $danger-main;
+        border-radius: $small-border-radius;
+    }
+
+    @include breakpoint-max($sm) {
+        padding-left: 10px;
+        padding-right: 10px;
+
+        &__currency {
+            font-size: rem(12);
+        }
+    }
+}

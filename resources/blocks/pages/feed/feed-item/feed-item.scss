@@ -1,0 +1,8 @@
+.feed-item {
+    margin-bottom: 24px;
+
+    @include breakpoint-max($sm) {
+        padding-top: 0;
+        overflow: hidden;
+    }
+}
