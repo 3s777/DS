@@ -3,7 +3,8 @@
     'info' => false
 ])
 
-<div
+<x-ui.card
+    body=''
     {{ $attributes->class([
         'item-card'
         ])
@@ -29,4 +30,4 @@
         </div>
     @endif
 
-</div>
+</x-ui.card>

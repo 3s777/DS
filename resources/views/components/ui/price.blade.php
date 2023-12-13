@@ -1,15 +1,26 @@
 @props([
     'value',
     'currency',
+    'standard' => true,
     'discount' => false,
     'old' => false,
-    'color' => 'dark'
+    'color' => 'dark',
+    'prefix' => false
 ])
 
-<x-ui.tag {{ $attributes->class(['price']) }} color="{{ $color }}" disabled="true">
-    <span class="price__value {{ $old ? 'price__value_old' : '' }}">{{ $value }}</span>
-    <span class="price__currency">{{ $currency }}</span>
+<div {{ $attributes->class([
+        'price',
+        'price_standard' => $standard,
+        'price_color_'.$color => $color
+        ])
+    }}>
+    <div class="price__value
+        {{ $prefix ? $prefix.'__price-value' : '' }}
+        {{ $old ? 'price__value_old' : '' }}">
+            {{ $value }}
+    </div>
+    <div class="price__currency {{ $prefix ? $prefix.'__price-currency' : '' }} ">{{ $currency }}</div>
     @if($discount)
         <div class="price__discount">-{{ $discount }}%</div>
     @endif
-</x-ui.tag>
+</div>

@@ -1,6 +1,7 @@
 @props([
     'header' => false,
     'footer' => false,
+    'body' => true,
     'tag' => 'div',
     'title' => false,
     'indentBottom' => false,
@@ -30,9 +31,15 @@
         </header>
     @endif
 
-    <div class="card__body">
+    @if($body)
+        <div class="card__body">
+    @endif
+
         {{ $slot }}
-    </div>
+
+    @if($body)
+        </div>
+    @endif
 
     @if($footer)
         <div {{ $footer->attributes->class(['card__footer']) }}>

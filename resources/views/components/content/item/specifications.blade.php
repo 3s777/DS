@@ -7,7 +7,9 @@
     'saveButtons' => true
 ])
 
-<div
+<x-ui.card
+    color="dark"
+    body=""
     {{ $attributes->class([
             'item-specifications',
             'item-specifications_indent' => $indent
@@ -84,4 +86,4 @@
             @endif
         </div>
     @endif
-</div>
+</x-ui.card>

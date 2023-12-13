@@ -1,9 +1,32 @@
 .price {
-    position: relative;
-    margin: 0;
+    padding: 5px 15px;
     font-size: rem(24);
+    text-decoration: none;
+    background-color: $base-light-like-transparent;
+    border-radius: 8px;
+    line-height: 1;
+
+    &_standard {
+        position: relative;
+        display: inline-flex;
+        align-items: flex-end;
+        gap: 2px;
+    }
+
+    &_color_success {
+        background-color: $additional-main;
+    }
+
+    &_color_dark {
+        background-color: $base-dark-like-transparent;
+    }
+
+    &_color_danger {
+        background-color: $danger-main;
+    }
 
     &__currency {
+        margin-bottom: 2px;
         font-size: rem(16);
     }
 

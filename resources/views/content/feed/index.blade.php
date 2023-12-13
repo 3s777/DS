@@ -4,7 +4,7 @@
             <x-common.messages />
 
 
-                <x-content.item.card class="card feed-item sale-item">
+                <x-content.item.card class="feed-item sale-item">
                     <x-slot:photos>
                         <x-content.item.photos>
                             <x-slot:main-photo>
@@ -66,13 +66,13 @@
                             <div class="sale-item__price">
                                 <div class="sale-item__price-title">Цена:</div>
                                 <x-ui.price
-                                    class="sale-item__price-data"
+                                    class="sale-item__price-value"
                                     color="success"
                                     value="2500"
                                     currency="RUB"
                                     discount="20"/>
                                 <x-ui.price
-                                    class="sale-item__price-data"
+                                    class="sale-item__price-value"
                                     color="dark"
                                     value="3000"
                                     currency="RUB"
@@ -88,7 +88,7 @@
                             </x-content.author-info>
                         </x-content.item.main>
 
-                        <x-content.item.specifications class="card card_color_dark">
+                        <x-content.item.specifications>
                             <x-slot:specifications>
                                 <x-ui.specifications>
                                     <x-ui.specifications.item title="Состояние">
@@ -247,38 +247,52 @@
 
                         <x-content.item.main class="auction-item__main">
 
-                            <div class="auction-item__terms">
-                                <div class="auction-item__bids">
-                                    <div class="sale-item__price-title">Начальная ставка:</div>
-                                    <x-ui.tag class="sale-item__price-data" color="dark" disabled="true">
-                                        <span class="sale-item__price-value">2500</span>
-                                        <span class="sale-item__currency">RUB</span>
-                                    </x-ui.tag>
-                                    <div class="sale-item__price-title">Текущая ставка:</div>
-                                    <x-ui.tag class="sale-item__price-data" color="success" disabled="true">
-                                        <span class="sale-item__price-oldvalue">3000</span>
-                                        <span class="sale-item__currency">RUB</span>
-                                    </x-ui.tag>
-                                    <div class="sale-item__price-title">Блиц ставка:</div>
-                                    <x-ui.tag class="sale-item__price-data" color="dark" disabled="true">
-                                        <span class="sale-item__price-oldvalue">5000</span>
-                                        <span class="sale-item__currency">RUB</span>
-                                    </x-ui.tag>
+                            <div class="auction-item__bids">
+                                <x-ui.title size="small" class="auction-item__bids-title">Ставки:</x-ui.title>
+                                <div class="auction-item__bids-wrapper">
+                                    <div class="auction-item__bid">
+                                        <x-ui.price
+                                            class="auction-item__price"
+                                            prefix="auction-item"
+                                            color="dark"
+                                            value="300"
+                                            currency="RUB"/>
+                                        <div class="auction-item__bid-title">стартовая</div>
+                                    </div>
+
+                                    <div class="auction-item__bid">
+
+                                        <x-ui.price
+                                            class="auction-item__price"
+                                            prefix="auction-item"
+                                            color="success"
+                                            value="2500"
+                                            currency="RUB"/>
+                                        <div class="auction-item__bid-title">текущая</div>
+                                    </div>
+
+                                    <div class="auction-item__bid">
+                                        <x-ui.price
+                                            class="auction-item__price"
+                                            prefix="auction-item"
+                                            color="dark"
+                                            value="5000"
+                                            currency="RUB"/>
+                                        <div class="auction-item__bid-title">блиц</div>
+                                    </div>
+
+                                    <div class="auction-item__bid">
+                                        <x-ui.price
+                                            class="auction-item__price"
+                                            prefix="auction-item"
+                                            color="danger"
+                                            value="1000"
+                                            currency="RUB"/>
+                                        <div class="auction-item__bid-title">ваша</div>
+                                    </div>
+
                                 </div>
-                                <div class="auction-item__rules">
-                                    <div class="sale-item__price-title">Шаг ставки:</div>
-                                    <x-ui.tag class="sale-item__price-data" color="dark" disabled="true">
-                                        <span class="sale-item__price-value">50</span>
-                                    </x-ui.tag>
-                                    <div class="sale-item__price-title">Дата окончания:</div>
-                                    <x-ui.tag class="sale-item__price-data" color="dark" disabled="true">
-                                        <span class="sale-item__price-value">20:00 12.12.2023</span>
-                                    </x-ui.tag>
-                                    <div class="sale-item__price-title">Автопродление:</div>
-                                    <x-ui.tag class="sale-item__price-data" color="dark" disabled="true">
-                                        <span class="sale-item__price-value">3 минуты</span>
-                                    </x-ui.tag>
-                                </div>
+
                             </div>
 
                             <x-content.author-info
@@ -289,6 +303,55 @@
                                 rating="8">
                             </x-content.author-info>
                         </x-content.item.main>
+
+                        <div class="auction-item__rules">
+                            <x-ui.title size="small" class="auction-item__bids-title">Условия аукциона:</x-ui.title>
+                            <x-ui.specifications>
+                                <x-ui.specifications.item
+                                    class="auction-item__rule"
+                                    type="inline"
+                                    title="Шаг">
+                                    <x-ui.tag class="auction-item__rule-value" color="dark" disabled="true">
+                                        50
+                                    </x-ui.tag>
+                                </x-ui.specifications.item>
+
+                                <x-ui.specifications.item
+                                    class="auction-item__rule"
+                                    type="inline"
+                                    title="Окончание">
+                                    <x-ui.tag class="auction-item__rule-value" color="dark" disabled="true">
+                                        20:00 12.12.2023
+                                    </x-ui.tag>
+                                </x-ui.specifications.item>
+
+                                <x-ui.specifications.item
+                                    class="auction-item__rule"
+                                    type="inline"
+                                    title="Автопродление">
+                                    <x-ui.tag class="auction-item__rule-value" color="dark" disabled="true">
+                                        3 минуты
+                                    </x-ui.tag>
+                                </x-ui.specifications.item>
+                            </x-ui.specifications>
+                        </div>
+
+                        <form class="auction-item__bid-form" action="" >
+                            <x-ui.form.input-text name="bid" id="bid" placeholder="Ваша ставка" type="number" step="50" min="300"></x-ui.form.input-text>
+                            <x-ui.form.button class="auction-item__bid-button">Сделать ставку</x-ui.form.button>
+                            <x-ui.form.button>Купить</x-ui.form.button>
+                        </form>
+
+                        <div class="auction-item__bids-history">
+                            <x-ui.accordion>
+                                <x-ui.accordion.item class="auction-item__accordion" color="light">
+                                    <x-ui.accordion.title class="auction-item__history-title">История ставок</x-ui.accordion.title>
+                                    <x-ui.accordion.content>
+                                        Тут история ставок
+                                    </x-ui.accordion.content>
+                                </x-ui.accordion.item>
+                            </x-ui.accordion>
+                        </div>
 
                         <x-content.item.specifications class="card card_color_dark">
                             <x-slot:specifications>

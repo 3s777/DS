@@ -3,6 +3,7 @@
     &__price {
         display: flex;
         align-items: flex-end;
+        flex-wrap: wrap;
         gap: 8px;
         padding-top: 10px;
         margin-bottom: 24px;
@@ -43,7 +44,6 @@
 
     @include breakpoint-max($xs) {
         &__price {
-            flex-wrap: wrap;
             font-size: rem(20);
         }
 
