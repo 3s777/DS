@@ -55,9 +55,9 @@
                             {{ __('Login') }}
                         </x-ui.form.button>
 
-                        @if (Route::has('password.request'))
+                        @if (Route::has('forgot'))
                             <div class="auth__forgot">
-                                <a class="auth__forgot-link" href="{{ route('password.request') }}">
+                                <a class="auth__forgot-link" href="{{ route('forgot') }}">
                                     {{ __('Forgot Your Password?') }}
                                 </a>
                             </div>

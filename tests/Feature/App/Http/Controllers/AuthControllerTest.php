@@ -2,17 +2,13 @@
 
 namespace Tests\Feature\App\Http\Controllers;
 
-use App\Http\Controllers\AuthController;
+use App\Http\Controllers\Auth\SignInController;
 use App\Http\Requests\SignInRequest;
 use App\Http\Requests\SignUpRequest;
-
-use App\Models\User;
-use App\Notifications\VerifyEmailNotification;
+use Domain\Auth\Models\User;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Auth\Listeners\SendEmailVerificationNotification;
-
 use Illuminate\Foundation\Testing\RefreshDatabase;
-
 use Illuminate\Support\Facades\Event;
 use Illuminate\Support\Facades\Notification;
 use Illuminate\Support\Facades\URL;
@@ -30,7 +26,7 @@ class AuthControllerTest extends TestCase
     {
         URL::defaults(['locale' => 'ru']);
 
-        $this->get(action([AuthController::class, 'login']))
+        $this->get(action([SignInController::class, 'login']))
             ->assertOk()
             ->assertSee('Войти')
             ->assertViewIs('content.auth.login');
@@ -44,7 +40,7 @@ class AuthControllerTest extends TestCase
     {
         URL::defaults(['locale' => 'ru']);
 
-        $this->get(action([AuthController::class, 'register']))
+        $this->get(action([SignInController::class, 'register']))
             ->assertOk()
             ->assertSee('Регистрация')
             ->assertViewIs('content.auth.register');
@@ -58,7 +54,7 @@ class AuthControllerTest extends TestCase
     {
         URL::defaults(['locale' => 'ru']);
 
-        $this->get(action([AuthController::class, 'forgot']))
+        $this->get(action([SignInController::class, 'forgot']))
             ->assertOk()
             ->assertSee('Забыли')
             ->assertViewIs('content.auth.forgot-password');
@@ -83,7 +79,7 @@ class AuthControllerTest extends TestCase
             'password' => $password
         ]);
 
-       $response = $this->post(action([AuthController::class, 'signIn']), $request);
+       $response = $this->post(action([SignInController::class, 'signIn']), $request);
 
        $response->assertValid()
            ->assertRedirect(route('search'));
@@ -101,7 +97,7 @@ class AuthControllerTest extends TestCase
 
         $user = User::factory()->create([]);
 
-        $this->actingAs($user)->delete(action([AuthController::class, 'logout']));
+        $this->actingAs($user)->delete(action([SignInController::class, 'logout']));
 
         $this->assertGuest();
     }
@@ -131,7 +127,7 @@ class AuthControllerTest extends TestCase
 
 
         $response = $this->post(
-            action([AuthController::class, 'signUp']),
+            action([SignInController::class, 'signUp']),
             $request
         );
 

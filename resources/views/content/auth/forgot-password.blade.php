@@ -10,7 +10,7 @@
 
                     <x-common.messages />
 
-                <form class="form" method="POST" action="{{ route('password.email') }}">
+                <form class="form" method="POST" action="{{ route('forgot.handle') }}">
                     @csrf
                     <x-ui.form.group>
                         <x-ui.form.input-text

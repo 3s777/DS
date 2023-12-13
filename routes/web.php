@@ -1,7 +1,6 @@
 <?php
 
-use App\Http\Controllers\AuthController;
-use Illuminate\Foundation\Auth\EmailVerificationRequest;
+use App\Http\Controllers\Auth\SignInController;
 use Illuminate\Support\Facades\Route;
 
 //require_once "web/auth.php";
@@ -12,7 +11,7 @@ Route::get('/{locale?}', function () {
 
 Route::prefix('{locale}')->whereIn('locale', config('app.available_locales'))->group(function () {
 
-    Route::controller(AuthController::class)->group(function () {
+    Route::controller(SignInController::class)->group(function () {
         Route::get('/register', 'register')->name('register');
         Route::post('/register', 'signUp')->middleware('throttle:auth')->name('signUp');
         Route::get('/login', 'login')->name('login');
