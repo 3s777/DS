@@ -2,9 +2,12 @@
 
 namespace Tests\Feature\App\Http\Controllers;
 
+use App\Http\Controllers\Auth\ForgotPasswordController;
 use App\Http\Controllers\Auth\SignInController;
+use App\Http\Controllers\Auth\SignUpController;
 use App\Http\Requests\SignInRequest;
 use App\Http\Requests\SignUpRequest;
+use Database\Factories\UserFactory;
 use Domain\Auth\Models\User;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Auth\Listeners\SendEmailVerificationNotification;
@@ -24,9 +27,7 @@ class AuthControllerTest extends TestCase
      */
     public function it_login_page_success(): void
     {
-        URL::defaults(['locale' => 'ru']);
-
-        $this->get(action([SignInController::class, 'login']))
+        $this->get(action([SignInController::class, 'page']))
             ->assertOk()
             ->assertSee('Войти')
             ->assertViewIs('content.auth.login');
@@ -36,11 +37,9 @@ class AuthControllerTest extends TestCase
      * @test
      * @return void
      */
-    public function it_sign_up_page_success(): void
+    public function it_register_page_success(): void
     {
-        URL::defaults(['locale' => 'ru']);
-
-        $this->get(action([SignInController::class, 'register']))
+        $this->get(action([SignUpController::class, 'page']))
             ->assertOk()
             ->assertSee('Регистрация')
             ->assertViewIs('content.auth.register');
@@ -52,9 +51,7 @@ class AuthControllerTest extends TestCase
      */
     public function it_forgot_page_success(): void
     {
-        URL::defaults(['locale' => 'ru']);
-
-        $this->get(action([SignInController::class, 'forgot']))
+        $this->get(action([ForgotPasswordController::class, 'page']))
             ->assertOk()
             ->assertSee('Забыли')
             ->assertViewIs('content.auth.forgot-password');
@@ -66,11 +63,9 @@ class AuthControllerTest extends TestCase
      */
     public function it_sign_in_page_success(): void
     {
-        URL::defaults(['locale' => 'ru']);
-
         $password = '123456789q';
 
-        $user = User::factory()->create([
+        $user = UserFactory::new()->create([
             'password' => bcrypt($password)
         ]);
 
@@ -79,7 +74,7 @@ class AuthControllerTest extends TestCase
             'password' => $password
         ]);
 
-       $response = $this->post(action([SignInController::class, 'signIn']), $request);
+       $response = $this->post(action([SignInController::class, 'handle']), $request);
 
        $response->assertValid()
            ->assertRedirect(route('search'));
@@ -93,9 +88,7 @@ class AuthControllerTest extends TestCase
      */
     public function it_logout_success(): void
     {
-        URL::defaults(['locale' => 'ru']);
-
-        $user = User::factory()->create([]);
+        $user = UserFactory::new()->create([]);
 
         $this->actingAs($user)->delete(action([SignInController::class, 'logout']));
 
@@ -106,14 +99,12 @@ class AuthControllerTest extends TestCase
      * @test
      * @return void
      */
-    public function it_store_success(): void
+    public function it_sign_up_success(): void
     {
         Notification::fake();
         Event::fake();
 
         $this->app->setLocale('ru');
-
-        URL::defaults(['locale' => 'ru']);
 
         $request = SignUpRequest::factory()->create([
             'password' => '123456789q',
@@ -124,10 +115,8 @@ class AuthControllerTest extends TestCase
             'email' => $request['email']
         ]);
 
-
-
         $response = $this->post(
-            action([SignInController::class, 'signUp']),
+            action([SignUpController::class, 'handle']),
             $request
         );
 
