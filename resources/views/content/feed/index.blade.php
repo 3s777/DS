@@ -257,7 +257,7 @@
                                             color="dark"
                                             value="300"
                                             currency="RUB"/>
-                                        <div class="auction-item__bid-title">стартовая</div>
+                                        <div class="auction-item__bid-title">Стартовая</div>
                                     </div>
 
                                     <div class="auction-item__bid">
@@ -268,7 +268,7 @@
                                             color="success"
                                             value="2500"
                                             currency="RUB"/>
-                                        <div class="auction-item__bid-title">текущая</div>
+                                        <div class="auction-item__bid-title">Текущая</div>
                                     </div>
 
                                     <div class="auction-item__bid">
@@ -276,9 +276,9 @@
                                             class="auction-item__price"
                                             prefix="auction-item"
                                             color="dark"
-                                            value="5000"
+                                            value="10000"
                                             currency="RUB"/>
-                                        <div class="auction-item__bid-title">блиц</div>
+                                        <div class="auction-item__bid-title">Блиц</div>
                                     </div>
 
                                     <div class="auction-item__bid">
@@ -288,7 +288,7 @@
                                             color="danger"
                                             value="1000"
                                             currency="RUB"/>
-                                        <div class="auction-item__bid-title">ваша</div>
+                                        <div class="auction-item__bid-title">Ваша</div>
                                     </div>
 
                                 </div>
@@ -347,7 +347,29 @@
                                 <x-ui.accordion.item class="auction-item__accordion" color="light">
                                     <x-ui.accordion.title class="auction-item__history-title">История ставок</x-ui.accordion.title>
                                     <x-ui.accordion.content>
-                                        Тут история ставок
+                                       <div class="auction-item__history-list">
+                                           <div class="auction-item__bid-row">
+                                               <div class="auction-item__bid-info">
+                                                   <x-ui.tag class="auction-item__bid-username" color="dark">@i.sinica</x-ui.tag>
+                                                   <div class="auction-item__bid-value">500<span class="auction-item__bid-currency">RUB</span></div>
+                                               </div>
+                                               <div class="auction-item__bid-date">10:47 14.12.2023</div>
+                                           </div>
+                                           <div class="auction-item__bid-row">
+                                               <div class="auction-item__bid-info">
+                                                   <x-ui.tag class="auction-item__bid-username" color="dark">@test.user</x-ui.tag>
+                                                   <div class="auction-item__bid-value">400<span class="auction-item__bid-currency">RUB</span></div>
+                                               </div>
+                                               <div class="auction-item__bid-date">22:34 13.12.2023</div>
+                                           </div>
+                                           <div class="auction-item__bid-row">
+                                               <div class="auction-item__bid-info">
+                                                   <x-ui.tag class="auction-item__bid-username" color="dark">@game.collector</x-ui.tag>
+                                                   <div class="auction-item__bid-value">300<span class="auction-item__bid-currency">RUB</span></div>
+                                               </div>
+                                               <div class="auction-item__bid-date">8:01 12.12.2023</div>
+                                           </div>
+                                       </div>
                                     </x-ui.accordion.content>
                                 </x-ui.accordion.item>
                             </x-ui.accordion>
@@ -423,8 +445,6 @@
                                 </p>
                             </x-slot:description>
                             <x-slot:buttons>
-                                <x-ui.form.button class="item-specifications__button">Купить</x-ui.form.button>
-                                <x-ui.form.button class="item-specifications__button">Забронировать</x-ui.form.button>
                                 <x-ui.form.button class="item-specifications__button" color="info">Написать продавцу</x-ui.form.button>
                             </x-slot:buttons>
                         </x-content.item.specifications>

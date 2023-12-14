@@ -1,10 +1,11 @@
 .auction-item {
 
     &__main {
-        margin-bottom: 24px;
+        margin-bottom: 36px;
     }
 
     &__price {
+        min-width: 70px;
         padding-left: 10px;
         padding-right: 10px;
         font-size: rem(22);
@@ -21,7 +22,7 @@
     }
 
     &__rules {
-        margin-bottom: 16px;
+        margin-bottom: 12px;
     }
 
     &__bids {
@@ -30,7 +31,7 @@
     }
 
     &__bids-title {
-        margin-bottom: 8px;
+        margin-bottom: 12px;
         font-size: rem(20);
     }
 
@@ -60,7 +61,7 @@
     }
 
     &__bids-history {
-        margin-bottom: 24px;
+        margin-bottom: 36px;
     }
 
     &__accordion {
@@ -69,5 +70,101 @@
 
     &__history-title {
         font-size: rem(20);
+    }
+
+    &__bid-row {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-end;
+        gap: 8px;
+        margin-bottom: 8px;
+        padding-bottom: 8px;
+        border-bottom: 1px dashed $opposite-main-20;
+
+        &:last-child {
+            margin-bottom: 0;
+        }
+    }
+
+    &__bid-info {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+    }
+
+    &__bid-username {
+        margin-bottom: 0;
+    }
+
+    &__bid-value {
+        font-size: rem(20);
+    }
+
+    &__bid-currency {
+        font-size: rem(12);
+    }
+
+    @include breakpoint-max($xl) {
+        &__price {
+            flex-direction: column;
+        }
+
+        &__bids-wrapper {
+            gap: 16px;
+        }
+    }
+
+    @include breakpoint-max($ml) {
+        &__price {
+            flex-direction: row;
+        }
+
+        &__bids {
+            max-width: 100%;
+        }
+
+        &__bids-wrapper {
+            gap: 8px;
+        }
+
+        &__author {
+            width: 100%;
+            max-width: 100%;
+        }
+    }
+
+    @include breakpoint-max($sm) {
+        &__price {
+            flex-direction: column;
+        }
+
+        &__bids-wrapper {
+            gap: 16px;
+        }
+
+        &__author {
+            min-width: auto;
+        }
+
+        &__bid-form {
+            flex-wrap: wrap;
+
+            & .button {
+                width: 100%;
+            }
+        }
+
+        &__bid-row {
+            flex-wrap: wrap;
+            gap: 4px;
+        }
+
+        &__bid-date {
+            width: 100%;
+            padding-left: 8px;
+            font-size: rem(12);
+        }
+
+
     }
 }
