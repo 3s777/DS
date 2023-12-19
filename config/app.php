@@ -210,6 +210,7 @@ return [
         App\Providers\TelescopeServiceProvider::class,
         App\Providers\ViewServiseProvider::class,
         App\Providers\DomainServiseProvider::class,
+
     ],
 
     /*

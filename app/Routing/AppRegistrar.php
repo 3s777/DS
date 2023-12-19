@@ -4,6 +4,8 @@ namespace App\Routing;
 
 
 use App\Contracts\RouteRegistrar;
+use App\Http\Controllers\ThumbnailController;
+use App\Http\Controllers\UserController;
 use Illuminate\Contracts\Routing\Registrar;
 use Illuminate\Support\Facades\Route;
 
@@ -11,6 +13,12 @@ class AppRegistrar implements RouteRegistrar
 {
     public function map(Registrar $registrar): void
     {
+        Route::get('/storage/images/{dir}/{method}/{size}/{file}', ThumbnailController::class)
+            ->where('method', 'resize|crop|fit')
+            ->where('size', '\d+x\d+')
+            ->where('file', '.+\.(png|jpg|jpeg|webp)$')
+            ->name('thumbnail');
+
         Route::middleware('web')
             ->group(function() {
         Route::prefix('{locale?}')->whereIn('locale', config('app.available_locales'))->group(function () {
@@ -18,6 +26,8 @@ class AppRegistrar implements RouteRegistrar
             Route::get('/', function () {
                 return view('welcome');
             });
+
+
 
 
             Route::get('/dashboard', function () {
@@ -40,9 +50,7 @@ class AppRegistrar implements RouteRegistrar
                 return view('content.search.index');
             })->name('search');
 
-            Route::get('/users', function () {
-                return view('content.users.index');
-            })->name('users');
+            Route::get('/users', [UserController::class, 'index'])->name('users');
 
             Route::get('/profile', function () {
                 return view('content.profile.index');

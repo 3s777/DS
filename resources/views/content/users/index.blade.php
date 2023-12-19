@@ -17,6 +17,12 @@
                 </x-ui.title>
             </div>
 
+            @foreach($users as $user)
+                <img src="{{ $user->makeThumbnail('100x100') }}" alt="">
+                {{ $user->name }}
+                @endforeach
+
+
             <div class="users__list">
                 <x-ui.card class="users__card" size="small">
                     <a href="" class="user-search__rating" title="Рейтинг пользователя">9.5/10</a>
