@@ -159,9 +159,13 @@
             gap: 4px;
         }
 
+        &__bid-info {
+            flex-wrap: wrap;
+        }
+
         &__bid-date {
             width: 100%;
-            padding-left: 8px;
+            text-align: right;
             font-size: rem(12);
         }
 

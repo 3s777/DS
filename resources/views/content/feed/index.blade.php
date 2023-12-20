@@ -406,7 +406,7 @@
                                     value="10"
                                     title="Диск"
                                     num-class="10"
-                                    name="disk-1">
+                                    name="disk-2">
                                 </x-ui.star-rating>
 
                                 <x-ui.star-rating
@@ -415,7 +415,7 @@
                                     value="9"
                                     title="Мануал"
                                     num-class="10"
-                                    name="manual-1">
+                                    name="manual-2">
                                 </x-ui.star-rating>
 
                                 <x-ui.star-rating
@@ -424,16 +424,16 @@
                                     title="Коробка"
                                     value="3"
                                     num-class="10"
-                                    name="box-1">
+                                    name="box-2">
                                 </x-ui.star-rating>
 
                                 <x-ui.star-rating
                                     class="item-specifications__star-rating"
                                     title="Обложка"
                                     type="disabled"
-                                    value="8"
+                                    value="5"
                                     num-class="10"
-                                    name="cover-1">
+                                    name="cover-2">
                                 </x-ui.star-rating>
                             </x-slot:starRating>
                             <x-slot:description>

@@ -1,12 +1,16 @@
 .sale-item {
 
+    &__main {
+        align-items: center;
+    }
+
     &__price {
         display: flex;
         align-items: flex-end;
         flex-wrap: wrap;
         gap: 8px;
         padding-top: 10px;
-        margin-bottom: 24px;
+        margin-bottom: 12px;
         font-size: rem(24);
     }
 
@@ -17,12 +21,13 @@
 
     &__author {
         min-width: 300px;
-        max-width: 50%;
+        max-width: 40%;
     }
 
     @include breakpoint-max($ml) {
         &__main {
             flex-wrap: wrap;
+            gap: 16px;
         }
 
         &__price {
@@ -33,6 +38,7 @@
         &__author {
             width: 100%;
             max-width: 100%;
+            margin-bottom: 16px;
         }
     }
 
@@ -48,7 +54,6 @@
         }
 
         &__price-title {
-            width: 100%;
             border-bottom: 0;
         }
     }

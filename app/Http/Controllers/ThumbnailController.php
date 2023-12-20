@@ -19,7 +19,6 @@ class ThumbnailController extends Controller
    ): BinaryFileResponse
    {
 
-
         abort_if(
             !in_array($size, config('thumbnail.allowed_sizes', [])),
             403,
@@ -28,35 +27,44 @@ class ThumbnailController extends Controller
 
         $storage = Storage::disk('images');
 
-        $realPath = "$dir/$file";
+        $sourcePath = "$dir/$file";
+        $sourceWebpPath = "$dir/webp/$file";
         $newDirPath = "$dir/$method/$size";
         $resultPath = "$newDirPath/$file";
 
 
+       $manager = new ImageManager(
+           new Driver()
+       );
+
+       $image = $manager->read($storage->path($sourcePath));
+
+       if(!$storage->exists($sourceWebpPath)) {
+
+           $filename = pathinfo($file);
+
+
+
+           $image->toWebp(90)
+               ->save($storage->path("$dir/webp/".$filename['filename'].".webp"));
+       }
 
         if(!$storage->exists($resultPath)) {
             $storage->makeDirectory($newDirPath);
         }
 
         if(!$storage->exists($resultPath)) {
-            $manager = new ImageManager(
-                new Driver()
-            );
 
 
-            $image = $manager->read($storage->path($realPath));
+
 
             [$w, $h] = explode('x', $size);
 
-            $image->{$method}($w, $h);
+//            $image->{$method}($w, $h)->gamma(10.7)->encode()->save($storage->path($newDirPath.'/sd1f.png'));
 
-            $encoded = $image->toWebp();
-
-
-
-            $encoded->save($storage->path($resultPath));
-
-
+            $image->{$method}($w, $h)
+                ->toJpeg(90)
+                ->save($storage->path($resultPath));
         }
 
         return response()->file($storage->path($resultPath));
