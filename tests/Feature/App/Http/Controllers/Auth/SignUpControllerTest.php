@@ -9,9 +9,11 @@ use Database\Factories\UserFactory;
 use Domain\Auth\Models\User;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Auth\Listeners\SendEmailVerificationNotification;
+use Illuminate\Auth\Notifications\VerifyEmail;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Event;
 use Illuminate\Support\Facades\Notification;
+use Illuminate\Support\Facades\Session;
 use Illuminate\Testing\TestResponse;
 use Tests\TestCase;
 
@@ -25,15 +27,10 @@ class SignUpControllerTest extends TestCase
     {
         parent::setUp();
 
-        $this->request = SignUpRequest::factory()->create([
-            'email' => 'qqq@qqq.qq',
-            'name' => 'qqqqq',
-            'password' => '123456789q',
-            'password_confirmation' => '123456789q'
-        ]);
+        $this->request = SignUpRequest::factory()->create();
     }
 
-    private function request(): TestResponse
+    private function postRequest(): TestResponse
     {
         return $this->post(
             action([SignUpController::class, 'handle']),
@@ -66,7 +63,7 @@ class SignUpControllerTest extends TestCase
      */
     public function it_validation_success(): void
     {
-        $this->request()
+        $this->postRequest()
             ->assertValid();
     }
 
@@ -79,7 +76,20 @@ class SignUpControllerTest extends TestCase
         $this->request['password'] = '123';
         $this->request['password_confirmation'] = '1234';
 
-        $this->request()
+        $this->postRequest()
+            ->assertInvalid(['password']);
+    }
+
+    /**
+     * @test
+     * @return void
+     */
+    public function it_should_fail_validation_on_password(): void
+    {
+        $this->request['password'] = '123';
+        $this->request['password_confirmation'] = '123';
+
+        $this->postRequest()
             ->assertInvalid(['password']);
     }
 
@@ -93,7 +103,7 @@ class SignUpControllerTest extends TestCase
             'email' => $this->request['email']
         ]);
 
-        $this->request();
+        $this->postRequest();
 
         $this->assertDatabaseHas('users', [
             'email' => $this->request['email']
@@ -114,8 +124,26 @@ class SignUpControllerTest extends TestCase
             'email' => $this->request['email']
         ]);
 
-        $this->request()
+        $this->postRequest()
             ->assertInvalid(['email']);
+    }
+
+    /**
+     * @test
+     * @return void
+     */
+    public function it_should_fail_validation_on_unique_username(): void
+    {
+        UserFactory::new()->create([
+            'name' => $this->request['name']
+        ]);
+
+        $this->assertDatabaseHas('users', [
+            'name' => $this->request['name']
+        ]);
+
+        $this->postRequest()
+            ->assertInvalid(['name']);
     }
 
     /**
@@ -126,7 +154,7 @@ class SignUpControllerTest extends TestCase
     {
         Event::fake();
 
-        $this->request();
+        $this->postRequest();
 
         Event::assertDispatched(Registered::class);
         Event::assertListening(
@@ -141,18 +169,33 @@ class SignUpControllerTest extends TestCase
      */
     public function it_notification_sent(): void
     {
-        $this->request();
-
-//        Notification::assertCount(3);
-
-        $user = User::query()
-            ->where('email', $this->request['email'])
-            ->first();
+        $this->postRequest();
 
         Notification::assertSentTo(
             $this->findUser(),
-            VerifyEmailNotification::class
+            VerifyEmail::class
         );
+    }
+
+    /**
+     * @test
+     * @return void
+     */
+    public function it_redirect_to_login(): void
+    {
+
+
+        $response = $this->post(
+                action([SignUpController::class, 'handle']),
+                $this->request
+        );
+
+        $response->assertValid()
+            ->assertRedirect(route('login'))
+            ->assertSessionHas('helper_flash_message', 'Вам необходимо подтвердить ваш Email');
+
+        $this->followRedirects($response)->assertSee('Вам необходимо подтвердить ваш Email');
+
     }
 
 }

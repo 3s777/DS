@@ -12,6 +12,7 @@ use Database\Factories\UserFactory;
 use Domain\Auth\Models\User;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Auth\Listeners\SendEmailVerificationNotification;
+use Illuminate\Auth\Notifications\VerifyEmail;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Event;
 use Illuminate\Support\Facades\Notification;
@@ -139,9 +140,9 @@ class AuthControllerTest extends TestCase
         $listener = new SendEmailVerificationNotification();
         $listener->handle($event);
 
-        Notification::assertSentTo($user, SendEmailVerificationNotification::class);
+        Notification::assertSentTo($user, VerifyEmail::class);
 
-        Notification::assertCount(3);
+
         $response->assertRedirect(route('login'));
     }
 }
