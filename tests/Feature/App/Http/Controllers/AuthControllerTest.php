@@ -7,6 +7,7 @@ use App\Http\Controllers\Auth\SignInController;
 use App\Http\Controllers\Auth\SignUpController;
 use App\Http\Requests\SignInRequest;
 use App\Http\Requests\SignUpRequest;
+use App\Notifications\VerifyEmailNotification;
 use Database\Factories\UserFactory;
 use Domain\Auth\Models\User;
 use Illuminate\Auth\Events\Registered;
@@ -138,8 +139,9 @@ class AuthControllerTest extends TestCase
         $listener = new SendEmailVerificationNotification();
         $listener->handle($event);
 
-//        Notification::assertSentTo($user, VerifyEmailNotification::class);
+        Notification::assertSentTo($user, SendEmailVerificationNotification::class);
 
+        Notification::assertCount(3);
         $response->assertRedirect(route('login'));
     }
 }

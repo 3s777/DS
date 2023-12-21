@@ -11,7 +11,7 @@ class SignupRequestFactory extends RequestFactory
         return [
            'email' => $this->faker->email,
            'name' => $this->faker->firstName(),
-           'passord' => $this->faker->password(8)
+           'password' => $this->faker->password(8)
         ];
     }
 }

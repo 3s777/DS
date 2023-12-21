@@ -4,15 +4,18 @@ namespace Tests;
 
 use Illuminate\Foundation\Testing\TestCase as BaseTestCase;
 use Illuminate\Support\Facades\Http;
+use Illuminate\Support\Facades\Notification;
 use Illuminate\Support\Facades\URL;
 
 abstract class TestCase extends BaseTestCase
 {
     use CreatesApplication;
 
-    public function setUp(): void
+    protected function setUp(): void
     {
         parent::setUp();
+
+        Notification::fake();
 
         Http::preventStrayRequests();
 
