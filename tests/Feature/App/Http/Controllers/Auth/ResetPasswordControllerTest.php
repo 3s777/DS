@@ -3,7 +3,7 @@
 namespace Tests\Feature\App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Auth\ResetPasswordController;
-use App\Http\Controllers\Auth\SignInController;
+use App\Http\Controllers\Auth\LoginController;
 use Database\Factories\UserFactory;
 use Domain\Auth\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
@@ -63,7 +63,7 @@ class ResetPasswordControllerTest extends TestCase
             'token' => $this->token
         ]);
 
-        $response->assertRedirect(action([SignInController::class, 'page']));
+        $response->assertRedirect(action([LoginController::class, 'page']));
     }
 
 }

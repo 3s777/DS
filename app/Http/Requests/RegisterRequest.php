@@ -9,7 +9,7 @@ use Illuminate\Validation\Rule;
 use Illuminate\Validation\Rules\Password;
 use Worksome\RequestFactories\Concerns\HasFactory;
 
-class SignUpRequest extends FormRequest
+class RegisterRequest extends FormRequest
 {
     use HasFactory;
 

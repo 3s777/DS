@@ -3,7 +3,8 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\SignInRequest;
+use App\Http\Requests\LoginRequest;
+use Domain\Auth\Models\User;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
 use Illuminate\Foundation\Application;
@@ -11,33 +12,36 @@ use Illuminate\Http\RedirectResponse;
 use Illuminate\Routing\Redirector;
 use Illuminate\Support\Facades\Auth;
 
-
-class SignInController extends Controller
+class LoginController extends Controller
 {
     public function page(): View|Application|Factory|\Illuminate\Contracts\Foundation\Application
     {
         return view('content.auth.login');
     }
 
-    public function handle(SignInRequest $request): RedirectResponse
+    public function handle(LoginRequest $request): RedirectResponse
     {
-        $credentials = $request->only(['username', 'password', 'remember']);
+        $credentials = $request->only(['email', 'password', 'remember']);
 
-        $remember = false;
+        $remember =  $credentials['remember'] ?? false;
 
-        if(isset($credentials['remember'])) {
-            $remember = $credentials['remember'];
+        $user = User::where('email', $credentials['email'])->select('email_verified_at')->first();
+
+        if($user && !$user->email_verified_at) {
+            return redirect()->route('verification.notice');
         }
 
-        if (Auth::attempt(['email' => $credentials['username'], 'password' => $credentials['password']], $remember) ||
-            Auth::attempt(['name' => $credentials['username'], 'password' => $credentials['password']], $remember)) {
+        if (Auth::attempt([
+                'email' => $credentials['email'],
+                'password' => $credentials['password']
+            ], $remember))
+        {
             $request->session()->regenerate();
-
             return redirect()->intended(route('search'));
         }
 
         return back()->withErrors([
-            'username' => __('The provided credentials do not match our records.'),
+            'email' => __('The provided credentials do not match our records.'),
         ])->onlyInput('username');
     }
 

@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\SendEmailVerifyRequest;
-use App\Http\Requests\SignUpRequest;
+use App\Http\Requests\RegisterRequest;
 use Domain\Auth\Contracts\RegisterNewUserContract;
 use Domain\Auth\Models\User;
 use Illuminate\Auth\Events\Registered;
@@ -14,7 +14,7 @@ use Illuminate\Foundation\Application;
 use Illuminate\Http\RedirectResponse;
 
 
-class SignUpController extends Controller
+class RegisterController extends Controller
 {
     public function page(): View|Application|Factory|\Illuminate\Contracts\Foundation\Application
     {
@@ -22,7 +22,7 @@ class SignUpController extends Controller
         return view('content.auth.register');
     }
 
-    public function handle(SignUpRequest $request, RegisterNewUserContract $action): RedirectResponse
+    public function handle(RegisterRequest $request, RegisterNewUserContract $action): RedirectResponse
     {
 //        $action($request->only(['name', 'email', 'password']));
 

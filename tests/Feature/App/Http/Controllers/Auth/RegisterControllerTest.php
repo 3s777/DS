@@ -2,9 +2,8 @@
 
 namespace Tests\Feature\App\Http\Controllers\Auth;
 
-use App\Http\Controllers\Auth\SignUpController;
-use App\Http\Requests\SignUpRequest;
-use App\Notifications\VerifyEmailNotification;
+use App\Http\Controllers\Auth\RegisterController;
+use App\Http\Requests\RegisterRequest;
 use Database\Factories\UserFactory;
 use Domain\Auth\Models\User;
 use Illuminate\Auth\Events\Registered;
@@ -13,11 +12,10 @@ use Illuminate\Auth\Notifications\VerifyEmail;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Event;
 use Illuminate\Support\Facades\Notification;
-use Illuminate\Support\Facades\Session;
 use Illuminate\Testing\TestResponse;
 use Tests\TestCase;
 
-class SignUpControllerTest extends TestCase
+class RegisterControllerTest extends TestCase
 {
     use RefreshDatabase;
 
@@ -27,22 +25,20 @@ class SignUpControllerTest extends TestCase
     {
         parent::setUp();
 
-        $this->request = SignUpRequest::factory()->create();
+        $this->request = RegisterRequest::factory()->create();
     }
 
     private function postRequest(): TestResponse
     {
         return $this->post(
-            action([SignUpController::class, 'handle']),
+            action([RegisterController::class, 'handle']),
             $this->request
         );
     }
 
     private function findUser(): User
     {
-        return User::query()
-            ->where('email', $this->request['email'])
-            ->first();
+        return User::where('email', $this->request['email'])->first();
     }
 
     /**
@@ -51,7 +47,7 @@ class SignUpControllerTest extends TestCase
      */
     public function it_page_success(): void
     {
-        $this->get(action([SignUpController::class, 'page']))
+        $this->get(action([RegisterController::class, 'page']))
             ->assertOk()
             ->assertSee('Регистрация')
             ->assertViewIs('content.auth.register');
@@ -183,10 +179,8 @@ class SignUpControllerTest extends TestCase
      */
     public function it_redirect_to_login(): void
     {
-
-
         $response = $this->post(
-                action([SignUpController::class, 'handle']),
+                action([RegisterController::class, 'handle']),
                 $this->request
         );
 
