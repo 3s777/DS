@@ -110,7 +110,7 @@ class LoginControllerTest extends TestCase
     public function it_logout_guest_middleware_fail(): void
     {
         $this->delete(action([LoginController::class, 'logout']))
-            ->assertRedirect('/');
+            ->assertRedirect(route('home'));
     }
 
 }

@@ -25,14 +25,8 @@ class AppRegistrar implements RouteRegistrar
 
             Route::get('/', function () {
                 return view('welcome');
-            });
+            })->name('home');
 
-
-
-
-            Route::get('/dashboard', function () {
-                return view('welcome');
-            })->middleware(['auth', 'verified'])->name('dashboard');
 
             Route::get('/ui', function () {
                 return view('content.ui.index');

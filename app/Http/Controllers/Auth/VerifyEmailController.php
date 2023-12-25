@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\SendEmailVerifyRequest;
 use App\Http\Requests\VerifyEmailRequest;
+use Domain\Auth\Actions\VerifyEmailAction;
 use Domain\Auth\Models\User;
 use Illuminate\Auth\Events\Verified;
 use Illuminate\Support\Facades\Auth;
@@ -17,19 +18,15 @@ class VerifyEmailController extends Controller
         return view('content.auth.verify');
     }
 
-    public function handle(VerifyEmailRequest $request, $id)
+    public function handle(VerifyEmailRequest $request, VerifyEmailAction $action, $id)
     {
-        $user = User::find($id);
+        $user = $action($id);
 
-        if (! $user->hasVerifiedEmail()) {
-            $user->markEmailAsVerified();
+        Auth::loginUsingId($user->id);
 
-            event(new Verified($user));
+        flash()->info(__('Your email is verified'));
 
-            Auth::loginUsingId($user->id);
-        }
-
-        return redirect()->route('search')->with('status', __('Your email is verified'));
+        return redirect()->route('search');
     }
 
     public function sendVerifyNotification(SendEmailVerifyRequest $request) {
@@ -37,7 +34,7 @@ class VerifyEmailController extends Controller
 
         if ($user->hasVerifiedEmail()) {
 
-            flash()->info(__('Your email is already verificated'));
+            flash()->info(__('Your email is verified'));
 
             return redirect()->route('verification.notice');
         }

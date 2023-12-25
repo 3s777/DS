@@ -29,10 +29,12 @@ class ForgotPasswordController extends Controller
         if($status === Password::RESET_LINK_SENT) {
             flash()->info(__($status), 'warning');
 
-            return back();
+            return redirect(route('forgot'));
         }
 
-        return back()->withErrors(['email' => __($status)]);
+        flash()->info(__('passwords.sent'));
+
+        return redirect(route('forgot'));
     }
 
 }

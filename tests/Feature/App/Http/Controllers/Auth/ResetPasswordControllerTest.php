@@ -18,12 +18,18 @@ class ResetPasswordControllerTest extends TestCase
 
     private User $user;
 
+    private string $password;
+
+    private string $password_confirmation;
+
     protected function setUp(): void
     {
         parent::setUp();
 
         $this->user = UserFactory::new()->create();
         $this->token = Password::createToken($this->user);
+        $this->password = '123456789q';
+        $this->password_confirmation = '123456789q';
     }
 
     /**
@@ -41,29 +47,41 @@ class ResetPasswordControllerTest extends TestCase
      * @test
      * @return void
      */
-    public function it_handle(): void
+    public function it_handle_success(): void
     {
-        $password = '123456789q';
-        $password_confirmation = '123456789q';
-
         Password::shouldReceive('reset')
             ->once()
             ->withSomeofArgs([
                 'email' => $this->user->email,
-                'password' => $password,
-                'password_confirmation' => $password_confirmation,
+                'password' => $this->password,
+                'password_confirmation' => $this->password_confirmation,
                 'token' => $this->token
             ])
             ->andReturn(Password::PASSWORD_RESET);
 
         $response = $this->post(action([ResetPasswordController::class, 'handle']), [
             'email' => $this->user->email,
-            'password' => $password,
-            'password_confirmation' => $password_confirmation,
+            'password' => $this->password,
+            'password_confirmation' => $this->password_confirmation,
             'token' => $this->token
         ]);
 
         $response->assertRedirect(action([LoginController::class, 'page']));
     }
 
+    /**
+     * @test
+     * @return void
+     */
+    public function it_token_fail(): void
+    {
+        $response = $this->post(action([ResetPasswordController::class, 'handle']), [
+            'email' => $this->user->email,
+            'password' => $this->password,
+            'password_confirmation' => $this->password_confirmation,
+            'token' => 'wrong_token'
+        ]);
+
+        $response->assertSessionHasErrors(['email']);
+    }
 }

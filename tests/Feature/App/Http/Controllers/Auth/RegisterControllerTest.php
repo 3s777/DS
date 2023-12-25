@@ -189,7 +189,5 @@ class RegisterControllerTest extends TestCase
             ->assertSessionHas('helper_flash_message', 'Вам необходимо подтвердить ваш Email');
 
         $this->followRedirects($response)->assertSee('Вам необходимо подтвердить ваш Email');
-
     }
-
 }

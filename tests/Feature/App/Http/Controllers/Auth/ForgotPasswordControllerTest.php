@@ -41,8 +41,7 @@ class ForgotPasswordControllerTest extends TestCase
         $user = UserFactory::new()->create($this->testingCredentials());
 
         $this->post(action([ForgotPasswordController::class, 'handle']), $this->testingCredentials())
-            ->assertRedirect();
-
+            ->assertRedirect(route('forgot'));
 
         Notification::assertSentTo([$user], ResetPasswordNotification::class);
     }
@@ -56,7 +55,7 @@ class ForgotPasswordControllerTest extends TestCase
         $this->assertDatabaseMissing('users', $this->testingCredentials());
 
         $this->post(action([ForgotPasswordController::class, 'handle']), $this->testingCredentials())
-            ->assertInvalid(['email']);
+            ->assertRedirect(route('forgot'));
 
         Notification::assertNothingSent();
     }
