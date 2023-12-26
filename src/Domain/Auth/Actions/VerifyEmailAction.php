@@ -2,11 +2,8 @@
 
 namespace Domain\Auth\Actions;
 
-use Domain\Auth\Contracts\RegisterNewUserContract;
 use Domain\Auth\Models\User;
-use Illuminate\Auth\Events\Registered;
 use Illuminate\Auth\Events\Verified;
-use Illuminate\Support\Facades\Auth;
 
 class VerifyEmailAction
 {

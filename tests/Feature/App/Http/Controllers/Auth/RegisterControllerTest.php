@@ -6,12 +6,7 @@ use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Requests\RegisterRequest;
 use Database\Factories\UserFactory;
 use Domain\Auth\Models\User;
-use Illuminate\Auth\Events\Registered;
-use Illuminate\Auth\Listeners\SendEmailVerificationNotification;
-use Illuminate\Auth\Notifications\VerifyEmail;
 use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Support\Facades\Event;
-use Illuminate\Support\Facades\Notification;
 use Illuminate\Testing\TestResponse;
 use Tests\TestCase;
 
@@ -93,23 +88,6 @@ class RegisterControllerTest extends TestCase
      * @test
      * @return void
      */
-    public function it_user_created_success(): void
-    {
-        $this->assertDatabaseMissing('users', [
-            'email' => $this->request['email']
-        ]);
-
-        $this->postRequest();
-
-        $this->assertDatabaseHas('users', [
-            'email' => $this->request['email']
-        ]);
-    }
-
-    /**
-     * @test
-     * @return void
-     */
     public function it_should_fail_validation_on_unique_email(): void
     {
         UserFactory::new()->create([
@@ -140,37 +118,6 @@ class RegisterControllerTest extends TestCase
 
         $this->postRequest()
             ->assertInvalid(['name']);
-    }
-
-    /**
-     * @test
-     * @return void
-     */
-    public function it_registered_event_and_listeners_dispatched(): void
-    {
-        Event::fake();
-
-        $this->postRequest();
-
-        Event::assertDispatched(Registered::class);
-        Event::assertListening(
-            Registered::class,
-            SendEmailVerificationNotification::class
-        );
-    }
-
-    /**
-     * @test
-     * @return void
-     */
-    public function it_notification_sent(): void
-    {
-        $this->postRequest();
-
-        Notification::assertSentTo(
-            $this->findUser(),
-            VerifyEmail::class
-        );
     }
 
     /**

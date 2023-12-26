@@ -33,6 +33,8 @@ class RegisterController extends Controller
             $request->get('password')
         );
 
+        flash()->info(__('You need to verify your email'));
+
         return redirect()->route('login');
     }
 }

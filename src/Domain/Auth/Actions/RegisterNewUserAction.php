@@ -17,7 +17,5 @@ class RegisterNewUserAction implements RegisterNewUserContract
         ]);
 
         event(new Registered($user));
-
-        flash()->info(__('You need to verify your email'));
     }
 }

@@ -2,13 +2,12 @@
 
 namespace App\Http\Controllers\Auth;
 
-use App\Http\Controllers\Auth\ForgotPasswordController;
-use App\Notifications\ResetPasswordNotification;
+use App\Notifications\VerifyEmailNotification;
 use Database\Factories\UserFactory;
-
-use Illuminate\Auth\Notifications\VerifyEmail;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Notification;
+use Illuminate\Support\Facades\Queue;
 use Illuminate\Support\Facades\URL;
 use Tests\TestCase;
 
@@ -34,6 +33,9 @@ class VerifyEmailControllerTest extends TestCase
      */
     public function it_verification_notification_sent(): void
     {
+//        Queue::fake();
+//        Mail::fake();
+
         $request = [
             'email_verified_at' => null
         ];
@@ -44,7 +46,10 @@ class VerifyEmailControllerTest extends TestCase
             ->assertRedirect(route('verification.notice'))
             ->assertSessionHas('helper_flash_message', 'We retry send verification link to your email');
 
-        Notification::assertSentTo([$user], VerifyEmail::class);
+        Notification::assertSentTo([$user], VerifyEmailNotification::class);
+//        Queue::assertNothingPushed();
+//        Mail::assertQueued(VerifyEmailNotification::class);
+//        Queue::assertPushed(VerifyEmailNotification::class, 1);
     }
 
     /**

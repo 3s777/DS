@@ -2,15 +2,13 @@
 
 namespace App\Http\Controllers\Auth;
 
-use App\Http\Controllers\Auth\ForgotPasswordController;
-use App\Notifications\ResetPasswordNotification;
+use App\Notifications\VerifyEmailNotification;
 use Database\Factories\UserFactory;
-
 use Domain\Auth\Actions\VerifyEmailAction;
-use Illuminate\Auth\Notifications\VerifyEmail;
+use Illuminate\Auth\Events\Verified;
 use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Support\Facades\Notification;
-use Illuminate\Support\Facades\URL;
+use Illuminate\Support\Facades\Event;
+use Illuminate\Support\Facades\Queue;
 use Tests\TestCase;
 
 class VerifyEmailActionTest extends TestCase
@@ -23,7 +21,7 @@ class VerifyEmailActionTest extends TestCase
      * @test
      * @return void
      */
-    public function it_verification_notification_sent(): void
+    public function it_verification_notification_sent_success(): void
     {
         $request = [
             'email_verified_at' => null
@@ -31,10 +29,32 @@ class VerifyEmailActionTest extends TestCase
 
         $user = UserFactory::new()->create($request);
 
-        $action = app(VerifyEmailAction::class, [$user->id]);
+        $action = app(VerifyEmailAction::class);
 
-        $action(['id' => $user->id]);
+        $verificatedUser = $action($user->id);
 
-        $this->assertNotNull($user->email_verified_at);
+        $this->assertNotNull($verificatedUser->email_verified_at);
+    }
+
+    /**
+     * @test
+     * @return void
+     */
+    public function it_verification_event_success(): void
+    {
+        Event::fake();
+
+        $request = [
+            'email_verified_at' => null
+        ];
+
+        $user = UserFactory::new()->create($request);
+
+        $action = app(VerifyEmailAction::class);
+
+        $action($user->id);
+
+        Event::assertDispatched(Verified::class);
+
     }
 }
