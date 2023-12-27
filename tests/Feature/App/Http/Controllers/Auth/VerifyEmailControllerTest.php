@@ -33,9 +33,6 @@ class VerifyEmailControllerTest extends TestCase
      */
     public function it_verification_notification_sent(): void
     {
-//        Queue::fake();
-//        Mail::fake();
-
         $request = [
             'email_verified_at' => null
         ];
@@ -47,9 +44,6 @@ class VerifyEmailControllerTest extends TestCase
             ->assertSessionHas('helper_flash_message', 'We retry send verification link to your email');
 
         Notification::assertSentTo([$user], VerifyEmailNotification::class);
-//        Queue::assertNothingPushed();
-//        Mail::assertQueued(VerifyEmailNotification::class);
-//        Queue::assertPushed(VerifyEmailNotification::class, 1);
     }
 
     /**

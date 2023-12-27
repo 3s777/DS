@@ -10,10 +10,8 @@ use Illuminate\Foundation\Application;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Password;
 
-
 class ForgotPasswordController extends Controller
 {
-
     public function page(): View|Application|Factory|\Illuminate\Contracts\Foundation\Application
     {
         return view('content.auth.forgot-password');
@@ -21,20 +19,16 @@ class ForgotPasswordController extends Controller
 
     public function handle(ForgotPasswordRequest $request): RedirectResponse
     {
-
         $status = Password::sendResetLink(
             $request->only('email')
         );
 
-        if($status === Password::RESET_LINK_SENT) {
-            flash()->info(__($status), 'warning');
+        flash()->info(__('passwords.sent'), 'warning');
 
-            return redirect(route('forgot'));
-        }
-
-        flash()->info(__('passwords.sent'));
+//        if($status === Password::RESET_LINK_SENT) {
+//            flash()->info(__($status), 'warning');
+//        }
 
         return redirect(route('forgot'));
     }
-
 }
