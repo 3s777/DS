@@ -12,7 +12,6 @@ use Illuminate\Foundation\Application;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Password;
 
-
 class ResetPasswordController extends Controller
 {
 

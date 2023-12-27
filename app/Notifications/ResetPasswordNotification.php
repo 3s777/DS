@@ -94,12 +94,13 @@ class ResetPasswordNotification extends Notification implements ShouldQueue
      */
     protected function resetUrl($notifiable)
     {
+
         if (static::$createUrlCallback) {
             return call_user_func(static::$createUrlCallback, app()->getLocale(), $notifiable, $this->token);
         }
 
         return url(route('password.reset', [
-            'locale' => session('locale'),
+            'locale' => app()->getLocale(),
             'token' => $this->token,
             'email' => $notifiable->getEmailForPasswordReset(),
         ], false));

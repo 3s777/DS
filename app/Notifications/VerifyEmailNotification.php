@@ -81,13 +81,14 @@ class VerifyEmailNotification extends Notification implements ShouldQueue
     protected function verificationUrl($notifiable)
     {
         if (static::$createUrlCallback) {
-            return call_user_func(static::$createUrlCallback, $notifiable);
+            return call_user_func(static::$createUrlCallback, app()->getLocale(), $notifiable);
         }
 
         return URL::temporarySignedRoute(
             'verification.verify',
             Carbon::now()->addMinutes(Config::get('auth.verification.expire', 60)),
             [
+                'locale' => app()->getLocale(),
                 'id' => $notifiable->getKey(),
                 'hash' => sha1($notifiable->getEmailForVerification()),
             ]

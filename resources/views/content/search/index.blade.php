@@ -2,6 +2,8 @@
     <x-grid.container>
         <x-common.content class="search">
 
+            <x-common.messages />
+
             @if (session('status'))
                 <x-ui.message class="search__message" type="info">
                     {{ session('status') }}
