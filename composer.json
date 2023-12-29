@@ -31,10 +31,10 @@
             "Database\\Seeders\\": "database/seeders/",
             "Domain\\": "src/Domain/",
             "Services\\": "src/Services/",
-            "Supports\\": "src/Supports/"
+            "Support\\": "src/Support/"
         },
         "files": [
-            "src/Supports/helpers.php"
+            "src/Support/helpers.php"
         ]
     },
     "autoload-dev": {

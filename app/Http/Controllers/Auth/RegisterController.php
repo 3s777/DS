@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\SendEmailVerifyRequest;
 use App\Http\Requests\RegisterRequest;
 use Domain\Auth\Contracts\RegisterNewUserContract;
+use Domain\Auth\DTOs\NewUserDTO;
 use Domain\Auth\Models\User;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Contracts\View\Factory;
@@ -24,14 +25,9 @@ class RegisterController extends Controller
 
     public function handle(RegisterRequest $request, RegisterNewUserContract $action): RedirectResponse
     {
-//        $action($request->only(['name', 'email', 'password']));
 
         // TODO try catch
-        $action(
-            $request->get('name'),
-            $request->get('email'),
-            $request->get('password')
-        );
+        $action(NewUserDTO::fromRequest($request));
 
         flash()->info(__('You need to verify your email'));
 

@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Requests\RegisterRequest;
 use App\Notifications\VerifyEmailNotification;
 use Domain\Auth\Contracts\RegisterNewUserContract;
+use Domain\Auth\DTOs\NewUserDTO;
 use Domain\Auth\Models\User;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Auth\Listeners\SendEmailVerificationNotification;
@@ -24,6 +25,8 @@ class RegisterNewUserActionTest extends TestCase
         parent::setUp();
 
         $this->request = RegisterRequest::factory()->create();
+
+        $this->action = app(RegisterNewUserContract::class);
     }
 
     /**
@@ -38,11 +41,11 @@ class RegisterNewUserActionTest extends TestCase
 
         $action = app(RegisterNewUserContract::class);
 
-        $action(
+        $action(NewUserDTO::make(
             $this->request['name'],
             $this->request['email'],
             $this->request['password']
-        );
+        ));
 
         $this->assertDatabaseHas('users', [
             'email' => $this->request['email']
@@ -59,11 +62,11 @@ class RegisterNewUserActionTest extends TestCase
 
         $action = app(RegisterNewUserContract::class);
 
-        $action(
+        $action(NewUserDTO::make(
             $this->request['name'],
             $this->request['email'],
             $this->request['password']
-        );
+        ));
 
         Event::assertDispatched(Registered::class);
         Event::assertListening(
@@ -80,11 +83,11 @@ class RegisterNewUserActionTest extends TestCase
     {
         $action = app(RegisterNewUserContract::class);
 
-        $action(
+        $action(NewUserDTO::make(
             $this->request['name'],
             $this->request['email'],
             $this->request['password']
-        );
+        ));
 
         $user = User::where('email', $this->request['email'])->first();
 

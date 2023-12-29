@@ -1,6 +1,6 @@
 <?php
 
-namespace Supports\Flash;
+namespace Support\Flash;
 
 class FlashMessage
 {
