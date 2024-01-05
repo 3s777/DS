@@ -4,6 +4,7 @@ namespace App\Routing;
 
 
 use App\Contracts\RouteRegistrar;
+use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ThumbnailController;
 use App\Http\Controllers\UserController;
 use Illuminate\Contracts\Routing\Registrar;
@@ -23,9 +24,7 @@ class AppRegistrar implements RouteRegistrar
             ->group(function() {
         Route::prefix('{locale?}')->whereIn('locale', config('app.available_locales'))->group(function () {
 
-            Route::get('/', function () {
-                return view('welcome');
-            })->name('home');
+            Route::get('/', HomeController::class)->name('home');
 
 
             Route::get('/ui', function () {
