@@ -6,19 +6,20 @@ use Domain\Game\Models\Genre;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Http;
+use Services\GamesDbApi\GamesApi;
+use Services\GamesDbApi\GamesDbApiContract;
 
 class GameGenreSeeder extends Seeder
 {
     /**
      * Run the database seeds.
      */
-    public function run(): void
+    public function run(GamesDbApiContract $gamesApi): void
     {
-        $response = Http::get(env('GAME_API_HOST')."/genres?key=".env('GAME_API_HOST'));
+        $genres = $gamesApi->getGenres();
 
-        $genres = $response->json('results');
         foreach ($genres as $genre) {
-            Genre::create([
+            Genre::firstOrCreate([
                 'name' => $genre['name'],
             ]);
         }

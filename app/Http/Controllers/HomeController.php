@@ -11,7 +11,9 @@ class HomeController extends Controller
 
 
 
-        $response = Http::get(env('GAME_API_HOST')."/genres?key=".env('GAME_API_HOST'));
+        $response = Http::get(env('GAME_API_HOST')."/genres?key=".env('GAME_API_KEY'));
+
+        dd($response->body());
 
         $genres = $response->json('results');
         foreach ($genres as $genre) {

@@ -5,9 +5,9 @@ namespace App\Console\Commands;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Storage;
 
-class RefreshlCommand extends Command
+class RefreshCommand extends Command
 {
-    protected $signature = 'shop:refresh';
+    protected $signature = 'ds:refresh';
 
     protected $description = 'Refresh';
 

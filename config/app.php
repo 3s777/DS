@@ -209,7 +209,7 @@ return [
         App\Providers\RouteServiceProvider::class,
         App\Providers\TelescopeServiceProvider::class,
         App\Providers\ViewServiseProvider::class,
-        App\Providers\DomainServiseProvider::class,
+        App\Providers\DomainServiceProvider::class,
 
     ],
 
