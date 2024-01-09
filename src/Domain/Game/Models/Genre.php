@@ -1,20 +1,18 @@
 <?php
 
-namespace App\Models;
+namespace Domain\Game\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class CollectableItem extends Model
+class Genre extends Model
 {
     use HasFactory;
 
-    protected $fillable = [
-      'name',
-      'properties'
-    ];
+    protected $table = 'game_genres';
 
-    protected $casts = [
-      'properties' => 'array'
+    protected $fillable = [
+        'name',
+        'description'
     ];
 }

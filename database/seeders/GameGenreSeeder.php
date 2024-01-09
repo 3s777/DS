@@ -1,16 +1,19 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace Database\Seeders;
 
 use Domain\Game\Models\Genre;
+use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Http;
 
-class HomeController extends Controller
+class GameGenreSeeder extends Seeder
 {
-    public function __invoke() {
-
-
-
+    /**
+     * Run the database seeds.
+     */
+    public function run(): void
+    {
         $response = Http::get(env('GAME_API_HOST')."/genres?key=".env('GAME_API_HOST'));
 
         $genres = $response->json('results');
@@ -19,9 +22,5 @@ class HomeController extends Controller
                 'name' => $genre['name'],
             ]);
         }
-
-        dump($response->json('results'));
-
-        return view('welcome');
     }
 }

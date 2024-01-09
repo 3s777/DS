@@ -13,6 +13,9 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        Condition::factory(3)->create();
+        $this->call([
+            GameGenreSeeder::class,
+            ConditionSeeder::class,
+        ]);
     }
 }
