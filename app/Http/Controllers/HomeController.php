@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Domain\Game\Models\Genre;
 use Illuminate\Support\Facades\Http;
+use Services\GamesDbApi\GamesDbApiContract;
 
 class HomeController extends Controller
 {
@@ -11,9 +12,12 @@ class HomeController extends Controller
 
 
 
-        $response = Http::get(env('GAME_API_HOST')."/genres?key=".env('GAME_API_KEY'));
+//        $response = Http::get(env('GAME_API_HOST')."/genres?key=".env('GAME_API_KEY'));
 
-        dd($response->body());
+
+
+        $platforms = app(GamesDbApiContract::class);
+        dd($platforms->getPlatforms());
 
         $genres = $response->json('results');
         foreach ($genres as $genre) {

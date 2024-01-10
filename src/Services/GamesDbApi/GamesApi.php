@@ -21,4 +21,11 @@ class GamesApi implements GamesDbApiContract
 
         return $response->json('results');
     }
+
+    public function getPlatforms(): array
+    {
+        $response = Http::get($this->host."/platforms/lists/parents?key=".$this->key);
+
+        return $response->json('results');
+    }
 }
