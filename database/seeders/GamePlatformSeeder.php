@@ -17,7 +17,8 @@ class GamePlatformSeeder extends Seeder
                 foreach ($platform['platforms'] as $child) {
                     Platform::firstOrCreate([
                         'name' => $child['name'],
-                        'platform_manufacturer_id' => 1
+                        'platform_manufacturer_id' => 1,
+                        'platform_type_id' => rand(0,2)
                     ]);
                 }
             }
