@@ -1,5 +1,7 @@
 <?php
 
+use Domain\Game\Models\Game;
+use Domain\Game\Models\Publisher;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -11,10 +13,10 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('collectable_items', function (Blueprint $table) {
+        Schema::create('game_game_publisher', function (Blueprint $table) {
             $table->id();
-            $table->string('name')->unique();
-            $table->jsonb('properties');
+            $table->foreignId('game_id');
+            $table->foreignId('game_publisher_id');
             $table->timestamps();
         });
     }
@@ -25,7 +27,7 @@ return new class extends Migration
     public function down(): void
     {
         if(!app()->isProduction()) {
-                Schema::dropIfExists('collectable_items');
+            Schema::dropIfExists('game_game_publisher');
         }
     }
 };
