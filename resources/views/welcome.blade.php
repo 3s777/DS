@@ -39,6 +39,10 @@
                 </div>
                 {{ __('auth.tu') }}
 
+                @foreach($products as $product)
+                    {{ $product->developers }}
+                    @endforeach
+
                 @if ($message = flash()->get())
                     <x-ui.message class="auth__message" type="{{ $message->class() }}">
                         {{ $message->message() }}

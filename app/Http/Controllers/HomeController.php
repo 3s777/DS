@@ -11,6 +11,19 @@ class HomeController extends Controller
 {
     public function __invoke() {
 
+//        $product = CollectableItem::createOrFirst([
+//            'name' => 'sdfdsf11gg',
+//            'properties' => ['xxgx', 'nng1n']
+//        ]);
+
+//        $product = CollectableItem::with(['developers'])->get();
+
+$products = CollectableItem::with('developers')->get();
+
+
+
+//        $product->developers()->sync([5,3]);
+
 
 
 //        $response = Http::get(env('GAME_API_HOST')."/genres?key=".env('GAME_API_KEY'));
@@ -22,20 +35,20 @@ class HomeController extends Controller
 //
 //        dd($c);
 
-        $platforms = app(GamesDbApiContract::class);
+//        $platforms = app(GamesDbApiContract::class);
+//
+//        $games = $platforms->getGames();
+//        dd($games[0]);
+//
+//        $genres = $response->json('results');
+//        foreach ($genres as $genre) {
+//            Genre::create([
+//                'name' => $genre['name'],
+//            ]);
+//        }
+//
+//        dump($response->json('results'));
 
-        $games = $platforms->getGames();
-        dd($games[0]);
-
-        $genres = $response->json('results');
-        foreach ($genres as $genre) {
-            Genre::create([
-                'name' => $genre['name'],
-            ]);
-        }
-
-        dump($response->json('results'));
-
-        return view('welcome');
+        return view('welcome', compact(['products']));
     }
 }
