@@ -1,42 +1,8 @@
 <x-layouts.main title="{{ __('Users') }}" :search="false">
-
-
     <x-grid.container>
-
             <x-common.content class="admin" wrapper-class="admin__content">
                 <x-slot:sidebar>
-                    <nav class="admin__menu">
-                        <x-ui.form.button
-                            class="content__sidebar-link"
-                            tag="a"
-                            color="light">
-                            Статистика
-                        </x-ui.form.button>
-                        <x-ui.form.button
-                            class="content__sidebar-link"
-                            tag="a"
-                            color="light">
-                            Добавить носитель
-                        </x-ui.form.button>
-                        <x-ui.form.button
-                            class="content__sidebar-link"
-                            tag="a"
-                            color="light">
-                            Добавить игру
-                        </x-ui.form.button>
-                        <x-ui.form.button
-                            class="content__sidebar-link"
-                            tag="a"
-                            color="light">
-                            Добавить разработчика
-                        </x-ui.form.button>
-                        <x-ui.form.button
-                            class="content__sidebar-link"
-                            tag="a"
-                            color="light">
-                            Добавить издание
-                        </x-ui.form.button>
-                    </nav>
+                    <x-common.sidebar-menu class="admin__menu" />
                 </x-slot:sidebar>
 
                     <x-ui.title size="normal" indent="big">Добавить игровой носитель</x-ui.title>
@@ -162,7 +128,6 @@
                         </form>
                     </div>
             </x-common.content>
-
     </x-grid.container>
 
     @push('scripts')

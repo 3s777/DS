@@ -1,0 +1,41 @@
+.sidebar-menu {
+
+    &__accordion {
+        margin-bottom: 8px;
+        font-size: rem(16);
+    }
+
+    &__accordion-item {
+        width: 100%;
+        margin-bottom: 8px;
+        padding: 12px;
+        border-radius: $extra-small-border-radius;
+
+        & & {
+            margin-bottom: 0;
+            padding-left: 0;
+            padding-right: 0;
+            transition: none;
+
+            &:hover {
+                background-color: $base-light-like-transparent;
+            }
+
+            &[open] {
+                padding-bottom: 0;
+            }
+        }
+
+        &:hover {
+            background-color: $additional-main;
+        }
+
+        &[open]:hover {
+            background-color: $base-light-like-transparent;
+        }
+    }
+
+    &__accordion-title {
+        font-size: rem(16);
+    }
+}

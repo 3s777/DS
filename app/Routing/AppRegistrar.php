@@ -61,6 +61,10 @@ class AppRegistrar implements RouteRegistrar
                 Route::get('/', function () {
                     return view('admin.index');
                 })->name('admin');
+
+                Route::get('/game-developer', function () {
+                    return view('admin.index');
+                })->name('add-game-developer');
             });
 
         });

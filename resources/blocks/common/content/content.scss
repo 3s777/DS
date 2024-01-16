@@ -23,6 +23,11 @@
         width: 100%;
         margin-bottom: 8px;
         padding: 12px;
+        text-align: left;
+
+        &:last-child {
+            margin-bottom: 0;
+        }
     }
 
     &__main_article {
