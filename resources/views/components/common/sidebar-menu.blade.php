@@ -31,7 +31,7 @@
                         <x-ui.accordion.content>
                             <x-ui.form.button
                                 tag="a"
-                                href="{{ route('add-game-developer') }}"
+                                href="{{ route('game-developers.create') }}"
                                 color="light"
                                 @class(['content__sidebar-link', 'button_submit' => Route::currentRouteName() === 'add-game-developer'])
                             >

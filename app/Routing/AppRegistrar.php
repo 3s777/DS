@@ -4,6 +4,7 @@ namespace App\Routing;
 
 
 use App\Contracts\RouteRegistrar;
+use App\Http\Controllers\Game\DeveloperController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ThumbnailController;
 use App\Http\Controllers\UserController;
@@ -62,9 +63,8 @@ class AppRegistrar implements RouteRegistrar
                     return view('admin.index');
                 })->name('admin');
 
-                Route::get('/game-developer', function () {
-                    return view('admin.index');
-                })->name('add-game-developer');
+                Route::resource('game-developers', DeveloperController::class)->middleware(['remove.locale']);
+
             });
 
         });

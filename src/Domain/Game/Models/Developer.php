@@ -11,4 +11,10 @@ class Developer extends Model
     use HasFactory;
 
     protected $table = 'game_developers';
+
+    protected $fillable = [
+        'name',
+        'slug',
+        'description'
+    ];
 }

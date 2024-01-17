@@ -20,7 +20,7 @@
                                     placeholder="Название"
                                     id="name"
                                     name="name"
-                                    value="{{ $developer->name }}"
+                                    value="{{ old('name') }}"
                                     required
                                     autocomplete="on"
                                     autofocus >
@@ -35,7 +35,7 @@
                                     placeholder="Префикс"
                                     id="slug"
                                     name="slug"
-                                    value="{{ $developer->slug }}"
+                                    value="{{ old('slug') }}"
                                     required
                                     autocomplete="on">
                                 </x-ui.form.input-text>
@@ -56,7 +56,6 @@
                         <x-grid.col xl="12" lg="6" md="6" sm="12">
                             <x-ui.form.group>
                                 <div id="editor">
-                                    {{ $developer->description }}
                                 </div>
                             </x-ui.form.group>
                         </x-grid.col>
