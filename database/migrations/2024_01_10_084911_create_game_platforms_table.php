@@ -1,8 +1,8 @@
 <?php
 
-use Domain\Game\Models\Platform;
-use Domain\Game\Models\PlatformManufacturer;
-use Domain\Game\Models\PlatformType;
+use Domain\Game\Models\GamePlatform;
+use Domain\Game\Models\GamePlatformManufacturer;
+use Domain\Game\Models\GamePlatformType;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -17,8 +17,8 @@ return new class extends Migration
         Schema::create('game_platforms', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->foreignIdFor(PlatformManufacturer::class)->nullable();
-            $table->foreignIdFor(PlatformType::class)->nullable();
+            $table->foreignIdFor(GamePlatformManufacturer::class)->nullable();
+            $table->foreignIdFor(GamePlatformType::class)->nullable();
             $table->text('description')->nullable();
             $table->timestamps();
         });

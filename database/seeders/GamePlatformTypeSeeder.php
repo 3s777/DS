@@ -2,7 +2,7 @@
 
 namespace Database\Seeders;
 
-use Domain\Game\Models\PlatformType;
+use Domain\Game\Models\GamePlatformType;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
@@ -16,7 +16,7 @@ class GamePlatformTypeSeeder extends Seeder
         $types = ['Стационарная', 'Портативная', 'Универсальная'];
 
         foreach ($types as $type) {
-            PlatformType::firstOrCreate([
+            GamePlatformType::firstOrCreate([
                 'name' => $type,
             ]);
         }

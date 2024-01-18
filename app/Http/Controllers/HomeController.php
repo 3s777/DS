@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\CollectableItem;
-use Domain\Game\Models\Genre;
+use Domain\Game\Models\GameGenre;
 use Illuminate\Support\Facades\Http;
 use Services\GamesDbApi\GamesDbApiContract;
 

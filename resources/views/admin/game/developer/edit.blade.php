@@ -10,8 +10,9 @@
             <x-common.messages />
 
             <div class="add-game-developer">
-                <form action="{{ route('game-developers.store') }}" method="POST">
+                <form action="{{ route('game-developers.update', $developer->id) }}" method="POST">
                     @csrf
+                    @method('put')
                     <x-grid type="container">
                         <x-grid.col xl="4" lg="6" md="6" sm="12">
                             <x-ui.form.group>
@@ -36,7 +37,7 @@
                                     id="slug"
                                     name="slug"
                                     value="{{ $developer->slug }}"
-                                    required
+
                                     autocomplete="on">
                                 </x-ui.form.input-text>
                             </x-ui.form.group>

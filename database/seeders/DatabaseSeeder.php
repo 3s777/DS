@@ -20,7 +20,8 @@ class DatabaseSeeder extends Seeder
 //            GamePlatformSeeder::class,
 //            GamePlatformManufacturerSeeder::class,
 //            GamePlatformTypeSeeder::class,
-            GameSeeder::class
+            GameSeeder::class,
+            UserSeeder::class
         ]);
     }
 }

@@ -30,16 +30,17 @@
                         <x-ui.accordion.title class="sidebar-menu__accordion-title">Разработчики</x-ui.accordion.title>
                         <x-ui.accordion.content>
                             <x-ui.form.button
+                                @class(['content__sidebar-link', 'button_submit' => Route::currentRouteName() === 'game-developers.create'])
                                 tag="a"
-                                href="{{ route('game-developers.create') }}"
+                                link="{{ route('game-developers.create') }}"
                                 color="light"
-                                @class(['content__sidebar-link', 'button_submit' => Route::currentRouteName() === 'add-game-developer'])
                             >
                                 Добавить
                             </x-ui.form.button>
                             <x-ui.form.button
-                                class="content__sidebar-link"
+                                @class(['content__sidebar-link', 'button_submit' => Route::currentRouteName() === 'game-developers.index'])
                                 tag="a"
+                                link="{{ route('game-developers.index') }}"
                                 color="light">
                                 Список
                             </x-ui.form.button>

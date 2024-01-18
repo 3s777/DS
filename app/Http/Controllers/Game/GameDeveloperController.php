@@ -3,21 +3,22 @@
 namespace App\Http\Controllers\Game;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Game\CreateDeveloperRequest;
-use Domain\Game\Models\Developer;
+use App\Http\Requests\Game\CreateGameDeveloperRequest;
+use App\Http\Requests\Game\UpdateGameDeveloperRequest;
+use Domain\Game\Models\GameDeveloper;
 use Illuminate\Foundation\Application;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Redirector;
 
-class DeveloperController extends Controller
+class GameDeveloperController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        $developers = Developer::all();
+        $developers = GameDeveloper::all();
 
         return view('admin.game.developer.index', compact(['developers']));
     }
@@ -33,11 +34,11 @@ class DeveloperController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(CreateDeveloperRequest $request): Application|Redirector|RedirectResponse|\Illuminate\Contracts\Foundation\Application
+    public function store(CreateGameDeveloperRequest $request): Application|Redirector|RedirectResponse|\Illuminate\Contracts\Foundation\Application
     {
         $data = $request->validated();
 
-        $developer = Developer::create($data);
+        $developer = GameDeveloper::create($data);
 
         flash()->info(__('Разработчик добавлен'));
 
@@ -57,7 +58,7 @@ class DeveloperController extends Controller
      */
     public function edit(string $slug)
     {
-        $developer = Developer::where('slug', $slug)->first();
+        $developer = GameDeveloper::where('slug', $slug)->first();
 
         return view('admin.game.developer.edit', compact(['developer']));
     }
@@ -65,9 +66,17 @@ class DeveloperController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(UpdateGameDeveloperRequest $request, string $id)
     {
-        //
+        $data = $request->validated();
+
+        $developer = GameDeveloper::find($id);
+
+        $developer->fill($data)->save();
+
+        flash()->info(__('Разработчик обновлен'));
+
+        return redirect(route('game-developers.index'));
     }
 
     /**

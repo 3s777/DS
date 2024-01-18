@@ -2,11 +2,11 @@
 
 namespace App\Http\Requests\Game;
 
-use Domain\Game\Models\Developer;
+use Domain\Game\Models\GameDeveloper;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
 
-class CreateDeveloperRequest extends FormRequest
+class CreateGameDeveloperRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,8 +24,8 @@ class CreateDeveloperRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name' => ['required', Rule::unique(Developer::class)],
-            'slug' => ['nullable', 'string', Rule::unique(Developer::class)],
+            'name' => ['required', Rule::unique(GameDeveloper::class)],
+            'slug' => ['nullable','string', Rule::unique(GameDeveloper::class)],
             'description' => ['string']
         ];
     }

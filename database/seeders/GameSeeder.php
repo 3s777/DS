@@ -3,11 +3,11 @@
 namespace Database\Seeders;
 
 use Domain\Game\DTOs\ApiGamesDTO;
-use Domain\Game\Models\Developer;
+use Domain\Game\Models\GameDeveloper;
 use Domain\Game\Models\Game;
-use Domain\Game\Models\Genre;
-use Domain\Game\Models\Platform;
-use Domain\Game\Models\Publisher;
+use Domain\Game\Models\GameGenre;
+use Domain\Game\Models\GamePlatform;
+use Domain\Game\Models\GamePublisher;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Services\GamesDbApi\GamesDbApiContract;
@@ -36,14 +36,14 @@ class GameSeeder extends Seeder
             }
 
             foreach ($game->publishers as $publisher) {
-                $currentPublisher = Publisher::firstOrCreate([
+                $currentPublisher = GamePublisher::firstOrCreate([
                     'name' => $publisher['name'],
                 ]);
                 $currentGame->publishers()->attach($currentPublisher->id);
             }
 
             foreach ($game->developers as $developer) {
-                $currentDeveloper = Developer::firstOrCreate([
+                $currentDeveloper = GameDeveloper::firstOrCreate([
                     'name' => $developer['name'],
                     'slug' => $developer['name'],
                 ]);
@@ -51,14 +51,14 @@ class GameSeeder extends Seeder
             }
 
             foreach ($game->genres as $genre) {
-                $currentGenre = Genre::firstOrCreate([
+                $currentGenre = GameGenre::firstOrCreate([
                     'name' => $genre['name'],
                 ]);
                 $currentGame->genres()->attach($currentGenre->id);
             }
 
             foreach ($game->platforms as $platform) {
-                    $currentPlatform = Platform::firstOrCreate([
+                    $currentPlatform = GamePlatform::firstOrCreate([
                         'name' => $platform['platform']['name'],
                     ]);
                     $currentGame->platforms()->attach($currentPlatform->id);

@@ -2,19 +2,18 @@
 
 namespace Domain\Game\Models;
 
-use App\Models\CollectableItem;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Developer extends Model
+class GamePlatform extends Model
 {
     use HasFactory;
 
-    protected $table = 'game_developers';
+    protected $table = 'game_platforms';
 
     protected $fillable = [
         'name',
-        'slug',
+        'parent_id',
         'description'
     ];
 }

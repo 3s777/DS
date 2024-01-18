@@ -2,16 +2,19 @@
 
 namespace Domain\Game\Models;
 
+use App\Models\CollectableItem;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Support\Traits\Models\HasSlug;
 
-class PlatformType extends Model
+class GameDeveloper extends Model
 {
     use HasFactory;
-
-    protected $table = 'game_platform_types';
+    use HasSlug;
 
     protected $fillable = [
-        'name'
+        'name',
+        'slug',
+        'description'
     ];
 }

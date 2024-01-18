@@ -2,7 +2,7 @@
 
 namespace Database\Seeders;
 
-use Domain\Game\Models\Genre;
+use Domain\Game\Models\GameGenre;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Http;
@@ -19,7 +19,7 @@ class GameGenreSeeder extends Seeder
         $genres = $gamesApi->getGenres();
 
         foreach ($genres as $genre) {
-            Genre::firstOrCreate([
+            GameGenre::firstOrCreate([
                 'name' => $genre['name'],
             ]);
         }

@@ -36,7 +36,7 @@
                                     id="slug"
                                     name="slug"
                                     value="{{ old('slug') }}"
-                                    required
+
                                     autocomplete="on">
                                 </x-ui.form.input-text>
                             </x-ui.form.group>

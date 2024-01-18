@@ -2,8 +2,8 @@
 
 namespace App\Models;
 
-use Domain\Game\Models\Developer;
-use Domain\Game\Models\Publisher;
+use Domain\Game\Models\GameDeveloper;
+use Domain\Game\Models\GamePublisher;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -21,10 +21,10 @@ class CollectableItem extends Model
     ];
 
     public function developers() {
-        return $this->morphedByMany(Developer::class, 'productable');
+        return $this->morphedByMany(GameDeveloper::class, 'productable');
     }
 
     public function publishers() {
-        return $this->morphedByMany(Publisher::class, 'productable');
+        return $this->morphedByMany(GamePublisher::class, 'productable');
     }
 }

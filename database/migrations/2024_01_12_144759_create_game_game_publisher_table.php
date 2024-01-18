@@ -1,7 +1,7 @@
 <?php
 
 use Domain\Game\Models\Game;
-use Domain\Game\Models\Publisher;
+use Domain\Game\Models\GamePublisher;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;

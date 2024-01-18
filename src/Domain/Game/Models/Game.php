@@ -15,21 +15,21 @@ class Game extends Model
 
     public function publishers()
     {
-        return $this->belongsToMany(Publisher::class, 'game_game_publisher', 'game_id', 'game_publisher_id');
+        return $this->belongsToMany(GamePublisher::class, 'game_game_publisher', 'game_id', 'game_publisher_id');
     }
 
     public function developers()
     {
-        return $this->belongsToMany(Developer::class, 'game_game_developer', 'game_id', 'game_developer_id');
+        return $this->belongsToMany(GameDeveloper::class, 'game_game_developer', 'game_id', 'game_developer_id');
     }
 
     public function genres()
     {
-        return $this->belongsToMany(Genre::class, 'game_game_genre', 'game_id', 'game_genre_id');
+        return $this->belongsToMany(GameGenre::class, 'game_game_genre', 'game_id', 'game_genre_id');
     }
 
     public function platforms()
     {
-        return $this->belongsToMany(Platform::class, 'game_game_platform', 'game_id', 'game_platform_id');
+        return $this->belongsToMany(GamePlatform::class, 'game_game_platform', 'game_id', 'game_platform_id');
     }
 }

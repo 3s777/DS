@@ -1,6 +1,6 @@
 <?php
 
-use Domain\Game\Models\Developer;
+use Domain\Game\Models\GameDeveloper;
 use Domain\Game\Models\Game;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;

@@ -5,14 +5,13 @@ namespace Domain\Game\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Genre extends Model
+class GamePlatformType extends Model
 {
     use HasFactory;
 
-    protected $table = 'game_genres';
+    protected $table = 'game_platform_types';
 
     protected $fillable = [
-        'name',
-        'description'
+        'name'
     ];
 }

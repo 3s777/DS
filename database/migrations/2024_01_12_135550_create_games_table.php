@@ -1,9 +1,9 @@
 <?php
 
-use Domain\Game\Models\Developer;
-use Domain\Game\Models\Genre;
-use Domain\Game\Models\Platform;
-use Domain\Game\Models\Publisher;
+use Domain\Game\Models\GameDeveloper;
+use Domain\Game\Models\GameGenre;
+use Domain\Game\Models\GamePlatform;
+use Domain\Game\Models\GamePublisher;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
