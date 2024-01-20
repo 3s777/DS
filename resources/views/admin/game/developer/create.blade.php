@@ -9,7 +9,7 @@
 
             <x-common.messages />
 
-            <div class="add-game-developer">
+            <div class="create-game-developer">
                 <form action="{{ route('game-developers.store') }}" method="POST">
                     @csrf
                     <x-grid type="container">

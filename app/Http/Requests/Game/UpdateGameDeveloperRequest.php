@@ -4,6 +4,7 @@ namespace App\Http\Requests\Game;
 
 use Domain\Game\Models\GameDeveloper;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Support\Str;
 use Illuminate\Validation\Rule;
 
 class UpdateGameDeveloperRequest extends FormRequest
@@ -15,6 +16,13 @@ class UpdateGameDeveloperRequest extends FormRequest
     {
         return true;
     }
+
+//    public function prepareForValidation()
+//    {
+//        $this->merge([
+//            'slug' => Str::slug($this->slug)
+//        ]);
+//    }
 
     /**
      * Get the validation rules that apply to the request.

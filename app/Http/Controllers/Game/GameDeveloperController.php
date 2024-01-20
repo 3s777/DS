@@ -36,9 +36,9 @@ class GameDeveloperController extends Controller
      */
     public function store(CreateGameDeveloperRequest $request): Application|Redirector|RedirectResponse|\Illuminate\Contracts\Foundation\Application
     {
-        $data = $request->validated();
+        $createGameDeveloperData = $request->validated();
 
-        $developer = GameDeveloper::create($data);
+        GameDeveloper::create($createGameDeveloperData);
 
         flash()->info(__('Разработчик добавлен'));
 
@@ -56,23 +56,19 @@ class GameDeveloperController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $slug)
+    public function edit(GameDeveloper $gameDeveloper)
     {
-        $developer = GameDeveloper::where('slug', $slug)->first();
-
-        return view('admin.game.developer.edit', compact(['developer']));
+        return view('admin.game.developer.edit', compact(['gameDeveloper']));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateGameDeveloperRequest $request, string $id)
+    public function update(UpdateGameDeveloperRequest $request, GameDeveloper $gameDeveloper)
     {
-        $data = $request->validated();
+        $updateGameDeveloperData = $request->validated();
 
-        $developer = GameDeveloper::find($id);
-
-        $developer->fill($data)->save();
+        $gameDeveloper->fill($updateGameDeveloperData)->save();
 
         flash()->info(__('Разработчик обновлен'));
 

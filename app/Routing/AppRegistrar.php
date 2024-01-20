@@ -63,7 +63,11 @@ class AppRegistrar implements RouteRegistrar
                     return view('admin.index');
                 })->name('admin');
 
-                Route::resource('game-developers', GameDeveloperController::class)->middleware(['remove.locale']);
+                Route::resource('game-developers', GameDeveloperController::class)
+//                    ->parameters([
+//                        'game-developers' => 'gameDeveloper:slug'
+//                    ])
+                    ->middleware(['remove.locale']);
 
             });
 

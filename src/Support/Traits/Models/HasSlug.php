@@ -11,6 +11,10 @@ trait HasSlug
         static::creating(function (Model $item) {
             $item->makeSlug();
         });
+
+        static::saving(function (Model $item) {
+            $item->makeSlug();
+        });
     }
 
     protected function makeSlug()

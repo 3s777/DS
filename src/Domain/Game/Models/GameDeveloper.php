@@ -17,4 +17,9 @@ class GameDeveloper extends Model
         'slug',
         'description'
     ];
+
+    public function getRouteKeyName()
+    {
+        return 'slug';
+    }
 }
