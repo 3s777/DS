@@ -7,7 +7,7 @@
                     color="dark"
                     class="auth-menu__link"
                     href="{{ route('login') }}">
-                    {{ __('Login') }}
+                    {{ __('auth.login') }}
                 </x-ui.form.button>
             </div>
         @endif
@@ -18,7 +18,7 @@
                     color="dark"
                     class="auth-menu__link"
                     href="{{ route('register') }}">
-                    {{ __('Register') }}
+                    {{ __('auth.register') }}
                 </x-ui.form.button>
             </div>
         @endif
@@ -42,7 +42,7 @@
                        href="{{ route('logout') }}"
                        onclick="event.preventDefault();
                        document.getElementById('logout-form').submit(); ">
-                        {{ __('Logout') }}
+                        {{ __('auth.logout') }}
                     </a>
 
                     <form id="logout-form" action="{{ route('logout') }}" method="POST">

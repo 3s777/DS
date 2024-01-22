@@ -1,10 +1,10 @@
-<x-layouts.main title="{{ __('Forgot Password') }}">
+<x-layouts.main title="{{ __('auth.forgot') }}">
     <x-grid.container>
         <x-common.content class="auth__content">
             <x-ui.card class="auth__card">
                 <x-slot:header>
                     <x-ui.title tag="h1">
-                        {{ __('Reset Password') }}
+                        {{ __('auth.reset') }}
                     </x-ui.title>
                 </x-slot>
 
@@ -28,7 +28,7 @@
 
                     <x-ui.form.group>
                         <x-ui.form.button full-width="true">
-                            {{ __('Send Password Reset Link') }}
+                            {{ __('auth.reset-button') }}
                         </x-ui.form.button>
                     </x-ui.form.group>
                 </form>
