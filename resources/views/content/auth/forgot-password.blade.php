@@ -1,4 +1,4 @@
-<x-layouts.main title="{{ __('auth.forgot') }}">
+<x-layouts.auth title="{{ __('auth.forgot') }}">
     <x-grid.container>
         <x-common.content class="auth__content">
             <x-ui.card class="auth__card">
@@ -35,4 +35,4 @@
             </x-ui.card>
         </x-common.content>
     </x-grid.container>
-</x-layouts.main>
+</x-layouts.auth>

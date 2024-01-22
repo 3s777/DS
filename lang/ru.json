@@ -1,6 +1,5 @@
 {
-    "auth.failed": "Неверный логин или пароль",
-    "auth.password": "Неверный пароль",
+
     "auth.throttle": "Слишком много попыток. Попробуйте через :seconds секунд.",
     "pagination.previous": "&laquo; Предыдущие",
     "pagination.next": "Следующие &raquo;",
@@ -10,11 +9,7 @@
     "password.token": "Неверный токен.",
     "password.user": "Мы не можем найти такого пользователя",
     "Authorization": "Авторизация",
-    "Password": "Пароль",
-    "Register": "Регистрация",
-    "Login": "Войти",
-    "Forgot Your Password?": "Забыли пароль?",
-    "Remember Me": "Запомнить меня",
+
     "Choose language": "Выберите язык",
     "Choose theme color": "Выберите цвет темы",
     "Settings": "Настройки",

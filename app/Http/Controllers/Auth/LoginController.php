@@ -41,7 +41,7 @@ class LoginController extends Controller
         }
 
         return back()->withErrors([
-            'email' => __('The provided credentials do not match our records.'),
+            'email' => __('auth.error.credentials'),
         ])->onlyInput('username');
     }
 

@@ -1,10 +1,10 @@
-<x-layouts.main title="Login">
+<x-layouts.auth title="{{ __('auth.login') }}">
     <x-grid.container>
         <x-common.content class="auth__content">
             <x-ui.card class="auth__card">
                 <x-slot:header>
                     <x-ui.title tag="h1">
-                        {{ __('Login') }}
+                        {{ __('auth.login') }}
                     </x-ui.title>
                 </x-slot>
 
@@ -19,7 +19,7 @@
                             name="email"
                             type="email"
                             value="{{ old('email') }}"
-                            placeholder="{{ __('Email') }}"
+                            placeholder="Email"
                             required
                             autofocus
                             autocomplete="email">
@@ -33,7 +33,7 @@
                             name="password"
                             type="password"
                             value=""
-                            placeholder="{{ __('Password') }}"
+                            placeholder="{{ __('auth.password') }}"
                             required
                             autofocus
                             autocomplete="current-password">
@@ -45,20 +45,20 @@
                             id="remember"
                             name="remember"
                             value=""
-                            label="{{ __('Remember Me') }}"
+                            label="{{ __('auth.remember') }}"
                         >
                         </x-ui.form.input-checkbox>
                     </x-ui.form.group>
 
                     <x-ui.form.group>
                         <x-ui.form.button full-width="true">
-                            {{ __('Login') }}
+                            {{ __('auth.login') }}
                         </x-ui.form.button>
 
                         @if (Route::has('forgot'))
                             <div class="auth__forgot">
                                 <a class="auth__forgot-link" href="{{ route('forgot') }}">
-                                    {{ __('Forgot Your Password?') }}
+                                    {{ __('auth.forgot_question') }}
                                 </a>
                             </div>
                         @endif
@@ -67,20 +67,4 @@
             </x-ui.card>
         </x-common.content>
     </x-grid.container>
-    @push('scripts')
-        <script type="module">
-            var selects = document.getElementsByClassName("choices-select-auto");
-            for (var i = 0; i < selects.length; i++) {
-
-                new Choices(selects.item(i), {
-                    itemSelectText: '',
-                    searchEnabled: false,
-                    shouldSort: false,
-                    allowHTML: true,
-                    noResultsText: '{{ __('Не найдено') }}',
-                    noChoicesText: '{{ __('Больше ничего нет') }}',
-                });
-            }
-        </script>
-    @endpush
-</x-layouts.main>
+</x-layouts.auth>

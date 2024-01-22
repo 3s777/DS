@@ -1,4 +1,4 @@
-<x-layouts.main title="Reset Password">
+<x-layouts.auth title="Reset Password">
     <x-grid.container>
         <x-common.content class="auth__content">
             <x-ui.card class="auth__card">
@@ -65,4 +65,4 @@
             </x-ui.card>
         </x-common.content>
     </x-grid.container>
-</x-layouts.main>
+</x-layouts.auth>

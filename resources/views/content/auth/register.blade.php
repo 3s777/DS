@@ -1,4 +1,4 @@
-<x-layouts.main title="Register">
+<x-layouts.auth title="Register">
     <x-grid.container>
         <x-common.content class="auth__content">
             <x-ui.card class="auth__card">
@@ -92,21 +92,4 @@
             </x-ui.card>
         </x-common.content>
     </x-grid.container>
-
-    @push('scripts')
-        <script type="module">
-            var selects = document.getElementsByClassName("choices-select-auto");
-            for (var i = 0; i < selects.length; i++) {
-
-                new Choices(selects.item(i), {
-                    itemSelectText: '',
-                    searchEnabled: false,
-                    shouldSort: false,
-                    allowHTML: true,
-                    noResultsText: '{{ __('Не найдено') }}',
-                    noChoicesText: '{{ __('Больше ничего нет') }}',
-                });
-            }
-        </script>
-    @endpush
-</x-layouts.main>
+</x-layouts.auth>
