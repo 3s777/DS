@@ -1,10 +1,10 @@
-<x-layouts.auth title="{{ __('auth.login') }}">
+<x-layouts.auth title="{{ __('auth.verify') }}">
     <x-grid.container>
         <x-common.content class="auth__content">
             <x-ui.card class="auth__card">
                 <x-slot:header>
                     <x-ui.title tag="h1">
-                        {{ __('Verify your Email') }}
+                        {{ __('auth.verify') }}
                     </x-ui.title>
                 </x-slot>
 
@@ -12,8 +12,8 @@
 
                     <x-ui.form.group>
                         <x-ui.message type="info">
-                            <p>{{ __('You need verify your Email') }}</p>
-                            <p>{{ __('Если вы не получили письмо, запросите письмо еще раз, заполнив форму ниже') }}</p>
+                            <p>{{ __('auth.verify_title') }}</p>
+                            <p>{{ __('auth.verify_message') }}</p>
                         </x-ui.message>
                     </x-ui.form.group>
 
@@ -27,14 +27,14 @@
                                 name="email"
                                 type="email"
                                 value="{{ old('email') }}"
-                                placeholder="{{ __('E-Mail Address') }}"
+                                placeholder="{{ __('auth.email') }}"
                                 required
                                 autocomplete="email">
                             </x-ui.form.input-text>
                         </x-ui.form.group>
 
                         <x-ui.form.group>
-                            <x-ui.form.button full-width="true">Отправить письмо повторно</x-ui.form.button>
+                            <x-ui.form.button full-width="true">{{ __('auth.verify_retry') }}</x-ui.form.button>
                         </x-ui.form.group>
                     </form>
 

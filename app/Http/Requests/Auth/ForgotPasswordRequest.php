@@ -1,29 +1,18 @@
 <?php
 
-namespace App\Http\Requests;
+namespace App\Http\Requests\Auth;
 
-use Domain\Auth\Models\User;
 use Illuminate\Contracts\Validation\Rule;
 use Illuminate\Foundation\Http\FormRequest;
 
-class VerifyEmailRequest extends FormRequest
+class ForgotPasswordRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
      */
     public function authorize(): bool
     {
-        $user = User::find($this->route('id'));
-
-        if(!$user) {
-            return false;
-        }
-
-        if (! hash_equals(sha1($user->getEmailForVerification()), (string) $this->route('hash'))) {
-            return false;
-        }
-
-        return true;
+        return auth()->guest();
     }
 
     /**
@@ -33,6 +22,12 @@ class VerifyEmailRequest extends FormRequest
      */
     public function rules(): array
     {
-        return [];
+        return [
+            'email' => [
+                'required',
+                'string',
+                'email',
+            ],
+        ];
     }
 }

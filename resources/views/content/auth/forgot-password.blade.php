@@ -19,7 +19,7 @@
                             name="email"
                             type="email"
                             value="{{ old('email') }}"
-                            placeholder="{{ __('E-Mail Address') }}"
+                            placeholder="{{ __('auth.email') }}"
                             required
                             autofocus
                             autocomplete="email">
@@ -28,7 +28,7 @@
 
                     <x-ui.form.group>
                         <x-ui.form.button full-width="true">
-                            {{ __('auth.reset-button') }}
+                            {{ __('auth.reset_button') }}
                         </x-ui.form.button>
                     </x-ui.form.group>
                 </form>

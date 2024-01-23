@@ -3,11 +3,10 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\SendEmailVerifyRequest;
-use App\Http\Requests\VerifyEmailRequest;
+use App\Http\Requests\Auth\SendEmailVerifyRequest;
+use App\Http\Requests\Auth\VerifyEmailRequest;
 use Domain\Auth\Actions\VerifyEmailAction;
 use Domain\Auth\Models\User;
-use Illuminate\Auth\Events\Verified;
 use Illuminate\Support\Facades\Auth;
 
 

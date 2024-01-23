@@ -79,11 +79,11 @@ class ResetPasswordNotification extends Notification implements ShouldQueue
     protected function buildMailMessage($url)
     {
         return (new MailMessage)
-            ->subject(Lang::get('Reset Password Notification'))
-            ->line(Lang::get('You are receiving this email because we received a password reset request for your account.'))
-            ->action(Lang::get('Reset Password'), $url)
-            ->line(Lang::get('This password reset link will expire in :count minutes.', ['count' => config('auth.passwords.'.config('auth.defaults.passwords').'.expire')]))
-            ->line(Lang::get('If you did not request a password reset, no further action is required.'));
+            ->subject(Lang::get('auth.reset_notification.title'))
+            ->line(Lang::get('auth.reset_notification.line1'))
+            ->action(Lang::get('auth.reset'), $url)
+            ->line(Lang::get('auth.reset_notification.line2', ['count' => config('auth.passwords.'.config('auth.defaults.passwords').'.expire')]))
+            ->line(Lang::get('auth.reset_notification.line3'));
     }
 
     /**

@@ -3,18 +3,23 @@
 namespace Domain\Auth\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
+use App\Models\Language;
 use App\Notifications\ResetPasswordNotification;
 use App\Notifications\VerifyEmailNotification;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
+use Illuminate\Contracts\Translation\HasLocalePreference;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 use Support\Traits\Models\HasThumbnail;
 
-class User extends Authenticatable implements MustVerifyEmail
+class User extends Authenticatable implements MustVerifyEmail, HasLocalePreference
 {
     use HasApiTokens;
     use HasFactory;
@@ -72,5 +77,18 @@ class User extends Authenticatable implements MustVerifyEmail
         return Attribute::make(
             get: fn() => 'https://ui-avatars.com/api/?background=0D8ABC&color=fff&name=' . $this->name
         );
+    }
+
+    public function preferredLocale()
+    {
+        return $this->language->slug;
+    }
+
+    public function settingsValue(): BelongsToMany {
+        return $this->belongsToMany(UserSettingValue::class);
+    }
+
+    public function language(): BelongsTo {
+        return $this->belongsTo(Language::class);
     }
 }

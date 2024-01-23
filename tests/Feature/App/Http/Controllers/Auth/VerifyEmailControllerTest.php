@@ -23,7 +23,7 @@ class VerifyEmailControllerTest extends TestCase
     {
         $this->get(action([VerifyEmailController::class, 'page']))
             ->assertOk()
-            ->assertSee('Verify your Email')
+            ->assertSee(__('auth.verify'))
             ->assertViewIs('content.auth.verify');
     }
 

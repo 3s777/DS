@@ -6,7 +6,7 @@
 @if ($level === 'error')
 # @lang('Whoops!')
 @else
-# @lang('Hello!')
+# @lang('mail.greeting')
 @endif
 @endif
 
@@ -39,7 +39,7 @@
 @isset($actionText)
 <x-slot:subcopy>
 @lang(
-    "If you're having trouble clicking the \":actionText\" button, copy and paste the URL below into your web browser:",
+    "mail.broken_link",
     [
         'actionText' => $actionText,
     ]

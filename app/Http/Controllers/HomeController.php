@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\CollectableItem;
+use Domain\Auth\Models\User;
 use Domain\Game\Models\GameGenre;
 use Illuminate\Support\Facades\Http;
 use Services\GamesDbApi\GamesDbApiContract;
@@ -10,6 +11,9 @@ use Services\GamesDbApi\GamesDbApiContract;
 class HomeController extends Controller
 {
     public function __invoke() {
+
+        $user = User::find(1)->language->slug;
+        dd($user);
 
 //        $product = CollectableItem::createOrFirst([
 //            'name' => 'sdfdsf11gg',

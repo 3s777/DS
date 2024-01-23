@@ -19,7 +19,7 @@
                             name="email"
                             type="email"
                             value="{{ old('email') }}"
-                            placeholder="Email"
+                            placeholder="{{ __('auth.email') }}"
                             required
                             autofocus
                             autocomplete="email">

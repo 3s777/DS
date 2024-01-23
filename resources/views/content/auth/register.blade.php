@@ -1,10 +1,10 @@
-<x-layouts.auth title="Register">
+<x-layouts.auth title="{{ __('auth.register') }}">
     <x-grid.container>
         <x-common.content class="auth__content">
             <x-ui.card class="auth__card">
                 <x-slot:header>
                     <x-ui.title tag="h1">
-                        {{ __('Register') }}
+                        {{ __('auth.register') }}
                     </x-ui.title>
                 </x-slot>
 
@@ -19,7 +19,7 @@
                             name="name"
                             type="text"
                             value="{{ old('name') }}"
-                            placeholder="{{ __('Username') }}"
+                            placeholder="{{ __('auth.username') }}"
                             required
                             autofocus
                             autocomplete="name">
@@ -37,7 +37,7 @@
                         <x-ui.tooltip
                             class="tooltip_1"
                             id="tooltip">
-                            Имя пользователя должно быть в нижнем регистре, латиницей, может содержать цифры и знак "."
+                            {{ __('auth.username_tooltip') }}
                         </x-ui.tooltip>
                     </x-ui.form.group>
 
@@ -48,7 +48,7 @@
                             name="email"
                             type="email"
                             value="{{ old('email') }}"
-                            placeholder="{{ __('E-Mail Address') }}"
+                            placeholder="{{ __('auth.email') }}"
                             required
                             autofocus
                             autocomplete="email">
@@ -62,7 +62,7 @@
                             name="password"
                             type="password"
                             value=""
-                            placeholder="{{ __('Password') }}"
+                            placeholder="{{ __('auth.password') }}"
                             required
                             autofocus
                             autocomplete="new-password">
@@ -76,7 +76,7 @@
                             name="password_confirmation"
                             type="password"
                             value=""
-                            placeholder="{{ __('Confirm Password') }}"
+                            placeholder="{{ __('auth.password_confirm') }}"
                             required
                             autofocus
                             autocomplete="new-password">
@@ -85,7 +85,7 @@
 
                     <x-ui.form.group>
                         <x-ui.form.button full-width="true">
-                            {{ __('Register') }}
+                            {{ __('auth.register') }}
                         </x-ui.form.button>
                     </x-ui.form.group>
                 </form>

@@ -17,7 +17,8 @@ class UserSeeder extends Seeder
             'name' => 'qqqqq',
             'email' => 'qqq@qq.qq',
             'password' => bcrypt('123456789q'),
-            'email_verified_at' => now()
+            'email_verified_at' => now(),
+            'language_id' => 2
         ]);
     }
 }

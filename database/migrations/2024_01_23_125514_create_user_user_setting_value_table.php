@@ -1,6 +1,7 @@
 <?php
 
-use App\Models\Language;
+use Domain\Auth\Models\User;
+use Domain\Auth\Models\UserSettingValue;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -12,19 +13,20 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('users', function (Blueprint $table) {
+        Schema::create('user_user_setting_value', function (Blueprint $table) {
             $table->id();
-            $table->string('name')->unique();
-            $table->string('email')->unique();
-            $table->timestamp('email_verified_at')->nullable();
-            $table->string('password');
-            $table->foreignIdFor(Language::class)
+
+            $table->foreignIdFor(User::class)
                 ->constrained()
                 ->cascadeOnDelete()
                 ->cascadeOnUpdate();
-            $table->rememberToken();
+
+            $table->foreignIdFor(UserSettingValue::class)
+                ->constrained()
+                ->cascadeOnDelete()
+                ->cascadeOnUpdate();
+
             $table->timestamps();
-            $table->softDeletes();
         });
     }
 
@@ -33,6 +35,8 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('users');
+        if(!app()->isProduction()) {
+                Schema::dropIfExists('user_user_setting_value');
+        }
     }
 };

@@ -1,10 +1,10 @@
-<x-layouts.auth title="Reset Password">
+<x-layouts.auth title="{{ __('auth.reset') }}">
     <x-grid.container>
         <x-common.content class="auth__content">
             <x-ui.card class="auth__card">
                 <x-slot:header>
                     <x-ui.title tag="h1">
-                        {{ __('Reset Password') }}
+                        {{ __('auth.reset') }}
                     </x-ui.title>
                 </x-slot>
 
@@ -21,7 +21,7 @@
                             name="email"
                             type="email"
                             value="{{ request('email') }}"
-                            placeholder="{{ __('Email') }}"
+                            placeholder="{{ __('auth.email') }}"
                             required
                             autofocus
                             autocomplete="email">
@@ -35,7 +35,7 @@
                             name="password"
                             type="password"
                             value=""
-                            placeholder="{{ __('Password') }}"
+                            placeholder="{{ __('auth.password') }}"
                             required
                             autofocus
                             autocomplete="new-password">
@@ -49,7 +49,7 @@
                             name="password_confirmation"
                             type="password"
                             value=""
-                            placeholder="{{ __('Confirm Password') }}"
+                            placeholder="{{ __('auth.password_confirm') }}"
                             required
                             autofocus
                             autocomplete="new-password">
@@ -58,7 +58,7 @@
 
                     <x-ui.form.group>
                         <x-ui.form.button full-width="true">
-                            {{ __('Reset Password') }}
+                            {{ __('auth.reset') }}
                         </x-ui.form.button>
                     </x-ui.form.group>
                 </form>
