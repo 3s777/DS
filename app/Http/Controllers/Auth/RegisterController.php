@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Auth\RegisterRequest;
+use App\Models\Language;
 use Domain\Auth\Contracts\RegisterNewUserContract;
 use Domain\Auth\DTOs\NewUserDTO;
 use Illuminate\Contracts\View\Factory;
@@ -22,7 +23,6 @@ class RegisterController extends Controller
 
     public function handle(RegisterRequest $request, RegisterNewUserContract $action): RedirectResponse
     {
-
         // TODO try catch
         $action(NewUserDTO::fromRequest($request));
 

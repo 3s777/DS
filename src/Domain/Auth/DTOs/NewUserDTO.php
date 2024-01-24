@@ -13,12 +13,13 @@ class NewUserDTO
         public readonly string $name,
         public readonly string $email,
         public readonly string $password,
+        public readonly int $language_id
     )
     {
     }
 
     public static function fromRequest(Request $request)
     {
-        return static::make(...$request->only(['name', 'email', 'password']));
+        return static::make(...$request->only(['name', 'email', 'password', 'language_id']));
     }
 }

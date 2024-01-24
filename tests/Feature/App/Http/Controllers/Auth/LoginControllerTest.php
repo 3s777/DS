@@ -3,6 +3,8 @@
 namespace Tests\Feature\App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Auth\LoginController;
+use App\Models\Language;
+use Database\Factories\LanguageFactory;
 use Database\Factories\UserFactory;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
@@ -29,6 +31,8 @@ class LoginControllerTest extends TestCase
      */
     public function it_handle_success(): void
     {
+        LanguageFactory::new()->create();
+
         $password = '123456789';
 
         $user = UserFactory::new()->create([

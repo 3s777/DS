@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests\Auth;
 
+use App\Models\Language;
 use App\Rules\LatinLowercaseRule;
 use Domain\Auth\Models\User;
 use Illuminate\Foundation\Http\FormRequest;
@@ -46,12 +47,14 @@ class RegisterRequest extends FormRequest
             'password' => ['required',
                 'confirmed',
                 Password::min(8)->letters()
-            ],
+            ]
         ];
     }
 
     protected function prepareForValidation()
     {
+        $locale = Language::where('slug', app()->getLocale())->first();
+
         $this->merge([
             'name' => str(request('name'))
                 ->squish()
@@ -61,6 +64,7 @@ class RegisterRequest extends FormRequest
                 ->squish()
                 ->lower()
                 ->value(),
+            'language_id' => $locale->id,
         ]);
     }
 
