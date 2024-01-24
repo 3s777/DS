@@ -23,6 +23,7 @@ class LoginControllerTest extends TestCase
             ->assertOk()
             ->assertSee('Войти')
             ->assertViewIs('content.auth.login');
+
     }
 
     /**
@@ -31,17 +32,15 @@ class LoginControllerTest extends TestCase
      */
     public function it_handle_success(): void
     {
-        LanguageFactory::new()->create();
-
         $password = '123456789';
 
         $user = UserFactory::new()->create([
-            'password' => bcrypt($password)
+            'password' => bcrypt($password),
         ]);
 
         $request = [
             'email' => $user->email,
-            'password' => $password
+            'password' => $password,
         ];
 
         $response = $this->post(action([LoginController::class, 'handle']), $request);
@@ -60,7 +59,7 @@ class LoginControllerTest extends TestCase
     {
         $request = [
             'email' => 'test@notexist.com',
-            'password' => str()->random(10)
+            'password' => str()->random(10),
         ];
 
         $this->post(action([LoginController::class, 'handle']), $request)
@@ -79,7 +78,7 @@ class LoginControllerTest extends TestCase
 
         $user = UserFactory::new()->create([
             'password' => bcrypt($password),
-            'email_verified_at' => null
+            'email_verified_at' => null,
         ]);
 
         $request = [

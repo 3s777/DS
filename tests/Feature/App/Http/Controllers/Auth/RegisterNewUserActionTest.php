@@ -44,7 +44,8 @@ class RegisterNewUserActionTest extends TestCase
         $action(NewUserDTO::make(
             $this->request['name'],
             $this->request['email'],
-            $this->request['password']
+            $this->request['password'],
+            $this->request['language_id']
         ));
 
         $this->assertDatabaseHas('users', [
@@ -65,7 +66,8 @@ class RegisterNewUserActionTest extends TestCase
         $action(NewUserDTO::make(
             $this->request['name'],
             $this->request['email'],
-            $this->request['password']
+            $this->request['password'],
+            $this->request['language_id']
         ));
 
         Event::assertDispatched(Registered::class);
@@ -86,7 +88,8 @@ class RegisterNewUserActionTest extends TestCase
         $action(NewUserDTO::make(
             $this->request['name'],
             $this->request['email'],
-            $this->request['password']
+            $this->request['password'],
+            $this->request['language_id']
         ));
 
         $user = User::where('email', $this->request['email'])->first();

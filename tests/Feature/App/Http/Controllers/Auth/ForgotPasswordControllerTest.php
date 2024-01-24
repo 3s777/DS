@@ -38,8 +38,6 @@ class ForgotPasswordControllerTest extends TestCase
      */
     public function it_handle_success(): void
     {
-        LanguageFactory::new()->create();
-
         $user = UserFactory::new()->create($this->testingCredentials());
 
         $this->post(action([ForgotPasswordController::class, 'handle']), $this->testingCredentials())

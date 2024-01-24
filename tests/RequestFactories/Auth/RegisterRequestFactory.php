@@ -2,6 +2,7 @@
 
 namespace Tests\RequestFactories\Auth;
 
+use App\Models\Language;
 use Worksome\RequestFactories\RequestFactory;
 
 class RegisterRequestFactory extends RequestFactory
@@ -13,7 +14,7 @@ class RegisterRequestFactory extends RequestFactory
            'name' => $this->faker->regexify('[a-z0-9.]{7}'),
            'password' => '123456789q',
            'password_confirmation' => '123456789q',
-            'language_id' => 1
+            'language_id' => Language::factory()
         ];
     }
 }
