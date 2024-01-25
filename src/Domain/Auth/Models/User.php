@@ -80,16 +80,16 @@ class User extends Authenticatable implements MustVerifyEmail, HasLocalePreferen
         );
     }
 
-    public function preferredLocale()
-    {
-        return $this->language->slug;
-    }
-
     public function settingsValue(): BelongsToMany {
         return $this->belongsToMany(UserSettingValue::class);
     }
 
     public function language(): BelongsTo {
         return $this->belongsTo(Language::class);
+    }
+
+    public function preferredLocale()
+    {
+        return $this->language->slug;
     }
 }

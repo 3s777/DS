@@ -14,6 +14,13 @@ class RegisterRequest extends FormRequest
 {
     use HasFactory;
 
+    public function __construct(array $query = [], array $request = [], array $attributes = [], array $cookies = [], array $files = [], array $server = [], $content = null)
+    {
+        parent::__construct($query, $request, $attributes, $cookies, $files, $server, $content);
+
+        $this->language = Language::where('slug', app()->getLocale())->first();
+    }
+
     /**
      * Determine if the user is authorized to make this request.
      */
@@ -29,6 +36,7 @@ class RegisterRequest extends FormRequest
      */
     public function rules(): array
     {
+
         return [
             'name' => ['required',
                 'string',
@@ -47,13 +55,14 @@ class RegisterRequest extends FormRequest
             'password' => ['required',
                 'confirmed',
                 Password::min(8)->letters()
-            ]
+            ],
+            'language_id' => ['required','exists:languages,id']
         ];
     }
 
     protected function prepareForValidation()
     {
-        $locale = Language::where('slug', app()->getLocale())->first();
+//        $this->request->add(['language_id' => $this->language->id]);
 
         $this->merge([
             'name' => str(request('name'))
@@ -64,7 +73,7 @@ class RegisterRequest extends FormRequest
                 ->squish()
                 ->lower()
                 ->value(),
-            'language_id' => $locale->id,
+            'language_id' => $this->language->id
         ]);
     }
 

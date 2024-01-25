@@ -23,9 +23,12 @@ class AppRegistrar implements RouteRegistrar
 
         Route::middleware('web')
             ->group(function() {
+
+                Route::get('/{locale?}', HomeController::class)->name('home');
+
         Route::prefix('{locale}')->whereIn('locale', config('app.available_locales'))->group(function () {
 
-            Route::get('/', HomeController::class)->name('home');
+
 
 
             Route::get('/ui', function () {

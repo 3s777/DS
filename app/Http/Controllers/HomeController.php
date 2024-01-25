@@ -13,7 +13,7 @@ class HomeController extends Controller
     public function __invoke() {
 
         $user = User::find(1)->language->slug;
-        dd($user);
+        dump(app()->getLocale());
 
 //        $product = CollectableItem::createOrFirst([
 //            'name' => 'sdfdsf11gg',

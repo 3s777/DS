@@ -40,8 +40,6 @@ class VerifyEmailControllerTest extends TestCase
             'email_verified_at' => null
         ];
 
-        LanguageFactory::new()->create();
-
         $user = UserFactory::new()->create($request);
 
         $this->post(action([VerifyEmailController::class, 'sendVerifyNotification']), ['email' => $user->email])
@@ -59,8 +57,6 @@ class VerifyEmailControllerTest extends TestCase
      */
     public function it_verification_notification_fail(): void
     {
-        LanguageFactory::new()->create();
-
         $user = UserFactory::new()->create();
 
         $this->post(action([VerifyEmailController::class, 'sendVerifyNotification']), ['email' => $user->email])
@@ -79,8 +75,6 @@ class VerifyEmailControllerTest extends TestCase
         $request = [
             'email_verified_at' => null
         ];
-
-        LanguageFactory::new()->create();
 
         $user = UserFactory::new()->create($request);
 
@@ -110,8 +104,6 @@ class VerifyEmailControllerTest extends TestCase
             'email_verified_at' => null
         ];
 
-        LanguageFactory::new()->create();
-
         $user = UserFactory::new()->create($request);
 
         $url = URL::temporarySignedRoute(
@@ -138,8 +130,6 @@ class VerifyEmailControllerTest extends TestCase
         $request = [
             'email_verified_at' => null
         ];
-
-        LanguageFactory::new()->create();
 
         $user = UserFactory::new()->create($request);
 
