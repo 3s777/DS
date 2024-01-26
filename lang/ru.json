@@ -1,5 +1,4 @@
 {
-
     "auth.throttle": "Слишком много попыток. Попробуйте через :seconds секунд.",
 
     "Authorization": "Авторизация",
@@ -11,6 +10,5 @@
     "Feed": "Лента",
     "Users": "Пользователи",
     "Add": "Добавить",
-    "Comments": "Комментарии",
-    "Congratulations, you have been registered. Now you need to verify your account. Check your email address": "Поздравляем, вы зарегистрированы. Теперь вам нужно подтвердить ваш аккаунт. Мы отправили вам инструкцию на электронную почту."
+    "Comments": "Комментарии"
 }

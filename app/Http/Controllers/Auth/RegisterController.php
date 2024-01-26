@@ -26,7 +26,7 @@ class RegisterController extends Controller
         // TODO try catch
         $action(NewUserDTO::fromRequest($request));
 
-        flash()->info(__('You need to verify your email'));
+        flash()->info(__('auth.register_verify'));
 
         return redirect()->route('login');
     }

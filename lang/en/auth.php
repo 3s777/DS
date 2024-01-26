@@ -3,6 +3,7 @@
 return [
     'login' => 'Login',
     'register' => 'Register',
+    'register_verify' => 'Congratulations, you have been registered. Now you need to verify your account. Check your email address',
     'logout' => 'Logout',
     'reset' => 'Reset Password',
     'forgot' => 'Forgot Password?',

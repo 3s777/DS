@@ -12,12 +12,11 @@ class RegisterNewUserAction implements RegisterNewUserContract
 {
     public function __invoke(NewUserDTO $data)
     {
-        $language = Language::where('slug', app()->getLocale())->first();
         $user = User::create([
             'name' => $data->name,
             'email' => $data->email,
             'password' => bcrypt($data->password),
-            'language_id' => $language->id
+            'language_id' => $data->language_id,
         ]);
 
         event(new Registered($user));
