@@ -3,9 +3,8 @@
 namespace Tests\Feature\App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Auth\ForgotPasswordController;
-use App\Notifications\ResetPasswordNotification;
-use Database\Factories\LanguageFactory;
 use Database\Factories\UserFactory;
+use Domain\Auth\Notifications\ResetPasswordNotification;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Notification;
 use Tests\TestCase;

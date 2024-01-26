@@ -2,13 +2,11 @@
 
 namespace App\Http\Controllers\Auth;
 
-use App\Notifications\VerifyEmailNotification;
 use Database\Factories\UserFactory;
 use Domain\Auth\Actions\VerifyEmailAction;
 use Illuminate\Auth\Events\Verified;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Event;
-use Illuminate\Support\Facades\Queue;
 use Tests\TestCase;
 
 class VerifyEmailActionTest extends TestCase

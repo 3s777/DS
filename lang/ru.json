@@ -1,6 +1,4 @@
 {
-    "auth.throttle": "Слишком много попыток. Попробуйте через :seconds секунд.",
-
     "Authorization": "Авторизация",
     "Choose language": "Выберите язык",
     "Choose theme color": "Выберите цвет темы",
