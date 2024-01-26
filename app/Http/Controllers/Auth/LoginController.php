@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Auth\LoginRequest;
+use Domain\Auth\DTOs\LoginUserDTO;
 use Domain\Auth\Models\User;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
@@ -21,20 +22,18 @@ class LoginController extends Controller
 
     public function handle(LoginRequest $request): RedirectResponse
     {
-        $credentials = $request->only(['email', 'password', 'remember']);
+        $loginData = LoginUserDTO::fromRequest($request);
 
-        $remember =  $credentials['remember'] ?? false;
-
-        $user = User::where('email', $credentials['email'])->select('email_verified_at')->first();
+        $user = User::where('email', $loginData->email)->select('email_verified_at')->first();
 
         if($user && !$user->email_verified_at) {
             return redirect()->route('verification.notice');
         }
 
         if (Auth::attempt([
-                'email' => $credentials['email'],
-                'password' => $credentials['password']
-            ], $remember))
+                'email' => $loginData->email,
+                'password' => $loginData->password,
+            ], $loginData->remember))
         {
             $request->session()->regenerate();
             return redirect()->intended(route('search'));
