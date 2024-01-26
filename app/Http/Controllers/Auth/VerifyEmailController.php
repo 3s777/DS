@@ -23,7 +23,7 @@ class VerifyEmailController extends Controller
 
         Auth::loginUsingId($user->id);
 
-        flash()->info(__('Your email is verified'));
+        flash()->info(__('auth.verified'));
 
         return redirect()->route('search');
     }
@@ -33,14 +33,14 @@ class VerifyEmailController extends Controller
 
         if ($user->hasVerifiedEmail()) {
 
-            flash()->info(__('Your email is verified'));
+            flash()->info(__('auth.verified'));
 
             return redirect()->route('verification.notice');
         }
 
         $user->sendEmailVerificationNotification();
 
-        flash()->info(__('We retry send verification link to your email'));
+        flash()->info(__('auth.verify_retry_send'));
 
         return redirect()->route('verification.notice');
     }

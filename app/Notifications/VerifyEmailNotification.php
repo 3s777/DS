@@ -66,10 +66,10 @@ class VerifyEmailNotification extends Notification implements ShouldQueue
     protected function buildMailMessage($url)
     {
         return (new MailMessage)
-            ->subject(Lang::get('Verify Email Address'))
-            ->line(Lang::get('Please click the button below to verify your email address.'))
-            ->action(Lang::get('Verify Email Address'), $url)
-            ->line(Lang::get('If you did not create an account, no further action is required.'));
+            ->subject(Lang::get('auth.verify_notification.title'))
+            ->line(Lang::get('auth.verify_notification.line1'))
+            ->action(Lang::get('auth.verify_notification.title'), $url)
+            ->line(Lang::get('auth.verify_notification.line2'));
     }
 
     /**
