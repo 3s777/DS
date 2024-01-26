@@ -44,7 +44,7 @@ class RegisterControllerTest extends TestCase
     {
         $this->get(action([RegisterController::class, 'page']))
             ->assertOk()
-            ->assertSee('Регистрация')
+            ->assertSee(__('auth.register'))
             ->assertViewIs('content.auth.register');
     }
 
@@ -133,8 +133,8 @@ class RegisterControllerTest extends TestCase
 
         $response->assertValid()
             ->assertRedirect(route('login'))
-            ->assertSessionHas('helper_flash_message', 'Вам необходимо подтвердить ваш Email');
+            ->assertSessionHas('helper_flash_message', __('auth.register_verify'));
 
-        $this->followRedirects($response)->assertSee('Вам необходимо подтвердить ваш Email');
+        $this->followRedirects($response)->assertSee(__('auth.register_verify'));
     }
 }
