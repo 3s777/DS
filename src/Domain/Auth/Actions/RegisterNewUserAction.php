@@ -10,7 +10,7 @@ use Illuminate\Auth\Events\Registered;
 
 class RegisterNewUserAction implements RegisterNewUserContract
 {
-    public function __invoke(NewUserDTO $data)
+    public function __invoke(NewUserDTO $data): void
     {
         $user = User::create([
             'name' => $data->name,

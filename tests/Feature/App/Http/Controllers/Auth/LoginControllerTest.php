@@ -63,7 +63,7 @@ class LoginControllerTest extends TestCase
         ];
 
         $this->post(action([LoginController::class, 'handle']), $request)
-            ->assertInvalid(['email']);
+            ->assertSessionHas('helper_flash_message', __('auth.error.credentials'));
 
         $this->assertGuest();
     }
