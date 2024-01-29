@@ -10,10 +10,8 @@ use Illuminate\Support\Facades\Auth;
 
 class LoginUserAction
 {
-    public function __invoke(LoginRequest $request): array
+    public function __invoke(LoginUserDTO $loginData): array
     {
-        $loginData = LoginUserDTO::fromRequest($request);
-
         $user = User::where('email', $loginData->email)->select('email_verified_at')->first();
 
         $actionResponse = ['user' => $user];
@@ -29,7 +27,6 @@ class LoginUserAction
             'password' => $loginData->password,
         ], $loginData->remember))
         {
-            $request->session()->regenerate();
             $actionResponse['route'] = 'search';
 
             return $actionResponse;

@@ -14,6 +14,8 @@ use Domain\Auth\Notifications\VerifyEmailNotification;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Auth\Listeners\SendEmailVerificationNotification;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Event;
 use Illuminate\Support\Facades\Notification;
 use Tests\TestCase;
@@ -23,7 +25,6 @@ class LoginUserActionTest extends TestCase
     use RefreshDatabase;
 
     protected User $user;
-    protected array $request;
     protected string $password = '123456789q';
 
     protected function setUp(): void
@@ -32,13 +33,8 @@ class LoginUserActionTest extends TestCase
 
         $this->user = UserFactory::new()->create([
             'password' => bcrypt($this->password),
+            'remember_token' => null
         ]);
-
-        $this->request = [
-            'email' => $this->user->email,
-            'password' => $this->password,
-            'session' => ''
-        ];
     }
 
     /**
@@ -49,11 +45,53 @@ class LoginUserActionTest extends TestCase
     {
         $action = app(LoginUserAction::class);
 
-        $actionData = $action(new LoginRequest($this->request));
-
-        dd($actionData);
+        $actionData = $action(LoginUserDTO::make(
+            $this->user->email,
+            $this->password,
+        ));
 
         $this->assertArrayHasKey('route', $actionData);
+    }
+
+    /**
+     * @test
+     * @return void
+     */
+    public function it_login_user_password_fail(): void
+    {
+        $action = app(LoginUserAction::class);
+
+        $actionData = $action(LoginUserDTO::make(
+            $this->user->email,
+            'wrong',
+        ));
+
+        $this->assertArrayHasKey('error', $actionData);
+    }
+
+    /**
+     * @test
+     * @return void
+     */
+    public function it_login_user_remember_success(): void
+    {
+        $action = app(LoginUserAction::class);
+
+        $user = UserFactory::new()->create([
+            'password' => bcrypt($this->password),
+            'remember_token' => null
+        ]);
+
+        $actionData = $action(LoginUserDTO::make(
+            $user->email,
+            $this->password,
+            true
+        ));
+
+        $this->assertDatabaseMissing('users', [
+            'email' => $user->email,
+            'remember_token' => null
+        ]);
     }
 
 }

@@ -21,11 +21,15 @@ class LoginController extends Controller
 
     public function handle(LoginRequest $request, LoginUserAction $action): RedirectResponse
     {
-        $actionData = $action($request);
+        $actionData = $action(LoginUserDTO::fromRequest($request));
 
         if(array_key_exists( 'error', $actionData)) {
             flash()->danger(__($actionData['error']));
             return back()->onlyInput('email');
+        }
+
+        if($actionData['route'] === 'search') {
+            $request->session()->regenerate();
         }
 
         return redirect()->route($actionData['route']);
