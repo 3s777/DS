@@ -20,14 +20,14 @@ class AuthRegistrar implements RouteRegistrar
             ->group(function() {
                 Route::prefix('{locale}')->whereIn('locale', config('app.available_locales'))->group(function () {
                     Route::controller(LoginController::class)->group(function () {
-                        Route::get('/login', 'page')->name('login');
-                        Route::post('/login', 'handle')->middleware('throttle:auth')->name('login.handle');
+                        Route::get('/login', 'page')->middleware('guest')->name('login');
+                        Route::post('/login', 'handle')->middleware('guest', 'throttle:auth')->name('login.handle');
                         Route::delete('/logout', 'logout')->name('logout');
                     });
 
                     Route::controller(RegisterController::class)->group(function () {
-                        Route::get('/register', 'page')->name('register');
-                        Route::post('/register', 'handle')->middleware('throttle:auth')->name('register.handle');
+                        Route::get('/register', 'page')->middleware('guest')->name('register');
+                        Route::post('/register', 'handle')->middleware('guest','throttle:auth')->name('register.handle');
                     });
 
                     Route::controller(ForgotPasswordController::class)->group(function () {

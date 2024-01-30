@@ -8,12 +8,31 @@ use Database\Factories\LanguageFactory;
 use Database\Factories\UserFactory;
 use Domain\Auth\Actions\LoginUserAction;
 use Domain\Auth\DTOs\LoginUserDTO;
+use Domain\Auth\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
 class LoginControllerTest extends TestCase
 {
     use RefreshDatabase;
+
+    protected User $user;
+    protected string $password = '123456789';
+    protected array $request;
+
+    public function setUp(): void
+    {
+        parent::setUp();
+
+        $this->user = UserFactory::new()->create([
+            'password' => bcrypt($this->password),
+        ]);
+
+        $this->request = [
+            'email' => $this->user->email,
+            'password' => $this->password,
+        ];
+    }
 
     /**
      * @test
@@ -32,25 +51,26 @@ class LoginControllerTest extends TestCase
      * @test
      * @return void
      */
+    public function it_only_guest_success(): void
+    {
+        $this->post(action([LoginController::class, 'handle']), $this->request);
+
+        $this->get(action([LoginController::class, 'page']))
+            ->assertRedirect('/');
+    }
+
+    /**
+     * @test
+     * @return void
+     */
     public function it_handle_success(): void
     {
-        $password = '123456789';
-
-        $user = UserFactory::new()->create([
-            'password' => bcrypt($password),
-        ]);
-
-        $request = [
-            'email' => $user->email,
-            'password' => $password,
-        ];
-
-        $response = $this->post(action([LoginController::class, 'handle']), $request);
+        $response = $this->post(action([LoginController::class, 'handle']), $this->request);
 
         $response->assertValid()
             ->assertRedirect(route('search'));
 
-        $this->assertAuthenticatedAs($user);
+        $this->assertAuthenticatedAs($this->user);
     }
 
     /**
@@ -76,16 +96,14 @@ class LoginControllerTest extends TestCase
      */
     public function it_not_verified_fail(): void
     {
-        $password = '123456789q';
-
         $user = UserFactory::new()->create([
-            'password' => bcrypt($password),
+            'password' => bcrypt($this->password),
             'email_verified_at' => null,
         ]);
 
         $request = [
             'email' => $user->email,
-            'password' => $password
+            'password' => $this->password
         ];
 
         $this->post(action([LoginController::class, 'handle']), $request)

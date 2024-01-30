@@ -2,6 +2,7 @@
 
 namespace Tests\Feature\App\Http\Controllers\Auth;
 
+use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Requests\Auth\RegisterRequest;
 use Database\Factories\UserFactory;
@@ -136,5 +137,28 @@ class RegisterControllerTest extends TestCase
             ->assertSessionHas('helper_flash_message', __('auth.register_verify'));
 
         $this->followRedirects($response)->assertSee(__('auth.register_verify'));
+    }
+
+    /**
+     * @test
+     * @return void
+     */
+    public function it_only_guest_success(): void
+    {
+        $password = '123456789';
+
+        $user = UserFactory::new()->create([
+            'password' => bcrypt($password),
+        ]);
+
+        $request = [
+            'email' => $user->email,
+            'password' => $password,
+        ];
+
+        $this->post(action([LoginController::class, 'handle']), $request);
+
+        $this->get(action([RegisterController::class, 'page']))
+            ->assertRedirect('/');
     }
 }

@@ -57,7 +57,7 @@
                         <x-grid.col xl="12" lg="6" md="6" sm="12">
                             <x-ui.form.group>
                                 <div id="editor">
-                                    {{ $gameDeveloper->description }}
+                                    {!! $gameDeveloper->description !!}
                                 </div>
                             </x-ui.form.group>
                         </x-grid.col>

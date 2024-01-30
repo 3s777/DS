@@ -57,6 +57,7 @@
                             <x-ui.form.group>
                                 <div id="editor">
                                 </div>
+                                <input name="description" type="hidden">
                             </x-ui.form.group>
                         </x-grid.col>
 
@@ -66,6 +67,7 @@
                             </x-ui.form.group>
                         </x-grid.col>
                     </x-grid>
+                    <div class="test" id="test">Test</div>
                 </form>
             </div>
         </x-common.content>
@@ -90,7 +92,7 @@
                 labelIdle: '<span class="filepond--label-action"> {{ __('Загрузите') }}</span> {{ __('главное фото') }} '
             });
 
-            var toolbarOptions = [
+            let toolbarOptions = [
                 ['bold', 'italic', 'underline', 'strike'],        // toggled buttons
                 [{ 'align': [] }],
                 ['blockquote'],
@@ -102,13 +104,22 @@
                 ['clean']                                         // remove formatting button
             ];
 
-            var quill = new Quill('#editor', {
+            let quill = new Quill('#editor', {
                 modules: {
                     toolbar: toolbarOptions
                 },
                 placeholder: 'Краткое описание разработчика',
                 theme: 'snow'
             });
+
+            let form = document.querySelector('form');
+            form.onsubmit = function() {
+                let description = document.querySelector('input[name=description]');
+                // description.value = JSON.stringify(quill.getContents());
+                description.value = quill.container.firstChild.innerHTML;
+                console.log("Submitted", description.value);
+                return false;
+            };
         </script>
     @endpush
 </x-layouts.main>
