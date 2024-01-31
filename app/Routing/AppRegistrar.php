@@ -35,9 +35,10 @@ class AppRegistrar implements RouteRegistrar
                 return view('content.ui.index');
             })->name('ui');
 
-            Route::get('/game-carrier', function () {
-                return view('content.game-carrier.index');
-            })->name('game-carrier');
+
+
+            Route::view('/game-carrier', 'content.game-carrier.index')
+                ->name('game-carrier');
 
             Route::get('/feed', function () {
                 return view('content.feed.index');

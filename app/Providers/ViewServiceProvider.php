@@ -5,7 +5,7 @@ namespace App\Providers;
 use Illuminate\Foundation\Vite;
 use Illuminate\Support\ServiceProvider;
 
-class ViewServiseProvider extends ServiceProvider
+class ViewServiceProvider extends ServiceProvider
 {
     /**
      * Register services.

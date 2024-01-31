@@ -208,7 +208,7 @@ return [
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
         App\Providers\TelescopeServiceProvider::class,
-        App\Providers\ViewServiseProvider::class,
+        App\Providers\ViewServiceProvider::class,
         App\Providers\DomainServiceProvider::class,
         Mews\Purifier\PurifierServiceProvider::class,
     ],
