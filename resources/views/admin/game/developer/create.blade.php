@@ -10,7 +10,7 @@
             <x-common.messages />
 
             <div class="create-game-developer">
-                <form action="{{ route('game-developers.store') }}" method="POST">
+                <form action="{{ route('game-developers.store') }}" method="POST" id="create-form">
                     @csrf
                     <x-grid type="container">
                         <x-grid.col xl="4" lg="6" md="6" sm="12">
@@ -54,10 +54,11 @@
                         </x-grid.col>
 
                         <x-grid.col xl="12" lg="6" md="6" sm="12">
-                            <x-ui.form.group>
-                                <div id="editor">
+                            <x-ui.form.group x-data="{ description: '' }">
+                                <div id="editor" x-model="description">
+                                    {!! old('description') !!}
                                 </div>
-                                <input name="description" type="hidden">
+                                <input name="description" type="hidden" x-model="description">
                             </x-ui.form.group>
                         </x-grid.col>
 
@@ -66,8 +67,8 @@
                                 <x-ui.form.button>Добавить</x-ui.form.button>
                             </x-ui.form.group>
                         </x-grid.col>
+
                     </x-grid>
-                    <div class="test" id="test">Test</div>
                 </form>
             </div>
         </x-common.content>
@@ -91,34 +92,42 @@
                 credits: false,
                 labelIdle: '<span class="filepond--label-action"> {{ __('Загрузите') }}</span> {{ __('главное фото') }} '
             });
+            // document.addEventListener('alpine:init', () => {
+                let toolbarOptions = [
+                    ['bold', 'italic', 'underline'],
+                    ['blockquote'],
+                    [{ 'list': 'ordered'}, { 'list': 'bullet' }],
+                    [{ 'header': [2, 3, false] }],
+                    [{ 'color': [] }, { 'background': [] }],
+                    ['clean']
+                ];
 
-            let toolbarOptions = [
-                ['bold', 'italic', 'underline', 'strike'],        // toggled buttons
-                [{ 'align': [] }],
-                ['blockquote'],
-                [{ 'header': 1 }, { 'header': 2 }],               // custom button values
-                [{ 'list': 'ordered'}, { 'list': 'bullet' }],
-                [{ 'size': ['small', false, 'large', 'huge'] }],  // custom dropdown
-                [{ 'header': [1, 2, 3, 4, 5, 6, false] }],
-                [{ 'color': [] }, { 'background': [] }],          // dropdown with defaults from theme
-                ['clean']                                         // remove formatting button
-            ];
+                new Quill('#editor', {
+                    modules: {
+                        toolbar: toolbarOptions
+                    },
+                    placeholder: 'Краткое описание разработчика',
+                    theme: 'snow'
+                });
 
-            let quill = new Quill('#editor', {
-                modules: {
-                    toolbar: toolbarOptions
-                },
-                placeholder: 'Краткое описание разработчика',
-                theme: 'snow'
-            });
+            // });
 
-            let form = document.querySelector('form');
+
+            // new Quill('#editor2', {
+            //     modules: {
+            //         toolbar: toolbarOptions
+            //     },
+            //     placeholder: 'Краткое описание разработчика2',
+            //     theme: 'snow'
+            // });
+
+            let form = document.getElementById('create-form');
+
             form.onsubmit = function() {
-                let description = document.querySelector('input[name=description]');
-                // description.value = JSON.stringify(quill.getContents());
-                description.value = quill.container.firstChild.innerHTML;
-                console.log("Submitted", description.value);
-                return false;
+                // let description = document.querySelector('input[name=description]');
+                // // description.value = JSON.stringify(quill.getContents());
+                // description.value = quill.container.firstChild.innerHTML;
+                // console.log("Submitted", description.value);
             };
         </script>
     @endpush

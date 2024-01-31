@@ -210,7 +210,7 @@ return [
         App\Providers\TelescopeServiceProvider::class,
         App\Providers\ViewServiseProvider::class,
         App\Providers\DomainServiceProvider::class,
-
+        Mews\Purifier\PurifierServiceProvider::class,
     ],
 
     /*
@@ -225,7 +225,7 @@ return [
     */
 
     'aliases' => Facade::defaultAliases()->merge([
-        // 'ExampleClass' => App\Example\ExampleClass::class,
+        'Purifier' => Mews\Purifier\Facades\Purifier::class,
     ])->toArray(),
 
 ];
