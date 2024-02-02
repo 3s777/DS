@@ -9,7 +9,8 @@ import '../blocks/ui/textarea/textarea';
 import '../blocks/ui/tabs/tabs';
 import '../blocks/ui/tooltip/tooltip';
 
+import './libraries/quill';
+
 Fancybox.bind("[data-fancybox]", {
     // Your custom options
 });
-

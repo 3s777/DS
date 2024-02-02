@@ -12,3 +12,4 @@ inputs.forEach(el => {
         }
     })
 })
+
