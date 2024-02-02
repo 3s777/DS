@@ -1,23 +1,22 @@
-<x-layouts.main title="{{ __('Users') }}" :search="false">
+<x-layouts.main title="{{ __('game.developer.add') }}" :search="false">
     <x-grid.container>
         <x-common.content class="admin" wrapper-class="admin__content">
             <x-slot:sidebar>
                 <x-common.sidebar-menu class="admin__menu" />
             </x-slot:sidebar>
 
-            <x-ui.title size="normal" indent="big">Добавить игрового разработчика</x-ui.title>
+            <x-ui.title size="normal" indent="big">{{ __('game.developer.add') }}</x-ui.title>
 
             <x-common.messages />
 
-            <div class="create-game-developer">
-                <form action="{{ route('game-developers.store') }}" method="POST" id="create-form">
-                    @csrf
+            <div class="crud-form">
+                <x-ui.form id="create-form" action="{{ route('game-developers.store') }}">
                     <x-grid type="container">
                         <x-grid.col xl="4" lg="6" md="6" sm="12">
                             <x-ui.form.group>
                                 <x-ui.form.input-text
                                     :errors="$errors"
-                                    placeholder="Название"
+                                    placeholder="{{ __('common.name') }}"
                                     id="name"
                                     name="name"
                                     value="{{ old('name') }}"
@@ -32,7 +31,7 @@
                             <x-ui.form.group>
                                 <x-ui.form.input-text
                                     :errors="$errors"
-                                    placeholder="Префикс"
+                                    placeholder="{{ __('common.slug') }}"
                                     id="slug"
                                     name="slug"
                                     value="{{ old('slug') }}"
@@ -57,27 +56,18 @@
                                 <x-libraries.rich-text-editor
                                     name="description"
                                     value=""
-                                    placeholder="{{ __('game-developer.description') }}" />
+                                    placeholder="{{ __('common.description') }}" />
                             </x-ui.form.group>
                         </x-grid.col>
 
                         <x-grid.col xl="12" lg="6" md="6" sm="12">
                             <x-ui.form.group>
-                                <x-ui.form.button>Добавить</x-ui.form.button>
+                                <x-ui.form.button>{{ __('common.add') }}</x-ui.form.button>
                             </x-ui.form.group>
                         </x-grid.col>
 
                     </x-grid>
-                </form>
-
-
-                <x-ui.form.group>
-                    <x-libraries.rich-text-editor
-                        name="description2"
-                        value=""
-                        placeholder="{{ __('game-developer.description') }}" />
-                </x-ui.form.group>
-
+                </x-ui.form>
             </div>
         </x-common.content>
     </x-grid.container>
@@ -98,7 +88,7 @@
 
             const pond = FilePond.create(inputElement, {
                 credits: false,
-                labelIdle: '<span class="filepond--label-action"> {{ __('Загрузите') }}</span> {{ __('главное фото') }} '
+                labelIdle: '<span class="filepond--label-action"> {{ __('common.upload') }}</span> {{ __('common.image') }} '
             });
         </script>
     @endpush

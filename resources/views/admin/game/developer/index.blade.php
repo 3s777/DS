@@ -9,15 +9,51 @@
 
             <x-common.messages />
 
-            <ul class="game-developers-list">
+            <table class="sort-table" id="developers">
+                <thead>
+                <tr>
+                    <th>id</th>
+                    <th>Name</th>
+                    <th>Slug</th>
+                    <th width="140">Edit</th>
+                </tr>
+                </thead>
+                <tbody>
                 @foreach($developers as $developer)
-                    <li>
-                        <a href="{{ route('game-developers.edit', $developer->slug) }}">
-                            {{ $developer->name }}
-                        </a>
-                    </li>
+                    <tr>
+                        <td>{{ $developer->id }}</td>
+                        <td>{{ $developer->name }}</td>
+                        <td>{{ $developer->slug }}</td>
+                        <td>
+                            <div class="sort-table__buttons">
+
+                                <x-ui.form.button
+                                    tag="a"
+                                    link="{{ route('game-developers.edit', $developer->slug) }}"
+                                    color="warning"
+                                    only-icon="true"
+                                    size="small">
+                                    <x-slot:icon class="button__icon-wrapper_edit">
+                                        <x-svg.edit class="button__icon button__icon_small"></x-svg.edit>
+                                    </x-slot:icon>
+                                </x-ui.form.button>
+
+                                <x-ui.form method="delete" action="{{ route('game-developers.destroy', $developer->slug) }}">
+                                    <x-ui.form.button
+                                        color="cancel"
+                                        only-icon="true"
+                                        size="small">
+                                        <x-slot:icon class="button__icon-wrapper_cancel">
+                                            <x-svg.close class="button__icon button__icon_small"></x-svg.close>
+                                        </x-slot:icon>
+                                    </x-ui.form.button>
+                                </x-ui.form>
+                            </div>
+                        </td>
+                    </tr>
                 @endforeach
-            </ul>
+                </tbody>
+            </table>
         </x-common.content>
     </x-grid.container>
 
@@ -35,67 +71,26 @@
                 });
             }
 
-            const element2 = document.querySelector('.choices-select-2');
-            const choices2 = new Choices(element2, {
-                itemSelectText: '',
-                removeItems: true,
-                removeItemButton: true,
-                noResultsText: '{{ __('Не найдено') }}',
-                noChoicesText: '{{ __('Больше ничего нет') }}',
-            });
-
-            const inputElement = document.querySelector('.filepond1');
-            const inputElement2 = document.querySelector('.filepond2');
-
-            const pond2 = FilePond.create(inputElement2, {
-                credits: false,
-                labelIdle: '<span class="filepond--label-action"> {{ __('Загрузите') }}</span> {{ __('дополнительные фото') }}',
-                labelMaxFileSizeExceeded: 'Файл слишком большой',
-                labelMaxFileSize: 'Максимальный размер {filesize}',
-                labelFileLoading: 'Загрузка',
-                labelTapToCancel: 'отменить',
-                labelFileWaitingForSize: 'подождите'
-            });
-
-            FilePond.registerPlugin(
-                FilePondPluginFileValidateType,
-                FilePondPluginImagePreview,
-                FilePondPluginImageExifOrientation,
-                FilePondPluginFileValidateSize,
-                FilePondPluginImageCrop,
-                FilePondPluginImageResize,
-                FilePondPluginImageTransform,
-            );
-
-            const pond = FilePond.create(inputElement, {
-                credits: false,
-                labelIdle: '<span class="filepond--label-action"> {{ __('Загрузите') }}</span> {{ __('главное фото') }} '
-            });
-
-            var toolbarOptions = [
-                ['bold', 'italic', 'underline', 'strike'],        // toggled buttons
-
-                [{ 'align': [] }],
-
-                ['blockquote'],
-
-                [{ 'header': 1 }, { 'header': 2 }],               // custom button values
-                [{ 'list': 'ordered'}, { 'list': 'bullet' }],
-
-                [{ 'size': ['small', false, 'large', 'huge'] }],  // custom dropdown
-                [{ 'header': [1, 2, 3, 4, 5, 6, false] }],
-
-                [{ 'color': [] }, { 'background': [] }],          // dropdown with defaults from theme
-
-                ['clean']                                         // remove formatting button
-            ];
-
-            var quill = new Quill('#editor', {
-                modules: {
-                    toolbar: toolbarOptions
-                },
-                placeholder: 'Compose an epic...',
-                theme: 'snow'
+            var table = new Tabulator("#developers", {
+                layout:"fitColumns",
+                rowHeight:'auto',
+                footerElement:"<button class='button button_submit'>Custom Button</button class='button button_submit'>",
+                responsiveLayout:"collapse",  //fit columns to width of table (optional)
+                columns:[
+                    {
+                        title: "id"
+                    },
+                    {
+                        title: "Name"
+                    },
+                    {
+                        title: "Slug"
+                    },
+                    {
+                        title: "Edit",
+                        formatter: (cell) => cell.getValue()
+                    },
+                ],
             });
         </script>
     @endpush

@@ -1,0 +1,11 @@
+.sort-table {
+
+    &__buttons {
+        display: flex;
+        gap: 8px
+    }
+
+    &__buttons-header {
+        width: 150px;
+    }
+}

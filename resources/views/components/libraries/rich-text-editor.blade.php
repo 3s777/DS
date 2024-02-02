@@ -7,21 +7,20 @@
     x-data="{
         content: '',
     }"
-    x-init="initQuill($refs, $data)"
+    x-init="initQuill_{{ $name }}($refs, $data)"
     x-cloak>
 
-    <textarea  name="{{ $name }}" :value="content"></textarea>
-    <div x-ref="quillEditor_{{ $name }}" x-model="content">
+    <textarea class="rich-text-editor__hidden" name="{{ $name }}" :value="content"></textarea>
+    <div x-ref="quillEditor" x-model="content">
         {!! old($name, $value ?? '') !!}
     </div>
 </div>
 
 @push('scripts')
     <script>
-        function initQuill($refs, $data) {
+        function initQuill_{{ $name }}($refs, $data) {
             document.addEventListener('DOMContentLoaded', () => {
-                console.log($refs.quillEditor_{{ $name }});
-                quill_{{ $name }} = new Quill($refs.quillEditor_{{ $name }}, {
+                quill_{{ $name }} = new Quill($refs.quillEditor, {
                     modules: {
                         toolbar: {
                             container: [
@@ -52,10 +51,7 @@
                 $data.content = (quill_{{ $name }}.root.innerHTML === '<p><br></p>')
                     ? ''
                     : quill_{{ $name }}.root.innerHTML;
-                console.log(quill_{{ $name }});
             })
-
-
         }
     </script>
 @endpush

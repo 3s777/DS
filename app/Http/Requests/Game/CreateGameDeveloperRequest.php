@@ -26,7 +26,7 @@ class CreateGameDeveloperRequest extends FormRequest
         return [
             'name' => ['required', Rule::unique(GameDeveloper::class)],
             'slug' => ['nullable','string', Rule::unique(GameDeveloper::class)],
-            'description' => ['string']
+            'description' => ['nullable','string']
         ];
     }
 }

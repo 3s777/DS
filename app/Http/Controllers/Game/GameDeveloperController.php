@@ -18,7 +18,7 @@ class GameDeveloperController extends Controller
      */
     public function index()
     {
-        $developers = GameDeveloper::all();
+        $developers = GameDeveloper::select(['id', 'name', 'slug'])->orderby('id')->paginate(5);
 
         return view('admin.game.developer.index', compact(['developers']));
     }
@@ -38,7 +38,7 @@ class GameDeveloperController extends Controller
     {
         GameDeveloper::create($request->validated());
 
-        flash()->info(__('Разработчик добавлен'));
+        flash()->info(__('game.developer.created'));
 
         return redirect(route('game-developers.index'));
     }
@@ -64,11 +64,9 @@ class GameDeveloperController extends Controller
      */
     public function update(UpdateGameDeveloperRequest $request, GameDeveloper $gameDeveloper)
     {
-        $updateGameDeveloperData = $request->validated();
+        $gameDeveloper->fill($request->validated())->save();
 
-        $gameDeveloper->fill($updateGameDeveloperData)->save();
-
-        flash()->info(__('Разработчик обновлен'));
+        flash()->info(__('game.developer.updated'));
 
         return redirect(route('game-developers.index'));
     }
@@ -76,8 +74,12 @@ class GameDeveloperController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(GameDeveloper $gameDeveloper)
     {
-        //
+        $gameDeveloper->delete();
+
+        flash()->info(__('game.developer.deleted'));
+
+        return redirect(route('game-developers.index'));
     }
 }
