@@ -62,7 +62,7 @@
 
                         <x-grid.col xl="12" lg="6" md="6" sm="12">
                             <x-ui.form.group>
-                                <x-ui.form.button>{{ __('common.add') }}</x-ui.form.button>
+                                <x-ui.form.button x-bind:disabled="preventSubmit">{{ __('common.add') }}</x-ui.form.button>
                             </x-ui.form.group>
                         </x-grid.col>
 

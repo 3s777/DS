@@ -184,7 +184,6 @@
         document.addEventListener('alpine:init', () => {
             Alpine.store('modal', {
                 hide: true,
-
             });
             Alpine.store('modal1', {
                 hide: true,

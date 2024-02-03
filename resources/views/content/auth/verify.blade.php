@@ -1,4 +1,4 @@
-<x-layouts.auth title="{{ __('auth.verify') }}">
+<x-layouts.main title="{{ __('auth.verify') }}" :search="false">
     <x-grid.container>
         <x-common.content class="auth__content">
             <x-ui.card class="auth__card">
@@ -41,4 +41,4 @@
             </x-ui.card>
         </x-common.content>
     </x-grid.container>
-</x-layouts.auth>
+</x-layouts.main>

@@ -82,4 +82,18 @@ class GameDeveloperController extends Controller
 
         return redirect(route('game-developers.index'));
     }
+
+    public function atest(Request $request){
+
+        $developers = GameDeveloper::select(['id', 'name', 'slug'])->orderby('id')->get();
+
+
+
+        if($request->sort){
+            return response()->json([
+                ['id' => 1, 'name' => 'bob', 'age' => '123'],
+            ]);
+        }
+        return response()->json($developers);
+    }
 }

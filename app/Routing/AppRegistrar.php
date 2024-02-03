@@ -72,6 +72,8 @@ class AppRegistrar implements RouteRegistrar
 //                        'game-developers' => 'gameDeveloper:slug'
 //                    ])
                     ->middleware(['remove.locale']);
+                Route::get('/game-developer/atest', [GameDeveloperController::class, 'atest'])->name('atest');
+
 
             });
 
