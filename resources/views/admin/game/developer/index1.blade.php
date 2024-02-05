@@ -8,78 +8,64 @@
             <x-ui.title size="normal" indent="big">{{ __('game.developer.list') }}</x-ui.title>
 
             <x-common.messages />
+<div id="example-table"></div>
 
 
-            <div class="responsive-table">
-                <div class="responsive-table__header">
-                    <div class="responsive-table__column responsive-table__column_id">
-                        {{ __('Id') }}
-                    </div>
-                    <div class="responsive-table__column">
-                        <div class="responsive-table__sortable">
-                            {{ __('Name') }}
-                            <a href="{{ route('game-developers.index', ['sort' => 'name', 'order'=> request()->get('order') == 'asc' ? 'desc' : 'asc']) }}">
-                                <div class="responsive-table__arrow"></div>
-                            </a>
-                        </div>
 
-                    </div>
-                    <div class="responsive-table__column">
-                        {{ __('Slug') }}
-                    </div>
-                    <div class="responsive-table__column responsive-table__column_action">
-                        {{ __('Action') }}
-                    </div>
-                </div>
+
+
+            <table class="sort-table" id="developers">
+                <thead>
+                <tr>
+                    <th width="70">id</th>
+                    <th>{{ __('common.name') }}</th>
+                    <th>{{ __('common.slug') }}</th>
+                    <th width="120">{{ __('common.action') }}</th>
+                </tr>
+                </thead>
+                <tbody>
                 @foreach($developers as $developer)
-                <div class="responsive-table__row">
-                    <div class="responsive-table__column responsive-table__column_id">
-                        {{ $developer->id }}
-                    </div>
-                    <div class="responsive-table__column">
-                        {{ $developer->name }}
-                    </div>
-                    <div class="responsive-table__column">
-                        {{ $developer->slug }}
-                    </div>
-                    <div class="responsive-table__column responsive-table__column_action">
-                        <div class="responsive-table__buttons">
-                            <x-ui.form.button
-                                tag="a"
-                                link="{{ route('game-developers.edit', $developer->slug) }}"
-                                color="warning"
-                                only-icon="true"
-                                size="small"
-                                title="{{ __('common.edit') }}">
-                                <x-slot:icon class="button__icon-wrapper_edit">
-                                    <x-svg.edit class="button__icon button__icon_small"></x-svg.edit>
-                                </x-slot:icon>
-                            </x-ui.form.button>
+                    <tr>
+                        <td>{{ $developer->id }}</td>
+                        <td>{{ $developer->name }}</td>
+                        <td>{{ $developer->slug }}</td>
+                        <td>
+                            <div class="sort-table__buttons">
+                                <x-ui.form.button
+                                    tag="a"
+                                    link="{{ route('game-developers.edit', $developer->slug) }}"
+                                    color="warning"
+                                    only-icon="true"
+                                    size="small"
+                                    title="{{ __('common.edit') }}">
+                                    <x-slot:icon class="button__icon-wrapper_edit">
+                                        <x-svg.edit class="button__icon button__icon_small"></x-svg.edit>
+                                    </x-slot:icon>
+                                </x-ui.form.button>
 
-                            <div x-data x-on:keydown.escape.window="$store.modal.hide = true">
-                                <div x-on:click.stop="
+                                <div x-data x-on:keydown.escape.window="$store.modal.hide = true">
+                                    <div x-on:click.stop="
                                     $store.modal.hide = ! $store.modal.hide;
                                     $store.modal.action = '{{ route('game-developers.destroy', $developer->slug) }}'
                                     $store.modal.name = '{{  $developer->name }}'
                                     ">
-                                    <x-ui.form.button
-                                        color="cancel"
-                                        only-icon="true"
-                                        size="small"
-                                        title="{{ __('common.delete') }}">
-                                        <x-slot:icon class="button__icon-wrapper_cancel">
-                                            <x-svg.close class="button__icon button__icon_small"></x-svg.close>
-                                        </x-slot:icon>
-                                    </x-ui.form.button>
+                                        <x-ui.form.button
+                                            color="cancel"
+                                            only-icon="true"
+                                            size="small"
+                                            title="{{ __('common.delete') }}">
+                                            <x-slot:icon class="button__icon-wrapper_cancel">
+                                                <x-svg.close class="button__icon button__icon_small"></x-svg.close>
+                                            </x-slot:icon>
+                                        </x-ui.form.button>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                    </div>
-                </div>
+                        </td>
+                    </tr>
                 @endforeach
-            </div>
-
-            {{ $developers->links() }}
+                </tbody>
+            </table>
 
             <x-ui.modal x-data tag="section"  ::class="$store.modal.hide ? '' : 'modal_show'">
                 <x-ui.modal.content
@@ -114,9 +100,6 @@
                     </x-ui.modal.footer>
                 </x-ui.modal.content>
             </x-ui.modal>
-
-            <div id="example-table"></div>
-
         </x-common.content>
     </x-grid.container>
 

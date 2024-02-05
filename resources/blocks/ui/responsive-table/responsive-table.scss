@@ -1,0 +1,65 @@
+.responsive-table {
+    display: table;
+    width: 100%;
+    border-radius: $small-border-radius $small-border-radius 0 0;
+    overflow: hidden;
+
+    &__header {
+        display: table-row;
+        height: 40px;
+        background-color: $base-dark;
+    }
+
+    &__row {
+        display: table-row;
+
+        &:nth-child(odd) {
+            background-color: $base-main-50;
+        }
+
+        &:hover {
+            background-color: $additional-main;
+        }
+    }
+
+    &__column {
+        display: table-cell;
+        padding: 5px 10px;
+        vertical-align: middle;
+        border-right: 1px solid $base-light-transparent;
+        word-break: break-all;
+
+        &:last-child {
+            border-right: 0;
+        }
+    }
+
+    &__column_id {
+        width: 50px;
+    }
+
+    &__column_action {
+        width: 130px;
+    }
+
+    &__buttons {
+        display: flex;
+        justify-content: flex-end;
+        gap: 8px;
+    }
+
+    &__sortable {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    &__arrow {
+        width: 0;
+        height: 0;
+        border-top: none;
+        border-left: 6px solid transparent;
+        border-right: 6px solid transparent;
+        border-bottom: 6px solid hsla(0, 0%, 100%, 0.5);
+    }
+}

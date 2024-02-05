@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Game\CreateGameDeveloperRequest;
 use App\Http\Requests\Game\UpdateGameDeveloperRequest;
 use Domain\Game\Models\GameDeveloper;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Foundation\Application;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -16,9 +17,18 @@ class GameDeveloperController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        $developers = GameDeveloper::select(['id', 'name', 'slug'])->orderby('id')->paginate(5);
+        $developers = GameDeveloper::query()
+            ->select(['id', 'name', 'slug'])
+            ->when($request->sort, function (Builder $query) use ($request) {
+                $query->orderBy($request->sort, $request->order);
+            })
+            ->paginate(5)
+            ->withQueryString();
+
+
+//        $developers = GameDeveloper::select(['id', 'name', 'slug'])->orderby('id')->paginate(5);
 
         return view('admin.game.developer.index', compact(['developers']));
     }
