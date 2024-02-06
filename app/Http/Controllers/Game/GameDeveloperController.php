@@ -22,16 +22,16 @@ class GameDeveloperController extends Controller
 
         $query = GameDeveloper::query()
             ->select(['id', 'name', 'slug']);
-        if($request->filters) {
-            $query->when($request->filters['sort'], function (Builder $query) use ($request) {
-                $query->orderBy($request->filters['sort'], $request->filters['order']);
-            })
-                ->when($request->filters['search'], function (Builder $query) use ($request) {
-                    $query->where('name','like',  '%'.$request->filters['search'].'%');
-                });
-        }
 
-        $developers = $query->paginate(1)
+            $query->when($request->input('filters.sort'), function (Builder $query) use ($request) {
+                $query->orderBy($request->input('filters.sort'), $request->input('filters.order'));
+            })
+                ->when($request->input('filters.search'), function (Builder $query) use ($request) {
+                    $query->where('name','like',  '%'.$request->input('filters.search').'%');
+                });
+
+
+        $developers = $query->paginate(5)
             ->withQueryString();
 
 

@@ -88,7 +88,7 @@
                 @endforeach
             </div>
 
-            {{ $developers->links('vendor.pagination.default') }}
+            {{ $developers->links('pagination::default') }}
 
             <x-ui.modal x-data tag="section"  ::class="$store.modal.hide ? '' : 'modal_show'">
                 <x-ui.modal.content
