@@ -13,7 +13,7 @@
     &__row {
         display: table-row;
 
-        &:nth-child(odd) {
+        &:nth-child(even) {
             background-color: $base-main-50;
         }
 

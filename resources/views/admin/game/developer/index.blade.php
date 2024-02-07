@@ -12,13 +12,15 @@
             <form action="{{ route('game-developers.index') }}"
                   method="get">
 
-                <input name="sort" type="hidden" value="{{ request()->get('sort') }}">
-                <input name="order" type="hidden" value="{{ request()->get('sort') == 'asc' ? 'desc' : 'asc' }}">
+                <input name="sort" type="hidden" value="{{ request('sort') }}">
+                <input name="order" type="hidden" value="{{ request('order') == 'asc' ? 'desc' : 'asc' }}">
                 @foreach(filters() as $filter)
                     {!! $filter !!}
                 @endforeach
                 <button>Найти</button>
             </form>
+
+
 
             <div class="responsive-table">
                 <div>
@@ -32,7 +34,7 @@
                             {{ __('Name') }}
 
 
-                                <a href="{{ filter_url(['sort' => 'name', 'order' => 'asc']) }}">
+                                <a href="{{ filter_url(['sort' => 'name', 'order' => request('order') == 'asc' ? 'desc' : 'asc']) }}">
                                     <div class="responsive-table__arrow"></div>
                                 </a>
 

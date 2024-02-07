@@ -4,6 +4,8 @@ namespace Domain\Game\Providers;
 
 // use Illuminate\Support\Facades\Gate;
 use App\Filters\SearchFilter;
+use Illuminate\Contracts\Foundation\Application;
+use Support\Sorters\Sorter;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
 use Support\Filters\FilterManager;
 
@@ -35,5 +37,9 @@ class GameServiceProvider extends ServiceProvider
         );
 
         $this->app->singleton(FilterManager::class);
+
+        $this->app->bind(Sorter::class, function (Application $app, array $fields) {
+            return new Sorter($fields);
+        });
     }
 }

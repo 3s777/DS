@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Game;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Game\CreateGameDeveloperRequest;
+use App\Http\Requests\Game\FilterGameDeveloperRequest;
 use App\Http\Requests\Game\UpdateGameDeveloperRequest;
 use Domain\Game\Models\GameDeveloper;
 use Illuminate\Database\Eloquent\Builder;
@@ -21,10 +22,10 @@ class GameDeveloperController extends Controller
     {
 
         $query = GameDeveloper::query()
-            ->select(['id', 'name', 'slug'])->filtered();
-        $query->when($request->input('sort'), function (Builder $query) use ($request) {
-            $query->orderBy($request->input('sort'), $request->input('order'));
-        });
+            ->select(['id', 'name', 'slug'])->filtered()->sorted();
+//        $query->when($request->input('sort'), function (Builder $query) use ($request) {
+//            $query->orderBy($request->input('sort'), $request->input('order'));
+//        });
 
         $developers = $query->paginate(4)->withQueryString();
 

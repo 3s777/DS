@@ -1,5 +1,6 @@
 <?php
 
+use Support\Sorters\Sorter;
 use Support\Filters\FilterManager;
 use Support\Flash\Flash;
 
@@ -27,9 +28,9 @@ if(!function_exists('filter_url')) {
     }
 }
 
-//if(!function_exists('sorter')) {
-//    function sorter(): Sorter
-//    {
-//        return app(Sorter::class);
-//    }
-//}
+if(!function_exists('sorter')) {
+    function sorter($fields): Sorter
+    {
+        return app(Sorter::class, $fields);
+    }
+}
