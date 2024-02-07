@@ -3,7 +3,9 @@
 namespace Domain\Game\Providers;
 
 // use Illuminate\Support\Facades\Gate;
+use App\Filters\SearchFilter;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
+use Support\Filters\FilterManager;
 
 class GameServiceProvider extends ServiceProvider
 {
@@ -21,7 +23,9 @@ class GameServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        //
+        app(FilterManager::class)->registerFilters([
+            new SearchFilter()
+        ]);
     }
 
     public function register(): void
@@ -29,5 +33,7 @@ class GameServiceProvider extends ServiceProvider
         $this->app->register(
             GamesApiServiceProvider::class
         );
+
+        $this->app->singleton(FilterManager::class);
     }
 }

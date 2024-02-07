@@ -17,7 +17,7 @@
             @else
                 <x-ui.form.button
                     tag="a"
-                    link="{{ $paginator->previousPageUrl() }}"
+                    link="{!! $paginator->previousPageUrl() !!}"
                     color="submit"
                     only-icon="true"
                     size="small"
@@ -53,7 +53,7 @@
                             <x-ui.form.button
                                 class="pagination__pages-num"
                                 tag="a"
-                                link="{{ $url }}"
+                                link="{!! $url !!}"
                                 color="submit"
                                 size="small"
                                 aria-label="{{ __('Go to page :page', ['page' => $page]) }}"
@@ -68,7 +68,7 @@
             @if ($paginator->hasMorePages())
                 <x-ui.form.button
                     tag="a"
-                    link="{{ $paginator->nextPageUrl() }}"
+                    link="{!! $paginator->nextPageUrl() !!}"
                     color="submit"
                     only-icon="true"
                     size="small"
