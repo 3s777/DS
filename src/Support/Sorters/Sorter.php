@@ -1,13 +1,10 @@
 <?php
 
-declare(strict_types=1);
-
 namespace Support\Sorters;
 
 use Illuminate\Contracts\Database\Eloquent\Builder;
-use Illuminate\Support\Stringable;
 
-final class Sorter
+class Sorter
 {
     public const SORT_KEY = 'sort';
 
@@ -20,6 +17,8 @@ final class Sorter
     public function run(Builder $query): Builder
     {
         $sortData = $this->sortData();
+
+        $sortData['order'] = $sortData['order']->contains(['asc', 'desc']) ? $sortData['order'] : 'asc';
 
         return $query->when($sortData['key']->contains($this->columns()), function (Builder $query) use ($sortData) {
             $query->orderBy(
@@ -47,7 +46,7 @@ final class Sorter
     {
         return [
             'key' =>  request()->str($this->key()),
-            'order' => request($this->order()) ?? 'desc'
+            'order' => request()->str($this->order()),
         ];
     }
 

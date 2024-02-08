@@ -27,7 +27,7 @@ class GameDeveloper extends Model
 
     public function scopeSorted(Builder $query)
     {
-        sorter(['name'])->run($query);
+        sorter(['id','name'])->run($query);
     }
 
     protected $fillable = [

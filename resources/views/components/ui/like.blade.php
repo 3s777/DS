@@ -7,11 +7,11 @@
 
 <div
     {{ $attributes->class([
-                'like',
-                'like_'.$type,
-                'like_size_'.$size => $size,
-                'like_'.$status => $status,
-            ])
+            'like',
+            'like_'.$type,
+            'like_size_'.$size => $size,
+            'like_'.$status => $status,
+        ])
     }}>
 
     @if($size == 'small')
