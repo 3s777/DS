@@ -22,7 +22,7 @@ class GameDeveloperController extends Controller
     {
 
         $query = GameDeveloper::query()
-            ->select(['id', 'name', 'slug'])
+            ->select(['id', 'name', 'slug', 'created_at'])
             ->filtered()
             ->sorted();
 

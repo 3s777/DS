@@ -3,6 +3,7 @@
 namespace Domain\Game\Models;
 
 use App\Models\CollectableItem;
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -27,7 +28,11 @@ class GameDeveloper extends Model
 
     public function scopeSorted(Builder $query)
     {
-        sorter(['id','name'])->run($query);
+        sorter([
+            'id',
+            'name',
+            'created_at'
+        ])->run($query);
     }
 
     protected $fillable = [
@@ -37,7 +42,7 @@ class GameDeveloper extends Model
     ];
 
     protected $casts = [
-        'description' => CleanHtml::class.':custom'
+        'description' => CleanHtml::class.':custom',
     ];
 
     public function getRouteKeyName()
