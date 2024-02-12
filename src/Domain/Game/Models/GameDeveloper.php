@@ -4,6 +4,7 @@ namespace Domain\Game\Models;
 
 use App\Models\CollectableItem;
 use Carbon\Carbon;
+use Domain\Game\QueryBuilders\GameDeveloperQueryBuilder;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -12,28 +13,14 @@ use Illuminate\Pipeline\Pipeline;
 use Mews\Purifier\Casts\CleanHtml;
 use Support\Traits\Models\HasSlug;
 
+/**
+ * @method  static GameDeveloper|GameDeveloperQueryBuilder query()
+ */
 class GameDeveloper extends Model
 {
     use HasFactory;
     use HasSlug;
     use SoftDeletes;
-
-    public function scopeFiltered(Builder $query)
-    {
-        return app(Pipeline::class)
-            ->send($query)
-            ->through(filters())
-            ->thenReturn();
-    }
-
-    public function scopeSorted(Builder $query)
-    {
-        sorter([
-            'id',
-            'name',
-            'created_at'
-        ])->run($query);
-    }
 
     protected $fillable = [
         'name',
@@ -48,5 +35,10 @@ class GameDeveloper extends Model
     public function getRouteKeyName()
     {
         return 'slug';
+    }
+
+    public function newEloquentBuilder($query): GameDeveloperQueryBuilder
+    {
+        return new GameDeveloperQueryBuilder($query);
     }
 }
