@@ -22,7 +22,5 @@ class GameDeveloperViewModel extends ViewModel
                 ->paginate(4)
                 ->withQueryString();
         });
-
     }
-
 }

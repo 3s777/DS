@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Auth;
+namespace App\Auth\Actions;
 
 use Database\Factories\UserFactory;
 use Domain\Auth\Actions\VerifyEmailAction;

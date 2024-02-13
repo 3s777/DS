@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Auth;
+namespace App\Auth\DTOs;
 
 use App\Http\Requests\Auth\RegisterRequest;
 use Domain\Auth\DTOs\NewUserDTO;

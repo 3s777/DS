@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use Domain\Game\Models\GameDeveloper;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -9,6 +10,8 @@ use Illuminate\Database\Eloquent\Factories\Factory;
  */
 class GameDeveloperFactory extends Factory
 {
+    protected $model = GameDeveloper::class;
+
     /**
      * Define the model's default state.
      *
@@ -17,7 +20,8 @@ class GameDeveloperFactory extends Factory
     public function definition(): array
     {
         return [
-            //
+            'name' => fake()->name(),
+            'description' => fake()->text(),
         ];
     }
 }
