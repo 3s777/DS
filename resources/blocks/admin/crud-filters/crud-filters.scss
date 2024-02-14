@@ -1,0 +1,14 @@
+.crud-filters {
+    margin-bottom: 18px;
+
+    &__header {
+        display: flex;
+        justify-content: flex-start;
+        gap: 12px;
+        margin-bottom: 12px;
+    }
+
+    &__trigger {
+        padding: 10px;
+    }
+}

@@ -14,7 +14,7 @@ use Illuminate\Routing\Redirector;
 
 class GameDeveloperController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
         return view('admin.game.developer.index', new GameDeveloperViewModel());
     }
@@ -61,7 +61,8 @@ class GameDeveloperController extends Controller
         return redirect(route('game-developers.index'));
     }
 
-    public function atest(Request $request){
+    public function atest(Request $request)
+    {
         $developers = GameDeveloper::select(['id', 'name', 'slug'])->orderby('id')->get();
 
         if($request->sort){

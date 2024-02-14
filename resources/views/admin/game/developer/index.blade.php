@@ -8,32 +8,88 @@
 {{--                @endforeach--}}
 {{--                <button>Найти</button>--}}
 {{--            </form>--}}
+    <div class="crud-filters" x-data="{ filters_hide: true, search: '' }">
+        <div class="crud-filters__header">
+            <x-ui.input-search
+                x-model="search"
+                class="crud-search__form"
+                wrapper-class="crud-search"
+                action="{!! route('game-developers.index') !!}"
+                method="get"
+                placeholder="{{ __('game.developer.search') }}"
+                color="dark"
+                sortable="true" />
 
-        <x-ui.input-search
-            class="crud-search__form"
-            wrapper-class="crud-search"
-            action="{!! route('game-developers.index') !!}"
-            method="get"
-            placeholder="{{ __('game.developer.search') }}"
-            color="dark"
-            sortable="true" />
+            <x-ui.form.button
+                class="crud-filters__trigger"
+                only-icon="true"
+                size="small"
+                color="dark"
+                ::class="filters_hide ? '' : 'button_submit'"
+                x-on:click="filters_hide = !filters_hide">
+                <x-slot:icon class="button__icon-wrapper_filter">
+                    <x-svg.filter class="button__icon button__icon_small"></x-svg.filter>
+                </x-slot:icon>
+            </x-ui.form.button>
+        </div>
 
-        <x-ui.responsive-table class="responsive-table_crud">
+        <div class="crud-filters__content" x-cloak x-show="!filters_hide" x-transition.scale.right>
+            <form action="{!! route('game-developers.index') !!}" method="get">
+                <div x-text="search"></div>
+                <input type="hidden" name="filters[search]" x-bind:value="search">
+                <x-grid type="container">
+                    <x-grid.col xl="3" lg="4"  md="6" sm="12">
+                        <x-ui.form.group>
+                            <x-ui.form.datepicker
+                                placeholder="Начальная дата"
+                                id="finish_date"
+                                name="start_date"
+                                value="{{ old('start_date') }}">
+                            </x-ui.form.datepicker>
+                        </x-ui.form.group>
+                    </x-grid.col>
+                    <x-grid.col xl="3" lg="4"  md="6" sm="12">
+                        <x-ui.form.group>
+                            <x-ui.form.datepicker
+                                placeholder="Конечная дата"
+                                id="finish_date"
+                                name="finish_date"
+                                value="{{ old('finish_date') }}">
+                            </x-ui.form.datepicker>
+                        </x-ui.form.group>
+                    </x-grid.col>
+                    <x-grid.col xl="12" lg="12"  md="12" sm="12">
+                        <x-ui.form.group>
+                            <div class="main-search__footer">
+                                <x-ui.form.button>{{ __('Отфильтровать') }}</x-ui.form.button>
+                                <x-ui.form.button color="warning">{{ __('Сбросить') }}</x-ui.form.button>
+                                <x-ui.form.button color="cancel" x-on:click="filters_hide = true">{{ __('Закрыть') }}</x-ui.form.button>
+                            </div>
+                        </x-ui.form.group>
+                    </x-grid.col>
+                </x-grid>
+            </form>
+        </div>
+    </div>
+
+
+
+    <x-ui.responsive-table class="responsive-table_crud">
             <x-ui.responsive-table.header>
                 <x-ui.responsive-table.column type="id" sortable="true" name="id">
-                    {{ __('Id') }}
+                    {{ __('common.id') }}
                 </x-ui.responsive-table.column>
                 <x-ui.responsive-table.column sortable="true" name="name">
-                    {{ __('Name') }}
+                    {{ __('common.name') }}
                 </x-ui.responsive-table.column>
                 <x-ui.responsive-table.column name="slug">
-                    {{ __('Slug') }}
+                    {{ __('common.slug') }}
                 </x-ui.responsive-table.column>
                 <x-ui.responsive-table.column name="created_at" sortable="true">
-                    {{ __('Created Date') }}
+                    {{ __('common.created-date') }}
                 </x-ui.responsive-table.column>
                 <x-ui.responsive-table.column type="action" name="action">
-                    {{ __('Action') }}
+                    {{ __('common.action') }}
                 </x-ui.responsive-table.column>
             </x-ui.responsive-table.header>
 

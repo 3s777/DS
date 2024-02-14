@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers\Game;
 
-use App\Http\Controllers\Auth\LoginController;
 use App\Http\Requests\Game\CreateGameDeveloperRequest;
 use Database\Factories\GameDeveloperFactory;
 use Database\Factories\UserFactory;
@@ -30,10 +29,28 @@ class GameDeveloperControllerTest extends TestCase
         $this->request = CreateGameDeveloperRequest::factory()->create();
     }
 
-    public function checkNotAuthRedirect(string $method, array $params = []): void
+    public function checkNotAuthRedirect(
+        string $action,
+        string $method= 'get',
+        array $params = [],
+        array $request = []): void
     {
-        $this->get(action([GameDeveloperController::class, $method], $params))
+        $this->{$method}(action([GameDeveloperController::class, $action], $params), $request)
             ->assertRedirect(route('login'));
+    }
+
+    /**
+     * @test
+     * @return void
+     */
+    public function it_pages_only_auth_success(): void
+    {
+        $this->checkNotAuthRedirect('index');
+        $this->checkNotAuthRedirect('create');
+        $this->checkNotAuthRedirect('edit', 'get',  [$this->gameDeveloper->slug]);
+        $this->checkNotAuthRedirect('store', 'post',  [$this->gameDeveloper->slug], $this->request);
+        $this->checkNotAuthRedirect('update', 'put',  [$this->gameDeveloper->slug], $this->request);
+        $this->checkNotAuthRedirect('destroy', 'delete',  [$this->gameDeveloper->slug]);
     }
 
     /**
@@ -42,11 +59,8 @@ class GameDeveloperControllerTest extends TestCase
      */
     public function it_index_only_auth_success(): void
     {
-        $this->checkNotAuthRedirect('index');
-
-        $this->actingAs($this->user);
-
-        $this->get(action([GameDeveloperController::class, 'index']))
+        $this->actingAs($this->user)
+            ->get(action([GameDeveloperController::class, 'index']))
             ->assertOk()
             ->assertSee(__('game.developer.list'))
             ->assertViewIs('admin.game.developer.index');
@@ -58,11 +72,8 @@ class GameDeveloperControllerTest extends TestCase
      */
     public function it_create_only_auth_success(): void
     {
-        $this->checkNotAuthRedirect('create');
-
-        $this->actingAs($this->user);
-
-        $this->get(action([GameDeveloperController::class, 'create']))
+        $this->actingAs($this->user)
+            ->get(action([GameDeveloperController::class, 'create']))
             ->assertOk()
             ->assertSee(__('game.developer.add'))
             ->assertViewIs('admin.game.developer.create');
@@ -74,12 +85,8 @@ class GameDeveloperControllerTest extends TestCase
      */
     public function it_edit_only_auth_success(): void
     {
-        $this->checkNotAuthRedirect('edit',  [$this->gameDeveloper->slug]);
-
-        $this->actingAs($this->user);
-
-        $this->get(action([GameDeveloperController::class, 'edit'],
-            [$this->gameDeveloper->slug]))
+        $this->actingAs($this->user)
+            ->get(action([GameDeveloperController::class, 'edit'], [$this->gameDeveloper->slug]))
             ->assertOk()
             ->assertSee(__($this->gameDeveloper->name))
             ->assertViewIs('admin.game.developer.edit');
@@ -91,104 +98,71 @@ class GameDeveloperControllerTest extends TestCase
      */
     public function it_store_only_auth_success(): void
     {
-        $this->post(
-            action([GameDeveloperController::class, 'store']),
-            $this->request
-        )->assertRedirect(route('login'));
-
-        $this->actingAs($this->user);
-
-        $this->post(
-            action([GameDeveloperController::class, 'store']),
-            $this->request
-        )->assertRedirect(route('game-developers.index'));
+        $this->actingAs($this->user)
+            ->post(action([GameDeveloperController::class, 'store']), $this->request)
+            ->assertRedirect(route('game-developers.index'))
+            ->assertSessionHas('helper_flash_message', __('game.developer.created'));
 
         $this->assertDatabaseHas('game_developers', [
             'name' => $this->request['name']
         ]);
     }
 
-
-
     /**
      * @test
      * @return void
      */
-    public function it_page_success(): void
+    public function it_validation_name_fail(): void
     {
-        $this->get(action([LoginController::class, 'page']))
-            ->assertOk()
-            ->assertSee('Войти')
-            ->assertViewIs('content.auth.login');
+        $this->app['session']->setPreviousUrl(route('game-developers.create'));
 
+        $this->request['name'] = '';
+
+        $this->actingAs($this->user)
+            ->post(action([GameDeveloperController::class, 'store']), $this->request)
+            ->assertInvalid(['name'])
+            ->assertRedirect(route('game-developers.create'));
+
+        $this->assertDatabaseMissing('game_developers', [
+            'name' => $this->request['name']
+        ]);
     }
 
     /**
      * @test
      * @return void
      */
-    public function it_only_guest_success(): void
+    public function it_update_only_auth_success(): void
     {
-        $this->post(action([LoginController::class, 'handle']), $this->request);
+        $this->request['name'] = 'newName';
 
-        $this->get(action([LoginController::class, 'page']))
-            ->assertRedirect('/');
+        $this->actingAs($this->user)
+            ->put(action(
+                [GameDeveloperController::class, 'update'], [$this->gameDeveloper->slug]),
+                $this->request
+            )
+            ->assertRedirect(route('game-developers.index'))
+            ->assertSessionHas('helper_flash_message', __('game.developer.updated'));
+
+        $this->assertDatabaseHas('game_developers', [
+            'name' => $this->request['name']
+        ]);
     }
 
     /**
      * @test
      * @return void
      */
-    public function it_handle_success(): void
+    public function it_delete_only_auth_success(): void
     {
-        $response = $this->post(action([LoginController::class, 'handle']), $this->request);
+        $this->actingAs($this->user)
+            ->delete(action([GameDeveloperController::class, 'destroy'], [$this->gameDeveloper->slug]))
+            ->assertRedirect(route('game-developers.index'))
+            ->assertSessionHas('helper_flash_message', __('game.developer.deleted'));
 
-        $response->assertValid()
-            ->assertRedirect(route('search'));
-
-        $this->assertAuthenticatedAs($this->user);
+        $this->assertDatabaseMissing('game_developers', [
+            'name' => $this->gameDeveloper->name,
+            'deleted_at' => null
+        ]);
     }
-
-    /**
-     * @test
-     * @return void
-     */
-    public function it_handle_fail(): void
-    {
-        $request = [
-            'email' => 'test@notexist.com',
-            'password' => str()->random(10),
-        ];
-
-        $this->post(action([LoginController::class, 'handle']), $request)
-            ->assertSessionHas('helper_flash_message', __('auth.error.credentials'));
-
-        $this->assertGuest();
-    }
-
-
-
-    /**
-     * @test
-     * @return void
-     */
-    public function it_logout_success(): void
-    {
-        $user = UserFactory::new()->create();
-
-        $this->actingAs($user)->delete(action([LoginController::class, 'logout']));
-
-        $this->assertGuest();
-    }
-
-    /**
-     * @test
-     * @return void
-     */
-    public function it_logout_guest_middleware_fail(): void
-    {
-        $this->delete(action([LoginController::class, 'logout']))
-            ->assertRedirect(route('home'));
-    }
-
 }
