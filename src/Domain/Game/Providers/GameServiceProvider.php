@@ -3,6 +3,7 @@
 namespace Domain\Game\Providers;
 
 // use Illuminate\Support\Facades\Gate;
+use App\Filters\DatesFilter;
 use App\Filters\SearchFilter;
 use Illuminate\Contracts\Foundation\Application;
 use Support\Sorters\Sorter;
@@ -26,7 +27,8 @@ class GameServiceProvider extends ServiceProvider
     public function boot(): void
     {
         app(FilterManager::class)->registerFilters([
-            new SearchFilter()
+            new SearchFilter(),
+            new DatesFilter()
         ]);
     }
 

@@ -1,7 +1,7 @@
-<x-layouts.admin title="{{ __('game.developer.list') }}"
+<x-layouts.admin title="{{ __('game.publisher.list') }}"
 >
 
-{{--            <form action="{{ route('game-developers.index') }}"--}}
+{{--            <form action="{{ route('game-publishers.index') }}"--}}
 {{--                  method="get">--}}
 {{--                @foreach(filters() as $filter)--}}
 {{--                    {!! $filter !!}--}}
@@ -14,9 +14,9 @@
                 x-model="search"
                 class="crud-search__form"
                 wrapper-class="crud-search"
-                action="{!! route('game-developers.index') !!}"
+                action="{!! route('game-publishers.index') !!}"
                 method="get"
-                placeholder="{{ __('game.developer.search') }}"
+                placeholder="{{ __('game.publisher.search') }}"
                 color="dark"
                 sortable="true" />
 
@@ -34,7 +34,7 @@
         </div>
 
         <div class="crud-filters__content" x-cloak x-show="!filters_hide" x-transition.scale.right>
-            <form action="{!! route('game-developers.index') !!}" method="get">
+            <form action="{!! route('game-publishers.index') !!}" method="get">
                 <div x-text="search"></div>
                 <input type="hidden" name="filters[search]" x-bind:value="search">
                 <x-grid type="container">
@@ -93,28 +93,28 @@
                 </x-ui.responsive-table.column>
             </x-ui.responsive-table.header>
 
-            @foreach($developers as $developer)
+            @foreach($publishers as $publisher)
                 <x-ui.responsive-table.row>
                     <x-ui.responsive-table.column type="id">
-                        {{ $developer->id }}
+                        {{ $publisher->id }}
                     </x-ui.responsive-table.column>
                     <x-ui.responsive-table.column>
-                        {{ $developer->name }}
+                        {{ $publisher->name }}
                     </x-ui.responsive-table.column>
                     <x-ui.responsive-table.column>
-                        {{ $developer->slug }}
+                        {{ $publisher->slug }}
                     </x-ui.responsive-table.column>
                     <x-ui.responsive-table.column>
-                        {{ $developer->created_at }}
+                        {{ $publisher->created_at }}
                     </x-ui.responsive-table.column>
                     <x-ui.responsive-table.column type="action">
-                        <x-ui.responsive-table.buttons :item="$developer" model="game-developers" />
+                        <x-ui.responsive-table.buttons :item="$publisher" model="game-publishers" />
                     </x-ui.responsive-table.column>
                 </x-ui.responsive-table.row>
             @endforeach
         </x-ui.responsive-table>
 
-        {{ $developers->links('pagination::default') }}
+        {{ $publishers->links('pagination::default') }}
 
         <x-ui.modal x-data tag="section" ::class="$store.modal.hide ? '' : 'modal_show'">
             <x-ui.modal.content

@@ -5,6 +5,7 @@ namespace App\Routing;
 
 use App\Contracts\RouteRegistrar;
 use App\Http\Controllers\Game\GameDeveloperController;
+use App\Http\Controllers\Game\GamePublisherController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ThumbnailController;
 use App\Http\Controllers\UserController;
@@ -73,7 +74,8 @@ class AppRegistrar implements RouteRegistrar
 //                    ])
                     ->middleware(['remove.locale']);
                 Route::get('/game-developer/atest', [GameDeveloperController::class, 'atest'])->name('atest');
-
+                Route::resource('game-publishers', GamePublisherController::class)
+                    ->middleware(['remove.locale']);
 
             });
 
