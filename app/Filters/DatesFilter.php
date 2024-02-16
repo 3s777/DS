@@ -11,7 +11,7 @@ class DatesFilter extends AbstractFilter
 
     public function title(): string
     {
-        return 'Начальная и конечная дата';
+        return 'Даты';
     }
 
     public function key(): string
@@ -56,11 +56,28 @@ class DatesFilter extends AbstractFilter
 
     public function values(): array
     {
-        return [];
+        if($this->requestValue('from')) {
+            $fromDate = Carbon::createFromFormat('Y-m-d', $this->requestValue('from'));
+        }
+
+        if($this->requestValue('to')) {
+            $toDate = Carbon::createFromFormat('Y-m-d', $this->requestValue('to'));
+        }
+
+        return [
+            'from' => $fromDate->toDateString() ?? '',
+//            'to' => $toDate->toDate() ?? '',
+        ];
     }
 
     public function view(): string
     {
         return 'components.common.filters.search';
+    }
+
+    public function badgeView() {
+        return view('components.common.filters.badge', [
+            'filter' => $this
+        ])->render();
     }
 }

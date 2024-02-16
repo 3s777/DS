@@ -1,13 +1,6 @@
 <x-layouts.admin title="{{ __('game.developer.list') }}"
 >
 
-{{--            <form action="{{ route('game-developers.index') }}"--}}
-{{--                  method="get">--}}
-{{--                @foreach(filters() as $filter)--}}
-{{--                    {!! $filter !!}--}}
-{{--                @endforeach--}}
-{{--                <button>Найти</button>--}}
-{{--            </form>--}}
     <div class="crud-filters" x-data="{ filters_hide: true, search: '' }">
         <div class="crud-filters__header">
             <x-ui.input-search
@@ -69,6 +62,16 @@
                     </x-grid.col>
                 </x-grid>
             </form>
+        </div>
+
+        <div class="crud-filters__footer">
+            <div class="current-filters">
+                <div class="current-filters__title">Фильтры: </div>
+                @foreach(filters() as $filter)
+                    {{--                    {!! $filter !!}--}}
+                    {!! $filter->badgeView() !!}
+                @endforeach
+            </div>
         </div>
     </div>
 

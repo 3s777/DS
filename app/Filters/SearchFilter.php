@@ -27,11 +27,19 @@ class SearchFilter extends AbstractFilter
 
     public function values(): array
     {
-        return [];
+        return [
+            'search' => str($this->requestValue())->value()
+        ];
     }
 
     public function view(): string
     {
         return 'components.common.filters.search';
+    }
+
+    public function badgeView() {
+        return view('components.common.filters.badge', [
+            'filter' => $this
+        ])->render();
     }
 }
