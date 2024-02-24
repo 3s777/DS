@@ -28,7 +28,7 @@ class SearchFilter extends AbstractFilter
     public function values(): array
     {
         return [
-            'search' => str($this->requestValue())->value()
+//            'search' => str($this->requestValue())->value()
         ];
     }
 
@@ -39,7 +39,8 @@ class SearchFilter extends AbstractFilter
 
     public function badgeView() {
         return view('components.common.filters.badge', [
-            'filter' => $this
+            'filter' => $this,
+            'values' => str($this->requestValue())->value()
         ])->render();
     }
 }
