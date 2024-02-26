@@ -8,7 +8,6 @@ use Illuminate\Database\Eloquent\Builder;
 
 class DatesFilter extends AbstractFilter
 {
-
     public function title(): string
     {
         return 'Даты';
@@ -54,39 +53,19 @@ class DatesFilter extends AbstractFilter
         });
     }
 
-    public function values(): array
+    public function preparedValues(): mixed
     {
-//        if($this->requestValue('from')) {
-//            $fromDate = Carbon::createFromFormat('Y-m-d', $this->requestValue('from'));
-//        }
-//
-//        if($this->requestValue('to')) {
-//            $toDate = Carbon::createFromFormat('Y-m-d', $this->requestValue('to'));
-//        }
-
-        return [
-//            'from' => $fromDate->toDateString() ?? '',
-////            'to' => $toDate->toDate() ?? '',
-        ];
-    }
-
-    public function view(): string
-    {
-        return 'components.common.filters.search';
-    }
-
-    public function badgeView() {
-
         $dates = $this->requestValue('from') ?? $this->requestValue('to');
 
         if($this->requestValue('from') && $this->requestValue('to')) {
             $dates = $this->requestValue('from').'-'.$this->requestValue('to');
         }
 
+        return $dates;
+    }
 
-        return view('components.common.filters.badge', [
-            'filter' => $this,
-            'values' => $dates
-        ])->render();
+    public function view(): string
+    {
+        return 'components.common.filters.search';
     }
 }

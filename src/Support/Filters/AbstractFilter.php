@@ -2,8 +2,10 @@
 
 namespace Support\Filters;
 
-
+use Illuminate\Contracts\View\Factory;
+use Illuminate\Contracts\View\View;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Foundation\Application;
 use Stringable;
 
 abstract class AbstractFilter implements Stringable
@@ -19,7 +21,7 @@ abstract class AbstractFilter implements Stringable
 
     abstract public function apply(Builder $query): Builder;
 
-    abstract public function values(): array;
+    abstract public function preparedValues(): mixed;
 
     abstract public function view(): string;
 
@@ -45,6 +47,18 @@ abstract class AbstractFilter implements Stringable
         return str($this->name($index))
             ->slug('_')
             ->value();
+    }
+
+    public function initialValues(): array
+    {
+        return [];
+    }
+
+    public function badgeView(): View|Application|Factory|\Illuminate\Contracts\Foundation\Application
+    {
+        return view('components.common.filters.badge', [
+            'filter' => $this
+        ]);
     }
 
     public function __toString(): string

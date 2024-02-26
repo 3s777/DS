@@ -25,22 +25,13 @@ class SearchFilter extends AbstractFilter
         });
     }
 
-    public function values(): array
+    public function preparedValues(): string
     {
-        return [
-//            'search' => str($this->requestValue())->value()
-        ];
+        return str($this->requestValue())->value();
     }
 
     public function view(): string
     {
         return 'components.common.filters.search';
-    }
-
-    public function badgeView() {
-        return view('components.common.filters.badge', [
-            'filter' => $this,
-            'values' => str($this->requestValue())->value()
-        ])->render();
     }
 }
