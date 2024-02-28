@@ -16,15 +16,22 @@ if(!function_exists('flash')) {
 if(!function_exists('filters')) {
     function filters(): array
     {
+//
+//        $d = app(FilterManager::class);
+//        $d->registerFilters([
+//            'sdfsdf', 'sdfsdf'
+//        ]);
+//
+//
+//        $s = app(FilterManager::class);
+//        $s->registerFilters([
+//            new SearchFilter(),
+//            new DatesFilter()
+//        ]);
+//
+//        dd($s, $d, app(FilterManager::class));
 
-        $d = app(FilterManager::class);
-        $d->registerFilters([
-            'sdfsdf', 'sdfsdf'
-        ]);
-
-
-        $s = app(FilterManager::class);
-        $s->registerFilters([
+        app(FilterManager::class)->registerFilters([
             new SearchFilter(),
             new DatesFilter()
         ]);

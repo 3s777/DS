@@ -28,10 +28,12 @@ class Localization
         if(auth()->check()) {
             if($currentLocale != session('locale') && $currentLocale) {
                 $currentLanguage = Language::where('slug', $currentLocale)->first();
-                auth()->user()
-                    ->language()
-                    ->associate($currentLanguage)
-                    ->save();
+                if($currentLanguage) {
+                    auth()->user()
+                        ->language()
+                        ->associate($currentLanguage)
+                        ->save();
+                }
             }
         }
 
