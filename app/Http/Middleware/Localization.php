@@ -21,9 +21,9 @@ class Localization
     {
         $currentLocale = $request->segment(1);
 
-        if(!in_array($currentLocale, config('app.available_locales')) && $currentLocale) {
-            abort(404);
-        }
+//        if(!in_array($currentLocale, config('app.available_locales')) && $currentLocale) {
+//            abort(404);
+//        }
 
         if(auth()->check()) {
             if($currentLocale != session('locale') && $currentLocale) {

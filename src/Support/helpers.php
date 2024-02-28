@@ -1,5 +1,7 @@
 <?php
 
+use App\Filters\DatesFilter;
+use App\Filters\SearchFilter;
 use Support\Sorters\Sorter;
 use Support\Filters\FilterManager;
 use Support\Flash\Flash;
@@ -14,6 +16,20 @@ if(!function_exists('flash')) {
 if(!function_exists('filters')) {
     function filters(): array
     {
+
+        $d = app(FilterManager::class);
+        $d->registerFilters([
+            'sdfsdf', 'sdfsdf'
+        ]);
+
+
+        $s = app(FilterManager::class);
+        $s->registerFilters([
+            new SearchFilter(),
+            new DatesFilter()
+        ]);
+
+
         return app(FilterManager::class)->items();
     }
 }
