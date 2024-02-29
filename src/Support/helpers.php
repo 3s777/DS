@@ -14,7 +14,7 @@ if(!function_exists('flash')) {
 }
 
 if(!function_exists('filters')) {
-    function filters($availableFilters): array
+    function filters($availableFilters = []): array
     {
         return app(FilterManager::class)
             ->registerFilters($availableFilters)

@@ -43,8 +43,8 @@ class GameDeveloper extends Model
     public function availableFilters(): array
     {
         return [
-            SearchFilter::make(),
-            new DatesFilter()
+            SearchFilter::make('Ищем'),
+            new DatesFilter('Датируем')
         ];
     }
 

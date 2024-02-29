@@ -67,10 +67,10 @@
         <div class="crud-filters__footer">
             <div class="current-filters">
                 <div class="current-filters__title">Фильтры: </div>
-{{--                @foreach(filters() as $filter)--}}
-{{--                    --}}{{--                    {!! $filter !!}--}}
-{{--                    {!! $filter->badgeView() !!}--}}
-{{--                @endforeach--}}
+                @foreach(filters() as $filter)
+                                        {!! $filter !!}
+                    {!! $filter->badgeView() !!}
+                @endforeach
             </div>
         </div>
     </div>

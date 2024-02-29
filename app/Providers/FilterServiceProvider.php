@@ -14,7 +14,7 @@ class FilterServiceProvider extends ServiceProvider
      */
     public function register(): void
     {
-        $this->app->bind(FilterManager::class);
+        $this->app->singleton(FilterManager::class);
 
         $this->app->bind(Sorter::class, function (Application $app, array $fields) {
             return new Sorter($fields);
