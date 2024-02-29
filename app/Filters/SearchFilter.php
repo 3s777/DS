@@ -4,9 +4,11 @@ namespace App\Filters;
 
 use Support\Filters\AbstractFilter;
 use Illuminate\Database\Eloquent\Builder;
+use Support\Traits\Makeable;
 
 class SearchFilter extends AbstractFilter
 {
+    use Makeable;
 
     public function title(): string
     {

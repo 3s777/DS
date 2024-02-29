@@ -2,25 +2,25 @@
 
 namespace Domain\Game\QueryBuilders;
 
+use Domain\Game\Models\GameDeveloper;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Query\Builder as QueryBuilder;
 use Illuminate\Pipeline\Pipeline;
 
 class GameDeveloperQueryBuilder extends Builder
 {
+    protected $model = GameDeveloper::class;
+
     public function filtered()
     {
         return app(Pipeline::class)
             ->send($this)
-            ->through(filters())
+            ->through(filters($this->model->availableFilters()))
             ->thenReturn();
     }
 
     public function sorted()
     {
-        return sorter([
-            'id',
-            'name',
-            'created_at'
-        ])->run($this);
+        return sorter($this->model->sortedFields)->run($this);
     }
 }

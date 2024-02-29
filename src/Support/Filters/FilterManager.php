@@ -10,9 +10,10 @@ class FilterManager
     {
     }
 
-    public function registerFilters(array $items): void
+    public function registerFilters(array $items): static
     {
         $this->items = $items;
+        return $this;
     }
 
     public function items(): array

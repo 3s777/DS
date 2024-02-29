@@ -2,6 +2,8 @@
 
 namespace Domain\Game\Models;
 
+use App\Filters\DatesFilter;
+use App\Filters\SearchFilter;
 use App\Models\CollectableItem;
 use Carbon\Carbon;
 use Domain\Game\QueryBuilders\GameDeveloperQueryBuilder;
@@ -31,6 +33,20 @@ class GameDeveloper extends Model
     protected $casts = [
         'description' => CleanHtml::class.':custom',
     ];
+
+    public array $sortedFields = [
+        'id',
+        'name',
+        'created_at'
+    ];
+
+    public function availableFilters(): array
+    {
+        return [
+            SearchFilter::make(),
+            new DatesFilter()
+        ];
+    }
 
     public function getRouteKeyName()
     {

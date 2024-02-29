@@ -209,6 +209,7 @@ return [
         App\Providers\RouteServiceProvider::class,
         App\Providers\ViewServiceProvider::class,
         App\Providers\DomainServiceProvider::class,
+        App\Providers\FilterServiceProvider::class,
         Mews\Purifier\PurifierServiceProvider::class,
     ],
 

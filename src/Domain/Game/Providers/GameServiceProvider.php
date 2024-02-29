@@ -2,34 +2,15 @@
 
 namespace Domain\Game\Providers;
 
-// use Illuminate\Support\Facades\Gate;
-use App\Filters\DatesFilter;
-use App\Filters\SearchFilter;
-use Illuminate\Contracts\Foundation\Application;
-use Support\Sorters\Sorter;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
-use Support\Filters\FilterManager;
 
 class GameServiceProvider extends ServiceProvider
 {
-    /**
-     * The model to policy mappings for the application.
-     *
-     * @var array<class-string, class-string>
-     */
-    protected $policies = [
-        // 'App\Models\Model' => 'App\Policies\ModelPolicy',
-    ];
-
     /**
      * Register any authentication / authorization services.
      */
     public function boot(): void
     {
-//        app(FilterManager::class)->registerFilters([
-//            new SearchFilter(),
-//            new DatesFilter()
-//        ]);
     }
 
     public function register(): void
@@ -37,11 +18,5 @@ class GameServiceProvider extends ServiceProvider
         $this->app->register(
             GamesApiServiceProvider::class
         );
-
-        $this->app->singleton(FilterManager::class);
-
-        $this->app->bind(Sorter::class, function (Application $app, array $fields) {
-            return new Sorter($fields);
-        });
     }
 }

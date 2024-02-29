@@ -14,30 +14,11 @@ if(!function_exists('flash')) {
 }
 
 if(!function_exists('filters')) {
-    function filters(): array
+    function filters($availableFilters): array
     {
-//
-//        $d = app(FilterManager::class);
-//        $d->registerFilters([
-//            'sdfsdf', 'sdfsdf'
-//        ]);
-//
-//
-//        $s = app(FilterManager::class);
-//        $s->registerFilters([
-//            new SearchFilter(),
-//            new DatesFilter()
-//        ]);
-//
-//        dd($s, $d, app(FilterManager::class));
-
-        app(FilterManager::class)->registerFilters([
-            new SearchFilter(),
-            new DatesFilter()
-        ]);
-
-
-        return app(FilterManager::class)->items();
+        return app(FilterManager::class)
+            ->registerFilters($availableFilters)
+            ->items();
     }
 }
 
