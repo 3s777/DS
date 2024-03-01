@@ -7,7 +7,9 @@
         {{ $filter->title() }}: {{ $filter->preparedValues() }}
 
         <div class="current-filters__delete">
-            <x-svg.close></x-svg.close>
+            <a href="{{ request()->fullUrlWithoutQuery(['filters.'.$filter->key()]) }}">
+                <x-svg.close></x-svg.close>
+            </a>
         </div>
     </x-ui.badge>
 @endif

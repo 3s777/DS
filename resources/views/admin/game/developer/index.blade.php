@@ -1,7 +1,6 @@
-<x-layouts.admin title="{{ __('game.developer.list') }}"
->
+<x-layouts.admin title="{{ __('game.developer.list') }}">
 
-    <div class="crud-filters" x-data="{ filters_hide: true, search: '' }">
+    <div class="crud-filters" x-data="{ filters_hide: true, search: '{{ request('filters.search') }}' }">
         <div class="crud-filters__header">
             <x-ui.input-search
                 x-model="search"
@@ -11,7 +10,8 @@
                 method="get"
                 placeholder="{{ __('game.developer.search') }}"
                 color="dark"
-                sortable="true" />
+                sortable="true"
+            />
 
             <x-ui.form.button
                 class="crud-filters__trigger"
@@ -28,7 +28,6 @@
 
         <div class="crud-filters__content" x-cloak x-show="!filters_hide" x-transition.scale.right>
             <form action="{!! route('game-developers.index') !!}" method="get">
-                <div x-text="search"></div>
                 <input type="hidden" name="filters[search]" x-bind:value="search">
                 <x-grid type="container">
                     <x-grid.col xl="3" lg="4"  md="6" sm="12">
@@ -55,7 +54,7 @@
                         <x-ui.form.group>
                             <div class="main-search__footer">
                                 <x-ui.form.button>{{ __('Отфильтровать') }}</x-ui.form.button>
-                                <x-ui.form.button color="warning">{{ __('Сбросить') }}</x-ui.form.button>
+                                <x-ui.form.button tag="a" link="{{ request()->url() }}" color="warning">{{ __('Сбросить') }}</x-ui.form.button>
                                 <x-ui.form.button color="cancel"  x-on:click.prevent="filters_hide = true">{{ __('Закрыть') }}</x-ui.form.button>
                             </div>
                         </x-ui.form.group>
@@ -64,15 +63,17 @@
             </form>
         </div>
 
-        <div class="crud-filters__footer">
-            <div class="current-filters">
-                <div class="current-filters__title">Фильтры: </div>
-                @foreach(filters() as $filter)
-                                        {!! $filter !!}
-                    {!! $filter->badgeView() !!}
-                @endforeach
+        @if(request('filters'))
+            <div class="crud-filters__footer">
+                <div class="current-filters">
+                    <div class="current-filters__title">Фильтры: </div>
+                    @foreach(filters() as $filter)
+                        {{--{!! $filter !!}--}}
+                        {!! $filter->badgeView() !!}
+                    @endforeach
+                </div>
             </div>
-        </div>
+        @endif
     </div>
 
 

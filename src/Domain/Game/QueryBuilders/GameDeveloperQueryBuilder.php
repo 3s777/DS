@@ -13,14 +13,22 @@ class GameDeveloperQueryBuilder extends Builder
 
     public function filtered()
     {
-        return app(Pipeline::class)
-            ->send($this)
-            ->through(filters($this->model->availableFilters()))
-            ->thenReturn();
+        if(request('filters')) {
+            return app(Pipeline::class)
+                ->send($this)
+                ->through(filters($this->model->availableFilters()))
+                ->thenReturn();
+        }
+
+        return $this;
     }
 
     public function sorted()
     {
-        return sorter($this->model->sortedFields)->run($this);
+        if(request('sort')) {
+            return sorter($this->model->sortedFields)->run($this);
+        }
+
+        return $this;
     }
 }

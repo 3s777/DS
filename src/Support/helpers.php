@@ -1,7 +1,6 @@
 <?php
 
-use App\Filters\DatesFilter;
-use App\Filters\SearchFilter;
+use Illuminate\Support\Facades\Route;
 use Support\Sorters\Sorter;
 use Support\Filters\FilterManager;
 use Support\Flash\Flash;
@@ -16,16 +15,20 @@ if(!function_exists('flash')) {
 if(!function_exists('filters')) {
     function filters($availableFilters = []): array
     {
-        return app(FilterManager::class)
-            ->registerFilters($availableFilters)
-            ->items();
+        if(!empty($availableFilters)) {
+            return app(FilterManager::class)
+                ->registerFilters($availableFilters)
+                ->items();
+        }
+
+        return app(FilterManager::class)->items();
     }
 }
 
 if(!function_exists('filter_url')) {
     function filter_url(array $params = []): string
     {
-        return route('game-developers.index', [
+        return route(Route::currentRouteName(), [
             ...request()->only(['filters', 'sort', 'order']),
             ...$params,
         ]);

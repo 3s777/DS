@@ -5,9 +5,9 @@
 ])
 
 <div
-    {{ $attributes->class(
-            'logo'
-        )
+    {{ $attributes->class([
+        'logo'
+    ])
     }}>
     <a class="logo__link" href="{{ $link }}">
         <x-svg.logo.site-icon class="{{ $classSiteIcon }}" ></x-svg.logo.site-icon>

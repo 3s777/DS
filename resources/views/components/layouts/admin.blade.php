@@ -32,7 +32,7 @@
                         @endif
                     </x-ui.title>
 
-                    <x-common.messages />
+                    <x-common.messages class="admin__messages" />
 
                     {{ $slot }}
 
