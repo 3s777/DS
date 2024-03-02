@@ -1,5 +1,4 @@
-@if($filter->requestValue())
-    <x-ui.badge
+<x-ui.badge
         class="current-filters__badge"
         type="tag"
         color="dark">
@@ -11,5 +10,5 @@
                 <x-svg.close></x-svg.close>
             </a>
         </div>
-    </x-ui.badge>
-@endif
+</x-ui.badge>
+

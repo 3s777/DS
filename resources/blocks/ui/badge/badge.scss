@@ -1,6 +1,10 @@
 .badge {
     display: block;
     background-color: $danger-main;
+    
+    a {
+        text-decoration: none;
+    }
 
     &:after {
         border-color: $danger-main;

@@ -33,7 +33,7 @@
                     <x-grid.col xl="3" lg="4"  md="6" sm="12">
                         <x-ui.form.group>
                             <x-ui.form.datepicker
-                                placeholder="Начальная дата"
+                                placeholder="{{ __('filters.start-date') }}"
                                 id="start_date"
                                 name="filters[dates][from]"
                                 value="{{ request('filters.dates.from') }}">
@@ -43,7 +43,7 @@
                     <x-grid.col xl="3" lg="4"  md="6" sm="12">
                         <x-ui.form.group>
                             <x-ui.form.datepicker
-                                placeholder="Конечная дата"
+                                placeholder="{{ __('filters.finish-date') }}"
                                 id="finish_date"
                                 name="filters[dates][to]"
                                 value="{{ request('filters.dates.to') }}">
@@ -53,9 +53,9 @@
                     <x-grid.col xl="12" lg="12"  md="12" sm="12">
                         <x-ui.form.group>
                             <div class="main-search__footer">
-                                <x-ui.form.button>{{ __('Отфильтровать') }}</x-ui.form.button>
-                                <x-ui.form.button tag="a" link="{{ request()->url() }}" color="warning">{{ __('Сбросить') }}</x-ui.form.button>
-                                <x-ui.form.button color="cancel"  x-on:click.prevent="filters_hide = true">{{ __('Закрыть') }}</x-ui.form.button>
+                                <x-ui.form.button>{{ __('common.filter') }}</x-ui.form.button>
+                                <x-ui.form.button tag="a" link="{{ request()->url() }}" color="warning">{{ __('common.reset') }}</x-ui.form.button>
+                                <x-ui.form.button color="cancel"  x-on:click.prevent="filters_hide = true">{{ __('common.close') }}</x-ui.form.button>
                             </div>
                         </x-ui.form.group>
                     </x-grid.col>
@@ -66,17 +66,31 @@
         @if(request('filters'))
             <div class="crud-filters__footer">
                 <div class="current-filters">
-                    <div class="current-filters__title">Фильтры: </div>
                     @foreach(filters() as $filter)
-                        {{--{!! $filter !!}--}}
-                        {!! $filter->badgeView() !!}
+                        @if($filter->preparedValues())
+                            @if($loop->first)
+                                <div class="current-filters__title">{{ __('filters.badges-title') }}: </div>
+                            @endif
+
+                            {{--{!! $filter !!}--}}
+                            {!! $filter->badgeView() !!}
+
+                            @if($loop->last)
+                                <x-ui.badge
+                                    class="current-filters__badge"
+                                    type="tag"
+                                    color="danger">
+                                    <a href="{{ request()->url() }}">
+                                        {{ __('filters.reset-all') }}
+                                    </a>
+                                </x-ui.badge>
+                            @endif
+                        @endif
                     @endforeach
                 </div>
             </div>
         @endif
     </div>
-
-
 
     <x-ui.responsive-table class="responsive-table_crud">
             <x-ui.responsive-table.header>
