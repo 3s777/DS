@@ -17,9 +17,7 @@ abstract class AbstractFilter implements Stringable
 
     protected string $title;
 
-    abstract public function title(): string;
-
-    abstract public function key(): string;
+    protected string $key;
 
     abstract public function apply(Builder $query): Builder;
 
@@ -27,8 +25,10 @@ abstract class AbstractFilter implements Stringable
 
     abstract public function view(): string;
 
-    public function __construct(string $title) {
+    public function __construct(string $title, string $key)
+    {
         $this->setTitle($title);
+        $this->setKey($key);
     }
 
     public function setTitle(string $title): static
@@ -36,6 +36,23 @@ abstract class AbstractFilter implements Stringable
         $this->title = $title;
 
         return $this;
+    }
+
+    public function setKey(string $key): static
+    {
+        $this->key = $key;
+
+        return $this;
+    }
+
+    public function title(): string
+    {
+        return $this->title;
+    }
+
+    public function key(): string
+    {
+        return $this->key;
     }
 
     public function requestValue(string $index = null, mixed $default = null): mixed

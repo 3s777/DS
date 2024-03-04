@@ -10,16 +10,6 @@ class SearchFilter extends AbstractFilter
 {
     use Makeable;
 
-    public function title(): string
-    {
-        return 'Поиск';
-    }
-
-    public function key(): string
-    {
-        return 'search';
-    }
-
     public function apply(Builder $query): Builder
     {
         return $query->when($this->requestValue(), function (Builder $query) {

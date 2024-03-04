@@ -4,14 +4,10 @@ namespace Domain\Game\Models;
 
 use App\Filters\DatesFilter;
 use App\Filters\SearchFilter;
-use App\Models\CollectableItem;
-use Carbon\Carbon;
 use Domain\Game\QueryBuilders\GameDeveloperQueryBuilder;
-use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
-use Illuminate\Pipeline\Pipeline;
 use Mews\Purifier\Casts\CleanHtml;
 use Support\Traits\Models\HasSlug;
 
@@ -43,8 +39,8 @@ class GameDeveloper extends Model
     public function availableFilters(): array
     {
         return [
-            SearchFilter::make('Ищем'),
-            new DatesFilter('Датируем')
+            DatesFilter::make('Датируем', 'dates'),
+            SearchFilter::make('Ищем', 'search'),
         ];
     }
 

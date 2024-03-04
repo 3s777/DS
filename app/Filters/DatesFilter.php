@@ -5,18 +5,11 @@ namespace App\Filters;
 use Illuminate\Support\Carbon;
 use Support\Filters\AbstractFilter;
 use Illuminate\Database\Eloquent\Builder;
+use Support\Traits\Makeable;
 
 class DatesFilter extends AbstractFilter
 {
-    public function title(): string
-    {
-        return 'Даты';
-    }
-
-    public function key(): string
-    {
-        return 'dates';
-    }
+    use Makeable;
 
     public function apply(Builder $query): Builder
     {
@@ -66,6 +59,6 @@ class DatesFilter extends AbstractFilter
 
     public function view(): string
     {
-        return 'components.common.filters.search';
+        return 'components.common.filters.dates';
     }
 }
