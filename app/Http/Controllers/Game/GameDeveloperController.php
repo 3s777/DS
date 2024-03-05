@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Game;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Game\CreateGameDeveloperRequest;
+use App\Http\Requests\Game\FilterGameDeveloperRequest;
 use App\Http\Requests\Game\UpdateGameDeveloperRequest;
 use App\ViewModels\GameDeveloperViewModel;
 use Domain\Game\Models\GameDeveloper;
@@ -14,7 +15,7 @@ use Illuminate\Routing\Redirector;
 
 class GameDeveloperController extends Controller
 {
-    public function index(Request $request)
+    public function index(FilterGameDeveloperRequest $request)
     {
         return view('admin.game.developer.index', new GameDeveloperViewModel());
     }

@@ -2,12 +2,14 @@
 
 namespace App\Http\Requests\Game;
 
+use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
 
 class FilterGameDeveloperRequest extends FormRequest
 {
-    protected $redirect = '/';
+    protected $redirectRoute = 'game-developers.index';
+
     /**
      * Determine if the user is authorized to make this request.
      */
@@ -24,7 +26,17 @@ class FilterGameDeveloperRequest extends FormRequest
     public function rules(): array
     {
         return [
+            'filters.search' => ['nullable', 'string'],
+            'filters.dates.from' => ['nullable', 'date'],
+            'filters.dates.to' => ['nullable', 'date'],
+        ];
+    }
 
+    public function messages()
+    {
+        return [
+            'filters.dates.from' => __('validation.filters_date'),
+            'filters.dates.to' => __('validation.filters_date'),
         ];
     }
 }

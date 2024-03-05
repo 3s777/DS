@@ -11,15 +11,17 @@ class DatesFilter extends AbstractFilter
 {
     use Makeable;
 
-    protected function validateValue($dateName) {
-        validator(request()->query(), [
-            $dateName => 'date'
-        ], [$dateName => __('validation.filter_date')])->validate();
+    public function fromDate() {
+        if($this->requestValue('from')) {
+            return Carbon::createFromFormat('Y-m-d', $this->requestValue('from'));
+        }
+
+
     }
 
-    public function uu($dateType) {
-        if($this->requestValue($dateType)) {
-            return Carbon::createFromFormat('Y-m-d', $this->requestValue($dateType));
+    public function toDate() {
+        if($this->requestValue('to')) {
+            return Carbon::createFromFormat('Y-m-d', $this->requestValue('to'));
         }
 
         return false;
@@ -30,36 +32,40 @@ class DatesFilter extends AbstractFilter
         return $query->when($this->requestValue(), function (Builder $query) {
 
 //            if($this->requestValue('from')) {
-//                $this->validateValue('filters.dates.from');
 //                $fromDate = Carbon::createFromFormat('Y-m-d', $this->requestValue('from'));
 //            }
 //
 //            if($this->requestValue('to')) {
-//                $this->validateValue('filters.dates.to');
 //                $toDate = Carbon::createFromFormat('Y-m-d', $this->requestValue('to'));
 //            }
 
-            $fromDate = $this->uu('from');
-
-            $toDate = $this->uu('to');
-            $this->validateValue('filters.dates.from');
-            $this->validateValue('filters.dates.to');
-            if($fromDate) {
-                $query->whereDate('created_at','>=',  $fromDate);
+            if($this->fromDate()) {
+                $query->whereDate('created_at','>=',  $this->fromDate());
             }
 
-            if($toDate) {
-                $query->whereDate('created_at','<=',  $toDate);
+            if($this->toDate()) {
+                $query->whereDate('created_at','<=',  $this->toDate());
             }
         });
     }
 
     public function preparedValues(): mixed
     {
-        $dates = $this->requestValue('from') ?? $this->requestValue('to');
+        $fromDate = null;
+        $toDate = null;
 
-        if($this->requestValue('from') && $this->requestValue('to')) {
-            $dates = $this->requestValue('from').'-'.$this->requestValue('to');
+        if($this->fromDate()) {
+            $fromDate = $this->fromDate()->format('d.m.Y');
+        }
+
+        if($this->toDate()) {
+            $toDate = $this->toDate()->format('d.m.Y');
+        }
+
+        $dates = $fromDate ?? $toDate;
+
+        if($fromDate && $toDate) {
+            $dates = $fromDate.' - '.$toDate;
         }
 
         return $dates;
