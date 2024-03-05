@@ -34,14 +34,12 @@ abstract class AbstractFilter implements Stringable
     public function setTitle(string $title): static
     {
         $this->title = $title;
-
         return $this;
     }
 
     public function setKey(string $key): static
     {
         $this->key = $key;
-
         return $this;
     }
 

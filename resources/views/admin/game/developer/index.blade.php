@@ -28,7 +28,6 @@
 
         <div class="crud-filters__content" x-cloak x-show="!filters_hide" x-transition.scale.right>
             <form action="{!! route('game-developers.index') !!}" method="get">
-
                 <x-grid type="container">
                     @foreach(filters() as $filter)
                         {!! $filter !!}
@@ -46,20 +45,14 @@
             </form>
         </div>
 
-
-
         @if(request('filters'))
             <div class="crud-filters__footer">
                 <div class="current-filters">
                     @foreach(filters() as $filter)
-
-
-
                         @if($filter->preparedValues())
                             @if($loop->first)
                                 <div class="current-filters__title">{{ __('filters.badges-title') }}: </div>
                             @endif
-
 
                             {!! $filter->badgeView() !!}
 

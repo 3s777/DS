@@ -7,6 +7,7 @@ use Illuminate\Validation\Rule;
 
 class FilterGameDeveloperRequest extends FormRequest
 {
+    protected $redirect = '/';
     /**
      * Determine if the user is authorized to make this request.
      */

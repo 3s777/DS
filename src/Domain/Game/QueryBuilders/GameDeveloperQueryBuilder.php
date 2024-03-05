@@ -5,6 +5,7 @@ namespace Domain\Game\QueryBuilders;
 use Domain\Game\Models\GameDeveloper;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Query\Builder as QueryBuilder;
+use Illuminate\Http\Client\Request;
 use Illuminate\Pipeline\Pipeline;
 
 class GameDeveloperQueryBuilder extends Builder
@@ -20,6 +21,7 @@ class GameDeveloperQueryBuilder extends Builder
                 ->thenReturn();
         }
 
+        filters($this->model->availableFilters());
         return $this;
     }
 
