@@ -8,7 +8,7 @@
                     </x-ui.title>
                 </x-slot>
 
-                    <x-common.messages />
+                    <x-common.messages class="auth__message" />
 
                 <form class="form" method="POST" action="{{ route('forgot.handle') }}">
                     @csrf

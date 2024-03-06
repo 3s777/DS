@@ -1,8 +1,8 @@
 <?php
 
 return [
-    'badges-title' => 'Фильтры',
-    'start-date' => 'Начальная дата',
-    'finish-date' => 'Конечная дата',
-    'reset-all' => 'Сбросить все'
+    'badges_title' => 'Фильтры',
+    'dates_from' => 'Начальная дата',
+    'dates_to' => 'Конечная дата',
+    'reset_all' => 'Сбросить все'
 ];

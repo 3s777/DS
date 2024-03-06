@@ -8,7 +8,7 @@
                     </x-ui.title>
                 </x-slot>
 
-                    <x-common.messages />
+                    <x-common.messages class="auth__message" />
 
                     <x-ui.form.group>
                         <x-ui.message type="info">

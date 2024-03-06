@@ -11,15 +11,18 @@ class DatesFilter extends AbstractFilter
 {
     use Makeable;
 
-    public function fromDate() {
+    protected function fromDate(): bool|Carbon
+    {
         if($this->requestValue('from')) {
             return Carbon::createFromFormat('Y-m-d', $this->requestValue('from'));
         }
 
-
+        return false;
     }
 
-    public function toDate() {
+    protected function toDate(): bool|Carbon
+    {
+
         if($this->requestValue('to')) {
             return Carbon::createFromFormat('Y-m-d', $this->requestValue('to'));
         }
@@ -30,15 +33,6 @@ class DatesFilter extends AbstractFilter
     public function apply(Builder $query): Builder
     {
         return $query->when($this->requestValue(), function (Builder $query) {
-
-//            if($this->requestValue('from')) {
-//                $fromDate = Carbon::createFromFormat('Y-m-d', $this->requestValue('from'));
-//            }
-//
-//            if($this->requestValue('to')) {
-//                $toDate = Carbon::createFromFormat('Y-m-d', $this->requestValue('to'));
-//            }
-
             if($this->fromDate()) {
                 $query->whereDate('created_at','>=',  $this->fromDate());
             }
@@ -49,10 +43,10 @@ class DatesFilter extends AbstractFilter
         });
     }
 
-    public function preparedValues(): mixed
+    public function preparedValues(): ?string
     {
-        $fromDate = null;
-        $toDate = null;
+        $fromDate = '';
+        $toDate = '';
 
         if($this->fromDate()) {
             $fromDate = $this->fromDate()->format('d.m.Y');

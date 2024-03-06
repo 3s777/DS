@@ -72,8 +72,9 @@ abstract class AbstractFilter implements Stringable
 
     public function id(string $index = null): string
     {
-        return str($this->name($index))
-            ->slug('_')
+        return str($this->key())
+            ->prepend('filters_')
+            ->when($index, fn($str) => $str->append("_$index"))
             ->value();
     }
 

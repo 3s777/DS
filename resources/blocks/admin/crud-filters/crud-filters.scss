@@ -8,6 +8,12 @@
         margin-bottom: 12px;
     }
 
+    &__buttons {
+        display: flex;
+        justify-content: center;
+        gap: 16px;
+    }
+
     &__trigger {
         padding: 10px;
     }

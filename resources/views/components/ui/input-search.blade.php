@@ -23,7 +23,7 @@
                 @csrf
             @endif
 
-            @if($sortable)
+            @if($sortable && request('sort'))
                 <input name="sort" type="hidden" value="{{ request('sort') }}">
                 <input name="order" type="hidden" value="{{ request('order') }}">
             @endif
