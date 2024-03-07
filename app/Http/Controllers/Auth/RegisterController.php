@@ -28,6 +28,6 @@ class RegisterController extends Controller
 
         flash()->info(__('auth.register_verify'));
 
-        return redirect()->route('login');
+        return to_route('login');
     }
 }

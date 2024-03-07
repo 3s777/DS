@@ -30,7 +30,7 @@ class GamePublisherController extends Controller
 
         flash()->info(__('game.publisher.created'));
 
-        return redirect(route('game-publishers.index'));
+        return to_route('game-publishers.index');
     }
 
     public function show(string $id)
@@ -49,7 +49,7 @@ class GamePublisherController extends Controller
 
         flash()->info(__('game.publisher.updated'));
 
-        return redirect(route('game-publishers.index'));
+        return to_route('game-publishers.index');
     }
 
     public function destroy(Gamepublisher $gamePublisher)
@@ -58,6 +58,6 @@ class GamePublisherController extends Controller
 
         flash()->info(__('game.publisher.deleted'));
 
-        return redirect(route('game-publishers.index'));
+        return to_route('game-publishers.index');
     }
 }

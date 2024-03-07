@@ -1,33 +1,24 @@
 <x-layouts.admin title="{{ __('game.developer.list') }}">
 
 <x-admin.crud-filters>
-    <form action="{!! route('game-developers.index') !!}" method="get">
-        <x-grid type="container">
-            <x-common.filters.hidden-search />
-            <x-grid.col xl="3" lg="4"  md="6" sm="12">
-                <x-ui.form.group>
-                    <x-common.filters.dates />
-                </x-ui.form.group>
-            </x-grid.col>
-            <x-grid.col xl="3" lg="4"  md="6" sm="12">
-                <x-ui.form.group>
-                    <x-common.filters.dates direction="to" />
-                </x-ui.form.group>
-            </x-grid.col>
-            {{--@foreach(filters() as $filter)--}}
-            {{--{!! $filter !!}--}}
-            {{--@endforeach--}}
-            <x-grid.col xl="12" lg="12"  md="12" sm="12">
-                <x-ui.form.group>
-                    <div class="crud-filters__buttons">
-                        <x-ui.form.button>{{ __('common.filter') }}</x-ui.form.button>
-                        <x-ui.form.button tag="a" link="{{ request()->url() }}" color="warning">{{ __('common.reset') }}</x-ui.form.button>
-                        <x-ui.form.button color="cancel"  x-on:click.prevent="filters_hide = true">{{ __('common.close') }}</x-ui.form.button>
-                    </div>
-                </x-ui.form.group>
-            </x-grid.col>
-        </x-grid>
-    </form>
+    <x-admin.crud-filters-form>
+        <x-grid.col xl="3" lg="4"  md="6" sm="12">
+            <x-ui.form.group>
+                <x-common.filters.dates />
+            </x-ui.form.group>
+        </x-grid.col>
+        <x-grid.col xl="3" lg="4"  md="6" sm="12">
+            <x-ui.form.group>
+                <x-common.filters.dates direction="to" />
+            </x-ui.form.group>
+        </x-grid.col>
+        {{--@foreach(filters() as $filter)--}}
+        {{--{!! $filter !!}--}}
+        {{--@endforeach--}}
+        <x-slot:buttons>
+
+        </x-slot:buttons>
+    </x-admin.crud-filters-form>
 </x-admin.crud-filters>
 
     <x-ui.responsive-table class="responsive-table_crud">

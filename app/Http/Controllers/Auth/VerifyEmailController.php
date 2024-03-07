@@ -25,7 +25,7 @@ class VerifyEmailController extends Controller
 
         flash()->info(__('auth.verified'));
 
-        return redirect()->route('search');
+        return to_route('search');
     }
 
     public function sendVerifyNotification(SendEmailVerifyRequest $request) {
@@ -35,14 +35,14 @@ class VerifyEmailController extends Controller
 
             flash()->info(__('auth.verified'));
 
-            return redirect()->route('verification.notice');
+            return to_route('verification.notice');
         }
 
         $user->sendEmailVerificationNotification();
 
         flash()->info(__('auth.verify_retry_send'));
 
-        return redirect()->route('verification.notice');
+        return to_route('verification.notice');
     }
 
 

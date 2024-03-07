@@ -31,7 +31,7 @@ class GameDeveloperController extends Controller
 
         flash()->info(__('game.developer.created'));
 
-        return redirect(route('game-developers.index'));
+        return to_route('game-developers.index');
     }
 
     public function show(string $id)
@@ -50,7 +50,7 @@ class GameDeveloperController extends Controller
 
         flash()->info(__('game.developer.updated'));
 
-        return redirect(route('game-developers.index'));
+        return to_route('game-developers.index');
     }
 
     public function destroy(GameDeveloper $gameDeveloper)
@@ -59,7 +59,7 @@ class GameDeveloperController extends Controller
 
         flash()->info(__('game.developer.deleted'));
 
-        return redirect(route('game-developers.index'));
+        return to_route('game-developers.index');
     }
 
     public function atest(Request $request)

@@ -4,7 +4,7 @@
             x-model="search"
             class="crud-search__form"
             wrapper-class="crud-search"
-            action="{!! route('game-developers.index') !!}"
+            action="{{ request()->url() }}"
             method="get"
             placeholder="{{ __('game.developer.search') }}"
             color="dark"

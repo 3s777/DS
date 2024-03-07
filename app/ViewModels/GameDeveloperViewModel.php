@@ -19,7 +19,7 @@ class GameDeveloperViewModel extends ViewModel
                 ->select(['id', 'name', 'slug', 'created_at'])
                 ->filtered()
                 ->sorted()
-                ->paginate(4)
+                ->paginate(2)
                 ->withQueryString();
 //        });
     }

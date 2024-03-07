@@ -32,7 +32,7 @@ class LoginController extends Controller
             $request->session()->regenerate();
         }
 
-        return redirect()->route($actionData['route']);
+        return to_route($actionData['route']);
     }
 
     public function logout(): Application|Redirector|RedirectResponse|\Illuminate\Contracts\Foundation\Application
@@ -43,6 +43,6 @@ class LoginController extends Controller
 
         request()->session()->regenerateToken();
 
-        return redirect(route('home'));
+        return to_route('home');
     }
 }
