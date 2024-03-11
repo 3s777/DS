@@ -15,9 +15,8 @@
         {{--@foreach(filters() as $filter)--}}
         {{--{!! $filter !!}--}}
         {{--@endforeach--}}
-        <x-slot:buttons>
+        <x-slot:buttons></x-slot:buttons>
 
-        </x-slot:buttons>
     </x-admin.crud-filters-form>
 </x-admin.crud-filters>
 

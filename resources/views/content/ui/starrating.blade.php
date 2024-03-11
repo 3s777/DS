@@ -6,6 +6,7 @@
                 <x-ui.form.group>
                     <x-ui.star-rating
                         class="ui__add-rating"
+                        num-class="10"
                         title="Star rating 1"
                         name="cover">
                     </x-ui.star-rating>

@@ -1,5 +1,5 @@
 @props([
-
+    'buttons'
 ])
 
 <form action="{{ request()->url() }}" method="get">
@@ -12,7 +12,7 @@
 
     {{ $slot }}
 
-    <x-slot:buttons>
+    @if($buttons->isEmpty())
         <x-grid.col xl="12" lg="12"  md="12" sm="12">
             <x-ui.form.group>
                 <div class="crud-filters__buttons">
@@ -22,6 +22,8 @@
                 </div>
             </x-ui.form.group>
         </x-grid.col>
-    </x-slot>
+    @else
+        {{ $buttons }}
+    @endif
     </x-grid>
 </form>
