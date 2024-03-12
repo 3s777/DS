@@ -43,11 +43,11 @@
     @endif
 
     @if($delete)
-        <div x-data x-on:keydown.escape.window="$store.modal.hide = true">
+        <div x-data x-on:keydown.escape.window="$store.modalDelete.hide = true">
             <div x-on:click.stop="
-                $store.modal.hide = ! $store.modal.hide;
-                $store.modal.action = '{{ route($model.'.destroy', $item->slug) }}'
-                $store.modal.name = '{{  $item->name }}'
+                $store.modalDelete.hide = ! $store.modalDelete.hide;
+                $store.modalDelete.action = '{{ route($model.'.destroy', $item->slug) }}'
+                $store.modalDelete.name = '{{  $item->name }}'
                 ">
                 <x-ui.form.button
                     color="cancel"
