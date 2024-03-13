@@ -21,7 +21,7 @@
                 </x-ui.responsive-table.column>
             </x-ui.responsive-table.header>
 
-            @foreach($developers as $developer)
+            @forelse($developers as $developer)
                 <x-ui.responsive-table.row>
                     <x-ui.responsive-table.column type="id">
                         {{ $developer->id }}
@@ -39,7 +39,9 @@
                         <x-ui.responsive-table.buttons :item="$developer" model="game-developers" />
                     </x-ui.responsive-table.column>
                 </x-ui.responsive-table.row>
-            @endforeach
+        @empty
+                <div>Ничего не найдено</div>
+            @endforelse
         </x-ui.responsive-table>
 
         {{ $developers->links('pagination::default') }}

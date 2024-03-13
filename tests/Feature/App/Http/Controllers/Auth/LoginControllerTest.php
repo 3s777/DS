@@ -64,7 +64,7 @@ class LoginControllerTest extends TestCase
         $response = $this->post(action([LoginController::class, 'handle']), $this->request);
 
         $response->assertValid()
-            ->assertRedirect(route('search'));
+            ->assertRedirectToRoute('search');
 
         $this->assertAuthenticatedAs($this->user);
     }
@@ -103,7 +103,7 @@ class LoginControllerTest extends TestCase
         ];
 
         $this->post(action([LoginController::class, 'handle']), $request)
-            ->assertRedirect(route('verification.notice'));
+            ->assertRedirectToRoute('verification.notice');
 
         $this->assertGuest();
     }
@@ -128,7 +128,7 @@ class LoginControllerTest extends TestCase
     public function it_logout_guest_middleware_fail(): void
     {
         $this->delete(action([LoginController::class, 'logout']))
-            ->assertRedirect(route('home'));
+            ->assertRedirectToRoute('home');
     }
 
 }

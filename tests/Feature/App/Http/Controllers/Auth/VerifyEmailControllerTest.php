@@ -40,7 +40,7 @@ class VerifyEmailControllerTest extends TestCase
         $user = UserFactory::new()->create($request);
 
         $this->post(action([VerifyEmailController::class, 'sendVerifyNotification']), ['email' => $user->email])
-            ->assertRedirect(route('verification.notice'))
+            ->assertRedirectToRoute('verification.notice')
             ->assertSessionHas('helper_flash_message', __('auth.verify_retry_send'));
 
         Notification::assertSentTo([$user], VerifyEmailNotification::class);
@@ -57,7 +57,7 @@ class VerifyEmailControllerTest extends TestCase
         $user = UserFactory::new()->create();
 
         $this->post(action([VerifyEmailController::class, 'sendVerifyNotification']), ['email' => $user->email])
-            ->assertRedirect(route('verification.notice'))
+            ->assertRedirectToRoute('verification.notice')
             ->assertSessionHas('helper_flash_message', __('auth.verified'));
 
         Notification::assertNothingSent();
@@ -85,7 +85,7 @@ class VerifyEmailControllerTest extends TestCase
         );
 
         $this->get($url)
-            ->assertRedirect(route('search'))
+            ->assertRedirectToRoute('search')
             ->assertSessionHas('helper_flash_message', __('auth.verified'));
 
         $this->assertAuthenticatedAs($user);

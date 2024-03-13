@@ -36,7 +36,7 @@ class GameDeveloperControllerTest extends TestCase
         array $request = []): void
     {
         $this->{$method}(action([GameDeveloperController::class, $action], $params), $request)
-            ->assertRedirect(route('login'));
+            ->assertRedirectToRoute('login');
     }
 
     /**
@@ -100,7 +100,7 @@ class GameDeveloperControllerTest extends TestCase
     {
         $this->actingAs($this->user)
             ->post(action([GameDeveloperController::class, 'store']), $this->request)
-            ->assertRedirect(route('game-developers.index'))
+            ->assertRedirectToRoute('game-developers.index')
             ->assertSessionHas('helper_flash_message', __('game.developer.created'));
 
         $this->assertDatabaseHas('game_developers', [
@@ -121,7 +121,7 @@ class GameDeveloperControllerTest extends TestCase
         $this->actingAs($this->user)
             ->post(action([GameDeveloperController::class, 'store']), $this->request)
             ->assertInvalid(['name'])
-            ->assertRedirect(route('game-developers.create'));
+            ->assertRedirectToRoute('game-developers.create');
 
         $this->assertDatabaseMissing('game_developers', [
             'name' => $this->request['name']
@@ -141,7 +141,7 @@ class GameDeveloperControllerTest extends TestCase
                 [GameDeveloperController::class, 'update'], [$this->gameDeveloper->slug]),
                 $this->request
             )
-            ->assertRedirect(route('game-developers.index'))
+            ->assertRedirectToRoute('game-developers.index')
             ->assertSessionHas('helper_flash_message', __('game.developer.updated'));
 
         $this->assertDatabaseHas('game_developers', [
@@ -157,7 +157,7 @@ class GameDeveloperControllerTest extends TestCase
     {
         $this->actingAs($this->user)
             ->delete(action([GameDeveloperController::class, 'destroy'], [$this->gameDeveloper->slug]))
-            ->assertRedirect(route('game-developers.index'))
+            ->assertRedirectToRoute('game-developers.index')
             ->assertSessionHas('helper_flash_message', __('game.developer.deleted'));
 
         $this->assertDatabaseMissing('game_developers', [
