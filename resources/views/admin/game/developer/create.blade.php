@@ -35,9 +35,8 @@
                     <x-ui.form.group>
                         <x-libraries.filepond
                             class="filepond1"
-                            name="filepond"
-                            accept="image/png, image/jpeg, image/gif"
-                            multiple>
+                            name="thumbnail"
+                            accept="image/png, image/jpeg">
                         </x-libraries.filepond>
                     </x-ui.form.group>
                 </x-grid.col>
@@ -64,6 +63,7 @@
     @push('scripts')
         <script type="module">
             const inputElement = document.querySelector('.filepond1');
+            const csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
 
             FilePond.registerPlugin(
                 FilePondPluginFileValidateType,
@@ -77,7 +77,15 @@
 
             const pond = FilePond.create(inputElement, {
                 credits: false,
-                labelIdle: '<span class="filepond--label-action"> {{ __('common.upload') }}</span> {{ __('common.image') }} '
+                labelIdle: '<span class="filepond--label-action"> {{ __('common.upload') }}</span> {{ __('common.image') }} ',
+                server: {
+                    process: '{{ route('uploads.process') }}',
+                    fetch: null,
+                    revert: null,
+                    headers: {
+                        'X-CSRF-TOKEN': csrfToken,
+                    }
+                }
             });
         </script>
     @endpush

@@ -4,6 +4,7 @@ namespace App\Routing;
 
 
 use App\Contracts\RouteRegistrar;
+use App\Http\Controllers\FilePondController;
 use App\Http\Controllers\Game\GameDeveloperController;
 use App\Http\Controllers\Game\GamePublisherController;
 use App\Http\Controllers\HomeController;
@@ -21,6 +22,8 @@ class AppRegistrar implements RouteRegistrar
             ->where('size', '\d+x\d+')
             ->where('file', '.+\.(png|jpg|jpeg|webp)$')
             ->name('thumbnail');
+
+        Route::post('uploads/process', [FilePondController::class, 'process'])->name('uploads.process');
 
         Route::middleware('web')
             ->group(function() {
