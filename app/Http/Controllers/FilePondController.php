@@ -2,13 +2,15 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\FilePondFormRequest;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 
 class FilePondController extends Controller
 {
-    public function process(Request $request): string
+    public function process(FilePondFormRequest $request): string
     {
+//        abort(422, 'No files were uploaded.');
 
         $files = $request->allFiles();
 
@@ -22,12 +24,10 @@ class FilePondController extends Controller
 
         $requestKey = array_key_first($files);
 
-        $file = is_array($request->input($requestKey))
-            ? $request->file($requestKey)[0]
-            : $request->file($requestKey);
+//        $file = is_array($request->input($requestKey))
+//            ? $request->file($requestKey)[0]
+//            : $request->file($requestKey);
 
-        return $file->store(
-            path: 'tmp/'.now()->timestamp.'-'.Str::random(20)
-        );
+        return $requestKey;
     }
 }
