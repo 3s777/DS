@@ -28,7 +28,14 @@ class FilePondFormRequest extends FormRequest
      */
     public function rules(): array
     {
+        if($this->files->get('thumbnail') && !is_array($this->files->get('thumbnail'))) {
+            return [
+                'thumbnail' => ['required','image', 'mimes:png'],
+            ];
+        }
+
         return [
+            'thumbnail' => ['required', 'array'],
             'thumbnail.*' => ['image', 'mimes:png']
         ];
     }
