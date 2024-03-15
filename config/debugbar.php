@@ -18,7 +18,7 @@ return [
     'except' => [
         'telescope*',
         'horizon*',
-        'uploads*'
+        'filepond*'
     ],
 
     /*

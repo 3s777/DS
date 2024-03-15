@@ -5,29 +5,32 @@ namespace App\Http\Controllers;
 use App\Http\Requests\FilePondFormRequest;
 use Illuminate\Http\Request;
 use Illuminate\Support\Arr;
+use Illuminate\Support\Facades\Crypt;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
+use Illuminate\Validation\ValidationException;
 
 class FilePondController extends Controller
 {
-    public function process(FilePondFormRequest $request)
+    public function upload(FilePondFormRequest $request)
     {
-//        abort(422, 'No files were uploaded.');
+        $filepondField = config('filepond.key');
 
-//        $files = $request->allFiles();
-//        if (empty($files)) {
-//            abort(422, 'No files were uploaded.');
-//        }
-//
-//        if (count($files) > 1) {
-//            abort(422, 'Only 1 file can be uploaded at a time.');
-//        }
-//        $file = $request->file('thumbnail');
+        $file = is_array($request->file($filepondField))
+            ? Arr::first($request->file($filepondField))
+            : $request->file($filepondField);
 
+        $folderName = config('filepond.temp_folder').'/'.now()->format('d-m-Y').'/'.Str::random(10);
 
-        $file = is_array($request->file('thumbnail'))
-            ? Arr::first($request->file('thumbnail'))
-            : $request->file('thumbnail');
+        return Crypt::encrypt($file->store($folderName));
+    }
 
-        return $file->store('tmp/'.now()->timestamp.'-'.Str::random(20));
+    public function delete(Request $request)
+    {
+        $filePath = Crypt::decrypt($request->getContent());
+
+//        throw(new \Exception($u));
+
+        Storage::delete($filePath);
     }
 }

@@ -23,8 +23,6 @@ class AppRegistrar implements RouteRegistrar
             ->where('file', '.+\.(png|jpg|jpeg|webp)$')
             ->name('thumbnail');
 
-        Route::post('uploads/process', [FilePondController::class, 'process'])->name('uploads.process');
-
         Route::middleware('web')
             ->group(function() {
 

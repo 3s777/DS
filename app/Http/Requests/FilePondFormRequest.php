@@ -28,15 +28,17 @@ class FilePondFormRequest extends FormRequest
      */
     public function rules(): array
     {
-        if($this->files->get('thumbnail') && !is_array($this->files->get('thumbnail'))) {
+        $filepondField = config('filepond.key');
+
+        if($this->files->get($filepondField) && !is_array($this->files->get($filepondField))) {
             return [
-                'thumbnail' => ['required','image', 'mimes:png'],
+                $filepondField => ['required','image', 'mimes:png,jpg'],
             ];
         }
 
         return [
-            'thumbnail' => ['required', 'array'],
-            'thumbnail.*' => ['image', 'mimes:png']
+            $filepondField => ['required', 'array'],
+            $filepondField.'.*' => ['image', 'mimes:png,jpg']
         ];
     }
 }
