@@ -1,0 +1,23 @@
+.input-image {
+    display: flex;
+    gap: 12px;
+    align-items: center;
+
+    &__preview {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 160px;
+        height: 160px;
+        position: relative;
+        padding: 16px;
+        border-radius: $small-border-radius;
+        background-color: $base-dark-like-transparent;
+        color: $font-main-50;
+
+        img {
+            max-width: 100%;
+            max-height: 100%;
+        }
+    }
+}
