@@ -1,6 +1,14 @@
-<x-layouts.admin title="{{ __('game.developer.list') }}">
+<x-layouts.admin>
 
-@include('admin.game.developer.partials.filters')
+    <x-ui.title size="normal" indent="big">
+        @if(request('filters.search'))
+            {{ __('filters.result') }} "{{ request('filters.search') }}"
+        @else
+            {{ __('game.developer.list') }}
+        @endif
+    </x-ui.title>
+
+    @include('admin.game.developer.partials.filters')
 
     <x-ui.responsive-table class="responsive-table_crud">
             <x-ui.responsive-table.header>

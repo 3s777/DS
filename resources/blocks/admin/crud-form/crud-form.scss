@@ -1,0 +1,24 @@
+.crud-form {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 24px;
+
+    &__main {
+        width: calc(77% - 24px);
+    }
+
+    &__sidebar {
+        width: 23%;
+    }
+
+    &__sidebar-wrapper {
+        padding: 14px;
+        background-color: $base-dark-like-transparent;
+        border-radius: 12px;
+    }
+
+    &__submit_mobile {
+        display: none;
+    }
+}

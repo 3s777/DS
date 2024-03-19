@@ -1,5 +1,5 @@
 .ql-editor {
-    min-height: 100px;
+    min-height: 107px;
     font-size: rem(16);
 }
 
@@ -8,7 +8,7 @@
 }
 
 .ql-editor.ql-blank::before {
-    color: $opposite-main-20;
     font-style: normal;
     font-size: rem(16);
+    color: $opposite-main-20;
 }

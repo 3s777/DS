@@ -24,14 +24,6 @@
                         <x-common.sidebar-menu class="admin__menu" />
                     </x-slot:sidebar>
 
-                    <x-ui.title size="normal" indent="big">
-                        @if(request('filters.search'))
-                            {{ __('Результаты поиска для: ') }} "{{ request('filters.search') }}"
-                        @else
-                            {{ $title }}
-                        @endif
-                    </x-ui.title>
-
                     <x-common.messages class="admin__messages" />
 
                     {{ $slot }}
