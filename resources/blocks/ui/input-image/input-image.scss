@@ -8,15 +8,15 @@
     flex-direction: column;
 
     &__preview {
+        position: relative;
         display: flex;
         justify-content: center;
         align-items: center;
         width: 100%;
-        position: relative;
         border-radius: $small-border-radius;
         background-color: $base-dark;
         color: $font-main-50;
-        aspect-ratio: 1 / 1;
+        aspect-ratio: 1/1;
         overflow: hidden;
 
         &_hidden {
@@ -87,5 +87,13 @@
             width: 20px;
             height: 20px;
         }
+    }
+
+    &__wrapper {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+        aspect-ratio: 1/1;
     }
 }

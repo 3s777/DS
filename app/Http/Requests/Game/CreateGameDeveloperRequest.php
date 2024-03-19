@@ -27,8 +27,8 @@ class CreateGameDeveloperRequest extends FormRequest
     {
         return [
             'name' => ['required', Rule::unique(GameDeveloper::class)],
-            'slug' => ['nullable','string', Rule::unique(GameDeveloper::class)],
-            'thumbnail' => ['image:jpg,png'],
+            'slug' => ['required','nullable','string', Rule::unique(GameDeveloper::class)],
+            'thumbnail' => ['required','image:jpg,png'],
             'description' => ['nullable','string']
         ];
     }

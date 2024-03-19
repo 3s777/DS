@@ -27,8 +27,9 @@ class GameDeveloperController extends Controller
 
     public function store(CreateGameDeveloperRequest $request): Application|Redirector|RedirectResponse|\Illuminate\Contracts\Foundation\Application
     {
-        dd($request);
+dd($request->validated());
         GameDeveloper::create($request->validated());
+        $request->file('thumbnail')->store('thumbs');
 
         flash()->info(__('game.developer.created'));
 

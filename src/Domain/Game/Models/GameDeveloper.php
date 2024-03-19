@@ -23,7 +23,7 @@ class GameDeveloper extends Model
     protected $fillable = [
         'name',
         'slug',
-        'description'
+        'description',
     ];
 
     protected $casts = [
