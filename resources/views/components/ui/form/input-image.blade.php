@@ -1,3 +1,8 @@
+@props([
+    'id',
+    'name'
+])
+
 <div x-data="imgPreview" x-cloak>
     <div class="input-image"
         {{ $attributes->class([
@@ -19,10 +24,10 @@
                 </div>
             </template>
         </div>
-        <x-ui.form.button class="input-image__submit" tag="label" for="thumbnail">
+        <x-ui.form.button class="input-image__submit" tag="label" for="{{ $id }}">
             {{ __('Выберите изображение') }}
         </x-ui.form.button>
-        <input type="file" hidden id="thumbnail"  name="thumbnail" accept="image/*" x-ref="myFile" @change="previewFile">
+        <input type="file" hidden id="{{ $id }}"  name="{{ $name }}" accept="image/*" x-ref="myFile" @change="previewFile">
     </div>
 </div>
 

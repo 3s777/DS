@@ -53,7 +53,16 @@
 
         <div class="crud-form__sidebar">
             <div class="crud-form__sidebar-wrapper">
-                <x-ui.form.input-image>
+                <x-ui.form.input-image name="thumbnail" id="thumbnail">
+                    <p>Формат jpg, png</p>
+                    <p>Максимальный размер 6Mb</p>
+                </x-ui.form.input-image>
+            </div>
+        </div>
+
+        <div class="crud-form__sidebar">
+            <div class="crud-form__sidebar-wrapper">
+                <x-ui.form.input-image name="thumbnail1" id="thumbnail1">
                     <p>Формат jpg, png</p>
                     <p>Максимальный размер 6Mb</p>
                 </x-ui.form.input-image>
