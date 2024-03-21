@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\Language;
 use Domain\Auth\Models\User;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
@@ -13,12 +14,14 @@ class UserSeeder extends Seeder
      */
     public function run(): void
     {
-        User::create([
-            'name' => 'qqqqq',
-            'email' => 'qqq@qq.qq',
-            'password' => bcrypt('123456789q'),
-            'email_verified_at' => now(),
-            'language_id' => 2
-        ]);
+        $language = Language::query()->first();
+        User::factory(10)->for($language)->create();
+//        User::create([
+//            'name' => 'qqqqq',
+//            'email' => 'qqq@qq.qq',
+//            'password' => bcrypt('123456789q'),
+//            'email_verified_at' => now(),
+//            'language_id' => 2
+//        ]);
     }
 }

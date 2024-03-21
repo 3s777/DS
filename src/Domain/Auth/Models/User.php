@@ -3,7 +3,9 @@
 namespace Domain\Auth\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
+use App\Models\Image;
 use App\Models\Language;
+use Database\Factories\UserFactory;
 use Domain\Auth\Notifications\ResetPasswordNotification;
 use Domain\Auth\Notifications\VerifyEmailNotification;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
@@ -35,7 +37,8 @@ class User extends Authenticatable implements MustVerifyEmail, HasLocalePreferen
         'name',
         'email',
         'password',
-        'language_id'
+        'language_id',
+        'avatar_id'
     ];
 
     /**
@@ -56,6 +59,11 @@ class User extends Authenticatable implements MustVerifyEmail, HasLocalePreferen
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    protected static function newFactory(): UserFactory
+    {
+        return UserFactory::new();
+    }
 
     public function sendEmailVerificationNotification()
     {
@@ -91,4 +99,13 @@ class User extends Authenticatable implements MustVerifyEmail, HasLocalePreferen
     {
         return $this->language->slug;
     }
+
+    public function thumbnail() {
+        return $this->hasOne('images');
+    }
+
+//    public function images()
+//    {
+//        return $this->hasMany(Image::class);
+//    }
 }

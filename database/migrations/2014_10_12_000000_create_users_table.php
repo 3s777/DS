@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\Image;
 use App\Models\Language;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;

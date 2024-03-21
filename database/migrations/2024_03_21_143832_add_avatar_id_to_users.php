@@ -1,6 +1,5 @@
 <?php
 
-use Domain\Auth\Models\User;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -12,15 +11,10 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('images', function (Blueprint $table) {
-            $table->id();
-            $table->string('path');
-            $table->foreignIdFor(User::class)
-                ->constrained()
-                ->cascadeOnUpdate()
-                ->cascadeOnDelete();
-
-            $table->timestamps();
+        Schema::table('users', function (Blueprint $table) {
+//            $table->foreignId('avatar_id')
+//                ->nullable()
+//                ->constrained('images');
         });
     }
 
@@ -30,7 +24,9 @@ return new class extends Migration
     public function down(): void
     {
         if(!app()->isProduction()) {
-            Schema::dropIfExists('images');
+            Schema::table('users', function (Blueprint $table) {
+                $table->dropColumn('avatar_id');
+            });
         }
     }
 };

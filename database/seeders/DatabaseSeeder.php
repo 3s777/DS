@@ -19,12 +19,13 @@ class DatabaseSeeder extends Seeder
         $this->call([
 //            GameGenreSeeder::class,
 //            ConditionSeeder::class,
-//            GamePlatformSeeder::class,
-//            GamePlatformManufacturerSeeder::class,
-//            GamePlatformTypeSeeder::class,
-//            GameSeeder::class,
+////            GamePlatformSeeder::class,
+////            GamePlatformManufacturerSeeder::class,
+////            GamePlatformTypeSeeder::class,
+////            GameSeeder::class,
             LanguageSeeder::class,
-            UserSeeder::class
+            UserSeeder::class,
+            ImageSeeder::class
         ]);
     }
 }

@@ -2,12 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Controllers\Auth\LoginController;
-use App\Models\Language;
-use Database\Factories\LanguageFactory;
-use Database\Factories\UserFactory;
-use Domain\Auth\Actions\LoginUserAction;
-use Domain\Auth\DTOs\LoginUserDTO;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 

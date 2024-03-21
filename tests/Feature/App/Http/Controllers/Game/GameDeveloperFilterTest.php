@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers\Game;
 
-use App\Http\Requests\Game\CreateGameDeveloperRequest;
 use Carbon\Carbon;
 use Database\Factories\GameDeveloperFactory;
 use Database\Factories\UserFactory;
