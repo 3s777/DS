@@ -14,19 +14,23 @@ use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
+use Spatie\MediaLibrary\HasMedia;
+use Spatie\MediaLibrary\InteractsWithMedia;
 use Support\Traits\Models\HasThumbnail;
 
-class User extends Authenticatable implements MustVerifyEmail, HasLocalePreference
+class User extends Authenticatable implements MustVerifyEmail, HasLocalePreference, HasMedia
 {
     use HasApiTokens;
     use HasFactory;
     use Notifiable;
     use SoftDeletes;
     use HasThumbnail;
+    use InteractsWithMedia;
 
     /**
      * The attributes that are mass assignable.
@@ -100,9 +104,39 @@ class User extends Authenticatable implements MustVerifyEmail, HasLocalePreferen
         return $this->language->slug;
     }
 
-    public function thumbnail() {
-        return $this->hasOne('images');
+//    public function thumbnail(): HasOne
+//    {
+//        return $this->hasOne(Image::class)->where('id', $this->avatar_id);
+//    }
+//
+//    public function cover(): HasOne
+//    {
+//        return $this->hasOne(Image::class)->where('id', $this->cover_id);
+//    }
+
+    public function img(): HasOne
+    {
+        return $this->hasOne(Image::class);
     }
+
+    public function morphImages()
+    {
+        return $this->morphMany(Image::class, 'imageable');
+    }
+
+
+//    public function registerMediaCollections(): void
+//    {
+////        $this->addMediaCollection('my-collection')
+////        //add options
+////        ...
+////
+////    // you can define as many collections as needed
+////    $this->addMediaCollection('my-other-collection')
+//        //add options
+//        ...
+//}
+
 
 //    public function images()
 //    {

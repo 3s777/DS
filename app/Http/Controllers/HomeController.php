@@ -12,8 +12,37 @@ class HomeController extends Controller
 {
     public function __invoke() {
 
-        $user = User::find(1)->language->slug;
-        dump(app()->getLocale());
+//        $user = User::with(['language'])->find(1)->language->slug;
+//        dump(app()->getLocale());
+
+//        $users = User::with('img:id,path,user_id')->get();
+
+        $user = User::find(1);
+
+        $user
+            ->addMediaFromDisk('thumbs/CvIrbHsJiz5udsEi58qazYimsy64tGGuI73mE4HK.jpg', 'public')
+            ->preservingOriginal()
+            ->toMediaCollection('avatars');
+
+        $mediaItems = $user->getMedia('avatars');
+
+//        $mediaItems[0]->name = 'new name';
+//        $mediaItems[0]->save();
+        dump($mediaItems);
+
+//        $users1 = User::with('morphImages')->find(1);
+//
+////        $user = User::with('img:id,path,user_id')->find(1);
+//
+//        dump($users1);
+
+//        foreach($users as $user) {
+//            dump($user->img);
+//        }
+
+
+//        $user = User::with(['cover'])->find(1);
+//        dump($user);
 
 //        $product = CollectableItem::createOrFirst([
 //            'name' => 'sdfdsf11gg',

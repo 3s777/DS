@@ -20,6 +20,8 @@ return new class extends Migration
                 ->cascadeOnUpdate()
                 ->cascadeOnDelete();
 
+            $table->nullableMorphs('imageable');
+
             $table->timestamps();
         });
     }

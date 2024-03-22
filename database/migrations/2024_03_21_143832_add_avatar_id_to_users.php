@@ -12,9 +12,10 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('users', function (Blueprint $table) {
-//            $table->foreignId('avatar_id')
-//                ->nullable()
-//                ->constrained('images');
+            $table->foreignId('avatar_id')
+                ->nullable();
+            $table->foreignId('cover_id')
+                ->nullable();
         });
     }
 

@@ -9,16 +9,19 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Mews\Purifier\Casts\CleanHtml;
+use Spatie\MediaLibrary\HasMedia;
+use Spatie\MediaLibrary\InteractsWithMedia;
 use Support\Traits\Models\HasSlug;
 
 /**
  * @method  static GameDeveloper|GameDeveloperQueryBuilder query()
  */
-class GameDeveloper extends Model
+class GameDeveloper extends Model implements HasMedia
 {
     use HasFactory;
     use HasSlug;
     use SoftDeletes;
+    use InteractsWithMedia;
 
     protected $fillable = [
         'name',
