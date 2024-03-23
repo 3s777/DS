@@ -16,12 +16,12 @@ class UserSeeder extends Seeder
     {
         $language = Language::query()->first();
         User::factory(10)->for($language)->create();
-//        User::create([
-//            'name' => 'qqqqq',
-//            'email' => 'qqq@qq.qq',
-//            'password' => bcrypt('123456789q'),
-//            'email_verified_at' => now(),
-//            'language_id' => 2
-//        ]);
+        User::create([
+            'name' => 'qqqqq',
+            'email' => 'qqq@qq.qq',
+            'password' => bcrypt('123456789q'),
+            'email_verified_at' => now(),
+            'language_id' => 2
+        ]);
     }
 }

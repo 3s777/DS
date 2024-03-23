@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\CollectableItem;
+use App\Models\Media;
 use Domain\Auth\Models\User;
 use Domain\Game\Models\GameGenre;
 use Illuminate\Support\Facades\Http;
@@ -12,23 +13,60 @@ class HomeController extends Controller
 {
     public function __invoke() {
 
+//        $users = User::with('media')->get();
+//        dump($users);
+
+//        $user = User::find(1);
+//        $mediaItems = $user->getMedia('2');
+//dump($mediaItems);
+
+$users = User::with('media')->get();
+foreach ($users as $user) {
+    $mediaItems = $user->getMedia('фмф');
+    dump($mediaItems);
+}
+
+//        $user = User::find(12);
+//                $user
+//            ->addMediaFromDisk('thumbs/CvIrbHsJiz5udsEi58qazYimsy64tGGuI73mE4HK.jpg', 'public')
+//            ->preservingOriginal()
+//            ->toMediaCollection('avatars');
+//        $mediaItems = $user->getMedia('avatars');
+//dump($mediaItems);
+
 //        $user = User::with(['language'])->find(1)->language->slug;
 //        dump(app()->getLocale());
 
+
 //        $users = User::with('img:id,path,user_id')->get();
 
-        $user = User::find(1);
+//        $user = User::with('img:id,path,user_id')->find(1);
 
-        $user
-            ->addMediaFromDisk('thumbs/CvIrbHsJiz5udsEi58qazYimsy64tGGuI73mE4HK.jpg', 'public')
-            ->preservingOriginal()
-            ->toMediaCollection('avatars');
+//        $user
+//            ->addMediaFromDisk('thumbs/CvIrbHsJiz5udsEi58qazYimsy64tGGuI73mE4HK.jpg', 'public')
+//            ->preservingOriginal()
+//            ->toMediaCollection('avatars');
+//        $medias = Media::take(10);
+//
+//
+//
+//        dump($medias);
 
-        $mediaItems = $user->getMedia('avatars');
+//
+//        dump($users);
 
-//        $mediaItems[0]->name = 'new name';
-//        $mediaItems[0]->save();
-        dump($mediaItems);
+//        foreach($users as $user) {
+//            $mediaItems = $user->getMedia('avatars');
+//            dump($mediaItems);
+//        }
+
+
+
+//        $mediaItems = $user->getMedia('avatars');
+//
+////        $mediaItems[0]->name = 'new name';
+////        $mediaItems[0]->save();
+//        dump($user);
 
 //        $users1 = User::with('morphImages')->find(1);
 //
