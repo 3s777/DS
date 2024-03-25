@@ -27,7 +27,7 @@
         <x-ui.form.button class="input-image__submit" tag="label" for="{{ $id }}">
             {{ __('Выберите изображение') }}
         </x-ui.form.button>
-        <input type="file" hidden id="{{ $id }}"  name="{{ $name }}" accept="image/*" x-ref="myFile" @change="previewFile">
+        <input type="file" hidden id="{{ $id }}"  name="{{ $name }}" accept="image/png, image/jpeg" x-ref="myFile" @change="previewFile">
     </div>
 </div>
 

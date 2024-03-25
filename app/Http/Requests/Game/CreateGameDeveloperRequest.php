@@ -5,6 +5,7 @@ namespace App\Http\Requests\Game;
 use Domain\Game\Models\GameDeveloper;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
+use Illuminate\Validation\Rules\File;
 use Worksome\RequestFactories\Concerns\HasFactory;
 
 class CreateGameDeveloperRequest extends FormRequest
@@ -27,9 +28,19 @@ class CreateGameDeveloperRequest extends FormRequest
     {
         return [
             'name' => ['required', Rule::unique(GameDeveloper::class)],
-            'slug' => ['required','nullable','string', Rule::unique(GameDeveloper::class)],
-            'thumbnail' => ['required','image:jpg,png'],
-            'description' => ['nullable','string']
+            'slug' => ['nullable','string', Rule::unique(GameDeveloper::class)],
+            'description' => ['nullable','string'],
+            'thumbnail' => ['nullable', 'mimes:jpg,png', 'max:1024'],
+        ];
+    }
+
+    public function attributes()
+    {
+        return [
+            'name' => __('common.name'),
+            'slug' => __('common.slug'),
+            'description' => __('common.description'),
+            'thumbnail' => __('common.thumbnail'),
         ];
     }
 }

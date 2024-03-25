@@ -19,18 +19,18 @@ class HomeController extends Controller
 //        $user = User::find(1);
 //        $mediaItems = $user->getMedia('2');
 //dump($mediaItems);
+//
+//$users = User::get();
+//foreach ($users as $user) {
+//    $mediaItems = $user->getMedia('фмф');
+//
+//}
 
-$users = User::with('media')->get();
-foreach ($users as $user) {
-    $mediaItems = $user->getMedia('фмф');
-    dump($mediaItems);
-}
-
-//        $user = User::find(12);
-//                $user
-//            ->addMediaFromDisk('thumbs/CvIrbHsJiz5udsEi58qazYimsy64tGGuI73mE4HK.jpg', 'public')
-//            ->preservingOriginal()
-//            ->toMediaCollection('avatars');
+        $user = User::find(11);
+                $user
+            ->addMediaFromDisk('thumbs/CvIrbHsJiz5udsEi58qazYimsy64tGGuI73mE4HK.jpg', 'public')
+            ->preservingOriginal()
+            ->toMediaCollection('avatars');
 //        $mediaItems = $user->getMedia('avatars');
 //dump($mediaItems);
 

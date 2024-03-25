@@ -22,7 +22,7 @@
                     {{ __('common.slug') }}
                 </x-ui.responsive-table.column>
                 <x-ui.responsive-table.column name="created_at" sortable="true">
-                    {{ __('common.created-date') }}
+                    {{ __('common.created_date') }}
                 </x-ui.responsive-table.column>
                 <x-ui.responsive-table.column type="action" name="action">
                     {{ __('common.action') }}

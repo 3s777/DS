@@ -12,7 +12,7 @@
         </x-ui.modal.header>
 
         <x-ui.modal.body>
-            {{ __('common.delete-confirmation') }} <span x-text="$store.modalDelete.name"></span>?
+            {{ __('common.delete_confirmation') }} <span x-text="$store.modalDelete.name"></span>?
         </x-ui.modal.body>
 
         <x-ui.modal.footer align-buttons="right">
