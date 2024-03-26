@@ -12,6 +12,9 @@ use Illuminate\Foundation\Application;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Redirector;
+use Illuminate\Support\Facades\Storage;
+use Intervention\Image\Drivers\Gd\Driver;
+use Intervention\Image\ImageManager;
 
 class GameDeveloperController extends Controller
 {
@@ -27,12 +30,31 @@ class GameDeveloperController extends Controller
 
     public function store(CreateGameDeveloperRequest $request): Application|Redirector|RedirectResponse|\Illuminate\Contracts\Foundation\Application
     {
-        $request->file('thumbnail')->store();
-        $gameDeveloper = GameDeveloper::create($request->safe()->except(['thumbnail']));
 
-        $media = $gameDeveloper->addMediaFromRequest('thumbnail', 'public')
-            ->withResponsiveImages()
-            ->toMediaCollection();
+
+        $file = $request->file('thumbnail')->store('','images');
+dd($file);
+
+//        $gameDeveloper = GameDeveloper::create($request->safe()->except(['thumbnail']));
+//
+//        $media = $gameDeveloper->addMediaFromRequest('thumbnail', 'public')
+//            ->withResponsiveImages()
+//            ->toMediaCollection();
+
+        $storage = Storage::disk('images');
+
+
+
+        $manager = new ImageManager(new Driver());
+        $image = $manager->read($request->file('thumbnail'));
+
+        $image->toWebp(90)
+            ->save($storage->path("/webp/".$file));
+
+        dd($image);
+
+
+
 //            ->usingFileName('xvcxvc')
 
 
