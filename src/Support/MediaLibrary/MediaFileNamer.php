@@ -11,7 +11,7 @@ class MediaFileNamer extends FileNamer
 {
     public function originalFileName(string $fileName): string
     {
-        return Str::random(10).Carbon::now()->timestamp;
+        return Str::random(40);
     }
 
     public function conversionFileName(string $fileName, Conversion $conversion): string

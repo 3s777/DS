@@ -30,7 +30,7 @@ class CreateGameDeveloperRequest extends FormRequest
             'name' => ['required', Rule::unique(GameDeveloper::class)],
             'slug' => ['nullable','string', Rule::unique(GameDeveloper::class)],
             'description' => ['nullable','string'],
-            'thumbnail' => ['nullable', 'mimes:jpg,png', 'max:1024'],
+            'thumbnail' => ['nullable', 'mimes:jpg,png', 'max:10024'],
         ];
     }
 

@@ -31,6 +31,7 @@
                     </x-ui.form.group>
                 </x-grid.col>
 
+
                 <x-grid.col xl="4" lg="6" md="6" sm="12">
                     <x-ui.form.group>
                         <x-libraries.filepond
@@ -57,6 +58,10 @@
                     </x-ui.form.group>
                 </x-grid.col>
             </x-grid>
+
+
+
+            <img src="{{ asset('storage/images/'.$gameDeveloper->thumb_path) }}" alt="">
         </x-ui.form>
     </div>
 

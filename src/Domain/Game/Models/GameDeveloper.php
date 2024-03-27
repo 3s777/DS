@@ -43,6 +43,11 @@ class GameDeveloper extends Model implements HasMedia
         'created_at'
     ];
 
+    public $thumbs = [
+        'small' => ['220', '220'],
+        'medium' => ['500', '500']
+    ];
+
     public function availableFilters(): array
     {
         return [
@@ -61,18 +66,18 @@ class GameDeveloper extends Model implements HasMedia
         return new GameDeveloperQueryBuilder($query);
     }
 
-    public function registerMediaConversions(Media|\Spatie\MediaLibrary\MediaCollections\Models\Media|null $media = null): void
-    {
-        $this->addMediaConversion('thumb')
-            ->format(Manipulations::FORMAT_WEBP)
-            ->width(368)
-            ->height(232)
-            ->sharpen(10);
-
-        $this->addMediaConversion('xcvcxv')
-            ->width(500)
-            ->height(300)
-            ->sharpen(10);
-
-    }
+//    public function registerMediaConversions(Media|\Spatie\MediaLibrary\MediaCollections\Models\Media|null $media = null): void
+//    {
+//        $this->addMediaConversion('thumb')
+//            ->format(Manipulations::FORMAT_WEBP)
+//            ->width(368)
+//            ->height(232)
+//            ->sharpen(10);
+//
+//        $this->addMediaConversion('xcvcxv')
+//            ->width(500)
+//            ->height(300)
+//            ->sharpen(10);
+//
+//    }
 }
