@@ -36,8 +36,9 @@ class GameDeveloperController extends Controller
 
 
 
-        $media = $gameDeveloper->addMediaFromRequest('thumbnail')
-            ->toMediaCollection('thumbnails', 'images');
+//        $media = $gameDeveloper->addMediaFromRequest('thumbnail')
+//            ->withResponsiveImages()
+//            ->toMediaCollection('thumbnails', 'images');
 
         $mediaPath = app(MediaPathGenerator::class)->getPath($media);
 

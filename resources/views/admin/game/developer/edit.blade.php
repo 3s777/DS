@@ -58,10 +58,123 @@
                     </x-ui.form.group>
                 </x-grid.col>
             </x-grid>
+            @php
+                $imgPath = pathinfo($gameDeveloper->thumb_path);
+                dump($imgPath);
+            @endphp
+{{--<div class="crud-form__test">--}}
+{{--    {{ $gameDeveloper->getFirstMedia('thumbnails') }}--}}
+{{--</div>--}}
+
+<div style="width: 50%">
+    <picture>
+        <source
+            type="image/webp"
+            srcset="
+{{--                        {{ asset('/storage/test-300.webp') }} 300w,--}}
+{{--                        {{ asset('/storage/test-650.webp') }} 650w,--}}
+{{--                        {{ asset('/storage/test-800.webp') }} 800w,--}}
+{{--                        {{ asset('/storage/test-1200.webp') }} 1200w,--}}
+                        {{ asset('storage/images/'.$imgPath['dirname'].'/'.$imgPath['filename'].'_500.webp') }} 500w,
+                        {{ asset('storage/images/'.$imgPath['dirname'].'/'.$imgPath['filename'].'_900.webp') }} 900w,
+                        {{ asset('storage/images/'.$imgPath['dirname'].'/'.$imgPath['filename'].'.webp') }} 1400w,
+                    "
+
+{{--                    sizes="--}}
+{{--                        (max-width: 500px) 200px,--}}
+{{--                        (max-width: 900px) 600px,--}}
+{{--                        (max-width: 1900px) 1000px,--}}
+{{--                        100vw--}}
+{{--                    "--}}
+
+{{--                        sizes="--}}
+{{--                            (max-width: 768px) 100vw,--}}
+{{--                            (max-width: 1200px) 50vw,--}}
+{{--                            30vw--}}
+{{--                        "--}}
+
+            sizes="100vw"
+
+        />
+        <img
+            style="max-width: 100%"
+            src="{{ asset('/storage/test.jpg') }}"
+            srcset="
+{{--                        {{ asset('/storage/test-300.jpg') }} 300w,--}}
+{{--                        {{ asset('/storage/test-650.jpg') }} 650w,--}}
+{{--                        {{ asset('/storage/test-800.jpg') }} 800w,--}}
+{{--                        {{ asset('/storage/test-1200.jpg') }} 1200w,--}}
+{{--                        {{ asset('/storage/test-1500.jpg') }} 1500w,--}}
+                        {{ asset('storage/images/'.$gameDeveloper->thumb_path) }} 3000w,
+                    "
+            sizes="
+                        (max-width: 700px) 280px,
+                        (max-width: 1000px) 740px,
+                        (max-width: 1900px) 1500px,
+                        100vw
+                    "
+            loading="lazy"
+            decoding="async"
+            alt="Test image"
+            title="Test image"
+        />
+    </picture>
+</div>
 
 
 
-            <img src="{{ asset('storage/images/'.$gameDeveloper->thumb_path) }}" alt="">
+
+
+
+
+{{--            <picture>--}}
+{{--                <source--}}
+{{--                    type="image/webp"--}}
+{{--                    srcset="--}}
+{{--                        {{ asset('/storage/test-300.webp') }} 300w,--}}
+{{--                        {{ asset('/storage/test-650.webp') }} 650w,--}}
+{{--                        {{ asset('/storage/test-800.webp') }} 800w,--}}
+{{--                        {{ asset('/storage/test-1200.webp') }} 1200w,--}}
+{{--                        {{ asset('/storage/test-1500.webp') }} 1500w,--}}
+{{--                        {{ asset('/storage/test.webp') }} 3000w,--}}
+{{--                    "--}}
+{{--                    sizes="--}}
+{{--                        (max-width: 700px) 280px,--}}
+{{--                        (max-width: 1000px) 740px,--}}
+{{--                        (max-width: 1900px) 1500px,--}}
+{{--                        100vw--}}
+{{--                    "--}}
+{{--                />--}}
+{{--                <img--}}
+{{--                    style="max-width: 100%"--}}
+{{--                    src="{{ asset('/storage/test.jpg') }}"--}}
+{{--                    srcset="--}}
+{{--                        {{ asset('/storage/test-300.jpg') }} 300w,--}}
+{{--                        {{ asset('/storage/test-650.jpg') }} 650w,--}}
+{{--                        {{ asset('/storage/test-800.jpg') }} 800w,--}}
+{{--                        {{ asset('/storage/test-1200.jpg') }} 1200w,--}}
+{{--                        {{ asset('/storage/test-1500.jpg') }} 1500w,--}}
+{{--                        {{ asset('/storage/test.jpg') }} 3000w,--}}
+{{--                    "--}}
+{{--                    sizes="--}}
+{{--                        (max-width: 700px) 280px,--}}
+{{--                        (max-width: 1000px) 740px,--}}
+{{--                        (max-width: 1900px) 1500px,--}}
+{{--                        100vw--}}
+{{--                    "--}}
+{{--                    loading="lazy"--}}
+{{--                    decoding="async"--}}
+{{--                    alt="Test image"--}}
+{{--                    title="Test image"--}}
+{{--                />--}}
+{{--            </picture>--}}
+
+
+
+
+
+
+{{--            <img src="{{ asset('storage/images/'.$gameDeveloper->thumb_path) }}" alt="">--}}
         </x-ui.form>
     </div>
 
