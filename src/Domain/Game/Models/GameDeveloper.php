@@ -16,6 +16,7 @@ use Spatie\MediaLibrary\Conversions\Manipulations;
 use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
 use Support\Traits\Models\HasSlug;
+use Support\Traits\Models\HasThumbnail;
 
 /**
  * @method  static GameDeveloper|GameDeveloperQueryBuilder query()
@@ -26,6 +27,7 @@ class GameDeveloper extends Model implements HasMedia
     use HasSlug;
     use SoftDeletes;
     use InteractsWithMedia;
+    use HasThumbnail;
 
     protected $fillable = [
         'name',
@@ -45,7 +47,13 @@ class GameDeveloper extends Model implements HasMedia
 
     public $thumbs = [
         'small' => ['220', '220'],
-        'medium' => ['500', '500']
+        'medium' => ['500', '500'],
+        'full_preview' => ['550', '550'],
+        'full_preview_300' => ['300', '300'],
+        'full_preview_400' => ['400', '400'],
+        'full_preview_600' => ['600', '600'],
+        'full_preview_1200' => ['1200', '1200'],
+        'large' => ['1000', '1000'],
     ];
 
     public function availableFilters(): array
@@ -80,4 +88,13 @@ class GameDeveloper extends Model implements HasMedia
 //            ->sharpen(10);
 //
 //    }
+    protected function thumbnailDir(): string
+    {
+        return 'sdf';
+    }
+
+    public function modelThumbDir(): string
+    {
+        return 'game_developer';
+    }
 }

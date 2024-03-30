@@ -12,6 +12,7 @@ use Illuminate\Foundation\Application;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Redirector;
+use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Storage;
 use Intervention\Image\Drivers\Gd\Driver;
 use Intervention\Image\ImageManager;
@@ -34,53 +35,11 @@ class GameDeveloperController extends Controller
 
         $gameDeveloper = GameDeveloper::create($request->safe()->except(['thumbnail']));
 
-
-
-//        $media = $gameDeveloper->addMediaFromRequest('thumbnail')
-//            ->withResponsiveImages()
-//            ->toMediaCollection('thumbnails', 'images');
-
-        $mediaPath = app(MediaPathGenerator::class)->getPath($media);
-
-        $gameDeveloper->thumb_path = $mediaPath.$media->file_name;
-        $gameDeveloper->save();
-
-        $storage = Storage::disk('images');
-
-        $filePath = pathinfo($mediaPath.$media->file_name);
-
-        $manager = new ImageManager(new Driver());
-
-        $image = $manager->read($storage->path($mediaPath.$media->file_name));
-        $image->save($storage->path($mediaPath.$filePath['filename'].'_original.'.$filePath['extension']), 85);
-
-        $webpImage = clone $image;
-        $webpImage->toWebp(75)->save($storage->path($mediaPath.$filePath['filename']).'.webp');
-
-        if($gameDeveloper->thumbs) {
-
-            $storage->makeDirectory($mediaPath.'/webp');
-            $storage->makeDirectory($mediaPath.'/'.$filePath['extension']);
-
-            foreach($gameDeveloper->thumbs as $thumb) {
-
-                $webpThumbDir = $mediaPath.'/webp/'.$thumb[0].'x'.$thumb[1];
-                $originalThumbDir = $mediaPath.'/'.$filePath['extension'].'/'.$thumb[0].'x'.$thumb[1];
-
-                $storage->makeDirectory($webpThumbDir);
-                $storage->makeDirectory($originalThumbDir);
-
-                $thumbImage = clone $image;
-                $thumbImage->scale($thumb[0], $thumb[1])->encodeByExtension(quality: 85)->save($storage->path($originalThumbDir.'/'.$filePath['filename'].'.'.$filePath['extension']));
-
-                $thumbWebpImage = clone $image;
-                $thumbWebpImage->scale($thumb[0], $thumb[1])->toWebp(75)->save($storage->path($webpThumbDir.'/'.$filePath['filename'].'.webp'));
-
-            }
-        }
-
-
-
+        $gameDeveloper->addImageWithThumbnail(
+            $request->file('thumbnail'),
+            'thumbnails',
+            ['small', 'medium',]
+        );
 
         dd($gameDeveloper);
 

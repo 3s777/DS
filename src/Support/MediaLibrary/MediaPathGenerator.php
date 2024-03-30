@@ -11,11 +11,14 @@ class MediaPathGenerator implements PathGenerator
 
     public function getPath(Media $media): string
     {
-        $mediaCreatedDate = Carbon::make($media->created_at);
-        return class_basename($media->model_type).'/'
+        $mediaCreatedDate = Carbon::make($media->model->created_at);
+        $filePath = pathinfo($media->file_name);
+
+        return $media->model->modelThumbDir().'/'
             .$mediaCreatedDate->format('Y').'/'
             .$mediaCreatedDate->format('m').'/'
-            .$media->getKey().'/';
+//            .$media->getKey().'/';
+            .$filePath['filename'].'/';
     }
 
     public function getPathForConversions(Media $media): string
