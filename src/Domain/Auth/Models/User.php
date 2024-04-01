@@ -142,4 +142,8 @@ class User extends Authenticatable implements MustVerifyEmail, HasLocalePreferen
 //    {
 //        return $this->hasMany(Image::class);
 //    }
+    public function thumbnailSizes(): array
+    {
+        return [];
+    }
 }

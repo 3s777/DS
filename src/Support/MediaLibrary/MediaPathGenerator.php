@@ -14,7 +14,7 @@ class MediaPathGenerator implements PathGenerator
         $mediaCreatedDate = Carbon::make($media->model->created_at);
         $filePath = pathinfo($media->file_name);
 
-        return $media->model->modelThumbDir().'/'
+        return $media->model->thumbnailDir().'/'
             .$mediaCreatedDate->format('Y').'/'
             .$mediaCreatedDate->format('m').'/'
 //            .$media->getKey().'/';
