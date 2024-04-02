@@ -2,15 +2,14 @@
 
 namespace Support\Traits\Models;
 
+use App\Jobs\GenerateSmallThumbnailsJob;
 use App\Jobs\GenerateThumbnailJob;
-use App\Models\Media;
 use Carbon\Carbon;
+use Illuminate\Contracts\Filesystem\Filesystem;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Storage;
-use Intervention\Image\Drivers\Gd\Driver;
-use Intervention\Image\ImageManager;
 use Support\MediaLibrary\MediaPathGenerator;
 
 trait HasThumbnail
@@ -24,7 +23,7 @@ trait HasThumbnail
         return 'thumbnail';
     }
 
-    public function thumbnailStorage(): \Illuminate\Contracts\Filesystem\Filesystem
+    public function thumbnailStorage(): Filesystem
     {
         return Storage::disk('images');
     }
@@ -40,7 +39,8 @@ trait HasThumbnail
         ]);
     }
 
-    protected function generateMediaPath($filename) {
+    protected function generateMediaPath(string $filename): string
+    {
         $mediaCreatedDate = Carbon::make($this->created_at);
         $filePath = pathinfo($filename);
 
@@ -55,7 +55,10 @@ trait HasThumbnail
         $media = $this->addMedia($image)
             ->toMediaCollection($collectionName, 'images');
         $mediaPath = app(MediaPathGenerator::class)->getPath($media);
+
+        $this->thumb_path = $mediaPath.$media->file_name;
         $this->save();
+
         return $mediaPath.$media->file_name;
     }
 
@@ -63,15 +66,12 @@ trait HasThumbnail
     {
         // TODO upload image without MediaLibrary
 //        $imageDir = $this->generateMediaPath($imageFileName);
-        return '';
+        return $image;
     }
 
     public function generateThumbnails($imageFullPath, $specialSizes): void
     {
         $defaultThumbnails = $this->thumbnailSizes();
-
-        $manager = new ImageManager(new Driver());
-        $image = $manager->read($this->thumbnailStorage()->path($imageFullPath));
 
         $imagePathInfo = pathinfo($imageFullPath);
 
@@ -80,50 +80,36 @@ trait HasThumbnail
             $filteredThumbs = ($specialSizes) ? Arr::only($defaultThumbnails, $specialSizes) : $defaultThumbnails;
 
             $this->thumbnailStorage()->makeDirectory($imagePathInfo['dirname'].'/webp');
-            $this->thumbnailStorage()->makeDirectory($imagePathInfo['dirname'].'/'.$imagePathInfo['extension']);
+//            $this->thumbnailStorage()->makeDirectory($imagePathInfo['dirname'].'/'.$imagePathInfo['extension']);
 
             foreach($filteredThumbs as $thumb) {
 
                 $webpThumbDir = $imagePathInfo['dirname'].'/webp/'.$thumb[0].'x'.$thumb[1];
-                $originalThumbDir = $imagePathInfo['dirname'].'/'.$imagePathInfo['extension'].'/'.$thumb[0].'x'.$thumb[1];
+//                $originalThumbDir = $imagePathInfo['dirname'].'/'.$imagePathInfo['extension'].'/'.$thumb[0].'x'.$thumb[1];
 
                 $this->thumbnailStorage()->makeDirectory($webpThumbDir);
-                $this->thumbnailStorage()->makeDirectory($originalThumbDir);
+//                $this->thumbnailStorage()->makeDirectory($originalThumbDir);
 
-                $thumbImage = clone $image;
-                $thumbImage
-                    ->scaleDown($thumb[0], $thumb[1])
-                    ->save($this->thumbnailStorage()->path($originalThumbDir.'/'.$imagePathInfo['filename'].'.'.$imagePathInfo['extension']));
-
-                $thumbWebpImage = clone $image;
-                $thumbWebpImage
-                    ->scaleDown($thumb[0], $thumb[1])
-                    ->toWebp()
-                    ->save($this->thumbnailStorage()->path($webpThumbDir.'/'.$imagePathInfo['filename'].'.webp'));
+                GenerateSmallThumbnailsJob::dispatch($imageFullPath, $thumb[0], $thumb[1], $webpThumbDir);
             }
         }
     }
 
-    public function generateFullSizes($imageFullPath)
+    public function generateFullSizes(string $imageFullPath): void
     {
-        $imagePathInfo = pathinfo($imageFullPath);
+        // Generate full image 2048, 100% quality
+        GenerateThumbnailJob::dispatch($imageFullPath, 2048, false);
 
-        $manager = new ImageManager(new Driver());
-        $image = $manager->read($this->thumbnailStorage()->path($imageFullPath));
-//        $image->scaleDown(2048)->save($this->thumbnailStorage()->path($imageFullPath));
+        // Generate original extension image 1200, 80% quality for webp alternative
+        GenerateThumbnailJob::dispatch($imageFullPath, 1200, false, 80, 'origin');
 
-        GenerateThumbnailJob::dispatch($imageFullPath);
-
-        $originalImage = clone $image;
-        $originalImage->scaleDown(1200)
-            ->encodeByExtension(quality: 80)
-            ->save($this->thumbnailStorage()->path($imagePathInfo['dirname'].'/'.$imagePathInfo['filename'].'_original.'.$imagePathInfo['extension']), 85);
-
-        $webpImage = clone $image;
-        $webpImage->toWebp(75)->save($this->thumbnailStorage()->path($imagePathInfo['dirname'].'/'.$imagePathInfo['filename']).'.webp');
+        // Generate webp image 75 quality full size
+        GenerateThumbnailJob::dispatch($imageFullPath, 2048, true, 75);
     }
 
-    public function addImageWithThumbnail(UploadedFile $image, string $collectionName = 'default', array $specialSizes = []): void
+    public function addImageWithThumbnail(UploadedFile $image,
+                                          string $collectionName = 'default',
+                                          array $specialSizes = []): void
     {
         if(config('thumbnail.driver') == 'media_library') {
             $imageFullPath = $this->addOriginalWithMediaLibrary($image, $collectionName);
@@ -134,5 +120,17 @@ trait HasThumbnail
         $this->generateFullSizes($imageFullPath);
 
         $this->generateThumbnails($imageFullPath, $specialSizes);
+    }
+
+    public function thumbUrlWebp(array $parameters)
+    {
+        $imgPath = pathinfo($this->thumb_path);
+        $allSizes = '';
+
+        foreach($parameters as $param) {
+            $allSizes .= asset('storage/images/'.$imgPath['dirname'].'/webp/'.$param['size'].'/'.$imgPath['filename'].'.webp').' 300w, ';
+        }
+
+        return $allSizes;
     }
 }

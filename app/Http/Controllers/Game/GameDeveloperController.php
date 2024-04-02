@@ -33,7 +33,7 @@ class GameDeveloperController extends Controller
         $gameDeveloper->addImageWithThumbnail(
             $request->file('thumbnail'),
             'thumbnails',
-            ['small', 'medium',]
+            ['small', 'medium', 'pulk']
         );
 
         dd($gameDeveloper);
