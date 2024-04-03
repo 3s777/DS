@@ -10,6 +10,8 @@ use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Storage;
+use Intervention\Image\Drivers\Gd\Driver;
+use Intervention\Image\ImageManager;
 use Support\MediaLibrary\MediaPathGenerator;
 
 trait HasThumbnail
@@ -39,7 +41,7 @@ trait HasThumbnail
         ]);
     }
 
-    protected function generateMediaPath(string $filename): string
+    public function generateMediaPath(string $filename): string
     {
         $mediaCreatedDate = Carbon::make($this->created_at);
         $filePath = pathinfo($filename);
@@ -56,7 +58,7 @@ trait HasThumbnail
             ->toMediaCollection($collectionName, 'images');
         $mediaPath = app(MediaPathGenerator::class)->getPath($media);
 
-        $this->thumb_path = $mediaPath.$media->file_name;
+        $this->{$this->thumbnailColumn()} = $mediaPath.$media->file_name;
         $this->save();
 
         return $mediaPath.$media->file_name;
@@ -101,10 +103,15 @@ trait HasThumbnail
         GenerateThumbnailJob::dispatch($imageFullPath, 2048, false);
 
         // Generate original extension image 1200, 80% quality for webp alternative
-        GenerateThumbnailJob::dispatch($imageFullPath, 1200, false, 80, 'origin');
+        GenerateThumbnailJob::dispatch($imageFullPath, 1200, false, 80, 'fallback');
 
         // Generate webp image 75 quality full size
         GenerateThumbnailJob::dispatch($imageFullPath, 2048, true, 75);
+    }
+
+    public function generateThumbnail($imagePath, $size, $quality)
+    {
+
     }
 
     public function addImageWithThumbnail(UploadedFile $image,
@@ -120,17 +127,5 @@ trait HasThumbnail
         $this->generateFullSizes($imageFullPath);
 
         $this->generateThumbnails($imageFullPath, $specialSizes);
-    }
-
-    public function thumbUrlWebp(array $parameters)
-    {
-        $imgPath = pathinfo($this->thumb_path);
-        $allSizes = '';
-
-        foreach($parameters as $param) {
-            $allSizes .= asset('storage/images/'.$imgPath['dirname'].'/webp/'.$param['size'].'/'.$imgPath['filename'].'.webp').' 300w, ';
-        }
-
-        return $allSizes;
     }
 }

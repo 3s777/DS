@@ -62,12 +62,12 @@
 
 
 <x-ui.responsive-image
-    :game_developer="$gameDeveloper"
-    :thumbs="['small', 'medium']"
-    sizes="(max-width: 1024px) 100vw,
-                (max-width: 1400px) 30vw,
-                550px"
->
+    :model="$gameDeveloper"
+    :thumbs="['extra_small', 'small', 'medium']"
+    path="df"
+    :media="$gameDeveloper->getFirstMedia('thumbnails')"
+    sizes="(max-width: 1024px) 100vw, (max-width: 1400px) 30vw, 550px">
+    <x-slot:img alt="test" title="test title"></x-slot:img>
 </x-ui.responsive-image>
 
 

@@ -25,8 +25,8 @@ class DatabaseSeeder extends Seeder
 ////            GameSeeder::class,
             LanguageSeeder::class,
             UserSeeder::class,
-            ImageSeeder::class,
-            MediaSeeder::class
+//            ImageSeeder::class,
+//            MediaSeeder::class
         ]);
     }
 }

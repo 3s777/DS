@@ -61,6 +61,7 @@ class GameDeveloper extends Model implements HasMedia
                 'full_preview_600' => ['600', '600'],
                 'full_preview_1200' => ['1200', '1200'],
                 'large' => ['1000', '1000'],
+                'extra_small' => ['100', '100']
             ];
         }
 

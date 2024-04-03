@@ -26,9 +26,19 @@ return new class extends Migration
             $table->json('generated_conversions');
             $table->json('responsive_images');
             $table->unsignedInteger('order_column')->nullable()->index();
-            $table->foreignIdFor(User::class)->nullable()->constrained();
+            $table->foreignIdFor(User::class)
+                ->nullable()
+                ->constrained()
+                ->cascadeOnDelete()
+                ->cascadeOnUpdate();
 
             $table->nullableTimestamps();
         });
+    }
+
+
+    public function down(): void
+    {
+        Schema::dropIfExists('media');
     }
 };

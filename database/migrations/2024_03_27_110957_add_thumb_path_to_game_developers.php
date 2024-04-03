@@ -12,7 +12,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('game_developers', function (Blueprint $table) {
-            $table->string('thumb_path')->nullable();
+            $table->string('thumbnail')->nullable();
         });
     }
 
@@ -23,7 +23,7 @@ return new class extends Migration
     {
         if(!app()->isProduction()) {
             Schema::table('game_developers', function (Blueprint $table) {
-                $table->dropColumn(['thumb_path']);
+                $table->dropColumn(['thumbnail']);
             });
         }
     }
