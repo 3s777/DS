@@ -20,7 +20,7 @@ trait HasThumbnail
 
     abstract public function thumbnailSizes(): array;
 
-    public function thumbnailColumn(): string
+    public function getThumbnailColumn(): string
     {
         return 'thumbnail';
     }
@@ -30,16 +30,16 @@ trait HasThumbnail
         return Storage::disk('images');
     }
 
-    public function makeThumbnail(string $size, string $method = 'resize'): string
-    {
-        return route('thumbnail', [
-            'size' => $size,
-            'dir' => $this->thumbnailDir(),
-            'method' => $method,
-            'file' => File::basename('test-4.jpg')
-//            'file' => File::basename($this->{$this->thumbnailColumn()})
-        ]);
-    }
+//    public function makeThumbnail(string $size, string $method = 'resize'): string
+//    {
+//        return route('thumbnail', [
+//            'size' => $size,
+//            'dir' => $this->thumbnailDir(),
+//            'method' => $method,
+//            'file' => File::basename('test-4.jpg')
+////            'file' => File::basename($this->{$this->thumbnailColumn()})
+//        ]);
+//    }
 
     public function generateMediaPath(string $filename): string
     {
@@ -58,7 +58,7 @@ trait HasThumbnail
             ->toMediaCollection($collectionName, 'images');
         $mediaPath = app(MediaPathGenerator::class)->getPath($media);
 
-        $this->{$this->thumbnailColumn()} = $mediaPath.$media->file_name;
+        $this->{$this->getThumbnailColumn()} = $mediaPath.$media->file_name;
         $this->save();
 
         return $mediaPath.$media->file_name;
@@ -109,23 +109,34 @@ trait HasThumbnail
         GenerateThumbnailJob::dispatch($imageFullPath, 2048, true, 75);
     }
 
-    public function generateThumbnail($imagePath, $size, $quality)
-    {
-
-    }
-
-    public function addImageWithThumbnail(UploadedFile $image,
+    public function addImageWithThumbnail(UploadedFile|null $image,
                                           string $collectionName = 'default',
                                           array $specialSizes = []): void
     {
-        if(config('thumbnail.driver') == 'media_library') {
-            $imageFullPath = $this->addOriginalWithMediaLibrary($image, $collectionName);
-        } else {
-            $imageFullPath = $this->addOriginal($image);
+        if($image) {
+            if(config('thumbnail.driver') == 'media_library') {
+                $imageFullPath = $this->addOriginalWithMediaLibrary($image, $collectionName);
+            } else {
+                $imageFullPath = $this->addOriginal($image);
+            }
+
+            $this->generateFullSizes($imageFullPath);
+
+            $this->generateThumbnails($imageFullPath, $specialSizes);
         }
+    }
 
-        $this->generateFullSizes($imageFullPath);
-
-        $this->generateThumbnails($imageFullPath, $specialSizes);
+    public function getThumbnailPath(): ?string
+    {
+        if(config('thumbnail.driver') == 'media_library') {
+            $thumbnailMedia = $this->getFirstMedia($this->getThumbnailColumn());
+            if(!$thumbnailMedia) {
+                return null;
+            }
+            $mediaPath = app(MediaPathGenerator::class)->getPath($thumbnailMedia);
+            return $mediaPath.$thumbnailMedia->file_name;
+        } else {
+            return $this->{$this->getThumbnailColumn()};
+        }
     }
 }

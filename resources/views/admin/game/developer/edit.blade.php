@@ -59,18 +59,14 @@
                 </x-grid.col>
             </x-grid>
 
-
-
-<x-ui.responsive-image
-    :model="$gameDeveloper"
-    :thumbs="['extra_small', 'small', 'medium']"
-    path="df"
-    :media="$gameDeveloper->getFirstMedia('thumbnails')"
-    sizes="(max-width: 1024px) 100vw, (max-width: 1400px) 30vw, 550px">
-    <x-slot:img alt="test" title="test title"></x-slot:img>
-</x-ui.responsive-image>
-
-
+        <x-ui.responsive-image
+            :model="$gameDeveloper"
+            :thumbs="['extra_small', 'extra_small1', 'small', 'medium']"
+            :path="$gameDeveloper->getThumbnailPath()"
+{{--            :placeholder="false"--}}
+            sizes="(max-width: 1024px) 100vw, (max-width: 1400px) 30vw, 550px">
+            <x-slot:img alt="test" title="test title"></x-slot:img>
+        </x-ui.responsive-image>
 
         </x-ui.form>
     </div>

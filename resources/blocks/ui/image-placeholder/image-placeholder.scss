@@ -1,0 +1,14 @@
+.image-placeholder {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 12px;
+    border-radius: $small-border-radius;
+    background-color: $base-dark-like-transparent;
+
+    svg {
+        width: 70%;
+        height: auto;
+        stroke: $opposite-main;
+    }
+}

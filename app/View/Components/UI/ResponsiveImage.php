@@ -15,48 +15,35 @@ use Support\MediaLibrary\MediaPathGenerator;
 
 class ResponsiveImage extends Component
 {
-    public string $imgPath;
     public array $imgPathInfo;
 
     public function __construct(
         public Model $model,
         public array $thumbs,
         public string $sizes,
-        public string $path,
-        public Media|null $media = null
+        public ?string $path,
+        public bool $placeholder = true
     )
     {
-        if(config('thumbnail.driver') == 'media_library') {
-
-            $mediaPath = app(MediaPathGenerator::class)->getPath($this->media);
-
-            $this->imgPath = $mediaPath.$this->media->file_name;
-        } else {
-            $this->imgPath = $this->model->thumbnail;
-        }
-
-
-        $this->imgPathInfo = pathinfo($this->imgPath);
+        $this->imgPathInfo = pathinfo($this->path);
     }
 
     public function fallbackSource() {
         return $this->imgPathInfo['dirname'].'/'.$this->imgPathInfo['filename'].'_fallback.'.$this->imgPathInfo['extension'];
     }
 
-    public function render(): View|Closure|string
+    /*    Check thumbnail sizes images by path and create if not isset */
+    public function checkAndCreateThumbnailSizes(array $thumbnailSizes): void
     {
         $storage = Storage::disk('images');
-
-        $thumbSizes = Arr::only($this->model->thumbnailSizes(),$this->thumbs);
-
-        foreach($thumbSizes as $size) {
+        foreach($thumbnailSizes as $size) {
             if(!$storage->exists($this->imgPathInfo['dirname'].'/webp/'.$size[0].'x'.$size[1].'/'.$this->imgPathInfo['filename'].'.webp'))
             {
                 $webpThumbDir = $this->imgPathInfo['dirname'].'/webp/'.$size[0].'x'.$size[1];
                 $storage->makeDirectory($webpThumbDir);
 
                 $manager = new ImageManager(new Driver());
-                $image = $manager->read($storage->path($this->imgPath));
+                $image = $manager->read($storage->path($this->path));
 
                 $image
                     ->scaleDown($size[0], $size[1])
@@ -64,7 +51,27 @@ class ResponsiveImage extends Component
                     ->save($storage->path($webpThumbDir.'/'.$this->imgPathInfo['filename'].'.webp'));
             }
         }
+    }
+
+    public function shouldRender(): bool
+    {
+        if(!$this->path && !$this->placeholder) {
+            return false;
+        }
+
+        return true;
+    }
+
+    public function render(): View|Closure|string
+    {
+        $thumbSizes = Arr::only($this->model->thumbnailSizes(),$this->thumbs);
+
+        if($this->path) {
+            $this->checkAndCreateThumbnailSizes($thumbSizes);
+        }
 
         return view('components.ui.responsive-image', compact(['thumbSizes']));
     }
+
+
 }
