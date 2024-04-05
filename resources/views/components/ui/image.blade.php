@@ -1,12 +1,5 @@
-{{--TODO: convert src_full to srcFull in Image component --}}
-
-@props([
-    'caption' => '',
-    'src' => '',
-    'src_full' => '',
-])
-@if($src_full)
-    <a href="{{ $src_full }}" data-fancybox data-caption="{{ $caption }}">
+@if($srcFull)
+    <a href="{{ $srcFull }}" data-fancybox data-caption="{{ $caption }}">
 @endif
     <img {{ $attributes->class([
             'item-card__main-img'
@@ -18,6 +11,6 @@
         alt="{{ $caption }}"
         title="{{ $caption }}"
     />
- @if($src_full)
+ @if($srcFull)
     </a>
 @endif

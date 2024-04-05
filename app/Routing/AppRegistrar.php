@@ -17,11 +17,6 @@ class AppRegistrar implements RouteRegistrar
 {
     public function map(Registrar $registrar): void
     {
-        Route::get('/storage/images/{dir}/{method}/{size}/{file}', ThumbnailController::class)
-            ->where('method', 'resize|crop|cover')
-            ->where('size', '\d+x\d+')
-            ->where('file', '.+\.(png|jpg|jpeg|webp)$')
-            ->name('thumbnail');
 
         Route::middleware('web')
             ->group(function() {

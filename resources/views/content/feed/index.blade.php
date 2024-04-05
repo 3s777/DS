@@ -12,7 +12,7 @@
                                     class="item-photos__img"
                                     caption="Test Caption"
                                     src="{{ Vite::image('620_1.jpg') }}"
-                                    src_full="{{ Vite::image('620_1.jpg') }}" />
+                                    src-full="{{ Vite::image('620_1.jpg') }}" />
                             </x-slot:main-photo>
 
                             <x-slot:additional-photos>
@@ -21,7 +21,7 @@
                                         class="item-photos__img"
                                         caption="Test Caption"
                                         src="{{ Vite::image('621_2.jpg') }}"
-                                        src_full="{{ Vite::image('621_2.jpg') }}" />
+                                        src-full="{{ Vite::image('621_2.jpg') }}" />
                                 </div>
 
                                 <div class="item-photos__additional-photo">
@@ -29,7 +29,7 @@
                                         class="item-photos__img"
                                         caption="Test Caption"
                                         src="{{ Vite::image('621_3.jpg') }}"
-                                        src_full="{{ Vite::image('621_3.jpg') }}" />
+                                        src-full="{{ Vite::image('621_3.jpg') }}" />
                                 </div>
 
                                 <div class="item-photos__additional-photo">
@@ -37,7 +37,7 @@
                                         class="item-photos__img"
                                         caption="Test Caption"
                                         src="{{ Vite::image('621_2.jpg') }}"
-                                        src_full="{{ Vite::image('621_2.jpg') }}" />
+                                        src-full="{{ Vite::image('621_2.jpg') }}" />
                                 </div>
 
                                 <div class="item-photos__additional-photo">
@@ -45,7 +45,7 @@
                                         class="item-photos__img"
                                         caption="Test Caption"
                                         src="{{ Vite::image('621_3.jpg') }}"
-                                        src_full="{{ Vite::image('621_3.jpg') }}" />
+                                        src-full="{{ Vite::image('621_3.jpg') }}" />
                                 </div>
                             </x-slot:additional-photos>
 
@@ -195,7 +195,7 @@
                                     class="item-photos__img"
                                     caption="Test Caption"
                                     src="{{ Vite::image('620_1.jpg') }}"
-                                    src_full="{{ Vite::image('620_1.jpg') }}" />
+                                    src-full="{{ Vite::image('620_1.jpg') }}" />
                             </x-slot:main-photo>
 
                             <x-slot:additional-photos>
@@ -204,7 +204,7 @@
                                         class="item-photos__img"
                                         caption="Test Caption"
                                         src="{{ Vite::image('621_2.jpg') }}"
-                                        src_full="{{ Vite::image('621_2.jpg') }}" />
+                                        src-full="{{ Vite::image('621_2.jpg') }}" />
                                 </div>
 
                                 <div class="item-photos__additional-photo">
@@ -212,7 +212,7 @@
                                         class="item-photos__img"
                                         caption="Test Caption"
                                         src="{{ Vite::image('621_3.jpg') }}"
-                                        src_full="{{ Vite::image('621_3.jpg') }}" />
+                                        src-full="{{ Vite::image('621_3.jpg') }}" />
                                 </div>
 
                                 <div class="item-photos__additional-photo">
@@ -220,7 +220,7 @@
                                         class="item-photos__img"
                                         caption="Test Caption"
                                         src="{{ Vite::image('621_2.jpg') }}"
-                                        src_full="{{ Vite::image('621_2.jpg') }}" />
+                                        src-full="{{ Vite::image('621_2.jpg') }}" />
                                 </div>
 
                                 <div class="item-photos__additional-photo">
@@ -228,7 +228,7 @@
                                         class="item-photos__img"
                                         caption="Test Caption"
                                         src="{{ Vite::image('621_3.jpg') }}"
-                                        src_full="{{ Vite::image('621_3.jpg') }}" />
+                                        src-full="{{ Vite::image('621_3.jpg') }}" />
                                 </div>
                             </x-slot:additional-photos>
 

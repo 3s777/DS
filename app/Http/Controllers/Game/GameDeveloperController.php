@@ -32,7 +32,7 @@ class GameDeveloperController extends Controller
         $gameDeveloper->addImageWithThumbnail(
             $request->file('thumbnail'),
             'thumbnail',
-            ['small', 'medium', 'pulk']
+            ['small', 'medium']
         );
 
         flash()->info(__('game.developer.created'));
@@ -61,22 +61,10 @@ class GameDeveloperController extends Controller
 
     public function destroy(GameDeveloper $gameDeveloper)
     {
-        $gameDeveloper->delete();
+        $gameDeveloper->forceDelete();
 
         flash()->info(__('game.developer.deleted'));
 
         return to_route('game-developers.index');
-    }
-
-    public function atest(Request $request)
-    {
-        $developers = GameDeveloper::select(['id', 'name', 'slug'])->orderby('id')->get();
-
-        if($request->sort){
-            return response()->json([
-                ['id' => 1, 'name' => 'bob', 'age' => '123'],
-            ]);
-        }
-        return response()->json($developers);
     }
 }

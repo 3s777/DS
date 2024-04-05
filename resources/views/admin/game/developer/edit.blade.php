@@ -1,7 +1,9 @@
-<x-layouts.admin title="{{ __('game.developer.edit') }}" :search="false">
+<x-layouts.admin :search="false">
+    <x-ui.form class="crud-form" method="put" id="edit-form" action="{{ route('game-developers.update', $gameDeveloper->slug) }}">        <x-ui.title class="curd-form__tile" size="normal" indent="small">
+            {{ __('game.developer.add') }}
+        </x-ui.title>
 
-    <div class="crud-form">
-        <x-ui.form method="put" id="edit-form" action="{{ route('game-developers.update', $gameDeveloper->slug) }}">
+        <div class="crud-form__main">
             <x-grid type="container">
                 <x-grid.col xl="4" lg="6" md="6" sm="12">
                     <x-ui.form.group>
@@ -31,18 +33,6 @@
                     </x-ui.form.group>
                 </x-grid.col>
 
-
-                <x-grid.col xl="4" lg="6" md="6" sm="12">
-                    <x-ui.form.group>
-                        <x-libraries.filepond
-                            class="filepond1"
-                            name="filepond"
-                            accept="image/png, image/jpeg, image/gif"
-                            multiple>
-                        </x-libraries.filepond>
-                    </x-ui.form.group>
-                </x-grid.col>
-
                 <x-grid.col xl="12" lg="6" md="6" sm="12">
                     <x-ui.form.group>
                         <x-libraries.rich-text-editor
@@ -51,44 +41,31 @@
                             placeholder="{{ __('common.description') }}" />
                     </x-ui.form.group>
                 </x-grid.col>
-
-                <x-grid.col xl="12" lg="6" md="6" sm="12">
-                    <x-ui.form.group>
-                        <x-ui.form.button>{{ __('common.save') }}</x-ui.form.button>
-                    </x-ui.form.group>
-                </x-grid.col>
             </x-grid>
+        </div>
 
-        <x-ui.responsive-image
-            :model="$gameDeveloper"
-            :thumbs="['extra_small', 'extra_small1', 'small', 'medium']"
-            :path="$gameDeveloper->getThumbnailPath()"
-{{--            :placeholder="false"--}}
-            sizes="(max-width: 1024px) 100vw, (max-width: 1400px) 30vw, 550px">
-            <x-slot:img alt="test" title="test title"></x-slot:img>
-        </x-ui.responsive-image>
+        <div class="crud-form__sidebar">
+            <div class="crud-form__sidebar-wrapper">
+                <x-ui.form.input-image name="thumbnail" id="thumbnail">
+                    <x-slot:thumbnail>
+                        <x-ui.responsive-image
+                            :model="$gameDeveloper"
+                            :thumbs="['extra_small', 'extra_small1', 'small', 'medium']"
+                            :path="$gameDeveloper->getThumbnailPath()"
+                            :preview="false"
+                            {{--            :placeholder="false"--}}
+                            sizes="(max-width: 1024px) 100vw, (max-width: 1400px) 30vw, 550px">
+                            <x-slot:img alt="test" title="test title"></x-slot:img>
+                        </x-ui.responsive-image>
+                    </x-slot:thumbnail>
+                    <p>{{ __('common.file.format') }} jpg, png</p>
+                    <p>{{ __('common.file.max_size') }} 6Mb</p>
+                </x-ui.form.input-image>
+            </div>
+        </div>
 
-        </x-ui.form>
-    </div>
-
-    @push('scripts')
-        <script type="module">
-            const inputElement = document.querySelector('.filepond1');
-
-            FilePond.registerPlugin(
-                FilePondPluginFileValidateType,
-                FilePondPluginImagePreview,
-                FilePondPluginImageExifOrientation,
-                FilePondPluginFileValidateSize,
-                FilePondPluginImageCrop,
-                FilePondPluginImageResize,
-                FilePondPluginImageTransform,
-            );
-
-            const pond = FilePond.create(inputElement, {
-                credits: false,
-                labelIdle: '<span class="filepond--label-action"> {{ __('common.upload') }}</span> {{ __('common.image') }} '
-            });
-        </script>
-    @endpush
+        <x-ui.form.group class="crud-form__submit">
+            <x-ui.form.button x-bind:disabled="preventSubmit">{{ __('common.add') }}</x-ui.form.button>
+        </x-ui.form.group>
+    </x-ui.form>
 </x-layouts.admin>

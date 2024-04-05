@@ -1,15 +1,27 @@
 .crud-form {
-    display: flex;
-    justify-content: space-between;
-    flex-wrap: wrap;
-    gap: 24px;
+    display: grid;
+    grid-template-columns: auto 23%;
+    grid-template-rows: repeat(3, auto);
+    grid-template-areas:
+        "title sidebar"
+        "form sidebar"
+        "submit sidebar";
+    column-gap: 24px;
+
+    &__title {
+        grid-area: title;
+    }
 
     &__main {
-        width: calc(77% - 24px);
+        grid-area: form;
+    }
+
+    &__submit {
+        grid-area: submit;
     }
 
     &__sidebar {
-        width: 23%;
+        grid-area: sidebar;
     }
 
     &__sidebar-wrapper {
@@ -18,7 +30,14 @@
         border-radius: 12px;
     }
 
-    &__submit_mobile {
-        display: none;
+    @include breakpoint-max($xl) {
+        grid-template-columns: 100%;
+        grid-template-rows: repeat(4, auto);
+        grid-template-areas:
+        "title"
+        "form"
+        "sidebar"
+        "submit";
+        column-gap: 24px;
     }
 }

@@ -6,16 +6,24 @@ use App\Jobs\GenerateSmallThumbnailsJob;
 use App\Jobs\GenerateThumbnailJob;
 use Carbon\Carbon;
 use Illuminate\Contracts\Filesystem\Filesystem;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Arr;
-use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Storage;
-use Intervention\Image\Drivers\Gd\Driver;
-use Intervention\Image\ImageManager;
+use Spatie\MediaLibrary\MediaCollections\Exceptions\FileDoesNotExist;
+use Spatie\MediaLibrary\MediaCollections\Exceptions\FileIsTooBig;
 use Support\MediaLibrary\MediaPathGenerator;
 
 trait HasThumbnail
 {
+    protected static function bootHasThumbnail()
+    {
+        static::forceDeleting(function (Model $item) {
+            if (config('thumbnail.driver') != 'media_library') {
+                $item->deleteAllThumbnails();
+            }
+        });
+    }
     abstract protected function thumbnailDir(): string;
 
     abstract public function thumbnailSizes(): array;
@@ -30,17 +38,6 @@ trait HasThumbnail
         return Storage::disk('images');
     }
 
-//    public function makeThumbnail(string $size, string $method = 'resize'): string
-//    {
-//        return route('thumbnail', [
-//            'size' => $size,
-//            'dir' => $this->thumbnailDir(),
-//            'method' => $method,
-//            'file' => File::basename('test-4.jpg')
-////            'file' => File::basename($this->{$this->thumbnailColumn()})
-//        ]);
-//    }
-
     public function generateMediaPath(string $filename): string
     {
         $mediaCreatedDate = Carbon::make($this->created_at);
@@ -52,6 +49,10 @@ trait HasThumbnail
             .$filePath['filename'].'/';
     }
 
+    /**
+     * @throws FileDoesNotExist
+     * @throws FileIsTooBig
+     */
     protected function addOriginalWithMediaLibrary(UploadedFile $image, $collectionName): string
     {
         $media = $this->addMedia($image)
@@ -100,18 +101,37 @@ trait HasThumbnail
     public function generateFullSizes(string $imageFullPath): void
     {
         // Generate full image 2048, 100% quality
-        GenerateThumbnailJob::dispatch($imageFullPath, 2048, false);
+        GenerateThumbnailJob::dispatch(
+            $imageFullPath,
+            2048,
+            false
+        );
 
         // Generate original extension image 1200, 80% quality for webp alternative
-        GenerateThumbnailJob::dispatch($imageFullPath, 1200, false, 80, 'fallback');
+        GenerateThumbnailJob::dispatch(
+            $imageFullPath,
+            1200,
+            false,
+            config('thumbnail.fallback_quality'),
+            'fallback'
+        );
 
         // Generate webp image 75 quality full size
-        GenerateThumbnailJob::dispatch($imageFullPath, 2048, true, 75);
+        GenerateThumbnailJob::dispatch(
+            $imageFullPath,
+            2048,
+            true,
+            config('thumbnail.webp_quality')
+        );
     }
 
+    /**
+     * @throws FileDoesNotExist
+     * @throws FileIsTooBig
+     */
     public function addImageWithThumbnail(UploadedFile|null $image,
-                                          string $collectionName = 'default',
-                                          array $specialSizes = []): void
+                                          string            $collectionName = 'default',
+                                          array             $specialSizes = []): void
     {
         if($image) {
             if(config('thumbnail.driver') == 'media_library') {
@@ -138,5 +158,11 @@ trait HasThumbnail
         } else {
             return $this->{$this->getThumbnailColumn()};
         }
+    }
+
+    public function deleteAllThumbnails()
+    {
+        $imagePathInfo = pathinfo($this->{$this->getThumbnailColumn()});
+        $this->thumbnailStorage()->delete($imagePathInfo['dirname']);
     }
 }

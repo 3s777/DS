@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 trait HasSlug
 {
-    protected static function bootHasSlug()
+    protected static function bootHasSlug(): void
     {
         static::creating(function (Model $item) {
             $item->makeSlug();

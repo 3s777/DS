@@ -2,7 +2,6 @@
 
 namespace App\View\Components\UI;
 
-use App\Models\Media;
 use Closure;
 use Illuminate\Contracts\View\View;
 use Illuminate\Database\Eloquent\Model;
@@ -11,7 +10,6 @@ use Illuminate\Support\Facades\Storage;
 use Illuminate\View\Component;
 use Intervention\Image\Drivers\Gd\Driver;
 use Intervention\Image\ImageManager;
-use Support\MediaLibrary\MediaPathGenerator;
 
 class ResponsiveImage extends Component
 {
@@ -28,7 +26,8 @@ class ResponsiveImage extends Component
         $this->imgPathInfo = pathinfo($this->path);
     }
 
-    public function fallbackSource() {
+    public function fallbackSource(): string
+    {
         return $this->imgPathInfo['dirname'].'/'.$this->imgPathInfo['filename'].'_fallback.'.$this->imgPathInfo['extension'];
     }
 
@@ -47,7 +46,7 @@ class ResponsiveImage extends Component
 
                 $image
                     ->scaleDown($size[0], $size[1])
-                    ->toWebp(75)
+                    ->toWebp(config('thumbnail.webp_quality'))
                     ->save($storage->path($webpThumbDir.'/'.$this->imgPathInfo['filename'].'.webp'));
             }
         }
@@ -72,6 +71,4 @@ class ResponsiveImage extends Component
 
         return view('components.ui.responsive-image', compact(['thumbSizes']));
     }
-
-
 }
