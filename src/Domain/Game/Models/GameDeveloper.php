@@ -4,15 +4,11 @@ namespace Domain\Game\Models;
 
 use App\Filters\DatesFilter;
 use App\Filters\SearchFilter;
-use App\Models\Media;
 use Domain\Game\QueryBuilders\GameDeveloperQueryBuilder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Mews\Purifier\Casts\CleanHtml;
-use Spatie\Image\Enums\BorderType;
-use Spatie\Image\Enums\CropPosition;
-use Spatie\MediaLibrary\Conversions\Manipulations;
 use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
 use Support\Traits\Models\HasSlug;
@@ -74,7 +70,7 @@ class GameDeveloper extends Model implements HasMedia
         ];
     }
 
-    public function getRouteKeyName()
+    public function getRouteKeyName(): string
     {
         return 'slug';
     }

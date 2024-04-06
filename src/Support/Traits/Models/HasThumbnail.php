@@ -4,6 +4,7 @@ namespace Support\Traits\Models;
 
 use App\Jobs\GenerateSmallThumbnailsJob;
 use App\Jobs\GenerateThumbnailJob;
+use App\Models\Media;
 use Carbon\Carbon;
 use Illuminate\Contracts\Filesystem\Filesystem;
 use Illuminate\Database\Eloquent\Model;
@@ -12,11 +13,10 @@ use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Storage;
 use Spatie\MediaLibrary\MediaCollections\Exceptions\FileDoesNotExist;
 use Spatie\MediaLibrary\MediaCollections\Exceptions\FileIsTooBig;
-use Support\MediaLibrary\MediaPathGenerator;
 
 trait HasThumbnail
 {
-    protected static function bootHasThumbnail()
+    protected static function bootHasThumbnail(): void
     {
         static::forceDeleting(function (Model $item) {
             if (config('thumbnail.driver') != 'media_library') {
@@ -57,12 +57,12 @@ trait HasThumbnail
     {
         $media = $this->addMedia($image)
             ->toMediaCollection($collectionName, 'images');
-        $mediaPath = app(MediaPathGenerator::class)->getPath($media);
-
-        $this->{$this->getThumbnailColumn()} = $mediaPath.$media->file_name;
+//        $mediaPath = app(MediaPathGenerator::class)->getPath($media);
+//        $this->{$this->getThumbnailColumn()} = $mediaPath.$media->file_name;
+        $this->{$this->getThumbnailColumn()} = $media->getPathRelativeToRoot();
         $this->save();
 
-        return $mediaPath.$media->file_name;
+        return $media->getPathRelativeToRoot();
     }
 
     protected function addOriginal(UploadedFile $image): string
@@ -130,8 +130,8 @@ trait HasThumbnail
      * @throws FileIsTooBig
      */
     public function addImageWithThumbnail(UploadedFile|null $image,
-                                          string            $collectionName = 'default',
-                                          array             $specialSizes = []): void
+                                          string $collectionName = 'default',
+                                          array $specialSizes = []): void
     {
         if($image) {
             if(config('thumbnail.driver') == 'media_library') {
@@ -153,16 +153,22 @@ trait HasThumbnail
             if(!$thumbnailMedia) {
                 return null;
             }
-            $mediaPath = app(MediaPathGenerator::class)->getPath($thumbnailMedia);
-            return $mediaPath.$thumbnailMedia->file_name;
+//            $mediaPath = $this->generateMediaPath($thumbnailMedia->file_name);
+//            return $mediaPath.$thumbnailMedia->file_name;
+//            $mediaPath = app(MediaPathGenerator::class)->getPath($thumbnailMedia);
+            return $thumbnailMedia->getPathRelativeToRoot();
         } else {
             return $this->{$this->getThumbnailColumn()};
         }
     }
 
-    public function deleteAllThumbnails()
+    public function deleteAllThumbnails(?Media $media): void
     {
-        $imagePathInfo = pathinfo($this->{$this->getThumbnailColumn()});
-        $this->thumbnailStorage()->delete($imagePathInfo['dirname']);
+        if($media) {
+            $media->forceDelete();
+        } else {
+            $imagePathInfo = pathinfo($this->{$this->getThumbnailColumn()});
+            $this->thumbnailStorage()->delete($imagePathInfo['dirname']);
+        }
     }
 }

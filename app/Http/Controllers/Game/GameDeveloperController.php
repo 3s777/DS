@@ -52,7 +52,13 @@ class GameDeveloperController extends Controller
 
     public function update(UpdateGameDeveloperRequest $request, GameDeveloper $gameDeveloper)
     {
-        $gameDeveloper->fill($request->validated())->save();
+
+        if(!$request->input('thumbnail_selected') && !$request->file('thumbnail')) {
+            $thumbnailMedia = $gameDeveloper->getFirstMedia('thumbnail');
+            $gameDeveloper->deleteAllThumbnails($thumbnailMedia);
+        }
+
+        $gameDeveloper->fill($request->safe()->except(['thumbnail', 'thumbnail_selected']))->save();
 
         flash()->info(__('game.developer.updated'));
 

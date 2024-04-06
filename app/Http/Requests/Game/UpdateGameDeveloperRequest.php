@@ -34,7 +34,9 @@ class UpdateGameDeveloperRequest extends FormRequest
         return [
             'name' => ['required', Rule::unique(GameDeveloper::class)->ignore($this->game_developer)],
             'slug' => ['nullable','string', Rule::unique(GameDeveloper::class)->ignore($this->game_developer)],
-            'description' => ['nullable','string']
+            'description' => ['nullable','string'],
+            'thumbnail' => ['nullable', 'mimes:jpg,png', 'max:10024'],
+            'thumbnail_selected' => ['nullable', 'string']
         ];
     }
 }

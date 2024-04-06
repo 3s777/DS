@@ -47,6 +47,18 @@
                         <x-ui.responsive-table.buttons :item="$developer" model="game-developers" />
                     </x-ui.responsive-table.column>
                 </x-ui.responsive-table.row>
+
+                    <x-ui.responsive-image
+                        :model="$developer"
+                        :thumbs="['extra_small', 'small']"
+                        :path="$developer->getThumbnailPath()"
+                        :preview="false"
+                        :placeholder="false"
+                        sizes="(max-width: 1024px) 100vw, (max-width: 1400px) 30vw, 100px">
+                        <x-slot:img alt="test" title="test title"></x-slot:img>
+                    </x-ui.responsive-image>
+
+
         @empty
                 <div>Ничего не найдено</div>
             @endforelse
