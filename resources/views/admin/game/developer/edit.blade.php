@@ -1,5 +1,6 @@
 <x-layouts.admin :search="false">
-    <x-ui.form class="crud-form" method="put" id="edit-form" action="{{ route('game-developers.update', $gameDeveloper->slug) }}">        <x-ui.title class="curd-form__tile" size="normal" indent="small">
+    <x-ui.form class="crud-form" method="put" id="edit-form" action="{{ route('game-developers.update', $gameDeveloper->slug) }}" enctype="multipart/form-data">
+        <x-ui.title class="curd-form__tile" size="normal" indent="small">
             {{ __('game.developer.add') }}
         </x-ui.title>
 
@@ -43,7 +44,7 @@
                 </x-grid.col>
             </x-grid>
         </div>
-
+@dd($gameDeveloper)
         <div class="crud-form__sidebar">
             <div class="crud-form__sidebar-wrapper">
                 <x-ui.form.input-image
@@ -51,17 +52,17 @@
                     id="thumbnail"
                     :path="$gameDeveloper->getThumbnailPath()">
                     @if($gameDeveloper->getThumbnailPath())
-                    <x-slot:thumbnail>
+                    <x-slot:uploaded-thumbnail>
                         <x-ui.responsive-image
                             :model="$gameDeveloper"
-                            :thumbs="['extra_small', 'extra_small1', 'small', 'medium']"
+                            :thumbs="['small', 'medium']"
                             :path="$gameDeveloper->getThumbnailPath()"
                             :preview="false"
                             :placeholder="false"
-                            sizes="(max-width: 1024px) 100vw, (max-width: 1400px) 30vw, 550px">
+                            sizes="(max-width: 1024px) 100vw, (max-width: 1400px) 30vw, 220px">
                             <x-slot:img alt="test" title="test title"></x-slot:img>
                         </x-ui.responsive-image>
-                    </x-slot:thumbnail>
+                    </x-slot:uploaded-thumbnail>
                     @endif
                     <p>{{ __('common.file.format') }} jpg, png</p>
                     <p>{{ __('common.file.max_size') }} 6Mb</p>

@@ -48,6 +48,8 @@
                     </x-ui.responsive-table.column>
                 </x-ui.responsive-table.row>
 
+
+
                     <x-ui.responsive-image
                         :model="$developer"
                         :thumbs="['extra_small', 'small']"

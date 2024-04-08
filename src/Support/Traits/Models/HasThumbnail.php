@@ -13,6 +13,7 @@ use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Storage;
 use Spatie\MediaLibrary\MediaCollections\Exceptions\FileDoesNotExist;
 use Spatie\MediaLibrary\MediaCollections\Exceptions\FileIsTooBig;
+use Support\MediaLibrary\MediaPathGenerator;
 
 trait HasThumbnail
 {
@@ -150,23 +151,31 @@ trait HasThumbnail
     {
         if(config('thumbnail.driver') == 'media_library') {
             $thumbnailMedia = $this->getFirstMedia($this->getThumbnailColumn());
-            if(!$thumbnailMedia) {
-                return null;
+
+            if($thumbnailMedia) {
+                $thumbnailMedia->preventsLazyLoading = false;
+                return $thumbnailMedia->getPathRelativeToRoot();
             }
+
+            return null;
 //            $mediaPath = $this->generateMediaPath($thumbnailMedia->file_name);
 //            return $mediaPath.$thumbnailMedia->file_name;
 //            $mediaPath = app(MediaPathGenerator::class)->getPath($thumbnailMedia);
-            return $thumbnailMedia->getPathRelativeToRoot();
+
         } else {
             return $this->{$this->getThumbnailColumn()};
         }
     }
 
-    public function deleteAllThumbnails(?Media $media): void
+    public function deleteAllThumbnails(): void
     {
-        if($media) {
-            $media->forceDelete();
-        } else {
+        if(config('thumbnail.driver') == 'media_library') {
+            $media = $this->getFirstMedia($this->getThumbnailColumn());
+            $media?->forceDelete();
+            return;
+        }
+
+        if($this->{$this->getThumbnailColumn()}) {
             $imagePathInfo = pathinfo($this->{$this->getThumbnailColumn()});
             $this->thumbnailStorage()->delete($imagePathInfo['dirname']);
         }

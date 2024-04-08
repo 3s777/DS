@@ -2,7 +2,7 @@
     'id',
     'name',
     'path' => false,
-    'thumbnail' => false,
+    'uploadedThumbnail' => false,
 ])
 
 <div x-data="imgPreview" x-cloak>
@@ -11,20 +11,20 @@
                 'input-image',
             ])
         }}>
-        <div class="input-image__preview" :class="imgSrc || thumbnailSrc ? 'input-image__preview_hidden' : ''">
-            <div class="input-image__placeholder" x-show="!imgSrc && !thumbnailSrc">
+        <div class="input-image__preview" :class="imgSrc || uploadedSrc ? 'input-image__preview_hidden' : ''">
+            <div class="input-image__placeholder" x-show="!imgSrc && !uploadedSrc">
                 <div class="input-image__placeholder-text">
                     {{ $slot }}
                 </div>
             </div>
 
-            @if($thumbnail)
-                <template x-if="thumbnailSrc">
+            @if($uploadedThumbnail)
+                <template x-if="uploadedSrc">
                     <div class="input-image__wrapper">
-                        <x-ui.badge class="input-image__close" @click="clearThumbnail" title="Удалить">
+                        <x-ui.badge class="input-image__close" @click="clearUploaded" title="Удалить">
                             <x-svg.close></x-svg.close>
                         </x-ui.badge>
-                        {{ $thumbnail }}
+                        {{ $uploadedThumbnail }}
                     </div>
                 </template>
             @endif
@@ -44,7 +44,7 @@
         <input type="file" hidden id="{{ $id }}"  name="{{ $name }}" accept="image/png, image/jpeg" x-ref="myFile" @change="previewFile">
 
         @if($path)
-            <input type="text" value="{{ $path }}" hidden id="{{ $id }}_selected" x-ref="selectedFile"  name="{{ $name }}_selected">
+            <input type="text" value="{{ $path }}" hidden id="{{ $id }}_uploaded" x-ref="uploadedFile"  name="{{ $name }}_uploaded">
         @endif
     </div>
 </div>
@@ -55,23 +55,23 @@
             document.addEventListener('alpine:init', () => {
                 Alpine.data('imgPreview', () => ({
                         imgSrc:null,
-                        @if($thumbnail)
-                            thumbnailSrc:true,
+                        @if($uploadedThumbnail)
+                            uploadedSrc:true,
                         @else
-                            thumbnailSrc:false,
+                            uploadedSrc:false,
                         @endif
                         previewFile() {
                             let file = this.$refs.myFile.files[0];
                             if(!file || file.type.indexOf('image/') === -1) {
                                 this.imgSrc = null;
-                                this.thumbnailSrc = null;
+                                this.uploadedSrc = null;
                                 return;
                             }
                             this.imgSrc = null;
                             let reader = new FileReader();
 
                             reader.onload = e => {
-                                this.thumbnailSrc = null;
+                                this.uploadedSrc = null;
                                 this.imgSrc = e.target.result;
                             }
 
@@ -81,9 +81,9 @@
                             this.imgSrc = null;
                             this.$refs.myFile.value = null;
                         },
-                        clearThumbnail() {
-                            this.thumbnailSrc = null;
-                            this.$refs.selectedFile.value = null;
+                        clearUploaded() {
+                            this.uploadedSrc = null;
+                            this.$refs.uploadedFile.value = null;
                         }
                     })
                 )

@@ -1,7 +1,7 @@
 <?php
 
 return [
-    'driver' => 'media_librbary',
+    'driver' => 'media_library',
     'allowed_sizes' => [
         '100x100',
         '300x300',

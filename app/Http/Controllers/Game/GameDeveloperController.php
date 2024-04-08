@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Game\CreateGameDeveloperRequest;
 use App\Http\Requests\Game\FilterGameDeveloperRequest;
 use App\Http\Requests\Game\UpdateGameDeveloperRequest;
+use App\Models\Language;
 use App\ViewModels\GameDeveloperViewModel;
 use Domain\Game\Models\GameDeveloper;
 use Illuminate\Foundation\Application;
@@ -52,13 +53,21 @@ class GameDeveloperController extends Controller
 
     public function update(UpdateGameDeveloperRequest $request, GameDeveloper $gameDeveloper)
     {
-
-        if(!$request->input('thumbnail_selected') && !$request->file('thumbnail')) {
-            $thumbnailMedia = $gameDeveloper->getFirstMedia('thumbnail');
-            $gameDeveloper->deleteAllThumbnails($thumbnailMedia);
+        if(!$request->input('thumbnail_uploaded') && !$request->file('thumbnail')) {
+            $gameDeveloper->deleteAllThumbnails();
         }
 
-        $gameDeveloper->fill($request->safe()->except(['thumbnail', 'thumbnail_selected']))->save();
+        if($request->file('thumbnail')) {
+            $gameDeveloper->deleteAllThumbnails();
+
+            $gameDeveloper->addImageWithThumbnail(
+                $request->file('thumbnail'),
+                'thumbnail',
+                ['small', 'medium']
+            );
+        }
+
+        $gameDeveloper->fill($request->safe()->except(['thumbnail', 'thumbnail_uploaded']))->save();
 
         flash()->info(__('game.developer.updated'));
 
