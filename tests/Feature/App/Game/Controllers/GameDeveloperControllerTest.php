@@ -1,7 +1,8 @@
 <?php
 
-namespace App\Http\Controllers\Game;
+namespace App\Game\Controllers;
 
+use App\Http\Controllers\Game\GameDeveloperController;
 use App\Http\Requests\Game\CreateGameDeveloperRequest;
 use Database\Factories\GameDeveloperFactory;
 use Database\Factories\UserFactory;
@@ -98,6 +99,7 @@ class GameDeveloperControllerTest extends TestCase
      */
     public function it_store_only_auth_success(): void
     {
+
         $this->actingAs($this->user)
             ->post(action([GameDeveloperController::class, 'store']), $this->request)
             ->assertRedirectToRoute('game-developers.index')

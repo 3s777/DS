@@ -2,6 +2,8 @@
 
 namespace Tests\RequestFactories\Game;
 
+use Illuminate\Http\UploadedFile;
+use Illuminate\Support\Facades\Storage;
 use Worksome\RequestFactories\RequestFactory;
 
 class CreateGameDeveloperRequestFactory extends RequestFactory
@@ -11,6 +13,7 @@ class CreateGameDeveloperRequestFactory extends RequestFactory
         return [
             'name' => fake()->name(),
             'description' => fake()->text(),
+            'thumbnail' => UploadedFile::fake()->image(Storage::disk('images')->path('test/test.jpg'), 640, 480, null, false)
         ];
     }
 }

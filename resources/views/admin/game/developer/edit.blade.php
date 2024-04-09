@@ -44,7 +44,7 @@
                 </x-grid.col>
             </x-grid>
         </div>
-@dd($gameDeveloper)
+
         <div class="crud-form__sidebar">
             <div class="crud-form__sidebar-wrapper">
                 <x-ui.form.input-image

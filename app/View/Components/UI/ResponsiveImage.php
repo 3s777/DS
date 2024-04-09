@@ -19,7 +19,7 @@ class ResponsiveImage extends Component
         public Model $model,
         public array $thumbs,
         public string $sizes,
-        public ?string $path,
+        public ?string $path = '',
         public bool $placeholder = true
     )
     {
@@ -35,6 +35,7 @@ class ResponsiveImage extends Component
     public function checkAndCreateThumbnailSizes(array $thumbnailSizes): void
     {
         $storage = Storage::disk('images');
+
         foreach($thumbnailSizes as $size) {
             if(!$storage->exists($this->imgPathInfo['dirname'].'/webp/'.$size[0].'x'.$size[1].'/'.$this->imgPathInfo['filename'].'.webp'))
             {
@@ -54,7 +55,15 @@ class ResponsiveImage extends Component
 
     public function shouldRender(): bool
     {
+        $storage = Storage::disk('images');
+
+
         if(!$this->path && !$this->placeholder) {
+            return false;
+        }
+
+        if(!$storage->exists($this->path))
+        {
             return false;
         }
 

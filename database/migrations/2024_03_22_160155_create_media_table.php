@@ -25,6 +25,7 @@ return new class extends Migration
             $table->json('custom_properties');
             $table->json('generated_conversions');
             $table->json('responsive_images');
+            $table->string('dirname');
             $table->unsignedInteger('order_column')->nullable()->index();
             $table->foreignIdFor(User::class)
                 ->nullable()

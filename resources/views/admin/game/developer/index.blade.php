@@ -47,15 +47,23 @@
                         <x-ui.responsive-table.buttons :item="$developer" model="game-developers" />
                     </x-ui.responsive-table.column>
                 </x-ui.responsive-table.row>
+{{--@php--}}
+{{--$developer->preventsLazyLoading = false;--}}
+{{--$media = $developer->media;--}}
+{{--foreach($media as $med) {--}}
+{{--   $med->preventsLazyLoading = false;--}}
+{{--}--}}
 
+
+{{--@endphp--}}
 
 
                     <x-ui.responsive-image
                         :model="$developer"
-                        :thumbs="['extra_small', 'small']"
+                        :thumbs="['extra_small', 'small', 'full_preview']"
                         :path="$developer->getThumbnailPath()"
                         :preview="false"
-                        :placeholder="false"
+                        :placeholder="true"
                         sizes="(max-width: 1024px) 100vw, (max-width: 1400px) 30vw, 100px">
                         <x-slot:img alt="test" title="test title"></x-slot:img>
                     </x-ui.responsive-image>

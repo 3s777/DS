@@ -15,7 +15,8 @@ class GameDeveloperViewModel extends ViewModel
 
     public function developers() {
         return GameDeveloper::query()
-            ->with(['media.model:id,created_at'])
+//            ->with(['media.model:id,created_at'])
+//            ->with(['media'])
             ->select(['id', 'name', 'slug', 'thumbnail', 'created_at'])
             ->filtered()
             ->sorted()

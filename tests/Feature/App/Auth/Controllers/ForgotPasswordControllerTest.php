@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests\Feature\App\Http\Controllers\Auth;
+namespace App\Auth\Controllers;
 
 use App\Http\Controllers\Auth\ForgotPasswordController;
 use Database\Factories\UserFactory;

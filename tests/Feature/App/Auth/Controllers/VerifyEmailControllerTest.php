@@ -1,7 +1,8 @@
 <?php
 
-namespace App\Http\Controllers\Auth;
+namespace App\Auth\Controllers;
 
+use App\Http\Controllers\Auth\VerifyEmailController;
 use Database\Factories\UserFactory;
 use Domain\Auth\Notifications\VerifyEmailNotification;
 use Illuminate\Foundation\Testing\RefreshDatabase;

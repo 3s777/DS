@@ -147,17 +147,16 @@ trait HasThumbnail
         }
     }
 
-    public function getThumbnailPath(): ?string
+    public function getThumbnailPath(): string
     {
         if(config('thumbnail.driver') == 'media_library') {
             $thumbnailMedia = $this->getFirstMedia($this->getThumbnailColumn());
 
             if($thumbnailMedia) {
-                $thumbnailMedia->preventsLazyLoading = false;
                 return $thumbnailMedia->getPathRelativeToRoot();
             }
 
-            return null;
+            return '';
 //            $mediaPath = $this->generateMediaPath($thumbnailMedia->file_name);
 //            return $mediaPath.$thumbnailMedia->file_name;
 //            $mediaPath = app(MediaPathGenerator::class)->getPath($thumbnailMedia);
@@ -178,6 +177,23 @@ trait HasThumbnail
         if($this->{$this->getThumbnailColumn()}) {
             $imagePathInfo = pathinfo($this->{$this->getThumbnailColumn()});
             $this->thumbnailStorage()->delete($imagePathInfo['dirname']);
+        }
+    }
+
+    public function updateThumbnail($request, $sizes = [])
+    {
+        if(!$request->input($this->getThumbnailColumn().'_uploaded') && !$request->file($this->getThumbnailColumn())) {
+            $this->deleteAllThumbnails();
+        }
+
+        if($request->file($this->getThumbnailColumn())) {
+            $this->deleteAllThumbnails();
+
+            $this->addImageWithThumbnail(
+                $request->file($this->getThumbnailColumn()),
+                $this->getThumbnailColumn(),
+                $sizes
+            );
         }
     }
 }

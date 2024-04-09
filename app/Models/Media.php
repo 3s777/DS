@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Carbon\Carbon;
 use Domain\Auth\Models\User;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -20,6 +21,14 @@ public static function boot()
         if(auth()->user()) {
             $model->user()->associate(auth()->user()) ;
         }
+
+        $modelCreatedDate = Carbon::make($model->model->created_at);
+        $mediaPath = pathinfo($model->file_name);
+
+        $model->dirname = $model->model->thumbnailDir().'/'
+            .$modelCreatedDate->format('Y').'/'
+            .$modelCreatedDate->format('m').'/'
+            .$mediaPath['filename'].'/';
      });
 }
 
