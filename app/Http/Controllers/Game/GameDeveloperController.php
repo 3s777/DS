@@ -53,7 +53,7 @@ class GameDeveloperController extends Controller
 
     public function update(UpdateGameDeveloperRequest $request, GameDeveloper $gameDeveloper)
     {
-        $gameDeveloper->updateThumbnail($request, ['small', 'medium']);
+        $gameDeveloper->updateThumbnail($request->file('thumbnail'), $request->input('thumbnail_uploaded'), ['small', 'medium']);
 
         $gameDeveloper->fill($request->safe()->except(['thumbnail', 'thumbnail_uploaded']))->save();
 

@@ -17,7 +17,7 @@ class ResponsiveImage extends Component
 
     public function __construct(
         public Model $model,
-        public array $thumbs,
+        public array $imageSizes,
         public string $sizes,
         public ?string $path = '',
         public bool $placeholder = true
@@ -32,15 +32,15 @@ class ResponsiveImage extends Component
     }
 
     /*    Check thumbnail sizes images by path and create if not isset */
-    public function checkAndCreateThumbnailSizes(array $thumbnailSizes): void
+    public function checkAndCreateImageSizes(array $imageSizes): void
     {
         $storage = Storage::disk('images');
 
-        foreach($thumbnailSizes as $size) {
+        foreach($imageSizes as $size) {
             if(!$storage->exists($this->imgPathInfo['dirname'].'/webp/'.$size[0].'x'.$size[1].'/'.$this->imgPathInfo['filename'].'.webp'))
             {
-                $webpThumbDir = $this->imgPathInfo['dirname'].'/webp/'.$size[0].'x'.$size[1];
-                $storage->makeDirectory($webpThumbDir);
+                $webpImageDir = $this->imgPathInfo['dirname'].'/webp/'.$size[0].'x'.$size[1];
+                $storage->makeDirectory($webpImageDir);
 
                 $manager = new ImageManager(new Driver());
                 $image = $manager->read($storage->path($this->path));
@@ -48,7 +48,7 @@ class ResponsiveImage extends Component
                 $image
                     ->scaleDown($size[0], $size[1])
                     ->toWebp(config('thumbnail.webp_quality'))
-                    ->save($storage->path($webpThumbDir.'/'.$this->imgPathInfo['filename'].'.webp'));
+                    ->save($storage->path($webpImageDir.'/'.$this->imgPathInfo['filename'].'.webp'));
             }
         }
     }
@@ -70,14 +70,16 @@ class ResponsiveImage extends Component
         return true;
     }
 
+
+
     public function render(): View|Closure|string
     {
-        $thumbSizes = Arr::only($this->model->thumbnailSizes(),$this->thumbs);
+        $imageSizesFiltered = Arr::only($this->model->thumbnailSizes(),$this->imageSizes);
 
         if($this->path) {
-            $this->checkAndCreateThumbnailSizes($thumbSizes);
+            $this->checkAndCreateImageSizes($imageSizesFiltered);
         }
 
-        return view('components.ui.responsive-image', compact(['thumbSizes']));
+        return view('components.ui.responsive-image', compact(['imageSizesFiltered']));
     }
 }

@@ -7,7 +7,7 @@
         <source
             type="image/webp"
             srcset="
-            @foreach($thumbSizes as $size)
+            @foreach($imageSizesFiltered as $size)
                 {{ asset('storage/images/'.$imgPathInfo['dirname'].'/webp/'.$size[0].'x'.$size[1].'/'.$imgPathInfo['filename'].'.webp '.$size[0].'w,')}}
             @endforeach
             {{ asset('storage/images/'.$imgPathInfo['dirname'].'/'.$imgPathInfo['filename'].'.webp') }} 2048w,

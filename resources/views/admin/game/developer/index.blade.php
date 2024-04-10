@@ -60,7 +60,7 @@
 
                     <x-ui.responsive-image
                         :model="$developer"
-                        :thumbs="['extra_small', 'small', 'full_preview']"
+                        :image-sizes="['extra_small', 'small', 'full_preview']"
                         :path="$developer->getThumbnailPath()"
                         :preview="false"
                         :placeholder="true"

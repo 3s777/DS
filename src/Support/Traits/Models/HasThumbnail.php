@@ -180,17 +180,17 @@ trait HasThumbnail
         }
     }
 
-    public function updateThumbnail($request, $sizes = [])
+    public function updateThumbnail($newThumbnail, $oldThumbnail ='', $sizes = [])
     {
-        if(!$request->input($this->getThumbnailColumn().'_uploaded') && !$request->file($this->getThumbnailColumn())) {
+        if(!$oldThumbnail && !$newThumbnail) {
             $this->deleteAllThumbnails();
         }
 
-        if($request->file($this->getThumbnailColumn())) {
+        if($newThumbnail) {
             $this->deleteAllThumbnails();
 
             $this->addImageWithThumbnail(
-                $request->file($this->getThumbnailColumn()),
+                $newThumbnail,
                 $this->getThumbnailColumn(),
                 $sizes
             );

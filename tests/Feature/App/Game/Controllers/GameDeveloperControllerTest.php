@@ -4,11 +4,16 @@ namespace App\Game\Controllers;
 
 use App\Http\Controllers\Game\GameDeveloperController;
 use App\Http\Requests\Game\CreateGameDeveloperRequest;
+use App\Jobs\GenerateSmallThumbnailsJob;
+use App\Jobs\GenerateThumbnailJob;
 use Database\Factories\GameDeveloperFactory;
 use Database\Factories\UserFactory;
 use Domain\Auth\Models\User;
 use Domain\Game\Models\GameDeveloper;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Http\UploadedFile;
+use Illuminate\Support\Facades\Queue;
+use Illuminate\Support\Facades\Storage;
 use Tests\TestCase;
 
 class GameDeveloperControllerTest extends TestCase
@@ -114,6 +119,31 @@ class GameDeveloperControllerTest extends TestCase
      * @test
      * @return void
      */
+    public function it_store_with_image_only_auth_success(): void
+    {
+        Queue::fake();
+        Storage::fake('images');
+
+        $this->request['thumbnail'] = UploadedFile::fake()->image('photo1.jpg');
+
+        $this->actingAs($this->user)
+            ->post(action([GameDeveloperController::class, 'store']), $this->request)
+            ->assertRedirectToRoute('game-developers.index')
+            ->assertSessionHas('helper_flash_message', __('game.developer.created'));
+
+        $this->assertDatabaseHas('game_developers', [
+            'name' => $this->request['name']
+        ]);
+
+        Queue::assertPushed(GenerateThumbnailJob::class, 3);
+
+        Queue::assertPushed(GenerateSmallThumbnailsJob::class, 2);
+    }
+
+    /**
+     * @test
+     * @return void
+     */
     public function it_validation_name_fail(): void
     {
         $this->app['session']->setPreviousUrl(route('game-developers.create'));
@@ -128,6 +158,22 @@ class GameDeveloperControllerTest extends TestCase
         $this->assertDatabaseMissing('game_developers', [
             'name' => $this->request['name']
         ]);
+    }
+
+    /**
+     * @test
+     * @return void
+     */
+    public function it_validation_thumbnail_fail(): void
+    {
+        $this->app['session']->setPreviousUrl(route('game-developers.create'));
+
+        $this->request['thumbnail'] = UploadedFile::fake()->image('photo1.php');
+
+        $this->actingAs($this->user)
+            ->post(action([GameDeveloperController::class, 'store']), $this->request)
+            ->assertInvalid(['thumbnail'])
+            ->assertRedirectToRoute('game-developers.create');
     }
 
     /**

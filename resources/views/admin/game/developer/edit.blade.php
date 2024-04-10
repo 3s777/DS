@@ -55,7 +55,7 @@
                     <x-slot:uploaded-thumbnail>
                         <x-ui.responsive-image
                             :model="$gameDeveloper"
-                            :thumbs="['small', 'medium']"
+                            :image-sizes="['small', 'medium', 'large']"
                             :path="$gameDeveloper->getThumbnailPath()"
                             :preview="false"
                             :placeholder="false"
