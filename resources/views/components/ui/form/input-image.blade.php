@@ -21,7 +21,7 @@
             @if($uploadedThumbnail)
                 <template x-if="uploadedSrc">
                     <div class="input-image__wrapper">
-                        <x-ui.badge class="input-image__close" @click="clearUploaded" title="Удалить">
+                        <x-ui.badge class="input-image__close" @click="clearUploaded" title="{{ __('common.delete') }}">
                             <x-svg.close></x-svg.close>
                         </x-ui.badge>
                         {{ $uploadedThumbnail }}
@@ -31,7 +31,7 @@
 
             <template x-if="imgSrc">
                 <div class="input-image__wrapper">
-                    <x-ui.badge class="input-image__close" @click="clearFile" title="Удалить">
+                    <x-ui.badge class="input-image__close" @click="clearFile" title="{{ __('common.delete') }}">
                         <x-svg.close></x-svg.close>
                     </x-ui.badge>
                     <img :src="imgSrc" class="imgPreview">
@@ -39,7 +39,7 @@
             </template>
         </div>
         <x-ui.form.button class="input-image__submit" tag="label" for="{{ $id }}">
-            {{ __('Выберите изображение') }}
+            {{ __('common.choose_image') }}
         </x-ui.form.button>
         <input type="file" hidden id="{{ $id }}"  name="{{ $name }}" accept="image/png, image/jpeg" x-ref="myFile" @change="previewFile">
 

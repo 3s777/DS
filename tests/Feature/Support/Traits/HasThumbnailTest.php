@@ -173,4 +173,29 @@ class HasThumbnailTest extends TestCase
 //        $this->storage->assertMissing($path);
 //        $this->storage->assertMissing($imagePathInfo['dirname']);
     }
+
+
+    /**
+     * @test
+     * @return void
+     */
+    public function it_success_delete_uploads_thumbnail(): void
+    {
+        Queue::fake();
+        Storage::fake('images');
+
+        $gameDeveloper = GameDeveloperFactory::new()->create();
+
+        $gameDeveloper->addImageWithThumbnail(
+            UploadedFile::fake()->image('photo1.jpg'),
+            'thumbnail',
+        );
+
+        $gameDeveloper->updateThumbnail('');
+
+        $gameDeveloperNewMedia = GameDeveloper::find($gameDeveloper->id)->first();
+        $newPath = $gameDeveloperNewMedia->getThumbnailPath();
+
+        $this->assertEmpty($newPath);
+    }
 }

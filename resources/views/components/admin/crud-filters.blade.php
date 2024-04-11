@@ -1,3 +1,7 @@
+@props([
+    'searchPlaceholder' => __('filters.search')
+])
+
 <div class="crud-filters" x-data="{ filters_hide: true, search: '{{ request('filters.search') }}' }">
     <div class="crud-filters__header">
         <x-ui.input-search
@@ -6,7 +10,7 @@
             wrapper-class="crud-search"
             action="{{ request()->url() }}"
             method="get"
-            placeholder="{{ __('game.developer.search') }}"
+            placeholder="{{ $searchPlaceholder }}"
             color="dark"
             sortable="true"
         />

@@ -19,7 +19,7 @@ class ResponsiveImage extends Component
         public Model $model,
         public array $imageSizes,
         public string $sizes,
-        public ?string $path = '',
+        public string $path = '',
         public bool $placeholder = true
     )
     {
@@ -69,8 +69,6 @@ class ResponsiveImage extends Component
 
         return true;
     }
-
-
 
     public function render(): View|Closure|string
     {

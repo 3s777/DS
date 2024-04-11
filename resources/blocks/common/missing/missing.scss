@@ -1,0 +1,15 @@
+.missing {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+    padding-top: 8px;
+    padding-bottom: 8px;
+    font-size: 1.2rem;
+
+    & svg {
+        stroke: $opposite-main;
+        stroke-width: 3px;
+        fill: none;
+    }
+}

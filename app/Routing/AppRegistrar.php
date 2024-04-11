@@ -21,7 +21,7 @@ class AppRegistrar implements RouteRegistrar
         Route::middleware('web')
             ->group(function() {
 
-                Route::get('/{locale?}', HomeController::class)->name('home');
+                Route::get('/{locale?}', HomeController::class)->whereIn('locale', config('app.available_locales'))->name('home');
 
         Route::prefix('{locale}')->whereIn('locale', config('app.available_locales'))->group(function () {
 
@@ -69,7 +69,6 @@ class AppRegistrar implements RouteRegistrar
 //                        'game-developers' => 'gameDeveloper:slug'
 //                    ])
                     ->middleware(['remove.locale']);
-                Route::get('/game-developer/atest', [GameDeveloperController::class, 'atest'])->name('atest');
                 Route::resource('game-publishers', GamePublisherController::class)
                     ->middleware(['remove.locale']);
 

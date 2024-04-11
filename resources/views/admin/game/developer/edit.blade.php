@@ -57,7 +57,6 @@
                             :model="$gameDeveloper"
                             :image-sizes="['small', 'medium', 'large']"
                             :path="$gameDeveloper->getThumbnailPath()"
-                            :preview="false"
                             :placeholder="false"
                             sizes="(max-width: 1024px) 100vw, (max-width: 1400px) 30vw, 220px">
                             <x-slot:img alt="test" title="test title"></x-slot:img>

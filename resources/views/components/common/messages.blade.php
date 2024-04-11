@@ -18,9 +18,3 @@
         @endforeach
     </x-ui.message>
 @endif
-
-{{--@if (session('status'))--}}
-{{--<x-ui.message class="auth__message" type="info">--}}
-{{--{{ session('status') }}--}}
-{{--</x-ui.message>--}}
-{{--@endif--}}

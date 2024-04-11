@@ -22,7 +22,6 @@ class DatesFilter extends AbstractFilter
 
     protected function toDate(): bool|Carbon
     {
-
         if($this->requestValue('to')) {
             return Carbon::createFromFormat('Y-m-d', $this->requestValue('to'));
         }
