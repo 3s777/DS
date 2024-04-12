@@ -29,7 +29,7 @@
         </x-ui.responsive-table.header>
 
         @foreach($developers as $developer)
-            <x-ui.responsive-table.row>
+            <x-ui.responsive-table.row data-id="{{ $developer->id }}">
                 <x-ui.responsive-table.column type="id">
                     {{ $developer->id }}
                 </x-ui.responsive-table.column>

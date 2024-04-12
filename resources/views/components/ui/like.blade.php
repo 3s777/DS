@@ -5,8 +5,7 @@
     'count' => false
 ])
 
-<div
-    {{ $attributes->class([
+<div {{ $attributes->class([
             'like',
             'like_'.$type,
             'like_size_'.$size => $size,

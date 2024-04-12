@@ -1,7 +1,7 @@
 <x-layouts.admin :search="false">
     <x-ui.form class="crud-form" method="put" id="edit-form" action="{{ route('game-developers.update', $gameDeveloper->slug) }}" enctype="multipart/form-data">
         <x-ui.title class="curd-form__tile" size="normal" indent="small">
-            {{ __('game.developer.add') }}
+            {{ __('game.developer.edit') }}
         </x-ui.title>
 
         <div class="crud-form__main">
@@ -70,7 +70,7 @@
         </div>
 
         <x-ui.form.group class="crud-form__submit">
-            <x-ui.form.button x-bind:disabled="preventSubmit">{{ __('common.add') }}</x-ui.form.button>
+            <x-ui.form.button x-bind:disabled="preventSubmit">{{ __('common.save') }}</x-ui.form.button>
         </x-ui.form.group>
     </x-ui.form>
 </x-layouts.admin>

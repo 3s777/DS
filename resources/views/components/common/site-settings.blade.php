@@ -9,8 +9,9 @@
             class="site-settings__popover"
             title="{{ __('Choose language') }}"
             tail="right">
-            <nav class="site-settings__flags">
-                <x-common.language-switcher/>
+
+                <x-common.language-switcher class="site-settings__flags" />
+{{--            <nav class="site-settings__flags">--}}
 {{--                <a href="{{ route(Route::currentRouteName(), ['locale' => 'en']) }}">--}}
 {{--                    <div class="site-settings__flag @if(app()->getLocale() == 'en') site-settings__flag_active @endif">--}}
 {{--                        <x-svg.flags.en class="site-settings__flag-icon"></x-svg.flags.en>--}}
@@ -26,7 +27,7 @@
 {{--                        <x-svg.flags.ua class="site-settings__flag-icon"></x-svg.flags.ua>--}}
 {{--                    </div>--}}
 {{--                </a>--}}
-            </nav>
+{{--            </nav>--}}
 
             <div class="popover__title">
                 {{ __('Choose theme color') }}
