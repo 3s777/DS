@@ -64,6 +64,7 @@ class AppRegistrar implements RouteRegistrar
                     return view('admin.index');
                 })->name('admin');
 
+                Route::delete('/game-developers/delete-selected', [GameDeveloperController::class, 'deleteSelected'])->name('game-developers.delete');
                 Route::resource('game-developers', GameDeveloperController::class)
 //                    ->parameters([
 //                        'game-developers' => 'gameDeveloper:slug'

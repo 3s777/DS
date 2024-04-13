@@ -31,15 +31,3 @@
         </x-ui.modal.footer>
     </x-ui.modal.content>
 </x-ui.modal>
-
-@push('scripts')
-    <script>
-        document.addEventListener('alpine:init', () => {
-            Alpine.store('modalDelete', {
-                hide: true,
-                action: false,
-                name: false
-            });
-        })
-    </script>
-@endpush

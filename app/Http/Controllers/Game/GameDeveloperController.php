@@ -13,6 +13,7 @@ use Illuminate\Foundation\Application;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Redirector;
+use Throwable;
 
 class GameDeveloperController extends Controller
 {
@@ -67,6 +68,31 @@ class GameDeveloperController extends Controller
         $gameDeveloper->forceDelete();
 
         flash()->info(__('game.developer.deleted'));
+
+        return to_route('game-developers.index');
+    }
+
+    public function deleteSelected(Request $request)
+    {
+        $selectedIds = explode(",", '6,2.5,7,5');
+        try {
+            foreach ($selectedIds as $id) {
+
+                if (is_numeric($id)) {
+
+                    GameDeveloper::where('id', $id)->delete();
+                }
+            }
+        }
+                     catch (Throwable $e) {
+report($e);
+flash()->danger(__('game.developer.updated'));
+
+return to_route('game-developers.index');
+
+}
+
+        flash()->info(__('game.developer.updated'));
 
         return to_route('game-developers.index');
     }

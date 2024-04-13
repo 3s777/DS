@@ -1,59 +1,124 @@
-<div x-data="selected"
+<div x-data="selectedRows">
+<div
     {{ $attributes->class([
             'responsive-table'
         ])
     }}>
-    <span x-text="selected_examinations"></span>
+
     {{ $slot }}
 </div>
+<span x-text="selectedRows"></span>
+<span x-html="selectedNames"></span>
+<form action="">
+    <input type="hidden" name="selected_rows[]" x-model="selectedRows">
+</form>
+<div class="responsive-table__footer">
+    <div x-data="{ actionSelect: '' }" class="responsive-table__action">
+        <x-libraries.choices
+            x-model="actionSelect"
+            class="responsive-table__select-action"
+            size="small"
+            id="responsive-table__select-action"
+            name="responsive-table__select-action"
+            label="Действие с отмеченными">
+            <x-ui.form.option value="delete">Удалить</x-ui.form.option>
+            <x-ui.form.option value="forceDelete">Удалить навсегда</x-ui.form.option>
+        </x-libraries.choices>
+        <div x-on:keydown.escape.window="$store.selectedModal.hide = true">
+            <x-ui.form.button
+                tag="div"
+                x-on:click.stop="
+                console.log(selectedNames);
+            $store.selectedModal.hide = ! $store.selectedModal.hide;
+            $store.selectedModal.action = actionSelect.value
+            $store.selectedModal.ids = selectedRows
+            $store.selectedModal.prepareSelectedNames(selectedNames)"
+            >Применить</x-ui.form.button>
+        </div>
+    </div>
+</div>
+</div>
+
+<x-ui.modal x-data tag="section" ::class="$store.selectedModal.hide ? '' : 'modal_show'">
+    <x-ui.modal.content
+        x-on:click.outside="$store.selectedModal.hide = true">
+        <x-ui.modal.close x-on:click="$store.selectedModal.hide = true" />
+
+        <x-ui.modal.header>
+            <x-ui.title
+                size="normal"
+                indent="normal">
+                {{ __('common.deleting') }}
+            </x-ui.title>
+        </x-ui.modal.header>
+
+        <x-ui.modal.body>
+            {{ __('common.delete_confirmation') }}?
+            <div x-html="$store.selectedModal.names"></div>
+        </x-ui.modal.body>
+
+        <x-ui.modal.footer align-buttons="right">
+            <x-ui.form method="DELETE" action="{{ route('game-developers.delete') }}">
+                <input type="hidden" name="ids" x-bind:value="$store.selectedModal.ids">
+{{--            <x-ui.form method="delete" x-bind:action=$store.selectedModal.action>--}}
+                <x-ui.form.button x-bind:disabled="preventSubmit">
+                    {{ __('common.delete') }}
+                </x-ui.form.button>
+
+                <x-ui.form.button
+                    x-on:click.prevent="$store.selectedModal.hide = true"
+                    color="cancel"
+                    indent="left">
+                    {{ __('common.close') }}
+                </x-ui.form.button>
+            </x-ui.form>
+        </x-ui.modal.footer>
+    </x-ui.modal.content>
+</x-ui.modal>
 
 @push('scripts')
+    <script type="module">
+        const element1 = document.querySelector('.responsive-table__select-action');
+        const choices1 = new Choices(element1, {
+            itemSelectText: '',
+            searchEnabled: false,
+        });
+    </script>
     <script>
         document.addEventListener('alpine:init', () => {
-            Alpine.data('selected', () => ({
-                selected_examinations:[],
-                    download(e) {
-                        this.countSelectedRow += e.currentTarget.dataset.id;
-                        console.log(this.countSelectedRow);
-                    },
+            Alpine.store('modalDelete', {
+                hide: true,
+                action: false,
+                name: false
+            });
 
-                    selectRow() {
-                        if (selected_examinations.includes(id)) {
-                            const index = selected_examinations.indexOf(id);
-                            selected_examinations.splice(index, 1)
-                        } else {
-                            selected_examinations.push(id)
-                        }
-                    },
-
-                    addRow() {
-                        let row = this.$refs.row.attributes['data-id'].value;
-                        console.log(row);
-                        // if(!file || file.type.indexOf('image/') === -1) {
-                        //     this.imgSrc = null;
-                        //     this.uploadedSrc = null;
-                        //     return;
-                        // }
-                        // this.imgSrc = null;
-                        // let reader = new FileReader();
-                        //
-                        // reader.onload = e => {
-                        //     this.uploadedSrc = null;
-                        //     this.imgSrc = e.target.result;
-                        // }
-                        //
-                        // reader.readAsDataURL(file);
-                    },
-                    // clearFile() {
-                    //     this.imgSrc = null;
-                    //     this.$refs.myFile.value = null;
-                    // },
-                    // clearUploaded() {
-                    //     this.uploadedSrc = null;
-                    //     this.$refs.uploadedFile.value = null;
-                    // }
-                })
-            )
+            Alpine.store('selectedModal', {
+                hide: true,
+                action: false,
+                names: false,
+                ids: false,
+                prepareSelectedNames(selectedNames) {
+                    this.names = selectedNames.join('<br>')
+                },
+            });
+            Alpine.data('selectedRows', () => ({
+                selectedRows:[],
+                selectedNames:[],
+                id:'',
+                name:'',
+                selectRow() {
+                    if (this.selectedRows.includes(this.id)) {
+                        const index = this.selectedRows.indexOf(this.id);
+                        this.selectedRows.splice(index, 1)
+                        const indexName = this.selectedNames.indexOf(this.name);
+                        this.selectedNames.splice(indexName, 1)
+                    } else {
+                        this.selectedRows.push(this.id)
+                        this.selectedNames.push(this.name)
+                    }
+                    console.log(this.selectedRows);
+                },
+            }))
         });
     </script>
 @endpush

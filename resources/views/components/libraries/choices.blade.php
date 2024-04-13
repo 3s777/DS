@@ -6,9 +6,10 @@
     'value' => false,
     'showLabel' => true,
     'wrapperClass' => false,
+    'size' => false
 ])
 
-<div class="choices-block {{ $wrapperClass }}">
+<div class="choices-block {{ $wrapperClass }} @if($size) choices-block_size_{{$size}} @endif">
     @if($showLabel)
         <label class="choices-block__label" for="{{ $id }}">{{ $label }}</label>
     @endif
