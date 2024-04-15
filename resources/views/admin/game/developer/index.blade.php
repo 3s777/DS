@@ -36,7 +36,7 @@
                 <x-ui.responsive-table.column>
                     <x-ui.form.input-checkbox
                         x-data="{id:'{{ $developer->id }}', name: '{{ $developer->name }}'}"
-                        @click="selectRow"
+                        @change="selectRow"
                         id="selected_row_{{ $developer->id }}"
                         name="selected_row_{{ $developer->id }}"
                     >

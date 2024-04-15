@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers\Game;
 
+use App\Exceptions\MassDeletingException;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Game\CreateGameDeveloperRequest;
 use App\Http\Requests\Game\FilterGameDeveloperRequest;
 use App\Http\Requests\Game\UpdateGameDeveloperRequest;
+use App\Http\Requests\MassDeletingRequest;
 use App\Models\Language;
 use App\ViewModels\GameDeveloperViewModel;
 use Domain\Game\Models\GameDeveloper;
@@ -13,6 +15,9 @@ use Illuminate\Foundation\Application;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Redirector;
+use Illuminate\Support\Facades\DB;
+use Support\Actions\MassDeletingAction;
+use Support\DTOs\MassDeletingDTO;
 use Throwable;
 
 class GameDeveloperController extends Controller
@@ -72,25 +77,33 @@ class GameDeveloperController extends Controller
         return to_route('game-developers.index');
     }
 
-    public function deleteSelected(Request $request)
+    /**
+     * @throws MassDeletingException
+     */
+    public function deleteSelected(MassDeletingRequest $request, MassDeletingAction $deletingAction)
     {
-        $selectedIds = explode(",", '6,2.5,7,5');
-        try {
-            foreach ($selectedIds as $id) {
+        $deletingAction(
+            MassDeletingDTO::make(
+                'Domain\Game\Models\GameDeveloper',
+                $request->input('ids'))
+        );
 
-                if (is_numeric($id)) {
+        flash()->info(__('game.developer.updated'));
 
-                    GameDeveloper::where('id', $id)->delete();
-                }
-            }
-        }
-                     catch (Throwable $e) {
-report($e);
-flash()->danger(__('game.developer.updated'));
+        return to_route('game-developers.index');
+    }
 
-return to_route('game-developers.index');
-
-}
+    /**
+     * @throws MassDeletingException
+     */
+    public function forceDeleteSelected(MassDeletingRequest $request, MassDeletingAction $deletingAction)
+    {
+        $deletingAction(
+            MassDeletingDTO::make(
+                'Domain\Game\Models\GameDeveloper',
+                $request->input('ids'),
+                true)
+        );
 
         flash()->info(__('game.developer.updated'));
 

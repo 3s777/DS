@@ -1,4 +1,4 @@
-<div x-data="selectedRows">
+<div x-data="selectableTable">
 <div
     {{ $attributes->class([
             'responsive-table'
@@ -7,11 +7,6 @@
 
     {{ $slot }}
 </div>
-<span x-text="selectedRows"></span>
-<span x-html="selectedNames"></span>
-<form action="">
-    <input type="hidden" name="selected_rows[]" x-model="selectedRows">
-</form>
 <div class="responsive-table__footer">
     <div x-data="{ actionSelect: '' }" class="responsive-table__action">
         <x-libraries.choices
@@ -27,12 +22,7 @@
         <div x-on:keydown.escape.window="$store.selectedModal.hide = true">
             <x-ui.form.button
                 tag="div"
-                x-on:click.stop="
-                console.log(selectedNames);
-            $store.selectedModal.hide = ! $store.selectedModal.hide;
-            $store.selectedModal.action = actionSelect.value
-            $store.selectedModal.ids = selectedRows
-            $store.selectedModal.prepareSelectedNames(selectedNames)"
+                x-on:click.stop="prepareModalData"
             >Применить</x-ui.form.button>
         </div>
     </div>
@@ -96,27 +86,32 @@
                 hide: true,
                 action: false,
                 names: false,
-                ids: false,
-                prepareSelectedNames(selectedNames) {
-                    this.names = selectedNames.join('<br>')
-                },
+                ids: [],
+
             });
-            Alpine.data('selectedRows', () => ({
-                selectedRows:[],
+
+            Alpine.data('selectableTable', () => ({
                 selectedNames:[],
-                id:'',
-                name:'',
+                prepareModalData() {
+                    this.$store.selectedModal.hide = ! this.$store.selectedModal.hide;
+                    this.$store.selectedModal.action = this.actionSelect.value;
+                    this.prepareSelectedNames(this.selectedNames);
+                },
+                prepareSelectedNames(selectedNames) {
+                    console.log(selectedNames);
+                    this.$store.selectedModal.names = selectedNames.join('<br>')
+                },
                 selectRow() {
-                    if (this.selectedRows.includes(this.id)) {
-                        const index = this.selectedRows.indexOf(this.id);
-                        this.selectedRows.splice(index, 1)
+                    if (this.$store.selectedModal.ids.includes(this.id)) {
+                        const index = this.$store.selectedModal.ids.indexOf(this.id);
+                        this.$store.selectedModal.ids.splice(index, 1)
                         const indexName = this.selectedNames.indexOf(this.name);
                         this.selectedNames.splice(indexName, 1)
                     } else {
-                        this.selectedRows.push(this.id)
+                        this.$store.selectedModal.ids.push(this.id)
                         this.selectedNames.push(this.name)
                     }
-                    console.log(this.selectedRows);
+                    console.log(this.$store.selectedModal.ids);
                 },
             }))
         });
