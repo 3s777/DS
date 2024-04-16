@@ -36,6 +36,14 @@
                 title: '',
             });
 
+            Alpine.store('deletedModal', {
+                hide: true,
+                action: false,
+                names: false,
+                ids: [],
+                title: '',
+            });
+
 
             Alpine.data('selectableTable', () => ({
                 pr: {
@@ -48,20 +56,14 @@
                 },
                 selectedNames:[],
                 prepareModalData(actionSelect) {
-
-
-                    if(actionSelect && actionSelect.value) {
-                        this.$store.selectedModal.hide = ! this.$store.selectedModal.hide;
-                        this.$store.selectedModal.action = this.actionSelect;
-                        this.prepareSelectedNames(this.selectedNames);
-
-                        switch (this.$store.selectedModal.action.value) {
-                            case this.$store.selectedModal.action.value:
-                                alert( this.pr.title );
-                                break;
-
+                    if(actionSelect.value === 'delete') {
+                        if(actionSelect && actionSelect.value) {
+                            this.$store.selectedModal.hide = ! this.$store.selectedModal.hide;
+                            this.$store.selectedModal.action = this.actionSelect;
+                            this.prepareSelectedNames(this.selectedNames);
                         }
                     }
+
                 },
                 prepareSelectedNames(selectedNames) {
                     this.$store.selectedModal.names = selectedNames.join('<br>')

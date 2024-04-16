@@ -64,8 +64,8 @@
                         name="responsive-table__select-action"
                         label="Действие с отмеченными">
                         <x-ui.form.option>Выберите действие</x-ui.form.option>
-                        <x-ui.form.option data-s="vs" value="test">Удалить</x-ui.form.option>
-                        <x-ui.form.option data-s="ss" value="test1">Удалить навсегда</x-ui.form.option>
+                        <x-ui.form.option data-s="vs" value="delete">Удалить</x-ui.form.option>
+                        <x-ui.form.option data-s="ss" value="forceDelete">Удалить навсегда</x-ui.form.option>
                     </x-libraries.choices>
                     <div x-on:keydown.escape.window="$store.selectedModal.hide = true">
                         <x-ui.form.button
