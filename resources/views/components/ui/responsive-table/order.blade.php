@@ -1,6 +1,5 @@
 @props([
     'name',
-    'route' => false,
 ])
 
 <a href="{{ filter_url(['sort' => $name, 'order' => request('order') == 'asc' ? 'desc' : 'asc']) }}">

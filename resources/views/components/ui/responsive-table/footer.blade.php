@@ -1,7 +1,7 @@
 <div
     {{ $attributes->class([
-        'responsive-table__row'
+            'responsive-table__footer'
         ])
     }}>
-   {{ $slot }}
+    {{ $slot }}
 </div>

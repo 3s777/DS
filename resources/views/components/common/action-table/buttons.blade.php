@@ -8,7 +8,7 @@
 
 <div
     {{ $attributes->class([
-        'responsive-table__buttons'
+        'action-table__buttons'
         ])
     }}>
 
