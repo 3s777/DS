@@ -18,65 +18,56 @@
     <script>
 
         document.addEventListener('alpine:init', () => {
+            Alpine.store('selectedRows', {
+                ids: [],
+                names: [],
 
+                select(id, name) {
+                    if (this.ids.includes(id)) {
+                        const index = this.ids.indexOf(id);
+                        this.ids.splice(index, 1)
 
+                        const indexName = this.names.indexOf(name);
+                        this.names.splice(indexName, 1)
+                    } else {
+                        this.ids.push(id)
+                        this.names.push(name)
+                    }
+                },
+            });
 
-
-            Alpine.store('modalDelete', {
+            Alpine.store('modalSingleDelete', {
                 hide: true,
                 action: false,
                 name: false
             });
 
-            Alpine.store('selectedModal', {
+            Alpine.store('modalMassDelete', {
                 hide: true,
-                action: false,
-                names: false,
+                action: '{{ route('game-developers.delete') }}',
+                names: [],
                 ids: [],
-                title: '',
             });
 
-            Alpine.store('deletedModal', {
+            Alpine.store('modalMassForceDelete', {
                 hide: true,
-                action: false,
-                names: false,
+                action: '{{ route('game-developers.forceDelete') }}',
+                names: [],
                 ids: [],
-                title: '',
             });
-
 
             Alpine.data('selectableTable', () => ({
-                pr: {
-                    test: {
-                        title:'xcvx'
-                    },
-                    test1: {
-                        title:'x5cvx'
-                    }
-                },
-                selectedNames:[],
-                prepareModalData(actionSelect) {
-                    if(actionSelect.value === 'delete') {
-                        if(actionSelect && actionSelect.value) {
-                            this.$store.selectedModal.hide = ! this.$store.selectedModal.hide;
-                            this.$store.selectedModal.action = this.actionSelect;
-                            this.prepareSelectedNames(this.selectedNames);
-                        }
+                prepareSelectedForAction(actionSelect) {
+                    if(actionSelect.value === 'delete' && this.$store.selectedRows.ids.length > 0) {
+                        this.$store.modalMassDelete.hide = ! this.$store.modalMassDelete.hide;
+                        this.$store.modalMassDelete.ids = this.$store.selectedRows.ids;
+                        this.$store.modalMassDelete.names = this.$store.selectedRows.names.join('<br>')
                     }
 
-                },
-                prepareSelectedNames(selectedNames) {
-                    this.$store.selectedModal.names = selectedNames.join('<br>')
-                },
-                selectRow() {
-                    if (this.$store.selectedModal.ids.includes(this.id)) {
-                        const index = this.$store.selectedModal.ids.indexOf(this.id);
-                        this.$store.selectedModal.ids.splice(index, 1)
-                        const indexName = this.selectedNames.indexOf(this.name);
-                        this.selectedNames.splice(indexName, 1)
-                    } else {
-                        this.$store.selectedModal.ids.push(this.id)
-                        this.selectedNames.push(this.name)
+                    if(actionSelect.value === 'forceDelete' && this.$store.selectedRows.ids.length > 0) {
+                        this.$store.modalMassForceDelete.hide = ! this.$store.modalMassForceDelete.hide;
+                        this.$store.modalMassForceDelete.ids = this.$store.selectedRows.ids;
+                        this.$store.modalMassForceDelete.names = this.$store.selectedRows.names.join('<br>')
                     }
                 },
             }))

@@ -82,6 +82,7 @@ class GameDeveloperController extends Controller
      */
     public function deleteSelected(MassDeletingRequest $request, MassDeletingAction $deletingAction)
     {
+        dd($request->input('ids'));
         $deletingAction(
             MassDeletingDTO::make(
                 'Domain\Game\Models\GameDeveloper',
@@ -98,6 +99,7 @@ class GameDeveloperController extends Controller
      */
     public function forceDeleteSelected(MassDeletingRequest $request, MassDeletingAction $deletingAction)
     {
+        dd($request->input('ids'), 'xcvx');
         $deletingAction(
             MassDeletingDTO::make(
                 'Domain\Game\Models\GameDeveloper',
