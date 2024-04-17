@@ -1,13 +1,13 @@
-<x-ui.modal x-data tag="section" ::class="$store.modalMassDelete.hide ? '' : 'modal_show'">
+<x-ui.modal x-data  tag="section" ::class="$store.modalMassDelete.hide ? '' : 'modal_show'">
     <x-ui.modal.content
         x-on:click.outside="$store.modalMassDelete.hide = true">
         <x-ui.modal.close x-on:click="$store.modalMassDelete.hide = true" />
 
         <x-ui.modal.header>
             <x-ui.title
+                x-text="$store.modalMassDelete.title"
                 size="normal"
                 indent="normal">
-                {{ __('common.deleting') }}
             </x-ui.title>
         </x-ui.modal.header>
 
@@ -19,7 +19,6 @@
         <x-ui.modal.footer align-buttons="right">
             <x-ui.form method="DELETE" x-bind:action="$store.modalMassDelete.action">
                 <input type="hidden" name="ids" x-bind:value="$store.modalMassDelete.ids">
-                {{--            <x-ui.form method="delete" x-bind:action=$store.modalMassDelete.action>--}}
                 <x-ui.form.button x-bind:disabled="preventSubmit">
                     {{ __('common.delete') }}
                 </x-ui.form.button>

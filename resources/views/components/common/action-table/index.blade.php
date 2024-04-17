@@ -16,12 +16,10 @@
         });
     </script>
     <script>
-
         document.addEventListener('alpine:init', () => {
             Alpine.store('selectedRows', {
                 ids: [],
                 names: [],
-
                 select(id, name) {
                     if (this.ids.includes(id)) {
                         const index = this.ids.indexOf(id);
@@ -45,29 +43,51 @@
             Alpine.store('modalMassDelete', {
                 hide: true,
                 action: '{{ route('game-developers.delete') }}',
-                names: [],
-                ids: [],
-            });
-
-            Alpine.store('modalMassForceDelete', {
-                hide: true,
-                action: '{{ route('game-developers.forceDelete') }}',
+                title: '',
                 names: [],
                 ids: [],
             });
 
             Alpine.data('selectableTable', () => ({
-                prepareSelectedForAction(actionSelect) {
-                    if(actionSelect.value === 'delete' && this.$store.selectedRows.ids.length > 0) {
-                        this.$store.modalMassDelete.hide = ! this.$store.modalMassDelete.hide;
-                        this.$store.modalMassDelete.ids = this.$store.selectedRows.ids;
-                        this.$store.modalMassDelete.names = this.$store.selectedRows.names.join('<br>')
+                selectall: false,
+                toggleAllCheckboxes(allIds, allNames) {
+
+                    this.selectall = !this.selectall
+
+                    if(!this.selectall) {
+
+                        allIds = [];
+                        allNames = [];
+
+
                     }
 
-                    if(actionSelect.value === 'forceDelete' && this.$store.selectedRows.ids.length > 0) {
-                        this.$store.modalMassForceDelete.hide = ! this.$store.modalMassForceDelete.hide;
-                        this.$store.modalMassForceDelete.ids = this.$store.selectedRows.ids;
-                        this.$store.modalMassForceDelete.names = this.$store.selectedRows.names.join('<br>')
+                    this.$store.selectedRows.ids = allIds.slice();
+                    this.$store.selectedRows.names = allNames.slice();
+
+console.log(allIds)
+
+
+                    checkboxes = document.querySelectorAll('[id^=selected_row]');
+                    [...checkboxes].map((el) => {
+                        el.checked = this.selectall;
+                    })
+                },
+                prepareDeleteModal(actionSelect) {
+                    if(this.$store.selectedRows.ids.length > 0) {
+                        this.$store.modalMassDelete.hide = ! this.$store.modalMassDelete.hide;
+                        this.$store.modalMassDelete.ids = this.$store.selectedRows.ids.slice();
+                        this.$store.modalMassDelete.names = this.$store.selectedRows.names.slice().join('<br>');
+                        switch (actionSelect.value) {
+                            case 'delete':
+                                this.$store.modalMassDelete.action = '{{ route('game-developers.delete') }}';
+                                this.$store.modalMassDelete.title = "{{ __('common.deleting') }}";
+                                break;
+                            case 'forceDelete':
+                                this.$store.modalMassDelete.action = '{{ route('game-developers.forceDelete') }}';
+                                this.$store.modalMassDelete.title = '{{ __('common.force_deleting') }}';
+                                break;
+                        }
                     }
                 },
             }))

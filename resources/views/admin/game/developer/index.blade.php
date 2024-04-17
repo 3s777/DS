@@ -13,6 +13,13 @@
         <x-ui.responsive-table class="responsive-table_crud">
             <x-ui.responsive-table.header>
                 <x-ui.responsive-table.column name="check">
+
+
+                    <x-common.action-table.select-all :models="$developers">
+
+                    </x-common.action-table.select-all>
+
+
                 </x-ui.responsive-table.column>
                 <x-ui.responsive-table.column type="id" sortable="true" name="id">
                     {{ __('common.id') }}
@@ -69,27 +76,18 @@
                     </x-libraries.choices>
 
 
-                    <div x-show="!actionSelect" x-on:keydown.escape.window="$store.modalMassDelete.hide = true">
+                    <div x-show="!actionSelect || actionSelect.value === ''" x-on:keydown.escape.window="$store.modalMassDelete.hide = true">
                         <x-ui.form.button
                             tag="div"
-                            x-on:click.stop="prepareSelectedForAction(actionSelect)"
-                        >Применить</x-ui.form.button>
+                            x-on:click.stop="prepareDeleteModal(actionSelect)"
+                        >Примеnнить</x-ui.form.button>
                     </div>
 
-                    <template x-if="actionSelect.value == 'delete'">
+                    <template x-if="actionSelect.value === 'delete' || actionSelect.value === 'forceDelete'">
                         <div x-on:keydown.escape.window="$store.modalMassDelete.hide = true">
                             <x-ui.form.button
                                 tag="div"
-                                x-on:click.stop="prepareSelectedForAction(actionSelect)"
-                            >Применить</x-ui.form.button>
-                        </div>
-                    </template>
-
-                    <template x-if="actionSelect.value == 'forceDelete'">
-                        <div x-on:keydown.escape.window="$store.modalMassDelete.hide = true">
-                            <x-ui.form.button
-                                tag="div"
-                                x-on:click.stop="prepareSelectedForAction(actionSelect)"
+                                x-on:click.stop="prepareDeleteModal(actionSelect)"
                             >Тульк</x-ui.form.button>
                         </div>
                     </template>
@@ -111,7 +109,6 @@
 
     <x-common.action-table.modal-delete />
     <x-common.action-table.modal-mass-delete />
-    <x-common.action-table.modal-mass-force-delete />
 </x-layouts.admin>
 
 @push('scripts')
