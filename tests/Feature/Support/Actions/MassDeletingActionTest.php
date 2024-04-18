@@ -9,6 +9,7 @@ use Domain\Auth\DTOs\LoginUserDTO;
 use Domain\Auth\Models\User;
 use Domain\Game\Models\GameDeveloper;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Support\Collection;
 use Support\DTOs\MassDeletingDTO;
 use Tests\TestCase;
 
@@ -17,20 +18,15 @@ class MassDeletingActionTest extends TestCase
     use RefreshDatabase;
 
     public string $modelsIds;
-    public GameDeveloper $models;
+    public Collection $models;
 
     protected function setUp(): void
     {
         parent::setUp();
 
         $this->models = GameDeveloperFactory::new()->count(5)->create();
-        $modelsIdsArray = $this->models->pluck('id')->all();
+        $modelsIdsArray = $this->models->pluck('id')->toArray();
         $this->modelsIds = implode(',', $modelsIdsArray);
-
-//        $this->user = UserFactory::new()->create([
-//            'password' => bcrypt($this->password),
-//            'remember_token' => null
-//        ]);
     }
 
     /**
@@ -39,8 +35,6 @@ class MassDeletingActionTest extends TestCase
      */
     public function it_mass_deleting_success(): void
     {
-
-
         $action = app(MassDeletingAction::class);
 
         $action(MassDeletingDTO::make(
@@ -61,6 +55,7 @@ class MassDeletingActionTest extends TestCase
      */
     public function it_mass_force_deleting_success(): void
     {
+        $undeletedModels = GameDeveloperFactory::new()->count(2)->create();
 
         $action = app(MassDeletingAction::class);
 
@@ -69,7 +64,15 @@ class MassDeletingActionTest extends TestCase
             $this->modelsIds,
             true));
 
-        $this->assertDatabaseCount('game_developers', 0);
+        $this->assertDatabaseCount('game_developers', 2);
+
+        foreach($undeletedModels as $model) {
+            $this->assertModelExists($model);
+
+            $this->assertDatabaseHas('game_developers', [
+                'id' => $model->id,
+            ]);
+        }
 
         foreach($this->models as $model) {
             $this->assertModelMissing($model);
