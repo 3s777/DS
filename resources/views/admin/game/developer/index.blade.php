@@ -9,17 +9,11 @@
 
     @include('admin.game.developer.partials.filters')
 
-    <x-common.action-table>
-        <x-ui.responsive-table class="responsive-table_crud">
+    <x-common.action-table model-name="game-developers">
+        <x-ui.responsive-table :data="$developers->isEmpty()">
             <x-ui.responsive-table.header>
-                <x-ui.responsive-table.column name="check">
-
-
-                    <x-common.action-table.select-all :models="$developers">
-
-                    </x-common.action-table.select-all>
-
-
+                <x-ui.responsive-table.column type="select" name="check">
+                    <x-common.action-table.select-all :models="$developers" />
                 </x-ui.responsive-table.column>
                 <x-ui.responsive-table.column type="id" sortable="true" name="id">
                     {{ __('common.id') }}
@@ -62,57 +56,39 @@
             @endforeach
 
             <x-slot:footer>
-                <div x-data="{ actionSelect: ''}" class="responsive-table__action">
-                    <x-libraries.choices
-                        x-model="actionSelect"
-                        class="responsive-table__select-action"
-                        size="small"
-                        id="responsive-table__select-action"
-                        name="responsive-table__select-action"
-                        label="Действие с отмеченными">
-                        <x-ui.form.option>Выберите действие</x-ui.form.option>
-                        <x-ui.form.option value="delete">Удалить</x-ui.form.option>
-                        <x-ui.form.option value="forceDelete">Удалить навсегда</x-ui.form.option>
-                    </x-libraries.choices>
-
-
-                    <div x-show="!actionSelect || actionSelect.value === ''" x-on:keydown.escape.window="$store.modalMassDelete.hide = true">
-                        <x-ui.form.button
-                            tag="div"
-                            x-on:click.stop="prepareDeleteModal(actionSelect)"
-                        >Примеnнить</x-ui.form.button>
-                    </div>
-
-                    <template x-if="actionSelect.value === 'delete' || actionSelect.value === 'forceDelete'">
-                        <div x-on:keydown.escape.window="$store.modalMassDelete.hide = true">
-                            <x-ui.form.button
-                                tag="div"
-                                x-on:click.stop="prepareDeleteModal(actionSelect)"
-                            >Тульк</x-ui.form.button>
-                        </div>
-                    </template>
-
-
-                </div>
+                <x-common.action-table.selected-action>
+                    <x-ui.form.option value="test1">Тестируем выбор</x-ui.form.option>
+                    <x-slot:action>
+                        <template x-if="actionSelect.value === 'test1'">
+                            <div x-on:keydown.escape.window="$store.modalTest.hide = true">
+                                <x-ui.form.button
+                                    tag="div"
+                                    x-on:click.stop="$store.modalTest.test(actionSelect.value)"
+                                >Тестируем кнопку</x-ui.form.button>
+                            </div>
+                        </template>
+                    </x-slot:action>
+                </x-common.action-table.selected-action>
             </x-slot:footer>
 
         </x-ui.responsive-table>
     </x-common.action-table>
 
-    @if($developers->isEmpty())
-        <x-common.missing>
-            {{ __('common.not_found') }}
-        </x-common.missing>
-    @endif
-
     {{ $developers->links('pagination::default') }}
 
-    <x-common.action-table.modal-delete />
-    <x-common.action-table.modal-mass-delete />
+    @push('scripts')
+        <script>
+            document.addEventListener('alpine:init', () => {
+                Alpine.store('modalTest', {
+                    hide: true,
+                    test(actionSelect) {
+                        console.log(actionSelect);
+                    }
+                });
+            });
+        </script>
+    @endpush
 </x-layouts.admin>
 
-@push('scripts')
-    <script>
 
-    </script>
-@endpush
+

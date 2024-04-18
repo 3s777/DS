@@ -1,11 +1,9 @@
 <x-ui.form.input-checkbox
-    name="selectAll"
-    id="selectAll"
-    x-data="{
-                            allIds:[{{$ids}}],
-                            allNames: [{{$names}}]
-                        }"
+    class="action-table__select-all"
+    name="action-table__select_all"
+    id="action-table__select_all"
+    size="small"
+    x-data="{allIds:[{{ $ids }}], allNames: [{{ $names }}]}"
     x-bind:checked="selectall"
     @click="toggleAllCheckboxes(allIds, allNames)"
-
 />

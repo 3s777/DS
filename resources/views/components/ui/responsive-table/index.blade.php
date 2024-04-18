@@ -1,5 +1,6 @@
 @props([
-    'footer' => false
+    'footer' => false,
+    'data' => false,
 ])
 <div
     {{ $attributes->class([
@@ -9,6 +10,13 @@
 
     {{ $slot }}
 </div>
+
+@if($data)
+    <x-common.missing>
+        {{ __('common.not_found') }}
+    </x-common.missing>
+@endif
+
 @if($footer)
     <div
         {{ $footer->attributes->class([

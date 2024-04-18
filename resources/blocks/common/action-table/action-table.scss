@@ -4,4 +4,17 @@
         justify-content: flex-end;
         gap: 8px;
     }
+
+    &__action {
+        display: flex;
+        gap: 12px;
+    }
+
+    & .choices-block {
+        width: 200px;
+    }
+
+    &__select-all + .input-checkbox__label:before {
+        background-color: $base-light-transparent;
+    }
 }

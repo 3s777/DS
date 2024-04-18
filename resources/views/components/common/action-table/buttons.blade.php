@@ -2,7 +2,10 @@
     'item',
     'model',
     'show' => false,
-    'edit' => true,
+    'edit' => true
+])
+
+@aware([
     'delete' => true
 ])
 

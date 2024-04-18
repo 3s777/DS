@@ -12,6 +12,7 @@
         align-items: center;
         user-select: none;
         color: $font-main-50;
+        gap: 8px;
 
         &:before {
             content: '';
@@ -20,7 +21,6 @@
             flex-grow: 0;
             width: 25px;
             height: 25px;
-            margin-right: 0.5em;
             border: 0;
             background-color: $base-dark-transparent;
             background-repeat: no-repeat;
@@ -28,6 +28,13 @@
             background-size: 50% 50%;
             border-radius: $extra-small-border-radius;
             transition: $base-transition;
+        }
+    }
+
+    &_size_small + .input-checkbox__label {
+        &:before {
+            width: 20px;
+            height: 20px;
         }
     }
 
