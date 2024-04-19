@@ -1,13 +1,13 @@
 <?php
 
-namespace Database\Factories;
+namespace Database\Factories\Game;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\Domain\Game\Models\GamePlatformType>
+ * @extends \Illuminate\Database\Eloquent\Factories\Factory<\Domain\Game\Models\GamePlatform>
  */
-class GamePlatformTypeFactory extends Factory
+class GamePlatformFactory extends Factory
 {
     /**
      * Define the model's default state.

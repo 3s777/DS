@@ -4,9 +4,12 @@ namespace Domain\Game\Models;
 
 use App\Filters\DatesFilter;
 use App\Filters\SearchFilter;
+use Database\Factories\Game\GameDeveloperFactory;
+use Domain\Auth\Models\User;
 use Domain\Game\QueryBuilders\GameDeveloperQueryBuilder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Mews\Purifier\Casts\CleanHtml;
 use Spatie\MediaLibrary\HasMedia;
@@ -40,6 +43,11 @@ class GameDeveloper extends Model implements HasMedia
         'name',
         'created_at'
     ];
+
+    protected static function newFactory(): GameDeveloperFactory
+    {
+        return GameDeveloperFactory::new();
+    }
 
     public function thumbnailDir(): string
     {
@@ -78,5 +86,10 @@ class GameDeveloper extends Model implements HasMedia
     public function newEloquentBuilder($query): GameDeveloperQueryBuilder
     {
         return new GameDeveloperQueryBuilder($query);
+    }
+
+    public function user(): BelongsTo
+    {
+        return $this->belongsTo(User::class);
     }
 }

@@ -6,7 +6,7 @@ use App\Http\Controllers\Game\GameDeveloperController;
 use App\Http\Requests\Game\CreateGameDeveloperRequest;
 use App\Jobs\GenerateSmallThumbnailsJob;
 use App\Jobs\GenerateThumbnailJob;
-use Database\Factories\GameDeveloperFactory;
+use Database\Factories\Game\GameDeveloperFactory;
 use Database\Factories\UserFactory;
 use Domain\Auth\Models\User;
 use Domain\Game\Models\GameDeveloper;

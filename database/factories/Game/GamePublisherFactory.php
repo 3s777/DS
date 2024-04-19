@@ -1,6 +1,6 @@
 <?php
 
-namespace Database\Factories;
+namespace Database\Factories\Game;
 
 use Domain\Game\Models\GamePublisher;
 use Illuminate\Database\Eloquent\Factories\Factory;

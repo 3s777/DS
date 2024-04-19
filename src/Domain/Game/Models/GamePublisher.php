@@ -2,7 +2,6 @@
 
 namespace Domain\Game\Models;
 
-use Database\Factories\GamePublisherFactory;
 use Domain\Game\QueryBuilders\GameDeveloperQueryBuilder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;

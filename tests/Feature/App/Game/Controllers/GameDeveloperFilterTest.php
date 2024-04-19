@@ -4,7 +4,7 @@ namespace App\Game\Controllers;
 
 use App\Http\Controllers\Game\GameDeveloperController;
 use Carbon\Carbon;
-use Database\Factories\GameDeveloperFactory;
+use Database\Factories\Game\GameDeveloperFactory;
 use Database\Factories\UserFactory;
 use Domain\Auth\Models\User;
 use Domain\Game\Models\GameDeveloper;

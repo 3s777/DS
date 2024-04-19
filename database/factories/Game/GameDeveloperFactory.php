@@ -1,7 +1,8 @@
 <?php
 
-namespace Database\Factories;
+namespace Database\Factories\Game;
 
+use Domain\Auth\Models\User;
 use Domain\Game\Models\GameDeveloper;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
@@ -19,9 +20,12 @@ class GameDeveloperFactory extends Factory
      */
     public function definition(): array
     {
+        $user = User::query()->inRandomOrder()->first();
+
         return [
             'name' => fake()->name(),
             'description' => fake()->text(),
+            'user_id' => User::query()->inRandomOrder()->first()->id
         ];
     }
 }
