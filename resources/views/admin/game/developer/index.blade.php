@@ -21,8 +21,8 @@
                 <x-ui.responsive-table.column sortable="true" name="name">
                     {{ __('common.name') }}
                 </x-ui.responsive-table.column>
-                <x-ui.responsive-table.column name="slug">
-                    {{ __('common.slug') }}
+                <x-ui.responsive-table.column name="users.name" sortable="true">
+                    {{ __('common.user') }}
                 </x-ui.responsive-table.column>
                 <x-ui.responsive-table.column name="created_at" sortable="true">
                     {{ __('common.created_date') }}
@@ -44,7 +44,7 @@
                         {{ $developer->name }}
                     </x-ui.responsive-table.column>
                     <x-ui.responsive-table.column>
-                        {{ $developer->slug }}
+                        {{ $developer->user_name }}
                     </x-ui.responsive-table.column>
                     <x-ui.responsive-table.column>
                         {{ $developer->created_at }}

@@ -10,6 +10,7 @@ use App\Http\Requests\Game\UpdateGameDeveloperRequest;
 use App\Http\Requests\MassDeletingRequest;
 use App\Models\Language;
 use App\ViewModels\GameDeveloperViewModel;
+use Domain\Auth\Models\User;
 use Domain\Game\Models\GameDeveloper;
 use Illuminate\Foundation\Application;
 use Illuminate\Http\RedirectResponse;
@@ -29,7 +30,8 @@ class GameDeveloperController extends Controller
 
     public function create()
     {
-        return view('admin.game.developer.create');
+        $users = User::all()->select('id', 'name');
+        return view('admin.game.developer.create', compact(['users']));
     }
 
     public function store(CreateGameDeveloperRequest $request): Application|Redirector|RedirectResponse|\Illuminate\Contracts\Foundation\Application

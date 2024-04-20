@@ -11,4 +11,32 @@ class UserController extends Controller
         $users = User::all();
         return view('content.users.index', compact('users'));
     }
+
+    public function getUsers() {
+        $users = User::all();
+
+        $result = [];
+        foreach ($users as $user) {
+            $result[] = ['value' => $user->id, 'label'=> $user->name];
+        }
+
+
+
+
+        return response()->json($result);
+    }
+
+
+    public function findUsers($param=null)
+    {
+        $users = null;
+
+        if($param) {
+            $users = User::where('name', 'LIKE', '%'.$param.'%')->get();
+        }
+        else {
+            $users = User::all();
+        }
+        return response()->json($users);
+    }
 }

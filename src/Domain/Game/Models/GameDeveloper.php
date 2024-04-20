@@ -16,6 +16,7 @@ use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
 use Support\Traits\Models\HasSlug;
 use Support\Traits\Models\HasThumbnail;
+use Support\Traits\Models\HasUser;
 
 /**
  * @method  static GameDeveloper|GameDeveloperQueryBuilder query()
@@ -27,11 +28,13 @@ class GameDeveloper extends Model implements HasMedia
     use SoftDeletes;
     use InteractsWithMedia;
     use HasThumbnail;
+    use HasUser;
 
     protected $fillable = [
         'name',
         'slug',
         'description',
+        'user_id'
     ];
 
     protected $casts = [
@@ -41,7 +44,8 @@ class GameDeveloper extends Model implements HasMedia
     public array $sortedFields = [
         'id',
         'name',
-        'created_at'
+        'created_at',
+        'users.email'
     ];
 
     protected static function newFactory(): GameDeveloperFactory
@@ -73,8 +77,8 @@ class GameDeveloper extends Model implements HasMedia
     public function availableFilters(): array
     {
         return [
-            DatesFilter::make('Датируем', 'dates'),
-            SearchFilter::make('Ищем', 'search'),
+            DatesFilter::make('Датируем', 'dates', 'game_developers'),
+            SearchFilter::make('Ищем', 'search', 'game_developers'),
         ];
     }
 

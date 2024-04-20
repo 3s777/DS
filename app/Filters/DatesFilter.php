@@ -33,11 +33,11 @@ class DatesFilter extends AbstractFilter
     {
         return $query->when($this->requestValue(), function (Builder $query) {
             if($this->fromDate()) {
-                $query->whereDate('created_at','>=',  $this->fromDate());
+                $query->whereDate($this->table.'.created_at','>=',  $this->fromDate());
             }
 
             if($this->toDate()) {
-                $query->whereDate('created_at','<=',  $this->toDate());
+                $query->whereDate($this->table.'.created_at','<=',  $this->toDate());
             }
         });
     }

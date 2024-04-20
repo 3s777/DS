@@ -49,15 +49,4 @@ class Sorter
             'order' => request()->str($this->order()),
         ];
     }
-
-//    public function isActive(string $column, string $direction = 'ASC'): bool
-//    {
-//        $column = trim($column, '-');
-//
-//        if(strtolower($direction) === 'DESC') {
-//            $column = '-'.$column;
-//        }
-//
-//        return request($this->key()) === $column;
-//    }
 }

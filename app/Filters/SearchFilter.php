@@ -13,7 +13,7 @@ class SearchFilter extends AbstractFilter
     public function apply(Builder $query): Builder
     {
         return $query->when($this->requestValue(), function (Builder $query) {
-            $query->where('name','like',  '%'.$this->requestValue().'%');
+            $query->where($this->table.'.name','ILIKE',  '%'.$this->requestValue().'%');
         });
     }
 

@@ -19,16 +19,19 @@ abstract class AbstractFilter implements Stringable
 
     protected string $key;
 
+    protected string $table;
+
     abstract public function apply(Builder $query): Builder;
 
     abstract public function preparedValues(): mixed;
 
     abstract public function view(): string;
 
-    public function __construct(string $title, string $key)
+    public function __construct(string $title, string $key, string $table)
     {
         $this->setTitle($title);
         $this->setKey($key);
+        $this->setTable($table);
     }
 
     public function setTitle(string $title): static
@@ -40,6 +43,12 @@ abstract class AbstractFilter implements Stringable
     public function setKey(string $key): static
     {
         $this->key = $key;
+        return $this;
+    }
+
+    public function setTable(string $table): static
+    {
+        $this->table = $table;
         return $this;
     }
 
