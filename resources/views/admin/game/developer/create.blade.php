@@ -43,29 +43,12 @@
                             label="{{ __('common.user') }}">
                             <x-ui.form.option value="">{{ __('common.choose_user') }}</x-ui.form.option>
 
-                            @foreach($users as $user)
-                                <x-ui.form.option
-                                    value="{{ $user['id']}}"
-                                    :selected="old('user_id') == $user['id']"
-                                >{{ $user['name'] }}</x-ui.form.option>
-                            @endforeach
-                        </x-libraries.choices>
-                    </x-ui.form.group>
-                </x-grid.col>
-
-
-
-                <x-grid.col xl="3" lg="4" md="6" sm="12">
-                    <x-ui.form.group>
-                        <x-libraries.choices
-                            class="choices-select-3"
-                            id="select-test-3"
-                            name="select-test-3"
-                            label="Choose something">
-                            <x-ui.form.option>Select with search</x-ui.form.option>
-                            <x-ui.form.option value="1">Test 1</x-ui.form.option>
-                            <x-ui.form.option value="2">Test 2</x-ui.form.option>
-                            <x-ui.form.option value="3">Test 3</x-ui.form.option>
+{{--                            @foreach($users as $user)--}}
+{{--                                <x-ui.form.option--}}
+{{--                                    value="{{ $user['id']}}"--}}
+{{--                                    :selected="old('user_id') == $user['id']"--}}
+{{--                                >{{ $user['name'] }}</x-ui.form.option>--}}
+{{--                            @endforeach--}}
                         </x-libraries.choices>
                     </x-ui.form.group>
                 </x-grid.col>
@@ -95,20 +78,69 @@
         </x-ui.form.group>
     </x-ui.form>
 
-    <x-ui.test-select>
-        <option>sadf</option>
-        <option></option>
-    </x-ui.test-select>
+
 
     @push('scripts')
         <script type="module">
+
             const users = document.querySelector('.user-select');
+
+
+            let tee = {
+                name: 'test',
+                searchTerms: null,
+                asyncUrl: '{{ route('find-users') }}',
+
+                fromUrl(url) {
+                    return fetch(url)
+                        .then(response => {
+                            return response.json()
+                        })
+                        .then(json => {
+                            return json
+                        })
+                },
+
+
+                async asyncSearch() {
+                    const url = new URL(this.asyncUrl)
+
+                    const query = this.searchTerms.value ?? null
+
+                    if (query !== null && query.length) {
+                        url.searchParams.append('query', query)
+                    }
+
+                    const options = await this.fromUrl(url.toString())
+
+                    console.log(url.toString());
+
+                    choices_users.setChoices(options, 'value', 'label', true)
+                }
+            };
+
+
             const choices_users = new Choices(users, {
                 allowHTML: true,
                 itemSelectText: '',
                 noResultsText: '{{ __('Не найдено') }}',
                 noChoicesText: '{{ __('Больше ничего нет') }}',
+                callbackOnInit: () => {
+                    tee.searchTerms = users.closest('.choices').querySelector('[name="search_terms"]')
+                    tee.asyncSearch();
+                },
             });
+
+
+            tee.searchTerms.addEventListener(
+                'input',
+                function (event) {
+                    choices_users.clearStore()
+                    tee.asyncSearch()
+                },
+                false,
+            )
+
 
         </script>
     @endpush

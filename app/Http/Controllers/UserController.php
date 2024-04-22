@@ -12,7 +12,18 @@ class UserController extends Controller
         return view('content.users.index', compact('users'));
     }
 
-    public function getUsers() {
+    public function getUsers(Request $request) {
+
+        if($request->input('query')) {
+            $users = User::where('name','ilike', "%{$request->input('query')}%")->get();
+
+            foreach ($users as $user) {
+                $result[] = ['value' => $user->id, 'label'=> $user->name];
+            }
+
+            return response()->json($result);
+        }
+
         $users = User::all();
 
         $result = [];
