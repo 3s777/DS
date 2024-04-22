@@ -1,16 +1,21 @@
 <?php
 
-namespace App\ViewModels;
+namespace App\ViewModels\Game;
 
+use Domain\Auth\Models\User;
 use Domain\Game\Models\GameDeveloper;
-use Illuminate\Support\Facades\Cache;
 use Spatie\ViewModels\ViewModel;
 
-class GameDeveloperViewModel extends ViewModel
+class GameDeveloperEditViewModel extends ViewModel
 {
-    public function __construct()
+    public $gameDeveloper;
+
+    public $users;
+
+    public function __construct(User $users, GameDeveloper $gameDeveloper = null)
     {
-        //
+        $this->users = $users;
+        $this->gameDeveloper = $gameDeveloper;
     }
 
     public function developers() {

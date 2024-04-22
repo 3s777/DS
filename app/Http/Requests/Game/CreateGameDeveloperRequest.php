@@ -31,6 +31,7 @@ class CreateGameDeveloperRequest extends FormRequest
             'slug' => ['nullable','string', Rule::unique(GameDeveloper::class)],
             'description' => ['nullable','string'],
             'thumbnail' => ['nullable', 'mimes:jpg,png', 'max:10024'],
+            'user_id' => ['nullable', 'integer', 'exists:Domain\Auth\Models\User,id']
         ];
     }
 
@@ -41,6 +42,7 @@ class CreateGameDeveloperRequest extends FormRequest
             'slug' => __('common.slug'),
             'description' => __('common.description'),
             'thumbnail' => __('common.thumbnail'),
+            'user_id' => __('common.user'),
         ];
     }
 }

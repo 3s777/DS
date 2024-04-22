@@ -11,12 +11,20 @@ class Sorter
     public const SORT_ORDER = 'order';
 
     public function __construct(
-        protected array $columns = []
+        protected array $columns = [],
+        protected string $defaultField = 'id',
+        protected string $defaultOrder = 'desc'
     ) {}
 
     public function run(Builder $query): Builder
     {
         $sortData = $this->sortData();
+
+        if(!request('sort')) {
+            $query->orderBy(
+                $this->defaultField, $this->defaultOrder
+            );
+        }
 
         $sortData['order'] = $sortData['order']->contains(['asc', 'desc']) ? $sortData['order'] : 'asc';
 

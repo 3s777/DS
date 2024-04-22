@@ -1,10 +1,8 @@
 <?php
 
-namespace App\ViewModels;
+namespace App\ViewModels\Game;
 
-use Domain\Game\Models\GameDeveloper;
 use Domain\Game\Models\GamePublisher;
-use Illuminate\Support\Facades\Cache;
 use Spatie\ViewModels\ViewModel;
 
 class GamePublisherViewModel extends ViewModel

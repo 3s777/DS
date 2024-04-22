@@ -8,30 +8,25 @@ use App\Http\Requests\Game\CreateGameDeveloperRequest;
 use App\Http\Requests\Game\FilterGameDeveloperRequest;
 use App\Http\Requests\Game\UpdateGameDeveloperRequest;
 use App\Http\Requests\MassDeletingRequest;
-use App\Models\Language;
-use App\ViewModels\GameDeveloperViewModel;
-use Domain\Auth\Models\User;
+use App\ViewModels\Game\GameDeveloperCreateViewModel;
+use App\ViewModels\Game\GameDeveloperIndexViewModel;
 use Domain\Game\Models\GameDeveloper;
 use Illuminate\Foundation\Application;
 use Illuminate\Http\RedirectResponse;
-use Illuminate\Http\Request;
 use Illuminate\Routing\Redirector;
-use Illuminate\Support\Facades\DB;
 use Support\Actions\MassDeletingAction;
 use Support\DTOs\MassDeletingDTO;
-use Throwable;
 
 class GameDeveloperController extends Controller
 {
     public function index(FilterGameDeveloperRequest $request)
     {
-        return view('admin.game.developer.index', new GameDeveloperViewModel());
+        return view('admin.game.developer.index', new GameDeveloperIndexViewModel());
     }
 
     public function create()
     {
-        $users = User::all()->select('id', 'name');
-        return view('admin.game.developer.create', compact(['users']));
+        return view('admin.game.developer.create', new GameDeveloperCreateViewModel());
     }
 
     public function store(CreateGameDeveloperRequest $request): Application|Redirector|RedirectResponse|\Illuminate\Contracts\Foundation\Application
@@ -56,7 +51,7 @@ class GameDeveloperController extends Controller
 
     public function edit(GameDeveloper $gameDeveloper)
     {
-        return view('admin.game.developer.edit', compact('gameDeveloper'));
+        return view('admin.game.developer.edit', new GameDeveloperCreateViewModel($gameDeveloper));
     }
 
     public function update(UpdateGameDeveloperRequest $request, GameDeveloper $gameDeveloper)

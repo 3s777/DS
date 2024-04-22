@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Game;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Game\CreateGamepublisherRequest;
 use App\Http\Requests\Game\UpdateGamepublisherRequest;
-use App\ViewModels\GamepublisherViewModel;
+use App\ViewModels\Game\GamepublisherViewModel;
 use Domain\Game\Models\Gamepublisher;
 use Illuminate\Foundation\Application;
 use Illuminate\Http\RedirectResponse;

@@ -36,7 +36,19 @@ class UpdateGameDeveloperRequest extends FormRequest
             'slug' => ['nullable','string', Rule::unique(GameDeveloper::class)->ignore($this->game_developer)],
             'description' => ['nullable','string'],
             'thumbnail' => ['nullable', 'mimes:jpg,png', 'max:10024'],
-            'thumbnail_selected' => ['nullable', 'string']
+            'thumbnail_selected' => ['nullable', 'string'],
+            'user_id' => ['nullable', 'integer', 'exists:Domain\Auth\Models\User,id']
+        ];
+    }
+
+    public function attributes()
+    {
+        return [
+            'name' => __('common.name'),
+            'slug' => __('common.slug'),
+            'description' => __('common.description'),
+            'thumbnail' => __('common.thumbnail'),
+            'user_id' => __('common.user'),
         ];
     }
 }

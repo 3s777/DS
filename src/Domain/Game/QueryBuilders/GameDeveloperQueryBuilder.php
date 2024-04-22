@@ -25,12 +25,12 @@ class GameDeveloperQueryBuilder extends Builder
         return $this;
     }
 
-    public function sorted()
+    public function sorted(string $defaultField = 'id', string $defaultOrder = 'desc')
     {
-        if(request('sort')) {
-            return sorter($this->model->sortedFields)->run($this);
-        }
-
-        return $this;
+//        if(request('sort')) {
+            return sorter($this->model->sortedFields, $defaultField, $defaultOrder)->run($this);
+//        }
+//
+//        return $this;
     }
 }

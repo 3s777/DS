@@ -34,6 +34,26 @@
                     </x-ui.form.group>
                 </x-grid.col>
 
+                <x-grid.col xl="4" lg="6" md="6" sm="12">
+                    <x-ui.form.group>
+                        <x-libraries.choices
+                            class="user-select"
+                            id="user-select"
+                            name="user_id"
+                            label="{{ __('common.user') }}">
+                            <x-ui.form.option value="">{{ __('common.choose_user') }}</x-ui.form.option>
+
+                            @foreach($users as $user)
+                                <x-ui.form.option
+                                    value="{{ $user['id']}}"
+                                    :selected="$gameDeveloper->user_id == $user['id']">
+                                    {{ $user['name'] }}
+                                </x-ui.form.option>
+                            @endforeach
+                        </x-libraries.choices>
+                    </x-ui.form.group>
+                </x-grid.col>
+
                 <x-grid.col xl="12" lg="6" md="6" sm="12">
                     <x-ui.form.group>
                         <x-libraries.rich-text-editor
@@ -73,4 +93,15 @@
             <x-ui.form.button x-bind:disabled="preventSubmit">{{ __('common.save') }}</x-ui.form.button>
         </x-ui.form.group>
     </x-ui.form>
+
+    @push('scripts')
+        <script type="module">
+            const users = document.querySelector('.user-select');
+            const choices_users = new Choices(users, {
+                itemSelectText: '',
+                noResultsText: '{{ __('Не найдено') }}',
+                noChoicesText: '{{ __('Больше ничего нет') }}',
+            });
+        </script>
+    @endpush
 </x-layouts.admin>

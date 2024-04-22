@@ -37,15 +37,35 @@
                 <x-grid.col xl="4" lg="6" md="6" sm="12">
                     <x-ui.form.group>
                         <x-libraries.choices
+                            class="user-select"
+                            id="user-select"
+                            name="user_id"
+                            label="{{ __('common.user') }}">
+                            <x-ui.form.option value="">{{ __('common.choose_user') }}</x-ui.form.option>
+
+                            @foreach($users as $user)
+                                <x-ui.form.option
+                                    value="{{ $user['id']}}"
+                                    :selected="old('user_id') == $user['id']"
+                                >{{ $user['name'] }}</x-ui.form.option>
+                            @endforeach
+                        </x-libraries.choices>
+                    </x-ui.form.group>
+                </x-grid.col>
+
+
+
+                <x-grid.col xl="3" lg="4" md="6" sm="12">
+                    <x-ui.form.group>
+                        <x-libraries.choices
                             class="choices-select-3"
                             id="select-test-3"
                             name="select-test-3"
-                            label="Пользователь">
-                            <x-ui.form.option>Выберите пользователя</x-ui.form.option>
-
-                            @foreach($users as $user)
-                                <x-ui.form.option value="{{ $user['id']}}">{{ $user['name'] }}</x-ui.form.option>
-                            @endforeach
+                            label="Choose something">
+                            <x-ui.form.option>Select with search</x-ui.form.option>
+                            <x-ui.form.option value="1">Test 1</x-ui.form.option>
+                            <x-ui.form.option value="2">Test 2</x-ui.form.option>
+                            <x-ui.form.option value="3">Test 3</x-ui.form.option>
                         </x-libraries.choices>
                     </x-ui.form.group>
                 </x-grid.col>
@@ -75,14 +95,21 @@
         </x-ui.form.group>
     </x-ui.form>
 
+    <x-ui.test-select>
+        <option>sadf</option>
+        <option></option>
+    </x-ui.test-select>
+
     @push('scripts')
         <script type="module">
-            const element3 = document.querySelector('.choices-select-3');
-            const choices3 = new Choices(element3, {
+            const users = document.querySelector('.user-select');
+            const choices_users = new Choices(users, {
+                allowHTML: true,
                 itemSelectText: '',
                 noResultsText: '{{ __('Не найдено') }}',
                 noChoicesText: '{{ __('Больше ничего нет') }}',
             });
+
         </script>
     @endpush
 </x-layouts.admin>

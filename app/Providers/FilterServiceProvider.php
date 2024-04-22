@@ -16,8 +16,8 @@ class FilterServiceProvider extends ServiceProvider
     {
         $this->app->singleton(FilterManager::class);
 
-        $this->app->bind(Sorter::class, function (Application $app, array $fields) {
-            return new Sorter($fields);
+        $this->app->bind(Sorter::class, function (Application $app, array $params) {
+            return new Sorter($params['columns'], $params['defaultField'], $params['defaultOrder']);
         });
     }
 
