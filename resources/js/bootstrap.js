@@ -98,4 +98,3 @@ window.FilePondPluginImageResize = FilePondPluginImageResize;
 
 import Quill from "quill";
 window.Quill = Quill;
-

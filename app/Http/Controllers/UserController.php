@@ -21,6 +21,10 @@ class UserController extends Controller
                 $result[] = ['value' => $user->id, 'label'=> $user->name];
             }
 
+            if($users->isEmpty()) {
+                return response()->json([['value' => '', 'label'=> 'Не найдено', 'disabled' => true]]);
+            }
+
             return response()->json($result);
         }
 
@@ -32,7 +36,9 @@ class UserController extends Controller
         }
 
 
-
+        if($users->isEmpty()) {
+            return response()->json(['value' => '', 'label'=> 'Пусто', 'disabled' => true]);
+        }
 
         return response()->json($result);
     }

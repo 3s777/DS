@@ -35,7 +35,7 @@
         <x-common.footer />
 
         @vite(['resources/js/app.js'])
-
+        @vite(['resources/js/scripts.js'])
         @stack('scripts')
 
     </body>

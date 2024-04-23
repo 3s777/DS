@@ -8,10 +8,11 @@ import '../blocks/ui/input-text/input-text';
 import '../blocks/ui/textarea/textarea';
 import '../blocks/ui/tabs/tabs';
 import '../blocks/ui/tooltip/tooltip';
-import './ch.js';
+import './scripts';
 
 import './libraries/quill';
 
 Fancybox.bind("[data-fancybox]", {
     // Your custom options
 });
+

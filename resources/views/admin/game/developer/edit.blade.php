@@ -96,12 +96,61 @@
 
     @push('scripts')
         <script type="module">
+
             const users = document.querySelector('.user-select');
+
+            let tee = {
+                searchTerms: null,
+                asyncUrl: '{{ route('find-users') }}',
+
+                fromUrl(url) {
+                    return fetch(url)
+                        .then(response => {
+                            return response.json()
+                        })
+                        .then(json => {
+                            return json
+                        })
+                },
+
+                async asyncSearch() {
+                    const url = new URL(this.asyncUrl)
+
+                    const query = this.searchTerms.value ?? null
+
+                    if (query !== null && query.length) {
+                        url.searchParams.append('query', query)
+                    }
+
+                    const options = await this.fromUrl(url.toString())
+
+                    choices_users.setChoices(options, 'value', 'label', true)
+                }
+            };
+
             const choices_users = new Choices(users, {
+                allowHTML: true,
                 itemSelectText: '',
-                noResultsText: '{{ __('Не найдено') }}',
+                noResultsText: '{{ __('Загрузка') }}',
                 noChoicesText: '{{ __('Больше ничего нет') }}',
+                callbackOnInit: () => {
+                    tee.searchTerms = users.closest('.choices').querySelector('[name="search_terms"]')
+
+                },
             });
+
+
+            tee.searchTerms.addEventListener(
+                'input',
+                event => choices_users.clearStore(),
+                false,
+            )
+
+            tee.searchTerms.addEventListener(
+                'input',
+                debounce(event => tee.asyncSearch(), 300),
+                false,
+            )
         </script>
     @endpush
 </x-layouts.admin>

@@ -84,60 +84,60 @@
         <script type="module">
 
             const users = document.querySelector('.user-select');
+            let tee = new myClass('{{ route('find-users') }}');
+            {{--let tee = {--}}
+            {{--    searchTerms: null,--}}
+            {{--    asyncUrl: '{{ route('find-users') }}',--}}
 
+            {{--    fromUrl(url) {--}}
+            {{--        return fetch(url)--}}
+            {{--            .then(response => {--}}
+            {{--                return response.json()--}}
+            {{--            })--}}
+            {{--            .then(json => {--}}
+            {{--                return json--}}
+            {{--            })--}}
+            {{--    },--}}
+            {{--};--}}
 
-            let tee = {
-                name: 'test',
-                searchTerms: null,
-                asyncUrl: '{{ route('find-users') }}',
-
-                fromUrl(url) {
-                    return fetch(url)
-                        .then(response => {
-                            return response.json()
-                        })
-                        .then(json => {
-                            return json
-                        })
+            const choices_users = new Choices(users, {
+                allowHTML: true,
+                itemSelectText: '',
+                noResultsText: '{{ __('Загрузка') }}',
+                noChoicesText: '{{ __('Больше ничего нет') }}',
+                callbackOnInit: () => {
+                    tee.searchTerms = users.closest('.choices').querySelector('[name="search_terms"]')
+                    asyncSearch(tee)
                 },
+            });
 
+                async function asyncSearch(tee) {
+                    const url = new URL(tee.asyncUrl)
 
-                async asyncSearch() {
-                    const url = new URL(this.asyncUrl)
-
-                    const query = this.searchTerms.value ?? null
+                    const query = tee.searchTerms.value ?? null
 
                     if (query !== null && query.length) {
                         url.searchParams.append('query', query)
                     }
 
-                    const options = await this.fromUrl(url.toString())
-
-                    console.log(url.toString());
+                    const options = await tee.fromUrl(url.toString())
 
                     choices_users.setChoices(options, 'value', 'label', true)
                 }
-            };
 
 
-            const choices_users = new Choices(users, {
-                allowHTML: true,
-                itemSelectText: '',
-                noResultsText: '{{ __('Не найдено') }}',
-                noChoicesText: '{{ __('Больше ничего нет') }}',
-                callbackOnInit: () => {
-                    tee.searchTerms = users.closest('.choices').querySelector('[name="search_terms"]')
-                    tee.asyncSearch();
-                },
-            });
+
 
 
             tee.searchTerms.addEventListener(
                 'input',
-                function (event) {
-                    choices_users.clearStore()
-                    tee.asyncSearch()
-                },
+                event => choices_users.clearStore(),
+                false,
+            )
+
+            tee.searchTerms.addEventListener(
+                'input',
+                debounce(event => asyncSearch(tee), 300),
                 false,
             )
 

@@ -163,6 +163,10 @@
     background-color: $additional-main;
 }
 
+.choices__list--dropdown .choices__list, .choices__list[aria-expanded] .choices__list {
+    max-height: 170px;
+}
+
 .choices__input {
     margin-bottom: 0;
     padding: 0;
