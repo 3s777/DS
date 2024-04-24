@@ -36,20 +36,7 @@
 
                 <x-grid.col xl="4" lg="6" md="6" sm="12">
                     <x-ui.form.group>
-                        <x-libraries.choices
-                            class="user-select"
-                            id="user-select"
-                            name="user_id"
-                            label="{{ __('common.user') }}">
-                            <x-ui.form.option value="">{{ __('common.choose_user') }}</x-ui.form.option>
-
-{{--                            @foreach($users as $user)--}}
-{{--                                <x-ui.form.option--}}
-{{--                                    value="{{ $user['id']}}"--}}
-{{--                                    :selected="old('user_id') == $user['id']"--}}
-{{--                                >{{ $user['name'] }}</x-ui.form.option>--}}
-{{--                            @endforeach--}}
-                        </x-libraries.choices>
+                        <x-ui.async-select name="user" route="find-users"></x-ui.async-select>
                     </x-ui.form.group>
                 </x-grid.col>
 
@@ -77,71 +64,4 @@
             <x-ui.form.button x-bind:disabled="preventSubmit">{{ __('common.add') }}</x-ui.form.button>
         </x-ui.form.group>
     </x-ui.form>
-
-
-
-    @push('scripts')
-        <script type="module">
-
-            const users = document.querySelector('.user-select');
-            let tee = new myClass('{{ route('find-users') }}');
-            {{--let tee = {--}}
-            {{--    searchTerms: null,--}}
-            {{--    asyncUrl: '{{ route('find-users') }}',--}}
-
-            {{--    fromUrl(url) {--}}
-            {{--        return fetch(url)--}}
-            {{--            .then(response => {--}}
-            {{--                return response.json()--}}
-            {{--            })--}}
-            {{--            .then(json => {--}}
-            {{--                return json--}}
-            {{--            })--}}
-            {{--    },--}}
-            {{--};--}}
-
-            const choices_users = new Choices(users, {
-                allowHTML: true,
-                itemSelectText: '',
-                noResultsText: '{{ __('Загрузка') }}',
-                noChoicesText: '{{ __('Больше ничего нет') }}',
-                callbackOnInit: () => {
-                    tee.searchTerms = users.closest('.choices').querySelector('[name="search_terms"]')
-                    asyncSearch(tee)
-                },
-            });
-
-                async function asyncSearch(tee) {
-                    const url = new URL(tee.asyncUrl)
-
-                    const query = tee.searchTerms.value ?? null
-
-                    if (query !== null && query.length) {
-                        url.searchParams.append('query', query)
-                    }
-
-                    const options = await tee.fromUrl(url.toString())
-
-                    choices_users.setChoices(options, 'value', 'label', true)
-                }
-
-
-
-
-
-            tee.searchTerms.addEventListener(
-                'input',
-                event => choices_users.clearStore(),
-                false,
-            )
-
-            tee.searchTerms.addEventListener(
-                'input',
-                debounce(event => asyncSearch(tee), 300),
-                false,
-            )
-
-
-        </script>
-    @endpush
 </x-layouts.admin>

@@ -9,6 +9,7 @@ import '../blocks/ui/textarea/textarea';
 import '../blocks/ui/tabs/tabs';
 import '../blocks/ui/tooltip/tooltip';
 import './scripts';
+import './asyncSelect'
 
 import './libraries/quill';
 
