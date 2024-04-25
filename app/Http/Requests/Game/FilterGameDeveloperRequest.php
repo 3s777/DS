@@ -26,7 +26,7 @@ class FilterGameDeveloperRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'filters.search' => ['nullable', 'string'],
+            'filters.search' => ['nullable', 'date'],
             'filters.dates.from' => ['nullable', 'date', 'date_format:Y-m-d'],
             'filters.dates.to' => ['nullable', 'date', 'date_format:Y-m-d'],
         ];

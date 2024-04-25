@@ -21,6 +21,8 @@ class GameDeveloperController extends Controller
 {
     public function index(FilterGameDeveloperRequest $request)
     {
+
+
         return view('admin.game.developer.index', new GameDeveloperIndexViewModel());
     }
 

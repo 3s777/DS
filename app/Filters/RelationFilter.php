@@ -18,7 +18,10 @@ class RelationFilter extends AbstractFilter
     public function __construct(string $title, string $key, string $table, ?string $field = null)
     {
         parent::__construct($title, $key, $table, $field);
-        $this->selectedModel();
+
+        if(request()->input($field)) {
+            $this->selectedModel();
+        }
 
     }
 

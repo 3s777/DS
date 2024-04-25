@@ -3,29 +3,35 @@
     'route',
     'label' => false,
     'selected' => false,
-    'selectName' => false
+    'selectName' => false,
+    'showOld' => true
 ])
 
 <x-libraries.choices
     {{ $attributes->class([
         $name.'-select' => $name
     ]) }}
-
     id="{{ $name }}-select"
-    :name="$selectName ?? $name.'_id'"
-
-    label="{{ __('common.'.$name) }}">
-
+    :name="$selectName ?: $name.'_id'"
+    label="{{ __('common.'.$name) }}"
+>
 
     @if($selected)
-        <x-ui.form.option value="{{ $selected->id }}" :selected="!old('{{ $name }}_id')">{{ $selected->name }}</x-ui.form.option>
+        <x-ui.form.option value="{{ $selected->id }}" :selected="!old('{{ $name }}_id')">
+            {{ $selected->name }}
+        </x-ui.form.option>
     @else
-        <x-ui.form.option value="">{{ __('common.choose_'.$name) }}</x-ui.form.option>
+        <x-ui.form.option value="">
+            {{ __('common.choose_'.$name) }}
+        </x-ui.form.option>
     @endif
 
-    @if(old($name.'_id'))
-        <x-ui.form.option value="{{ old($name.'_id') }}" selected>{{ old('old_selected_'.$name.'_label') }}</x-ui.form.option>
+    @if(old($name.'_id') && $showOld)
+        <x-ui.form.option value="{{ old($name.'_id') }}" selected>
+            {{ old('old_selected_'.$name.'_label') }}
+        </x-ui.form.option>
     @endif
+
     {{--@foreach(${{ $name }} as ${{ $name }})--}}
     {{--    <x-ui.form.option--}}
     {{--        value="{{ ${{ $name }}['id']}}"--}}
@@ -33,7 +39,10 @@
     {{--    >{{ ${{ $name }}['name'] }}</x-ui.form.option>--}}
     {{--@endforeach--}}
 </x-libraries.choices>
-<input type="hidden" name="old_selected_{{ $name }}_label" value="" id="old_selected_{{ $name }}_label">
+
+    @if($showOld)
+        <input type="hidden" name="old_selected_{{ $name }}_label" value="" id="old_selected_{{ $name }}_label">
+    @endif
 
 @push('scripts')
     <script type="module">
@@ -95,12 +104,19 @@
             false,
         )
 
-        let select{{ $name }} = document.querySelector(`[name="{{ $name }}_id"]`);
-        let selected{{ $name }}Name = document.getElementById('old_selected_{{ $name }}_label');
+        @if($showOld)
+            @if($selectName)
+                let select{{ $name }} = document.querySelector(`[name="{{ $selectName }}"]`);
+            @else
+                let select{{ $name }} = document.querySelector(`[name="{{ $name }}_id"]`);
+            @endif
 
-        select{{ $name }}.onchange = function () {
-            selected{{ $name }}Name.value = select{{ $name }}.options[select{{ $name }}.selectedIndex].text;
-        };
+            let selected{{ $name }}Name = document.getElementById('old_selected_{{ $name }}_label');
+
+            select{{ $name }}.onchange = function () {
+                selected{{ $name }}Name.value = select{{ $name }}.options[select{{ $name }}.selectedIndex].text;
+            };
+        @endif
 
         // document.querySelector(`[name="{{ $name }}_id"]`).addEventListener(
         //     'change',
@@ -110,7 +126,6 @@
         //     },
         //     false,
         // )
-
 
     </script>
 @endpush
