@@ -25,6 +25,13 @@ if(!function_exists('filters')) {
     }
 }
 
+if(!function_exists('get_filter')) {
+    function get_filter($filterName)
+    {
+        return filters()[$filterName];
+    }
+}
+
 if(!function_exists('filter_url')) {
     function filter_url(array $params = []): string
     {

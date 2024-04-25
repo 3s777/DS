@@ -9,6 +9,8 @@
 
     @include('admin.game.developer.partials.filters')
 
+
+
     <x-common.action-table model-name="game-developers">
         <x-ui.responsive-table :data="$developers->isEmpty()">
             <x-ui.responsive-table.header>

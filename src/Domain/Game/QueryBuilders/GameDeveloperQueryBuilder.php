@@ -21,6 +21,7 @@ class GameDeveloperQueryBuilder extends Builder
                 ->thenReturn();
         }
 
+        // Add filters for rendering filter->view()
         filters($this->model->availableFilters());
         return $this;
     }

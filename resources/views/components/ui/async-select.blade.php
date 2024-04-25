@@ -2,7 +2,8 @@
     'name',
     'route',
     'label' => false,
-    'selected' => false
+    'selected' => false,
+    'selectName' => false
 ])
 
 <x-libraries.choices
@@ -11,7 +12,8 @@
     ]) }}
 
     id="{{ $name }}-select"
-    name="{{ $name }}_id"
+    :name="$selectName ?? $name.'_id'"
+
     label="{{ __('common.'.$name) }}">
 
 

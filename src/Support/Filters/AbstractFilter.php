@@ -21,17 +21,20 @@ abstract class AbstractFilter implements Stringable
 
     protected string $table;
 
+    protected string|null $field;
+
     abstract public function apply(Builder $query): Builder;
 
     abstract public function preparedValues(): mixed;
 
     abstract public function view(): string;
 
-    public function __construct(string $title, string $key, string $table)
+    public function __construct(string $title, string $key, string $table, string|null $field = null)
     {
         $this->setTitle($title);
         $this->setKey($key);
         $this->setTable($table);
+        $this->setField($field);
     }
 
     public function setTitle(string $title): static
@@ -49,6 +52,12 @@ abstract class AbstractFilter implements Stringable
     public function setTable(string $table): static
     {
         $this->table = $table;
+        return $this;
+    }
+
+    public function setField(string|null $field): static
+    {
+        $this->field = $field;
         return $this;
     }
 

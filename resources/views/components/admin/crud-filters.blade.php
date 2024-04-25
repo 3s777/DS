@@ -35,6 +35,7 @@
     @if(request('filters'))
         <div class="crud-filters__badges">
             <div class="current-filters">
+
                 @foreach(filters() as $filter)
                     @if($filter->preparedValues())
                         @if($loop->first)

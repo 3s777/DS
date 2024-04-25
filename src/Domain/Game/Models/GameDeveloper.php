@@ -3,6 +3,7 @@
 namespace Domain\Game\Models;
 
 use App\Filters\DatesFilter;
+use App\Filters\RelationFilter;
 use App\Filters\SearchFilter;
 use Database\Factories\Game\GameDeveloperFactory;
 use Domain\Auth\Models\User;
@@ -77,8 +78,9 @@ class GameDeveloper extends Model implements HasMedia
     public function availableFilters(): array
     {
         return [
-            DatesFilter::make('Датируем', 'dates', 'game_developers'),
-            SearchFilter::make('Ищем', 'search', 'game_developers'),
+            'dates' => DatesFilter::make('Датируем', 'dates', 'game_developers'),
+            'search' => SearchFilter::make('Ищем', 'search', 'game_developers'),
+            'user' => RelationFilter::make('Пользователь', 'user', 'game_developers', 'user_id'),
         ];
     }
 

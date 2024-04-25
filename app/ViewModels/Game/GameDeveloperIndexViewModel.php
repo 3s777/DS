@@ -2,6 +2,7 @@
 
 namespace App\ViewModels\Game;
 
+use Domain\Auth\Models\User;
 use Domain\Game\Models\GameDeveloper;
 use Spatie\ViewModels\ViewModel;
 
@@ -10,6 +11,15 @@ class GameDeveloperIndexViewModel extends ViewModel
     public function __construct()
     {
         //
+    }
+
+    public function filteredUser() {
+//        if(request()->input('filters.user')) {
+//            $user = User::find(request()->input('filters.user'));
+//            return $user;
+//        }
+
+        return '';
     }
 
     public function developers() {
