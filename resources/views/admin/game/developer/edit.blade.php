@@ -39,6 +39,7 @@
                         <x-ui.async-select
                             name="user"
                             route="find-users"
+                            label="{{ __('common.user') }}"
                             :selected="$gameDeveloper->user ?? false"
                         >
                         </x-ui.async-select>

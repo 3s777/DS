@@ -4,8 +4,6 @@ namespace Domain\Game\QueryBuilders;
 
 use Domain\Game\Models\GameDeveloper;
 use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Query\Builder as QueryBuilder;
-use Illuminate\Http\Client\Request;
 use Illuminate\Pipeline\Pipeline;
 
 class GameDeveloperQueryBuilder extends Builder
@@ -28,10 +26,6 @@ class GameDeveloperQueryBuilder extends Builder
 
     public function sorted(string $defaultField = 'id', string $defaultOrder = 'desc')
     {
-//        if(request('sort')) {
-            return sorter($this->model->sortedFields, $defaultField, $defaultOrder)->run($this);
-//        }
-//
-//        return $this;
+        return sorter($this->model->sortedFields, $defaultField, $defaultOrder)->run($this);
     }
 }

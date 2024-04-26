@@ -13,11 +13,16 @@
         <x-grid.col xl="3" lg="4" md="6" sm="12">
             <x-ui.form.group>
                 <x-ui.async-select
-                    :selected="get_filter('user')->user ?: false"
+                    :selected="get_filter('user')->relatedModel ?? false"
                     :show-old="false"
-                    name="user" selectName="filters[user]" route="find-users"></x-ui.async-select>
+                    name="user"
+                    label="{{ __('common.user') }}"
+                    selectName="filters[user]"
+                    route="find-users"></x-ui.async-select>
             </x-ui.form.group>
         </x-grid.col>
+
+
 
 {{--        @foreach(filters() as $filter)--}}
 {{--        {!! $filter !!}--}}

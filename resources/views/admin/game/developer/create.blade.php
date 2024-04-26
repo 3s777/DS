@@ -39,7 +39,7 @@
 
 <x-grid.col xl="4" lg="6" md="6" sm="12">
 <x-ui.form.group>
-    <x-ui.async-select name="user" route="find-users"></x-ui.async-select>
+    <x-ui.async-select name="user" route="find-users" label="{{ __('common.user') }}"></x-ui.async-select>
 </x-ui.form.group>
 </x-grid.col>
 

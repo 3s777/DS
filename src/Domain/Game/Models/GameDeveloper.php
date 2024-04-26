@@ -78,9 +78,20 @@ class GameDeveloper extends Model implements HasMedia
     public function availableFilters(): array
     {
         return [
-            'dates' => DatesFilter::make('Датируем', 'dates', 'game_developers'),
-            'search' => SearchFilter::make('Ищем', 'search', 'game_developers'),
-            'user' => RelationFilter::make('Пользователь', 'user', 'game_developers', 'user_id'),
+            'dates' => DatesFilter::make(
+                __('common.dates'),
+                'dates',
+                'game_developers'),
+            'search' => SearchFilter::make(
+                __('common.search'),
+                'search',
+                'game_developers'),
+            'user' => RelationFilter::make(
+                __('common.user'),
+                'user',
+                'game_developers',
+                'user_id',
+                User::class),
         ];
     }
 

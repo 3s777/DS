@@ -26,9 +26,10 @@ class FilterGameDeveloperRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'filters.search' => ['nullable', 'date'],
+            'filters.search' => ['nullable', 'string'],
             'filters.dates.from' => ['nullable', 'date', 'date_format:Y-m-d'],
             'filters.dates.to' => ['nullable', 'date', 'date_format:Y-m-d'],
+            'filters.user' => ['nullable', 'integer', 'exists:Domain\Auth\Models\User,id'],
         ];
     }
 
@@ -37,6 +38,15 @@ class FilterGameDeveloperRequest extends FormRequest
         return [
             'filters.dates.from' => __('validation.filters_date'),
             'filters.dates.to' => __('validation.filters_date'),
+        ];
+    }
+
+    public function attributes()
+    {
+        return [
+            'filters.search' => __('common.search'),
+            'filters.dates' => __('common.dates'),
+            'filters.user' => __('common.user'),
         ];
     }
 }
