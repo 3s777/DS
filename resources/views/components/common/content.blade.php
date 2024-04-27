@@ -10,7 +10,10 @@
         ])
     }}>
     @if($sidebar)
-        <aside {{ $sidebar->attributes->class([
+        <aside
+            :class="collapseSidebar ?  'content__sidebar_collapsed' : ''"
+            x-cloak
+            {{ $sidebar->attributes->class([
                 'content__sidebar'
             ])
         }}>

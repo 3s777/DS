@@ -12,7 +12,7 @@
     <body>
         <x-common.header />
 
-        <main class="main">
+        <main class="main" x-data="{collapseSidebar: $persist(false)}">
             <x-grid.container>
                 <x-common.content
                     {{ $attributes->class([

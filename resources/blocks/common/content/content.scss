@@ -10,6 +10,10 @@
         padding: 24px 16px;
         background: $base-dark-like-transparent;
         border-radius: $big-border-radius 0 0 $big-border-radius;
+
+        &_collapsed {
+            width: 76px;
+        }
     }
 
     &__wrapper {
@@ -27,6 +31,17 @@
 
         &:last-child {
             margin-bottom: 0;
+        }
+
+        &_collapse {
+            justify-content: left;
+        }
+    }
+
+    &__sidebar-icon {
+        transition: $base-transition;
+        svg {
+            fill: $opposite-main
         }
     }
 

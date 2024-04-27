@@ -1,5 +1,42 @@
 .sidebar-menu {
 
+    &_collapsed {
+        .sidebar-menu__link-icon {
+            margin-right: 0;
+            display: block;
+
+            &_collapse {
+                rotate: (180deg);
+            }
+        }
+
+        .sidebar-menu__link-label {
+            display: none;
+        }
+
+        .sidebar-menu__accordion-title:after {
+            display: none;
+        }
+    }
+
+    &__link {
+        justify-content: flex-start;
+    }
+
+    &__link-icon {
+        transition: $base-transition;
+        display: none;
+
+        &_collapse {
+            display: block;
+        }
+
+        svg {
+            fill: $opposite-main;
+        }
+    }
+
+
     &__accordion {
         margin-bottom: 8px;
         font-size: rem(16);
@@ -39,3 +76,5 @@
         font-size: rem(16);
     }
 }
+
+

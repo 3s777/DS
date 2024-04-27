@@ -13,8 +13,7 @@
     ]) }}
     id="{{ $name }}-select"
     :name="$selectName ?: $name.'_id'"
-    label="{{ $label }}"
->
+    label="{{ $label }}">
 
     @if($selected)
         <x-ui.form.option value="{{ $selected->id }}" :selected="!old('{{ $name }}_id')">

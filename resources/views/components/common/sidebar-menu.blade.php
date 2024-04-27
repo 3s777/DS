@@ -1,122 +1,123 @@
 <nav
+    :class="collapseSidebar ?  'sidebar-menu_collapsed' : ''"
     {{ $attributes->class([
             'sidebar-menu'
         ])
     }}>
     <x-ui.form.button
-        class="content__sidebar-link"
+        x-on:click="collapseSidebar = ! collapseSidebar"
+        class="content__sidebar-link sidebar-menu__link sidebar-menu__link_collapse"
         tag="a"
-        color="light">
-        Статистика
+        color="light"
+        title="Развернуть меню">
+        <x-slot:icon class="sidebar-menu__link-icon sidebar-menu__link-icon_collapse">
+            <x-svg.collapse-left />
+        </x-slot:icon>
+        <span class="sidebar-menu__link-label">Свернуть меню</span>
     </x-ui.form.button>
-    <x-ui.form.button
-        class="content__sidebar-link"
-        tag="a"
-        color="light">
-        Добавить носитель
-    </x-ui.form.button>
-    <x-ui.form.button
-        class="content__sidebar-link"
-        tag="a"
-        color="light">
-        Добавить игру
-    </x-ui.form.button>
-    <x-ui.accordion class="sidebar-menu__accordion">
-        <x-ui.accordion.item class="sidebar-menu__accordion-item" color="light" open>
-            <x-ui.accordion.title class="sidebar-menu__accordion-title">Игры</x-ui.accordion.title>
-            <x-ui.accordion.content>
-                <x-ui.accordion>
-                    <x-ui.accordion.item class="sidebar-menu__accordion-item" color="light" open>
-                        <x-ui.accordion.title class="sidebar-menu__accordion-title">Разработчики</x-ui.accordion.title>
-                        <x-ui.accordion.content>
-                            <x-ui.form.button
-                                @class(['content__sidebar-link', 'button_submit' => Route::currentRouteName() === 'game-developers.create'])
-                                tag="a"
-                                link="{{ route('game-developers.create') }}"
-                                color="light"
-                            >
-                                Добавить
-                            </x-ui.form.button>
-                            <x-ui.form.button
-                                @class(['content__sidebar-link', 'button_submit' => Route::currentRouteName() === 'game-developers.index'])
-                                tag="a"
-                                link="{{ route('game-developers.index') }}"
-                                color="light">
-                                Список
-                            </x-ui.form.button>
-                        </x-ui.accordion.content>
-                    </x-ui.accordion.item>
 
-                    <x-ui.accordion.item class="sidebar-menu__accordion-item" color="light">
-                        <x-ui.accordion.title class="sidebar-menu__accordion-title">Издатели</x-ui.accordion.title>
-                        <x-ui.accordion.content>
+    <div class="sidebar-menu__content">
+        <x-ui.form.button
+            class="content__sidebar-link sidebar-menu__link"
+            tag="a"
+            color="light">
+            <x-slot:icon class="sidebar-menu__link-icon">
+                <x-svg.statistic />
+            </x-slot:icon>
+            <span class="sidebar-menu__link-label">Статистика</span>
+        </x-ui.form.button>
+
+        <x-ui.form.button
+            class="content__sidebar-link sidebar-menu__link"
+            tag="a"
+            color="light">
+            <x-slot:icon class="sidebar-menu__link-icon">
+                <x-svg.statistic />
+            </x-slot:icon>
+            <span class="sidebar-menu__link-label">Профиль</span>
+        </x-ui.form.button>
+
+        <x-ui.accordion x-on:click="collapseSidebar = ! collapseSidebar" class="sidebar-menu__accordion">
+            <x-ui.accordion.item class="sidebar-menu__accordion-item" color="light" open>
+                <x-ui.accordion.title class="sidebar-menu__accordion-title">
+                    <div class="sidebar-menu__link-icon">
+                        <x-svg.statistic />
+                    </div>
+                    <span class="sidebar-menu__link-label">Игры</span>
+                </x-ui.accordion.title>
+                <x-ui.accordion.content>
+                    <x-ui.accordion>
+                        <x-ui.accordion.item class="sidebar-menu__accordion-item" color="light" open>
+                            <x-ui.accordion.title class="sidebar-menu__accordion-title">
+                                <div class="sidebar-menu__link-icon">
+                                    <x-svg.statistic />
+                                </div>
+                                <span class="sidebar-menu__link-label">Разработчики</span>
+                            </x-ui.accordion.title>
                             <x-ui.accordion.content>
                                 <x-ui.form.button
-                                    class="content__sidebar-link"
+                                    @class(['content__sidebar-link', 'sidebar-menu__link', 'button_submit' => Route::currentRouteName() === 'game-developers.create'])
                                     tag="a"
-                                    color="light">
-                                    Добавить
+                                    link="{{ route('game-developers.create') }}"
+                                    color="light"
+                                >
+                                    <div class="sidebar-menu__link-icon">
+                                        <x-svg.statistic />
+                                    </div>
+                                    <span class="sidebar-menu__link-label">Добавить</span>
                                 </x-ui.form.button>
                                 <x-ui.form.button
-                                    class="content__sidebar-link"
+                                    @class(['content__sidebar-link', 'sidebar-menu__link', 'button_submit' => Route::currentRouteName() === 'game-developers.index'])
                                     tag="a"
+                                    link="{{ route('game-developers.index') }}"
                                     color="light">
-                                    Список
+                                    <div class="sidebar-menu__link-icon">
+                                        <x-svg.statistic />
+                                    </div>
+                                    <span class="sidebar-menu__link-label">Список</span>
                                 </x-ui.form.button>
                             </x-ui.accordion.content>
-                        </x-ui.accordion.content>
-                    </x-ui.accordion.item>
+                        </x-ui.accordion.item>
 
-                    <x-ui.accordion.item class="sidebar-menu__accordion-item" color="light">
-                        <x-ui.accordion.title class="sidebar-menu__accordion-title">Жанры</x-ui.accordion.title>
-                        <x-ui.accordion.content>
+                        <x-ui.accordion.item class="sidebar-menu__accordion-item" color="light">
+                            <x-ui.accordion.title class="sidebar-menu__accordion-title">
+                                <div class="sidebar-menu__link-icon">
+                                    <x-svg.statistic />
+                                </div>
+                                <span class="sidebar-menu__link-label">Издатели</span>
+                            </x-ui.accordion.title>
                             <x-ui.accordion.content>
                                 <x-ui.form.button
-                                    class="content__sidebar-link"
+                                    @class(['content__sidebar-link', 'sidebar-menu__link', 'button_submit' => Route::currentRouteName() === 'game-developers.create'])
                                     tag="a"
-                                    color="light">
-                                    Добавить
+                                    link="{{ route('game-developers.create') }}"
+                                    color="light"
+                                >
+                                    <div class="sidebar-menu__link-icon">
+                                        <x-svg.statistic />
+                                    </div>
+                                    <span class="sidebar-menu__link-label">Добавить</span>
                                 </x-ui.form.button>
                                 <x-ui.form.button
-                                    class="content__sidebar-link"
+                                    @class(['content__sidebar-link', 'sidebar-menu__link', 'button_submit' => Route::currentRouteName() === 'game-developers.index'])
                                     tag="a"
+                                    link="{{ route('game-developers.index') }}"
                                     color="light">
-                                    Список
+                                    <div class="sidebar-menu__link-icon">
+                                        <x-svg.statistic />
+                                    </div>
+                                    <span class="sidebar-menu__link-label">Список</span>
                                 </x-ui.form.button>
                             </x-ui.accordion.content>
-                        </x-ui.accordion.content>
-                    </x-ui.accordion.item>
-
-                    <x-ui.accordion.item class="sidebar-menu__accordion-item" color="light">
-                        <x-ui.accordion.title class="sidebar-menu__accordion-title">Игры</x-ui.accordion.title>
-                        <x-ui.accordion.content>
-                            <x-ui.accordion.content>
-                                <x-ui.form.button
-                                    class="content__sidebar-link"
-                                    tag="a"
-                                    color="light">
-                                    Добавить
-                                </x-ui.form.button>
-                                <x-ui.form.button
-                                    class="content__sidebar-link"
-                                    tag="a"
-                                    color="light">
-                                    Список
-                                </x-ui.form.button>
-                            </x-ui.accordion.content>
-                        </x-ui.accordion.content>
-                    </x-ui.accordion.item>
-                </x-ui.accordion>
+                        </x-ui.accordion.item>
 
 
-            </x-ui.accordion.content>
-        </x-ui.accordion.item>
-    </x-ui.accordion>
 
-    <x-ui.form.button
-        class="content__sidebar-link"
-        tag="a"
-        color="light">
-        Добавить издание
-    </x-ui.form.button>
+                    </x-ui.accordion>
+
+
+                </x-ui.accordion.content>
+            </x-ui.accordion.item>
+        </x-ui.accordion>
+    </div>
 </nav>

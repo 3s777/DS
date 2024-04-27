@@ -12,6 +12,7 @@
         "vite-join-media-queries": "^0.1.1"
     },
     "dependencies": {
+        "@alpinejs/persist": "^3.13.10",
         "@editorjs/editorjs": "^2.26.5",
         "@fancyapps/ui": "^5.0.17",
         "@floating-ui/dom": "^1.2.8",
