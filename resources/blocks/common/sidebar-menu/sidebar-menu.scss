@@ -10,17 +10,36 @@
             }
         }
 
+        .sidebar-menu__accordion {
+            opacity: 0;
+            visibility: hidden;
+        }
+
         .sidebar-menu__link-label {
-            display: none;
+            opacity: 0;
+            visibility: hidden;
+            font-size: .1rem;
         }
 
         .sidebar-menu__accordion-title:after {
             display: none;
         }
+
+        .sidebar-menu__link-icon_toggle {
+            display: block;
+        }
     }
 
     &__link {
+        width: 100%;
+        margin-bottom: 8px;
+        padding: 12px;
+        text-align: left;
         justify-content: flex-start;
+
+        &:last-child {
+            margin-bottom: 0;
+        }
     }
 
     &__link-icon {
@@ -36,6 +55,13 @@
         }
     }
 
+    &__link-label {
+        transition: .3s;
+    }
+
+    &__link-icon_toggle {
+        display: none;
+    }
 
     &__accordion {
         margin-bottom: 8px;

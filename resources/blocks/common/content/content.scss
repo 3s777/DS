@@ -10,6 +10,7 @@
         padding: 24px 16px;
         background: $base-dark-like-transparent;
         border-radius: $big-border-radius 0 0 $big-border-radius;
+        transition: $base-transition;
 
         &_collapsed {
             width: 76px;
@@ -21,28 +22,6 @@
         padding: 24px;
         background: $base-light-like-transparent;
         border-radius: 0 $big-border-radius $big-border-radius 0;
-    }
-
-    &__sidebar-link {
-        width: 100%;
-        margin-bottom: 8px;
-        padding: 12px;
-        text-align: left;
-
-        &:last-child {
-            margin-bottom: 0;
-        }
-
-        &_collapse {
-            justify-content: left;
-        }
-    }
-
-    &__sidebar-icon {
-        transition: $base-transition;
-        svg {
-            fill: $opposite-main
-        }
     }
 
     &__main_article {
