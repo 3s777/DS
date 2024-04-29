@@ -8,11 +8,9 @@ use Domain\Auth\Models\User;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
 use Illuminate\Validation\Rules\Password;
-use Worksome\RequestFactories\Concerns\HasFactory;
 
 class RegisterRequest extends FormRequest
 {
-    use HasFactory;
 
     public function __construct(array $query = [], array $request = [], array $attributes = [], array $cookies = [], array $files = [], array $server = [], $content = null)
     {

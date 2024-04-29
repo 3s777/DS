@@ -8,25 +8,24 @@
         "php": "^8.1",
         "guzzlehttp/guzzle": "^7.2",
         "intervention/image": "^3.1",
-        "laravel/framework": "^10.0",
-        "laravel/sanctum": "^3.3",
+        "laravel/framework": "^11.0",
+        "laravel/sanctum": "^4.0",
         "laravel/tinker": "^2.8",
         "mews/purifier": "^3.4",
         "spatie/laravel-medialibrary": "^11.0.0",
-        "spatie/laravel-view-models": "^1.5",
-        "ext-imagick": "*"
+        "spatie/laravel-view-models": "^1.5"
     },
     "require-dev": {
         "barryvdh/laravel-debugbar": "^3.12",
         "fakerphp/faker": "^1.9.1",
         "laravel/pint": "^1.0",
         "laravel/sail": "^1.18",
-        "laravel/telescope": "^4.17",
+        "laravel/telescope": "^5.0",
         "mockery/mockery": "^1.4.4",
-        "nunomaduro/collision": "^7.0",
+        "nunomaduro/collision": "^8.1",
         "phpunit/phpunit": "^10.0",
         "spatie/laravel-ignition": "^2.0",
-        "worksome/request-factories": "^2.6"
+        "worksome/request-factories": "^3.3"
     },
     "autoload": {
         "psr-4": {
