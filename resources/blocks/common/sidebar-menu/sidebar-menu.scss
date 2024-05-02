@@ -2,8 +2,9 @@
 
     &_collapsed {
         .sidebar-menu__link-icon {
-            margin-right: 0;
             display: block;
+            margin-right: 0;
+            line-height: 0;
 
             &_collapse {
                 rotate: (180deg);

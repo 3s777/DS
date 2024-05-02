@@ -51,6 +51,9 @@
     @media screen and (max-width: $grid-ls-breakpoint) {
         padding: 0 (math.div($grid-ls-gutter, 2));
     }
+    @media screen and (max-width: $grid-ml-breakpoint) {
+        padding: 0 (math.div($grid-ml-gutter, 2));
+    }
     @media screen and (max-width: $grid-lg-breakpoint) {
         padding: 0 (math.div($grid-lg-gutter, 2));
     }
@@ -71,6 +74,12 @@
         margin-left: -(math.div($grid-ls-gutter, 2));
         margin-right: -(math.div($grid-ls-gutter, 2));
         padding: 0 (math.div($grid-ls-gutter, 2));
+    }
+
+    @media screen and (max-width: $grid-ml-breakpoint) {
+        margin-left: -(math.div($grid-ml-gutter, 2));
+        margin-right: -(math.div($grid-ml-gutter, 2));
+        padding: 0 (math.div($grid-ml-gutter, 2));
     }
 
     @media screen and (max-width: $grid-lg-breakpoint) {
@@ -96,6 +105,11 @@
     @media screen and (max-width: $grid-ls-breakpoint) {
         margin-left: -(math.div($grid-ls-gutter, 2));
         margin-right: -(math.div($grid-ls-gutter, 2));
+        width: auto;
+    }
+    @media screen and (max-width: $grid-ml-breakpoint) {
+        margin-left: -(math.div($grid-ml-gutter, 2));
+        margin-right: -(math.div($grid-ml-gutter, 2));
         width: auto;
     }
     @media screen and (max-width: $grid-lg-breakpoint) {
@@ -125,20 +139,28 @@
         @include columns-loop-reserve(xl, $grid-xl-columns, $grid-ls-gutter);
         @include columns-loop(ls, $grid-ls-columns, $grid-ls-gutter);
     }
+    @media screen and (max-width: $grid-ml-breakpoint) {
+        @include columns-loop-reserve(xl, $grid-xl-columns, $grid-ml-gutter);
+        @include columns-loop-reserve(ls, $grid-ls-columns, $grid-ml-gutter);
+        @include columns-loop(ml, $grid-ml-columns, $grid-ml-gutter);
+    }
 
     @media screen and (max-width: $grid-lg-breakpoint) {
         @include columns-loop-reserve(xl, $grid-xl-columns, $grid-lg-gutter);
+        @include columns-loop-reserve(ml, $grid-ml-columns, $grid-lg-gutter);
         @include columns-loop-reserve(ls, $grid-ls-columns, $grid-lg-gutter);
         @include columns-loop(lg, $grid-lg-columns, $grid-lg-gutter);
     }
     @media screen and (max-width: $grid-md-breakpoint) {
         @include columns-loop-reserve(xl, $grid-xl-columns, $grid-md-gutter);
+        @include columns-loop-reserve(ml, $grid-ml-columns, $grid-md-gutter);
         @include columns-loop-reserve(ls, $grid-ls-columns, $grid-md-gutter);
         @include columns-loop-reserve(lg, $grid-lg-columns, $grid-md-gutter);
         @include columns-loop(md, $grid-md-columns, $grid-md-gutter);
     }
     @media screen and (max-width: $grid-sm-breakpoint) {
         @include columns-loop-reserve(xl, $grid-xl-columns, $grid-sm-gutter);
+        @include columns-loop-reserve(ml, $grid-ml-columns, $grid-sm-gutter);
         @include columns-loop-reserve(ls, $grid-ls-columns, $grid-sm-gutter);
         @include columns-loop-reserve(lg, $grid-lg-columns, $grid-sm-gutter);
         @include columns-loop-reserve(md, $grid-md-columns, $grid-sm-gutter);

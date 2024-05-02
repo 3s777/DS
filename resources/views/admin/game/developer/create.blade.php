@@ -7,7 +7,7 @@
 
         <div class="crud-form__main">
             <x-grid type="container">
-                <x-grid.col xl="4" lg="6" md="6" sm="12">
+                <x-grid.col xl="4" ls="6" ml="12" lg="6" md="6" sm="12">
                     <x-ui.form.group>
                         <x-ui.form.input-text
                             :errors="$errors"
@@ -22,7 +22,7 @@
                     </x-ui.form.group>
                 </x-grid.col>
 
-                <x-grid.col xl="4" lg="6" md="6" sm="12">
+                <x-grid.col xl="4" ls="6" ml="12" lg="6" md="6" sm="12">
                     <x-ui.form.group>
                         <x-ui.form.input-text
                             :errors="$errors"
@@ -35,14 +35,14 @@
                     </x-ui.form.group>
                 </x-grid.col>
 
-                <x-grid.col xl="4" lg="6" md="6" sm="12">
+                <x-grid.col xl="4" ls="6" ml="12" lg="6" md="6" sm="12">
                     <x-ui.form.group>
                         <x-ui.async-select name="user" route="find-users"
                                            label="{{ __('common.user') }}"></x-ui.async-select>
                     </x-ui.form.group>
                 </x-grid.col>
 
-                <x-grid.col xl="12" lg="6" md="6" sm="12">
+                <x-grid.col xl="12" ml="12" lg="12" md="12" sm="12">
                     <x-ui.form.group>
                         <x-libraries.rich-text-editor
                             name="description"

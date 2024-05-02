@@ -40,6 +40,14 @@
         margin-top: 4px;
     }
 
+    @include breakpoint-max($lg) {
+        &__sidebar {
+            display: none;
+        }
 
+        &__wrapper {
+            border-radius: $big-border-radius;
+        }
+    }
 
 }

@@ -146,6 +146,12 @@
 
 .choices__list--single {
     padding: 0;
+
+    .choices__item {
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
 }
 
 .choices__list--dropdown,

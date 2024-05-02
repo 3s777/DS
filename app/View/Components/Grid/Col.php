@@ -11,6 +11,7 @@ class Col extends Component
     public bool $noGap;
     public int $xl;
     public int $ls;
+    public int $ml;
     public int $lg;
     public int $md;
     public int $sm;
@@ -19,6 +20,7 @@ class Col extends Component
         bool $noGap = false,
         int $xl = 0,
         int $ls = 0,
+        int $ml = 0,
         int $lg = 0,
         int $md = 0,
         int $sm = 0,
@@ -27,6 +29,7 @@ class Col extends Component
         $this->noGap = $noGap;
         $this->xl = $xl;
         $this->ls = $ls;
+        $this->ml = $ml;
         $this->lg = $lg;
         $this->md = $md;
         $this->sm = $sm;
@@ -43,6 +46,7 @@ class Col extends Component
         $sizes = [
             'xl' => $this->xl,
             'ls' => $this->ls,
+            'ml' => $this->ml,
             'lg' => $this->lg,
             'md' => $this->md,
             'sm' => $this->sm,
