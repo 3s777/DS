@@ -41,21 +41,21 @@
                                            label="{{ __('common.user') }}"></x-ui.async-select>
                     </x-ui.form.group>
                 </x-grid.col>
-
-                <x-grid.col xl="12" ml="12" lg="12" md="12" sm="12">
-                    <x-ui.form.group>
-                        <x-libraries.rich-text-editor
-                            name="description"
-                            value=""
-                            placeholder="{{ __('common.description') }}"/>
-                    </x-ui.form.group>
-                </x-grid.col>
             </x-grid>
+        </div>
+
+        <div class="crud-form__description">
+            <x-ui.form.group>
+                <x-libraries.rich-text-editor
+                    name="description"
+                    value=""
+                    placeholder="{{ __('common.description') }}"/>
+            </x-ui.form.group>
         </div>
 
         <div class="crud-form__sidebar">
             <div class="crud-form__sidebar-wrapper">
-                <x-ui.form.input-image name="thumbnail" id="thumbnail">
+                <x-ui.form.input-image class="crud-form__input-image" name="thumbnail" id="thumbnail">
                     <p>{{ __('common.file.format') }} jpg, png</p>
                     <p>{{ __('common.file.max_size') }} 6Mb</p>
                 </x-ui.form.input-image>
@@ -63,7 +63,7 @@
         </div>
 
         <x-ui.form.group class="crud-form__submit">
-            <x-ui.form.button x-bind:disabled="preventSubmit">{{ __('common.add') }}</x-ui.form.button>
+            <x-ui.form.button class="crud-form__submit-button" x-bind:disabled="preventSubmit">{{ __('game.developer.save_button') }}</x-ui.form.button>
         </x-ui.form.group>
     </x-ui.form>
 </x-layouts.admin>

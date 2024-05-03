@@ -4,7 +4,12 @@
 }
 
 .ql-toolbar.ql-snow {
+    border: 0;
     background-color: $opposite-main-50;
+}
+
+.ql-container.ql-snow {
+    border-color: $opposite-main-10;
 }
 
 .ql-toolbar.ql-snow + .ql-container.ql-snow {

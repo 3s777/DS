@@ -55,9 +55,9 @@
         cursor: pointer;
     }
 
-    .choices[data-type*=select-one] & {
-        padding-bottom: 14px;
-    }
+    //.choices[data-type*=select-one] & {
+    //    padding-bottom: 14px;
+    //}
 }
 
 
@@ -174,6 +174,7 @@
 }
 
 .choices__input {
+    width: 5px;
     margin-bottom: 0;
     padding: 0;
     font-size: rem(16);

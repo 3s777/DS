@@ -28,7 +28,7 @@ export default defineConfig({
     },
     plugins: [
         laravel({
-            input: ['resources/scss/app.scss', 'resources/js/app.js'],
+            input: ['resources/scss/app.scss', 'resources/scss/admin.scss', 'resources/js/app.js', 'resources/js/scripts.js'],
             refresh: true,
         }),
         // viteJoinMediaQueries({

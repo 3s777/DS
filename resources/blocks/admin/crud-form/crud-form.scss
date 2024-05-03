@@ -1,10 +1,11 @@
 .crud-form {
     display: grid;
     grid-template-columns: auto 246px;
-    grid-template-rows: repeat(3, auto);
+    grid-template-rows: repeat(4, auto);
     grid-template-areas:
         "title sidebar"
         "form sidebar"
+        "description sidebar"
         "submit sidebar";
     column-gap: 24px;
 
@@ -14,6 +15,10 @@
 
     &__main {
         grid-area: form;
+    }
+
+    &__description {
+        grid-area: description;
     }
 
     &__submit {
@@ -37,12 +42,46 @@
         "title"
         "form"
         "sidebar"
+        "description"
         "submit";
         column-gap: 24px;
+
+        &__sidebar-wrapper {
+            padding: 16px 0;
+            background: none;
+        }
+
+        &__input-image {
+            display: flex;
+            justify-content: center;
+            width:100%;
+
+            & .input-image {
+                width: 250px;
+            }
+
+            & .input-image__preview {
+                background-color: $base-dark-like-transparent;
+            }
+
+            & .input-image__placeholder-text {
+                background-color: $base-dark-like-transparent;
+            }
+
+            .input-image__preview::before, .input-image__preview::after {
+                background-color: $opposite-main-10;
+            }
+        }
+
+        &__submit-button {
+            width: 100%;
+        }
     }
 
 
-    @include breakpoint-max($xl) {
-
+    @include breakpoint-max($xs) {
+        & .input-image {
+            width: 100%;
+        }
     }
 }

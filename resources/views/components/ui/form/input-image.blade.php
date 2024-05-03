@@ -5,12 +5,11 @@
     'uploadedThumbnail' => false,
 ])
 
-<div x-data="imgPreview" x-cloak>
-    <div class="input-image"
-        {{ $attributes->class([
-                'input-image',
+<div x-data="imgPreview" {{ $attributes->class([
+                'input-image__wrapper',
             ])
-        }}>
+        }} x-cloak>
+    <div class="input-image">
         <div class="input-image__preview" :class="imgSrc || uploadedSrc ? 'input-image__preview_hidden' : ''">
             <div class="input-image__placeholder" x-show="!imgSrc && !uploadedSrc">
                 <div class="input-image__placeholder-text">
@@ -20,7 +19,7 @@
 
             @if($uploadedThumbnail)
                 <template x-if="uploadedSrc">
-                    <div class="input-image__wrapper">
+                    <div class="input-image__inner">
                         <x-ui.badge class="input-image__close" @click="clearUploaded" title="{{ __('common.delete') }}">
                             <x-svg.close></x-svg.close>
                         </x-ui.badge>
@@ -30,7 +29,7 @@
             @endif
 
             <template x-if="imgSrc">
-                <div class="input-image__wrapper">
+                <div class="input-image__inner">
                     <x-ui.badge class="input-image__close" @click="clearFile" title="{{ __('common.delete') }}">
                         <x-svg.close></x-svg.close>
                     </x-ui.badge>
