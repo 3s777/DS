@@ -31,6 +31,7 @@
     }
 
     &__column {
+        min-width: 150px;
         display: table-cell;
         padding: 5px 10px;
         vertical-align: middle;
@@ -44,14 +45,21 @@
 
     &__column_id {
         width: 56px;
+        min-width: 56px;
     }
 
     &__column_select {
         width: 40px;
+        min-width: 40px;
+
+        .input-checkbox__label-wrapper {
+            display: none;
+        }
     }
 
     &__column_action {
         width: 130px;
+        min-width: 130px;
     }
 
     &__sortable {
@@ -77,5 +85,95 @@
             border-top: 6px solid $additional-main;
             border-bottom: none
         }
+    }
+
+    &__label {
+        display: none;
+    }
+
+    @include breakpoint-max($md) {
+        display: block;
+
+        &__header {
+            display: flex;
+            padding: 8px;
+            background: none;
+
+            .responsive-table__column {
+                display: none;
+            }
+
+            .responsive-table__column_select {
+                display: flex;
+                order: 1;
+                align-items: center;
+                width: auto;
+
+                .input-checkbox__label-wrapper {
+                    display: block;
+                }
+            }
+        }
+
+        &__row {
+            position: relative;
+            display: flex;
+            flex-wrap: wrap;
+            margin-bottom: 8px;
+            padding: 8px;
+            border: 1px solid $opposite-main-20;
+            border-radius: $small-border-radius;
+
+            &:nth-child(2n+1) {
+                background: none;
+            }
+
+            &:hover {
+                background: none;
+            }
+        }
+
+        &__column {
+            order: 3;
+            display: block;
+            width: 100%;
+            padding: 4px 0;
+            border-right: 0;
+            word-break: unset;
+            line-height: 1.4;
+        }
+
+        &__column_select {
+            display: flex;
+            order: 0;
+            align-items: center;
+            width: 30px;
+            min-width: 30px;
+        }
+
+        &__column_id {
+            display: flex;
+            order: 1;
+            align-items: center;
+            width: 100px;
+        }
+
+        &__column_action {
+            position: absolute;
+            top: 4px;
+            right: 8px;
+            order: 2;
+            width: 130px;
+        }
+
+        &__label {
+            display: inline;
+            margin-right: 5px;
+            padding: 3px 8px;
+            font-size: rem(14);
+            background: $base-dark-transparent-40;
+            border-radius: $small-border-radius;
+        }
+
     }
 }

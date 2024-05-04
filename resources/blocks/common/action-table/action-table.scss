@@ -1,4 +1,6 @@
 .action-table {
+    overflow-x: auto;
+
     &__buttons {
         display: flex;
         justify-content: flex-end;
@@ -16,5 +18,19 @@
 
     &__select-all + .input-checkbox__label:before {
         background-color: $base-light-transparent;
+    }
+
+    &__footer {
+        display: flex;
+        gap: 14px;
+        background-color: $base-dark;
+        padding: 20px 20px;
+        border-radius: 0 0 $small-border-radius $small-border-radius;
+    }
+
+    @include breakpoint-max($md) {
+        &__select-all + .input-checkbox__label:before {
+            background-color: $base-dark-transparent;
+        }
     }
 }

@@ -3,6 +3,7 @@
     'delete' => true,
     'selectable' => true,
     'massDelete' => true,
+    'footer' => false
 ])
 
 <div @if($selectable) x-data="selectableTable" @endif
@@ -13,6 +14,16 @@
 
     {{ $slot }}
 </div>
+
+@if($footer)
+    <div
+        {{ $footer->attributes->class([
+                'action-table__footer'
+            ])
+        }}>
+        {{ $footer }}
+    </div>
+@endif
 
 @if($delete)
     <x-common.action-table.modal-delete />

@@ -24,6 +24,6 @@
     >
 
     <label class="input-checkbox__label" for="{{ $id }}">
-        {{ $label }}
+        <span class="input-checkbox__label-wrapper">{{ $label }}</span>
     </label>
 </div>

@@ -6,6 +6,7 @@
     }
 
     &__sidebar {
+        flex-shrink: 0;
         width: 300px;
         padding: 24px 16px;
         background: $base-dark-like-transparent;
@@ -19,6 +20,7 @@
 
     &__wrapper {
         width: 100%;
+        min-width: 0;
         padding: 24px;
         background: $base-light-like-transparent;
         border-radius: 0 $big-border-radius $big-border-radius 0;
