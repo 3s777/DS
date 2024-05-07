@@ -1,6 +1,4 @@
 .action-table {
-    overflow-x: auto;
-
     &__buttons {
         display: flex;
         justify-content: flex-end;
@@ -12,10 +10,6 @@
         gap: 12px;
     }
 
-    & .choices-block {
-        width: 200px;
-    }
-
     &__select-all + .input-checkbox__label:before {
         background-color: $base-light-transparent;
     }
@@ -24,13 +18,22 @@
         display: flex;
         gap: 14px;
         background-color: $base-dark;
-        padding: 20px 20px;
+        padding: 20px;
         border-radius: 0 0 $small-border-radius $small-border-radius;
+
+        & .choices-block {
+            width: 200px;
+        }
     }
 
     @include breakpoint-max($md) {
         &__select-all + .input-checkbox__label:before {
             background-color: $base-dark-transparent;
+        }
+
+        &__selectable-order {
+            margin-top: 30px;
+            margin-bottom: 12px;
         }
     }
 }

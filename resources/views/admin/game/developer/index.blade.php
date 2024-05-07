@@ -9,29 +9,21 @@
 
     @include('admin.game.developer.partials.filters')
 
-    <div class="form-group" x-data="{ sort: '{{ filter_url(['sort' => request('sort'), 'order' => request('order') == 'asc' ? 'desc' : 'asc']) }}'}">
-        <x-libraries.choices
-            id="" x-model="sort"
-            x-on:change="window.location = sort.value"
-{{--x-on:change="console.log(sort.value)"--}}
-            class="sort-select"
-            id="select-test"
-            name="select-test"
-            label="Сортировка">
-            <x-ui.form.option value="">Сортировать по:</x-ui.form.option>
-            <option
-                value="{{ filter_url(['sort' => 'id', 'order' => request('order') == 'asc' ? 'desc' : 'asc']) }}">id</option>
-            <option
-                value="{{ filter_url(['sort' => 'name', 'order' => request('order') == 'asc' ? 'desc' : 'asc']) }}">Название</option>
-            <option
-                value="{{ filter_url(['sort' => 'users.name', 'order' => request('order') == 'asc' ? 'desc' : 'asc']) }}">Пользователь</option>
-            <option
-                value="{{ filter_url(['sort' => 'created_at', 'order' => request('order') == 'asc' ? 'desc' : 'asc']) }}">Добавлен</option>
-        </x-libraries.choices>
 
-    </div>
+
+
 
     <x-common.action-table model-name="game-developers">
+
+        <x-common.selectable-order
+            class="action-table__selectable-order"
+            :sorters="[
+                'id' => 'ID',
+                'name' => 'Название',
+                'users.name' => 'Пользователь',
+                'created_at' => 'Дата добавления',
+            ]" />
+
 
 
 
@@ -100,28 +92,6 @@
 
 
     {{ $developers->links('pagination::default') }}
-
-    @push('scripts')
-        <script type="module">
-            const element1 = document.querySelector('.sort-select');
-            const choices1 = new Choices(element1, {
-                itemSelectText: '',
-                searchEnabled: false,
-                noResultsText: '{{ __('Не найдено') }}',
-                noChoicesText: '{{ __('Больше ничего нет') }}',
-            });
-        </script>
-        <script>
-            document.addEventListener('alpine:init', () => {
-                Alpine.store('modalTest', {
-                    hide: true,
-                    test(actionSelect) {
-                        console.log(actionSelect);
-                    }
-                });
-            });
-        </script>
-    @endpush
 </x-layouts.admin>
 
 

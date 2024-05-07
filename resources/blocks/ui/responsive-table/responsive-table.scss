@@ -4,6 +4,10 @@
     border-radius: $small-border-radius $small-border-radius 0 0;
     overflow: hidden;
 
+    &__wrapper {
+        overflow-x: auto;
+    }
+
     &__header {
         display: table-row;
         height: 40px;
