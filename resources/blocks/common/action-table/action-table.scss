@@ -17,8 +17,9 @@
     &__footer {
         display: flex;
         gap: 14px;
-        background-color: $base-dark;
+        margin-bottom: 12px;
         padding: 20px;
+        background-color: $base-dark;
         border-radius: 0 0 $small-border-radius $small-border-radius;
 
         & .choices-block {
@@ -32,8 +33,16 @@
         }
 
         &__selectable-order {
-            margin-top: 30px;
-            margin-bottom: 12px;
+            margin-bottom: 4px;
+
+            .selectable-order__button {
+                padding: 12px 14px;
+            }
+
+            .choices[data-type*=select-one] .choices__inner {
+                min-height: 36px;
+                padding: 8px 28px 6px 20px;
+            }
         }
     }
 }

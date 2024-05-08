@@ -1,11 +1,15 @@
 .crud-search {
+    width: 300px;
 
-    &__form {
-        width: 300px;
-        padding: 8px 10px;
-    }
+    //&__form {
+    //    padding: 8px 10px;
+    //}
 
     &__form_only {
         margin-bottom: 18px;
+    }
+
+    @include breakpoint-max($md) {
+        width: 100%;
     }
 }

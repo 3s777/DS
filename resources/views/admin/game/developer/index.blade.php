@@ -10,22 +10,16 @@
     @include('admin.game.developer.partials.filters')
 
 
-
-
-
     <x-common.action-table model-name="game-developers">
 
         <x-common.selectable-order
             class="action-table__selectable-order"
             :sorters="[
-                'id' => 'ID',
-                'name' => 'Название',
-                'users.name' => 'Пользователь',
-                'created_at' => 'Дата добавления',
+                'id' => __('common.id'),
+                'name' => __('common.name'),
+                'users.name' => __('common.user'),
+                'created_at' => __('common.created_date'),
             ]" />
-
-
-
 
         <x-ui.responsive-table :data="$developers->isEmpty()">
             <x-ui.responsive-table.header>

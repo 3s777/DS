@@ -1,5 +1,5 @@
 .crud-filters {
-    margin-bottom: 18px;
+    margin-bottom: 24px;
 
     &__header {
         display: flex;
@@ -15,6 +15,22 @@
     }
 
     &__trigger {
-        padding: 10px;
+        padding: 10px 14px;
+    }
+
+    @include breakpoint-max($md) {
+        margin-bottom: 28px;
+
+        &__buttons {
+            flex-wrap: wrap;
+        }
+    }
+
+    @include breakpoint-max($sm) {
+        &__buttons {
+            .button {
+                width: 100%;
+            }
+        }
     }
 }
