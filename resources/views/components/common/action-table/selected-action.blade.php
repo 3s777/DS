@@ -27,7 +27,7 @@
     @endif
 
     <template x-if="actionSelect.value === 'delete' || actionSelect.value === 'forceDelete'">
-        <div x-on:keydown.escape.window="$store.modalMassDelete.hide = true">
+        <div class="action-table__select-button" x-on:keydown.escape.window="$store.modalMassDelete.hide = true">
             <x-ui.form.button
                 tag="div"
                 x-on:click.stop="$store.modalMassDelete.prepareDeleteModal(

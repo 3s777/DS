@@ -1,5 +1,7 @@
 <x-layouts.admin :search="false">
-    <x-ui.form class="crud-form" id="create-form" action="{{ route('game-developers.store') }}"
+    <x-ui.form class="crud-form"
+               id="create-form"
+               action="{{ route('game-developers.store') }}"
                enctype="multipart/form-data">
         <x-ui.title class="curd-form__tile" size="normal" indent="small">
             {{ __('game.developer.add') }}
@@ -37,8 +39,11 @@
 
                 <x-grid.col xl="4" ls="6" ml="12" lg="6" md="6" sm="12">
                     <x-ui.form.group>
-                        <x-ui.async-select name="user" route="find-users"
-                                           label="{{ __('common.user') }}"></x-ui.async-select>
+                        <x-ui.async-select
+                            name="user"
+                            route="find-users"
+                            label="{{ __('common.user') }}">
+                        </x-ui.async-select>
                     </x-ui.form.group>
                 </x-grid.col>
             </x-grid>
@@ -55,7 +60,10 @@
 
         <div class="crud-form__sidebar">
             <div class="crud-form__sidebar-wrapper">
-                <x-ui.form.input-image class="crud-form__input-image" name="thumbnail" id="thumbnail">
+                <x-ui.form.input-image
+                    class="crud-form__input-image"
+                    name="thumbnail"
+                    id="thumbnail">
                     <p>{{ __('common.file.format') }} jpg, png</p>
                     <p>{{ __('common.file.max_size') }} 6Mb</p>
                 </x-ui.form.input-image>
@@ -63,7 +71,11 @@
         </div>
 
         <x-ui.form.group class="crud-form__submit">
-            <x-ui.form.button class="crud-form__submit-button" x-bind:disabled="preventSubmit">{{ __('game.developer.save_button') }}</x-ui.form.button>
+            <x-ui.form.button
+                class="crud-form__submit-button"
+                x-bind:disabled="preventSubmit">
+                    {{ __('game.developer.save_button') }}
+            </x-ui.form.button>
         </x-ui.form.group>
     </x-ui.form>
 </x-layouts.admin>

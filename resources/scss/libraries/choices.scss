@@ -13,12 +13,12 @@
 
 .choices-block_size_small {
     .choices__inner {
-        padding: 10px 28px 10px 20px;
+        padding: 9px 28px 9px 20px;
         min-height: 44px;
     }
 
     & .choices[data-type*=select-one] .choices__inner {
-        padding-bottom: 10px;
+        padding-bottom: 9px;
     }
 }
 

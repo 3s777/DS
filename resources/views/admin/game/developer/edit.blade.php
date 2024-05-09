@@ -1,12 +1,16 @@
 <x-layouts.admin :search="false">
-    <x-ui.form class="crud-form" method="put" id="edit-form" action="{{ route('game-developers.update', $gameDeveloper->slug) }}" enctype="multipart/form-data">
+    <x-ui.form class="crud-form"
+               method="put"
+               id="edit-form"
+               action="{{ route('game-developers.update', $gameDeveloper->slug) }}"
+               enctype="multipart/form-data">
         <x-ui.title class="curd-form__tile" size="normal" indent="small">
             {{ __('game.developer.edit') }}
         </x-ui.title>
 
         <div class="crud-form__main">
             <x-grid type="container">
-                <x-grid.col xl="4" lg="6" md="6" sm="12">
+                <x-grid.col xl="4" ls="6" ml="12" lg="6" md="6" sm="12">
                     <x-ui.form.group>
                         <x-ui.form.input-text
                             :errors="$errors"
@@ -16,12 +20,12 @@
                             value="{{ $gameDeveloper->name }}"
                             required
                             autocomplete="on"
-                            autofocus >
+                            autofocus>
                         </x-ui.form.input-text>
                     </x-ui.form.group>
                 </x-grid.col>
 
-                <x-grid.col xl="4" lg="6" md="6" sm="12">
+                <x-grid.col xl="4" ls="6" ml="12" lg="6" md="6" sm="12">
                     <x-ui.form.group>
                         <x-ui.form.input-text
                             :errors="$errors"
@@ -34,7 +38,7 @@
                     </x-ui.form.group>
                 </x-grid.col>
 
-                <x-grid.col xl="4" lg="6" md="6" sm="12">
+                <x-grid.col xl="4" ls="6" ml="12" lg="6" md="6" sm="12">
                     <x-ui.form.group>
                         <x-ui.async-select
                             name="user"
@@ -45,21 +49,22 @@
                         </x-ui.async-select>
                     </x-ui.form.group>
                 </x-grid.col>
-
-                <x-grid.col xl="12" lg="6" md="6" sm="12">
-                    <x-ui.form.group>
-                        <x-libraries.rich-text-editor
-                            name="description"
-                            value="{!! $gameDeveloper->description !!}"
-                            placeholder="{{ __('common.description') }}" />
-                    </x-ui.form.group>
-                </x-grid.col>
             </x-grid>
+        </div>
+
+        <div class="crud-form__description">
+            <x-ui.form.group>
+                <x-libraries.rich-text-editor
+                    name="description"
+                    value="{!! $gameDeveloper->description !!}"
+                    placeholder="{{ __('common.description') }}"/>
+            </x-ui.form.group>
         </div>
 
         <div class="crud-form__sidebar">
             <div class="crud-form__sidebar-wrapper">
                 <x-ui.form.input-image
+                    class="crud-form__input-image"
                     name="thumbnail"
                     id="thumbnail"
                     :path="$gameDeveloper->getThumbnailPath()">
@@ -82,8 +87,11 @@
         </div>
 
         <x-ui.form.group class="crud-form__submit">
-            <x-ui.form.button x-bind:disabled="preventSubmit">{{ __('common.save') }}</x-ui.form.button>
+            <x-ui.form.button
+                class="crud-form__submit-button"
+                x-bind:disabled="preventSubmit">
+                    {{ __('common.save') }}
+            </x-ui.form.button>
         </x-ui.form.group>
     </x-ui.form>
-
 </x-layouts.admin>

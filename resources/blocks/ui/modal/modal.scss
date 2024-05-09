@@ -72,15 +72,33 @@
         padding-bottom: 8px;
     }
 
+    &__footer-buttons {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 12px;
+    }
+
     &__footer_buttons_right {
-        text-align: right;
+        .modal__footer-buttons {
+            justify-content: flex-end;
+        }
     }
 
     &__footer_buttons_left {
-        text-align: left;
+        .modal__footer-buttons {
+            justify-content: flex-start;
+        }
     }
 
     &__footer_buttons_center{
-        text-align: center;
+        .modal__footer-buttons {
+            justify-content: center;
+        }
+    }
+
+    @include breakpoint-max($xs) {
+        &__footer-button {
+            width: 100%;
+        }
     }
 }

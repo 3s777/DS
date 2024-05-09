@@ -30,18 +30,19 @@
                             </x-ui.modal.body>
 
                             <x-ui.modal.footer align-buttons="center">
-                                <x-ui.form.button
-                                    only-icon="true"
-                                    indent="right">
-                                    <x-svg.success class="button__icon button__icon_big button__edit-icon"></x-svg.success>
-                                </x-ui.form.button>
+                                <div class="modal__footer-buttons">
+                                    <x-ui.form.button
+                                        only-icon="true">
+                                        <x-svg.success class="button__icon button__icon_big button__edit-icon"></x-svg.success>
+                                    </x-ui.form.button>
 
-                                <x-ui.form.button
-                                    x-on:click="modalHide = true"
-                                    color="cancel"
-                                    only-icon="true">
-                                    <x-svg.cancel class="button__icon button__icon_big button__close-icon"></x-svg.cancel>
-                                </x-ui.form.button>
+                                    <x-ui.form.button
+                                        x-on:click="modalHide = true"
+                                        color="cancel"
+                                        only-icon="true">
+                                        <x-svg.cancel class="button__icon button__icon_big button__close-icon"></x-svg.cancel>
+                                    </x-ui.form.button>
+                                </div>
                             </x-ui.modal.footer>
                         </x-ui.modal.content>
                     </x-ui.modal>
@@ -79,16 +80,18 @@
                             </x-ui.modal.body>
 
                             <x-ui.modal.footer align-buttons="right">
-                                <x-ui.form.button>
-                                    Submit
-                                </x-ui.form.button>
+                                <div class="modal__footer-buttons">
+                                    <x-ui.form.button class="modal__footer-button">
+                                        Submit
+                                    </x-ui.form.button>
 
-                                <x-ui.form.button
-                                    x-on:click="modalHide = true"
-                                    color="cancel"
-                                    indent="left">
-                                    Cancel
-                                </x-ui.form.button>
+                                    <x-ui.form.button
+                                        class="modal__footer-button"
+                                        x-on:click="modalHide = true"
+                                        color="cancel">
+                                        Cancel
+                                    </x-ui.form.button>
+                                </div>
                             </x-ui.modal.footer>
                         </x-ui.modal.content>
                     </x-ui.modal>
@@ -126,16 +129,18 @@
                             </x-ui.modal.body>
 
                             <x-ui.modal.footer align-buttons="right">
-                                <x-ui.form.button>
-                                    Submit
-                                </x-ui.form.button>
+                                <div class="modal__footer-buttons">
+                                    <x-ui.form.button class="modal__footer-button">
+                                        Submit
+                                    </x-ui.form.button>
 
-                                <x-ui.form.button
-                                    x-on:click="modalHide = true"
-                                    color="cancel"
-                                    indent="left">
-                                    Cancel
-                                </x-ui.form.button>
+                                    <x-ui.form.button
+                                        class="modal__footer-button"
+                                        x-on:click="modalHide = true"
+                                        color="cancel">
+                                        Cancel
+                                    </x-ui.form.button>
+                                </div>
                             </x-ui.modal.footer>
                         </x-ui.modal.content>
                     </x-ui.modal>

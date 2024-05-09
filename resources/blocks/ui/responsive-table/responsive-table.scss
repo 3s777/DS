@@ -78,7 +78,7 @@
         border-top: none;
         border-left: 6px solid transparent;
         border-right: 6px solid transparent;
-        border-bottom: 6px solid hsla(0, 0%, 100%, 0.5);
+        border-bottom: 6px solid $opposite-main-50;;
 
         &.responsive-table__arrow_active {
             border-top: none;

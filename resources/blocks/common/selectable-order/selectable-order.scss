@@ -12,12 +12,10 @@
     }
 
     &__arrow {
-        width: 0;
-        height: 0;
         border-top: none;
         border-left: 6px solid transparent;
         border-right: 6px solid transparent;
-        border-bottom: 6px solid hsla(0, 0%, 100%, 0.5);
+        border-bottom: 6px solid $opposite-main-50;
 
         &.selectable-order__arrow_active {
             border-top: none;
@@ -25,7 +23,7 @@
         }
 
         &.selectable-order__arrow_desc {
-            border-top: 6px solid hsla(0, 0%, 100%, 0.5);
+            border-top: 6px solid $opposite-main-50;
             border-bottom: none
         }
 
@@ -52,12 +50,6 @@
     @include breakpoint-max($md) {
         &_mobile {
             display: flex;
-        }
-    }
-
-    @include breakpoint-max($sl) {
-        .choices-block {
-            width: 100%;
         }
     }
 }

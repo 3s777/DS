@@ -7,7 +7,12 @@
 
     &__action {
         display: flex;
+        flex-wrap: wrap;
         gap: 12px;
+
+        & .choices-block {
+            width: 200px;
+        }
     }
 
     &__select-all + .input-checkbox__label:before {
@@ -16,15 +21,12 @@
 
     &__footer {
         display: flex;
+        flex-wrap: wrap;
         gap: 14px;
         margin-bottom: 12px;
         padding: 20px;
         background-color: $base-dark;
         border-radius: 0 0 $small-border-radius $small-border-radius;
-
-        & .choices-block {
-            width: 200px;
-        }
     }
 
     @include breakpoint-max($md) {
@@ -42,6 +44,28 @@
             .choices[data-type*=select-one] .choices__inner {
                 min-height: 36px;
                 padding: 8px 28px 6px 20px;
+            }
+        }
+    }
+
+    @include breakpoint-max($xs) {
+        &__selectable-order .choices-block {
+            width: 100%;
+        }
+
+        &__action {
+            width: 100%;
+
+            & .choices-block {
+                width: 100%;
+            }
+        }
+
+        &__select-button {
+           width: 100%;
+
+            .button {
+                width: 100%;
             }
         }
     }
