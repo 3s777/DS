@@ -5,6 +5,7 @@
 /public/storage
 /storage/*.key
 /vendor
+/_docker/postgres
 .env
 .env.testing
 .env.backup

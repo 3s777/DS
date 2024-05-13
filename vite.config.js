@@ -7,6 +7,9 @@ import sortMediaQueries from 'postcss-sort-media-queries';
 
 
 export default defineConfig({
+    server: {
+        host: '127.0.0.1',  // Add this to force IPv4 only
+    },
     resolve:{
         alias:{
             '~' : '/node_modules/'
