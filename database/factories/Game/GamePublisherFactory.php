@@ -10,7 +10,6 @@ use Illuminate\Database\Eloquent\Factories\Factory;
  */
 class GamePublisherFactory extends Factory
 {
-
     protected $model = GamePublisher::class;
 
     /**

@@ -12,7 +12,7 @@ class DomainCommand extends Command
         'Collections',
         'Actions',
         'Providers',
-        'QueryBuilders'
+        'QueryBuilders',
     ];
 
     protected $signature = 'shop:domain';
@@ -56,7 +56,7 @@ class DomainCommand extends Command
 
         file_put_contents($domainProviderPath, preg_replace(
             '/public function register\(\): void\n+\s+\{\n+/m',
-            $this->registerMethodSignature() . $this->appRegister($this->domain),
+            $this->registerMethodSignature().$this->appRegister($this->domain),
             $domainProvider
         ));
     }
@@ -91,9 +91,9 @@ class DomainCommand extends Command
         file_put_contents(
             app_path("Routing/{$this->domain}Registrar.php"),
             str_replace(
-                "{{Domain}}",
+                '{{Domain}}',
                 $this->domain,
-                file_get_contents(base_path("stubs/domain/route_registrar.stub"))
+                file_get_contents(base_path('stubs/domain/route_registrar.stub'))
             )
         );
     }
@@ -103,7 +103,7 @@ class DomainCommand extends Command
         file_put_contents(
             base_path("src/Domain/$this->domain/Providers/{$name}ServiceProvider.php"),
             str_replace(
-                "{{Domain}}",
+                '{{Domain}}',
                 $this->domain,
                 file_get_contents(base_path("stubs/domain/$stub.stub"))
             )

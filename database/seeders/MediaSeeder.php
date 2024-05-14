@@ -2,10 +2,7 @@
 
 namespace Database\Seeders;
 
-use App\Models\Language;
 use App\Models\Media;
-use Domain\Auth\Models\User;
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
 class MediaSeeder extends Seeder

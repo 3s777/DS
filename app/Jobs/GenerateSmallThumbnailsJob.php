@@ -13,13 +13,17 @@ use Intervention\Image\ImageManager;
 
 class GenerateSmallThumbnailsJob implements ShouldQueue
 {
-    use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
+    use Dispatchable;
+    use InteractsWithQueue;
+    use Queueable;
+    use SerializesModels;
 
-    public function __construct(protected string $imageFullPath,
-                                protected int|null $width,
-                                protected int|null $height,
-                                protected string $webpThumbDir)
-    {
+    public function __construct(
+        protected string $imageFullPath,
+        protected int|null $width,
+        protected int|null $height,
+        protected string $webpThumbDir
+    ) {
     }
 
     public function handle(): void
@@ -30,10 +34,10 @@ class GenerateSmallThumbnailsJob implements ShouldQueue
         $manager = new ImageManager(new Driver());
         $image = $manager->read($thumbnailStorage->path($this->imageFullPath));
 
-//        $thumbImage = clone $image;
-//        $thumbImage
-//            ->scaleDown($this->width, $this->height)
-//            ->save($thumbnailStorage->path($this->originalThumbDir.'/'.$imagePathInfo['filename'].'.'.$imagePathInfo['extension']));
+        //        $thumbImage = clone $image;
+        //        $thumbImage
+        //            ->scaleDown($this->width, $this->height)
+        //            ->save($thumbnailStorage->path($this->originalThumbDir.'/'.$imagePathInfo['filename'].'.'.$imagePathInfo['extension']));
 
         $image
             ->scaleDown($this->width, $this->height)

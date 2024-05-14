@@ -18,8 +18,7 @@ class Price implements Stringable
         private int $value,
         private string $currency = 'RUB',
         private int $precision = 100
-    )
-    {
+    ) {
         if($value < 0) {
             throw new InvalidArgumentException('Price must be more than zero');
         }

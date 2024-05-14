@@ -26,9 +26,9 @@ class FilterServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-//        app(FilterManager::class)->registerFilters([
-//            new SearchFilter(),
-//            new DatesFilter()
-//        ]);
+        //        app(FilterManager::class)->registerFilters([
+        //            new SearchFilter(),
+        //            new DatesFilter()
+        //        ]);
     }
 }

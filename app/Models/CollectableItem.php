@@ -20,11 +20,13 @@ class CollectableItem extends Model
       'properties' => 'array'
     ];
 
-    public function developers() {
+    public function developers()
+    {
         return $this->morphedByMany(GameDeveloper::class, 'productable');
     }
 
-    public function publishers() {
+    public function publishers()
+    {
         return $this->morphedByMany(GamePublisher::class, 'productable');
     }
 }

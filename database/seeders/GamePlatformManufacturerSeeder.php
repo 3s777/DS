@@ -2,9 +2,7 @@
 
 namespace Database\Seeders;
 
-use Domain\Game\Models\GamePlatform;
 use Domain\Game\Models\GamePlatformManufacturer;
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Services\GamesDbApi\GamesDbApiContract;
 

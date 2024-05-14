@@ -2,7 +2,6 @@
 
 namespace Support\MediaLibrary;
 
-use Illuminate\Support\Carbon;
 use Illuminate\Support\Str;
 use Spatie\MediaLibrary\Conversions\Conversion;
 use Spatie\MediaLibrary\Support\FileNamer\FileNamer;

@@ -11,7 +11,8 @@ class GamesApi implements GamesDbApiContract
 
     protected string $key;
 
-    public function __construct() {
+    public function __construct()
+    {
         $this->host = env('GAME_API_HOST');
         $this->key = env('GAME_API_KEY');
     }

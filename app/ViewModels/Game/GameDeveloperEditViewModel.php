@@ -18,7 +18,8 @@ class GameDeveloperEditViewModel extends ViewModel
         $this->gameDeveloper = $gameDeveloper;
     }
 
-    public function developers() {
+    public function developers()
+    {
         return GameDeveloper::query()
 //            ->with(['media.model:id,created_at'])
 //            ->with(['media'])

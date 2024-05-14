@@ -2,12 +2,10 @@
 
 namespace Support\DTOs;
 
-use App\Http\Requests\Auth\LoginRequest;
-use Domain\Auth\DTOs\LoginUserDTO;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
-class  MassDeletingDTOTest extends TestCase
+class MassDeletingDTOTest extends TestCase
 {
     use RefreshDatabase;
 

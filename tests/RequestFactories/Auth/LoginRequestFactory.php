@@ -2,8 +2,6 @@
 
 namespace Tests\RequestFactories\Auth;
 
-use App\Models\Language;
-use Carbon\Carbon;
 use Worksome\RequestFactories\RequestFactory;
 
 class LoginRequestFactory extends RequestFactory

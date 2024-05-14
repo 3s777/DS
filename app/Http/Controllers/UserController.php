@@ -8,8 +8,10 @@ use Illuminate\Http\Request;
 
 class UserController extends Controller
 {
-    public function index() {
+    public function index()
+    {
         $users = User::all();
+
         return view('content.users.index', compact('users'));
     }
 
@@ -18,16 +20,16 @@ class UserController extends Controller
         return new UserListSelectViewModel($request->input('query'));
     }
 
-    public function findUsers($param=null)
+    public function findUsers($param = null)
     {
         $users = null;
 
-        if($param) {
+        if ($param) {
             $users = User::where('name', 'LIKE', '%'.$param.'%')->get();
-        }
-        else {
+        } else {
             $users = User::all();
         }
+
         return response()->json($users);
     }
 }

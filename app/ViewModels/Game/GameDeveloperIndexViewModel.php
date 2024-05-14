@@ -13,16 +13,18 @@ class GameDeveloperIndexViewModel extends ViewModel
         //
     }
 
-    public function filteredUser() {
-//        if(request()->input('filters.user')) {
-//            $user = User::find(request()->input('filters.user'));
-//            return $user;
-//        }
+    public function filteredUser()
+    {
+        //        if(request()->input('filters.user')) {
+        //            $user = User::find(request()->input('filters.user'));
+        //            return $user;
+        //        }
 
         return '';
     }
 
-    public function developers() {
+    public function developers()
+    {
         return GameDeveloper::query()
 //            ->with(['media.model:id,created_at'])
 //            ->with(['media'])

@@ -1,8 +1,6 @@
 <?php
 
-
 namespace Services\Support\ValueObjects;
-
 
 use Support\ValueObjects\Price;
 use Tests\TestCase;

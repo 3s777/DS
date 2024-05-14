@@ -14,18 +14,18 @@ class UserListSelectViewModel extends ViewModel
     public function result(): array
     {
         $result = [
-            ['value' => '', 'label'=> __('common.choose_user')]
+            ['value' => '', 'label' => __('common.choose_user')]
         ];
 
         if($this->query) {
-            $users = User::where('name','ilike', "%{$this->query}%")->select('id', 'name')->get();
+            $users = User::where('name', 'ilike', "%{$this->query}%")->select('id', 'name')->get();
 
             foreach ($users as $user) {
-                $result[] = ['value' => $user->id, 'label'=> $user->name];
+                $result[] = ['value' => $user->id, 'label' => $user->name];
             }
 
             if($users->isEmpty()) {
-                $result[] = ['value' => '', 'label'=> __('common.not_found'), 'disabled' => true];
+                $result[] = ['value' => '', 'label' => __('common.not_found'), 'disabled' => true];
             }
         }
 

@@ -2,10 +2,8 @@
 
 namespace Domain\Auth\Actions;
 
-use App\Http\Requests\Auth\LoginRequest;
 use Domain\Auth\DTOs\LoginUserDTO;
 use Domain\Auth\Models\User;
-use Illuminate\Auth\Events\Verified;
 use Illuminate\Support\Facades\Auth;
 
 class LoginUserAction
@@ -25,8 +23,7 @@ class LoginUserAction
         if (Auth::attempt([
             'email' => $loginData->email,
             'password' => $loginData->password,
-        ], $loginData->remember))
-        {
+        ], $loginData->remember)) {
             $actionResponse['route'] = 'search';
 
             return $actionResponse;

@@ -24,8 +24,7 @@ class Col extends Component
         int $lg = 0,
         int $md = 0,
         int $sm = 0,
-    )
-    {
+    ) {
         $this->noGap = $noGap;
         $this->xl = $xl;
         $this->ls = $ls;
@@ -35,7 +34,7 @@ class Col extends Component
         $this->sm = $sm;
     }
 
-    public function col (): string
+    public function col(): string
     {
         $colName = 'col';
 

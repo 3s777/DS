@@ -176,7 +176,7 @@ class GameDeveloperFilterTest extends TestCase
             ->assertOk()
             ->assertSeeInOrder(
                 $gameDevelopers->sortBy('name')
-                    ->flatMap(fn($item) => [$item->name])
+                    ->flatMap(fn ($item) => [$item->name])
                     ->toArray()
             );
 

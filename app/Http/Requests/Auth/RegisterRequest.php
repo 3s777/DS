@@ -11,7 +11,6 @@ use Illuminate\Validation\Rules\Password;
 
 class RegisterRequest extends FormRequest
 {
-
     public function __construct(array $query = [], array $request = [], array $attributes = [], array $cookies = [], array $files = [], array $server = [], $content = null)
     {
         parent::__construct($query, $request, $attributes, $cookies, $files, $server, $content);
@@ -40,7 +39,7 @@ class RegisterRequest extends FormRequest
                 'string',
                 'max:255',
                 'min:3',
-                new LatinLowercaseRule,
+                new LatinLowercaseRule(),
                 Rule::unique(User::class)
             ],
             'email' => [
@@ -60,7 +59,7 @@ class RegisterRequest extends FormRequest
 
     protected function prepareForValidation()
     {
-//        $this->request->add(['language_id' => $this->language->id]);
+        //        $this->request->add(['language_id' => $this->language->id]);
 
         $this->merge([
             'name' => str(request('name'))

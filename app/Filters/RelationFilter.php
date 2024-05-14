@@ -53,7 +53,7 @@ class RelationFilter extends AbstractFilter
     public function apply(Builder $query): Builder
     {
         return $query->when($this->requestValue(), function (Builder $query) {
-            $query->where($this->table.'.'.$this->field,  $this->requestValue());
+            $query->where($this->table.'.'.$this->field, $this->requestValue());
         });
     }
 
@@ -68,7 +68,7 @@ class RelationFilter extends AbstractFilter
 
     public function view(): string
     {
-//        return 'components.common.filters.search';
+        //        return 'components.common.filters.search';
         return '';
     }
 }

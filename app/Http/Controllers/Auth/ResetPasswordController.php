@@ -14,11 +14,10 @@ use Illuminate\Support\Facades\Password;
 
 class ResetPasswordController extends Controller
 {
-
-    public function page( string $token): View|Application|Factory|\Illuminate\Contracts\Foundation\Application
+    public function page(string $token): View|Application|Factory|\Illuminate\Contracts\Foundation\Application
     {
         return view('content.auth.reset-password', [
-            'token' => $token
+            'token' => $token,
         ]);
     }
 
@@ -29,7 +28,7 @@ class ResetPasswordController extends Controller
             $request->only('email', 'password', 'password_confirmation', 'token'),
             function (User $user, string $password) {
                 $user->forceFill([
-                    'password' => bcrypt($password)
+                    'password' => bcrypt($password),
                 ])->setRememberToken(str()->random(60));
 
                 $user->save();
@@ -38,7 +37,7 @@ class ResetPasswordController extends Controller
             }
         );
 
-        if($status === Password::PASSWORD_RESET) {
+        if ($status === Password::PASSWORD_RESET) {
             flash()->info(__($status));
 
             return to_route('login');

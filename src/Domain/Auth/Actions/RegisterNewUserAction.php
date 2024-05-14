@@ -2,7 +2,6 @@
 
 namespace Domain\Auth\Actions;
 
-use App\Models\Language;
 use Domain\Auth\Contracts\RegisterNewUserContract;
 use Domain\Auth\DTOs\NewUserDTO;
 use Domain\Auth\Models\User;

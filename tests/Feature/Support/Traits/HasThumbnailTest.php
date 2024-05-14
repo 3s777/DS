@@ -147,31 +147,31 @@ class HasThumbnailTest extends TestCase
 
         $this->assertFalse($oldPath == $newPath);
 
-//        $this->storage->assertMissing($oldPath);
-//        $oldImagePathInfo = pathinfo($oldPath);
-//        $this->storage->assertMissing($oldImagePathInfo['dirname']);
-//
-//        $path = $gameDeveloperNewMedia->getThumbnailPath();
-//
-//
-//        $imagePathInfo = pathinfo($path);
-//
-//        $this->storage->assertExists($path);
-//
-//        $this->storage->assertExists($imagePathInfo['dirname']);
-//
-//        $this->storage->assertExists($imagePathInfo['dirname'].'/'.$imagePathInfo['filename'].'.webp');
-//
-//        $this->storage->assertExists($imagePathInfo['dirname'].'/'.$imagePathInfo['filename'].'_fallback.'.$imagePathInfo['extension']);
-//
-//        foreach($gameDeveloperNewMedia->thumbnailSizes() as $thumb) {
-//            $this->storage->assertExists($imagePathInfo['dirname'].'/webp/'.$thumb[0].'x'.$thumb[1].'/'.$imagePathInfo['filename'].'.webp');
-//        }
-//
-//        $gameDeveloperNewMedia->forceDelete();
-//
-//        $this->storage->assertMissing($path);
-//        $this->storage->assertMissing($imagePathInfo['dirname']);
+        //        $this->storage->assertMissing($oldPath);
+        //        $oldImagePathInfo = pathinfo($oldPath);
+        //        $this->storage->assertMissing($oldImagePathInfo['dirname']);
+        //
+        //        $path = $gameDeveloperNewMedia->getThumbnailPath();
+        //
+        //
+        //        $imagePathInfo = pathinfo($path);
+        //
+        //        $this->storage->assertExists($path);
+        //
+        //        $this->storage->assertExists($imagePathInfo['dirname']);
+        //
+        //        $this->storage->assertExists($imagePathInfo['dirname'].'/'.$imagePathInfo['filename'].'.webp');
+        //
+        //        $this->storage->assertExists($imagePathInfo['dirname'].'/'.$imagePathInfo['filename'].'_fallback.'.$imagePathInfo['extension']);
+        //
+        //        foreach($gameDeveloperNewMedia->thumbnailSizes() as $thumb) {
+        //            $this->storage->assertExists($imagePathInfo['dirname'].'/webp/'.$thumb[0].'x'.$thumb[1].'/'.$imagePathInfo['filename'].'.webp');
+        //        }
+        //
+        //        $gameDeveloperNewMedia->forceDelete();
+        //
+        //        $this->storage->assertMissing($path);
+        //        $this->storage->assertMissing($imagePathInfo['dirname']);
     }
 
 

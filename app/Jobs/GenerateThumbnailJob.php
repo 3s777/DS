@@ -14,14 +14,18 @@ use Intervention\Image\ImageManager;
 
 class GenerateThumbnailJob implements ShouldQueue
 {
-    use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
+    use Dispatchable;
+    use InteractsWithQueue;
+    use Queueable;
+    use SerializesModels;
 
-    public function __construct(protected string $imageFullPath,
-                                protected int|null $scaleDown = null,
-                                protected bool $isWebp = false,
-                                protected int|null $quality = null,
-                                protected string $prefix = '')
-    {
+    public function __construct(
+        protected string $imageFullPath,
+        protected int|null $scaleDown = null,
+        protected bool $isWebp = false,
+        protected int|null $quality = null,
+        protected string $prefix = ''
+    ) {
     }
 
     public function handle(): void
@@ -42,12 +46,12 @@ class GenerateThumbnailJob implements ShouldQueue
                 ->save($thumbnailStorage->path($imagePathInfo['dirname'].'/'.$imagePathInfo['filename']).'.webp');
         }
 
-       if($this->prefix) {
-           $image->save($thumbnailStorage->path($imagePathInfo['dirname'].'/'.$imagePathInfo['filename'].'_'.$this->prefix.'.'.$imagePathInfo['extension']), $this->quality);
-       }
+        if($this->prefix) {
+            $image->save($thumbnailStorage->path($imagePathInfo['dirname'].'/'.$imagePathInfo['filename'].'_'.$this->prefix.'.'.$imagePathInfo['extension']), $this->quality);
+        }
 
-       if(!$this->isWebp && !$this->prefix) {
-           $image->save($thumbnailStorage->path($this->imageFullPath));
-       }
+        if(!$this->isWebp && !$this->prefix) {
+            $image->save($thumbnailStorage->path($this->imageFullPath));
+        }
     }
 }

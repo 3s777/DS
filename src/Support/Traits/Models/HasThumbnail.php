@@ -56,8 +56,8 @@ trait HasThumbnail
     {
         $media = $this->addMedia($image)
             ->toMediaCollection($collectionName, 'images');
-//        $mediaPath = app(MediaPathGenerator::class)->getPath($media);
-//        $this->{$this->getThumbnailColumn()} = $mediaPath.$media->file_name;
+        //        $mediaPath = app(MediaPathGenerator::class)->getPath($media);
+        //        $this->{$this->getThumbnailColumn()} = $mediaPath.$media->file_name;
         $this->{$this->getThumbnailColumn()} = $media->getPathRelativeToRoot();
         $this->save();
 
@@ -67,7 +67,7 @@ trait HasThumbnail
     protected function addOriginal(UploadedFile $image): string
     {
         // TODO upload image without MediaLibrary
-//        $imageDir = $this->generateMediaPath($imageFileName);
+        //        $imageDir = $this->generateMediaPath($imageFileName);
         return $image;
     }
 
@@ -82,15 +82,15 @@ trait HasThumbnail
             $filteredThumbs = ($specialSizes) ? Arr::only($defaultThumbnails, $specialSizes) : $defaultThumbnails;
 
             $this->thumbnailStorage()->makeDirectory($imagePathInfo['dirname'].'/webp');
-//            $this->thumbnailStorage()->makeDirectory($imagePathInfo['dirname'].'/'.$imagePathInfo['extension']);
+            //            $this->thumbnailStorage()->makeDirectory($imagePathInfo['dirname'].'/'.$imagePathInfo['extension']);
 
             foreach($filteredThumbs as $thumb) {
 
                 $webpThumbDir = $imagePathInfo['dirname'].'/webp/'.$thumb[0].'x'.$thumb[1];
-//                $originalThumbDir = $imagePathInfo['dirname'].'/'.$imagePathInfo['extension'].'/'.$thumb[0].'x'.$thumb[1];
+                //                $originalThumbDir = $imagePathInfo['dirname'].'/'.$imagePathInfo['extension'].'/'.$thumb[0].'x'.$thumb[1];
 
                 $this->thumbnailStorage()->makeDirectory($webpThumbDir);
-//                $this->thumbnailStorage()->makeDirectory($originalThumbDir);
+                //                $this->thumbnailStorage()->makeDirectory($originalThumbDir);
 
                 GenerateSmallThumbnailsJob::dispatch($imageFullPath, $thumb[0], $thumb[1], $webpThumbDir);
             }
@@ -128,10 +128,11 @@ trait HasThumbnail
      * @throws FileDoesNotExist
      * @throws FileIsTooBig
      */
-    public function addImageWithThumbnail(UploadedFile|null $image,
-                                          string $collectionName = 'default',
-                                          array $specialSizes = []): void
-    {
+    public function addImageWithThumbnail(
+        UploadedFile|null $image,
+        string $collectionName = 'default',
+        array $specialSizes = []
+    ): void {
         if($image) {
             if(config('thumbnail.driver') == 'media_library') {
                 $imageFullPath = $this->addOriginalWithMediaLibrary($image, $collectionName);
@@ -155,9 +156,9 @@ trait HasThumbnail
             }
 
             return '';
-//            $mediaPath = $this->generateMediaPath($thumbnailMedia->file_name);
-//            return $mediaPath.$thumbnailMedia->file_name;
-//            $mediaPath = app(MediaPathGenerator::class)->getPath($thumbnailMedia);
+            //            $mediaPath = $this->generateMediaPath($thumbnailMedia->file_name);
+            //            return $mediaPath.$thumbnailMedia->file_name;
+            //            $mediaPath = app(MediaPathGenerator::class)->getPath($thumbnailMedia);
 
         } else {
             return $this->{$this->getThumbnailColumn()};
@@ -178,7 +179,7 @@ trait HasThumbnail
         }
     }
 
-    public function updateThumbnail($newThumbnail, $oldThumbnail ='', $sizes = [])
+    public function updateThumbnail($newThumbnail, $oldThumbnail = '', $sizes = [])
     {
         if(!$oldThumbnail && !$newThumbnail) {
             $this->deleteAllThumbnails();

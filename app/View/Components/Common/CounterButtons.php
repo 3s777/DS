@@ -12,8 +12,7 @@ class CounterButtons extends Component
         public string $buttonClass,
         public string $badgeClass,
         public string $type = 'standard',
-    )
-    {
+    ) {
         if($type == 'light') {
             $this->buttonClass = $buttonClass. ' counter-buttons__button_light';
             $this->badgeClass = $badgeClass. ' counter-buttons__badge_light';

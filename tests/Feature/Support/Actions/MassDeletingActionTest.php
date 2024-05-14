@@ -2,7 +2,6 @@
 
 namespace Support\Actions;
 
-use Database\Factories\Game\GameDeveloperFactory;
 use Domain\Auth\Models\User;
 use Domain\Game\Models\GameDeveloper;
 use Illuminate\Foundation\Testing\RefreshDatabase;
@@ -23,8 +22,8 @@ class MassDeletingActionTest extends TestCase
 
         $this->models = GameDeveloper::factory()
             ->for(User::factory()->create())
-            ->count(5
-            )->create();
+            ->count(5)
+            ->create();
         $modelsIdsArray = $this->models->pluck('id')->toArray();
         $this->modelsIds = implode(',', $modelsIdsArray);
     }
@@ -39,7 +38,8 @@ class MassDeletingActionTest extends TestCase
 
         $action(MassDeletingDTO::make(
             'Domain\Game\Models\GameDeveloper',
-            $this->modelsIds));
+            $this->modelsIds
+        ));
 
         $this->assertDatabaseCount('game_developers', 5);
 
@@ -65,7 +65,8 @@ class MassDeletingActionTest extends TestCase
         $action(MassDeletingDTO::make(
             'Domain\Game\Models\GameDeveloper',
             $this->modelsIds,
-            true));
+            true
+        ));
 
         $this->assertDatabaseCount('game_developers', 2);
 

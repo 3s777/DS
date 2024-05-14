@@ -13,8 +13,7 @@ class LoginUserDTO
         public readonly string $email,
         public readonly string $password,
         public readonly bool $remember = false
-    )
-    {
+    ) {
     }
 
     public static function fromRequest(Request $request)

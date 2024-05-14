@@ -84,7 +84,7 @@ abstract class AbstractFilter implements Stringable
         return str($this->key())
             ->wrap('[', ']')
             ->prepend('filters')
-            ->when($index, fn($str) => $str->append("[$index]"))
+            ->when($index, fn ($str) => $str->append("[$index]"))
             ->value();
     }
 
@@ -92,7 +92,7 @@ abstract class AbstractFilter implements Stringable
     {
         return str($this->key())
             ->prepend('filters_')
-            ->when($index, fn($str) => $str->append("_$index"))
+            ->when($index, fn ($str) => $str->append("_$index"))
             ->value();
     }
 

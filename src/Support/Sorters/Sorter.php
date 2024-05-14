@@ -14,7 +14,8 @@ class Sorter
         protected array $columns = [],
         protected string $defaultField = 'id',
         protected string $defaultOrder = 'desc'
-    ) {}
+    ) {
+    }
 
     public function run(Builder $query): Builder
     {
@@ -22,7 +23,8 @@ class Sorter
 
         if(!request('sort')) {
             $query->orderBy(
-                $this->defaultField, $this->defaultOrder
+                $this->defaultField,
+                $this->defaultOrder
             );
         }
 
@@ -30,7 +32,8 @@ class Sorter
 
         return $query->when($sortData['key']->contains($this->columns()), function (Builder $query) use ($sortData) {
             $query->orderBy(
-                $sortData['key'], $sortData['order']
+                $sortData['key'],
+                $sortData['order']
             );
         });
     }

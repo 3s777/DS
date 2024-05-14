@@ -14,8 +14,8 @@ class Image extends Component
     public function __construct(
         public string $src,
         public string $caption = '',
-        public string $srcFull = '')
-    {
+        public string $srcFull = ''
+    ) {
         //
     }
 

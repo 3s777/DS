@@ -57,7 +57,7 @@ class RouteServiceProvider extends ServiceProvider
                 ->response(function (Request $request, array $headers) {
                     flash()->danger(__('text'), 'warning');
                     return back();
-//                    return response('Полегче', ResponseAlias::HTTP_TOO_MANY_REQUESTS);
+                    //                    return response('Полегче', ResponseAlias::HTTP_TOO_MANY_REQUESTS);
                 });
         });
     }

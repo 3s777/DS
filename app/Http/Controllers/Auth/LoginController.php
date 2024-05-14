@@ -23,12 +23,13 @@ class LoginController extends Controller
     {
         $actionData = $action(LoginUserDTO::fromRequest($request));
 
-        if(array_key_exists( 'error', $actionData)) {
+        if (array_key_exists('error', $actionData)) {
             flash()->danger(__($actionData['error']));
+
             return back()->onlyInput('email');
         }
 
-        if($actionData['route'] === 'search') {
+        if ($actionData['route'] === 'search') {
             $request->session()->regenerate();
         }
 

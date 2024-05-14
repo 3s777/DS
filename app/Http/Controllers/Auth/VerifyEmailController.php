@@ -9,7 +9,6 @@ use Domain\Auth\Actions\VerifyEmailAction;
 use Domain\Auth\Models\User;
 use Illuminate\Support\Facades\Auth;
 
-
 class VerifyEmailController extends Controller
 {
     public function page()
@@ -28,7 +27,8 @@ class VerifyEmailController extends Controller
         return to_route('search');
     }
 
-    public function sendVerifyNotification(SendEmailVerifyRequest $request) {
+    public function sendVerifyNotification(SendEmailVerifyRequest $request)
+    {
         $user = User::where('email', $request->only(['email']))->first();
 
         if ($user->hasVerifiedEmail()) {
@@ -44,7 +44,4 @@ class VerifyEmailController extends Controller
 
         return to_route('verification.notice');
     }
-
-
-
 }

@@ -60,20 +60,20 @@ class GameDeveloper extends Model implements HasMedia
     }
 
     public function thumbnailSizes(): array
-        {
-            return [
-                'small' => ['220', '220'],
-                'medium' => ['500', '500'],
-                'full_preview' => ['550', '550'],
-                'full_preview_300' => ['300', '300'],
-                'full_preview_400' => ['400', '400'],
-                'full_preview_600' => ['600', '600'],
-                'full_preview_1200' => ['1200', '1200'],
-                'large' => ['1000', '1000'],
-                'extra_small' => ['100', '100'],
-                'extra_small1' => ['50', '50']
-            ];
-        }
+    {
+        return [
+            'small' => ['220', '220'],
+            'medium' => ['500', '500'],
+            'full_preview' => ['550', '550'],
+            'full_preview_300' => ['300', '300'],
+            'full_preview_400' => ['400', '400'],
+            'full_preview_600' => ['600', '600'],
+            'full_preview_1200' => ['1200', '1200'],
+            'large' => ['1000', '1000'],
+            'extra_small' => ['100', '100'],
+            'extra_small1' => ['50', '50']
+        ];
+    }
 
     public function availableFilters(): array
     {
@@ -81,17 +81,20 @@ class GameDeveloper extends Model implements HasMedia
             'dates' => DatesFilter::make(
                 __('common.dates'),
                 'dates',
-                'game_developers'),
+                'game_developers'
+            ),
             'search' => SearchFilter::make(
                 __('common.search'),
                 'search',
-                'game_developers'),
+                'game_developers'
+            ),
             'user' => RelationFilter::make(
                 __('common.user'),
                 'user',
                 'game_developers',
                 'user_id',
-                User::class),
+                User::class
+            ),
         ];
     }
 

@@ -13,11 +13,10 @@ use Illuminate\Support\Facades\Route;
 
 class AuthRegistrar implements RouteRegistrar
 {
-
     public function map(Registrar $registrar): void
     {
         Route::middleware('web')
-            ->group(function() {
+            ->group(function () {
                 Route::prefix('{locale}')->whereIn('locale', config('app.available_locales'))->group(function () {
                     Route::controller(LoginController::class)->group(function () {
                         Route::get('/login', 'page')->middleware('guest')->name('login');
@@ -27,7 +26,7 @@ class AuthRegistrar implements RouteRegistrar
 
                     Route::controller(RegisterController::class)->group(function () {
                         Route::get('/register', 'page')->middleware('guest')->name('register');
-                        Route::post('/register', 'handle')->middleware('guest','throttle:auth')->name('register.handle');
+                        Route::post('/register', 'handle')->middleware('guest', 'throttle:auth')->name('register.handle');
                     });
 
                     Route::controller(ForgotPasswordController::class)->group(function () {

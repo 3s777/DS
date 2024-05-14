@@ -37,10 +37,10 @@ class GameDeveloperControllerTest extends TestCase
 
     public function checkNotAuthRedirect(
         string $action,
-        string $method= 'get',
+        string $method = 'get',
         array $params = [],
-        array $request = []): void
-    {
+        array $request = []
+    ): void {
         $this->{$method}(action([GameDeveloperController::class, $action], $params), $request)
             ->assertRedirectToRoute('login');
     }
@@ -53,10 +53,10 @@ class GameDeveloperControllerTest extends TestCase
     {
         $this->checkNotAuthRedirect('index');
         $this->checkNotAuthRedirect('create');
-        $this->checkNotAuthRedirect('edit', 'get',  [$this->gameDeveloper->slug]);
-        $this->checkNotAuthRedirect('store', 'post',  [$this->gameDeveloper->slug], $this->request);
-        $this->checkNotAuthRedirect('update', 'put',  [$this->gameDeveloper->slug], $this->request);
-        $this->checkNotAuthRedirect('destroy', 'delete',  [$this->gameDeveloper->slug]);
+        $this->checkNotAuthRedirect('edit', 'get', [$this->gameDeveloper->slug]);
+        $this->checkNotAuthRedirect('store', 'post', [$this->gameDeveloper->slug], $this->request);
+        $this->checkNotAuthRedirect('update', 'put', [$this->gameDeveloper->slug], $this->request);
+        $this->checkNotAuthRedirect('destroy', 'delete', [$this->gameDeveloper->slug]);
     }
 
     /**
@@ -185,8 +185,11 @@ class GameDeveloperControllerTest extends TestCase
         $this->request['name'] = 'newName';
 
         $this->actingAs($this->user)
-            ->put(action(
-                [GameDeveloperController::class, 'update'], [$this->gameDeveloper->slug]),
+            ->put(
+                action(
+                    [GameDeveloperController::class, 'update'],
+                    [$this->gameDeveloper->slug]
+                ),
                 $this->request
             )
             ->assertRedirectToRoute('game-developers.index')

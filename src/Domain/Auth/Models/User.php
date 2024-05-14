@@ -71,7 +71,7 @@ class User extends Authenticatable implements MustVerifyEmail, HasLocalePreferen
 
     public function sendEmailVerificationNotification()
     {
-        $this->notify(new VerifyEmailNotification);
+        $this->notify(new VerifyEmailNotification());
     }
 
     public function sendPasswordResetNotification($token)
@@ -87,15 +87,17 @@ class User extends Authenticatable implements MustVerifyEmail, HasLocalePreferen
     public function avatar(): Attribute
     {
         return Attribute::make(
-            get: fn() => 'https://ui-avatars.com/api/?background=0D8ABC&color=fff&name=' . $this->name
+            get: fn () => 'https://ui-avatars.com/api/?background=0D8ABC&color=fff&name=' . $this->name
         );
     }
 
-    public function settingsValue(): BelongsToMany {
+    public function settingsValue(): BelongsToMany
+    {
         return $this->belongsToMany(UserSettingValue::class);
     }
 
-    public function language(): BelongsTo {
+    public function language(): BelongsTo
+    {
         return $this->belongsTo(Language::class);
     }
 
@@ -104,15 +106,15 @@ class User extends Authenticatable implements MustVerifyEmail, HasLocalePreferen
         return $this->language->slug;
     }
 
-//    public function thumbnail(): HasOne
-//    {
-//        return $this->hasOne(Image::class)->where('id', $this->avatar_id);
-//    }
-//
-//    public function cover(): HasOne
-//    {
-//        return $this->hasOne(Image::class)->where('id', $this->cover_id);
-//    }
+    //    public function thumbnail(): HasOne
+    //    {
+    //        return $this->hasOne(Image::class)->where('id', $this->avatar_id);
+    //    }
+    //
+    //    public function cover(): HasOne
+    //    {
+    //        return $this->hasOne(Image::class)->where('id', $this->cover_id);
+    //    }
 
     public function img(): HasOne
     {
@@ -125,23 +127,23 @@ class User extends Authenticatable implements MustVerifyEmail, HasLocalePreferen
     }
 
 
-//    public function registerMediaCollections(): void
-//    {
-////        $this->addMediaCollection('my-collection')
-////        //add options
-////        ...
-////
-////    // you can define as many collections as needed
-////    $this->addMediaCollection('my-other-collection')
-//        //add options
-//        ...
-//}
+    //    public function registerMediaCollections(): void
+    //    {
+    ////        $this->addMediaCollection('my-collection')
+    ////        //add options
+    ////        ...
+    ////
+    ////    // you can define as many collections as needed
+    ////    $this->addMediaCollection('my-other-collection')
+    //        //add options
+    //        ...
+    //}
 
 
-//    public function images()
-//    {
-//        return $this->hasMany(Image::class);
-//    }
+    //    public function images()
+    //    {
+    //        return $this->hasMany(Image::class);
+    //    }
     public function thumbnailSizes(): array
     {
         return [];

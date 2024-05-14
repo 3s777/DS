@@ -128,8 +128,8 @@ class RegisterControllerTest extends TestCase
     public function it_redirect_to_login(): void
     {
         $response = $this->post(
-                action([RegisterController::class, 'handle']),
-                $this->request
+            action([RegisterController::class, 'handle']),
+            $this->request
         );
 
         $response->assertValid()

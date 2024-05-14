@@ -4,7 +4,6 @@ namespace Database\Seeders;
 
 use Domain\Auth\Models\User;
 use Domain\Game\Models\GameDeveloper;
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
 class GameDeveloperSeeder extends Seeder

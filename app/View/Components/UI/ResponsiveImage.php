@@ -21,8 +21,7 @@ class ResponsiveImage extends Component
         public string $sizes,
         public string $path = '',
         public bool $placeholder = true
-    )
-    {
+    ) {
         $this->imgPathInfo = pathinfo($this->path);
     }
 
@@ -37,8 +36,7 @@ class ResponsiveImage extends Component
         $storage = Storage::disk('images');
 
         foreach($imageSizes as $size) {
-            if(!$storage->exists($this->imgPathInfo['dirname'].'/webp/'.$size[0].'x'.$size[1].'/'.$this->imgPathInfo['filename'].'.webp'))
-            {
+            if(!$storage->exists($this->imgPathInfo['dirname'].'/webp/'.$size[0].'x'.$size[1].'/'.$this->imgPathInfo['filename'].'.webp')) {
                 $webpImageDir = $this->imgPathInfo['dirname'].'/webp/'.$size[0].'x'.$size[1];
                 $storage->makeDirectory($webpImageDir);
 
@@ -62,8 +60,7 @@ class ResponsiveImage extends Component
             return false;
         }
 
-        if(!$storage->exists($this->path))
-        {
+        if(!$storage->exists($this->path)) {
             return false;
         }
 
@@ -72,7 +69,7 @@ class ResponsiveImage extends Component
 
     public function render(): View|Closure|string
     {
-        $imageSizesFiltered = Arr::only($this->model->thumbnailSizes(),$this->imageSizes);
+        $imageSizesFiltered = Arr::only($this->model->thumbnailSizes(), $this->imageSizes);
 
         if($this->path) {
             $this->checkAndCreateImageSizes($imageSizesFiltered);

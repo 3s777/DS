@@ -8,7 +8,6 @@ use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Crypt;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
-use Illuminate\Validation\ValidationException;
 
 class FilePondController extends Controller
 {
@@ -29,7 +28,7 @@ class FilePondController extends Controller
     {
         $filePath = Crypt::decrypt($request->getContent());
 
-//        throw(new \Exception($u));
+        //        throw(new \Exception($u));
 
         Storage::delete($filePath);
     }

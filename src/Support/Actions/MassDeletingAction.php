@@ -25,8 +25,7 @@ class MassDeletingAction
                     }
                 }
             });
-        }
-        catch (Throwable $e) {
+        } catch (Throwable $e) {
             throw new MassDeletingException($e->getMessage());
         }
     }

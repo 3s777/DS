@@ -12,7 +12,6 @@ class MassDeletingDTO
         public readonly string $modelNamespace,
         public readonly array|string $ids,
         public readonly bool $isForce = false
-    )
-    {
+    ) {
     }
 }

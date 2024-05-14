@@ -32,7 +32,7 @@ class VerifyEmailControllerTest extends TestCase
      */
     public function it_verification_notification_sent(): void
     {
-//        Queue::fake();
+        //        Queue::fake();
 
         $request = [
             'email_verified_at' => null
@@ -46,7 +46,7 @@ class VerifyEmailControllerTest extends TestCase
 
         Notification::assertSentTo([$user], VerifyEmailNotification::class);
 
-//        Queue::assertNothingPushed();
+        //        Queue::assertNothingPushed();
     }
 
     /**

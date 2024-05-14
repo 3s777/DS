@@ -25,7 +25,8 @@ class Flash
         return new FlashMessage(
             $message,
             $this->session->get(self::MESSAGE_TYPE_KEY, ''),
-            $this->session->get(self::MESSAGE_ICON_KEY, false));
+            $this->session->get(self::MESSAGE_ICON_KEY, false)
+        );
     }
 
     public function info(string $message, string $icon = ''): void
@@ -52,7 +53,7 @@ class Flash
     {
         $this->session->flash(self::MESSAGE_KEY, $message);
         $this->session->flash(self::MESSAGE_TYPE_KEY, config("flash.$type"));
-        if($icon){
+        if($icon) {
             $this->session->flash(self::MESSAGE_ICON_KEY, 'svg.'.$icon);
         }
     }

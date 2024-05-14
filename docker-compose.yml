@@ -27,7 +27,7 @@ services:
         - POSTGRES_DB=${DB_DATABASE}
         - POSTGRES_USER=${DB_USERNAME}
         - POSTGRES_PASSWORD=${DB_PASSWORD}
-      container_name: ds_db
+      container_name: db-ds
   node-ds:
       build:
           context: .
@@ -38,4 +38,4 @@ services:
       working_dir: /var/www
       volumes:
           - .:/var/www # Монтируем локальную папку в контейнер как /var/www
-      container_name: node_db
+      container_name: node-ds

@@ -45,7 +45,8 @@ if(!function_exists('filter_url')) {
 if(!function_exists('sorter')) {
     function sorter($fields, $defaultField, $defaultOrder): Sorter
     {
-        return app(Sorter::class,
+        return app(
+            Sorter::class,
             ['columns' => $fields,
             'defaultField' => $defaultField,
             'defaultOrder' => $defaultOrder]

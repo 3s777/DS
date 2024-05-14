@@ -2,16 +2,13 @@
 
 namespace Database\Seeders;
 
-use Domain\Game\DTOs\ApiGamesDTO;
 use Domain\Game\Models\GameDeveloper;
 use Domain\Game\Models\Game;
 use Domain\Game\Models\GameGenre;
 use Domain\Game\Models\GamePlatform;
 use Domain\Game\Models\GamePublisher;
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Services\GamesDbApi\GamesDbApiContract;
-use Spatie\FlareClient\Api;
 
 class GameSeeder extends Seeder
 {
@@ -58,10 +55,10 @@ class GameSeeder extends Seeder
             }
 
             foreach ($game->platforms as $platform) {
-                    $currentPlatform = GamePlatform::firstOrCreate([
-                        'name' => $platform['platform']['name'],
-                    ]);
-                    $currentGame->platforms()->attach($currentPlatform->id);
+                $currentPlatform = GamePlatform::firstOrCreate([
+                    'name' => $platform['platform']['name'],
+                ]);
+                $currentGame->platforms()->attach($currentPlatform->id);
             }
         }
     }

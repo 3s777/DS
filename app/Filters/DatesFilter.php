@@ -44,11 +44,11 @@ class DatesFilter extends AbstractFilter
     {
         return $query->when($this->requestValue(), function (Builder $query) {
             if($this->fromDate()) {
-                $query->whereDate($this->table.'.'.$this->field,'>=',  $this->fromDate());
+                $query->whereDate($this->table.'.'.$this->field, '>=', $this->fromDate());
             }
 
             if($this->toDate()) {
-                $query->whereDate($this->table.'.'.$this->field,'<=',  $this->toDate());
+                $query->whereDate($this->table.'.'.$this->field, '<=', $this->toDate());
             }
         });
     }

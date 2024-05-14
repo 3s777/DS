@@ -3,7 +3,6 @@
 namespace Database\Seeders;
 
 use Domain\Game\Models\GamePublisher;
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
 class GamePublisherSeeder extends Seeder

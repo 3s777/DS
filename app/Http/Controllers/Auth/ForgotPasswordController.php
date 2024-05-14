@@ -25,9 +25,9 @@ class ForgotPasswordController extends Controller
 
         flash()->info(__($status), 'warning');
 
-//        if($status === Password::RESET_LINK_SENT) {
-//            flash()->info(__($status), 'warning');
-//        }
+        //        if($status === Password::RESET_LINK_SENT) {
+        //            flash()->info(__($status), 'warning');
+        //        }
 
         return to_route('forgot');
     }

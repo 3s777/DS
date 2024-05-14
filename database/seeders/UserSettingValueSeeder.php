@@ -2,9 +2,7 @@
 
 namespace Database\Seeders;
 
-use Domain\Auth\Models\UserSetting;
 use Domain\Auth\Models\UserSettingValue;
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
 class UserSettingValueSeeder extends Seeder

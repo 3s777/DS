@@ -17,7 +17,6 @@ class ApiGamesDTO
         public readonly array $developers,
         public readonly array $genres,
         public readonly array $platforms,
-    )
-    {
+    ) {
     }
 }

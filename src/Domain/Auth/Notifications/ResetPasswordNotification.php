@@ -78,7 +78,7 @@ class ResetPasswordNotification extends Notification implements ShouldQueue
      */
     protected function buildMailMessage($url)
     {
-        return (new MailMessage)
+        return (new MailMessage())
             ->subject(Lang::get('auth.reset_notification.title'))
             ->line(Lang::get('auth.reset_notification.line1'))
             ->action(Lang::get('auth.reset'), $url)

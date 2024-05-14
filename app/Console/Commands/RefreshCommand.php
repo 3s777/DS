@@ -13,7 +13,7 @@ class RefreshCommand extends Command
 
     public function handle(): int
     {
-        if(app()->isProduction()) {
+        if (app()->isProduction()) {
             return self::FAILURE;
         }
 
@@ -23,7 +23,7 @@ class RefreshCommand extends Command
         Storage::deleteDirectory('images/brands');
 
         $this->call('migrate:fresh', [
-            '--seed' => true
+            '--seed' => true,
         ]);
 
         return self::SUCCESS;

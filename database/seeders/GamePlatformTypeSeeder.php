@@ -3,7 +3,6 @@
 namespace Database\Seeders;
 
 use Domain\Game\Models\GamePlatformType;
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
 class GamePlatformTypeSeeder extends Seeder

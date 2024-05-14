@@ -21,8 +21,6 @@ class GameDeveloperController extends Controller
 {
     public function index(FilterGameDeveloperRequest $request)
     {
-
-
         return view('admin.game.developer.index', new GameDeveloperIndexViewModel());
     }
 
@@ -84,7 +82,8 @@ class GameDeveloperController extends Controller
         $deletingAction(
             MassDeletingDTO::make(
                 'Domain\Game\Models\GameDeveloper',
-                $request->input('ids'))
+                $request->input('ids')
+            )
         );
 
         flash()->info(__('game.developer.updated'));
@@ -101,7 +100,8 @@ class GameDeveloperController extends Controller
             MassDeletingDTO::make(
                 'Domain\Game\Models\GameDeveloper',
                 $request->input('ids'),
-                true)
+                true
+            )
         );
 
         flash()->info(__('game.developer.updated'));

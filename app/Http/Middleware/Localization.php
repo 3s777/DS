@@ -21,9 +21,9 @@ class Localization
     {
         $currentLocale = $request->segment(1);
 
-//        if(!in_array($currentLocale, config('app.available_locales')) && $currentLocale) {
-//            abort(404);
-//        }
+        //        if(!in_array($currentLocale, config('app.available_locales')) && $currentLocale) {
+        //            abort(404);
+        //        }
 
         if(auth()->check()) {
             if($currentLocale != session('locale') && $currentLocale) {
@@ -38,7 +38,7 @@ class Localization
         }
 
         if(is_null(session('locale'))) {
-            session(['locale'=> config('app.locale')]);
+            session(['locale' => config('app.locale')]);
         }
 
         if(is_null($currentLocale)) {
@@ -47,7 +47,7 @@ class Localization
 
         app()->setLocale($currentLocale);
 
-        session(['locale'=> $currentLocale]);
+        session(['locale' => $currentLocale]);
 
         URL::defaults(['locale' => $currentLocale]);
 
