@@ -1,4 +1,8 @@
-<div class="site-settings">
+<div
+    {{ $attributes->class([
+            'site-settings'
+        ])
+    }}>
     <div class="site-settings__inner" x-data="{ siteSettingsHidden: true }">
         <div class="site-settings__button" x-on:click.stop="siteSettingsHidden = ! siteSettingsHidden" title="{{ __('Settings') }}">
             <x-svg.settings class="site-settings__icon"></x-svg.settings>

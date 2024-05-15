@@ -1,4 +1,8 @@
-<nav class="auth-menu">
+<nav
+    {{ $attributes->class([
+            'auth-menu'
+        ])
+    }}>
     @guest
         @if(Route::currentRouteName() != 'login')
             <div class="auth-menu__item">
@@ -34,7 +38,7 @@
 
             <div class="profile-menu__links">
                 <a class="profile-menu__username " href="#">
-                    {{--{{ Auth::user()->name }}--}} Александр Синица
+                    {{--{{ Auth::user()->name }}--}} Александр Мосиенко
                 </a>
 
                 <div class="profile-menu__logout">

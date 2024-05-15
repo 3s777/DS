@@ -16,9 +16,10 @@ class ResetPasswordController extends Controller
 {
     public function page(string $token): View|Application|Factory|\Illuminate\Contracts\Foundation\Application
     {
-        return view('content.auth.reset-password', [
-            'token' => $token,
-        ]);
+        return view(
+            'content.auth.reset-password',
+            ['token' => $token,]
+        );
     }
 
     public function handle(ResetPasswordRequest $request): RedirectResponse
@@ -27,9 +28,9 @@ class ResetPasswordController extends Controller
         $status = Password::reset(
             $request->only('email', 'password', 'password_confirmation', 'token'),
             function (User $user, string $password) {
-                $user->forceFill([
-                    'password' => bcrypt($password),
-                ])->setRememberToken(str()->random(60));
+                $user->forceFill(
+                    ['password' => bcrypt($password),]
+                )->setRememberToken(str()->random(60));
 
                 $user->save();
 

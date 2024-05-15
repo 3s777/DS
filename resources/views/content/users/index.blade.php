@@ -18,7 +18,7 @@
             </div>
 
             @foreach($users as $user)
-                <img src="{{ $user->makeThumbnail('100x100') }}" alt="">
+                <img src="" alt="">
                 {{ $user->name }}
                 @endforeach
 

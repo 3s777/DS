@@ -14,14 +14,8 @@
     }
 
     @include breakpoint-max($ml) {
-        order: 2;
-
         &__link {
             padding: 10px 16px;
         }
-    }
-
-    @include breakpoint-max($lg) {
-        display: none;
     }
 }

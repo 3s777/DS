@@ -1,0 +1,24 @@
+.chat-icon-notification {
+    position: relative;
+
+    &__badge {
+        position: absolute;
+        top: 0;
+        right: 0;
+        max-width: 30px;
+        padding: 1px 4px;
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+    }
+
+    &__icon {
+        line-height: 0;
+    }
+
+    &__svg {
+        fill: $opposite-main;
+        width: 30px;
+        height: 30px;
+    }
+}
