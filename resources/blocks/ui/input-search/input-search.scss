@@ -48,7 +48,7 @@
     }
 
     &__form-button {
-        padding: 0;
+        padding: 0 0 0 4px;
         border: 0;
         box-shadow: none;
         line-height: 0;
@@ -58,6 +58,8 @@
 
     &__icon {
         fill: $opposite-main;
+        width: 20px;
+        height: 20px;
     }
 }
 

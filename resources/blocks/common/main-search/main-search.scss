@@ -1,5 +1,4 @@
 .main-search {
-    position: relative;
 
     &__header {
         display: flex;
@@ -10,7 +9,6 @@
         margin-right: 16px;
     }
 
-
     &__filter-button {
         padding: 13px;
     }
@@ -20,13 +18,24 @@
         height: 22px;
     }
 
-    &__filters {
-        padding-top: 24px;
-    }
+    @include breakpoint-max($md) {
+        &__input-search {
+            margin-right: 0;
+        }
 
-    &__footer {
-        display: flex;
-        justify-content: center;
-        gap: 16px;
+        &__input {
+            padding: 10px 4px 10px 12px;
+            border-radius: $small-border-radius 0 0 $small-border-radius;
+        }
+
+        &__filter-button {
+            padding: 10px;
+            border-radius: 0 $small-border-radius $small-border-radius 0;
+        }
+
+        &__filter-icon {
+            width: 20px;
+            height: 20px;
+        }
     }
 }

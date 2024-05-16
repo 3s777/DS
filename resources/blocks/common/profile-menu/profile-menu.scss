@@ -42,8 +42,6 @@
     }
 
     @include breakpoint-max($ml) {
-        order: 1;
-
         &__avatar {
             width: 36px;
             height: 36px;

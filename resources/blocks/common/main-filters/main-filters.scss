@@ -1,0 +1,10 @@
+.main-filters {
+    position: relative;
+    margin-bottom: 16px;
+
+    &__footer {
+        display: flex;
+        justify-content: center;
+        gap: 16px;
+    }
+}

@@ -1,4 +1,6 @@
 .header {
+    margin-bottom: 32px;
+
     &::before {
         content: "";
         position: absolute;
@@ -8,7 +10,7 @@
         height: 600px;
         background-color: $base-dark;
         border-radius: 0 0 85% 30%;
-        animation: buble 10s infinite linear;
+        animation: bubble 10s infinite linear;
         animation-direction: alternate;
         animation-delay: 2s;
     }
@@ -19,7 +21,7 @@
         justify-content: space-between;
         align-items: flex-end;
         flex-wrap: wrap;
-        padding: 32px 0;
+        padding: 32px 0 0 0;
     }
 
     &__site-icon {
@@ -32,7 +34,8 @@
     }
 
     &__search {
-        display: none;
+        width: 100%;
+        padding-top: 32px;
     }
 
     @include breakpoint-max($ml) {
@@ -47,21 +50,18 @@
     }
 
     @include breakpoint-max($lg) {
+        margin-bottom:  24px;
+
         &__inner {
+            align-items: center;
             flex-wrap: nowrap;
-            gap: 12px;
-            padding-top: 16px;
-            padding-bottom: 24px;
+            gap: 16px;
+            padding-top: 24px;
+            padding-bottom: 0;
         }
 
         &__main-menu {
             display: none;
-        }
-    }
-
-    @include breakpoint-max($md) {
-        &__inner {
-            align-items: center;
         }
 
         &__site-settings {
@@ -72,9 +72,19 @@
             display: none;
         }
 
+        &__logo {
+            order: 0;
+        }
+
+        &__site-icon {
+            width: auto;
+            margin-right: 8px;
+        }
+
         &__search {
-            display: flex;
+            order: 1;
             width: 100%;
+            padding-top: 0;
 
             .input-search__inner {
                 width: 100%;
@@ -85,12 +95,22 @@
             width: 100%;
             padding: 8px 10px 8px 10px;
         }
+
+        &__profile-menu {
+            order: 2;
+        }
+    }
+
+    @include breakpoint-max($md) {
+        &__inner {
+            gap: 12px;
+        }
     }
 
     @include breakpoint-max($sm) {
         &__site-icon {
             height: 30px;
-            margin-right: 2px;
+            margin-right: 0;
         }
 
         &__site-name {
@@ -99,7 +119,7 @@
     }
 }
 
-@keyframes buble {
+@keyframes bubble {
     0% {
         transform: translateY(-150px);
         border-radius: 0 0 85% 30%;

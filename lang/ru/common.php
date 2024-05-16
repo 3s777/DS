@@ -43,5 +43,6 @@ return [
     'shelfs' => 'Полки',
     'blog' => 'Блог',
     'feed' => 'Лента',
-    'more' => 'Больше'
+    'more' => 'Больше',
+    'default_search_placeholder' => 'Что будем искать?'
 ];
