@@ -3,7 +3,7 @@
         <x-grid.container>
             <x-ui.input-search
                 wrapper-class="users-search__input-search"
-                link="{{ route('users') }}"
+                link="{{ route('users.index') }}"
                 placeholder="{{ __('Введите имя пользователя?') }}">
             </x-ui.input-search>
         </x-grid.container>
@@ -38,7 +38,7 @@
                                 </div>
                                 <div class="user-search__subscribe">
                                     <x-ui.form.button size="small">Подписаться</x-ui.form.button>
-                                    <x-ui.form.button class="user-search__button-message" tag="a" href="{{ route('users') }}" only-icon="true" size="small" title="Написать сообщение">
+                                    <x-ui.form.button class="user-search__button-message" tag="a" href="{{ route('users.index') }}" only-icon="true" size="small" title="Написать сообщение">
                                         <x-svg.message class="user-search__message-icon"></x-svg.message>
                                     </x-ui.form.button>
                                 </div>
@@ -71,7 +71,7 @@
                                 <div class="user-search__nickname"><a href="">@test-user</a></div>
                                 <div class="user-search__subscribe">
                                     <x-ui.form.button color="cancel" size="small">Отписаться</x-ui.form.button>
-                                    <x-ui.form.button class="user-search__button-message" tag="a" href="{{ route('users') }}" only-icon="true" size="small" title="Написать сообщение">
+                                    <x-ui.form.button class="user-search__button-message" tag="a" href="{{ route('users.index') }}" only-icon="true" size="small" title="Написать сообщение">
                                         <x-svg.message class="user-search__message-icon"></x-svg.message>
                                     </x-ui.form.button>
                                 </div>
@@ -104,7 +104,7 @@
                                 <div class="user-search__nickname"><a href="">@testovichhhh</a></div>
                                 <div class="user-search__subscribe">
                                     <x-ui.form.button size="small">Подписаться</x-ui.form.button>
-                                    <x-ui.form.button class="user-search__button-message" tag="a" href="{{ route('users') }}" only-icon="true" size="small" title="Написать сообщение">
+                                    <x-ui.form.button class="user-search__button-message" tag="a" href="{{ route('users.index') }}" only-icon="true" size="small" title="Написать сообщение">
                                         <x-svg.message class="user-search__message-icon"></x-svg.message>
                                     </x-ui.form.button>
                                 </div>
@@ -137,7 +137,7 @@
                                 <div class="user-search__nickname"><a href="">@test-user</a></div>
                                 <div class="user-search__subscribe">
                                     <x-ui.form.button size="small">Подписаться</x-ui.form.button>
-                                    <x-ui.form.button class="user-search__button-message" tag="a" href="{{ route('users') }}" only-icon="true" size="small" title="Написать сообщение">
+                                    <x-ui.form.button class="user-search__button-message" tag="a" href="{{ route('users.index') }}" only-icon="true" size="small" title="Написать сообщение">
                                         <x-svg.message class="user-search__message-icon"></x-svg.message>
                                     </x-ui.form.button>
                                 </div>
@@ -169,7 +169,7 @@
                                 <div class="user-search__nickname"><a href="">@test-user</a> <x-ui.tag class="user-search__rating" title="Рейтинг пользователя" color="success">9.5/10</x-ui.tag></div>
                                 <div class="user-search__subscribe">
                                     <x-ui.form.button color="cancel" size="small">Отписаться</x-ui.form.button>
-                                    <x-ui.form.button class="user-search__button-message" tag="a" href="{{ route('users') }}" only-icon="true" size="small" title="Написать сообщение">
+                                    <x-ui.form.button class="user-search__button-message" tag="a" href="{{ route('users.index') }}" only-icon="true" size="small" title="Написать сообщение">
                                         <x-svg.message class="user-search__message-icon"></x-svg.message>
                                     </x-ui.form.button>
                                 </div>
@@ -201,7 +201,7 @@
                                 <div class="user-search__nickname"><a href="">@testovichhhh</a> <x-ui.tag class="user-search__rating" title="Рейтинг пользователя" color="success">9.5/10</x-ui.tag></div>
                                 <div class="user-search__subscribe">
                                     <x-ui.form.button size="small">Подписаться</x-ui.form.button>
-                                    <x-ui.form.button class="user-search__button-message" tag="a" href="{{ route('users') }}" only-icon="true" size="small" title="Написать сообщение">
+                                    <x-ui.form.button class="user-search__button-message" tag="a" href="{{ route('users.index') }}" only-icon="true" size="small" title="Написать сообщение">
                                         <x-svg.message class="user-search__message-icon"></x-svg.message>
                                     </x-ui.form.button>
                                 </div>
@@ -233,7 +233,7 @@
                                 <div class="user-search__nickname"><a href="">@test-user</a> <x-ui.tag class="user-search__rating" title="Рейтинг пользователя" color="success">9.5/10</x-ui.tag></div>
                                 <div class="user-search__subscribe">
                                     <x-ui.form.button size="small">Подписаться</x-ui.form.button>
-                                    <x-ui.form.button class="user-search__button-message" tag="a" href="{{ route('users') }}" only-icon="true" size="small" title="Написать сообщение">
+                                    <x-ui.form.button class="user-search__button-message" tag="a" href="{{ route('users.index') }}" only-icon="true" size="small" title="Написать сообщение">
                                         <x-svg.message class="user-search__message-icon"></x-svg.message>
                                     </x-ui.form.button>
                                 </div>
@@ -265,7 +265,7 @@
                                 <div class="user-search__nickname"><a href="">@test-user</a> <x-ui.tag class="user-search__rating" title="Рейтинг пользователя" color="success">9.5/10</x-ui.tag></div>
                                 <div class="user-search__subscribe">
                                     <x-ui.form.button size="small">Подписаться</x-ui.form.button>
-                                    <x-ui.form.button class="user-search__button-message" tag="a" href="{{ route('users') }}" only-icon="true" size="small" title="Написать сообщение">
+                                    <x-ui.form.button class="user-search__button-message" tag="a" href="{{ route('users.index') }}" only-icon="true" size="small" title="Написать сообщение">
                                         <x-svg.message class="user-search__message-icon"></x-svg.message>
                                     </x-ui.form.button>
                                 </div>

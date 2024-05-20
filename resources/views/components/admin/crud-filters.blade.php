@@ -44,6 +44,8 @@
 
                         {!! $filter->badgeView() !!}
 
+                        @dump($loop)
+
                         @if($loop->last)
                             <x-ui.badge
                                 class="current-filters__badge"

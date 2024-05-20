@@ -5,6 +5,7 @@ return [
     'name' => 'Название',
     'slug' => 'Префикс',
     'description' => 'Описание',
+    'email' => 'Email',
     'thumbnail' => 'Миниатюра',
     'created_date' => 'Дата добавления',
     'add' => 'Добавить',

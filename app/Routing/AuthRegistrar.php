@@ -7,6 +7,7 @@ use App\Http\Controllers\Auth\ForgotPasswordController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\Auth\ResetPasswordController;
+use App\Http\Controllers\Auth\UserController;
 use App\Http\Controllers\Auth\VerifyEmailController;
 use Illuminate\Contracts\Routing\Registrar;
 use Illuminate\Support\Facades\Route;
@@ -43,6 +44,15 @@ class AuthRegistrar implements RouteRegistrar
                         Route::get('/email/verify', 'page')->name('verification.notice');
                         Route::get('/email/verify/{id}/{hash}', 'handle')->middleware(['remove.locale'])->name('verification.verify');
                         Route::post('/email/verification-notification', 'sendVerifyNotification')->middleware(['throttle:6,1'])->name('verification.send');
+                    });
+
+
+                    Route::delete('/users/delete-selected', [UserController::class, 'deleteSelected'])->name('users.delete');
+                    Route::delete('/users/force-delete-selected', [UserController::class, 'forceDeleteSelected'])->name('users.forceDelete');
+                    Route::get('/get-users', [UserController::class, 'getUsers'])->name('get-users');
+                    Route::get('/users', [UserController::class, 'publicIndex'])->name('public-users');
+                    Route::prefix('admin')->middleware(['auth', 'verified'])->group(function () {
+                        Route::resource('users', UserController::class);
                     });
                 });
             });

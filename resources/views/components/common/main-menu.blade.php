@@ -35,7 +35,7 @@
             tag="a"
             color="dark"
             class="main-menu__link"
-            href="{{ route('users') }}">
+            href="{{ route('users.index') }}">
             {{ __('common.more') }}
         </x-ui.form.button>
     </div>

@@ -3,11 +3,15 @@
 namespace Domain\Auth\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
+use App\Filters\DatesFilter;
+use App\Filters\RelationFilter;
+use App\Filters\SearchFilter;
 use App\Models\Image;
 use App\Models\Language;
 use Database\Factories\UserFactory;
 use Domain\Auth\Notifications\ResetPasswordNotification;
 use Domain\Auth\Notifications\VerifyEmailNotification;
+use Domain\Auth\QueryBuilders\UserQueryBuilder;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Contracts\Translation\HasLocalePreference;
 use Illuminate\Database\Eloquent\Casts\Attribute;
@@ -21,12 +25,14 @@ use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
+use Support\Traits\Models\HasSlug;
 use Support\Traits\Models\HasThumbnail;
 
 class User extends Authenticatable implements MustVerifyEmail, HasLocalePreference, HasMedia
 {
     use HasApiTokens;
     use HasFactory;
+    use HasSlug;
     use Notifiable;
     use SoftDeletes;
     use HasThumbnail;
@@ -40,6 +46,7 @@ class User extends Authenticatable implements MustVerifyEmail, HasLocalePreferen
     protected $fillable = [
         'name',
         'email',
+        'slug',
         'password',
         'language_id',
         'avatar_id'
@@ -64,6 +71,13 @@ class User extends Authenticatable implements MustVerifyEmail, HasLocalePreferen
         'email_verified_at' => 'datetime',
     ];
 
+    public array $sortedFields = [
+        'id',
+        'name',
+        'created_at',
+        'email'
+    ];
+
     protected static function newFactory(): UserFactory
     {
         return UserFactory::new();
@@ -79,16 +93,30 @@ class User extends Authenticatable implements MustVerifyEmail, HasLocalePreferen
         $this->notify(new ResetPasswordNotification($token));
     }
 
+    public function newEloquentBuilder($query): UserQueryBuilder
+    {
+        return new UserQueryBuilder($query);
+    }
+
     protected function thumbnailDir(): string
     {
         return 'avatars';
     }
 
-    public function avatar(): Attribute
+    public function availableFilters(): array
     {
-        return Attribute::make(
-            get: fn () => 'https://ui-avatars.com/api/?background=0D8ABC&color=fff&name=' . $this->name
-        );
+        return [
+            'dates' => DatesFilter::make(
+                __('common.dates'),
+                'dates',
+                'users'
+            ),
+            'search' => SearchFilter::make(
+                __('common.search'),
+                'search',
+                'users'
+            ),
+        ];
     }
 
     public function settingsValue(): BelongsToMany

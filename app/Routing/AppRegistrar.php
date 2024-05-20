@@ -3,10 +3,10 @@
 namespace App\Routing;
 
 use App\Contracts\RouteRegistrar;
+use App\Http\Controllers\Auth\UserController;
 use App\Http\Controllers\Game\GameDeveloperController;
 use App\Http\Controllers\Game\GamePublisherController;
 use App\Http\Controllers\HomeController;
-use App\Http\Controllers\UserController;
 use Illuminate\Contracts\Routing\Registrar;
 use Illuminate\Support\Facades\Route;
 
@@ -42,8 +42,6 @@ class AppRegistrar implements RouteRegistrar
                         return view('content.search.index');
                     })->name('search');
 
-                    Route::get('/users', [UserController::class, 'index'])->name('users');
-                    Route::get('/get-users', [UserController::class, 'getUsers'])->name('get-users');
 
                     Route::get('/findUsers{query?}', [UserController::class, 'getUsers'])->name('find-users');
 

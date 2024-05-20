@@ -13,7 +13,6 @@
         <aside
             class="content__sidebar"
             :class="collapseSidebar ?  'content__sidebar_collapsed' : ''"
-            x-cloak
             {{ $sidebar->attributes->class([
                 'content__sidebar'
             ])
