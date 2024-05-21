@@ -3,7 +3,7 @@
 namespace App\Game\Controllers;
 
 use App\Http\Controllers\Game\GameDeveloperController;
-use App\Http\Requests\Game\CreateUserRequest;
+use App\Http\Requests\Game\CreateGameDeveloperRequest;
 use App\Jobs\GenerateSmallThumbnailsJob;
 use App\Jobs\GenerateThumbnailJob;
 use Database\Factories\Game\GameDeveloperFactory;
@@ -32,7 +32,7 @@ class GameDeveloperControllerTest extends TestCase
 
         $this->gameDeveloper = GameDeveloperFactory::new()->create();
 
-        $this->request = CreateUserRequest::factory()->create();
+        $this->request = CreateGameDeveloperRequest::factory()->create();
     }
 
     public function checkNotAuthRedirect(
@@ -68,7 +68,7 @@ class GameDeveloperControllerTest extends TestCase
         $this->actingAs($this->user)
             ->get(action([GameDeveloperController::class, 'index']))
             ->assertOk()
-            ->assertSee(__('game.developer.list'))
+            ->assertSee(__('crud.list', ['entity' => __('entity.game_developer_b')]))
             ->assertViewIs('admin.game.developer.index');
     }
 
@@ -81,7 +81,7 @@ class GameDeveloperControllerTest extends TestCase
         $this->actingAs($this->user)
             ->get(action([GameDeveloperController::class, 'create']))
             ->assertOk()
-            ->assertSee(__('game.developer.add'))
+            ->assertSee(__('crud.add', ['entity' => __('entity.game_developer_a')]))
             ->assertViewIs('admin.game.developer.create');
     }
 

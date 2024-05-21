@@ -39,7 +39,7 @@ class PagesControllerTest extends TestCase
      */
     public function it_page_users_success(): void
     {
-        $this->get(route('users'))
+        $this->get(route('public-users'))
             ->assertOk()
             ->assertSee('Список пользователей')
             ->assertViewIs('content.users.index');

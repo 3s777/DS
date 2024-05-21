@@ -14,8 +14,8 @@ class NewUserDTO
         public readonly string $email,
         public readonly string $password,
         public readonly int $language_id,
-        public readonly string $slug = '',
-        public readonly string $description = '',
+        public readonly null|string $slug = null,
+        public readonly null|string $description = null,
     ) {
     }
 
