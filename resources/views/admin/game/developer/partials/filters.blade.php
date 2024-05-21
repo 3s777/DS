@@ -1,4 +1,4 @@
-<x-admin.crud-filters search-placeholder="{{ __('game.developer.search') }}">
+<x-admin.crud-filters search-placeholder="{{ __('filters.search_entity', ['entity' => __('entity.game_developer_a')]) }}">
     <x-admin.crud-filters-form>
         <x-grid.col xl="3" lg="4"  md="6" sm="12">
             <x-ui.form.group>

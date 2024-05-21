@@ -3,9 +3,14 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Auth\User\CreateUserRequest;
+use App\ViewModels\User\UserCreateViewModel;
 use App\ViewModels\User\UserIndexViewModel;
 use App\ViewModels\User\UserListSelectViewModel;
+use Domain\Auth\Contracts\RegisterNewUserContract;
+use Domain\Auth\DTOs\NewUserDTO;
 use Domain\Auth\Models\User;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 
 class UserController extends Controller
@@ -13,6 +18,32 @@ class UserController extends Controller
     public function index()
     {
         return view('admin.user.index', new UserIndexViewModel());
+    }
+
+    public function create()
+    {
+        return view('admin.user.create', new UserCreateViewModel());
+    }
+
+    public function store(CreateUserRequest $request, RegisterNewUserContract $action): RedirectResponse
+    {
+//        $validated = $request->validated();
+//
+//        $validated['password'] = bcrypt($validated['password']);
+//
+//        $user = User::create($validated);
+
+        $action(NewUserDTO::fromRequest($request));
+
+//        $user->addImageWithThumbnail(
+//            $request->file('thumbnail'),
+//            'thumbnail',
+//            ['small', 'medium']
+//        );
+
+        flash()->info(__('crud.created', ['entity' => __('entity.user')]));
+
+        return to_route('users.index');
     }
 
     public function publicIndex()

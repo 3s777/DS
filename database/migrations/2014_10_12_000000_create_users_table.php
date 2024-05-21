@@ -18,6 +18,9 @@ return new class () extends Migration {
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
+            $table->text('description')->nullable();
+            $table->string('thumbnail')->nullable();
+            $table->boolean('is_banned')->nullable();
             $table->foreignIdFor(Language::class)
                 ->constrained()
                 ->cascadeOnDelete()

@@ -5,7 +5,11 @@
         display: flex;
         justify-content: flex-start;
         gap: 12px;
-        margin-bottom: 12px;
+        margin-bottom: 24px;
+    }
+
+    &__content {
+        margin-bottom: 24px;
     }
 
     &__buttons {
@@ -16,6 +20,10 @@
 
     &__trigger {
         padding: 10px 15px;
+    }
+
+    &__badges {
+
     }
 
     @include breakpoint-max($md) {

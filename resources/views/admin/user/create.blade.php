@@ -1,10 +1,10 @@
 <x-layouts.admin :search="false">
     <x-ui.form class="crud-form"
                id="create-form"
-               action="{{ route('game-developers.store') }}"
+               action="{{ route('users.store') }}"
                enctype="multipart/form-data">
         <x-ui.title class="curd-form__tile" size="normal" indent="small">
-            {{ __('crud.add', ['entity' => __('entity.game_developer_a')]) }}
+            {{ __('crud.add', ['entity' => __('entity.user_a')]) }}
         </x-ui.title>
 
         <div class="crud-form__main">
@@ -13,7 +13,7 @@
                     <x-ui.form.group>
                         <x-ui.form.input-text
                             :errors="$errors"
-                            placeholder="{{ __('common.name') }}"
+                            placeholder="{{ __('auth.username') }}"
                             id="name"
                             name="name"
                             value="{{ old('name') }}"
@@ -37,13 +37,54 @@
                     </x-ui.form.group>
                 </x-grid.col>
 
+{{--                <x-grid.col xl="4" ls="6" ml="12" lg="6" md="6" sm="12">--}}
+{{--                    <x-ui.form.group>--}}
+{{--                        <x-ui.async-select--}}
+{{--                            name="user"--}}
+{{--                            route="find-users"--}}
+{{--                            label="{{ __('common.user') }}">--}}
+{{--                        </x-ui.async-select>--}}
+{{--                    </x-ui.form.group>--}}
+{{--                </x-grid.col>--}}
+
                 <x-grid.col xl="4" ls="6" ml="12" lg="6" md="6" sm="12">
                     <x-ui.form.group>
-                        <x-ui.async-select
-                            name="user"
-                            route="find-users"
-                            label="{{ __('common.user') }}">
-                        </x-ui.async-select>
+                        <x-libraries.choices
+                            class="language"
+                            id="language_id"
+                            name="language_id"
+                            label="Язык">
+                            <x-ui.form.option value="">Выберите язык</x-ui.form.option>
+                            @foreach($languages as $language)
+                                <x-ui.form.option value="{{ $language['id'] }}">{{ $language['name'] }}</x-ui.form.option>
+                            @endforeach
+                        </x-libraries.choices>
+                    </x-ui.form.group>
+                </x-grid.col>
+
+                <x-grid.col xl="4" ls="6" ml="12" lg="6" md="6" sm="12">
+                    <x-ui.form.group>
+                        <x-ui.form.input-text
+                            :errors="$errors"
+                            type="email"
+                            placeholder="{{ __('common.email') }}"
+                            id="email"
+                            name="email"
+                            value="{{ old('email') }}"
+                            autocomplete="on">
+                        </x-ui.form.input-text>
+                    </x-ui.form.group>
+                </x-grid.col>
+
+                <x-grid.col xl="4" ls="6" ml="12" lg="6" md="6" sm="12">
+                    <x-ui.form.group>
+                        <x-ui.form.input-text
+                            :errors="$errors"
+                            placeholder="{{ __('auth.password') }}"
+                            id="password"
+                            name="password"
+                            required>
+                        </x-ui.form.input-text>
                     </x-ui.form.group>
                 </x-grid.col>
             </x-grid>
@@ -78,4 +119,14 @@
             </x-ui.form.button>
         </x-ui.form.group>
     </x-ui.form>
+
+@push('scripts')
+    <script type="module">
+        const language = document.querySelector('.language');
+        const choicesLanguage = new Choices(language, {
+            itemSelectText: '',
+            searchEnabled: false,
+        });
+    </script>
+@endpush
 </x-layouts.admin>

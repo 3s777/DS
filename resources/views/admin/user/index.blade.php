@@ -1,9 +1,9 @@
-<x-layouts.admin>
+<x-layouts.admin :search="false">
     <x-ui.title size="normal" indent="big">
         @if(request('filters.search'))
             {{ __('filters.result') }} "{{ request('filters.search') }}"
         @else
-            {{ __('game.developer.list') }}
+            {{ __('crud.list', ['entity' => __('entity.user_b')]) }}
         @endif
     </x-ui.title>
 

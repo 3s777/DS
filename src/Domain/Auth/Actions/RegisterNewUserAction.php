@@ -16,6 +16,8 @@ class RegisterNewUserAction implements RegisterNewUserContract
             'email' => $data->email,
             'password' => bcrypt($data->password),
             'language_id' => $data->language_id,
+            'slug' => $data->language_id,
+            'descriptoin' => $data->description,
         ]);
 
         event(new Registered($user));

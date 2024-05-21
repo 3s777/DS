@@ -35,27 +35,24 @@
     @if(request('filters'))
         <div class="crud-filters__badges">
             <div class="current-filters">
-
                 @foreach(filters() as $filter)
+                    @if($loop->first)
+                        <div class="current-filters__title">{{ __('filters.badges_title') }}: </div>
+                    @endif
+
                     @if($filter->preparedValues())
-                        @if($loop->first)
-                            <div class="current-filters__title">{{ __('filters.badges_title') }}: </div>
-                        @endif
-
                         {!! $filter->badgeView() !!}
+                    @endif
 
-                        @dump($loop)
-
-                        @if($loop->last)
-                            <x-ui.badge
-                                class="current-filters__badge"
-                                type="tag"
-                                color="danger">
-                                <a href="{{ request()->url() }}">
-                                    {{ __('filters.reset_all') }}
-                                </a>
-                            </x-ui.badge>
-                        @endif
+                    @if($loop->last)
+                        <x-ui.badge
+                            class="current-filters__badge"
+                            type="tag"
+                            color="danger">
+                            <a href="{{ request()->url() }}">
+                                {{ __('filters.reset_all') }}
+                            </a>
+                        </x-ui.badge>
                     @endif
                 @endforeach
             </div>

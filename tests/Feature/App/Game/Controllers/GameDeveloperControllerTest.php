@@ -3,7 +3,7 @@
 namespace App\Game\Controllers;
 
 use App\Http\Controllers\Game\GameDeveloperController;
-use App\Http\Requests\Game\CreateGameDeveloperRequest;
+use App\Http\Requests\Game\CreateUserRequest;
 use App\Jobs\GenerateSmallThumbnailsJob;
 use App\Jobs\GenerateThumbnailJob;
 use Database\Factories\Game\GameDeveloperFactory;
@@ -32,7 +32,7 @@ class GameDeveloperControllerTest extends TestCase
 
         $this->gameDeveloper = GameDeveloperFactory::new()->create();
 
-        $this->request = CreateGameDeveloperRequest::factory()->create();
+        $this->request = CreateUserRequest::factory()->create();
     }
 
     public function checkNotAuthRedirect(
