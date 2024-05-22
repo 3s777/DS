@@ -13,13 +13,27 @@
                     <x-ui.form.group>
                         <x-ui.form.input-text
                             :errors="$errors"
-                            placeholder="{{ __('auth.username') }}"
+                            placeholder="{{ __('auth.username') }} *"
                             id="name"
                             name="name"
                             value="{{ old('name') }}"
                             required
                             autocomplete="on"
                             autofocus>
+                        </x-ui.form.input-text>
+                    </x-ui.form.group>
+                </x-grid.col>
+
+                <x-grid.col xl="4" ls="6" ml="12" lg="6" md="6" sm="12">
+                    <x-ui.form.group>
+                        <x-ui.form.input-text
+                            :errors="$errors"
+                            placeholder="{{ __('auth.first_name') }}"
+                            id="first_name"
+                            name="first_name"
+                            value="{{ old('first_name') }}"
+                            required
+                            autocomplete="on">
                         </x-ui.form.input-text>
                     </x-ui.form.group>
                 </x-grid.col>
@@ -53,10 +67,15 @@
                             class="language"
                             id="language_id"
                             name="language_id"
-                            label="Язык">
-                            <x-ui.form.option value="">Выберите язык</x-ui.form.option>
+                            label="{{ __('common.language') }} *">
+                            <x-ui.form.option value="">{{ __('common.choose_language') }}</x-ui.form.option>
                             @foreach($languages as $language)
-                                <x-ui.form.option value="{{ $language['id'] }}">{{ $language['name'] }}</x-ui.form.option>
+                                <x-ui.form.option
+                                    value="{{ $language['id'] }}"
+                                    :selected="old('language_id') == $language['id']"
+                                    >
+                                        {{ $language['name'] }}
+                                </x-ui.form.option>
                             @endforeach
                         </x-libraries.choices>
                     </x-ui.form.group>
@@ -67,7 +86,7 @@
                         <x-ui.form.input-text
                             :errors="$errors"
                             type="email"
-                            placeholder="{{ __('common.email') }}"
+                            placeholder="{{ __('common.email') }} *"
                             id="email"
                             name="email"
                             value="{{ old('email') }}"
@@ -80,7 +99,7 @@
                     <x-ui.form.group>
                         <x-ui.form.input-text
                             :errors="$errors"
-                            placeholder="{{ __('auth.password') }}"
+                            placeholder="{{ __('auth.password') }} *"
                             id="password"
                             name="password"
                             required>

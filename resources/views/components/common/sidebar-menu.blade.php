@@ -115,17 +115,17 @@
 
 
                             <x-ui.form.button
-                                @class(['content__sidebar-link', 'sidebar-menu__link', 'button_submit' => Route::currentRouteName() === 'game-developers.index'])
+                                @class(['content__sidebar-link', 'sidebar-menu__link', 'button_submit' => Route::currentRouteName() === 'users.index'])
                                 tag="a"
-                                link="{{ route('game-developers.index') }}"
+                                link="{{ route('users.index') }}"
                                 color="light">
                                 <span class="sidebar-menu__link-label">Список</span>
                             </x-ui.form.button>
 
                             <x-ui.form.button
-                                @class(['content__sidebar-link', 'sidebar-menu__link', 'button_submit' => Route::currentRouteName() === 'game-developers.create'])
+                                @class(['content__sidebar-link', 'sidebar-menu__link', 'button_submit' => Route::currentRouteName() === 'users.create'])
                                 tag="a"
-                                link="{{ route('game-developers.create') }}"
+                                link="{{ route('users.create') }}"
                                 color="light"
                             >
                                 <span class="sidebar-menu__link-label">Добавить</span>
@@ -138,17 +138,17 @@
                                 </x-ui.accordion.title>
                                 <x-ui.accordion.content>
                                     <x-ui.form.button
-                                        @class(['content__sidebar-link', 'sidebar-menu__link', 'button_submit' => Route::currentRouteName() === 'game-developers.create'])
+                                        @class(['content__sidebar-link', 'sidebar-menu__link', 'button_submit' => Route::currentRouteName() === 'users.create'])
                                         tag="a"
-                                        link="{{ route('game-developers.create') }}"
+                                        link="{{ route('users.create') }}"
                                         color="light"
                                     >
                                         <span class="sidebar-menu__link-label">Добавить</span>
                                     </x-ui.form.button>
                                     <x-ui.form.button
-                                        @class(['content__sidebar-link', 'sidebar-menu__link', 'button_submit' => Route::currentRouteName() === 'game-developers.index'])
+                                        @class(['content__sidebar-link', 'sidebar-menu__link', 'button_submit' => Route::currentRouteName() === 'users.index'])
                                         tag="a"
-                                        link="{{ route('game-developers.index') }}"
+                                        link="{{ route('users.index') }}"
                                         color="light">
                                         <span class="sidebar-menu__link-label">Список</span>
                                     </x-ui.form.button>
@@ -174,7 +174,6 @@
 
     list.forEach(item =>{
         item.addEventListener('click', (e) =>{
-            console.log('Привет');
             sidebar.classList.remove('content__sidebar_collapsed');
             menu.classList.remove('sidebar-menu_collapsed');
             // list.forEach(el=>{ el.classList.remove('active'); });

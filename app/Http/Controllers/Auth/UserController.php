@@ -27,23 +27,16 @@ class UserController extends Controller
 
     public function store(CreateUserRequest $request, RegisterNewUserContract $action): RedirectResponse
     {
-//        $validated = $request->validated();
-//
-//        $validated['password'] = bcrypt($validated['password']);
-//
-//        $user = User::create($validated);
-
         $action(NewUserDTO::fromRequest($request));
-
-//        $user->addImageWithThumbnail(
-//            $request->file('thumbnail'),
-//            'thumbnail',
-//            ['small', 'medium']
-//        );
 
         flash()->info(__('crud.created', ['entity' => __('entity.user')]));
 
         return to_route('users.index');
+    }
+
+    public function edit(User $user)
+    {
+        return view('admin.user.edit', new UserCreateViewModel($user));
     }
 
     public function publicIndex()

@@ -49,6 +49,7 @@ class User extends Authenticatable implements MustVerifyEmail, HasLocalePreferen
         'slug',
         'password',
         'language_id',
+        'first_name',
         'thumbnail',
         'description'
     ];
@@ -76,7 +77,8 @@ class User extends Authenticatable implements MustVerifyEmail, HasLocalePreferen
         'id',
         'name',
         'created_at',
-        'email'
+        'email',
+        'first_name'
     ];
 
     protected static function newFactory(): UserFactory
@@ -99,9 +101,20 @@ class User extends Authenticatable implements MustVerifyEmail, HasLocalePreferen
         return new UserQueryBuilder($query);
     }
 
-    protected function thumbnailDir(): string
+    public function thumbnailDir(): string
     {
-        return 'avatars';
+        return 'user';
+    }
+
+    public function thumbnailSizes(): array
+    {
+        return [
+            'small' => ['220', '220'],
+            'medium' => ['500', '500'],
+            'full_preview' => ['550', '550'],
+            'extra_small' => ['100', '100'],
+            'extra_small1' => ['50', '50']
+        ];
     }
 
     public function availableFilters(): array
@@ -135,16 +148,6 @@ class User extends Authenticatable implements MustVerifyEmail, HasLocalePreferen
         return $this->language->slug;
     }
 
-    //    public function thumbnail(): HasOne
-    //    {
-    //        return $this->hasOne(Image::class)->where('id', $this->avatar_id);
-    //    }
-    //
-    //    public function cover(): HasOne
-    //    {
-    //        return $this->hasOne(Image::class)->where('id', $this->cover_id);
-    //    }
-
     public function img(): HasOne
     {
         return $this->hasOne(Image::class);
@@ -155,26 +158,4 @@ class User extends Authenticatable implements MustVerifyEmail, HasLocalePreferen
         return $this->morphMany(Image::class, 'imageable');
     }
 
-
-    //    public function registerMediaCollections(): void
-    //    {
-    ////        $this->addMediaCollection('my-collection')
-    ////        //add options
-    ////        ...
-    ////
-    ////    // you can define as many collections as needed
-    ////    $this->addMediaCollection('my-other-collection')
-    //        //add options
-    //        ...
-    //}
-
-
-    //    public function images()
-    //    {
-    //        return $this->hasMany(Image::class);
-    //    }
-    public function thumbnailSizes(): array
-    {
-        return [];
-    }
 }

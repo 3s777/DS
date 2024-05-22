@@ -2,9 +2,11 @@
 
 namespace App\Http\Requests\Auth\User;
 
+use App\Rules\LatinLowercaseRule;
 use Domain\Auth\Models\User;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
+use Illuminate\Validation\Rules\Password;
 
 class CreateUserRequest extends FormRequest
 {
@@ -24,10 +26,26 @@ class CreateUserRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name' => ['required', Rule::unique(User::class)],
-            'email' => ['required','email', Rule::unique(User::class)],
-            'password' => ['required'],
-            'language_id' => ['required', 'integer', 'exists:App\Models\Language,id'],
+            'name' => ['required',
+                'string',
+                'max:255',
+                'min:3',
+                new LatinLowercaseRule(),
+                Rule::unique(User::class)
+            ],
+            'email' => [
+                'required',
+                'string',
+                'email',
+                'max:255',
+                Rule::unique(User::class),
+            ],
+            'password' => [
+                'required',
+                Password::min(8)->letters()
+            ],
+            'language_id' => ['required', 'integer', 'exists:languages,id'],
+            'first_name' => ['nullable','string'],
             'slug' => ['nullable','string', Rule::unique(User::class)],
             'description' => ['nullable','string'],
             'thumbnail' => ['nullable', 'mimes:jpg,png', 'max:10024'],
@@ -37,12 +55,13 @@ class CreateUserRequest extends FormRequest
     public function attributes()
     {
         return [
-            'name' => __('common.name'),
+            'name' => __('auth.username'),
             'slug' => __('common.slug'),
+            'first_name' => __('auth.first_name'),
             'email' => __('common.email'),
             'description' => __('common.description'),
             'thumbnail' => __('common.thumbnail'),
-            'language_id' => __('common.user'),
+            'language_id' => __('common.language'),
         ];
     }
 }

@@ -52,7 +52,7 @@ class AuthRegistrar implements RouteRegistrar
                     Route::get('/get-users', [UserController::class, 'getUsers'])->name('get-users');
                     Route::get('/users', [UserController::class, 'publicIndex'])->name('public-users');
                     Route::prefix('admin')->middleware(['auth', 'verified'])->group(function () {
-                        Route::resource('users', UserController::class);
+                        Route::resource('users', UserController::class)->middleware(['remove.locale']);;
                     });
                 });
             });

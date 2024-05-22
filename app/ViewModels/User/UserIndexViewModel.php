@@ -15,7 +15,7 @@ class UserIndexViewModel extends ViewModel
     public function users()
     {
         return User::query()
-            ->select('users.id', 'users.name', 'users.slug', 'users.created_at', 'users.email')
+            ->select('users.id', 'users.name', 'users.slug', 'users.first_name', 'users.created_at', 'users.email')
             ->filtered()
             ->sorted()
             ->paginate(10)

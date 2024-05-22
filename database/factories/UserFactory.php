@@ -22,6 +22,8 @@ class UserFactory extends Factory
     {
         return [
             'name' => fake()->name(),
+            'first_name' => fake()->name(),
+            'description' => fake()->text(200),
             'slug' => Str::slug(fake()->unique()->name()),
             'email' => fake()->unique()->safeEmail(),
             'email_verified_at' => now(),

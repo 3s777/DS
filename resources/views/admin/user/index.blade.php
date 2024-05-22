@@ -28,7 +28,10 @@
                     {{ __('common.id') }}
                 </x-ui.responsive-table.column>
                 <x-ui.responsive-table.column sortable="true" name="name">
-                    {{ __('common.name') }}
+                    {{ __('auth.username') }}
+                </x-ui.responsive-table.column>
+                <x-ui.responsive-table.column sortable="true" name="first_name">
+                    {{ __('auth.first_name') }}
                 </x-ui.responsive-table.column>
                 <x-ui.responsive-table.column sortable="true" name="email">
                     {{ __('common.email') }}
@@ -50,7 +53,10 @@
                         {{ $user->id }}
                     </x-ui.responsive-table.column>
                     <x-ui.responsive-table.column>
-                        <span class="responsive-table__label">{{ __('common.name') }}: </span> {{ $user->name }}
+                        <span class="responsive-table__label">{{ __('auth.username') }}: </span> {{ $user->name }}
+                    </x-ui.responsive-table.column>
+                    <x-ui.responsive-table.column>
+                        <span class="responsive-table__label">{{ __('auth.first_name') }}: </span> {{ $user->first_name }}
                     </x-ui.responsive-table.column>
                     <x-ui.responsive-table.column>
                         <span class="responsive-table__label">{{ __('common.email') }}: </span> {{ $user->email }}

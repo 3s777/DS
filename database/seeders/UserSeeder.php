@@ -17,6 +17,7 @@ class UserSeeder extends Seeder
         User::factory(10)->for($language)->create();
         User::create([
             'name' => 'qqqqq',
+            'first_name' => 'Test Name',
             'slug' => 'qqqqq',
             'email' => 'qqq@qq.qq',
             'password' => bcrypt('123456789q'),
