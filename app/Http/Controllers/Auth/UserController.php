@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Auth\User\CreateUserRequest;
+use App\Http\Requests\Auth\User\UpdateUserRequest;
 use App\ViewModels\User\UserCreateViewModel;
 use App\ViewModels\User\UserIndexViewModel;
 use App\ViewModels\User\UserListSelectViewModel;
@@ -39,14 +40,24 @@ class UserController extends Controller
         return view('admin.user.edit', new UserCreateViewModel($user));
     }
 
+    public function update(UpdateUserRequest $request, User $user)
+    {
+        dd($request);
+        $user->updateThumbnail($request->file('thumbnail'), $request->input('thumbnail_uploaded'), ['small', 'medium']);
+
+        $user->fill($request->safe()->except(['thumbnail', 'thumbnail_uploaded', 'password']))->save();
+
+        flash()->info(__('crud.updated', ['entity' => __('entity.user')]));
+
+        return to_route('users.index');
+    }
+
     public function publicIndex()
     {
         $users = User::all();
 
         return view('content.users.index', compact('users'));
     }
-
-
 
     public function getUsers(Request $request): UserListSelectViewModel
     {

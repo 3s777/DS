@@ -4,7 +4,6 @@ namespace App\ViewModels\User;
 
 use App\Models\Language;
 use Domain\Auth\Models\User;
-use Illuminate\Database\Eloquent\Collection;
 use Spatie\ViewModels\ViewModel;
 
 class UserCreateViewModel extends ViewModel

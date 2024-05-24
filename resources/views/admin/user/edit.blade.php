@@ -1,12 +1,12 @@
 <x-layouts.admin :search="false">
 
-
-        <x-ui.form class="crud-form"
-                   id="create-form"
-                   action="{{ route('users.store') }}"
-                   enctype="multipart/form-data">
+    <x-ui.form class="crud-form"
+               method="put"
+               id="edit-form"
+               action="{{ route('users.update', $user->slug) }}"
+               enctype="multipart/form-data">
             <x-ui.title class="curd-form__tile" size="normal" indent="small">
-                {{ __('crud.add', ['entity' => __('entity.user_a')]) }}
+                {{ __('crud.edit', ['entity' => __('entity.user_a')]) }}
             </x-ui.title>
 
             <div class="crud-form__main">
@@ -44,10 +44,10 @@
                         <x-ui.form.group>
                             <x-ui.form.input-text
                                 :errors="$errors"
-                                placeholder="{{ $user->slug }}"
+                                placeholder="{{ __('common.slug') }}"
                                 id="slug"
                                 name="slug"
-                                value="{{ old('slug') }}"
+                                value="{{ $user->slug }}"
                                 autocomplete="on">
                             </x-ui.form.input-text>
                         </x-ui.form.group>
@@ -93,8 +93,7 @@
                                 :errors="$errors"
                                 placeholder="{{ __('auth.password') }} *"
                                 id="password"
-                                name="password"
-                                required>
+                                name="password">
                             </x-ui.form.input-text>
                         </x-ui.form.group>
                     </x-grid.col>
@@ -105,7 +104,7 @@
                 <x-ui.form.group>
                     <x-libraries.rich-text-editor
                         name="description"
-                        value="{{ $user->description }}"
+                        value="{!! $user->description !!}"
                         placeholder="{{ __('common.description') }}"/>
                 </x-ui.form.group>
             </div>

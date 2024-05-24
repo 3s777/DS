@@ -1,11 +1,12 @@
 <?php
 
-namespace App\Http\Requests\Game;
+namespace App\Http\Requests\Auth\User;
 
-use Domain\Game\Models\GameDeveloper;
+use App\Rules\LatinLowercaseRule;
+use Domain\Auth\Models\User;
 use Illuminate\Foundation\Http\FormRequest;
-use Illuminate\Support\Str;
 use Illuminate\Validation\Rule;
+use Illuminate\Validation\Rules\Password;
 
 class UpdateUserRequest extends FormRequest
 {
@@ -17,13 +18,6 @@ class UpdateUserRequest extends FormRequest
         return true;
     }
 
-    //    public function prepareForValidation()
-    //    {
-    //        $this->merge([
-    //            'slug' => Str::slug($this->slug)
-    //        ]);
-    //    }
-
     /**
      * Get the validation rules that apply to the request.
      *
@@ -32,23 +26,47 @@ class UpdateUserRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name' => ['required', Rule::unique(GameDeveloper::class)->ignore($this->game_developer)],
-            'slug' => ['nullable','string', Rule::unique(GameDeveloper::class)->ignore($this->game_developer)],
+            'name' => ['required',
+                'string',
+                'max:255',
+                'min:3',
+                new LatinLowercaseRule(),
+                Rule::unique(User::class)->ignore($this->user)
+            ],
+            'email' => [
+                'required',
+                'string',
+                'email',
+                'max:255',
+                Rule::unique(User::class)->ignore($this->user),
+            ],
+            'password' => [
+                'nullable',
+                Password::min(8)->letters()
+            ],
+            'slug' => [
+                'nullable',
+                'string',
+                Rule::unique(User::class)->ignore($this->user)
+            ],
+            'language_id' => ['required', 'integer', 'exists:languages,id'],
+            'first_name' => ['nullable','string'],
             'description' => ['nullable','string'],
             'thumbnail' => ['nullable', 'mimes:jpg,png', 'max:10024'],
             'thumbnail_selected' => ['nullable', 'string'],
-            'user_id' => ['nullable', 'integer', 'exists:Domain\Auth\Models\User,id']
         ];
     }
 
     public function attributes()
     {
         return [
-            'name' => __('common.name'),
+            'name' => __('auth.username'),
             'slug' => __('common.slug'),
+            'first_name' => __('auth.first_name'),
+            'email' => __('common.email'),
             'description' => __('common.description'),
             'thumbnail' => __('common.thumbnail'),
-            'user_id' => __('common.user'),
+            'language_id' => __('common.language'),
         ];
     }
 }

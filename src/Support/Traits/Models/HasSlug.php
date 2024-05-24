@@ -68,6 +68,9 @@ trait HasSlug
         return $query->exists();
     }
 
-
+    public function getRouteKeyName(): string
+    {
+        return 'slug';
+    }
 
 }

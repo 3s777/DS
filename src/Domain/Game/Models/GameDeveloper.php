@@ -98,10 +98,10 @@ class GameDeveloper extends Model implements HasMedia
         ];
     }
 
-    public function getRouteKeyName(): string
-    {
-        return 'slug';
-    }
+//    public function getRouteKeyName(): string
+//    {
+//        return 'slug';
+//    }
 
     public function newEloquentBuilder($query): GameDeveloperQueryBuilder
     {
