@@ -69,7 +69,7 @@ class GameDeveloperController extends Controller
     {
         $gameDeveloper->forceDelete();
 
-        flash()->info(__('game.developer.deleted'));
+        flash()->info(__('crud.mass_deleted'));
 
         return to_route('game-developers.index');
     }
@@ -86,7 +86,7 @@ class GameDeveloperController extends Controller
             )
         );
 
-        flash()->info(__('game.developer.updated'));
+        flash()->info(__('crud.mass_force_deleted', ['entity' => __('entity.game_developer_c')]));
 
         return to_route('game-developers.index');
     }
@@ -104,7 +104,7 @@ class GameDeveloperController extends Controller
             )
         );
 
-        flash()->info(__('game.developer.updated'));
+        flash()->info(__('game.developer.updated', ['entity' => __('entity.game_developer_c')]));
 
         return to_route('game-developers.index');
     }

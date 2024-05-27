@@ -32,7 +32,6 @@
                             id="first_name"
                             name="first_name"
                             value="{{ old('first_name') }}"
-                            required
                             autocomplete="on">
                         </x-ui.form.input-text>
                     </x-ui.form.group>
@@ -68,7 +67,6 @@
                             id="language_id"
                             name="language_id"
                             label="{{ __('common.language') }} *">
-                            <x-ui.form.option value="">{{ __('common.choose_language') }}</x-ui.form.option>
                             @foreach($languages as $language)
                                 <x-ui.form.option
                                     value="{{ $language['id'] }}"
@@ -90,6 +88,7 @@
                             id="email"
                             name="email"
                             value="{{ old('email') }}"
+                            required
                             autocomplete="on">
                         </x-ui.form.input-text>
                     </x-ui.form.group>
@@ -104,6 +103,18 @@
                             name="password"
                             required>
                         </x-ui.form.input-text>
+                    </x-ui.form.group>
+                </x-grid.col>
+
+                <x-grid.col xl="4" ls="6" ml="12" lg="6" md="6" sm="12">
+                    <x-ui.form.group>
+                        <x-ui.form.switcher
+                            name="is_verified"
+                            value="1"
+                            label="{{ __('auth.is_verified') }}"
+                            :checked="old() ? old('is_verified') : 'checked'"
+                        >
+                        </x-ui.form.switcher>
                     </x-ui.form.group>
                 </x-grid.col>
             </x-grid>

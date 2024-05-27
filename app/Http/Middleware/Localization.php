@@ -34,6 +34,8 @@ class Localization
                         ->associate($currentLanguage)
                         ->save();
                 }
+
+
             }
         }
 

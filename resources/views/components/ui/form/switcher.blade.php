@@ -2,13 +2,13 @@
     'name',
     'label' => '',
     'errors' => false,
-    'value' => ''
+    'checked' => false
 ])
 
 <label class="switcher">
     <input
            {{ $attributes->class(['switcher__checkbox']) }}
-           @if($value)
+           @if($checked)
                checked
            @endif
            type="checkbox"

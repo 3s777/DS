@@ -19,7 +19,8 @@ class UpdateUserDTO
         public readonly null|string $slug = null,
         public readonly null|string $description = null,
         public readonly null|UploadedFile $thumbnail = null,
-        public readonly null|UploadedFile $thumbnail_uploaded = null
+        public readonly null|string $thumbnail_uploaded = null,
+        public readonly null|int $is_verified = null
     ) {
     }
 
@@ -34,7 +35,8 @@ class UpdateUserDTO
             'slug',
             'description',
             'thumbnail',
-            'thumbnail_uploaded'
+            'thumbnail_uploaded',
+            'is_verified'
         ]));
     }
 }

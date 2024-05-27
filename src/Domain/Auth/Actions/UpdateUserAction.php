@@ -2,41 +2,38 @@
 
 namespace Domain\Auth\Actions;
 
+use Carbon\Carbon;
 use Domain\Auth\DTOs\UpdateUserDTO;
 use Domain\Auth\Models\User;
-use Illuminate\Auth\Events\Registered;
 
 class UpdateUserAction
 {
     public function __invoke(UpdateUserDTO $data, User $user): User
     {
-        if($data->thumbnail) {
-            $user->updateThumbnail($data->thumbnail, $data->thumbnail_uploaded, ['small', 'medium']);
+        $user->updateThumbnail($data->thumbnail, $data->thumbnail_uploaded, ['small', 'medium']);
 
-            $user->addImageWithThumbnail(
-                $data->thumbnail,
-                'thumbnail',
-                ['small', 'medium']
-            );
-        }
-
-        $user = User::create([
+        $user->fill([
             'name' => $data->name,
             'email' => $data->email,
-            'password' => bcrypt($data->password),
             'language_id' => $data->language_id,
             'first_name' => $data->first_name,
-            'slug' => $data->language_id,
-            'description' => $data->description,
+            'slug' => $data->slug,
+            'description' => $data->description
         ]);
 
+        if($data->password) {
+            $user->password = bcrypt($data->password);
+        }
 
+        if(!$user->email_verified_at && $data->is_verified) {
+            $user->email_verified_at = Carbon::now();
+        }
 
-//        $user->fill($request->safe()->except(['thumbnail', 'thumbnail_uploaded', 'password']))->save();
+        if(!$data->is_verified) {
+            $user->email_verified_at = null;
+        }
 
-
-
-        event(new Registered($user));
+        $user->save();
 
         return $user;
     }

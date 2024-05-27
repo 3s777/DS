@@ -51,7 +51,8 @@ class User extends Authenticatable implements MustVerifyEmail, HasLocalePreferen
         'language_id',
         'first_name',
         'thumbnail',
-        'description'
+        'description',
+        'email_verified_at'
     ];
 
     /**
@@ -131,6 +132,13 @@ class User extends Authenticatable implements MustVerifyEmail, HasLocalePreferen
                 'users'
             ),
         ];
+    }
+
+    public function updatePassword($password)
+    {
+        if(!$password) {
+            $this->deleteAllThumbnails();
+        }
     }
 
     public function settingsValue(): BelongsToMany

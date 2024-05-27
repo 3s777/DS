@@ -2,6 +2,7 @@
 
 namespace Domain\Auth\Actions;
 
+use Carbon\Carbon;
 use Domain\Auth\Contracts\RegisterNewUserContract;
 use Domain\Auth\DTOs\NewUserDTO;
 use Domain\Auth\Models\User;
@@ -17,8 +18,9 @@ class RegisterNewUserAction implements RegisterNewUserContract
             'password' => bcrypt($data->password),
             'language_id' => $data->language_id,
             'first_name' => $data->first_name,
-            'slug' => $data->language_id,
+            'slug' => $data->slug,
             'description' => $data->description,
+            'email_verified_at' => $data->is_verified ? Carbon::now() : null
         ]);
 
         if($data->thumbnail) {

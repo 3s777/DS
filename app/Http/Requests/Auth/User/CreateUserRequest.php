@@ -49,6 +49,7 @@ class CreateUserRequest extends FormRequest
             'slug' => ['nullable','string', Rule::unique(User::class)],
             'description' => ['nullable','string'],
             'thumbnail' => ['nullable', 'mimes:jpg,png', 'max:10024'],
+            'is_verified' => ['nullable','in:1']
         ];
     }
 
@@ -62,6 +63,7 @@ class CreateUserRequest extends FormRequest
             'description' => __('common.description'),
             'thumbnail' => __('common.thumbnail'),
             'language_id' => __('common.language'),
+            'is_verified' => __('auth.is_verified'),
         ];
     }
 }

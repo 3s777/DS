@@ -54,6 +54,7 @@ class UpdateUserRequest extends FormRequest
             'description' => ['nullable','string'],
             'thumbnail' => ['nullable', 'mimes:jpg,png', 'max:10024'],
             'thumbnail_selected' => ['nullable', 'string'],
+            'is_verified' => ['nullable','in:1']
         ];
     }
 
@@ -67,6 +68,7 @@ class UpdateUserRequest extends FormRequest
             'description' => __('common.description'),
             'thumbnail' => __('common.thumbnail'),
             'language_id' => __('common.language'),
+            'is_verified' => __('auth.is_verified'),
         ];
     }
 }

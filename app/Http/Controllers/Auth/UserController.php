@@ -2,17 +2,23 @@
 
 namespace App\Http\Controllers\Auth;
 
+use App\Exceptions\MassDeletingException;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Auth\User\CreateUserRequest;
 use App\Http\Requests\Auth\User\UpdateUserRequest;
+use App\Http\Requests\MassDeletingRequest;
 use App\ViewModels\User\UserCreateViewModel;
 use App\ViewModels\User\UserIndexViewModel;
 use App\ViewModels\User\UserListSelectViewModel;
+use Domain\Auth\Actions\UpdateUserAction;
 use Domain\Auth\Contracts\RegisterNewUserContract;
 use Domain\Auth\DTOs\NewUserDTO;
+use Domain\Auth\DTOs\UpdateUserDTO;
 use Domain\Auth\Models\User;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Support\Actions\MassDeletingAction;
+use Support\DTOs\MassDeletingDTO;
 
 class UserController extends Controller
 {
@@ -40,17 +46,59 @@ class UserController extends Controller
         return view('admin.user.edit', new UserCreateViewModel($user));
     }
 
-    public function update(UpdateUserRequest $request, User $user)
+    public function update(UpdateUserRequest $request, User $user, UpdateUserAction $action)
     {
-        dd($request);
-        $user->updateThumbnail($request->file('thumbnail'), $request->input('thumbnail_uploaded'), ['small', 'medium']);
-
-        $user->fill($request->safe()->except(['thumbnail', 'thumbnail_uploaded', 'password']))->save();
+        $action(UpdateUserDTO::fromRequest($request), $user);
 
         flash()->info(__('crud.updated', ['entity' => __('entity.user')]));
 
         return to_route('users.index');
     }
+
+    public function destroy(User $user)
+    {
+        $user->forceDelete();
+
+        flash()->info(__('crud.deleted', ['entity' => __('entity.user')]));
+
+        return to_route('users.index');
+    }
+
+    /**
+     * @throws MassDeletingException
+     */
+    public function deleteSelected(MassDeletingRequest $request, MassDeletingAction $deletingAction)
+    {
+        $deletingAction(
+            MassDeletingDTO::make(
+                'Domain\Auth\Models\User',
+                $request->input('ids')
+            )
+        );
+
+        flash()->info(__('crud.mass_deleted', ['entity' => __('entity.user_c')]));
+
+        return to_route('users.index');
+    }
+
+    /**
+     * @throws MassDeletingException
+     */
+    public function forceDeleteSelected(MassDeletingRequest $request, MassDeletingAction $deletingAction)
+    {
+        $deletingAction(
+            MassDeletingDTO::make(
+                'Domain\Auth\Models\User',
+                $request->input('ids'),
+                true
+            )
+        );
+
+        flash()->info(__('crud.mass_force_deleted', ['entity' => __('entity.user_c')]));
+
+        return to_route('users.index');
+    }
+
 
     public function publicIndex()
     {
@@ -77,12 +125,4 @@ class UserController extends Controller
         return response()->json($users);
     }
 
-    public function destroy(User $user)
-    {
-        $user->forceDelete();
-
-        flash()->info(__('game.developer.deleted'));
-
-        return to_route('game-developers.index');
-    }
 }
