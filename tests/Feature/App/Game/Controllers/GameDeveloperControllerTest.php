@@ -108,7 +108,7 @@ class GameDeveloperControllerTest extends TestCase
         $this->actingAs($this->user)
             ->post(action([GameDeveloperController::class, 'store']), $this->request)
             ->assertRedirectToRoute('game-developers.index')
-            ->assertSessionHas('helper_flash_message', __('game.developer.created'));
+            ->assertSessionHas('helper_flash_message', __('crud.created', ['entity' => __('entity.game_developer')]));
 
         $this->assertDatabaseHas('game_developers', [
             'name' => $this->request['name']
@@ -129,7 +129,7 @@ class GameDeveloperControllerTest extends TestCase
         $this->actingAs($this->user)
             ->post(action([GameDeveloperController::class, 'store']), $this->request)
             ->assertRedirectToRoute('game-developers.index')
-            ->assertSessionHas('helper_flash_message', __('game.developer.created'));
+            ->assertSessionHas('helper_flash_message', __('crud.created', ['entity' => __('entity.game_developer')]));
 
         $this->assertDatabaseHas('game_developers', [
             'name' => $this->request['name']
@@ -193,7 +193,7 @@ class GameDeveloperControllerTest extends TestCase
                 $this->request
             )
             ->assertRedirectToRoute('game-developers.index')
-            ->assertSessionHas('helper_flash_message', __('game.developer.updated'));
+            ->assertSessionHas('helper_flash_message', __('crud.updated', ['entity' => __('entity.game_developer')]));
 
         $this->assertDatabaseHas('game_developers', [
             'name' => $this->request['name']
@@ -209,7 +209,7 @@ class GameDeveloperControllerTest extends TestCase
         $this->actingAs($this->user)
             ->delete(action([GameDeveloperController::class, 'destroy'], [$this->gameDeveloper->slug]))
             ->assertRedirectToRoute('game-developers.index')
-            ->assertSessionHas('helper_flash_message', __('game.developer.deleted'));
+            ->assertSessionHas('helper_flash_message', __('crud.deleted', ['entity' => __('entity.game_developer')]));
 
         $this->assertDatabaseMissing('game_developers', [
             'name' => $this->gameDeveloper->name,

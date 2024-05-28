@@ -50,7 +50,7 @@
             <div x-on:click.stop="
                 $store.modalSingleDelete.hide = ! $store.modalSingleDelete.hide;
                 $store.modalSingleDelete.action = '{{ route($model.'.destroy', $item->slug) }}'
-                $store.modalSingleDelete.name = '{{  $item->name }}'
+                $store.modalSingleDelete.name = '{{ addslashes($item->name) }}'
                 ">
                 <x-ui.form.button
                     color="cancel"

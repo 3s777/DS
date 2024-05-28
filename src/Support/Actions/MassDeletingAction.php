@@ -18,9 +18,9 @@ class MassDeletingAction
                 foreach ($selectedIdsArray as $id) {
                     if (is_numeric($id)) {
                         if($data->isForce) {
-                            $data->modelNamespace::where('id', $id)->forceDelete();
+                            $data->modelNamespace::find($id)->forceDelete();
                         } else {
-                            $data->modelNamespace::where('id', $id)->delete();
+                            $data->modelNamespace::find($id)->delete();
                         }
                     }
                 }

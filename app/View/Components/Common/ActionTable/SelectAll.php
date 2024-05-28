@@ -15,7 +15,7 @@ class SelectAll extends Component
     ) {
         foreach($models as $model) {
             $this->ids .= "'$model->id',";
-            $this->names .= "'$model->name',";
+            $this->names .= "'".htmlspecialchars($model->name)."',";
         }
     }
 

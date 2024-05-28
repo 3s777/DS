@@ -11,6 +11,8 @@ use App\Http\Requests\MassDeletingRequest;
 use App\ViewModels\Game\GameDeveloperCreateViewModel;
 use App\ViewModels\Game\GameDeveloperIndexViewModel;
 use Domain\Game\Models\GameDeveloper;
+use Illuminate\Contracts\View\Factory;
+use Illuminate\Contracts\View\View;
 use Illuminate\Foundation\Application;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Routing\Redirector;
@@ -19,12 +21,12 @@ use Support\DTOs\MassDeletingDTO;
 
 class GameDeveloperController extends Controller
 {
-    public function index(FilterGameDeveloperRequest $request)
+    public function index(FilterGameDeveloperRequest $request): View|Application|Factory|\Illuminate\Contracts\Foundation\Application
     {
         return view('admin.game.developer.index', new GameDeveloperIndexViewModel());
     }
 
-    public function create()
+    public function create(): View|Application|Factory|\Illuminate\Contracts\Foundation\Application
     {
         return view('admin.game.developer.create', new GameDeveloperCreateViewModel());
     }
@@ -39,7 +41,7 @@ class GameDeveloperController extends Controller
             ['small', 'medium']
         );
 
-        flash()->info(__('game.developer.created'));
+        flash()->info(__('crud.created', ['entity' => __('entity.game_developer')]));
 
         return to_route('game-developers.index');
     }
@@ -49,27 +51,27 @@ class GameDeveloperController extends Controller
         //
     }
 
-    public function edit(GameDeveloper $gameDeveloper)
+    public function edit(GameDeveloper $gameDeveloper): View|Application|Factory|\Illuminate\Contracts\Foundation\Application
     {
         return view('admin.game.developer.edit', new GameDeveloperCreateViewModel($gameDeveloper));
     }
 
-    public function update(UpdateGameDeveloperRequest $request, GameDeveloper $gameDeveloper)
+    public function update(UpdateGameDeveloperRequest $request, GameDeveloper $gameDeveloper): RedirectResponse
     {
         $gameDeveloper->updateThumbnail($request->file('thumbnail'), $request->input('thumbnail_uploaded'), ['small', 'medium']);
 
         $gameDeveloper->fill($request->safe()->except(['thumbnail', 'thumbnail_uploaded']))->save();
 
-        flash()->info(__('game.developer.updated'));
+        flash()->info(__('crud.updated', ['entity' => __('entity.game_developer')]));
 
         return to_route('game-developers.index');
     }
 
-    public function destroy(GameDeveloper $gameDeveloper)
+    public function destroy(GameDeveloper $gameDeveloper): RedirectResponse
     {
-        $gameDeveloper->forceDelete();
+        $gameDeveloper->delete();
 
-        flash()->info(__('crud.mass_deleted'));
+        flash()->info(__('crud.deleted', ['entity' => __('entity.game_developer')]));
 
         return to_route('game-developers.index');
     }
@@ -77,7 +79,7 @@ class GameDeveloperController extends Controller
     /**
      * @throws MassDeletingException
      */
-    public function deleteSelected(MassDeletingRequest $request, MassDeletingAction $deletingAction)
+    public function deleteSelected(MassDeletingRequest $request, MassDeletingAction $deletingAction): RedirectResponse
     {
         $deletingAction(
             MassDeletingDTO::make(
@@ -86,7 +88,7 @@ class GameDeveloperController extends Controller
             )
         );
 
-        flash()->info(__('crud.mass_force_deleted', ['entity' => __('entity.game_developer_c')]));
+        flash()->info(__('crud.mass_deleted', ['entity' => __('entity.game_developer_c')]));
 
         return to_route('game-developers.index');
     }
@@ -94,7 +96,7 @@ class GameDeveloperController extends Controller
     /**
      * @throws MassDeletingException
      */
-    public function forceDeleteSelected(MassDeletingRequest $request, MassDeletingAction $deletingAction)
+    public function forceDeleteSelected(MassDeletingRequest $request, MassDeletingAction $deletingAction): RedirectResponse
     {
         $deletingAction(
             MassDeletingDTO::make(
@@ -104,8 +106,9 @@ class GameDeveloperController extends Controller
             )
         );
 
-        flash()->info(__('game.developer.updated', ['entity' => __('entity.game_developer_c')]));
+        flash()->info(__('crud.mass_force_deleted', ['entity' => __('entity.game_developer_c')]));
 
         return to_route('game-developers.index');
     }
 }
+

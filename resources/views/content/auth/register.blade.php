@@ -25,7 +25,7 @@
                             autocomplete="name">
                         </x-ui.form.input-text>
 
-                        <input type="hidden" name="language_id" value="oo">
+{{--                        <input type="hidden" name="language_id" value="oo">--}}
 
                         <x-ui.form.button
                             class="tooltip_trigger"

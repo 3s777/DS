@@ -15,6 +15,9 @@ use Domain\Auth\Contracts\RegisterNewUserContract;
 use Domain\Auth\DTOs\NewUserDTO;
 use Domain\Auth\DTOs\UpdateUserDTO;
 use Domain\Auth\Models\User;
+use Illuminate\Contracts\View\Factory;
+use Illuminate\Contracts\View\View;
+use Illuminate\Foundation\Application;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Support\Actions\MassDeletingAction;
@@ -22,12 +25,12 @@ use Support\DTOs\MassDeletingDTO;
 
 class UserController extends Controller
 {
-    public function index()
+    public function index(): View|Application|Factory|\Illuminate\Contracts\Foundation\Application
     {
         return view('admin.user.index', new UserIndexViewModel());
     }
 
-    public function create()
+    public function create(): View|Application|Factory|\Illuminate\Contracts\Foundation\Application
     {
         return view('admin.user.create', new UserCreateViewModel());
     }
@@ -41,12 +44,12 @@ class UserController extends Controller
         return to_route('users.index');
     }
 
-    public function edit(User $user)
+    public function edit(User $user): View|Application|Factory|\Illuminate\Contracts\Foundation\Application
     {
         return view('admin.user.edit', new UserCreateViewModel($user));
     }
 
-    public function update(UpdateUserRequest $request, User $user, UpdateUserAction $action)
+    public function update(UpdateUserRequest $request, User $user, UpdateUserAction $action): RedirectResponse
     {
         $action(UpdateUserDTO::fromRequest($request), $user);
 
@@ -55,9 +58,9 @@ class UserController extends Controller
         return to_route('users.index');
     }
 
-    public function destroy(User $user)
+    public function destroy(User $user): RedirectResponse
     {
-        $user->forceDelete();
+        $user->delete();
 
         flash()->info(__('crud.deleted', ['entity' => __('entity.user')]));
 
@@ -67,7 +70,7 @@ class UserController extends Controller
     /**
      * @throws MassDeletingException
      */
-    public function deleteSelected(MassDeletingRequest $request, MassDeletingAction $deletingAction)
+    public function deleteSelected(MassDeletingRequest $request, MassDeletingAction $deletingAction): RedirectResponse
     {
         $deletingAction(
             MassDeletingDTO::make(
@@ -84,7 +87,7 @@ class UserController extends Controller
     /**
      * @throws MassDeletingException
      */
-    public function forceDeleteSelected(MassDeletingRequest $request, MassDeletingAction $deletingAction)
+    public function forceDeleteSelected(MassDeletingRequest $request, MassDeletingAction $deletingAction): RedirectResponse
     {
         $deletingAction(
             MassDeletingDTO::make(
