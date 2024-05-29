@@ -59,7 +59,9 @@ class RegisterNewUserActionTest extends TestCase
      */
     public function it_registered_event_and_listeners_dispatched(): void
     {
-        Event::fake();
+        Event::fake([
+            Registered::class,
+        ]);
 
         $action = app(RegisterNewUserContract::class);
 
