@@ -3,6 +3,7 @@
 return [
     'id' => 'id',
     'name' => 'Название',
+    'display_name' => 'Отображаемое имя',
     'slug' => 'Префикс',
     'description' => 'Описание',
     'email' => 'Email',

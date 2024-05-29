@@ -7,6 +7,7 @@ use App\Http\Controllers\Auth\ForgotPasswordController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\Auth\ResetPasswordController;
+use App\Http\Controllers\Auth\RoleController;
 use App\Http\Controllers\Auth\UserController;
 use App\Http\Controllers\Auth\VerifyEmailController;
 use Illuminate\Contracts\Routing\Registrar;
@@ -47,12 +48,14 @@ class AuthRegistrar implements RouteRegistrar
                     });
 
 
-                    Route::delete('/users/delete-selected', [UserController::class, 'deleteSelected'])->name('users.delete');
-                    Route::delete('/users/force-delete-selected', [UserController::class, 'forceDeleteSelected'])->name('users.forceDelete');
+
                     Route::get('/get-users', [UserController::class, 'getUsers'])->name('get-users');
                     Route::get('/users', [UserController::class, 'publicIndex'])->name('public-users');
                     Route::prefix('admin')->middleware(['auth', 'verified'])->group(function () {
-                        Route::resource('users', UserController::class)->middleware(['remove.locale']);;
+                        Route::delete('/users/delete-selected', [UserController::class, 'deleteSelected'])->name('users.delete');
+                        Route::delete('/users/force-delete-selected', [UserController::class, 'forceDeleteSelected'])->name('users.forceDelete');
+                        Route::resource('users', UserController::class)->middleware(['remove.locale']);
+                        Route::resource('roles', RoleController::class)->middleware(['remove.locale']);
                     });
                 });
             });

@@ -2,7 +2,8 @@
     'item',
     'model',
     'show' => false,
-    'edit' => true
+    'edit' => true,
+    'slug' => true
 ])
 
 @aware([
@@ -20,7 +21,7 @@
     @if($show)
         <x-ui.form.button
             tag="a"
-            link="{{ route($model.'.show', $item->slug) }}"
+            link="{{ route($model.'.show',$slug ? $item->slug : $item->id) }}"
             color="info"
             only-icon="true"
             size="small"
@@ -34,7 +35,7 @@
     @if($edit)
         <x-ui.form.button
             tag="a"
-            link="{{ route($model.'.edit', $item->slug) }}"
+            link="{{ route($model.'.edit', $slug ? $item->slug : $item->id) }}"
             color="warning"
             only-icon="true"
             size="small"
@@ -49,7 +50,7 @@
         <div x-data x-on:keydown.escape.window="$store.modalSingleDelete.hide = true">
             <div x-on:click.stop="
                 $store.modalSingleDelete.hide = ! $store.modalSingleDelete.hide;
-                $store.modalSingleDelete.action = '{{ route($model.'.destroy', $item->slug) }}'
+                $store.modalSingleDelete.action = '{{ route($model.'.destroy', $slug ? $item->slug : $item->id) }}'
                 $store.modalSingleDelete.name = '{{ addslashes($item->name) }}'
                 ">
                 <x-ui.form.button

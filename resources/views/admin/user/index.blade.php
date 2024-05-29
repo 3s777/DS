@@ -14,7 +14,8 @@
             class="action-table__selectable-order"
             :sorters="[
                 'id' => __('common.id'),
-                'name' => __('common.name'),
+                'name' => __('auth.username'),
+                'first_name' => __('auth.first_name'),
                 'email' => __('common.email'),
                 'created_at' => __('common.created_date'),
             ]" />

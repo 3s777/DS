@@ -134,21 +134,21 @@
                         <x-ui.accordion>
                             <x-ui.accordion.item class="sidebar-menu__accordion-item" color="light">
                                 <x-ui.accordion.title class="sidebar-menu__accordion-title">
-                                    <span class="sidebar-menu__link-label">Издатели</span>
+                                    <span class="sidebar-menu__link-label">Роли</span>
                                 </x-ui.accordion.title>
                                 <x-ui.accordion.content>
                                     <x-ui.form.button
-                                        @class(['content__sidebar-link', 'sidebar-menu__link', 'button_submit' => Route::currentRouteName() === 'users.create'])
+                                        @class(['content__sidebar-link', 'sidebar-menu__link', 'button_submit' => Route::currentRouteName() === 'roles.create'])
                                         tag="a"
-                                        link="{{ route('users.create') }}"
+                                        link="{{ route('roles.create') }}"
                                         color="light"
                                     >
                                         <span class="sidebar-menu__link-label">Добавить</span>
                                     </x-ui.form.button>
                                     <x-ui.form.button
-                                        @class(['content__sidebar-link', 'sidebar-menu__link', 'button_submit' => Route::currentRouteName() === 'users.index'])
+                                        @class(['content__sidebar-link', 'sidebar-menu__link', 'button_submit' => Route::currentRouteName() === 'roles.index'])
                                         tag="a"
-                                        link="{{ route('users.index') }}"
+                                        link="{{ route('roles.index') }}"
                                         color="light">
                                         <span class="sidebar-menu__link-label">Список</span>
                                     </x-ui.form.button>

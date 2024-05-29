@@ -9,6 +9,10 @@
         "submit sidebar";
     column-gap: 24px;
 
+    &_full-width {
+        display: block;
+    }
+
     &__title {
         grid-area: title;
     }

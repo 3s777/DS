@@ -13,6 +13,7 @@
         "laravel/tinker": "^2.8",
         "mews/purifier": "^3.4",
         "spatie/laravel-medialibrary": "^11.0.0",
+        "spatie/laravel-permission": "^6.7",
         "spatie/laravel-view-models": "^1.5"
     },
     "require-dev": {
