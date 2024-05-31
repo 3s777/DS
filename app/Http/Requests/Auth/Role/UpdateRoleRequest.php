@@ -9,7 +9,7 @@ use Illuminate\Validation\Rule;
 use Illuminate\Validation\Rules\Password;
 use Spatie\Permission\Models\Role;
 
-class CreateRoleRequest extends FormRequest
+class UpdateRoleRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -32,7 +32,7 @@ class CreateRoleRequest extends FormRequest
                 'string',
                 'max:255',
                 'min:3',
-                Rule::unique(Role::class)
+                Rule::unique(Role::class)->ignore($this->role)
             ],
             'display_name' => ['required','string'],
             'description' => ['nullable','string']

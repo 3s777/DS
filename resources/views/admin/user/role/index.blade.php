@@ -1,30 +1,21 @@
 <x-layouts.admin :search="false">
     <x-ui.title size="normal" indent="big">
-            {{ __('crud.list', ['entity' => __('entity.role_b')]) }}
+            {{ __('model/role.list') }}
     </x-ui.title>
 
-
-        <x-common.selectable-order
-            class="action-table__selectable-order"
-            :sorters="[
-                'id' => __('common.id'),
-                'name' => __('common.name'),
-                'email' => __('common.display_name'),
-                'created_at' => __('common.created_date'),
-            ]" />
-
+    <x-common.action-table model-name="roles" :mass-delete="false" :selectable="false">
         <x-ui.responsive-table :data="$roles->isEmpty()">
             <x-ui.responsive-table.header>
-                <x-ui.responsive-table.column type="id" sortable="true" name="id">
+                <x-ui.responsive-table.column type="id" name="id">
                     {{ __('common.id') }}
                 </x-ui.responsive-table.column>
-                <x-ui.responsive-table.column sortable="true" name="name">
+                <x-ui.responsive-table.column name="name">
                     {{ __('common.name') }}
                 </x-ui.responsive-table.column>
-                <x-ui.responsive-table.column sortable="true" name="first_name">
+                <x-ui.responsive-table.column name="first_name">
                     {{ __('common.display_name') }}
                 </x-ui.responsive-table.column>
-                <x-ui.responsive-table.column name="created_at" sortable="true">
+                <x-ui.responsive-table.column name="created_at">
                     {{ __('common.created_date') }}
                 </x-ui.responsive-table.column>
                 <x-ui.responsive-table.column type="action" name="action">
@@ -52,12 +43,8 @@
                 </x-ui.responsive-table.row>
             @endforeach
         </x-ui.responsive-table>
-
-        <x-slot:footer>
-            <x-common.action-table.selected-action>
-
-            </x-common.action-table.selected-action>
-        </x-slot:footer>
+    </x-common.action-table>
 
     {{ $roles->links('pagination::default') }}
+
 </x-layouts.admin>
