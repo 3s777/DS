@@ -1,10 +1,10 @@
 <x-layouts.admin :search="false">
     <x-ui.title size="normal" indent="big">
-            {{ __('role.list') }}
+            {{ __('permission.list') }}
     </x-ui.title>
 
-    <x-common.action-table model-name="roles" :mass-delete="false" :selectable="false">
-        <x-ui.responsive-table :data="$roles->isEmpty()">
+    <x-common.action-table model-name="permissions" :mass-delete="false" :selectable="false">
+        <x-ui.responsive-table :data="$permissions->isEmpty()">
             <x-ui.responsive-table.header>
                 <x-ui.responsive-table.column type="id" name="id">
                     {{ __('common.id') }}
@@ -23,28 +23,28 @@
                 </x-ui.responsive-table.column>
             </x-ui.responsive-table.header>
 
-            @foreach($roles as $role)
+            @foreach($permissions as $permission)
                 <x-ui.responsive-table.row >
                     <x-ui.responsive-table.column type="id">
-                        {{ $role->id }}
+                        {{ $permission->id }}
                     </x-ui.responsive-table.column>
                     <x-ui.responsive-table.column>
-                        <span class="responsive-table__label">{{ __('common.name') }}: </span> {{ $role->name }}
+                        <span class="responsive-table__label">{{ __('common.name') }}: </span> {{ $permission->name }}
                     </x-ui.responsive-table.column>
                     <x-ui.responsive-table.column>
-                        <span class="responsive-table__label">{{ __('common.display_name') }}: </span> {{ $role->display_name }}
+                        <span class="responsive-table__label">{{ __('common.display_name') }}: </span> {{ $permission->display_name }}
                     </x-ui.responsive-table.column>
                     <x-ui.responsive-table.column>
-                        <span class="responsive-table__label">{{ __('common.created_date') }}: </span> {{ $role->created_at }}
+                        <span class="responsive-table__label">{{ __('common.created_date') }}: </span> {{ $permission->created_at }}
                     </x-ui.responsive-table.column>
                     <x-ui.responsive-table.column type="action">
-                        <x-common.action-table.buttons :item="$role" model="roles" :slug="false" />
+                        <x-common.action-table.buttons :item="$permission" model="permissions" :slug="false" />
                     </x-ui.responsive-table.column>
                 </x-ui.responsive-table.row>
             @endforeach
         </x-ui.responsive-table>
     </x-common.action-table>
 
-    {{ $roles->links('pagination::default') }}
+    {{ $permissions->links('pagination::default') }}
 
 </x-layouts.admin>

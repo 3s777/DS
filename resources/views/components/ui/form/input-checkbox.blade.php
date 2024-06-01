@@ -3,8 +3,8 @@
     'name',
     'label' => '',
     'errors' => false,
-    'value' => false,
-    'size' => false
+    'size' => false,
+    'checked' => false
 ])
 
 <div class="input-checkbox">
@@ -17,7 +17,7 @@
                 ])
                 ->merge([
                     'type'=>'checkbox',
-                    'checked' => $value == 1,
+                    'checked' => $checked,
                     'name' => $name,
                     'id' => $id
                 ]) }}

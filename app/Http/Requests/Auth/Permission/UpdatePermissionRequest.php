@@ -1,12 +1,12 @@
 <?php
 
-namespace App\Http\Requests\Auth\Role;
+namespace App\Http\Requests\Auth\Permission;
 
+use Domain\Auth\Models\Permission;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
-use Spatie\Permission\Models\Role;
 
-class CreateRoleRequest extends FormRequest
+class UpdatePermissionRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -29,11 +29,10 @@ class CreateRoleRequest extends FormRequest
                 'string',
                 'max:255',
                 'min:3',
-                Rule::unique(Role::class)
+                Rule::unique(Permission::class)->ignore($this->permission)
             ],
             'display_name' => ['required','string'],
-            'description' => ['nullable','string'],
-            'permissions' => ['nullable', 'array']
+            'description' => ['nullable','string']
         ];
     }
 

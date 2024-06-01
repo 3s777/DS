@@ -39,7 +39,7 @@ class UserController extends Controller
     {
         $action(NewUserDTO::fromRequest($request));
 
-        flash()->info(__('crud.created', ['entity' => __('entity.user')]));
+        flash()->info(__('user.created'));
 
         return to_route('users.index');
     }
@@ -53,7 +53,7 @@ class UserController extends Controller
     {
         $action(UpdateUserDTO::fromRequest($request), $user);
 
-        flash()->info(__('crud.updated', ['entity' => __('entity.user')]));
+        flash()->info(__('user.updated'));
 
         return to_route('users.index');
     }
@@ -62,7 +62,7 @@ class UserController extends Controller
     {
         $user->delete();
 
-        flash()->info(__('crud.deleted', ['entity' => __('entity.user')]));
+        flash()->info(__('user.deleted'));
 
         return to_route('users.index');
     }
@@ -79,7 +79,7 @@ class UserController extends Controller
             )
         );
 
-        flash()->info(__('crud.mass_deleted', ['entity' => __('entity.user_c')]));
+        flash()->info(__('user.mass_deleted'));
 
         return to_route('users.index');
     }
@@ -97,7 +97,7 @@ class UserController extends Controller
             )
         );
 
-        flash()->info(__('crud.mass_force_deleted', ['entity' => __('entity.user_c')]));
+        flash()->info(__('user.mass_force_deleted'));
 
         return to_route('users.index');
     }

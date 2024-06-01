@@ -3,7 +3,7 @@
         @if(request('filters.search'))
             {{ __('filters.result') }} "{{ request('filters.search') }}"
         @else
-            {{ __('crud.list', ['entity' => __('entity.user_b')]) }}
+            {{ __('user.list') }}
         @endif
     </x-ui.title>
 

@@ -157,6 +157,32 @@
 
                         </x-ui.accordion>
 
+                        <x-ui.accordion>
+                            <x-ui.accordion.item class="sidebar-menu__accordion-item" color="light">
+                                <x-ui.accordion.title class="sidebar-menu__accordion-title">
+                                    <span class="sidebar-menu__link-label">Разрешения</span>
+                                </x-ui.accordion.title>
+                                <x-ui.accordion.content>
+                                    <x-ui.form.button
+                                        @class(['content__sidebar-link', 'sidebar-menu__link', 'button_submit' => Route::currentRouteName() === 'permissions.create'])
+                                        tag="a"
+                                        link="{{ route('permissions.create') }}"
+                                        color="light"
+                                    >
+                                        <span class="sidebar-menu__link-label">Добавить</span>
+                                    </x-ui.form.button>
+                                    <x-ui.form.button
+                                        @class(['content__sidebar-link', 'sidebar-menu__link', 'button_submit' => Route::currentRouteName() === 'permissions.index'])
+                                        tag="a"
+                                        link="{{ route('permissions.index') }}"
+                                        color="light">
+                                        <span class="sidebar-menu__link-label">Список</span>
+                                    </x-ui.form.button>
+                                </x-ui.accordion.content>
+                            </x-ui.accordion.item>
+
+                        </x-ui.accordion>
+
                     </x-ui.accordion.content>
                 </x-ui.accordion.item>
             </x-ui.accordion>

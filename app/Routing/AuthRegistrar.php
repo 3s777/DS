@@ -5,6 +5,7 @@ namespace App\Routing;
 use App\Contracts\RouteRegistrar;
 use App\Http\Controllers\Auth\ForgotPasswordController;
 use App\Http\Controllers\Auth\LoginController;
+use App\Http\Controllers\Auth\PermissionController;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\Auth\ResetPasswordController;
 use App\Http\Controllers\Auth\RoleController;
@@ -56,6 +57,7 @@ class AuthRegistrar implements RouteRegistrar
                         Route::delete('/users/force-delete-selected', [UserController::class, 'forceDeleteSelected'])->name('users.forceDelete');
                         Route::resource('users', UserController::class)->middleware(['remove.locale']);
                         Route::resource('roles', RoleController::class)->middleware(['remove.locale']);
+                        Route::resource('permissions', PermissionController::class)->middleware(['remove.locale']);
                     });
                 });
             });

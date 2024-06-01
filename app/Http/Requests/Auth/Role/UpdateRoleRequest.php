@@ -2,11 +2,8 @@
 
 namespace App\Http\Requests\Auth\Role;
 
-use App\Rules\LatinLowercaseRule;
-use Domain\Auth\Models\User;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
-use Illuminate\Validation\Rules\Password;
 use Spatie\Permission\Models\Role;
 
 class UpdateRoleRequest extends FormRequest
@@ -35,7 +32,8 @@ class UpdateRoleRequest extends FormRequest
                 Rule::unique(Role::class)->ignore($this->role)
             ],
             'display_name' => ['required','string'],
-            'description' => ['nullable','string']
+            'description' => ['nullable','string'],
+            'permissions' => ['nullable', 'array']
         ];
     }
 

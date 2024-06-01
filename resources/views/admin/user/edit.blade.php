@@ -6,7 +6,7 @@
                action="{{ route('users.update', $user->slug) }}"
                enctype="multipart/form-data">
             <x-ui.title class="curd-form__tile" size="normal" indent="small">
-                {{ __('crud.edit', ['entity' => __('entity.user_a')]) }}
+                {{ __('user.edit') }}
             </x-ui.title>
 
             <div class="crud-form__main">

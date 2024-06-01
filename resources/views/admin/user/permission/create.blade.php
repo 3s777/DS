@@ -1,10 +1,10 @@
 <x-layouts.admin :search="false">
     <x-ui.form class="crud-form crud-form_full-width"
                id="create-form"
-               action="{{ route('roles.store') }}"
+               action="{{ route('permissions.store') }}"
                enctype="multipart/form-data">
         <x-ui.title class="curd-form__tile" size="normal" indent="small">
-            {{ __('role.add') }}
+            {{ __('permission.add') }}
         </x-ui.title>
 
         <div class="crud-form__main">
@@ -37,23 +37,6 @@
                         </x-ui.form.input-text>
                     </x-ui.form.group>
                 </x-grid.col>
-            </x-grid>
-
-            <x-grid type="container">
-                @foreach($permissions as $key => $permission)
-                    <x-grid.col xl="3" ls="6" ml="12" lg="6" md="6" sm="12">
-                        <x-ui.form.group size="small">
-                            <x-ui.form.input-checkbox
-                                id="permission-{{ $key }}"
-                                name="permissions[]"
-                                value="{{ $permission['name'] }}"
-                                label="{{ $permission['display_name'] }}"
-                                :checked="in_array($permission['name'], old('permissions', []))"
-                            >
-                            </x-ui.form.input-checkbox>
-                        </x-ui.form.group>
-                    </x-grid.col>
-                @endforeach
             </x-grid>
         </div>
 

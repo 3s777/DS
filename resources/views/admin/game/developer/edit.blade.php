@@ -5,7 +5,7 @@
                action="{{ route('game-developers.update', $gameDeveloper->slug) }}"
                enctype="multipart/form-data">
         <x-ui.title class="curd-form__tile" size="normal" indent="small">
-            {{ __('crud.edit', ['entity' => __('entity.game_developer_a')]) }}
+            {{ __('game_developer.edit') }}
         </x-ui.title>
 
         <div class="crud-form__main">

@@ -3,10 +3,10 @@
     <x-ui.form class="crud-form crud-form_full-width"
                method="put"
                id="edit-form"
-               action="{{ route('roles.update', $role->id) }}"
+               action="{{ route('permissions.update', $permission->id) }}"
                enctype="multipart/form-data">
             <x-ui.title class="curd-form__tile" size="normal" indent="small">
-                {{ __('role.edit') }}
+                {{ __('permission.edit') }}
             </x-ui.title>
 
             <div class="crud-form__main">
@@ -18,7 +18,7 @@
                                 placeholder="{{ __('common.name') }} *"
                                 id="name"
                                 name="name"
-                                value="{{ $role->name }}"
+                                value="{{ $permission->name }}"
                                 required
                                 autocomplete="on"
                                 autofocus>
@@ -33,27 +33,11 @@
                                 placeholder="{{ __('common.display_name') }} *"
                                 id="display_name"
                                 name="display_name"
-                                value="{{ $role->display_name }}"
+                                value="{{ $permission->display_name }}"
                                 autocomplete="on">
                             </x-ui.form.input-text>
                         </x-ui.form.group>
                     </x-grid.col>
-                </x-grid>
-                <x-grid type="container">
-                    @foreach($permissions as $key => $permission)
-                        <x-grid.col xl="3" ls="6" ml="12" lg="6" md="6" sm="12">
-                            <x-ui.form.group size="small">
-                                <x-ui.form.input-checkbox
-                                    id="permission-{{ $key }}"
-                                    name="permissions[]"
-                                    value="{{ $permission['name'] }}"
-                                    label="{{ $permission['display_name'] }}"
-                                    :checked="$role->hasPermissionTo($permission['name'])"
-                                >
-                                </x-ui.form.input-checkbox>
-                            </x-ui.form.group>
-                        </x-grid.col>
-                    @endforeach
                 </x-grid>
             </div>
 
@@ -61,7 +45,7 @@
                 <x-ui.form.group>
                     <x-libraries.rich-text-editor
                         name="description"
-                        value="{!! $role->description !!}"
+                        value="{!! $permission->description !!}"
                         placeholder="{{ __('common.description') }}"/>
                 </x-ui.form.group>
             </div>

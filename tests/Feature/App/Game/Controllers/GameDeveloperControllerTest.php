@@ -68,7 +68,7 @@ class GameDeveloperControllerTest extends TestCase
         $this->actingAs($this->user)
             ->get(action([GameDeveloperController::class, 'index']))
             ->assertOk()
-            ->assertSee(__('crud.list', ['entity' => __('entity.game_developer_b')]))
+            ->assertSee(__('game_developer.list'))
             ->assertViewIs('admin.game.developer.index');
     }
 
@@ -81,7 +81,7 @@ class GameDeveloperControllerTest extends TestCase
         $this->actingAs($this->user)
             ->get(action([GameDeveloperController::class, 'create']))
             ->assertOk()
-            ->assertSee(__('crud.add', ['entity' => __('entity.game_developer_a')]))
+            ->assertSee(__('game_developer.add'))
             ->assertViewIs('admin.game.developer.create');
     }
 
@@ -108,7 +108,7 @@ class GameDeveloperControllerTest extends TestCase
         $this->actingAs($this->user)
             ->post(action([GameDeveloperController::class, 'store']), $this->request)
             ->assertRedirectToRoute('game-developers.index')
-            ->assertSessionHas('helper_flash_message', __('crud.created', ['entity' => __('entity.game_developer')]));
+            ->assertSessionHas('helper_flash_message', __('game_developer.created'));
 
         $this->assertDatabaseHas('game_developers', [
             'name' => $this->request['name']
@@ -129,7 +129,7 @@ class GameDeveloperControllerTest extends TestCase
         $this->actingAs($this->user)
             ->post(action([GameDeveloperController::class, 'store']), $this->request)
             ->assertRedirectToRoute('game-developers.index')
-            ->assertSessionHas('helper_flash_message', __('crud.created', ['entity' => __('entity.game_developer')]));
+            ->assertSessionHas('helper_flash_message', __('game_developer.created'));
 
         $this->assertDatabaseHas('game_developers', [
             'name' => $this->request['name']
@@ -193,7 +193,7 @@ class GameDeveloperControllerTest extends TestCase
                 $this->request
             )
             ->assertRedirectToRoute('game-developers.index')
-            ->assertSessionHas('helper_flash_message', __('crud.updated', ['entity' => __('entity.game_developer')]));
+            ->assertSessionHas('helper_flash_message', __('game_developer.updated'));
 
         $this->assertDatabaseHas('game_developers', [
             'name' => $this->request['name']
@@ -209,7 +209,7 @@ class GameDeveloperControllerTest extends TestCase
         $this->actingAs($this->user)
             ->delete(action([GameDeveloperController::class, 'destroy'], [$this->gameDeveloper->slug]))
             ->assertRedirectToRoute('game-developers.index')
-            ->assertSessionHas('helper_flash_message', __('crud.deleted', ['entity' => __('entity.game_developer')]));
+            ->assertSessionHas('helper_flash_message', __('game_developer.deleted'));
 
         $this->assertDatabaseMissing('game_developers', [
             'name' => $this->gameDeveloper->name,

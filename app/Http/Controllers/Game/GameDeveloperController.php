@@ -41,7 +41,7 @@ class GameDeveloperController extends Controller
             ['small', 'medium']
         );
 
-        flash()->info(__('crud.created', ['entity' => __('entity.game_developer')]));
+        flash()->info(__('game_developer.created'));
 
         return to_route('game-developers.index');
     }
@@ -62,7 +62,7 @@ class GameDeveloperController extends Controller
 
         $gameDeveloper->fill($request->safe()->except(['thumbnail', 'thumbnail_uploaded']))->save();
 
-        flash()->info(__('crud.updated', ['entity' => __('entity.game_developer')]));
+        flash()->info(__('game_developer.updated'));
 
         return to_route('game-developers.index');
     }
@@ -71,7 +71,7 @@ class GameDeveloperController extends Controller
     {
         $gameDeveloper->delete();
 
-        flash()->info(__('crud.deleted', ['entity' => __('entity.game_developer')]));
+        flash()->info(__('game_developer.deleted'));
 
         return to_route('game-developers.index');
     }
@@ -88,7 +88,7 @@ class GameDeveloperController extends Controller
             )
         );
 
-        flash()->info(__('crud.mass_deleted', ['entity' => __('entity.game_developer_c')]));
+        flash()->info(__('game_developer.mass_deleted'));
 
         return to_route('game-developers.index');
     }
@@ -106,7 +106,7 @@ class GameDeveloperController extends Controller
             )
         );
 
-        flash()->info(__('crud.mass_force_deleted', ['entity' => __('entity.game_developer_c')]));
+        flash()->info(__('game_developer.mass_force_deleted'));
 
         return to_route('game-developers.index');
     }

@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Auth\Role\CreateRoleRequest;
 use App\Http\Requests\Auth\Role\UpdateRoleRequest;
+use App\ViewModels\User\RoleCreateViewModel;
 use App\ViewModels\User\RoleIndexViewModel;
 use Domain\Auth\Models\Role;
 use Illuminate\Contracts\View\Factory;
@@ -23,14 +24,16 @@ class RoleController extends Controller
 
     public function create(): View|Application|Factory|\Illuminate\Contracts\Foundation\Application
     {
-        return view('admin.user.role.create');
+        return view('admin.user.role.create', new RoleCreateViewModel());
     }
 
     public function store(CreateRoleRequest $request): RedirectResponse
     {
-        Role::create($request->safe()->toArray());
+        $role = Role::create($request->safe()->except(['permissions']));
 
-        flash()->info(__('crud.created', ['entity' => __('entity.role')]));
+        $role->syncPermissions($request->input('permissions'));
+
+        flash()->info(__('role.created'));
 
         return to_route('roles.index');
     }
@@ -42,14 +45,17 @@ class RoleController extends Controller
 
     public function edit(Role $role): View|Application|Factory|\Illuminate\Contracts\Foundation\Application
     {
-        return view('admin.user.role.edit', compact(['role']));
+        return view('admin.user.role.edit', new RoleCreateViewModel($role));
     }
 
     public function update(UpdateRoleRequest $request, Role $role): RedirectResponse
     {
-        $role->fill($request->validated())->save();
 
-        flash()->info(__('crud.updated', ['entity' => __('entity.role')]));
+        $role->fill($request->safe()->except(['permissions']))->save();
+
+        $role->syncPermissions($request->input('permissions'));
+
+        flash()->info(__('role.updated'));
 
         return to_route('roles.index');
     }
@@ -58,7 +64,7 @@ class RoleController extends Controller
     {
         $role->delete();
 
-        flash()->info(__('crud.deleted', ['entity' => __('entity.role')]));
+        flash()->info(__('role.deleted'));
 
         return to_route('roles.index');
     }

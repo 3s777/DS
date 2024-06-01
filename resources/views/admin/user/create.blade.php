@@ -4,7 +4,7 @@
                action="{{ route('users.store') }}"
                enctype="multipart/form-data">
         <x-ui.title class="curd-form__tile" size="normal" indent="small">
-            {{ __('crud.add', ['entity' => __('entity.user_a')]) }}
+            {{ __('user.add') }}
         </x-ui.title>
 
         <div class="crud-form__main">
