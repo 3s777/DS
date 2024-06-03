@@ -18,6 +18,37 @@ class CreateUserRequest extends FormRequest
         return true;
     }
 
+    protected function prepareForValidation()
+    {
+        $this->merge([
+            'name' => str(request('name'))
+                ->squish()
+                ->lower()
+                ->value(),
+            'email' => str(request('email'))
+                ->squish()
+                ->lower()
+                ->value(),
+        ]);
+
+        $roles = request('roles');
+        $defaultRole = config('settings.default_role');
+
+        if(!$roles) {
+            $this->merge([
+                'roles' => [$defaultRole]
+            ]);
+        }
+
+        if($roles && !in_array($defaultRole, $roles)) {
+            $roles[] = $defaultRole;
+
+            $this->merge([
+                'roles' => $roles
+            ]);
+        }
+    }
+
     /**
      * Get the validation rules that apply to the request.
      *
@@ -45,6 +76,7 @@ class CreateUserRequest extends FormRequest
                 Password::min(8)->letters()
             ],
             'language_id' => ['required', 'integer', 'exists:languages,id'],
+            'roles' => ['required', 'array', 'exists:roles,name'],
             'first_name' => ['nullable','string'],
             'slug' => ['nullable','string', Rule::unique(User::class)],
             'description' => ['nullable','string'],
@@ -60,6 +92,7 @@ class CreateUserRequest extends FormRequest
             'slug' => __('common.slug'),
             'first_name' => __('auth.first_name'),
             'email' => __('common.email'),
+            'roles' => __('role.roles'),
             'description' => __('common.description'),
             'thumbnail' => __('common.thumbnail'),
             'language_id' => __('common.language'),

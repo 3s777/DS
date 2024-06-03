@@ -4,7 +4,8 @@
     'label' => '',
     'errors' => false,
     'size' => false,
-    'checked' => false
+    'checked' => false,
+    'disabled' => false,
 ])
 
 <div class="input-checkbox">
@@ -18,6 +19,7 @@
                 ->merge([
                     'type'=>'checkbox',
                     'checked' => $checked,
+                    'disabled' => $disabled,
                     'name' => $name,
                     'id' => $id
                 ]) }}

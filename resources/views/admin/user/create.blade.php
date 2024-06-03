@@ -50,20 +50,10 @@
                     </x-ui.form.group>
                 </x-grid.col>
 
-{{--                <x-grid.col xl="4" ls="6" ml="12" lg="6" md="6" sm="12">--}}
-{{--                    <x-ui.form.group>--}}
-{{--                        <x-ui.async-select--}}
-{{--                            name="user"--}}
-{{--                            route="find-users"--}}
-{{--                            label="{{ __('common.user') }}">--}}
-{{--                        </x-ui.async-select>--}}
-{{--                    </x-ui.form.group>--}}
-{{--                </x-grid.col>--}}
-
                 <x-grid.col xl="4" ls="6" ml="12" lg="6" md="6" sm="12">
                     <x-ui.form.group>
                         <x-libraries.choices
-                            class="language"
+                            class="choices-language"
                             id="language_id"
                             name="language_id"
                             label="{{ __('common.language') }} *">
@@ -117,6 +107,25 @@
                         </x-ui.form.switcher>
                     </x-ui.form.group>
                 </x-grid.col>
+
+                <x-grid.col xl="12" lg="12" md="12" sm="12">
+                    <x-ui.form.group>
+                        <x-libraries.choices
+                            class="choices-role"
+                            id="roles"
+                            name="roles[]"
+                            label="{{ __('role.choose') }}"
+                            multiple>
+                            @foreach($roles as $role)
+                                <x-ui.form.option value="{{ $role['name'] }}"
+                                    :selected="$role['name'] == config('settings.default_role')"
+                                >
+                                    {{ $role['display_name'] }}
+                                </x-ui.form.option>
+                            @endforeach
+                        </x-libraries.choices>
+                    </x-ui.form.group>
+                </x-grid.col>
             </x-grid>
         </div>
 
@@ -152,10 +161,18 @@
 
 @push('scripts')
     <script type="module">
-        const language = document.querySelector('.language');
+        const language = document.querySelector('.choices-language');
         const choicesLanguage = new Choices(language, {
             itemSelectText: '',
             searchEnabled: false,
+        });
+        const role = document.querySelector('.choices-role');
+        const choicesRole = new Choices(role, {
+            itemSelectText: '',
+            removeItems: true,
+            removeItemButton: true,
+            noResultsText: '{{ __('common.not_found') }}',
+            noChoicesText: '{{ __('common.nothing_else') }}',
         });
     </script>
 @endpush

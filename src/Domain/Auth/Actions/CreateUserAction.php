@@ -8,7 +8,7 @@ use Domain\Auth\DTOs\NewUserDTO;
 use Domain\Auth\Models\User;
 use Illuminate\Auth\Events\Registered;
 
-class RegisterNewUserAction implements RegisterNewUserContract
+class CreateUserAction implements RegisterNewUserContract
 {
     public function __invoke(NewUserDTO $data): User
     {
@@ -17,9 +17,21 @@ class RegisterNewUserAction implements RegisterNewUserContract
             'email' => $data->email,
             'password' => bcrypt($data->password),
             'language_id' => $data->language_id,
+            'first_name' => $data->first_name,
+            'slug' => $data->slug,
+            'description' => $data->description,
+            'email_verified_at' => $data->is_verified ? Carbon::now() : null
         ]);
 
-        $user->assignRole(config('settings.default_role'));
+        if($data->thumbnail) {
+            $user->addImageWithThumbnail(
+                $data->thumbnail,
+                'thumbnail',
+                ['small', 'medium']
+            );
+        }
+
+        $user->syncRoles($data->roles);
 
         event(new Registered($user));
 

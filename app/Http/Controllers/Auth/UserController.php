@@ -10,8 +10,8 @@ use App\Http\Requests\MassDeletingRequest;
 use App\ViewModels\User\UserCreateViewModel;
 use App\ViewModels\User\UserIndexViewModel;
 use App\ViewModels\User\UserListSelectViewModel;
+use Domain\Auth\Actions\CreateUserAction;
 use Domain\Auth\Actions\UpdateUserAction;
-use Domain\Auth\Contracts\RegisterNewUserContract;
 use Domain\Auth\DTOs\NewUserDTO;
 use Domain\Auth\DTOs\UpdateUserDTO;
 use Domain\Auth\Models\User;
@@ -35,7 +35,7 @@ class UserController extends Controller
         return view('admin.user.create', new UserCreateViewModel());
     }
 
-    public function store(CreateUserRequest $request, RegisterNewUserContract $action): RedirectResponse
+    public function store(CreateUserRequest $request, CreateUserAction $action): RedirectResponse
     {
         $action(NewUserDTO::fromRequest($request));
 

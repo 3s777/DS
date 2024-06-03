@@ -35,6 +35,8 @@ class UpdateUserAction
 
         $user->save();
 
+        $user->syncRoles($data->roles);
+
         return $user;
     }
 }

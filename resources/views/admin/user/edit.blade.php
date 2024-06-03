@@ -109,7 +109,52 @@
                             </x-ui.form.switcher>
                         </x-ui.form.group>
                     </x-grid.col>
+
+                    <x-grid.col xl="12" lg="12" md="12" sm="12">
+                        <x-ui.form.group>
+                            <x-libraries.choices
+                                class="choices-role"
+                                id="roles"
+                                name="roles[]"
+                                label="{{ __('role.choose') }}" multiple>
+                                @foreach($roles as $role)
+                                    <x-ui.form.option value="{{ $role['name'] }}"
+                                    :selected="$user->hasRole([$role['name']])"
+                                    >
+                                        {{ $role['display_name'] }}
+                                    </x-ui.form.option>
+                                @endforeach
+                            </x-libraries.choices>
+                        </x-ui.form.group>
+                    </x-grid.col>
                 </x-grid>
+@dump($rolePermissions)
+                <x-ui.form.group>
+                    <x-ui.accordion>
+                        <x-ui.accordion.item  padding="none" color="light">
+                            <x-ui.accordion.title>Дополнительные разрешения</x-ui.accordion.title>
+                            <x-ui.accordion.content>
+                                <x-grid type="container">
+                                    @foreach($permissions as $key => $permission)
+                                        <x-grid.col xl="3" ls="6" ml="12" lg="6" md="6" sm="12">
+                                            <x-ui.form.group size="small">
+                                                <x-ui.form.input-checkbox
+                                                    id="permission-{{ $key }}"
+                                                    name="permissions[]"
+                                                    value="{{ $permission['name'] }}"
+                                                    label="{{ $permission['display_name'] }}"
+                                                    :disabled="in_array($permission['name'], $rolePermissions)"
+                                                    :checked="$user->hasPermissionTo($permission['name'])"
+                                                >
+                                                </x-ui.form.input-checkbox>
+                                            </x-ui.form.group>
+                                        </x-grid.col>
+                                    @endforeach
+                                </x-grid>
+                            </x-ui.accordion.content>
+                        </x-ui.accordion.item>
+                    </x-ui.accordion>
+                </x-ui.form.group>
             </div>
 
             <div class="crud-form__description">
@@ -162,6 +207,14 @@
             const choicesLanguage = new Choices(language, {
                 itemSelectText: '',
                 searchEnabled: false,
+            });
+            const role = document.querySelector('.choices-role');
+            const choicesRole = new Choices(role, {
+                itemSelectText: '',
+                removeItems: true,
+                removeItemButton: true,
+                noResultsText: '{{ __('common.not_found') }}',
+                noChoicesText: '{{ __('common.nothing_else') }}',
             });
         </script>
     @endpush
