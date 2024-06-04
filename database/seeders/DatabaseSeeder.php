@@ -16,6 +16,7 @@ class DatabaseSeeder extends Seeder
             LanguageSeeder::class,
             UserSeeder::class,
             GameDeveloperSeeder::class,
+            RolesAndPermissionsSeeder::class,
 //            GameGenreSeeder::class,
 //            ConditionSeeder::class,
 ////            GamePlatformSeeder::class,

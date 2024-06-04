@@ -128,7 +128,7 @@
                         </x-ui.form.group>
                     </x-grid.col>
                 </x-grid>
-@dump($rolePermissions)
+
                 <x-ui.form.group>
                     <x-ui.accordion>
                         <x-ui.accordion.item  padding="none" color="light">

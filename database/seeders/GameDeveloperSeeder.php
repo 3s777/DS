@@ -13,8 +13,6 @@ class GameDeveloperSeeder extends Seeder
      */
     public function run(): void
     {
-
         GameDeveloper::factory(10)->for(User::factory()->create())->create();
-
     }
 }

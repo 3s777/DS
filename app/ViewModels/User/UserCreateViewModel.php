@@ -32,8 +32,12 @@ class UserCreateViewModel extends ViewModel
         return Permission::all()->select('name', 'display_name')->toArray();
     }
 
-    public function rolePermissions()
+    public function rolePermissions(): array
     {
+        if(!$this->user) {
+            return [];
+        }
+
         return $this->user->getPermissionsViaRoles()->pluck('name', 'display_name')->toArray();
     }
 }
