@@ -4,6 +4,7 @@ namespace App\Http\Requests\Auth\User;
 
 use App\Rules\LatinLowercaseRule;
 use Domain\Auth\Models\User;
+use Illuminate\Contracts\Validation\ValidationRule;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
 use Illuminate\Validation\Rules\Password;
@@ -18,7 +19,7 @@ class CreateUserRequest extends FormRequest
         return true;
     }
 
-    protected function prepareForValidation()
+    protected function prepareForValidation(): void
     {
         $this->merge([
             'name' => str(request('name'))
@@ -52,7 +53,7 @@ class CreateUserRequest extends FormRequest
     /**
      * Get the validation rules that apply to the request.
      *
-     * @return array<string, \Illuminate\Contracts\Validation\ValidationRule|array<mixed>|string>
+     * @return array<string, ValidationRule|array<mixed>|string>
      */
     public function rules(): array
     {
@@ -73,19 +74,35 @@ class CreateUserRequest extends FormRequest
             ],
             'password' => [
                 'required',
-                Password::min(8)->letters()
+                Password::min(8)->numbers()->letters()
             ],
-            'language_id' => ['required', 'integer', 'exists:languages,id'],
-            'roles' => ['required', 'array', 'exists:roles,name'],
+            'language_id' => [
+                'required',
+                'integer',
+                'exists:languages,id'
+            ],
+            'roles' => [
+                'required',
+                'array',
+                'exists:roles,name'
+            ],
             'first_name' => ['nullable','string'],
-            'slug' => ['nullable','string', Rule::unique(User::class)],
+            'slug' => [
+                'nullable',
+                'string',
+                Rule::unique(User::class)
+            ],
             'description' => ['nullable','string'],
-            'thumbnail' => ['nullable', 'mimes:jpg,png', 'max:10024'],
+            'thumbnail' => [
+                'nullable',
+                'mimes:jpg,png',
+                'max:10024'
+            ],
             'is_verified' => ['nullable','in:1']
         ];
     }
 
-    public function attributes()
+    public function attributes(): array
     {
         return [
             'name' => __('auth.username'),

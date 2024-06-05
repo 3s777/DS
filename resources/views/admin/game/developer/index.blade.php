@@ -19,7 +19,7 @@
                 'created_at' => __('common.created_date'),
             ]" />
 
-        <x-ui.responsive-table :data="$developers->isEmpty()">
+        <x-ui.responsive-table :empty="$developers->isEmpty()">
             <x-ui.responsive-table.header>
                 <x-ui.responsive-table.column type="select" name="check">
                     <x-common.action-table.select-all :models="$developers" />

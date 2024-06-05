@@ -43,6 +43,7 @@ class UpdateRoleRequest extends FormRequest
             'name' => __('common.name'),
             'display_name' => __('common.display_name'),
             'description' => __('common.description'),
+            'permissions' => __('permission.permissions'),
         ];
     }
 }

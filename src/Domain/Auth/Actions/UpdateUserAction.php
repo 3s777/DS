@@ -37,7 +37,17 @@ class UpdateUserAction
 
         $user->syncRoles($data->roles);
 
-        $user->syncPermissions($data->permissions);
+        $rolePermissions = $user->getPermissionsViaRoles()->pluck( 'name')->toArray();
+
+        $resultPermissions = array_diff($data->permissions ?? [], $rolePermissions);
+
+        $resultPermissions = array_filter(
+            $resultPermissions,
+            function($permission) use($user) {
+                return !$user->hasPermissionTo($permission);
+        });
+
+        $user->syncPermissions($resultPermissions);
 
         return $user;
     }

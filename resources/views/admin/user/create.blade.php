@@ -117,9 +117,11 @@
                             label="{{ __('role.choose') }}"
                             multiple>
                             @foreach($roles as $role)
-                                <x-ui.form.option value="{{ $role['name'] }}"
-                                    :selected="$role['name'] == config('settings.default_role')"
-                                >
+                                <x-ui.form.option
+                                    value="{{ $role['name'] }}"
+                                    :selected="old()
+                                        ? in_array($role['name'], old('roles', []))
+                                        : $role['name'] == config('settings.default_role')">
                                     {{ $role['display_name'] }}
                                 </x-ui.form.option>
                             @endforeach

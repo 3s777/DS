@@ -4,7 +4,7 @@
     </x-ui.title>
 
     <x-common.action-table model-name="permissions" :mass-delete="false" :selectable="false">
-        <x-ui.responsive-table :data="$permissions->isEmpty()">
+        <x-ui.responsive-table :empty="$permissions->isEmpty()">
             <x-ui.responsive-table.header>
                 <x-ui.responsive-table.column type="id" name="id">
                     {{ __('common.id') }}

@@ -15,14 +15,14 @@ class UpdateUserDTO
         public readonly string $email,
         public readonly int $language_id,
         public readonly array $roles,
-        public readonly null|array $permissions = null,
-        public readonly null|string $password = null,
-        public readonly null|string $first_name = null,
-        public readonly null|string $slug = null,
-        public readonly null|string $description = null,
-        public readonly null|UploadedFile $thumbnail = null,
-        public readonly null|string $thumbnail_uploaded = null,
-        public readonly null|int $is_verified = null
+        public readonly ?array $permissions = null,
+        public readonly ?string $password = null,
+        public readonly ?string $first_name = null,
+        public readonly ?string $slug = null,
+        public readonly ?string $description = null,
+        public readonly ?UploadedFile $thumbnail = null,
+        public readonly ?string $thumbnail_uploaded = null,
+        public readonly ?int $is_verified = null
     ) {
     }
 

@@ -48,8 +48,7 @@
                                 name="permissions[]"
                                 value="{{ $permission['name'] }}"
                                 label="{{ $permission['display_name'] }}"
-                                :checked="in_array($permission['name'], old('permissions', []))"
-                            >
+                                :checked="in_array($permission['name'], old('permissions', []))">
                             </x-ui.form.input-checkbox>
                         </x-ui.form.group>
                     </x-grid.col>

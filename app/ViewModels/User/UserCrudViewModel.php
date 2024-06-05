@@ -8,7 +8,7 @@ use Domain\Auth\Models\Role;
 use Domain\Auth\Models\User;
 use Spatie\ViewModels\ViewModel;
 
-class UserCreateViewModel extends ViewModel
+class UserCrudViewModel extends ViewModel
 {
     public ?User $user;
 
@@ -34,10 +34,8 @@ class UserCreateViewModel extends ViewModel
 
     public function rolePermissions(): array
     {
-        if(!$this->user) {
-            return [];
-        }
-
-        return $this->user->getPermissionsViaRoles()->pluck('name', 'display_name')->toArray();
+        return $this->user
+            ? $this->user->getPermissionsViaRoles()->pluck('name', 'display_name')->toArray()
+            : [];
     }
 }

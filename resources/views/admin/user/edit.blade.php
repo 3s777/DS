@@ -103,9 +103,7 @@
                                 name="is_verified"
                                 value="1"
                                 label="{{ __('auth.is_verified') }}"
-{{--                                :checked="old() ? old('is_verified') : 'checked'"--}}
-                                :checked="$user->email_verified_at"
-                            >
+                                :checked="$user->email_verified_at">
                             </x-ui.form.switcher>
                         </x-ui.form.group>
                     </x-grid.col>
@@ -119,8 +117,9 @@
                                 label="{{ __('role.choose') }}" multiple>
                                 @foreach($roles as $role)
                                     <x-ui.form.option value="{{ $role['name'] }}"
-                                    :selected="$user->hasRole([$role['name']])"
-                                    >
+                                    :selected="old()
+                                        ? in_array($role['name'], old('roles', []))
+                                        : $user->hasRole([$role['name']])">
                                         {{ $role['display_name'] }}
                                     </x-ui.form.option>
                                 @endforeach
@@ -132,7 +131,7 @@
                 <x-ui.form.group>
                     <x-ui.accordion>
                         <x-ui.accordion.item  padding="none" color="light">
-                            <x-ui.accordion.title>Дополнительные разрешения</x-ui.accordion.title>
+                            <x-ui.accordion.title>{{ __('permission.additional') }}</x-ui.accordion.title>
                             <x-ui.accordion.content>
                                 <x-grid type="container">
                                     @foreach($permissions as $key => $permission)
@@ -144,8 +143,9 @@
                                                     value="{{ $permission['name'] }}"
                                                     label="{{ $permission['display_name'] }}"
                                                     :disabled="in_array($permission['name'], $rolePermissions)"
-                                                    :checked="$user->hasPermissionTo($permission['name'])"
-                                                >
+                                                    :checked="old()
+                                                        ? in_array($permission['name'], old('permissions', []))
+                                                        : $user->hasPermissionTo($permission['name'])">
                                                 </x-ui.form.input-checkbox>
                                             </x-ui.form.group>
                                         </x-grid.col>

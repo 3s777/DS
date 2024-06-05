@@ -15,12 +15,12 @@ class NewUserDTO
         public readonly string $email,
         public readonly string $password,
         public readonly int $language_id,
-        public readonly null|array $roles = null,
-        public readonly null|string $first_name = null,
-        public readonly null|string $slug = null,
-        public readonly null|string $description = null,
-        public readonly null|UploadedFile $thumbnail = null,
-        public readonly null|int $is_verified = null
+        public readonly ?array $roles = null,
+        public readonly ?string $first_name = null,
+        public readonly ?string $slug = null,
+        public readonly ?string $description = null,
+        public readonly ?UploadedFile $thumbnail = null,
+        public readonly ?int $is_verified = null
     ) {
     }
 

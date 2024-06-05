@@ -6,7 +6,7 @@ use Domain\Auth\Models\Permission;
 use Domain\Auth\Models\Role;
 use Spatie\ViewModels\ViewModel;
 
-class RoleCreateViewModel extends ViewModel
+class RoleCrudViewModel extends ViewModel
 {
     public ?Role $role;
 

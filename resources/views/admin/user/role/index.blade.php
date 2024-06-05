@@ -4,7 +4,7 @@
     </x-ui.title>
 
     <x-common.action-table model-name="roles" :mass-delete="false" :selectable="false">
-        <x-ui.responsive-table :data="$roles->isEmpty()">
+        <x-ui.responsive-table :empty="$roles->isEmpty()">
             <x-ui.responsive-table.header>
                 <x-ui.responsive-table.column type="id" name="id">
                     {{ __('common.id') }}

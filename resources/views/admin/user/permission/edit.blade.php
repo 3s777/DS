@@ -34,6 +34,7 @@
                                 id="display_name"
                                 name="display_name"
                                 value="{{ $permission->display_name }}"
+                                required
                                 autocomplete="on">
                             </x-ui.form.input-text>
                         </x-ui.form.group>

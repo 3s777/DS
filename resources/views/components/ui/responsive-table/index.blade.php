@@ -1,6 +1,6 @@
 @props([
     'footer' => false,
-    'data' => false,
+    'empty' => false,
 ])
 <div class="responsive-table__wrapper">
     <div
@@ -12,7 +12,7 @@
         {{ $slot }}
     </div>
 
-    @if($data)
+    @if($empty)
         <x-common.missing>
             {{ __('common.not_found') }}
         </x-common.missing>

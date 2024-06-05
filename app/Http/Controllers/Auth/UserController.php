@@ -5,9 +5,10 @@ namespace App\Http\Controllers\Auth;
 use App\Exceptions\MassDeletingException;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Auth\User\CreateUserRequest;
+use App\Http\Requests\Auth\User\FilterUserRequest;
 use App\Http\Requests\Auth\User\UpdateUserRequest;
 use App\Http\Requests\MassDeletingRequest;
-use App\ViewModels\User\UserCreateViewModel;
+use App\ViewModels\User\UserCrudViewModel;
 use App\ViewModels\User\UserIndexViewModel;
 use App\ViewModels\User\UserListSelectViewModel;
 use Domain\Auth\Actions\CreateUserAction;
@@ -25,14 +26,14 @@ use Support\DTOs\MassDeletingDTO;
 
 class UserController extends Controller
 {
-    public function index(): View|Application|Factory|\Illuminate\Contracts\Foundation\Application
+    public function index(FilterUserRequest $request): View|Application|Factory|\Illuminate\Contracts\Foundation\Application
     {
         return view('admin.user.index', new UserIndexViewModel());
     }
 
     public function create(): View|Application|Factory|\Illuminate\Contracts\Foundation\Application
     {
-        return view('admin.user.create', new UserCreateViewModel());
+        return view('admin.user.create', new UserCrudViewModel());
     }
 
     public function store(CreateUserRequest $request, CreateUserAction $action): RedirectResponse
@@ -46,7 +47,7 @@ class UserController extends Controller
 
     public function edit(User $user): View|Application|Factory|\Illuminate\Contracts\Foundation\Application
     {
-        return view('admin.user.edit', new UserCreateViewModel($user));
+        return view('admin.user.edit', new UserCrudViewModel($user));
     }
 
     public function update(UpdateUserRequest $request, User $user, UpdateUserAction $action): RedirectResponse

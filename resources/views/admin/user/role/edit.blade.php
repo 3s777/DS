@@ -48,8 +48,9 @@
                                     name="permissions[]"
                                     value="{{ $permission['name'] }}"
                                     label="{{ $permission['display_name'] }}"
-                                    :checked="$role->hasPermissionTo($permission['name'])"
-                                >
+                                    :checked="old()
+                                        ? in_array($permission['name'], old('permissions', []))
+                                        : $role->hasPermissionTo($permission['name'])">
                                 </x-ui.form.input-checkbox>
                             </x-ui.form.group>
                         </x-grid.col>

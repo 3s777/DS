@@ -19,6 +19,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
+use Illuminate\Database\Eloquent\Relations\MorphMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -89,12 +90,12 @@ class User extends Authenticatable implements MustVerifyEmail, HasLocalePreferen
         return UserFactory::new();
     }
 
-    public function sendEmailVerificationNotification()
+    public function sendEmailVerificationNotification(): void
     {
         $this->notify(new VerifyEmailNotification());
     }
 
-    public function sendPasswordResetNotification($token)
+    public function sendPasswordResetNotification($token): void
     {
         $this->notify(new ResetPasswordNotification($token));
     }
@@ -136,7 +137,7 @@ class User extends Authenticatable implements MustVerifyEmail, HasLocalePreferen
         ];
     }
 
-    public function updatePassword($password)
+    public function updatePassword($password): void
     {
         if(!$password) {
             $this->deleteAllThumbnails();
@@ -163,7 +164,7 @@ class User extends Authenticatable implements MustVerifyEmail, HasLocalePreferen
         return $this->hasOne(Image::class);
     }
 
-    public function morphImages()
+    public function morphImages(): MorphMany
     {
         return $this->morphMany(Image::class, 'imageable');
     }

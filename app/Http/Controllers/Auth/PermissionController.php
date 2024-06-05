@@ -6,17 +6,14 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Auth\Permission\CreatePermissionRequest;
 use App\Http\Requests\Auth\Permission\UpdatePermissionRequest;
 use App\ViewModels\User\PermissionIndexViewModel;
-use App\ViewModels\User\RoleCreateViewModel;
 use Domain\Auth\Models\Permission;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
 use Illuminate\Foundation\Application;
 use Illuminate\Http\RedirectResponse;
 
-
 class PermissionController extends Controller
 {
-
     public function index(): View|Application|Factory|\Illuminate\Contracts\Foundation\Application
     {
         return view('admin.user.permission.index', new PermissionIndexViewModel());

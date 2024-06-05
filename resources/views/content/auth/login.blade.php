@@ -44,7 +44,6 @@
                         <x-ui.form.input-checkbox
                             id="remember"
                             name="remember"
-                            value=""
                             label="{{ __('auth.remember') }}"
                         >
                         </x-ui.form.input-checkbox>

@@ -2,11 +2,12 @@
 
 namespace App\Http\Requests\Auth\User;
 
+use Illuminate\Contracts\Validation\ValidationRule;
 use Illuminate\Foundation\Http\FormRequest;
 
 class FilterUserRequest extends FormRequest
 {
-    protected $redirectRoute = 'game-developers.index';
+    protected $redirectRoute = 'users.index';
 
     /**
      * Determine if the user is authorized to make this request.
@@ -19,19 +20,26 @@ class FilterUserRequest extends FormRequest
     /**
      * Get the validation rules that apply to the request.
      *
-     * @return array<string, \Illuminate\Contracts\Validation\ValidationRule|array<mixed>|string>
+     * @return array<string, ValidationRule|array<mixed>|string>
      */
     public function rules(): array
     {
         return [
             'filters.search' => ['nullable', 'string'],
-            'filters.dates.from' => ['nullable', 'date', 'date_format:Y-m-d'],
-            'filters.dates.to' => ['nullable', 'date', 'date_format:Y-m-d'],
-            'filters.user' => ['nullable', 'integer', 'exists:Domain\Auth\Models\User,id'],
+            'filters.dates.from' => [
+                'nullable',
+                'date',
+                'date_format:Y-m-d'
+            ],
+            'filters.dates.to' => [
+                'nullable',
+                'date',
+                'date_format:Y-m-d'
+            ]
         ];
     }
 
-    public function messages()
+    public function messages(): array
     {
         return [
             'filters.dates.from' => __('validation.filters_date'),
@@ -39,12 +47,11 @@ class FilterUserRequest extends FormRequest
         ];
     }
 
-    public function attributes()
+    public function attributes(): array
     {
         return [
             'filters.search' => __('common.search'),
             'filters.dates' => __('common.dates'),
-            'filters.user' => __('common.user'),
         ];
     }
 }

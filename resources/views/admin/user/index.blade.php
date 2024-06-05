@@ -20,7 +20,7 @@
                 'created_at' => __('common.created_date'),
             ]" />
 
-        <x-ui.responsive-table :data="$users->isEmpty()">
+        <x-ui.responsive-table :empty="$users->isEmpty()">
             <x-ui.responsive-table.header>
                 <x-ui.responsive-table.column type="select" name="check">
                     <x-common.action-table.select-all :models="$users" />
@@ -81,16 +81,4 @@
 
     {{ $users->links('pagination::default') }}
 
-    @push('scripts')
-        <script>
-            document.addEventListener('alpine:init', () => {
-                Alpine.store('modalTest', {
-                    hide: true,
-                    test(actionSelect) {
-                        console.log(actionSelect);
-                    }
-                });
-            });
-        </script>
-    @endpush
 </x-layouts.admin>
