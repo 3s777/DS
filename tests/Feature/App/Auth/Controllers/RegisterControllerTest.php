@@ -6,6 +6,7 @@ use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Requests\Auth\RegisterRequest;
 use Database\Factories\UserFactory;
+use Domain\Auth\Models\Role;
 use Domain\Auth\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Testing\TestResponse;
@@ -22,6 +23,9 @@ class RegisterControllerTest extends TestCase
         parent::setUp();
 
         $this->request = RegisterRequest::factory()->create();
+
+        Role::create(['name' => config('settings.default_role'), 'display_name' => 'User']);
+
     }
 
     private function postRequest(): TestResponse

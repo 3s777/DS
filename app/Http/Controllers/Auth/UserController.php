@@ -45,6 +45,11 @@ class UserController extends Controller
         return to_route('users.index');
     }
 
+    public function show(User $user)
+    {
+        return view('admin.user.show', compact(['user']));
+    }
+
     public function edit(User $user): View|Application|Factory|\Illuminate\Contracts\Foundation\Application
     {
         return view('admin.user.edit', new UserCrudViewModel($user));

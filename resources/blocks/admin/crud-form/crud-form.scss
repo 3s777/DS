@@ -36,7 +36,7 @@
     &__sidebar-wrapper {
         padding: 14px;
         background-color: $base-dark-like-transparent;
-        border-radius: 12px;
+        border-radius: $border-radius;
     }
 
     @include breakpoint-max($md) {

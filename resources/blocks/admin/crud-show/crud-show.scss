@@ -1,0 +1,70 @@
+.crud-show {
+    display: grid;
+    grid-template-columns: auto 246px;
+    grid-template-rows: repeat(4, auto);
+    grid-template-areas:
+        "content sidebar"
+        "buttons sidebar";
+    column-gap: 24px;
+
+    &__tile {
+        margin-bottom: 24px;
+    }
+
+    &__content {
+        grid-area: content;
+        margin-bottom: 24px;
+    }
+
+    &__description {
+        grid-area: description;
+        padding: 14px;
+        font-size: rem(18);
+        background-color: $base-dark-like-transparent;
+        border-radius: $border-radius;
+
+        p {
+            font-size: rem(18);
+
+            &:last-child {
+                margin-bottom: 0;
+            }
+        }
+
+        &-title {
+            margin-bottom: 16px;
+        }
+    }
+
+
+
+    &__buttons {
+        grid-area: buttons;
+        display: flex;
+        gap: 16px;
+    }
+
+    &__sidebar {
+        grid-area: sidebar;
+    }
+
+    &__thumbnail {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+        padding: 14px;
+        line-height: 0;
+        background-color: $base-dark-like-transparent;
+        border-radius: $border-radius;
+        aspect-ratio: 1 / 1;
+    }
+
+    .specifications {
+        font-size: rem(18);
+    }
+
+    .tag {
+        font-size: rem(16);
+    }
+}

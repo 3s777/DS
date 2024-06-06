@@ -14,7 +14,7 @@ class RegisterRequestFactory extends RequestFactory
            'name' => $this->faker->regexify('[a-z0-9.]{7}'),
            'password' => '123456789q',
            'password_confirmation' => '123456789q',
-            'language_id' => Language::factory()
+           'language_id' => Language::factory()
         ];
     }
 }

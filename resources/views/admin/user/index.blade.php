@@ -66,7 +66,7 @@
                         <span class="responsive-table__label">{{ __('common.created_date') }}: </span> {{ $user->created_at }}
                     </x-ui.responsive-table.column>
                     <x-ui.responsive-table.column type="action">
-                        <x-common.action-table.buttons :item="$user" model="users" />
+                        <x-common.action-table.buttons :item="$user" :show="true" model="users" />
                     </x-ui.responsive-table.column>
                 </x-ui.responsive-table.row>
             @endforeach

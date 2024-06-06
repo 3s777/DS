@@ -3,7 +3,7 @@
                id="create-form"
                action="{{ route('roles.store') }}"
                enctype="multipart/form-data">
-        <x-ui.title class="curd-form__tile" size="normal" indent="small">
+        <x-ui.title class="crud-form__tile" size="normal" indent="small">
             {{ __('role.add') }}
         </x-ui.title>
 

@@ -5,7 +5,7 @@
                id="edit-form"
                action="{{ route('users.update', $user->slug) }}"
                enctype="multipart/form-data">
-            <x-ui.title class="curd-form__tile" size="normal" indent="small">
+            <x-ui.title class="crud-form__tile" size="normal" indent="small">
                 {{ __('user.edit') }}
             </x-ui.title>
 

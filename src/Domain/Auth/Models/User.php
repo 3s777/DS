@@ -26,6 +26,7 @@ use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
+use Spatie\Permission\Traits\HasPermissions;
 use Spatie\Permission\Traits\HasRoles;
 use Support\Traits\Models\HasSlug;
 use Support\Traits\Models\HasThumbnail;
@@ -40,6 +41,7 @@ class User extends Authenticatable implements MustVerifyEmail, HasLocalePreferen
     use HasThumbnail;
     use InteractsWithMedia;
     use HasRoles;
+    use HasPermissions;
 
     /**
      * The attributes that are mass assignable.

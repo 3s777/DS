@@ -44,7 +44,15 @@ class UpdateUserAction
         $resultPermissions = array_filter(
             $resultPermissions,
             function($permission) use($user) {
-                return !$user->hasPermissionTo($permission);
+                $isRoleHasPermission = true;
+
+                foreach($user->roles as $role) {
+                    if($role->hasPermissionTo($permission) ) {
+                        $isRoleHasPermission = false;
+                    }
+                }
+
+                return $isRoleHasPermission;
         });
 
         $user->syncPermissions($resultPermissions);

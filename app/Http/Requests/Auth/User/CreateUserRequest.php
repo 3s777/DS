@@ -60,7 +60,7 @@ class CreateUserRequest extends FormRequest
         return [
             'name' => ['required',
                 'string',
-                'max:255',
+                'max:30',
                 'min:3',
                 new LatinLowercaseRule(),
                 Rule::unique(User::class)

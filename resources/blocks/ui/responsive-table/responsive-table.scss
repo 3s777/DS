@@ -35,12 +35,16 @@
     }
 
     &__column {
-        min-width: 150px;
         display: table-cell;
+        min-width: 150px;
+        max-width: 300px;
         padding: 5px 10px;
         vertical-align: middle;
         border-right: 1px solid $base-light-transparent;
-        word-break: break-all;
+        //word-break: break-all;
+        //overflow-wrap: break-word;
+        overflow: hidden;
+        text-overflow: ellipsis;
 
         &:last-child {
             border-right: 0;
@@ -141,6 +145,7 @@
             order: 3;
             display: block;
             width: 100%;
+            max-width: 100%;
             padding: 4px 0;
             border-right: 0;
             word-break: unset;
