@@ -1,5 +1,5 @@
 <x-layouts.admin :search="false">
-            <x-ui.title class="crud-show__tile" size="normal" indent="small">
+            <x-ui.title class="crud-show__title" size="normal" indent="small">
                 {{ $user->name }} - {{ $user->first_name }}
             </x-ui.title>
 
@@ -38,7 +38,7 @@
                     @if($user->description)
                         <div class="crud-show__description">
                             <div class="crud-show__description-title">
-                                Описание и заметки:
+                                {{ __('common.description_notes') }}:
                             </div>
                             {!! $user->description !!}
                         </div>
@@ -47,26 +47,28 @@
 
                 <div class="crud-show__sidebar">
                     <div class="crud-show__thumbnail">
-                        <a href="{{ asset('storage/images/'.$user->getThumbnailPath())  }}" data-fancybox data-caption="Single image">
+                        <a href="{{ asset('storage/images/'.$user->getThumbnailPathWebp())  }}" data-fancybox data-caption="">
                         <x-ui.responsive-image
                             :model="$user"
                             :image-sizes="['small', 'medium', 'large']"
                             :path="$user->getThumbnailPath()"
                             sizes="(max-width: 1024px) 100vw, (max-width: 1400px) 30vw, 220px">
-                            <x-slot:img alt="test" title="test title"></x-slot:img>
+                            <x-slot:img height="220" width="220" alt="test" title="test title"></x-slot:img>
                         </x-ui.responsive-image>
                         </a>
                     </div>
                 </div>
 
-                <div class="crud-show__buttons" x-data x-on:keydown.escape.window="$store.modalDelete.hide = true">
-                    <x-ui.form.button tag="a">Перейти в профиль</x-ui.form.button>
-                    <x-ui.form.button tag="a" href="{{ route('users.edit', $user->slug) }}" color="warning">{{ __('common.edit') }}</x-ui.form.button>
-                    <x-ui.form.button x-on:click.stop="
-                $store.modalDelete.hide = ! $store.modalDelete.hide;
-                $store.modalDelete.action = '{{ route('users.destroy', $user->slug) }}'
-                $store.modalDelete.name = '{{ $user->name }}'
-                " tag="a" color="cancel">{{ __('common.delete') }}</x-ui.form.button>
+                <div class="crud-show__action-buttons" x-data x-on:keydown.escape.window="$store.modalDelete.hide = true">
+                    <x-ui.form.button class="crud-show__action-button" tag="a">{{ __('user.to_profile') }}</x-ui.form.button>
+                    <x-ui.form.button class="crud-show__action-button" tag="a" href="{{ route('users.edit', $user->slug) }}" color="warning">{{ __('common.edit') }}</x-ui.form.button>
+                    <x-ui.form.button class="crud-show__action-button" x-on:click.stop="
+                        $store.modalDelete.hide = ! $store.modalDelete.hide;
+                        $store.modalDelete.action = '{{ route('users.destroy', $user->slug) }}'
+                        $store.modalDelete.name = '{{ $user->name }}'"
+                        tag="a" color="cancel">
+                        {{ __('common.delete') }}
+                    </x-ui.form.button>
                 </div>
             </div>
 
@@ -115,5 +117,4 @@
             });
         </script>
     @endpush
-
 </x-layouts.admin>

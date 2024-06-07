@@ -40,7 +40,7 @@ class GenerateSmallThumbnailsJob implements ShouldQueue
         //            ->save($thumbnailStorage->path($this->originalThumbDir.'/'.$imagePathInfo['filename'].'.'.$imagePathInfo['extension']));
 
         $image
-            ->scaleDown($this->width, $this->height)
+            ->scaleDown($this->width)
             ->toWebp(config('thumbnail.webp_quality'))
             ->save($thumbnailStorage->path($this->webpThumbDir.'/'.$imagePathInfo['filename'].'.webp'));
     }

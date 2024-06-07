@@ -5,15 +5,14 @@
     grid-template-areas:
         "content sidebar"
         "buttons sidebar";
-    column-gap: 24px;
+    gap: 24px;
 
-    &__tile {
+    &__title {
         margin-bottom: 24px;
     }
 
     &__content {
         grid-area: content;
-        margin-bottom: 24px;
     }
 
     &__description {
@@ -37,12 +36,14 @@
     }
 
 
-
-    &__buttons {
+    &__action-buttons {
         grid-area: buttons;
         display: flex;
+        flex-wrap: wrap;
+        align-items: flex-start;
         gap: 16px;
     }
+
 
     &__sidebar {
         grid-area: sidebar;
@@ -58,6 +59,17 @@
         background-color: $base-dark-like-transparent;
         border-radius: $border-radius;
         aspect-ratio: 1 / 1;
+        overflow: hidden;
+
+            picture {
+                display: block;
+                width: 100%;
+            }
+
+            img {
+                max-width: 100%;
+                height: auto;
+            }
     }
 
     .specifications {
@@ -66,5 +78,45 @@
 
     .tag {
         font-size: rem(16);
+    }
+
+    @include breakpoint-max($md) {
+        grid-template-columns: auto;
+        grid-template-rows: repeat(4, auto);
+        grid-template-areas:
+        "content"
+        "sidebar"
+        "buttons";
+        gap: 24px;
+
+        &__sidebar {
+            display: flex;
+            justify-content: center;
+        }
+
+        &__thumbnail {
+            width: 250px;
+        }
+    }
+
+    @include breakpoint-max($sm) {
+        &__action-button {
+            width: 100%;
+        }
+    }
+
+    @include breakpoint-max($sl) {
+        &__action-button {
+            width: 100%;
+        }
+
+        .specifications__item {
+            flex-wrap: wrap;
+        }
+
+        .specifications__item-title {
+            width: 100%;
+            margin-bottom: 8px;
+        }
     }
 }

@@ -165,6 +165,17 @@ trait HasThumbnail
         }
     }
 
+    public function getThumbnailPathWebp(): string
+    {
+        $thumbnailPathInfo = pathinfo($this->getThumbnailPath());
+
+        if($thumbnailPathInfo['filename']) {
+            return $thumbnailPathInfo['dirname'].'/'.$thumbnailPathInfo['filename'].'.webp';
+        }
+
+        return '';
+    }
+
     public function deleteAllThumbnails(): void
     {
         if(config('thumbnail.driver') == 'media_library') {

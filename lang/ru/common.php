@@ -6,6 +6,7 @@ return [
     'display_name' => 'Отображаемое название',
     'slug' => 'Префикс',
     'description' => 'Описание',
+    'description_notes' => 'Описание и заметки:',
     'email' => 'Email',
     'thumbnail' => 'Миниатюра',
     'created_date' => 'Дата добавления',

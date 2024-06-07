@@ -12,8 +12,3 @@ import './scripts';
 import './asyncSelect'
 
 import './libraries/quill';
-
-Fancybox.bind("[data-fancybox]", {
-    // Your custom options
-});
-
