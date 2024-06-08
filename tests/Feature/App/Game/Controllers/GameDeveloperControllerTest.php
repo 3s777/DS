@@ -94,7 +94,7 @@ class GameDeveloperControllerTest extends TestCase
         $this->actingAs($this->user)
             ->get(action([GameDeveloperController::class, 'edit'], [$this->gameDeveloper->slug]))
             ->assertOk()
-            ->assertSee(__($this->gameDeveloper->name))
+            ->assertSee($this->gameDeveloper->name)
             ->assertViewIs('admin.game.developer.edit');
     }
 

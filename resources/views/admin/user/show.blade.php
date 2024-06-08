@@ -6,29 +6,29 @@
             <div class="crud-show user-show-admin">
                 <div class="crud-show__content">
                     <x-ui.specifications>
-                        <x-ui.specifications.item title="{{ __('auth.username') }}">
+                        <x-ui.specifications.item class="crud-show__specification" title="{{ __('auth.username') }}">
                             <x-ui.tag :disabled="true" tag="div" color="dark">{{ $user->name }}</x-ui.tag>
                         </x-ui.specifications.item>
 
-                        <x-ui.specifications.item title="{{ __('auth.first_name') }}">
+                        <x-ui.specifications.item class="crud-show__specification" title="{{ __('auth.first_name') }}">
                             <x-ui.tag :disabled="true" tag="div" color="dark">{{ $user->first_name }}</x-ui.tag>
                         </x-ui.specifications.item>
 
-                        <x-ui.specifications.item title="{{ __('common.email') }}">
+                        <x-ui.specifications.item class="crud-show__specification" title="{{ __('common.email') }}">
                             <x-ui.tag :disabled="true" tag="div" color="dark">{{ $user->email }}</x-ui.tag>
                         </x-ui.specifications.item>
 
-                        <x-ui.specifications.item title="{{ __('common.language') }}">
+                        <x-ui.specifications.item class="crud-show__specification" title="{{ __('common.language') }}">
                             <x-ui.tag :disabled="true" tag="div" color="dark">{{ $user->language->name }}</x-ui.tag>
                         </x-ui.specifications.item>
 
-                        <x-ui.specifications.item title="{{ __('role.roles') }}">
+                        <x-ui.specifications.item class="crud-show__specification" title="{{ __('role.roles') }}">
                             @foreach($user->roles as $role)
                                 <x-ui.tag :disabled="true" tag="div" color="dark">{{ $role->display_name }}</x-ui.tag>
                             @endforeach
                         </x-ui.specifications.item>
 
-                        <x-ui.specifications.item title="{{ __('permission.permissions') }}">
+                        <x-ui.specifications.item class="crud-show__specification" title="{{ __('permission.permissions') }}">
                             @foreach($user->permissions as $permission)
                                 <x-ui.tag :disabled="true" tag="div" color="dark">{{ $permission->display_name }}</x-ui.tag>
                             @endforeach

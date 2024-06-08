@@ -32,7 +32,8 @@ class UpdatePermissionRequest extends FormRequest
                 Rule::unique(Permission::class)->ignore($this->permission)
             ],
             'display_name' => ['required','string'],
-            'description' => ['nullable','string']
+            'description' => ['nullable','string'],
+            'permissions' => ['nullable', 'array']
         ];
     }
 
@@ -42,6 +43,7 @@ class UpdatePermissionRequest extends FormRequest
             'name' => __('common.name'),
             'display_name' => __('common.display_name'),
             'description' => __('common.description'),
+            'permissions' => __('permission.permissions'),
         ];
     }
 }

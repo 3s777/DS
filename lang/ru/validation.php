@@ -192,5 +192,6 @@ return [
     */
     'incorrect_login_format' => 'Неверный формат. Поле :attribute должно быть в нижнем регистре, латиницей, может содержать цифры и знак "."',
     'email_not_exist' => 'Пользователя с таким :attribute не существует',
+    'array_model_not_exist' => 'Неверное значение поля :attribute',
     'filters_date' => 'Неверный формат даты'
 ];

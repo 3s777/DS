@@ -49,7 +49,6 @@ class RoleController extends Controller
 
     public function update(UpdateRoleRequest $request, Role $role): RedirectResponse
     {
-
         $role->fill($request->safe()->except(['permissions']))->save();
 
         $role->syncPermissions($request->input('permissions'));

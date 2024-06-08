@@ -110,13 +110,13 @@
             width: 100%;
         }
 
-        .specifications__item {
+        &__specification {
             flex-wrap: wrap;
-        }
 
-        .specifications__item-title {
-            width: 100%;
-            margin-bottom: 8px;
+            .specifications__item-title {
+                width: 100%;
+                margin-bottom: 8px;
+            }
         }
     }
 }

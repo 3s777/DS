@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests\Auth\Role;
 
+use App\Rules\ModelExistsInArrayRule;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
 use Spatie\Permission\Models\Role;
@@ -33,7 +34,11 @@ class UpdateRoleRequest extends FormRequest
             ],
             'display_name' => ['required','string'],
             'description' => ['nullable','string'],
-            'permissions' => ['nullable', 'array']
+            'permissions' => [
+                'nullable',
+                'array',
+                new ModelExistsInArrayRule('Domain\Auth\Models\Permission', 'name'),
+            ]
         ];
     }
 
