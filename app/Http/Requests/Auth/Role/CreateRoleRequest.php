@@ -2,7 +2,6 @@
 
 namespace App\Http\Requests\Auth\Role;
 
-use App\Rules\LatinLowercaseRule;
 use App\Rules\ModelExistsInArrayRule;
 use Domain\Auth\Models\Role;
 use Illuminate\Foundation\Http\FormRequest;
@@ -39,7 +38,8 @@ class CreateRoleRequest extends FormRequest
             'permissions' => [
                 'nullable',
                 'array',
-                new ModelExistsInArrayRule('Domain\Auth\Models\Permission', 'name'),
+                'exists:permissions,name'
+//                new ModelExistsInArrayRule('Domain\Auth\Models\Permission', 'name'),
             ]
         ];
     }

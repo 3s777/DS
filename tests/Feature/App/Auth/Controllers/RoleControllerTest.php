@@ -35,7 +35,6 @@ class RoleControllerTest extends TestCase
         $this->request = CreateRoleRequest::factory()->create();
 
         $this->artisan('db:seed', ['--class' => PermissionsTestSeeder::class]);
-
     }
 
     public function checkNotAuthRedirect(
@@ -66,7 +65,7 @@ class RoleControllerTest extends TestCase
      * @test
      * @return void
      */
-    public function it_index_only_auth_success(): void
+    public function it_index_success(): void
     {
         $this->actingAs($this->user)
             ->get(action([RoleController::class, 'index']))
@@ -79,7 +78,7 @@ class RoleControllerTest extends TestCase
      * @test
      * @return void
      */
-    public function it_create_only_auth_success(): void
+    public function it_create_success(): void
     {
         $this->actingAs($this->user)
             ->get(action([RoleController::class, 'create']))
@@ -92,7 +91,7 @@ class RoleControllerTest extends TestCase
      * @test
      * @return void
      */
-    public function it_edit_only_auth_success(): void
+    public function it_edit_success(): void
     {
         $this->actingAs($this->user)
             ->get(action([RoleController::class, 'edit'], [$this->role->id]))
@@ -105,7 +104,7 @@ class RoleControllerTest extends TestCase
      * @test
      * @return void
      */
-    public function it_store_only_auth_success(): void
+    public function it_store_success(): void
     {
         $this->actingAs($this->user)
             ->post(action([RoleController::class, 'store']), $this->request)
@@ -120,6 +119,26 @@ class RoleControllerTest extends TestCase
         ]);
     }
 
+    /**
+     * @test
+     * @return void
+     */
+    public function it_has_wildcard_permissions_success(): void
+    {
+        $this->request['permissions'] = ['entity.*'];
+
+        $this->actingAs($this->user)
+            ->post(action([RoleController::class, 'store']), $this->request)
+            ->assertRedirectToRoute('roles.index')
+            ->assertSessionHas('helper_flash_message', __('role.created'));
+
+        $role = Role::where('name', $this->request['name'])->first();
+        $this->assertTrue($role->hasAllPermissions(['entity.create', 'entity.edit', 'entity.delete']));
+
+        $this->assertDatabaseHas('roles', [
+            'name' => $this->request['name']
+        ]);
+    }
 
     /**
      * @test
@@ -146,9 +165,30 @@ class RoleControllerTest extends TestCase
      * @test
      * @return void
      */
-    public function it_update_only_auth_success(): void
+    public function it_validation_permission_fail(): void
+    {
+        $this->app['session']->setPreviousUrl(route('roles.create'));
+
+        $this->request['permissions'] = ['permission.not-exist'];
+
+        $this->actingAs($this->user)
+            ->post(action([RoleController::class, 'store']), $this->request)
+            ->assertInvalid(['permissions'])
+            ->assertRedirectToRoute('roles.create');
+
+        $this->assertDatabaseMissing('roles', [
+            'name' => $this->request['name']
+        ]);
+    }
+
+    /**
+     * @test
+     * @return void
+     */
+    public function it_update_success(): void
     {
         $this->request['name'] = 'newName';
+        $this->request['permissions'] = ['entity.edit', 'entity.delete'];
 
         $this->actingAs($this->user)
             ->put(
@@ -161,6 +201,10 @@ class RoleControllerTest extends TestCase
             ->assertRedirectToRoute('roles.index')
             ->assertSessionHas('helper_flash_message', __('role.updated'));
 
+        $role = Role::where('name', $this->request['name'])->first();
+        $this->assertTrue($role->hasAllPermissions(['entity.edit', 'entity.delete']));
+        $this->assertFalse($role->hasAllPermissions(['entity.*', 'entity.create']));
+
         $this->assertDatabaseHas('roles', [
             'name' => $this->request['name']
         ]);
@@ -171,7 +215,7 @@ class RoleControllerTest extends TestCase
      * @test
      * @return void
      */
-    public function it_update_with_locale_only_auth_success(): void
+    public function it_update_with_locale_success(): void
     {
         $this->request['name'] = 'newName';
         $this->request['display_name'] = 'ТестРус';
@@ -213,7 +257,7 @@ class RoleControllerTest extends TestCase
      * @test
      * @return void
      */
-    public function it_delete_only_auth_success(): void
+    public function it_delete_success(): void
     {
         $this->actingAs($this->user)
             ->delete(action([RoleController::class, 'destroy'], [$this->role->id]))

@@ -49,7 +49,7 @@ class GameDeveloperControllerTest extends TestCase
      * @test
      * @return void
      */
-    public function it_pages_only_auth_success(): void
+    public function it_pages_success(): void
     {
         $this->checkNotAuthRedirect('index');
         $this->checkNotAuthRedirect('create');
@@ -63,7 +63,7 @@ class GameDeveloperControllerTest extends TestCase
      * @test
      * @return void
      */
-    public function it_index_only_auth_success(): void
+    public function it_index_success(): void
     {
         $this->actingAs($this->user)
             ->get(action([GameDeveloperController::class, 'index']))
@@ -76,7 +76,7 @@ class GameDeveloperControllerTest extends TestCase
      * @test
      * @return void
      */
-    public function it_create_only_auth_success(): void
+    public function it_create_success(): void
     {
         $this->actingAs($this->user)
             ->get(action([GameDeveloperController::class, 'create']))
@@ -89,7 +89,7 @@ class GameDeveloperControllerTest extends TestCase
      * @test
      * @return void
      */
-    public function it_edit_only_auth_success(): void
+    public function it_edit_success(): void
     {
         $this->actingAs($this->user)
             ->get(action([GameDeveloperController::class, 'edit'], [$this->gameDeveloper->slug]))
@@ -102,7 +102,7 @@ class GameDeveloperControllerTest extends TestCase
      * @test
      * @return void
      */
-    public function it_store_only_auth_success(): void
+    public function it_store_success(): void
     {
 
         $this->actingAs($this->user)
@@ -119,7 +119,7 @@ class GameDeveloperControllerTest extends TestCase
      * @test
      * @return void
      */
-    public function it_store_with_image_only_auth_success(): void
+    public function it_store_with_image_success(): void
     {
         Queue::fake();
         Storage::fake('images');
@@ -180,7 +180,7 @@ class GameDeveloperControllerTest extends TestCase
      * @test
      * @return void
      */
-    public function it_update_only_auth_success(): void
+    public function it_update_success(): void
     {
         $this->request['name'] = 'newName';
 
@@ -204,7 +204,7 @@ class GameDeveloperControllerTest extends TestCase
      * @test
      * @return void
      */
-    public function it_delete_only_auth_success(): void
+    public function it_delete_success(): void
     {
         $this->actingAs($this->user)
             ->delete(action([GameDeveloperController::class, 'destroy'], [$this->gameDeveloper->slug]))

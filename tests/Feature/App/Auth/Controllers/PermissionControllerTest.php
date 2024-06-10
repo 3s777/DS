@@ -48,7 +48,7 @@ class PermissionControllerTest extends TestCase
      * @test
      * @return void
      */
-    public function it_pages_only_auth_success(): void
+    public function it_pages_success(): void
     {
         $this->checkNotAuthRedirect('index');
         $this->checkNotAuthRedirect('create');
@@ -62,7 +62,7 @@ class PermissionControllerTest extends TestCase
      * @test
      * @return void
      */
-    public function it_index_only_auth_success(): void
+    public function it_index_success(): void
     {
         $this->actingAs($this->user)
             ->get(action([PermissionController::class, 'index']))
@@ -75,7 +75,7 @@ class PermissionControllerTest extends TestCase
      * @test
      * @return void
      */
-    public function it_create_only_auth_success(): void
+    public function it_create_success(): void
     {
         $this->actingAs($this->user)
             ->get(action([PermissionController::class, 'create']))
@@ -88,7 +88,7 @@ class PermissionControllerTest extends TestCase
      * @test
      * @return void
      */
-    public function it_edit_only_auth_success(): void
+    public function it_edit_success(): void
     {
         $this->actingAs($this->user)
             ->get(action([PermissionController::class, 'edit'], [$this->permission->id]))
@@ -101,7 +101,7 @@ class PermissionControllerTest extends TestCase
      * @test
      * @return void
      */
-    public function it_store_only_auth_success(): void
+    public function it_store_success(): void
     {
         $this->actingAs($this->user)
             ->post(action([PermissionController::class, 'store']), $this->request)
@@ -138,7 +138,7 @@ class PermissionControllerTest extends TestCase
      * @test
      * @return void
      */
-    public function it_update_only_auth_success(): void
+    public function it_update_success(): void
     {
         $this->updateRequest['name'] = 'newName';
 
@@ -163,7 +163,7 @@ class PermissionControllerTest extends TestCase
      * @test
      * @return void
      */
-    public function it_update_with_locale_only_auth_success(): void
+    public function it_update_with_locale_success(): void
     {
         $this->updateRequest['name'] = 'newName';
         $this->updateRequest['display_name'] = 'ТестРус';
@@ -205,7 +205,7 @@ class PermissionControllerTest extends TestCase
      * @test
      * @return void
      */
-    public function it_delete_only_auth_success(): void
+    public function it_delete_success(): void
     {
         $this->actingAs($this->user)
             ->delete(action([PermissionController::class, 'destroy'], [$this->permission->id]))
