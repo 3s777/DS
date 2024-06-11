@@ -13,13 +13,16 @@ class CreateUserRequestFactory extends RequestFactory
         return [
            'email' => $this->faker->email,
            'name' => $this->faker->regexify('[a-z0-9.]{7}'),
+           'first_name' => $this->faker->name,
            'password' => '123456789q',
-           'password_confirmation' => '123456789q',
            'language_id' => Language::factory(),
            'roles' => [config('settings.default_role'), 'editor'],
+           'permissions' => ['entity.*', 'entity.create', 'entity.edit', 'entity.delete'],
            'description' => $this->faker->text(200),
            'thumbnail' => UploadedFile::fake()->image('photo1.jpg'),
-           'is_verified' => true,
+           'thumbnail_uploaded' => $this->faker->name,
+           'is_verified' => 1,
+           'slug' => $this->faker->name,
         ];
     }
 }

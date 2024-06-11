@@ -11,6 +11,7 @@ class LoginRequestFactory extends RequestFactory
         return [
            'email' => $this->faker->email,
            'password' => '123456789q',
+           'remember' => 1,
            'email_verified_at' => now()
         ];
     }

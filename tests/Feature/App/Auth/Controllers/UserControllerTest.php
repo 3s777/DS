@@ -4,14 +4,17 @@ namespace App\Auth\Controllers;
 
 use App\Http\Controllers\Auth\UserController;
 use App\Http\Requests\Auth\User\CreateUserRequest;
+use App\Jobs\GenerateSmallThumbnailsJob;
+use App\Jobs\GenerateThumbnailJob;
 use Database\Factories\UserFactory;
 use Database\Seeders\PermissionsTestSeeder;
-use Domain\Auth\Actions\CreateUserAction;
 use Domain\Auth\Models\Permission;
 use Domain\Auth\Models\Role;
 use Domain\Auth\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Support\Facades\URL;
+use Illuminate\Http\UploadedFile;
+use Illuminate\Support\Facades\Queue;
+use Illuminate\Support\Facades\Storage;
 use Spatie\Permission\PermissionRegistrar;
 use Tests\TestCase;
 
@@ -110,6 +113,9 @@ class UserControllerTest extends TestCase
      */
     public function it_store_success(): void
     {
+        Queue::fake();
+        Storage::fake('images');
+
         $this->actingAs($this->authUser)
             ->post(action([UserController::class, 'store']), $this->request)
             ->assertRedirectToRoute('users.index')
@@ -117,9 +123,68 @@ class UserControllerTest extends TestCase
 
         $user = User::where('name', $this->request['name'])->first();
         $this->assertTrue($user->hasAllRoles($this->request['roles']));
+        $this->assertNotNull($user->email_verified_at);
 
         $this->assertDatabaseHas('users', [
             'name' => $this->request['name']
+        ]);
+
+        Queue::assertPushed(GenerateThumbnailJob::class, 3);
+        Queue::assertPushed(GenerateSmallThumbnailsJob::class, 2);
+    }
+
+    /**
+     * @test
+     * @return void
+     */
+    public function it_update_success(): void
+    {
+        Permission::create(['name' => 'test', 'display_name' => 'Test']);
+        Role::create(['name' => 'superadmin', 'display_name' =>'Super Admin']);
+        $role = Role::where('name', config('settings.default_role'))->first();
+        $role->givePermissionTo('entity.*');
+
+        $this->request['name'] = 'newName';
+        $this->request['first_name'] = 'New First Name';
+        $this->request['roles'] = ['user', 'superadmin'];
+        $this->request['permissions'] = ['test'];
+
+        $this->actingAs($this->authUser)
+            ->put(
+                action(
+                    [UserController::class, 'update'],
+                    [$this->testingUser->slug]
+                ),
+                $this->request
+            )
+            ->assertRedirectToRoute('users.index')
+            ->assertSessionHas('helper_flash_message', __('user.updated'));
+
+        $user = User::where('name', 'newname')->first();
+        $this->assertTrue($user->hasAllPermissions(['entity.edit', 'entity.delete', 'test']));
+        $this->assertTrue($user->hasAllRoles([config('settings.default_role'), 'superadmin']));
+        $this->assertFalse($user->hasRole('editor'));
+
+        $this->assertDatabaseHas('users', [
+            'name' => 'newname',
+            'first_name' => 'New First Name'
+        ]);
+    }
+
+    /**
+     * @test
+     * @return void
+     */
+    public function it_delete_success(): void
+    {
+        $this->actingAs($this->authUser)
+            ->delete(action([UserController::class, 'destroy'], [$this->testingUser->slug]))
+            ->assertRedirectToRoute('users.index')
+            ->assertSessionHas('helper_flash_message', __('user.deleted'));
+
+        $this->assertDatabaseMissing('users', [
+            'name' => $this->testingUser->name,
+            'deleted_at' => null
         ]);
     }
 
@@ -146,17 +211,19 @@ class UserControllerTest extends TestCase
      * @test
      * @return void
      */
-    public function it_validation_fail(): void
+    public function it_create_validation_fail(): void
     {
         $this->app['session']->setPreviousUrl(route('users.create'));
 
         $this->request['name'] = '';
         $this->request['password'] = 'wrong';
         $this->request['language_id'] = 'test';
+        $this->request['roles'] = ['role.not-exist'];
+        $this->request['thumbnail'] = UploadedFile::fake()->image('photo1.php');
 
         $this->actingAs($this->authUser)
             ->post(action([UserController::class, 'store']), $this->request)
-            ->assertInvalid(['name', 'password', 'language_id'])
+            ->assertInvalid(['name', 'password', 'language_id', 'roles', 'thumbnail'])
             ->assertRedirectToRoute('users.create');
 
         $this->assertDatabaseMissing('users', [
@@ -168,38 +235,14 @@ class UserControllerTest extends TestCase
      * @test
      * @return void
      */
-//    public function it_validation_permission_fail(): void
-//    {
-//        $this->app['session']->setPreviousUrl(route('roles.create'));
-//
-//        $this->request['permissions'] = ['permission.not-exist'];
-//
-//        $this->actingAs($this->user)
-//            ->post(action([RoleController::class, 'store']), $this->request)
-//            ->assertInvalid(['permissions'])
-//            ->assertRedirectToRoute('roles.create');
-//
-//        $this->assertDatabaseMissing('roles', [
-//            'name' => $this->request['name']
-//        ]);
-//    }
-
-    /**
-     * @test
-     * @return void
-     */
-    public function it_update_success(): void
+    public function it_update_validation_fail(): void
     {
-        Permission::create(['name' => 'test', 'display_name' => 'Test']);
-        Role::create(['name' => 'superadmin', 'display_name' =>'Super Admin']);
-        $role = Role::where('name', config('settings.default_role'))->first();
-        $role->givePermissionTo('entity.*');
+        $this->app['session']->setPreviousUrl(route('users.edit', [$this->testingUser->slug]));
 
-        $this->request['name'] = 'newName';
-        $this->request['first_name'] = 'New First Name';
-        $this->request['password'] = '741258963q';
-        $this->request['roles'] = ['user', 'superadmin'];
-        $this->request['permissions'] = ['test'];
+        $this->request['name'] = '';
+        $this->request['language_id'] = 'test';
+        $this->request['roles'] = ['role.not-exist'];
+        $this->request['permissions'] = ['permission.not-exist'];
 
         $this->actingAs($this->authUser)
             ->put(
@@ -209,32 +252,11 @@ class UserControllerTest extends TestCase
                 ),
                 $this->request
             )
-            ->assertRedirectToRoute('users.index')
-            ->assertSessionHas('helper_flash_message', __('user.updated'));
-
-        $user = User::where('name', 'newname')->first();
-        $this->assertTrue($user->hasAllPermissions(['entity.edit', 'entity.delete', 'test']));
-
-        $this->assertDatabaseHas('users', [
-            'name' => 'newname'
-        ]);
-    }
-
-
-    /**
-     * @test
-     * @return void
-     */
-    public function it_delete_success(): void
-    {
-        $this->actingAs($this->authUser)
-            ->delete(action([UserController::class, 'destroy'], [$this->testingUser->slug]))
-            ->assertRedirectToRoute('users.index')
-            ->assertSessionHas('helper_flash_message', __('user.deleted'));
+            ->assertInvalid(['name', 'language_id', 'roles', 'permissions'])
+            ->assertRedirectToRoute('users.edit', [$this->testingUser->slug]);
 
         $this->assertDatabaseMissing('users', [
-            'name' => $this->testingUser->name,
-            'deleted_at' => null
+            'name' => $this->request['name']
         ]);
     }
 }

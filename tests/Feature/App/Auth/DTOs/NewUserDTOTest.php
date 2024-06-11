@@ -3,6 +3,7 @@
 namespace App\Auth\DTOs;
 
 use App\Http\Requests\Auth\RegisterRequest;
+use App\Http\Requests\Auth\User\CreateUserRequest;
 use Domain\Auth\DTOs\NewUserDTO;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
@@ -22,9 +23,20 @@ class NewUserDTOTest extends TestCase
      * @test
      * @return void
      */
-    public function it_instance_created_from_form_request_success(): void
+    public function it_instance_created_from_register_request_success(): void
     {
         $data = NewUserDTO::fromRequest(new RegisterRequest($this->request));
+
+        $this->assertInstanceOf(NewUserDTO::class, $data);
+    }
+
+    /**
+     * @test
+     * @return void
+     */
+    public function it_instance_created_from_create_request_success(): void
+    {
+        $data = NewUserDTO::fromRequest(new CreateUserRequest($this->request));
 
         $this->assertInstanceOf(NewUserDTO::class, $data);
     }
