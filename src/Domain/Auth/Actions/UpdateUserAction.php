@@ -2,61 +2,73 @@
 
 namespace Domain\Auth\Actions;
 
+use App\Exceptions\UserCreateEditException;
 use Carbon\Carbon;
 use Domain\Auth\DTOs\UpdateUserDTO;
 use Domain\Auth\Models\User;
+use Illuminate\Support\Facades\DB;
+use Throwable;
 
 class UpdateUserAction
 {
     public function __invoke(UpdateUserDTO $data, User $user): User
     {
-        $user->updateThumbnail($data->thumbnail, $data->thumbnail_uploaded, ['small', 'medium']);
+        try {
+            DB::beginTransaction();
 
-        $user->fill([
-            'name' => $data->name,
-            'email' => $data->email,
-            'language_id' => $data->language_id,
-            'first_name' => $data->first_name,
-            'slug' => $data->slug,
-            'description' => $data->description
-        ]);
+            $user->updateThumbnail($data->thumbnail, $data->thumbnail_uploaded, ['small', 'medium']);
 
-        if($data->password) {
-            $user->password = bcrypt($data->password);
-        }
+            $user->fill([
+                'name' => $data->name,
+                'email' => $data->email,
+                'language_id' => $data->language_id,
+                'first_name' => $data->first_name,
+                'slug' => $data->slug,
+                'description' => $data->description
+            ]);
 
-        if(!$user->email_verified_at && $data->is_verified) {
-            $user->email_verified_at = Carbon::now();
-        }
+            if($data->password) {
+                $user->password = bcrypt($data->password);
+            }
 
-        if(!$data->is_verified) {
-            $user->email_verified_at = null;
-        }
+            if(!$user->email_verified_at && $data->is_verified) {
+                $verifyAction = app(VerifyEmailAction::class);
+                $verifyAction($user->id);
+            }
 
-        $user->save();
+            if(!$data->is_verified) {
+                $user->email_verified_at = null;
+            }
 
-        $user->syncRoles($data->roles);
+            $user->save();
 
-        $rolePermissions = $user->getPermissionsViaRoles()->pluck( 'name')->toArray();
+            $user->syncRoles($data->roles);
 
-        $resultPermissions = array_diff($data->permissions ?? [], $rolePermissions);
+            $rolePermissions = $user->getPermissionsViaRoles()->pluck( 'name')->toArray();
 
-        $resultPermissions = array_filter(
-            $resultPermissions,
-            function($permission) use($user) {
-                $isRoleHasPermission = true;
+            $resultPermissions = array_diff($data->permissions ?? [], $rolePermissions);
 
-                foreach($user->roles as $role) {
-                    if($role->hasPermissionTo($permission) ) {
-                        $isRoleHasPermission = false;
+            $resultPermissions = array_filter(
+                $resultPermissions,
+                function($permission) use($user) {
+                    $isRoleHasPermission = true;
+
+                    foreach($user->roles as $role) {
+                        if($role->hasPermissionTo($permission) ) {
+                            $isRoleHasPermission = false;
+                        }
                     }
-                }
 
-                return $isRoleHasPermission;
-        });
+                    return $isRoleHasPermission;
+            });
 
-        $user->syncPermissions($resultPermissions);
+            $user->syncPermissions($resultPermissions);
 
-        return $user;
+            DB::commit();
+
+            return $user;
+        } catch (Throwable $e) {
+            throw new UserCreateEditException($e->getMessage());
+        }
     }
 }

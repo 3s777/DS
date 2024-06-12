@@ -12,9 +12,11 @@ use Throwable;
 
 class CreateUserAction
 {
-    public function __invoke(NewUserDTO $data): User
+    public function __invoke(NewUserDTO $data): ?User
     {
         try {
+            DB::beginTransaction();
+
             $user = User::create([
                 'name' => $data->name,
                 'email' => $data->email,
@@ -22,9 +24,17 @@ class CreateUserAction
                 'language_id' => $data->language_id,
                 'first_name' => $data->first_name,
                 'slug' => $data->slug,
-                'description' => $data->description,
-                'email_verified_at' => $data->is_verified ? Carbon::now() : null
+                'description' => $data->description
             ]);
+
+            event(new Registered($user));
+
+            if($data->is_verified) {
+                $verifyAction = app(VerifyEmailAction::class);
+                $verifyAction($user->id);
+            }
+
+            $user->syncRoles($data->roles);
 
             if($data->thumbnail) {
                 $user->addImageWithThumbnail(
@@ -34,9 +44,7 @@ class CreateUserAction
                 );
             }
 
-            $user->syncRoles($data->roles);
-
-            event(new Registered($user));
+            DB::commit();
 
             return $user;
         } catch (Throwable $e) {
