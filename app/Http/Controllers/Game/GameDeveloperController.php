@@ -28,6 +28,15 @@ class GameDeveloperController extends Controller
 
     public function create(): View|Application|Factory|\Illuminate\Contracts\Foundation\Application
     {
+
+        $developer = GameDeveloper::first();
+
+        $this->authorize('view', $developer);
+
+//        if(auth()->user()->cannot('view', $developer)) {
+//            abort(403);
+//        }
+
         return view('admin.game.developer.create', new GameDeveloperCrudViewModel());
     }
 

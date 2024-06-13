@@ -7,6 +7,7 @@ use App\Http\Controllers\Auth\UserController;
 use App\Http\Controllers\Game\GameDeveloperController;
 use App\Http\Controllers\Game\GamePublisherController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\LanguageController;
 use Illuminate\Contracts\Routing\Registrar;
 use Illuminate\Support\Facades\Route;
 
@@ -23,7 +24,7 @@ class AppRegistrar implements RouteRegistrar
                 Route::prefix('{locale}')->whereIn('locale', config('app.available_locales'))->group(function () {
 
 
-
+                    Route::get('/lang', [LanguageController::class, 'index'])->name('lang');
 
                     Route::get('/ui', function () {
                         return view('content.ui.index');

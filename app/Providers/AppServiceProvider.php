@@ -2,7 +2,10 @@
 
 namespace App\Providers;
 
+use App\Policies\GameDeveloperPolicy;
+use Domain\Game\Models\GameDeveloper;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\ServiceProvider;
 use Spatie\Translatable\Facades\Translatable;
 
@@ -24,6 +27,8 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
+        Gate::policy(GameDeveloper::class, GameDeveloperPolicy::class);
+
         Model::shouldBeStrict(!app()->isProduction());
 //        Translatable::fallback(
 //            fallbackLocale: 'ru',
