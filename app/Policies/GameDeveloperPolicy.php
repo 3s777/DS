@@ -8,21 +8,21 @@ use Illuminate\Auth\Access\Response;
 
 class GameDeveloperPolicy
 {
-    public function before(User $user, string $ability): bool|null
-    {
-        if ($user->hasRole('super_admin')) {
-            return true;
-        }
-
-        return null;
-    }
+//    public function before(User $user, string $ability): bool|null
+//    {
+//        if ($user->hasRole('user')) {
+//            return true;
+//        }
+//
+//        return null;
+//    }
 
     /**
      * Determine whether the user can view any models.
      */
     public function viewAny(User $user): bool
     {
-        //
+        return $user->can('game-developers.view_all');
     }
 
     /**
@@ -30,7 +30,7 @@ class GameDeveloperPolicy
      */
     public function view(User $user, GameDeveloper $gameDeveloper): bool
     {
-        return false;
+        return $user->can('game-developers.view');
     }
 
     /**
@@ -38,7 +38,7 @@ class GameDeveloperPolicy
      */
     public function create(User $user): bool
     {
-        return true;
+        return $user->can('game-developers.create');
     }
 
     /**
@@ -46,7 +46,11 @@ class GameDeveloperPolicy
      */
     public function update(User $user, GameDeveloper $gameDeveloper): bool
     {
-        //
+       if($user->can('game-developers.edit')) {
+           return true;
+       }
+
+       return $user->id == $gameDeveloper->user_id;
     }
 
     /**
@@ -54,7 +58,7 @@ class GameDeveloperPolicy
      */
     public function delete(User $user, GameDeveloper $gameDeveloper): bool
     {
-        //
+        return $user->can('game-developers.delete');
     }
 
     /**
@@ -62,7 +66,7 @@ class GameDeveloperPolicy
      */
     public function restore(User $user, GameDeveloper $gameDeveloper): bool
     {
-        //
+        return $user->can('game-developers.delete');
     }
 
     /**
@@ -70,6 +74,6 @@ class GameDeveloperPolicy
      */
     public function forceDelete(User $user, GameDeveloper $gameDeveloper): bool
     {
-        //
+        return $user->can('game-developers.delete');
     }
 }

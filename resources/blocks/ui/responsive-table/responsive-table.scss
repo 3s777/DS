@@ -38,6 +38,7 @@
         display: table-cell;
         min-width: 150px;
         max-width: 300px;
+        height: 42px;
         padding: 5px 10px;
         vertical-align: middle;
         border-right: 1px solid $base-light-transparent;
@@ -146,6 +147,7 @@
             display: block;
             width: 100%;
             max-width: 100%;
+            height: auto;
             padding: 4px 0;
             border-right: 0;
             word-break: unset;

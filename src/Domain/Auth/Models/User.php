@@ -25,6 +25,9 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 use Mews\Purifier\Casts\CleanHtml;
+use OwenIt\Auditing\Contracts\Auditable;
+use Spatie\Activitylog\LogOptions;
+use Spatie\Activitylog\Traits\LogsActivity;
 use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
 use Spatie\Permission\Traits\HasPermissions;
@@ -32,7 +35,7 @@ use Spatie\Permission\Traits\HasRoles;
 use Support\Traits\Models\HasSlug;
 use Support\Traits\Models\HasThumbnail;
 
-class User extends Authenticatable implements MustVerifyEmail, HasLocalePreference, HasMedia
+class User extends Authenticatable implements MustVerifyEmail, HasLocalePreference, HasMedia, Auditable
 {
     use HasApiTokens;
     use HasFactory;
@@ -43,6 +46,8 @@ class User extends Authenticatable implements MustVerifyEmail, HasLocalePreferen
     use InteractsWithMedia;
     use HasRoles;
     use HasPermissions;
+    use LogsActivity;
+    use \OwenIt\Auditing\Auditable;
 
     /**
      * The attributes that are mass assignable.
@@ -88,6 +93,11 @@ class User extends Authenticatable implements MustVerifyEmail, HasLocalePreferen
         'email',
         'first_name'
     ];
+
+    public function getActivitylogOptions(): LogOptions
+    {
+        return LogOptions::defaults()->logOnly(['*']);
+    }
 
     protected static function newFactory(): UserFactory
     {

@@ -3,6 +3,10 @@
 namespace App\Providers;
 
 use App\Policies\GameDeveloperPolicy;
+use App\Policies\RolePolicy;
+use App\Policies\UserPolicy;
+use Domain\Auth\Models\Role;
+use Domain\Auth\Models\User;
 use Domain\Game\Models\GameDeveloper;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Gate;
@@ -27,7 +31,17 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
+        Gate::before(function ($user, $ability) {
+            if ($user->hasRole('super_admin')) {
+                return true;
+            }
+
+            return null;
+        });
+
         Gate::policy(GameDeveloper::class, GameDeveloperPolicy::class);
+        Gate::policy(User::class, UserPolicy::class);
+        Gate::policy(Role::class, RolePolicy::class);
 
         Model::shouldBeStrict(!app()->isProduction());
 //        Translatable::fallback(

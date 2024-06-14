@@ -21,6 +21,11 @@ use Support\DTOs\MassDeletingDTO;
 
 class GameDeveloperController extends Controller
 {
+    public function __construct()
+    {
+        $this->authorizeResource(GameDeveloper::class, 'game_developer');
+    }
+
     public function index(FilterGameDeveloperRequest $request): View|Application|Factory|\Illuminate\Contracts\Foundation\Application
     {
         return view('admin.game.developer.index', new GameDeveloperIndexViewModel());
@@ -31,7 +36,7 @@ class GameDeveloperController extends Controller
 
         $developer = GameDeveloper::first();
 
-        $this->authorize('view', $developer);
+//        $this->authorize('view', $developer);
 
 //        if(auth()->user()->cannot('view', $developer)) {
 //            abort(403);

@@ -8,6 +8,7 @@ use App\Http\Requests\Auth\Role\UpdateRoleRequest;
 use App\ViewModels\User\RoleCrudViewModel;
 use App\ViewModels\User\RoleIndexViewModel;
 use Domain\Auth\Models\Role;
+use Domain\Auth\Models\User;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
 use Illuminate\Foundation\Application;
@@ -15,6 +16,10 @@ use Illuminate\Http\RedirectResponse;
 
 class RoleController extends Controller
 {
+    public function __construct()
+    {
+        $this->authorizeResource(Role::class, 'role');
+    }
 
     public function index(): View|Application|Factory|\Illuminate\Contracts\Foundation\Application
     {

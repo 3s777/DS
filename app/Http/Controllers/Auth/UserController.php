@@ -16,18 +16,27 @@ use Domain\Auth\Actions\UpdateUserAction;
 use Domain\Auth\DTOs\NewUserDTO;
 use Domain\Auth\DTOs\UpdateUserDTO;
 use Domain\Auth\Models\User;
+use Domain\Game\Models\GameDeveloper;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
 use Illuminate\Foundation\Application;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 use Support\Actions\MassDeletingAction;
 use Support\DTOs\MassDeletingDTO;
 
 class UserController extends Controller
 {
+    public function __construct()
+    {
+        $this->authorizeResource(User::class, 'user');
+    }
+
     public function index(FilterUserRequest $request): View|Application|Factory|\Illuminate\Contracts\Foundation\Application
     {
+        Log::info('Showing the user profile for user: ');
+
         return view('admin.user.index', new UserIndexViewModel());
     }
 

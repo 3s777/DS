@@ -42,27 +42,27 @@ class RolesAndPermissionsSeeder extends Seeder
             'ru' => 'Удалить (Полный доступ)'
         ]]);
 
-        Permission::create(['name' => 'game_developers.*', 'display_name' => [
+        Permission::create(['name' => 'game-developers.*', 'display_name' => [
             'en' => 'Game Developer. All',
             'ru' => 'Игровой разработчик. Все'
         ]]);
-        Permission::create(['name' => 'game_developers.view', 'display_name' => [
+        Permission::create(['name' => 'game-developers.view', 'display_name' => [
             'en' => 'Game Developer. View',
             'ru' => 'Игровой разработчик. Смотреть'
         ]]);
-        Permission::create(['name' => 'game_developers.view_all', 'display_name' => [
+        Permission::create(['name' => 'game-developers.view_all', 'display_name' => [
             'en' => 'Game Developer. View all',
             'ru' => 'Игровой разработчик. Смотреть все'
         ]]);
-        Permission::create(['name' => 'game_developers.create', 'display_name' => [
+        Permission::create(['name' => 'game-developers.create', 'display_name' => [
             'en' => 'Game Developer. Create',
             'ru' => 'Игровой разработчик. Создать'
         ]]);
-        Permission::create(['name' => 'game_developers.edit', 'display_name' => [
+        Permission::create(['name' => 'game-developers.edit', 'display_name' => [
             'en' => 'Game Developer. Edit',
             'ru' => 'Игровой разработчик. Редактировать'
         ]]);
-        Permission::create(['name' => 'game_developers.delete', 'display_name' => [
+        Permission::create(['name' => 'game-developers.delete', 'display_name' => [
             'en' => 'Game Developer. Delete',
             'ru' => 'Игровой разработчик. Удалить'
         ]]);
@@ -71,13 +71,12 @@ class RolesAndPermissionsSeeder extends Seeder
             'en' => 'User',
             'ru' => 'Пользователь'
         ]]);
-        $role->givePermissionTo('game_developers.create');
 
         $role = Role::create(['name' => 'editor', 'display_name' => [
             'en' => 'Editor',
             'ru' => 'Редактор'
         ]]);
-        $role->givePermissionTo('game_developers.*');
+        $role->givePermissionTo(['game-developers.view', 'game-developers.view_all']);
 
         $role = Role::create(['name' => 'admin', 'display_name' => [
             'en' => 'Admin',
