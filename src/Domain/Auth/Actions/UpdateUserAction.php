@@ -3,7 +3,6 @@
 namespace Domain\Auth\Actions;
 
 use App\Exceptions\UserCreateEditException;
-use Carbon\Carbon;
 use Domain\Auth\DTOs\UpdateUserDTO;
 use Domain\Auth\Models\User;
 use Illuminate\Support\Facades\DB;
@@ -42,6 +41,12 @@ class UpdateUserAction
 
             $user->save();
 
+            $user->audit(
+                'changeRole',
+                ['roles' => $user->roles->pluck(['name'])],
+                ['roles' => $data->roles]
+            );
+
             $user->syncRoles($data->roles);
 
             $rolePermissions = $user->getPermissionsViaRoles()->pluck( 'name')->toArray();
@@ -60,7 +65,13 @@ class UpdateUserAction
                     }
 
                     return $isRoleHasPermission;
-            });
+                });
+
+            $user->audit(
+                'changePermission',
+                ['permissions' => $user->permissions->pluck(['name'])],
+                ['permissions' => $data->permissions ?? []]
+            );
 
             $user->syncPermissions($resultPermissions);
 

@@ -8,6 +8,7 @@ use App\Jobs\GenerateSmallThumbnailsJob;
 use App\Jobs\GenerateThumbnailJob;
 use Database\Factories\Game\GameDeveloperFactory;
 use Database\Factories\UserFactory;
+use Domain\Auth\Models\Role;
 use Domain\Auth\Models\User;
 use Domain\Game\Models\GameDeveloper;
 use Illuminate\Foundation\Testing\RefreshDatabase;
@@ -29,6 +30,8 @@ class GameDeveloperControllerTest extends TestCase
         parent::setUp();
 
         $this->user = UserFactory::new()->create();
+        Role::create(['name' => config('settings.super_admin_role'), 'display_name' => 'SuperAdmin']);
+        $this->user->assignRole('super_admin');
 
         $this->gameDeveloper = GameDeveloperFactory::new()->create();
 

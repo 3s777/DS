@@ -5,6 +5,7 @@ namespace App\Game\Controllers;
 use App\Http\Controllers\Game\GameDeveloperController;
 use Carbon\Carbon;
 use Database\Factories\Game\GameDeveloperFactory;
+use Domain\Auth\Models\Role;
 use Domain\Auth\Models\User;
 use Domain\Game\Models\GameDeveloper;
 use Illuminate\Foundation\Testing\RefreshDatabase;
@@ -23,6 +24,8 @@ class GameDeveloperFilterTest extends TestCase
         parent::setUp();
 
         $this->user = User::factory()->create();
+        Role::create(['name' => config('settings.super_admin_role'), 'display_name' => 'SuperAdmin']);
+        $this->user->assignRole('super_admin');
     }
 
     /**

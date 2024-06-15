@@ -4,7 +4,6 @@ namespace Domain\Auth\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 use App\Filters\DatesFilter;
-use App\Filters\RelationFilter;
 use App\Filters\SearchFilter;
 use App\Models\Image;
 use App\Models\Language;
@@ -14,7 +13,6 @@ use Domain\Auth\Notifications\VerifyEmailNotification;
 use Domain\Auth\QueryBuilders\UserQueryBuilder;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Contracts\Translation\HasLocalePreference;
-use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
@@ -26,14 +24,14 @@ use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 use Mews\Purifier\Casts\CleanHtml;
 use OwenIt\Auditing\Contracts\Auditable;
-use Spatie\Activitylog\LogOptions;
-use Spatie\Activitylog\Traits\LogsActivity;
 use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
 use Spatie\Permission\Traits\HasPermissions;
 use Spatie\Permission\Traits\HasRoles;
+use Support\Traits\Models\HasCustomAudit;
 use Support\Traits\Models\HasSlug;
 use Support\Traits\Models\HasThumbnail;
+use OwenIt\Auditing\Auditable as HasAuditable;
 
 class User extends Authenticatable implements MustVerifyEmail, HasLocalePreference, HasMedia, Auditable
 {
@@ -46,8 +44,8 @@ class User extends Authenticatable implements MustVerifyEmail, HasLocalePreferen
     use InteractsWithMedia;
     use HasRoles;
     use HasPermissions;
-    use LogsActivity;
-    use \OwenIt\Auditing\Auditable;
+    use HasAuditable;
+    use HasCustomAudit;
 
     /**
      * The attributes that are mass assignable.
@@ -93,11 +91,6 @@ class User extends Authenticatable implements MustVerifyEmail, HasLocalePreferen
         'email',
         'first_name'
     ];
-
-    public function getActivitylogOptions(): LogOptions
-    {
-        return LogOptions::defaults()->logOnly(['*']);
-    }
 
     protected static function newFactory(): UserFactory
     {
@@ -182,5 +175,4 @@ class User extends Authenticatable implements MustVerifyEmail, HasLocalePreferen
     {
         return $this->morphMany(Image::class, 'imageable');
     }
-
 }

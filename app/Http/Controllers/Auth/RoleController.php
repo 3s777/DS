@@ -35,6 +35,12 @@ class RoleController extends Controller
     {
         $role = Role::create($request->safe()->except(['permissions']));
 
+        $role->audit(
+            'changePermission',
+            [],
+            ['permissions' => $request->input('permissions') ?? []]
+        );
+
         $role->syncPermissions($request->input('permissions'));
 
         flash()->info(__('role.created'));
@@ -55,6 +61,12 @@ class RoleController extends Controller
     public function update(UpdateRoleRequest $request, Role $role): RedirectResponse
     {
         $role->fill($request->safe()->except(['permissions']))->save();
+
+        $role->audit(
+            'changePermission',
+            ['permissions' => $role->permissions->pluck(['name'])],
+            ['permissions' => $request->input('permissions') ?? []]
+        );
 
         $role->syncPermissions($request->input('permissions'));
 

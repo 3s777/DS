@@ -34,6 +34,12 @@ class CreateUserAction
                 $verifyAction($user->id);
             }
 
+            $user->audit(
+                'changeRole',
+                [],
+                ['roles' => $data->roles]
+            );
+
             $user->syncRoles($data->roles);
 
             if($data->thumbnail) {

@@ -32,7 +32,7 @@ class AppServiceProvider extends ServiceProvider
     public function boot(): void
     {
         Gate::before(function ($user, $ability) {
-            if ($user->hasRole('super_admin')) {
+            if ($user->hasRole(config('settings.super_admin_role'))) {
                 return true;
             }
 
@@ -43,7 +43,7 @@ class AppServiceProvider extends ServiceProvider
         Gate::policy(User::class, UserPolicy::class);
         Gate::policy(Role::class, RolePolicy::class);
 
-        Model::shouldBeStrict(!app()->isProduction());
+//        Model::shouldBeStrict(!app()->isProduction());
 //        Translatable::fallback(
 //            fallbackLocale: 'ru',
 //        );
