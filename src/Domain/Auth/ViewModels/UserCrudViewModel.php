@@ -1,6 +1,6 @@
 <?php
 
-namespace App\ViewModels\User;
+namespace Domain\Auth\ViewModels;
 
 use App\Models\Language;
 use Domain\Auth\Models\Permission;

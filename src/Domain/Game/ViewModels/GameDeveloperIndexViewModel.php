@@ -1,8 +1,7 @@
 <?php
 
-namespace App\ViewModels\Game;
+namespace Domain\Game\ViewModels;
 
-use Domain\Auth\Models\User;
 use Domain\Game\Models\GameDeveloper;
 use Spatie\ViewModels\ViewModel;
 

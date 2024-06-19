@@ -1,9 +1,10 @@
 <?php
 
-namespace App\ViewModels\User;
+namespace Domain\Auth\ViewModels;
 
 use Domain\Auth\Models\Permission;
 use Domain\Auth\Models\Role;
+use Illuminate\Support\Facades\Cache;
 use Spatie\ViewModels\ViewModel;
 
 class RoleCrudViewModel extends ViewModel
@@ -17,6 +18,8 @@ class RoleCrudViewModel extends ViewModel
 
     public function permissions(): array
     {
-        return Permission::all()->select('name', 'display_name')->toArray();
+        return Cache::rememberForever('permissions_select', function () {
+            return Permission::all()->select('name', 'display_name')->toArray();
+        });
     }
 }

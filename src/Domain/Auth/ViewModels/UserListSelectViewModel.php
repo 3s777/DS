@@ -1,6 +1,6 @@
 <?php
 
-namespace App\ViewModels\User;
+namespace Domain\Auth\ViewModels;
 
 use Domain\Auth\Models\User;
 use Spatie\ViewModels\ViewModel;
