@@ -1,6 +1,18 @@
+
+
 ::selection {
     background-color: $additional-light;
 }
+//
+//$base: 300;
+//$base-main: hsl($base+3, 25%, 31%);
+//
+//.test {
+//    --main-color: 129;
+//    position: relative;
+//    z-index: 1000;
+//    background: hsl(var(--main-color), 25%, 31%);;
+//}
 
 html {
     font-size: 16px;

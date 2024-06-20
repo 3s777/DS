@@ -4,6 +4,7 @@ namespace App\Routing;
 
 use App\Contracts\RouteRegistrar;
 use App\Http\Controllers\Auth\UserController;
+use App\Http\Controllers\ColorThemeController;
 use App\Http\Controllers\Game\GameDeveloperController;
 use App\Http\Controllers\Game\GamePublisherController;
 use App\Http\Controllers\HomeController;
@@ -25,6 +26,8 @@ class AppRegistrar implements RouteRegistrar
 
 
                     Route::get('/lang', [LanguageController::class, 'index'])->name('lang');
+
+                    Route::get('/set-theme/{theme}', ColorThemeController::class)->name('set.theme')->middleware(['remove.locale']);;
 
                     Route::get('/ui', function () {
                         return view('content.ui.index');

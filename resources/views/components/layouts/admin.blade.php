@@ -9,7 +9,7 @@
 
         @vite(['resources/scss/admin.scss'])
     </head>
-    <body>
+    <body class="body {{ session()->get('color.theme') }}">
         <x-common.header />
 
         <main class="main" x-data="{collapseSidebar: $persist(false)}">

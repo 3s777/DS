@@ -9,10 +9,10 @@
         <x-common.meta />
 
         @vite(['resources/scss/app.scss'])
-    </head>
-    <body>
-        <x-common.header />
 
+    </head>
+    <body class="body {{ session()->get('color.theme') }}">
+        <x-common.header />
 
         <main class="main">
             {{ $slot }}

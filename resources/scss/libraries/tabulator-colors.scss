@@ -1,10 +1,14 @@
+//$base-dark: hsl(238, 27%, 27%);
+//$base-main-50: hsla(238, 27%, 27%, .5);
+//$base-light-like-transparent: hsl(238, 17%, 39%);
+
 //Main Theme Variables
 $backgroundColor: $base-light-like-transparent; //background color of tabulator
 $borderColor: transparent; //border to tabulator
 $textSize: 16px; //table text size
 
 //header theming
-$headerBackgroundColor: $base-dark; //border to tabulator
+$headerBackgroundColor: hsl(238, 27%, 27%); //border to tabulator
 $headerTextColor: $font-main; //header text color
 $headerBorderColor: $base-light-transparent;  //header border color
 $headerSeparatorColor: $base-light-transparent; //header bottom separator color
@@ -16,8 +20,8 @@ $sortArrowActive: $additional-main;
 $sortArrowInactive: $font-main-50;
 
 //row theming
-$rowBackgroundColor: $base-light-like-transparent; //table row background color
-$rowAltBackgroundColor: $base-main-50; //table row background color
+$rowBackgroundColor: hsl(238, 17%, 39%); //table row background color
+$rowAltBackgroundColor: hsla(238, 27%, 27%, .5); //table row background color
 $rowBorderColor: $base-light-transparent;//table border color
 $rowTextColor: $font-main; //table text color
 $rowHoverBackground: $additional-main; //row background color on hover
@@ -29,7 +33,7 @@ $editBoxColor: #1D68CD !default; //border color for edit boxes
 $errorColor: #dd0000 !default; //error indication
 
 //footer theming
-$footerBackgroundColor: $base-dark; //border to tabulator
+$footerBackgroundColor: hsl(238, 27%, 27%); //border to tabulator
 $footerTextColor: $font-main; //footer text color
 $footerBorderColor: transparent; //footer border color
 $footerSeparatorColor: $base-light-transparent; //footer bottom separator color

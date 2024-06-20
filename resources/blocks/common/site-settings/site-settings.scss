@@ -1,88 +1,90 @@
 .site-settings {
     display: flex;
     align-items: center;
-}
 
-.site-settings__inner {
-    position: relative;
-}
+    &__inner {
+        position: relative;
+    }
 
-.site-settings__button {
-    line-height: 1;
-    cursor: pointer;
-}
+    &__button {
+        line-height: 1;
+        cursor: pointer;
+    }
 
-.site-settings__icon {
-    display: block;
-    width: 30px;
-    height: 30px;
-    transition: $base-transition;
-    fill: $opposite-main;
+    &__icon {
+        display: block;
+        width: 30px;
+        height: 30px;
+        transition: $base-transition;
+        fill: $opposite-main;
 
-    &:hover {
-        rotate: 90deg;
-        fill: $additional-main;
+        &:hover {
+            rotate: 90deg;
+            fill: $additional-main;
+        }
+    }
+
+    &__popover {
+        position: absolute;
+        z-index: 10;
+        transition: $base-transition;
+        right: 0;
+        top: 150%;
+        min-width: 220px;
+        visibility: hidden;
+        opacity: 0;
+    }
+
+    &__popover_visible {
+        visibility: visible;
+        opacity: 1;
+    }
+
+    &__flags {
+        display: flex;
+        margin-bottom: 16px;
+
+    }
+
+    &__flag {
+        display: block;
+        margin-right: 8px;
+        border: 2px solid $base-main;
+        line-height: 0;
+    }
+
+    &__flag_active {
+        border: 2px solid $additional-main;
+    }
+
+    &__flag-icon {
+        display: block;
+        width: 30px;
+    }
+
+
+
+    &__colors {
+        display: flex;
+    }
+
+    &__color {
+        display: block;
+        width: 24px;
+        height: 24px;
+        margin-right: 8px;
+        border: 2px solid $base-main;
+        background-color: var(--base-default);
+        border-radius: 50%;
+    }
+
+    &__color_1 {
+        background-color: var(--base-green);
+    }
+
+    &__color_2 {
+        background-color: var(--base-red);
     }
 }
 
-.site-settings__popover {
-    position: absolute;
-    z-index: 10;
-    transition: $base-transition;
-    right: 0;
-    top: 150%;
-    min-width: 220px;
-    visibility: hidden;
-    opacity: 0;
-}
 
-.site-settings__popover_visible {
-    visibility: visible;
-    opacity: 1;
-}
-
-.site-settings__flags {
-    display: flex;
-    margin-bottom: 16px;
-
-}
-
-.site-settings__flag {
-    display: block;
-    margin-right: 8px;
-    border: 2px solid $base-main;
-    line-height: 0;
-}
-
-.site-settings__flag_active {
-    border: 2px solid $additional-main;
-}
-
-.site-settings__flag-icon {
-    display: block;
-    width: 30px;
-}
-
-
-
-.site-settings__colors {
-    display: flex;
-}
-
-.site-settings__color {
-    display: block;
-    width: 24px;
-    height: 24px;
-    margin-right: 8px;
-    border: 2px solid $base-main;
-    background-color: $base-main;
-    border-radius: 50%;
-}
-
-.site-settings__color_1 {
-    background-color: $additional-main;
-}
-
-.site-settings__color_2 {
-    background-color: $opposite-main;
-}

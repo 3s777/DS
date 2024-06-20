@@ -14,33 +14,17 @@
             title="{{ __('Choose language') }}"
             tail="right">
 
-                <x-common.language-switcher class="site-settings__flags" />
-{{--            <nav class="site-settings__flags">--}}
-{{--                <a href="{{ route(Route::currentRouteName(), ['locale' => 'en']) }}">--}}
-{{--                    <div class="site-settings__flag @if(app()->getLocale() == 'en') site-settings__flag_active @endif">--}}
-{{--                        <x-svg.flags.en class="site-settings__flag-icon"></x-svg.flags.en>--}}
-{{--                    </div>--}}
-{{--                </a>--}}
-{{--                <a href="{{ route(Route::currentRouteName(), ['locale' => 'ru']) }}">--}}
-{{--                    <div class="site-settings__flag @if(app()->getLocale() == 'ru') site-settings__flag_active @endif">--}}
-{{--                        <x-svg.flags.ru class="site-settings__flag-icon"></x-svg.flags.ru>--}}
-{{--                    </div>--}}
-{{--                </a>--}}
-{{--                <a href="{{ route(Route::currentRouteName(), ['locale' => 'ua']) }}">--}}
-{{--                    <div class="site-settings__flag @if(app()->getLocale() == 'ua') site-settings__flag_active @endif">--}}
-{{--                        <x-svg.flags.ua class="site-settings__flag-icon"></x-svg.flags.ua>--}}
-{{--                    </div>--}}
-{{--                </a>--}}
-{{--            </nav>--}}
+            <x-common.language-switcher class="site-settings__flags" />
 
             <div class="popover__title">
                 {{ __('Choose theme color') }}
             </div>
 
             <nav class="site-settings__colors">
-                <a class="site-settings__color" href=""></a>
-                <a class="site-settings__color site-settings__color_1" href=""></a>
-                <a class="site-settings__color site-settings__color_2" href=""></a>
+                <a class="site-settings__color" href="{{ route('set.theme', 2) }}"></a>
+                <a class="site-settings__color site-settings__color_1" href="{{ route('set.theme', 3) }}"></a>
+                <a class="site-settings__color site-settings__color_2" href="{{ route('set.theme', 4) }}"></a>
+                <a class="site-settings__color site-settings__color_3" href="{{ route('set.theme', 5) }}"></a>
             </nav>
 
             <x-slot:close x-on:click="siteSettingsHidden = true">

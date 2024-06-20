@@ -1,31 +1,196 @@
-$base: 238;
-$additional: 129;
-$opposite: 0;
+:root {
+    --base: 238;
+    --additional: 129;
+    --opposite: 0;
+    --font: 0;
+    --success: 129;
+    --danger: 0;
+    --warning: 32;
+    --info: 210;
+    --disabled: 0;
 
-$font: 0;
-$success: 129;
-$danger: 0;
-$warning: 32;
-$info: 210;
-$disabled: 0;
+    --base-default: hsl(calc(var(--base) + 3), 25%, 31%);
+    --base-green: hsl(125, 25%, 31%);
+    --base-red: hsl(285, 25%, 31%);
 
-$base-main: hsl($base+3, 25%, 31%);
-$base-dark: hsl($base, 27%, 27%);
-$base-dark-transparent: hsla($base, 27%, 27%, .6);
-$base-dark-transparent-40: hsla($base, 27%, 27%, .4);
-$base-dark-like-transparent: hsl($base, 22%, 32%);
-$base-light-transparent: hsla($base, 15%, 41%, .8);
-$base-light-like-transparent: hsl($base, 17%, 39%);
+    --base-main: hsl(calc(var(--base) + 3), 25%, 31%);
+    --base-dark: hsl(var(--base), 27%, 27%);
+    --base-dark-transparent: hsla(var(--base), 27%, 27%, .6);
+    --base-dark-transparent-40: hsla(var(--base), 27%, 27%, .4);
+    --base-dark-like-transparent: hsl(var(--base), 22%, 32%);
+    --base-light-transparent: hsla(var(--base), 15%, 41%, .8);
+    --base-light-like-transparent: hsl(var(--base), 17%, 39%);
 
-$base-main-10: hsla($base, 27%, 27%, .1);
-$base-main-20: hsla($base, 27%, 27%, .2);
-$base-main-30: hsla($base, 27%, 27%, .3);
-$base-main-40: hsla($base, 27%, 27%, .4);
-$base-main-50: hsla($base, 27%, 27%, .5);
-$base-main-60: hsla($base, 27%, 27%, .6);
-$base-main-70: hsla($base, 27%, 27%, .7);
-$base-main-80: hsla($base, 27%, 27%, .8);
-$base-main-90: hsla($base, 27%, 27%, .9);
+    --base-main-10: hsla(var(--base), 27%, 27%, .1);
+    --base-main-20: hsla(var(--base), 27%, 27%, .2);
+    --base-main-30: hsla(var(--base), 27%, 27%, .3);
+    --base-main-40: hsla(var(--base), 27%, 27%, .4);
+    --base-main-50: hsla(var(--base), 27%, 27%, .5);
+    --base-main-60: hsla(var(--base), 27%, 27%, .6);
+    --base-main-70: hsla(var(--base), 27%, 27%, .7);
+    --base-main-80: hsla(var(--base), 27%, 27%, .8);
+    --base-main-90: hsla(var(--base), 27%, 27%, .9);
+
+    --additional-main: hsl(var(--additional), 87%, 32%);
+    --additional-light: hsl(var(--additional), 87%, 40%);
+    --additional-main-50: hsl(var(--additional), 87%, 32%, .5);
+    --additional-main-80: hsl(var(--additional), 87%, 32%, .8);
+
+    --opposite-main: hsl(var(--opposite), 0%, 100%);
+    --opposite-main-50: hsla(var(--opposite), 0%, 100%, .5);
+    --opposite-main-20: hsla(var(--opposite), 0%, 100%, .2);
+    --opposite-main-10: hsla(var(--opposite), 0%, 100%, .1);
+
+    --font-main: hsl(var(--font), 0%, 100%);
+    --font-main-10: hsla(var(--font), 0%, 100%, .1);
+    --font-main-20: hsla(var(--font), 0%, 100%, .2);
+    --font-main-30: hsla(var(--font), 0%, 100%, .3);
+    --font-main-40: hsla(var(--font), 0%, 100%, .4);
+    --font-main-50: hsla(var(--font), 0%, 100%, .5);
+    --font-main-60: hsla(var(--font), 0%, 100%, .6);
+    --font-main-70: hsla(var(--font), 0%, 100%, .7);
+    --font-main-80: hsla(var(--font), 0%, 100%, .8);
+    --font-main-90: hsla(var(--font), 0%, 100%, .9);
+    --font-base: hsl(var(--base), 27%, 27%);
+
+    --success-main: hsl(var(--additional), 87%, 32%);
+    --disabled-main: hsl(var(--disabled), 0%, 50%);
+    --info-main: hsl(var(--info), 100%, 60%);
+    --info-dark: hsl(var(--info), 100%, 50%);
+    --danger-main: hsl(var(--danger), 100%, 65%);
+    --danger-dark: hsl(var(--danger), 100%, 55%);
+    --warning-main: hsl(var(--warning), 100%, 50%);
+    --warning-dark: hsl(var(--warning), 100%, 40%);
+
+    --rating-active: hsl(38.82deg 100% 50%);
+    --rating-no-active: hsla(0, 0%, 100%, .5);
+
+    --shadow: hsl(0, 0%, 17%);
+
+}
+
+.theme__opposite_dark {
+    --font-main: hsl(var(--font), 0%, 0%);
+    --font-main-10: hsla(var(--font), 0%, 0%, .1);
+    --font-main-20: hsla(var(--font), 0%, 0%, .2);
+    --font-main-30: hsla(var(--font), 0%, 0%, .3);
+    --font-main-40: hsla(var(--font), 0%, 0%, .4);
+    --font-main-50: hsla(var(--font), 0%, 0%, .5);
+    --font-main-60: hsla(var(--font), 0%, 0%, .6);
+    --font-main-70: hsla(var(--font), 0%, 0%, .7);
+    --font-main-80: hsla(var(--font), 0%, 0%, .8);
+    --font-main-90: hsla(var(--font), 0%, 0%, .9);
+
+    --opposite: 0;
+    --opposite-main: hsl(var(--opposite), 0%, 0%);
+    --opposite-main-50: hsla(var(--opposite), 0%, 0%, .5);
+    --opposite-main-20: hsla(var(--opposite), 0%, 0%, .2);
+    --opposite-main-10: hsla(var(--opposite), 0%, 0%, .1);
+}
+
+.theme_green {
+    --base: 136;
+    --additional: 200;
+    --base-main: hsl(calc(var(--base) + 3), 43%, 35%);
+    --base-dark: hsl(var(--base), 40%, 25%);
+    --base-dark-transparent: hsla(var(--base), 40%, 27%, .6);
+    --base-dark-transparent-40: hsla(var(--base), 40%, 27%, .4);
+    --base-dark-like-transparent: hsl(var(--base), 41%, 28%);
+    --base-light-transparent: hsla(var(--base), 40%, 30%, .8);
+    --base-light-like-transparent: hsl(var(--base), 41%, 32%);
+
+    --base-main-10: hsla(var(--base), 27%, 27%, .1);
+    --base-main-20: hsla(var(--base), 27%, 27%, .2);
+    --base-main-30: hsla(var(--base), 27%, 27%, .3);
+    --base-main-40: hsla(var(--base), 27%, 27%, .4);
+    --base-main-50: hsla(var(--base), 27%, 27%, .5);
+    --base-main-60: hsla(var(--base), 27%, 27%, .6);
+    --base-main-70: hsla(var(--base), 27%, 27%, .7);
+    --base-main-80: hsla(var(--base), 27%, 27%, .8);
+    --base-main-90: hsla(var(--base), 27%, 27%, .9);
+
+    --additional-main: hsl(var(--additional), 87%, 32%);
+    --additional-light: hsl(var(--additional), 87%, 40%);
+    --additional-main-50: hsl(var(--additional), 87%, 32%, .5);
+    --additional-main-80: hsl(var(--additional), 87%, 32%, .8);
+
+    --font-base: hsl(var(--base), 27%, 27%);
+}
+
+.theme_light {
+    --base: 0;
+    --additional: 45;
+    --base-main: hsl(calc(var(--base) + 3), 0%, 100%);
+    --base-dark: hsl(var(--base), 0%, 80%);
+    --base-dark-transparent: hsla(var(--base), 0%, 70%, .6);
+    --base-dark-transparent-40: hsla(var(--base), 0%, 70%, .4);
+    --base-dark-like-transparent: hsl(var(--base), 0%, 70%);
+    --base-light-transparent: hsla(var(--base), 0%, 60%, .8);
+    --base-light-like-transparent: hsl(var(--base), 0%, 60%);
+
+    --base-main-10: hsla(var(--base), 0%, 75%, .1);
+    --base-main-20: hsla(var(--base), 0%, 75%, .2);
+    --base-main-30: hsla(var(--base), 0%, 75%, .3);
+    --base-main-40: hsla(var(--base), 0%, 75%, .4);
+    --base-main-50: hsla(var(--base), 0%, 75%, .5);
+    --base-main-60: hsla(var(--base), 0%, 75%, .6);
+    --base-main-70: hsla(var(--base), 0%, 75%, .7);
+    --base-main-80: hsla(var(--base), 0%, 75%, .8);
+    --base-main-90: hsla(var(--base), 0%, 75%, .9);
+
+    --additional-main: hsl(var(--additional), 77%, 53%);
+    --additional-light: hsl(var(--additional), 46%, 60%);
+    --additional-main-50: hsl(var(--additional), 46%, 57%, .5);
+    --additional-main-80: hsl(var(--additional), 46%, 57%, .8);
+
+    --font-base: hsl(var(--base), 0%, 100%);
+
+    --rating-active: hsl(10,10%, 50%);
+    --rating-no-active: hsla(10, 10%, 100%, .5);
+}
+
+.theme_dark {
+    --base: 0;
+
+    --base-main: hsl(calc(var(--base) + 3), 0%, 22%);
+    --base-dark: hsl(var(--base), 0%, 18%);
+    --base-dark-transparent: hsla(var(--base), 0%, 20%, .6);
+    --base-dark-transparent-40: hsla(var(--base), 0%, 18%, .4);
+    --base-dark-like-transparent: hsl(var(--base), 0%, 15%);
+    --base-light-transparent: hsla(var(--base), 0%, 15%, .8);
+    --base-light-like-transparent: hsl(var(--base), 0%, 15%);
+
+    --base-main-10: hsla(var(--base), 0%, 20%, .1);
+    --base-main-20: hsla(var(--base), 0%, 20%, .2);
+    --base-main-30: hsla(var(--base), 0%, 20%, .3);
+    --base-main-40: hsla(var(--base), 0%, 20%, .4);
+    --base-main-50: hsla(var(--base), 0%, 20%, .5);
+    --base-main-60: hsla(var(--base), 0%, 20%, .6);
+    --base-main-70: hsla(var(--base), 0%, 20%, .7);
+    --base-main-80: hsla(var(--base), 0%, 20%, .8);
+    --base-main-90: hsla(var(--base), 0%, 20%, .9);
+
+    --rating-active: hsl(10,10%, 50%);
+    --rating-no-active: hsla(10, 10%, 100%, .5);
+}
+
+$base-main: var(--base-main);
+$base-dark: var(--base-dark);
+$base-dark-transparent: var(--base-dark-transparent);
+$base-dark-transparent-40: var(--base-dark-transparent-40);
+$base-dark-like-transparent: var(--base-dark-like-transparent);
+$base-light-transparent:var(--base-light-transparent);
+$base-light-like-transparent: var(--base-light-like-transparent);
+
+$base-main-10: var(--base-main-10);
+$base-main-20: var(--base-main-20);
+$base-main-30: var(--base-main-30);
+$base-main-40: var(--base-main-40);
+$base-main-50: var(--base-main-50);
+$base-main-60: var(--base-main-60);
+$base-main-70: var(--base-main-70);
+$base-main-80: var(--base-main-80);
+$base-main-90: var(--base-main-90);
 
 //$base-dark: hsla($base, 30%, 23%, 1);
 //hsl(238.38deg 38.14% 19.02%);
@@ -33,27 +198,27 @@ $base-main-90: hsla($base, 27%, 27%, .9);
 //$base-main: hsla(242, 27%, 27%, 1);
 //$base-main-light: hsla(238, 27%, 27%, 1);
 //$base-extra-light-transparent: hsla($base, 10%, 65%, .8);
-$additional-main: hsl($additional, 87%, 32%);
-$additional-light: hsl($additional, 87%, 40%);
-$additional-main-50: hsl($additional, 87%, 32%, .5);
-$additional-main-80: hsl($additional, 87%, 32%, .8);
+$additional-main: var(--additional-main);
+$additional-light: var(--additional-light);
+$additional-main-50:var(--additional-main-50);
+$additional-main-80: var(--additional-main-80);
 
-$opposite-main: hsl($opposite, 0%, 100%);
-$opposite-main-50: hsla($opposite, 0%, 100%, .5);
-$opposite-main-20: hsla($opposite, 0%, 100%, .2);
-$opposite-main-10: hsla($opposite, 0%, 100%, .1);
+$opposite-main: var(--opposite-main);
+$opposite-main-50: var(--opposite-main-50);
+$opposite-main-20:var(--opposite-main-20);
+$opposite-main-10:var(--opposite-main-10);
 
-$font-main: hsl($font, 0%, 100%);
-$font-main-10: hsla($font, 0%, 100%, .1);
-$font-main-20: hsla($font, 0%, 100%, .2);
-$font-main-30: hsla($font, 0%, 100%, .3);
-$font-main-40: hsla($font, 0%, 100%, .4);
-$font-main-50: hsla($font, 0%, 100%, .5);
-$font-main-60: hsla($font, 0%, 100%, .6);
-$font-main-70: hsla($font, 0%, 100%, .7);
-$font-main-80: hsla($font, 0%, 100%, .8);
-$font-main-90: hsla($font, 0%, 100%, .9);
-$font-base: hsl($base, 27%, 27%);
+$font-main: var(--font-main);
+$font-main-10: var(--font-main-10);
+$font-main-20: var(--font-main-20);
+$font-main-30: var(--font-main-30);
+$font-main-40: var(--font-main-40);
+$font-main-50: var(--font-main-50);
+$font-main-60: var(--font-main-60);
+$font-main-70: var(--font-main-70);
+$font-main-80: var(--font-main-80);
+$font-main-90: var(--font-main-90);
+$font-base: var(--font-base);
 
 // LOGO
 $logo-1: hsl(1, 79%, 51%);
@@ -78,18 +243,17 @@ $logo-stroke-4: hsl(202, 100%, 91%);
 $logo-stroke-5: hsl(111deg, 52%, 80%);
 
 //$success-main: hsl($success, 87%, 40%);
-$success-main: hsl($additional, 87%, 32%);
+$success-main: var(--success-main);
 //$success-main: hsl($additional, 87%, 32%);
-$disabled-main: hsl($disabled, 0%, 50%);
-$info-main: hsl($info, 100%, 60%);
-$info-dark: hsl($info, 100%, 50%);
-$danger-main: hsl($danger, 100%, 65%);
-$danger-dark: hsl($danger, 100%, 55%);
-$warning-main: hsl($warning, 100%, 50%);
-$warning-dark: hsl($warning, 100%, 40%);
+$disabled-main: var(--disabled-main);
+$info-main: var(--info-main);
+$info-dark: var(--info-dark);
+$danger-main: var(--danger-main);
+$danger-dark: var(--danger-dark);
+$warning-main: var(--warning-main);
+$warning-dark: var(--warning-dark);
 
-$rating-active: hsl(38.82deg 100% 50%);
-$rating-no-active: hsla(0, 0%, 100%, .5);
+$rating-active: var(--rating-active);
+$rating-no-active: var(--rating-no-active);
 
-
-$shadow: hsl(0, 0%, 17%);
+$shadow: var(--shadow);
