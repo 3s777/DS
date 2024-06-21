@@ -1,3 +1,7 @@
+@foreach($menu->all() as $item)
+    <a href="{{ $item->link() }}" class="link @if($item->isActive()) active @endif">{{ $item->label() }}</a>
+@endforeach
+
 <nav
     :class="collapseSidebar ?  'sidebar-menu_collapsed' : ''"
     {{ $attributes->class([
