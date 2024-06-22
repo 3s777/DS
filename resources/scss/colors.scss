@@ -9,9 +9,10 @@
     --info: 210;
     --disabled: 0;
 
-    --base-default: hsl(calc(var(--base) + 3), 25%, 31%);
-    --base-green: hsl(125, 25%, 31%);
-    --base-red: hsl(285, 25%, 31%);
+    --theme-default: hsl(calc(var(--base) + 3), 25%, 31%);
+    --theme-green: hsl(125, 25%, 31%);
+    --theme-light: hsl(0, 0, 100%);
+    --theme-dark: hsl(0, 0%, 22%);
 
     --base-main: hsl(calc(var(--base) + 3), 25%, 31%);
     --base-dark: hsl(var(--base), 27%, 27%);

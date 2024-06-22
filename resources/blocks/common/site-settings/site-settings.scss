@@ -61,30 +61,4 @@
         display: block;
         width: 30px;
     }
-
-
-
-    &__colors {
-        display: flex;
-    }
-
-    &__color {
-        display: block;
-        width: 24px;
-        height: 24px;
-        margin-right: 8px;
-        border: 2px solid $base-main;
-        background-color: var(--base-default);
-        border-radius: 50%;
-    }
-
-    &__color_1 {
-        background-color: var(--base-green);
-    }
-
-    &__color_2 {
-        background-color: var(--base-red);
-    }
 }
-
-

@@ -20,12 +20,7 @@
                 {{ __('Choose theme color') }}
             </div>
 
-            <nav class="site-settings__colors">
-                <a class="site-settings__color" href="{{ route('set.theme', 2) }}"></a>
-                <a class="site-settings__color site-settings__color_1" href="{{ route('set.theme', 3) }}"></a>
-                <a class="site-settings__color site-settings__color_2" href="{{ route('set.theme', 4) }}"></a>
-                <a class="site-settings__color site-settings__color_3" href="{{ route('set.theme', 5) }}"></a>
-            </nav>
+            <x-common.theme-switcher class="site-settings__colors" link-class="site-settings" />
 
             <x-slot:close x-on:click="siteSettingsHidden = true">
                 <x-svg.close class="popover__close-icon"></x-svg.close>
