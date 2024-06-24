@@ -24,7 +24,7 @@ class Menu implements IteratorAggregate, Countable
         return Collection::make($this->items);
     }
 
-    public function add(MenuItem $item): self
+    public function add(MenuItem|MenuGroup $item): self
     {
         $this->items[] = $item;
 

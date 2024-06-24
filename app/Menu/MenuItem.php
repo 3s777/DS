@@ -8,6 +8,8 @@ class MenuItem
 {
     use Makeable;
 
+    protected const TYPE = 'link';
+
     public function __construct(
         protected string $link,
         protected string $label,
@@ -24,14 +26,23 @@ class MenuItem
         return $this->label;
     }
 
+    public function type(): string
+    {
+        return self::TYPE;
+    }
+
     public function isActive(): bool
     {
         $path = parse_url($this->link(), PHP_URL_PATH) ?? '/';
 
-        if($path === '/') {
-            return request()->path() === $path;
+        if(request()->path() === '/') {
+            foreach (config('app.available_locales') as $locale) {
+                if($path === '/'.$locale) {
+                    return true;
+                }
+            }
         }
 
-        return  request()->fullUrlIs($this->link . '*');
+        return  request()->fullUrlIs($this->link . '?*', $this->link);
     }
 }

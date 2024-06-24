@@ -3,6 +3,43 @@
         <x-common.content class="feed">
             <x-common.messages />
 
+            @foreach($menu->all() as $item)
+                @if($item->type() === 'link')
+                    <x-ui.form.button
+                        @class(['content__sidebar-link', 'sidebar-menu__link', 'button_submit' => $item->isActive()])
+                        tag="a"
+                        href="{{ $item->link() }}"
+                        color="light">
+                        <x-slot:icon class="sidebar-menu__link-icon">
+                            <x-svg.statistic />
+                        </x-slot:icon>
+                        <span class="sidebar-menu__link-label">{{ $item->label() }}</span>
+                    </x-ui.form.button>
+                @endif
+                @if($item->type() === 'group')
+                    <x-ui.accordion class="sidebar-menu__accordion">
+                        <x-ui.accordion.item class="sidebar-menu__accordion-item" :open="$item->isActive()" color="light">
+                            <x-ui.accordion.title class="sidebar-menu__accordion-title">
+                                <span class="sidebar-menu__link-label">{{ $item->label() }}</span>
+                            </x-ui.accordion.title>
+                            <x-ui.accordion.content>
+                                @foreach($item->all() as $groupItem)
+                                    <x-ui.form.button
+                                        @class(['content__sidebar-link', 'sidebar-menu__link', 'button_submit' => $groupItem->isActive()])
+                                        tag="a"
+                                        href="{{ $groupItem->link() }}"
+                                        color="light">
+                                        <x-slot:icon class="sidebar-menu__link-icon">
+                                            <x-svg.statistic />
+                                        </x-slot:icon>
+                                        <span class="sidebar-menu__link-label">{{ $groupItem->label() }}</span>
+                                    </x-ui.form.button>
+                                @endforeach
+                            </x-ui.accordion.content>
+                        </x-ui.accordion.item>
+                    </x-ui.accordion>
+                @endif
+            @endforeach
 
             <x-content.item.card class="feed-item sale-item">
                 <x-slot:photos>
