@@ -25,17 +25,33 @@
                 tag="a"
                 href="{{ $item->link() }}"
                 color="light">
-                <x-slot:icon class="sidebar-menu__link-icon">
-                    <x-svg.statistic />
-                </x-slot:icon>
+                @if($item->icon())
+                    <x-slot:icon class="sidebar-menu__link-icon">
+                        <x-dynamic-component component="svg.{{ $item->icon() }}" class="mt-4" />
+                    </x-slot:icon>
+                @endif
                 <span class="sidebar-menu__link-label">{{ $item->label() }}</span>
             </x-ui.form.button>
             @endif
                 @if($item->type() === 'group')
+
+                        <x-ui.form.button
+                            @class(['sidebar-menu__link', 'sidebar-menu__link-icon_toggle', 'button_submit' => $item->isActive()])
+                            tag="a"
+                            color="light">
+                            @if($item->icon())
+                                <x-slot:icon class="sidebar-menu__link-icon">
+                                    <x-dynamic-component component="svg.{{ $item->icon() }}" class="mt-4" />
+                                </x-slot:icon>
+                            @endif
+                        </x-ui.form.button>
+
                     <x-ui.accordion class="sidebar-menu__accordion">
                         <x-ui.accordion.item class="sidebar-menu__accordion-item" :open="$item->isActive()" color="light">
                             <x-ui.accordion.title class="sidebar-menu__accordion-title">
-                                <span class="sidebar-menu__link-label">{{ $item->label() }}</span>
+                                <span class="sidebar-menu__link-label">
+                                    {{ $item->label() }}
+                                </span>
                             </x-ui.accordion.title>
                             <x-ui.accordion.content>
                                 @foreach($item->all() as $groupItem)
@@ -52,6 +68,7 @@
                                         </x-ui.form.button>
                                     @endif
                                         @if($groupItem->type() === 'group')
+
                                             <x-ui.accordion class="sidebar-menu__accordion">
                                                 <x-ui.accordion.item class="sidebar-menu__accordion-item" :open="$groupItem->isActive()" color="light">
                                                     <x-ui.accordion.title class="sidebar-menu__accordion-title">
@@ -75,11 +92,13 @@
                                                     </x-ui.accordion.content>
                                                 </x-ui.accordion.item>
                                             </x-ui.accordion>
+
                                         @endif
                                 @endforeach
                             </x-ui.accordion.content>
                         </x-ui.accordion.item>
                     </x-ui.accordion>
+
                 @endif
         @endforeach
 
@@ -172,6 +191,14 @@
 {{--                </x-ui.accordion.item>--}}
 {{--            </x-ui.accordion>--}}
 
+{{--            <x-ui.form.button--}}
+{{--                class="sidebar-menu__link sidebar-menu__link-icon_toggle"--}}
+{{--                tag="a"--}}
+{{--                color="light">--}}
+{{--                <x-slot:icon class="sidebar-menu__link-icon">--}}
+{{--                    <x-svg.game />--}}
+{{--                </x-slot:icon>--}}
+{{--            </x-ui.form.button>--}}
 {{--            <x-ui.accordion class="sidebar-menu__accordion">--}}
 {{--                <x-ui.accordion.item class="sidebar-menu__accordion-item" color="light" open>--}}
 {{--                    <x-ui.accordion.title class="sidebar-menu__accordion-title">--}}

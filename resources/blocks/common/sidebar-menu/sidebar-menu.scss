@@ -14,6 +14,8 @@
         .sidebar-menu__accordion {
             opacity: 0;
             visibility: hidden;
+            height: 0;
+            margin: 0;
         }
 
         .sidebar-menu__link-label {
@@ -67,6 +69,10 @@
     &__accordion {
         margin-bottom: 8px;
         font-size: rem(16);
+
+        &:last-child {
+            margin-bottom: 0;
+        }
     }
 
     &__accordion-item {
@@ -74,6 +80,12 @@
         margin-bottom: 8px;
         padding: 12px;
         border-radius: $extra-small-border-radius;
+
+        &[open] {
+            & > .accordion__title {
+                margin-bottom: 16px;
+            }
+        }
 
         & & {
             margin-bottom: 0;

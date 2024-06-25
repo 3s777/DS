@@ -12,10 +12,11 @@ final class NavigationComposer
     public function compose(View $view): void
     {
         $menu = Menu::make()
-            ->add(MenuItem::make(route('home'), 'Статистика'))
-            ->add(MenuItem::make(route('users.show', ['user' => auth()->user()->slug ]), 'Профиль'))
+            ->add(MenuItem::make(route('home'), 'Статистика', 'statistic'))
+            ->add(MenuItem::make(route('users.show', ['user' => auth()->user()->slug ]), 'Профиль', 'profile'))
             ->add(MenuGroup::make()
                 ->setLabel('Игры')
+                ->setIcon('game')
                 ->add(MenuGroup::make()
                     ->setLabel('Разработчики')
                     ->add(MenuItem::make(route('game-developers.create'), 'Добавить'))
@@ -33,6 +34,7 @@ final class NavigationComposer
             )
             ->add(MenuGroup::make()
                 ->setLabel('Пользователи')
+                ->setIcon('profile')
                 ->add(MenuItem::make(route('users.create'), 'Добавить'))
                 ->add(MenuItem::make(route('users.index'), 'Список'))
                 ->add(MenuGroup::make()

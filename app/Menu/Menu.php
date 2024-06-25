@@ -14,7 +14,7 @@ class Menu implements IteratorAggregate, Countable
 
     protected array $items = [];
 
-    public function __construct(MenuItem ...$items)
+    public function __construct(MenuGroup|MenuItem ...$items)
     {
         $this->items = $items;
     }

@@ -13,7 +13,14 @@ class MenuItem
     public function __construct(
         protected string $link,
         protected string $label,
-    ) {
+        protected ?string $icon = null
+    )
+    {
+    }
+
+    public function type(): string
+    {
+        return self::TYPE;
     }
 
     public function link(): string
@@ -26,9 +33,9 @@ class MenuItem
         return $this->label;
     }
 
-    public function type(): string
+    public function icon(): ?string
     {
-        return self::TYPE;
+        return $this->icon;
     }
 
     public function isActive(): bool
