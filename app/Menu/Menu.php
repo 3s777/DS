@@ -67,4 +67,35 @@ class Menu implements IteratorAggregate, Countable
     {
         return count($this->items);
     }
+
+    protected function recursiveCreateGroup(array $items, Menu|MenuGroup $menu): void
+    {
+        foreach ($items as $item) {
+            $item['link'] = $item['link'] ?? '';
+            $item['label'] = $item['label'] ?? '';
+            $item['icon'] = $item['icon'] ?? '';
+            $item['group'] = $item['group'] ?? '';
+            $item['class'] = $item['class'] ?? '';
+
+            if(is_array($item['group'])) {
+                $group = MenuGroup::make()
+                    ->setLabel($item['label'])
+                    ->setLink($item['link'])
+                    ->setIcon($item['icon'])
+                    ->setClass($item['class']);
+                $this->recursiveCreateGroup($item['group'], $group);
+
+                $menu->add($group);
+            } else {
+                $menu->add(MenuItem::make($item['link'], $item['label'], $item['icon'], $item['class']));
+            }
+        }
+    }
+
+    public static function createFromArray(array $items): Menu
+    {
+        $menu = self::make();
+        $menu->recursiveCreateGroup($items, $menu);
+        return $menu;
+    }
 }

@@ -50,5 +50,7 @@ return [
     'blog' => 'Блог',
     'feed' => 'Лента',
     'more' => 'Больше',
-    'default_search_placeholder' => 'Что будем искать?'
+    'default_search_placeholder' => 'Что будем искать?',
+    'expand_menu' => 'Развернуть меню',
+    'collapse_menu' => 'Свернуть меню'
 ];

@@ -13,6 +13,7 @@ class MenuGroup extends Menu
     protected string $label;
     protected ?string $link = null;
     protected ?string $icon = null;
+    protected ?string $class = null;
 
     public function type(): string
     {
@@ -40,6 +41,13 @@ class MenuGroup extends Menu
         return $this;
     }
 
+    public function setClass($class): MenuGroup
+    {
+        $this->class = $class;
+
+        return $this;
+    }
+
     public function label(): string
     {
         return $this->label;
@@ -54,6 +62,12 @@ class MenuGroup extends Menu
     {
         return $this->icon;
     }
+
+    public function class(): string
+    {
+        return $this->class;
+    }
+
 
     public function isActive(): bool
     {

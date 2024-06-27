@@ -13,7 +13,8 @@ class MenuItem
     public function __construct(
         protected string $link,
         protected string $label,
-        protected ?string $icon = null
+        protected ?string $icon = null,
+        protected ?string $class = null
     )
     {
     }
@@ -36,6 +37,18 @@ class MenuItem
     public function icon(): ?string
     {
         return $this->icon;
+    }
+
+    public function class(): ?string
+    {
+        return $this->class;
+    }
+
+    public function setClass($class): MenuItem
+    {
+        $this->class = $class;
+
+        return $this;
     }
 
     public function isActive(): bool
