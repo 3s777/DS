@@ -1,0 +1,38 @@
+.mobile-main-menu {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    padding: 4px 16px;
+    background-color: $base-dark-like-transparent;
+    box-shadow: $base-box-shadow;
+
+    &__inner {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    &__link {
+        padding: 4px;
+        line-height: 0;
+    }
+
+    &__item-icon {
+        width: 22px;
+        height: 22px;
+        fill: $opposite-main;
+    }
+
+    &__item-icon.home-icon{
+        fill: none;
+        stroke: $opposite-main;
+        stroke-width: 1.5;
+        stroke-linecap: round;
+        stroke-linejoin: round;
+    }
+
+    &__item-icon.shelfs-icon{
+        width: 18px;
+        height: 18px;
+    }
+}

@@ -1,10 +1,31 @@
 .main-menu {
+    position: relative;
     display: flex;
     justify-content: space-between;
     flex-wrap: wrap;
 
     &__item {
         margin: 0 8px;
+    }
+
+    &__more {
+        position: absolute;
+        z-index: 100;
+        top: 60px;
+        width: calc(100% - 16px);
+        margin-left: 8px;
+        border: 2px solid $opposite-main-10;
+        box-shadow: $base-box-shadow;
+    }
+
+    &__more-close {
+        position: absolute;
+        top: 8px;
+        right: 8px;
+    }
+
+    &__close-icon {
+        fill: $opposite-main;
     }
 
     @include breakpoint-max($xl) {

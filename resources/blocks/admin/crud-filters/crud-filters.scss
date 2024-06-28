@@ -32,6 +32,10 @@
         &__buttons {
             flex-wrap: wrap;
         }
+
+        .current-filters {
+            padding-bottom: 8px;
+        }
     }
 
     @include breakpoint-max($sm) {

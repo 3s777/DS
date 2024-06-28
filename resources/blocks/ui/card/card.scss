@@ -8,6 +8,14 @@
         background-color: $base-dark-transparent;
     }
 
+    &_color_notransparent_dark {
+        background-color: $base-dark-like-transparent;
+    }
+
+    &_color_notransparent_light {
+        background-color: $base-light-like-transparent;
+    }
+
     &__header {
         margin-bottom: 12px;
     }
