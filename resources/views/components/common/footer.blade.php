@@ -15,9 +15,6 @@
         <a href="{{ route('feed') }}" class="mobile-main-menu__link">
             <x-svg.burger class="mobile-main-menu__item-icon"></x-svg.burger>
         </a>
-
-        <a href="{{ route('feed') }}" class="mobile-main-menu__link">
-            <x-svg.message class="mobile-main-menu__item-icon"></x-svg.message>
-        </a>
+            <x-common.chat-icon-notification class="mobile-main-menu__link mobile-main-menu__chat" count="5" />
     </nav>
 </div>

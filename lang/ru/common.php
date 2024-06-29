@@ -52,5 +52,7 @@ return [
     'more' => 'Больше',
     'default_search_placeholder' => 'Что будем искать?',
     'expand_menu' => 'Развернуть меню',
-    'collapse_menu' => 'Свернуть меню'
+    'collapse_menu' => 'Свернуть меню',
+    'statistic' => 'Статистика',
+    'list' => 'Список'
 ];
