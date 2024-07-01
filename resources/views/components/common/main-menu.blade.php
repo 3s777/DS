@@ -27,7 +27,7 @@
         @endif
     @endforeach
 
-    <x-ui.card x-show="moreOpen" x-on:click.outside="moreOpen = false" class="main-menu__more" size="small" color="notransparent_dark">
+    <x-ui.card x-cloak x-show="moreOpen" x-on:click.outside="moreOpen = false" class="main-menu__more" size="small" color="notransparent_dark">
         <div x-on:click="moreOpen = false"  class="main-menu__more-close">
             <x-svg.close class="main-menu__close-icon"></x-svg.close>
         </div>

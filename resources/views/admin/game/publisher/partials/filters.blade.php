@@ -1,4 +1,4 @@
-<x-admin.crud-filters search-placeholder="{{ __('game_developer.search') }}">
+<x-admin.crud-filters search-placeholder="{{ __('game_publisher.search') }}">
     <x-admin.crud-filters-form>
         <x-grid.col xl="3" lg="4"  md="6" sm="12">
             <x-ui.form.group>
@@ -21,11 +21,6 @@
                     route="find-users"></x-ui.async-select>
             </x-ui.form.group>
         </x-grid.col>
-
-{{--        @foreach(filters() as $filter)--}}
-{{--        {!! $filter !!}--}}
-{{--        @endforeach--}}
-
         <x-slot:buttons></x-slot:buttons>
     </x-admin.crud-filters-form>
 </x-admin.crud-filters>

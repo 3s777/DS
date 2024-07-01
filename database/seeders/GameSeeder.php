@@ -35,6 +35,7 @@ class GameSeeder extends Seeder
             foreach ($game->publishers as $publisher) {
                 $currentPublisher = GamePublisher::firstOrCreate([
                     'name' => $publisher['name'],
+                    'user_id' => '11'
                 ]);
                 $currentGame->publishers()->attach($currentPublisher->id);
             }
@@ -43,6 +44,7 @@ class GameSeeder extends Seeder
                 $currentDeveloper = GameDeveloper::firstOrCreate([
                     'name' => $developer['name'],
                     'slug' => $developer['name'],
+                    'user_id' => '11'
                 ]);
                 $currentGame->developers()->attach($currentDeveloper->id);
             }

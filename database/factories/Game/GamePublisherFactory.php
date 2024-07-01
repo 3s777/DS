@@ -2,6 +2,7 @@
 
 namespace Database\Factories\Game;
 
+use Domain\Auth\Models\User;
 use Domain\Game\Models\GamePublisher;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
@@ -20,7 +21,9 @@ class GamePublisherFactory extends Factory
     public function definition(): array
     {
         return [
-            'name' => $this->faker->title()
+            'name' => fake()->name(),
+            'description' => fake()->text(),
+            'user_id' => User::factory(),
         ];
     }
 }

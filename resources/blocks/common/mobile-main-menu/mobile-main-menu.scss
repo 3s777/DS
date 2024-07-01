@@ -1,6 +1,7 @@
 .mobile-main-menu {
     position: fixed;
     bottom: 0;
+    display: none;
     width: 100%;
     padding: 4px 16px;
     background-color: $base-dark-like-transparent;
@@ -44,5 +45,9 @@
     .chat-icon-notification__badge {
         line-height: 12px;
         font-size: rem(12);
+    }
+
+    @include breakpoint-max($lg) {
+        display: block;
     }
 }

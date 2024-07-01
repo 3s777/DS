@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 use Domain\Auth\Models\Permission;
 use Domain\Auth\Models\Role;
+use Domain\Auth\Models\User;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
@@ -67,6 +68,31 @@ class RolesAndPermissionsSeeder extends Seeder
             'ru' => 'Игровой разработчик. Удалить'
         ]]);
 
+        Permission::create(['name' => 'game-publishers.*', 'display_name' => [
+            'en' => 'Game Publisher. All',
+            'ru' => 'Игровой издатель. Все'
+        ]]);
+        Permission::create(['name' => 'game-publishers.view', 'display_name' => [
+            'en' => 'Game Publisher. View',
+            'ru' => 'Игровой издатель. Смотреть'
+        ]]);
+        Permission::create(['name' => 'game-publishers.view_all', 'display_name' => [
+            'en' => 'Game Publisher. View all',
+            'ru' => 'Игровой издатель. Смотреть все'
+        ]]);
+        Permission::create(['name' => 'game-publishers.create', 'display_name' => [
+            'en' => 'Game Publisher. Create',
+            'ru' => 'Игровой издатель. Создать'
+        ]]);
+        Permission::create(['name' => 'game-publishers.edit', 'display_name' => [
+            'en' => 'Game Publisher. Edit',
+            'ru' => 'Игровой издатель. Редактировать'
+        ]]);
+        Permission::create(['name' => 'game-publishers.delete', 'display_name' => [
+            'en' => 'Game Publisher. Delete',
+            'ru' => 'Игровой издатель. Удалить'
+        ]]);
+
         $role = Role::create(['name' => 'user', 'display_name' => [
             'en' => 'User',
             'ru' => 'Пользователь'
@@ -89,5 +115,10 @@ class RolesAndPermissionsSeeder extends Seeder
             'ru' => 'Супер администратор'
         ]]);
         $role->givePermissionTo(Permission::all());
+
+        $user = User::where('name', 'qqqqq')->first();
+
+        $user->assignRole('super_admin');
+
     }
 }

@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use Domain\Auth\Models\User;
 use Domain\Game\Models\GamePublisher;
 use Illuminate\Database\Seeder;
 
@@ -12,6 +13,6 @@ class GamePublisherSeeder extends Seeder
      */
     public function run(): void
     {
-        GamePublisher::factory(3)->create();
+        GamePublisher::factory(10)->for(User::factory()->create())->create();
     }
 }

@@ -2,9 +2,8 @@
 
 namespace App\Http\Requests\Game;
 
-use Domain\Game\Models\GameDeveloper;
+use Domain\Game\Models\GamePublisher;
 use Illuminate\Foundation\Http\FormRequest;
-use Illuminate\Support\Str;
 use Illuminate\Validation\Rule;
 
 class UpdateGamePublisherRequest extends FormRequest
@@ -32,9 +31,23 @@ class UpdateGamePublisherRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name' => ['required', Rule::unique(GameDeveloper::class)->ignore($this->game_developer)],
-            'slug' => ['nullable','string', Rule::unique(GameDeveloper::class)->ignore($this->game_developer)],
-            'description' => ['nullable','string']
+            'name' => ['required', Rule::unique(GamePublisher::class)->ignore($this->game_publisher)],
+            'slug' => ['nullable','string', Rule::unique(GamePublisher::class)->ignore($this->game_publisher)],
+            'description' => ['nullable','string'],
+            'thumbnail' => ['nullable', 'mimes:jpg,png', 'max:10024'],
+            'thumbnail_selected' => ['nullable', 'string'],
+            'user_id' => ['nullable', 'integer', 'exists:Domain\Auth\Models\User,id']
+        ];
+    }
+
+    public function attributes()
+    {
+        return [
+            'name' => __('common.name'),
+            'slug' => __('common.slug'),
+            'description' => __('common.description'),
+            'thumbnail' => __('common.thumbnail'),
+            'user_id' => __('common.user'),
         ];
     }
 }

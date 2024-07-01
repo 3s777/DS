@@ -2,7 +2,7 @@
 
 namespace App\Http\Requests\Game;
 
-use Domain\Game\Models\GameDeveloper;
+use Domain\Game\Models\GamePublisher;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
 
@@ -24,9 +24,22 @@ class CreateGamePublisherRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name' => ['required', Rule::unique(GameDeveloper::class)],
-            'slug' => ['nullable','string', Rule::unique(GameDeveloper::class)],
-            'description' => ['nullable','string']
+            'name' => ['required', Rule::unique(GamePublisher::class)],
+            'slug' => ['nullable','string', Rule::unique(GamePublisher::class)],
+            'description' => ['nullable','string'],
+            'thumbnail' => ['nullable', 'mimes:jpg,png', 'max:10024'],
+            'user_id' => ['nullable', 'integer', 'exists:Domain\Auth\Models\User,id']
+        ];
+    }
+
+    public function attributes()
+    {
+        return [
+            'name' => __('common.name'),
+            'slug' => __('common.slug'),
+            'description' => __('common.description'),
+            'thumbnail' => __('common.thumbnail'),
+            'user_id' => __('common.user'),
         ];
     }
 }

@@ -11,7 +11,7 @@ return new class () extends Migration {
     public function up(): void
     {
         Schema::table('game_developers', function (Blueprint $table) {
-            $table->string('thumbnail')->nullable();
+//            $table->string('thumbnail')->nullable();
         });
     }
 

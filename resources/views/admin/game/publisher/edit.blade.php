@@ -1,95 +1,97 @@
-<x-layouts.main title="{{ __('game.publisher.edit') }}" :search="false">
-    <x-grid.container>
-        <x-common.content class="admin" wrapper-class="admin__content">
-            <x-slot:sidebar>
-                <x-common.sidebar-menu class="admin__menu" />
-            </x-slot:sidebar>
+<x-layouts.admin :search="false">
+    <x-ui.form class="crud-form"
+               method="put"
+               id="edit-form"
+               action="{{ route('game-publishers.update', $gamePublisher->slug) }}"
+               enctype="multipart/form-data">
+        <x-ui.title class="crud-form__tile" size="normal" indent="small">
+            {{ __('game_publisher.edit') }}
+        </x-ui.title>
 
-            <x-ui.title size="normal" indent="big">{{ __('game.publisher.edit') }}</x-ui.title>
+        <div class="crud-form__main">
+            <x-grid type="container">
+                <x-grid.col xl="4" ls="6" ml="12" lg="6" md="6" sm="12">
+                    <x-ui.form.group>
+                        <x-ui.form.input-text
+                            :errors="$errors"
+                            placeholder="{{ __('common.name') }}"
+                            id="name"
+                            name="name"
+                            value="{{ $gamePublisher->name }}"
+                            required
+                            autocomplete="on"
+                            autofocus>
+                        </x-ui.form.input-text>
+                    </x-ui.form.group>
+                </x-grid.col>
 
-            <x-common.messages />
+                <x-grid.col xl="4" ls="6" ml="12" lg="6" md="6" sm="12">
+                    <x-ui.form.group>
+                        <x-ui.form.input-text
+                            :errors="$errors"
+                            placeholder="{{ __('common.slug') }}"
+                            id="slug"
+                            name="slug"
+                            value="{{ $gamePublisher->slug }}"
+                            autocomplete="on">
+                        </x-ui.form.input-text>
+                    </x-ui.form.group>
+                </x-grid.col>
 
-            <div class="crud-form">
-                <x-ui.form method="put" id="edit-form" action="{{ route('game-publishers.update', $gamepublisher->slug) }}">
-                    <x-grid type="container">
-                        <x-grid.col xl="4" lg="6" md="6" sm="12">
-                            <x-ui.form.group>
-                                <x-ui.form.input-text
-                                    :errors="$errors"
-                                    placeholder="{{ __('common.name') }}"
-                                    id="name"
-                                    name="name"
-                                    value="{{ $gamepublisher->name }}"
-                                    required
-                                    autocomplete="on"
-                                    autofocus >
-                                </x-ui.form.input-text>
-                            </x-ui.form.group>
-                        </x-grid.col>
+                <x-grid.col xl="4" ls="6" ml="12" lg="6" md="6" sm="12">
+                    <x-ui.form.group>
+                        <x-ui.async-select
+                            name="user"
+                            route="find-users"
+                            label="{{ __('common.user') }}"
+                            :selected="$gamePublisher->user ?? false"
+                        >
+                        </x-ui.async-select>
+                    </x-ui.form.group>
+                </x-grid.col>
+            </x-grid>
+        </div>
 
-                        <x-grid.col xl="4" lg="6" md="6" sm="12">
-                            <x-ui.form.group>
-                                <x-ui.form.input-text
-                                    :errors="$errors"
-                                    placeholder="{{ __('common.slug') }}"
-                                    id="slug"
-                                    name="slug"
-                                    value="{{ $gamepublisher->slug }}"
+        <div class="crud-form__description">
+            <x-ui.form.group>
+                <x-libraries.rich-text-editor
+                    name="description"
+                    value="{!! $gamePublisher->description !!}"
+                    placeholder="{{ __('common.description') }}"/>
+            </x-ui.form.group>
+        </div>
 
-                                    autocomplete="on">
-                                </x-ui.form.input-text>
-                            </x-ui.form.group>
-                        </x-grid.col>
-
-                        <x-grid.col xl="4" lg="6" md="6" sm="12">
-                            <x-ui.form.group>
-                                <x-libraries.filepond
-                                    class="filepond1"
-                                    name="filepond"
-                                    accept="image/png, image/jpeg, image/gif"
-                                    multiple>
-                                </x-libraries.filepond>
-                            </x-ui.form.group>
-                        </x-grid.col>
-
-                        <x-grid.col xl="12" lg="6" md="6" sm="12">
-                            <x-ui.form.group>
-                                <x-libraries.rich-text-editor
-                                    name="description"
-                                    value="{!! $gamepublisher->description !!}"
-                                    placeholder="{{ __('common.description') }}" />
-                            </x-ui.form.group>
-                        </x-grid.col>
-
-                        <x-grid.col xl="12" lg="6" md="6" sm="12">
-                            <x-ui.form.group>
-                                <x-ui.form.button>{{ __('common.save') }}</x-ui.form.button>
-                            </x-ui.form.group>
-                        </x-grid.col>
-                    </x-grid>
-                </x-ui.form>
+        <div class="crud-form__sidebar">
+            <div class="crud-form__sidebar-wrapper">
+                <x-ui.form.input-image
+                    class="crud-form__input-image"
+                    name="thumbnail"
+                    id="thumbnail"
+                    :path="$gamePublisher->getThumbnailPath()">
+                    @if($gamePublisher->getThumbnailPath())
+                    <x-slot:uploaded-thumbnail>
+                        <x-ui.responsive-image
+                            :model="$gamePublisher"
+                            :image-sizes="['small', 'medium', 'large']"
+                            :path="$gamePublisher->getThumbnailPath()"
+                            :placeholder="false"
+                            sizes="(max-width: 1024px) 100vw, (max-width: 1400px) 30vw, 220px">
+                            <x-slot:img alt="test" title="test title"></x-slot:img>
+                        </x-ui.responsive-image>
+                    </x-slot:uploaded-thumbnail>
+                    @endif
+                    <p>{{ __('common.file.format') }} jpg, png</p>
+                    <p>{{ __('common.file.max_size') }} 6Mb</p>
+                </x-ui.form.input-image>
             </div>
-        </x-common.content>
-    </x-grid.container>
+        </div>
 
-    @push('scripts')
-        <script type="module">
-            const inputElement = document.querySelector('.filepond1');
-
-            FilePond.registerPlugin(
-                FilePondPluginFileValidateType,
-                FilePondPluginImagePreview,
-                FilePondPluginImageExifOrientation,
-                FilePondPluginFileValidateSize,
-                FilePondPluginImageCrop,
-                FilePondPluginImageResize,
-                FilePondPluginImageTransform,
-            );
-
-            const pond = FilePond.create(inputElement, {
-                credits: false,
-                labelIdle: '<span class="filepond--label-action"> {{ __('common.upload') }}</span> {{ __('common.image') }} '
-            });
-        </script>
-    @endpush
-</x-layouts.main>
+        <x-ui.form.group class="crud-form__submit">
+            <x-ui.form.button
+                class="crud-form__submit-button"
+                x-bind:disabled="preventSubmit">
+                    {{ __('common.save') }}
+            </x-ui.form.button>
+        </x-ui.form.group>
+    </x-ui.form>
+</x-layouts.admin>
