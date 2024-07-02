@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use Domain\Auth\Models\User;
 use Domain\Game\Models\GameGenre;
 use Illuminate\Database\Seeder;
 use Services\GamesDbApi\GamesDbApiContract;
@@ -13,12 +14,13 @@ class GameGenreSeeder extends Seeder
      */
     public function run(GamesDbApiContract $gamesApi): void
     {
-        $genres = $gamesApi->getGenres();
-
-        foreach ($genres as $genre) {
-            GameGenre::firstOrCreate([
-                'name' => $genre['name'],
-            ]);
-        }
+        GameGenre::factory(10)->for(User::factory()->create())->create();
+//        $genres = $gamesApi->getGenres();
+//
+//        foreach ($genres as $genre) {
+//            GameGenre::firstOrCreate([
+//                'name' => $genre['name'],
+//            ]);
+//        }
     }
 }
