@@ -15,6 +15,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 use Mews\Purifier\Casts\CleanHtml;
 use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
+use Spatie\Translatable\HasTranslations;
 use Support\Traits\Models\HasSlug;
 use Support\Traits\Models\HasThumbnail;
 use Support\Traits\Models\HasUser;
@@ -27,6 +28,7 @@ class GamePublisher extends Model implements HasMedia
     use InteractsWithMedia;
     use HasThumbnail;
     use HasUser;
+    use HasTranslations;
 
     protected $fillable = [
         'name',
@@ -45,6 +47,8 @@ class GamePublisher extends Model implements HasMedia
         'created_at',
         'users.email'
     ];
+
+    public $translatable = ['description'];
 
     protected static function newFactory(): GamePublisherFactory
     {
@@ -67,8 +71,6 @@ class GamePublisher extends Model implements HasMedia
             'full_preview_600' => ['600', '600'],
             'full_preview_1200' => ['1200', '1200'],
             'large' => ['1000', '1000'],
-            'extra_small' => ['100', '100'],
-            'extra_small1' => ['50', '50']
         ];
     }
 

@@ -15,6 +15,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 use Mews\Purifier\Casts\CleanHtml;
 use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
+use Spatie\Translatable\HasTranslations;
 use Support\Traits\Models\HasSlug;
 use Support\Traits\Models\HasThumbnail;
 use Support\Traits\Models\HasUser;
@@ -30,6 +31,7 @@ class GameDeveloper extends Model implements HasMedia
     use InteractsWithMedia;
     use HasThumbnail;
     use HasUser;
+    use HasTranslations;
 
     protected $fillable = [
         'name',
@@ -41,6 +43,8 @@ class GameDeveloper extends Model implements HasMedia
     protected $casts = [
         'description' => CleanHtml::class.':custom',
     ];
+
+    public $translatable = ['description'];
 
     public array $sortedFields = [
         'id',

@@ -33,8 +33,6 @@ class GamePublisherController extends Controller
 
     public function create(): View|Application|Factory|\Illuminate\Contracts\Foundation\Application
     {
-        $publisher = GamePublisher::first();
-
         return view('admin.game.publisher.create', new GamePublisherCrudViewModel());
     }
 

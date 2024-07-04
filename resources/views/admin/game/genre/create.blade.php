@@ -1,5 +1,5 @@
 <x-layouts.admin :search="false">
-    <x-ui.form class="crud-form"
+    <x-ui.form class="crud-form_full-width"
                id="create-form"
                action="{{ route('game-genres.store') }}">
         <x-ui.title class="crud-form__tile" size="normal" indent="small">

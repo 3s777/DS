@@ -1,11 +1,10 @@
 <x-layouts.admin :search="false">
-    <x-ui.form class="crud-form_full-width"
-               method="put"
-               id="edit-form"
-               action="{{ route('game-genres.update', $gameGenre->slug) }}"
+    <x-ui.form class="crud-form"
+               id="create-form"
+               action="{{ route('game-platform-manufacturers.store') }}"
                enctype="multipart/form-data">
         <x-ui.title class="crud-form__tile" size="normal" indent="small">
-            {{ __('game_genre.edit') }}
+            {{ __('game_platform_manufacturer.add') }}
         </x-ui.title>
 
         <div class="crud-form__main">
@@ -17,7 +16,7 @@
                             placeholder="{{ __('common.name') }}"
                             id="name"
                             name="name"
-                            value="{{ $gameGenre->name }}"
+                            value="{{ old('name') }}"
                             required
                             autocomplete="on"
                             autofocus>
@@ -32,7 +31,7 @@
                             placeholder="{{ __('common.slug') }}"
                             id="slug"
                             name="slug"
-                            value="{{ $gameGenre->slug }}"
+                            value="{{ old('slug') }}"
                             autocomplete="on">
                         </x-ui.form.input-text>
                     </x-ui.form.group>
@@ -43,9 +42,7 @@
                         <x-ui.async-select
                             name="user"
                             route="find-users"
-                            label="{{ __('common.user') }}"
-                            :selected="$gameGenre->user ?? false"
-                        >
+                            label="{{ __('common.user') }}">
                         </x-ui.async-select>
                     </x-ui.form.group>
                 </x-grid.col>
@@ -56,9 +53,21 @@
             <x-ui.form.group>
                 <x-libraries.rich-text-editor
                     name="description"
-                    value="{!! $gameGenre->description !!}"
+                    value=""
                     placeholder="{{ __('common.description') }}"/>
             </x-ui.form.group>
+        </div>
+
+        <div class="crud-form__sidebar">
+            <div class="crud-form__sidebar-wrapper">
+                <x-ui.form.input-image
+                    class="crud-form__input-image"
+                    name="thumbnail"
+                    id="thumbnail">
+                    <p>{{ __('common.file.format') }} jpg, png</p>
+                    <p>{{ __('common.file.max_size') }} 6Mb</p>
+                </x-ui.form.input-image>
+            </div>
         </div>
 
         <x-ui.form.group class="crud-form__submit">

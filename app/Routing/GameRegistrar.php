@@ -5,6 +5,7 @@ namespace App\Routing;
 use App\Contracts\RouteRegistrar;
 use App\Http\Controllers\Game\GameDeveloperController;
 use App\Http\Controllers\Game\GameGenreController;
+use App\Http\Controllers\Game\GamePlatformManufacturerController;
 use App\Http\Controllers\Game\GamePublisherController;
 use Illuminate\Contracts\Routing\Registrar;
 use Illuminate\Support\Facades\Route;
@@ -36,6 +37,13 @@ class GameRegistrar implements RouteRegistrar
                         Route::delete('/game-genres/force-delete-selected', [GameGenreController::class, 'forceDeleteSelected'])
                             ->name('game-genres.forceDelete');
                         Route::resource('game-genres', GameGenreController::class)
+                            ->middleware(['remove.locale']);
+
+                        Route::delete('/game-platform-manufacturers/delete-selected', [GamePlatformManufacturerController::class, 'deleteSelected'])
+                            ->name('game-platform-manufacturers.delete');
+                        Route::delete('/game-platform-manufacturers/force-delete-selected', [GamePlatformManufacturerController::class, 'forceDeleteSelected'])
+                            ->name('game-platform-manufacturers.forceDelete');
+                        Route::resource('game-platform-manufacturers', GamePlatformManufacturerController::class)
                             ->middleware(['remove.locale']);
                     });
                 });

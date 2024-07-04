@@ -22,7 +22,7 @@ class GameDeveloperFactory extends Factory
     {
         return [
             'name' => fake()->name(),
-            'description' => fake()->text(),
+            'description' => $this->translations(['en', 'ru'], [fake()->text(), fake()->text()]),
             'user_id' => User::factory(),
         ];
     }

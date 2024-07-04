@@ -32,8 +32,6 @@ class GameGenreController extends Controller
 
     public function create(): View|Application|Factory|\Illuminate\Contracts\Foundation\Application
     {
-        $genre = GameGenre::first();
-
         return view('admin.game.genre.create', new GameGenreCrudViewModel());
     }
 

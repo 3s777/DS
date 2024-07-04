@@ -2,6 +2,9 @@
 
 namespace Database\Factories\Game;
 
+use Domain\Auth\Models\User;
+use Domain\Game\Models\GameGenre;
+use Domain\Game\Models\GamePlatformManufacturer;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -9,6 +12,7 @@ use Illuminate\Database\Eloquent\Factories\Factory;
  */
 class GamePlatformManufacturerFactory extends Factory
 {
+    protected $model = GamePlatformManufacturer::class;
     /**
      * Define the model's default state.
      *
@@ -17,7 +21,9 @@ class GamePlatformManufacturerFactory extends Factory
     public function definition(): array
     {
         return [
-            //
+            'name' => fake()->name(),
+            'description' => $this->translations(['en', 'ru'], [fake()->text(), fake()->text()]),
+            'user_id' => User::factory(),
         ];
     }
 }

@@ -2,6 +2,7 @@
 
 namespace Domain\Auth\Models;
 
+use Database\Factories\PermissionFactory;
 use Domain\Auth\Observers\PermissionObserver;
 use Illuminate\Database\Eloquent\Attributes\ObservedBy;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -27,4 +28,9 @@ class Permission extends SpatiePermission implements Auditable
     ];
 
     public $translatable = ['display_name'];
+
+    protected static function newFactory(): PermissionFactory
+    {
+        return PermissionFactory::new();
+    }
 }
