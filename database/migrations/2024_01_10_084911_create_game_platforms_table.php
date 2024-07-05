@@ -1,5 +1,6 @@
 <?php
 
+use Domain\Auth\Models\User;
 use Domain\Game\Models\GamePlatformManufacturer;
 use Domain\Game\Models\GamePlatformType;
 use Illuminate\Database\Migrations\Migration;
@@ -14,10 +15,16 @@ return new class () extends Migration {
     {
         Schema::create('game_platforms', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
+            $table->string('name')->unique();
+            $table->string('slug')->unique();
+            $table->jsonb('description')->nullable();
+            $table->string('type')->nullable();
+            $table->foreignIdFor(User::class)
+                ->constrained();
             $table->foreignIdFor(GamePlatformManufacturer::class)->nullable();
-            $table->foreignIdFor(GamePlatformType::class)->nullable();
-            $table->text('description')->nullable();
+            $table->string('thumbnail')->nullable();
+
+            $table->softDeletes();
             $table->timestamps();
         });
     }

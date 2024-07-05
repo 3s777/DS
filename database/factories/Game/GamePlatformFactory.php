@@ -2,6 +2,10 @@
 
 namespace Database\Factories\Game;
 
+use App\Enums\GamePlatformTypeEnum;
+use Domain\Auth\Models\User;
+use Domain\Game\Models\GamePlatform;
+use Domain\Game\Models\GamePlatformManufacturer;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -9,6 +13,7 @@ use Illuminate\Database\Eloquent\Factories\Factory;
  */
 class GamePlatformFactory extends Factory
 {
+    protected $model = GamePlatform::class;
     /**
      * Define the model's default state.
      *
@@ -17,7 +22,11 @@ class GamePlatformFactory extends Factory
     public function definition(): array
     {
         return [
-            //
+            'name' => fake()->name(),
+            'description' => $this->translations(['en', 'ru'], [fake()->text(), fake()->text()]),
+            'user_id' => User::factory(),
+            'type' => GamePlatformTypeEnum::Other,
+            'game_platform_manufacturer_id' => GamePlatformManufacturer::factory(),
         ];
     }
 }

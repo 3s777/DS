@@ -1,0 +1,104 @@
+<x-layouts.admin :search="false">
+    <x-ui.form class="crud-form"
+               id="create-form"
+               action="{{ route('game-platforms.store') }}"
+               enctype="multipart/form-data">
+        <x-ui.title class="crud-form__tile" size="normal" indent="small">
+            {{ __('game_platform.add') }}
+        </x-ui.title>
+
+        <div class="crud-form__main">
+            <x-grid type="container">
+                <x-grid.col xl="4" ls="6" ml="12" lg="6" md="6" sm="12">
+                    <x-ui.form.group>
+                        <x-ui.form.input-text
+                            :errors="$errors"
+                            placeholder="{{ __('common.name') }}"
+                            id="name"
+                            name="name"
+                            value="{{ old('name') }}"
+                            required
+                            autocomplete="on"
+                            autofocus>
+                        </x-ui.form.input-text>
+                    </x-ui.form.group>
+                </x-grid.col>
+
+                <x-grid.col xl="4" ls="6" ml="12" lg="6" md="6" sm="12">
+                    <x-ui.form.group>
+                        <x-ui.form.input-text
+                            :errors="$errors"
+                            placeholder="{{ __('common.slug') }}"
+                            id="slug"
+                            name="slug"
+                            value="{{ old('slug') }}"
+                            autocomplete="on">
+                        </x-ui.form.input-text>
+                    </x-ui.form.group>
+                </x-grid.col>
+
+                <x-grid.col xl="4" ls="6" ml="12" lg="6" md="6" sm="12">
+                    <x-ui.form.group>
+                        <x-libraries.choices
+                            id="type"
+                            name="type"
+                            label="Выберите тип">
+                            @foreach(\App\Enums\GamePlatformTypeEnum::cases() as $type) {
+                                <x-ui.form.option value="{{ $type->value }}">{{ $type->from($type->value)->type()}}</x-ui.form.option>
+                            @endforeach
+                        </x-libraries.choices>
+                    </x-ui.form.group>
+                </x-grid.col>
+
+                <x-grid.col xl="4" ls="6" ml="12" lg="6" md="6" sm="12">
+                    <x-ui.form.group>
+                        <x-ui.async-select
+                            name="user"
+                            route="find-users"
+                            label="{{ __('common.user') }}">
+                        </x-ui.async-select>
+                    </x-ui.form.group>
+                </x-grid.col>
+            </x-grid>
+        </div>
+
+        <div class="crud-form__description">
+            <x-ui.form.group>
+                <x-libraries.rich-text-editor
+                    name="description"
+                    value=""
+                    placeholder="{{ __('common.description') }}"/>
+            </x-ui.form.group>
+        </div>
+
+        <div class="crud-form__sidebar">
+            <div class="crud-form__sidebar-wrapper">
+                <x-ui.form.input-image
+                    class="crud-form__input-image"
+                    name="thumbnail"
+                    id="thumbnail">
+                    <p>{{ __('common.file.format') }} jpg, png</p>
+                    <p>{{ __('common.file.max_size') }} 6Mb</p>
+                </x-ui.form.input-image>
+            </div>
+        </div>
+
+        <x-ui.form.group class="crud-form__submit">
+            <x-ui.form.button
+                class="crud-form__submit-button"
+                x-bind:disabled="preventSubmit">
+                    {{ __('common.save') }}
+            </x-ui.form.button>
+        </x-ui.form.group>
+    </x-ui.form>
+</x-layouts.admin>
+
+<script type="module">
+    const element1 = document.querySelector('#type');
+    const choices1 = new Choices(element1, {
+        itemSelectText: '',
+        searchEnabled: false,
+        noResultsText: '{{ __('Не найдено') }}',
+        noChoicesText: '{{ __('Больше ничего нет') }}',
+    });
+</script>
