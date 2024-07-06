@@ -33,7 +33,8 @@ class GamePlatform extends Model implements HasMedia
         'name',
         'slug',
         'description',
-        'user_id'
+        'user_id',
+        'type'
     ];
 
     protected $casts = [

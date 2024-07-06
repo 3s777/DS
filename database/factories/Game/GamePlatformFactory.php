@@ -7,6 +7,7 @@ use Domain\Auth\Models\User;
 use Domain\Game\Models\GamePlatform;
 use Domain\Game\Models\GamePlatformManufacturer;
 use Illuminate\Database\Eloquent\Factories\Factory;
+use Illuminate\Support\Arr;
 
 /**
  * @extends \Illuminate\Database\Eloquent\Factories\Factory<\Domain\Game\Models\GamePlatform>
@@ -25,7 +26,7 @@ class GamePlatformFactory extends Factory
             'name' => fake()->name(),
             'description' => $this->translations(['en', 'ru'], [fake()->text(), fake()->text()]),
             'user_id' => User::factory(),
-            'type' => GamePlatformTypeEnum::Other,
+            'type' => Arr::random(GamePlatformTypeEnum::cases()),
             'game_platform_manufacturer_id' => GamePlatformManufacturer::factory(),
         ];
     }

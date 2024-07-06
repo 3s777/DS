@@ -40,6 +40,7 @@ class GameRegistrar implements RouteRegistrar
                         Route::resource('game-genres', GameGenreController::class)
                             ->middleware(['remove.locale']);
 
+                        Route::get('/get-manufacturers', [GamePlatformManufacturerController::class, 'getManufacturers'])->name('get-manufacturers');
                         Route::delete('/game-platform-manufacturers/delete-selected', [GamePlatformManufacturerController::class, 'deleteSelected'])
                             ->name('game-platform-manufacturers.delete');
                         Route::delete('/game-platform-manufacturers/force-delete-selected', [GamePlatformManufacturerController::class, 'forceDeleteSelected'])

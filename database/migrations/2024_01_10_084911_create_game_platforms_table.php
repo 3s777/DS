@@ -18,7 +18,7 @@ return new class () extends Migration {
             $table->string('name')->unique();
             $table->string('slug')->unique();
             $table->jsonb('description')->nullable();
-            $table->string('type')->nullable();
+            $table->string('type')->default('stationary')->nullable();
             $table->foreignIdFor(User::class)
                 ->constrained();
             $table->foreignIdFor(GamePlatformManufacturer::class)->nullable();

@@ -2,6 +2,7 @@
 
 namespace Domain\Game\ViewModels;
 
+use App\Enums\GamePlatformTypeEnum;
 use Domain\Auth\Models\User;
 use Domain\Game\Models\GamePlatform;
 use Domain\Game\Models\GamePublisher;
@@ -24,5 +25,10 @@ class GamePlatformCrudViewModel extends ViewModel
     public function users(): \Illuminate\Database\Eloquent\Collection
     {
         return User::all()->select('id', 'name');
+    }
+
+    public function types(): array
+    {
+        return GamePlatformTypeEnum::cases();
     }
 }

@@ -7,9 +7,11 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Game\CreateGamePlatformManufacturerRequest;
 use App\Http\Requests\Game\UpdateGamePlatformManufacturerRequest;
 use App\Http\Requests\MassDeletingRequest;
+use Illuminate\Http\Request;
 use Domain\Game\Models\GamePlatformManufacturer;
 use Domain\Game\ViewModels\GamePlatformManufacturerCrudViewModel;
 use Domain\Game\ViewModels\GamePlatformManufacturerIndexViewModel;
+use Domain\Game\ViewModels\GamePlatformManufacturerListSelectViewModel;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
 use Illuminate\Foundation\Application;
@@ -113,6 +115,11 @@ class GamePlatformManufacturerController extends Controller
         flash()->info(__('game_platform_manufacturer.mass_force_deleted'));
 
         return to_route('game-platform-manufacturers.index');
+    }
+
+    public function getManufacturers(Request $request): GamePlatformManufacturerListSelectViewModel
+    {
+        return new GamePlatformManufacturerListSelectViewModel($request->input('query'));
     }
 }
 

@@ -30,6 +30,7 @@ return [
     'language' => 'Язык',
     'choose_image' => 'Выберите изображение',
     'choose_language' => 'Выберите язык',
+    'choose_manufacturer' => 'Выберите производителя',
     'not_found' => 'Ничего не найдено',
     'nothing_else' => 'Больше ничего нет',
     'unable_mass_deleting' => 'Невозможно удалить отмеченное',

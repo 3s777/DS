@@ -49,6 +49,7 @@ class AuthRegistrar implements RouteRegistrar
                     });
 
 
+//                    Route::get('/findUsers{query?}', [UserController::class, 'getUsers'])->name('find-users');
 
                     Route::get('/get-users', [UserController::class, 'getUsers'])->name('get-users');
                     Route::get('/users', [UserController::class, 'publicIndex'])->name('public-users');

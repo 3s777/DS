@@ -40,9 +40,26 @@
 
                 <x-grid.col xl="4" ls="6" ml="12" lg="6" md="6" sm="12">
                     <x-ui.form.group>
+                        <x-libraries.choices
+                            id="type"
+                            name="type"
+                            label="{{ __('game_platform.choose_type') }}">
+                            <x-ui.form.option value="">{{ __('game_platform.choose_type') }}</x-ui.form.option>
+                            @foreach($types as $type) {
+                            <x-ui.form.option
+                                value="{{ $type->value }}"
+                                :selected="$gamePlatform->type == $type->value"
+                            >{{ $type->name()}}</x-ui.form.option>
+                            @endforeach
+                        </x-libraries.choices>
+                    </x-ui.form.group>
+                </x-grid.col>
+
+                <x-grid.col xl="4" ls="6" ml="12" lg="6" md="6" sm="12">
+                    <x-ui.form.group>
                         <x-ui.async-select
                             name="user"
-                            route="find-users"
+                            route="get-users"
                             label="{{ __('common.user') }}"
                             :selected="$gamePlatform->user ?? false"
                         >
@@ -95,3 +112,14 @@
         </x-ui.form.group>
     </x-ui.form>
 </x-layouts.admin>
+
+<script type="module">
+    const platformManufacturerType = document.querySelector('#type');
+    const choicesPlatformManufacturerType = new Choices(platformManufacturerType, {
+        itemSelectText: '',
+        searchEnabled: false,
+        shouldSort: false,
+        noResultsText: '{{ __('Не найдено') }}',
+        noChoicesText: '{{ __('Больше ничего нет') }}',
+    });
+</script>

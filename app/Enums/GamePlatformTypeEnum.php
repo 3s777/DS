@@ -11,7 +11,7 @@ enum GamePlatformTypeEnum: string
     case Computer = 'computer';
     case Other = 'other';
 
-    public function type():string {
+    public function name():string {
         return match($this) {
             GamePlatformTypeEnum::Portable => __('game_platform.portable'),
             GamePlatformTypeEnum::Universal => __('game_platform.universal'),

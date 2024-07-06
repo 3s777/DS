@@ -47,7 +47,6 @@ class AppRegistrar implements RouteRegistrar
                     })->name('search');
 
 
-                    Route::get('/findUsers{query?}', [UserController::class, 'getUsers'])->name('find-users');
 
 
                     Route::get('/profile', function () {

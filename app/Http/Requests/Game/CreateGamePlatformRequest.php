@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests\Game;
 
+use App\Enums\GamePlatformTypeEnum;
 use Domain\Game\Models\GamePlatform;
 use Domain\Game\Models\GamePlatformManufacturer;
 use Illuminate\Foundation\Http\FormRequest;
@@ -26,10 +27,11 @@ class CreateGamePlatformRequest extends FormRequest
     {
         return [
             'name' => ['required', Rule::unique(GamePlatform::class)],
+            'type' => ['required', Rule::enum(GamePlatformTypeEnum::class)],
             'slug' => ['nullable','string', Rule::unique(GamePlatform::class)],
             'description' => ['nullable','string'],
             'thumbnail' => ['nullable', 'mimes:jpg,png', 'max:10024'],
-            'user_id' => ['nullable', 'integer', 'exists:Domain\Auth\Models\User,id']
+            'user_id' => ['nullable', 'integer', 'exists:Domain\Auth\Models\User,id'],
         ];
     }
 
@@ -41,6 +43,7 @@ class CreateGamePlatformRequest extends FormRequest
             'description' => __('common.description'),
             'thumbnail' => __('common.thumbnail'),
             'user_id' => __('common.user'),
+            'type' => __('game_platform_manufacturer.manufacturer')
         ];
     }
 }

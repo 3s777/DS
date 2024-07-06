@@ -42,7 +42,7 @@
                     <x-ui.form.group>
                         <x-ui.async-select
                             name="user"
-                            route="find-users"
+                            route="get-users"
                             label="{{ __('common.user') }}"
                             :selected="$gameDeveloper->user ?? false"
                         >
