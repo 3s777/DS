@@ -4,7 +4,8 @@
     'label' => false,
     'selected' => false,
     'selectName' => false,
-    'showOld' => true
+    'showOld' => true,
+    'defaultOption' => false
 ])
 
 <x-libraries.choices
@@ -20,9 +21,11 @@
             {{ $selected->name }}
         </x-ui.form.option>
     @else
-        <x-ui.form.option value="">
-            {{ __('common.choose_'.$name) }}
-        </x-ui.form.option>
+        @if($defaultOption)
+            <x-ui.form.option value="">
+                {{ $defaultOption }}
+            </x-ui.form.option>
+        @endif
     @endif
 
     @if(old($name.'_id') && $showOld)

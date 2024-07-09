@@ -14,7 +14,7 @@ class UserListSelectViewModel extends ViewModel
     public function result(): array
     {
         $result = [
-            ['value' => '', 'label' => __('common.choose_user')]
+            ['value' => '', 'label' => __('user.choose')]
         ];
 
         if($this->query) {

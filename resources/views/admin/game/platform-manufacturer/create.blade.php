@@ -42,7 +42,8 @@
                         <x-ui.async-select
                             name="user"
                             route="get-users"
-                            label="{{ __('common.user') }}">
+                            default-option="{{ __('user.choose') }}"
+                            label="{{ __('user.user') }}">
                         </x-ui.async-select>
                     </x-ui.form.group>
                 </x-grid.col>

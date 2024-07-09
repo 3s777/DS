@@ -15,7 +15,7 @@ class GamePlatformManufacturerListSelectViewModel extends ViewModel
     public function result(): array
     {
         $result = [
-            ['value' => '', 'label' => __('game_platform_manufacturer.choose_manufacturer')]
+            ['value' => '', 'label' => __('game_platform_manufacturer.choose')]
         ];
 
         if($this->query) {

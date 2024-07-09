@@ -16,9 +16,10 @@
                     :selected="get_filter('user')->relatedModel ?? false"
                     :show-old="false"
                     name="user"
-                    label="{{ __('common.user') }}"
+                    label="{{ __('user.user') }}"
+                    defaultOption="{{ __('user.choose') }}"
                     selectName="filters[user]"
-                    route="find-users"></x-ui.async-select>
+                    route="get-users"></x-ui.async-select>
             </x-ui.form.group>
         </x-grid.col>
 
