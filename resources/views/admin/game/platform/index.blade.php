@@ -55,7 +55,7 @@
                     <x-ui.responsive-table.column>
                         <span class="responsive-table__label">{{ __('game_platform.type') }}: </span>
                         @if($platform->type)
-                            {{ App\Enums\GamePlatformTypeEnum::tryFrom($platform->type)->name() }}
+                            {{ $getTypeName($platform->type) }}
                         @endif
                     </x-ui.responsive-table.column>
                     <x-ui.responsive-table.column>
