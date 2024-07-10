@@ -9,7 +9,7 @@
             :sorters="[
                 'id' => __('common.id'),
                 'name' => __('common.name'),
-                'users.name' => __('common.user'),
+                'users.name' => __('user.user'),
                 'created_at' => __('common.created_date'),
             ]" />
 
@@ -21,11 +21,17 @@
                 <x-ui.responsive-table.column type="id" name="id">
                     {{ __('common.id') }}
                 </x-ui.responsive-table.column>
-                <x-ui.responsive-table.column sortable="true" name="name">
+                <x-ui.responsive-table.column name="name">
                     {{ __('common.name') }}
                 </x-ui.responsive-table.column>
+                <x-ui.responsive-table.column name="type">
+                    {{ __('game_platform.type') }}
+                </x-ui.responsive-table.column>
+                <x-ui.responsive-table.column name="manufacturer">
+                    {{ __('game_platform_manufacturer.manufacturer') }}
+                </x-ui.responsive-table.column>
                 <x-ui.responsive-table.column name="users.name">
-                    {{ __('common.user') }}
+                    {{ __('user.user') }}
                 </x-ui.responsive-table.column>
                 <x-ui.responsive-table.column name="created_at">
                     {{ __('common.created_date') }}
@@ -47,7 +53,19 @@
                         <span class="responsive-table__label">{{ __('common.name') }}: </span> {{ $platform->name }}
                     </x-ui.responsive-table.column>
                     <x-ui.responsive-table.column>
-                        <span class="responsive-table__label">{{ __('common.user') }}: </span> {{ $platform->user_name }}
+                        <span class="responsive-table__label">{{ __('game_platform.type') }}: </span>
+                        @if($platform->type)
+                            {{ App\Enums\GamePlatformTypeEnum::tryFrom($platform->type)->name() }}
+                        @endif
+                    </x-ui.responsive-table.column>
+                    <x-ui.responsive-table.column>
+                        <span class="responsive-table__label">{{ __('game_platform_manufacturer.manufacturer') }}: </span>
+                        @if($platform->game_platform_manufacturer)
+                            {{ $platform->game_platform_manufacturer->name }}
+                        @endif
+                    </x-ui.responsive-table.column>
+                    <x-ui.responsive-table.column>
+                        <span class="responsive-table__label">{{ __('user.user') }}: </span> {{ $platform->user->name }}
                     </x-ui.responsive-table.column>
                     <x-ui.responsive-table.column>
                         <span class="responsive-table__label">{{ __('common.created_date') }}: </span> {{ $platform->created_at }}

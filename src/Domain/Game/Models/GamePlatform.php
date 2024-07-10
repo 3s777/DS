@@ -34,7 +34,8 @@ class GamePlatform extends Model implements HasMedia
         'slug',
         'description',
         'user_id',
-        'type'
+        'type',
+        'game_platform_manufacturer_id'
     ];
 
     protected $casts = [
@@ -70,5 +71,10 @@ class GamePlatform extends Model implements HasMedia
     public function user(): BelongsTo
     {
         return $this->belongsTo(User::class);
+    }
+
+    public function game_platform_manufacturer(): BelongsTo
+    {
+        return $this->belongsTo(GamePlatformManufacturer::class);
     }
 }

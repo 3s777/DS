@@ -34,10 +34,21 @@
         </x-ui.form.option>
     @endif
 
+    @if(old($selectName) && $showOld)
+        <x-ui.form.option value="{{ old($selectName) }}" selected>
+            {{ old('old_selected_'.$name.'_label') }}
+        </x-ui.form.option>
+    @endif
+
 </x-libraries.choices>
 
     @if($showOld)
-        <input type="hidden" name="old_selected_{{ $name }}_label" value="" id="old_selected_{{ $name }}_label">
+        @if($selected)
+            <input type="hidden" name="old_selected_{{ $name }}_label" value="{{ $selected->name }}" id="old_selected_{{ $name }}_label">
+        @else
+            <input type="hidden" name="old_selected_{{ $name }}_label" value="{{ old('old_selected_'.$name.'_label') }}" id="old_selected_{{ $name }}_label">
+
+        @endif
     @endif
 
 @push('scripts')

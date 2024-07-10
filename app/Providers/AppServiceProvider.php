@@ -43,7 +43,7 @@ class AppServiceProvider extends ServiceProvider
         Gate::policy(User::class, UserPolicy::class);
         Gate::policy(Role::class, RolePolicy::class);
 
-//        Model::shouldBeStrict(!app()->isProduction());
+        Model::shouldBeStrict(!app()->isProduction());
 //        Translatable::fallback(
 //            fallbackLocale: 'ru',
 //        );

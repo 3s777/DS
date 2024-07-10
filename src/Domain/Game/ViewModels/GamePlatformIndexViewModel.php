@@ -2,6 +2,7 @@
 
 namespace Domain\Game\ViewModels;
 
+use App\Enums\GamePlatformTypeEnum;
 use Domain\Game\Models\GamePlatform;
 use Spatie\ViewModels\ViewModel;
 
@@ -12,11 +13,12 @@ class GamePlatformIndexViewModel extends ViewModel
         //
     }
 
-    public function platforms()
+
+    public function platforms(): \Illuminate\Contracts\Pagination\LengthAwarePaginator
     {
         return GamePlatform::query()
-            ->select('game_platforms.id', 'game_platforms.name', 'game_platforms.created_at', 'game_platforms.slug', 'game_platforms.user_id', 'users.name as user_name')
-            ->join('users', 'users.id', '=', 'game_platforms.user_id')
+            ->select('game_platforms.id', 'game_platforms.name', 'game_platforms.type', 'game_platforms.created_at', 'game_platforms.slug', 'game_platforms.user_id', 'game_platforms.game_platform_manufacturer_id')
+            ->with(['user', 'game_platform_manufacturer'])
             ->orderBy('id', 'DESC')
             ->paginate(100)
             ->withQueryString();

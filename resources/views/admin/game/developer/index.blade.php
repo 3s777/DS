@@ -15,7 +15,7 @@
             :sorters="[
                 'id' => __('common.id'),
                 'name' => __('common.name'),
-                'users.name' => __('common.user'),
+                'users.name' => __('user.user'),
                 'created_at' => __('common.created_date'),
             ]" />
 
@@ -31,7 +31,7 @@
                     {{ __('common.name') }}
                 </x-ui.responsive-table.column>
                 <x-ui.responsive-table.column name="users.name" sortable="true">
-                    {{ __('common.user') }}
+                    {{ __('user.user') }}
                 </x-ui.responsive-table.column>
                 <x-ui.responsive-table.column name="created_at" sortable="true">
                     {{ __('common.created_date') }}
@@ -53,7 +53,7 @@
                         <span class="responsive-table__label">{{ __('common.name') }}: </span> {{ $developer->name }}
                     </x-ui.responsive-table.column>
                     <x-ui.responsive-table.column>
-                        <span class="responsive-table__label">{{ __('common.user') }}: </span> {{ $developer->user_name }}
+                        <span class="responsive-table__label">{{ __('user.user') }}: </span> {{ $developer->user_name }}
                     </x-ui.responsive-table.column>
                     <x-ui.responsive-table.column>
                         <span class="responsive-table__label">{{ __('common.created_date') }}: </span> {{ $developer->created_at }}

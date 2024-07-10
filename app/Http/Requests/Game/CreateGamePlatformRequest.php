@@ -32,6 +32,7 @@ class CreateGamePlatformRequest extends FormRequest
             'description' => ['nullable','string'],
             'thumbnail' => ['nullable', 'mimes:jpg,png', 'max:10024'],
             'user_id' => ['nullable', 'integer', 'exists:Domain\Auth\Models\User,id'],
+            'game_platform_manufacturer_id' => ['nullable', 'integer', 'exists:Domain\Game\Models\GamePlatformManufacturer,id'],
         ];
     }
 
@@ -43,7 +44,8 @@ class CreateGamePlatformRequest extends FormRequest
             'description' => __('common.description'),
             'thumbnail' => __('common.thumbnail'),
             'user_id' => __('common.user'),
-            'type' => __('game_platform_manufacturer.manufacturer')
+            'type' => __('game_platform.type'),
+            'game_platform_manufacturer_id' => __('game_platform_manufacturer.manufacturer')
         ];
     }
 }

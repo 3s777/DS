@@ -58,11 +58,23 @@
                 <x-grid.col xl="4" ls="6" ml="12" lg="6" md="6" sm="12">
                     <x-ui.form.group>
                         <x-ui.async-select
+                            :selected="$gamePlatform->game_platform_manufacturer ?? false"
+                            name="game_platform_manufacturer"
+                            route="get-manufacturers"
+                            label="{{ __('game_platform_manufacturer.manufacturer') }}"
+                            default-option="{{ __('game_platform_manufacturer.choose') }}">
+                        </x-ui.async-select>
+                    </x-ui.form.group>
+                </x-grid.col>
+
+                <x-grid.col xl="4" ls="6" ml="12" lg="6" md="6" sm="12">
+                    <x-ui.form.group>
+                        <x-ui.async-select
+                            :selected="$gamePlatform->user ?? false"
                             name="user"
                             route="get-users"
-                            label="{{ __('common.user') }}"
-                            :selected="$gamePlatform->user ?? false"
-                        >
+                            label="{{ __('user.user') }}"
+                            default-option="{{ __('user.choose') }}">
                         </x-ui.async-select>
                     </x-ui.form.group>
                 </x-grid.col>
