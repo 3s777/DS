@@ -2,15 +2,15 @@
 
 namespace App\Game\Controllers;
 
-use App\Http\Controllers\Game\GameDeveloperController;
-use App\Http\Requests\Game\CreateGameDeveloperRequest;
+use App\Http\Controllers\Game\GamePlatformController;
+use App\Http\Requests\Game\CreateGamePlatformRequest;
 use App\Jobs\GenerateSmallThumbnailsJob;
 use App\Jobs\GenerateThumbnailJob;
-use Database\Factories\Game\GameDeveloperFactory;
+use Database\Factories\Game\GamePlatformFactory;
 use Database\Factories\UserFactory;
 use Domain\Auth\Models\Role;
 use Domain\Auth\Models\User;
-use Domain\Game\Models\GameDeveloper;
+use Domain\Game\Models\GamePlatform;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Queue;
@@ -18,12 +18,12 @@ use Illuminate\Support\Facades\Storage;
 use Tests\TestCase;
 
 // TODO: add policy tests
-class GameDeveloperControllerTest extends TestCase
+class GamePlatformControllerTest extends TestCase
 {
     use RefreshDatabase;
 
     protected User $user;
-    protected GameDeveloper $gameDeveloper;
+    protected GamePlatform $gamePlatform;
     protected array $request;
 
     public function setUp(): void
@@ -34,9 +34,9 @@ class GameDeveloperControllerTest extends TestCase
         Role::create(['name' => config('settings.super_admin_role'), 'display_name' => 'SuperAdmin']);
         $this->user->assignRole('super_admin');
 
-        $this->gameDeveloper = GameDeveloperFactory::new()->create();
+        $this->gamePlatform = GamePlatformFactory::new()->create();
 
-        $this->request = CreateGameDeveloperRequest::factory()->create();
+        $this->request = CreateGamePlatformRequest::factory()->create();
     }
 
     public function checkNotAuthRedirect(
@@ -45,7 +45,7 @@ class GameDeveloperControllerTest extends TestCase
         array $params = [],
         array $request = []
     ): void {
-        $this->{$method}(action([GameDeveloperController::class, $action], $params), $request)
+        $this->{$method}(action([GamePlatformController::class, $action], $params), $request)
             ->assertRedirectToRoute('login');
     }
 
@@ -57,10 +57,10 @@ class GameDeveloperControllerTest extends TestCase
     {
         $this->checkNotAuthRedirect('index');
         $this->checkNotAuthRedirect('create');
-        $this->checkNotAuthRedirect('edit', 'get', [$this->gameDeveloper->slug]);
-        $this->checkNotAuthRedirect('store', 'post', [$this->gameDeveloper->slug], $this->request);
-        $this->checkNotAuthRedirect('update', 'put', [$this->gameDeveloper->slug], $this->request);
-        $this->checkNotAuthRedirect('destroy', 'delete', [$this->gameDeveloper->slug]);
+        $this->checkNotAuthRedirect('edit', 'get', [$this->gamePlatform->slug]);
+        $this->checkNotAuthRedirect('store', 'post', [$this->gamePlatform->slug], $this->request);
+        $this->checkNotAuthRedirect('update', 'put', [$this->gamePlatform->slug], $this->request);
+        $this->checkNotAuthRedirect('destroy', 'delete', [$this->gamePlatform->slug]);
     }
 
     /**
@@ -70,10 +70,10 @@ class GameDeveloperControllerTest extends TestCase
     public function it_index_success(): void
     {
         $this->actingAs($this->user)
-            ->get(action([GameDeveloperController::class, 'index']))
+            ->get(action([GamePlatformController::class, 'index']))
             ->assertOk()
-            ->assertSee(__('game_developer.list'))
-            ->assertViewIs('admin.game.developer.index');
+            ->assertSee(__('game_platform.list'))
+            ->assertViewIs('admin.game.platform.index');
     }
 
     /**
@@ -83,10 +83,10 @@ class GameDeveloperControllerTest extends TestCase
     public function it_create_success(): void
     {
         $this->actingAs($this->user)
-            ->get(action([GameDeveloperController::class, 'create']))
+            ->get(action([GamePlatformController::class, 'create']))
             ->assertOk()
-            ->assertSee(__('game_developer.add'))
-            ->assertViewIs('admin.game.developer.create');
+            ->assertSee(__('game_platform.add'))
+            ->assertViewIs('admin.game.platform.create');
     }
 
     /**
@@ -96,10 +96,10 @@ class GameDeveloperControllerTest extends TestCase
     public function it_edit_success(): void
     {
         $this->actingAs($this->user)
-            ->get(action([GameDeveloperController::class, 'edit'], [$this->gameDeveloper->slug]))
+            ->get(action([GamePlatformController::class, 'edit'], [$this->gamePlatform->slug]))
             ->assertOk()
-            ->assertSee($this->gameDeveloper->name)
-            ->assertViewIs('admin.game.developer.edit');
+            ->assertSee($this->gamePlatform->name)
+            ->assertViewIs('admin.game.platform.edit');
     }
 
     /**
@@ -108,13 +108,12 @@ class GameDeveloperControllerTest extends TestCase
      */
     public function it_store_success(): void
     {
-
         $this->actingAs($this->user)
-            ->post(action([GameDeveloperController::class, 'store']), $this->request)
-            ->assertRedirectToRoute('game-developers.index')
-            ->assertSessionHas('helper_flash_message', __('game_developer.created'));
+            ->post(action([GamePlatformController::class, 'store']), $this->request)
+            ->assertRedirectToRoute('game-platforms.index')
+            ->assertSessionHas('helper_flash_message', __('game_platform.created'));
 
-        $this->assertDatabaseHas('game_developers', [
+        $this->assertDatabaseHas('game_platforms', [
             'name' => $this->request['name']
         ]);
     }
@@ -131,11 +130,11 @@ class GameDeveloperControllerTest extends TestCase
         $this->request['thumbnail'] = UploadedFile::fake()->image('photo1.jpg');
 
         $this->actingAs($this->user)
-            ->post(action([GameDeveloperController::class, 'store']), $this->request)
-            ->assertRedirectToRoute('game-developers.index')
-            ->assertSessionHas('helper_flash_message', __('game_developer.created'));
+            ->post(action([GamePlatformController::class, 'store']), $this->request)
+            ->assertRedirectToRoute('game-platforms.index')
+            ->assertSessionHas('helper_flash_message', __('game_platform.created'));
 
-        $this->assertDatabaseHas('game_developers', [
+        $this->assertDatabaseHas('game_platforms', [
             'name' => $this->request['name']
         ]);
 
@@ -150,16 +149,16 @@ class GameDeveloperControllerTest extends TestCase
      */
     public function it_validation_name_fail(): void
     {
-        $this->app['session']->setPreviousUrl(route('game-developers.create'));
+        $this->app['session']->setPreviousUrl(route('game-platforms.create'));
 
         $this->request['name'] = '';
 
         $this->actingAs($this->user)
-            ->post(action([GameDeveloperController::class, 'store']), $this->request)
+            ->post(action([GamePlatformController::class, 'store']), $this->request)
             ->assertInvalid(['name'])
-            ->assertRedirectToRoute('game-developers.create');
+            ->assertRedirectToRoute('game-platforms.create');
 
-        $this->assertDatabaseMissing('game_developers', [
+        $this->assertDatabaseMissing('game_platforms', [
             'name' => $this->request['name']
         ]);
     }
@@ -170,14 +169,14 @@ class GameDeveloperControllerTest extends TestCase
      */
     public function it_validation_thumbnail_fail(): void
     {
-        $this->app['session']->setPreviousUrl(route('game-developers.create'));
+        $this->app['session']->setPreviousUrl(route('game-platforms.create'));
 
         $this->request['thumbnail'] = UploadedFile::fake()->image('photo1.php');
 
         $this->actingAs($this->user)
-            ->post(action([GameDeveloperController::class, 'store']), $this->request)
+            ->post(action([GamePlatformController::class, 'store']), $this->request)
             ->assertInvalid(['thumbnail'])
-            ->assertRedirectToRoute('game-developers.create');
+            ->assertRedirectToRoute('game-platforms.create');
     }
 
     /**
@@ -191,15 +190,15 @@ class GameDeveloperControllerTest extends TestCase
         $this->actingAs($this->user)
             ->put(
                 action(
-                    [GameDeveloperController::class, 'update'],
-                    [$this->gameDeveloper->slug]
+                    [GamePlatformController::class, 'update'],
+                    [$this->gamePlatform->slug]
                 ),
                 $this->request
             )
-            ->assertRedirectToRoute('game-developers.index')
-            ->assertSessionHas('helper_flash_message', __('game_developer.updated'));
+            ->assertRedirectToRoute('game-platforms.index')
+            ->assertSessionHas('helper_flash_message', __('game_platform.updated'));
 
-        $this->assertDatabaseHas('game_developers', [
+        $this->assertDatabaseHas('game_platforms', [
             'name' => $this->request['name']
         ]);
     }
@@ -211,12 +210,12 @@ class GameDeveloperControllerTest extends TestCase
     public function it_delete_success(): void
     {
         $this->actingAs($this->user)
-            ->delete(action([GameDeveloperController::class, 'destroy'], [$this->gameDeveloper->slug]))
-            ->assertRedirectToRoute('game-developers.index')
-            ->assertSessionHas('helper_flash_message', __('game_developer.deleted'));
+            ->delete(action([GamePlatformController::class, 'destroy'], [$this->gamePlatform->slug]))
+            ->assertRedirectToRoute('game-platforms.index')
+            ->assertSessionHas('helper_flash_message', __('game_platform.deleted'));
 
-        $this->assertDatabaseMissing('game_developers', [
-            'name' => $this->gameDeveloper->name,
+        $this->assertDatabaseMissing('game_platforms', [
+            'name' => $this->gamePlatform->name,
             'deleted_at' => null
         ]);
     }

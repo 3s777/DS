@@ -41,6 +41,7 @@
                 </x-ui.responsive-table.column>
             </x-ui.responsive-table.header>
 
+
             @foreach($platforms as $platform)
                 <x-ui.responsive-table.row >
                     <x-ui.responsive-table.column type="select">
@@ -60,12 +61,12 @@
                     </x-ui.responsive-table.column>
                     <x-ui.responsive-table.column>
                         <span class="responsive-table__label">{{ __('game_platform_manufacturer.manufacturer') }}: </span>
-                        @if($platform->game_platform_manufacturer)
-                            {{ $platform->game_platform_manufacturer->name }}
-                        @endif
+
+                            {{ $platform->manufacturer_name }}
+
                     </x-ui.responsive-table.column>
                     <x-ui.responsive-table.column>
-                        <span class="responsive-table__label">{{ __('user.user') }}: </span> {{ $platform->user->name }}
+                        <span class="responsive-table__label">{{ __('user.user') }}: </span> {{ $platform->user_name }}
                     </x-ui.responsive-table.column>
                     <x-ui.responsive-table.column>
                         <span class="responsive-table__label">{{ __('common.created_date') }}: </span> {{ $platform->created_at }}

@@ -2,22 +2,21 @@
 
 namespace App\Game\Controllers;
 
-use App\Http\Controllers\Game\GameDeveloperController;
+use App\Http\Controllers\Game\GamePublisherController;
 use Carbon\Carbon;
-use Database\Factories\Game\GameDeveloperFactory;
+use Database\Factories\Game\GamePublisherFactory;
 use Domain\Auth\Models\Role;
 use Domain\Auth\Models\User;
-use Domain\Game\Models\GameDeveloper;
+use Domain\Game\Models\GamePublisher;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
-// TODO: add user filter test
-class GameDeveloperFilterTest extends TestCase
+class GamePublisherFilterTest extends TestCase
 {
     use RefreshDatabase;
 
     protected User $user;
-    protected GameDeveloper $gameDeveloper;
+    protected GamePublisher $gamePublisher;
     protected array $request;
 
     public function setUp(): void
@@ -35,11 +34,11 @@ class GameDeveloperFilterTest extends TestCase
      */
     public function it_success_search_filtered_response(): void
     {
-        $gameDevelopers = GameDeveloperFactory::new()
+        $gamePublishers = GamePublisherFactory::new()
             ->count(10)
             ->create();
 
-        $expectedGameDeveloper = GameDeveloperFactory::new()
+        $expectedGamePublisher = GamePublisherFactory::new()
             ->create(['name' => 'search test']);
 
         $request = [
@@ -49,11 +48,11 @@ class GameDeveloperFilterTest extends TestCase
         ];
 
         $this->actingAs($this->user)
-            ->get(action([GameDeveloperController::class, 'index'], $request))
+            ->get(action([GamePublisherController::class, 'index'], $request))
             ->assertOk()
-            ->assertViewHas('developers')
-            ->assertSee($expectedGameDeveloper->name)
-            ->assertDontSee($gameDevelopers->random()->first()->name);
+            ->assertViewHas('publishers')
+            ->assertSee($expectedGamePublisher->name)
+            ->assertDontSee($gamePublishers->random()->first()->name);
     }
 
     /**
@@ -62,14 +61,12 @@ class GameDeveloperFilterTest extends TestCase
      */
     public function it_success_dates_from_filtered_response(): void
     {
-        $gameDevelopers = GameDeveloperFactory::new()
+        $gamePublishers = GamePublisherFactory::new()
             ->count(10)
             ->create(['created_at' => Carbon::yesterday()]);
 
-
-        $expectedGameDeveloper = GameDeveloperFactory::new()
+        $expectedGamePublisher = GamePublisherFactory::new()
             ->create(['created_at' => Carbon::now()]);
-
 
         $request = [
             'filters' => [
@@ -78,11 +75,11 @@ class GameDeveloperFilterTest extends TestCase
         ];
 
         $this->actingAs($this->user)
-            ->get(action([GameDeveloperController::class, 'index'], $request))
+            ->get(action([GamePublisherController::class, 'index'], $request))
             ->assertOk()
-            ->assertViewHas('developers')
-            ->assertSee($expectedGameDeveloper->name)
-            ->assertDontSee($gameDevelopers->random()->first()->name);
+            ->assertViewHas('publishers')
+            ->assertSee($expectedGamePublisher->name)
+            ->assertDontSee($gamePublishers->random()->first()->name);
     }
 
     /**
@@ -91,14 +88,12 @@ class GameDeveloperFilterTest extends TestCase
      */
     public function it_success_dates_to_filtered_response(): void
     {
-        $gameDevelopers = GameDeveloperFactory::new()
+        $gamePublishers = GamePublisherFactory::new()
             ->count(10)
             ->create(['created_at' => Carbon::tomorrow()]);
 
-
-        $expectedGameDeveloper = GameDeveloperFactory::new()
+        $expectedGamePublisher = GamePublisherFactory::new()
             ->create(['created_at' => Carbon::yesterday()]);
-
 
         $request = [
             'filters' => [
@@ -107,11 +102,11 @@ class GameDeveloperFilterTest extends TestCase
         ];
 
         $this->actingAs($this->user)
-            ->get(action([GameDeveloperController::class, 'index'], $request))
+            ->get(action([GamePublisherController::class, 'index'], $request))
             ->assertOk()
-            ->assertViewHas('developers')
-            ->assertSee($expectedGameDeveloper->name)
-            ->assertDontSee($gameDevelopers->random()->first()->name);
+            ->assertViewHas('publishers')
+            ->assertSee($expectedGamePublisher->name)
+            ->assertDontSee($gamePublishers->random()->first()->name);
     }
 
 
@@ -121,11 +116,11 @@ class GameDeveloperFilterTest extends TestCase
      */
     public function it_success_dates_filtered_response(): void
     {
-        $gameDevelopers = GameDeveloperFactory::new()
+        $gamePublishers = GamePublisherFactory::new()
             ->count(10)
             ->create();
 
-        $expectedGameDeveloper = GameDeveloperFactory::new()
+        $expectedGamePublisher = GamePublisherFactory::new()
             ->create(['created_at' => Carbon::yesterday()]);
 
         $request = [
@@ -135,11 +130,11 @@ class GameDeveloperFilterTest extends TestCase
         ];
 
         $this->actingAs($this->user)
-            ->get(action([GameDeveloperController::class, 'index'], $request))
+            ->get(action([GamePublisherController::class, 'index'], $request))
             ->assertOk()
-            ->assertViewHas('developers')
-            ->assertSee($expectedGameDeveloper->name)
-            ->assertDontSee($gameDevelopers->random()->first()->name);
+            ->assertViewHas('publishers')
+            ->assertSee($expectedGamePublisher->name)
+            ->assertDontSee($gamePublishers->random()->first()->name);
     }
 
 
@@ -156,9 +151,9 @@ class GameDeveloperFilterTest extends TestCase
         ];
 
         $this->actingAs($this->user)
-            ->get(action([GameDeveloperController::class, 'index'], $request))
+            ->get(action([GamePublisherController::class, 'index'], $request))
             ->assertInvalid(['filters.dates.from', 'filters.dates.to'])
-            ->assertRedirectToRoute('game-developers.index');
+            ->assertRedirectToRoute('game-publishers.index');
     }
 
     /**
@@ -167,7 +162,7 @@ class GameDeveloperFilterTest extends TestCase
      */
     public function it_success_sorted_response(): void
     {
-        $gameDevelopers = GameDeveloperFactory::new()
+        $gamePublishers = GamePublisherFactory::new()
             ->count(5)
             ->create();
 
@@ -176,14 +171,12 @@ class GameDeveloperFilterTest extends TestCase
         ];
 
         $this->actingAs($this->user)
-            ->get(action([GameDeveloperController::class, 'index'], $request))
+            ->get(action([GamePublisherController::class, 'index'], $request))
             ->assertOk()
             ->assertSeeInOrder(
-                $gameDevelopers->sortBy('name')
+                $gamePublishers->sortBy('name')
                     ->flatMap(fn ($item) => [$item->name])
                     ->toArray()
             );
-
-
     }
 }
