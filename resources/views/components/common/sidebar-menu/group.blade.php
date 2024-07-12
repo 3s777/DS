@@ -25,7 +25,8 @@
         :open="$group->isActive()"
         color="light">
 
-        <x-ui.accordion.title class="sidebar-menu__accordion-title">
+        <x-ui.accordion.title
+            @class(['sidebar-menu__accordion-title', 'sidebar-menu__accordion-title_opened' => $group->isActive()])>
             <span class="sidebar-menu__link-label">{{ $group->label() }}</span>
         </x-ui.accordion.title>
 

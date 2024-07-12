@@ -6,10 +6,8 @@ use Illuminate\Database\Eloquent\Builder;
 use Support\Traits\QueryFiltered;
 use Support\Traits\QuerySorted;
 
-class GameDeveloperQueryBuilder extends Builder
+class GameQueryBuilder extends Builder
 {
     use QueryFiltered;
     use QuerySorted;
-
-//    protected $model = GameDeveloper::class;
 }
