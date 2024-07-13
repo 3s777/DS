@@ -2,10 +2,10 @@
     <x-ui.form class="crud-form"
                method="put"
                id="edit-form"
-               action="{{ route('game-developers.update', $gameDeveloper->slug) }}"
+               action="{{ route('games.update', $game->slug) }}"
                enctype="multipart/form-data">
         <x-ui.title class="crud-form__tile" size="normal" indent="small">
-            {{ __('game_developer.edit') }}
+            {{ __('game.edit') }}
         </x-ui.title>
 
         <div class="crud-form__main">
@@ -17,7 +17,7 @@
                             placeholder="{{ __('common.name') }}"
                             id="name"
                             name="name"
-                            value="{{ $gameDeveloper->name }}"
+                            value="{{ $game->name }}"
                             required
                             autocomplete="on"
                             autofocus>
@@ -32,7 +32,7 @@
                             placeholder="{{ __('common.slug') }}"
                             id="slug"
                             name="slug"
-                            value="{{ $gameDeveloper->slug }}"
+                            value="{{ $game->slug }}"
                             autocomplete="on">
                         </x-ui.form.input-text>
                     </x-ui.form.group>
@@ -41,7 +41,7 @@
                 <x-grid.col xl="4" ls="6" ml="12" lg="6" md="6" sm="12">
                     <x-ui.form.group>
                         <x-ui.async-select
-                            :selected="$gameDeveloper->user ?? false"
+                            :selected="$game->user ?? false"
                             name="user"
                             route="get-users"
                             default-option="{{ __('user.choose') }}"
@@ -56,7 +56,7 @@
             <x-ui.form.group>
                 <x-libraries.rich-text-editor
                     name="description"
-                    value="{!! $gameDeveloper->description !!}"
+                    value="{!! $game->description !!}"
                     placeholder="{{ __('common.description') }}"/>
             </x-ui.form.group>
         </div>
@@ -67,13 +67,13 @@
                     class="crud-form__input-image"
                     name="thumbnail"
                     id="thumbnail"
-                    :path="$gameDeveloper->getThumbnailPath()">
-                    @if($gameDeveloper->getThumbnailPath())
+                    :path="$game->getThumbnailPath()">
+                    @if($game->getThumbnailPath())
                     <x-slot:uploaded-thumbnail>
                         <x-ui.responsive-image
-                            :model="$gameDeveloper"
+                            :model="$game"
                             :image-sizes="['small', 'medium', 'large']"
-                            :path="$gameDeveloper->getThumbnailPath()"
+                            :path="$game->getThumbnailPath()"
                             :placeholder="false"
                             sizes="(max-width: 1024px) 100vw, (max-width: 1400px) 30vw, 220px">
                             <x-slot:img alt="test" title="test title"></x-slot:img>

@@ -11,11 +11,13 @@ use Database\Factories\UserFactory;
 use Domain\Auth\Notifications\ResetPasswordNotification;
 use Domain\Auth\Notifications\VerifyEmailNotification;
 use Domain\Auth\QueryBuilders\UserQueryBuilder;
+use Domain\Game\Models\Game;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Contracts\Translation\HasLocalePreference;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Database\Eloquent\Relations\MorphMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -174,5 +176,10 @@ class User extends Authenticatable implements MustVerifyEmail, HasLocalePreferen
     public function morphImages(): MorphMany
     {
         return $this->morphMany(Image::class, 'imageable');
+    }
+
+    public function games(): HasMany
+    {
+        return $this->hasMany(Game::class);
     }
 }

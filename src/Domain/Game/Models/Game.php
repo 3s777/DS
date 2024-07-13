@@ -15,13 +15,14 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Mews\Purifier\Casts\CleanHtml;
+use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
 use Spatie\Translatable\HasTranslations;
 use Support\Traits\Models\HasSlug;
 use Support\Traits\Models\HasThumbnail;
 use Support\Traits\Models\HasUser;
 
-class Game extends Model
+class Game extends Model implements HasMedia
 {
     use HasSlug;
     use SoftDeletes;

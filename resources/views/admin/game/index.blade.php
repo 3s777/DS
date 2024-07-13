@@ -3,13 +3,13 @@
         @if(request('filters.search'))
             {{ __('filters.result') }} "{{ request('filters.search') }}"
         @else
-            {{ __('game_developer.list') }}
+            {{ __('game.list') }}
         @endif
     </x-ui.title>
 
-    @include('admin.game.developer.partials.filters')
+    @include('admin.game.partials.filters')
 
-    <x-common.action-table model-name="game-developers">
+    <x-common.action-table model-name="games">
         <x-common.selectable-order
             class="action-table__selectable-order"
             :sorters="[
@@ -19,10 +19,10 @@
                 'created_at' => __('common.created_date'),
             ]" />
 
-        <x-ui.responsive-table :empty="$developers->isEmpty()">
+        <x-ui.responsive-table :empty="$games->isEmpty()">
             <x-ui.responsive-table.header>
                 <x-ui.responsive-table.column type="select" name="check">
-                    <x-common.action-table.select-all :models="$developers" />
+                    <x-common.action-table.select-all :models="$games" />
                 </x-ui.responsive-table.column>
                 <x-ui.responsive-table.column type="id" sortable="true" name="id">
                     {{ __('common.id') }}
@@ -41,25 +41,25 @@
                 </x-ui.responsive-table.column>
             </x-ui.responsive-table.header>
 
-            @foreach($developers as $developer)
+            @foreach($games as $game)
                 <x-ui.responsive-table.row >
                     <x-ui.responsive-table.column type="select">
-                        <x-common.action-table.row-checkbox :model="$developer" />
+                        <x-common.action-table.row-checkbox :model="$game" />
                     </x-ui.responsive-table.column>
                     <x-ui.responsive-table.column type="id">
-                        {{ $developer->id }}
+                        {{ $game->id }}
                     </x-ui.responsive-table.column>
                     <x-ui.responsive-table.column>
-                        <span class="responsive-table__label">{{ __('common.name') }}: </span> {{ $developer->name }}
+                        <span class="responsive-table__label">{{ __('common.name') }}: </span> {{ $game->name }}
                     </x-ui.responsive-table.column>
                     <x-ui.responsive-table.column>
-                        <span class="responsive-table__label">{{ __('user.user') }}: </span> {{ $developer->user_name }}
+                        <span class="responsive-table__label">{{ __('user.user') }}: </span> {{ $game->user_name }}
                     </x-ui.responsive-table.column>
                     <x-ui.responsive-table.column>
-                        <span class="responsive-table__label">{{ __('common.created_date') }}: </span> {{ $developer->created_at }}
+                        <span class="responsive-table__label">{{ __('common.created_date') }}: </span> {{ $game->created_at }}
                     </x-ui.responsive-table.column>
                     <x-ui.responsive-table.column type="action">
-                        <x-common.action-table.buttons :item="$developer" model="game-developers" />
+                        <x-common.action-table.buttons :item="$game" model="games" />
                     </x-ui.responsive-table.column>
                 </x-ui.responsive-table.row>
             @endforeach
@@ -82,7 +82,7 @@
         </x-slot:footer>
     </x-common.action-table>
 
-    {{ $developers->links('pagination::default') }}
+    {{ $games->links('pagination::default') }}
 
     <x-ui.modal x-data tag="section" ::class="$store.modalTest.hide ? '' : 'modal_show'">
         <x-ui.modal.content

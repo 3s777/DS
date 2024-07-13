@@ -5,12 +5,15 @@
     'selected' => false,
     'selectName' => false,
     'showOld' => true,
-    'defaultOption' => false
+    'defaultOption' => false,
+    'multiple' => false
 ])
 
 <x-libraries.choices
     {{ $attributes->class([
         $name.'-select' => $name
+    ])->merge([
+        'multiple' => $multiple
     ]) }}
     id="{{ $name }}-select"
     :name="$selectName ?: $name.'_id'"
@@ -60,6 +63,8 @@
         const choices{{ $name }} = new Choices({{ $name }}List, {
             allowHTML: true,
             itemSelectText: '',
+            removeItems: true,
+            removeItemButton: true,
             noResultsText: '{{ __('common.loading') }}',
             noChoicesText: '{{ __('common.not_found') }}',
             searchPlaceholderValue: '{{ __('common.search') }}',
@@ -68,11 +73,11 @@
             },
         });
 
-        asyncSelect.searchTerms.addEventListener(
-            'input',
-            event => choices{{ $name }}.clearStore(),
-            false,
-        )
+        {{--asyncSelect.searchTerms.addEventListener(--}}
+        {{--    'input',--}}
+        {{--    event => choices{{ $name }}.clearStore(),--}}
+        {{--    false,--}}
+        {{--)--}}
 
         asyncSelect.searchTerms.addEventListener(
             'input',

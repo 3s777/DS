@@ -9,12 +9,15 @@ use App\Http\Requests\Game\FilterGamePublisherRequest;
 use App\Http\Requests\Game\UpdateGamePublisherRequest;
 use App\Http\Requests\MassDeletingRequest;
 use Domain\Game\Models\GamePublisher;
+use Domain\Game\ViewModels\GameDeveloperListSelectViewModel;
 use Domain\Game\ViewModels\GamePublisherCrudViewModel;
 use Domain\Game\ViewModels\GamePublisherIndexViewModel;
+use Domain\Game\ViewModels\GamePublisherListSelectViewModel;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
 use Illuminate\Foundation\Application;
 use Illuminate\Http\RedirectResponse;
+use Illuminate\Http\Request;
 use Illuminate\Routing\Redirector;
 use Support\Actions\MassDeletingAction;
 use Support\DTOs\MassDeletingDTO;
@@ -114,6 +117,11 @@ class GamePublisherController extends Controller
         flash()->info(__('game_publisher.mass_force_deleted'));
 
         return to_route('game-publishers.index');
+    }
+
+    public function getForSelect(Request $request): GamePublisherListSelectViewModel
+    {
+        return new GamePublisherListSelectViewModel($request->input('query'));
     }
 }
 

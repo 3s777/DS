@@ -11,10 +11,12 @@ use App\Http\Requests\MassDeletingRequest;
 use Domain\Game\Models\GameDeveloper;
 use Domain\Game\ViewModels\GameDeveloperCrudViewModel;
 use Domain\Game\ViewModels\GameDeveloperIndexViewModel;
+use Domain\Game\ViewModels\GameDeveloperListSelectViewModel;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
 use Illuminate\Foundation\Application;
 use Illuminate\Http\RedirectResponse;
+use Illuminate\Http\Request;
 use Illuminate\Routing\Redirector;
 use Support\Actions\MassDeletingAction;
 use Support\DTOs\MassDeletingDTO;
@@ -123,6 +125,11 @@ class GameDeveloperController extends Controller
         flash()->info(__('game_developer.mass_force_deleted'));
 
         return to_route('game-developers.index');
+    }
+
+    public function getForSelect(Request $request): GameDeveloperListSelectViewModel
+    {
+        return new GameDeveloperListSelectViewModel($request->input('query'));
     }
 }
 

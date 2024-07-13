@@ -25,10 +25,12 @@ class GameRegistrar extends BaseRouteRegistrar implements RouteRegistrar
                             ->middleware(['remove.locale']);
 
                         $this->massDelete('game-developers', GameDeveloperController::class);
+                        Route::get('/select-game-developers', [GameDeveloperController::class, 'getForSelect'])->name('select-game-developers');
                         Route::resource('game-developers', GameDeveloperController::class)
                             ->middleware(['remove.locale']);
 
                         $this->massDelete('game-publishers', GamePublisherController::class);
+                        Route::get('/select-game-publishers', [GamePublisherController::class, 'getForSelect'])->name('select-game-publishers');
                         Route::resource('game-publishers', GamePublisherController::class)
                             ->middleware(['remove.locale']);
 
