@@ -16,6 +16,7 @@ use Domain\Auth\Models\User;
 use Domain\Auth\ViewModels\UserCrudViewModel;
 use Domain\Auth\ViewModels\UserIndexViewModel;
 use Domain\Auth\ViewModels\UserListSelectViewModel;
+use Domain\Game\Models\GameDeveloper;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
 use Illuminate\Foundation\Application;
@@ -23,6 +24,7 @@ use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Support\Actions\MassDeletingAction;
 use Support\DTOs\MassDeletingDTO;
+use Support\ViewModels\AsyncSelectViewModel;
 
 class UserController extends Controller
 {
@@ -121,9 +123,13 @@ class UserController extends Controller
         return view('content.users.index', compact('users'));
     }
 
-    public function getUsers(Request $request): UserListSelectViewModel
+    public function getForSelect(Request $request): AsyncSelectViewModel
     {
-        return new UserListSelectViewModel($request->input('query'));
+        return new AsyncSelectViewModel(
+            $request->input('query'),
+            User::class,
+            'user.choose'
+        );
     }
 
     public function findUsers($param = null)

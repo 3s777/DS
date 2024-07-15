@@ -8,6 +8,7 @@ use App\Http\Requests\Game\CreateGamePublisherRequest;
 use App\Http\Requests\Game\FilterGamePublisherRequest;
 use App\Http\Requests\Game\UpdateGamePublisherRequest;
 use App\Http\Requests\MassDeletingRequest;
+use Domain\Game\Models\GameDeveloper;
 use Domain\Game\Models\GamePublisher;
 use Domain\Game\ViewModels\GameDeveloperListSelectViewModel;
 use Domain\Game\ViewModels\GamePublisherCrudViewModel;
@@ -21,6 +22,7 @@ use Illuminate\Http\Request;
 use Illuminate\Routing\Redirector;
 use Support\Actions\MassDeletingAction;
 use Support\DTOs\MassDeletingDTO;
+use Support\ViewModels\AsyncSelectViewModel;
 
 class GamePublisherController extends Controller
 {
@@ -119,9 +121,13 @@ class GamePublisherController extends Controller
         return to_route('game-publishers.index');
     }
 
-    public function getForSelect(Request $request): GamePublisherListSelectViewModel
+    public function getForSelect(Request $request): AsyncSelectViewModel
     {
-        return new GamePublisherListSelectViewModel($request->input('query'));
+        return new AsyncSelectViewModel(
+            $request->input('query'),
+            GamePublisher::class,
+            'game_publisher.choose'
+        );
     }
 }
 

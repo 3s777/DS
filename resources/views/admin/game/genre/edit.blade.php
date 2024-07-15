@@ -43,7 +43,7 @@
                         <x-ui.async-select
                             :selected="$gameGenre->user ?? false"
                             name="user"
-                            route="get-users"
+                            route="select-users"
                             default-option="{{ __('user.choose') }}"
                             label="{{ __('user.user') }}">
                         </x-ui.async-select>

@@ -55,7 +55,7 @@
                     <x-ui.form.group>
                         <x-ui.async-select
                             name="game_platform_manufacturer"
-                            route="get-manufacturers"
+                            route="select-game-platform-manufacturers"
                             label="{{ __('game_platform_manufacturer.manufacturer') }}"
                             default-option="{{ __('game_platform_manufacturer.choose') }}">
                         </x-ui.async-select>
@@ -66,7 +66,7 @@
                     <x-ui.form.group>
                         <x-ui.async-select
                             name="user"
-                            route="get-users"
+                            route="select-users"
                             label="{{ __('user.user') }}"
                             default-option="{{ __('user.choose') }}">
                         </x-ui.async-select>

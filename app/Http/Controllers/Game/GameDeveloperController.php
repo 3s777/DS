@@ -20,6 +20,7 @@ use Illuminate\Http\Request;
 use Illuminate\Routing\Redirector;
 use Support\Actions\MassDeletingAction;
 use Support\DTOs\MassDeletingDTO;
+use Support\ViewModels\AsyncSelectViewModel;
 
 class GameDeveloperController extends Controller
 {
@@ -127,9 +128,13 @@ class GameDeveloperController extends Controller
         return to_route('game-developers.index');
     }
 
-    public function getForSelect(Request $request): GameDeveloperListSelectViewModel
+    public function getForSelect(Request $request): AsyncSelectViewModel
     {
-        return new GameDeveloperListSelectViewModel($request->input('query'));
+        return new AsyncSelectViewModel(
+            $request->input('query'),
+            GameDeveloper::class,
+            'game_developer.choose'
+        );
     }
 }
 

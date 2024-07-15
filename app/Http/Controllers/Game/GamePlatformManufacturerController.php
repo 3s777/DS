@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Game\CreateGamePlatformManufacturerRequest;
 use App\Http\Requests\Game\UpdateGamePlatformManufacturerRequest;
 use App\Http\Requests\MassDeletingRequest;
+use Domain\Game\Models\GameDeveloper;
 use Illuminate\Http\Request;
 use Domain\Game\Models\GamePlatformManufacturer;
 use Domain\Game\ViewModels\GamePlatformManufacturerCrudViewModel;
@@ -19,6 +20,7 @@ use Illuminate\Http\RedirectResponse;
 use Illuminate\Routing\Redirector;
 use Support\Actions\MassDeletingAction;
 use Support\DTOs\MassDeletingDTO;
+use Support\ViewModels\AsyncSelectViewModel;
 
 class GamePlatformManufacturerController extends Controller
 {
@@ -117,9 +119,13 @@ class GamePlatformManufacturerController extends Controller
         return to_route('game-platform-manufacturers.index');
     }
 
-    public function getManufacturers(Request $request): GamePlatformManufacturerListSelectViewModel
+    public function getForSelect(Request $request): AsyncSelectViewModel
     {
-        return new GamePlatformManufacturerListSelectViewModel($request->input('query'));
+        return new AsyncSelectViewModel(
+            $request->input('query'),
+            GamePlatformManufacturer::class,
+            'game_platform_manufacturer.choose'
+        );
     }
 }
 

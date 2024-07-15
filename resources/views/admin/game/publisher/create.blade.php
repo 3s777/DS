@@ -41,7 +41,7 @@
                     <x-ui.form.group>
                         <x-ui.async-select
                             name="user"
-                            route="get-users"
+                            route="select-users"
                             label="{{ __('user.user') }}"
                             default-option="{{ __('user.choose') }}">
                             >

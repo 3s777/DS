@@ -19,7 +19,7 @@
                     label="{{ __('user.user') }}"
                     defaultOption="{{ __('user.choose') }}"
                     selectName="filters[user]"
-                    route="get-users"></x-ui.async-select>
+                    route="select-users"></x-ui.async-select>
             </x-ui.form.group>
         </x-grid.col>
 
