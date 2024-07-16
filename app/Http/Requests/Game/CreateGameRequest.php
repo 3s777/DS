@@ -27,6 +27,7 @@ class CreateGameRequest extends FormRequest
             'name' => ['required', Rule::unique(Game::class)],
             'slug' => ['nullable','string', Rule::unique(Game::class)],
             'description' => ['nullable','string'],
+            'released_at' => ['required'],
             'thumbnail' => ['nullable', 'mimes:jpg,png', 'max:10024'],
             'user_id' => ['nullable', 'integer', 'exists:Domain\Auth\Models\User,id']
         ];

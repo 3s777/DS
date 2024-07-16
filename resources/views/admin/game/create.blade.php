@@ -59,7 +59,7 @@
                             <x-ui.form.option value="">{{ __('game_genre.genre') }}</x-ui.form.option>
                             @foreach($genres as $genre)
                                 <x-ui.form.option
-                                    value="{{ $genre['name'] }}"
+                                    value="{{ $genre['id'] }}"
                                     :selected="in_array($genre['name'], old('genres', []))">
                                     {{ $genre['name'] }}
                                 </x-ui.form.option>
@@ -79,7 +79,7 @@
                             <x-ui.form.option value="">{{ __('game_platform.platform') }}</x-ui.form.option>
                             @foreach($platforms as $platform)
                                 <x-ui.form.option
-                                    value="{{ $platform['name'] }}"
+                                    value="{{ $platform['id'] }}"
                                     :selected="in_array($platform['name'], old('platforms', []))">
                                     {{ $platform['name'] }}
                                 </x-ui.form.option>
@@ -92,6 +92,7 @@
                     <x-ui.form.group>
                         <x-ui.async-select
                             name="game_developer"
+                            select-name="game_developers[]"
                             route="select-game-developers"
                             multiple="true"
                             default-option="{{ __('game_developer.developer') }}"
@@ -104,6 +105,7 @@
                     <x-ui.form.group>
                         <x-ui.async-select
                             name="game_publisher"
+                            select-name="game_publishers[]"
                             route="select-game-publishers"
                             multiple="true"
                             default-option="{{ __('game_publisher.publisher') }}"

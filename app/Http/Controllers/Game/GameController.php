@@ -45,6 +45,11 @@ class GameController extends Controller
             ['small', 'medium']
         );
 
+        $game->genres()->attach($request->input('genres'));
+        $game->platforms()->attach($request->input('platforms'));
+        $game->developers()->attach($request->input('game_developers'));
+        $game->publishers()->attach($request->input('game_publishers'));
+
         flash()->info(__('game.created'));
 
         return to_route('games.index');

@@ -13,6 +13,7 @@ use Domain\Game\QueryBuilders\GameQueryBuilder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Mews\Purifier\Casts\CleanHtml;
 use Spatie\MediaLibrary\HasMedia;
@@ -36,7 +37,8 @@ class Game extends Model implements HasMedia
         'slug',
         'alternative_names',
         'description',
-        'user_id'
+        'user_id',
+        'released_at'
     ];
 
     protected $casts = [
@@ -109,6 +111,26 @@ class Game extends Model implements HasMedia
     public function user(): BelongsTo
     {
         return $this->belongsTo(User::class);
+    }
+
+    public function developers(): BelongsToMany
+    {
+        return $this->belongsToMany(GameDeveloper::class);
+    }
+
+    public function publishers(): BelongsToMany
+    {
+        return $this->belongsToMany(GamePublisher::class);
+    }
+
+    public function genres(): BelongsToMany
+    {
+        return $this->belongsToMany(GameGenre::class);
+    }
+
+    public function platforms(): BelongsToMany
+    {
+        return $this->belongsToMany(GamePlatform::class);
     }
 
 }
