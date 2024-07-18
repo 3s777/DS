@@ -1,5 +1,7 @@
 <?php
 
+use Domain\Game\Models\Game;
+use Domain\Game\Models\GameGenre;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -12,8 +14,14 @@ return new class () extends Migration {
     {
         Schema::create('game_game_genre', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('game_id');
-            $table->foreignId('game_genre_id');
+            $table->foreignIdFor(Game::class)
+                ->constrained()
+                ->cascadeOnDelete()
+                ->cascadeOnUpdate();
+            $table->foreignIdFor(GameGenre::class)
+                ->constrained()
+                ->cascadeOnDelete()
+                ->cascadeOnUpdate();
             $table->timestamps();
         });
     }
