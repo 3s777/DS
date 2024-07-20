@@ -22,26 +22,27 @@ class GameCrudViewModel extends ViewModel
 
     public function game(): ?Game
     {
+        $this->game?->load(['genres:id,name', 'platforms:id,name', 'developers:id,name', 'publishers:id,name']);
         return $this->game ?? null;
     }
 
     public function genres(): array
     {
-        return GameGenre::all()->select('id', 'name')->toArray();
+        return GameGenre::select('id', 'name')->get()->toArray();
     }
 
     public function platforms(): array
     {
-        return GamePlatform::all()->select('id', 'name')->toArray();
+        return GamePlatform::select('id', 'name')->get()->toArray();
     }
 
-    public function developers(): array
-    {
-        return GameDeveloper::all()->select('id', 'name')->toArray();
-    }
-
-    public function publishers(): array
-    {
-        return GamePublisher::all()->select('id', 'name')->toArray();
-    }
+//    public function developers(): array
+//    {
+//        return GameDeveloper::select('id', 'name')->get()->toArray();
+//    }
+//
+//    public function publishers(): array
+//    {
+//        return GamePublisher::select('id', 'name')->get()->toArray();
+//    }
 }

@@ -8,6 +8,8 @@
             {{ __('game.edit') }}
         </x-ui.title>
 
+
+
         <div class="crud-form__main">
             <x-grid type="container">
                 <x-grid.col xl="4" ls="6" ml="12" lg="6" md="6" sm="12">
@@ -62,8 +64,33 @@
                             @foreach($genres as $genre)
                                 <x-ui.form.option
                                     value="{{ $genre['id'] }}"
-                                    :selected="in_array($genre['id'], $game->genres->pluck('id')->toArray())">
+                                    :selected="old()
+                                        ? in_array($genre['id'], old('genres', []))
+                                        : in_array($genre['id'], $game->genres->pluck('id')->toArray())">
                                     {{ $genre['name'] }}
+                                </x-ui.form.option>
+                            @endforeach
+                        </x-libraries.choices>
+                    </x-ui.form.group>
+                </x-grid.col>
+
+                <x-grid.col xl="6" lg="12" md="12" sm="12">
+                    <x-ui.form.group>
+                        <x-libraries.choices
+                            class="choices-platforms"
+                            id="platforms"
+                            name="platforms[]"
+                            label="{{ __('game_platform.choose') }}"
+                            multiple>
+                            <x-ui.form.option value="">{{ __('game_platform.platform') }}</x-ui.form.option>
+
+                            @foreach($platforms as $platform)
+                                <x-ui.form.option
+                                    value="{{ $platform['id'] }}"
+                                    :selected="old()
+                                        ? in_array($platform['id'], old('genres', []))
+                                        : $game->platforms->contains('id', $platform['id'])">
+                                    {{ $platform['name'] }}
                                 </x-ui.form.option>
                             @endforeach
                         </x-libraries.choices>

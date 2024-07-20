@@ -29,6 +29,7 @@ class UpdateGameRequest extends FormRequest
             'name' => ['required', Rule::unique(Game::class)->ignore($this->game)],
             'slug' => ['nullable','string', Rule::unique(Game::class)->ignore($this->game)],
             'description' => ['nullable','string'],
+            'released_at' => ['required'],
             'thumbnail' => ['nullable', 'mimes:jpg,png', 'max:10024'],
             'thumbnail_selected' => ['nullable', 'string'],
             'user_id' => ['nullable', 'integer', 'exists:Domain\Auth\Models\User,id']
