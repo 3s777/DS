@@ -90,27 +90,25 @@
 
                 <x-grid.col xl="6" ls="6" ml="12" lg="6" md="6" sm="12">
                     <x-ui.form.group>
-                        <x-ui.async-select
+                        <x-ui.async-select-multiple
                             name="game_developer"
                             select-name="game_developers[]"
                             route="select-game-developers"
-                            multiple="true"
                             default-option="{{ __('game_developer.developer') }}"
                             label="{{ __('game_developer.choose') }}">
-                        </x-ui.async-select>
+                        </x-ui.async-select-multiple>
                     </x-ui.form.group>
                 </x-grid.col>
 
                 <x-grid.col xl="6" ls="6" ml="12" lg="6" md="6" sm="12">
                     <x-ui.form.group>
-                        <x-ui.async-select
+                        <x-ui.async-select-multiple
                             name="game_publisher"
                             select-name="game_publishers[]"
                             route="select-game-publishers"
-                            multiple="true"
                             default-option="{{ __('game_publisher.publisher') }}"
                             label="{{ __('game_publisher.choose') }}">
-                        </x-ui.async-select>
+                        </x-ui.async-select-multiple>
                     </x-ui.form.group>
                 </x-grid.col>
 

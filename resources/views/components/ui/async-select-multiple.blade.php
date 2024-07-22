@@ -13,40 +13,41 @@
         $name.'-select' => $name
     ]) }}
     id="{{ $name }}-select"
-    :name="$selectName ?: $name.'_id'"
-    label="{{ $label }}">
+    :name="$name.'[]'"
+    label="{{ $label }}"
+    multiple>
 
     @if($selected)
-        <x-ui.form.option value="{{ $selected->id }}" :selected="!old('{{ $name }}_id')">
-            {{ $selected->name }}
-        </x-ui.form.option>
-    @else
-        @if($defaultOption)
-            <x-ui.form.option value="">
-                {{ $defaultOption }}
+        @foreach($selected as $item)
+            <x-ui.form.option value="{{ $item->id }}" :selected="!old($name)">
+                {{ $item->name }}
             </x-ui.form.option>
-        @endif
+        @endforeach
     @endif
 
-    @if(old($name.'_id') && $showOld)
-        <x-ui.form.option value="{{ old($name.'_id') }}" selected>
-            {{ old('old_selected_'.$name.'_label') }}
+    @if($defaultOption && !$selected)
+        <x-ui.form.option value="">
+            {{ $defaultOption }}
         </x-ui.form.option>
     @endif
 
-    @if(old($selectName) && $showOld)
-        <x-ui.form.option value="{{ old($selectName) }}" selected>
-            {{ old('old_selected_'.$name.'_label') }}
-        </x-ui.form.option>
-    @endif
+{{--    @if(old($name) && $showOld)--}}
+{{--        @foreach(old($name) as $old)--}}
+{{--            <x-ui.form.option value="{{ $old }}" selected>--}}
+{{--                {{ old('old_selected_'.$name.'_label') }}--}}
+{{--            </x-ui.form.option>--}}
+{{--        @endforeach--}}
+{{--    @endif--}}
 
 </x-libraries.choices>
 
     @if($showOld)
         @if($selected)
-            <input type="hidden" name="old_selected_{{ $name }}_label" value="{{ $selected->name }}" id="old_selected_{{ $name }}_label">
+            @foreach($selected as $item)
+                <input type="hidden" name="old_selected_{{ $name }}_label[old][{{ $item->id }}]" value="{{ $item->name }}">
+            @endforeach
         @else
-            <input type="hidden" name="old_selected_{{ $name }}_label" value="{{ old('old_selected_'.$name.'_label') }}" id="old_selected_{{ $name }}_label">
+            <input type="hidden" name="old_selected_{{ $name }}_label[][]" value="{{ old('old_selected_'.$name.'_label') }}" id="old_selected_{{ $name }}_label">
 
         @endif
     @endif
@@ -70,12 +71,6 @@
             },
         });
 
-        {{--asyncSelect.searchTerms.addEventListener(--}}
-        {{--    'input',--}}
-        {{--    event => choices{{ $name }}.clearStore(),--}}
-        {{--    false,--}}
-        {{--)--}}
-
         asyncSelect.searchTerms.addEventListener(
             'input',
             debounce(event => asyncSelect.asyncSearch(choices{{ $name }}), 300),
@@ -83,15 +78,37 @@
         )
 
         @if($showOld)
-            @if($selectName)
-                let select{{ $name }} = document.querySelector(`[name="{{ $selectName }}"]`);
-            @else
-                let select{{ $name }} = document.querySelector(`[name="{{ $name }}_id"]`);
-            @endif
+            let select{{ $name }} = document.querySelector(`[name="{{ $name }}[]"]`);
 
             let selected{{ $name }}Name = document.getElementById('old_selected_{{ $name }}_label');
 
+
+
+        var options = select{{ $name }}.selectedOptions;
+
+        // var values = Array.from(options).map(
+        //     ({ text, value }) => value
+        //
+        //     // function (item, index) {
+        //     //     console.log("элемент:", item)
+        //     //     return index
+        //     // }
+        // );
+
+
+
+
+
             select{{ $name }}.onchange = function () {
+
+                var values = Array.from(options).reduce(function(oldOptions, currentOption) {
+                    oldOptions[currentOption.value] = currentOption.text;
+                    return oldOptions;
+                }, {});
+
+                console.log(values)
+
+
                 selected{{ $name }}Name.value = select{{ $name }}.options[select{{ $name }}.selectedIndex].text;
             };
         @endif

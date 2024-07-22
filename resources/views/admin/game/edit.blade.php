@@ -8,7 +8,9 @@
             {{ __('game.edit') }}
         </x-ui.title>
 
-
+        @if(old())
+            @dd(old())
+        @endif
 
         <div class="crud-form__main">
             <x-grid type="container">
@@ -66,7 +68,7 @@
                                     value="{{ $genre['id'] }}"
                                     :selected="old()
                                         ? in_array($genre['id'], old('genres', []))
-                                        : in_array($genre['id'], $game->genres->pluck('id')->toArray())">
+                                        : $game->genres->contains('id', $genre['id'])">
                                     {{ $genre['name'] }}
                                 </x-ui.form.option>
                             @endforeach
@@ -88,12 +90,37 @@
                                 <x-ui.form.option
                                     value="{{ $platform['id'] }}"
                                     :selected="old()
-                                        ? in_array($platform['id'], old('genres', []))
+                                        ? in_array($platform['id'], old('platforms', []))
                                         : $game->platforms->contains('id', $platform['id'])">
                                     {{ $platform['name'] }}
                                 </x-ui.form.option>
                             @endforeach
                         </x-libraries.choices>
+                    </x-ui.form.group>
+                </x-grid.col>
+
+                <x-grid.col xl="6" ls="6" ml="12" lg="6" md="6" sm="12">
+                    <x-ui.form.group>
+                        <x-ui.async-select-multiple
+                            name="game_developers"
+                            select-name="game_developers[]"
+                            route="select-game-developers"
+                            :selected="$game->developers ?? false"
+                            default-option="{{ __('game_developer.developer') }}"
+                            label="{{ __('game_developer.choose') }}">
+                        </x-ui.async-select-multiple>
+                    </x-ui.form.group>
+                </x-grid.col>
+
+                <x-grid.col xl="6" ls="6" ml="12" lg="6" md="6" sm="12">
+                    <x-ui.form.group>
+                        <x-ui.async-select-multiple
+                            name="game_publishers"
+                            route="select-game-publishers"
+                            :selected="$game->publishers ?? false"
+                            default-option="{{ __('game_publisher.publisher') }}"
+                            label="{{ __('game_publisher.choose') }}">
+                        </x-ui.async-select-multiple>
                     </x-ui.form.group>
                 </x-grid.col>
 
