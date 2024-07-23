@@ -13,7 +13,7 @@ class AsyncSelectViewModel extends ViewModel
     public function result(): array
     {
         $options = [
-            ['value' => '', 'label' => __($this->label)]
+            ['value' => '', 'label' => __($this->label), 'disabled' => true]
         ];
 
         if($this->query) {

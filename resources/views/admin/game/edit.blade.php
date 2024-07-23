@@ -8,9 +8,13 @@
             {{ __('game.edit') }}
         </x-ui.title>
 
-        @if(old())
-            @dd(old())
-        @endif
+{{--        @if(old())--}}
+{{--            @dd(old('old_selected_game_developers_label')['old'])--}}
+{{--        @endif--}}
+
+{{--        @if(old())--}}
+{{--            @dd(old('old_selected_game_publishers_label')['old'])--}}
+{{--        @endif--}}
 
         <div class="crud-form__main">
             <x-grid type="container">
@@ -61,8 +65,6 @@
                             name="genres[]"
                             label="{{ __('game_genre.choose') }}"
                             multiple>
-                            <x-ui.form.option value="">{{ __('game_genre.genre') }}</x-ui.form.option>
-
                             @foreach($genres as $genre)
                                 <x-ui.form.option
                                     value="{{ $genre['id'] }}"
@@ -84,8 +86,6 @@
                             name="platforms[]"
                             label="{{ __('game_platform.choose') }}"
                             multiple>
-                            <x-ui.form.option value="">{{ __('game_platform.platform') }}</x-ui.form.option>
-
                             @foreach($platforms as $platform)
                                 <x-ui.form.option
                                     value="{{ $platform['id'] }}"

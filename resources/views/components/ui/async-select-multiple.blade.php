@@ -3,7 +3,6 @@
     'route',
     'label' => false,
     'selected' => false,
-    'selectName' => false,
     'showOld' => true,
     'defaultOption' => false,
 ])
@@ -17,38 +16,43 @@
     label="{{ $label }}"
     multiple>
 
-    @if($selected)
-        @foreach($selected as $item)
-            <x-ui.form.option value="{{ $item->id }}" :selected="!old($name)">
-                {{ $item->name }}
-            </x-ui.form.option>
-        @endforeach
-    @endif
-
     @if($defaultOption && !$selected)
         <x-ui.form.option value="">
             {{ $defaultOption }}
         </x-ui.form.option>
     @endif
 
-{{--    @if(old($name) && $showOld)--}}
-{{--        @foreach(old($name) as $old)--}}
-{{--            <x-ui.form.option value="{{ $old }}" selected>--}}
-{{--                {{ old('old_selected_'.$name.'_label') }}--}}
-{{--            </x-ui.form.option>--}}
-{{--        @endforeach--}}
-{{--    @endif--}}
+    @if($selected)
+        @if(!old($name) || !$showOld)
+            @foreach($selected as $item)
+                <x-ui.form.option value="{{ $item->id }}" :selected="true">
+                    {{ $item->name }}
+                </x-ui.form.option>
+            @endforeach
+        @endif
+    @endif
+
+    @if(old($name) && $showOld)
+        @foreach(old('old_selected_'.$name.'_label')['old'] as $key => $value)
+            <x-ui.form.option value="{{ $key }}" selected>
+                {{ $value }}
+            </x-ui.form.option>
+        @endforeach
+    @endif
 
 </x-libraries.choices>
 
     @if($showOld)
-        @if($selected)
+        @if($selected && !old($name))
             @foreach($selected as $item)
-                <input type="hidden" name="old_selected_{{ $name }}_label[old][{{ $item->id }}]" value="{{ $item->name }}">
+                <input type="hidden" class="old_selected_{{ $name }}_label" name="old_selected_{{ $name }}_label[old][{{ $item->id }}]" value="{{ $item->name }}">
             @endforeach
-        @else
-            <input type="hidden" name="old_selected_{{ $name }}_label[][]" value="{{ old('old_selected_'.$name.'_label') }}" id="old_selected_{{ $name }}_label">
+        @endif
 
+        @if(old($name))
+            @foreach(old('old_selected_'.$name.'_label')['old'] as $key => $value)
+                <input type="hidden" class="old_selected_{{ $name }}_label" name="old_selected_{{ $name }}_label[old][{{ $key }}]" value="{{ $value }}">
+            @endforeach
         @endif
     @endif
 
@@ -62,6 +66,7 @@
             allowHTML: true,
             itemSelectText: '',
             removeItems: true,
+            placeholder: false,
             removeItemButton: true,
             noResultsText: '{{ __('common.loading') }}',
             noChoicesText: '{{ __('common.not_found') }}',
@@ -84,6 +89,7 @@
 
 
 
+
         var options = select{{ $name }}.selectedOptions;
 
         // var values = Array.from(options).map(
@@ -101,15 +107,41 @@
 
             select{{ $name }}.onchange = function () {
 
-                var values = Array.from(options).reduce(function(oldOptions, currentOption) {
+                const selectedInputs = document.getElementsByClassName('old_selected_{{ $name }}_label');
+
+
+
+                while(selectedInputs.length > 0){
+                    selectedInputs[0].parentNode.removeChild(selectedInputs[0]);
+                }
+
+
+                const selectedForm = select{{ $name }} .closest('form');
+
+
+                    let values = Array.from(options).reduce(function(oldOptions, currentOption) {
                     oldOptions[currentOption.value] = currentOption.text;
                     return oldOptions;
                 }, {});
 
-                console.log(values)
+                // console.log(values)
 
 
-                selected{{ $name }}Name.value = select{{ $name }}.options[select{{ $name }}.selectedIndex].text;
+                for (const key in values) {
+                    if(key) {
+                        const input = document.createElement("input");
+                        input.type = "text";
+                        input.className = "old_selected_{{ $name }}_label";
+                        input.name = "old_selected_{{ $name }}_label[old][" + key + "]";
+                        input.value = values[key];
+
+                        selectedForm.appendChild(input);
+                    }
+
+
+                    // console.log( "Ключ: " + key + " значение: " + values[key] );
+                }
+
             };
         @endif
     </script>
