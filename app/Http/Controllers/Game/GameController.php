@@ -37,7 +37,7 @@ class GameController extends Controller
 
     public function store(CreateGameRequest $request): Application|Redirector|RedirectResponse|\Illuminate\Contracts\Foundation\Application
     {
-        $game = Game::create($request->safe()->except(['thumbnail']));
+        $game = Game::create($request->safe()->except(['thumbnail', 'genres', 'platforms', 'developers', 'publishers']));
 
         $game->addImageWithThumbnail(
             $request->file('thumbnail'),
@@ -45,10 +45,10 @@ class GameController extends Controller
             ['small', 'medium']
         );
 
-        $game->genres()->attach($request->input('genres'));
-        $game->platforms()->attach($request->input('platforms'));
-        $game->developers()->attach($request->input('game_developers'));
-        $game->publishers()->attach($request->input('game_publishers'));
+        $game->genres()->sync($request->input('genres'));
+        $game->platforms()->sync($request->input('platforms'));
+        $game->developers()->sync($request->input('developers'));
+        $game->publishers()->sync($request->input('publishers'));
 
         flash()->info(__('game.created'));
 
@@ -67,10 +67,18 @@ class GameController extends Controller
 
     public function update(UpdateGameRequest $request, Game $game): RedirectResponse
     {
-        dd($request);
-        $game->updateThumbnail($request->file('thumbnail'), $request->input('thumbnail_uploaded'), ['small', 'medium']);
+        $game->updateThumbnail(
+            $request->file('thumbnail'),
+            $request->input('thumbnail_uploaded'),
+            ['small', 'medium']
+        );
 
-        $game->fill($request->safe()->except(['thumbnail', 'thumbnail_uploaded']))->save();
+        $game->fill($request->safe()->except(['thumbnail', 'thumbnail_uploaded', 'genres', 'platforms', 'developers', 'publishers']))->save();
+
+        $game->genres()->sync($request->input('genres'));
+        $game->platforms()->sync($request->input('platforms'));
+        $game->developers()->sync($request->input('game_developers'));
+        $game->publishers()->sync($request->input('game_publishers'));
 
         flash()->info(__('game.updated'));
 

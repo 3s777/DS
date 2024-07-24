@@ -16,16 +16,16 @@
     :name="$selectName ?: $name.'_id'"
     label="{{ $label }}">
 
+    @if($defaultOption && !$selected)
+        <x-ui.form.option value="">
+            {{ $defaultOption }}
+        </x-ui.form.option>
+    @endif
+
     @if($selected)
         <x-ui.form.option value="{{ $selected->id }}" :selected="!old('{{ $name }}_id')">
             {{ $selected->name }}
         </x-ui.form.option>
-    @else
-        @if($defaultOption)
-            <x-ui.form.option value="">
-                {{ $defaultOption }}
-            </x-ui.form.option>
-        @endif
     @endif
 
     @if(old($name.'_id') && $showOld)
@@ -42,14 +42,13 @@
 
 </x-libraries.choices>
 
-    @if($showOld)
-        @if($selected)
-            <input type="hidden" name="old_selected_{{ $name }}_label" value="{{ $selected->name }}" id="old_selected_{{ $name }}_label">
-        @else
-            <input type="hidden" name="old_selected_{{ $name }}_label" value="{{ old('old_selected_'.$name.'_label') }}" id="old_selected_{{ $name }}_label">
-
-        @endif
+@if($showOld)
+    @if($selected)
+        <input type="hidden" name="old_selected_{{ $name }}_label" value="{{ $selected->name }}" id="old_selected_{{ $name }}_label">
+    @else
+        <input type="hidden" name="old_selected_{{ $name }}_label" value="{{ old('old_selected_'.$name.'_label') }}" id="old_selected_{{ $name }}_label">
     @endif
+@endif
 
 @push('scripts')
     <script type="module">

@@ -49,7 +49,7 @@
                 <x-grid.col xl="4" ls="6" ml="12" lg="6" md="6" sm="12">
                     <x-ui.form.group>
                         <x-ui.form.datepicker
-                            placeholder="Дата релиза"
+                            placeholder="{{ __('game.released_at') }}"
                             id="released_at"
                             name="released_at"
                             value="{{ $game->released_at }}">
@@ -103,7 +103,6 @@
                     <x-ui.form.group>
                         <x-ui.async-select-multiple
                             name="game_developers"
-                            select-name="game_developers[]"
                             route="select-game-developers"
                             :selected="$game->developers ?? false"
                             default-option="{{ __('game_developer.developer') }}"

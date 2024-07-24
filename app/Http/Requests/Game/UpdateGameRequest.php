@@ -26,13 +26,52 @@ class UpdateGameRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name' => ['required', Rule::unique(Game::class)->ignore($this->game)],
-            'slug' => ['nullable','string', Rule::unique(Game::class)->ignore($this->game)],
+            'name' => [
+                'required',
+                Rule::unique(Game::class)->ignore($this->game)
+            ],
+            'slug' => [
+                'nullable',
+                'string',
+                Rule::unique(Game::class)->ignore($this->game)
+            ],
             'description' => ['nullable','string'],
-            'released_at' => ['required'],
-            'thumbnail' => ['nullable', 'mimes:jpg,png', 'max:10024'],
+            'released_at' => [
+                'nullable',
+                'date',
+                'date_format:Y-m-d'
+            ],
+            'thumbnail' => [
+                'nullable',
+                'mimes:jpg,png',
+                'max:10024'
+            ],
             'thumbnail_selected' => ['nullable', 'string'],
-            'user_id' => ['nullable', 'integer', 'exists:Domain\Auth\Models\User,id']
+            'genres' => [
+                'nullable',
+                'array',
+                'exists:game_genres,id'
+            ],
+            'platforms' => [
+                'nullable',
+                'array',
+                'exists:game_platforms,id'
+            ],
+            'developers' => [
+                'nullable',
+                'array',
+                'exists:game_developers,id'
+            ],
+            'publishers' => [
+                'nullable',
+                'array',
+                'exists:game_publishers,id'
+            ],
+            'user_id' => [
+                'nullable',
+                'integer',
+                'exists:Domain\Auth\Models\User,id'
+            ]
         ];
     }
 
@@ -42,6 +81,11 @@ class UpdateGameRequest extends FormRequest
             'name' => __('common.name'),
             'slug' => __('common.slug'),
             'description' => __('common.description'),
+            'released_at' => __('game.released_at'),
+            'genres' => __('game_genre.genres'),
+            'platforms' => __('game_platform.platforms'),
+            'developers' => __('game_developer.developers'),
+            'publishers' => __('game_publisher.publishers'),
             'thumbnail' => __('common.thumbnail'),
             'user_id' => __('common.user'),
         ];

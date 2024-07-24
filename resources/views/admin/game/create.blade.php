@@ -40,7 +40,7 @@
                 <x-grid.col xl="4" ls="6" ml="12" lg="6" md="6" sm="12">
                     <x-ui.form.group>
                         <x-ui.form.datepicker
-                            placeholder="Дата релиза"
+                            placeholder="{{ __('game.released_at') }}"
                             id="released_at"
                             name="released_at"
                             value="{{ old('released_at') }}">
@@ -60,7 +60,7 @@
                             @foreach($genres as $genre)
                                 <x-ui.form.option
                                     value="{{ $genre['id'] }}"
-                                    :selected="in_array($genre['name'], old('genres', []))">
+                                    :selected="in_array($genre['id'], old('genres', []))">
                                     {{ $genre['name'] }}
                                 </x-ui.form.option>
                             @endforeach
@@ -80,7 +80,7 @@
                             @foreach($platforms as $platform)
                                 <x-ui.form.option
                                     value="{{ $platform['id'] }}"
-                                    :selected="in_array($platform['name'], old('platforms', []))">
+                                    :selected="in_array($platform['id'], old('platforms', []))">
                                     {{ $platform['name'] }}
                                 </x-ui.form.option>
                             @endforeach
@@ -91,8 +91,7 @@
                 <x-grid.col xl="6" ls="6" ml="12" lg="6" md="6" sm="12">
                     <x-ui.form.group>
                         <x-ui.async-select-multiple
-                            name="game_developer"
-                            select-name="game_developers[]"
+                            name="developers"
                             route="select-game-developers"
                             default-option="{{ __('game_developer.developer') }}"
                             label="{{ __('game_developer.choose') }}">
@@ -103,8 +102,7 @@
                 <x-grid.col xl="6" ls="6" ml="12" lg="6" md="6" sm="12">
                     <x-ui.form.group>
                         <x-ui.async-select-multiple
-                            name="game_publisher"
-                            select-name="game_publishers[]"
+                            name="publishers"
                             route="select-game-publishers"
                             default-option="{{ __('game_publisher.publisher') }}"
                             label="{{ __('game_publisher.choose') }}">

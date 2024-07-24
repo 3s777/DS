@@ -33,28 +33,27 @@
     @endif
 
     @if(old($name) && $showOld)
-        @foreach(old('old_selected_'.$name.'_label')['old'] as $key => $value)
-            <x-ui.form.option value="{{ $key }}" selected>
+        @foreach(old('old_selected_'.$name)['old'] as $key => $value)
+            <x-ui.form.option value="{{ $key }}" :selected="true">
                 {{ $value }}
             </x-ui.form.option>
         @endforeach
     @endif
-
 </x-libraries.choices>
 
-    @if($showOld)
-        @if($selected && !old($name))
-            @foreach($selected as $item)
-                <input type="hidden" class="old_selected_{{ $name }}_label" name="old_selected_{{ $name }}_label[old][{{ $item->id }}]" value="{{ $item->name }}">
-            @endforeach
-        @endif
-
-        @if(old($name))
-            @foreach(old('old_selected_'.$name.'_label')['old'] as $key => $value)
-                <input type="hidden" class="old_selected_{{ $name }}_label" name="old_selected_{{ $name }}_label[old][{{ $key }}]" value="{{ $value }}">
-            @endforeach
-        @endif
+@if($showOld)
+    @if($selected && !old($name))
+        @foreach($selected as $item)
+            <input type="hidden" class="old_selected_{{ $name }}" name="old_selected_{{ $name }}[old][{{ $item->id }}]" value="{{ $item->name }}">
+        @endforeach
     @endif
+
+    @if(old($name))
+        @foreach(old('old_selected_'.$name)['old'] as $key => $value)
+            <input type="hidden" class="old_selected_{{ $name }}" name="old_selected_{{ $name }}[old][{{ $key }}]" value="{{ $value }}">
+        @endforeach
+    @endif
+@endif
 
 @push('scripts')
     <script type="module">
@@ -85,63 +84,34 @@
         @if($showOld)
             let select{{ $name }} = document.querySelector(`[name="{{ $name }}[]"]`);
 
-            let selected{{ $name }}Name = document.getElementById('old_selected_{{ $name }}_label');
+            let selectedForm = select{{ $name }} .closest('form');
 
-
-
-
-        var options = select{{ $name }}.selectedOptions;
-
-        // var values = Array.from(options).map(
-        //     ({ text, value }) => value
-        //
-        //     // function (item, index) {
-        //     //     console.log("элемент:", item)
-        //     //     return index
-        //     // }
-        // );
-
-
-
-
+            let options = select{{ $name }}.selectedOptions;
 
             select{{ $name }}.onchange = function () {
 
-                const selectedInputs = document.getElementsByClassName('old_selected_{{ $name }}_label');
-
-
+                const selectedInputs = document.getElementsByClassName('old_selected_{{ $name }}');
 
                 while(selectedInputs.length > 0){
                     selectedInputs[0].parentNode.removeChild(selectedInputs[0]);
                 }
 
-
-                const selectedForm = select{{ $name }} .closest('form');
-
-
-                    let values = Array.from(options).reduce(function(oldOptions, currentOption) {
+                let values = Array.from(options).reduce(function(oldOptions, currentOption) {
                     oldOptions[currentOption.value] = currentOption.text;
                     return oldOptions;
                 }, {});
 
-                // console.log(values)
-
-
                 for (const key in values) {
                     if(key) {
                         const input = document.createElement("input");
-                        input.type = "text";
-                        input.className = "old_selected_{{ $name }}_label";
-                        input.name = "old_selected_{{ $name }}_label[old][" + key + "]";
+                        input.type = "hidden";
+                        input.className = "old_selected_{{ $name }}";
+                        input.name = "old_selected_{{ $name }}[old][" + key + "]";
                         input.value = values[key];
 
                         selectedForm.appendChild(input);
                     }
-
-
-                    // console.log( "Ключ: " + key + " значение: " + values[key] );
                 }
-
             };
         @endif
     </script>

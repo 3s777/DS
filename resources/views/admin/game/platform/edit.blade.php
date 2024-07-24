@@ -60,7 +60,7 @@
                         <x-ui.async-select
                             :selected="$gamePlatform->game_platform_manufacturer ?? false"
                             name="game_platform_manufacturer"
-                            route="get-manufacturers"
+                            route="select-game-platform-manufacturers"
                             label="{{ __('game_platform_manufacturer.manufacturer') }}"
                             default-option="{{ __('game_platform_manufacturer.choose') }}">
                         </x-ui.async-select>
