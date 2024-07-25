@@ -2,6 +2,12 @@
     position: relative;
 }
 
+.choices-block_error {
+    .choices__inner {
+        border: 2px solid $danger-main;
+    }
+}
+
 .choices-block__label {
     position: absolute;
     top: -17px;

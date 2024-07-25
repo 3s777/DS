@@ -12,7 +12,6 @@
                 <x-grid.col xl="4" ls="6" ml="12" lg="6" md="6" sm="12">
                     <x-ui.form.group>
                         <x-ui.form.input-text
-                            :errors="$errors"
                             placeholder="{{ __('common.name') }}"
                             id="name"
                             name="name"
@@ -27,7 +26,6 @@
                 <x-grid.col xl="4" ls="6" ml="12" lg="6" md="6" sm="12">
                     <x-ui.form.group>
                         <x-ui.form.input-text
-                            :errors="$errors"
                             placeholder="{{ __('common.slug') }}"
                             id="slug"
                             name="slug"
@@ -54,6 +52,7 @@
                             class="choices-genres"
                             id="genres"
                             name="genres[]"
+                            :error="$errors->has('genres')"
                             label="{{ __('game_genre.choose') }}"
                             multiple>
                             <x-ui.form.option value="">{{ __('game_genre.genre') }}</x-ui.form.option>
@@ -74,6 +73,7 @@
                             class="choices-platforms"
                             id="platforms"
                             name="platforms[]"
+                            :error="$errors->has('platforms')"
                             label="{{ __('game_platform.choose') }}"
                             multiple>
                             <x-ui.form.option value="">{{ __('game_platform.platform') }}</x-ui.form.option>
@@ -92,6 +92,7 @@
                     <x-ui.form.group>
                         <x-ui.async-select-multiple
                             name="developers"
+                            :error="$errors->has('developers')"
                             route="select-game-developers"
                             default-option="{{ __('game_developer.developer') }}"
                             label="{{ __('game_developer.choose') }}">
@@ -103,6 +104,7 @@
                     <x-ui.form.group>
                         <x-ui.async-select-multiple
                             name="publishers"
+                            :error="$errors->has('publishers')"
                             route="select-game-publishers"
                             default-option="{{ __('game_publisher.publisher') }}"
                             label="{{ __('game_publisher.choose') }}">
@@ -110,11 +112,11 @@
                     </x-ui.form.group>
                 </x-grid.col>
 
-
                 <x-grid.col xl="4" ls="6" ml="12" lg="6" md="6" sm="12">
                     <x-ui.form.group>
                         <x-ui.async-select
                             name="user"
+                            :error="$errors->has('user_id')"
                             route="select-users"
                             default-option="{{ __('user.choose') }}"
                             label="{{ __('user.user') }}">

@@ -5,6 +5,7 @@
     'selected' => false,
     'showOld' => true,
     'defaultOption' => false,
+    'error' => false
 ])
 
 <x-libraries.choices
@@ -13,13 +14,14 @@
     ]) }}
     id="{{ $name }}-select"
     :name="$name.'[]'"
+    :error="$error"
     label="{{ $label }}"
     multiple>
 
     @if($defaultOption && !$selected)
         <x-ui.form.option value="">
             {{ $defaultOption }}
-        </x-ui.form.option>
+        </x-ui.form.option>z
     @endif
 
     @if($selected)

@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Game\CreateGameRequest;
 use App\Http\Requests\Game\UpdateGameRequest;
 use App\Http\Requests\MassDeletingRequest;
+use Domain\Game\DTOs\CreateGameDTO;
 use Domain\Game\Models\Game;
 use Domain\Game\ViewModels\GameCrudViewModel;
 use Domain\Game\ViewModels\GameIndexViewModel;
@@ -37,6 +38,9 @@ class GameController extends Controller
 
     public function store(CreateGameRequest $request): Application|Redirector|RedirectResponse|\Illuminate\Contracts\Foundation\Application
     {
+        $dto = CreateGameDTO::fromRequest($request);
+        dd($dto);
+
         $game = Game::create($request->safe()->except(['thumbnail', 'genres', 'platforms', 'developers', 'publishers']));
 
         $game->addImageWithThumbnail(

@@ -5,10 +5,18 @@
     'input' => false,
     'value' => false,
     'wrapperClass' => false,
-    'size' => false
+    'size' => false,
+    'error' => false
 ])
 
-<div class="choices-block {{ $wrapperClass }} @if($size) choices-block_size_{{$size}} @endif">
+
+
+<div class="
+    choices-block
+    {{ $wrapperClass }}
+    @if($size) choices-block_size_{{$size}} @endif
+    @if($error) choices-block_error @endif
+    ">
     @if($label)
         <label class="choices-block__label" for="{{ $id }}">{{ $label }}</label>
     @endif

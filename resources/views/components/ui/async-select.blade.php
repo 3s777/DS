@@ -6,6 +6,7 @@
     'selectName' => false,
     'showOld' => true,
     'defaultOption' => false,
+    'error' => false
 ])
 
 <x-libraries.choices
@@ -14,6 +15,7 @@
     ]) }}
     id="{{ $name }}-select"
     :name="$selectName ?: $name.'_id'"
+    :error="$error"
     label="{{ $label }}">
 
     @if($defaultOption && !$selected)

@@ -87,7 +87,7 @@ class UpdateGameRequest extends FormRequest
             'developers' => __('game_developer.developers'),
             'publishers' => __('game_publisher.publishers'),
             'thumbnail' => __('common.thumbnail'),
-            'user_id' => __('common.user'),
+            'user_id' => __('user.user'),
         ];
     }
 }
