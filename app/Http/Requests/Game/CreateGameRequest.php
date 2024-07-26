@@ -26,12 +26,12 @@ class CreateGameRequest extends FormRequest
         return [
             'name' => ['required', Rule::unique(Game::class)],
             'slug' => [
-                'required',
+                'nullable',
                 'string', Rule::unique(Game::class)
             ],
             'description' => ['nullable','string'],
             'released_at' => [
-                'required',
+                'nullable',
                 'date',
                 'date_format:Y-m-d'
             ],
@@ -41,27 +41,27 @@ class CreateGameRequest extends FormRequest
                 'max:10024'
             ],
             'genres' => [
-                'required',
+                'nullable',
                 'array',
                 'exists:Domain\Game\Models\GameGenre,id'
             ],
             'platforms' => [
-                'required',
+                'nullable',
                 'array',
                 'exists:Domain\Game\Models\GamePlatform,id'
             ],
             'developers' => [
-                'required',
+                'nullable',
                 'array',
                 'exists:Domain\Game\Models\GameDeveloper,id'
             ],
             'publishers' => [
-                'required',
+                'nullable',
                 'array',
                 'exists:Domain\Game\Models\GamePublisher,id'
             ],
             'user_id' => [
-                'required',
+                'nullable',
                 'integer',
                 'exists:Domain\Auth\Models\User,id'
             ]

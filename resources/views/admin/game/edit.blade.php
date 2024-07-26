@@ -102,7 +102,7 @@
                 <x-grid.col xl="6" ls="6" ml="12" lg="6" md="6" sm="12">
                     <x-ui.form.group>
                         <x-ui.async-select-multiple
-                            name="game_developers"
+                            name="developers"
                             route="select-game-developers"
                             :selected="$game->developers ?? false"
                             default-option="{{ __('game_developer.developer') }}"
@@ -114,7 +114,7 @@
                 <x-grid.col xl="6" ls="6" ml="12" lg="6" md="6" sm="12">
                     <x-ui.form.group>
                         <x-ui.async-select-multiple
-                            name="game_publishers"
+                            name="publishers"
                             route="select-game-publishers"
                             :selected="$game->publishers ?? false"
                             default-option="{{ __('game_publisher.publisher') }}"

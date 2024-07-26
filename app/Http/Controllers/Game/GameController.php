@@ -8,7 +8,9 @@ use App\Http\Requests\Game\CreateGameRequest;
 use App\Http\Requests\Game\UpdateGameRequest;
 use App\Http\Requests\MassDeletingRequest;
 use Domain\Game\DTOs\CreateGameDTO;
+use Domain\Game\DTOs\UpdateGameDTO;
 use Domain\Game\Models\Game;
+use Domain\Game\Services\GameService;
 use Domain\Game\ViewModels\GameCrudViewModel;
 use Domain\Game\ViewModels\GameIndexViewModel;
 use Illuminate\Contracts\View\Factory;
@@ -36,23 +38,9 @@ class GameController extends Controller
         return view('admin.game.create', new GameCrudViewModel());
     }
 
-    public function store(CreateGameRequest $request): Application|Redirector|RedirectResponse|\Illuminate\Contracts\Foundation\Application
+    public function store(CreateGameRequest $request, GameService $service): Application|Redirector|RedirectResponse|\Illuminate\Contracts\Foundation\Application
     {
-        $dto = CreateGameDTO::fromRequest($request);
-        dd($dto);
-
-        $game = Game::create($request->safe()->except(['thumbnail', 'genres', 'platforms', 'developers', 'publishers']));
-
-        $game->addImageWithThumbnail(
-            $request->file('thumbnail'),
-            'thumbnail',
-            ['small', 'medium']
-        );
-
-        $game->genres()->sync($request->input('genres'));
-        $game->platforms()->sync($request->input('platforms'));
-        $game->developers()->sync($request->input('developers'));
-        $game->publishers()->sync($request->input('publishers'));
+        $service->create(CreateGameDTO::fromRequest($request));
 
         flash()->info(__('game.created'));
 
@@ -69,20 +57,9 @@ class GameController extends Controller
         return view('admin.game.edit', new GameCrudViewModel($game));
     }
 
-    public function update(UpdateGameRequest $request, Game $game): RedirectResponse
+    public function update(UpdateGameRequest $request, Game $game, GameService $service): RedirectResponse
     {
-        $game->updateThumbnail(
-            $request->file('thumbnail'),
-            $request->input('thumbnail_uploaded'),
-            ['small', 'medium']
-        );
-
-        $game->fill($request->safe()->except(['thumbnail', 'thumbnail_uploaded', 'genres', 'platforms', 'developers', 'publishers']))->save();
-
-        $game->genres()->sync($request->input('genres'));
-        $game->platforms()->sync($request->input('platforms'));
-        $game->developers()->sync($request->input('game_developers'));
-        $game->publishers()->sync($request->input('game_publishers'));
+        $service->update($game, UpdateGameDTO::fromRequest($request));
 
         flash()->info(__('game.updated'));
 
