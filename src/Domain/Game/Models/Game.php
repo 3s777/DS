@@ -4,11 +4,10 @@ namespace Domain\Game\Models;
 
 use App\Filters\DatesFilter;
 use App\Filters\RelationFilter;
+use App\Filters\RelationMultipleFilter;
 use App\Filters\SearchFilter;
-use Database\Factories\Game\GameDeveloperFactory;
 use Database\Factories\Game\GameFactory;
 use Domain\Auth\Models\User;
-use Domain\Game\QueryBuilders\GameDeveloperQueryBuilder;
 use Domain\Game\QueryBuilders\GameQueryBuilder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -99,6 +98,20 @@ class Game extends Model implements HasMedia
                 'games',
                 'user_id',
                 User::class
+            ),
+            'genres' => RelationMultipleFilter::make(
+                __('game_genre.genre'),
+                'genres',
+                'game_genres',
+                'id',
+                GameGenre::class
+            ),
+            'platforms' => RelationMultipleFilter::make(
+                __('game_platform.platform'),
+                'platforms',
+                'game_platforms',
+                'id',
+                GamePlatform::class
             ),
         ];
     }

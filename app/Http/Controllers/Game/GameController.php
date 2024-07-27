@@ -38,9 +38,9 @@ class GameController extends Controller
         return view('admin.game.create', new GameCrudViewModel());
     }
 
-    public function store(CreateGameRequest $request, GameService $service): Application|Redirector|RedirectResponse|\Illuminate\Contracts\Foundation\Application
+    public function store(CreateGameRequest $request, GameService $gameService): Application|Redirector|RedirectResponse|\Illuminate\Contracts\Foundation\Application
     {
-        $service->create(CreateGameDTO::fromRequest($request));
+        $gameService->create(CreateGameDTO::fromRequest($request));
 
         flash()->info(__('game.created'));
 
@@ -57,9 +57,9 @@ class GameController extends Controller
         return view('admin.game.edit', new GameCrudViewModel($game));
     }
 
-    public function update(UpdateGameRequest $request, Game $game, GameService $service): RedirectResponse
+    public function update(UpdateGameRequest $request, Game $game, GameService $gameService): RedirectResponse
     {
-        $service->update($game, UpdateGameDTO::fromRequest($request));
+        $gameService->update($game, UpdateGameDTO::fromRequest($request));
 
         flash()->info(__('game.updated'));
 

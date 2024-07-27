@@ -30,6 +30,12 @@
                 <x-ui.responsive-table.column sortable="true" name="name">
                     {{ __('common.name') }}
                 </x-ui.responsive-table.column>
+                <x-ui.responsive-table.column name="genre">
+                    {{ __('game_genre.genre') }}
+                </x-ui.responsive-table.column>
+                <x-ui.responsive-table.column name="platform">
+                    {{ __('game_platform.platform') }}
+                </x-ui.responsive-table.column>
                 <x-ui.responsive-table.column name="users.name" sortable="true">
                     {{ __('user.user') }}
                 </x-ui.responsive-table.column>
@@ -51,6 +57,18 @@
                     </x-ui.responsive-table.column>
                     <x-ui.responsive-table.column>
                         <span class="responsive-table__label">{{ __('common.name') }}: </span> {{ $game->name }}
+                    </x-ui.responsive-table.column>
+                    <x-ui.responsive-table.column>
+                        <span class="responsive-table__label">{{ __('game_genres.genre') }}: </span>
+                        @foreach($game->genres as $genre)
+                            {{ $genre['name'] }},
+                        @endforeach
+                    </x-ui.responsive-table.column>
+                    <x-ui.responsive-table.column>
+                        <span class="responsive-table__label">{{ __('game_platforms.platform') }}: </span>
+                        @foreach($game->platforms as $platform)
+                            {{ $platform['name'] }},
+                        @endforeach
                     </x-ui.responsive-table.column>
                     <x-ui.responsive-table.column>
                         <span class="responsive-table__label">{{ __('user.user') }}: </span> {{ $game->user_name }}
@@ -123,6 +141,25 @@
                         console.log(actionSelect);
                     }
                 });
+            });
+        </script>
+        <script type="module">
+            const genres = document.querySelector('.choices-genres');
+            const choicesGenres = new Choices(genres, {
+                itemSelectText: '',
+                removeItems: true,
+                removeItemButton: true,
+                noResultsText: '{{ __('common.not_found') }}',
+                noChoicesText: '{{ __('common.nothing_else') }}',
+            });
+
+            const platforms = document.querySelector('.choices-platforms');
+            const choicesPlatforms = new Choices(platforms, {
+                itemSelectText: '',
+                removeItems: true,
+                removeItemButton: true,
+                noResultsText: '{{ __('common.not_found') }}',
+                noChoicesText: '{{ __('common.nothing_else') }}',
             });
         </script>
     @endpush
