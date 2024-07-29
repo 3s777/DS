@@ -47,9 +47,11 @@ if(!function_exists('sorter')) {
     {
         return app(
             Sorter::class,
-            ['columns' => $fields,
-            'defaultField' => $defaultField,
-            'defaultOrder' => $defaultOrder]
+            [
+                'columns' => $fields,
+                'defaultField' => $defaultField,
+                'defaultOrder' => $defaultOrder
+            ]
         );
     }
 }

@@ -7,7 +7,7 @@
             'filters__'.$name
         ])
     }}
-    placeholder="{{ __('filters.'.$name.'_'.$direction) }}"
+    placeholder="{{ get_filter($name)->placeholder($direction) }}"
     id="filters_{{ $name }}_{{ $direction }}"
     name="filters[{{ $name }}][{{ $direction }}]"
     value="{{ request('filters.'.$name.'.'.$direction) }}">

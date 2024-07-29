@@ -23,18 +23,27 @@ abstract class AbstractFilter implements Stringable
 
     protected string|null $field;
 
+    protected string|array|null $placeholder;
+
     abstract public function apply(Builder $query): Builder;
 
     abstract public function preparedValues(): mixed;
 
     abstract public function view(): string;
 
-    public function __construct(string $title, string $key, string $table, string|null $field = null)
+    public function __construct(
+        string $title,
+        string $key,
+        string $table,
+        string|null $field = null,
+        string|array|null $placeholder = null
+    )
     {
         $this->setTitle($title);
         $this->setKey($key);
         $this->setTable($table);
         $this->setField($field);
+        $this->setPlaceholder($placeholder);
     }
 
     public function setTitle(string $title): static
@@ -61,6 +70,12 @@ abstract class AbstractFilter implements Stringable
         return $this;
     }
 
+    public function setPlaceholder(string|array|null $placeholder): static
+    {
+        $this->placeholder = $placeholder;
+        return $this;
+    }
+
     public function title(): string
     {
         return $this->title;
@@ -69,6 +84,15 @@ abstract class AbstractFilter implements Stringable
     public function key(): string
     {
         return $this->key;
+    }
+
+    public function placeholder(string $key = ''): string|array|null
+    {
+        if($key && is_array($this->placeholder)) {
+            return $this->placeholder[$key];
+        }
+
+        return $this->placeholder;
     }
 
     public function requestValue(string $index = null, mixed $default = null): mixed

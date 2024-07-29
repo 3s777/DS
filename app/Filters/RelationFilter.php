@@ -14,9 +14,16 @@ class RelationFilter extends AbstractFilter
     public ?Model $relatedModel;
     protected string $relation;
 
-    public function __construct(string $title, string $key, string $table, ?string $field = null, ?string $relation = null)
+    public function __construct(
+        string $title,
+        string $key,
+        string $table,
+        ?string $field = null,
+        ?string $placeholder = null,
+        ?string $relation = null
+    )
     {
-        parent::__construct($title, $key, $table, $field);
+        parent::__construct($title, $key, $table, $field, $placeholder);
 
         $this->setRelation($relation);
         $this->setRelatedModel();

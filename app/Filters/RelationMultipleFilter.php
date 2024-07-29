@@ -2,7 +2,6 @@
 
 namespace App\Filters;
 
-use Illuminate\Database\Eloquent\Model;
 use Support\Filters\AbstractFilter;
 use Illuminate\Database\Eloquent\Builder;
 use Support\Traits\Makeable;
@@ -19,10 +18,11 @@ class RelationMultipleFilter extends AbstractFilter
         string $key,
         string $table,
         ?string $field = null,
+        ?string $plceholder = null,
         ?string $relation = null
     )
     {
-        parent::__construct($title, $key, $table, $field);
+        parent::__construct($title, $key, $table, $field, $plceholder);
 
         $this->setRelation($relation);
         $this->setRelatedModel();
@@ -47,17 +47,10 @@ class RelationMultipleFilter extends AbstractFilter
 
     public function setRelatedModel(): static
     {
-
-
-
-
         if(request()->input('filters.'.$this->key)) {
-
             foreach ($this->requestValue() as $key => $value) {
                 $this->relatedModels[$key] = $this->relation::find($value);
             }
-
-//            $this->relatedModel = $this->relation::find($this->requestValue());
         }
 
         return $this;
@@ -75,7 +68,6 @@ class RelationMultipleFilter extends AbstractFilter
     public function preparedValues(): mixed
     {
         if(!empty($this->relatedModels)) {
-
             $names = [];
 
             foreach($this->relatedModels as $key => $model) {

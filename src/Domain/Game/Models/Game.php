@@ -85,7 +85,11 @@ class Game extends Model implements HasMedia
             'dates' => DatesFilter::make(
                 __('common.dates'),
                 'dates',
-                'games'
+                'games',
+                placeholder: [
+                    'from' => __('filters.dates_from'),
+                    'to' => __('filters.dates_to'),
+                ],
             ),
             'search' => SearchFilter::make(
                 __('common.search'),
@@ -97,6 +101,7 @@ class Game extends Model implements HasMedia
                 'user',
                 'games',
                 'user_id',
+                'test',
                 User::class
             ),
             'genres' => RelationMultipleFilter::make(
@@ -104,6 +109,7 @@ class Game extends Model implements HasMedia
                 'genres',
                 'game_genres',
                 'id',
+                __('game_genre.choose'),
                 GameGenre::class
             ),
             'platforms' => RelationMultipleFilter::make(
@@ -111,6 +117,7 @@ class Game extends Model implements HasMedia
                 'platforms',
                 'game_platforms',
                 'id',
+                 __('game_platform.choose'),
                 GamePlatform::class
             ),
         ];

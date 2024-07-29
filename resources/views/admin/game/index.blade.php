@@ -152,15 +152,6 @@
                 noResultsText: '{{ __('common.not_found') }}',
                 noChoicesText: '{{ __('common.nothing_else') }}',
             });
-
-            const platforms = document.querySelector('.choices-platforms');
-            const choicesPlatforms = new Choices(platforms, {
-                itemSelectText: '',
-                removeItems: true,
-                removeItemButton: true,
-                noResultsText: '{{ __('common.not_found') }}',
-                noChoicesText: '{{ __('common.nothing_else') }}',
-            });
         </script>
     @endpush
 </x-layouts.admin>
