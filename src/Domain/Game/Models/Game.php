@@ -97,23 +97,39 @@ class Game extends Model implements HasMedia
                 'games'
             ),
             'user' => RelationFilter::make(
-                __('common.user'),
+                __('user.user'),
                 'user',
                 'games',
                 'user_id',
-                'test',
+                __('user.choose'),
                 User::class
             ),
             'genres' => RelationMultipleFilter::make(
-                __('game_genre.genre'),
+                __('game_genre.genres'),
                 'genres',
                 'game_genres',
                 'id',
                 __('game_genre.choose'),
                 GameGenre::class
             ),
+            'developers' => RelationMultipleFilter::make(
+                __('game_developer.developers'),
+                'developers',
+                'game_developers',
+                'id',
+                __('game_developer.choose'),
+                GameDeveloper::class
+            ),
+            'publishers' => RelationMultipleFilter::make(
+                __('game_publisher.publishers'),
+                'publishers',
+                'game_publishers',
+                'id',
+                __('game_publisher.choose'),
+                GamePublisher::class
+            ),
             'platforms' => RelationMultipleFilter::make(
-                __('game_platform.platform'),
+                __('game_platform.platforms'),
                 'platforms',
                 'game_platforms',
                 'id',

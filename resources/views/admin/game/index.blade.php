@@ -30,11 +30,17 @@
                 <x-ui.responsive-table.column sortable="true" name="name">
                     {{ __('common.name') }}
                 </x-ui.responsive-table.column>
-                <x-ui.responsive-table.column name="genre">
-                    {{ __('game_genre.genre') }}
+                <x-ui.responsive-table.column name="genres">
+                    {{ __('game_genre.genres') }}
                 </x-ui.responsive-table.column>
-                <x-ui.responsive-table.column name="platform">
-                    {{ __('game_platform.platform') }}
+                <x-ui.responsive-table.column name="platforms">
+                    {{ __('game_platform.platforms') }}
+                </x-ui.responsive-table.column>
+                <x-ui.responsive-table.column name="developers">
+                    {{ __('game_developer.developers') }}
+                </x-ui.responsive-table.column>
+                <x-ui.responsive-table.column name="publishers">
+                    {{ __('game_publisher.publishers') }}
                 </x-ui.responsive-table.column>
                 <x-ui.responsive-table.column name="users.name" sortable="true">
                     {{ __('user.user') }}
@@ -59,15 +65,27 @@
                         <span class="responsive-table__label">{{ __('common.name') }}: </span> {{ $game->name }}
                     </x-ui.responsive-table.column>
                     <x-ui.responsive-table.column>
-                        <span class="responsive-table__label">{{ __('game_genres.genre') }}: </span>
+                        <span class="responsive-table__label">{{ __('game_genre.genres') }}: </span>
                         @foreach($game->genres as $genre)
                             {{ $genre['name'] }},
                         @endforeach
                     </x-ui.responsive-table.column>
                     <x-ui.responsive-table.column>
-                        <span class="responsive-table__label">{{ __('game_platforms.platform') }}: </span>
+                        <span class="responsive-table__label">{{ __('game_platform.platforms') }}: </span>
                         @foreach($game->platforms as $platform)
                             {{ $platform['name'] }},
+                        @endforeach
+                    </x-ui.responsive-table.column>
+                    <x-ui.responsive-table.column>
+                        <span class="responsive-table__label">{{ __('game_developer.developers') }}: </span>
+                        @foreach($game->developers as $developer)
+                            {{ $developer['name'] }},
+                        @endforeach
+                    </x-ui.responsive-table.column>
+                    <x-ui.responsive-table.column>
+                        <span class="responsive-table__label">{{ __('game_publisher.publishers') }}: </span>
+                        @foreach($game->publishers as $publisher)
+                            {{ $publisher['name'] }},
                         @endforeach
                     </x-ui.responsive-table.column>
                     <x-ui.responsive-table.column>
@@ -141,16 +159,6 @@
                         console.log(actionSelect);
                     }
                 });
-            });
-        </script>
-        <script type="module">
-            const genres = document.querySelector('.choices-genres');
-            const choicesGenres = new Choices(genres, {
-                itemSelectText: '',
-                removeItems: true,
-                removeItemButton: true,
-                noResultsText: '{{ __('common.not_found') }}',
-                noChoicesText: '{{ __('common.nothing_else') }}',
             });
         </script>
     @endpush

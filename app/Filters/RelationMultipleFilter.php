@@ -18,11 +18,11 @@ class RelationMultipleFilter extends AbstractFilter
         string $key,
         string $table,
         ?string $field = null,
-        ?string $plceholder = null,
+        ?string $placeholder = null,
         ?string $relation = null
     )
     {
-        parent::__construct($title, $key, $table, $field, $plceholder);
+        parent::__construct($title, $key, $table, $field, $placeholder);
 
         $this->setRelation($relation);
         $this->setRelatedModel();
@@ -48,9 +48,11 @@ class RelationMultipleFilter extends AbstractFilter
     public function setRelatedModel(): static
     {
         if(request()->input('filters.'.$this->key)) {
-            foreach ($this->requestValue() as $key => $value) {
-                $this->relatedModels[$key] = $this->relation::find($value);
-            }
+            $relatedCollection = $this->relation::select(['id', 'name'])->whereIn('id', $this->requestValue())->get();
+
+            $this->relatedModels = array_map(function ($value) use ($relatedCollection) {
+                return $relatedCollection->find($value);
+            }, request()->input('filters.'.$this->key) );
         }
 
         return $this;
@@ -61,7 +63,7 @@ class RelationMultipleFilter extends AbstractFilter
         return $query->when($this->requestValue(), function (Builder $query) {
             $query->whereHas($this->key, function (Builder $query) {
                 $query->whereIn($this->table.'.'.$this->field,   $this->requestValue());
-            })->get();
+            });
         });
     }
 
@@ -71,7 +73,9 @@ class RelationMultipleFilter extends AbstractFilter
             $names = [];
 
             foreach($this->relatedModels as $key => $model) {
-                $names[$key] = $model->name;
+                if($model) {
+                    $names[$key] = $model->name;
+                }
             }
 
             return $names;

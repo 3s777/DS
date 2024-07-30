@@ -5,7 +5,8 @@
     'selected' => false,
     'showOld' => true,
     'defaultOption' => false,
-    'error' => false
+    'error' => false,
+    'arrayKey' => false
 ])
 
 <x-libraries.choices
@@ -13,7 +14,7 @@
         $name.'-select' => $name
     ]) }}
     id="{{ $name }}-select"
-    :name="$name.'[]'"
+    :name="$arrayKey ? $arrayKey.'['.$name.'][]' : $name.'[]'"
     :error="$error"
     label="{{ $label }}"
     multiple>

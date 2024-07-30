@@ -12,9 +12,10 @@
     label="{{ $placeholder }}" multiple="">
     <x-ui.form.option value="">{{ get_filter($name)->title() }}</x-ui.form.option>
     @foreach($list as $item)
+
         <x-ui.form.option
             value="{{ $item['id'] }}"
-            :selected="request('filters.{{ $name }}') && in_array($item['id'], request('filters.{{ $name }}'))">
+            :selected="request('filters.'.$name) && in_array($item['id'], request('filters.'.$name))">
             {{ $item['name'] }}
         </x-ui.form.option>
     @endforeach

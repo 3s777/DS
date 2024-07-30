@@ -85,18 +85,23 @@ class GameDeveloper extends Model implements HasMedia
             'dates' => DatesFilter::make(
                 __('common.dates'),
                 'dates',
-                'game_developers'
+                'game_developers',
+                placeholder: [
+                    'from' => __('filters.dates_from'),
+                    'to' => __('filters.dates_to'),
+                ],
             ),
             'search' => SearchFilter::make(
                 __('common.search'),
                 'search',
-                'game_developers'
+                'game_developers',
             ),
             'user' => RelationFilter::make(
                 __('common.user'),
                 'user',
                 'game_developers',
                 'user_id',
+                __('users.choose'),
                 User::class
             ),
         ];
