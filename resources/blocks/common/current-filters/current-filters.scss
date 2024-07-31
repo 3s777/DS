@@ -3,21 +3,4 @@
     flex-wrap: wrap;
     align-items: center;
     gap: 8px;
-
-    &__badge {
-        display: flex;
-        align-items: center;
-    }
-
-    &__delete {
-        margin-left: 4px;
-        line-height: 0;
-
-        svg {
-            width: 18px;
-            height: 18px;
-            fill: $opposite-main;
-            cursor: pointer;
-        }
-    }
 }

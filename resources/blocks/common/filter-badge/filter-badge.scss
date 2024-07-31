@@ -1,0 +1,30 @@
+.filter-badge {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 5px;
+
+    &__delete {
+        margin-left: 4px;
+        line-height: 0;
+
+        svg {
+            width: 18px;
+            height: 18px;
+            fill: $opposite-main;
+            cursor: pointer;
+
+            &:hover {
+                fill: $danger-main;
+            }
+        }
+    }
+
+    &__item {
+        display: flex;
+        align-items: center;
+        padding: 2px 4px 2px 8px;
+        background-color: $additional-main;
+        border-radius: $small-border-radius;
+    }
+}

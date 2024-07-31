@@ -6,8 +6,10 @@ use App\Filters\DatesFilter;
 use App\Filters\RelationFilter;
 use App\Filters\RelationMultipleFilter;
 use App\Filters\SearchFilter;
+use App\Routing\FilepondRegistrar;
 use Database\Factories\Game\GameFactory;
 use Domain\Auth\Models\User;
+use Domain\Game\FilterRegistrars\GameFilterRegistrar;
 use Domain\Game\QueryBuilders\GameQueryBuilder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -24,6 +26,7 @@ use Support\Traits\Models\HasUser;
 
 class Game extends Model implements HasMedia
 {
+    use HasFactory;
     use HasSlug;
     use SoftDeletes;
     use InteractsWithMedia;
@@ -81,62 +84,7 @@ class Game extends Model implements HasMedia
 
     public function availableFilters(): array
     {
-        return [
-            'dates' => DatesFilter::make(
-                __('common.dates'),
-                'dates',
-                'games',
-                placeholder: [
-                    'from' => __('filters.dates_from'),
-                    'to' => __('filters.dates_to'),
-                ],
-            ),
-            'search' => SearchFilter::make(
-                __('common.search'),
-                'search',
-                'games'
-            ),
-            'user' => RelationFilter::make(
-                __('user.user'),
-                'user',
-                'games',
-                'user_id',
-                __('user.choose'),
-                User::class
-            ),
-            'genres' => RelationMultipleFilter::make(
-                __('game_genre.genres'),
-                'genres',
-                'game_genres',
-                'id',
-                __('game_genre.choose'),
-                GameGenre::class
-            ),
-            'developers' => RelationMultipleFilter::make(
-                __('game_developer.developers'),
-                'developers',
-                'game_developers',
-                'id',
-                __('game_developer.choose'),
-                GameDeveloper::class
-            ),
-            'publishers' => RelationMultipleFilter::make(
-                __('game_publisher.publishers'),
-                'publishers',
-                'game_publishers',
-                'id',
-                __('game_publisher.choose'),
-                GamePublisher::class
-            ),
-            'platforms' => RelationMultipleFilter::make(
-                __('game_platform.platforms'),
-                'platforms',
-                'game_platforms',
-                'id',
-                 __('game_platform.choose'),
-                GamePlatform::class
-            ),
-        ];
+        return app(GameFilterRegistrar::class)->filtersList();
     }
 
     public function newEloquentBuilder($query): GameQueryBuilder

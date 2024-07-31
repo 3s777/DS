@@ -92,6 +92,7 @@ class GamePublisher extends Model implements HasMedia
                 'user',
                 'game_publishers',
                 'user_id',
+                __('user.choose'),
                 User::class
             ),
         ];

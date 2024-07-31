@@ -7,6 +7,7 @@ use App\Filters\RelationFilter;
 use App\Filters\SearchFilter;
 use Database\Factories\Game\GameDeveloperFactory;
 use Domain\Auth\Models\User;
+use Domain\Game\FilterRegistrars\GameDeveloperFilterRegistrar;
 use Domain\Game\QueryBuilders\GameDeveloperQueryBuilder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -81,30 +82,7 @@ class GameDeveloper extends Model implements HasMedia
 
     public function availableFilters(): array
     {
-        return [
-            'dates' => DatesFilter::make(
-                __('common.dates'),
-                'dates',
-                'game_developers',
-                placeholder: [
-                    'from' => __('filters.dates_from'),
-                    'to' => __('filters.dates_to'),
-                ],
-            ),
-            'search' => SearchFilter::make(
-                __('common.search'),
-                'search',
-                'game_developers',
-            ),
-            'user' => RelationFilter::make(
-                __('common.user'),
-                'user',
-                'game_developers',
-                'user_id',
-                __('users.choose'),
-                User::class
-            ),
-        ];
+        return app(GameDeveloperFilterRegistrar::class)->filtersList();
     }
 
 //    public function getRouteKeyName(): string
