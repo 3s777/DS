@@ -3,6 +3,7 @@
     'name',
     'placeholder' => '',
     'value' => '',
+    'error' => false
 ])
 
 <div class="datepicker">

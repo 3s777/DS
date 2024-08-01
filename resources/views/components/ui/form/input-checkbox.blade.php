@@ -6,6 +6,7 @@
     'size' => false,
     'checked' => false,
     'disabled' => false,
+    'error' => false
 ])
 
 <div class="input-checkbox">

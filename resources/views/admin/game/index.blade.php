@@ -102,65 +102,10 @@
         </x-ui.responsive-table>
 
         <x-slot:footer>
-            <x-common.action-table.selected-action>
-                <x-ui.form.option value="test1">Тестируем выбор</x-ui.form.option>
-                <x-slot:action>
-                    <template x-if="actionSelect.value === 'test1'">
-                        <div class="action-table__select-button" x-on:keydown.escape.window="$store.modalTest.hide = true">
-                            <x-ui.form.button
-                                tag="div"
-                            x-on:click.stop="$store.modalTest.hide = ! $store.modalTest.hide;"
-                            >Тестируем кнопку</x-ui.form.button>
-                        </div>
-                    </template>
-                </x-slot:action>
-            </x-common.action-table.selected-action>
+            <x-common.action-table.selected-action />
         </x-slot:footer>
     </x-common.action-table>
 
     {{ $games->links('pagination::default') }}
 
-    <x-ui.modal x-data tag="section" ::class="$store.modalTest.hide ? '' : 'modal_show'">
-        <x-ui.modal.content
-            x-on:click.outside="$store.modalTest.hide = true">
-            <x-ui.modal.close x-on:click="$store.modalTest.hide = true" />
-
-            <x-ui.modal.header>
-                <x-ui.title
-                    size="normal"
-                    indent="normal">
-                    Modal test
-                </x-ui.title>
-            </x-ui.modal.header>
-
-            <x-ui.modal.body>
-                Modal test content
-            </x-ui.modal.body>
-
-            <x-ui.modal.footer align-buttons="right">
-                <x-ui.form method="delete" x-bind:action=$store.modalTest.action>
-                    <x-ui.form.button
-                        x-on:click.prevent="$store.modalTest.hide = true"
-                        color="cancel"
-                        indent="left">
-                        {{ __('common.close') }}
-                    </x-ui.form.button>
-                </x-ui.form>
-            </x-ui.modal.footer>
-        </x-ui.modal.content>
-    </x-ui.modal>
-
-    @push('scripts')
-        <script>
-            document.addEventListener('alpine:init', () => {
-                Alpine.store('modalTest', {
-                    hide: true,
-                    test(actionSelect) {
-                        console.log(actionSelect);
-                    }
-                });
-            });
-        </script>
-    @endpush
 </x-layouts.admin>
-

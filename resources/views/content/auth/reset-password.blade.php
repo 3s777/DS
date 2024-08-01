@@ -16,7 +16,7 @@
 
                     <x-ui.form.group>
                         <x-ui.form.input-text
-                            :errors="$errors"
+
                             id="email"
                             name="email"
                             type="email"
@@ -30,7 +30,7 @@
 
                     <x-ui.form.group>
                         <x-ui.form.input-text
-                            :errors="$errors"
+
                             id="password"
                             name="password"
                             type="password"
@@ -44,7 +44,7 @@
 
                     <x-ui.form.group>
                         <x-ui.form.input-text
-                            :errors="$errors"
+
                             id="password-confirm"
                             name="password_confirmation"
                             type="password"

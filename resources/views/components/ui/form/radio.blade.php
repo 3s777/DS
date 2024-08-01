@@ -2,7 +2,7 @@
     'id',
     'name',
     'label' => '',
-    'errors' => false,
+    'error' => false,
     'value' => ''
 ])
 

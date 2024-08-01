@@ -11,7 +11,7 @@
                 <x-grid.col xl="4" ls="6" ml="12" lg="6" md="6" sm="12">
                     <x-ui.form.group>
                         <x-ui.form.input-text
-                            :errors="$errors"
+
                             placeholder="{{ __('common.name') }}"
                             id="name"
                             name="name"
@@ -26,7 +26,7 @@
                 <x-grid.col xl="4" ls="6" ml="12" lg="6" md="6" sm="12">
                     <x-ui.form.group>
                         <x-ui.form.input-text
-                            :errors="$errors"
+
                             placeholder="{{ __('common.slug') }}"
                             id="slug"
                             name="slug"

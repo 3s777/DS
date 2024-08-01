@@ -48,22 +48,12 @@
 
                 <x-grid.col xl="6" lg="12" md="12" sm="12">
                     <x-ui.form.group>
-                        <x-libraries.choices
-                            class="choices-genres"
-                            id="genres"
-                            name="genres[]"
-                            :error="$errors->has('genres')"
-                            label="{{ __('game_genre.choose') }}"
-                            multiple>
-                            <x-ui.form.option value="">{{ __('game_genre.genre') }}</x-ui.form.option>
-                            @foreach($genres as $genre)
-                                <x-ui.form.option
-                                    value="{{ $genre['id'] }}"
-                                    :selected="in_array($genre['id'], old('genres', []))">
-                                    {{ $genre['name'] }}
-                                </x-ui.form.option>
-                            @endforeach
-                        </x-libraries.choices>
+                        <x-ui.data-select-multiple
+                            name="genres"
+                            :options="$genres"
+                            placeholder="{{ __('game_genre.choose') }}"
+                            default-option="{{ __('game_genre.genres') }}"
+                        />
                     </x-ui.form.group>
                 </x-grid.col>
 
@@ -73,7 +63,7 @@
                             class="choices-platforms"
                             id="platforms"
                             name="platforms[]"
-                            :error="$errors->has('platforms')"
+                            error="platforms"
                             label="{{ __('game_platform.choose') }}"
                             multiple>
                             <x-ui.form.option value="">{{ __('game_platform.platform') }}</x-ui.form.option>
@@ -158,15 +148,6 @@
 
     @push('scripts')
         <script type="module">
-            const genres = document.querySelector('.choices-genres');
-            const choicesGenres = new Choices(genres, {
-                itemSelectText: '',
-                removeItems: true,
-                removeItemButton: true,
-                noResultsText: '{{ __('common.not_found') }}',
-                noChoicesText: '{{ __('common.nothing_else') }}',
-            });
-
             const platforms = document.querySelector('.choices-platforms');
             const choicesPlatforms= new Choices(platforms, {
                 itemSelectText: '',

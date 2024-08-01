@@ -1,5 +1,6 @@
 <x-layouts.main title="Game Carrier">
     <x-grid.container>
+
         <x-common.content class="carrier">
 
             @include('content.game-carrier.title')

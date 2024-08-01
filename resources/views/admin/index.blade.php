@@ -12,7 +12,7 @@
                                 <x-grid.col xl="4" lg="6" md="6" sm="12">
                                     <x-ui.form.group>
                                         <x-ui.form.input-text
-                                            :errors="$errors"
+
                                             placeholder="Название"
                                             id="name"
                                             name="name"
@@ -25,7 +25,7 @@
                                 <x-grid.col xl="4" lg="6" md="6" sm="12">
                                     <x-ui.form.group>
                                         <x-ui.form.input-text
-                                            :errors="$errors"
+
                                             placeholder="Код носителя"
                                             id="name"
                                             name="name"

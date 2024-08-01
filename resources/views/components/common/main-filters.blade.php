@@ -87,7 +87,6 @@
         <x-grid.col xl="3" lg="4"  md="6" sm="12">
             <x-ui.form.group>
                 <x-ui.form.input-text
-                    :errors="$errors"
                     placeholder="Год выхода"
                     id="text"
                     name="text"

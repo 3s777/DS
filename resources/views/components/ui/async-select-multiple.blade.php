@@ -15,14 +15,14 @@
     ]) }}
     id="{{ $name }}-select"
     :name="$arrayKey ? $arrayKey.'['.$name.'][]' : $name.'[]'"
-    :error="$error"
+    :error="$name"
     label="{{ $label }}"
     multiple>
 
     @if($defaultOption && !$selected)
         <x-ui.form.option value="">
             {{ $defaultOption }}
-        </x-ui.form.option>z
+        </x-ui.form.option>
     @endif
 
     @if($selected)

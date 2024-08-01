@@ -12,7 +12,7 @@
                 <x-grid.col xl="4" ls="6" ml="12" lg="6" md="6" sm="12">
                     <x-ui.form.group>
                         <x-ui.form.input-text
-                            :errors="$errors"
+
                             placeholder="{{ __('auth.username') }} *"
                             id="name"
                             name="name"
@@ -27,7 +27,7 @@
                 <x-grid.col xl="4" ls="6" ml="12" lg="6" md="6" sm="12">
                     <x-ui.form.group>
                         <x-ui.form.input-text
-                            :errors="$errors"
+
                             placeholder="{{ __('auth.first_name') }}"
                             id="first_name"
                             name="first_name"
@@ -40,7 +40,7 @@
                 <x-grid.col xl="4" ls="6" ml="12" lg="6" md="6" sm="12">
                     <x-ui.form.group>
                         <x-ui.form.input-text
-                            :errors="$errors"
+
                             placeholder="{{ __('common.slug') }}"
                             id="slug"
                             name="slug"
@@ -72,7 +72,7 @@
                 <x-grid.col xl="4" ls="6" ml="12" lg="6" md="6" sm="12">
                     <x-ui.form.group>
                         <x-ui.form.input-text
-                            :errors="$errors"
+
                             type="email"
                             placeholder="{{ __('common.email') }} *"
                             id="email"
@@ -87,7 +87,7 @@
                 <x-grid.col xl="4" ls="6" ml="12" lg="6" md="6" sm="12">
                     <x-ui.form.group>
                         <x-ui.form.input-text
-                            :errors="$errors"
+
                             placeholder="{{ __('auth.password') }} *"
                             id="password"
                             name="password"

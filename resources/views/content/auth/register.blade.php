@@ -14,7 +14,7 @@
                     @csrf
                     <x-ui.form.group type="flex">
                         <x-ui.form.input-text
-                            :errors="$errors"
+
                             id="name"
                             name="name"
                             type="text"
@@ -45,7 +45,7 @@
 
                     <x-ui.form.group>
                         <x-ui.form.input-text
-                            :errors="$errors"
+
                             id="email"
                             name="email"
                             type="email"
@@ -59,7 +59,7 @@
 
                     <x-ui.form.group>
                         <x-ui.form.input-text
-                            :errors="$errors"
+
                             id="password"
                             name="password"
                             type="password"
@@ -73,7 +73,7 @@
 
                     <x-ui.form.group>
                         <x-ui.form.input-text
-                            :errors="$errors"
+
                             id="password-confirm"
                             name="password_confirmation"
                             type="password"

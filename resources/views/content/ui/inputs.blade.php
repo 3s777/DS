@@ -7,7 +7,6 @@
                 <x-ui.title size="small" >{{ __('Text input') }}</x-ui.title>
                 <x-ui.form.group>
                     <x-ui.form.input-text
-                        :errors="$errors"
                         placeholder="Enter here text"
                         id="text"
                         name="text"
@@ -24,7 +23,6 @@
                 <x-ui.form.group>
                     <x-ui.form.input-text
                         class="input-text__field_error"
-                        :errors="$errors"
                         id="text"
                         name="text"
                         value="{{ old('text') }}"
@@ -40,7 +38,6 @@
 
                 <x-ui.form.group>
                     <x-ui.form.datepicker
-                        :errors="$errors"
                         id="date"
                         name="date"
                         value="{{ old('date') }}"
@@ -53,7 +50,6 @@
         <x-ui.title size="small" >{{ __('Textarea') }}</x-ui.title>
         <x-ui.form.group>
             <x-ui.form.textarea
-                :errors="$errors"
                 id="textarea"
                 name="textarea"
                 placeholder="{{ __('Textarea placeholder') }}">

@@ -22,7 +22,7 @@
 
                         <x-ui.form.group>
                             <x-ui.form.input-text
-                                :errors="$errors"
+
                                 id="email"
                                 name="email"
                                 type="email"

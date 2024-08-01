@@ -10,7 +10,7 @@
             <x-grid.col lg="6" xl="6" md="6" sm="12">
                 <x-ui.form.group>
                     <x-ui.form.input-text
-                        :errors="$errors"
+
                         placeholder="Цена"
                         id="text"
                         name="text"
@@ -43,7 +43,7 @@
             <x-grid.col lg="6" xl="6" md="6" sm="12">
                 <x-ui.form.group>
                     <x-ui.form.input-text
-                        :errors="$errors"
+
                         placeholder="Начальная ставка"
                         id="text"
                         name="text"
@@ -70,7 +70,7 @@
             <x-grid.col lg="6" xl="6" md="6" sm="12">
                 <x-ui.form.group>
                     <x-ui.form.input-text
-                        :errors="$errors"
+
                         placeholder="Шаг торгов"
                         id="text"
                         name="text"
@@ -82,9 +82,10 @@
                 </x-ui.form.group>
             </x-grid.col>
             <x-grid.col xl="6" lg="6" md="6" sm="12">
+
                 <x-ui.form.group>
                     <x-ui.form.datepicker
-                        :errors="$errors"
+
                         id="date"
                         name="date"
                         placeholder="Дата окончания"
@@ -108,7 +109,7 @@
         <x-grid.col lg="6" xl="6" md="6" sm="12">
             <x-ui.form.group>
                 <x-ui.form.input-text
-                    :errors="$errors"
+
                     placeholder="Название"
                     id="text"
                     name="text"
@@ -133,7 +134,7 @@
         <x-grid.col lg="6" xl="6" md="6" sm="12">
             <x-ui.form.group>
                 <x-ui.form.input-text
-                    :errors="$errors"
+
                     placeholder="Свой артикул"
                     id="text"
                     name="text"
@@ -230,7 +231,7 @@
         <x-grid.col lg="12" xl="12" md="12" sm="12">
             <x-ui.form.group>
                 <x-ui.form.textarea
-                    :errors="$errors"
+
                     id="textarea"
                     name="textarea"
                     placeholder="{{ __('Заметки и коментарии') }}">
@@ -252,7 +253,7 @@
                         <x-grid.col lg="6" xl="6" md="6" sm="12">
                             <x-ui.form.group>
                                 <x-ui.form.input-text
-                                    :errors="$errors"
+
                                     placeholder="Цена покупки"
                                     id="text"
                                     name="text"
@@ -267,7 +268,7 @@
                         <x-grid.col lg="6" xl="6" md="6" sm="12">
                             <x-ui.form.group>
                                 <x-ui.form.input-text
-                                    :errors="$errors"
+
                                     placeholder="Место покупки"
                                     id="text"
                                     name="text"
@@ -282,7 +283,6 @@
                         <x-grid.col xl="6" lg="6" md="6" sm="12">
                             <x-ui.form.group>
                                 <x-ui.form.datepicker
-                                    :errors="$errors"
                                     id="date"
                                     name="date"
                                     placeholder="Дата покупки"
@@ -312,7 +312,7 @@
                         <x-grid.col lg="6" xl="6" md="6" sm="12">
                             <x-ui.form.group>
                                 <x-ui.form.input-text
-                                    :errors="$errors"
+
                                     placeholder="Свое поле"
                                     id="text"
                                     name="text"
@@ -326,7 +326,7 @@
                         <x-grid.col lg="6" xl="6" md="6" sm="12">
                             <x-ui.form.group>
                                 <x-ui.form.input-text
-                                    :errors="$errors"
+
                                     placeholder="Свое поле"
                                     id="text"
                                     name="text"
