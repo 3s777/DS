@@ -59,22 +59,12 @@
 
                 <x-grid.col xl="6" lg="12" md="12" sm="12">
                     <x-ui.form.group>
-                        <x-libraries.choices
-                            class="choices-platforms"
-                            id="platforms"
-                            name="platforms[]"
-                            error="platforms"
-                            label="{{ __('game_platform.choose') }}"
-                            multiple>
-                            <x-ui.form.option value="">{{ __('game_platform.platform') }}</x-ui.form.option>
-                            @foreach($platforms as $platform)
-                                <x-ui.form.option
-                                    value="{{ $platform['id'] }}"
-                                    :selected="in_array($platform['id'], old('platforms', []))">
-                                    {{ $platform['name'] }}
-                                </x-ui.form.option>
-                            @endforeach
-                        </x-libraries.choices>
+                        <x-ui.data-select-multiple
+                            name="platforms"
+                            :options="$platforms"
+                            placeholder="{{ __('game_platform.choose') }}"
+                            default-option="{{ __('game_platform.platforms') }}"
+                        />
                     </x-ui.form.group>
                 </x-grid.col>
 
@@ -145,17 +135,4 @@
             </x-ui.form.button>
         </x-ui.form.group>
     </x-ui.form>
-
-    @push('scripts')
-        <script type="module">
-            const platforms = document.querySelector('.choices-platforms');
-            const choicesPlatforms= new Choices(platforms, {
-                itemSelectText: '',
-                removeItems: true,
-                removeItemButton: true,
-                noResultsText: '{{ __('common.not_found') }}',
-                noChoicesText: '{{ __('common.nothing_else') }}',
-            });
-        </script>
-    @endpush
 </x-layouts.admin>

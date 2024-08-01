@@ -10,10 +10,10 @@
 <x-libraries.choices
     class="choices-{{ $name }}"
     id="{{ $name }}"
-    :name="$arrayKey ? $arrayKey.'['.$name.'][]' : $name.'[]'"
+    :name="$arrayKey ? $arrayKey.'['.$name.']' : $name"
     :error="$name"
-    :label="$placeholder"
-    multiple>
+    :label="$placeholder">
+
     @if($defaultOption)
         <x-ui.form.option value="">
             {{ $defaultOption }}
@@ -34,7 +34,7 @@
                 <x-ui.form.option
                     value="{{ $option['id'] }}"
                     :selected="old()
-                        ? in_array($option['id'], old($name, []))
+                        ? $option['id'] == old($name)
                         : $data->contains('id', $option['id'])">
                     {{ $option['name'] }}
                 </x-ui.form.option>

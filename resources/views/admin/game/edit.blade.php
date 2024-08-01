@@ -13,7 +13,6 @@
                 <x-grid.col xl="4" ls="6" ml="12" lg="6" md="6" sm="12">
                     <x-ui.form.group>
                         <x-ui.form.input-text
-
                             placeholder="{{ __('common.name') }}"
                             id="name"
                             name="name"
@@ -28,7 +27,6 @@
                 <x-grid.col xl="4" ls="6" ml="12" lg="6" md="6" sm="12">
                     <x-ui.form.group>
                         <x-ui.form.input-text
-
                             placeholder="{{ __('common.slug') }}"
                             id="slug"
                             name="slug"
@@ -51,43 +49,21 @@
 
                 <x-grid.col xl="6" lg="12" md="12" sm="12">
                     <x-ui.form.group>
-                        <x-libraries.choices
-                            class="choices-genres"
-                            id="genres"
-                            name="genres[]"
-                            label="{{ __('game_genre.choose') }}"
-                            multiple>
-                            @foreach($genres as $genre)
-                                <x-ui.form.option
-                                    value="{{ $genre['id'] }}"
-                                    :selected="old()
-                                        ? in_array($genre['id'], old('genres', []))
-                                        : $game->genres->contains('id', $genre['id'])">
-                                    {{ $genre['name'] }}
-                                </x-ui.form.option>
-                            @endforeach
-                        </x-libraries.choices>
+                        <x-ui.data-select-multiple
+                            name="genres"
+                            :options="$genres"
+                            placeholder="{{ __('game_genre.choose') }}"
+                            :data="$game->genres" />
                     </x-ui.form.group>
                 </x-grid.col>
 
                 <x-grid.col xl="6" lg="12" md="12" sm="12">
                     <x-ui.form.group>
-                        <x-libraries.choices
-                            class="choices-platforms"
-                            id="platforms"
-                            name="platforms[]"
-                            label="{{ __('game_platform.choose') }}"
-                            multiple>
-                            @foreach($platforms as $platform)
-                                <x-ui.form.option
-                                    value="{{ $platform['id'] }}"
-                                    :selected="old()
-                                        ? in_array($platform['id'], old('platforms', []))
-                                        : $game->platforms->contains('id', $platform['id'])">
-                                    {{ $platform['name'] }}
-                                </x-ui.form.option>
-                            @endforeach
-                        </x-libraries.choices>
+                        <x-ui.data-select-multiple
+                            name="platforms"
+                            :options="$platforms"
+                            placeholder="{{ __('game_platform.choose') }}"
+                            :data="$game->platforms" />
                     </x-ui.form.group>
                 </x-grid.col>
 
@@ -171,26 +147,4 @@
             </x-ui.form.button>
         </x-ui.form.group>
     </x-ui.form>
-
-    @push('scripts')
-        <script type="module">
-            const genres = document.querySelector('.choices-genres');
-            const choicesGenres = new Choices(genres, {
-                itemSelectText: '',
-                removeItems: true,
-                removeItemButton: true,
-                noResultsText: '{{ __('common.not_found') }}',
-                noChoicesText: '{{ __('common.nothing_else') }}',
-            });
-
-            const platforms = document.querySelector('.choices-platforms');
-            const choicesPlatforms= new Choices(platforms, {
-                itemSelectText: '',
-                removeItems: true,
-                removeItemButton: true,
-                noResultsText: '{{ __('common.not_found') }}',
-                noChoicesText: '{{ __('common.nothing_else') }}',
-            });
-        </script>
-    @endpush
 </x-layouts.admin>
