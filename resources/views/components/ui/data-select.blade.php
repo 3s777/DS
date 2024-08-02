@@ -3,8 +3,8 @@
     'options',
     'placeholder' => false,
     'defaultOption' => false,
-    'arrayKey' => false,
-    'data' => false
+    'selected' => false,
+    'arrayKey' => false
 ])
 
 <x-libraries.choices
@@ -20,33 +20,23 @@
         </x-ui.form.option>
     @endif
 
-    @if($data)
+    @if($selected)
         @foreach($options as $option)
-            @if($arrayKey)
-                <x-ui.form.option
-                    value="{{ $option['id'] }}"
-                    :selected="old()
-                        ? in_array($option['id'], old($arrayKey.'.'.$name, []))
-                        : $data->contains('id', $option['id'])">
-                    {{ $option['name'] }}
-                </x-ui.form.option>
-            @else
-                <x-ui.form.option
-                    value="{{ $option['id'] }}"
-                    :selected="old()
-                        ? $option['id'] == old($name)
-                        : $data->contains('id', $option['id'])">
-                    {{ $option['name'] }}
-                </x-ui.form.option>
-            @endif
+            <x-ui.form.option
+                value="{{ $option['id'] }}"
+                :selected="old()
+                    ? $option['id'] == old($arrayKey.'.'.$name) || $option['id'] == old($name)
+                    : $option['id'] == $selected">
+                {{ $option['name'] }}
+            </x-ui.form.option>
         @endforeach
     @else
         @foreach($options as $option)
             <x-ui.form.option
                 value="{{ $option['id'] }}"
                 :selected="$arrayKey
-                    ? in_array($option['id'], old($arrayKey.'.'.$name, []))
-                    : in_array($option['id'], old($name, []))">
+                    ? $option['id'] == old($arrayKey.'.'.$name)
+                    : $option['id'] == old($name)">
                 {{ $option['name'] }}
             </x-ui.form.option>
         @endforeach

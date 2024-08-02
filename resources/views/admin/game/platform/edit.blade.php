@@ -13,7 +13,6 @@
                 <x-grid.col xl="4" ls="6" ml="12" lg="6" md="6" sm="12">
                     <x-ui.form.group>
                         <x-ui.form.input-text
-
                             placeholder="{{ __('common.name') }}"
                             id="name"
                             name="name"
@@ -28,7 +27,6 @@
                 <x-grid.col xl="4" ls="6" ml="12" lg="6" md="6" sm="12">
                     <x-ui.form.group>
                         <x-ui.form.input-text
-
                             placeholder="{{ __('common.slug') }}"
                             id="slug"
                             name="slug"
@@ -55,17 +53,28 @@
                     </x-ui.form.group>
                 </x-grid.col>
 
-                <x-grid.col xl="4" ls="6" ml="12" lg="6" md="6" sm="12">
+                <x-grid.col xl="4" ls="6" lg="12" md="12" sm="12">
                     <x-ui.form.group>
-                        <x-ui.async-select
-                            :selected="$gamePlatform->game_platform_manufacturer ?? false"
-                            name="game_platform_manufacturer"
-                            route="select-game-platform-manufacturers"
-                            label="{{ __('game_platform_manufacturer.manufacturer') }}"
-                            default-option="{{ __('game_platform_manufacturer.choose') }}">
-                        </x-ui.async-select>
+                        <x-ui.data-select
+                            name="game_platform_manufacturer_id"
+                            :options="$manufacturers"
+                            :selected="$gamePlatform->game_platform_manufacturer->id"
+                            default-option="{{__('game_platform_manufacturer.manufacturer')}}"
+                            placeholder="{{ __('game_platform_manufacturer.choose') }}" />
                     </x-ui.form.group>
                 </x-grid.col>
+
+{{--                <x-grid.col xl="4" ls="6" ml="12" lg="6" md="6" sm="12">--}}
+{{--                    <x-ui.form.group>--}}
+{{--                        <x-ui.async-select--}}
+{{--                            :selected="$gamePlatform->game_platform_manufacturer ?? false"--}}
+{{--                            name="game_platform_manufacturer"--}}
+{{--                            route="select-game-platform-manufacturers"--}}
+{{--                            label="{{ __('game_platform_manufacturer.manufacturer') }}"--}}
+{{--                            default-option="{{ __('game_platform_manufacturer.choose') }}">--}}
+{{--                        </x-ui.async-select>--}}
+{{--                    </x-ui.form.group>--}}
+{{--                </x-grid.col>--}}
 
                 <x-grid.col xl="4" ls="6" ml="12" lg="6" md="6" sm="12">
                     <x-ui.form.group>

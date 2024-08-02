@@ -53,7 +53,7 @@
                             name="genres"
                             :options="$genres"
                             placeholder="{{ __('game_genre.choose') }}"
-                            :data="$game->genres" />
+                            :selected="$game->genres" />
                     </x-ui.form.group>
                 </x-grid.col>
 
@@ -63,7 +63,7 @@
                             name="platforms"
                             :options="$platforms"
                             placeholder="{{ __('game_platform.choose') }}"
-                            :data="$game->platforms" />
+                            :selected="$game->platforms" />
                     </x-ui.form.group>
                 </x-grid.col>
 
