@@ -4,6 +4,9 @@ namespace Tests\RequestFactories\Game;
 
 use App\Enums\GamePlatformTypeEnum;
 use Domain\Game\Models\GameDeveloper;
+use Domain\Game\Models\GameGenre;
+use Domain\Game\Models\GamePlatform;
+use Domain\Game\Models\GamePublisher;
 use Illuminate\Support\Arr;
 use Worksome\RequestFactories\RequestFactory;
 
@@ -14,8 +17,11 @@ class CreateGameRequestFactory extends RequestFactory
         return [
             'name' => fake()->name(),
             'description' => fake()->text(),
-            'type' => Arr::random(GamePlatformTypeEnum::cases())->value,
-            'developers' => GameDeveloper::factory(),
+            'released_at' => fake()->date(),
+            'developers' => [GameDeveloper::factory(), GameDeveloper::factory()],
+            'publishers' => [GamePublisher::factory()],
+            'genres' => [GameGenre::factory(), GameGenre::factory()],
+            'platforms' => [GamePlatform::factory()],
         ];
     }
 }

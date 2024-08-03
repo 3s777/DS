@@ -2,11 +2,6 @@
 
 namespace Domain\Game\Models;
 
-use App\Filters\DatesFilter;
-use App\Filters\RelationFilter;
-use App\Filters\RelationMultipleFilter;
-use App\Filters\SearchFilter;
-use App\Routing\FilepondRegistrar;
 use Database\Factories\Game\GameFactory;
 use Domain\Auth\Models\User;
 use Domain\Game\FilterRegistrars\GameFilterRegistrar;

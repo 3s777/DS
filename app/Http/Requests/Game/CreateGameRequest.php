@@ -41,7 +41,7 @@ class CreateGameRequest extends FormRequest
                 'max:10024'
             ],
             'genres' => [
-                'required',
+                'nullable',
                 'array',
                 'exists:Domain\Game\Models\GameGenre,id'
             ],
@@ -51,7 +51,7 @@ class CreateGameRequest extends FormRequest
                 'exists:Domain\Game\Models\GamePlatform,id'
             ],
             'developers' => [
-                'required',
+                'nullable',
                 'array',
                 'exists:Domain\Game\Models\GameDeveloper,id'
             ],
@@ -61,7 +61,7 @@ class CreateGameRequest extends FormRequest
                 'exists:Domain\Game\Models\GamePublisher,id'
             ],
             'user_id' => [
-                'required',
+                'nullable',
                 'integer',
                 'exists:Domain\Auth\Models\User,id'
             ]

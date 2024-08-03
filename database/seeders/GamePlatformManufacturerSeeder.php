@@ -15,8 +15,8 @@ class GamePlatformManufacturerSeeder extends Seeder
     public function run(GamesDbApiContract $gamesApi): void
     {
         GamePlatformManufacturer::factory(10)
-            ->for(User::factory()->create())
             ->create();
+
 //        $manufacturers = $gamesApi->getPlatforms();
 //
 //        foreach ($manufacturers as $manufacturer) {

@@ -12,7 +12,7 @@ class GamePlatformSeeder extends Seeder
     public function run(GamesDbApiContract $gamesApi): void
     {
         GamePlatform::factory(10)
-            ->for(User::factory()->create())
+            ->recycle(User::factory()->create())
             ->create();
 
 //        $platforms = $gamesApi->getPlatforms();

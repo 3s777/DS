@@ -14,7 +14,8 @@ class GameGenreSeeder extends Seeder
      */
     public function run(GamesDbApiContract $gamesApi): void
     {
-        GameGenre::factory(10)->for(User::factory()->create())->create();
+        GameGenre::factory(10)
+            ->create();
 //        $genres = $gamesApi->getGenres();
 //
 //        foreach ($genres as $genre) {

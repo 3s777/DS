@@ -3,6 +3,8 @@
 namespace Database\Factories\Game;
 
 use Domain\Auth\Models\User;
+use Domain\Game\Models\Game;
+use Domain\Game\Models\GameDeveloper;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -10,6 +12,8 @@ use Illuminate\Database\Eloquent\Factories\Factory;
  */
 class GameFactory extends Factory
 {
+    protected $model = Game::class;
+
     /**
      * Define the model's default state.
      *
