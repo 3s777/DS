@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use Domain\Auth\Models\User;
 use Domain\Game\Models\Game;
 use Domain\Game\Models\GameDeveloper;
 use Domain\Game\Models\GameGenre;
@@ -22,6 +23,7 @@ class GameSeeder extends Seeder
             ->has(GamePublisher::factory(2), 'publishers')
             ->has(GameGenre::factory(3), 'genres')
             ->has(GamePlatform::factory(2), 'platforms')
+            ->recycle(User::factory(5)->create())
             ->create();
     }
 }

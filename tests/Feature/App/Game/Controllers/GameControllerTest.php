@@ -188,7 +188,6 @@ class GameControllerTest extends TestCase
     {
         $this->request['name'] = 'newName';
 
-        //TODO: check updating user_id
         $this->actingAs($this->user)
             ->put(
                 action(

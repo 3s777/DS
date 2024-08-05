@@ -13,11 +13,5 @@ trait HasUser
                 $item->user_id = auth()->id();
             }
         });
-
-        static::updating(function (Model $item) {
-            if(empty($item->user_id)) {
-                $item->user_id = auth()->id();
-            }
-        });
     }
 }

@@ -58,7 +58,7 @@ class GameService
                     'name' => $data->name,
                     'slug' => $data->slug,
                     'released_at' => $data->released_at,
-                    'user_id' => $data->user_id,
+                    'user_id' => $data->user_id ?? $game->user_id,
                     'description' => $data->description,
                 ]
             )->save();
