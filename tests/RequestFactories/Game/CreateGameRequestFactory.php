@@ -7,6 +7,7 @@ use Domain\Game\Models\GameDeveloper;
 use Domain\Game\Models\GameGenre;
 use Domain\Game\Models\GamePlatform;
 use Domain\Game\Models\GamePublisher;
+use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Arr;
 use Worksome\RequestFactories\RequestFactory;
 
