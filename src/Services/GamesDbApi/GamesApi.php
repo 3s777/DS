@@ -17,39 +17,43 @@ class GamesApi implements GamesDbApiContract
         $this->key = env('GAME_API_KEY');
     }
 
-    public function getGenres(): array
+    public function getGenres($page): array
     {
         $response = Http::get($this->host."/genres?key=".$this->key);
 
         return $response->json('results');
     }
 
-    public function getPlatforms(): array
+    public function getPlatforms($page): array
     {
         $response = Http::get($this->host."/platforms/lists/parents?key=".$this->key);
 
         return $response->json('results');
     }
 
-    public function getGames(): array
+    public function getGames(int $page): array
     {
-        $response = Http::get($this->host."/games?key=$this->key&platforms=16");
-
         $games = [];
+        for ($i = 1; $i <= $page; $i++) {
 
-        foreach ($response->json('results') as $game) {
-            $currentGame = $this->getGame($game['id']);
+            $response = Http::get($this->host."/games?key=$this->key&page=$i");
 
-            $games[] = ApiGamesDTO::make(
-                $currentGame['name'],
-                $currentGame['alternative_names'],
-                $currentGame['released'],
-                $currentGame['description'],
-                $currentGame['publishers'],
-                $currentGame['developers'],
-                $currentGame['genres'],
-                $currentGame['platforms'],
-            );
+            foreach ($response->json('results') as $game) {
+                $currentGame = $this->getGame($game['id']);
+
+                $games[] = ApiGamesDTO::make(
+                    $currentGame['name'],
+                    $currentGame['alternative_names'],
+                    $currentGame['released'],
+                    $currentGame['description'],
+                    $currentGame['publishers'],
+                    $currentGame['developers'],
+                    $currentGame['genres'],
+                    $currentGame['platforms'],
+                );
+            }
+
+
         }
 
         return $games;
@@ -60,5 +64,33 @@ class GamesApi implements GamesDbApiContract
         $response = Http::get($this->host."/games/$name?key=$this->key");
 
         return $response->json();
+    }
+
+    public function getGamesByPlatform(int $platform, int $page): array
+    {
+        $games = [];
+
+
+            $response = Http::get($this->host."/games?key=$this->key&platforms=$platform&page=$page");
+
+            foreach ($response->json('results') as $game) {
+                $currentGame = $this->getGame($game['id']);
+
+                $games[] = ApiGamesDTO::make(
+                    $currentGame['name'],
+                    $currentGame['alternative_names'],
+                    $currentGame['released'],
+                    $currentGame['description'],
+                    $currentGame['publishers'],
+                    $currentGame['developers'],
+                    $currentGame['genres'],
+                    $currentGame['platforms'],
+                );
+            }
+
+
+
+
+        return $games;
     }
 }

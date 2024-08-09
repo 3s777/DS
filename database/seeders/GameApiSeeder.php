@@ -17,50 +17,55 @@ class GameApiSeeder extends Seeder
      */
     public function run(GamesDbApiContract $gamesApi): void
     {
-        $games = $gamesApi->getGames();
+        for($i = 1; $i <= 10; $i++) {
+            $games = $gamesApi->getGamesByPlatform(16, $i);
 
-        foreach ($games as $game) {
+            foreach ($games as $game) {
 
-            $currentGame = Game::createOrFirst([
-                'name' => $game->name,
-                'released_at' => $game->released,
-                'description' => $game->description
-            ]);
-
-            if(empty($currentGame->alternative_names)) {
-                $currentGame->alternative_names = $game->alternative_names;
-                $currentGame->save();
-            }
-
-            foreach ($game->publishers as $publisher) {
-                $currentPublisher = GamePublisher::firstOrCreate([
-                    'name' => $publisher['name'],
-                    'user_id' => '11'
+                $currentGame = Game::createOrFirst([
+                    'name' => $game->name,
+                    'released_at' => $game->released,
+                    'description' => ['en' => $game->description],
+                    'user_id' => 11,
                 ]);
-                $currentGame->publishers()->attach($currentPublisher->id);
-            }
 
-            foreach ($game->developers as $developer) {
-                $currentDeveloper = GameDeveloper::firstOrCreate([
-                    'name' => $developer['name'],
-                    'slug' => $developer['name'],
-                    'user_id' => '11'
-                ]);
-                $currentGame->developers()->attach($currentDeveloper->id);
-            }
+                if(empty($currentGame->alternative_names)) {
+                    $currentGame->alternative_names = $game->alternative_names;
+                    $currentGame->save();
+                }
 
-            foreach ($game->genres as $genre) {
-                $currentGenre = GameGenre::firstOrCreate([
-                    'name' => $genre['name'],
-                ]);
-                $currentGame->genres()->attach($currentGenre->id);
-            }
+                foreach ($game->publishers as $publisher) {
+                    $currentPublisher = GamePublisher::firstOrCreate([
+                        'name' => $publisher['name'],
+                        'user_id' => '11'
+                    ]);
+                    $currentGame->publishers()->attach($currentPublisher->id);
+                }
 
-            foreach ($game->platforms as $platform) {
-                $currentPlatform = GamePlatform::firstOrCreate([
-                    'name' => $platform['platform']['name'],
-                ]);
-                $currentGame->platforms()->attach($currentPlatform->id);
+                foreach ($game->developers as $developer) {
+                    $currentDeveloper = GameDeveloper::firstOrCreate([
+                        'name' => $developer['name'],
+                        'slug' => $developer['name'],
+                        'user_id' => '11'
+                    ]);
+                    $currentGame->developers()->attach($currentDeveloper->id);
+                }
+
+                foreach ($game->genres as $genre) {
+                    $currentGenre = GameGenre::firstOrCreate([
+                        'name' => $genre['name'],
+                        'user_id' => '11'
+                    ]);
+                    $currentGame->genres()->attach($currentGenre->id);
+                }
+
+                foreach ($game->platforms as $platform) {
+                    $currentPlatform = GamePlatform::firstOrCreate([
+                        'name' => $platform['platform']['name'],
+                        'user_id' => '11'
+                    ]);
+                    $currentGame->platforms()->attach($currentPlatform->id);
+                }
             }
         }
     }

@@ -13,15 +13,19 @@ class DatabaseSeeder extends Seeder
     public function run(): void
     {
         $this->call([
-            LanguageSeeder::class,
-            UserSeeder::class,
+//            LanguageSeeder::class,
+//            UserSeeder::class,
+//            RolesAndPermissionsSeeder::class,
+//            GameSeeder::class,
+
+
+            GameApiSeeder::class,
+
 //            GameDeveloperSeeder::class,
 //            GamePublisherSeeder::class,
 //            GameGenreSeeder::class,
 //            GamePlatformManufacturerSeeder::class,
 //            GamePlatformSeeder::class,
-            GameSeeder::class,
-            RolesAndPermissionsSeeder::class,
 //            GameGenreSeeder::class,
 //            ConditionSeeder::class,
 ////            GamePlatformSeeder::class,
