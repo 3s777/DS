@@ -4,16 +4,15 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-return new class () extends Migration {
+return new class extends Migration
+{
     /**
      * Run the migrations.
      */
     public function up(): void
     {
-        Schema::create('collectable_items', function (Blueprint $table) {
+        Schema::create('game_media', function (Blueprint $table) {
             $table->id();
-            $table->string('name')->unique();
-            $table->jsonb('properties');
             $table->timestamps();
         });
     }
@@ -23,8 +22,8 @@ return new class () extends Migration {
      */
     public function down(): void
     {
-        if (! app()->isProduction()) {
-            Schema::dropIfExists('collectable_items');
+        if(!app()->isProduction()) {
+                Schema::dropIfExists('game_media');
         }
     }
 };
