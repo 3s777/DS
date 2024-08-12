@@ -9,6 +9,7 @@ use Domain\Auth\Models\Role;
 use Domain\Auth\Models\User;
 use Domain\Game\Models\GameDeveloper;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\Relation;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\ServiceProvider;
 use Spatie\Translatable\Facades\Translatable;
@@ -44,6 +45,19 @@ class AppServiceProvider extends ServiceProvider
         Gate::policy(Role::class, RolePolicy::class);
 
         Model::shouldBeStrict(!app()->isProduction());
+
+        Relation::enforceMorphMap([
+            'game' => 'Domain\Game\Models\Game',
+            'game_media' => 'Domain\Game\Models\GameMedia',
+            'game_developer' => 'Domain\Game\Models\GameDeveloper',
+            'game_publisher' => 'Domain\Game\Models\GamePublisher',
+            'game_platform' => 'Domain\Game\Models\GamePlatform',
+            'game_platform_manufacturer' => 'Domain\Game\Models\GamePlatformManufacturer',
+            'user' => 'Domain\Auth\Models\User',
+            'permission' => 'Domain\Auth\Models\Permission',
+            'role' => 'Domain\Auth\Models\Role',
+        ]);
+
 //        Translatable::fallback(
 //            fallbackLocale: 'ru',
 //        );

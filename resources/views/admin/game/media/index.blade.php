@@ -3,13 +3,13 @@
         @if(request('filters.search'))
             {{ __('filters.result') }} "{{ request('filters.search') }}"
         @else
-            {{ __('game.list') }}
+            {{ __('game_media.list') }}
         @endif
     </x-ui.title>
 
-    @include('admin.game.partials.filters')
+    @include('admin.game.media.partials.filters')
 
-    <x-common.action-table model-name="games">
+    <x-common.action-table model-name="game-medias">
         <x-common.selectable-order
             class="action-table__selectable-order"
             :sorters="[
@@ -19,10 +19,10 @@
                 'created_at' => __('common.created_date'),
             ]" />
 
-        <x-ui.responsive-table :empty="$games->isEmpty()">
+        <x-ui.responsive-table :empty="$gameMedias->isEmpty()">
             <x-ui.responsive-table.header>
                 <x-ui.responsive-table.column type="select" name="check">
-                    <x-common.action-table.select-all :models="$games" />
+                    <x-common.action-table.select-all :models="$gameMedias" />
                 </x-ui.responsive-table.column>
                 <x-ui.responsive-table.column type="id" sortable="true" name="id">
                     {{ __('common.id') }}
@@ -53,7 +53,7 @@
                 </x-ui.responsive-table.column>
             </x-ui.responsive-table.header>
 
-            @foreach($games as $game)
+            @foreach($gameMedias as $game)
                 <x-ui.responsive-table.row >
                     <x-ui.responsive-table.column type="select">
                         <x-common.action-table.row-checkbox :model="$game" />
@@ -95,7 +95,7 @@
                         <span class="responsive-table__label">{{ __('common.created_date') }}: </span> {{ $game->created_at }}
                     </x-ui.responsive-table.column>
                     <x-ui.responsive-table.column type="action">
-                        <x-common.action-table.buttons :item="$game" model="games" />
+                        <x-common.action-table.buttons :item="$game" model="game-medias" />
                     </x-ui.responsive-table.column>
                 </x-ui.responsive-table.row>
             @endforeach
@@ -106,6 +106,6 @@
         </x-slot:footer>
     </x-common.action-table>
 
-    {{ $games->links('pagination::default') }}
+    {{ $gameMedias->links('pagination::default') }}
 
 </x-layouts.admin>

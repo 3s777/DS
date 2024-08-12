@@ -6,7 +6,7 @@ use Domain\Auth\Models\User;
 use Domain\Game\Models\GameDeveloper;
 use Spatie\ViewModels\ViewModel;
 
-class GameDeveloperCrudViewModel extends ViewModel
+class GameDeveloperUpdateViewModel extends ViewModel
 {
     public ?GameDeveloper $gameDeveloper;
 

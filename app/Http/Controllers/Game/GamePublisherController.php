@@ -11,7 +11,7 @@ use App\Http\Requests\MassDeletingRequest;
 use Domain\Game\Models\GameDeveloper;
 use Domain\Game\Models\GamePublisher;
 use Domain\Game\ViewModels\GameDeveloperListSelectViewModel;
-use Domain\Game\ViewModels\GamePublisherCrudViewModel;
+use Domain\Game\ViewModels\GamePublisherUpdateViewModel;
 use Domain\Game\ViewModels\GamePublisherIndexViewModel;
 use Domain\Game\ViewModels\GamePublisherListSelectViewModel;
 use Illuminate\Contracts\View\Factory;
@@ -38,7 +38,7 @@ class GamePublisherController extends Controller
 
     public function create(): View|Application|Factory|\Illuminate\Contracts\Foundation\Application
     {
-        return view('admin.game.publisher.create', new GamePublisherCrudViewModel());
+        return view('admin.game.publisher.create', new GamePublisherUpdateViewModel());
     }
 
     public function store(CreateGamePublisherRequest $request): Application|Redirector|RedirectResponse|\Illuminate\Contracts\Foundation\Application
@@ -63,7 +63,7 @@ class GamePublisherController extends Controller
 
     public function edit(GamePublisher $gamePublisher): View|Application|Factory|\Illuminate\Contracts\Foundation\Application
     {
-        return view('admin.game.publisher.edit', new GamePublisherCrudViewModel($gamePublisher));
+        return view('admin.game.publisher.edit', new GamePublisherUpdateViewModel($gamePublisher));
     }
 
     public function update(UpdateGamePublisherRequest $request, GamePublisher $gamePublisher): RedirectResponse

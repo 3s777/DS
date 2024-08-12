@@ -9,7 +9,7 @@ use Domain\Game\Models\GamePlatformManufacturer;
 use Domain\Game\Models\GamePublisher;
 use Spatie\ViewModels\ViewModel;
 
-class GamePlatformCrudViewModel extends ViewModel
+class GamePlatformUpdateViewModel extends ViewModel
 {
     public ?GamePlatform $gamePlatform;
 

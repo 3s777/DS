@@ -9,7 +9,7 @@ use App\Http\Requests\Game\UpdateGameGenreRequest;
 use App\Http\Requests\MassDeletingRequest;
 use Domain\Game\Models\GameGenre;
 use Domain\Game\ViewModels\GameGenreIndexViewModel;
-use Domain\Game\ViewModels\GameGenreCrudViewModel;
+use Domain\Game\ViewModels\GameGenreUpdateViewModel;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
 use Illuminate\Foundation\Application;
@@ -32,7 +32,7 @@ class GameGenreController extends Controller
 
     public function create(): View|Application|Factory|\Illuminate\Contracts\Foundation\Application
     {
-        return view('admin.game.genre.create', new GameGenreCrudViewModel());
+        return view('admin.game.genre.create', new GameGenreUpdateViewModel());
     }
 
     public function store(CreateGameGenreRequest $request): Application|Redirector|RedirectResponse|\Illuminate\Contracts\Foundation\Application
@@ -51,7 +51,7 @@ class GameGenreController extends Controller
 
     public function edit(GameGenre $gameGenre): View|Application|Factory|\Illuminate\Contracts\Foundation\Application
     {
-        return view('admin.game.genre.edit', new GameGenreCrudViewModel($gameGenre));
+        return view('admin.game.genre.edit', new GameGenreUpdateViewModel($gameGenre));
     }
 
     public function update(UpdateGameGenreRequest $request, GameGenre $gameGenre): RedirectResponse

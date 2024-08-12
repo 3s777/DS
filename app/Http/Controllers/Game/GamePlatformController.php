@@ -8,7 +8,7 @@ use App\Http\Requests\Game\CreateGamePlatformRequest;
 use App\Http\Requests\Game\UpdateGamePlatformRequest;
 use App\Http\Requests\MassDeletingRequest;
 use Domain\Game\Models\GamePlatform;
-use Domain\Game\ViewModels\GamePlatformCrudViewModel;
+use Domain\Game\ViewModels\GamePlatformUpdateViewModel;
 use Domain\Game\ViewModels\GamePlatformIndexViewModel;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
@@ -32,7 +32,7 @@ class GamePlatformController extends Controller
 
     public function create(): View|Application|Factory|\Illuminate\Contracts\Foundation\Application
     {
-        return view('admin.game.platform.create', new GamePlatformCrudViewModel());
+        return view('admin.game.platform.create', new GamePlatformUpdateViewModel());
     }
 
     public function store(CreateGamePlatformRequest $request): Application|Redirector|RedirectResponse|\Illuminate\Contracts\Foundation\Application
@@ -57,7 +57,7 @@ class GamePlatformController extends Controller
 
     public function edit(GamePlatform $gamePlatform): View|Application|Factory|\Illuminate\Contracts\Foundation\Application
     {
-        return view('admin.game.platform.edit', new GamePlatformCrudViewModel($gamePlatform));
+        return view('admin.game.platform.edit', new GamePlatformUpdateViewModel($gamePlatform));
     }
 
     public function update(UpdateGamePlatformRequest $request, GamePlatform $gamePlatform): RedirectResponse

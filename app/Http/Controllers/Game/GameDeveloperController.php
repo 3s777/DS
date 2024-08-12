@@ -9,7 +9,7 @@ use App\Http\Requests\Game\FilterGameDeveloperRequest;
 use App\Http\Requests\Game\UpdateGameDeveloperRequest;
 use App\Http\Requests\MassDeletingRequest;
 use Domain\Game\Models\GameDeveloper;
-use Domain\Game\ViewModels\GameDeveloperCrudViewModel;
+use Domain\Game\ViewModels\GameDeveloperUpdateViewModel;
 use Domain\Game\ViewModels\GameDeveloperIndexViewModel;
 use Domain\Game\ViewModels\GameDeveloperListSelectViewModel;
 use Illuminate\Contracts\View\Factory;
@@ -45,7 +45,7 @@ class GameDeveloperController extends Controller
 //            abort(403);
 //        }
 
-        return view('admin.game.developer.create', new GameDeveloperCrudViewModel());
+        return view('admin.game.developer.create', new GameDeveloperUpdateViewModel());
     }
 
     public function store(CreateGameDeveloperRequest $request): Application|Redirector|RedirectResponse|\Illuminate\Contracts\Foundation\Application
@@ -70,7 +70,7 @@ class GameDeveloperController extends Controller
 
     public function edit(GameDeveloper $gameDeveloper): View|Application|Factory|\Illuminate\Contracts\Foundation\Application
     {
-        return view('admin.game.developer.edit', new GameDeveloperCrudViewModel($gameDeveloper));
+        return view('admin.game.developer.edit', new GameDeveloperUpdateViewModel($gameDeveloper));
     }
 
     public function update(UpdateGameDeveloperRequest $request, GameDeveloper $gameDeveloper): RedirectResponse

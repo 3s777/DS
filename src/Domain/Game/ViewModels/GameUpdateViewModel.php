@@ -11,7 +11,7 @@ use Domain\Game\Models\GamePublisher;
 use Illuminate\Database\Eloquent\Collection;
 use Spatie\ViewModels\ViewModel;
 
-class GameCrudViewModel extends ViewModel
+class GameUpdateViewModel extends ViewModel
 {
     public ?Game $game;
 

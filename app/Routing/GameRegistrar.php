@@ -6,6 +6,7 @@ use App\Contracts\RouteRegistrar;
 use App\Http\Controllers\Game\GameController;
 use App\Http\Controllers\Game\GameDeveloperController;
 use App\Http\Controllers\Game\GameGenreController;
+use App\Http\Controllers\Game\GameMediaController;
 use App\Http\Controllers\Game\GamePlatformController;
 use App\Http\Controllers\Game\GamePlatformManufacturerController;
 use App\Http\Controllers\Game\GamePublisherController;
@@ -20,6 +21,11 @@ class GameRegistrar extends BaseRouteRegistrar implements RouteRegistrar
             ->group(function () {
                 Route::prefix('{locale}')->whereIn('locale', config('app.available_locales'))->group(function () {
                     Route::prefix('admin')->middleware(['auth', 'verified'])->group(function () {
+                        $this->massDelete('game-medias', GameMediaController::class);
+                        Route::resource('game-medias', GameMediaController::class)
+                            ->middleware(['remove.locale']);
+
+
                         $this->massDelete('games', GameController::class);
                         Route::resource('games', GameController::class)
                             ->middleware(['remove.locale']);

@@ -2,10 +2,10 @@
 
 namespace Domain\Game\Models;
 
-use Database\Factories\Game\GameFactory;
+use Database\Factories\Game\GameMediaFactory;
 use Domain\Auth\Models\User;
-use Domain\Game\FilterRegistrars\GameFilterRegistrar;
-use Domain\Game\QueryBuilders\GameQueryBuilder;
+use Domain\Game\FilterRegistrars\GameMediaFilterRegistrar;
+use Domain\Game\QueryBuilders\GameMediaQueryBuilder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -20,7 +20,7 @@ use Support\Traits\Models\HasSlug;
 use Support\Traits\Models\HasThumbnail;
 use Support\Traits\Models\HasUser;
 
-class Game extends Model implements HasMedia
+class GameMedia extends Model implements HasMedia
 {
     use HasFactory;
     use HasSlug;
@@ -30,9 +30,13 @@ class Game extends Model implements HasMedia
     use HasUser;
     use HasTranslations;
 
+    protected $table = 'game_medias';
+
     protected $fillable = [
         'name',
         'slug',
+        'article_number',
+        'barcodes',
         'alternative_names',
         'description',
         'user_id',
@@ -41,9 +45,9 @@ class Game extends Model implements HasMedia
 
     protected $casts = [
         'description' => CleanHtml::class.':custom',
-        'alternative_names' => 'array'
+        'alternative_names' => 'array',
+        'barcodes' => 'array'
     ];
-
 
     public $translatable = ['description'];
 
@@ -54,14 +58,14 @@ class Game extends Model implements HasMedia
         'users.email'
     ];
 
-    protected static function newFactory(): GameFactory
+    protected static function newFactory(): GameMediaFactory
     {
-        return GameFactory::new();
+        return GameMediaFactory::new();
     }
 
     public function thumbnailDir(): string
     {
-        return 'game';
+        return 'game_media';
     }
 
     public function thumbnailSizes(): array
@@ -80,12 +84,12 @@ class Game extends Model implements HasMedia
 
     public function availableFilters(): array
     {
-        return app(GameFilterRegistrar::class)->filtersList();
+        return app(GameMediaFilterRegistrar::class)->filtersList();
     }
 
-    public function newEloquentBuilder($query): GameQueryBuilder
+    public function newEloquentBuilder($query): GameMediaQueryBuilder
     {
-        return new GameQueryBuilder($query);
+        return new GameMediaQueryBuilder($query);
     }
 
     public function user(): BelongsTo
@@ -113,4 +117,8 @@ class Game extends Model implements HasMedia
         return $this->morphToMany(GamePlatform::class, 'game_platformable');
     }
 
+    public function games(): BelongsToMany
+    {
+        return $this->belongsToMany(Game::class);
+    }
 }

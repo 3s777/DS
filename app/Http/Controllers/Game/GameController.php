@@ -11,7 +11,7 @@ use Domain\Game\DTOs\CreateGameDTO;
 use Domain\Game\DTOs\UpdateGameDTO;
 use Domain\Game\Models\Game;
 use Domain\Game\Services\GameService;
-use Domain\Game\ViewModels\GameCrudViewModel;
+use Domain\Game\ViewModels\GameUpdateViewModel;
 use Domain\Game\ViewModels\GameIndexViewModel;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
@@ -30,12 +30,12 @@ class GameController extends Controller
 
     public function index(): View|Application|Factory|\Illuminate\Contracts\Foundation\Application
     {
-        return view('admin.game.index', new GameIndexViewModel());
+        return view('admin.game.game.index', new GameIndexViewModel());
     }
 
     public function create(): View|Application|Factory|\Illuminate\Contracts\Foundation\Application
     {
-        return view('admin.game.create', new GameCrudViewModel());
+        return view('admin.game.game.create', new GameUpdateViewModel());
     }
 
     public function store(CreateGameRequest $request, GameService $gameService): Application|Redirector|RedirectResponse|\Illuminate\Contracts\Foundation\Application
@@ -54,7 +54,7 @@ class GameController extends Controller
 
     public function edit(Game $game): View|Application|Factory|\Illuminate\Contracts\Foundation\Application
     {
-        return view('admin.game.edit', new GameCrudViewModel($game));
+        return view('admin.game.game.edit', new GameUpdateViewModel($game));
     }
 
     public function update(UpdateGameRequest $request, Game $game, GameService $gameService): RedirectResponse

@@ -74,7 +74,7 @@ class GameControllerTest extends TestCase
             ->get(action([GameController::class, 'index']))
             ->assertOk()
             ->assertSee(__('game.list'))
-            ->assertViewIs('admin.game.index');
+            ->assertViewIs('admin.game.game.index');
     }
 
     /**
@@ -87,7 +87,7 @@ class GameControllerTest extends TestCase
             ->get(action([GameController::class, 'create']))
             ->assertOk()
             ->assertSee(__('game.add'))
-            ->assertViewIs('admin.game.create');
+            ->assertViewIs('admin.game.game.create');
     }
 
     /**
@@ -100,7 +100,7 @@ class GameControllerTest extends TestCase
             ->get(action([GameController::class, 'edit'], [$this->game->slug]))
             ->assertOk()
             ->assertSee($this->game->name)
-            ->assertViewIs('admin.game.edit');
+            ->assertViewIs('admin.game.game.edit');
     }
 
     /**

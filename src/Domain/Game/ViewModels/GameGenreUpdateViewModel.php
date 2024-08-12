@@ -7,7 +7,7 @@ use Domain\Game\Models\GameGenre;
 use Domain\Game\Models\GamePublisher;
 use Spatie\ViewModels\ViewModel;
 
-class GameGenreCrudViewModel extends ViewModel
+class GameGenreUpdateViewModel extends ViewModel
 {
     public ?GameGenre $gameGenre;
 
