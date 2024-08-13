@@ -16,11 +16,9 @@ class DatabaseSeeder extends Seeder
             LanguageSeeder::class,
             UserSeeder::class,
             RolesAndPermissionsSeeder::class,
-            GameSeeder::class,
-
-
+//            GameSeeder::class,
+            GameMediaSeeder::class,
 //            GameApiSeeder::class,
-
 //            GameDeveloperSeeder::class,
 //            GamePublisherSeeder::class,
 //            GameGenreSeeder::class,
@@ -28,9 +26,9 @@ class DatabaseSeeder extends Seeder
 //            GamePlatformSeeder::class,
 //            GameGenreSeeder::class,
 //            ConditionSeeder::class,
-////            GamePlatformSeeder::class,
-////            GamePlatformTypeSeeder::class,
-////            GameSeeder::class,
+//            GamePlatformSeeder::class,
+//            GamePlatformTypeSeeder::class,
+//            GameSeeder::class,
 //            ImageSeeder::class,
 //            MediaSeeder::class
         ]);

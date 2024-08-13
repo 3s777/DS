@@ -117,8 +117,8 @@ class GameMedia extends Model implements HasMedia
         return $this->morphToMany(GamePlatform::class, 'game_platformable');
     }
 
-    public function games(): BelongsToMany
+    public function games(): MorphToMany
     {
-        return $this->belongsToMany(Game::class);
+        return $this->morphToMany(Game::class, 'gameable');
     }
 }
