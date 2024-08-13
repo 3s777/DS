@@ -29,6 +29,9 @@ class CreateGameMediaRequest extends FormRequest
                 'nullable',
                 'string', Rule::unique(GameMedia::class)
             ],
+            'article_number' => ['nullable','string'],
+            'alternative_names' => ['nullable','string'],
+            'barcodes' => ['nullable','string'],
             'description' => ['nullable','string'],
             'released_at' => [
                 'nullable',

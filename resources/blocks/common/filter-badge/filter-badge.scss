@@ -3,6 +3,7 @@
     align-items: center;
     flex-wrap: wrap;
     gap: 5px;
+    padding-right: 4px;
 
     &__delete {
         margin-left: 4px;
@@ -25,6 +26,6 @@
         align-items: center;
         padding: 2px 4px 2px 8px;
         background-color: $additional-main;
-        border-radius: $small-border-radius;
+        border-radius: $extra-small-border-radius;
     }
 }

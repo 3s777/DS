@@ -46,6 +46,28 @@
                     </x-ui.form.group>
                 </x-grid.col>
 
+                <x-grid.col xl="4" ls="6" ml="12" lg="6" md="6" sm="12">
+                    <x-ui.form.group>
+                        <x-ui.form.input-text
+                            placeholder="{{ __('common.article_number') }}"
+                            id="article_number"
+                            name="article_number"
+                            value="{{ old('article_number') }}"
+                            autocomplete="on">
+                        </x-ui.form.input-text>
+                    </x-ui.form.group>
+                </x-grid.col>
+
+                <x-grid.col xl="4" ls="6" ml="12" lg="6" md="6" sm="12">
+                    <x-ui.form.group>
+                        <x-ui.input-select
+                            name="alternative_names"
+                            placeholder="{{ __('common.alternative_names') }}"
+                            default-option="{{ __('common.name') }}"
+                        />
+                    </x-ui.form.group>
+                </x-grid.col>
+
                 <x-grid.col xl="6" lg="12" md="12" sm="12">
                     <x-ui.form.group>
                         <x-ui.data-select-multiple
@@ -135,4 +157,21 @@
             </x-ui.form.button>
         </x-ui.form.group>
     </x-ui.form>
+
+    @push('scripts')
+        <script type="module">
+            const element4 = document.querySelector('.choices-select-4');
+            const choices4 = new Choices(element4, {
+                itemSelectText: '',
+                placeholder: true,
+                removeItems: true,
+                removeItemButton: true,
+                placeholderValue: '{{ __('common.name') }}',
+                noResultsText: '{{ __('Не найдено') }}',
+                noChoicesText: '{{ __('Больше ничего нет') }}',
+            });
+        </script>
+    @endpush
 </x-layouts.admin>
+
+

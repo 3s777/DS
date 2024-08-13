@@ -20,38 +20,30 @@ class GameRegistrar extends BaseRouteRegistrar implements RouteRegistrar
         Route::middleware('web')
             ->group(function () {
                 Route::prefix('{locale}')->whereIn('locale', config('app.available_locales'))->group(function () {
-                    Route::prefix('admin')->middleware(['auth', 'verified'])->group(function () {
+                    Route::prefix('admin')->middleware(['auth', 'verified', 'remove.locale'])->group(function () {
                         $this->massDelete('game-medias', GameMediaController::class);
-                        Route::resource('game-medias', GameMediaController::class)
-                            ->middleware(['remove.locale']);
-
+                        Route::resource('game-medias', GameMediaController::class);
 
                         $this->massDelete('games', GameController::class);
-                        Route::resource('games', GameController::class)
-                            ->middleware(['remove.locale']);
+                        Route::resource('games', GameController::class);
 
                         $this->massDelete('game-developers', GameDeveloperController::class);
                         Route::get('/select-game-developers', [GameDeveloperController::class, 'getForSelect'])->name('select-game-developers');
-                        Route::resource('game-developers', GameDeveloperController::class)
-                            ->middleware(['remove.locale']);
+                        Route::resource('game-developers', GameDeveloperController::class);
 
                         $this->massDelete('game-publishers', GamePublisherController::class);
                         Route::get('/select-game-publishers', [GamePublisherController::class, 'getForSelect'])->name('select-game-publishers');
-                        Route::resource('game-publishers', GamePublisherController::class)
-                            ->middleware(['remove.locale']);
+                        Route::resource('game-publishers', GamePublisherController::class);
 
                         $this->massDelete('game-genres', GameGenreController::class);
-                        Route::resource('game-genres', GameGenreController::class)
-                            ->middleware(['remove.locale']);
+                        Route::resource('game-genres', GameGenreController::class);
 
                         $this->massDelete('game-platform-manufacturers', GamePlatformManufacturerController::class);
                         Route::get('/select-game-platform-manufacturers', [GamePlatformManufacturerController::class, 'getForSelect'])->name('select-game-platform-manufacturers');
-                        Route::resource('game-platform-manufacturers', GamePlatformManufacturerController::class)
-                            ->middleware(['remove.locale']);
+                        Route::resource('game-platform-manufacturers', GamePlatformManufacturerController::class);
 
                         $this->massDelete('game-platforms', GamePlatformController::class);
-                        Route::resource('game-platforms', GamePlatformController::class)
-                            ->middleware(['remove.locale']);
+                        Route::resource('game-platforms', GamePlatformController::class);
                     });
                 });
             });

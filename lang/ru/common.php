@@ -52,5 +52,10 @@ return [
     'expand_menu' => 'Развернуть меню',
     'collapse_menu' => 'Свернуть меню',
     'statistic' => 'Статистика',
-    'list' => 'Список'
+    'list' => 'Список',
+    'article_number' => 'Артикул',
+    'barcodes' => 'Штрихкоды',
+    'barcode' => 'Штрихкод',
+    'alternative_names' => 'Альтернативные названия',
+    'press_enter' => 'Нажмите Enter чтобы добавить'
 ];

@@ -12,9 +12,9 @@ class CreateGameMediaDTO
 
     public function __construct(
         public readonly string $name,
-        public readonly ?string $articleNumber = null,
-        public readonly ?array $barcodes = null,
-        public readonly ?array $alternativeNames = null,
+        public readonly ?string $article_number = null,
+        public readonly ?string $barcodes = null,
+        public readonly ?string $alternative_names = null,
         public readonly ?int $user_id = null,
         public readonly ?string $slug = null,
         public readonly ?string $released_at = null,
@@ -31,9 +31,9 @@ class CreateGameMediaDTO
     {
         return static::make(...$request->only([
             'name',
-            'articleNumber',
+            'article_number',
             'barcodes',
-            'alternativeNames',
+            'alternative_names',
             'user_id',
             'slug',
             'released_at',
