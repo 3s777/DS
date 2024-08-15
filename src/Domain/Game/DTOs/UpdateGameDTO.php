@@ -22,6 +22,7 @@ class UpdateGameDTO
         public readonly ?UploadedFile $thumbnail = null,
         public readonly ?string $thumbnail_uploaded = null,
         public readonly ?string $description = null,
+        public readonly ?string $alternative_names = null
     ) {
     }
 
@@ -39,6 +40,7 @@ class UpdateGameDTO
             'thumbnail',
             'thumbnail_uploaded',
             'description',
+            'alternative_names'
         ]));
     }
 }

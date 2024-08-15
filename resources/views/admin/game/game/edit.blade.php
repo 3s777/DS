@@ -47,6 +47,17 @@
                     </x-ui.form.group>
                 </x-grid.col>
 
+                <x-grid.col xl="12" ls="12" ml="12" lg="6" md="6" sm="12">
+                    <x-ui.form.group>
+                        <x-ui.input-select
+                            name="alternative_names"
+                            placeholder="{{ __('common.alternative_names') }}"
+                            default-option="{{ __('common.name') }}"
+                            value="{{ implode('||', $game->alternative_names) }}"
+                        />
+                    </x-ui.form.group>
+                </x-grid.col>
+
                 <x-grid.col xl="6" lg="12" md="12" sm="12">
                     <x-ui.form.group>
                         <x-ui.data-select-multiple

@@ -21,6 +21,7 @@ class CreateGameDTO
         public readonly ?array $publishers = null,
         public readonly ?UploadedFile $thumbnail = null,
         public readonly ?string $description = null,
+        public readonly ?string $alternative_names = null
     ) {
     }
 
@@ -37,6 +38,7 @@ class CreateGameDTO
             'publishers',
             'thumbnail',
             'description',
+            'alternative_names'
         ]));
     }
 }

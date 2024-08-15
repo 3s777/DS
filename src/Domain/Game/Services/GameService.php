@@ -20,6 +20,7 @@ class GameService
                 'released_at' => $data->released_at,
                 'user_id' => $data->user_id,
                 'description' => $data->description,
+                'alternative_names' => explode('||', $data->alternative_names)
             ]);
 
             $game->addImageWithThumbnail(
@@ -60,8 +61,11 @@ class GameService
                     'released_at' => $data->released_at,
                     'user_id' => $data->user_id ?? $game->user_id,
                     'description' => $data->description,
+                    'alternative_names' => explode('||', $data->alternative_names)
                 ]
             )->save();
+
+
 
             $game->genres()->sync($data->genres);
             $game->platforms()->sync($data->platforms);

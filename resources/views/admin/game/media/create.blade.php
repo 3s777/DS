@@ -63,7 +63,7 @@
                         <x-ui.input-select
                             name="alternative_names"
                             placeholder="{{ __('common.alternative_names') }}"
-                            default-option="{{ __('common.name') }}"
+                            default-option="{{ __('common.names') }}"
                         />
                     </x-ui.form.group>
                 </x-grid.col>

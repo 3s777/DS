@@ -23,6 +23,7 @@ class CreateGameRequestFactory extends RequestFactory
             'publishers' => [GamePublisher::factory()],
             'genres' => [GameGenre::factory(), GameGenre::factory()],
             'platforms' => [GamePlatform::factory()],
+            'alternative_names' => fake()->name().'||'.fake()->name(),
         ];
     }
 }

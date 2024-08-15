@@ -6,6 +6,7 @@ use Database\Factories\Game\GameFactory;
 use Domain\Auth\Models\User;
 use Domain\Game\FilterRegistrars\GameFilterRegistrar;
 use Domain\Game\QueryBuilders\GameQueryBuilder;
+use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -44,8 +45,14 @@ class Game extends Model implements HasMedia
         'alternative_names' => 'array'
     ];
 
-
     public $translatable = ['description'];
+
+//    protected function alternativeNames(): Attribute
+//    {
+//        return Attribute::make(
+//            set: fn (?string $value) => json_encode(explode('||', $value)),
+//        );
+//    }
 
     public array $sortedFields = [
         'id',
@@ -53,6 +60,8 @@ class Game extends Model implements HasMedia
         'created_at',
         'users.email'
     ];
+
+
 
     protected static function newFactory(): GameFactory
     {

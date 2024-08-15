@@ -26,6 +26,7 @@ class GameFactory extends Factory
             'description' => $this->translations(['en', 'ru'], [fake()->text(), fake()->text()]),
             'released_at' => fake()->date(),
             'user_id' => User::factory(),
+            'alternative_names' => [fake()->name(), fake()->name()],
         ];
     }
 }
