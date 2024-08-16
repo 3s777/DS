@@ -25,12 +25,13 @@ class GameFilterRegistrar implements FilterRegistrar
                 placeholder: [
                     'from' => __('filters.dates_from'),
                     'to' => __('filters.dates_to'),
-                ],
+                ]
             ),
             'search' => SearchFilter::make(
                 __('common.search'),
                 'search',
-                'games'
+                'games',
+                alternativeFields: ['alternative_names']
             ),
             'user' => RelationFilter::make(
                 __('user.user'),

@@ -15,7 +15,7 @@ return new class () extends Migration {
             $table->id();
             $table->string('name')->unique();
             $table->string('slug')->unique();
-            $table->json('alternative_names')->nullable();
+            $table->text('alternative_names')->nullable();
             $table->date('released_at')->nullable();
             $table->jsonb('description')->nullable();
             $table->string('thumbnail')->nullable();

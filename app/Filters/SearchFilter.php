@@ -10,6 +10,20 @@ class SearchFilter extends AbstractFilter
 {
     use Makeable;
 
+    public function __construct(
+        string $title,
+        string $key,
+        string $table,
+        ?string $field = null,
+        ?string $placeholder = null,
+        ?array $alternativeFields = null
+    )
+    {
+        parent::__construct($title, $key, $table, $field, $placeholder);
+
+        $this->setAlternativeFields($alternativeFields);
+    }
+
     public function setField(string|null $field): static
     {
         $this->field = 'name';
@@ -21,10 +35,21 @@ class SearchFilter extends AbstractFilter
         return $this;
     }
 
+    public function setAlternativeFields(?array $alternativeFields): static
+    {
+        $this->alternativeFields = $alternativeFields;
+        return $this;
+    }
+
     public function apply(Builder $query): Builder
     {
         return $query->when($this->requestValue(), function (Builder $query) {
             $query->where($this->table.'.'.$this->field, 'ILIKE', '%'.$this->requestValue().'%');
+            if($this->alternativeFields) {
+                foreach($this->alternativeFields as $field) {
+                    $query->orWhere($this->table.'.'.$field, 'ILIKE', '%'.$this->requestValue().'%');
+                }
+            }
         });
     }
 

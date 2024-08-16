@@ -18,7 +18,7 @@ return new class extends Migration
             $table->string('slug')->unique();
             $table->string('article_number')->nullable();
             $table->string('barcodes')->nullable();
-            $table->string('alternative_names')->nullable();
+            $table->text('alternative_names')->nullable();
             $table->date('released_at')->nullable();
             $table->jsonb('description')->nullable();
             $table->string('thumbnail')->nullable();

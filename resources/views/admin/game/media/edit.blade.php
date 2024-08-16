@@ -60,13 +60,13 @@
                     </x-ui.form.group>
                 </x-grid.col>
 
-                <x-grid.col xl="4" ls="6" ml="12" lg="6" md="6" sm="12">
+                <x-grid.col xl="8" ls="6" ml="12" lg="6" md="6" sm="12">
                     <x-ui.form.group>
                         <x-ui.input-select
                             name="alternative_names"
                             placeholder="{{ __('common.alternative_names') }}"
                             default-option="{{ __('common.name') }}"
-                            value="{{ $gameMedia->alternative_names }}"
+                            value="{{ implode('||', $gameMedia->alternative_names) }}"
                         />
                     </x-ui.form.group>
                 </x-grid.col>

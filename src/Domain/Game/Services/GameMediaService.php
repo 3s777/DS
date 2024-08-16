@@ -23,7 +23,7 @@ class GameMediaService
                 'released_at' => $data->released_at,
                 'user_id' => $data->user_id,
                 'description' => $data->description,
-                'alternative_names' => $data->alternative_names,
+                'alternative_names'  => explode('||', $data->alternative_names),
                 'article_number' => $data->article_number,
                 'barcodes' => $data->barcodes
             ]);
@@ -66,6 +66,7 @@ class GameMediaService
                     'released_at' => $data->released_at,
                     'user_id' => $data->user_id ?? $gameMedia->user_id,
                     'description' => $data->description,
+                    'alternative_names'  => explode('||', $data->alternative_names)
                 ]
             )->save();
 

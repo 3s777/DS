@@ -30,7 +30,8 @@ class GameMediaFilterRegistrar implements FilterRegistrar
             'search' => SearchFilter::make(
                 __('common.search'),
                 'search',
-                'game_medias'
+                'game_medias',
+                alternativeFields: ['alternative_names']
             ),
             'user' => RelationFilter::make(
                 __('user.user'),
