@@ -32,12 +32,29 @@ class UpdateGamePlatformManufacturerRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name' => ['required', Rule::unique(GamePlatformManufacturer::class)->ignore($this->game_platform_manufacturer)],
-            'slug' => ['nullable','string', Rule::unique(GamePlatformManufacturer::class)->ignore($this->game_platform_manufacturer)],
+            'name' => [
+                'required',
+                'max:250',
+                Rule::unique(GamePlatformManufacturer::class)->ignore($this->game_platform_manufacturer)
+            ],
+            'slug' => [
+                'nullable',
+                'string',
+                'max:250',
+                Rule::unique(GamePlatformManufacturer::class)->ignore($this->game_platform_manufacturer)
+            ],
             'description' => ['nullable','string'],
-            'thumbnail' => ['nullable', 'mimes:jpg,png', 'max:10024'],
+            'thumbnail' => [
+                'nullable',
+                'mimes:jpg,png',
+                'max:10024'
+            ],
             'thumbnail_selected' => ['nullable', 'string'],
-            'user_id' => ['nullable', 'integer', 'exists:Domain\Auth\Models\User,id']
+            'user_id' => [
+                'nullable',
+                'integer',
+                'exists:Domain\Auth\Models\User,id'
+            ]
         ];
     }
 

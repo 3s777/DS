@@ -24,9 +24,14 @@ class CreateGameRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name' => ['required', Rule::unique(Game::class)],
+            'name' => [
+                'required',
+                'max:250',
+                Rule::unique(Game::class)
+            ],
             'slug' => [
                 'nullable',
+                'max:250',
                 'string', Rule::unique(Game::class)
             ],
             'description' => ['nullable','string'],

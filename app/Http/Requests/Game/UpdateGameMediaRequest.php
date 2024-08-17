@@ -26,11 +26,13 @@ class UpdateGameMediaRequest extends FormRequest
         return [
             'name' => [
                 'required',
+                'max:250',
                 Rule::unique(GameMedia::class)->ignore($this->game_media)
             ],
             'slug' => [
                 'nullable',
                 'string',
+                'max:250',
                 Rule::unique(GameMedia::class)->ignore($this->game_media)
             ],
             'description' => ['nullable','string'],

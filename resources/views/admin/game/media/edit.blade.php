@@ -13,7 +13,7 @@
                 <x-grid.col xl="4" ls="6" ml="12" lg="6" md="6" sm="12">
                     <x-ui.form.group>
                         <x-ui.form.input-text
-                            placeholder="{{ __('common.name') }}"
+                            placeholder="{{ trans_choice('common.name', 1) }}"
                             id="name"
                             name="name"
                             value="{{ $gameMedia->name }}"
@@ -60,13 +60,22 @@
                     </x-ui.form.group>
                 </x-grid.col>
 
-                <x-grid.col xl="8" ls="6" ml="12" lg="6" md="6" sm="12">
+                <x-grid.col xl="12" ls="12" ml="12" lg="6" md="6" sm="12">
                     <x-ui.form.group>
                         <x-ui.input-select
                             name="alternative_names"
                             placeholder="{{ __('common.alternative_names') }}"
-                            default-option="{{ __('common.name') }}"
                             value="{{ implode('||', $gameMedia->alternative_names) }}"
+                        />
+                    </x-ui.form.group>
+                </x-grid.col>
+
+                <x-grid.col xl="12" ls="12" ml="12" lg="6" md="6" sm="12">
+                    <x-ui.form.group>
+                        <x-ui.input-select
+                            name="barcodes"
+                            placeholder="{{ __('common.enter_barcodes') }}"
+                            value="{{ implode('||', $gameMedia->barcodes) }}"
                         />
                     </x-ui.form.group>
                 </x-grid.col>

@@ -13,7 +13,7 @@
                     <x-ui.form.group>
                         <x-ui.form.input-text
 
-                            placeholder="{{ __('common.name') }} *"
+                            placeholder="{{ trans_choice('common.name', 1) }} *"
                             id="name"
                             name="name"
                             value="{{ old('name') }}"

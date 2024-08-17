@@ -24,10 +24,16 @@ class CreateGameMediaRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name' => ['required', Rule::unique(GameMedia::class)],
+            'name' => [
+                'required',
+                'max:250',
+                Rule::unique(GameMedia::class)
+            ],
             'slug' => [
                 'nullable',
-                'string', Rule::unique(GameMedia::class)
+                'string',
+                'max:250',
+                Rule::unique(GameMedia::class)
             ],
             'article_number' => ['nullable','string'],
             'alternative_names' => ['nullable','string'],

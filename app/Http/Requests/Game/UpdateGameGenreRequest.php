@@ -25,10 +25,23 @@ class UpdateGameGenreRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name' => ['required', Rule::unique(GameGenre::class)->ignore($this->game_genre)],
-            'slug' => ['nullable','string', Rule::unique(GameGenre::class)->ignore($this->game_genre)],
+            'name' => [
+                'required',
+                'max:250',
+                Rule::unique(GameGenre::class)->ignore($this->game_genre)
+            ],
+            'slug' => [
+                'nullable',
+                'string',
+                'max:250',
+                Rule::unique(GameGenre::class)->ignore($this->game_genre)
+            ],
             'description' => ['nullable','string'],
-            'user_id' => ['nullable', 'integer', 'exists:Domain\Auth\Models\User,id']
+            'user_id' => [
+                'nullable',
+                'integer',
+                'exists:Domain\Auth\Models\User,id'
+            ]
         ];
     }
 

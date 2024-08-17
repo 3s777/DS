@@ -28,11 +28,13 @@ class UpdateGameRequest extends FormRequest
         return [
             'name' => [
                 'required',
+                'max:250',
                 Rule::unique(Game::class)->ignore($this->game)
             ],
             'slug' => [
                 'nullable',
                 'string',
+                'max:250',
                 Rule::unique(Game::class)->ignore($this->game)
             ],
             'description' => ['nullable','string'],

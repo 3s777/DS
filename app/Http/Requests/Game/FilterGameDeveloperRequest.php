@@ -25,9 +25,21 @@ class FilterGameDeveloperRequest extends FormRequest
     {
         return [
             'filters.search' => ['nullable', 'string'],
-            'filters.dates.from' => ['nullable', 'date', 'date_format:Y-m-d'],
-            'filters.dates.to' => ['nullable', 'date', 'date_format:Y-m-d'],
-            'filters.user' => ['nullable', 'integer', 'exists:Domain\Auth\Models\User,id'],
+            'filters.dates.from' => [
+                'nullable',
+                'date',
+                'date_format:Y-m-d'
+            ],
+            'filters.dates.to' => [
+                'nullable',
+                'date',
+                'date_format:Y-m-d'
+            ],
+            'filters.user' => [
+                'nullable',
+                'integer',
+                'exists:Domain\Auth\Models\User,id'
+            ],
         ];
     }
 

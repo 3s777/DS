@@ -10,7 +10,7 @@
                     {{ __('common.id') }}
                 </x-ui.responsive-table.column>
                 <x-ui.responsive-table.column name="name">
-                    {{ __('common.name') }}
+                    {{ trans_choice('common.name', 1) }}
                 </x-ui.responsive-table.column>
                 <x-ui.responsive-table.column name="first_name">
                     {{ __('common.display_name') }}
@@ -29,7 +29,7 @@
                         {{ $role->id }}
                     </x-ui.responsive-table.column>
                     <x-ui.responsive-table.column>
-                        <span class="responsive-table__label">{{ __('common.name') }}: </span> {{ $role->name }}
+                        <span class="responsive-table__label">{{ trans_choice('common.name', 1) }}: </span> {{ $role->name }}
                     </x-ui.responsive-table.column>
                     <x-ui.responsive-table.column>
                         <span class="responsive-table__label">{{ __('common.display_name') }}: </span> {{ $role->display_name }}

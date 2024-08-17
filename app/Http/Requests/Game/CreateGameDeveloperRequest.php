@@ -24,11 +24,28 @@ class CreateGameDeveloperRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name' => ['required', Rule::unique(GameDeveloper::class)],
-            'slug' => ['nullable','string', Rule::unique(GameDeveloper::class)],
+            'name' => [
+                'required',
+                'max:250',
+                Rule::unique(GameDeveloper::class)
+            ],
+            'slug' => [
+                'nullable',
+                'string',
+                'max:250',
+                Rule::unique(GameDeveloper::class)
+            ],
             'description' => ['nullable','string'],
-            'thumbnail' => ['nullable', 'mimes:jpg,png', 'max:10024'],
-            'user_id' => ['nullable', 'integer', 'exists:Domain\Auth\Models\User,id']
+            'thumbnail' => [
+                'nullable',
+                'mimes:jpg,png',
+                'max:10024'
+            ],
+            'user_id' => [
+                'nullable',
+                'integer',
+                'exists:Domain\Auth\Models\User,id'
+            ]
         ];
     }
 

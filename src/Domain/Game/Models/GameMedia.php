@@ -2,6 +2,7 @@
 
 namespace Domain\Game\Models;
 
+use App\Casts\ArrayWithoutUnicode;
 use Database\Factories\Game\GameMediaFactory;
 use Domain\Auth\Models\User;
 use Domain\Game\FilterRegistrars\GameMediaFilterRegistrar;
@@ -45,8 +46,8 @@ class GameMedia extends Model implements HasMedia
 
     protected $casts = [
         'description' => CleanHtml::class.':custom',
-        'alternative_names' => 'array',
-        'barcodes' => 'array'
+        'alternative_names' => ArrayWithoutUnicode::class,
+        'barcodes' => ArrayWithoutUnicode::class,
     ];
 
     public $translatable = ['description'];

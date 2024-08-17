@@ -14,7 +14,7 @@
             class="action-table__selectable-order"
             :sorters="[
                 'id' => __('common.id'),
-                'name' => __('common.name'),
+                'name' => trans_choice('common.name', 1),
                 'users.name' => __('user.user'),
                 'created_at' => __('common.created_date'),
             ]" />
@@ -28,7 +28,7 @@
                     {{ __('common.id') }}
                 </x-ui.responsive-table.column>
                 <x-ui.responsive-table.column sortable="true" name="name">
-                    {{ __('common.name') }}
+                    {{ trans_choice('common.name', 1) }}
                 </x-ui.responsive-table.column>
                 <x-ui.responsive-table.column name="genres">
                     {{ __('game_genre.genres') }}
@@ -62,7 +62,7 @@
                         {{ $game->id }}
                     </x-ui.responsive-table.column>
                     <x-ui.responsive-table.column>
-                        <span class="responsive-table__label">{{ __('common.name') }}: </span> {{ $game->name }}
+                        <span class="responsive-table__label">{{ trans_choice('common.name', 1) }}: </span> {{ $game->name }}
                     </x-ui.responsive-table.column>
                     <x-ui.responsive-table.column>
                         <span class="responsive-table__label">{{ __('game_genre.genres') }}: </span>

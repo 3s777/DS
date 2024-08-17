@@ -24,8 +24,8 @@ class GameMediaService
                 'user_id' => $data->user_id,
                 'description' => $data->description,
                 'alternative_names'  => explode('||', $data->alternative_names),
+                'barcodes'  => explode('||', $data->barcodes),
                 'article_number' => $data->article_number,
-                'barcodes' => $data->barcodes
             ]);
 
             $game->addImageWithThumbnail(
@@ -66,7 +66,8 @@ class GameMediaService
                     'released_at' => $data->released_at,
                     'user_id' => $data->user_id ?? $gameMedia->user_id,
                     'description' => $data->description,
-                    'alternative_names'  => explode('||', $data->alternative_names)
+                    'alternative_names'  => explode('||', $data->alternative_names),
+                    'barcodes'  => explode('||', $data->barcodes),
                 ]
             )->save();
 

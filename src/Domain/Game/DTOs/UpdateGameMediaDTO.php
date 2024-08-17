@@ -13,7 +13,7 @@ class UpdateGameMediaDTO
     public function __construct(
         public readonly string $name,
         public readonly ?string $articleNumber = null,
-        public readonly ?array $barcodes = null,
+        public readonly ?string $barcodes = null,
         public readonly ?string $alternative_names = null,
         public readonly ?int $user_id = null,
         public readonly ?string $slug = null,

@@ -2,8 +2,7 @@
 
 return [
     'id' => 'id',
-    'name' => 'Название',
-    'names' => 'Названия',
+    'name' => 'Название|Названия',
     'display_name' => 'Отображаемое название',
     'slug' => 'Префикс',
     'description' => 'Описание',
@@ -55,8 +54,8 @@ return [
     'statistic' => 'Статистика',
     'list' => 'Список',
     'article_number' => 'Артикул',
-    'barcodes' => 'Штрихкоды',
-    'barcode' => 'Штрихкод',
+    'barcodes' => 'Штрихкод|Штрихкоды',
     'alternative_names' => 'Альтернативные названия',
-    'press_enter' => 'Нажмите Enter чтобы добавить'
+    'press_enter' => 'Нажмите Enter чтобы добавить',
+    'enter_barcodes' => 'Введите штрихкоды'
 ];

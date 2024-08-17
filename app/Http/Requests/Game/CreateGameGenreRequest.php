@@ -24,10 +24,23 @@ class CreateGameGenreRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name' => ['required', Rule::unique(GameGenre::class)],
-            'slug' => ['nullable','string', Rule::unique(GameGenre::class)],
+            'name' => [
+                'required',
+                'max:250',
+                Rule::unique(GameGenre::class)
+            ],
+            'slug' => [
+                'nullable',
+                'string',
+                'max:250',
+                Rule::unique(GameGenre::class)
+            ],
             'description' => ['nullable','string'],
-            'user_id' => ['nullable', 'integer', 'exists:Domain\Auth\Models\User,id']
+            'user_id' => [
+                'nullable',
+                'integer',
+                'exists:Domain\Auth\Models\User,id'
+            ]
         ];
     }
 
