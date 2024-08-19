@@ -49,6 +49,11 @@ class CreateGameMediaRequest extends FormRequest
                 'mimes:jpg,png',
                 'max:10024'
             ],
+            'games' => [
+                'nullable',
+                'array',
+                'exists:Domain\Game\Models\Game,id'
+            ],
             'genres' => [
                 'nullable',
                 'array',
@@ -84,6 +89,7 @@ class CreateGameMediaRequest extends FormRequest
             'slug' => __('common.slug'),
             'description' => __('common.description'),
             'released_at' => __('game.released_at'),
+            'games' => __('game.games'),
             'genres' => __('game_genre.genres'),
             'platforms' => __('game_platform.platforms'),
             'developers' => __('game_developer.developers'),

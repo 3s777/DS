@@ -17,7 +17,7 @@ class GameMediaService
         try {
             DB::beginTransaction();
 
-            $game = GameMedia::create([
+            $gameMedia = GameMedia::create([
                 'name' => $data->name,
                 'slug' => $data->slug,
                 'released_at' => $data->released_at,
@@ -28,20 +28,21 @@ class GameMediaService
                 'article_number' => $data->article_number,
             ]);
 
-            $game->addImageWithThumbnail(
+            $gameMedia->addImageWithThumbnail(
                 $data->thumbnail,
                 'thumbnail',
                 ['small', 'medium']
             );
 
-            $game->genres()->sync($data->genres);
-            $game->platforms()->sync($data->platforms);
-            $game->developers()->sync($data->developers);
-            $game->publishers()->sync($data->publishers);
+            $gameMedia->games()->sync($data->games);
+            $gameMedia->genres()->sync($data->genres);
+            $gameMedia->platforms()->sync($data->platforms);
+            $gameMedia->developers()->sync($data->developers);
+            $gameMedia->publishers()->sync($data->publishers);
 
             DB::commit();
 
-            return $game;
+            return $gameMedia;
 
         } catch (Throwable $e) {
             throw new CrudException($e->getMessage());
@@ -68,9 +69,11 @@ class GameMediaService
                     'description' => $data->description,
                     'alternative_names'  => explode('||', $data->alternative_names),
                     'barcodes'  => explode('||', $data->barcodes),
+                    'article_number' => $data->article_number,
                 ]
             )->save();
 
+            $gameMedia->games()->sync($data->games);
             $gameMedia->genres()->sync($data->genres);
             $gameMedia->platforms()->sync($data->platforms);
             $gameMedia->developers()->sync($data->developers);

@@ -25,18 +25,6 @@
 
                 <x-grid.col xl="4" ls="6" ml="12" lg="6" md="6" sm="12">
                     <x-ui.form.group>
-                        <x-ui.form.input-text
-                            placeholder="{{ __('common.slug') }}"
-                            id="slug"
-                            name="slug"
-                            value="{{ old('slug') }}"
-                            autocomplete="on">
-                        </x-ui.form.input-text>
-                    </x-ui.form.group>
-                </x-grid.col>
-
-                <x-grid.col xl="4" ls="6" ml="12" lg="6" md="6" sm="12">
-                    <x-ui.form.group>
                         <x-ui.form.datepicker
                             placeholder="{{ __('game_media.released_at') }}"
                             id="released_at"
@@ -68,13 +56,25 @@
                     </x-ui.form.group>
                 </x-grid.col>
 
-                <x-grid.col xl="12" ls="12" ml="12" lg="6" md="6" sm="12">
+                <x-grid.col xl="6" ls="6" ml="12" lg="6" md="6" sm="12">
                     <x-ui.form.group>
                         <x-ui.input-select
                             name="barcodes"
                             placeholder="{{ __('common.enter_barcodes') }}"
                             default-option="{{ trans_choice('common.barcodes', 1)  }}"
                         />
+                    </x-ui.form.group>
+                </x-grid.col>
+
+                <x-grid.col xl="6" ls="6" ml="12" lg="6" md="6" sm="12">
+                    <x-ui.form.group>
+                        <x-ui.async-select-multiple
+                            name="games"
+                            :error="$errors->has('games')"
+                            route="select-games"
+                            default-option="{{ __('game.game') }}"
+                            label="{{ __('game.choose') }}">
+                        </x-ui.async-select-multiple>
                     </x-ui.form.group>
                 </x-grid.col>
 
@@ -121,6 +121,18 @@
                             default-option="{{ __('game_publisher.publisher') }}"
                             label="{{ __('game_publisher.choose') }}">
                         </x-ui.async-select-multiple>
+                    </x-ui.form.group>
+                </x-grid.col>
+
+                <x-grid.col xl="4" ls="6" ml="12" lg="6" md="6" sm="12">
+                    <x-ui.form.group>
+                        <x-ui.form.input-text
+                            placeholder="{{ __('common.slug') }}"
+                            id="slug"
+                            name="slug"
+                            value="{{ old('slug') }}"
+                            autocomplete="on">
+                        </x-ui.form.input-text>
                     </x-ui.form.group>
                 </x-grid.col>
 

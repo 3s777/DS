@@ -10,6 +10,7 @@ use App\Http\Requests\MassDeletingRequest;
 use Domain\Game\DTOs\CreateGameDTO;
 use Domain\Game\DTOs\UpdateGameDTO;
 use Domain\Game\Models\Game;
+use Domain\Game\Models\GamePublisher;
 use Domain\Game\Services\GameService;
 use Domain\Game\ViewModels\GameUpdateViewModel;
 use Domain\Game\ViewModels\GameIndexViewModel;
@@ -17,9 +18,11 @@ use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
 use Illuminate\Foundation\Application;
 use Illuminate\Http\RedirectResponse;
+use Illuminate\Http\Request;
 use Illuminate\Routing\Redirector;
 use Support\Actions\MassDeletingAction;
 use Support\DTOs\MassDeletingDTO;
+use Support\ViewModels\AsyncSelectViewModel;
 
 class GameController extends Controller
 {
@@ -108,5 +111,14 @@ class GameController extends Controller
         flash()->info(__('game.mass_force_deleted'));
 
         return to_route('games.index');
+    }
+
+    public function getForSelect(Request $request): AsyncSelectViewModel
+    {
+        return new AsyncSelectViewModel(
+            $request->input('query'),
+            Game::class,
+            'game.choose'
+        );
     }
 }

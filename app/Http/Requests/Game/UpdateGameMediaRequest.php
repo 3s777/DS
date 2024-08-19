@@ -47,6 +47,11 @@ class UpdateGameMediaRequest extends FormRequest
                 'max:10024'
             ],
             'thumbnail_selected' => ['nullable', 'string'],
+            'games' => [
+                'nullable',
+                'array',
+                'exists:games,id'
+            ],
             'genres' => [
                 'nullable',
                 'array',
@@ -82,6 +87,7 @@ class UpdateGameMediaRequest extends FormRequest
             'slug' => __('common.slug'),
             'description' => __('common.description'),
             'released_at' => __('game.released_at'),
+            'games' => __('game.games'),
             'genres' => __('game_genre.genres'),
             'platforms' => __('game_platform.platforms'),
             'developers' => __('game_developer.developers'),
