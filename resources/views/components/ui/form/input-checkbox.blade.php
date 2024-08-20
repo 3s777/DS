@@ -6,7 +6,8 @@
     'size' => false,
     'checked' => false,
     'disabled' => false,
-    'error' => false
+    'error' => false,
+    'value' => false
 ])
 
 <div class="input-checkbox">
@@ -22,7 +23,8 @@
                     'checked' => $checked,
                     'disabled' => $disabled,
                     'name' => $name,
-                    'id' => $id
+                    'id' => $id,
+                    'value' => $value,
                 ]) }}
     >
 

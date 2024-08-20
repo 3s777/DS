@@ -67,7 +67,7 @@ class CreateGamePlatformRequest extends FormRequest
             'slug' => __('common.slug'),
             'description' => __('common.description'),
             'thumbnail' => __('common.thumbnail'),
-            'user_id' => __('common.user'),
+            'user_id' => trans_choice('user.users', 1),
             'type' => __('game_platform.type'),
             'game_platform_manufacturer_id' => __('game_platform_manufacturer.manufacturer')
         ];

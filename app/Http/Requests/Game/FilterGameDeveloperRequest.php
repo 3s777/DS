@@ -56,7 +56,7 @@ class FilterGameDeveloperRequest extends FormRequest
         return [
             'filters.search' => __('common.search'),
             'filters.dates' => __('common.dates'),
-            'filters.user' => __('common.user'),
+            'filters.user' => trans_choice('user.users', 1),
         ];
     }
 }

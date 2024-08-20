@@ -1,5 +1,4 @@
 <x-layouts.admin :search="false">
-
     <x-ui.form class="crud-form"
                method="put"
                id="edit-form"
@@ -14,11 +13,10 @@
                     <x-grid.col xl="4" ls="6" ml="12" lg="6" md="6" sm="12">
                         <x-ui.form.group>
                             <x-ui.form.input-text
-
-                                placeholder="{{ __('auth.username') }} *"
+                                :placeholder="__('auth.username')"
                                 id="name"
                                 name="name"
-                                value="{{ $user->name }}"
+                                :value="$user->name"
                                 required
                                 autocomplete="on"
                                 autofocus>
@@ -29,11 +27,10 @@
                     <x-grid.col xl="4" ls="6" ml="12" lg="6" md="6" sm="12">
                         <x-ui.form.group>
                             <x-ui.form.input-text
-
-                                placeholder="{{ __('auth.first_name') }}"
+                                :placeholder="__('auth.first_name')"
                                 id="first_name"
                                 name="first_name"
-                                value="{{ $user->first_name }}"
+                                :value="$user->first_name"
                                 autocomplete="on">
                             </x-ui.form.input-text>
                         </x-ui.form.group>
@@ -42,11 +39,10 @@
                     <x-grid.col xl="4" ls="6" ml="12" lg="6" md="6" sm="12">
                         <x-ui.form.group>
                             <x-ui.form.input-text
-
-                                placeholder="{{ __('common.slug') }}"
+                                :placeholder="__('common.slug')"
                                 id="slug"
                                 name="slug"
-                                value="{{ $user->slug }}"
+                                :value="$user->slug"
                                 autocomplete="on">
                             </x-ui.form.input-text>
                         </x-ui.form.group>
@@ -58,13 +54,13 @@
                                 class="language"
                                 id="language_id"
                                 name="language_id"
-                                label="{{ __('common.language') }} *">
+                                required
+                                :label="__('common.language')">
                                 <x-ui.form.option value="">{{ __('common.choose_language') }}</x-ui.form.option>
                                 @foreach($languages as $language)
                                     <x-ui.form.option
-                                        value="{{ $language['id'] }}"
-                                        :selected="$user->language_id == $language['id']"
-                                    >
+                                        :value="$language['id']"
+                                        :selected="$user->language_id == $language['id']">
                                         {{ $language['name'] }}
                                     </x-ui.form.option>
                                 @endforeach
@@ -75,12 +71,12 @@
                     <x-grid.col xl="4" ls="6" ml="12" lg="6" md="6" sm="12">
                         <x-ui.form.group>
                             <x-ui.form.input-text
-
                                 type="email"
-                                placeholder="{{ __('common.email') }} *"
+                                :placeholder="__('common.email')"
                                 id="email"
                                 name="email"
-                                value="{{ $user->email }}"
+                                required
+                                :value="$user->email"
                                 autocomplete="on">
                             </x-ui.form.input-text>
                         </x-ui.form.group>
@@ -89,8 +85,7 @@
                     <x-grid.col xl="4" ls="6" ml="12" lg="6" md="6" sm="12">
                         <x-ui.form.group>
                             <x-ui.form.input-text
-
-                                placeholder="{{ __('auth.password') }} *"
+                                :placeholder="__('auth.password')"
                                 id="password"
                                 name="password">
                             </x-ui.form.input-text>
@@ -101,8 +96,8 @@
                         <x-ui.form.group>
                             <x-ui.form.switcher
                                 name="is_verified"
-                                value="1"
-                                label="{{ __('auth.is_verified') }}"
+                                :value="1"
+                                :label="__('auth.is_verified')"
                                 :checked="$user->email_verified_at">
                             </x-ui.form.switcher>
                         </x-ui.form.group>
@@ -114,12 +109,14 @@
                                 class="choices-role"
                                 id="roles"
                                 name="roles[]"
-                                label="{{ __('role.choose') }}" multiple>
+                                :label="__('role.choose')"
+                                multiple>
                                 @foreach($roles as $role)
-                                    <x-ui.form.option value="{{ $role['name'] }}"
-                                    :selected="old()
-                                        ? in_array($role['name'], old('roles', []))
-                                        : $user->hasRole([$role['name']])">
+                                    <x-ui.form.option
+                                        :value="$role['name']"
+                                        :selected="old()
+                                            ? in_array($role['name'], old('roles', []))
+                                            : $user->hasRole([$role['name']])">
                                         {{ $role['display_name'] }}
                                     </x-ui.form.option>
                                 @endforeach
@@ -140,8 +137,8 @@
                                                 <x-ui.form.input-checkbox
                                                     id="permission-{{ $key }}"
                                                     name="permissions[]"
-                                                    value="{{ $permission['name'] }}"
-                                                    label="{{ $permission['display_name'] }}"
+                                                    :value="$permission['name']"
+                                                    :label="$permission['display_name']"
                                                     :disabled="in_array($permission['name'], $rolePermissions)"
                                                     :checked="old()
                                                         ? in_array($permission['name'], old('permissions', []))
@@ -161,8 +158,8 @@
                 <x-ui.form.group>
                     <x-libraries.rich-text-editor
                         name="description"
-                        value="{!! $user->description !!}"
-                        placeholder="{{ __('common.description') }}"/>
+                        :value="$user->description"
+                        :placeholder="__('common.description')"/>
                 </x-ui.form.group>
             </div>
 
@@ -199,7 +196,6 @@
                 </x-ui.form.button>
             </x-ui.form.group>
         </x-ui.form>
-
 
     @push('scripts')
         <script type="module">

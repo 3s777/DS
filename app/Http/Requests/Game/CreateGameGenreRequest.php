@@ -50,7 +50,7 @@ class CreateGameGenreRequest extends FormRequest
             'name' => __('common.name'),
             'slug' => __('common.slug'),
             'description' => __('common.description'),
-            'user_id' => __('common.user'),
+            'user_id' => trans_choice('user.users', 1),
         ];
     }
 }

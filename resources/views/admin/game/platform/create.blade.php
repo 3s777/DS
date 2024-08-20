@@ -75,8 +75,8 @@
                         <x-ui.async-select
                             name="user"
                             route="select-users"
-                            label="{{ __('user.user') }}"
-                            default-option="{{ __('user.choose') }}">
+                            label="{{ trans_choice('user.users', 1) }}"
+                            default-option="{{ trans_choice('user.choose', 1) }}">
                         </x-ui.async-select>
                     </x-ui.form.group>
                 </x-grid.col>

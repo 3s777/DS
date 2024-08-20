@@ -6,7 +6,8 @@
     'value' => false,
     'wrapperClass' => false,
     'size' => false,
-    'error' => false
+    'error' => false,
+    'required' => false
 ])
 
 <div class="
@@ -16,7 +17,7 @@
     @if($errors->has($name) || $errors->has($error)) choices-block_error @endif
     ">
     @if($label)
-        <label class="choices-block__label" for="{{ $id }}">{{ $label }}</label>
+        <label class="choices-block__label" for="{{ $id }}">{{ $label }} @if($required)  * @endif</label>
     @endif
     @if($input)
         <input
@@ -37,7 +38,7 @@
                 ])
                 ->merge([
                     'id' => $id,
-                    'name' => $name,
+                    'name' => $name
                 ])
             }}>
             {{ $slot }}

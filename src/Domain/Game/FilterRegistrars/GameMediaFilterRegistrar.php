@@ -34,7 +34,7 @@ class GameMediaFilterRegistrar implements FilterRegistrar
                 alternativeFields: ['alternative_names']
             ),
             'user' => RelationFilter::make(
-                __('user.user'),
+                trans_choice('user.users', 1),
                 'user',
                 'game_medias',
                 'user_id',

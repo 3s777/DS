@@ -16,7 +16,7 @@
     id="{{ $name }}-select"
     :name="$selectName ?: $name.'_id'"
     :error="$error"
-    label="{{ $label }}">
+    :label="$label">
 
     @if($defaultOption && !$selected)
         <x-ui.form.option value="">
@@ -25,19 +25,19 @@
     @endif
 
     @if($selected)
-        <x-ui.form.option value="{{ $selected->id }}" :selected="!old('{{ $name }}_id')">
+        <x-ui.form.option :value="$selected->id" :selected="!old('{{ $name }}_id')">
             {{ $selected->name }}
         </x-ui.form.option>
     @endif
 
     @if(old($name.'_id') && $showOld)
-        <x-ui.form.option value="{{ old($name.'_id') }}" selected>
+        <x-ui.form.option :value="old($name.'_id')" selected>
             {{ old('old_selected_'.$name.'_label') }}
         </x-ui.form.option>
     @endif
 
     @if(old($selectName) && $showOld)
-        <x-ui.form.option value="{{ old($selectName) }}" selected>
+        <x-ui.form.option :value="old($selectName)" selected>
             {{ old('old_selected_'.$name.'_label') }}
         </x-ui.form.option>
     @endif

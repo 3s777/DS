@@ -12,11 +12,10 @@
                 <x-grid.col xl="4" ls="6" ml="12" lg="6" md="6" sm="12">
                     <x-ui.form.group>
                         <x-ui.form.input-text
-
-                            placeholder="{{ trans_choice('common.name', 1) }} *"
+                            :placeholder="trans_choice('common.name', 1)"
                             id="name"
                             name="name"
-                            value="{{ old('name') }}"
+                            :value="old('name')"
                             required
                             autocomplete="on"
                             autofocus>
@@ -27,11 +26,10 @@
                 <x-grid.col xl="4" ls="6" ml="12" lg="6" md="6" sm="12">
                     <x-ui.form.group>
                         <x-ui.form.input-text
-
-                            placeholder="{{ __('common.display_name') }} *"
+                            :placeholder="__('common.display_name')"
                             id="display_name"
                             name="display_name"
-                            value="{{ old('display_name') }}"
+                            :value="old('display_name')"
                             required
                             autocomplete="on">
                         </x-ui.form.input-text>
@@ -45,7 +43,7 @@
                 <x-libraries.rich-text-editor
                     name="description"
                     value=""
-                    placeholder="{{ __('common.description') }}"/>
+                    :placeholder="__('common.description')" />
             </x-ui.form.group>
         </div>
 

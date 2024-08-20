@@ -12,11 +12,10 @@
                 <x-grid.col xl="4" ls="6" ml="12" lg="6" md="6" sm="12">
                     <x-ui.form.group>
                         <x-ui.form.input-text
-
-                            placeholder="{{ __('auth.username') }} *"
+                            :placeholder="__('auth.username')"
                             id="name"
                             name="name"
-                            value="{{ old('name') }}"
+                            :value="old('name')"
                             required
                             autocomplete="on"
                             autofocus>
@@ -27,11 +26,10 @@
                 <x-grid.col xl="4" ls="6" ml="12" lg="6" md="6" sm="12">
                     <x-ui.form.group>
                         <x-ui.form.input-text
-
-                            placeholder="{{ __('auth.first_name') }}"
+                            :placeholder="__('auth.first_name')"
                             id="first_name"
                             name="first_name"
-                            value="{{ old('first_name') }}"
+                            :value="old('first_name')"
                             autocomplete="on">
                         </x-ui.form.input-text>
                     </x-ui.form.group>
@@ -40,11 +38,10 @@
                 <x-grid.col xl="4" ls="6" ml="12" lg="6" md="6" sm="12">
                     <x-ui.form.group>
                         <x-ui.form.input-text
-
-                            placeholder="{{ __('common.slug') }}"
+                            :placeholder="__('common.slug')"
                             id="slug"
                             name="slug"
-                            value="{{ old('slug') }}"
+                            :value="old('slug')"
                             autocomplete="on">
                         </x-ui.form.input-text>
                     </x-ui.form.group>
@@ -52,32 +49,22 @@
 
                 <x-grid.col xl="4" ls="6" ml="12" lg="6" md="6" sm="12">
                     <x-ui.form.group>
-                        <x-libraries.choices
-                            class="choices-language"
-                            id="language_id"
+                        <x-ui.data-select
                             name="language_id"
-                            label="{{ __('common.language') }} *">
-                            @foreach($languages as $language)
-                                <x-ui.form.option
-                                    value="{{ $language['id'] }}"
-                                    :selected="old('language_id') == $language['id']"
-                                    >
-                                        {{ $language['name'] }}
-                                </x-ui.form.option>
-                            @endforeach
-                        </x-libraries.choices>
+                            :options="$languages"
+                            :placeholder="__('common.language')"
+                        />
                     </x-ui.form.group>
                 </x-grid.col>
 
                 <x-grid.col xl="4" ls="6" ml="12" lg="6" md="6" sm="12">
                     <x-ui.form.group>
                         <x-ui.form.input-text
-
                             type="email"
-                            placeholder="{{ __('common.email') }} *"
+                            :placeholder="__('common.email')"
                             id="email"
                             name="email"
-                            value="{{ old('email') }}"
+                            :value="old('email')"
                             required
                             autocomplete="on">
                         </x-ui.form.input-text>
@@ -87,8 +74,7 @@
                 <x-grid.col xl="4" ls="6" ml="12" lg="6" md="6" sm="12">
                     <x-ui.form.group>
                         <x-ui.form.input-text
-
-                            placeholder="{{ __('auth.password') }} *"
+                            :placeholder="__('auth.password')"
                             id="password"
                             name="password"
                             required>
@@ -100,32 +86,46 @@
                     <x-ui.form.group>
                         <x-ui.form.switcher
                             name="is_verified"
-                            value="1"
-                            label="{{ __('auth.is_verified') }}"
-                            :checked="old() ? old('is_verified') : 'checked'"
-                        >
+                            :value="1"
+                            :label="__('auth.is_verified')"
+                            :checked="old() ? old('is_verified') : 'checked'">
                         </x-ui.form.switcher>
                     </x-ui.form.group>
                 </x-grid.col>
 
                 <x-grid.col xl="12" lg="12" md="12" sm="12">
                     <x-ui.form.group>
-                        <x-libraries.choices
-                            class="choices-role"
-                            id="roles"
-                            name="roles[]"
-                            label="{{ __('role.choose') }}"
-                            multiple>
-                            @foreach($roles as $role)
-                                <x-ui.form.option
-                                    value="{{ $role['name'] }}"
-                                    :selected="old()
-                                        ? in_array($role['name'], old('roles', []))
-                                        : $role['name'] == config('settings.default_role')">
-                                    {{ $role['display_name'] }}
-                                </x-ui.form.option>
-                            @endforeach
-                        </x-libraries.choices>
+                        <x-ui.data-select-multiple
+                            name="roles"
+                            type="input"
+                            key="name"
+                            option-name="display_name"
+                            :selected="collect(['default' => ['name' => config('settings.default_role')]])"
+                            :options="$roles"
+                            :placeholder="trans_choice('role.choose', 1)"
+                            :default-option="trans_choice('role.roles', 1)"
+                        />
+
+
+
+
+{{--                        <x-libraries.choices--}}
+{{--                            class="choices-role"--}}
+{{--                            id="roles"--}}
+{{--                            name="roles[]"--}}
+{{--                            label="{{ trans_choice('role.choose', 1) }}"--}}
+{{--                            required--}}
+{{--                            multiple>--}}
+{{--                            @foreach($roles as $role)--}}
+{{--                                <x-ui.form.option--}}
+{{--                                    :value="$role['name']"--}}
+{{--                                    :selected="old()--}}
+{{--                                        ? in_array($role['name'], old('roles', []))--}}
+{{--                                        : $role['name'] == config('settings.default_role')">--}}
+{{--                                    {{ $role['display_name'] }}--}}
+{{--                                </x-ui.form.option>--}}
+{{--                            @endforeach--}}
+{{--                        </x-libraries.choices>--}}
                     </x-ui.form.group>
                 </x-grid.col>
             </x-grid>
@@ -136,7 +136,7 @@
                 <x-libraries.rich-text-editor
                     name="description"
                     value=""
-                    placeholder="{{ __('common.description') }}"/>
+                    :placeholder="__('common.description')"/>
             </x-ui.form.group>
         </div>
 
@@ -163,11 +163,6 @@
 
 @push('scripts')
     <script type="module">
-        const language = document.querySelector('.choices-language');
-        const choicesLanguage = new Choices(language, {
-            itemSelectText: '',
-            searchEnabled: false,
-        });
         const role = document.querySelector('.choices-role');
         const choicesRole = new Choices(role, {
             itemSelectText: '',

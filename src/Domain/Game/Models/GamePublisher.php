@@ -88,11 +88,11 @@ class GamePublisher extends Model implements HasMedia
                 'game_publishers'
             ),
             'user' => RelationFilter::make(
-                __('common.user'),
+                trans_choice('user.users', 1),
                 'user',
                 'game_publishers',
                 'user_id',
-                __('user.choose'),
+                trans_choice('user.choose', 1),
                 User::class
             ),
         ];

@@ -15,7 +15,7 @@
             :sorters="[
                 'id' => __('common.id'),
                 'name' => trans_choice('common.name', 1),
-                'users.name' => __('user.user'),
+                'users.name' => trans_choice('user.users', 1),
                 'created_at' => __('common.created_date'),
             ]" />
 
@@ -43,7 +43,7 @@
                     {{ __('game_publisher.publishers') }}
                 </x-ui.responsive-table.column>
                 <x-ui.responsive-table.column name="users.name" sortable="true">
-                    {{ __('user.user') }}
+                    {{ trans_choice('user.users', 1) }}
                 </x-ui.responsive-table.column>
                 <x-ui.responsive-table.column name="created_at" sortable="true">
                     {{ __('common.created_date') }}
@@ -89,7 +89,7 @@
                         @endforeach
                     </x-ui.responsive-table.column>
                     <x-ui.responsive-table.column>
-                        <span class="responsive-table__label">{{ __('user.user') }}: </span> {{ $game->user_name }}
+                        <span class="responsive-table__label">{{ trans_choice('user.users', 1) }}: </span> {{ $game->user_name }}
                     </x-ui.responsive-table.column>
                     <x-ui.responsive-table.column>
                         <span class="responsive-table__label">{{ __('common.created_date') }}: </span> {{ $game->created_at }}

@@ -108,8 +108,8 @@
                             :selected="$game->user ?? false"
                             name="user"
                             route="select-users"
-                            default-option="{{ __('user.choose') }}"
-                            label="{{ __('user.user') }}">
+                            default-option="{{ trans_choice('user.choose', 1) }}"
+                            label="{{ trans_choice('user.users', 1) }}">
                         </x-ui.async-select>
                     </x-ui.form.group>
                 </x-grid.col>

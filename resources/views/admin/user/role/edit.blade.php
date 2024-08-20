@@ -1,5 +1,4 @@
 <x-layouts.admin :search="false">
-
     <x-ui.form class="crud-form crud-form_full-width"
                method="put"
                id="edit-form"
@@ -14,11 +13,10 @@
                     <x-grid.col xl="4" ls="6" ml="12" lg="6" md="6" sm="12">
                         <x-ui.form.group>
                             <x-ui.form.input-text
-
-                                placeholder="{{ trans_choice('common.name', 1) }} *"
+                                :placeholder="trans_choice('common.name', 1)"
                                 id="name"
                                 name="name"
-                                value="{{ $role->name }}"
+                                :value="$role->name"
                                 required
                                 autocomplete="on"
                                 autofocus>
@@ -29,11 +27,11 @@
                     <x-grid.col xl="4" ls="6" ml="12" lg="6" md="6" sm="12">
                         <x-ui.form.group>
                             <x-ui.form.input-text
-
-                                placeholder="{{ __('common.display_name') }} *"
+                                :placeholder="__('common.display_name')"
                                 id="display_name"
                                 name="display_name"
-                                value="{{ $role->display_name }}"
+                                required
+                                :value="$role->display_name"
                                 autocomplete="on">
                             </x-ui.form.input-text>
                         </x-ui.form.group>
@@ -46,8 +44,8 @@
                                 <x-ui.form.input-checkbox
                                     id="permission-{{ $key }}"
                                     name="permissions[]"
-                                    value="{{ $permission['name'] }}"
-                                    label="{{ $permission['display_name'] }}"
+                                    :value="$permission['name']"
+                                    :label="$permission['display_name']"
                                     :checked="old()
                                         ? in_array($permission['name'], old('permissions', []))
                                         : $role->hasPermissionTo($permission['name'])">
@@ -62,8 +60,8 @@
                 <x-ui.form.group>
                     <x-libraries.rich-text-editor
                         name="description"
-                        value="{!! $role->description !!}"
-                        placeholder="{{ __('common.description') }}"/>
+                        :value="$role->description"
+                        :placeholder="__('common.description')"/>
                 </x-ui.form.group>
             </div>
 

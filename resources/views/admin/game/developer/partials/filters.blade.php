@@ -16,8 +16,8 @@
                     :selected="get_filter('user')->relatedModel ?? false"
                     :show-old="false"
                     name="user"
-                    label="{{ __('user.user') }}"
-                    defaultOption="{{ __('user.choose') }}"
+                    :label="trans_choice('user.users', 1)"
+                    :defaultOption="trans_choice('user.choose', 1)"
                     selectName="filters[user]"
                     route="select-users">я</x-ui.async-select>
             </x-ui.form.group>

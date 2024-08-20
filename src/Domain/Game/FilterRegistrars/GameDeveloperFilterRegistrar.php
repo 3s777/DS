@@ -33,7 +33,7 @@ class GameDeveloperFilterRegistrar implements FilterRegistrar
                 'game_developers',
             ),
             'user' => RelationFilter::make(
-                __('user.user'),
+                trans_choice('user.users', 1),
                 'user',
                 'game_developers',
                 'user_id',

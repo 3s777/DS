@@ -56,7 +56,7 @@ class CreateGameDeveloperRequest extends FormRequest
             'slug' => __('common.slug'),
             'description' => __('common.description'),
             'thumbnail' => __('common.thumbnail'),
-            'user_id' => __('common.user'),
+            'user_id' => trans_choice('user.users', 1),
         ];
     }
 }

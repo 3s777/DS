@@ -54,7 +54,7 @@ final class AdminSidebarMenuComposer
                 )
             )
             ->add(MenuGroup::make()
-                ->setLabel(__('user.users'))
+                ->setLabel(trans_choice('user.users', 2))
                 ->setIcon('users')
                 ->add(MenuItem::make(route('users.create'), __('common.add')))
                 ->add(MenuItem::make(route('users.index'), __('common.list')))

@@ -1,5 +1,6 @@
 @props([
-    'selected' => false
+    'selected' => false,
+    'value' => false,
 ])
 
 <option
@@ -7,6 +8,7 @@
             'option',
         ])
         ->merge([
+            'value' => $value,
             'selected' => $selected
             ])
     }}>
