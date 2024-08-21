@@ -50,7 +50,7 @@
                 <x-grid.col xl="4" ls="6" ml="12" lg="6" md="6" sm="12">
                     <x-ui.form.group>
                         <x-ui.data-select
-                            name="language_id"
+                            name="language"
                             :options="$languages"
                             :placeholder="__('common.language')"
                         />
@@ -100,32 +100,10 @@
                             type="input"
                             key="name"
                             option-name="display_name"
-                            :selected="collect(['default' => ['name' => config('settings.default_role')]])"
+                            :selected="['name' => config('settings.default_role')]"
                             :options="$roles"
                             :placeholder="trans_choice('role.choose', 1)"
-                            :default-option="trans_choice('role.roles', 1)"
                         />
-
-
-
-
-{{--                        <x-libraries.choices--}}
-{{--                            class="choices-role"--}}
-{{--                            id="roles"--}}
-{{--                            name="roles[]"--}}
-{{--                            label="{{ trans_choice('role.choose', 1) }}"--}}
-{{--                            required--}}
-{{--                            multiple>--}}
-{{--                            @foreach($roles as $role)--}}
-{{--                                <x-ui.form.option--}}
-{{--                                    :value="$role['name']"--}}
-{{--                                    :selected="old()--}}
-{{--                                        ? in_array($role['name'], old('roles', []))--}}
-{{--                                        : $role['name'] == config('settings.default_role')">--}}
-{{--                                    {{ $role['display_name'] }}--}}
-{{--                                </x-ui.form.option>--}}
-{{--                            @endforeach--}}
-{{--                        </x-libraries.choices>--}}
                     </x-ui.form.group>
                 </x-grid.col>
             </x-grid>
@@ -160,17 +138,4 @@
             </x-ui.form.button>
         </x-ui.form.group>
     </x-ui.form>
-
-@push('scripts')
-    <script type="module">
-        const role = document.querySelector('.choices-role');
-        const choicesRole = new Choices(role, {
-            itemSelectText: '',
-            removeItems: true,
-            removeItemButton: true,
-            noResultsText: '{{ __('common.not_found') }}',
-            noChoicesText: '{{ __('common.nothing_else') }}',
-        });
-    </script>
-@endpush
 </x-layouts.admin>

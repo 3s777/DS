@@ -10,6 +10,6 @@
                 <x-common.filters.dates direction="to" />
             </x-ui.form.group>
         </x-grid.col>
-        <x-slot:buttons></x-slot:buttons>
+        <x-slot:buttons />
     </x-admin.crud-filters-form>
 </x-admin.crud-filters>

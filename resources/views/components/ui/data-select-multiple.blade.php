@@ -26,13 +26,23 @@
 
     @if($selected)
         @foreach($options as $option)
-            <x-ui.form.option
-                value="{{ $option[$key] }}"
-                :selected="old()
+            @if(is_array($selected))
+                <x-ui.form.option
+                    value="{{ $option[$key] }}"
+                    :selected="old()
+                    ? in_array($option[$key], old($arrayKey.'.'.$name, [])) || in_array($option[$key], old($name, []))
+                    : in_array($option[$key], $selected)">
+                    {{ $option[$optionName] }}
+                </x-ui.form.option>
+            @else
+                <x-ui.form.option
+                    value="{{ $option[$key] }}"
+                    :selected="old()
                     ? in_array($option[$key], old($arrayKey.'.'.$name, [])) || in_array($option[$key], old($name, []))
                     : $selected->contains($key, $option[$key])">
-                {{ $option[$optionName] }}
-            </x-ui.form.option>
+                    {{ $option[$optionName] }}
+                </x-ui.form.option>
+            @endif
         @endforeach
     @else
         @foreach($options as $option)

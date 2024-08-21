@@ -50,21 +50,12 @@
 
                     <x-grid.col xl="4" ls="6" ml="12" lg="6" md="6" sm="12">
                         <x-ui.form.group>
-                            <x-libraries.choices
-                                class="language"
-                                id="language_id"
+                            <x-ui.data-select
                                 name="language_id"
-                                required
-                                :label="__('common.language')">
-                                <x-ui.form.option value="">{{ __('common.choose_language') }}</x-ui.form.option>
-                                @foreach($languages as $language)
-                                    <x-ui.form.option
-                                        :value="$language['id']"
-                                        :selected="$user->language_id == $language['id']">
-                                        {{ $language['name'] }}
-                                    </x-ui.form.option>
-                                @endforeach
-                            </x-libraries.choices>
+                                :options="$languages"
+                                :placeholder="__('common.language')"
+                                :selected="$user->language_id"
+                            />
                         </x-ui.form.group>
                     </x-grid.col>
 
@@ -105,22 +96,14 @@
 
                     <x-grid.col xl="12" lg="12" md="12" sm="12">
                         <x-ui.form.group>
-                            <x-libraries.choices
-                                class="choices-role"
-                                id="roles"
-                                name="roles[]"
-                                :label="__('role.choose')"
-                                multiple>
-                                @foreach($roles as $role)
-                                    <x-ui.form.option
-                                        :value="$role['name']"
-                                        :selected="old()
-                                            ? in_array($role['name'], old('roles', []))
-                                            : $user->hasRole([$role['name']])">
-                                        {{ $role['display_name'] }}
-                                    </x-ui.form.option>
-                                @endforeach
-                            </x-libraries.choices>
+                            <x-ui.data-select-multiple
+                                name="roles"
+                                type="input"
+                                key="name"
+                                option-name="display_name"
+                                :selected="$user->roles"
+                                :options="$roles"
+                                :placeholder="trans_choice('role.choose', 1)"/>
                         </x-ui.form.group>
                     </x-grid.col>
                 </x-grid>
@@ -196,22 +179,4 @@
                 </x-ui.form.button>
             </x-ui.form.group>
         </x-ui.form>
-
-    @push('scripts')
-        <script type="module">
-            const language = document.querySelector('.language');
-            const choicesLanguage = new Choices(language, {
-                itemSelectText: '',
-                searchEnabled: false,
-            });
-            const role = document.querySelector('.choices-role');
-            const choicesRole = new Choices(role, {
-                itemSelectText: '',
-                removeItems: true,
-                removeItemButton: true,
-                noResultsText: '{{ __('common.not_found') }}',
-                noChoicesText: '{{ __('common.nothing_else') }}',
-            });
-        </script>
-    @endpush
 </x-layouts.admin>

@@ -4,7 +4,9 @@
     'placeholder' => false,
     'defaultOption' => false,
     'selected' => false,
-    'arrayKey' => false
+    'arrayKey' => false,
+    'key' => 'id',
+    'optionName' => 'name'
 ])
 
 <x-libraries.choices
@@ -23,21 +25,21 @@
     @if($selected)
         @foreach($options as $option)
             <x-ui.form.option
-                value="{{ $option['id'] }}"
+                value="{{ $option[$key] }}"
                 :selected="old()
-                    ? $option['id'] == old($arrayKey.'.'.$name) || $option['id'] == old($name)
-                    : $option['id'] == $selected">
-                {{ $option['name'] }}
+                    ? $option[$key] == old($arrayKey.'.'.$name) || $option[$key] == old($name)
+                    : $option[$key] == $selected">
+                {{ $option[$optionName] }}
             </x-ui.form.option>
         @endforeach
     @else
         @foreach($options as $option)
             <x-ui.form.option
-                value="{{ $option['id'] }}"
+                value="{{ $option[$key] }}"
                 :selected="$arrayKey
-                    ? $option['id'] == old($arrayKey.'.'.$name)
-                    : $option['id'] == old($name)">
-                {{ $option['name'] }}
+                    ? $option[$key] == old($arrayKey.'.'.$name)
+                    : $option[$key] == old($name)">
+                {{ $option[$optionName] }}
             </x-ui.form.option>
         @endforeach
     @endif
