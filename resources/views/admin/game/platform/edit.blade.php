@@ -2,7 +2,7 @@
     <x-ui.form class="crud-form"
                method="put"
                id="edit-form"
-               action="{{ route('game-platforms.update', $gamePlatform->slug) }}"
+               :action="route('game-platforms.update', $gamePlatform->slug)"
                enctype="multipart/form-data">
         <x-ui.title class="crud-form__tile" size="normal" indent="small">
             {{ __('game_platform.edit') }}
@@ -13,10 +13,10 @@
                 <x-grid.col xl="4" ls="6" ml="12" lg="6" md="6" sm="12">
                     <x-ui.form.group>
                         <x-ui.form.input-text
-                            placeholder="{{ trans_choice('common.name', 1) }}"
+                            :placeholder="trans_choice('common.name', 1)"
                             id="name"
                             name="name"
-                            value="{{ $gamePlatform->name }}"
+                            :value="$gamePlatform->name"
                             required
                             autocomplete="on"
                             autofocus>
@@ -27,10 +27,10 @@
                 <x-grid.col xl="4" ls="6" ml="12" lg="6" md="6" sm="12">
                     <x-ui.form.group>
                         <x-ui.form.input-text
-                            placeholder="{{ __('common.slug') }}"
+                            :placeholder="__('common.slug')"
                             id="slug"
                             name="slug"
-                            value="{{ $gamePlatform->slug }}"
+                            :value="$gamePlatform->slug"
                             autocomplete="on">
                         </x-ui.form.input-text>
                     </x-ui.form.group>
@@ -59,8 +59,8 @@
                             name="game_platform_manufacturer_id"
                             :options="$manufacturers"
                             :selected="$gamePlatform->game_platform_manufacturer->id"
-                            default-option="{{__('game_platform_manufacturer.manufacturer')}}"
-                            placeholder="{{ __('game_platform_manufacturer.choose') }}" />
+                            :default-option="__('game_platform_manufacturer.manufacturer')"
+                            :placeholder="__('game_platform_manufacturer.choose')" />
                     </x-ui.form.group>
                 </x-grid.col>
 
@@ -82,8 +82,8 @@
                             :selected="$gamePlatform->user ?? false"
                             name="user"
                             route="select-users"
-                            label="{{ trans_choice('user.users', 1) }}"
-                            default-option="{{ trans_choice('user.choose', 1) }}">
+                            :label="trans_choice('user.users', 1)"
+                            :default-option="trans_choice('user.choose', 1)">
                         </x-ui.async-select>
                     </x-ui.form.group>
                 </x-grid.col>
@@ -94,8 +94,8 @@
             <x-ui.form.group>
                 <x-libraries.rich-text-editor
                     name="description"
-                    value="{!! $gamePlatform->description !!}"
-                    placeholder="{{ __('common.description') }}"/>
+                    :value="$gamePlatform->description"
+                    :placeholder="__('common.description')"/>
             </x-ui.form.group>
         </div>
 

@@ -41,7 +41,6 @@
                 </x-ui.responsive-table.column>
             </x-ui.responsive-table.header>
 
-
             @foreach($platforms as $platform)
                 <x-ui.responsive-table.row >
                     <x-ui.responsive-table.column type="select">
@@ -61,9 +60,7 @@
                     </x-ui.responsive-table.column>
                     <x-ui.responsive-table.column>
                         <span class="responsive-table__label">{{ __('game_platform_manufacturer.manufacturer') }}: </span>
-
                             {{ $platform->manufacturer_name }}
-
                     </x-ui.responsive-table.column>
                     <x-ui.responsive-table.column>
                         <span class="responsive-table__label">{{ trans_choice('user.users', 1) }}: </span> {{ $platform->user_name }}

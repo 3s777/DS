@@ -5,7 +5,8 @@
     'color'=>'',
     'wrapperClass'=>false,
     'sortable' => false,
-    'method' => 'post'
+    'method' => 'post',
+    'action' => false
 ])
 
 <div class="input-search @if($wrapperClass) {{ $wrapperClass }} @endif" x-data="{ search_active: false }">
@@ -14,10 +15,12 @@
             {{ $attributes->class([
                 'input-search__form',
                 'input-search__form_color_'.$color => $color
+                ])->merge([
+                    'action' => $action,
+                    'method' => $method
                 ])
             }}
-            :class="search_active ? 'input-search__form_active' : ''"
-            method="{{ $method }}">
+            :class="search_active ? 'input-search__form_active' : ''">
 
             @if($method === 'post')
                 @csrf

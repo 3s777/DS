@@ -35,12 +35,12 @@ class UserController extends Controller
 
     public function index(FilterUserRequest $request): View|Application|Factory|\Illuminate\Contracts\Foundation\Application
     {
-        return view('admin.user.index', new UserIndexViewModel());
+        return view('admin.user.user.index', new UserIndexViewModel());
     }
 
     public function create(): View|Application|Factory|\Illuminate\Contracts\Foundation\Application
     {
-        return view('admin.user.create', new UserCrudViewModel());
+        return view('admin.user.user.create', new UserCrudViewModel());
     }
 
     public function store(CreateUserRequest $request, CreateUserAction $action): RedirectResponse
@@ -54,12 +54,12 @@ class UserController extends Controller
 
     public function show(User $user)
     {
-        return view('admin.user.show', compact(['user']));
+        return view('admin.user.user.show', compact(['user']));
     }
 
     public function edit(User $user): View|Application|Factory|\Illuminate\Contracts\Foundation\Application
     {
-        return view('admin.user.edit', new UserCrudViewModel($user));
+        return view('admin.user.user.edit', new UserCrudViewModel($user));
     }
 
     public function update(UpdateUserRequest $request, User $user, UpdateUserAction $action): RedirectResponse

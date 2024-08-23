@@ -1,7 +1,7 @@
 <x-layouts.admin :search="false">
     <x-ui.form class="crud-form"
                id="create-form"
-               action="{{ route('game-developers.store') }}"
+               :action="route('game-developers.store')"
                enctype="multipart/form-data">
         <x-ui.title class="crud-form__tile" size="normal" indent="small">
             {{ __('game_developer.add') }}

@@ -2,7 +2,7 @@
     <x-ui.form class="crud-form crud-form_full-width"
                method="put"
                id="edit-form"
-               action="{{ route('permissions.update', $permission->id) }}"
+               :action="route('permissions.update', $permission->id)"
                enctype="multipart/form-data">
             <x-ui.title class="crud-form__tile" size="normal" indent="small">
                 {{ __('permission.edit') }}

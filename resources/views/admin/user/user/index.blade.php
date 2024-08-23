@@ -7,7 +7,7 @@
         @endif
     </x-ui.title>
 
-    @include('admin.user.partials.filters')
+    @include('admin.user.user.partials.filters')
 
     <x-common.action-table model-name="users">
         <x-common.selectable-order
@@ -18,12 +18,12 @@
                 'first_name' => __('auth.first_name'),
                 'email' => __('common.email'),
                 'created_at' => __('common.created_date'),
-            ]" />
+            ]"/>
 
         <x-ui.responsive-table :empty="$users->isEmpty()">
             <x-ui.responsive-table.header>
                 <x-ui.responsive-table.column type="select" name="check">
-                    <x-common.action-table.select-all :models="$users" />
+                    <x-common.action-table.select-all :models="$users"/>
                 </x-ui.responsive-table.column>
                 <x-ui.responsive-table.column type="id" sortable="true" name="id">
                     {{ __('common.id') }}
@@ -46,9 +46,9 @@
             </x-ui.responsive-table.header>
 
             @foreach($users as $user)
-                <x-ui.responsive-table.row >
+                <x-ui.responsive-table.row>
                     <x-ui.responsive-table.column type="select">
-                        <x-common.action-table.row-checkbox :model="$user" />
+                        <x-common.action-table.row-checkbox :model="$user"/>
                     </x-ui.responsive-table.column>
                     <x-ui.responsive-table.column type="id">
                         {{ $user->id }}
@@ -57,16 +57,18 @@
                         <span class="responsive-table__label">{{ __('auth.username') }}: </span> {{ $user->name }}
                     </x-ui.responsive-table.column>
                     <x-ui.responsive-table.column>
-                        <span class="responsive-table__label">{{ __('auth.first_name') }}: </span> {{ $user->first_name }}
+                        <span
+                            class="responsive-table__label">{{ __('auth.first_name') }}: </span> {{ $user->first_name }}
                     </x-ui.responsive-table.column>
                     <x-ui.responsive-table.column>
                         <span class="responsive-table__label">{{ __('common.email') }}: </span> {{ $user->email }}
                     </x-ui.responsive-table.column>
                     <x-ui.responsive-table.column>
-                        <span class="responsive-table__label">{{ __('common.created_date') }}: </span> {{ $user->created_at }}
+                        <span
+                            class="responsive-table__label">{{ __('common.created_date') }}: </span> {{ $user->created_at }}
                     </x-ui.responsive-table.column>
                     <x-ui.responsive-table.column type="action">
-                        <x-common.action-table.buttons :item="$user" :show="true" model="users" />
+                        <x-common.action-table.buttons :item="$user" :show="true" model="users"/>
                     </x-ui.responsive-table.column>
                 </x-ui.responsive-table.row>
             @endforeach

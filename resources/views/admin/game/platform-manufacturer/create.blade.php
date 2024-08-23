@@ -1,7 +1,7 @@
 <x-layouts.admin :search="false">
     <x-ui.form class="crud-form"
                id="create-form"
-               action="{{ route('game-platform-manufacturers.store') }}"
+               :action="route('game-platform-manufacturers.store')"
                enctype="multipart/form-data">
         <x-ui.title class="crud-form__tile" size="normal" indent="small">
             {{ __('game_platform_manufacturer.add') }}
@@ -12,11 +12,10 @@
                 <x-grid.col xl="4" ls="6" ml="12" lg="6" md="6" sm="12">
                     <x-ui.form.group>
                         <x-ui.form.input-text
-
-                            placeholder="{{ trans_choice('common.name', 1) }}"
+                            :placeholder="trans_choice('common.name', 1)"
                             id="name"
                             name="name"
-                            value="{{ old('name') }}"
+                            :value="old('name')"
                             required
                             autocomplete="on"
                             autofocus>
@@ -27,11 +26,10 @@
                 <x-grid.col xl="4" ls="6" ml="12" lg="6" md="6" sm="12">
                     <x-ui.form.group>
                         <x-ui.form.input-text
-
-                            placeholder="{{ __('common.slug') }}"
+                            :placeholder="__('common.slug')"
                             id="slug"
                             name="slug"
-                            value="{{ old('slug') }}"
+                            :value="old('slug')"
                             autocomplete="on">
                         </x-ui.form.input-text>
                     </x-ui.form.group>
@@ -42,8 +40,8 @@
                         <x-ui.async-select
                             name="user"
                             route="select-users"
-                            default-option="{{ trans_choice('user.choose', 1) }}"
-                            label="{{ trans_choice('user.users', 1) }}">
+                            :default-option="trans_choice('user.choose', 1)"
+                            :label="trans_choice('user.users', 1)">
                         </x-ui.async-select>
                     </x-ui.form.group>
                 </x-grid.col>
@@ -55,7 +53,7 @@
                 <x-libraries.rich-text-editor
                     name="description"
                     value=""
-                    placeholder="{{ __('common.description') }}"/>
+                    :placeholder="__('common.description')"/>
             </x-ui.form.group>
         </div>
 

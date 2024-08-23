@@ -1,7 +1,7 @@
 <x-layouts.admin :search="false">
     <x-ui.form class="crud-form crud-form_full-width"
                id="create-form"
-               action="{{ route('roles.store') }}"
+               :action="route('roles.store')"
                enctype="multipart/form-data">
         <x-ui.title class="crud-form__tile" size="normal" indent="small">
             {{ __('role.add') }}

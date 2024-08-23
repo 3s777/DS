@@ -1,12 +1,14 @@
 @props([
     'method' => 'POST',
-    'preventSubmit' => true
+    'preventSubmit' => true,
+    'action' => false
 ])
 
 <form
     {{ $attributes->class([
             'form'
         ])->merge([
+            'action' => $action,
             'method' => 'POST'
         ])
     }}

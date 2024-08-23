@@ -1,4 +1,4 @@
-.crud-filters {
+.admin-filters {
     margin-bottom: 24px;
 
     &__header {
@@ -26,6 +26,11 @@
 
     }
 
+    &__search {
+        width: 300px;
+    }
+
+
     @include breakpoint-max($md) {
         margin-bottom: 28px;
 
@@ -35,6 +40,10 @@
 
         .current-filters {
             padding-bottom: 8px;
+        }
+
+        &__search {
+            width: 100%;
         }
     }
 
