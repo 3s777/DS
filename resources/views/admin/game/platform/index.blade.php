@@ -28,7 +28,7 @@
                     {{ __('game_platform.type') }}
                 </x-ui.responsive-table.column>
                 <x-ui.responsive-table.column name="manufacturer">
-                    {{ __('game_platform_manufacturer.manufacturer') }}
+                    {{ trans_choice('game_platform_manufacturer.manufacturers', 1) }}
                 </x-ui.responsive-table.column>
                 <x-ui.responsive-table.column name="users.name">
                     {{ trans_choice('user.users', 1) }}
@@ -59,7 +59,7 @@
                         @endif
                     </x-ui.responsive-table.column>
                     <x-ui.responsive-table.column>
-                        <span class="responsive-table__label">{{ __('game_platform_manufacturer.manufacturer') }}: </span>
+                        <span class="responsive-table__label">{{ trans_choice('game_platform_manufacturer.manufacturers', 1) }}: </span>
                             {{ $platform->manufacturer_name }}
                     </x-ui.responsive-table.column>
                     <x-ui.responsive-table.column>

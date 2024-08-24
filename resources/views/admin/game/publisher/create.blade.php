@@ -1,7 +1,7 @@
 <x-layouts.admin :search="false">
     <x-ui.form class="crud-form"
                id="create-form"
-               action="{{ route('game-publishers.store') }}"
+               :action="route('game-publishers.store')"
                enctype="multipart/form-data">
         <x-ui.title class="crud-form__tile" size="normal" indent="small">
             {{ __('game_publisher.add') }}
@@ -42,7 +42,6 @@
                             route="select-users"
                             :label="trans_choice('user.users', 1)"
                             :default-option="trans_choice('user.choose', 1)">
-                            >
                         </x-ui.async-select>
                     </x-ui.form.group>
                 </x-grid.col>

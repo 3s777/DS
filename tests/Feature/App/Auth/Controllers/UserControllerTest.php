@@ -78,7 +78,7 @@ class UserControllerTest extends TestCase
             ->get(action([UserController::class, 'index']))
             ->assertOk()
             ->assertSee(__('user.list'))
-            ->assertViewIs('admin.user.index');
+            ->assertViewIs('admin.user.user.index');
     }
 
     /**
@@ -91,7 +91,7 @@ class UserControllerTest extends TestCase
             ->get(action([UserController::class, 'create']))
             ->assertOk()
             ->assertSee(__('user.add'))
-            ->assertViewIs('admin.user.create');
+            ->assertViewIs('admin.user.user.create');
     }
 
     /**
@@ -104,7 +104,7 @@ class UserControllerTest extends TestCase
             ->get(action([UserController::class, 'edit'], [$this->testingUser->slug]))
             ->assertOk()
             ->assertSee($this->testingUser->name)
-            ->assertViewIs('admin.user.edit');
+            ->assertViewIs('admin.user.user.edit');
     }
 
     /**

@@ -29,7 +29,7 @@
             @if($selected)
                 @foreach($options as $option)
                     <x-ui.form.option
-                        value="{{ $option->$key }}"
+                        :value="$option->$key"
                         :selected="old()
                     ? $option->$key == old($arrayKey.'.'.$name) || $option->$key == old($name)
                     : $option->$key == $selected">
@@ -39,7 +39,7 @@
             @else
                 @foreach($options as $option)
                     <x-ui.form.option
-                        value="{{ $option->$key }}"
+                        :value="$option->$key"
                         :selected="$arrayKey
                     ? $option->$key == old($arrayKey.'.'.$name)
                     : $option->$key == old($name)">
@@ -51,7 +51,7 @@
         @if($selected)
             @foreach($options as $option)
                 <x-ui.form.option
-                    value="{{ $option[$key] }}"
+                    :value="$option[$key]"
                     :selected="old()
                 ? $option[$key] == old($arrayKey.'.'.$name) || $option[$key] == old($name)
                 : $option[$key] == $selected">
@@ -61,7 +61,7 @@
         @else
             @foreach($options as $option)
                 <x-ui.form.option
-                    value="{{ $option[$key] }}"
+                    :value="$option[$key]"
                     :selected="$arrayKey
                 ? $option[$key] == old($arrayKey.'.'.$name)
                 : $option[$key] == old($name)">

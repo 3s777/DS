@@ -12,7 +12,7 @@ final class MainMenuComposer
     public function compose(View $view): void
     {
         $menu = Menu::make()
-            ->add(MenuItem::make('#', __('common.shelfs')))
+            ->add(MenuItem::make('#', trans_choice('common.shelfs', 2)))
             ->add(MenuItem::make('#', __('common.blog')))
             ->add(MenuItem::make(route('feed'), __('common.feed')))
             ->add(MenuItem::make('#', __('common.more'), class: 'main-menu__button-more'))

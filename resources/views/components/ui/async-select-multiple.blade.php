@@ -16,7 +16,7 @@
     id="{{ $name }}-select"
     :name="$arrayKey ? $arrayKey.'['.$name.'][]' : $name.'[]'"
     :error="$name"
-    label="{{ $label }}"
+    :label="$label"
     multiple>
 
     @if($defaultOption && !$selected)
@@ -28,7 +28,7 @@
     @if($selected)
         @if(!old($name) || !$showOld)
             @foreach($selected as $item)
-                <x-ui.form.option value="{{ $item->id }}" :selected="true">
+                <x-ui.form.option :value="$item->id" :selected="true">
                     {{ $item->name }}
                 </x-ui.form.option>
             @endforeach
@@ -37,7 +37,7 @@
 
     @if(old($name) && $showOld)
         @foreach(old('old_selected_'.$name)['old'] as $key => $value)
-            <x-ui.form.option value="{{ $key }}" :selected="true">
+            <x-ui.form.option :value="$key" :selected="true">
                 {{ $value }}
             </x-ui.form.option>
         @endforeach

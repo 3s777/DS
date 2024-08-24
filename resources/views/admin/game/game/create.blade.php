@@ -1,7 +1,7 @@
 <x-layouts.admin :search="false">
     <x-ui.form class="crud-form"
                id="create-form"
-               action="{{ route('games.store') }}"
+               :action="route('games.store')"
                enctype="multipart/form-data">
         <x-ui.title class="crud-form__tile" size="normal" indent="small">
             {{ __('game.add') }}
@@ -12,10 +12,10 @@
                 <x-grid.col xl="4" ls="6" ml="12" lg="6" md="6" sm="12">
                     <x-ui.form.group>
                         <x-ui.form.input-text
-                            placeholder="{{ trans_choice('common.name', 1) }}"
+                            :placeholder="trans_choice('common.name', 1)"
                             id="name"
                             name="name"
-                            value="{{ old('name') }}"
+                            :value="old('name')"
                             required
                             autocomplete="on"
                             autofocus>
@@ -26,10 +26,10 @@
                 <x-grid.col xl="4" ls="6" ml="12" lg="6" md="6" sm="12">
                     <x-ui.form.group>
                         <x-ui.form.input-text
-                            placeholder="{{ __('common.slug') }}"
+                            :placeholder="__('common.slug')"
                             id="slug"
                             name="slug"
-                            value="{{ old('slug') }}"
+                            :value="old('slug')"
                             autocomplete="on">
                         </x-ui.form.input-text>
                     </x-ui.form.group>
@@ -38,10 +38,10 @@
                 <x-grid.col xl="4" ls="6" ml="12" lg="6" md="6" sm="12">
                     <x-ui.form.group>
                         <x-ui.form.datepicker
-                            placeholder="{{ __('game.released_at') }}"
+                            :placeholder="__('game.released_at')"
                             id="released_at"
                             name="released_at"
-                            value="{{ old('released_at') }}">
+                            :value="old('released_at')">
                         </x-ui.form.datepicker>
                     </x-ui.form.group>
                 </x-grid.col>
@@ -50,9 +50,8 @@
                     <x-ui.form.group>
                         <x-ui.input-select
                             name="alternative_names"
-                            placeholder="{{ __('common.alternative_names') }}"
-                            default-option="{{ trans_choice('common.name', 2) }}"
-                        />
+                            :placeholder="__('common.alternative_names')"
+                            :default-option="trans_choice('common.name', 2)" />
                     </x-ui.form.group>
                 </x-grid.col>
 
@@ -61,9 +60,8 @@
                         <x-ui.data-select-multiple
                             name="genres"
                             :options="$genres"
-                            placeholder="{{ __('game_genre.choose') }}"
-                            default-option="{{ __('game_genre.genres') }}"
-                        />
+                            :placeholder="trans_choice('game_genre.choose', 2)"
+                            :default-option="trans_choice('game_genre.genres', 2)" />
                     </x-ui.form.group>
                 </x-grid.col>
 
@@ -72,9 +70,8 @@
                         <x-ui.data-select-multiple
                             name="platforms"
                             :options="$platforms"
-                            placeholder="{{ __('game_platform.choose') }}"
-                            default-option="{{ __('game_platform.platforms') }}"
-                        />
+                            :placeholder="trans_choice('game_platform.choose', 2)"
+                            :default-option="trans_choice('game_platform.platforms', 2)" />
                     </x-ui.form.group>
                 </x-grid.col>
 
@@ -84,8 +81,8 @@
                             name="developers"
                             :error="$errors->has('developers')"
                             route="select-game-developers"
-                            default-option="{{ __('game_developer.developer') }}"
-                            label="{{ __('game_developer.choose') }}">
+                            :default-option="trans_choice('game_developer.developers', 1)"
+                            :label="trans_choice('game_developer.choose', 2)">
                         </x-ui.async-select-multiple>
                     </x-ui.form.group>
                 </x-grid.col>
@@ -96,8 +93,8 @@
                             name="publishers"
                             :error="$errors->has('publishers')"
                             route="select-game-publishers"
-                            default-option="{{ __('game_publisher.publisher') }}"
-                            label="{{ __('game_publisher.choose') }}">
+                            :default-option="trans_choice('game_publisher.publishers', 2)"
+                            :label="trans_choice('game_publisher.choose', 2)">
                         </x-ui.async-select-multiple>
                     </x-ui.form.group>
                 </x-grid.col>
@@ -108,8 +105,8 @@
                             name="user"
                             :error="$errors->has('user_id')"
                             route="select-users"
-                            default-option="{{ trans_choice('user.choose', 1) }}"
-                            label="{{ trans_choice('user.users', 1) }}">
+                            :default-option="trans_choice('user.choose', 1)"
+                            :label="trans_choice('user.users', 1)">
                         </x-ui.async-select>
                     </x-ui.form.group>
                 </x-grid.col>
@@ -121,7 +118,7 @@
                 <x-libraries.rich-text-editor
                     name="description"
                     value=""
-                    placeholder="{{ __('common.description') }}"/>
+                    :placeholder="__('common.description')"/>
             </x-ui.form.group>
         </div>
 

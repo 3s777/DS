@@ -1,4 +1,4 @@
-<x-admin.filters search-placeholder="{{ __('game_publisher.search') }}">
+<x-admin.filters :search-placeholder="__('game_publisher.search')">
     <x-admin.filters-form>
         <x-grid.col xl="3" lg="4"  md="6" sm="12">
             <x-ui.form.group>

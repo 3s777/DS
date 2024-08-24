@@ -75,7 +75,7 @@
                             route="select-games"
                             :selected="$gameMedia->games ?? false"
                             default-option="{{ __('game.game') }}"
-                            label="{{ __('game.choose') }}">
+                            label="{{ trans_choice('game.choose', 1) }}">
                         </x-ui.async-select-multiple>
                     </x-ui.form.group>
                 </x-grid.col>
@@ -85,7 +85,7 @@
                         <x-ui.data-select-multiple
                             name="genres"
                             :options="$genres"
-                            placeholder="{{ __('game_genre.choose') }}"
+                            placeholder="{{ trans_choice('game_genre.choose', 2) }}"
                             :selected="$gameMedia->genres" />
                     </x-ui.form.group>
                 </x-grid.col>
@@ -95,7 +95,7 @@
                         <x-ui.data-select-multiple
                             name="platforms"
                             :options="$platforms"
-                            placeholder="{{ __('game_platform.choose') }}"
+                            placeholder="{{ trans_choice('game_platform.choose', 2) }}"
                             :selected="$gameMedia->platforms" />
                     </x-ui.form.group>
                 </x-grid.col>
@@ -106,8 +106,8 @@
                             name="developers"
                             route="select-game-developers"
                             :selected="$gameMedia->developers ?? false"
-                            default-option="{{ __('game_developer.developer') }}"
-                            label="{{ __('game_developer.choose') }}">
+                            default-option="{{ trans_choice('game_developer.developers', 1) }}"
+                            label="{{ trans_choice('game_developer.choose', 2) }}">
                         </x-ui.async-select-multiple>
                     </x-ui.form.group>
                 </x-grid.col>
@@ -118,8 +118,8 @@
                             name="publishers"
                             route="select-game-publishers"
                             :selected="$gameMedia->publishers ?? false"
-                            default-option="{{ __('game_publisher.publisher') }}"
-                            label="{{ __('game_publisher.choose') }}">
+                            default-option="{{ trans_choice('game_publisher.publishers', 2) }}"
+                            label="{{ trans_choice('game_publisher.choose', 2) }}">
                         </x-ui.async-select-multiple>
                     </x-ui.form.group>
                 </x-grid.col>

@@ -31,16 +31,16 @@
                     {{ trans_choice('common.name', 1) }}
                 </x-ui.responsive-table.column>
                 <x-ui.responsive-table.column name="genres">
-                    {{ __('game_genre.genres') }}
+                    {{ trans_choice('game_genre.genres', 2) }}
                 </x-ui.responsive-table.column>
                 <x-ui.responsive-table.column name="platforms">
-                    {{ __('game_platform.platforms') }}
+                    {{ trans_choice('game_platform.platforms', 2) }}
                 </x-ui.responsive-table.column>
                 <x-ui.responsive-table.column name="developers">
-                    {{ __('game_developer.developers') }}
+                    {{ trans_choice('game_developer.developers', 2) }}
                 </x-ui.responsive-table.column>
                 <x-ui.responsive-table.column name="publishers">
-                    {{ __('game_publisher.publishers') }}
+                    {{ trans_choice('game_publisher.publishers', 2) }}
                 </x-ui.responsive-table.column>
                 <x-ui.responsive-table.column name="users.name" sortable="true">
                     {{ trans_choice('user.users', 1) }}
@@ -65,25 +65,25 @@
                         <span class="responsive-table__label">{{ trans_choice('common.name', 1) }}: </span> {{ $game->name }}
                     </x-ui.responsive-table.column>
                     <x-ui.responsive-table.column>
-                        <span class="responsive-table__label">{{ __('game_genre.genres') }}: </span>
+                        <span class="responsive-table__label">{{ trans_choice('game_genre.genres', 2) }}: </span>
                         @foreach($game->genres as $genre)
                             {{ $genre['name'] }},
                         @endforeach
                     </x-ui.responsive-table.column>
                     <x-ui.responsive-table.column>
-                        <span class="responsive-table__label">{{ __('game_platform.platforms') }}: </span>
+                        <span class="responsive-table__label">{{ trans_choice('game_platform.platforms', 2) }}: </span>
                         @foreach($game->platforms as $platform)
                             {{ $platform['name'] }},
                         @endforeach
                     </x-ui.responsive-table.column>
                     <x-ui.responsive-table.column>
-                        <span class="responsive-table__label">{{ __('game_developer.developers') }}: </span>
+                        <span class="responsive-table__label">{{ trans_choice('game_developer.developers', 2) }}: </span>
                         @foreach($game->developers as $developer)
                             {{ $developer['name'] }},
                         @endforeach
                     </x-ui.responsive-table.column>
                     <x-ui.responsive-table.column>
-                        <span class="responsive-table__label">{{ __('game_publisher.publishers') }}: </span>
+                        <span class="responsive-table__label">{{ trans_choice('game_publisher.publishers', 2) }}: </span>
                         @foreach($game->publishers as $publisher)
                             {{ $publisher['name'] }},
                         @endforeach

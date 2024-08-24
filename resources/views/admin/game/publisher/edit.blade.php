@@ -2,7 +2,7 @@
     <x-ui.form class="crud-form"
                method="put"
                id="edit-form"
-               action="{{ route('game-publishers.update', $gamePublisher->slug) }}"
+               :action="route('game-publishers.update', $gamePublisher->slug)"
                enctype="multipart/form-data">
         <x-ui.title class="crud-form__tile" size="normal" indent="small">
             {{ __('game_publisher.edit') }}

@@ -59,8 +59,8 @@
                             name="game_platform_manufacturer_id"
                             :options="$manufacturers"
                             :selected="$gamePlatform->game_platform_manufacturer->id"
-                            :default-option="__('game_platform_manufacturer.manufacturer')"
-                            :placeholder="__('game_platform_manufacturer.choose')" />
+                            :default-option="trans_choice('game_platform_manufacturer.manufacturers', 1)"
+                            :placeholder="trans_choice('game_platform_manufacturer.choose', 1)" />
                     </x-ui.form.group>
                 </x-grid.col>
 
@@ -70,8 +70,8 @@
 {{--                            :selected="$gamePlatform->game_platform_manufacturer ?? false"--}}
 {{--                            name="game_platform_manufacturer"--}}
 {{--                            route="select-game-platform-manufacturers"--}}
-{{--                            label="{{ __('game_platform_manufacturer.manufacturer') }}"--}}
-{{--                            default-option="{{ __('game_platform_manufacturer.choose') }}">--}}
+{{--                            label="{{ trans_choice('game_platform_manufacturer.manufacturers', 1) }}"--}}
+{{--                            default-option="{{ trans_choice('game_platform_manufacturer.choose', 1) }}">--}}
 {{--                        </x-ui.async-select>--}}
 {{--                    </x-ui.form.group>--}}
 {{--                </x-grid.col>--}}

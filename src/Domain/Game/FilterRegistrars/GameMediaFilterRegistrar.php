@@ -38,39 +38,39 @@ class GameMediaFilterRegistrar implements FilterRegistrar
                 'user',
                 'game_medias',
                 'user_id',
-                __('user.choose'),
+                trans_choice('user.choose', 1),
                 User::class
             ),
             'genres' => RelationMultipleFilter::make(
-                __('game_genre.genres'),
+                trans_choice('game_genre.genres', 2),
                 'genres',
                 'game_genres',
                 'id',
-                __('game_genre.choose'),
+                trans_choice('game_genre.choose', 1),
                 GameGenre::class
             ),
             'developers' => RelationMultipleFilter::make(
-                __('game_developer.developers'),
+                trans_choice('game_developer.developers', 2),
                 'developers',
                 'game_developers',
                 'id',
-                __('game_developer.choose'),
+                trans_choice('game_developer.choose', 1),
                 GameDeveloper::class
             ),
             'publishers' => RelationMultipleFilter::make(
-                __('game_publisher.publishers'),
+                trans_choice('game_publisher.publishers', 2),
                 'publishers',
                 'game_publishers',
                 'id',
-                __('game_publisher.choose'),
+                trans_choice('game_publisher.choose', 1),
                 GamePublisher::class
             ),
             'platforms' => RelationMultipleFilter::make(
-                __('game_platform.platforms'),
+                trans_choice('game_platform.platforms', 2),
                 'platforms',
                 'game_platforms',
                 'id',
-                __('game_platform.choose'),
+                trans_choice('game_platform.choose', 1),
                 GamePlatform::class
             ),
         ];
