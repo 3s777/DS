@@ -62,7 +62,7 @@
                     <x-ui.form.group>
                         <x-ui.input-select
                             name="barcodes"
-                            placeholder="{{ __('common.enter_barcodes') }}"
+                            placeholder="{{ trans_choice('common.enter_barcodes', 2) }}"
                             value="{{ implode('||', $gameMedia->barcodes) }}"
                         />
                     </x-ui.form.group>

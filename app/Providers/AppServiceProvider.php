@@ -40,6 +40,7 @@ class AppServiceProvider extends ServiceProvider
             return null;
         });
 
+        //Ручная регистрация полиций laravel 11
         Gate::policy(GameDeveloper::class, GameDeveloperPolicy::class);
         Gate::policy(User::class, UserPolicy::class);
         Gate::policy(Role::class, RolePolicy::class);

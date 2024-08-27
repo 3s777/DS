@@ -126,7 +126,7 @@ class GamePublisherController extends Controller
         return new AsyncSelectViewModel(
             $request->input('query'),
             GamePublisher::class,
-            'game_publisher.choose'
+            trans_choice('game_publisher.choose', 2)
         );
     }
 }

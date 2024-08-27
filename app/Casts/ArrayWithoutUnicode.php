@@ -9,12 +9,15 @@ class ArrayWithoutUnicode implements CastsAttributes
 {
     /**
      *
-     * @param  array<string, mixed>  $attributes
-     * @return array<string, mixed>
+     * @param Model $model
+     * @param string $key
+     * @param mixed $value
+     * @param array<string, mixed> $attributes
+     * @return array|null
      */
     public function get(Model $model, string $key, mixed $value, array $attributes): array
     {
-        return json_decode($value, true);
+        return json_decode($value, true) ?? [];
     }
 
     /**
