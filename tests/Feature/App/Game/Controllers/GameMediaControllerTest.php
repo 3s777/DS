@@ -17,7 +17,6 @@ use Illuminate\Support\Facades\Queue;
 use Illuminate\Support\Facades\Storage;
 use Tests\TestCase;
 
-
 class GameMediaControllerTest extends TestCase
 {
     use RefreshDatabase;
@@ -147,15 +146,20 @@ class GameMediaControllerTest extends TestCase
      * @test
      * @return void
      */
-    public function it_validation_name_fail(): void
+    public function it_validation_fail(): void
     {
         $this->app['session']->setPreviousUrl(route('game-medias.create'));
 
         $this->request['name'] = '';
+        $this->request['article_number'] = ['fake', 'fake 2'];
+        $this->request['alternative_names'] = ['fake', 'fake 2'];
+        $this->request['barcodes'] = ['fake', 'fake 2'];
+        $this->request['user_id'] = 1500000;
+        $this->request['genres'] = 1500000;
 
         $this->actingAs($this->user)
             ->post(action([GameMediaController::class, 'store']), $this->request)
-            ->assertInvalid(['name'])
+            ->assertInvalid(['name', 'article_number', 'alternative_names', 'barcodes', 'user_id', 'genres'])
             ->assertRedirectToRoute('game-medias.create');
 
         $this->assertDatabaseMissing('game_medias', [

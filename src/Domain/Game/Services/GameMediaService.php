@@ -1,18 +1,14 @@
 <?php namespace Domain\Game\Services;
 
 use App\Exceptions\CrudException;
-use Domain\Game\DTOs\CreateGameDTO;
-use Domain\Game\DTOs\CreateGameMediaDTO;
-use Domain\Game\DTOs\UpdateGameDTO;
-use Domain\Game\DTOs\UpdateGameMediaDTO;
-use Domain\Game\Models\Game;
+use Domain\Game\DTOs\FillGameMediaDTO;
 use Domain\Game\Models\GameMedia;
 use Illuminate\Support\Facades\DB;
 use Throwable;
 
 class GameMediaService
 {
-    public function create(CreateGameMediaDTO $data): GameMedia
+    public function create(FillGameMediaDTO $data): GameMedia
     {
         try {
             DB::beginTransaction();
@@ -49,7 +45,7 @@ class GameMediaService
         }
     }
 
-    public function update(GameMedia $gameMedia, UpdateGameMediaDTO $data): GameMedia
+    public function update(GameMedia $gameMedia, FillGameMediaDTO $data): GameMedia
     {
         try {
             DB::beginTransaction();

@@ -7,8 +7,7 @@ use App\Http\Requests\Game\CreateGameMediaRequest;
 use App\Jobs\GenerateSmallThumbnailsJob;
 use App\Jobs\GenerateThumbnailJob;
 use Domain\Auth\Models\User;
-use Domain\Game\DTOs\CreateGameMediaDTO;
-use Domain\Game\DTOs\UpdateGameMediaDTO;
+use Domain\Game\DTOs\FillGameMediaDTO;
 use Domain\Game\Models\Game;
 use Domain\Game\Models\GameDeveloper;
 use Domain\Game\Models\GameGenre;
@@ -58,7 +57,7 @@ class GameMediaServiceTest extends TestCase
 
         $gameService = app(GameMediaService::class);
 
-        $gameService->create(CreateGameMediaDTO::fromRequest(
+        $gameService->create(FillGameMediaDTO::fromRequest(
             $request
         ));
 
@@ -108,7 +107,7 @@ class GameMediaServiceTest extends TestCase
 
         $gameMediaService = app(GameMediaService::class);
 
-        $gameMediaService->create(CreateGameMediaDTO::fromRequest(
+        $gameMediaService->create(FillGameMediaDTO::fromRequest(
             $createRequest
         ));
 
@@ -133,7 +132,7 @@ class GameMediaServiceTest extends TestCase
 
         $updateRequest = new CreateUserRequest($this->request);
 
-        $gameMediaService->update($gameMedia, UpdateGameMediaDTO::fromRequest($updateRequest));
+        $gameMediaService->update($gameMedia, FillGameMediaDTO::fromRequest($updateRequest));
 
         $this->assertDatabaseHas('game_medias', [
             'name' => 'NewNameGameMedia',

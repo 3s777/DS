@@ -6,15 +6,19 @@ use Illuminate\Http\Request;
 use Illuminate\Http\UploadedFile;
 use Support\Traits\Makeable;
 
-class UpdateGameDTO
+class FillGameMediaDTO
 {
     use Makeable;
 
     public function __construct(
         public readonly string $name,
+        public readonly ?string $article_number = null,
+        public readonly ?string $barcodes = null,
+        public readonly ?string $alternative_names = null,
         public readonly ?int $user_id = null,
         public readonly ?string $slug = null,
         public readonly ?string $released_at = null,
+        public readonly ?array $games = null,
         public readonly ?array $genres = null,
         public readonly ?array $platforms = null,
         public readonly ?array $developers = null,
@@ -22,7 +26,6 @@ class UpdateGameDTO
         public readonly ?UploadedFile $thumbnail = null,
         public readonly ?string $thumbnail_uploaded = null,
         public readonly ?string $description = null,
-        public readonly ?string $alternative_names = null
     ) {
     }
 
@@ -30,9 +33,13 @@ class UpdateGameDTO
     {
         return static::make(...$request->only([
             'name',
+            'article_number',
+            'barcodes',
+            'alternative_names',
             'user_id',
             'slug',
             'released_at',
+            'games',
             'genres',
             'platforms',
             'developers',
@@ -40,7 +47,6 @@ class UpdateGameDTO
             'thumbnail',
             'thumbnail_uploaded',
             'description',
-            'alternative_names'
         ]));
     }
 }

@@ -7,8 +7,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Game\CreateGameMediaRequest;
 use App\Http\Requests\Game\UpdateGameMediaRequest;
 use App\Http\Requests\MassDeletingRequest;
-use Domain\Game\DTOs\CreateGameMediaDTO;
-use Domain\Game\DTOs\UpdateGameMediaDTO;
+use Domain\Game\DTOs\FillGameMediaDTO;
 use Domain\Game\Models\GameMedia;
 use Domain\Game\Services\GameMediaService;
 use Domain\Game\ViewModels\GameMediaUpdateViewModel;
@@ -40,7 +39,7 @@ class GameMediaController extends Controller
 
     public function store(CreateGameMediaRequest $request, GameMediaService $gameMediaService): Application|Redirector|RedirectResponse|\Illuminate\Contracts\Foundation\Application
     {
-        $gameMediaService->create(CreateGameMediaDTO::fromRequest($request));
+        $gameMediaService->create(FillGameMediaDTO::fromRequest($request));
 
         flash()->info(__('game_media.created'));
 
@@ -59,7 +58,7 @@ class GameMediaController extends Controller
 
     public function update(UpdateGameMediaRequest $request, GameMedia $gameMedia, GameMediaService $gameMediaService): RedirectResponse
     {
-        $gameMediaService->update($gameMedia, UpdateGameMediaDTO::fromRequest($request));
+        $gameMediaService->update($gameMedia, FillGameMediaDTO::fromRequest($request));
 
         flash()->info(__('game_media.updated'));
 

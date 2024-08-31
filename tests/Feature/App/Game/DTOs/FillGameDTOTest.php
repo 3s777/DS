@@ -2,14 +2,12 @@
 
 namespace App\Game\DTOs;
 
-use App\Http\Requests\Game\CreateGameMediaRequest;
 use App\Http\Requests\Game\CreateGameRequest;
-use Domain\Game\DTOs\CreateGameDTO;
-use Domain\Game\DTOs\CreateGameMediaDTO;
+use Domain\Game\DTOs\FillGameDTO;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
-class CreateGameMediaDTOTest extends TestCase
+class FillGameDTOTest extends TestCase
 {
     use RefreshDatabase;
 
@@ -17,7 +15,7 @@ class CreateGameMediaDTOTest extends TestCase
     {
         parent::setUp();
 
-        $this->request = CreateGameMediaRequest::factory()->create();
+        $this->request = CreateGameRequest::factory()->create();
     }
 
     /**
@@ -26,9 +24,9 @@ class CreateGameMediaDTOTest extends TestCase
      */
     public function it_instance_created_from_register_request_success(): void
     {
-        $data = CreateGameMediaDTO::fromRequest(new CreateGameMediaRequest($this->request));
+        $data = FillGameDTO::fromRequest(new CreateGameRequest($this->request));
 
-        $this->assertInstanceOf(CreateGameMediaDTO::class, $data);
+        $this->assertInstanceOf(FillGameDTO::class, $data);
     }
 
     /**
@@ -37,9 +35,9 @@ class CreateGameMediaDTOTest extends TestCase
      */
     public function it_instance_created_from_create_request_success(): void
     {
-        $data = CreateGameMediaDTO::fromRequest(new CreateGameMediaRequest($this->request));
+        $data = FillGameDTO::fromRequest(new CreateGameRequest($this->request));
 
-        $this->assertInstanceOf(CreateGameMediaDTO::class, $data);
+        $this->assertInstanceOf(FillGameDTO::class, $data);
     }
 
 
@@ -49,7 +47,7 @@ class CreateGameMediaDTOTest extends TestCase
      */
     public function it_instance_created_success(): void
     {
-        $data = CreateGameMediaDTO::make(
+        $data = FillGameDTO::make(
             name: $this->request['name'],
             description: $this->request['description'],
             released_at: $this->request['released_at'],
@@ -57,11 +55,8 @@ class CreateGameMediaDTOTest extends TestCase
             publishers: $this->request['publishers'],
             genres: $this->request['genres'],
             platforms: $this->request['platforms'],
-            games: $this->request['games'],
-            alternative_names: $this->request['alternative_names'],
-            barcodes: $this->request['barcodes'],
         );
 
-        $this->assertInstanceOf(CreateGameMediaDTO::class, $data);
+        $this->assertInstanceOf(FillGameDTO::class, $data);
     }
 }

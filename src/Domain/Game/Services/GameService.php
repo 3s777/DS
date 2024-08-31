@@ -1,15 +1,14 @@
 <?php namespace Domain\Game\Services;
 
 use App\Exceptions\CrudException;
-use Domain\Game\DTOs\CreateGameDTO;
-use Domain\Game\DTOs\UpdateGameDTO;
+use Domain\Game\DTOs\FillGameDTO;
 use Domain\Game\Models\Game;
 use Illuminate\Support\Facades\DB;
 use Throwable;
 
 class GameService
 {
-    public function create(CreateGameDTO $data): Game
+    public function create(FillGameDTO $data): Game
     {
         try {
             DB::beginTransaction();
@@ -43,7 +42,7 @@ class GameService
         }
     }
 
-    public function update(Game $game, UpdateGameDTO $data)
+    public function update(Game $game, FillGameDTO $data)
     {
         try {
             DB::beginTransaction();

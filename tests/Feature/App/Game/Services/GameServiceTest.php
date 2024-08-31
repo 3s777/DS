@@ -7,8 +7,7 @@ use App\Http\Requests\Game\CreateGameRequest;
 use App\Jobs\GenerateSmallThumbnailsJob;
 use App\Jobs\GenerateThumbnailJob;
 use Domain\Auth\Models\User;
-use Domain\Game\DTOs\CreateGameDTO;
-use Domain\Game\DTOs\UpdateGameDTO;
+use Domain\Game\DTOs\FillGameDTO;
 use Domain\Game\Models\Game;
 use Domain\Game\Models\GameDeveloper;
 use Domain\Game\Models\GameGenre;
@@ -57,7 +56,7 @@ class GameServiceTest extends TestCase
 
         $gameService = app(GameService::class);
 
-        $gameService->create(CreateGameDTO::fromRequest(
+        $gameService->create(FillGameDTO::fromRequest(
             $request
         ));
 
@@ -103,7 +102,7 @@ class GameServiceTest extends TestCase
 
         $gameService = app(GameService::class);
 
-        $gameService->create(CreateGameDTO::fromRequest(
+        $gameService->create(FillGameDTO::fromRequest(
             $createRequest
         ));
 
@@ -126,7 +125,7 @@ class GameServiceTest extends TestCase
 
         $updateRequest = new CreateUserRequest($this->request);
 
-        $gameService->update($game, UpdateGameDTO::fromRequest($updateRequest));
+        $gameService->update($game, FillGameDTO::fromRequest($updateRequest));
 
         $this->assertDatabaseHas('games', [
             'name' => 'NewNameGame',

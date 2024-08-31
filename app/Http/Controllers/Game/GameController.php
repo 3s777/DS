@@ -7,10 +7,8 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Game\CreateGameRequest;
 use App\Http\Requests\Game\UpdateGameRequest;
 use App\Http\Requests\MassDeletingRequest;
-use Domain\Game\DTOs\CreateGameDTO;
-use Domain\Game\DTOs\UpdateGameDTO;
+use Domain\Game\DTOs\FillGameDTO;
 use Domain\Game\Models\Game;
-use Domain\Game\Models\GamePublisher;
 use Domain\Game\Services\GameService;
 use Domain\Game\ViewModels\GameUpdateViewModel;
 use Domain\Game\ViewModels\GameIndexViewModel;
@@ -43,7 +41,7 @@ class GameController extends Controller
 
     public function store(CreateGameRequest $request, GameService $gameService): Application|Redirector|RedirectResponse|\Illuminate\Contracts\Foundation\Application
     {
-        $gameService->create(CreateGameDTO::fromRequest($request));
+        $gameService->create(FillGameDTO::fromRequest($request));
 
         flash()->info(__('game.created'));
 
@@ -62,7 +60,7 @@ class GameController extends Controller
 
     public function update(UpdateGameRequest $request, Game $game, GameService $gameService): RedirectResponse
     {
-        $gameService->update($game, UpdateGameDTO::fromRequest($request));
+        $gameService->update($game, FillGameDTO::fromRequest($request));
 
         flash()->info(__('game.updated'));
 
