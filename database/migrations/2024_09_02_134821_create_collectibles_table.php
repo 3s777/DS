@@ -1,6 +1,7 @@
 <?php
 
-use App\Models\Shelf;
+use Domain\Auth\Models\User;
+use Domain\Shelf\Models\Shelf;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -23,6 +24,7 @@ return new class extends Migration
             $table->morphs('collectable');
             $table->string('thumbnail')->nullable();
             $table->jsonb('description')->nullable();
+            $table->foreignIdFor(User::class)->constrained();
 
             $table->softDeletes();
             $table->timestamps();
