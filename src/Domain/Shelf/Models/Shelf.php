@@ -6,6 +6,8 @@ use Database\Factories\Shelf\CollectibleFactory;
 use Database\Factories\Shelf\ShelfFactory;
 use Domain\Auth\Models\User;
 use Domain\Game\Models\GamePlatform;
+use Domain\Shelf\FilterRegistrars\ShelfFilterRegistrar;
+use Domain\Shelf\QueryBuilders\ShelfQueryBuilder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -27,9 +29,11 @@ class Shelf extends Model implements HasMedia
     use HasUser;
     use HasTranslations;
 
+
     protected $fillable = [
         'name',
         'number',
+        'ulid',
         'description',
         'user_id',
     ];
@@ -72,15 +76,15 @@ class Shelf extends Model implements HasMedia
         ];
     }
 
-//    public function availableFilters(): array
-//    {
-//        return app(GameFilterRegistrar::class)->filtersList();
-//    }
-//
-//    public function newEloquentBuilder($query): GameQueryBuilder
-//    {
-//        return new GameQueryBuilder($query);
-//    }
+    public function availableFilters(): array
+    {
+        return app(ShelfFilterRegistrar::class)->filtersList();
+    }
+
+    public function newEloquentBuilder($query): ShelfQueryBuilder
+    {
+        return new ShelfQueryBuilder($query);
+    }
 
     public function user(): BelongsTo
     {

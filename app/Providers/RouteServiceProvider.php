@@ -7,6 +7,7 @@ use App\Routing\AppRegistrar;
 use App\Routing\AuthRegistrar;
 use App\Routing\FilepondRegistrar;
 use App\Routing\GameRegistrar;
+use App\Routing\ShelfRegistrar;
 use Illuminate\Cache\RateLimiting\Limit;
 use Illuminate\Contracts\Routing\Registrar;
 use Illuminate\Foundation\Support\Providers\RouteServiceProvider as ServiceProvider;
@@ -30,6 +31,7 @@ class RouteServiceProvider extends ServiceProvider
         AppRegistrar::class,
         AuthRegistrar::class,
         GameRegistrar::class,
+        ShelfRegistrar::class,
         FilepondRegistrar::class,
     ];
 

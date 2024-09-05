@@ -42,7 +42,7 @@ class GameService
         }
     }
 
-    public function update(Game $game, FillGameDTO $data)
+    public function update(Game $game, FillGameDTO $data): Game
     {
         try {
             DB::beginTransaction();

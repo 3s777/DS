@@ -48,6 +48,7 @@ class AppServiceProvider extends ServiceProvider
         Model::shouldBeStrict(!app()->isProduction());
 
         Relation::enforceMorphMap([
+            'shelf' => 'Domain\Shelf\Models\Shelf',
             'game' => 'Domain\Game\Models\Game',
             'game_media' => 'Domain\Game\Models\GameMedia',
             'game_developer' => 'Domain\Game\Models\GameDeveloper',

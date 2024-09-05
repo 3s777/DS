@@ -15,6 +15,7 @@ class MassDeletingAction
 
         try {
             DB::transaction(function () use ($selectedIdsArray, $data) {
+
                 foreach ($selectedIdsArray as $id) {
                     if (is_numeric($id)) {
                         if($data->isForce) {
