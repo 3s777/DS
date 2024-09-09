@@ -37,7 +37,7 @@
                 <x-grid.col xl="4" ls="6" ml="12" lg="6" md="6" sm="12">
                     <x-ui.form.group>
                         <x-ui.form.input-text
-                            :placeholder="__('common.article_number')"
+                            :placeholder="trans_choice('common.article_numbers', 1)"
                             id="article_number"
                             name="article_number"
                             :value="old('article_number')"

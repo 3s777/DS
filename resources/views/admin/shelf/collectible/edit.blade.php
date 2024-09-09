@@ -2,10 +2,10 @@
     <x-ui.form class="crud-form"
                method="put"
                id="edit-form"
-               :action="route('game-platforms.update', $gamePlatform->slug)"
+               :action="route('shelves.update', $shelf->id)"
                enctype="multipart/form-data">
         <x-ui.title class="crud-form__tile" size="normal" indent="small">
-            {{ __('game_platform.edit') }}
+            {{ __('shelf.edit') }}
         </x-ui.title>
 
         <div class="crud-form__main">
@@ -16,7 +16,7 @@
                             :placeholder="trans_choice('common.name', 1)"
                             id="name"
                             name="name"
-                            :value="$gamePlatform->name"
+                            :value="$shelf->name"
                             required
                             autocomplete="on"
                             autofocus>
@@ -27,10 +27,10 @@
                 <x-grid.col xl="4" ls="6" ml="12" lg="6" md="6" sm="12">
                     <x-ui.form.group>
                         <x-ui.form.input-text
-                            :placeholder="__('common.slug')"
-                            id="slug"
-                            name="slug"
-                            :value="$gamePlatform->slug"
+                            :placeholder="trans_choice('common.number', 1)"
+                            id="number"
+                            name="number"
+                            :value="$shelf->number"
                             autocomplete="on">
                         </x-ui.form.input-text>
                     </x-ui.form.group>
@@ -38,36 +38,12 @@
 
                 <x-grid.col xl="4" ls="6" ml="12" lg="6" md="6" sm="12">
                     <x-ui.form.group>
-                        <x-ui.enum-select
-                            id="type"
-                            name="type"
-                            required
-                            :selected="$gamePlatform->type"
-                            :options="$types"
-                            :default-option="__('game_platform.choose_type')"
-                            :placeholder="__('game_platform.choose_type')" />
-                    </x-ui.form.group>
-                </x-grid.col>
-
-                <x-grid.col xl="4" ls="6" lg="12" md="12" sm="12">
-                    <x-ui.form.group>
-                        <x-ui.data-select
-                            name="game_platform_manufacturer_id"
-                            :options="$manufacturers"
-                            :selected="$gamePlatform->game_platform_manufacturer->id ?? false"
-                            :default-option="trans_choice('game_platform_manufacturer.manufacturers', 1)"
-                            :placeholder="trans_choice('game_platform_manufacturer.choose', 1)" />
-                    </x-ui.form.group>
-                </x-grid.col>
-
-                <x-grid.col xl="4" ls="6" ml="12" lg="6" md="6" sm="12">
-                    <x-ui.form.group>
                         <x-ui.async-select
-                            :selected="$gamePlatform->user ?? false"
+                            :selected="$shelf->user ?? false"
                             name="user"
                             route="select-users"
-                            :label="trans_choice('user.users', 1)"
-                            :default-option="trans_choice('user.choose', 1)">
+                            :default-option="trans_choice('user.choose', 1)"
+                            :label="trans_choice('user.users', 1)">
                         </x-ui.async-select>
                     </x-ui.form.group>
                 </x-grid.col>
@@ -78,7 +54,7 @@
             <x-ui.form.group>
                 <x-libraries.rich-text-editor
                     name="description"
-                    :value="$gamePlatform->description"
+                    :value="$shelf->description"
                     :placeholder="__('common.description')"/>
             </x-ui.form.group>
         </div>
@@ -89,13 +65,13 @@
                     class="crud-form__input-image"
                     name="thumbnail"
                     id="thumbnail"
-                    :path="$gamePlatform->getThumbnailPath()">
-                    @if($gamePlatform->getThumbnailPath())
+                    :path="$shelf->getThumbnailPath()">
+                    @if($shelf->getThumbnailPath())
                     <x-slot:uploaded-thumbnail>
                         <x-ui.responsive-image
-                            :model="$gamePlatform"
+                            :model="$shelf"
                             :image-sizes="['small', 'medium', 'large']"
-                            :path="$gamePlatform->getThumbnailPath()"
+                            :path="$shelf->getThumbnailPath()"
                             :placeholder="false"
                             sizes="(max-width: 1024px) 100vw, (max-width: 1400px) 30vw, 220px">
                             <x-slot:img alt="test" title="test title"></x-slot:img>

@@ -12,6 +12,8 @@ use Domain\Game\Models\GameGenre;
 use Domain\Game\Models\GamePlatform;
 use Domain\Game\Models\GamePublisher;
 use Domain\Game\QueryBuilders\GameQueryBuilder;
+use Domain\Shelf\FilterRegistrars\CollectibleFilterRegistrar;
+use Domain\Shelf\QueryBuilders\CollectibleQueryBuilder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -82,15 +84,15 @@ class Collectible extends Model implements HasMedia
         ];
     }
 
-//    public function availableFilters(): array
-//    {
-//        return app(GameFilterRegistrar::class)->filtersList();
-//    }
-//
-//    public function newEloquentBuilder($query): GameQueryBuilder
-//    {
-//        return new GameQueryBuilder($query);
-//    }
+    public function availableFilters(): array
+    {
+        return app(CollectibleFilterRegistrar::class)->filtersList();
+    }
+
+    public function newEloquentBuilder($query): CollectibleQueryBuilder
+    {
+        return new CollectibleQueryBuilder($query);
+    }
 
     public function user(): BelongsTo
     {

@@ -30,7 +30,7 @@ class CreateCollectibleRequest extends FormRequest
                 Rule::unique(Shelf::class)
             ],
             'number' => [
-                'nullable',
+                'required',
                 'integer',
                 'numeric',
                 'max:20'

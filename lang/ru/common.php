@@ -53,9 +53,16 @@ return [
     'collapse_menu' => 'Свернуть меню',
     'statistic' => 'Статистика',
     'list' => 'Список',
-    'article_number' => 'Артикул',
+    'article_numbers' => 'Артикул|Артикулы',
     'barcodes' => 'Штрихкод|Штрихкоды',
     'alternative_names' => 'Альтернативные названия',
     'press_enter' => 'Нажмите Enter чтобы добавить',
-    'enter_barcodes' => 'Введите штрихкод|Введите штрихкоды'
+    'enter_barcodes' => 'Введите штрихкод|Введите штрихкоды',
+    'condition' => 'Состояние',
+    'new' => 'Новый',
+    'used' => 'Б/У',
+    'refurbished' => 'Восстановленный',
+    'repackaged' => 'Перепак',
+    'other' => 'Другое',
+    'choose_condition' => 'Выберите состояние'
 ];

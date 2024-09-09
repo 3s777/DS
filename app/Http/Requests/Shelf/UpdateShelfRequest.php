@@ -30,7 +30,7 @@ class UpdateShelfRequest extends FormRequest
                 Rule::unique(Game::class)->ignore($this->game)
             ],
             'number' => [
-                'nullable',
+                'required',
                 'integer',
                 'numeric',
                 'max:20'
