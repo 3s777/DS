@@ -15,13 +15,16 @@ window.asyncSelectSearch = class AsyncSelectSearch {
             })
     }
 
-    async asyncSearch(choices) {
+    async asyncSearch(choices, sd) {
         const url = new URL(this.asyncUrl)
 
         const query = this.searchTerms.value ?? null
 
+        console.log('sd')
+
         if (query !== null && query.length) {
             url.searchParams.append('query', query)
+            url.searchParams.append('depended[user_id]', 11)
         }
 
         const options = await this.fromUrl(url.toString())

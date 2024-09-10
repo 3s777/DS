@@ -16,7 +16,9 @@ use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
 use Illuminate\Foundation\Application;
 use Illuminate\Http\RedirectResponse;
+use Illuminate\Http\Request;
 use Illuminate\Routing\Redirector;
+
 use Support\Actions\MassDeletingAction;
 use Support\DTOs\MassDeletingDTO;
 
@@ -37,8 +39,11 @@ class CollectibleController extends Controller
         return view('admin.shelf.collectible.create', new CollectibleUpdateViewModel());
     }
 
-    public function store(CreateCollectibleRequest $request, CollectibleService $collectibleService): Application|Redirector|RedirectResponse|\Illuminate\Contracts\Foundation\Application
+//    public function store(CreateCollectibleRequest $request, CollectibleService $collectibleService): Application|Redirector|RedirectResponse|\Illuminate\Contracts\Foundation\Application
+    public function store(Request $request): Application|Redirector|RedirectResponse|\Illuminate\Contracts\Foundation\Application
+
     {
+        dd($request);
         $collectibleService->create(FillCollectibleDTO::fromRequest($request));
 
         flash()->info(__('collectible.created'));

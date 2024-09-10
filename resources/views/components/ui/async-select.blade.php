@@ -6,7 +6,10 @@
     'selectName' => false,
     'showOld' => true,
     'defaultOption' => false,
-    'error' => false
+    'error' => false,
+    'dependedOn' => false,
+    'dependedField' => false,
+    'field' => 'user_id'
 ])
 
 <x-libraries.choices
@@ -16,6 +19,7 @@
     id="{{ $name }}-select"
     :name="$selectName ?: $name.'_id'"
     :error="$error"
+
     :label="$label">
 
     @if($defaultOption && !$selected)
@@ -71,15 +75,51 @@
             },
         });
 
+
+
         {{--asyncSelect.searchTerms.addEventListener(--}}
         {{--    'input',--}}
         {{--    event => choices{{ $name }}.clearStore(),--}}
         {{--    false,--}}
         {{--)--}}
 
+            const sd{{ $name }} = {}
+
+        @if($dependedOn)
+            const {{ $name }}DependedList = document.querySelector('.{{ $dependedOn }}-select');
+
+            choices{{ $name }}.disable();
+
+            {{ $name }}DependedList.addEventListener(
+                'addItem',
+                function(event) {
+                    choices{{ $name }}.enable();
+                    sd{{ $name }}['user_id'] = 11;
+                    {{ $name }}List.setAttribute('data-depended', 'user_id,11');
+                    {{ $name }}List.setAttribute('data-depended', 'game_id,11');
+                    // do something creative here...
+                    // console.log(event.detail.id);
+                    // console.log(event.detail.value);
+                    // console.log(event.detail.label);
+                    // console.log(event.detail.customProperties);
+                    // console.log(event.detail.groupValue);
+                },
+                false,
+            );
+
+        {{ $name }}DependedList.addEventListener(
+            'removeItem',
+            function(event) {
+                choices{{ $name }}.disable();
+                choices{{ $name }}.setChoiceByValue(['']);
+            },
+            false,
+        );
+        @endif
+
         asyncSelect.searchTerms.addEventListener(
             'input',
-            debounce(event => asyncSelect.asyncSearch(choices{{ $name }}), 300),
+            debounce(event => asyncSelect.asyncSearch(choices{{ $name }}, sd{{ $name }}), 300),
             false,
         )
 

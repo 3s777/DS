@@ -2,11 +2,17 @@
 
 namespace Support\ViewModels;
 
+use Illuminate\Support\Facades\Schema;
 use Spatie\ViewModels\ViewModel;
 
 class AsyncSelectViewModel extends ViewModel
 {
-    public function __construct(protected null|string $query, protected $modelName, protected string $label)
+    public function __construct(
+        protected ?string $query,
+        protected $modelName,
+        protected string $label,
+        protected ?array $depended = null
+    )
     {
     }
 
@@ -17,7 +23,18 @@ class AsyncSelectViewModel extends ViewModel
         ];
 
         if($this->query) {
-            $models = $this->modelName::where('name', 'ilike', "%{$this->query}%")->select('id', 'name')->limit(10)->get();
+            $query = $this->modelName::query()->where('name', 'ilike', "%{$this->query}%")->select('id', 'name');
+
+            $query->when(request('depended'), function ($q) {
+                foreach(request('depended') as $key => $depended) {
+                    if (Schema::hasColumn($q->getModel()->getTable(), $key)){
+                        $q->where($key, $depended);
+                    }
+                }
+                return $q;
+            });
+
+            $models = $query->limit(10)->get();
 
             foreach ($models as $model) {
                 $options[] = ['value' => $model->id, 'label' => $model->name];

@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\MassDeletingRequest;
 use App\Http\Requests\Shelf\CreateShelfRequest;
 use App\Http\Requests\Shelf\UpdateShelfRequest;
+use Domain\Game\Models\GameDeveloper;
 use Domain\Shelf\DTOs\FillShelfDTO;
 use Domain\Shelf\Models\Shelf;
 use Domain\Shelf\Services\ShelfService;
@@ -16,9 +17,11 @@ use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
 use Illuminate\Foundation\Application;
 use Illuminate\Http\RedirectResponse;
+use Illuminate\Http\Request;
 use Illuminate\Routing\Redirector;
 use Support\Actions\MassDeletingAction;
 use Support\DTOs\MassDeletingDTO;
+use Support\ViewModels\AsyncSelectViewModel;
 
 class ShelfController extends Controller
 {
@@ -107,5 +110,14 @@ class ShelfController extends Controller
         flash()->info(__('shelf.mass_force_deleted'));
 
         return to_route('shelves.index');
+    }
+
+    public function getForSelect(Request $request): AsyncSelectViewModel
+    {
+        return new AsyncSelectViewModel(
+            $request->input('query'),
+            Shelf::class,
+            trans_choice('shelf.choose', 1)
+        );
     }
 }
