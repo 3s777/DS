@@ -51,6 +51,7 @@
                     <x-ui.form.group>
                         <x-ui.async-select
                             name="user"
+                            required
                             :error="$errors->has('user_id')"
                             route="select-users"
                             :default-option="trans_choice('user.choose', 1)"
@@ -67,8 +68,8 @@
                             route="select-shelves"
                             depended-on="user"
                             depended-field="user_id"
-                            :default-option="trans_choice('shelf.shelves', 1)"
-                            :placeholder="trans_choice('shelf.shelves', 1)" />
+                            :default-option="trans_choice('shelf.choose', 1)"
+                            :label="trans_choice('shelf.shelves', 1)" />
                     </x-ui.form.group>
                 </x-grid.col>
             </x-grid>

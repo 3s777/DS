@@ -75,28 +75,25 @@
             },
         });
 
-
-
         {{--asyncSelect.searchTerms.addEventListener(--}}
         {{--    'input',--}}
         {{--    event => choices{{ $name }}.clearStore(),--}}
         {{--    false,--}}
         {{--)--}}
 
-            const sd{{ $name }} = {}
-
         @if($dependedOn)
-            const {{ $name }}DependedList = document.querySelector('.{{ $dependedOn }}-select');
+            const {{ $name }}Depended = document.querySelector('.{{ $dependedOn }}-select');
+
+            const dependedData = {};
 
             choices{{ $name }}.disable();
 
-            {{ $name }}DependedList.addEventListener(
+            {{ $name }}Depended.addEventListener(
                 'addItem',
                 function(event) {
                     choices{{ $name }}.enable();
-                    sd{{ $name }}['user_id'] = 11;
-                    {{ $name }}List.setAttribute('data-depended', 'user_id,11');
-                    {{ $name }}List.setAttribute('data-depended', 'game_id,11');
+{{--                    {{ $name }}List.setAttribute('data-depended', '{{ $dependedField }},'+event.detail.value);--}}
+                    dependedData['{{ $dependedField }}'] = event.detail.value
                     // do something creative here...
                     // console.log(event.detail.id);
                     // console.log(event.detail.value);
@@ -107,7 +104,8 @@
                 false,
             );
 
-        {{ $name }}DependedList.addEventListener(
+
+        {{ $name }}Depended.addEventListener(
             'removeItem',
             function(event) {
                 choices{{ $name }}.disable();
@@ -119,7 +117,7 @@
 
         asyncSelect.searchTerms.addEventListener(
             'input',
-            debounce(event => asyncSelect.asyncSearch(choices{{ $name }}, sd{{ $name }}), 300),
+            debounce(event => asyncSelect.asyncSearch(choices{{ $name }} @if($dependedOn) ,dependedData @endif), 300),
             false,
         )
 

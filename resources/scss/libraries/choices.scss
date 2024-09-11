@@ -61,9 +61,15 @@
         cursor: pointer;
     }
 
-    //.choices[data-type*=select-one] & {
-    //    padding-bottom: 14px;
-    //}
+    .choices[data-type*=select-one].is-disabled & {
+        background-color: $disabled-main;
+        border: 1px solid $disabled-main;
+        color: $opposite-main;
+
+        & .choices__placeholder {
+            opacity: .7;
+        }
+    }
 }
 
 

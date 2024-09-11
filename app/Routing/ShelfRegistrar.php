@@ -20,7 +20,7 @@ class ShelfRegistrar extends BaseRouteRegistrar implements RouteRegistrar
                     ->group(function () {
                     Route::prefix('admin')->group(function () {
                         $this->massDelete('shelves', ShelfController::class);
-                        Route::get('/select-shelves', [ShelfController::class, 'getForSelect'])->name('select-shelves');
+                        Route::post('/select-shelves', [ShelfController::class, 'getForSelect'])->name('select-shelves');
                         Route::resource('shelves', ShelfController::class);
                     });
 

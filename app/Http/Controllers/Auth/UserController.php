@@ -128,7 +128,8 @@ class UserController extends Controller
         return new AsyncSelectViewModel(
             $request->input('query'),
             User::class,
-            'user.choose'
+            trans_choice('user.choose', 1),
+            'all.*'
         );
     }
 
