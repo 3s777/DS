@@ -37,7 +37,7 @@
 
                 <x-grid.col xl="4" ls="6" ml="12" lg="6" md="6" sm="12">
                     <x-ui.form.group>
-                        <x-ui.enum-select
+                        <x-ui.select.enum
                             id="type"
                             name="type"
                             required
@@ -49,7 +49,7 @@
 
                 <x-grid.col xl="4" ls="6" lg="12" md="12" sm="12">
                     <x-ui.form.group>
-                        <x-ui.data-select
+                        <x-ui.select.data
                             name="game_platform_manufacturer_id"
                             required
                             :options="$manufacturers"
@@ -60,12 +60,13 @@
 
                 <x-grid.col xl="4" ls="6" ml="12" lg="6" md="6" sm="12">
                     <x-ui.form.group>
-                        <x-ui.async-select
+                        <x-ui.select.async
                             name="user"
+                            select-name="user_id"
                             route="select-users"
                             :label="trans_choice('user.users', 1)"
                             :default-option="trans_choice('user.choose', 1)">
-                        </x-ui.async-select>
+                        </x-ui.select.async>
                     </x-ui.form.group>
                 </x-grid.col>
             </x-grid>

@@ -37,7 +37,7 @@
 
                 <x-grid.col xl="4" ls="6" ml="12" lg="6" md="6" sm="12">
                     <x-ui.form.group>
-                        <x-ui.enum-select
+                        <x-ui.select.enum
                             id="condition"
                             name="condition"
                             required
@@ -49,27 +49,36 @@
 
                 <x-grid.col xl="4" ls="6" ml="12" lg="6" md="6" sm="12">
                     <x-ui.form.group>
-                        <x-ui.async-select
+                        <x-ui.select.async
                             name="user"
+                            select-name="user_id"
                             required
-                            :error="$errors->has('user_id')"
                             route="select-users"
                             :default-option="trans_choice('user.choose', 1)"
                             :label="trans_choice('user.users', 1)">
-                        </x-ui.async-select>
+                        </x-ui.select.async>
                     </x-ui.form.group>
                 </x-grid.col>
 
                 <x-grid.col xl="4" ls="6" lg="12" md="12" sm="12">
                     <x-ui.form.group>
-                        <x-ui.async-select
-                            name="shelf_id"
-                            required
+{{--                        <x-ui.select.async-depend--}}
+{{--                            name="shelf"--}}
+{{--                            required--}}
+{{--                            route="select-shelves"--}}
+{{--                            depend-on="user"--}}
+{{--                            depend-field="user_id"--}}
+{{--                            :default-option="trans_choice('shelf.choose', 1)"--}}
+{{--                            :label="trans_choice('shelf.shelves', 1)" />--}}
+                        <x-ui.select.async-depend
+                            name="shelf"
                             route="select-shelves"
-                            depended-on="user"
-                            depended-field="user_id"
+                            depend-on="user_id"
+                            depend-field="user_id"
+                            select-name="shelf_id"
                             :default-option="trans_choice('shelf.choose', 1)"
-                            :label="trans_choice('shelf.shelves', 1)" />
+                            :label="trans_choice('shelf.shelves', 1)">
+                        </x-ui.select.async-depend>
                     </x-ui.form.group>
                 </x-grid.col>
             </x-grid>
@@ -83,6 +92,8 @@
                     :placeholder="__('common.description')"/>
             </x-ui.form.group>
         </div>
+
+        @dump(old())
 
         <div class="crud-form__sidebar">
             <div class="crud-form__sidebar-wrapper">

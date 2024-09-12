@@ -50,7 +50,7 @@
 
                     <x-grid.col xl="4" ls="6" ml="12" lg="6" md="6" sm="12">
                         <x-ui.form.group>
-                            <x-ui.data-select
+                            <x-ui.select.data
                                 name="language_id"
                                 :options="$languages"
                                 :placeholder="__('common.language')"
@@ -96,7 +96,7 @@
 
                     <x-grid.col xl="12" lg="12" md="12" sm="12">
                         <x-ui.form.group>
-                            <x-ui.data-select-multiple
+                            <x-ui.select.data-multiple
                                 name="roles"
                                 type="input"
                                 key="name"

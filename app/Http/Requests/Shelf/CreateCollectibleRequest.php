@@ -42,10 +42,12 @@ class CreateCollectibleRequest extends FormRequest
                 'max:10024'
             ],
             'user_id' => [
-                'nullable',
+                'required',
                 'integer',
                 'exists:Domain\Auth\Models\User,id'
-            ]
+            ],
+            'shelf_id' => ['required'],
+            'condition' => ['required']
         ];
     }
 

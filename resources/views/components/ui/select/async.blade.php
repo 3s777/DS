@@ -1,15 +1,11 @@
 @props([
     'name',
     'route',
+    'selectName',
     'label' => false,
     'selected' => false,
-    'selectName' => false,
     'showOld' => true,
     'defaultOption' => false,
-    'error' => false,
-    'dependedOn' => false,
-    'dependedField' => false,
-    'field' => 'user_id'
 ])
 
 <x-libraries.choices
@@ -17,9 +13,7 @@
         $name.'-select' => $name
     ]) }}
     id="{{ $name }}-select"
-    :name="$selectName ?: $name.'_id'"
-    :error="$error"
-
+    :name="$selectName"
     :label="$label">
 
     @if($defaultOption && !$selected)
@@ -29,14 +23,8 @@
     @endif
 
     @if($selected)
-        <x-ui.form.option :value="$selected->id" :selected="!old('{{ $name }}_id')">
+        <x-ui.form.option :value="$selected->id" :selected="!old('{{ $name }}')">
             {{ $selected->name }}
-        </x-ui.form.option>
-    @endif
-
-    @if(old($name.'_id') && $showOld)
-        <x-ui.form.option :value="old($name.'_id')" selected>
-            {{ old('old_selected_'.$name.'_label') }}
         </x-ui.form.option>
     @endif
 
@@ -45,7 +33,6 @@
             {{ old('old_selected_'.$name.'_label') }}
         </x-ui.form.option>
     @endif
-
 </x-libraries.choices>
 
 @if($showOld)
@@ -81,52 +68,14 @@
         {{--    false,--}}
         {{--)--}}
 
-        @if($dependedOn)
-            const {{ $name }}Depended = document.querySelector('.{{ $dependedOn }}-select');
-
-            const dependedData = {};
-
-            choices{{ $name }}.disable();
-
-            {{ $name }}Depended.addEventListener(
-                'addItem',
-                function(event) {
-                    choices{{ $name }}.enable();
-{{--                    {{ $name }}List.setAttribute('data-depended', '{{ $dependedField }},'+event.detail.value);--}}
-                    dependedData['{{ $dependedField }}'] = event.detail.value
-                    // do something creative here...
-                    // console.log(event.detail.id);
-                    // console.log(event.detail.value);
-                    // console.log(event.detail.label);
-                    // console.log(event.detail.customProperties);
-                    // console.log(event.detail.groupValue);
-                },
-                false,
-            );
-
-
-        {{ $name }}Depended.addEventListener(
-            'removeItem',
-            function(event) {
-                choices{{ $name }}.disable();
-                choices{{ $name }}.setChoiceByValue(['']);
-            },
-            false,
-        );
-        @endif
-
         asyncSelect.searchTerms.addEventListener(
             'input',
-            debounce(event => asyncSelect.asyncSearch(choices{{ $name }} @if($dependedOn) ,dependedData @endif), 300),
+            debounce(event => asyncSelect.asyncSearch(choices{{ $name }}), 300),
             false,
         )
 
         @if($showOld)
-            @if($selectName)
-                let select{{ $name }} = document.querySelector(`[name="{{ $selectName }}"]`);
-            @else
-                let select{{ $name }} = document.querySelector(`[name="{{ $name }}_id"]`);
-            @endif
+            let select{{ $name }} = document.querySelector(`[name="{{ $selectName }}"]`);
 
             let selected{{ $name }}Name = document.getElementById('old_selected_{{ $name }}_label');
 

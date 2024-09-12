@@ -4,7 +4,6 @@
     'placeholder' => '',
     'value' => '',
     'type' => 'text',
-    'error' => false,
     'wrapperClass' => false,
     'fullWidth' => true,
     'required' => false

@@ -15,7 +15,6 @@
     id="{{ $name }}"
     :required="$required"
     :name="$arrayKey ? $arrayKey.'['.$name.']' : $name"
-    :error="$name"
     :label="$placeholder">
 
     @if($defaultOption)

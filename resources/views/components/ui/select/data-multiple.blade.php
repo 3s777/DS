@@ -13,8 +13,8 @@
     class="choices-{{ $name }}"
     id="{{ $name }}"
     :name="$arrayKey ? $arrayKey.'['.$name.'][]' : $name.'[]'"
-    :error="$name"
     :label="$placeholder"
+    :error="$name"
     multiple>
     @if($defaultOption)
         <x-ui.form.option value="">

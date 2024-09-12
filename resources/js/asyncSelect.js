@@ -36,13 +36,13 @@ window.asyncSelectSearch = class AsyncSelectSearch {
 
         const options = await this.fromUrl(url.toString())
 
-        const response = await axios.post(url.toString(), {
-            query: query,
-            depended: {'user_id': 11}
-        });
+        // const response = await axios.post(url.toString(), {
+        //     query: query,
+        //     depended: {'user_id': 11}
+        // });
 
         console.log(options);
-        console.log(response);
+        // console.log(response);
 
         let result = options;
 

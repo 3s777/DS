@@ -2,7 +2,6 @@
     'id',
     'name',
     'placeholder' => '',
-    'error' => false
 ])
 
 <div class="textarea">

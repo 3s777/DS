@@ -6,7 +6,6 @@
     'size' => false,
     'checked' => false,
     'disabled' => false,
-    'error' => false,
     'value' => false
 ])
 

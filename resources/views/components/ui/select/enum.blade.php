@@ -13,7 +13,6 @@
     id="{{ $name }}"
     :required="$required"
     :name="$arrayKey ? $arrayKey.'['.$name.']' : $name"
-    :error="$name"
     :label="$placeholder">
 
     @if($defaultOption)
@@ -27,8 +26,8 @@
             <x-ui.form.option
                 :value="$option->value"
                 :selected="old()
-            ? $option->value == old($arrayKey.'.'.$name) || $option->value == old($name)
-            : $option->value == $selected">
+                    ? $option->value == old($arrayKey.'.'.$name) || $option->value == old($name)
+                    : $option->value == $selected">
                 {{ $option->name() }}
             </x-ui.form.option>
         @endforeach
@@ -37,8 +36,8 @@
             <x-ui.form.option
                 :value="$option->value"
                 :selected="$arrayKey
-            ? $option->value == old($arrayKey.'.'.$name)
-            : $option->value == old($name)">
+                    ? $option->value == old($arrayKey.'.'.$name)
+                    : $option->value == old($name)">
                 {{ $option->name() }}
             </x-ui.form.option>
         @endforeach

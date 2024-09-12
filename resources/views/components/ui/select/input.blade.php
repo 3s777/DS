@@ -9,12 +9,10 @@
     class="choices-{{ $name }}"
     id="{{ $name }}"
     name="{{ $name }}"
-    :error="$name"
     :label="$placeholder"
     input="true"
-    :value="old() ? old($name) : $value"
-    >
-</x-libraries.choices>
+    :value="old() ? old($name) : $value" />
+
 
 @push('scripts')
     <script type="module">

@@ -1,12 +1,13 @@
 @props([
     'name',
     'route',
+    'dependOn',
+    'dependField',
     'label' => false,
     'selected' => false,
     'showOld' => true,
     'defaultOption' => false,
-    'error' => false,
-    'arrayKey' => false
+    'arrayKey' => false,
 ])
 
 <x-libraries.choices
@@ -15,8 +16,8 @@
     ]) }}
     id="{{ $name }}-select"
     :name="$arrayKey ? $arrayKey.'['.$name.'][]' : $name.'[]'"
-    :error="$name"
     :label="$label"
+    :error="$name"
     multiple>
 
     @if($defaultOption && !$selected)
@@ -57,7 +58,8 @@
         @endforeach
     @endif
 @endif
-
+@dump($dependOn)
+@dump(old())
 @push('scripts')
     <script type="module">
         const {{ $name }}List = document.querySelector('.{{ $name }}-select');
@@ -78,9 +80,48 @@
             },
         });
 
+
+        @if($dependOn)
+            const {{ $name }}Depended = document.querySelector('.{{ $dependOn }}-select');
+
+            const dependData = {};
+
+            choices{{ $name }}.disable();
+
+            {{ $name }}Depended.addEventListener(
+                'addItem',
+                function(event) {
+                    choices{{ $name }}.enable();
+                    dependData['{{ $dependField }}'] = event.detail.value
+                },
+                false,
+            );
+
+
+            {{ $name }}Depended.addEventListener(
+                'removeItem',
+                function(event) {
+                    choices{{ $name }}.disable();
+                    choices{{ $name }}.clearStore();
+                },
+                false,
+            );
+
+            @if(old($name) && $showOld)
+                choices{{ $name }}.enable();
+                dependData['{{ $dependField }}'] = {{ $name }}Depended.value;
+            @endif
+
+            @if(old($dependOn) && $showOld)
+                choices{{ $name }}.enable();
+                dependData['{{ $dependField }}'] = {{ $name }}Depended.value;
+            @endif
+        @endif
+
+
         asyncSelect.searchTerms.addEventListener(
             'input',
-            debounce(event => asyncSelect.asyncSearch(choices{{ $name }}), 300),
+            debounce(event => asyncSelect.asyncSearch(choices{{ $name }} @if($dependOn) ,dependData @endif), 300),
             false,
         )
 

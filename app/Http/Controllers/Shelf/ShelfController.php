@@ -114,7 +114,7 @@ class ShelfController extends Controller
 
     public function getForSelect(Request $request): AsyncSelectViewModel
     {
-        dd($request);
+
         return new AsyncSelectViewModel(
             $request->input('query'),
             Shelf::class,

@@ -4,7 +4,7 @@
     'placeholder' => get_filter($name)->placeholder()
 ])
 
-<x-ui.async-select-multiple
+<x-ui.select.async-multiple
     :selected="get_filter($name)->relatedModels ?? false"
     :show-old="false"
     :name="$name"
@@ -12,4 +12,4 @@
     :label="$placeholder"
     defaultOption="{{ get_filter($name)->title() }}"
     :route="$route">
-</x-ui.async-select-multiple>
+</x-ui.select.async-multiple>

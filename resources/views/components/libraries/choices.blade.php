@@ -14,11 +14,14 @@
     choices-block
     {{ $wrapperClass }}
     @if($size) choices-block_size_{{$size}} @endif
-    @if($errors->has($name) || $errors->has($error)) choices-block_error @endif
-    ">
+
+    {{--    check errors for select one || select multiple with $errors--}}
+    @if($errors->has($name) || $errors->has($error)) choices-block_error @endif">
+
     @if($label)
         <label class="choices-block__label" for="{{ $id }}">{{ $label }} @if($required)  * @endif</label>
     @endif
+
     @if($input)
         <input
             {{ $attributes->class([

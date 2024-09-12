@@ -63,7 +63,15 @@
 
     .choices[data-type*=select-one].is-disabled & {
         background-color: $disabled-main;
-        border: 1px solid $disabled-main;
+        color: $opposite-main;
+
+        & .choices__placeholder {
+            opacity: .7;
+        }
+    }
+
+    .choices[data-type*=select-multiple].is-disabled & {
+        background-color: $disabled-main;
         color: $opposite-main;
 
         & .choices__placeholder {
@@ -137,6 +145,7 @@
             border: 1px solid $disabled-main;
         }
     }
+
 }
 
 
@@ -209,6 +218,10 @@
         position: relative;
         top: 2px;
         color: $font-main-50;
+    }
+
+    .choices.is-disabled & {
+        background: none;
     }
 }
 
