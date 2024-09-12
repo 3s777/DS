@@ -48,6 +48,7 @@
     <script type="module">
         const {{ $name }} = document.querySelector('.choices-{{ $name }}');
         new Choices({{ $name }}, {
+            allowHTML: true,
             itemSelectText: '',
             removeItems: true,
             removeItemButton: true,

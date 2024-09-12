@@ -80,7 +80,9 @@
             let selected{{ $name }}Name = document.getElementById('old_selected_{{ $name }}_label');
 
             select{{ $name }}.onchange = function () {
-                selected{{ $name }}Name.value = select{{ $name }}.options[select{{ $name }}.selectedIndex].text;
+                if(select{{ $name }}.options[select{{ $name }}.selectedIndex]){
+                    selected{{ $name }}Name.value = select{{ $name }}.options[select{{ $name }}.selectedIndex].text;
+                }
             };
         @endif
     </script>

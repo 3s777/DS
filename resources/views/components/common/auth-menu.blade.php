@@ -28,13 +28,13 @@
         @endif
     @else
         <div class="profile-menu__auth">
-            <x-ui.avatar
-                class="profile-menu__avatar"
-                link="{{ route('ui') }}"
-                src="{{ asset('/storage/test-5.jpg') }}"
-                username="{{ Auth::user()->name }}"
-            >
-            </x-ui.avatar>
+{{--            <x-ui.avatar--}}
+{{--                class="profile-menu__avatar"--}}
+{{--                link="{{ route('ui') }}"--}}
+{{--                src="{{ asset('/storage/test-5.jpg') }}"--}}
+{{--                username="{{ Auth::user()->name }}"--}}
+{{--            >--}}
+{{--            </x-ui.avatar>--}}
 
             <div class="profile-menu__links">
                 <a class="profile-menu__username " href="#">

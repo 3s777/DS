@@ -83,6 +83,7 @@
             {{ $name }}Depended.addEventListener(
                 'addItem',
                 function(event) {
+                    console.log(40);
                     choices{{ $name }}.enable();
 {{--                    {{ $name }}List.setAttribute('data-depend', '{{ $dependField }},'+event.detail.value);--}}
                     dependData['{{ $dependField }}'] = event.detail.value
@@ -100,7 +101,7 @@
             {{ $name }}Depended.addEventListener(
                 'removeItem',
                 function(event) {
-                    choices{{ $name }}.disable();
+                    console.log (55);
                     choices{{ $name }}.setChoiceByValue(['']);
                     choices{{ $name }}.disable();
                 },
@@ -108,12 +109,12 @@
             );
 
             @if(old($selectName) && $showOld)
-                choices{{ $name }}.enable();
+                {{--choices{{ $name }}.enable();--}}
                 dependData['{{ $dependField }}'] = {{ $name }}Depended.value;
             @endif
 
             @if(old($dependOn) && $showOld)
-                choices{{ $name }}.enable();
+                {{--choices{{ $name }}.enable();--}}
                 dependData['{{ $dependField }}'] = {{ $name }}Depended.value;
             @endif
         @endif
@@ -130,9 +131,10 @@
             let selected{{ $name }}Name = document.getElementById('old_selected_{{ $name }}_label');
 
             select{{ $name }}.onchange = function () {
-                if(select{{ $name }}.options[select{{ $name }}.selectedIndex].text){
+                if(select{{ $name }}.options[select{{ $name }}.selectedIndex]){
                     selected{{ $name }}Name.value = select{{ $name }}.options[select{{ $name }}.selectedIndex].text;
-                }};
+                }
+            };
         @endif
     </script>
 @endpush

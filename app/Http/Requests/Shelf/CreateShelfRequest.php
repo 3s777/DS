@@ -33,7 +33,7 @@ class CreateShelfRequest extends FormRequest
                 'nullable',
                 'integer',
                 'numeric',
-                'max:20'
+                'max:100000'
             ],
             'description' => ['nullable','string'],
             'thumbnail' => [
