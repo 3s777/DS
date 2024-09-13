@@ -114,12 +114,12 @@ class ShelfController extends Controller
 
     public function getForSelect(Request $request): AsyncSelectViewModel
     {
-
         return new AsyncSelectViewModel(
             $request->input('query'),
             Shelf::class,
             trans_choice('shelf.choose', 1),
-            'all.*'
+            'all.*',
+            true
         );
     }
 }

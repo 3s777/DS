@@ -41,14 +41,17 @@ window.asyncSelectSearch = class AsyncSelectSearch {
         //     depended: {'user_id': 11}
         // });
 
-        console.log(options);
-        // console.log(response);
+        // console.log(options);
+        //
 
         let result = options;
 
         if(options.result) {
             result = options.result
         }
+
+        console.log(result);
+
 
         choices.setChoices(result, 'value', 'label', true)
     }

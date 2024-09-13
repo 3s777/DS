@@ -12,6 +12,7 @@ class AsyncSelectViewModel extends ViewModel
         protected $modelName,
         protected string $label,
         protected ?string $permission = null,
+        protected ?bool $depended = false,
 //        protected ?array $depended = null
     )
     {
@@ -22,6 +23,13 @@ class AsyncSelectViewModel extends ViewModel
         $options = [
             ['value' => '', 'label' => __($this->label), 'disabled' => true]
         ];
+
+        if($this->depended && !request('depended')) {
+            $options[] = ['value' => 'not_found', 'label' => __('common.not_found'), 'disabled' => true];
+            return $options;
+        }
+
+
 
         if(auth()->user()->hasPermissionTo($this->permission)) {
             if($this->query) {
@@ -42,16 +50,15 @@ class AsyncSelectViewModel extends ViewModel
                     $options[] = ['value' => $model->id, 'label' => $model->name];
                 }
 
-                if($models->isEmpty()) {
-                    $options[] = ['value' => '', 'label' => __('common.not_found'), 'disabled' => true];
-                }
+//                if($models->isEmpty()) {
+//                    $options[] = ['value' => 'not_found', 'label' => 'xssd', 'disabled' => true];
+//                }
             }
 
             return $options;
         }
 
-        $options[] = ['value' => '', 'label' => __('common.not_found'), 'disabled' => true];
+        $options[] = ['value' => 'not_found', 'label' => __('common.not_found'), 'disabled' => true];
         return $options;
-
     }
 }

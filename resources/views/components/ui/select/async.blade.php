@@ -54,11 +54,12 @@
             itemSelectText: '',
             removeItems: true,
             removeItemButton: true,
-            noResultsText: '{{ __('common.loading') }}',
+            loadingText: '{{ __('common.loading') }}',
+            noResultsText: '{{ __('common.not_found') }}',
             noChoicesText: '{{ __('common.not_found') }}',
             searchPlaceholderValue: '{{ __('common.search') }}',
             callbackOnInit: () => {
-                asyncSelect.searchTerms = {{ $name }}List.closest('.choices').querySelector('[name="search_terms"]')
+                asyncSelect.searchTerms = {{ $name }}List.closest('.choices').querySelector('input[type=search]')
             },
         });
 
@@ -73,6 +74,28 @@
             debounce(event => asyncSelect.asyncSearch(choices{{ $name }}), 300),
             false,
         )
+
+
+
+        {{--const asyncSearch = {{ $name }}List.closest('.choices').querySelector('input[type=search]');--}}
+        {{--asyncSearch.addEventListener(--}}
+        {{--    'input',--}}
+        {{--    debounce(event => choices{{ $name }}.setChoices(async () => {--}}
+        {{--        try {--}}
+        {{--            const query = asyncSearch.value ?? null--}}
+        {{--            const response = await axios.post('{{ route($route) }}', {--}}
+        {{--                query: query,--}}
+        {{--            });--}}
+        {{--            console.log(response.data.result);--}}
+        {{--            return response.data.result;--}}
+        {{--        } catch (err) {--}}
+        {{--            @if(!app()->isProduction())--}}
+        {{--                console.log(err);--}}
+        {{--            @endif--}}
+        {{--        }--}}
+        {{--    }, 'value', 'label', true), 300),--}}
+        {{--    false--}}
+        {{--)--}}
 
         @if($showOld)
             let select{{ $name }} = document.querySelector(`[name="{{ $selectName }}"]`);
