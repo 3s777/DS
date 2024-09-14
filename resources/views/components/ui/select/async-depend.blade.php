@@ -123,7 +123,7 @@
             {{--    false,--}}
             {{--)--}}
 
-        const asyncSearch = {{ $name }}List.closest('.choices').querySelector('input[type=search]');
+
 
         async function testFill(dependData) {
             try {
@@ -204,15 +204,51 @@
             }
         }, 300)
 
+        // asyncSearch.addEventListener(
+        //     'input',
+        //     debouncedHandle,
+        //     false,
+        // )
+
+        const asyncSearch = {{ $name }}List.closest('.choices').querySelector('input[type=search]');
         asyncSearch.addEventListener(
             'input',
+            debounce(event => choices{{ $name }}.setChoices(async () => {
+                try {
+                    const url = new URL('{{ route($route) }}')
 
-            debouncedHandle,
+                    const query = asyncSearch.value ?? null
+
+                    if(dependData !== null) {
+                        for (const key in dependData) {
+                            url.searchParams.append('depended['+key+']', dependData[key])
+                        }
+
+                    }
+
+                    console.log('sdf', dependData);
+
+                    const response = await axios.post('{{ route($route) }}', {
+                        query: query,
+                        depended: dependData
+                    });
+
+                    // console.log(response.data.result);
+                    {{--choices{{ $name }}.setChoices(response.data.result, 'value', 'label', true)--}}
+                    const test= document.getElementById("number");
+                    const test2 = {{ $name }}List.closest('.choices').querySelector('input[type=search]');
+                    test2.setAttribute('tabindex', '-1');
+                    setTimeout(() => {
+                        test2.focus();
+                    }, 0);
 
 
-
-
-            false,
+                    return response.data.result;
+                } catch (err) {
+                    console.error(err);
+                }
+            }, 'value', 'label', true), 300),
+            false
         )
 
         @if($showOld)

@@ -31,6 +31,7 @@ class AsyncSelectViewModel extends ViewModel
 
 
 
+
         if(auth()->user()->hasPermissionTo($this->permission)) {
             if($this->query) {
                 $query = $this->modelName::query()->where('name', 'ilike', "%{$this->query}%")->select('id', 'name');
