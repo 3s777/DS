@@ -40,7 +40,7 @@ class CollectibleController extends Controller
     }
 
 //    public function store(CreateCollectibleRequest $request, CollectibleService $collectibleService): Application|Redirector|RedirectResponse|\Illuminate\Contracts\Foundation\Application
-    public function store(CreateCollectibleRequest $request): Application|Redirector|RedirectResponse|\Illuminate\Contracts\Foundation\Application
+    public function store(Request $request): Application|Redirector|RedirectResponse|\Illuminate\Contracts\Foundation\Application
 
     {
         dd($request);
