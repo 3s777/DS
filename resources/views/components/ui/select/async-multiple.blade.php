@@ -67,7 +67,7 @@
             allowHTML: true,
             itemSelectText: '',
             removeItems: true,
-            placeholder: false,
+            // placeholder: false,
             removeItemButton: true,
             noResultsText: '{{ __('common.loading') }}',
             noChoicesText: '{{ __('common.not_found') }}',

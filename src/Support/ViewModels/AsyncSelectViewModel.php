@@ -29,6 +29,27 @@ class AsyncSelectViewModel extends ViewModel
             return $options;
         }
 
+        if($this->depended && request('all')) {
+            $query = $this->modelName::query()->select('id', 'name');
+
+            $query->when(request('depended'), function ($q) {
+                foreach(request('depended') as $key => $value) {
+                    if (Schema::hasColumn($q->getModel()->getTable(), $key) && $value){
+                        $q->whereIn($key, explode(',', $value));
+                    }
+                }
+                return $q;
+            });
+
+            $models = $query->get();
+
+            foreach ($models as $model) {
+                $options[] = ['value' => $model->id, 'label' => $model->name];
+            }
+
+            return $options;
+        }
+
 
 
 

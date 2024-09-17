@@ -58,31 +58,25 @@
         @endforeach
     @endif
 @endif
-@dump($dependOn)
-@dump(old())
+
 @push('scripts')
     <script type="module">
         const {{ $name }}List = document.querySelector('.{{ $name }}-select');
-
-        let asyncSelect = new asyncSelectSearch('{{ route($route) }}');
 
         const choices{{ $name }} = new Choices({{ $name }}List, {
             allowHTML: true,
             itemSelectText: '',
             removeItems: true,
-            placeholder: false,
+            // placeholder: false,
             removeItemButton: true,
-            noResultsText: '{{ __('common.loading') }}',
+            loadingText: '{{ __('common.loading')  }}',
+            noResultsText: '{{ __('common.not_found') }}',
             noChoicesText: '{{ __('common.not_found') }}',
-            searchPlaceholderValue: '{{ __('common.search') }}',
-            callbackOnInit: () => {
-                asyncSelect.searchTerms = {{ $name }}List.closest('.choices').querySelector('[name="search_terms"]')
-            },
+            searchPlaceholderValue: '{{ __('common.search') }}'
         });
 
 
-        @if($dependOn)
-            const {{ $name }}Depended = document.querySelector('.{{ $dependOn }}-select');
+            const {{ $name }}Depended = document.querySelector("[name='{{ $dependOn }}']");
 
             const dependData = {};
 
@@ -91,8 +85,12 @@
             {{ $name }}Depended.addEventListener(
                 'addItem',
                 function(event) {
-                    choices{{ $name }}.enable();
-                    dependData['{{ $dependField }}'] = event.detail.value
+                    if({{ $name }}Depended.value) {
+                        console.log('add');
+                        choices{{ $name }}.enable();
+
+                        dependData['{{ $dependField }}'] = event.detail.value
+                    }
                 },
                 false,
             );
@@ -101,11 +99,38 @@
             {{ $name }}Depended.addEventListener(
                 'removeItem',
                 function(event) {
+                    console.log ('remove');
                     choices{{ $name }}.disable();
                     choices{{ $name }}.clearStore();
+                    delete dependData['{{ $dependField }}'];
                 },
                 false,
             );
+
+        const asyncSearch = {{ $name }}List.closest('.choices').querySelector('input[type=search]');
+
+        asyncSearch.addEventListener(
+            'input',
+            debounce(event => choices{{ $name }}.setChoices(async () => {
+                try {
+                    const query = asyncSearch.value ?? null
+                    const response = await axios.post('{{ route($route) }}', {
+                        query: query,
+                        depended: dependData
+                    });
+                    {{--choices{{ $name }}.setChoices(response.data.result, 'value', 'label', true)--}}
+                    setTimeout(() => {
+                        asyncSearch.focus();
+                    }, 0);
+                    return response.data.result;
+                } catch (err) {
+                    @if(!app()->isProduction())
+                    console.log(err);
+                    @endif
+                }
+            }, 'value', 'label', true), 300),
+            false
+        )
 
             @if(old($name) && $showOld)
                 choices{{ $name }}.enable();
@@ -116,14 +141,7 @@
                 choices{{ $name }}.enable();
                 dependData['{{ $dependField }}'] = {{ $name }}Depended.value;
             @endif
-        @endif
 
-
-        asyncSelect.searchTerms.addEventListener(
-            'input',
-            debounce(event => asyncSelect.asyncSearch(choices{{ $name }} @if($dependOn) ,dependData @endif), 300),
-            false,
-        )
 
         @if($showOld)
             let select{{ $name }} = document.querySelector(`[name="{{ $name }}[]"]`);

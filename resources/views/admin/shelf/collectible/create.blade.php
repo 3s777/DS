@@ -70,7 +70,7 @@
 {{--                            depend-field="user_id"--}}
 {{--                            :default-option="trans_choice('shelf.choose', 1)"--}}
 {{--                            :label="trans_choice('shelf.shelves', 1)" />--}}
-                        <x-ui.select.async-depend
+                        <x-ui.select.async-multiple-depend
                             name="shelf"
                             route="select-shelves"
                             depend-on="user_id"
@@ -78,7 +78,35 @@
                             select-name="shelf_id"
                             :default-option="trans_choice('shelf.choose', 1)"
                             :label="trans_choice('shelf.shelves', 1)">
-                        </x-ui.select.async-depend>
+                        </x-ui.select.async-multiple-depend>
+                    </x-ui.form.group>
+                </x-grid.col>
+
+
+                <x-grid.col xl="4" ls="6" ml="12" lg="6" md="6" sm="12">
+                    <x-ui.form.group>
+                        <x-ui.select.async
+                            name="user1"
+                            select-name="user1_id"
+                            required
+                            route="select-users"
+                            :default-option="trans_choice('user.choose', 1)"
+                            :label="trans_choice('user.users', 1)">
+                        </x-ui.select.async>
+                    </x-ui.form.group>
+                </x-grid.col>
+
+                <x-grid.col xl="4" ls="6" lg="12" md="12" sm="12">
+                    <x-ui.form.group>
+                        <x-ui.select.data-depend
+                            name="shelf1_id"
+                            required
+                            :options="[]"
+                            route="select-shelves"
+                            depend-on="user1_id"
+                            depend-field="user_id"
+                            :default-option="trans_choice('shelf.choose', 1)"
+                            :placeholder="trans_choice('shelf.shelves', 1)" />
                     </x-ui.form.group>
                 </x-grid.col>
             </x-grid>
