@@ -38,8 +38,8 @@
                 <x-grid.col xl="4" ls="6" ml="12" lg="6" md="6" sm="12">
                     <x-ui.form.group>
                         <x-ui.select.enum
-                            id="condition"
                             name="condition"
+                            select-name="condition"
                             required
                             :options="$conditions"
                             :default-option="__('common.choose_condition')"
@@ -99,9 +99,9 @@
                 <x-grid.col xl="4" ls="6" lg="12" md="12" sm="12">
                     <x-ui.form.group>
                         <x-ui.select.data-depend
-                            name="shelf1_id"
+                            name="shelf1"
+                            select-name="shelf1_id"
                             required
-                            :options="[]"
                             route="select-shelves"
                             depend-on="user1_id"
                             depend-field="user_id"

@@ -1,24 +1,26 @@
-@props([
-    'name',
-    'options',
-    'dependOn',
-    'dependField',
-    'route',
-    'placeholder' => false,
-    'defaultOption' => false,
-    'selected' => false,
-    'arrayKey' => false,
-    'key' => 'id',
-    'optionName' => 'name',
-    'required' => false
-])
+{{--@props([--}}
+{{--    'name',--}}
+{{--    'selectName',--}}
+{{--    'dependOn',--}}
+{{--    'dependField',--}}
+{{--    'route',--}}
+{{--    'options' => false,--}}
+{{--    'label' => false,--}}
+{{--    'defaultOption' => false,--}}
+{{--    'selected' => false,--}}
+{{--    'arrayKey' => false,--}}
+{{--    'key' => 'id',--}}
+{{--    'optionName' => 'name',--}}
+{{--    'required' => false,--}}
+{{--    'showOld' => true--}}
+{{--])--}}
 
 <x-libraries.choices
     class="choices-{{ $name }}"
     id="{{ $name }}"
     :required="$required"
-    :name="$arrayKey ? $arrayKey.'['.$name.']' : $name"
-    :label="$placeholder">
+    :name="$selectName"
+    :label="$label">
 
     @if($defaultOption)
         <x-ui.form.option value="">
@@ -26,27 +28,19 @@
         </x-ui.form.option>
     @endif
 
-    @if($selected)
-        @foreach($options as $option)
-            <x-ui.form.option
-                :value="$option[$key]"
-                :selected="old()
-                    ? $option[$key] == old($arrayKey.'.'.$name) || $option[$key] == old($name)
-                    : $option[$key] == $selected">
+    @foreach($options as $option)
+        <x-ui.form.option
+            :value="$option[$key]"
+            :selected="$isSelected($option[$key])">
                 {{ $option[$optionName] }}
-            </x-ui.form.option>
-        @endforeach
-    @else
-        @foreach($options as $option)
-            <x-ui.form.option
-                :value="$option[$key]"
-                :selected="$arrayKey
-                    ? $option[$key] == old($arrayKey.'.'.$name)
-                    : $option[$key] == old($name)">
-                {{ $option[$optionName] }}
-            </x-ui.form.option>
-        @endforeach
-    @endif
+        </x-ui.form.option>
+    @endforeach
+
+{{--    @if(old($filteredName) && $showOld)--}}
+{{--        <x-ui.form.option :value="old($filteredName)" selected>--}}
+{{--            waesdf--}}
+{{--        </x-ui.form.option>--}}
+{{--    @endif--}}
 
 </x-libraries.choices>
 
@@ -67,7 +61,23 @@
 
         choices{{ $name }}.disable();
 
+        async function setChoices() {
+            try {
+                const response = await axios.post('{{ route($route) }}', {
+                    all: true,
+                    depended: dependData
+                });
+                {{--choices{{ $name }}.setChoices(response.data.result, 'value', 'label', true)--}}
+                setTimeout(() => {
 
+                }, 0);
+                return response.data.result;
+            } catch (err) {
+                @if(!app()->isProduction())
+                    console.log(err);
+                @endif
+            }
+        }
 
         {{ $name }}Depended.addEventListener(
             'addItem',
@@ -78,24 +88,10 @@
                     dependData['{{ $dependField }}'] = event.detail.value
 
                     choices{{ $name }}.setChoices(async () => {
-                        try {
-
-                            const response = await axios.post('{{ route($route) }}', {
-                                // query: query,
-                                all: true,
-                                depended: dependData
-                            });
-                            {{--choices{{ $name }}.setChoices(response.data.result, 'value', 'label', true)--}}
-                            setTimeout(() => {
-
-                            }, 0);
-                            return response.data.result;
-                        } catch (err) {
-                            @if(!app()->isProduction())
-                            console.log(err);
-                            @endif
-                        }
+                        return setChoices()
                     })
+
+                    {{--choices{{ $name }}.setChoiceByValue('waesdf')--}}
                 }
             },
             false,
@@ -112,6 +108,23 @@
             },
             false,
         );
+
+        @if(old($dependOn) && $showOld)
+            choices{{ $name }}.enable();
+            dependData['{{ $dependField }}'] = {{ $name }}Depended.value;
+
+            choices{{ $name }}.setChoices(async () => {
+                return setChoices().then(() => console.log(choices{{ $name }}.getValue(true)))
+            })
+
+            @if(old($filteredName))
+
+        {{--window.addEventListener("load", function(){--}}
+        {{--        console.log(choices{{ $name }}.getValue());--}}
+        {{--});--}}
+
+            @endif
+        @endif
 
     </script>
 @endpush

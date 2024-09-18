@@ -51,8 +51,9 @@
                     <x-ui.form.group>
                         <x-ui.select.data
                             name="language"
+                            select-name="language_id"
                             :options="$languages"
-                            :placeholder="__('common.language')"
+                            :label="__('common.language')"
                         />
                     </x-ui.form.group>
                 </x-grid.col>

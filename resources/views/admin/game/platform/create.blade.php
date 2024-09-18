@@ -38,23 +38,24 @@
                 <x-grid.col xl="4" ls="6" ml="12" lg="6" md="6" sm="12">
                     <x-ui.form.group>
                         <x-ui.select.enum
-                            id="type"
                             name="type"
+                            select-name="type"
                             required
                             :options="$types"
                             :default-option="__('game_platform.choose_type')"
-                            :placeholder="__('game_platform.choose_type')" />
+                            :label="__('game_platform.choose_type')" />
                     </x-ui.form.group>
                 </x-grid.col>
 
                 <x-grid.col xl="4" ls="6" lg="12" md="12" sm="12">
                     <x-ui.form.group>
                         <x-ui.select.data
-                            name="game_platform_manufacturer_id"
+                            name="manufacturer"
+                            select-name="game_platform_manufacturer_id"
                             required
                             :options="$manufacturers"
                             :default-option="trans_choice('game_platform_manufacturer.manufacturers', 1)"
-                            :placeholder="trans_choice('game_platform_manufacturer.choose', 1)" />
+                            :label="trans_choice('game_platform_manufacturer.choose', 1)" />
                     </x-ui.form.group>
                 </x-grid.col>
 
