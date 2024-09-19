@@ -90,6 +90,7 @@
                             select-name="user1_id"
                             required
                             route="select-users"
+
                             :default-option="trans_choice('user.choose', 1)"
                             :label="trans_choice('user.users', 1)">
                         </x-ui.select.async>
@@ -105,6 +106,7 @@
                             route="select-shelves"
                             depend-on="user1_id"
                             depend-field="user_id"
+
                             :default-option="trans_choice('shelf.choose', 1)"
                             :placeholder="trans_choice('shelf.shelves', 1)" />
                     </x-ui.form.group>

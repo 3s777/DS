@@ -1,20 +1,3 @@
-{{--@props([--}}
-{{--    'name',--}}
-{{--    'selectName',--}}
-{{--    'dependOn',--}}
-{{--    'dependField',--}}
-{{--    'route',--}}
-{{--    'options' => false,--}}
-{{--    'label' => false,--}}
-{{--    'defaultOption' => false,--}}
-{{--    'selected' => false,--}}
-{{--    'arrayKey' => false,--}}
-{{--    'key' => 'id',--}}
-{{--    'optionName' => 'name',--}}
-{{--    'required' => false,--}}
-{{--    'showOld' => true--}}
-{{--])--}}
-
 <x-libraries.choices
     class="choices-{{ $name }}"
     id="{{ $name }}"
@@ -29,23 +12,19 @@
     @endif
 
     @foreach($options as $option)
-        <x-ui.form.option
-            :value="$option[$key]"
-            :selected="$isSelected($option[$key])">
+        <x-ui.form.option :value="$option[$key]">
                 {{ $option[$optionName] }}
         </x-ui.form.option>
     @endforeach
-
-{{--    @if(old($filteredName) && $showOld)--}}
-{{--        <x-ui.form.option :value="old($filteredName)" selected>--}}
-{{--            waesdf--}}
-{{--        </x-ui.form.option>--}}
-{{--    @endif--}}
-
 </x-libraries.choices>
 
 @push('scripts')
     <script type="module">
+        let showOld = false;
+        @if($showOld)
+            showOld = true;
+        @endif
+
         const {{ $name }} = document.querySelector('.choices-{{ $name }}');
         const choices{{ $name }} = new Choices({{ $name }}, {
             itemSelectText: '',
@@ -67,10 +46,6 @@
                     all: true,
                     depended: dependData
                 });
-                {{--choices{{ $name }}.setChoices(response.data.result, 'value', 'label', true)--}}
-                setTimeout(() => {
-
-                }, 0);
                 return response.data.result;
             } catch (err) {
                 @if(!app()->isProduction())
@@ -83,15 +58,11 @@
             'addItem',
             function(event) {
                 if({{ $name }}Depended.value) {
-                    console.log('add');
                     choices{{ $name }}.enable();
                     dependData['{{ $dependField }}'] = event.detail.value
-
                     choices{{ $name }}.setChoices(async () => {
                         return setChoices()
                     })
-
-                    {{--choices{{ $name }}.setChoiceByValue('waesdf')--}}
                 }
             },
             false,
@@ -100,7 +71,6 @@
         {{ $name }}Depended.addEventListener(
             'removeItem',
             function(event) {
-                console.log ('remove');
                 choices{{ $name }}.disable();
                 choices{{ $name }}.setChoiceByValue(['']);
                 choices{{ $name }}.clearChoices();
@@ -109,21 +79,30 @@
             false,
         );
 
+
+{{--        @if(!old($dependOn))--}}
+{{--            if({{ $name }}Depended.value !== '') {--}}
+{{--                console.log('sx');--}}
+{{--                choices{{ $name }}.enable();--}}
+{{--                dependData['{{ $dependField }}'] = {{ $name }}Depended.value;--}}
+{{--                choices{{ $name }}.setChoices(async () => {--}}
+{{--                    return setChoices()--}}
+{{--                })@if($selected).then(() => choices{{ $name }}.setChoiceByValue({{ $selected }}))@endif--}}
+{{--            }--}}
+{{--        @endif--}}
+
         @if(old($dependOn) && $showOld)
             choices{{ $name }}.enable();
             dependData['{{ $dependField }}'] = {{ $name }}Depended.value;
 
             choices{{ $name }}.setChoices(async () => {
-                return setChoices().then(() => console.log(choices{{ $name }}.getValue(true)))
-            })
+                return setChoices()
+            }).then(() => choices{{ $name }}.setChoiceByValue({{ old($filteredName) }}))
 
-            @if(old($filteredName))
-
-        {{--window.addEventListener("load", function(){--}}
-        {{--        console.log(choices{{ $name }}.getValue());--}}
-        {{--});--}}
-
-            @endif
+            {{--setTimeout(() => {--}}
+            {{--    choices{{ $name }}.setChoiceByValue({{ old($filteredName) }});--}}
+            {{--    console.log('time');--}}
+            {{--}, 1000);--}}
         @endif
 
     </script>
