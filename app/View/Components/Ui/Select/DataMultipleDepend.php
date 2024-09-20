@@ -8,7 +8,7 @@ use Illuminate\Support\Collection;
 use Illuminate\Support\Str;
 use Illuminate\View\Component;
 
-class Data extends Component
+class DataMultipleDepend extends Component
 {
     public string $filteredName;
     /**
@@ -17,7 +17,10 @@ class Data extends Component
     public function __construct(
         public string $name,
         public string $selectName,
-        public array|Collection $options,
+        public string $dependOn,
+        public string $dependField,
+        public string $route,
+        public array|Collection $options = [],
         public ?string $label = null,
         public ?string $defaultOption = null,
         public ?string $selected = null,
@@ -29,32 +32,8 @@ class Data extends Component
         $this->filteredName = Str::of($this->selectName)->replace('[', '.')->remove(']')->value();
     }
 
-    public function isOld(string $key): bool
-    {
-        if(old($this->filteredName) == $key) {
-            return true;
-        }
-
-        return false;
-    }
-
-    public function isSelected(string $key): bool {
-        if(!$this->showOld) {
-            return false;
-        }
-
-        if($this->selected && !old()) {
-            return $key == $this->selected;
-        }
-
-        return $this->isOld($key);
-    }
-
-    /**
-     * Get the view / contents that represent the component.
-     */
     public function render(): View|Closure|string
     {
-        return view('components.ui.select.data');
+        return view('components.ui.select.data-multiple-depend');
     }
 }

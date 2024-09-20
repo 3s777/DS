@@ -83,9 +83,10 @@
                     <x-ui.form.group>
                         <x-ui.select.data-multiple
                             name="genres"
+                            select-name="genres[]"
                             :options="$genres"
-                            :placeholder="trans_choice('game_genre.choose', 2)"
-                            :selected="$gameMedia->genres" />
+                            :label="trans_choice('game_genre.choose', 2)"
+                            :selected="$gameMedia->genres->pluck('name', 'id')->toArray()" />
                     </x-ui.form.group>
                 </x-grid.col>
 
@@ -93,9 +94,10 @@
                     <x-ui.form.group>
                         <x-ui.select.data-multiple
                             name="platforms"
+                            select-name="platforms[]"
                             :options="$platforms"
-                            :placeholder="trans_choice('game_platform.choose', 2)"
-                            :selected="$gameMedia->platforms" />
+                            :label="trans_choice('game_platform.choose', 2)"
+                            :selected="$gameMedia->platforms->pluck('name', 'id')->toArray()" />
                     </x-ui.form.group>
                 </x-grid.col>
 

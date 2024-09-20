@@ -99,12 +99,13 @@
                         <x-ui.form.group>
                             <x-ui.select.data-multiple
                                 name="roles"
+                                select-name="roles[]"
                                 type="input"
                                 key="name"
                                 option-name="display_name"
                                 :selected="$user->roles"
                                 :options="$roles"
-                                :placeholder="trans_choice('role.choose', 1)"/>
+                                :label="trans_choice('role.choose', 1)"/>
                         </x-ui.form.group>
                     </x-grid.col>
                 </x-grid>

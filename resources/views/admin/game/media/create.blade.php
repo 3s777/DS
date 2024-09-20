@@ -82,8 +82,9 @@
                     <x-ui.form.group>
                         <x-ui.select.data-multiple
                             name="genres"
+                            select-name="genres[]"
                             :options="$genres"
-                            :placeholder="trans_choice('game_genre.choose', 2)"
+                            :label="trans_choice('game_genre.choose', 2)"
                             :default-option="trans_choice('game_genre.genres', 2)"
                         />
                     </x-ui.form.group>
@@ -93,8 +94,9 @@
                     <x-ui.form.group>
                         <x-ui.select.data-multiple
                             name="platforms"
+                            select-name="platforms[]"
                             :options="$platforms"
-                            :placeholder="trans_choice('game_platform.choose', 2)"
+                            :label="trans_choice('game_platform.choose', 2)"
                             :default-option="trans_choice('game_platform.platforms', 2)"
                         />
                     </x-ui.form.group>

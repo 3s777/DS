@@ -133,7 +133,8 @@ class GameDeveloperController extends Controller
         return new AsyncSelectViewModel(
             $request->input('query'),
             GameDeveloper::class,
-            trans_choice('game_developer.choose', 2)
+            trans_choice('game_developer.choose', 2),
+            'all.*',
         );
     }
 }

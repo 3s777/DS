@@ -20,16 +20,12 @@
 
 @push('scripts')
     <script type="module">
-        let showOld = false;
-        @if($showOld)
-            showOld = true;
-        @endif
-
         const {{ $name }} = document.querySelector('.choices-{{ $name }}');
         const choices{{ $name }} = new Choices({{ $name }}, {
             itemSelectText: '',
             removeItems: true,
             removeItemButton: true,
+            loadingText: '{{ __('common.loading') }}',
             noResultsText: '{{ __('common.not_found') }}',
             noChoicesText: '{{ __('common.nothing_else') }}',
         });
@@ -40,7 +36,7 @@
 
         choices{{ $name }}.disable();
 
-        async function setChoices() {
+        async function setData() {
             try {
                 const response = await axios.post('{{ route($route) }}', {
                     all: true,
@@ -60,8 +56,9 @@
                 if({{ $name }}Depended.value) {
                     choices{{ $name }}.enable();
                     dependData['{{ $dependField }}'] = event.detail.value
+                    choices{{ $name }}.clearChoices();
                     choices{{ $name }}.setChoices(async () => {
-                        return setChoices()
+                        return setData()
                     })
                 }
             },
@@ -79,31 +76,19 @@
             false,
         );
 
-
-{{--        @if(!old($dependOn))--}}
-{{--            if({{ $name }}Depended.value !== '') {--}}
-{{--                console.log('sx');--}}
-{{--                choices{{ $name }}.enable();--}}
-{{--                dependData['{{ $dependField }}'] = {{ $name }}Depended.value;--}}
-{{--                choices{{ $name }}.setChoices(async () => {--}}
-{{--                    return setChoices()--}}
-{{--                })@if($selected).then(() => choices{{ $name }}.setChoiceByValue({{ $selected }}))@endif--}}
-{{--            }--}}
-{{--        @endif--}}
-
-        @if(old($dependOn) && $showOld)
+        if({{ $name }}Depended.value !== '') {
             choices{{ $name }}.enable();
             dependData['{{ $dependField }}'] = {{ $name }}Depended.value;
 
-            choices{{ $name }}.setChoices(async () => {
-                return setChoices()
-            }).then(() => choices{{ $name }}.setChoiceByValue({{ old($filteredName) }}))
-
-            {{--setTimeout(() => {--}}
-            {{--    choices{{ $name }}.setChoiceByValue({{ old($filteredName) }});--}}
-            {{--    console.log('time');--}}
-            {{--}, 1000);--}}
-        @endif
-
+            @if(old($dependOn) && $showOld)
+                choices{{ $name }}.setChoices(async () => {
+                    return setData()
+                }).then(() => choices{{ $name }}.setChoiceByValue({{ old($filteredName) }}))
+            @else
+                choices{{ $name }}.setChoices(async () => {
+                    return setData()
+                })@if($selected).then(() => choices{{ $name }}.setChoiceByValue({{ $selected }}))@endif
+            @endif
+        }
     </script>
 @endpush

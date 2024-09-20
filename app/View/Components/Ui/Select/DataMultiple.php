@@ -4,11 +4,12 @@ namespace App\View\Components\Ui\Select;
 
 use Closure;
 use Illuminate\Contracts\View\View;
+use Illuminate\Support\Arr;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Str;
 use Illuminate\View\Component;
 
-class Data extends Component
+class DataMultiple extends Component
 {
     public string $filteredName;
     /**
@@ -20,13 +21,13 @@ class Data extends Component
         public array|Collection $options,
         public ?string $label = null,
         public ?string $defaultOption = null,
-        public ?string $selected = null,
-        public string $key = 'id',
-        public string $optionName = 'name',
+        public array|Collection|null $selected = null,
+//        public string $key = 'id',
+//        public string $optionName = 'name',
         public bool $required = false,
         public bool $showOld = true
     ) {
-        $this->filteredName = Str::of($this->selectName)->replace('[', '.')->remove(']')->value();
+        $this->filteredName = Str::of($this->selectName)->replace('[]','')->replace('[', '.')->remove(']')->value();
     }
 
     public function isOld(string $key): bool
@@ -44,10 +45,20 @@ class Data extends Component
         }
 
         if($this->selected && !old()) {
-            return $key == $this->selected;
+            if(is_array($this->selected)) {
+
+                return Arr::exists($this->selected, $key);
+//                return in_array($key, $this->selected);
+            }
+
+//            return $this->selected->contains($this->key, $key);
         }
 
-        return $this->isOld($key);
+//        if($this->selected && old()) {
+//            return in_array($key, old($this->filteredName, []));
+//        }
+
+        return in_array($key, old($this->filteredName, []));
     }
 
     /**
@@ -55,6 +66,6 @@ class Data extends Component
      */
     public function render(): View|Closure|string
     {
-        return view('components.ui.select.data');
+        return view('components.ui.select.data-multiple');
     }
 }

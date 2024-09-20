@@ -73,7 +73,7 @@
             noChoicesText: '{{ __('common.not_found') }}',
             searchPlaceholderValue: '{{ __('common.search') }}',
             callbackOnInit: () => {
-                asyncSelect.searchTerms = {{ $name }}List.closest('.choices').querySelector('[name="search_terms"]')
+                asyncSelect.searchTerms = {{ $name }}List.closest('.choices').querySelector('input[type=search]')
             },
         });
 

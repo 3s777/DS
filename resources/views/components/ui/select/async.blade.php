@@ -23,7 +23,7 @@
     @endif
 
     @if($selected)
-        <x-ui.form.option :value="$selected->id" :selected="!old('{{ $name }}')">
+        <x-ui.form.option :value="$selected->id" :selected="!old($selectName)">
             {{ $selected->name }}
         </x-ui.form.option>
     @endif

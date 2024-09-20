@@ -25,11 +25,11 @@ class GameMediaUpdateViewModel extends ViewModel
 
     public function genres(): array
     {
-        return GameGenre::select('id', 'name')->get()->toArray();
+        return GameGenre::select('id', 'name')->get()->pluck('name', 'id')->toArray();
     }
 
     public function platforms(): array
     {
-        return GamePlatform::select('id', 'name')->get()->toArray();
+        return GamePlatform::select('id', 'name')->get()->pluck('name', 'id')->toArray();
     }
 }

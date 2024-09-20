@@ -98,12 +98,14 @@
                     <x-ui.form.group>
                         <x-ui.select.data-multiple
                             name="roles"
+                            select-name="roles[]"
                             type="input"
                             key="name"
                             option-name="display_name"
                             :selected="['name' => config('settings.default_role')]"
                             :options="$roles"
-                            :placeholder="trans_choice('role.choose', 1)"
+                            :label="trans_choice('role.choose', 1)"
+                            :required="true"
                         />
                     </x-ui.form.group>
                 </x-grid.col>
@@ -130,6 +132,8 @@
                 </x-ui.form.input-image>
             </div>
         </div>
+
+        @dump(old())
 
         <x-ui.form.group class="crud-form__submit">
             <x-ui.form.button
