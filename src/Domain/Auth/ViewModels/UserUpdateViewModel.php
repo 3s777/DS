@@ -8,7 +8,7 @@ use Domain\Auth\Models\Role;
 use Domain\Auth\Models\User;
 use Spatie\ViewModels\ViewModel;
 
-class UserCrudViewModel extends ViewModel
+class UserUpdateViewModel extends ViewModel
 {
     public ?User $user;
 
@@ -19,12 +19,12 @@ class UserCrudViewModel extends ViewModel
 
     public function languages(): array
     {
-        return Language::all()->select('id', 'name')->toArray();
+        return Language::all()->select('id', 'name')->pluck('name', 'id')->toArray();
     }
 
     public function roles(): array
     {
-        return Role::all()->select('name', 'display_name')->toArray();
+        return Role::all()->select('name', 'display_name')->pluck('display_name', 'name')->toArray();
     }
 
     public function permissions(): array

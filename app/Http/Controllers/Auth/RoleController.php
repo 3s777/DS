@@ -6,7 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Auth\Role\CreateRoleRequest;
 use App\Http\Requests\Auth\Role\UpdateRoleRequest;
 use Domain\Auth\Models\Role;
-use Domain\Auth\ViewModels\RoleCrudViewModel;
+use Domain\Auth\ViewModels\RoleUpdateViewModel;
 use Domain\Auth\ViewModels\RoleIndexViewModel;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
@@ -27,7 +27,7 @@ class RoleController extends Controller
 
     public function create(): View|Application|Factory|\Illuminate\Contracts\Foundation\Application
     {
-        return view('admin.user.role.create', new RoleCrudViewModel());
+        return view('admin.user.role.create', new RoleUpdateViewModel());
     }
 
     public function store(CreateRoleRequest $request): RedirectResponse
@@ -54,7 +54,7 @@ class RoleController extends Controller
 
     public function edit(Role $role): View|Application|Factory|\Illuminate\Contracts\Foundation\Application
     {
-        return view('admin.user.role.edit', new RoleCrudViewModel($role));
+        return view('admin.user.role.edit', new RoleUpdateViewModel($role));
     }
 
     public function update(UpdateRoleRequest $request, Role $role): RedirectResponse

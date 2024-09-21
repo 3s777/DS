@@ -79,6 +79,7 @@
                             <x-ui.form.input-text
                                 :placeholder="__('auth.password')"
                                 id="password"
+                                :show-old="false"
                                 name="password">
                             </x-ui.form.input-text>
                         </x-ui.form.group>
@@ -103,7 +104,7 @@
                                 type="input"
                                 key="name"
                                 option-name="display_name"
-                                :selected="$user->roles"
+                                :selected="$user->roles->pluck('name')->toArray()"
                                 :options="$roles"
                                 :label="trans_choice('role.choose', 1)"/>
                         </x-ui.form.group>

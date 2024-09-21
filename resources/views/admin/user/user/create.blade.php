@@ -102,7 +102,7 @@
                             type="input"
                             key="name"
                             option-name="display_name"
-                            :selected="['name' => config('settings.default_role')]"
+                            :selected="[config('settings.default_role')]"
                             :options="$roles"
                             :label="trans_choice('role.choose', 1)"
                             :required="true"
@@ -133,7 +133,7 @@
             </div>
         </div>
 
-        @dump(old())
+        @dump($errors)
 
         <x-ui.form.group class="crud-form__submit">
             <x-ui.form.button

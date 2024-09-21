@@ -13,7 +13,7 @@ use Domain\Auth\Actions\UpdateUserAction;
 use Domain\Auth\DTOs\NewUserDTO;
 use Domain\Auth\DTOs\UpdateUserDTO;
 use Domain\Auth\Models\User;
-use Domain\Auth\ViewModels\UserCrudViewModel;
+use Domain\Auth\ViewModels\UserUpdateViewModel;
 use Domain\Auth\ViewModels\UserIndexViewModel;
 use Domain\Auth\ViewModels\UserListSelectViewModel;
 use Domain\Game\Models\GameDeveloper;
@@ -40,7 +40,7 @@ class UserController extends Controller
 
     public function create(): View|Application|Factory|\Illuminate\Contracts\Foundation\Application
     {
-        return view('admin.user.user.create', new UserCrudViewModel());
+        return view('admin.user.user.create', new UserUpdateViewModel());
     }
 
     public function store(CreateUserRequest $request, CreateUserAction $action): RedirectResponse
@@ -59,7 +59,7 @@ class UserController extends Controller
 
     public function edit(User $user): View|Application|Factory|\Illuminate\Contracts\Foundation\Application
     {
-        return view('admin.user.user.edit', new UserCrudViewModel($user));
+        return view('admin.user.user.edit', new UserUpdateViewModel($user));
     }
 
     public function update(UpdateUserRequest $request, User $user, UpdateUserAction $action): RedirectResponse

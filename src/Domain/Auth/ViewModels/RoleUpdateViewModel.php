@@ -7,7 +7,7 @@ use Domain\Auth\Models\Role;
 use Illuminate\Support\Facades\Cache;
 use Spatie\ViewModels\ViewModel;
 
-class RoleCrudViewModel extends ViewModel
+class RoleUpdateViewModel extends ViewModel
 {
     public ?Role $role;
 

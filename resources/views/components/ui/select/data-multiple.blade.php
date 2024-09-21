@@ -15,11 +15,11 @@
 
     {{ $slot }}
 
-    @foreach($options as $k => $v)
+    @foreach($options as $value => $option)
         <x-ui.form.option
-            :value="$k"
-            :selected="$isSelected($k)">
-                {{ $v }}
+            :value="$value"
+            :selected="$isSelected($value)">
+            {{ $option }}
         </x-ui.form.option>
     @endforeach
 

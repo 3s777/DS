@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Str;
 use Support\Sorters\Sorter;
 use Support\Filters\FilterManager;
 use Support\Flash\Flash;
@@ -53,5 +54,13 @@ if(!function_exists('sorter')) {
                 'defaultOrder' => $defaultOrder
             ]
         );
+    }
+}
+
+
+if(!function_exists('filterInputName')) {
+    function to_dot_name(string $name): string
+    {
+        return Str::of($name)->replace('[]','')->replace('[', '.')->remove(']')->value();
     }
 }

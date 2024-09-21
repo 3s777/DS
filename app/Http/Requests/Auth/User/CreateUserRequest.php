@@ -109,7 +109,7 @@ class CreateUserRequest extends FormRequest
             'slug' => __('common.slug'),
             'first_name' => __('auth.first_name'),
             'email' => __('common.email'),
-            'roles' => __('role.roles'),
+            'roles' => trans_choice('role.roles', 2),
             'description' => __('common.description'),
             'thumbnail' => __('common.thumbnail'),
             'language_id' => __('common.language'),

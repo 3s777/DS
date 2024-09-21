@@ -12,11 +12,11 @@
         </x-ui.form.option>
     @endif
 
-    @foreach($options as $option)
+    @foreach($options as $value => $option)
         <x-ui.form.option
-            :value="$option[$key]"
-            :selected="$isSelected($option[$key])">
-                {{ $option[$optionName] }}
+            :value="$value"
+            :selected="$isSelected($value)">
+                {{ $option }}
         </x-ui.form.option>
     @endforeach
 

@@ -53,7 +53,7 @@ class CreateGamePlatformRequest extends FormRequest
                 'exists:Domain\Auth\Models\User,id'
             ],
             'game_platform_manufacturer_id' => [
-                'required',
+                'nullable',
                 'integer',
                 'exists:Domain\Game\Models\GamePlatformManufacturer,id'
             ],

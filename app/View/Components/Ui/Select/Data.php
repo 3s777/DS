@@ -17,16 +17,14 @@ class Data extends Component
     public function __construct(
         public string $name,
         public string $selectName,
-        public array|Collection $options,
+        public array $options,
         public ?string $label = null,
         public ?string $defaultOption = null,
         public ?string $selected = null,
-        public string $key = 'id',
-        public string $optionName = 'name',
         public bool $required = false,
         public bool $showOld = true
     ) {
-        $this->filteredName = Str::of($this->selectName)->replace('[', '.')->remove(']')->value();
+        $this->filteredName = to_dot_name($selectName);
     }
 
     public function isOld(string $key): bool
@@ -50,9 +48,6 @@ class Data extends Component
         return $this->isOld($key);
     }
 
-    /**
-     * Get the view / contents that represent the component.
-     */
     public function render(): View|Closure|string
     {
         return view('components.ui.select.data');
