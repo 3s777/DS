@@ -27,6 +27,11 @@ class UserUpdateViewModel extends ViewModel
         return Role::all()->select('name', 'display_name')->pluck('display_name', 'name')->toArray();
     }
 
+    public function selectedRoles(): ?array
+    {
+        return $this->user?->roles->pluck('name')->toArray() ?? null;
+    }
+
     public function permissions(): array
     {
         return Permission::all()->select('name', 'display_name')->toArray();

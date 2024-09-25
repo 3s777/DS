@@ -104,7 +104,7 @@
                                 type="input"
                                 key="name"
                                 option-name="display_name"
-                                :selected="$user->roles->pluck('name')->toArray()"
+                                :selected="$selectedRoles"
                                 :options="$roles"
                                 :label="trans_choice('role.choose', 1)"/>
                         </x-ui.form.group>

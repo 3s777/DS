@@ -28,6 +28,11 @@ class GamePlatformUpdateViewModel extends ViewModel
         return GamePlatformManufacturer::all()->select('id', 'name')->pluck('name', 'id')->toArray();
     }
 
+    public function selectedManufacturer(): ?int
+    {
+        return $this->gamePlatform?->game_platform_manufacturer->id ?? null;
+    }
+
     public function users(): \Illuminate\Database\Eloquent\Collection
     {
         return User::all()->select('id', 'name');

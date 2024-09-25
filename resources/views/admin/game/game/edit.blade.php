@@ -64,7 +64,7 @@
                             select-name="genres[]"
                             :options="$genres"
                             :label="trans_choice('game_genre.choose', 2)"
-                            :selected="$game->genres" />
+                            :selected="$selectedGenres" />
                     </x-ui.form.group>
                 </x-grid.col>
 
@@ -75,7 +75,7 @@
                             select-name="platforms[]"
                             :options="$platforms"
                             :label="trans_choice('game_platform.choose', 2)"
-                            :selected="$game->platforms" />
+                            :selected="$selectedPlatforms" />
                     </x-ui.form.group>
                 </x-grid.col>
 

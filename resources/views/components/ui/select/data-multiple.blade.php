@@ -21,6 +21,9 @@
             :selected="$isSelected($value)">
             {{ $option }}
         </x-ui.form.option>
+            <script>
+                console.log('{{ $isSelected($value) }}');
+            </script>
     @endforeach
 
 {{--    @foreach($options as $option)--}}

@@ -26,14 +26,24 @@ class GameUpdateViewModel extends ViewModel
         return $this->game ?? null;
     }
 
+    public function selectedGenres(): ?array
+    {
+        return $this->game?->genres->pluck('id')->toArray() ?? null;
+    }
+
+    public function selectedPlatforms(): ?array
+    {
+        return $this->game?->platforms->pluck('id')->toArray() ?? null;
+    }
+
     public function genres(): array
     {
-        return GameGenre::select('id', 'name')->get()->toArray();
+        return GameGenre::select('id', 'name')->get()->pluck('name', 'id')->toArray();
     }
 
     public function platforms(): array
     {
-        return GamePlatform::select('id', 'name')->get()->toArray();
+        return GamePlatform::select('id', 'name')->get()->pluck('name', 'id')->toArray();
     }
 
 //    public function developers(): array

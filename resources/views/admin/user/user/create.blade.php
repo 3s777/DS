@@ -133,8 +133,6 @@
             </div>
         </div>
 
-        @dump($errors)
-
         <x-ui.form.group class="crud-form__submit">
             <x-ui.form.button
                 class="crud-form__submit-button"

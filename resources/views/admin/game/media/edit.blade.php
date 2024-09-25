@@ -86,7 +86,7 @@
                             select-name="genres[]"
                             :options="$genres"
                             :label="trans_choice('game_genre.choose', 2)"
-                            :selected="$gameMedia->genres->pluck('name', 'id')->toArray()" />
+                            :selected="$selectedGenres" />
                     </x-ui.form.group>
                 </x-grid.col>
 
@@ -97,7 +97,7 @@
                             select-name="platforms[]"
                             :options="$platforms"
                             :label="trans_choice('game_platform.choose', 2)"
-                            :selected="$gameMedia->platforms->pluck('name', 'id')->toArray()" />
+                            :selected="$selectedPlatforms" />
                     </x-ui.form.group>
                 </x-grid.col>
 

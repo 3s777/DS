@@ -55,7 +55,7 @@
                             name="game_platform_manufacturer_id"
                             select-name="game_platform_manufacturer_id"
                             :options="$manufacturers"
-                            :selected="$gamePlatform->game_platform_manufacturer->id ?? false"
+                            :selected="$selectedManufacturer"
                             :default-option="trans_choice('game_platform_manufacturer.manufacturers', 1)"
                             :placeholder="trans_choice('game_platform_manufacturer.choose', 1)" />
                     </x-ui.form.group>
