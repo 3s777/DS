@@ -4,8 +4,6 @@ namespace App\View\Components\Ui\Select;
 
 use Closure;
 use Illuminate\Contracts\View\View;
-use Illuminate\Support\Collection;
-use Illuminate\Support\Str;
 use Illuminate\View\Component;
 
 class Data extends Component

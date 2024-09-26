@@ -3,7 +3,8 @@
     id="{{ $name }}"
     :required="$required"
     :name="$selectName"
-    :label="$label">
+    :label="$label"
+    :error="$filteredName">
 
     @if($defaultOption)
         <x-ui.form.option value="">
@@ -11,9 +12,12 @@
         </x-ui.form.option>
     @endif
 
-    @foreach($options as $option)
-        <x-ui.form.option :value="$option[$key]">
-                {{ $option[$optionName] }}
+    @foreach($options as $value => $option)
+        <x-ui.form.option
+            :value="$value"
+{{--            :selected="$isSelected($value)"--}}
+        >
+            {{ $option }}
         </x-ui.form.option>
     @endforeach
 </x-libraries.choices>
@@ -34,6 +38,23 @@
 
         const dependData = {};
 
+        if({{ $name }}Depended.value !== '') {
+            choices{{ $name }}.enable();
+            dependData['{{ $dependField }}'] = {{ $name }}Depended.value;
+
+            let selectedChoices = choices{{ $name }}.setChoices(async () => {
+                return setData()
+            });
+
+            @if($selected)
+                selectedChoices.then(() => choices{{ $name }}.setChoiceByValue({{ $selected }}))
+            @endif
+
+            @if(old($filteredDependName) && $showOld)
+                selectedChoices.then(() => choices{{ $name }}.setChoiceByValue({{ old($filteredName) }}))
+            @endif
+        }
+
         choices{{ $name }}.disable();
 
         async function setData() {
@@ -42,6 +63,7 @@
                     all: true,
                     depended: dependData
                 });
+                console.log(response.data.result);
                 return response.data.result;
             } catch (err) {
                 @if(!app()->isProduction())
@@ -56,7 +78,9 @@
                 if({{ $name }}Depended.value) {
                     choices{{ $name }}.enable();
                     dependData['{{ $dependField }}'] = event.detail.value
+                    choices{{ $name }}.setChoiceByValue(['']);
                     choices{{ $name }}.clearChoices();
+                    {{--choices{{ $name }}.clearStore();--}}
                     choices{{ $name }}.setChoices(async () => {
                         return setData()
                     })
@@ -75,20 +99,5 @@
             },
             false,
         );
-
-        if({{ $name }}Depended.value !== '') {
-            choices{{ $name }}.enable();
-            dependData['{{ $dependField }}'] = {{ $name }}Depended.value;
-
-            @if(old($dependOn) && $showOld)
-                choices{{ $name }}.setChoices(async () => {
-                    return setData()
-                }).then(() => choices{{ $name }}.setChoiceByValue({{ old($filteredName) }}))
-            @else
-                choices{{ $name }}.setChoices(async () => {
-                    return setData()
-                })@if($selected).then(() => choices{{ $name }}.setChoiceByValue({{ $selected }}))@endif
-            @endif
-        }
     </script>
 @endpush

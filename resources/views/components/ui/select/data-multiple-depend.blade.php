@@ -1,20 +1,8 @@
-@props([
-    'name',
-    'selectName',
-    'options',
-    'placeholder' => false,
-    'defaultOption' => false,
-    'arrayKey' => false,
-    'selected' => false,
-    'key' => 'id',
-    'optionName' => 'name'
-])
-
 <x-libraries.choices
     class="choices-{{ $name }}"
     id="{{ $name }}"
-    :name="$arrayKey ? $arrayKey.'['.$name.'][]' : $name.'[]'"
-    :label="$placeholder"
+    :name="$selectName"
+    :label="$label"
     :error="$name"
     multiple>
     @if($defaultOption)

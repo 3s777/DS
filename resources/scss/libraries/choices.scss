@@ -61,6 +61,13 @@
         cursor: pointer;
     }
 
+
+    & input:disabled::-webkit-input-placeholder {
+        color: $opposite-main;
+        opacity: .7;
+    }
+
+
     .choices[data-type*=select-one].is-disabled & {
         background-color: $disabled-main;
         color: $opposite-main;

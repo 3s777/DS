@@ -4,13 +4,12 @@ namespace App\View\Components\Ui\Select;
 
 use Closure;
 use Illuminate\Contracts\View\View;
-use Illuminate\Support\Collection;
-use Illuminate\Support\Str;
 use Illuminate\View\Component;
 
 class DataDepend extends Component
 {
     public string $filteredName;
+    public string $filteredDependName;
     /**
      * Create a new component instance.
      */
@@ -20,16 +19,15 @@ class DataDepend extends Component
         public string $dependOn,
         public string $dependField,
         public string $route,
-        public array|Collection $options = [],
+        public array $options = [],
         public ?string $label = null,
         public ?string $defaultOption = null,
         public ?string $selected = null,
-        public string $key = 'id',
-        public string $optionName = 'name',
         public bool $required = false,
         public bool $showOld = true
     ) {
-        $this->filteredName = Str::of($this->selectName)->replace('[', '.')->remove(']')->value();
+        $this->filteredName = to_dot_name($selectName);
+        $this->filteredDependName = to_dot_name($dependOn);
     }
 
     public function render(): View|Closure|string

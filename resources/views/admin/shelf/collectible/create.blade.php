@@ -99,7 +99,7 @@
 
                 <x-grid.col xl="4" ls="6" lg="12" md="12" sm="12">
                     <x-ui.form.group>
-                        <x-ui.select.data-depend
+                        <x-ui.select.data-multiple-depend
                             name="shelf1"
                             select-name="shelf1_id"
                             required

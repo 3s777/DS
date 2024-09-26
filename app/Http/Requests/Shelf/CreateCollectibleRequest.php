@@ -47,7 +47,8 @@ class CreateCollectibleRequest extends FormRequest
                 'exists:Domain\Auth\Models\User,id'
             ],
             'shelf_id' => ['required'],
-            'condition' => ['required']
+            'condition' => ['required'],
+//            'shelf1_id.test' => ['required'],
         ];
     }
 
