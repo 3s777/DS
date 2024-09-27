@@ -48,7 +48,8 @@ class CreateCollectibleRequest extends FormRequest
             ],
             'shelf_id' => ['required'],
             'condition' => ['required'],
-//            'shelf1_id.test' => ['required'],
+            'shelf2_id' => ['required'],
+
         ];
     }
 

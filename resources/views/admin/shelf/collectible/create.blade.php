@@ -99,7 +99,7 @@
 
                 <x-grid.col xl="4" ls="6" lg="12" md="12" sm="12">
                     <x-ui.form.group>
-                        <x-ui.select.data-multiple-depend
+                        <x-ui.select.data-depend
                             name="shelf1"
                             select-name="shelf1_id"
                             required
@@ -107,6 +107,36 @@
                             depend-on="user1_id"
                             depend-field="user_id"
 {{--                            selected="12"--}}
+                            :default-option="trans_choice('shelf.choose', 1)"
+                            :placeholder="trans_choice('shelf.shelves', 1)" />
+                    </x-ui.form.group>
+                </x-grid.col>
+
+
+                <x-grid.col xl="4" ls="6" ml="12" lg="6" md="6" sm="12">
+                    <x-ui.form.group>
+                        <x-ui.select.async
+                            name="user2"
+                            select-name="user2_id"
+                            required
+                            route="select-users"
+                            :selected="auth()->user()"
+                            :default-option="trans_choice('user.choose', 1)"
+                            :label="trans_choice('user.users', 1)">
+                        </x-ui.select.async>
+                    </x-ui.form.group>
+                </x-grid.col>
+
+                <x-grid.col xl="4" ls="6" lg="12" md="12" sm="12">
+                    <x-ui.form.group>
+                        <x-ui.select.data-multiple-depend
+                            name="shelf2"
+                            select-name="shelf2_id[]"
+                            required
+                            route="select-shelves"
+                            depend-on="user2_id"
+                            depend-field="user_id"
+                            :selected="[12,13]"
                             :default-option="trans_choice('shelf.choose', 1)"
                             :placeholder="trans_choice('shelf.shelves', 1)" />
                     </x-ui.form.group>
@@ -124,6 +154,8 @@
         </div>
 
         @dump(old())
+
+        @dump($errors)
 
         <div class="crud-form__sidebar">
             <div class="crud-form__sidebar-wrapper">

@@ -12,6 +12,8 @@
         </x-ui.form.option>
     @endif
 
+    {{ $slot }}
+
     @foreach($options as $value => $option)
         <x-ui.form.option
             :value="$value"

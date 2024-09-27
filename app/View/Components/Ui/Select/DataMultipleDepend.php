@@ -20,12 +20,25 @@ class DataMultipleDepend extends Component
         public array $options = [],
         public ?string $label = null,
         public ?string $defaultOption = null,
-        public ?string $selected = null,
+        public ?array $selected = null,
         public bool $required = false,
         public bool $showOld = true
     ) {
         $this->filteredName = to_dot_name($selectName);
         $this->filteredDependName = to_dot_name($dependOn);
+    }
+
+    public function oldValues(): ?string
+    {
+        $oldValues = '';
+
+        if(old($this->filteredName)) {
+            foreach(old($this->filteredName) as $oldValue) {
+                $oldValues .= $oldValue.',';
+            }
+        }
+
+        return $oldValues;
     }
 
     public function render(): View|Closure|string
