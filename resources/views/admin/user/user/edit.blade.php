@@ -102,8 +102,6 @@
                                 name="roles"
                                 select-name="roles[]"
                                 type="input"
-                                key="name"
-                                option-name="display_name"
                                 :selected="$selectedRoles"
                                 :options="$roles"
                                 :label="trans_choice('role.choose', 1)"/>

@@ -49,10 +49,24 @@
 
                 <x-grid.col xl="4" ls="6" ml="12" lg="6" md="6" sm="12">
                     <x-ui.form.group>
+                        <x-ui.select.async-multiple
+                            name="user_m"
+                            select-name="user_idm[m]"
+                            route="select-users"
+                            :selected="$users"
+                            :required="true"
+                            :default-option="trans_choice('user.choose', 1)"
+                            :label="trans_choice('user.users', 1)">
+                        </x-ui.select.async-multiple>
+                    </x-ui.form.group>
+                </x-grid.col>
+
+                <x-grid.col xl="4" ls="6" ml="12" lg="6" md="6" sm="12">
+                    <x-ui.form.group>
                         <x-ui.select.async
                             name="user"
                             select-name="user_id"
-                            required
+                            :required="true"
                             route="select-users"
                             :default-option="trans_choice('user.choose', 1)"
                             :label="trans_choice('user.users', 1)">
@@ -120,7 +134,7 @@
                             select-name="user2_id"
                             required
                             route="select-users"
-                            :selected="auth()->user()"
+                            :selected="[auth()->user()->id => auth()->user()->name]"
                             :default-option="trans_choice('user.choose', 1)"
                             :label="trans_choice('user.users', 1)">
                         </x-ui.select.async>

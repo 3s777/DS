@@ -1,21 +1,12 @@
-@props([
-    'name',
-    'route',
-    'label' => false,
-    'selected' => false,
-    'showOld' => true,
-    'defaultOption' => false,
-    'arrayKey' => false
-])
-
 <x-libraries.choices
     {{ $attributes->class([
         $name.'-select' => $name
     ]) }}
     id="{{ $name }}-select"
-    :name="$arrayKey ? $arrayKey.'['.$name.'][]' : $name.'[]'"
+    :name="$selectName"
     :label="$label"
-    :error="$name"
+    :error="$filteredName"
+    :required="$required"
     multiple>
 
     @if($defaultOption && !$selected)
@@ -24,17 +15,15 @@
         </x-ui.form.option>
     @endif
 
-    @if($selected)
-        @if(!old($name) || !$showOld)
-            @foreach($selected as $item)
-                <x-ui.form.option :value="$item->id" :selected="true">
-                    {{ $item->name }}
-                </x-ui.form.option>
-            @endforeach
-        @endif
+    @if(($selected && !old()) || ($selected && !$showOld))
+        @foreach($selected as $value => $option)
+            <x-ui.form.option :value="$value" :selected="true">
+                {{ $option }}
+            </x-ui.form.option>
+        @endforeach
     @endif
 
-    @if(old($name) && $showOld)
+    @if(old($filteredName) && $showOld)
         @foreach(old('old_selected_'.$name)['old'] as $key => $value)
             <x-ui.form.option :value="$key" :selected="true">
                 {{ $value }}
@@ -44,13 +33,13 @@
 </x-libraries.choices>
 
 @if($showOld)
-    @if($selected && !old($name))
-        @foreach($selected as $item)
-            <input type="hidden" class="old_selected_{{ $name }}" name="old_selected_{{ $name }}[old][{{ $item->id }}]" value="{{ $item->name }}">
+    @if(($selected && !old()) || ($selected && !$showOld))
+        @foreach($selected as $value => $option)
+            <input type="hidden" class="old_selected_{{ $name }}" name="old_selected_{{ $name }}[old][{{ $value }}]" value="{{ $option }}">
         @endforeach
     @endif
 
-    @if(old($name))
+    @if(old($filteredName) && $showOld))
         @foreach(old('old_selected_'.$name)['old'] as $key => $value)
             <input type="hidden" class="old_selected_{{ $name }}" name="old_selected_{{ $name }}[old][{{ $key }}]" value="{{ $value }}">
         @endforeach
@@ -61,30 +50,42 @@
     <script type="module">
         const {{ $name }}List = document.querySelector('.{{ $name }}-select');
 
-        let asyncSelect = new asyncSelectSearch('{{ route($route) }}');
-
         const choices{{ $name }} = new Choices({{ $name }}List, {
             allowHTML: true,
             itemSelectText: '',
             removeItems: true,
-            // placeholder: false,
             removeItemButton: true,
             noResultsText: '{{ __('common.loading') }}',
             noChoicesText: '{{ __('common.not_found') }}',
             searchPlaceholderValue: '{{ __('common.search') }}',
-            callbackOnInit: () => {
-                asyncSelect.searchTerms = {{ $name }}List.closest('.choices').querySelector('input[type=search]')
-            },
         });
 
-        asyncSelect.searchTerms.addEventListener(
+        const asyncSearch = {{ $name }}List.closest('.choices').querySelector('input[type=search]');
+
+        asyncSearch.addEventListener(
             'input',
-            debounce(event => asyncSelect.asyncSearch(choices{{ $name }}), 300),
-            false,
+            debounce(event => choices{{ $name }}.setChoices(async () => {
+                try {
+                    const query = asyncSearch.value ?? null
+                    const response = await axios.post('{{ route($route) }}', {
+                        query: query,
+                    });
+                    setTimeout(() => {
+                        asyncSearch.focus();
+                    }, 0);
+
+                    return response.data.result;
+                } catch (err) {
+                    @if(!app()->isProduction())
+                    console.log(err);
+                    @endif
+                }
+            }, 'value', 'label', true), 300),
+            false
         )
 
         @if($showOld)
-            let select{{ $name }} = document.querySelector(`[name="{{ $name }}[]"]`);
+            let select{{ $name }} = document.querySelector(`[name="{{ $selectName }}"]`);
 
             let selectedForm = select{{ $name }} .closest('form');
 

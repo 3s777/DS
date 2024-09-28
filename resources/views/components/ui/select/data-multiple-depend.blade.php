@@ -18,38 +18,6 @@
             {{ $option }}
         </x-ui.form.option>
     @endforeach
-
-{{--    @if($selected)--}}
-{{--        @foreach($options as $option)--}}
-{{--            @if(is_array($selected))--}}
-{{--                <x-ui.form.option--}}
-{{--                    value="{{ $option[$key] }}"--}}
-{{--                    :selected="old()--}}
-{{--                    ? in_array($option[$key], old($arrayKey.'.'.$name, [])) || in_array($option[$key], old($name, []))--}}
-{{--                    : in_array($option[$key], $selected)">--}}
-{{--                    {{ $option[$optionName] }}--}}
-{{--                </x-ui.form.option>--}}
-{{--            @else--}}
-{{--                <x-ui.form.option--}}
-{{--                    value="{{ $option[$key] }}"--}}
-{{--                    :selected="old()--}}
-{{--                    ? in_array($option[$key], old($arrayKey.'.'.$name, [])) || in_array($option[$key], old($name, []))--}}
-{{--                    : $selected->contains($key, $option[$key])">--}}
-{{--                    {{ $option[$optionName] }}--}}
-{{--                </x-ui.form.option>--}}
-{{--            @endif--}}
-{{--        @endforeach--}}
-{{--    @else--}}
-{{--        @foreach($options as $option)--}}
-{{--            <x-ui.form.option--}}
-{{--                value="{{ $option[$key] }}"--}}
-{{--                :selected="$arrayKey--}}
-{{--                    ? in_array($option[$key], old($arrayKey.'.'.$name, []))--}}
-{{--                    : in_array($option[$key], old($name, []))">--}}
-{{--                {{ $option[$optionName] }}--}}
-{{--            </x-ui.form.option>--}}
-{{--        @endforeach--}}
-{{--    @endif--}}
 </x-libraries.choices>
 
 @push('scripts')
@@ -93,7 +61,7 @@
                     all: true,
                     depended: dependData
                 });
-                console.log(response.data.result);
+
                 return response.data.result;
             } catch (err) {
                 @if(!app()->isProduction())

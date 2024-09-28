@@ -54,6 +54,7 @@
                         <x-ui.select.data
                             name="game_platform_manufacturer_id"
                             select-name="game_platform_manufacturer_id"
+                            :show-old="true"
                             :options="$manufacturers"
                             :selected="$selectedManufacturer"
                             :default-option="trans_choice('game_platform_manufacturer.manufacturers', 1)"
@@ -64,7 +65,7 @@
                 <x-grid.col xl="4" ls="6" ml="12" lg="6" md="6" sm="12">
                     <x-ui.form.group>
                         <x-ui.select.async
-                            :selected="$gamePlatform->user ?? false"
+                            :selected="[auth()->user()->id => auth()->user()->name] ?? false"
                             name="user"
                             select-name="user_id"
                             route="select-users"

@@ -1,19 +1,11 @@
-@props([
-    'name',
-    'route',
-    'selectName',
-    'label' => false,
-    'selected' => false,
-    'showOld' => true,
-    'defaultOption' => false,
-])
-
 <x-libraries.choices
     {{ $attributes->class([
         $name.'-select' => $name
     ]) }}
     id="{{ $name }}-select"
     :name="$selectName"
+    :error="$filteredName"
+    :required="$required"
     :label="$label">
 
     @if($defaultOption && !$selected)
@@ -22,14 +14,16 @@
         </x-ui.form.option>
     @endif
 
-    @if($selected)
-        <x-ui.form.option :value="$selected->id" :selected="!old($selectName)">
-            {{ $selected->name }}
+    {{ $slot }}
+
+    @if(($selected && !old()) || ($selected && !$showOld))
+        <x-ui.form.option :value="key($selected)" selected>
+            {{ $selected[key($selected)] }}
         </x-ui.form.option>
     @endif
 
-    @if(old($selectName) && $showOld)
-        <x-ui.form.option :value="old($selectName)" selected>
+    @if(old($filteredName) && $showOld)
+        <x-ui.form.option :value="old($filteredName)" selected>
             {{ old('old_selected_'.$name.'_label') }}
         </x-ui.form.option>
     @endif
@@ -37,7 +31,7 @@
 
 @if($showOld)
     @if($selected)
-        <input type="hidden" name="old_selected_{{ $name }}_label" value="{{ $selected->name }}" id="old_selected_{{ $name }}_label">
+        <input type="hidden" name="old_selected_{{ $name }}_label" value="{{ $selected[key($selected)] }}" id="old_selected_{{ $name }}_label">
     @else
         <input type="hidden" name="old_selected_{{ $name }}_label" value="{{ old('old_selected_'.$name.'_label') }}" id="old_selected_{{ $name }}_label">
     @endif
@@ -88,7 +82,7 @@
                     setTimeout(() => {
                         asyncSearch.focus();
                     }, 0);
-                    console.log(response.data.result);
+
                     return response.data.result;
                 } catch (err) {
                     @if(!app()->isProduction())

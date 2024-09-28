@@ -3,6 +3,7 @@
 namespace Domain\Shelf\ViewModel;
 
 use App\Enums\ConditionEnum;
+use Domain\Auth\Models\User;
 use Domain\Shelf\Models\Collectible;
 use Domain\Shelf\Models\Shelf;
 use Illuminate\Database\Eloquent\Collection;
@@ -30,5 +31,10 @@ class CollectibleUpdateViewModel extends ViewModel
     public function collectible(): ?Collectible
     {
         return $this->collectible ?? null;
+    }
+
+    public function users()
+    {
+        return User::limit(3)->get()->pluck('name', 'id')->toArray();
     }
 }
