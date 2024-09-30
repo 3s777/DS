@@ -1,22 +1,12 @@
-@props([
-    'name',
-    'selectName',
-    'route',
-    'dependOn',
-    'dependField',
-    'label' => false,
-    'selected' => false,
-    'showOld' => true,
-    'defaultOption' => false,
-])
-
 <x-libraries.choices
     {{ $attributes->class([
         $name.'-select' => $name
     ]) }}
     id="{{ $name }}-select"
+    :error="$filteredName"
     :name="$selectName"
-    :label="$label">
+    :label="$label"
+    :required="$required">
 
     @if($defaultOption && !$selected)
         <x-ui.form.option value="">
@@ -30,12 +20,11 @@
         </x-ui.form.option>
     @endif
 
-    @if(old($selectName) && $showOld)
-        <x-ui.form.option :value="old($selectName)" selected>
+    @if(old($filteredName) && $showOld)
+        <x-ui.form.option :value="old($filteredName)" selected>
             {{ old('old_selected_'.$name.'_label') }}
         </x-ui.form.option>
     @endif
-
 </x-libraries.choices>
 
 @if($showOld)
@@ -71,11 +60,9 @@
             'addItem',
             function(event) {
                 if({{ $name }}Depended.value) {
-                    console.log('add');
                     choices{{ $name }}.enable();
                     dependData['{{ $dependField }}'] = event.detail.value
                 }
-
             },
             false,
         );
@@ -83,7 +70,6 @@
         {{ $name }}Depended.addEventListener(
             'removeItem',
             function(event) {
-                console.log ('remove');
                 choices{{ $name }}.disable();
                 choices{{ $name }}.setChoiceByValue(['']);
                 choices{{ $name }}.clearChoices();
@@ -92,12 +78,7 @@
             false,
         );
 
-        @if(old($selectName) && $showOld)
-            choices{{ $name }}.enable();
-            dependData['{{ $dependField }}'] = {{ $name }}Depended.value;
-        @endif
-
-        @if(old($dependOn) && $showOld)
+        @if((old($filteredName) && $showOld) || (old($filteredDependName) && $showOld))
             choices{{ $name }}.enable();
             dependData['{{ $dependField }}'] = {{ $name }}Depended.value;
         @endif

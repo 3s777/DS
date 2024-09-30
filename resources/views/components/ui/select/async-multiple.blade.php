@@ -39,7 +39,7 @@
         @endforeach
     @endif
 
-    @if(old($filteredName) && $showOld))
+    @if(old($filteredName) && $showOld)
         @foreach(old('old_selected_'.$name)['old'] as $key => $value)
             <input type="hidden" class="old_selected_{{ $name }}" name="old_selected_{{ $name }}[old][{{ $key }}]" value="{{ $value }}">
         @endforeach
