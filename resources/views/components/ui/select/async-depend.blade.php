@@ -8,28 +8,28 @@
     :label="$label"
     :required="$required">
 
-    @if($defaultOption && !$selected)
+    @if($defaultOption)
         <x-ui.form.option value="">
             {{ $defaultOption }}
         </x-ui.form.option>
     @endif
 
-    @if($selected)
-        <x-ui.form.option :value="$selected->id" :selected="!old('{{ $name }}_id')">
-            {{ $selected->name }}
-        </x-ui.form.option>
-    @endif
+{{--    @if(($selected && !old()) || ($selected && !$showOld))--}}
+{{--        <x-ui.form.option :value="key($selected)">--}}
+{{--            {{ $selected[key($selected)] }}--}}
+{{--        </x-ui.form.option>--}}
+{{--    @endif--}}
 
-    @if(old($filteredName) && $showOld)
-        <x-ui.form.option :value="old($filteredName)" selected>
-            {{ old('old_selected_'.$name.'_label') }}
-        </x-ui.form.option>
-    @endif
+{{--    @if(old($filteredName) && $showOld)--}}
+{{--        <x-ui.form.option :value="old($filteredName)" selected>--}}
+{{--            {{ old('old_selected_'.$name.'_label') }}--}}
+{{--        </x-ui.form.option>--}}
+{{--    @endif--}}
 </x-libraries.choices>
 
 @if($showOld)
     @if($selected)
-        <input type="hidden" name="old_selected_{{ $name }}_label" value="{{ $selected->name }}" id="old_selected_{{ $name }}_label">
+        <input type="hidden" name="old_selected_{{ $name }}_label" value="{{ $selected[key($selected)] }}" id="old_selected_{{ $name }}_label">
     @else
         <input type="hidden" name="old_selected_{{ $name }}_label" value="{{ old('old_selected_'.$name.'_label') }}" id="old_selected_{{ $name }}_label">
     @endif
@@ -56,6 +56,24 @@
 
         choices{{ $name }}.disable();
 
+        if({{ $name }}Depended.value !== '') {
+            choices{{ $name }}.enable();
+            dependData['{{ $dependField }}'] = {{ $name }}Depended.value;
+
+
+            @if(($selected && !old()) || ($selected && !$showOld))
+                choices{{ $name }}.setValue([
+                    { value: '{{ key($selected) }}', label: '{{ $selected[key($selected)] }}', selected: true }
+                ]);
+            @endif
+
+            @if((old($filteredName) && $showOld) || (old($filteredDependName) && $showOld))
+                choices{{ $name }}.setValue([
+                    { value: '{{ old($filteredName) }}', label: '{{ old('old_selected_'.$name.'_label') }}', selected: true }
+                ]);
+            @endif
+        }
+
         {{ $name }}Depended.addEventListener(
             'addItem',
             function(event) {
@@ -77,11 +95,6 @@
             },
             false,
         );
-
-        @if((old($filteredName) && $showOld) || (old($filteredDependName) && $showOld))
-            choices{{ $name }}.enable();
-            dependData['{{ $dependField }}'] = {{ $name }}Depended.value;
-        @endif
 
         const asyncSearch = {{ $name }}List.closest('.choices').querySelector('input[type=search]');
 

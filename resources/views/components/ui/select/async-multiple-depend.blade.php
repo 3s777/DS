@@ -1,23 +1,12 @@
-@props([
-    'name',
-    'route',
-    'dependOn',
-    'dependField',
-    'label' => false,
-    'selected' => false,
-    'showOld' => true,
-    'defaultOption' => false,
-    'arrayKey' => false,
-])
-
 <x-libraries.choices
     {{ $attributes->class([
         $name.'-select' => $name
     ]) }}
     id="{{ $name }}-select"
-    :name="$arrayKey ? $arrayKey.'['.$name.'][]' : $name.'[]'"
+    :error="$filteredName"
+    :name="$selectName"
     :label="$label"
-    :error="$name"
+    :required="$required"
     multiple>
 
     @if($defaultOption && !$selected)
@@ -27,7 +16,7 @@
     @endif
 
     @if($selected)
-        @if(!old($name) || !$showOld)
+        @if(!old($filteredName) || !$showOld)
             @foreach($selected as $item)
                 <x-ui.form.option :value="$item->id" :selected="true">
                     {{ $item->name }}
@@ -36,7 +25,8 @@
         @endif
     @endif
 
-    @if(old($name) && $showOld)
+    @if(old($filteredName) && $showOld)
+
         @foreach(old('old_selected_'.$name)['old'] as $key => $value)
             <x-ui.form.option :value="$key" :selected="true">
                 {{ $value }}
@@ -46,13 +36,13 @@
 </x-libraries.choices>
 
 @if($showOld)
-    @if($selected && !old($name))
+    @if($selected && !old($filteredName))
         @foreach($selected as $item)
             <input type="hidden" class="old_selected_{{ $name }}" name="old_selected_{{ $name }}[old][{{ $item->id }}]" value="{{ $item->name }}">
         @endforeach
     @endif
 
-    @if(old($name))
+    @if(old($filteredName))
         @foreach(old('old_selected_'.$name)['old'] as $key => $value)
             <input type="hidden" class="old_selected_{{ $name }}" name="old_selected_{{ $name }}[old][{{ $key }}]" value="{{ $value }}">
         @endforeach
@@ -144,7 +134,7 @@
 
 
         @if($showOld)
-            let select{{ $name }} = document.querySelector(`[name="{{ $name }}[]"]`);
+            let select{{ $name }} = document.querySelector(`[name="{{ $selectName }}"]`);
 
             let selectedForm = select{{ $name }} .closest('form');
 

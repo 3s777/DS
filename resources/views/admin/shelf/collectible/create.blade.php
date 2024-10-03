@@ -68,6 +68,7 @@
                             select-name="user_id"
                             :required="true"
                             route="select-users"
+
                             :default-option="trans_choice('user.choose', 1)"
                             :label="trans_choice('user.users', 1)">
                         </x-ui.select.async>
@@ -78,12 +79,12 @@
                     <x-ui.form.group>
                         <x-ui.select.async-depend
                             name="shelf"
-                            select-name="shelf-async"
+                            select-name="shelf-async[test]"
                             :required="true"
                             route="select-shelves"
                             depend-on="user_id"
                             depend-field="user_id"
-                            :selected="[]"
+{{--                            :selected="[auth()->user()->id => auth()->user()->name]"--}}
                             :default-option="trans_choice('shelf.choose', 1)"
                             :label="trans_choice('shelf.shelves', 1)" />
 {{--                        <x-ui.select.async-multiple-depend--}}
@@ -95,6 +96,37 @@
 {{--                            :default-option="trans_choice('shelf.choose', 1)"--}}
 {{--                            :label="trans_choice('shelf.shelves', 1)">--}}
 {{--                        </x-ui.select.async-multiple-depend>--}}
+                    </x-ui.form.group>
+                </x-grid.col>
+
+
+                <x-grid.col xl="4" ls="6" ml="12" lg="6" md="6" sm="12">
+                    <x-ui.form.group>
+                        <x-ui.select.async
+                            name="usert"
+                            select-name="usert_id"
+                            :required="true"
+                            route="select-users"
+
+                            :default-option="trans_choice('user.choose', 1)"
+                            :label="trans_choice('user.users', 1)">
+                        </x-ui.select.async>
+                    </x-ui.form.group>
+                </x-grid.col>
+
+
+                <x-grid.col xl="4" ls="6" lg="12" md="12" sm="12">
+                    <x-ui.form.group>
+                        <x-ui.select.async-multiple-depend
+                            name="shelft"
+                            select-name="shelft-async"
+                            :required="true"
+                            route="select-shelves"
+                            depend-on="usert_id"
+                            depend-field="user_id"
+                            {{--                            :selected="[auth()->user()->id => auth()->user()->name]"--}}
+                            :default-option="trans_choice('shelf.choose', 1)"
+                            :label="trans_choice('shelf.shelves', 1)" />
                     </x-ui.form.group>
                 </x-grid.col>
 

@@ -49,7 +49,8 @@ class CreateCollectibleRequest extends FormRequest
             'shelf_id' => ['required'],
             'condition' => ['required'],
             'shelf2_id' => ['required'],
-            'user_idm' => ['required']
+            'user_idm' => ['required'],
+            'shelf-async.test' => ['required']
         ];
     }
 

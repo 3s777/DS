@@ -6,13 +6,10 @@ use Closure;
 use Illuminate\Contracts\View\View;
 use Illuminate\View\Component;
 
-class AsyncDepend extends Component
+class AsyncMultipleDepend extends Component
 {
     public string $filteredName;
-    public string $filteredDependName;
-    /**
-     * Create a new component instance.
-     */
+
     public function __construct(
         public string $name,
         public string $selectName,
@@ -21,16 +18,29 @@ class AsyncDepend extends Component
         public string $route,
         public ?string $label = null,
         public ?string $defaultOption = null,
-        public ?array $selected = null,
+        public array|null $selected = null,
         public bool $required = false,
         public bool $showOld = true
     ) {
         $this->filteredName = to_dot_name($selectName);
-        $this->filteredDependName = to_dot_name($dependOn);
     }
+
+
+    public function isSelected(string $key): bool {
+        if(($this->selected && !old()) || ($this->selected && !$this->showOld)) {
+            return in_array($key, $this->selected);
+        }
+
+        if(!$this->showOld) {
+            return false;
+        }
+
+        return in_array($key, old($this->filteredName, []));
+    }
+
 
     public function render(): View|Closure|string
     {
-        return view('components.ui.select.async-depend');
+        return view('components.ui.select.async-multiple-depend');
     }
 }
