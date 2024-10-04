@@ -9,36 +9,35 @@
     :required="$required"
     multiple>
 
-    @if($defaultOption && !$selected)
+    @if($defaultOption)
         <x-ui.form.option value="">
             {{ $defaultOption }}
         </x-ui.form.option>
     @endif
 
-    @if($selected)
-        @if(!old($filteredName) || !$showOld)
-            @foreach($selected as $item)
-                <x-ui.form.option :value="$item->id" :selected="true">
-                    {{ $item->name }}
-                </x-ui.form.option>
-            @endforeach
-        @endif
-    @endif
+{{--    @if($selected)--}}
+{{--        @if(!old($filteredName) || !$showOld)--}}
+{{--            @foreach($selected as $item)--}}
+{{--                <x-ui.form.option :value="$item->id" :selected="true">--}}
+{{--                    {{ $item->name }}--}}
+{{--                </x-ui.form.option>--}}
+{{--            @endforeach--}}
+{{--        @endif--}}
+{{--    @endif--}}
 
-    @if(old($filteredName) && $showOld)
-
-        @foreach(old('old_selected_'.$name)['old'] as $key => $value)
-            <x-ui.form.option :value="$key" :selected="true">
-                {{ $value }}
-            </x-ui.form.option>
-        @endforeach
-    @endif
+{{--    @if(old($filteredName) && $showOld)--}}
+{{--        @foreach(old('old_selected_'.$name)['old'] as $key => $value)--}}
+{{--            <x-ui.form.option :value="$key" :selected="true">--}}
+{{--                {{ $value }}--}}
+{{--            </x-ui.form.option>--}}
+{{--        @endforeach--}}
+{{--    @endif--}}
 </x-libraries.choices>
 
 @if($showOld)
     @if($selected && !old($filteredName))
-        @foreach($selected as $item)
-            <input type="hidden" class="old_selected_{{ $name }}" name="old_selected_{{ $name }}[old][{{ $item->id }}]" value="{{ $item->name }}">
+        @foreach($selected as $value => $label)
+            <input type="hidden" class="old_selected_{{ $name }}" name="old_selected_{{ $name }}[old][{{ $value }}]" value="{{ $label }}">
         @endforeach
     @endif
 
@@ -71,6 +70,41 @@
             const dependData = {};
 
             choices{{ $name }}.disable();
+
+
+        if({{ $name }}Depended.value !== '') {
+            choices{{ $name }}.enable();
+            dependData['{{ $dependField }}'] = {{ $name }}Depended.value;
+
+
+            @if(($selected && !old()) || ($selected && !$showOld))
+            choices{{ $name }}.setValue([
+                @foreach($selected as $value => $label)
+                    { value: '{{ $value }}', label: '{{ $label }}', selected: true },
+                @endforeach
+            ]);
+            @endif
+
+            @if((old($filteredName) && $showOld) || (old($filteredDependName) && $showOld))
+            choices{{ $name }}.setValue([
+                @foreach(old('old_selected_'.$name)['old'] as $value => $label)
+                    { value: '{{ $value }}', label: '{{ $label }}', selected: true },
+                @endforeach
+            ]);
+            @endif
+        }
+
+
+
+{{--            @if(old($name) && $showOld)--}}
+{{--                choices{{ $name }}.enable();--}}
+{{--                dependData['{{ $dependField }}'] = {{ $name }}Depended.value;--}}
+{{--            @endif--}}
+
+{{--            @if(old($dependOn) && $showOld)--}}
+{{--                choices{{ $name }}.enable();--}}
+{{--                dependData['{{ $dependField }}'] = {{ $name }}Depended.value;--}}
+{{--            @endif--}}
 
             {{ $name }}Depended.addEventListener(
                 'addItem',
@@ -121,17 +155,6 @@
             }, 'value', 'label', true), 300),
             false
         )
-
-            @if(old($name) && $showOld)
-                choices{{ $name }}.enable();
-                dependData['{{ $dependField }}'] = {{ $name }}Depended.value;
-            @endif
-
-            @if(old($dependOn) && $showOld)
-                choices{{ $name }}.enable();
-                dependData['{{ $dependField }}'] = {{ $name }}Depended.value;
-            @endif
-
 
         @if($showOld)
             let select{{ $name }} = document.querySelector(`[name="{{ $selectName }}"]`);

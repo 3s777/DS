@@ -9,6 +9,7 @@ use Illuminate\View\Component;
 class AsyncMultipleDepend extends Component
 {
     public string $filteredName;
+    public string $filteredDependName;
 
     public function __construct(
         public string $name,
@@ -23,21 +24,8 @@ class AsyncMultipleDepend extends Component
         public bool $showOld = true
     ) {
         $this->filteredName = to_dot_name($selectName);
+        $this->filteredDependName = to_dot_name($dependOn);
     }
-
-
-    public function isSelected(string $key): bool {
-        if(($this->selected && !old()) || ($this->selected && !$this->showOld)) {
-            return in_array($key, $this->selected);
-        }
-
-        if(!$this->showOld) {
-            return false;
-        }
-
-        return in_array($key, old($this->filteredName, []));
-    }
-
 
     public function render(): View|Closure|string
     {

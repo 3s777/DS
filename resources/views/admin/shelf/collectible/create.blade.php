@@ -107,7 +107,7 @@
                             select-name="usert_id"
                             :required="true"
                             route="select-users"
-
+{{--                            :selected="[auth()->user()->id => auth()->user()->name]"--}}
                             :default-option="trans_choice('user.choose', 1)"
                             :label="trans_choice('user.users', 1)">
                         </x-ui.select.async>
@@ -124,7 +124,7 @@
                             route="select-shelves"
                             depend-on="usert_id"
                             depend-field="user_id"
-                            {{--                            :selected="[auth()->user()->id => auth()->user()->name]"--}}
+                                                        :selected="[auth()->user()->id => auth()->user()->name]"
                             :default-option="trans_choice('shelf.choose', 1)"
                             :label="trans_choice('shelf.shelves', 1)" />
                     </x-ui.form.group>
