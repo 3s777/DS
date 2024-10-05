@@ -9,6 +9,8 @@ use App\Http\Controllers\Game\GameDeveloperController;
 use App\Http\Controllers\Game\GamePublisherController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\LanguageController;
+use App\Http\Controllers\PageController;
+use App\Http\Controllers\Shelf\CollectibleController;
 use Illuminate\Contracts\Routing\Registrar;
 use Illuminate\Support\Facades\Route;
 
@@ -66,6 +68,8 @@ class AppRegistrar implements RouteRegistrar
                             return view('admin.index');
                         })->name('admin');
                     });
+
+                    Route::get('/demo-select', [PageController::class, 'demoSelect'])->name('demo-select');
                 });
             });
     }

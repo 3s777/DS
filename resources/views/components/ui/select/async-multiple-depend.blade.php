@@ -14,24 +14,6 @@
             {{ $defaultOption }}
         </x-ui.form.option>
     @endif
-
-{{--    @if($selected)--}}
-{{--        @if(!old($filteredName) || !$showOld)--}}
-{{--            @foreach($selected as $item)--}}
-{{--                <x-ui.form.option :value="$item->id" :selected="true">--}}
-{{--                    {{ $item->name }}--}}
-{{--                </x-ui.form.option>--}}
-{{--            @endforeach--}}
-{{--        @endif--}}
-{{--    @endif--}}
-
-{{--    @if(old($filteredName) && $showOld)--}}
-{{--        @foreach(old('old_selected_'.$name)['old'] as $key => $value)--}}
-{{--            <x-ui.form.option :value="$key" :selected="true">--}}
-{{--                {{ $value }}--}}
-{{--            </x-ui.form.option>--}}
-{{--        @endforeach--}}
-{{--    @endif--}}
 </x-libraries.choices>
 
 @if($showOld)
@@ -56,7 +38,6 @@
             allowHTML: true,
             itemSelectText: '',
             removeItems: true,
-            // placeholder: false,
             removeItemButton: true,
             loadingText: '{{ __('common.loading')  }}',
             noResultsText: '{{ __('common.not_found') }}',
@@ -64,72 +45,54 @@
             searchPlaceholderValue: '{{ __('common.search') }}'
         });
 
+        const {{ $name }}Depended = document.querySelector("[name='{{ $dependOn }}']");
 
-            const {{ $name }}Depended = document.querySelector("[name='{{ $dependOn }}']");
+        const dependData = {};
 
-            const dependData = {};
-
-            choices{{ $name }}.disable();
-
+        choices{{ $name }}.disable();
 
         if({{ $name }}Depended.value !== '') {
             choices{{ $name }}.enable();
             dependData['{{ $dependField }}'] = {{ $name }}Depended.value;
 
-
             @if(($selected && !old()) || ($selected && !$showOld))
-            choices{{ $name }}.setValue([
-                @foreach($selected as $value => $label)
-                    { value: '{{ $value }}', label: '{{ $label }}', selected: true },
-                @endforeach
-            ]);
+                choices{{ $name }}.setValue([
+                    @foreach($selected as $value => $label)
+                        { value: '{{ $value }}', label: '{{ $label }}', selected: true },
+                    @endforeach
+                ]);
             @endif
 
-            @if((old($filteredName) && $showOld) || (old($filteredDependName) && $showOld))
-            choices{{ $name }}.setValue([
-                @foreach(old('old_selected_'.$name)['old'] as $value => $label)
-                    { value: '{{ $value }}', label: '{{ $label }}', selected: true },
-                @endforeach
-            ]);
+            @if((old($filteredName) && $showOld))
+                choices{{ $name }}.setValue([
+                    @foreach(old('old_selected_'.$name)['old'] as $value => $label)
+                        { value: '{{ $value }}', label: '{{ $label }}', selected: true },
+                    @endforeach
+                ]);
             @endif
         }
 
+        {{ $name }}Depended.addEventListener(
+            'addItem',
+            function(event) {
+                if({{ $name }}Depended.value) {
+                    choices{{ $name }}.enable();
+                    dependData['{{ $dependField }}'] = event.detail.value
+                }
+            },
+            false,
+        );
 
 
-{{--            @if(old($name) && $showOld)--}}
-{{--                choices{{ $name }}.enable();--}}
-{{--                dependData['{{ $dependField }}'] = {{ $name }}Depended.value;--}}
-{{--            @endif--}}
-
-{{--            @if(old($dependOn) && $showOld)--}}
-{{--                choices{{ $name }}.enable();--}}
-{{--                dependData['{{ $dependField }}'] = {{ $name }}Depended.value;--}}
-{{--            @endif--}}
-
-            {{ $name }}Depended.addEventListener(
-                'addItem',
-                function(event) {
-                    if({{ $name }}Depended.value) {
-                        console.log('add');
-                        choices{{ $name }}.enable();
-
-                        dependData['{{ $dependField }}'] = event.detail.value
-                    }
-                },
-                false,
-            );
-
-
-            {{ $name }}Depended.addEventListener(
-                'removeItem',
-                function(event) {
-                    console.log ('remove');
-                    choices{{ $name }}.disable();
-                    choices{{ $name }}.clearStore();
-                    delete dependData['{{ $dependField }}'];
-                },
-                false,
-            );
+        {{ $name }}Depended.addEventListener(
+            'removeItem',
+            function(event) {
+                choices{{ $name }}.disable();
+                choices{{ $name }}.clearStore();
+                delete dependData['{{ $dependField }}'];
+            },
+            false,
+        );
 
         const asyncSearch = {{ $name }}List.closest('.choices').querySelector('input[type=search]');
 
