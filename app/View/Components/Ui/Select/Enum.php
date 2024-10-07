@@ -18,6 +18,7 @@ class Enum extends Component
         public string $name,
         public string $selectName,
         public array|Collection $options,
+        public bool $nameAsValue = false,
         public ?string $label = null,
         public ?string $defaultOption = null,
         public ?string $selected = null,
@@ -41,6 +42,15 @@ class Enum extends Component
         }
 
         return $this->isOld($key);
+    }
+
+    public function getValue(): string
+    {
+        if($this->nameAsValue) {
+            return 'name';
+        }
+
+        return 'value';
     }
 
     /**
