@@ -65,7 +65,7 @@
                 <x-grid.col xl="4" ls="6" ml="12" lg="6" md="6" sm="12">
                     <x-ui.form.group>
                         <x-ui.select.async
-                            :selected="[auth()->user()->id => auth()->user()->name] ?? false"
+                            :selected="$selectedUser"
                             name="user"
                             select-name="user_id"
                             route="select-users"

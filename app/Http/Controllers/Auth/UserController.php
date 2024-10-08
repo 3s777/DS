@@ -22,6 +22,7 @@ use Illuminate\Contracts\View\View;
 use Illuminate\Foundation\Application;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Gate;
 use Support\Actions\MassDeletingAction;
 use Support\DTOs\MassDeletingDTO;
 use Support\ViewModels\AsyncSelectViewModel;
@@ -31,6 +32,13 @@ class UserController extends Controller
     public function __construct()
     {
         $this->authorizeResource(User::class, 'user');
+    }
+
+    protected function resourceAbilityMap(): array
+    {
+        return array_merge(parent::resourceAbilityMap(), [
+            'getForSelect' => 'getForSelect'
+        ]);
     }
 
     public function index(FilterUserRequest $request): View|Application|Factory|\Illuminate\Contracts\Foundation\Application
@@ -125,6 +133,8 @@ class UserController extends Controller
 
     public function getForSelect(Request $request): AsyncSelectViewModel
     {
+//        Gate::authorize('getForSelect', User::class);
+
         return new AsyncSelectViewModel(
             $request->input('query'),
             User::class,

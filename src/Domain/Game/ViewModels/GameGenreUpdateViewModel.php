@@ -6,9 +6,12 @@ use Domain\Auth\Models\User;
 use Domain\Game\Models\GameGenre;
 use Domain\Game\Models\GamePublisher;
 use Spatie\ViewModels\ViewModel;
+use Support\Traits\HasSelectedUser;
 
 class GameGenreUpdateViewModel extends ViewModel
 {
+    use HasSelectedUser;
+
     public ?GameGenre $gameGenre;
 
     public function __construct(GameGenre $gameGenre = null)
@@ -21,8 +24,7 @@ class GameGenreUpdateViewModel extends ViewModel
         return $this->gameGenre ?? null;
     }
 
-    public function users(): \Illuminate\Database\Eloquent\Collection
-    {
-        return User::all()->select('id', 'name');
+    public function selectedUser(): array {
+        return $this->getSelectedUser($this->gameGenre);
     }
 }

@@ -18,4 +18,16 @@ class ShelfUpdateViewModel extends ViewModel
     {
         return $this->shelf ?? null;
     }
+
+    public function selectedUser(): array {
+        $selectedUser = [];
+        if($this->shelf?->user) {
+           $selectedUser = [
+               'key' => $this->shelf->user->id,
+               'value' => $this->shelf->user->name,
+           ];
+        }
+
+        return $selectedUser;
+    }
 }

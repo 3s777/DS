@@ -47,6 +47,8 @@ class RelationMultipleFilter extends AbstractFilter
 
     public function setRelatedModel(): static
     {
+        $this->relatedModels = [];
+
         if(request()->input('filters.'.$this->key)) {
             $relatedCollection = $this->relation::select(['id', 'name'])->whereIn('id', $this->requestValue())->get();
 

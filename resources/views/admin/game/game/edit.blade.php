@@ -83,8 +83,9 @@
                     <x-ui.form.group>
                         <x-ui.select.async-multiple
                             name="developers"
+                            select-name="developers[]"
                             route="select-game-developers"
-                            :selected="$game->developers ?? false"
+                            :selected="$selectedDevelopers"
                             :default-option="trans_choice('game_developer.developers', 1)"
                             :label="trans_choice('game_developer.choose', 2)">
                         </x-ui.select.async-multiple>
@@ -95,8 +96,9 @@
                     <x-ui.form.group>
                         <x-ui.select.async-multiple
                             name="publishers"
+                            select-name="publishers[]"
                             route="select-game-publishers"
-                            :selected="$game->publishers ?? false"
+                            :selected="$selectedPublishers"
                             :default-option="trans_choice('game_publisher.publishers', 2)"
                             :label="trans_choice('game_publisher.choose', 2)">
                         </x-ui.select.async-multiple>
@@ -106,7 +108,7 @@
                 <x-grid.col xl="4" ls="6" ml="12" lg="6" md="6" sm="12">
                     <x-ui.form.group>
                         <x-ui.select.async
-                            :selected="$game->user ?? false"
+                            :selected="$selectedUser"
                             name="user"
                             select-name="user_id"
                             route="select-users"

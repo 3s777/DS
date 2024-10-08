@@ -8,9 +8,12 @@ use Domain\Game\Models\GamePlatform;
 use Domain\Game\Models\GamePlatformManufacturer;
 use Domain\Game\Models\GamePublisher;
 use Spatie\ViewModels\ViewModel;
+use Support\Traits\HasSelectedUser;
 
 class GamePlatformUpdateViewModel extends ViewModel
 {
+    use HasSelectedUser;
+
     public ?GamePlatform $gamePlatform;
 
     public function __construct(GamePlatform $gamePlatform = null)
@@ -33,13 +36,12 @@ class GamePlatformUpdateViewModel extends ViewModel
         return $this->gamePlatform?->game_platform_manufacturer->id ?? null;
     }
 
-    public function users(): \Illuminate\Database\Eloquent\Collection
-    {
-        return User::all()->select('id', 'name');
-    }
-
     public function types(): array
     {
         return GamePlatformTypeEnum::cases();
+    }
+
+    public function selectedUser(): array {
+        return $this->getSelectedUser($this->gamePlatform);
     }
 }

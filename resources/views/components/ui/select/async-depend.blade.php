@@ -29,7 +29,7 @@
 
 @if($showOld)
     @if($selected)
-        <input type="hidden" name="old_selected_{{ $name }}_label" value="{{ $selected[key($selected)] }}" id="old_selected_{{ $name }}_label">
+        <input type="hidden" name="old_selected_{{ $name }}_label" value="{{ $selected['value'] }}" id="old_selected_{{ $name }}_label">
     @else
         <input type="hidden" name="old_selected_{{ $name }}_label" value="{{ old('old_selected_'.$name.'_label') }}" id="old_selected_{{ $name }}_label">
     @endif
@@ -63,7 +63,7 @@
 
             @if(($selected && !old()) || ($selected && !$showOld))
                 choices{{ $name }}.setValue([
-                    { value: '{{ key($selected) }}', label: '{{ $selected[key($selected)] }}', selected: true }
+                    { value: '{{ $selected['key'] }}', label: '{{ $selected['value'] }}', selected: true }
                 ]);
             @endif
 

@@ -7,9 +7,12 @@ use Domain\Game\Models\GameGenre;
 use Domain\Game\Models\GameMedia;
 use Domain\Game\Models\GamePlatform;
 use Spatie\ViewModels\ViewModel;
+use Support\Traits\HasSelectedUser;
 
 class GameMediaUpdateViewModel extends ViewModel
 {
+    use HasSelectedUser;
+
     public ?GameMedia $gameMedia;
 
     public function __construct(GameMedia $gameMedia = null)
@@ -33,6 +36,21 @@ class GameMediaUpdateViewModel extends ViewModel
         return $this->gameMedia?->platforms->pluck('id')->toArray() ?? null;
     }
 
+    public function selectedGames(): ?array
+    {
+        return $this->gameMedia?->games->pluck('name', 'id')->toArray() ?? null;
+    }
+
+    public function selectedPublishers(): ?array
+    {
+        return $this->gameMedia?->publishers->pluck('name', 'id')->toArray() ?? null;
+    }
+
+    public function selectedDevelopers(): ?array
+    {
+        return $this->gameMedia?->developers->pluck('name', 'id')->toArray() ?? null;
+    }
+
     public function genres(): array
     {
         return GameGenre::select('id', 'name')->get()->pluck('name', 'id')->toArray();
@@ -41,5 +59,10 @@ class GameMediaUpdateViewModel extends ViewModel
     public function platforms(): array
     {
         return GamePlatform::select('id', 'name')->get()->pluck('name', 'id')->toArray();
+    }
+
+    public function selectedUser(): array
+    {
+        return $this->getSelectedUser($this->gameMedia);
     }
 }

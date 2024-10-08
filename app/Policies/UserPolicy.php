@@ -62,4 +62,9 @@ class UserPolicy
     {
         return true;
     }
+
+    public function getForSelect(User $user): bool
+    {
+        return false;
+    }
 }

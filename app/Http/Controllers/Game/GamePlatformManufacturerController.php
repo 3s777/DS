@@ -7,12 +7,9 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Game\CreateGamePlatformManufacturerRequest;
 use App\Http\Requests\Game\UpdateGamePlatformManufacturerRequest;
 use App\Http\Requests\MassDeletingRequest;
-use Domain\Game\Models\GameDeveloper;
-use Illuminate\Http\Request;
 use Domain\Game\Models\GamePlatformManufacturer;
-use Domain\Game\ViewModels\GamePlatformManufacturerCrudViewModel;
+use Domain\Game\ViewModels\GamePlatformManufacturerUpdateViewModel;
 use Domain\Game\ViewModels\GamePlatformManufacturerIndexViewModel;
-use Domain\Game\ViewModels\GamePlatformManufacturerListSelectViewModel;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
 use Illuminate\Foundation\Application;
@@ -20,7 +17,6 @@ use Illuminate\Http\RedirectResponse;
 use Illuminate\Routing\Redirector;
 use Support\Actions\MassDeletingAction;
 use Support\DTOs\MassDeletingDTO;
-use Support\ViewModels\AsyncSelectViewModel;
 
 class GamePlatformManufacturerController extends Controller
 {
@@ -36,7 +32,7 @@ class GamePlatformManufacturerController extends Controller
 
     public function create(): View|Application|Factory|\Illuminate\Contracts\Foundation\Application
     {
-        return view('admin.game.platform-manufacturer.create', new GamePlatformManufacturerCrudViewModel());
+        return view('admin.game.platform-manufacturer.create', new GamePlatformManufacturerUpdateViewModel());
     }
 
     public function store(CreateGamePlatformManufacturerRequest $request): Application|Redirector|RedirectResponse|\Illuminate\Contracts\Foundation\Application
@@ -61,7 +57,7 @@ class GamePlatformManufacturerController extends Controller
 
     public function edit(GamePlatformManufacturer $gamePlatformManufacturer): View|Application|Factory|\Illuminate\Contracts\Foundation\Application
     {
-        return view('admin.game.platform-manufacturer.edit', new GamePlatformManufacturerCrudViewModel($gamePlatformManufacturer));
+        return view('admin.game.platform-manufacturer.edit', new GamePlatformManufacturerUpdateViewModel($gamePlatformManufacturer));
     }
 
     public function update(UpdateGamePlatformManufacturerRequest $request, GamePlatformManufacturer $gamePlatformManufacturer): RedirectResponse
@@ -117,15 +113,6 @@ class GamePlatformManufacturerController extends Controller
         flash()->info(__('game_platform_manufacturer.mass_force_deleted'));
 
         return to_route('game-platform-manufacturers.index');
-    }
-
-    public function getForSelect(Request $request): AsyncSelectViewModel
-    {
-        return new AsyncSelectViewModel(
-            $request->input('query'),
-            GamePlatformManufacturer::class,
-            'game_platform_manufacturer.choose'
-        );
     }
 }
 

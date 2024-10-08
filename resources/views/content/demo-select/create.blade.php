@@ -11,44 +11,6 @@
             <x-grid type="container">
                 <x-grid.col xl="4" ls="6" ml="12" lg="6" md="6" sm="12">
                     <x-ui.form.group>
-                        <x-ui.form.input-text
-                            :placeholder="trans_choice('common.name', 1)"
-                            id="name"
-                            name="name"
-                            :value="old('name')"
-                            required
-                            autocomplete="on"
-                            autofocus>
-                        </x-ui.form.input-text>
-                    </x-ui.form.group>
-                </x-grid.col>
-
-                <x-grid.col xl="4" ls="6" ml="12" lg="6" md="6" sm="12">
-                    <x-ui.form.group>
-                        <x-ui.form.input-text
-                            :placeholder="trans_choice('common.article_numbers', 1)"
-                            id="number"
-                            name="number"
-                            :value="old('number')"
-                            autocomplete="on">
-                        </x-ui.form.input-text>
-                    </x-ui.form.group>
-                </x-grid.col>
-
-                <x-grid.col xl="4" ls="6" ml="12" lg="6" md="6" sm="12">
-                    <x-ui.form.group>
-                        <x-ui.select.enum
-                            name="condition"
-                            select-name="condition"
-                            required
-                            :options="$conditions"
-                            :default-option="__('common.choose_condition')"
-                            :placeholder="__('common.condition')" />
-                    </x-ui.form.group>
-                </x-grid.col>
-
-                <x-grid.col xl="4" ls="6" ml="12" lg="6" md="6" sm="12">
-                    <x-ui.form.group>
                         <x-ui.select.async-multiple
                             name="user_m"
                             select-name="user_idm[]"
@@ -68,7 +30,6 @@
                             select-name="user_id"
                             :required="true"
                             route="select-users"
-
                             :default-option="trans_choice('user.choose', 1)"
                             :label="trans_choice('user.users', 1)">
                         </x-ui.select.async>
@@ -107,7 +68,7 @@
                             select-name="usert_id"
                             :required="true"
                             route="select-users"
-                            :selected="[auth()->user()->id => auth()->user()->name]"
+                            :selected="['key' => auth()->user()->id, 'value' => auth()->user()->name]"
                             :default-option="trans_choice('user.choose', 1)"
                             :label="trans_choice('user.users', 1)">
                         </x-ui.select.async>
@@ -168,7 +129,7 @@
                             select-name="user2_id"
                             required
                             route="select-users"
-                            :selected="[auth()->user()->id => auth()->user()->name]"
+                            :selected="['key' => auth()->user()->id, 'value' => auth()->user()->name]"
                             :default-option="trans_choice('user.choose', 1)"
                             :label="trans_choice('user.users', 1)">
                         </x-ui.select.async>

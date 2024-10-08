@@ -11,7 +11,6 @@ use App\Http\Requests\MassDeletingRequest;
 use Domain\Game\Models\GameDeveloper;
 use Domain\Game\ViewModels\GameDeveloperUpdateViewModel;
 use Domain\Game\ViewModels\GameDeveloperIndexViewModel;
-use Domain\Game\ViewModels\GameDeveloperListSelectViewModel;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
 use Illuminate\Foundation\Application;

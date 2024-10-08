@@ -10,9 +10,12 @@ use Domain\Game\Models\GamePlatform;
 use Domain\Game\Models\GamePublisher;
 use Illuminate\Database\Eloquent\Collection;
 use Spatie\ViewModels\ViewModel;
+use Support\Traits\HasSelectedUser;
 
 class GameUpdateViewModel extends ViewModel
 {
+    use HasSelectedUser;
+
     public ?Game $game;
 
     public function __construct(Game $game = null)
@@ -36,6 +39,16 @@ class GameUpdateViewModel extends ViewModel
         return $this->game?->platforms->pluck('id')->toArray() ?? null;
     }
 
+    public function selectedPublishers(): ?array
+    {
+        return $this->game?->publishers->pluck('name', 'id')->toArray() ?? null;
+    }
+
+    public function selectedDevelopers(): ?array
+    {
+        return $this->game?->developers->pluck('name', 'id')->toArray() ?? null;
+    }
+
     public function genres(): array
     {
         return GameGenre::select('id', 'name')->get()->pluck('name', 'id')->toArray();
@@ -46,13 +59,8 @@ class GameUpdateViewModel extends ViewModel
         return GamePlatform::select('id', 'name')->get()->pluck('name', 'id')->toArray();
     }
 
-//    public function developers(): array
-//    {
-//        return GameDeveloper::select('id', 'name')->get()->toArray();
-//    }
-//
-//    public function publishers(): array
-//    {
-//        return GamePublisher::select('id', 'name')->get()->toArray();
-//    }
+    public function selectedUser(): array
+    {
+        return $this->getSelectedUser($this->game);
+    }
 }

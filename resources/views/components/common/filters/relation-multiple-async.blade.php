@@ -5,10 +5,10 @@
 ])
 
 <x-ui.select.async-multiple
-    :selected="get_filter($name)->relatedModels ?? false"
+    :selected="get_filter($name)->relatedModels"
     :show-old="false"
     :name="$name"
-    array-key="filters"
+    select-name="{{ $name.'[filters]' }}"
     :label="$placeholder"
     defaultOption="{{ get_filter($name)->title() }}"
     :route="$route">

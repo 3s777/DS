@@ -116,7 +116,8 @@ class GameController extends Controller
         return new AsyncSelectViewModel(
             $request->input('query'),
             Game::class,
-            trans_choice('game.choose', 2)
+            trans_choice('game.choose', 2),
+            'all.*',
         );
     }
 }

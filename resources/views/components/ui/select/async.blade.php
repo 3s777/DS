@@ -17,8 +17,8 @@
     {{ $slot }}
 
     @if(($selected && !old()) || ($selected && !$showOld))
-        <x-ui.form.option :value="key($selected)" selected>
-            {{ $selected[key($selected)] }}
+        <x-ui.form.option :value="$selected['key']" selected>
+            {{ $selected['value'] }}
         </x-ui.form.option>
     @endif
 

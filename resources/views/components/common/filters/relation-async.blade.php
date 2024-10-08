@@ -5,7 +5,7 @@
 ])
 
 <x-ui.select.async
-    :selected="get_filter('user')->relatedModel ?? false"
+    :selected="get_filter('user')->relatedModel"
     :show-old="false"
     :name="$name"
     :select-name="$name"

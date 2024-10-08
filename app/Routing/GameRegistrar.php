@@ -25,22 +25,22 @@ class GameRegistrar extends BaseRouteRegistrar implements RouteRegistrar
                         Route::resource('game-medias', GameMediaController::class);
 
                         $this->massDelete('games', GameController::class);
-                        Route::get('/select-games', [GameController::class, 'getForSelect'])->name('select-games');
+                        Route::post('/select-games', [GameController::class, 'getForSelect'])->name('select-games');
                         Route::resource('games', GameController::class);
 
                         $this->massDelete('game-developers', GameDeveloperController::class);
-                        Route::get('/select-game-developers', [GameDeveloperController::class, 'getForSelect'])->name('select-game-developers');
+                        Route::post('/select-game-developers', [GameDeveloperController::class, 'getForSelect'])->name('select-game-developers');
                         Route::resource('game-developers', GameDeveloperController::class);
 
                         $this->massDelete('game-publishers', GamePublisherController::class);
-                        Route::get('/select-game-publishers', [GamePublisherController::class, 'getForSelect'])->name('select-game-publishers');
+                        Route::post('/select-game-publishers', [GamePublisherController::class, 'getForSelect'])->name('select-game-publishers');
                         Route::resource('game-publishers', GamePublisherController::class);
 
                         $this->massDelete('game-genres', GameGenreController::class);
                         Route::resource('game-genres', GameGenreController::class);
 
                         $this->massDelete('game-platform-manufacturers', GamePlatformManufacturerController::class);
-                        Route::get('/select-game-platform-manufacturers', [GamePlatformManufacturerController::class, 'getForSelect'])->name('select-game-platform-manufacturers');
+                        Route::post('/select-game-platform-manufacturers', [GamePlatformManufacturerController::class, 'getForSelect'])->name('select-game-platform-manufacturers');
                         Route::resource('game-platform-manufacturers', GamePlatformManufacturerController::class);
 
                         $this->massDelete('game-platforms', GamePlatformController::class);

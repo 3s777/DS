@@ -70,6 +70,7 @@
                     <x-ui.form.group>
                         <x-ui.select.async-multiple
                             name="games"
+                            select-name="games[]"
                             :error="$errors->has('games')"
                             route="select-games"
                             :default-option="trans_choice('game.games', 1)"
@@ -106,6 +107,7 @@
                     <x-ui.form.group>
                         <x-ui.select.async-multiple
                             name="developers"
+                            select-name="developers[]"
                             :error="$errors->has('developers')"
                             route="select-game-developers"
                             :default-option="trans_choice('game_developer.developers', 1)"
@@ -118,6 +120,7 @@
                     <x-ui.form.group>
                         <x-ui.select.async-multiple
                             name="publishers"
+                            select-name="publishers[]"
                             :error="$errors->has('publishers')"
                             route="select-game-publishers"
                             :default-option="trans_choice('game_publisher.publishers', 2)"
