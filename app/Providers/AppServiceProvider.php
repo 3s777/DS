@@ -2,17 +2,12 @@
 
 namespace App\Providers;
 
-use App\Policies\GameDeveloperPolicy;
-use App\Policies\RolePolicy;
-use App\Policies\UserPolicy;
-use Domain\Auth\Models\Role;
-use Domain\Auth\Models\User;
 use Domain\Game\Models\GameDeveloper;
+use Domain\Game\Models\Policies\GameDeveloperPolicy;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\Relation;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\ServiceProvider;
-use Spatie\Translatable\Facades\Translatable;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -41,9 +36,7 @@ class AppServiceProvider extends ServiceProvider
         });
 
         //Ручная регистрация полиций laravel 11
-        Gate::policy(GameDeveloper::class, GameDeveloperPolicy::class);
-        Gate::policy(User::class, UserPolicy::class);
-        Gate::policy(Role::class, RolePolicy::class);
+        //Gate::policy(GameDeveloper::class, GameDeveloperPolicy::class);
 
         Model::shouldBeStrict(!app()->isProduction());
 

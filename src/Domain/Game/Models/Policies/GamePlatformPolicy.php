@@ -1,10 +1,9 @@
 <?php
 
-namespace App\Policies;
+namespace Domain\Game\Models\Policies;
 
 use Domain\Auth\Models\User;
 use Domain\Game\Models\GamePlatform;
-use Illuminate\Auth\Access\Response;
 
 class GamePlatformPolicy
 {

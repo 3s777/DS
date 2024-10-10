@@ -35,7 +35,6 @@ class GameDeveloperController extends Controller
 
     public function create(): View|Application|Factory|\Illuminate\Contracts\Foundation\Application
     {
-
         $developer = GameDeveloper::first();
 
 //        $this->authorize('view', $developer);
@@ -132,8 +131,7 @@ class GameDeveloperController extends Controller
         return new AsyncSelectViewModel(
             $request->input('query'),
             GameDeveloper::class,
-            trans_choice('game_developer.choose', 2),
-            'all.*',
+            trans_choice('game_developer.choose', 2)
         );
     }
 }

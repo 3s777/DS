@@ -11,7 +11,6 @@ class AsyncSelectViewModel extends ViewModel
         protected ?string $query,
         protected $modelName,
         protected string $label,
-        protected ?string $permission = null,
         protected ?bool $depended = false,
     )
     {
@@ -51,9 +50,6 @@ class AsyncSelectViewModel extends ViewModel
         }
 
 
-
-
-//        if(auth()->user()->hasPermissionTo($this->permission)) {
             if($this->query) {
                 $query = $this->modelName::query()->where('name', 'ilike', "%{$this->query}%")->select('id', 'name');
 
@@ -79,7 +75,7 @@ class AsyncSelectViewModel extends ViewModel
             }
 
 
-//        }
+
 
         $options[] = ['value' => 'not_found', 'label' => __('common.not_found'), 'disabled' => true];
         return $options;

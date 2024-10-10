@@ -13,10 +13,8 @@ use Domain\Auth\Actions\UpdateUserAction;
 use Domain\Auth\DTOs\NewUserDTO;
 use Domain\Auth\DTOs\UpdateUserDTO;
 use Domain\Auth\Models\User;
-use Domain\Auth\ViewModels\UserUpdateViewModel;
 use Domain\Auth\ViewModels\UserIndexViewModel;
-use Domain\Auth\ViewModels\UserListSelectViewModel;
-use Domain\Game\Models\GameDeveloper;
+use Domain\Auth\ViewModels\UserUpdateViewModel;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
 use Illuminate\Foundation\Application;
@@ -34,12 +32,12 @@ class UserController extends Controller
         $this->authorizeResource(User::class, 'user');
     }
 
-    protected function resourceAbilityMap(): array
-    {
-        return array_merge(parent::resourceAbilityMap(), [
-            'getForSelect' => 'getForSelect'
-        ]);
-    }
+//    protected function resourceAbilityMap(): array
+//    {
+//        return array_merge(parent::resourceAbilityMap(), [
+//            'getForSelect' => 'getForSelect'
+//        ]);
+//    }
 
     public function index(FilterUserRequest $request): View|Application|Factory|\Illuminate\Contracts\Foundation\Application
     {
@@ -133,13 +131,12 @@ class UserController extends Controller
 
     public function getForSelect(Request $request): AsyncSelectViewModel
     {
-//        Gate::authorize('getForSelect', User::class);
+        Gate::authorize('getForSelect', User::class);
 
         return new AsyncSelectViewModel(
             $request->input('query'),
             User::class,
-            trans_choice('user.choose', 1),
-            'all.*'
+            trans_choice('user.choose', 1)
         );
     }
 

@@ -118,7 +118,6 @@ class ShelfController extends Controller
             $request->input('query'),
             Shelf::class,
             trans_choice('shelf.choose', 1),
-            'all.*',
             true
         );
     }

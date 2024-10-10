@@ -1,11 +1,9 @@
 <?php
 
-namespace App\Policies;
+namespace Domain\Game\Models\Policies;
 
 use Domain\Auth\Models\User;
 use Domain\Game\Models\GameMedia;
-use Domain\Game\Models\GamePublisher;
-use Illuminate\Auth\Access\Response;
 
 class GameMediaPolicy
 {
