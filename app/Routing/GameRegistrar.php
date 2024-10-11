@@ -40,7 +40,7 @@ class GameRegistrar extends BaseRouteRegistrar implements RouteRegistrar
                         Route::resource('game-genres', GameGenreController::class);
 
                         $this->massDelete('game-platform-manufacturers', GamePlatformManufacturerController::class);
-                        Route::post('/select-game-platform-manufacturers', [GamePlatformManufacturerController::class, 'getForSelect'])->name('select-game-platform-manufacturers');
+//                        Route::post('/select-game-platform-manufacturers', [GamePlatformManufacturerController::class, 'getForSelect'])->name('select-game-platform-manufacturers');
                         Route::resource('game-platform-manufacturers', GamePlatformManufacturerController::class);
 
                         $this->massDelete('game-platforms', GamePlatformController::class);

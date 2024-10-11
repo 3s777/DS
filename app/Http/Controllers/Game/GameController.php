@@ -20,7 +20,7 @@ use Illuminate\Http\Request;
 use Illuminate\Routing\Redirector;
 use Support\Actions\MassDeletingAction;
 use Support\DTOs\MassDeletingDTO;
-use Support\ViewModels\AsyncSelectViewModel;
+use Support\ViewModels\AsyncSelectByQueryViewModel;
 
 class GameController extends Controller
 {
@@ -111,9 +111,9 @@ class GameController extends Controller
         return to_route('games.index');
     }
 
-    public function getForSelect(Request $request): AsyncSelectViewModel
+    public function getForSelect(Request $request): AsyncSelectByQueryViewModel
     {
-        return new AsyncSelectViewModel(
+        return new AsyncSelectByQueryViewModel(
             $request->input('query'),
             Game::class,
             trans_choice('game.choose', 2)

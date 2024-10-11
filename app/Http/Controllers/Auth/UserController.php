@@ -23,7 +23,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Gate;
 use Support\Actions\MassDeletingAction;
 use Support\DTOs\MassDeletingDTO;
-use Support\ViewModels\AsyncSelectViewModel;
+use Support\ViewModels\AsyncSelectByQueryViewModel;
 
 class UserController extends Controller
 {
@@ -129,11 +129,11 @@ class UserController extends Controller
         return view('content.users.index', compact('users'));
     }
 
-    public function getForSelect(Request $request): AsyncSelectViewModel
+    public function getForSelect(Request $request): AsyncSelectByQueryViewModel
     {
         Gate::authorize('getForSelect', User::class);
 
-        return new AsyncSelectViewModel(
+        return new AsyncSelectByQueryViewModel(
             $request->input('query'),
             User::class,
             trans_choice('user.choose', 1)

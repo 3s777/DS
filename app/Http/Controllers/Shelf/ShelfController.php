@@ -21,7 +21,8 @@ use Illuminate\Http\Request;
 use Illuminate\Routing\Redirector;
 use Support\Actions\MassDeletingAction;
 use Support\DTOs\MassDeletingDTO;
-use Support\ViewModels\AsyncSelectViewModel;
+use Support\ViewModels\AsyncSelectAllViewModel;
+use Support\ViewModels\AsyncSelectByQueryViewModel;
 
 class ShelfController extends Controller
 {
@@ -112,10 +113,9 @@ class ShelfController extends Controller
         return to_route('shelves.index');
     }
 
-    public function getForSelect(Request $request): AsyncSelectViewModel
+    public function getForSelect(Request $request): AsyncSelectAllViewModel
     {
-        return new AsyncSelectViewModel(
-            $request->input('query'),
+        return new AsyncSelectAllViewModel(
             Shelf::class,
             trans_choice('shelf.choose', 1),
             true
