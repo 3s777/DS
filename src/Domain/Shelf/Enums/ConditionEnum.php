@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Enums;
+namespace Domain\Shelf\Enums;
 
 enum ConditionEnum: string
 {

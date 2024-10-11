@@ -2,8 +2,8 @@
 
 namespace App\View\Components\Common;
 
-use App\Enums\ColorThemeEnum;
 use Closure;
+use Domain\Setting\Enums\ColorThemeEnum;
 use Illuminate\Contracts\View\View;
 use Illuminate\View\Component;
 

@@ -2,9 +2,9 @@
 
 namespace Domain\Shelf\ViewModel;
 
-use App\Enums\CollectableTypeEnum;
-use App\Enums\ConditionEnum;
 use Domain\Auth\Models\User;
+use Domain\Shelf\Enums\CollectableTypeEnum;
+use Domain\Shelf\Enums\ConditionEnum;
 use Domain\Shelf\Models\Collectible;
 use Domain\Shelf\Models\Shelf;
 use Illuminate\Database\Eloquent\Collection;

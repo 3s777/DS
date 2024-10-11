@@ -13,7 +13,7 @@ class UpdateUserDTO
     public function __construct(
         public readonly string $name,
         public readonly string $email,
-        public readonly int $language_id,
+        public readonly string $language,
         public readonly array $roles,
         public readonly ?array $permissions = null,
         public readonly ?string $password = null,
@@ -32,7 +32,7 @@ class UpdateUserDTO
             'name',
             'email',
             'password',
-            'language_id',
+            'language',
             'roles',
             'permissions',
             'first_name',

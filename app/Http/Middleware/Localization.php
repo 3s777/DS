@@ -4,6 +4,7 @@ namespace App\Http\Middleware;
 
 use App\Models\Language;
 use Closure;
+use Domain\Auth\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\URL;
 use Symfony\Component\HttpFoundation\Response;
@@ -21,21 +22,14 @@ class Localization
     {
         $currentLocale = $request->segment(1);
 
-        //        if(!in_array($currentLocale, config('app.available_locales')) && $currentLocale) {
-        //            abort(404);
-        //        }
+//        if(!in_array($currentLocale, config('app.available_locales')) && $currentLocale) {
+//            abort(404);
+//        }
 
         if(auth()->check()) {
             if($currentLocale != session('locale') && $currentLocale) {
-                $currentLanguage = Language::where('slug', $currentLocale)->first();
-                if($currentLanguage) {
-                    auth()->user()
-                        ->language()
-                        ->associate($currentLanguage)
-                        ->save();
-                }
-
-
+                auth()->user()->language = $currentLocale;
+                auth()->user()->save();
             }
         }
 

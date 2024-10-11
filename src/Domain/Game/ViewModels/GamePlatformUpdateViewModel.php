@@ -2,11 +2,9 @@
 
 namespace Domain\Game\ViewModels;
 
-use App\Enums\GamePlatformTypeEnum;
-use Domain\Auth\Models\User;
+use Domain\Game\Enums\GamePlatformTypeEnum;
 use Domain\Game\Models\GamePlatform;
 use Domain\Game\Models\GamePlatformManufacturer;
-use Domain\Game\Models\GamePublisher;
 use Spatie\ViewModels\ViewModel;
 use Support\Traits\HasSelectedUser;
 

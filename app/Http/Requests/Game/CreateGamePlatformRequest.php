@@ -2,9 +2,8 @@
 
 namespace App\Http\Requests\Game;
 
-use App\Enums\GamePlatformTypeEnum;
+use Domain\Game\Enums\GamePlatformTypeEnum;
 use Domain\Game\Models\GamePlatform;
-use Domain\Game\Models\GamePlatformManufacturer;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
 

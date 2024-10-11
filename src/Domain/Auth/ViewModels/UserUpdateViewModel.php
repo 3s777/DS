@@ -2,10 +2,10 @@
 
 namespace Domain\Auth\ViewModels;
 
-use App\Models\Language;
 use Domain\Auth\Models\Permission;
 use Domain\Auth\Models\Role;
 use Domain\Auth\Models\User;
+use Domain\Setting\Enums\LanguageEnum;
 use Spatie\ViewModels\ViewModel;
 
 class UserUpdateViewModel extends ViewModel
@@ -19,7 +19,7 @@ class UserUpdateViewModel extends ViewModel
 
     public function languages(): array
     {
-        return Language::all()->select('id', 'name')->pluck('name', 'id')->toArray();
+        return LanguageEnum::cases();
     }
 
     public function roles(): array

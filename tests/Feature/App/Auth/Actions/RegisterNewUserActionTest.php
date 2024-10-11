@@ -48,7 +48,7 @@ class RegisterNewUserActionTest extends TestCase
             $this->request['name'],
             $this->request['email'],
             $this->request['password'],
-            $this->request['language_id']
+            $this->request['language']
         ));
 
         $this->assertDatabaseHas('users', [
@@ -72,7 +72,7 @@ class RegisterNewUserActionTest extends TestCase
             $this->request['name'],
             $this->request['email'],
             $this->request['password'],
-            $this->request['language_id']
+            $this->request['language']
         ));
 
         Event::assertDispatched(Registered::class);
@@ -94,7 +94,7 @@ class RegisterNewUserActionTest extends TestCase
             $this->request['name'],
             $this->request['email'],
             $this->request['password'],
-            $this->request['language_id']
+            $this->request['language']
         ));
 
         $user = User::where('email', $this->request['email'])->first();

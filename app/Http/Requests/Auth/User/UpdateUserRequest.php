@@ -75,10 +75,10 @@ class UpdateUserRequest extends FormRequest
                 'string',
                 Rule::unique(User::class)->ignore($this->user)
             ],
-            'language_id' => [
+            'language' => [
                 'required',
                 'integer',
-                'exists:languages,id'
+                Rule::in(config('app.available_locales'))
             ],
             'roles' => [
                 'required',
@@ -113,7 +113,7 @@ class UpdateUserRequest extends FormRequest
             'permissions' => __('permission.permissions'),
             'description' => __('common.description'),
             'thumbnail' => __('common.thumbnail'),
-            'language_id' => __('common.language'),
+            'language' => __('common.language'),
             'is_verified' => __('auth.is_verified'),
         ];
     }

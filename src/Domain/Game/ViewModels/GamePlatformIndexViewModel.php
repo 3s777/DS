@@ -2,7 +2,7 @@
 
 namespace Domain\Game\ViewModels;
 
-use App\Enums\GamePlatformTypeEnum;
+use Domain\Game\Enums\GamePlatformTypeEnum;
 use Domain\Game\Models\GamePlatform;
 use Spatie\ViewModels\ViewModel;
 

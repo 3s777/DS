@@ -15,7 +15,7 @@ class CreateUserRequestFactory extends RequestFactory
            'name' => $this->faker->regexify('[a-z0-9.]{7}'),
            'first_name' => $this->faker->name,
            'password' => '123456789q',
-           'language_id' => Language::factory(),
+           'language' => 'en',
            'roles' => [config('settings.default_role'), 'editor'],
            'permissions' => ['entity.*', 'entity.create', 'entity.edit', 'entity.delete'],
            'description' => $this->faker->text(200),

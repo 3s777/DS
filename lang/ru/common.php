@@ -64,5 +64,10 @@ return [
     'refurbished' => 'Восстановленный',
     'repackaged' => 'Перепак',
     'other' => 'Другое',
-    'choose_condition' => 'Выберите состояние'
+    'choose_condition' => 'Выберите состояние',
+    'languages' => [
+        'ru' => 'Русский',
+        'ua' => 'Украинский',
+        'en' => 'Английский',
+    ]
 ];

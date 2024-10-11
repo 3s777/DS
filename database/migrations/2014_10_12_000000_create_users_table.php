@@ -22,10 +22,7 @@ return new class () extends Migration {
             $table->text('description')->nullable();
             $table->string('thumbnail')->nullable();
             $table->boolean('is_banned')->nullable();
-            $table->foreignIdFor(Language::class)
-                ->constrained()
-                ->cascadeOnDelete()
-                ->cascadeOnUpdate();
+            $table->string('language')->default('en');
             $table->rememberToken();
             $table->timestamps();
             $table->softDeletes();

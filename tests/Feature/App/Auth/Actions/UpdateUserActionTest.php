@@ -59,7 +59,7 @@ class UpdateUserActionTest extends TestCase
             $this->request['name'],
             $this->request['email'],
             $this->request['password'],
-            $this->request['language_id'],
+            $this->request['language'],
             $this->request['roles'],
             $this->request['first_name'],
             $this->request['slug'],
@@ -82,7 +82,7 @@ class UpdateUserActionTest extends TestCase
         $updateAction(UpdateUserDTO::make(
             'newName',
             'newEmail@email.com',
-            $this->request['language_id'],
+            $this->request['language'],
             ['user', 'superadmin'],
             ['test'],
             $this->request['password'],

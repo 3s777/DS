@@ -13,8 +13,6 @@ class VerifyEmailActionTest extends TestCase
 {
     use RefreshDatabase;
 
-
-
     /**
      * @test
      * @return void

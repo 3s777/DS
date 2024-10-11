@@ -2,7 +2,6 @@
 
 namespace App\Http\Requests\Auth;
 
-use App\Models\Language;
 use App\Rules\LatinLowercaseRule;
 use Domain\Auth\Models\User;
 use Illuminate\Foundation\Http\FormRequest;
@@ -11,13 +10,6 @@ use Illuminate\Validation\Rules\Password;
 
 class RegisterRequest extends FormRequest
 {
-    public function __construct(array $query = [], array $request = [], array $attributes = [], array $cookies = [], array $files = [], array $server = [], $content = null)
-    {
-        parent::__construct($query, $request, $attributes, $cookies, $files, $server, $content);
-
-        $this->language = Language::where('slug', app()->getLocale())->first();
-    }
-
     /**
      * Determine if the user is authorized to make this request.
      */
@@ -52,7 +44,7 @@ class RegisterRequest extends FormRequest
                 'confirmed',
                 Password::min(8)->letters()
             ],
-            'language_id' => ['required','exists:languages,id']
+            'language' => ['required', Rule::in(config('app.available_locales'))]
         ];
     }
 
@@ -69,7 +61,7 @@ class RegisterRequest extends FormRequest
                 ->squish()
                 ->lower()
                 ->value(),
-            'language_id' => $this->language->id
+            'language' => app()->getLocale()
         ]);
     }
 

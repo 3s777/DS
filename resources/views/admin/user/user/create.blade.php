@@ -49,9 +49,9 @@
 
                 <x-grid.col xl="4" ls="6" ml="12" lg="6" md="6" sm="12">
                     <x-ui.form.group>
-                        <x-ui.select.data
+                        <x-ui.select.enum
                             name="language"
-                            select-name="language_id"
+                            select-name="language"
                             :options="$languages"
                             :label="__('common.language')"
                         />

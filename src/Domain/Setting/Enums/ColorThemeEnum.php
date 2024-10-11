@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Enums;
+namespace Domain\Setting\Enums;
 
 enum ColorThemeEnum: string
 {

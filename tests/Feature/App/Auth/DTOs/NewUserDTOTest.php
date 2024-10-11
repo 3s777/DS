@@ -52,7 +52,7 @@ class NewUserDTOTest extends TestCase
             $this->request['name'],
             $this->request['email'],
             $this->request['password'],
-            $this->request['language_id']
+            $this->request['language']
         );
 
         $this->assertInstanceOf(NewUserDTO::class, $data);

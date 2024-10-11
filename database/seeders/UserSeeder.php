@@ -13,8 +13,7 @@ class UserSeeder extends Seeder
      */
     public function run(): void
     {
-        $language = Language::query()->first();
-        User::factory(10)->for($language)->create();
+        User::factory(10)->create();
         User::create([
             'name' => 'qqqqq',
             'first_name' => 'Test Name',
@@ -22,7 +21,7 @@ class UserSeeder extends Seeder
             'email' => 'qqq@qq.qq',
             'password' => bcrypt('123456789q'),
             'email_verified_at' => now(),
-            'language_id' => 2
+            'language' => 'en'
         ]);
     }
 }

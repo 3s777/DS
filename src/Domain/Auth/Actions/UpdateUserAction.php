@@ -20,7 +20,7 @@ class UpdateUserAction
             $user->fill([
                 'name' => $data->name,
                 'email' => $data->email,
-                'language_id' => $data->language_id,
+                'language' => $data->language,
                 'first_name' => $data->first_name,
                 'slug' => $data->slug,
                 'description' => $data->description

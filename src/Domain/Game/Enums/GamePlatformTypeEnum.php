@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Enums;
+namespace Domain\Game\Enums;
 
 enum GamePlatformTypeEnum: string
 {

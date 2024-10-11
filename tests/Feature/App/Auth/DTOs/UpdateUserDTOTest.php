@@ -39,7 +39,7 @@ class UpdateUserDTOTest extends TestCase
         $data = UpdateUserDTO::make(
             $this->request['name'],
             $this->request['email'],
-            $this->request['language_id'],
+            $this->request['language'],
             $this->request['roles'],
             $this->request['permissions'],
             $this->request['password'],

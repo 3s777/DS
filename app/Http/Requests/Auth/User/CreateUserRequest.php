@@ -76,10 +76,10 @@ class CreateUserRequest extends FormRequest
                 'required',
                 Password::min(8)->numbers()->letters()
             ],
-            'language_id' => [
+            'language' => [
                 'required',
-                'integer',
-                'exists:languages,id'
+                'string',
+                Rule::in(config('app.available_locales'))
             ],
             'roles' => [
                 'required',
@@ -112,7 +112,7 @@ class CreateUserRequest extends FormRequest
             'roles' => trans_choice('role.roles', 2),
             'description' => __('common.description'),
             'thumbnail' => __('common.thumbnail'),
-            'language_id' => __('common.language'),
+            'language' => __('common.language'),
             'is_verified' => __('auth.is_verified'),
         ];
     }

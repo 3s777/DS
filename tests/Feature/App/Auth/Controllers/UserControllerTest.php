@@ -217,13 +217,13 @@ class UserControllerTest extends TestCase
 
         $this->request['name'] = '';
         $this->request['password'] = 'wrong';
-        $this->request['language_id'] = 'test';
+        $this->request['language'] = 'test';
         $this->request['roles'] = ['role.not-exist'];
         $this->request['thumbnail'] = UploadedFile::fake()->image('photo1.php');
 
         $this->actingAs($this->authUser)
             ->post(action([UserController::class, 'store']), $this->request)
-            ->assertInvalid(['name', 'password', 'language_id', 'roles', 'thumbnail'])
+            ->assertInvalid(['name', 'password', 'language', 'roles', 'thumbnail'])
             ->assertRedirectToRoute('users.create');
 
         $this->assertDatabaseMissing('users', [
@@ -240,7 +240,7 @@ class UserControllerTest extends TestCase
         $this->app['session']->setPreviousUrl(route('users.edit', [$this->testingUser->slug]));
 
         $this->request['name'] = '';
-        $this->request['language_id'] = 'test';
+        $this->request['language'] = 'test';
         $this->request['roles'] = ['role.not-exist'];
         $this->request['permissions'] = ['permission.not-exist'];
 
@@ -252,7 +252,7 @@ class UserControllerTest extends TestCase
                 ),
                 $this->request
             )
-            ->assertInvalid(['name', 'language_id', 'roles', 'permissions'])
+            ->assertInvalid(['name', 'language', 'roles', 'permissions'])
             ->assertRedirectToRoute('users.edit', [$this->testingUser->slug]);
 
         $this->assertDatabaseMissing('users', [

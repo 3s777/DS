@@ -2,7 +2,7 @@
 
 namespace Tests\RequestFactories\Game;
 
-use App\Enums\GamePlatformTypeEnum;
+use Domain\Game\Enums\GamePlatformTypeEnum;
 use Domain\Game\Models\GamePlatformManufacturer;
 use Illuminate\Support\Arr;
 use Worksome\RequestFactories\RequestFactory;

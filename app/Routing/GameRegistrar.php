@@ -25,7 +25,7 @@ class GameRegistrar extends BaseRouteRegistrar implements RouteRegistrar
                         Route::resource('game-medias', GameMediaController::class);
 
                         $this->massDelete('games', GameController::class);
-                        Route::post('/select-games', [GameController::class, 'getForSelect'])->name('select-games');
+                    Route::post('/select-games', [GameController::class, 'getForSelect'])->name('select-games');
                         Route::resource('games', GameController::class);
 
                         $this->massDelete('game-developers', GameDeveloperController::class);

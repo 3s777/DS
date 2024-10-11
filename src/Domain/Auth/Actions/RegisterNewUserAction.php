@@ -16,7 +16,7 @@ class RegisterNewUserAction implements RegisterNewUserContract
             'name' => $data->name,
             'email' => $data->email,
             'password' => bcrypt($data->password),
-            'language_id' => $data->language_id,
+            'language' => $data->language,
         ]);
 
         $user->assignRole(config('settings.default_role'));

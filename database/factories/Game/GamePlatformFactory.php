@@ -2,8 +2,8 @@
 
 namespace Database\Factories\Game;
 
-use App\Enums\GamePlatformTypeEnum;
 use Domain\Auth\Models\User;
+use Domain\Game\Enums\GamePlatformTypeEnum;
 use Domain\Game\Models\GamePlatform;
 use Domain\Game\Models\GamePlatformManufacturer;
 use Illuminate\Database\Eloquent\Factories\Factory;
