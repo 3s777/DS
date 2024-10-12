@@ -6,7 +6,6 @@ namespace Domain\Auth\Models;
 use App\Filters\DatesFilter;
 use App\Filters\SearchFilter;
 use App\Models\Image;
-use App\Models\Language;
 use Database\Factories\UserFactory;
 use Domain\Auth\Notifications\ResetPasswordNotification;
 use Domain\Auth\Notifications\VerifyEmailNotification;
@@ -158,14 +157,9 @@ class User extends Authenticatable implements MustVerifyEmail, HasLocalePreferen
         return $this->belongsToMany(UserSettingValue::class);
     }
 
-    public function language(): BelongsTo
-    {
-        return $this->belongsTo(Language::class);
-    }
-
     public function preferredLocale()
     {
-        return $this->language->slug;
+        return $this->language;
     }
 
     public function img(): HasOne

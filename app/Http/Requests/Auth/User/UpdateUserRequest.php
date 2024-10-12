@@ -77,7 +77,7 @@ class UpdateUserRequest extends FormRequest
             ],
             'language' => [
                 'required',
-                'integer',
+                'string',
                 Rule::in(config('app.available_locales'))
             ],
             'roles' => [
