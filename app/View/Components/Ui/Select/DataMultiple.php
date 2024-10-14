@@ -25,8 +25,9 @@ class DataMultiple extends Component
 
 
     public function isSelected(string $key): bool {
+
         if(($this->selected && !old()) || ($this->selected && !$this->showOld)) {
-            return in_array($key, $this->selected);
+            return array_key_exists($key, $this->selected);
         }
 
         if(!$this->showOld) {

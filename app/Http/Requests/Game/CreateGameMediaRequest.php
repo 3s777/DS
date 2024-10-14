@@ -74,6 +74,11 @@ class CreateGameMediaRequest extends FormRequest
                 'array',
                 'exists:Domain\Game\Models\GamePublisher,id'
             ],
+            'kit_items' => [
+                'required',
+                'array',
+                'exists:Domain\Shelf\Models\KitItem,id'
+            ],
             'user_id' => [
                 'nullable',
                 'integer',

@@ -9,6 +9,7 @@ use Domain\Game\Models\GameGenre;
 use Domain\Game\Models\GameMedia;
 use Domain\Game\Models\GamePlatform;
 use Domain\Game\Models\GamePublisher;
+use Domain\Shelf\Models\KitItem;
 use Illuminate\Database\Seeder;
 use Services\GamesDbApi\GamesDbApiContract;
 
@@ -32,6 +33,7 @@ class GameMediaSeeder extends Seeder
             ->has(GamePublisher::factory(2), 'publishers')
             ->has(GameGenre::factory(3), 'genres')
             ->has(GamePlatform::factory(2), 'platforms')
+            ->has(KitItem::factory(2), 'kitItems')
             ->recycle(User::factory(5)->create())
             ->create();
     }

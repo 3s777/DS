@@ -19,7 +19,7 @@
                         </x-ui.specifications.item>
 
                         <x-ui.specifications.item class="crud-show__specification" :title="__('common.language')">
-                            <x-ui.tag :disabled="true" tag="div" color="dark">{{ $user->language->name }}</x-ui.tag>
+                            <x-ui.tag :disabled="true" tag="div" color="dark">{{ $user->language }}</x-ui.tag>
                         </x-ui.specifications.item>
 
                         <x-ui.specifications.item class="crud-show__specification" :title="trans_choice('role.roles', 2)">

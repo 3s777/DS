@@ -35,6 +35,7 @@ class GameMediaService
             $gameMedia->platforms()->sync($data->platforms);
             $gameMedia->developers()->sync($data->developers);
             $gameMedia->publishers()->sync($data->publishers);
+            $gameMedia->kitItems()->sync($data->kit_items);
 
             DB::commit();
 
@@ -74,6 +75,7 @@ class GameMediaService
             $gameMedia->platforms()->sync($data->platforms);
             $gameMedia->developers()->sync($data->developers);
             $gameMedia->publishers()->sync($data->publishers);
+            $gameMedia->kitItems()->sync($data->kit_items);
 
             DB::commit();
 

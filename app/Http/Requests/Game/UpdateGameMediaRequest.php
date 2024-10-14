@@ -68,9 +68,13 @@ class UpdateGameMediaRequest extends FormRequest
                 'exists:game_developers,id'
             ],
             'publishers' => [
-                'nullable',
                 'array',
                 'exists:game_publishers,id'
+            ],
+            'kit_items' => [
+                'required',
+                'array',
+                'exists:Domain\Shelf\Models\KitItem,id'
             ],
             'user_id' => [
                 'nullable',

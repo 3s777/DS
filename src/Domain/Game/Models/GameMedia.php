@@ -7,6 +7,7 @@ use Database\Factories\Game\GameMediaFactory;
 use Domain\Auth\Models\User;
 use Domain\Game\FilterRegistrars\GameMediaFilterRegistrar;
 use Domain\Game\QueryBuilders\GameMediaQueryBuilder;
+use Domain\Shelf\Models\KitItem;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -121,5 +122,10 @@ class GameMedia extends Model implements HasMedia
     public function games(): MorphToMany
     {
         return $this->morphToMany(Game::class, 'gameable');
+    }
+
+    public function kitItems(): MorphToMany
+    {
+        return $this->morphToMany(KitItem::class, 'kitable');
     }
 }

@@ -128,6 +128,19 @@
                     </x-ui.form.group>
                 </x-grid.col>
 
+                <x-grid.col xl="6" lg="12" md="12" sm="12">
+                    <x-ui.form.group>
+                        <x-ui.select.data-multiple
+                            name="kit_items"
+                            select-name="kit_items[]"
+                            :selected="$selectedKitItems"
+                            :options="$kitItems"
+                            :label="trans_choice('collectible.kit.choose', 2)"
+                            :default-option="trans_choice('collectible.kit.items', 2)"
+                        />
+                    </x-ui.form.group>
+                </x-grid.col>
+
                 <x-grid.col xl="4" ls="6" ml="12" lg="6" md="6" sm="12">
                     <x-ui.form.group>
                         <x-ui.form.input-text

@@ -6,6 +6,7 @@ use Domain\Game\Models\Game;
 use Domain\Game\Models\GameGenre;
 use Domain\Game\Models\GameMedia;
 use Domain\Game\Models\GamePlatform;
+use Domain\Shelf\Models\KitItem;
 use Spatie\ViewModels\ViewModel;
 use Support\Traits\HasSelectedUser;
 
@@ -51,6 +52,11 @@ class GameMediaUpdateViewModel extends ViewModel
         return $this->gameMedia?->developers->pluck('name', 'id')->toArray() ?? null;
     }
 
+    public function selectedKitItems(): ?array
+    {
+        return $this->gameMedia?->kitItems->pluck('name', 'id')->toArray() ?? null;
+    }
+
     public function genres(): array
     {
         return GameGenre::select('id', 'name')->get()->pluck('name', 'id')->toArray();
@@ -64,5 +70,10 @@ class GameMediaUpdateViewModel extends ViewModel
     public function selectedUser(): array
     {
         return $this->getSelectedUser($this->gameMedia);
+    }
+
+    public function kitItems(): array
+    {
+        return KitItem::select('id', 'name')->get()->pluck('name', 'id')->toArray();
     }
 }
