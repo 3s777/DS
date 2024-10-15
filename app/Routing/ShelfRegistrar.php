@@ -17,25 +17,23 @@ class ShelfRegistrar extends BaseRouteRegistrar implements RouteRegistrar
             ->group(function () {
                 Route::prefix('{locale}')
                     ->whereIn('locale', config('app.available_locales'))
-                    ->middleware(['auth', 'verified', 'remove.locale'])
                     ->group(function () {
-                    Route::prefix('admin')->group(function () {
-                        $this->massDelete('shelves', ShelfController::class);
-                        Route::post('/select-shelves', [ShelfController::class, 'getForSelect'])->name('select-shelves');
-                        Route::resource('shelves', ShelfController::class);
-                    });
+                        Route::prefix('admin')
+                        ->middleware(['auth', 'verified', 'remove.locale'])
+                        ->group(function () {
+                            $this->massDelete('shelves', ShelfController::class);
+                            Route::post('/select-shelves', [ShelfController::class, 'getForSelect'])->name('select-shelves');
+                            Route::resource('shelves', ShelfController::class);
 
-                    Route::prefix('admin')->group(function () {
-                        $this->massDelete('collectibles', CollectibleController::class);
-                        Route::get('/select-collectibles', [CollectibleController::class, 'getForSelect'])->name('select-collectibles');
-                        Route::resource('collectibles', CollectibleController::class);
-                    });
+                            $this->massDelete('collectibles', CollectibleController::class);
+                            Route::get('/select-collectibles', [CollectibleController::class, 'getForSelect'])->name('select-collectibles');
+                            Route::get('/select-collectible-media', [CollectibleController::class, 'getMediaForSelect'])->name('select-collectible-media');
+                            Route::resource('collectibles', CollectibleController::class);
 
-                    Route::prefix('admin')->group(function () {
-                        $this->massDelete('kit-items', KitItemController::class);
-                        Route::resource('kit-items', KitItemController::class);
+                            $this->massDelete('kit-items', KitItemController::class);
+                            Route::resource('kit-items', KitItemController::class);
+                        });
                     });
-                });
             });
     }
 }

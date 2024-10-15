@@ -78,12 +78,26 @@
                     <x-ui.form.group>
                         <x-ui.select.enum
                             name="collectable_type"
-                            select-name="collectable_typ"
+                            select-name="collectable_type"
                             required
                             :options="$types"
                             :name-as-value="true"
-                            :default-option="__('common.choose_condition')"
-                            :placeholder="__('common.condition')" />
+                            :default-option="__('collectible.choose_type')"
+                            :placeholder="trans_choice('collectible.choose_type', 1)" />
+                    </x-ui.form.group>
+                </x-grid.col>
+
+                <x-grid.col xl="4" ls="6" lg="12" md="12" sm="12">
+                    <x-ui.form.group>
+                        <x-ui.select.async-depend
+                            name="media"
+                            select-name="media"
+                            :required="true"
+                            route="select-shelves"
+                            depend-on="collectable_type"
+                            depend-field="media"
+                            :default-option="trans_choice('collectible.choose_media', 1)"
+                            :label="trans_choice('collectible.media', 1)" />
                     </x-ui.form.group>
                 </x-grid.col>
             </x-grid>

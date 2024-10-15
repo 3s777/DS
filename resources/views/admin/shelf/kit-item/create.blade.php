@@ -1,10 +1,10 @@
 <x-layouts.admin :search="false">
     <x-ui.form class="crud-form"
                id="create-form"
-               :action="route('shelves.store')"
+               :action="route('kit-items.store')"
                enctype="multipart/form-data">
         <x-ui.title class="crud-form__tile" size="normal" indent="small">
-            {{ __('shelf.add') }}
+            {{ __('collectible.kit.add') }}
         </x-ui.title>
 
         <div class="crud-form__main">

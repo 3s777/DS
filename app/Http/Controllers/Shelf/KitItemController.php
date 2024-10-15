@@ -5,14 +5,13 @@ namespace App\Http\Controllers\Shelf;
 use App\Exceptions\MassDeletingException;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\MassDeletingRequest;
-use App\Http\Requests\Shelf\CreateShelfRequest;
-use App\Http\Requests\Shelf\UpdateShelfRequest;
-use Domain\Shelf\DTOs\FillShelfDTO;
+use App\Http\Requests\Shelf\CreateKitItemRequest;
+use App\Http\Requests\Shelf\UpdateKitItemRequest;
+use Domain\Shelf\ViewModel\KitItemUpdateViewModel;
+use Domain\Shelf\DTOs\FillKitItemDTO;
 use Domain\Shelf\Models\KitItem;
-use Domain\Shelf\Models\Shelf;
-use Domain\Shelf\Services\ShelfService;
-use Domain\Shelf\ViewModel\ShelfIndexViewModel;
-use Domain\Shelf\ViewModel\ShelfUpdateViewModel;
+use Domain\Shelf\Services\KitItemService;
+use Domain\Shelf\ViewModel\KitItemIndexViewModel;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
 use Illuminate\Foundation\Application;
@@ -31,7 +30,7 @@ class KitItemController extends Controller
 
     public function index(): View|Application|Factory|\Illuminate\Contracts\Foundation\Application
     {
-        return view('admin.shelf.shelf.index', new ShelfIndexViewModel());
+        return view('admin.shelf.kit-item.index', new KitItemIndexViewModel());
     }
 
     public function create(): View|Application|Factory|\Illuminate\Contracts\Foundation\Application
@@ -39,13 +38,13 @@ class KitItemController extends Controller
         return view('admin.shelf.kit-item.create');
     }
 
-    public function store(CreateShelfRequest $request, ShelfService $shelfService): Application|Redirector|RedirectResponse|\Illuminate\Contracts\Foundation\Application
+    public function store(CreateKitItemRequest $request, KitItemService $kitItemService): Application|Redirector|RedirectResponse|\Illuminate\Contracts\Foundation\Application
     {
-        $shelfService->create(FillShelfDTO::fromRequest($request));
+        $kitItemService->create(FillKitItemDTO::fromRequest($request));
 
-        flash()->info(__('shelf.created'));
+        flash()->info(__('collectible.kit.created'));
 
-        return to_route('shelves.index');
+        return to_route('kit-items.index');
     }
 
     public function show(string $id)
@@ -53,27 +52,27 @@ class KitItemController extends Controller
         //
     }
 
-    public function edit(Shelf $shelf): View|Application|Factory|\Illuminate\Contracts\Foundation\Application
+    public function edit(KitItem $kitItem): View|Application|Factory|\Illuminate\Contracts\Foundation\Application
     {
-        return view('admin.shelf.shelf.edit', new ShelfUpdateViewModel($shelf));
+        return view('admin.shelf.kit-item.edit', new KitItemUpdateViewModel($kitItem));
     }
 
-    public function update(UpdateShelfRequest $request, Shelf $shelf, ShelfService $shelfService): RedirectResponse
+    public function update(UpdateKitItemRequest $request, KitItem $kitItem, KitItemService $kitItemService): RedirectResponse
     {
-        $shelfService->update($shelf, FillShelfDTO::fromRequest($request));
+        $kitItemService->update($kitItem, FillKitItemDTO::fromRequest($request));
 
-        flash()->info(__('shelf.updated'));
+        flash()->info(__('collectible.kit.updated'));
 
-        return to_route('shelves.index');
+        return to_route('kit-items.index');
     }
 
-    public function destroy(Shelf $shelf): RedirectResponse
+    public function destroy(KitItem $kitItem): RedirectResponse
     {
-        $shelf->delete();
+        $kitItem->delete();
 
-        flash()->info(__('shelf.deleted'));
+        flash()->info(__('collectible.kit.deleted'));
 
-        return to_route('shelves.index');
+        return to_route('kit-items.index');
     }
 
     /**
@@ -83,14 +82,14 @@ class KitItemController extends Controller
     {
         $deletingAction(
             MassDeletingDTO::make(
-                'Domain\Shelf\Models\Shelf',
+                'Domain\Shelf\Models\KitItem',
                 $request->input('ids')
             )
         );
 
-        flash()->info(__('shelf.mass_deleted'));
+        flash()->info(__('collectible.kit.mass_deleted'));
 
-        return to_route('shelves.index');
+        return to_route('kit-items.index');
     }
 
     /**
@@ -100,14 +99,14 @@ class KitItemController extends Controller
     {
         $deletingAction(
             MassDeletingDTO::make(
-                'Domain\Shelf\Models\Shelf',
+                'Domain\Shelf\Models\KitItem',
                 $request->input('ids'),
                 true
             )
         );
 
-        flash()->info(__('shelf.mass_force_deleted'));
+        flash()->info(__('collectible.kit.mass_force_deleted'));
 
-        return to_route('shelves.index');
+        return to_route('kit-items.index');
     }
 }

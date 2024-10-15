@@ -11,6 +11,7 @@ use Domain\Collectible\DTOs\FillCollectibleDTO;
 use Domain\Collectible\Services\CollectibleService;
 use Domain\Shelf\Models\Collectible;
 use Domain\Shelf\ViewModel\CollectibleIndexViewModel;
+use Domain\Shelf\ViewModel\CollectibleMediaViewModel;
 use Domain\Shelf\ViewModel\CollectibleUpdateViewModel;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
@@ -112,5 +113,12 @@ class CollectibleController extends Controller
         flash()->info(__('collectible.mass_force_deleted'));
 
         return to_route('collectibles.index');
+    }
+
+    public function getMediaForSelect(Request $request): CollectibleMediaViewModel
+    {
+        return new CollectibleMediaViewModel(
+            $request->input('query')
+        );
     }
 }
