@@ -4,6 +4,8 @@ namespace Domain\Shelf\ViewModel;
 
 use Domain\Shelf\Enums\CollectableTypeEnum;
 use Illuminate\Support\Facades\Schema;
+use Illuminate\Support\Facades\Validator;
+use Illuminate\Validation\Rule;
 use Spatie\ViewModels\ViewModel;
 
 class CollectibleMediaViewModel extends ViewModel
@@ -20,19 +22,22 @@ class CollectibleMediaViewModel extends ViewModel
             ['value' => '', 'label' => trans_choice('collectible.choose_media', 1), 'disabled' => true]
         ];
 
-        if($this->query) {
-dd(array_search(request('depended')[0], array_column(CollectableTypeEnum::cases(), 'name')));
-            if(array_search('Book', array_column(CollectableTypeEnum::cases(), 'name'))) {
-                dd(5);
-            }
+        $availableModels = array_column(CollectableTypeEnum::cases(), 'name');
+
+        $validator = Validator::make(request()->all(), [
+            'query' => ['required', 'max:250'],
+            'depended' => ['required', 'array'],
+            'depended.*' => [Rule::in($availableModels)]
+        ]);
+
+        if($validator->fails()) {
+            $options[] = ['value' => 'not_found', 'label' => __('common.not_found'), 'disabled' => true];
+            return $options;
+        }
 
 
 
-            if($this->query) {
-                $options[] = ['value' => 'not_found', 'label' => __('common.not_found'), 'disabled' => true];
-                return $options;
-            }
-            $dependedModel = request('depended')[1];
+            $dependedModel = request('depended')[0];
             $modelName = CollectableTypeEnum::{$dependedModel}->value;
 
             $query = $modelName::query()->where('name', 'ilike', "%{$this->query}%")->select('id', 'name');
@@ -53,9 +58,6 @@ dd(array_search(request('depended')[0], array_column(CollectableTypeEnum::cases(
             }
 
             return $options;
-        }
 
-        $options[] = ['value' => 'not_found', 'label' => __('common.not_found'), 'disabled' => true];
-        return $options;
     }
 }
