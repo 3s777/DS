@@ -93,13 +93,19 @@
                             name="media"
                             select-name="media"
                             :required="true"
-                            route="select-shelves"
+                            route="select-collectible-media"
                             depend-on="collectable_type"
                             depend-field="media"
                             :default-option="trans_choice('collectible.choose_media', 1)"
                             :label="trans_choice('collectible.media', 1)" />
                     </x-ui.form.group>
                 </x-grid.col>
+                <x-grid.col xl="4" ls="6" lg="12" md="12" sm="12">
+                    <x-ui.form.group>
+                        <div id="fs"></div>
+                    </x-ui.form.group>
+                </x-grid.col>
+
             </x-grid>
         </div>
 
@@ -131,5 +137,29 @@
                     {{ __('common.save') }}
             </x-ui.form.button>
         </x-ui.form.group>
+
     </x-ui.form>
+    @push('scripts')
+        <script>
+            document.getElementById('media-select').addEventListener('change', async function() {
+                console.log('You selected: ', this.value);
+                try {
+                    const media = this.value ?? null
+                    const model = document.getElementById('collectable_type')
+                    const response = await axios.post('{{ route('get-game-media') }}', {
+                        media: media,
+                        model: model.value
+                    });
+                    console.log(response.data);
+                    const fs = document.getElementById('fs')
+fs.innerHTML = response.data;
+                    return response.data.result;
+                } catch (err) {
+                    @if(!app()->isProduction())
+                    console.log(err);
+                    @endif
+                }
+            });
+        </script>
+    @endpush
 </x-layouts.admin>

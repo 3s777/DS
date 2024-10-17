@@ -115,7 +115,7 @@
                     console.log(err);
                     @endif
                 }
-            }, 'value', 'label', true), 300),
+            }, 'value', 'label', true), 700),
             false
         )
 

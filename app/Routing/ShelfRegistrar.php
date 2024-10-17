@@ -27,7 +27,7 @@ class ShelfRegistrar extends BaseRouteRegistrar implements RouteRegistrar
 
                             $this->massDelete('collectibles', CollectibleController::class);
                             Route::get('/select-collectibles', [CollectibleController::class, 'getForSelect'])->name('select-collectibles');
-                            Route::get('/select-collectible-media', [CollectibleController::class, 'getMediaForSelect'])->name('select-collectible-media');
+                            Route::post('/select-collectible-media', [CollectibleController::class, 'getMediaForSelect'])->name('select-collectible-media');
                             Route::resource('collectibles', CollectibleController::class);
 
                             $this->massDelete('kit-items', KitItemController::class);

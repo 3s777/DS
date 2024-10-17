@@ -8,8 +8,8 @@ use App\Http\Requests\MassDeletingRequest;
 use App\Http\Requests\Shelf\CreateCollectibleRequest;
 use App\Http\Requests\Shelf\GetCollectibleMediaRequest;
 use App\Http\Requests\Shelf\UpdateCollectibleRequest;
-use Domain\Collectible\DTOs\FillCollectibleDTO;
-use Domain\Collectible\Services\CollectibleService;
+use Domain\Shelf\DTOs\FillCollectibleDTO;
+use Domain\Shelf\Services\CollectibleService;
 use Domain\Shelf\Models\Collectible;
 use Domain\Shelf\ViewModel\CollectibleIndexViewModel;
 use Domain\Shelf\ViewModel\CollectibleMediaViewModel;
@@ -20,7 +20,6 @@ use Illuminate\Foundation\Application;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Redirector;
-
 use Illuminate\Support\Facades\Validator;
 use Support\Actions\MassDeletingAction;
 use Support\DTOs\MassDeletingDTO;
@@ -117,7 +116,7 @@ class CollectibleController extends Controller
         return to_route('collectibles.index');
     }
 
-    public function getMediaForSelect(Request $request): string|CollectibleMediaViewModel
+    public function getMediaForSelect(GetCollectibleMediaRequest $request): string|CollectibleMediaViewModel
     {
         return new CollectibleMediaViewModel(
             $request->input('query')

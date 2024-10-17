@@ -3,17 +3,17 @@
 namespace Domain\Shelf\ViewModel;
 
 use Domain\Shelf\Enums\CollectableTypeEnum;
-use Illuminate\Support\Facades\Schema;
-use Illuminate\Support\Facades\Validator;
-use Illuminate\Validation\Rule;
 use Spatie\ViewModels\ViewModel;
 
 class CollectibleMediaViewModel extends ViewModel
 {
-    public function __construct(
-        protected ?string $query
-    )
+    protected ?string $query;
+    protected string $dependedModel;
+
+    public function __construct($query)
     {
+        $this->query = $query;
+        $this->dependedModel = request('depended')['media'];
     }
 
     public function result(): array
@@ -22,42 +22,24 @@ class CollectibleMediaViewModel extends ViewModel
             ['value' => '', 'label' => trans_choice('collectible.choose_media', 1), 'disabled' => true]
         ];
 
-        $availableModels = array_column(CollectableTypeEnum::cases(), 'name');
-
-        $validator = Validator::make(request()->all(), [
-            'query' => ['required', 'max:250'],
-            'depended' => ['required', 'array'],
-            'depended.*' => [Rule::in($availableModels)]
-        ]);
-
-        if($validator->fails()) {
+        if(!$this->query) {
             $options[] = ['value' => 'not_found', 'label' => __('common.not_found'), 'disabled' => true];
             return $options;
         }
 
+        $modelName = CollectableTypeEnum::{$this->dependedModel}->value;
 
+        $models = $modelName::query()
+            ->where('name', 'ilike', "%{$this->query}%")
+            ->orWhere('alternative_names', 'ilike', "%{$this->query}%")
+            ->select('id', 'name')
+            ->limit(10)
+            ->get();
 
-            $dependedModel = request('depended')[0];
-            $modelName = CollectableTypeEnum::{$dependedModel}->value;
+        foreach ($models as $model) {
+            $options[] = ['value' => $model->id, 'label' => $model->name];
+        }
 
-            $query = $modelName::query()->where('name', 'ilike', "%{$this->query}%")->select('id', 'name');
-
-            $query->when(request('depended'), function ($q) {
-                foreach(request('depended') as $key => $value) {
-                    if (Schema::hasColumn($q->getModel()->getTable(), $key) && $value){
-                        $q->whereIn($key, explode(',', $value));
-                    }
-                }
-                return $q;
-            });
-
-            $models = $query->limit(10)->get();
-
-            foreach ($models as $model) {
-                $options[] = ['value' => $model->id, 'label' => $model->name];
-            }
-
-            return $options;
-
+        return $options;
     }
 }

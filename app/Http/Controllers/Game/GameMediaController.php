@@ -14,11 +14,14 @@ use Domain\Game\ViewModels\GameMediaUpdateViewModel;
 use Domain\Game\ViewModels\GameMediaIndexViewModel;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
+use Illuminate\Support\Facades\View as ViewFacade;
 use Illuminate\Foundation\Application;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Routing\Redirector;
+use Illuminate\Http\Request;
 use Support\Actions\MassDeletingAction;
 use Support\DTOs\MassDeletingDTO;
+use Domain\Shelf\Enums\CollectableTypeEnum;
 
 class GameMediaController extends Controller
 {
@@ -107,5 +110,21 @@ class GameMediaController extends Controller
         flash()->info(__('game_media.mass_force_deleted'));
 
         return to_route('game-medias.index');
+    }
+
+    public function getMedia(Request $request)
+    {
+        $modelName = CollectableTypeEnum::{$request->input('model')}->value;
+        $media = $modelName::find($request->input('media'));
+
+        $html = '';
+
+        foreach($media->kitItems as $kitItem) {
+            $html .= ViewFacade::make("components.ui.star-rating")
+                ->with('name', $kitItem->slug)
+                ->with('title', $kitItem->name);
+        }
+
+        return $html;
     }
 }
