@@ -114,15 +114,23 @@ class GameMediaController extends Controller
 
     public function getMedia(Request $request)
     {
-        $modelName = CollectableTypeEnum::{$request->input('model')}->value;
-        $media = $modelName::find($request->input('media'));
+        $modelClass = CollectableTypeEnum::{$request->input('model')}->value;
+        $modelName = CollectableTypeEnum::{$request->input('model')}->name;
+        $media = $modelClass::find($request->input('media'));
 
         $html = '';
 
+        $html .= view('admin.'.$modelName.'.partials.properties');
+
         foreach($media->kitItems as $kitItem) {
-            $html .= ViewFacade::make("components.ui.star-rating")
-                ->with('name', $kitItem->slug)
-                ->with('title', $kitItem->name);
+//            $html .= ViewFacade::make("components.ui.star-rating")
+//                ->with('name', $kitItem->slug)
+//                ->with('title', $kitItem->name);
+
+            $html .= view('components.Ui.star-rating',
+                ['name' => $kitItem->slug,
+                'title' => $kitItem->name]
+            );
         }
 
         return $html;

@@ -28,4 +28,7 @@ return [
     'choose_type' => 'Выберите тип',
     'media' => 'Носитель|Носители',
     'choose_media' => 'Выберите носитель',
+    'purchase_price' => 'Цена покупки',
+    'purchase_date' => 'Дата покупки',
+    'seller' => 'Продавец'
 ];

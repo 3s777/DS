@@ -25,30 +25,6 @@
 
                 <x-grid.col xl="4" ls="6" ml="12" lg="6" md="6" sm="12">
                     <x-ui.form.group>
-                        <x-ui.form.input-text
-                            :placeholder="trans_choice('common.article_numbers', 1)"
-                            id="number"
-                            name="number"
-                            :value="old('number')"
-                            autocomplete="on">
-                        </x-ui.form.input-text>
-                    </x-ui.form.group>
-                </x-grid.col>
-
-                <x-grid.col xl="4" ls="6" ml="12" lg="6" md="6" sm="12">
-                    <x-ui.form.group>
-                        <x-ui.select.enum
-                            name="condition"
-                            select-name="condition"
-                            required
-                            :options="$conditions"
-                            :default-option="__('common.choose_condition')"
-                            :placeholder="__('common.condition')" />
-                    </x-ui.form.group>
-                </x-grid.col>
-
-                <x-grid.col xl="4" ls="6" ml="12" lg="6" md="6" sm="12">
-                    <x-ui.form.group>
                         <x-ui.select.async
                             name="user_shelf"
                             select-name="user_shelf"
@@ -76,6 +52,69 @@
 
                 <x-grid.col xl="4" ls="6" ml="12" lg="6" md="6" sm="12">
                     <x-ui.form.group>
+                        <x-ui.form.input-text
+                            :placeholder="trans_choice('common.article_numbers', 1)"
+                            id="article_number"
+                            name="article_number"
+                            :value="old('article_number')"
+                            autocomplete="on">
+                        </x-ui.form.input-text>
+                    </x-ui.form.group>
+                </x-grid.col>
+
+                <x-grid.col xl="4" ls="6" ml="12" lg="6" md="6" sm="12">
+                    <x-ui.form.group>
+                        <x-ui.select.enum
+                            name="condition"
+                            select-name="condition"
+                            required
+                            :options="$conditions"
+                            :default-option="__('common.choose_condition')"
+                            :placeholder="__('common.condition')" />
+                    </x-ui.form.group>
+                </x-grid.col>
+
+                <x-grid.col xl="4" ls="6" ml="12" lg="6" md="6" sm="12">
+                    <x-ui.form.group>
+                        <x-ui.form.input-text
+                            :placeholder="trans_choice('collectible.purchase_price', 1)"
+                            id="price"
+                            name="price"
+                            type="number"
+                            step="0.01"
+                            :value="old('price')"
+                            autocomplete="on">
+                        </x-ui.form.input-text>
+                    </x-ui.form.group>
+                </x-grid.col>
+
+                <x-grid.col xl="4" ls="6" ml="12" lg="6" md="6" sm="12">
+                    <x-ui.form.group>
+                        <x-ui.form.input-text
+                            :placeholder="trans_choice('collectible.seller', 1)"
+                            id="seller"
+                            name="seller"
+                            :value="old('seller')"
+                            autocomplete="on">
+                        </x-ui.form.input-text>
+                    </x-ui.form.group>
+                </x-grid.col>
+
+                <x-grid.col xl="4" ls="6" ml="12" lg="6" md="6" sm="12">
+                    <x-ui.form.group>
+                        <x-ui.form.datepicker
+                            :placeholder="trans_choice('collectible.purchase_date', 1)"
+                            id="purchase_date"
+                            name="purchase_date"
+                            :value="old('purchase_date')">
+                        </x-ui.form.datepicker>
+                    </x-ui.form.group>
+                </x-grid.col>
+
+                <x-grid.col xl="12" />
+
+                <x-grid.col xl="4" ls="6" ml="12" lg="6" md="6" sm="12">
+                    <x-ui.form.group>
                         <x-ui.select.enum
                             name="collectable_type"
                             select-name="collectable_type"
@@ -100,9 +139,10 @@
                             :label="trans_choice('collectible.media', 1)" />
                     </x-ui.form.group>
                 </x-grid.col>
-                <x-grid.col xl="4" ls="6" lg="12" md="12" sm="12">
+
+                <x-grid.col xl="6" ls="6" lg="12" md="12" sm="12">
                     <x-ui.form.group>
-                        <div id="fs"></div>
+                        <div id="properties"></div>
                     </x-ui.form.group>
                 </x-grid.col>
 
@@ -151,8 +191,8 @@
                         model: model.value
                     });
                     console.log(response.data);
-                    const fs = document.getElementById('fs')
-fs.innerHTML = response.data;
+                    const properties = document.getElementById('properties')
+                    properties.innerHTML = response.data;
                     return response.data.result;
                 } catch (err) {
                     @if(!app()->isProduction())

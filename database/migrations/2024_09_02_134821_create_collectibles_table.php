@@ -21,6 +21,7 @@ return new class extends Migration
             $table->string('condition');
             $table->foreignIdFor(Shelf::class)->constrained();
             $table->jsonb('kit')->nullable();
+            $table->jsonb('properties')->nullable();
             $table->morphs('collectable');
             $table->string('thumbnail')->nullable();
             $table->jsonb('description')->nullable();
