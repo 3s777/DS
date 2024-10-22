@@ -22,7 +22,7 @@ class GameRegistrar extends BaseRouteRegistrar implements RouteRegistrar
                 Route::prefix('{locale}')->whereIn('locale', config('app.available_locales'))->group(function () {
                     Route::prefix('admin')->middleware(['auth', 'verified', 'remove.locale'])->group(function () {
                         $this->massDelete('game-medias', GameMediaController::class);
-                        Route::post('/get-game-media', [GameMediaController::class, 'getMedia'])->name('get-game-media');
+                        Route::post('/select-game-media', [GameMediaController::class, 'getForSelect'])->name('game-media.select');
                         Route::resource('game-medias', GameMediaController::class);
 
                         $this->massDelete('games', GameController::class);

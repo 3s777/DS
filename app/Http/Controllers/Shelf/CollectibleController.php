@@ -23,6 +23,7 @@ use Illuminate\Routing\Redirector;
 use Illuminate\Support\Facades\Validator;
 use Support\Actions\MassDeletingAction;
 use Support\DTOs\MassDeletingDTO;
+use Domain\Shelf\Enums\CollectableTypeEnum;
 
 class CollectibleController extends Controller
 {
@@ -55,7 +56,7 @@ class CollectibleController extends Controller
 
     public function show(string $id)
     {
-        //
+        dd('sdf');
     }
 
     public function edit(Collectible $collectible): View|Application|Factory|\Illuminate\Contracts\Foundation\Application
@@ -121,5 +122,27 @@ class CollectibleController extends Controller
         return new CollectibleMediaViewModel(
             $request->input('query')
         );
+    }
+
+    public function getMedia(Request $request)
+    {
+        $modelClass = CollectableTypeEnum::{$request->input('model')}->value;
+        $modelName = CollectableTypeEnum::{$request->input('model')}->name;
+        $media = $modelClass::find($request->input('media'));
+
+        $html = '';
+
+        foreach($media->kitItems as $kitItem) {
+//            $html .= ViewFacade::make("components.ui.star-rating")
+//                ->with('name', $kitItem->slug)
+//                ->with('title', $kitItem->name);
+
+            $html .= view('components.Ui.star-rating',
+                ['name' => $kitItem->slug,
+                'title' => $kitItem->name]
+            );
+        }
+
+        return $html;
     }
 }

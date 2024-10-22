@@ -30,5 +30,6 @@ return [
     'choose_media' => 'Выберите носитель',
     'purchase_price' => 'Цена покупки',
     'purchase_date' => 'Дата покупки',
-    'seller' => 'Продавец'
+    'seller' => 'Продавец',
+    'sale_price' => 'Цена продажи'
 ];

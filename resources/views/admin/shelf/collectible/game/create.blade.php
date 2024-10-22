@@ -78,11 +78,11 @@
                     <x-ui.form.group>
                         <x-ui.form.input-text
                             :placeholder="trans_choice('collectible.purchase_price', 1)"
-                            id="price"
-                            name="price"
+                            id="purchase_price"
+                            name="purchase_price"
                             type="number"
                             step="0.01"
-                            :value="old('price')"
+                            :value="old('purchase_price')"
                             autocomplete="on">
                         </x-ui.form.input-text>
                     </x-ui.form.group>
@@ -115,26 +115,43 @@
 
                 <x-grid.col xl="4" ls="6" ml="12" lg="6" md="6" sm="12">
                     <x-ui.form.group>
-                        <x-ui.select.enum
-                            name="collectable_type"
-                            select-name="collectable_type"
-                            required
-                            :options="$types"
-                            :name-as-value="true"
-                            :default-option="__('collectible.choose_type')"
-                            :placeholder="trans_choice('collectible.choose_type', 1)" />
+                        <x-ui.form.input-text
+                            :placeholder="trans_choice('common.additional_fields', 1)"
+                            id="additional"
+                            name="additional"
+                            :value="old('additional')"
+                            autocomplete="on">
+                        </x-ui.form.input-text>
                     </x-ui.form.group>
                 </x-grid.col>
 
                 <x-grid.col xl="4" ls="6" lg="12" md="12" sm="12">
                     <x-ui.form.group>
-                        <x-ui.select.async-depend
+                        <x-ui.form.switcher
+                            name="is_done"
+                            label="{{ __('game.is_done') }}">
+                        </x-ui.form.switcher>
+                    </x-ui.form.group>
+                </x-grid.col>
+
+                <x-grid.col xl="4" ls="6" lg="12" md="12" sm="12">
+                    <x-ui.form.group>
+                        <x-ui.form.switcher
+                            name="is_digital"
+                            label="{{ __('game.is_digital') }}">
+                        </x-ui.form.switcher>
+                    </x-ui.form.group>
+                </x-grid.col>
+
+                <x-grid.col xl="12" />
+
+                <x-grid.col xl="4" ls="6" lg="12" md="12" sm="12">
+                    <x-ui.form.group>
+                        <x-ui.select.async
                             name="media"
                             select-name="media"
                             :required="true"
-                            route="collectibles.select.media"
-                            depend-on="collectable_type"
-                            depend-field="media"
+                            route="game-media.select"
                             :default-option="trans_choice('collectible.choose_media', 1)"
                             :label="trans_choice('collectible.media', 1)" />
                     </x-ui.form.group>
@@ -142,9 +159,73 @@
 
                 <x-grid.col xl="6" ls="6" lg="12" md="12" sm="12">
                     <x-ui.form.group>
-                        <div id="properties"></div>
+                        <div id="kit"></div>
                     </x-ui.form.group>
                 </x-grid.col>
+
+                <div class="collectible-target">
+                    <x-grid.col xl="12" ls="12" lg="12" md="12" sm="12">
+                        <x-ui.form.group>
+                            <x-ui.form.radio-group>
+                                <x-ui.form.radio-button
+                                    id="radio-collection"
+                                    name="target"
+                                    value="collection"
+                                    color="dark"
+                                    :checked="true"
+                                    :group="true"
+                                    label="{{ __('common.for_collection') }}">
+                                </x-ui.form.radio-button>
+
+                                <x-ui.form.radio-button
+                                    id="radio-sale"
+                                    name="target"
+                                    value="sale"
+                                    color="dark"
+                                    :group="true"
+                                    label="{{ __('common.for_sale') }}">
+                                </x-ui.form.radio-button>
+
+                                <x-ui.form.radio-button
+                                    id="radio-auction"
+                                    name="target"
+                                    value="auction"
+                                    color="dark"
+                                    :group="true"
+                                    label="{{ __('common.for_auction') }}">
+                                </x-ui.form.radio-button>
+
+                                <x-ui.form.radio-button
+                                    id="radio-exchange"
+                                    name="target"
+                                    value="exchange"
+                                    color="dark"
+                                    :group="true"
+                                    label="{{ __('common.for_exchange') }}">
+                                </x-ui.form.radio-button>
+                            </x-ui.form.radio-group>
+                        </x-ui.form.group>
+                    </x-grid.col>
+
+                    <div class="collectible-target__fields collectible-target__sale" style="display: none">
+                        <x-grid.col lg="4" xl="6" md="12" sm="12">
+                            <x-ui.form.group>
+                                <x-ui.form.input-text
+                                    placeholder="{{ __('collectible.sale_price') }}"
+                                    id="sale_price"
+                                    name="sale_price"
+                                    value="{{ old('sale_price') }}"
+                                    type="number"
+                                    required
+                                    autocomplete="on">
+                                </x-ui.form.input-text>
+                            </x-ui.form.group>
+                        </x-grid.col>
+                    </div>
+                    <div class="collectible-target__fields collectible-target__auction" style="display: none">
+                        Auction
+                    </div>
+                </div>
 
             </x-grid>
         </div>
@@ -181,22 +262,50 @@
     </x-ui.form>
     @push('scripts')
         <script>
+            var targets = document.querySelectorAll('input[type=radio][name="target"]');
+            targets.forEach(target => target.addEventListener('change',
+                function() {
+                    document.querySelectorAll('.collectible-target__fields').forEach(function(el) {
+                        el.style.display = 'none';
+                    });
+
+                    if(target.value === 'sale') {
+                        document.querySelectorAll('.collectible-target__sale').forEach(function(el) {
+                            el.style.display = 'block';
+                        });
+                    }
+
+                    if(target.value === 'auction') {
+                        document.querySelectorAll('.collectible-target__auction').forEach(function(el) {
+                            el.style.display = 'block';
+                        });
+                    }
+
+                    console.log(target.value);
+                }
+            ));
+
+
+            // document.querySelector('input[name="target"]').addEventListener('change', async function() {
+            //     const target = document.querySelector('input[name="target"]:checked').value;
+            //     console.log(target);
+            // });
+
+
             document.getElementById('media-select').addEventListener('change', async function() {
-                console.log('You selected: ', this.value);
                 try {
                     const media = this.value ?? null
-                    const model = document.getElementById('collectable_type')
                     const response = await axios.post('{{ route('collectibles.get.media') }}', {
                         media: media,
-                        model: model.value
+                        model: 'Game'
                     });
                     console.log(response.data);
-                    const properties = document.getElementById('properties')
-                    properties.innerHTML = response.data;
+                    const kit = document.getElementById('kit')
+                    kit.innerHTML = response.data;
                     return response.data.result;
                 } catch (err) {
                     @if(!app()->isProduction())
-                    console.log(err);
+                        console.log(err);
                     @endif
                 }
             });

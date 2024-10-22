@@ -8,6 +8,7 @@ use App\Http\Requests\Game\CreateGameMediaRequest;
 use App\Http\Requests\Game\UpdateGameMediaRequest;
 use App\Http\Requests\MassDeletingRequest;
 use Domain\Game\DTOs\FillGameMediaDTO;
+use Domain\Game\Models\GameDeveloper;
 use Domain\Game\Models\GameMedia;
 use Domain\Game\Services\GameMediaService;
 use Domain\Game\ViewModels\GameMediaUpdateViewModel;
@@ -22,6 +23,7 @@ use Illuminate\Http\Request;
 use Support\Actions\MassDeletingAction;
 use Support\DTOs\MassDeletingDTO;
 use Domain\Shelf\Enums\CollectableTypeEnum;
+use Support\ViewModels\AsyncSelectByQueryViewModel;
 
 class GameMediaController extends Controller
 {
@@ -112,27 +114,12 @@ class GameMediaController extends Controller
         return to_route('game-medias.index');
     }
 
-    public function getMedia(Request $request)
+    public function getForSelect(Request $request): AsyncSelectByQueryViewModel
     {
-        $modelClass = CollectableTypeEnum::{$request->input('model')}->value;
-        $modelName = CollectableTypeEnum::{$request->input('model')}->name;
-        $media = $modelClass::find($request->input('media'));
-
-        $html = '';
-
-        $html .= view('admin.'.$modelName.'.partials.properties');
-
-        foreach($media->kitItems as $kitItem) {
-//            $html .= ViewFacade::make("components.ui.star-rating")
-//                ->with('name', $kitItem->slug)
-//                ->with('title', $kitItem->name);
-
-            $html .= view('components.Ui.star-rating',
-                ['name' => $kitItem->slug,
-                'title' => $kitItem->name]
-            );
-        }
-
-        return $html;
+        return new AsyncSelectByQueryViewModel(
+            $request->input('query'),
+            GameMedia::class,
+            trans_choice('game_media.choose', 2)
+        );
     }
 }

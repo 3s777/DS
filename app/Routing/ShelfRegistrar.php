@@ -4,6 +4,7 @@ namespace App\Routing;
 
 use App\Contracts\RouteRegistrar;
 use App\Http\Controllers\Shelf\CollectibleController;
+use App\Http\Controllers\Shelf\CollectibleGameController;
 use App\Http\Controllers\Shelf\KitItemController;
 use App\Http\Controllers\Shelf\ShelfController;
 use Illuminate\Contracts\Routing\Registrar;
@@ -22,15 +23,14 @@ class ShelfRegistrar extends BaseRouteRegistrar implements RouteRegistrar
                         ->middleware(['auth', 'verified', 'remove.locale'])
                         ->group(function () {
                             $this->massDelete('shelves', ShelfController::class);
-                            Route::post('/select-shelves', [ShelfController::class, 'getForSelect'])->name('select-shelves');
+                            Route::post('/shelves/select/list', [ShelfController::class, 'getForSelect'])->name('shelves.select');
                             Route::resource('shelves', ShelfController::class);
 
                             $this->massDelete('collectibles', CollectibleController::class);
-                            Route::get('/select-collectibles', [CollectibleController::class, 'getForSelect'])->name('select-collectibles');
-                            Route::post('/select-collectible-media', [CollectibleController::class, 'getMediaForSelect'])->name('select-collectible-media');
-                            Route::get('/collectibles/create/game', [CollectibleController::class, 'create'])->name('collectible-create-game');
+                            Route::post('/collectibles/select/media', [CollectibleController::class, 'getMediaForSelect'])->name('collectibles.select.media');
+                            Route::post('/collectibles/get/media', [CollectibleController::class, 'getMedia'])->name('collectibles.get.media');
+                            Route::get('/collectibles/create/game', [CollectibleGameController::class, 'create'])->name('collectibles.create.game');
                             Route::resource('collectibles', CollectibleController::class);
-
 
                             $this->massDelete('kit-items', KitItemController::class);
                             Route::resource('kit-items', KitItemController::class);

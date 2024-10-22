@@ -1,5 +1,6 @@
 .switcher {
-    display: inline-block;
+    display: inline-flex;
+    align-items: center;
     cursor: pointer;
 
     &:hover .switcher__button {
@@ -18,6 +19,7 @@
 .switcher__button {
     position: relative;
     display: inline-block;
+    flex-shrink: 0;
     width: 56px;
     height: 30px;
     margin-right: 5px;
@@ -76,7 +78,6 @@
 
 .switcher__label {
     position: relative;
-    top: 2px;
     font-size: rem(16);
     color: $font-main-50;
     transition: $base-transition;

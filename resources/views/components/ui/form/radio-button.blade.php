@@ -7,13 +7,15 @@
     'indent' => false,
     'size' => false,
     'labelClass' => false,
-    'checked' => false
+    'checked' => false,
+    'group' => false
 ])
 
 <div
     {{ $attributes->class([
             'radio-button',
             'radio-button_indent_'.$indent => $indent,
+            'radio-group__button' => $group
         ])
     }}>
 
@@ -27,7 +29,7 @@
 
     <x-ui.form.button
         tag="label"
-        class="radio-button__label {{ $labelClass }}"
+        class="radio-button__label {{ $labelClass }} @if($group) radio-group__label @endif"
         color="{{ $color }}"
         size="{{ $size }}"
         for="{{ $id }}">
