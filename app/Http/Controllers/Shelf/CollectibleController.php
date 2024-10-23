@@ -20,6 +20,7 @@ use Illuminate\Foundation\Application;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Redirector;
+use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\Facades\Validator;
 use Support\Actions\MassDeletingAction;
 use Support\DTOs\MassDeletingDTO;
@@ -137,9 +138,14 @@ class CollectibleController extends Controller
 //                ->with('name', $kitItem->slug)
 //                ->with('title', $kitItem->name);
 
-            $html .= view('components.Ui.star-rating',
-                ['name' => $kitItem->slug,
-                'title' => $kitItem->name]
+//            $html .= view('components.ui.star-rating',
+//                ['name' => $kitItem->slug,
+//                'title' => $kitItem->name]
+//            );
+
+            $html .= Blade::render(
+                '<x-ui.star-rating :name="$name" :title="$title" input-name="conditions[{{ $name }}]" class="admin__conditions-item" />',
+                ['name' => $kitItem->slug, 'title' => $kitItem->name]
             );
         }
 

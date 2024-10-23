@@ -1,7 +1,7 @@
 <x-layouts.admin :search="false">
     <x-ui.form class="crud-form"
                id="create-form"
-               :action="route('collectibles.store')"
+               :action="route('collectibles.store.game')"
                enctype="multipart/form-data">
         <x-ui.title class="crud-form__tile" size="normal" indent="small">
             {{ __('collectible.add') }}
@@ -40,7 +40,7 @@
                     <x-ui.form.group>
                         <x-ui.select.async-depend
                             name="shelf"
-                            select-name="shelf"
+                            select-name="shelf_id"
                             :required="true"
                             route="shelves.select"
                             depend-on="user_shelf"
@@ -110,9 +110,9 @@
                         </x-ui.form.datepicker>
                     </x-ui.form.group>
                 </x-grid.col>
+            </x-grid>
 
-                <x-grid.col xl="12" />
-
+            <x-grid type="container">
                 <x-grid.col xl="4" ls="6" ml="12" lg="6" md="6" sm="12">
                     <x-ui.form.group>
                         <x-ui.form.input-text
@@ -129,6 +129,7 @@
                     <x-ui.form.group>
                         <x-ui.form.switcher
                             name="is_done"
+                            value="1"
                             label="{{ __('game.is_done') }}">
                         </x-ui.form.switcher>
                     </x-ui.form.group>
@@ -138,13 +139,14 @@
                     <x-ui.form.group>
                         <x-ui.form.switcher
                             name="is_digital"
+                            value="1"
                             label="{{ __('game.is_digital') }}">
                         </x-ui.form.switcher>
                     </x-ui.form.group>
                 </x-grid.col>
+            </x-grid>
 
-                <x-grid.col xl="12" />
-
+            <x-grid type="container">
                 <x-grid.col xl="4" ls="6" lg="12" md="12" sm="12">
                     <x-ui.form.group>
                         <x-ui.select.async
@@ -157,13 +159,15 @@
                     </x-ui.form.group>
                 </x-grid.col>
 
-                <x-grid.col xl="6" ls="6" lg="12" md="12" sm="12">
+                <x-grid.col xl="5" ls="6" lg="12" md="12" sm="12">
                     <x-ui.form.group>
-                        <div id="kit"></div>
+                        <div id="kit" class="admin__conditions"></div>
                     </x-ui.form.group>
                 </x-grid.col>
+            </x-grid>
 
-                <div class="collectible-target">
+            <div class="collectible-target">
+                <x-grid type="container">
                     <x-grid.col xl="12" ls="12" lg="12" md="12" sm="12">
                         <x-ui.form.group>
                             <x-ui.form.radio-group>
@@ -206,28 +210,68 @@
                             </x-ui.form.radio-group>
                         </x-ui.form.group>
                     </x-grid.col>
+                </x-grid>
 
-                    <div class="collectible-target__fields collectible-target__sale" style="display: none">
-                        <x-grid.col lg="4" xl="6" md="12" sm="12">
+                <div class="collectible-target__fields collectible-target__sale" style="display: none">
+                    <x-grid type="container">
+                        <x-grid.col xl="4" ls="6" lg="12" md="12" sm="12">
                             <x-ui.form.group>
                                 <x-ui.form.input-text
-                                    placeholder="{{ __('collectible.sale_price') }}"
+                                    placeholder="{{ __('collectible.sale_price') }} *"
                                     id="sale_price"
                                     name="sale_price"
+                                    step="0.01"
                                     value="{{ old('sale_price') }}"
                                     type="number"
-                                    required
                                     autocomplete="on">
                                 </x-ui.form.input-text>
                             </x-ui.form.group>
                         </x-grid.col>
-                    </div>
-                    <div class="collectible-target__fields collectible-target__auction" style="display: none">
-                        Auction
-                    </div>
+                    </x-grid>
                 </div>
+                <div class="collectible-target__fields collectible-target__auction" style="display: none">
+                    <x-grid type="container">
+                        <x-grid.col xl="4" ls="6" lg="12" md="12" sm="12">
+                            <x-ui.form.group>
+                                <x-ui.form.input-text
+                                    placeholder="{{ __('collectible.auction_price') }} *"
+                                    id="auction_price"
+                                    name="auction_price"
+                                    step="0.01"
+                                    value="{{ old('auction_price') }}"
+                                    type="number"
+                                    autocomplete="on">
+                                </x-ui.form.input-text>
+                            </x-ui.form.group>
+                        </x-grid.col>
 
-            </x-grid>
+                        <x-grid.col xl="4" ls="6" lg="12" md="12" sm="12">
+                            <x-ui.form.group>
+                                <x-ui.form.input-text
+                                    placeholder="{{ __('collectible.auction_step') }} *"
+                                    id="auction_step"
+                                    name="auction_step"
+                                    step="0.01"
+                                    value="{{ old('auction_step') }}"
+                                    type="number"
+                                    autocomplete="on">
+                                </x-ui.form.input-text>
+                            </x-ui.form.group>
+                        </x-grid.col>
+
+                        <x-grid.col xl="4" ls="6" lg="12" md="12" sm="12">
+                            <x-ui.form.group>
+                                <x-ui.form.datepicker
+                                    placeholder="{{ __('collectible.auction_stop_date') }} *"
+                                    id="auction_date"
+                                    name="auction_date"
+                                    :value="old('auction_date')">
+                                </x-ui.form.datepicker>
+                            </x-ui.form.group>
+                        </x-grid.col>
+                    </x-grid>
+                </div>
+            </div>
         </div>
 
         <div class="crud-form__description">
@@ -284,13 +328,6 @@
                     console.log(target.value);
                 }
             ));
-
-
-            // document.querySelector('input[name="target"]').addEventListener('change', async function() {
-            //     const target = document.querySelector('input[name="target"]:checked').value;
-            //     console.log(target);
-            // });
-
 
             document.getElementById('media-select').addEventListener('change', async function() {
                 try {

@@ -31,5 +31,8 @@ return [
     'purchase_price' => 'Цена покупки',
     'purchase_date' => 'Дата покупки',
     'seller' => 'Продавец',
-    'sale_price' => 'Цена продажи'
+    'sale_price' => 'Цена продажи',
+    'auction_price' => 'Стартовая цена',
+    'auction_step' => 'Шаг',
+    'auction_stop_date' => 'Время окончания'
 ];

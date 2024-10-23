@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Shelf;
 use App\Exceptions\MassDeletingException;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\MassDeletingRequest;
+use App\Http\Requests\Shelf\CreateCollectibleGameRequest;
 use App\Http\Requests\Shelf\CreateCollectibleRequest;
 use App\Http\Requests\Shelf\GetCollectibleMediaRequest;
 use App\Http\Requests\Shelf\UpdateCollectibleRequest;
@@ -33,8 +34,7 @@ class CollectibleGameController extends Controller
     }
 
 //    public function store(CreateCollectibleRequest $request, CollectibleService $collectibleService): Application|Redirector|RedirectResponse|\Illuminate\Contracts\Foundation\Application
-    public function store(CreateCollectibleRequest $request): Application|Redirector|RedirectResponse|\Illuminate\Contracts\Foundation\Application
-
+    public function store(CreateCollectibleGameRequest $request): Application|Redirector|RedirectResponse|\Illuminate\Contracts\Foundation\Application
     {
         dd($request);
         $collectibleService->create(FillCollectibleDTO::fromRequest($request));

@@ -1,5 +1,6 @@
 @props([
     'name',
+    'inputName' => false,
     'type' => false,
     'title' => false,
     'responsive' => true,
@@ -20,12 +21,12 @@
         <legend class="star-rating__title">{{ $title }}:</legend>
         <div class="star-rating__group @if($groupClass) {{$groupClass}} @endif">
 
-            <input style="display: none" class="star-rating__input" name="star-rating_{{ $name }}" value="" type="radio" checked>
+            <input style="display: none" class="star-rating__input" name="@if($inputName) {{ $inputName }} @else star-rating_{{ $name }} @endif" value="" type="radio" checked>
 
             @unless($noneButton)
                 <input
                     class="star-rating__input star-rating__input_none"
-                    name="star-rating_{{ $name }}"
+                    name="@if($inputName) {{ $inputName }} @else star-rating_{{ $name }} @endif"
                     id="star-rating_{{ $name }}-none"
                     value="none"
                     type="radio"
@@ -42,7 +43,7 @@
                 </label>
                 <input
                     class="star-rating__input"
-                    name="star-rating_{{ $name }}"
+                    name="@if($inputName) {{ $inputName }} @else star-rating_{{ $name }} @endif"
                     id="star-rating_{{ $name }}-{{ $i }}"
                     value="{{ $i }}"
                     type="radio"
