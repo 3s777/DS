@@ -40,7 +40,7 @@ class CreateCollectibleGameRequest extends FormRequest
                 'integer',
                 'exists:Domain\Shelf\Models\Shelf,id'
             ],
-            'number' => [
+            'article_number' => [
                 'nullable',
                 'string',
                 'max:250',
@@ -59,10 +59,15 @@ class CreateCollectibleGameRequest extends FormRequest
                 'string',
                 'max:250'
             ],
-            'purchase_date' => [
+            'purchased_at' => [
                 'nullable',
                 'date',
                 'date_format:Y-m-d'
+            ],
+            'user_id' => [
+                'nullable',
+                'integer',
+                'exists:Domain\Auth\Models\User,id'
             ],
             'additional_field' => [
                 'nullable',
@@ -79,6 +84,13 @@ class CreateCollectibleGameRequest extends FormRequest
                 'required',
                 'integer',
                 'exists:Domain\Game\Models\GameMedia,id'
+            ],
+            'kit_conditions' => [
+                'required'
+            ],
+            'kit_conditions.*' => [
+                'sometimes',
+                'numeric'
             ],
             'target' => [
               'required',
@@ -99,25 +111,17 @@ class CreateCollectibleGameRequest extends FormRequest
                 'required',
                 'numeric'
             ],
-            'auction_date_stop' => [
+            'auction_stop_date' => [
                 'exclude_unless:target,auction',
                 'date',
                 'date_format:Y-m-d'
             ],
-            'conditions' => [
-                'required'
-            ],
-//            'conditions.*' => [
-//                'sometimes',
-//                'numeric'
-//            ],
             'description' => ['nullable','string'],
             'thumbnail' => [
                 'nullable',
                 'mimes:jpg,png',
                 'max:10024'
             ],
-
         ];
     }
 
@@ -125,10 +129,25 @@ class CreateCollectibleGameRequest extends FormRequest
     {
         return [
             'name' => __('common.name'),
-            'number' => trans_choice('common.number', 1),
+            'user_shelf' => trans_choice('user.users', 1),
+            'shelf_id' => trans_choice('shelf.shelves', 1),
+            'article_number' => trans_choice('common.article_numbers', 1),
+            'condition' => __('common.condition'),
+            'purchase_price' => __('common.purchase_price'),
+            'seller' => __('collectible.seller'),
+            'purchase_date' => __('collectible.purchase_date'),
+            'additional_field' => __('common.additional_field'),
+            'is_done' => __('game.is_done'),
+            'is_digital' => __('game.is_digital'),
+            'media' => trans_choice('collectible.media', 1),
+            'kit_conditions' => __('collectible.kit_conditions'),
+            'target' => __('collectible.target'),
+            'sale_price' => __('collectible.sale_price'),
+            'auction_price' => __('collectible.auction_price'),
+            'auction_step' => __('collectible.auction_step'),
+            'auction_stop_date' => __('collectible.auction_stop_date'),
             'description' => __('common.description'),
             'thumbnail' => __('common.thumbnail'),
-            'user_id' => trans_choice('user.users', 1),
         ];
     }
 }

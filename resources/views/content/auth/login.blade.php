@@ -14,7 +14,6 @@
                     @csrf
                     <x-ui.form.group>
                         <x-ui.form.input-text
-
                             id="email"
                             name="email"
                             type="email"
@@ -28,7 +27,6 @@
 
                     <x-ui.form.group>
                         <x-ui.form.input-text
-
                             id="password"
                             name="password"
                             type="password"

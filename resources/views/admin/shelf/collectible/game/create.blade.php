@@ -31,14 +31,14 @@
                             route="select-users"
                             :required="true"
                             :default-option="trans_choice('user.choose', 1)"
-                            :label="trans_choice('user.users', 1)">
+                            :label="__('shelf.user')">
                         </x-ui.select.async>
                     </x-ui.form.group>
                 </x-grid.col>
 
                 <x-grid.col xl="4" ls="6" lg="12" md="12" sm="12">
                     <x-ui.form.group>
-                        <x-ui.select.async-depend
+                        <x-ui.select.data-depend
                             name="shelf"
                             select-name="shelf_id"
                             :required="true"
@@ -69,7 +69,7 @@
                             select-name="condition"
                             required
                             :options="$conditions"
-                            :default-option="__('common.choose_condition')"
+                            :label="__('common.choose_condition')"
                             :placeholder="__('common.condition')" />
                     </x-ui.form.group>
                 </x-grid.col>
@@ -103,11 +103,23 @@
                 <x-grid.col xl="4" ls="6" ml="12" lg="6" md="6" sm="12">
                     <x-ui.form.group>
                         <x-ui.form.datepicker
-                            :placeholder="trans_choice('collectible.purchase_date', 1)"
-                            id="purchase_date"
-                            name="purchase_date"
-                            :value="old('purchase_date')">
+                            :placeholder="trans_choice('collectible.purchased_at', 1)"
+                            id="purchased_at"
+                            name="purchased_at"
+                            :value="old('purchased_at')">
                         </x-ui.form.datepicker>
+                    </x-ui.form.group>
+                </x-grid.col>
+
+                <x-grid.col xl="4" ls="6" ml="12" lg="6" md="6" sm="12">
+                    <x-ui.form.group>
+                        <x-ui.select.async
+                            name="user"
+                            select-name="user_id"
+                            route="select-users"
+                            :default-option="trans_choice('user.choose', 1)"
+                            :label="trans_choice('user.users', 1)">
+                        </x-ui.select.async>
                     </x-ui.form.group>
                 </x-grid.col>
             </x-grid>
@@ -130,6 +142,7 @@
                         <x-ui.form.switcher
                             name="is_done"
                             value="1"
+                            :checked="old('is_done')"
                             label="{{ __('game.is_done') }}">
                         </x-ui.form.switcher>
                     </x-ui.form.group>
@@ -140,6 +153,7 @@
                         <x-ui.form.switcher
                             name="is_digital"
                             value="1"
+                            :checked="old('is_digital')"
                             label="{{ __('game.is_digital') }}">
                         </x-ui.form.switcher>
                     </x-ui.form.group>
@@ -176,7 +190,7 @@
                                     name="target"
                                     value="collection"
                                     color="dark"
-                                    :checked="true"
+                                    :checked="old() ? old('target') == 'collection' : true"
                                     :group="true"
                                     label="{{ __('common.for_collection') }}">
                                 </x-ui.form.radio-button>
@@ -187,6 +201,7 @@
                                     value="sale"
                                     color="dark"
                                     :group="true"
+                                    :checked="old('target') == 'sale'"
                                     label="{{ __('common.for_sale') }}">
                                 </x-ui.form.radio-button>
 
@@ -196,6 +211,7 @@
                                     value="auction"
                                     color="dark"
                                     :group="true"
+                                    :checked="old('target') == 'auction'"
                                     label="{{ __('common.for_auction') }}">
                                 </x-ui.form.radio-button>
 
@@ -205,6 +221,7 @@
                                     value="exchange"
                                     color="dark"
                                     :group="true"
+                                    :checked="old('target') == 'exchange'"
                                     label="{{ __('common.for_exchange') }}">
                                 </x-ui.form.radio-button>
                             </x-ui.form.radio-group>
@@ -262,10 +279,10 @@
                         <x-grid.col xl="4" ls="6" lg="12" md="12" sm="12">
                             <x-ui.form.group>
                                 <x-ui.form.datepicker
-                                    placeholder="{{ __('collectible.auction_stop_date') }} *"
-                                    id="auction_date"
-                                    name="auction_date"
-                                    :value="old('auction_date')">
+                                    placeholder="{{ __('collectible.auction_to') }} *"
+                                    id="auction_to"
+                                    name="auction_to"
+                                    :value="old('auction_to')">
                                 </x-ui.form.datepicker>
                             </x-ui.form.group>
                         </x-grid.col>
@@ -302,49 +319,94 @@
                     {{ __('common.save') }}
             </x-ui.form.button>
         </x-ui.form.group>
-
+@dump(old())
     </x-ui.form>
+
+
     @push('scripts')
         <script>
             var targets = document.querySelectorAll('input[type=radio][name="target"]');
+
+            function hideTarget() {
+                document.querySelectorAll('.collectible-target__fields').forEach(function(el) {
+                    el.style.display = 'none';
+                });
+            }
+
+            function setTargetSale() {
+                document.querySelectorAll('.collectible-target__sale').forEach(function(el) {
+                    el.style.display = 'block';
+                });
+            }
+
+            function setTargetAuction() {
+                document.querySelectorAll('.collectible-target__auction').forEach(function(el) {
+                    el.style.display = 'block';
+                });
+            }
+
+            @if(old('target'))
+                targets.forEach( target => {
+                    hideTarget();
+
+                    @if(old('target') == 'sale')
+                        setTargetSale();
+                    @endif
+
+                    @if(old('target') == 'auction')
+                        setTargetAuction();
+                    @endif
+                })
+            @endif
+
             targets.forEach(target => target.addEventListener('change',
                 function() {
-                    document.querySelectorAll('.collectible-target__fields').forEach(function(el) {
-                        el.style.display = 'none';
-                    });
+                    hideTarget();
 
                     if(target.value === 'sale') {
-                        document.querySelectorAll('.collectible-target__sale').forEach(function(el) {
-                            el.style.display = 'block';
-                        });
+                        setTargetSale();
                     }
 
                     if(target.value === 'auction') {
-                        document.querySelectorAll('.collectible-target__auction').forEach(function(el) {
-                            el.style.display = 'block';
-                        });
+                        setTargetAuction();
                     }
-
-                    console.log(target.value);
                 }
             ));
 
-            document.getElementById('media-select').addEventListener('change', async function() {
+            async function setKit(mediaValue) {
                 try {
-                    const media = this.value ?? null
+                    const media = mediaValue ?? null
                     const response = await axios.post('{{ route('collectibles.get.media') }}', {
                         media: media,
                         model: 'Game'
                     });
-                    console.log(response.data);
                     const kit = document.getElementById('kit')
                     kit.innerHTML = response.data;
+
+                    @if(old('kit_conditions'))
+                        @foreach(old('kit_conditions') as $key => $value)
+                            document.getElementById("star-rating_{{$key}}-{{$value}}").checked = true;
+                        @endforeach
+                    @endif
+
                     return response.data.result;
                 } catch (err) {
                     @if(!app()->isProduction())
                         console.log(err);
                     @endif
                 }
+            }
+
+            const mediaSelect = document.getElementById('media-select');
+
+            window.addEventListener("load", (event) => {
+                if(mediaSelect.value !== '') {
+                    setKit(mediaSelect.value);
+                }
+            });
+
+            mediaSelect.addEventListener('change', async function() {
+                setKit(this.value);
             });
         </script>
     @endpush

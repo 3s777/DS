@@ -42,7 +42,7 @@
                             name="shelf"
                             select-name="shelf-async[test]"
                             :required="true"
-                            route="select-shelves"
+                            route="shelves.select"
                             depend-on="user_id"
                             depend-field="user_id"
 {{--                            :selected="[auth()->user()->id => auth()->user()->name]"--}}
@@ -82,7 +82,7 @@
                             name="shelft"
                             select-name="shelft-async"
                             :required="true"
-                            route="select-shelves"
+                            route="shelves.select"
                             depend-on="usert_id"
                             depend-field="user_id"
                                                         :selected="[auth()->user()->id => auth()->user()->name]"
@@ -112,7 +112,7 @@
                             name="shelf1"
                             select-name="shelf1_id"
                             required
-                            route="select-shelves"
+                            route="shelves.select"
                             depend-on="user1_id"
                             depend-field="user_id"
 {{--                            selected="12"--}}
@@ -142,7 +142,7 @@
                             name="shelf2"
                             select-name="shelf2_id[]"
                             required
-                            route="select-shelves"
+                            route="shelves.select"
                             depend-on="user2_id"
                             depend-field="user_id"
                             :selected="[12,13]"

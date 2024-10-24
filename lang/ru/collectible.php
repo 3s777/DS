@@ -29,10 +29,12 @@ return [
     'media' => 'Носитель|Носители',
     'choose_media' => 'Выберите носитель',
     'purchase_price' => 'Цена покупки',
-    'purchase_date' => 'Дата покупки',
+    'purchased_at' => 'Дата покупки',
     'seller' => 'Продавец',
     'sale_price' => 'Цена продажи',
     'auction_price' => 'Стартовая цена',
     'auction_step' => 'Шаг',
-    'auction_stop_date' => 'Время окончания'
+    'auction_to' => 'Время окончания',
+    'kit_conditions' => 'Состояние комплекта',
+    'target' => 'Назначение'
 ];

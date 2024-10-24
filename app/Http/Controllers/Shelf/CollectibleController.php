@@ -142,9 +142,8 @@ class CollectibleController extends Controller
 //                ['name' => $kitItem->slug,
 //                'title' => $kitItem->name]
 //            );
-
             $html .= Blade::render(
-                '<x-ui.star-rating :name="$name" :title="$title" input-name="conditions[{{ $name }}]" class="admin__conditions-item" />',
+                '<x-ui.star-rating :name="$name" :title="$title" input-name="kit_conditions[{{ $name }}]" class="admin__conditions-item" />',
                 ['name' => $kitItem->slug, 'title' => $kitItem->name]
             );
         }
