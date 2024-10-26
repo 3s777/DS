@@ -26,8 +26,8 @@
                 <x-grid.col xl="4" ls="6" ml="12" lg="6" md="6" sm="12">
                     <x-ui.form.group>
                         <x-ui.select.async
-                            name="user_shelf"
-                            select-name="user_shelf"
+                            name="user_shelf_id"
+                            select-name="user_shelf_id"
                             route="select-users"
                             :required="true"
                             :default-option="trans_choice('user.choose', 1)"
@@ -43,7 +43,7 @@
                             select-name="shelf_id"
                             :required="true"
                             route="shelves.select"
-                            depend-on="user_shelf"
+                            depend-on="user_shelf_id"
                             depend-field="user_id"
                             :default-option="trans_choice('shelf.choose', 1)"
                             :label="trans_choice('shelf.shelves', 1)" />
@@ -140,7 +140,7 @@
                 <x-grid.col xl="4" ls="6" lg="12" md="12" sm="12">
                     <x-ui.form.group>
                         <x-ui.form.switcher
-                            name="is_done"
+                            name="properties[is_done]"
                             value="1"
                             :checked="old('is_done')"
                             label="{{ __('game.is_done') }}">
@@ -151,7 +151,7 @@
                 <x-grid.col xl="4" ls="6" lg="12" md="12" sm="12">
                     <x-ui.form.group>
                         <x-ui.form.switcher
-                            name="is_digital"
+                            name="properties[is_digital]"
                             value="1"
                             :checked="old('is_digital')"
                             label="{{ __('game.is_digital') }}">
@@ -236,7 +236,7 @@
                                 <x-ui.form.input-text
                                     placeholder="{{ __('collectible.sale_price') }} *"
                                     id="sale_price"
-                                    name="sale_price"
+                                    name="sale[price]"
                                     step="0.01"
                                     value="{{ old('sale_price') }}"
                                     type="number"
@@ -253,7 +253,7 @@
                                 <x-ui.form.input-text
                                     placeholder="{{ __('collectible.auction_price') }} *"
                                     id="auction_price"
-                                    name="auction_price"
+                                    name="auction[price]"
                                     step="0.01"
                                     value="{{ old('auction_price') }}"
                                     type="number"
@@ -267,7 +267,7 @@
                                 <x-ui.form.input-text
                                     placeholder="{{ __('collectible.auction_step') }} *"
                                     id="auction_step"
-                                    name="auction_step"
+                                    name="auction[step]"
                                     step="0.01"
                                     value="{{ old('auction_step') }}"
                                     type="number"
@@ -281,7 +281,7 @@
                                 <x-ui.form.datepicker
                                     placeholder="{{ __('collectible.auction_to') }} *"
                                     id="auction_to"
-                                    name="auction_to"
+                                    name="auction[to]"
                                     :value="old('auction_to')">
                                 </x-ui.form.datepicker>
                             </x-ui.form.group>

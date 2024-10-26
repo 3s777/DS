@@ -6,13 +6,13 @@ use Illuminate\Http\Request;
 use Illuminate\Http\UploadedFile;
 use Support\Traits\Makeable;
 
-class FillCollctibleGameDTO
+class FillCollectibleDTO
 {
     use Makeable;
 
     public function __construct(
         public readonly string $name,
-        public readonly int $user_shelf,
+        public readonly int $user_shelf_id,
         public readonly int $shelf_id,
         public readonly string $condition,
         public readonly int $media,
@@ -22,13 +22,10 @@ class FillCollctibleGameDTO
         public readonly ?string $purchased_at = null,
         public readonly ?int $user_id = null,
         public readonly ?string $additional_field = null,
-        public readonly bool $is_done = false,
-        public readonly bool $is_digital = false,
+        public readonly ?array $properties = null,
         public readonly ?string $target = null,
-        public readonly ?int $sale_price = null,
-        public readonly ?int $auction_price = null,
-        public readonly ?int $auction_step = null,
-        public readonly ?string $auction_to = null,
+        public readonly ?array $sale = null,
+        public readonly ?array $auction = null,
         public readonly ?UploadedFile $thumbnail = null,
         public readonly ?string $thumbnail_uploaded = null,
         public readonly ?string $description = null,
@@ -39,17 +36,23 @@ class FillCollctibleGameDTO
     {
         return static::make(...$request->only([
             'name',
+            'user_shelf',
+            'shelf_id',
+            'condition',
+            'media',
+            'kit_conditions',
+            'article_number',
+            'price',
+            'purchase_at',
             'user_id',
-            'slug',
-            'released_at',
-            'genres',
-            'platforms',
-            'developers',
-            'publishers',
+            'additional_field',
+            'properties',
+            'target',
+            'sale',
+            'auction',
             'thumbnail',
             'thumbnail_uploaded',
-            'description',
-            'alternative_names'
+            'description'
         ]));
     }
 }

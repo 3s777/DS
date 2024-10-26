@@ -30,7 +30,7 @@ class CreateCollectibleGameRequest extends FormRequest
                 'max:250',
                 Rule::unique(Shelf::class)
             ],
-            'user_shelf' => [
+            'user_shelf_id' => [
                 'required',
                 'integer',
                 'exists:Domain\Auth\Models\User,id'
@@ -96,22 +96,22 @@ class CreateCollectibleGameRequest extends FormRequest
               'required',
               'string'
             ],
-            'sale_price' => [
+            'sale.price' => [
                 'exclude_unless:target,sale',
                 'required',
                 'numeric'
             ],
-            'auction_price' => [
+            'auction.price' => [
                 'exclude_unless:target,auction',
                 'required',
                 'numeric'
             ],
-            'auction_step' => [
+            'auction.step' => [
                 'exclude_unless:target,auction',
                 'required',
                 'numeric'
             ],
-            'auction_stop_date' => [
+            'auction.to' => [
                 'exclude_unless:target,auction',
                 'date',
                 'date_format:Y-m-d'
@@ -142,10 +142,10 @@ class CreateCollectibleGameRequest extends FormRequest
             'media' => trans_choice('collectible.media', 1),
             'kit_conditions' => __('collectible.kit_conditions'),
             'target' => __('collectible.target'),
-            'sale_price' => __('collectible.sale_price'),
-            'auction_price' => __('collectible.auction_price'),
-            'auction_step' => __('collectible.auction_step'),
-            'auction_stop_date' => __('collectible.auction_stop_date'),
+            'sale.price' => __('collectible.sale_price'),
+            'auction.price' => __('collectible.auction_price'),
+            'auction.step' => __('collectible.auction_step'),
+            'auction.to' => __('collectible.auction_stop_date'),
             'description' => __('common.description'),
             'thumbnail' => __('common.thumbnail'),
         ];
