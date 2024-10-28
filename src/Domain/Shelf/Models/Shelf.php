@@ -11,6 +11,7 @@ use Domain\Shelf\QueryBuilders\ShelfQueryBuilder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\MorphToMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Mews\Purifier\Casts\CleanHtml;
@@ -89,6 +90,11 @@ class Shelf extends Model implements HasMedia
     public function user(): BelongsTo
     {
         return $this->belongsTo(User::class);
+    }
+
+    public function collectibles(): HasMany
+    {
+        return $this->hasMany(Collectible::class);
     }
 //
 //    public function platforms(): MorphToMany

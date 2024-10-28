@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use Domain\Auth\Models\User;
 use Domain\Game\Models\GameDeveloper;
 use Domain\Game\Models\Game;
 use Domain\Game\Models\GameGenre;
@@ -17,6 +18,8 @@ class GameApiSeeder extends Seeder
      */
     public function run(GamesDbApiContract $gamesApi): void
     {
+        $user = User::where('name', 'qqqqq')->first();
+
         for($i = 1; $i <= 10; $i++) {
             $games = $gamesApi->getGamesByPlatform(16, $i);
 
@@ -37,7 +40,7 @@ class GameApiSeeder extends Seeder
                 foreach ($game->publishers as $publisher) {
                     $currentPublisher = GamePublisher::firstOrCreate([
                         'name' => $publisher['name'],
-                        'user_id' => '11'
+                        'user_id' => $user->id
                     ]);
                     $currentGame->publishers()->attach($currentPublisher->id);
                 }
@@ -46,7 +49,7 @@ class GameApiSeeder extends Seeder
                     $currentDeveloper = GameDeveloper::firstOrCreate([
                         'name' => $developer['name'],
                         'slug' => $developer['name'],
-                        'user_id' => '11'
+                        'user_id' => $user->id
                     ]);
                     $currentGame->developers()->attach($currentDeveloper->id);
                 }
@@ -54,7 +57,7 @@ class GameApiSeeder extends Seeder
                 foreach ($game->genres as $genre) {
                     $currentGenre = GameGenre::firstOrCreate([
                         'name' => $genre['name'],
-                        'user_id' => '11'
+                        'user_id' => $user->id
                     ]);
                     $currentGame->genres()->attach($currentGenre->id);
                 }
@@ -62,7 +65,7 @@ class GameApiSeeder extends Seeder
                 foreach ($game->platforms as $platform) {
                     $currentPlatform = GamePlatform::firstOrCreate([
                         'name' => $platform['platform']['name'],
-                        'user_id' => '11'
+                        'user_id' => $user->id
                     ]);
                     $currentGame->platforms()->attach($currentPlatform->id);
                 }

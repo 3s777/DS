@@ -19,7 +19,6 @@ return new class extends Migration
             $table->string('name');
             $table->string('article_number')->nullable();
             $table->string('condition');
-            $table->foreignIdFor(User::class, 'user_shelf')->constrained();
             $table->foreignIdFor(Shelf::class)->constrained();
             $table->integer('purchase_price')->nullable();
             $table->date('purchase_at')->nullable();

@@ -4,9 +4,11 @@ namespace Database\Factories\Shelf;
 
 use Domain\Auth\Models\User;
 use Domain\Game\Models\GameMedia;
+use Domain\Shelf\Enums\TargetEnum;
 use Domain\Shelf\Models\Collectible;
 use Domain\Shelf\Models\Shelf;
 use Illuminate\Database\Eloquent\Factories\Factory;
+use Illuminate\Support\Arr;
 use Illuminate\Support\Str;
 
 /**
@@ -35,6 +37,7 @@ class CollectibleFactory extends Factory
             'collectable_id' => function(array $attributes) {
                 return $attributes['collectable_type']::factory();
             },
+            'target' => Arr::random(TargetEnum::cases()),
             'description' => $this->translations(['en', 'ru'], [fake()->text(), fake()->text()]),
             'user_id' => User::factory(),
         ];

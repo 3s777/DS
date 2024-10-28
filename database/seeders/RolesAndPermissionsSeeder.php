@@ -116,9 +116,5 @@ class RolesAndPermissionsSeeder extends Seeder
         ]]);
         $role->givePermissionTo(Permission::all());
 
-        $user = User::where('name', 'qqqqq')->first();
-
-        $user->assignRole('super_admin');
-
     }
 }

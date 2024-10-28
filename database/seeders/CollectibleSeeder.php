@@ -9,6 +9,7 @@ use Domain\Game\Models\GameGenre;
 use Domain\Game\Models\GamePlatform;
 use Domain\Game\Models\GamePublisher;
 use Domain\Shelf\Models\Collectible;
+use Domain\Shelf\Models\Shelf;
 use Illuminate\Database\Seeder;
 use Services\GamesDbApi\GamesDbApiContract;
 
@@ -19,12 +20,15 @@ class CollectibleSeeder extends Seeder
      */
     public function run(): void
     {
-        Collectible::factory(10)
+//        $shelves = Shelf::factory()->create();
+
+        Collectible::factory(2)
 //            ->has(GameDeveloper::factory(2), 'developers')
 //            ->has(GamePublisher::factory(2), 'publishers')
 //            ->has(GameGenre::factory(3), 'genres')
-//            ->has(GamePlatform::factory(2), 'platforms')
-            ->recycle(User::factory(5)->create())
+//            ->for($shelves, 'shelf')
+//            ->for(User::factory()->recycle($shelves)->create(), 'user')
+            ->recycle(User::factory(3)->create())
             ->create();
     }
 }

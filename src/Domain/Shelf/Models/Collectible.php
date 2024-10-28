@@ -99,6 +99,11 @@ class Collectible extends Model implements HasMedia
         return $this->belongsTo(User::class);
     }
 
+    public function shelf(): BelongsTo
+    {
+        return $this->belongsTo(Shelf::class);
+    }
+
     public function platforms(): MorphToMany
     {
         return $this->morphToMany(GamePlatform::class, 'game_platformable');
