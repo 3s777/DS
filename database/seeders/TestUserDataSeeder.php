@@ -29,7 +29,7 @@ class TestUserDataSeeder extends Seeder
         $testUser->assignRole('super_admin');
 
         Shelf::factory(2)
-            ->has(Collectible::factory(5)
+            ->has(Collectible::factory(rand(1,5))
                 ->for($testUser, 'user'), 'collectibles')
             ->for($testUser, 'user')
             ->create();

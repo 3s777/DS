@@ -1,10 +1,12 @@
-<?php namespace Domain\Shelf\Services;
+<?php
+
+namespace Domain\Shelf\Services;
 
 use App\Exceptions\CrudException;
-use Domain\Game\DTOs\FillGameDTO;
-use Domain\Game\Models\Game;
+use Domain\Game\Models\GameMedia;
 use Domain\Shelf\DTOs\FillCollectibleDTO;
 use Domain\Shelf\DTOs\FillShelfDTO;
+use Domain\Shelf\Models\Collectible;
 use Domain\Shelf\Models\Shelf;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
@@ -12,20 +14,61 @@ use Throwable;
 
 class CollectibleService
 {
-    public function create(FillCollectibleDTO $data): Shelf
+    public function create(FillCollectibleDTO $data): Collectible
     {
         try {
             DB::beginTransaction();
 
-            $shelf = Shelf::create([
+            $gameMedia = GameMedia::find($data->media);
+
+//            $gameMedia->collectibles()->create([
+//                'name' => $data->name,
+//                'ulid' => Str::ulid(),
+//                'shelf_id' => $data->shelf_id,
+//                'condition' => $data->condition,
+//                'kit_conditions' => $data->kit_conditions,
+//                'article_number' => $data->article_number,
+//                'purchase_price' => $data->purchase_price*100,
+//                'purchase_at' => $data->purchased_at,
+//                'seller' => $data->seller,
+//                'additional_field' => $data->additional_field,
+//                'properties' => $data->properties,
+//                'target' => $data->target,
+//                'sale' => $data->sale,
+//                'auction' => $data->auction,
+//                'user_id' => $data->user_id,
+//                'description' => $data->description,
+//            ]);
+
+            $collectible = Collectible::make([
                 'name' => $data->name,
-                'number' => $data->number,
                 'ulid' => Str::ulid(),
+                'shelf_id' => $data->shelf_id,
+                'condition' => $data->condition,
+                'kit_conditions' => $data->kit_conditions,
+                'article_number' => $data->article_number,
+                'purchase_price' => $data->purchase_price*100,
+                'purchase_at' => $data->purchased_at,
+                'seller' => $data->seller,
+                'additional_field' => $data->additional_field,
+                'properties' => $data->properties,
+//                'collectable_id' => $data->media,
+//                'collectable_type' => GameMedia::class,
+                'target' => $data->target,
+                'sale' => $data->sale,
+                'auction' => $data->auction,
                 'user_id' => $data->user_id,
                 'description' => $data->description,
             ]);
 
-            $shelf->addImageWithThumbnail(
+            $collectible->collectable_id = $data->media;
+            $collectible->collectable_type = GameMedia::class;
+
+//            $collectible->collectable()->save($gameMedia);
+
+            $collectible->save();
+
+            $collectible->addImageWithThumbnail(
                 $data->thumbnail,
                 'thumbnail',
                 ['small', 'medium']
@@ -33,7 +76,7 @@ class CollectibleService
 
             DB::commit();
 
-            return $shelf;
+            return $collectible;
 
         } catch (Throwable $e) {
             throw new CrudException($e->getMessage());

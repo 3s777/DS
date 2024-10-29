@@ -37,6 +37,7 @@ class CollectibleFactory extends Factory
             'collectable_id' => function(array $attributes) {
                 return $attributes['collectable_type']::factory();
             },
+            'purchase_price' => $this->faker->numberBetween(1000, 100000),
             'target' => Arr::random(TargetEnum::cases()),
             'description' => $this->translations(['en', 'ru'], [fake()->text(), fake()->text()]),
             'user_id' => User::factory(),

@@ -17,6 +17,7 @@ use Domain\Shelf\QueryBuilders\CollectibleQueryBuilder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\MorphTo;
 use Illuminate\Database\Eloquent\Relations\MorphToMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Mews\Purifier\Casts\CleanHtml;
@@ -39,16 +40,32 @@ class Collectible extends Model implements HasMedia
 
     protected $fillable = [
         'name',
+        'ulid',
+        'shelf_id',
         'article_number',
-        'kit',
+        'purchase_price',
+        'purchase_at',
+        'seller',
+        'additional_field',
+        'properties',
+        'target',
+        'sale',
+        'auction',
+        'kit_conditions',
         'condition',
         'description',
         'user_id',
-        'released_at'
+        'thumbnail',
+//        'collectable_id',
+//        'collectable_type'
     ];
 
     protected $casts = [
         'description' => CleanHtml::class.':custom',
+        'kit_conditions' => 'json',
+        'properties' => 'json',
+        'sale' => 'json',
+        'auction' => 'json'
     ];
 
     public $translatable = ['description'];
@@ -104,8 +121,8 @@ class Collectible extends Model implements HasMedia
         return $this->belongsTo(Shelf::class);
     }
 
-    public function platforms(): MorphToMany
+    public function collectable(): MorphTo
     {
-        return $this->morphToMany(GamePlatform::class, 'game_platformable');
+        return $this->morphTo();
     }
 }

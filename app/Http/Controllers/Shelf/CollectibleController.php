@@ -47,7 +47,7 @@ class CollectibleController extends Controller
     public function store(CreateCollectibleRequest $request): Application|Redirector|RedirectResponse|\Illuminate\Contracts\Foundation\Application
 
     {
-        dd($request);
+
         $collectibleService->create(FillCollectibleDTO::fromRequest($request));
 
         flash()->info(__('collectible.created'));
