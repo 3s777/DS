@@ -3,7 +3,7 @@
 namespace Domain\Shelf\ViewModel;
 
 use Domain\Auth\Models\User;
-use Domain\Shelf\Enums\CollectableTypeEnum;
+use Domain\Shelf\Enums\CollectibleTypeEnum;
 use Domain\Shelf\Enums\ConditionEnum;
 use Domain\Shelf\Models\Collectible;
 use Domain\Shelf\Models\Shelf;
@@ -26,7 +26,7 @@ class CollectibleUpdateViewModel extends ViewModel
 
     public function types(): array
     {
-        return CollectableTypeEnum::cases();
+        return CollectibleTypeEnum::cases();
     }
 
     public function shelves(): Collection

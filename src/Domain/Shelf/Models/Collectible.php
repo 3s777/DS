@@ -3,6 +3,7 @@
 namespace Domain\Shelf\Models;
 
 use App\Casts\ArrayWithoutUnicode;
+use App\Casts\Price;
 use Database\Factories\Game\GameFactory;
 use Database\Factories\Shelf\CollectibleFactory;
 use Domain\Auth\Models\User;
@@ -65,7 +66,8 @@ class Collectible extends Model implements HasMedia
         'kit_conditions' => 'json',
         'properties' => 'json',
         'sale' => 'json',
-        'auction' => 'json'
+        'auction' => 'json',
+        'purchase_price' => Price::class
     ];
 
     public $translatable = ['description'];

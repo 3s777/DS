@@ -24,7 +24,7 @@ use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\Facades\Validator;
 use Support\Actions\MassDeletingAction;
 use Support\DTOs\MassDeletingDTO;
-use Domain\Shelf\Enums\CollectableTypeEnum;
+use Domain\Shelf\Enums\CollectibleTypeEnum;
 
 class CollectibleController extends Controller
 {

@@ -22,7 +22,7 @@ use Illuminate\Routing\Redirector;
 use Illuminate\Http\Request;
 use Support\Actions\MassDeletingAction;
 use Support\DTOs\MassDeletingDTO;
-use Domain\Shelf\Enums\CollectableTypeEnum;
+use Domain\Shelf\Enums\CollectibleTypeEnum;
 use Support\ViewModels\AsyncSelectByQueryViewModel;
 
 class GameMediaController extends Controller

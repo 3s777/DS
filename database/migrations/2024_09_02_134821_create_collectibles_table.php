@@ -21,7 +21,7 @@ return new class extends Migration
             $table->string('condition');
             $table->foreignIdFor(Shelf::class)->constrained();
             $table->unsignedInteger('purchase_price')->nullable();
-            $table->date('purchase_at')->nullable();
+            $table->date('purchased_at')->nullable();
             $table->string('seller')->nullable();
             $table->string('additional_field')->nullable();
             $table->jsonb('kit_conditions')->nullable();

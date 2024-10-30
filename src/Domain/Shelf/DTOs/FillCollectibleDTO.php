@@ -17,7 +17,7 @@ class FillCollectibleDTO
         public readonly int $media,
         public readonly array $kit_conditions,
         public readonly ?string $article_number = null,
-        public readonly ?int $purchase_price = null,
+        public readonly ?float $purchase_price = null,
         public readonly ?string $purchased_at = null,
         public readonly ?string $seller = null,
         public readonly ?int $user_id = null,

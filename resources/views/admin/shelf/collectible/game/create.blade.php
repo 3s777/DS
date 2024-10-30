@@ -77,7 +77,7 @@
                 <x-grid.col xl="4" ls="6" ml="12" lg="6" md="6" sm="12">
                     <x-ui.form.group>
                         <x-ui.form.input-text
-                            :placeholder="trans_choice('collectible.purchase_price', 1)"
+                            :placeholder="__('collectible.purchase_price')"
                             id="purchase_price"
                             name="purchase_price"
                             type="number"
@@ -91,7 +91,7 @@
                 <x-grid.col xl="4" ls="6" ml="12" lg="6" md="6" sm="12">
                     <x-ui.form.group>
                         <x-ui.form.input-text
-                            :placeholder="trans_choice('collectible.seller', 1)"
+                            :placeholder="__('collectible.seller')"
                             id="seller"
                             name="seller"
                             :value="old('seller')"
@@ -103,23 +103,11 @@
                 <x-grid.col xl="4" ls="6" ml="12" lg="6" md="6" sm="12">
                     <x-ui.form.group>
                         <x-ui.form.datepicker
-                            :placeholder="trans_choice('collectible.purchased_at', 1)"
+                            :placeholder="__('collectible.purchased_at')"
                             id="purchased_at"
                             name="purchased_at"
                             :value="old('purchased_at')">
                         </x-ui.form.datepicker>
-                    </x-ui.form.group>
-                </x-grid.col>
-
-                <x-grid.col xl="4" ls="6" ml="12" lg="6" md="6" sm="12">
-                    <x-ui.form.group>
-                        <x-ui.select.async
-                            name="user"
-                            select-name="user_id"
-                            route="select-users"
-                            :default-option="trans_choice('user.choose', 1)"
-                            :label="trans_choice('user.users', 1)">
-                        </x-ui.select.async>
                     </x-ui.form.group>
                 </x-grid.col>
             </x-grid>

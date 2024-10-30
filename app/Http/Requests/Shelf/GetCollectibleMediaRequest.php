@@ -2,7 +2,7 @@
 
 namespace App\Http\Requests\Shelf;
 
-use Domain\Shelf\Enums\CollectableTypeEnum;
+use Domain\Shelf\Enums\CollectibleTypeEnum;
 use Domain\Shelf\Models\Shelf;
 use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Foundation\Http\FormRequest;
@@ -26,7 +26,7 @@ class GetCollectibleMediaRequest extends FormRequest
      */
     public function rules(): array
     {
-        $availableModels = array_column(CollectableTypeEnum::cases(), 'name');
+        $availableModels = array_column(CollectibleTypeEnum::cases(), 'name');
 
         return [
             'query' => ['nullable', 'string', 'max:250'],

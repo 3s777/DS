@@ -13,9 +13,11 @@ class GamePlatformIndexViewModel extends ViewModel
         //
     }
 
-    public function getTypeName($type): string
+    public function getTypeName($type): ?string
     {
-        return GamePlatformTypeEnum::tryFrom($type)->name();
+        $gameTypeEnum = GamePlatformTypeEnum::tryFrom($type);
+
+        return $gameTypeEnum?->name();
     }
 
     public function platforms(): \Illuminate\Contracts\Pagination\LengthAwarePaginator

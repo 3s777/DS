@@ -16,29 +16,9 @@ class CollectibleService
 {
     public function create(FillCollectibleDTO $data): Collectible
     {
+
         try {
             DB::beginTransaction();
-
-            $gameMedia = GameMedia::find($data->media);
-
-//            $gameMedia->collectibles()->create([
-//                'name' => $data->name,
-//                'ulid' => Str::ulid(),
-//                'shelf_id' => $data->shelf_id,
-//                'condition' => $data->condition,
-//                'kit_conditions' => $data->kit_conditions,
-//                'article_number' => $data->article_number,
-//                'purchase_price' => $data->purchase_price*100,
-//                'purchase_at' => $data->purchased_at,
-//                'seller' => $data->seller,
-//                'additional_field' => $data->additional_field,
-//                'properties' => $data->properties,
-//                'target' => $data->target,
-//                'sale' => $data->sale,
-//                'auction' => $data->auction,
-//                'user_id' => $data->user_id,
-//                'description' => $data->description,
-//            ]);
 
             $collectible = Collectible::make([
                 'name' => $data->name,
@@ -47,13 +27,11 @@ class CollectibleService
                 'condition' => $data->condition,
                 'kit_conditions' => $data->kit_conditions,
                 'article_number' => $data->article_number,
-                'purchase_price' => $data->purchase_price*100,
-                'purchase_at' => $data->purchased_at,
+                'purchase_price' => $data->purchase_price,
+                'purchased_at' => $data->purchased_at,
                 'seller' => $data->seller,
                 'additional_field' => $data->additional_field,
                 'properties' => $data->properties,
-//                'collectable_id' => $data->media,
-//                'collectable_type' => GameMedia::class,
                 'target' => $data->target,
                 'sale' => $data->sale,
                 'auction' => $data->auction,
@@ -63,8 +41,6 @@ class CollectibleService
 
             $collectible->collectable_id = $data->media;
             $collectible->collectable_type = GameMedia::class;
-
-//            $collectible->collectable()->save($gameMedia);
 
             $collectible->save();
 

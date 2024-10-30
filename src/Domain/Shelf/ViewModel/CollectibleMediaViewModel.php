@@ -2,7 +2,7 @@
 
 namespace Domain\Shelf\ViewModel;
 
-use Domain\Shelf\Enums\CollectableTypeEnum;
+use Domain\Shelf\Enums\CollectibleTypeEnum;
 use Spatie\ViewModels\ViewModel;
 
 class CollectibleMediaViewModel extends ViewModel
