@@ -15,7 +15,7 @@ class LoginUserAction
         $actionResponse = ['user' => $user];
 
         if($user && !$user->email_verified_at) {
-            $actionResponse['route'] = 'verification.notice';
+            $actionResponse['not_verified'] = true;
 
             return $actionResponse;
         }
@@ -24,8 +24,6 @@ class LoginUserAction
             'email' => $loginData->email,
             'password' => $loginData->password,
         ], $loginData->remember)) {
-            $actionResponse['route'] = 'search';
-
             return $actionResponse;
         }
 

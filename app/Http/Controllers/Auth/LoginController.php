@@ -29,11 +29,13 @@ class LoginController extends Controller
             return back()->onlyInput('email');
         }
 
-        if ($actionData['route'] === 'search') {
-            $request->session()->regenerate();
+        if(array_key_exists('not_verified', $actionData)) {
+            return to_route('verification.notice');
         }
 
-        return to_route($actionData['route']);
+        $request->session()->regenerate();
+
+        return redirect()->intended(route('search'));
     }
 
     public function logout(): Application|Redirector|RedirectResponse|\Illuminate\Contracts\Foundation\Application
