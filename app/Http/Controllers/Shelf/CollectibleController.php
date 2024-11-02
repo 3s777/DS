@@ -62,7 +62,8 @@ class CollectibleController extends Controller
 
     public function edit(Collectible $collectible): View|Application|Factory|\Illuminate\Contracts\Foundation\Application
     {
-        return view('admin.shelf.collectible.edit', new CollectibleUpdateViewModel($collectible));
+        $type = strtolower(CollectibleTypeEnum::tryFrom($collectible->collectable_type)->name);
+        return view('admin.shelf.collectible.'.$type.'.edit', new CollectibleUpdateViewModel($collectible));
     }
 
     public function update(UpdateCollectibleRequest $request, Collectible $collectible, CollectibleService $collectibleService): RedirectResponse
@@ -127,8 +128,8 @@ class CollectibleController extends Controller
 
     public function getMedia(Request $request)
     {
-        $modelClass = CollectableTypeEnum::{$request->input('model')}->value;
-        $modelName = CollectableTypeEnum::{$request->input('model')}->name;
+        $modelClass = CollectibleTypeEnum::{$request->input('model')}->value;
+        $modelName = CollectibleTypeEnum::{$request->input('model')}->name;
         $media = $modelClass::find($request->input('media'));
 
         $html = '';

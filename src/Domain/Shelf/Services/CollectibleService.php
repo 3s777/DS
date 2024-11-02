@@ -16,7 +16,6 @@ class CollectibleService
 {
     public function create(FillCollectibleDTO $data): Collectible
     {
-
         try {
             DB::beginTransaction();
 

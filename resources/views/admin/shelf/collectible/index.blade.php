@@ -120,7 +120,7 @@
                         <span class="responsive-table__label">{{ __('collectible.purchase_price') }}: </span> {{ $collectible->purchase_price }}
                     </x-ui.responsive-table.column>
                     <x-ui.responsive-table.column>
-                        <span class="responsive-table__label">{{ __('collectible.purchased_at') }}: </span> {{ $collectible->purchase_at }}
+                        <span class="responsive-table__label">{{ __('collectible.purchased_at') }}: </span> {{ $collectible->purchased_at }}
                     </x-ui.responsive-table.column>
                     <x-ui.responsive-table.column>
                         <span class="responsive-table__label">{{ __('collectible.seller') }}: </span> {{ $collectible->seller }}
@@ -149,7 +149,7 @@
                         <span class="responsive-table__label">{{ __('common.created_date') }}: </span> {{ $collectible->created_at }}
                     </x-ui.responsive-table.column>
                     <x-ui.responsive-table.column type="action">
-                        <x-common.action-table.buttons :item="$collectible" :slug="false" model="shelves" />
+                        <x-common.action-table.buttons :item="$collectible" :slug="false" model="collectibles" />
                     </x-ui.responsive-table.column>
                 </x-ui.responsive-table.row>
             @endforeach

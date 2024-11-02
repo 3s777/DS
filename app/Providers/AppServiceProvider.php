@@ -52,6 +52,7 @@ class AppServiceProvider extends ServiceProvider
             'permission' => 'Domain\Auth\Models\Permission',
             'role' => 'Domain\Auth\Models\Role',
             'kit_item' => 'Domain\Shelf\Models\KitItem',
+            'collectable' => 'Domain\Shelf\Models\Collectible'
         ]);
 
 //        Translatable::fallback(

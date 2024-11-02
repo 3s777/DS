@@ -39,6 +39,30 @@ class CollectibleUpdateViewModel extends ViewModel
         return $this->collectible ?? null;
     }
 
+    public function selectedUser(): array {
+        $selectedUser = [];
+        if($this->collectible?->user) {
+            $selectedUser = [
+                'key' => $this->collectible->user->id,
+                'value' => $this->collectible->user->name,
+            ];
+        }
+
+        return $selectedUser;
+    }
+
+    public function selectedShelf(): array {
+        $selectedShelf = [];
+        if($this->collectible?->shelf) {
+            $selectedUser = [
+                'key' => $this->collectible->shelf->id,
+                'value' => $this->collectible->shelf->name,
+            ];
+        }
+
+        return $selectedShelf;
+    }
+
     public function users()
     {
         return User::limit(3)->get()->pluck('name', 'id')->toArray();

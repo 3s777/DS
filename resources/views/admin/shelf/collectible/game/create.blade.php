@@ -117,9 +117,9 @@
                     <x-ui.form.group>
                         <x-ui.form.input-text
                             :placeholder="trans_choice('common.additional_fields', 1)"
-                            id="additional"
-                            name="additional"
-                            :value="old('additional')"
+                            id="additional_field"
+                            name="additional_field"
+                            :value="old('additional_field')"
                             autocomplete="on">
                         </x-ui.form.input-text>
                     </x-ui.form.group>
@@ -270,7 +270,7 @@
                                     placeholder="{{ __('collectible.auction_to') }} *"
                                     id="auction_to"
                                     name="auction[to]"
-                                    :value="old('auction_to')">
+                                    :value="old('auction.to')">
                                 </x-ui.form.datepicker>
                             </x-ui.form.group>
                         </x-grid.col>

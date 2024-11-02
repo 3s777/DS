@@ -43,7 +43,7 @@ class FillCollectibleDTO
             'kit_conditions',
             'article_number',
             'purchase_price',
-            'purchase_at',
+            'purchased_at',
             'seller',
             'user_id',
             'additional_field',

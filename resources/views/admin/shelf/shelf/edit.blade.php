@@ -27,7 +27,7 @@
                 <x-grid.col xl="4" ls="6" ml="12" lg="6" md="6" sm="12">
                     <x-ui.form.group>
                         <x-ui.form.input-text
-                            :placeholder="trans_choice('common.number', 1)"
+                            :placeholder="trans_choice('common.numbers', 1)"
                             id="number"
                             name="number"
                             :value="$shelf->number"

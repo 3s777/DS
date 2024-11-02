@@ -45,7 +45,7 @@ class Collectible extends Model implements HasMedia
         'shelf_id',
         'article_number',
         'purchase_price',
-        'purchase_at',
+        'purchased_at',
         'seller',
         'additional_field',
         'properties',
