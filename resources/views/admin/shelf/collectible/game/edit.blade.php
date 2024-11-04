@@ -155,19 +155,23 @@
             <x-grid type="container">
                 <x-grid.col xl="4" ls="6" lg="12" md="12" sm="12">
                     <x-ui.form.group>
-                        <x-ui.select.async
+                        <x-ui.form.input-text
+                            :placeholder="trans_choice('collectible.media', 1)"
+                            id="media"
                             name="media"
-                            select-name="media"
-                            :required="true"
-                            route="game-media.select"
-                            :default-option="trans_choice('collectible.choose_media', 1)"
-                            :label="trans_choice('collectible.media', 1)" />
+                            :value="$collectible->collectable->name"
+                            :disabled="true">
+                        </x-ui.form.input-text>
                     </x-ui.form.group>
                 </x-grid.col>
 
                 <x-grid.col xl="5" ls="6" lg="12" md="12" sm="12">
                     <x-ui.form.group>
-                        <div id="kit" class="admin__conditions"></div>
+                        <div id="kit" class="admin__conditions">
+                            @foreach($collectible->kit_items as $kit_item)
+
+                            @endforeach
+                        </div>
                     </x-ui.form.group>
                 </x-grid.col>
             </x-grid>

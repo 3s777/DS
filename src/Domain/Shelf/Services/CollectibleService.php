@@ -41,7 +41,15 @@ class CollectibleService
             $collectible->collectable_id = $data->media;
             $collectible->collectable_type = GameMedia::class;
 
+            $kitItems = [];
+
+            foreach($data->kit_conditions as $key=>$value) {
+                $kitItems[$key] = ['condition' => $value];
+            }
+
             $collectible->save();
+
+            $collectible->kitItems()->attach($kitItems);
 
             $collectible->addImageWithThumbnail(
                 $data->thumbnail,
