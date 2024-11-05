@@ -16,12 +16,12 @@ use Domain\Shelf\ViewModel\CollectibleMediaViewModel;
 use Domain\Shelf\ViewModel\CollectibleUpdateViewModel;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
+use Illuminate\Database\Eloquent\Relations\Relation;
 use Illuminate\Foundation\Application;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Redirector;
 use Illuminate\Support\Facades\Blade;
-use Illuminate\Support\Facades\Validator;
 use Support\Actions\MassDeletingAction;
 use Support\DTOs\MassDeletingDTO;
 use Domain\Shelf\Enums\CollectibleTypeEnum;
@@ -38,42 +38,41 @@ class CollectibleController extends Controller
         return view('admin.shelf.collectible.index', new CollectibleIndexViewModel());
     }
 
-    public function create(): View|Application|Factory|\Illuminate\Contracts\Foundation\Application
-    {
-        return view('admin.shelf.collectible.create', new CollectibleUpdateViewModel());
-    }
-
-//    public function store(CreateCollectibleRequest $request, CollectibleService $collectibleService): Application|Redirector|RedirectResponse|\Illuminate\Contracts\Foundation\Application
-    public function store(CreateCollectibleRequest $request): Application|Redirector|RedirectResponse|\Illuminate\Contracts\Foundation\Application
-
-    {
-
-        $collectibleService->create(FillCollectibleDTO::fromRequest($request));
-
-        flash()->info(__('collectible.created'));
-
-        return to_route('collectibles.index');
-    }
-
-    public function show(string $id)
-    {
-        dd('sdf');
-    }
+//    public function create(): View|Application|Factory|\Illuminate\Contracts\Foundation\Application
+//    {
+//        return view('admin.shelf.collectible.create', new CollectibleUpdateViewModel());
+//    }
+//
+////    public function store(CreateCollectibleRequest $request, CollectibleService $collectibleService): Application|Redirector|RedirectResponse|\Illuminate\Contracts\Foundation\Application
+//    public function store(CreateCollectibleRequest $request): Application|Redirector|RedirectResponse|\Illuminate\Contracts\Foundation\Application
+//    {
+//        $collectibleService->create(FillCollectibleDTO::fromRequest($request));
+//
+//        flash()->info(__('collectible.created'));
+//
+//        return to_route('collectibles.index');
+//    }
+//
+//    public function show(string $id)
+//    {
+//        dd('sdf');
+//    }
 
     public function edit(Collectible $collectible): View|Application|Factory|\Illuminate\Contracts\Foundation\Application
     {
-        $type = strtolower(CollectibleTypeEnum::tryFrom($collectible->collectable_type)->name);
+        $class = Relation::getMorphedModel($collectible->collectable->getMorphClass());
+        $type = strtolower(CollectibleTypeEnum::tryFrom($class)->name);
         return view('admin.shelf.collectible.'.$type.'.edit', new CollectibleUpdateViewModel($collectible));
     }
 
-    public function update(UpdateCollectibleRequest $request, Collectible $collectible, CollectibleService $collectibleService): RedirectResponse
-    {
-        $collectibleService->update($collectible, FillCollectibleDTO::fromRequest($request));
-
-        flash()->info(__('collectible.updated'));
-
-        return to_route('collectibles.index');
-    }
+//    public function update(UpdateCollectibleRequest $request, Collectible $collectible, CollectibleService $collectibleService): RedirectResponse
+//    {
+//        $collectibleService->update($collectible, FillCollectibleDTO::fromRequest($request));
+//
+//        flash()->info(__('collectible.updated'));
+//
+//        return to_route('collectibles.index');
+//    }
 
     public function destroy(Collectible $collectible): RedirectResponse
     {
@@ -126,29 +125,8 @@ class CollectibleController extends Controller
         );
     }
 
-    public function getMedia(Request $request)
+    public function getHtmlKitConditions(Request $request, CollectibleService $collectibleService): string
     {
-        $modelClass = CollectibleTypeEnum::{$request->input('model')}->value;
-        $modelName = CollectibleTypeEnum::{$request->input('model')}->name;
-        $media = $modelClass::find($request->input('media'));
-
-        $html = '';
-
-        foreach($media->kitItems as $kitItem) {
-//            $html .= ViewFacade::make("components.ui.star-rating")
-//                ->with('name', $kitItem->slug)
-//                ->with('title', $kitItem->name);
-
-//            $html .= view('components.ui.star-rating',
-//                ['name' => $kitItem->slug,
-//                'title' => $kitItem->name]
-//            );
-            $html .= Blade::render(
-                '<x-ui.star-rating :name="$name" :title="$title" input-name="kit_conditions[{{ $name }}]" class="admin__conditions-item" />',
-                ['name' => $kitItem->id, 'title' => $kitItem->name]
-            );
-        }
-
-        return $html;
+        return $collectibleService->makeHtmlKitConditionsRating($request->input('model'), $request->input('media'));
     }
 }

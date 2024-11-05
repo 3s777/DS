@@ -7,7 +7,7 @@ use Domain\Shelf\Models\Collectible;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
 
-class CreateCollectibleGameRequest extends FormRequest
+class UpdateCollectibleGameRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -28,7 +28,7 @@ class CreateCollectibleGameRequest extends FormRequest
             'name' => [
                 'required',
                 'max:250',
-                Rule::unique(Collectible::class)
+                Rule::unique(Collectible::class)->ignore($this->collectible)
             ],
             'user_id' => [
                 'required',
@@ -74,11 +74,6 @@ class CreateCollectibleGameRequest extends FormRequest
             ],
             'is_digital' => [
                 'boolean'
-            ],
-            'media' => [
-                'required',
-                'integer',
-                'exists:Domain\Game\Models\GameMedia,id'
             ],
             'kit_conditions' => [
                 'required'
@@ -134,7 +129,6 @@ class CreateCollectibleGameRequest extends FormRequest
             'additional_field' => __('common.additional_field'),
             'is_done' => __('game.is_done'),
             'is_digital' => __('game.is_digital'),
-            'media' => trans_choice('collectible.media', 1),
             'kit_conditions' => __('collectible.kit_conditions'),
             'target' => __('collectible.target'),
             'sale.price' => __('collectible.sale_price'),

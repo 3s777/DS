@@ -20,12 +20,14 @@
     }}>
 
     <input
-        class="radio-button__input"
-        id="{{ $id }}"
-        type="radio"
-        name="{{ $name }}"
-        value="{{ $value }}"
-        {{ $checked ? 'checked' : '' }}>
+        {{ $attributes->class(['radio-button__input'])
+                ->merge([
+                    'type' => 'radio',
+                    'id' => $id,
+                    'name' => $name,
+                    'value' => $value,
+                    'checked' => old(to_dot_name($name)) ? old(to_dot_name($name)) == $value : $checked
+                ]) }}>
 
     <x-ui.form.button
         tag="label"

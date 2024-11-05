@@ -12,7 +12,7 @@
                     'type' => 'checkbox',
                     'name' => $name,
                     'value' => $value,
-                    'checked' => $checked
+                    'checked' => old(to_dot_name($name)) ? old(to_dot_name($name)) : $checked
                 ]) }}>
     <span class="switcher__button"></span>
     <span class="switcher__label @if($errors->has($name)) switcher__label_error @endif">{{ $label }}</span>

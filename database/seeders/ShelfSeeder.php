@@ -19,6 +19,7 @@ class ShelfSeeder extends Seeder
         foreach($users as $user) {
             Shelf::factory(2)
                 ->has(Collectible::factory(5)
+                    ->has()
                     ->for($user, 'user'), 'collectibles')
                 ->for($user, 'user')
                 ->create();

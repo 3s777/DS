@@ -24,7 +24,7 @@ final class AdminSidebarMenuComposer
                 )
                 ->add(MenuGroup::make()
                     ->setLabel(trans_choice('collectible.collectibles', 2))
-                    ->add(MenuItem::make(route('collectibles.create'), __('common.add')))
+//                    ->add(MenuItem::make(route('collectibles.create'), __('common.add')))
                     ->add(MenuItem::make(route('collectibles.create.game'), __('game.add')))
                     ->add(MenuItem::make(route('collectibles.index'), __('common.list')))
                 )

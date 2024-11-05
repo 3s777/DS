@@ -12,5 +12,5 @@
            id="{{ $id }}"
            type="date"
            name="{{ $name }}"
-           value="{{ $value }}" >
+           value="{{ old(to_dot_name($name)) ? old(to_dot_name($name)) : $value }}" >
 </div>

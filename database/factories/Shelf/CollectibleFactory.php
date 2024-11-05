@@ -41,8 +41,6 @@ class CollectibleFactory extends Factory
             ];
         }
 
-
-
         return [
             'name' => fake()->name(),
             'ulid' => Str::ulid(),

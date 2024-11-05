@@ -15,7 +15,6 @@
                             :placeholder="trans_choice('common.name', 1)"
                             id="name"
                             name="name"
-                            :value="old('name')"
                             required
                             autocomplete="on"
                             autofocus>
@@ -26,8 +25,8 @@
                 <x-grid.col xl="4" ls="6" ml="12" lg="6" md="6" sm="12">
                     <x-ui.form.group>
                         <x-ui.select.async
-                            name="user_shelf_id"
-                            select-name="user_shelf_id"
+                            name="user_id"
+                            select-name="user_id"
                             route="select-users"
                             :required="true"
                             :default-option="trans_choice('user.choose', 1)"
@@ -43,7 +42,7 @@
                             select-name="shelf_id"
                             :required="true"
                             route="shelves.select"
-                            depend-on="user_shelf_id"
+                            depend-on="user_id"
                             depend-field="user_id"
                             :default-option="trans_choice('shelf.choose', 1)"
                             :label="trans_choice('shelf.shelves', 1)" />
@@ -56,7 +55,6 @@
                             :placeholder="trans_choice('common.article_numbers', 1)"
                             id="article_number"
                             name="article_number"
-                            :value="old('article_number')"
                             autocomplete="on">
                         </x-ui.form.input-text>
                     </x-ui.form.group>
@@ -82,7 +80,6 @@
                             name="purchase_price"
                             type="number"
                             step="0.01"
-                            :value="old('purchase_price')"
                             autocomplete="on">
                         </x-ui.form.input-text>
                     </x-ui.form.group>
@@ -94,7 +91,6 @@
                             :placeholder="__('collectible.seller')"
                             id="seller"
                             name="seller"
-                            :value="old('seller')"
                             autocomplete="on">
                         </x-ui.form.input-text>
                     </x-ui.form.group>
@@ -105,8 +101,7 @@
                         <x-ui.form.datepicker
                             :placeholder="__('collectible.purchased_at')"
                             id="purchased_at"
-                            name="purchased_at"
-                            :value="old('purchased_at')">
+                            name="purchased_at">
                         </x-ui.form.datepicker>
                     </x-ui.form.group>
                 </x-grid.col>
@@ -119,7 +114,6 @@
                             :placeholder="trans_choice('common.additional_fields', 1)"
                             id="additional_field"
                             name="additional_field"
-                            :value="old('additional_field')"
                             autocomplete="on">
                         </x-ui.form.input-text>
                     </x-ui.form.group>
@@ -130,8 +124,7 @@
                         <x-ui.form.switcher
                             name="properties[is_done]"
                             value="1"
-                            :checked="old('is_done')"
-                            label="{{ __('game.is_done') }}">
+                            :label="__('game.is_done')">
                         </x-ui.form.switcher>
                     </x-ui.form.group>
                 </x-grid.col>
@@ -141,8 +134,7 @@
                         <x-ui.form.switcher
                             name="properties[is_digital]"
                             value="1"
-                            :checked="old('is_digital')"
-                            label="{{ __('game.is_digital') }}">
+                            :label="__('game.is_digital')">
                         </x-ui.form.switcher>
                     </x-ui.form.group>
                 </x-grid.col>
@@ -178,9 +170,9 @@
                                     name="target"
                                     value="collection"
                                     color="dark"
-                                    :checked="old() ? old('target') == 'collection' : true"
+                                    :checked="true"
                                     :group="true"
-                                    label="{{ __('common.for_collection') }}">
+                                    :label="__('common.for_collection')">
                                 </x-ui.form.radio-button>
 
                                 <x-ui.form.radio-button
@@ -189,8 +181,7 @@
                                     value="sale"
                                     color="dark"
                                     :group="true"
-                                    :checked="old('target') == 'sale'"
-                                    label="{{ __('common.for_sale') }}">
+                                    :label="__('common.for_sale')">
                                 </x-ui.form.radio-button>
 
                                 <x-ui.form.radio-button
@@ -199,8 +190,7 @@
                                     value="auction"
                                     color="dark"
                                     :group="true"
-                                    :checked="old('target') == 'auction'"
-                                    label="{{ __('common.for_auction') }}">
+                                    :label="__('common.for_auction')">
                                 </x-ui.form.radio-button>
 
                                 <x-ui.form.radio-button
@@ -209,8 +199,7 @@
                                     value="exchange"
                                     color="dark"
                                     :group="true"
-                                    :checked="old('target') == 'exchange'"
-                                    label="{{ __('common.for_exchange') }}">
+                                    :label="__('common.for_exchange')">
                                 </x-ui.form.radio-button>
                             </x-ui.form.radio-group>
                         </x-ui.form.group>
@@ -226,7 +215,6 @@
                                     id="sale_price"
                                     name="sale[price]"
                                     step="0.01"
-                                    value="{{ old('sale_price') }}"
                                     type="number"
                                     autocomplete="on">
                                 </x-ui.form.input-text>
@@ -243,7 +231,6 @@
                                     id="auction_price"
                                     name="auction[price]"
                                     step="0.01"
-                                    value="{{ old('auction_price') }}"
                                     type="number"
                                     autocomplete="on">
                                 </x-ui.form.input-text>
@@ -257,7 +244,6 @@
                                     id="auction_step"
                                     name="auction[step]"
                                     step="0.01"
-                                    value="{{ old('auction_step') }}"
                                     type="number"
                                     autocomplete="on">
                                 </x-ui.form.input-text>
@@ -269,8 +255,7 @@
                                 <x-ui.form.datepicker
                                     placeholder="{{ __('collectible.auction_to') }} *"
                                     id="auction_to"
-                                    name="auction[to]"
-                                    :value="old('auction.to')">
+                                    name="auction[to]">
                                 </x-ui.form.datepicker>
                             </x-ui.form.group>
                         </x-grid.col>
@@ -307,9 +292,7 @@
                     {{ __('common.save') }}
             </x-ui.form.button>
         </x-ui.form.group>
-@dump(old())
     </x-ui.form>
-
 
     @push('scripts')
         <script>
@@ -364,7 +347,7 @@
             async function setKit(mediaValue) {
                 try {
                     const media = mediaValue ?? null
-                    const response = await axios.post('{{ route('collectibles.get.media') }}', {
+                    const response = await axios.post('{{ route('collectibles.get.html-kit-conditions') }}', {
                         media: media,
                         model: 'Game'
                     });

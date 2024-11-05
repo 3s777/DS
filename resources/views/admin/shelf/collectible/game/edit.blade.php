@@ -2,10 +2,10 @@
     <x-ui.form class="crud-form"
                method="put"
                id="edit-form"
-               :action="route('shelves.update', $collectible->id)"
+               :action="route('collectibles.update.game', $collectible->id)"
                enctype="multipart/form-data">
         <x-ui.title class="crud-form__tile" size="normal" indent="small">
-            {{ __('shelf.edit') }}
+            {{ __('collectible.edit') }}
         </x-ui.title>
 
         <div class="crud-form__main">
@@ -27,8 +27,8 @@
                 <x-grid.col xl="4" ls="6" ml="12" lg="6" md="6" sm="12">
                     <x-ui.form.group>
                         <x-ui.select.async
-                            name="user_shelf_id"
-                            select-name="user_shelf_id"
+                            name="user_id"
+                            select-name="user_id"
                             route="select-users"
                             :required="true"
                             :selected="$selectedUser"
@@ -46,7 +46,7 @@
                             :required="true"
                             :selected="$collectible->shelf->id"
                             route="shelves.select"
-                            depend-on="user_shelf_id"
+                            depend-on="user_id"
                             depend-field="user_id"
                             :default-option="trans_choice('shelf.choose', 1)"
                             :label="trans_choice('shelf.shelves', 1)" />
@@ -121,8 +121,8 @@
                     <x-ui.form.group>
                         <x-ui.form.input-text
                             :placeholder="trans_choice('common.additional_fields', 1)"
-                            id="additional"
-                            name="additional"
+                            id="additional_field"
+                            name="additional_field"
                             :value="$collectible->additional_field"
                             autocomplete="on">
                         </x-ui.form.input-text>
@@ -135,7 +135,7 @@
                             name="properties[is_done]"
                             value="1"
                             :checked="$collectible->properties['is_done'] ?? false"
-                            label="{{ __('game.is_done') }}">
+                            :label="__('game.is_done')">
                         </x-ui.form.switcher>
                     </x-ui.form.group>
                 </x-grid.col>
@@ -146,7 +146,7 @@
                             name="properties[is_digital]"
                             value="1"
                             :checked="$collectible->properties['is_digital'] ?? false"
-                            label="{{ __('game.is_digital') }}">
+                            :label="__('game.is_digital')">
                         </x-ui.form.switcher>
                     </x-ui.form.group>
                 </x-grid.col>
@@ -168,8 +168,13 @@
                 <x-grid.col xl="5" ls="6" lg="12" md="12" sm="12">
                     <x-ui.form.group>
                         <div id="kit" class="admin__conditions">
-                            @foreach($collectible->kit_items as $kit_item)
-
+                            @foreach($collectible->collectable->kitItems as $item)
+                                <x-ui.star-rating
+                                    :name="$item->id"
+                                    :title="$item->name"
+                                    :value="$collectible->kit_conditions[$item->id]"
+                                    input-name="kit_conditions[{{ $item->id }}]"
+                                    class="admin__conditions-item" />
                             @endforeach
                         </div>
                     </x-ui.form.group>
@@ -186,9 +191,9 @@
                                     name="target"
                                     value="collection"
                                     color="dark"
-                                    :checked="old() ? old('target') == 'collection' : true"
+                                    :checked="$collectible->target == 'collection'"
                                     :group="true"
-                                    label="{{ __('common.for_collection') }}">
+                                    :label="__('common.for_collection')">
                                 </x-ui.form.radio-button>
 
                                 <x-ui.form.radio-button
@@ -197,8 +202,8 @@
                                     value="sale"
                                     color="dark"
                                     :group="true"
-                                    :checked="old('target') == 'sale'"
-                                    label="{{ __('common.for_sale') }}">
+                                    :checked="$collectible->target == 'sale'"
+                                    :label="__('common.for_sale')">
                                 </x-ui.form.radio-button>
 
                                 <x-ui.form.radio-button
@@ -207,8 +212,8 @@
                                     value="auction"
                                     color="dark"
                                     :group="true"
-                                    :checked="old('target') == 'auction'"
-                                    label="{{ __('common.for_auction') }}">
+                                    :checked="$collectible->target == 'auction'"
+                                    :label="__('common.for_auction')">
                                 </x-ui.form.radio-button>
 
                                 <x-ui.form.radio-button
@@ -217,8 +222,8 @@
                                     value="exchange"
                                     color="dark"
                                     :group="true"
-                                    :checked="old('target') == 'exchange'"
-                                    label="{{ __('common.for_exchange') }}">
+                                    :checked="$collectible->target == 'exchange'"
+                                    :label="__('common.for_exchange')">
                                 </x-ui.form.radio-button>
                             </x-ui.form.radio-group>
                         </x-ui.form.group>
@@ -234,7 +239,7 @@
                                     id="sale_price"
                                     name="sale[price]"
                                     step="0.01"
-                                    value="{{ old('sale_price') }}"
+                                    :value="$collectible->sale['price']"
                                     type="number"
                                     autocomplete="on">
                                 </x-ui.form.input-text>
@@ -251,7 +256,7 @@
                                     id="auction_price"
                                     name="auction[price]"
                                     step="0.01"
-                                    value="{{ old('auction_price') }}"
+                                    :value="$collectible->auction['price']"
                                     type="number"
                                     autocomplete="on">
                                 </x-ui.form.input-text>
@@ -265,7 +270,7 @@
                                     id="auction_step"
                                     name="auction[step]"
                                     step="0.01"
-                                    value="{{ old('auction_step') }}"
+                                    :value="$collectible->auction['step']"
                                     type="number"
                                     autocomplete="on">
                                 </x-ui.form.input-text>
@@ -278,7 +283,7 @@
                                     placeholder="{{ __('collectible.auction_to') }} *"
                                     id="auction_to"
                                     name="auction[to]"
-                                    :value="old('auction_to')">
+                                    :value="$collectible->auction['to']">
                                 </x-ui.form.datepicker>
                             </x-ui.form.group>
                         </x-grid.col>
@@ -329,4 +334,54 @@
             </x-ui.form.button>
         </x-ui.form.group>
     </x-ui.form>
+
+    @push('scripts')
+        <script>
+            var targets = document.querySelectorAll('input[type=radio][name="target"]');
+
+            function hideTarget() {
+                document.querySelectorAll('.collectible-target__fields').forEach(function(el) {
+                    el.style.display = 'none';
+                });
+            }
+
+            function setTargetSale() {
+                document.querySelectorAll('.collectible-target__sale').forEach(function(el) {
+                    el.style.display = 'block';
+                });
+            }
+
+            function setTargetAuction() {
+                document.querySelectorAll('.collectible-target__auction').forEach(function(el) {
+                    el.style.display = 'block';
+                });
+            }
+
+            targets.forEach( target => {
+                hideTarget();
+
+                @if(old('target') == 'sale' || $collectible->target == 'sale')
+                    setTargetSale();
+                @endif
+
+                @if(old('target') == 'auction' || $collectible->target == 'auction')
+                    setTargetAuction();
+                @endif
+            })
+
+            targets.forEach(target => target.addEventListener('change',
+                function() {
+                    hideTarget();
+
+                    if(target.value === 'sale') {
+                        setTargetSale();
+                    }
+
+                    if(target.value === 'auction') {
+                        setTargetAuction();
+                    }
+                }
+            ));
+        </script>
+    @endpush
 </x-layouts.admin>
