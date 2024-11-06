@@ -39,7 +39,7 @@ class LoginUserActionTest extends TestCase
             $this->password,
         ));
 
-        $this->assertArrayHasKey('route', $actionData);
+        $this->assertArrayNotHasKey('not_verified', $actionData);
     }
 
     /**

@@ -91,6 +91,11 @@ class UpdateCollectibleGameRequest extends FormRequest
                 'required',
                 'numeric'
             ],
+            'sale.price_old' => [
+                'exclude_unless:target,sale',
+                'required',
+                'numeric'
+            ],
             'auction.price' => [
                 'exclude_unless:target,auction',
                 'required',

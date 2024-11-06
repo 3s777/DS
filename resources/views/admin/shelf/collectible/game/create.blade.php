@@ -220,6 +220,18 @@
                                 </x-ui.form.input-text>
                             </x-ui.form.group>
                         </x-grid.col>
+                        <x-grid.col xl="4" ls="6" lg="12" md="12" sm="12">
+                            <x-ui.form.group>
+                                <x-ui.form.input-text
+                                    placeholder="{{ __('collectible.sale_price_old') }} *"
+                                    id="sale_price_old"
+                                    name="sale[price_old]"
+                                    step="0.01"
+                                    type="number"
+                                    autocomplete="on">
+                                </x-ui.form.input-text>
+                            </x-ui.form.group>
+                        </x-grid.col>
                     </x-grid>
                 </div>
                 <div class="collectible-target__fields collectible-target__auction" style="display: none">
@@ -347,12 +359,12 @@
             async function setKit(mediaValue) {
                 try {
                     const media = mediaValue ?? null
-                    const response = await axios.post('{{ route('collectibles.get.html-kit-conditions') }}', {
+                    const response = await axios.post('{{ route('kit-items.get.html-conditions') }}', {
                         media: media,
                         model: 'Game'
                     });
                     const kit = document.getElementById('kit')
-                    kit.innerHTML = response.data;
+                    kit.innerHTML = response.data.html;
 
                     @if(old('kit_conditions'))
                         @foreach(old('kit_conditions') as $key => $value)

@@ -5,23 +5,19 @@ namespace App\Http\Controllers\Shelf;
 use App\Exceptions\MassDeletingException;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\MassDeletingRequest;
-use App\Http\Requests\Shelf\CreateCollectibleRequest;
 use App\Http\Requests\Shelf\GetCollectibleMediaRequest;
-use App\Http\Requests\Shelf\UpdateCollectibleRequest;
-use Domain\Shelf\DTOs\FillCollectibleDTO;
 use Domain\Shelf\Services\CollectibleService;
 use Domain\Shelf\Models\Collectible;
 use Domain\Shelf\ViewModel\CollectibleIndexViewModel;
 use Domain\Shelf\ViewModel\CollectibleMediaViewModel;
 use Domain\Shelf\ViewModel\CollectibleUpdateViewModel;
+use Domain\Shelf\ViewModel\KitItemConditionViewModel;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
 use Illuminate\Database\Eloquent\Relations\Relation;
 use Illuminate\Foundation\Application;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
-use Illuminate\Routing\Redirector;
-use Illuminate\Support\Facades\Blade;
 use Support\Actions\MassDeletingAction;
 use Support\DTOs\MassDeletingDTO;
 use Domain\Shelf\Enums\CollectibleTypeEnum;
@@ -43,7 +39,6 @@ class CollectibleController extends Controller
 //        return view('admin.shelf.collectible.create', new CollectibleUpdateViewModel());
 //    }
 //
-////    public function store(CreateCollectibleRequest $request, CollectibleService $collectibleService): Application|Redirector|RedirectResponse|\Illuminate\Contracts\Foundation\Application
 //    public function store(CreateCollectibleRequest $request): Application|Redirector|RedirectResponse|\Illuminate\Contracts\Foundation\Application
 //    {
 //        $collectibleService->create(FillCollectibleDTO::fromRequest($request));
@@ -55,7 +50,6 @@ class CollectibleController extends Controller
 //
 //    public function show(string $id)
 //    {
-//        dd('sdf');
 //    }
 
     public function edit(Collectible $collectible): View|Application|Factory|\Illuminate\Contracts\Foundation\Application
@@ -123,10 +117,5 @@ class CollectibleController extends Controller
         return new CollectibleMediaViewModel(
             $request->input('query')
         );
-    }
-
-    public function getHtmlKitConditions(Request $request, CollectibleService $collectibleService): string
-    {
-        return $collectibleService->makeHtmlKitConditionsRating($request->input('model'), $request->input('media'));
     }
 }

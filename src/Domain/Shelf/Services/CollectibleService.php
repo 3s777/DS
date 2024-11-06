@@ -3,13 +3,13 @@
 namespace Domain\Shelf\Services;
 
 use App\Exceptions\CrudException;
-use Domain\Game\Models\GameMedia;
 use Domain\Shelf\DTOs\FillCollectibleDTO;
 use Domain\Shelf\Models\Collectible;
 use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
 use Throwable;
+use Domain\Shelf\Enums\CollectibleTypeEnum;
 
 class CollectibleService
 {
@@ -87,34 +87,5 @@ class CollectibleService
         } catch (Throwable $e) {
             throw new CrudException($e->getMessage());
         }
-    }
-
-    public function makeHtmlKitConditionsRating($model, $media)
-    {
-
-        $modelClass = CollectibleTypeEnum::{$model}->value;
-        $modelName = CollectibleTypeEnum::{$model}->name;
-        $media = $modelClass::find($media);
-
-        dd($mediae);
-
-        $html = '';
-
-        foreach($media->kitItems as $kitItem) {
-//            $html .= ViewFacade::make("components.ui.star-rating")
-//                ->with('name', $kitItem->slug)
-//                ->with('title', $kitItem->name);
-
-//            $html .= view('components.ui.star-rating',
-//                ['name' => $kitItem->slug,
-//                'title' => $kitItem->name]
-//            );
-            $html .= Blade::render(
-                '<x-ui.star-rating :name="$name" :title="$title" input-name="kit_conditions[{{ $name }}]" class="admin__conditions-item" />',
-                ['name' => $kitItem->id, 'title' => $kitItem->name]
-            );
-        }
-
-        return $html;
     }
 }

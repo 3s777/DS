@@ -32,6 +32,7 @@ return [
     'purchased_at' => 'Дата покупки',
     'seller' => 'Продавец',
     'sale_price' => 'Цена продажи',
+    'sale_price_old' => 'Старая цена',
     'auction_price' => 'Стартовая цена',
     'auction_step' => 'Шаг',
     'auction_to' => 'Время окончания',

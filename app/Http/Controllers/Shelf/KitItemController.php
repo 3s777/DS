@@ -6,7 +6,10 @@ use App\Exceptions\MassDeletingException;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\MassDeletingRequest;
 use App\Http\Requests\Shelf\CreateKitItemRequest;
+use App\Http\Requests\Shelf\GetKitItemConditionRequest;
 use App\Http\Requests\Shelf\UpdateKitItemRequest;
+use Domain\Shelf\Services\CollectibleService;
+use Domain\Shelf\ViewModel\KitItemConditionViewModel;
 use Domain\Shelf\ViewModel\KitItemUpdateViewModel;
 use Domain\Shelf\DTOs\FillKitItemDTO;
 use Domain\Shelf\Models\KitItem;
@@ -16,6 +19,7 @@ use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
 use Illuminate\Foundation\Application;
 use Illuminate\Http\RedirectResponse;
+use Illuminate\Http\Request;
 use Illuminate\Routing\Redirector;
 use Support\Actions\MassDeletingAction;
 use Support\DTOs\MassDeletingDTO;
@@ -108,5 +112,13 @@ class KitItemController extends Controller
         flash()->info(__('collectible.kit.mass_force_deleted'));
 
         return to_route('kit-items.index');
+    }
+
+    public function getHtmlConditions(GetKitItemConditionRequest $request): KitItemConditionViewModel
+    {
+        return new KitItemConditionViewModel(
+            $request->input('model'),
+            $request->input('media')
+        );
     }
 }
