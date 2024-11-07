@@ -27,7 +27,9 @@ trait HasSlug
             );
         } else {
             $slug = $this->slugUnique(
-                $this->{$this->slugColumn()}
+                str($this->{$this->slugColumn()})
+                ->slug()
+                ->value()
             );
         }
 
@@ -46,13 +48,14 @@ trait HasSlug
 
     private function slugUnique(string $slug): string
     {
-        $orginalSlug = $slug;
+        $originalSlug = $slug;
+
         $i = 0;
 
         while ($this->isSlugExists($slug)) {
             $i++;
 
-            $slug = $orginalSlug.'-'.$i;
+            $slug = $originalSlug.'-'.$i;
         }
 
         return $slug;

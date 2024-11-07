@@ -22,17 +22,6 @@ class FillGameMediaDTOTest extends TestCase
      * @test
      * @return void
      */
-    public function it_instance_created_from_register_request_success(): void
-    {
-        $data = FillGameMediaDTO::fromRequest(new CreateGameMediaRequest($this->request));
-
-        $this->assertInstanceOf(FillGameMediaDTO::class, $data);
-    }
-
-    /**
-     * @test
-     * @return void
-     */
     public function it_instance_created_from_create_request_success(): void
     {
         $data = FillGameMediaDTO::fromRequest(new CreateGameMediaRequest($this->request));

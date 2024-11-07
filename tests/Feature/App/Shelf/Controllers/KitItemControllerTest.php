@@ -1,24 +1,15 @@
 <?php
 
-namespace App\Shelf;
+namespace App\Shelf\Controllers;
 
 use App\Http\Controllers\Shelf\KitItemController;
-use App\Http\Requests\Game\CreateGameRequest;
 use App\Http\Requests\Shelf\CreateKitItemRequest;
-use App\Jobs\GenerateSmallThumbnailsJob;
-use App\Jobs\GenerateThumbnailJob;
-use Database\Factories\Game\GameFactory;
 use Database\Factories\Shelf\KitItemFactory;
 use Database\Factories\UserFactory;
 use Domain\Auth\Models\Role;
 use Domain\Auth\Models\User;
-use Domain\Game\Models\Game;
-use Domain\Game\Models\GameDeveloper;
 use Domain\Shelf\Models\KitItem;
 use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Http\UploadedFile;
-use Illuminate\Support\Facades\Queue;
-use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 use Tests\TestCase;
 

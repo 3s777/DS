@@ -22,17 +22,6 @@ class FillGameDTOTest extends TestCase
      * @test
      * @return void
      */
-    public function it_instance_created_from_register_request_success(): void
-    {
-        $data = FillGameDTO::fromRequest(new CreateGameRequest($this->request));
-
-        $this->assertInstanceOf(FillGameDTO::class, $data);
-    }
-
-    /**
-     * @test
-     * @return void
-     */
     public function it_instance_created_from_create_request_success(): void
     {
         $data = FillGameDTO::fromRequest(new CreateGameRequest($this->request));

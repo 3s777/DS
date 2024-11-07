@@ -33,7 +33,7 @@ class UpdateShelfRequest extends FormRequest
                 'required',
                 'integer',
                 'numeric',
-                'max:20'
+                'max:100000'
             ],
             'description' => ['nullable','string'],
             'thumbnail' => [

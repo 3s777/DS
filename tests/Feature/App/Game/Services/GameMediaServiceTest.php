@@ -16,6 +16,7 @@ use Domain\Game\Models\GamePlatform;
 use Domain\Game\Models\GamePublisher;
 use Domain\Game\Services\GameMediaService;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Http\Request;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Queue;
 use Illuminate\Support\Facades\Storage;
@@ -53,7 +54,7 @@ class GameMediaServiceTest extends TestCase
         $this->request['user_id'] = $this->user->id;
         $this->request['thumbnail'] = UploadedFile::fake()->image('photo1.jpg');
 
-        $request = new CreateUserRequest($this->request);
+        $request = new Request($this->request);
 
         $gameService = app(GameMediaService::class);
 
@@ -103,7 +104,7 @@ class GameMediaServiceTest extends TestCase
 
         $this->request['user_id'] = $this->user->id;
 
-        $createRequest = new CreateUserRequest($this->request);
+        $createRequest = new Request($this->request);
 
         $gameMediaService = app(GameMediaService::class);
 
@@ -120,7 +121,7 @@ class GameMediaServiceTest extends TestCase
         $newPlatforms = GamePlatform::factory(2)->create();
 
         $this->request['name'] = 'NewNameGameMedia';
-        $this->request['slug'] = 'NesSlug';
+        $this->request['slug'] = 'newslug';
         $this->request['description'] = 'NewDescription';
         $this->request['released_at'] = fake()->date();
         $this->request['games'] = $newGames->pluck('id')->toArray();

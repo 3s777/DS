@@ -3,7 +3,6 @@
 namespace App\Http\Requests\Shelf;
 
 use Domain\Shelf\Models\KitItem;
-use Domain\Shelf\Models\Shelf;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
 
