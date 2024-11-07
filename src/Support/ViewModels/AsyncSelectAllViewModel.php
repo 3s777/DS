@@ -17,6 +17,14 @@ class AsyncSelectAllViewModel extends ViewModel
     {
     }
 
+    private function setEmpty(): array
+    {
+        return [
+            ['value' => '', 'label' => __($this->label), 'disabled' => true],
+            ['value' => 'not_found', 'label' => __('common.not_found'), 'disabled' => true]
+        ];
+    }
+
     public function result(): array
     {
         $options = [
@@ -24,21 +32,21 @@ class AsyncSelectAllViewModel extends ViewModel
         ];
 
         if($this->depended && !request('depended')) {
-            $options[] = ['value' => 'not_found', 'label' => __('common.not_found'), 'disabled' => true];
-            return $options;
+            return $this->setEmpty();
         }
 
         if($this->depended) {
+            $dependedData = request('depended');
+            $dependedKey = array_key_first($dependedData);
+            $dependedValue = $dependedData[$dependedKey];
+
             $query = $this->modelName::query()->select($this->key, $this->name);
 
-            $query->when(request('depended'), function ($q) {
-                foreach(request('depended') as $key => $value) {
-                    if (Schema::hasColumn($q->getModel()->getTable(), $key) && $value){
-                        $q->whereIn($key, explode(',', $value));
-                    }
-                }
-                return $q;
-            });
+            if (!Schema::hasColumn($query->getModel()->getTable(), $dependedKey) || !$dependedValue) {
+                return $this->setEmpty();
+            }
+
+            $query->whereIn($dependedKey, explode(',', $dependedValue));
 
             $models = $query->get();
 
@@ -49,7 +57,6 @@ class AsyncSelectAllViewModel extends ViewModel
             return $options;
         }
 
-        $options[] = ['value' => 'not_found', 'label' => __('common.not_found'), 'disabled' => true];
-        return $options;
+        return $this->setEmpty();
     }
 }
