@@ -1,7 +1,7 @@
 <x-layouts.admin :search="false">
     <x-ui.form class="crud-form"
                id="create-form"
-               :action="route('collectibles.store')"
+               :action="route('collectibles.store.game')"
                enctype="multipart/form-data">
         <x-ui.title class="crud-form__tile" size="normal" indent="small">
             {{ __('collectible.add') }}
@@ -44,7 +44,7 @@
                             :required="true"
                             route="shelves.select"
                             depend-on="user_id"
-                            depend-field="user_id"
+                            depend-field="userfg_id"
 {{--                            :selected="[auth()->user()->id => auth()->user()->name]"--}}
                             :default-option="trans_choice('shelf.choose', 1)"
                             :label="trans_choice('shelf.shelves', 1)" />

@@ -37,17 +37,32 @@ class AsyncSelectByQueryViewModel extends ViewModel
             return $this->setEmpty();
         }
 
-        if($this->query) {
+
+        if($this->depended && $this->query) {
+            $dependedData = request('depended');
+            $dependedKey = array_key_first($dependedData);
+            $dependedValue = $dependedData[$dependedKey];
+
             $query = $this->modelName::query()->where($this->searchField, 'ilike', "%{$this->query}%")->select($this->key, $this->name);
 
-            $query->when(request('depended'), function ($q) {
-                foreach(request('depended') as $key => $value) {
-                    if (Schema::hasColumn($q->getModel()->getTable(), $key) && $value){
-                        $q->whereIn($key, explode(',', $value));
-                    }
-                }
-                return $q;
-            });
+            if (!Schema::hasColumn($query->getModel()->getTable(), $dependedKey) || !$dependedValue) {
+                return $this->setEmpty();
+            }
+
+            $query->whereIn($dependedKey, explode(',', $dependedValue));
+
+            $models = $query->get();
+
+            foreach ($models as $model) {
+                $options[] = ['value' => $model->{$this->key}, 'label' => $model->{$this->name}];
+            }
+
+            return $options;
+        }
+
+
+        if($this->query) {
+            $query = $this->modelName::query()->where($this->searchField, 'ilike', "%{$this->query}%")->select($this->key, $this->name);
 
             $models = $query->limit(10)->get();
 
