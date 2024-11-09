@@ -118,7 +118,7 @@ class ShelfController extends Controller
         return new AsyncSelectAllViewModel(
             Shelf::class,
             trans_choice('shelf.choose', 1),
-            true
+            $request->input('depended')
         );
     }
 }

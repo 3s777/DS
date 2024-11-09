@@ -10,7 +10,7 @@ class AsyncSelectAllViewModel extends ViewModel
     public function __construct(
         protected $modelName,
         protected string $label,
-        protected ?bool $depended = false,
+        protected ?array $depended = null,
         protected ?string $key = 'id',
         protected ?string $name = 'name'
     )
@@ -31,14 +31,14 @@ class AsyncSelectAllViewModel extends ViewModel
             ['value' => '', 'label' => __($this->label), 'disabled' => true]
         ];
 
-        if($this->depended && !request('depended')) {
-            return $this->setEmpty();
-        }
+//        if($this->depended && !request('depended')) {
+//            return $this->setEmpty();
+//        }
 
         if($this->depended) {
-            $dependedData = request('depended');
-            $dependedKey = array_key_first($dependedData);
-            $dependedValue = $dependedData[$dependedKey];
+//            $dependedData = request('depended');
+            $dependedKey = array_key_first($this->depended);
+            $dependedValue = $this->depended[$dependedKey];
 
             $query = $this->modelName::query()->select($this->key, $this->name);
 

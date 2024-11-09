@@ -44,7 +44,7 @@
                             :required="true"
                             route="shelves.select"
                             depend-on="user_id"
-                            depend-field="userfg_id"
+                            depend-field="user_id"
 {{--                            :selected="[auth()->user()->id => auth()->user()->name]"--}}
                             :default-option="trans_choice('shelf.choose', 1)"
                             :label="trans_choice('shelf.shelves', 1)" />

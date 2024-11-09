@@ -11,7 +11,7 @@ class AsyncSelectByQueryViewModel extends ViewModel
         protected ?string $query,
         protected $modelName,
         protected string $label,
-        protected ?bool $depended = false,
+        protected ?array $depended = null,
         protected ?string $searchField = 'name',
         protected ?string $key = 'id',
         protected ?string $name = 'name'
@@ -33,15 +33,14 @@ class AsyncSelectByQueryViewModel extends ViewModel
             ['value' => '', 'label' => __($this->label), 'disabled' => true]
         ];
 
-        if($this->depended && !request('depended')) {
-            return $this->setEmpty();
-        }
+//        if($this->depended && !request('depended')) {
+//            return $this->setEmpty();
+//        }
 
 
         if($this->depended && $this->query) {
-            $dependedData = request('depended');
-            $dependedKey = array_key_first($dependedData);
-            $dependedValue = $dependedData[$dependedKey];
+            $dependedKey = array_key_first($this->depended);
+            $dependedValue = $this->depended[$dependedKey];
 
             $query = $this->modelName::query()->where($this->searchField, 'ilike', "%{$this->query}%")->select($this->key, $this->name);
 

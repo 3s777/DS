@@ -10,7 +10,7 @@ use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Http\Request;
 use Tests\TestCase;
 
-class AsyncSelectAllViewModelTest extends TestCase
+class AsyncSelectByQueryViewModelTest extends TestCase
 {
     use RefreshDatabase;
 
@@ -27,21 +27,27 @@ class AsyncSelectAllViewModelTest extends TestCase
      * @test
      * @return void
      */
-    public function it_success_get_select_depended(): void
+    public function it_success_get_select(): void
     {
-        $shelves = Shelf::factory(3)->create(['user_id' => $this->user->id]);
+        Shelf::factory()->create(['name' => 'TestName']);
+        Shelf::factory()->create(['name' => 'PestNaming']);
+        Shelf::factory(3)->create();
 
-        $select = new AsyncSelectAllViewModel(
+        $select = new AsyncSelectByQueryViewModel(
+            'estNam',
             Shelf::class,
-            trans_choice('shelf.choose', 1),
-            ['user_id' => $this->user->id]
+            trans_choice('shelf.choose', 1)
         );
 
         $expectedResult = [
-            ['value' => '', 'label' => trans_choice('shelf.choose', 1), 'disabled' => true]
+            ['value' => '', 'label' => trans_choice('shelf.choose', 1), 'disabled' => true],
         ];
 
-        foreach($shelves as $shelf) {
+        $expectedShelves = Shelf::where('name', 'ilike', "%estNam%")->get();
+
+        $this->assertCount(2, $expectedShelves);
+
+        foreach($expectedShelves as $shelf) {
             $expectedResult[] =  ['value' => $shelf->id, 'label' => $shelf->name];
         }
 
@@ -55,11 +61,43 @@ class AsyncSelectAllViewModelTest extends TestCase
      * @test
      * @return void
      */
-    public function it_fail_get_select_wrong_depended(): void
+    public function it_success_get_select_depended(): void
     {
+        Shelf::factory()->create(['name' => 'TestName', 'user_id' => $this->user->id]);
         Shelf::factory(3)->create(['user_id' => $this->user->id]);
 
-        $select = new AsyncSelectAllViewModel(
+        $select = new AsyncSelectByQueryViewModel(
+            'estNam',
+            Shelf::class,
+            trans_choice('shelf.choose', 1),
+            ['user_id' => $this->user->id]
+        );
+
+        $expectedResult = [
+            ['value' => '', 'label' => trans_choice('shelf.choose', 1), 'disabled' => true]
+        ];
+
+        $expectedShelf = Shelf::where('name', 'TestName')->first();
+
+        $expectedResult[] =  ['value' => $expectedShelf->id, 'label' => $expectedShelf->name];
+
+        $this->assertEquals(
+            $select->result(),
+            $expectedResult
+        );
+    }
+
+    /**
+     * @test
+     * @return void
+     */
+    public function it_fail_get_select_wrong_depended(): void
+    {
+        Shelf::factory()->create(['name' => 'TestName', 'user_id' => $this->user->id]);
+        Shelf::factory(3)->create(['user_id' => $this->user->id]);
+
+        $select = new AsyncSelectByQueryViewModel(
+            'estNam',
             Shelf::class,
             trans_choice('shelf.choose', 1),
             ['wrong_model_id' => $this->user->id]
