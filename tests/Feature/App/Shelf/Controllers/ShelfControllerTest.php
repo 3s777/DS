@@ -226,12 +226,31 @@ class ShelfControllerTest extends TestCase
      * @test
      * @return void
      */
+    public function it_fail_wrong_depended_get_for_select(): void
+    {
+        $this->actingAs($this->user)
+            ->post(action([ShelfController::class, 'getForSelect'], ['depended' => ['wrong_field_id' => $this->user->id]]))
+            ->assertJson(['result' => [
+                ['value' => '', 'label' => trans_choice('shelf.choose', 1), 'disabled' => true],
+                ['value' => 'not_found', 'label' => __('common.not_found'), 'disabled' => true]
+            ]])
+            ->assertOk();
+    }
+
+    /**
+     * @test
+     * @return void
+     */
     public function it_success_get_for_select(): void
     {
-        $s = $this->actingAs($this->user)
-            ->post(action([ShelfController::class, 'getForSelect'], ['depended' => ['userdnm_id' => $this->user->id]]))
-            ->assertJson(['result' => true])
+        $shelf = Shelf::factory()->create(['user_id' => $this->user->id]);
+
+        $this->actingAs($this->user)
+            ->post(action([ShelfController::class, 'getForSelect'], ['depended' => ['user_id' => $this->user->id]]))
+            ->assertJson(['result' => [
+                ['value' => '', 'label' => trans_choice('shelf.choose', 1), 'disabled' => true],
+                ['value' => $shelf->id, 'label' => $shelf->name]
+            ]])
             ->assertOk();
-        dd($s);
     }
 }

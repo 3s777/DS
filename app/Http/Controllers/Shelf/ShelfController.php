@@ -113,10 +113,9 @@ class ShelfController extends Controller
         return to_route('shelves.index');
     }
 
-    public function getForSelect(Request $request): AsyncSelectByQueryViewModel
+    public function getForSelect(Request $request): AsyncSelectAllViewModel
     {
-        return new AsyncSelectByQueryViewModel(
-            request('query'),
+        return new AsyncSelectAllViewModel(
             Shelf::class,
             trans_choice('shelf.choose', 1),
             true
