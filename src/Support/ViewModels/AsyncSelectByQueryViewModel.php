@@ -37,7 +37,6 @@ class AsyncSelectByQueryViewModel extends ViewModel
 //            return $this->setEmpty();
 //        }
 
-
         if($this->depended && $this->query) {
             $dependedKey = array_key_first($this->depended);
             $dependedValue = $this->depended[$dependedKey];

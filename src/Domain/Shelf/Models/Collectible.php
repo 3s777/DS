@@ -51,8 +51,11 @@ class Collectible extends Model implements HasMedia
         'additional_field',
         'properties',
         'target',
-        'sale',
-        'auction',
+//        'sale->price',
+//        'sale->old_price',
+//        'auction->price',
+//        'auction->to',
+//        'auction->step',
         'kit_conditions',
         'condition',
         'description',
@@ -64,10 +67,10 @@ class Collectible extends Model implements HasMedia
 
     protected $casts = [
         'description' => CleanHtml::class.':custom',
-        'kit_conditions' => 'json',
-        'properties' => 'json',
-        'sale' => 'json',
-        'auction' => 'json',
+        'kit_conditions' => 'array',
+        'properties' => 'array',
+        'sale' => 'array',
+        'auction' => 'array',
         'purchase_price' => Price::class
     ];
 

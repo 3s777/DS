@@ -12,6 +12,7 @@ use Domain\Shelf\Enums\CollectibleTypeEnum;
 use Domain\Shelf\Enums\ConditionEnum;
 use Domain\Shelf\Models\Collectible;
 use Domain\Shelf\Models\Shelf;
+use Illuminate\Database\Eloquent\Relations\Relation;
 use Spatie\ViewModels\ViewModel;
 
 class CollectibleIndexViewModel extends ViewModel
@@ -30,7 +31,8 @@ class CollectibleIndexViewModel extends ViewModel
 
     public function getTypeName($type): ?string
     {
-        $typeEnum = CollectibleTypeEnum::tryFrom($type);
+        $typeClassName = Relation::getMorphedModel($type);
+        $typeEnum = CollectibleTypeEnum::tryFrom($typeClassName);
 
         return $typeEnum?->name();
     }

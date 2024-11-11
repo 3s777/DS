@@ -5,6 +5,7 @@ namespace Domain\Shelf\Services;
 use App\Exceptions\CrudException;
 use Domain\Shelf\DTOs\FillCollectibleDTO;
 use Domain\Shelf\Models\Collectible;
+use Domain\Shelf\Models\Shelf;
 use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
@@ -27,9 +28,6 @@ class CollectibleService
             'additional_field' => $data->additional_field,
             'properties' => $data->properties,
             'target' => $data->target,
-            'sale' => $data->sale,
-            'auction' => $data->auction,
-            'user_id' => $data->user_id,
             'description' => $data->description,
         ];
     }
@@ -40,6 +38,26 @@ class CollectibleService
             DB::beginTransaction();
 
             $collectible = Collectible::make($this->preparedFields($data));
+
+            $shelf = Shelf::find($data->shelf_id);
+            $collectible->user_id = $shelf->user_id;
+
+            if($data->target == 'sale') {
+                $sale = [
+                    'price' => $data->sale['price'],
+                    'price_old' => $data->sale['price_old'] ?? null
+                ];
+                $collectible->sale = $sale;
+            }
+
+            if($data->target == 'auction') {
+                $auction = [
+                    'price' => $data->auction['price'],
+                    'to' => $data->auction['to'],
+                    'step' => $data->auction['step']
+                ];
+                $collectible->auction = $auction;
+            }
 
             $collectible->collectable_id = $data->media;
             $collectible->collectable_type = 'game_media';
@@ -78,7 +96,29 @@ class CollectibleService
                 ['small', 'medium']
             );
 
-            $collectible->fill($this->preparedFields($data))->save();
+            $collectible->fill($this->preparedFields($data));
+
+            $shelf = Shelf::find($data->shelf_id);
+            $collectible->user_id = $shelf->user_id;
+
+            if($data->target == 'sale') {
+                $sale = [
+                    'price' => $data->sale['price'],
+                    'price_old' => $data->sale['price_old'] ?? null
+                ];
+                $collectible->sale = $sale;
+            }
+
+            if($data->target == 'auction') {
+                $auction = [
+                    'price' => $data->auction['price'],
+                    'to' => $data->auction['to'],
+                    'step' => $data->auction['step']
+                ];
+                $collectible->auction = $auction;
+            }
+
+            $collectible->save();
 
             DB::commit();
 

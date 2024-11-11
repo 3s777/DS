@@ -30,11 +30,6 @@ class CreateCollectibleGameRequest extends FormRequest
                 'max:250',
                 Rule::unique(Collectible::class)
             ],
-            'user_id' => [
-                'required',
-                'integer',
-                'exists:Domain\Auth\Models\User,id'
-            ],
             'shelf_id' => [
                 'required',
                 'integer',
@@ -85,7 +80,7 @@ class CreateCollectibleGameRequest extends FormRequest
             ],
             'kit_conditions.*' => [
                 'sometimes',
-                'numeric'
+                'integer'
             ],
             'target' => [
               'required',
@@ -98,7 +93,7 @@ class CreateCollectibleGameRequest extends FormRequest
             ],
             'sale.price_old' => [
                 'exclude_unless:target,sale',
-                'required',
+                'nullable',
                 'numeric'
             ],
             'auction.price' => [
@@ -113,6 +108,7 @@ class CreateCollectibleGameRequest extends FormRequest
             ],
             'auction.to' => [
                 'exclude_unless:target,auction',
+                'required',
                 'date',
                 'date_format:Y-m-d'
             ],

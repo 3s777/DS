@@ -239,7 +239,7 @@
                                     id="sale_price"
                                     name="sale[price]"
                                     step="0.01"
-                                    :value="$collectible->sale['price']"
+                                    :value="$collectible->sale['price'] ?? ''"
                                     type="number"
                                     autocomplete="on">
                                 </x-ui.form.input-text>
@@ -253,7 +253,7 @@
                                     id="sale_price_old"
                                     name="sale[price_old]"
                                     step="0.01"
-                                    :value="$collectible->sale['price_old']"
+                                    :value="$collectible->sale['price_old'] ?? ''"
                                     type="number"
                                     autocomplete="on">
                                 </x-ui.form.input-text>
@@ -270,7 +270,7 @@
                                     id="auction_price"
                                     name="auction[price]"
                                     step="0.01"
-                                    :value="$collectible->auction['price']"
+                                    :value="$collectible->auction['price'] ?? ''"
                                     type="number"
                                     autocomplete="on">
                                 </x-ui.form.input-text>
@@ -284,7 +284,7 @@
                                     id="auction_step"
                                     name="auction[step]"
                                     step="0.01"
-                                    :value="$collectible->auction['step']"
+                                    :value="$collectible->auction['step'] ?? ''"
                                     type="number"
                                     autocomplete="on">
                                 </x-ui.form.input-text>
@@ -297,7 +297,7 @@
                                     placeholder="{{ __('collectible.auction_to') }} *"
                                     id="auction_to"
                                     name="auction[to]"
-                                    :value="$collectible->auction['to']">
+                                    :value="$collectible->auction['to'] ?? ''">
                                 </x-ui.form.datepicker>
                             </x-ui.form.group>
                         </x-grid.col>

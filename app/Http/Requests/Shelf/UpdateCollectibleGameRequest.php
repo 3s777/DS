@@ -30,11 +30,6 @@ class UpdateCollectibleGameRequest extends FormRequest
                 'max:250',
                 Rule::unique(Collectible::class)->ignore($this->collectible)
             ],
-            'user_id' => [
-                'required',
-                'integer',
-                'exists:Domain\Auth\Models\User,id'
-            ],
             'shelf_id' => [
                 'required',
                 'integer',
