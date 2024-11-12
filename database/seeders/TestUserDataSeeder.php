@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 use Domain\Auth\Models\User;
+use Domain\Game\Models\GameMedia;
 use Domain\Shelf\Models\Collectible;
 use Domain\Shelf\Models\Shelf;
 use Illuminate\Database\Seeder;
@@ -28,10 +29,14 @@ class TestUserDataSeeder extends Seeder
 
         $testUser->assignRole('super_admin');
 
-        Shelf::factory(2)
-            ->has(Collectible::factory(rand(1,5))
-                ->for($testUser, 'user'), 'collectibles')
-            ->for($testUser, 'user')
-            ->create();
+//        Shelf::factory(2)
+//            ->has(
+//                Collectible::factory(rand(1,5))
+//                    ->for($testUser, 'user')
+//                    ->for(GameMedia::factory(), 'collectable'),
+//                'collectibles'
+//            )
+//            ->for($testUser, 'user')
+//            ->create();
     }
 }

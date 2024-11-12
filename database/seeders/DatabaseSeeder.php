@@ -13,7 +13,7 @@ class DatabaseSeeder extends Seeder
             UserSeeder::class,
             RolesAndPermissionsSeeder::class,
             TestUserDataSeeder::class,
-            GameMediaSeeder::class,
+//            GameMediaSeeder::class,
             ShelfSeeder::class,
         ]);
     }

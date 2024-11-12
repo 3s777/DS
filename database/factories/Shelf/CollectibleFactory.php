@@ -49,30 +49,54 @@ class CollectibleFactory extends Factory
             'ulid' => Str::ulid(),
             'article_number' => fake()->title(),
             'condition' => Arr::random(ConditionEnum::cases())->value,
+            'user_id' => User::factory(),
             'shelf_id' => Shelf::factory(),
-            'collectable_type' => fake()->randomElement([
-                'game_media'
-            ]),
-            'collectable_id' => function(array $attributes) {
-                $className = Relation::getMorphedModel($attributes['collectable_type']);
-                return $className::factory()->has(KitItem::factory(rand(1,3)));
-            },
-            'kit_conditions' => function(array $attributes) {
-                $className = Relation::getMorphedModel($attributes['collectable_type']);
-                $media = $className::find($attributes['collectable_id']);
-                $kitConditions = [];
-
-                foreach($media->kitItems as $kitItem)  {
-                    $kitConditions[$kitItem->id] = rand(1,10);
-                }
-
-                return $kitConditions;
-            },
+//            'collectable_type' => fake()->randomElement([
+//                'game_media'
+//            ]),
+//            'collectable_id' => function(array $attributes) {
+//                $className = Relation::getMorphedModel($attributes['collectable_type']);
+//                return $className::factory()->has(KitItem::factory(rand(1,3)));
+//            },
+            'seller' => fake()->name(),
             'purchase_price' => $this->faker->numberBetween(1000, 100000),
+            'purchased_at' => fake()->date(),
+            'additional_field' => fake()->title(),
             'target' => $target,
             'sale' => $sale,
             'auction' => $auction,
             'description' => $this->translations(['en', 'ru'], [fake()->text(), fake()->text()])
         ];
+    }
+
+    public function hasKitConditions(): static
+    {
+        return $this->state(fn (array $attributes) =>
+            [
+                'kit_conditions' => function(array $attributes) {
+                    $className = Relation::getMorphedModel($attributes['collectable_type']);
+                    $media = $className::find($attributes['collectable_id']);
+                    $kitConditions = [];
+
+                    foreach($media->kitItems as $kitItem)  {
+                        $kitConditions[$kitItem->id] = rand(1,10);
+                    }
+
+                    return $kitConditions;
+                }
+            ]
+        );
+    }
+
+    public function hasMedia()
+    {
+        return $this->state(fn ($attributes) =>
+        $this->for(
+
+            GameMedia::factory()
+
+                ->has(KitItem::factory(rand(1,3)), 'kitItems'),
+            'collectable')
+        );
     }
 }

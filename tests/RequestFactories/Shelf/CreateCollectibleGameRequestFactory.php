@@ -27,7 +27,6 @@ class CreateCollectibleGameRequestFactory extends RequestFactory
             'properties.is_done' => fake()->boolean(),
             'properties.is_digital'  => fake()->boolean(),
             'media' => [GameMedia::factory()],
-
         ];
     }
 }
