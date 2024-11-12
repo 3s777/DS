@@ -16,22 +16,40 @@ class ShelfSeeder extends Seeder
     public function run(): void
     {
         $users = User::factory(5)->create();
-//        $gameMedias = GameMedia::factory(5)->has(KitItem::factory(5), 'kitItems')->create();
+        $gameMedias = GameMedia::factory(5)->has(KitItem::factory(5), 'kitItems')->create();
 
-            $collectable = Collectible::factory(5)
+        $collectibles = [];
+
+        foreach($gameMedias as $media) {
+            $collectibles[] = Collectible::factory()
                 ->for($users->random())
-                    ->for(
-                        fake()->randomElement([
-                            GameMedia::factory()
-                        ])
-                            ->has(KitItem::factory(rand(1,3)), 'kitItems'),
-                    'collectable')
+                ->for($media,  'collectable')
 //                ->for(new Sequence(
 //                    fn (Sequence $sequence) => $gameMedias->random()
 //                ), 'collectable')
 //                        ->recycle($gameMedias->random())
-                ->hasKitConditions()->create();
+                ->hasKitConditions();
 //                ->state(['kit_conditions' => 'test']);
+        }
+
+        $collectionCollectibles = collect($collectibles);
+
+//        dd(collect($collectibles));
+
+//        Collectible::factory(5)
+//            ->for($users->random())
+//            ->for(
+//                fake()->randomElement([
+//                    GameMedia::factory()
+//                ])
+//                    ->has(KitItem::factory(rand(1,3)), 'kitItems'),
+//                'collectable')
+////                ->for(new Sequence(
+////                    fn (Sequence $sequence) => $gameMedias->random()
+////                ), 'collectable')
+////                        ->recycle($gameMedias->random())
+//            ->hasKitConditions()->create();
+////                ->state(['kit_conditions' => 'test']);
 
 
         foreach($users as $user) {
@@ -56,12 +74,12 @@ class ShelfSeeder extends Seeder
 //
 //
 //
-//            Shelf::factory(2)
-//                ->has($collectable,
-////                    ->state(['kit_conditions' => 'test']),
-//                    'collectibles')
-//                ->for($user, 'user')
-//                ->create();
+            Shelf::factory(2)
+                ->has($collectionCollectibles->random(),
+//                    ->state(['kit_conditions' => 'test']),
+                    'collectibles')
+                ->for($user, 'user')
+                ->create();
         }
     }
 }
