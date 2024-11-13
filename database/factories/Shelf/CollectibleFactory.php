@@ -59,7 +59,7 @@ class CollectibleFactory extends Factory
 //                return $className::factory()->has(KitItem::factory(rand(1,3)));
 //            },
             'seller' => fake()->name(),
-            'purchase_price' => $this->faker->numberBetween(1000, 100000),
+            'purchase_price' => fake()->numberBetween(1000, 100000),
             'purchased_at' => fake()->date(),
             'additional_field' => fake()->title(),
             'target' => $target,
@@ -85,18 +85,6 @@ class CollectibleFactory extends Factory
                     return $kitConditions;
                 }
             ]
-        );
-    }
-
-    public function hasMedia()
-    {
-        return $this->state(fn ($attributes) =>
-        $this->for(
-
-            GameMedia::factory()
-
-                ->has(KitItem::factory(rand(1,3)), 'kitItems'),
-            'collectable')
         );
     }
 }

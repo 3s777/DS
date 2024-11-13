@@ -10,6 +10,7 @@ use Database\Factories\Shelf\CollectibleFactory;
 use Database\Factories\UserFactory;
 use Domain\Auth\Models\Role;
 use Domain\Auth\Models\User;
+use Domain\Game\Models\GameMedia;
 use Domain\Shelf\Models\Collectible;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Http\UploadedFile;
@@ -33,7 +34,7 @@ class CollectibleGameControllerTest extends TestCase
         Role::create(['name' => config('settings.super_admin_role'), 'display_name' => 'SuperAdmin']);
         $this->user->assignRole('super_admin');
 
-        $this->collectible = CollectibleFactory::new()->create();
+        $this->collectible = CollectibleFactory::new()->for(GameMedia::factory(), 'collectable')->create();
 
         $this->request = CreateCollectibleGameRequest::factory()->create();
     }
