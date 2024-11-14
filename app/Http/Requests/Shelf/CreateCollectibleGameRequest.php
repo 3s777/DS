@@ -3,6 +3,7 @@
 namespace App\Http\Requests\Shelf;
 
 use Domain\Shelf\Enums\ConditionEnum;
+use Domain\Shelf\Enums\TargetEnum;
 use Domain\Shelf\Models\Collectible;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
@@ -64,10 +65,10 @@ class CreateCollectibleGameRequest extends FormRequest
                 'string',
                 'max:250'
             ],
-            'is_done' => [
+            'properties.is_done' => [
                 'boolean'
             ],
-            'is_digital' => [
+            'properties.is_digital' => [
                 'boolean'
             ],
             'media' => [
@@ -84,7 +85,7 @@ class CreateCollectibleGameRequest extends FormRequest
             ],
             'target' => [
               'required',
-              'string'
+              Rule::enum(TargetEnum::class)
             ],
             'sale.price' => [
                 'exclude_unless:target,sale',

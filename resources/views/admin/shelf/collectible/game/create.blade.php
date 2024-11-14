@@ -123,7 +123,7 @@
                     <x-ui.form.group>
                         <x-ui.form.switcher
                             name="properties[is_done]"
-                            value="1"
+                            value="fake"
                             :label="__('game.is_done')">
                         </x-ui.form.switcher>
                     </x-ui.form.group>
@@ -156,7 +156,6 @@
                 <x-grid.col xl="5" ls="6" lg="12" md="12" sm="12">
                     <x-ui.form.group>
                         <div id="kit" class="admin__conditions"></div>
-                        <input type="text" name="kit_conditions[po]">
                     </x-ui.form.group>
                 </x-grid.col>
             </x-grid>
