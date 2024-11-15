@@ -59,8 +59,8 @@ class CollectibleService
                 $collectible->auction = $auction;
             }
 
-            $collectible->collectable_id = $data->media;
-            $collectible->collectable_type = 'game_media';
+            $collectible->collectable_id = $data->collectable;
+            $collectible->collectable_type = $data->collectable_type;
 
             $collectible->save();
 

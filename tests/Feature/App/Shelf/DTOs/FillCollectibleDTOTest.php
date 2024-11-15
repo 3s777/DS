@@ -50,7 +50,8 @@ class FillCollectibleDTOTest extends TestCase
                 'is_digital' => $this->request['properties.is_digital']
             ],
             target: $this->request['target'],
-            media: $this->request['media'],
+            collectable: $this->request['collectable'],
+            collectable_type: $this->request['collectable_type'],
             kit_conditions: $this->request['kit_conditions'],
             sale: $this->request['sale'],
             auction: $this->request['auction'],

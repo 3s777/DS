@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests\Shelf;
 
+use Domain\Shelf\Enums\CollectibleTypeEnum;
 use Domain\Shelf\Enums\ConditionEnum;
 use Domain\Shelf\Enums\TargetEnum;
 use Domain\Shelf\Models\Collectible;
@@ -16,6 +17,13 @@ class CreateCollectibleGameRequest extends FormRequest
     public function authorize(): bool
     {
         return true;
+    }
+
+    protected function prepareForValidation()
+    {
+        $this->merge([
+            'collectable_type' => CollectibleTypeEnum::Game->morphName(),
+        ]);
     }
 
     /**
@@ -71,10 +79,14 @@ class CreateCollectibleGameRequest extends FormRequest
             'properties.is_digital' => [
                 'boolean'
             ],
-            'media' => [
+            'collectable' => [
                 'required',
                 'integer',
                 'exists:Domain\Game\Models\GameMedia,id'
+            ],
+            'collectable_type' => [
+                'required',
+                'string'
             ],
             'kit_conditions' => [
                 'required'

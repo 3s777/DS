@@ -75,10 +75,10 @@ class CollectibleFactory extends Factory
             [
                 'kit_conditions' => function(array $attributes) {
                     $className = Relation::getMorphedModel($attributes['collectable_type']);
-                    $media = $className::find($attributes['collectable_id']);
+                    $collectable = $className::find($attributes['collectable_id']);
                     $kitConditions = [];
 
-                    foreach($media->kitItems as $kitItem)  {
+                    foreach($collectable->kitItems as $kitItem)  {
                         $kitConditions[$kitItem->id] = rand(1,10);
                     }
 

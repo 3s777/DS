@@ -144,12 +144,12 @@
                 <x-grid.col xl="4" ls="6" lg="12" md="12" sm="12">
                     <x-ui.form.group>
                         <x-ui.select.async
-                            name="media"
-                            select-name="media"
+                            name="collectable"
+                            select-name="collectable"
                             :required="true"
                             route="game-media.select"
-                            :default-option="trans_choice('collectible.choose_media', 1)"
-                            :label="trans_choice('collectible.media', 1)" />
+                            :default-option="trans_choice('collectible.choose_collectable', 1)"
+                            :label="trans_choice('collectible.collectable', 1)" />
                     </x-ui.form.group>
                 </x-grid.col>
 

@@ -156,9 +156,9 @@
                 <x-grid.col xl="4" ls="6" lg="12" md="12" sm="12">
                     <x-ui.form.group>
                         <x-ui.form.input-text
-                            :placeholder="trans_choice('collectible.media', 1)"
-                            id="media"
-                            name="media"
+                            :placeholder="trans_choice('collectible.collectable', 1)"
+                            id="collectable"
+                            name="collectable"
                             :value="$collectible->collectable->name"
                             :disabled="true">
                         </x-ui.form.input-text>

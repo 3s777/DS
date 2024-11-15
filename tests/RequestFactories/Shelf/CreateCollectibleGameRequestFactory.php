@@ -4,6 +4,7 @@ namespace Tests\RequestFactories\Shelf;
 
 use Domain\Auth\Models\User;
 use Domain\Game\Models\GameMedia;
+use Domain\Shelf\Enums\CollectibleTypeEnum;
 use Domain\Shelf\Enums\ConditionEnum;
 use Domain\Shelf\Enums\TargetEnum;
 use Domain\Shelf\Models\KitItem;
@@ -46,7 +47,8 @@ class CreateCollectibleGameRequestFactory extends RequestFactory
             'additional_field' => fake()->title(),
             'properties.is_done' => fake()->boolean(),
             'properties.is_digital' => fake()->boolean(),
-            'media' => $gameMedia->id,
+            'collectable' => $gameMedia->id,
+            'collectable_type' => CollectibleTypeEnum::Game->morphName(),
             'target' => $target->value,
             'sale' => $sale,
             'auction' => $auction,
@@ -58,11 +60,11 @@ class CreateCollectibleGameRequestFactory extends RequestFactory
         return $this->state(
         [
             'kit_conditions' => function(array $properties) {
-                $className = Relation::getMorphedModel('game_media');
-                $media = $className::find($properties['media']);
+                $className = Relation::getMorphedModel(CollectibleTypeEnum::Game->morphName());
+                $collectable = $className::find($properties['collectable']);
                 $kitConditions = [];
 
-                foreach($media->kitItems as $kitItem)  {
+                foreach($collectable->kitItems as $kitItem)  {
                     $kitConditions[$kitItem->id] = rand(1,10);
                 }
 

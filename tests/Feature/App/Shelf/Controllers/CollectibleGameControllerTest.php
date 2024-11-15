@@ -51,7 +51,7 @@ class CollectibleGameControllerTest extends TestCase
             ->assertRedirectToRoute('login');
     }
 
-    protected function setFakeRequestData(): void
+    private function setFakeRequestData(): void
     {
         $this->request['name'] = '';
         $this->request['article_number'] = ['fake', 'fake 2'];
@@ -62,28 +62,26 @@ class CollectibleGameControllerTest extends TestCase
         $this->request['additional_field'] = ['fake'];
         $this->request['properties']['is_done'] = 'fake';
         $this->request['properties']['is_digital'] = 'fake';
-        $this->request['media'] = 150000;
+        $this->request['collectable'] = 150000;
         $this->request['kit_conditions'] = null;
         $this->request['target'] = 'fake';
         $this->request['shelf_id'] = 1500000;
     }
 
-    protected function setFakeSaleRequestData(): void
+    private function setFakeSaleRequestData(): void
     {
         $this->request['target'] = 'sale';
         $this->request['sale']['price'] = 'fake';
         $this->request['sale']['price_old'] = 'fake';
     }
 
-    protected function setFakeAuctionRequestData(): void
+    private function setFakeAuctionRequestData(): void
     {
         $this->request['target'] = 'auction';
         $this->request['auction']['price'] = 'fake';
         $this->request['auction']['step'] = 'fake';
         $this->request['auction']['to'] = 'fake';
     }
-
-
 
     /**
      * @test
@@ -187,7 +185,7 @@ class CollectibleGameControllerTest extends TestCase
                 'additional_field',
                 'properties.is_done',
                 'properties.is_digital',
-                'media',
+                'collectable',
                 'kit_conditions',
                 'target',
                 'shelf_id'
@@ -319,7 +317,7 @@ class CollectibleGameControllerTest extends TestCase
         $this->request['additional_field'] = 'additional';
         $this->request['properties']['is_done'] = 1;
         $this->request['properties']['is_digital'] = 1;
-        $this->request['media'] = 200;
+        $this->request['collectable'] = 200;
         $this->request['target'] = 'sale';
         $this->request['shelf_id'] = $newShelf->id;
         $this->request['sale']['price'] = '100';

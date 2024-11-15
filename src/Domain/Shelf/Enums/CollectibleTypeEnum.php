@@ -14,4 +14,12 @@ enum CollectibleTypeEnum: string
             default => trans_choice('game.games', 1),
         };
     }
+
+    public function morphName():string {
+        return match($this) {
+            CollectibleTypeEnum::Game => 'game_media',
+            CollectibleTypeEnum::Book => 'booke',
+            default => 'game_media',
+        };
+    }
 }
