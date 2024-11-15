@@ -132,8 +132,13 @@ class Collectible extends Model implements HasMedia
         return $this->morphTo();
     }
 
-    public function kitItems(): BelongsToMany
+//    public function kitItems(): BelongsToMany
+//    {
+//        return $this->belongsToMany(KitItem::class);
+//    }
+
+    public function kitItems(): MorphToMany
     {
-        return $this->belongsToMany(KitItem::class);
+        return $this->morphToMany(KitItem::class, 'kitable')->withPivot('condition');
     }
 }

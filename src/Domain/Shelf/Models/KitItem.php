@@ -6,6 +6,7 @@ namespace Domain\Shelf\Models;
 use Database\Factories\Shelf\KitItemFactory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\MorphToMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use OwenIt\Auditing\Auditable as HasAuditable;
 use OwenIt\Auditing\Contracts\Auditable;
@@ -32,5 +33,10 @@ class KitItem extends Model implements Auditable
     protected static function newFactory(): KitItemFactory
     {
         return KitItemFactory::new();
+    }
+
+    public function collectible(): MorphToMany
+    {
+        return $this->morphToMany(Collectible::class, 'collectible')->withPivot('condition');
     }
 }

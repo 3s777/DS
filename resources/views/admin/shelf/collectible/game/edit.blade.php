@@ -168,6 +168,16 @@
                 <x-grid.col xl="5" ls="6" lg="12" md="12" sm="12">
                     <x-ui.form.group>
                         <div id="kit" class="admin__conditions">
+                            @foreach($collectible->kitItems as $item)
+                                <x-ui.star-rating
+                                    :name="$item->id"
+                                    :title="$item->name"
+                                    :value="$item->collectible->condition"
+                                    input-name="kit_conditions[{{ $item->id }}]"
+                                    class="admin__conditions-item" />
+                            @endforeach
+
+
                             @foreach($collectible->collectable->kitItems as $item)
                                 <x-ui.star-rating
                                     :name="$item->id"

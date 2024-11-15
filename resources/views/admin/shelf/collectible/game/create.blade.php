@@ -380,15 +380,15 @@
                 }
             }
 
-            const mediaSelect = document.getElementById('media-select');
+            const collectableSelect = document.getElementById('collectable-select');
 
             window.addEventListener("load", (event) => {
-                if(mediaSelect.value !== '') {
-                    setKit(mediaSelect.value);
+                if(collectableSelect.value !== '') {
+                    setKit(collectableSelect.value);
                 }
             });
 
-            mediaSelect.addEventListener('change', async function() {
+            collectableSelect.addEventListener('change', async function() {
                 setKit(this.value);
             });
         </script>

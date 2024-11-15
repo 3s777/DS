@@ -5,6 +5,7 @@ namespace Domain\Shelf\Services;
 use App\Exceptions\CrudException;
 use Domain\Shelf\DTOs\FillCollectibleDTO;
 use Domain\Shelf\Models\Collectible;
+use Domain\Shelf\Models\KitItem;
 use Domain\Shelf\Models\Shelf;
 use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\Facades\DB;
@@ -63,6 +64,18 @@ class CollectibleService
             $collectible->collectable_type = $data->collectable_type;
 
             $collectible->save();
+
+            $kitItems = [];
+
+            foreach($data->kit_conditions as $kitItem => $condition) {
+                if(KitItem::find($kitItem)->exists()) {
+                    $kitItems[$kitItem] = ['condition' => $condition];
+                }
+            }
+
+//            foreach($data->kit_conditions as $kitItem => $condition) {
+                $collectible->kitItems()->sync($kitItems);
+//            }
 
 //            $kitItems = [];
 //            foreach($data->kit_conditions as $key=>$value) {
