@@ -172,8 +172,8 @@
                                 <x-ui.star-rating
                                     :name="$item->id"
                                     :title="$item->name"
-                                    :value="$item->collectible->condition"
-                                    input-name="kit_conditions[{{ $item->id }}]"
+                                    :value="$item->pivot->condition"
+                                    input-name="kit_conditionss[{{ $item->id }}]"
                                     class="admin__conditions-item" />
                             @endforeach
 

@@ -35,8 +35,8 @@ class KitItem extends Model implements Auditable
         return KitItemFactory::new();
     }
 
-    public function collectible(): MorphToMany
-    {
-        return $this->morphToMany(Collectible::class, 'collectible')->withPivot('condition');
-    }
+//    public function collectible(): MorphToMany
+//    {
+//        return $this->morphedByMany(Collectible::class, 'collectable')->withPivot('condition');
+//    }
 }

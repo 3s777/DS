@@ -3,16 +3,19 @@
 namespace Database\Seeders;
 
 use Domain\Auth\Models\User;
+use Domain\Game\Models\Game;
+use Domain\Game\Models\GameDeveloper;
+use Domain\Game\Models\GameGenre;
 use Domain\Game\Models\GameMedia;
+use Domain\Game\Models\GamePlatform;
+use Domain\Game\Models\GamePublisher;
 use Domain\Shelf\Models\Collectible;
+use Domain\Shelf\Models\KitItem;
 use Domain\Shelf\Models\Shelf;
 use Illuminate\Database\Seeder;
 
 class TestUserDataSeeder extends Seeder
 {
-    /**
-     * Run the database seeds.
-     */
     public function run(): void
     {
         User::create([
@@ -29,14 +32,30 @@ class TestUserDataSeeder extends Seeder
 
         $testUser->assignRole('super_admin');
 
-//        Shelf::factory(2)
-//            ->has(
-//                Collectible::factory(rand(1,5))
-//                    ->for($testUser, 'user')
-//                    ->for(GameMedia::factory(), 'collectable'),
-//                'collectibles'
-//            )
-//            ->for($testUser, 'user')
-//            ->create();
+        $collectableFactory = fake()->randomElement([
+            GameMedia::factory(5)
+                ->has(
+                    Game::factory(1)
+                        ->has(GameDeveloper::factory(2), 'developers')
+                        ->has(GamePublisher::factory(2), 'publishers')
+                        ->has(GameGenre::factory(3), 'genres')
+                        ->has(GamePlatform::factory(2), 'platforms'),
+                    'games'
+                )
+                ->has(GameDeveloper::factory(2), 'developers')
+                ->has(GamePublisher::factory(2), 'publishers')
+                ->has(GameGenre::factory(3), 'genres')
+                ->has(GamePlatform::factory(2), 'platforms')
+        ]);
+
+        $collectableFactory
+            ->has(KitItem::factory(rand(1,3)), 'kitItems')
+            ->has(Collectible::factory()
+                ->for(Shelf::factory()->for($testUser, 'user'), 'shelf')
+                ->for($testUser, 'user')
+                ->hasKitConditions(),
+                'collectibles')
+            ->for(User::factory(), 'user')
+            ->create();
     }
 }
