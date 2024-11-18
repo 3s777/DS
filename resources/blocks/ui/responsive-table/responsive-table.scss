@@ -5,7 +5,70 @@
     overflow: hidden;
 
     &__wrapper {
+        position: relative;
         overflow-x: auto;
+    }
+
+    &__scroll-buttons {
+        display: flex;
+        justify-content: flex-end;
+        gap: 4px;
+
+        &_static {
+            margin-bottom: 8px;
+        }
+    }
+
+    &__scroll-button {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 26px;
+        height: 26px;
+        padding: 0;
+        border-radius: 50%;
+
+        &:after {
+            content: 'next';
+            font-family: swiper-icons;
+            font-size: rem(12);
+            text-transform: none !important;
+            letter-spacing: 0;
+            font-variant: initial;
+            line-height: 1;
+        }
+    }
+
+    &__scroll-button_left {
+        &:after {
+            content: 'prev';
+        }
+    }
+
+    &__scroll-buttons_fixed {
+        display: none;
+        padding: 16px 0;
+
+        .responsive-table__wrapper_absolute & {
+            display: none;
+            position: absolute;
+            bottom: 0;
+            right: 0;
+            top: auto;
+        }
+
+        .responsive-table__wrapper_fixed & {
+            display: flex;
+            position: fixed;
+            top: 0;
+            bottom: auto;
+            opacity: .5;
+
+            &:hover {
+                opacity: 1;
+            }
+        }
+
     }
 
     &__header {
