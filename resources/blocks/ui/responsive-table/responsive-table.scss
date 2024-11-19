@@ -1,21 +1,40 @@
 .responsive-table {
-    display: table;
-    width: 100%;
-    border-radius: $small-border-radius $small-border-radius 0 0;
-    overflow: hidden;
+    position: relative;
+    margin-top: -24px;
+    padding-top: 36px;
 
-    &__wrapper {
-        position: relative;
+    &__inner {
         overflow-x: auto;
     }
 
+    &__content {
+        display: table;
+        width: 100%;
+        border-radius: $small-border-radius $small-border-radius 0 0;
+        overflow: hidden;
+    }
+
     &__scroll-buttons {
+        position: absolute;
+        top: 0;
+        right: 0;
         display: flex;
         justify-content: flex-end;
         gap: 4px;
+        margin-bottom: 8px;
 
-        &_static {
-            margin-bottom: 8px;
+        .responsive-table__wrapper_fixed & {
+            display: flex;
+            position: fixed;
+            z-index: 100;
+            top: 0;
+            bottom: auto;
+            opacity: .5;
+            padding-top: 12px;
+
+            &:hover {
+                opacity: 1;
+            }
         }
     }
 
@@ -43,32 +62,6 @@
         &:after {
             content: 'prev';
         }
-    }
-
-    &__scroll-buttons_fixed {
-        display: none;
-        padding: 16px 0;
-
-        .responsive-table__wrapper_absolute & {
-            display: none;
-            position: absolute;
-            bottom: 0;
-            right: 0;
-            top: auto;
-        }
-
-        .responsive-table__wrapper_fixed & {
-            display: flex;
-            position: fixed;
-            top: 0;
-            bottom: auto;
-            opacity: .5;
-
-            &:hover {
-                opacity: 1;
-            }
-        }
-
     }
 
     &__header {
@@ -164,7 +157,20 @@
     }
 
     @include breakpoint-max($md) {
-        display: block;
+        margin-top: 0;
+        padding-top: 0;
+
+        &__content {
+            display: block;
+        }
+
+        &__scroll-buttons {
+            display: none;
+
+            .responsive-table__wrapper_fixed & {
+                display: none;
+            }
+        }
 
         &__header {
             display: flex;

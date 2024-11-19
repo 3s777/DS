@@ -18,7 +18,7 @@
                 'article_number' => trans_choice('common.article_numbers', 1),
                 'condition'  => __('common.condition'),
                 'type' => trans_choice('collectible.type', 1),
-                'media' => trans_choice('collectible.media', 1),
+                'media' => trans_choice('collectible.collectable', 1),
                 'kit_conditions' => __('collectible.kit.items'),
                 'purchase_price' => __('collectible.purchase_price'),
                 'purchase_at' => __('collectible.purchased_at'),
@@ -54,7 +54,7 @@
                     {{ trans_choice('collectible.type', 1) }}
                 </x-ui.responsive-table.column>
                 <x-ui.responsive-table.column sortable="true" name="collectable.name">
-                    {{ trans_choice('collectible.media', 1) }}
+                    {{ trans_choice('collectible.collectable', 1) }}
                 </x-ui.responsive-table.column>
                 <x-ui.responsive-table.column name="collectable.kit_conditions">
                     {{ __('collectible.kit.items') }}
@@ -109,7 +109,7 @@
                         <span class="responsive-table__label">{{ trans_choice('collectible.type', 1) }}: </span> {{ $getTypeName($collectible->collectable_type) }}
                     </x-ui.responsive-table.column>
                     <x-ui.responsive-table.column>
-                        <span class="responsive-table__label">{{ trans_choice('collectible.media', 1) }}: </span> {{ $collectible->collectable->name }}
+                        <span class="responsive-table__label">{{ trans_choice('collectible.collectable', 1) }}: </span> {{ $collectible->collectable->name }}
                     </x-ui.responsive-table.column>
                     <x-ui.responsive-table.column>
                         <span class="responsive-table__label">{{ __('collectible.kit.items') }}: </span>
@@ -164,55 +164,7 @@
     </x-common.action-table>
 
     Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusantium ad alias amet aperiam, aspernatur aut blanditiis consequatur dicta eius eum excepturi fugiat fugit hic, id ipsum iste iusto molestiae nam nihil non odio omnis possimus praesentium quae quas repellendus tempora voluptatibus? Accusamus architecto at aut blanditiis cum delectus deleniti dignissimos ducimus eaque earum enim eos esse excepturi exercitationem fuga illum impedit in incidunt iste iusto, laboriosam magni maxime molestiae mollitia nesciunt nihil numquam pariatur possimus praesentium quasi quisquam quos reiciendis repellendus reprehenderit sed sit suscipit. Corporis cumque deserunt distinctio doloremque eos inventore labore laudantium quae quidem, reiciendis velit voluptas. Consequatur distinctio, et eveniet facilis nemo nobis odio sunt voluptas! Ab asperiores commodi culpa et, eum eveniet facere facilis fuga hic incidunt labore laudantium minima natus nisi nobis, obcaecati quam, repellat similique sit tempora temporibus unde velit voluptate! Animi architecto at fugiat in officiis quaerat sunt! Adipisci amet beatae, consequuntur dignissimos, eaque excepturi in itaque laborum minus molestias quam, quos suscipit tempore ullam voluptate? Aliquam aliquid animi atque blanditiis corporis deserunt eius est explicabo iste laudantium minus non, perspiciatis praesentium quam quo repellendus, velit? A architecto cumque dolores ducimus iste omnis quos ratione sed. Animi autem cumque distinctio dolore doloribus dolorum error facilis hic id laudantium natus officiis quasi, recusandae repellat reprehenderit similique sit, tempora tempore velit voluptatum? Ab amet at blanditiis deserunt dolores facere hic maxime quia temporibus? Ad adipisci alias at blanditiis consequatur corporis debitis deleniti deserunt dolores doloribus earum et excepturi harum illum inventore labore libero magnam minima minus nemo nihil odit, officiis perferendis perspiciatis placeat porro praesentium provident quae qui quidem quisquam quod sint ullam vel, vero vitae voluptatum? A ad aspernatur autem consectetur consequatur exercitationem, explicabo facere illo ipsam ipsum maiores minima necessitatibus nobis obcaecati, pariatur praesentium quod sapiente sed suscipit velit! Commodi consequatur eligendi minima sequi? Maxime nostrum recusandae soluta. Accusamus aspernatur assumenda dicta distinctio itaque laboriosam modi quam tempore ullam! Atque aut corporis cumque dolorem ea enim et facere iusto labore laboriosam minus, nam natus, recusandae reiciendis sit tenetur unde veritatis voluptatum. Ad animi architecto aspernatur consequatur debitis deleniti earum, eligendi et eveniet excepturi impedit incidunt iure laboriosam minus molestias necessitatibus non nostrum officiis, quam quas quisquam quod ratione repudiandae rerum veniam! Ea eaque itaque non odio, quidem tempora. Adipisci beatae consectetur consequuntur culpa cum cupiditate dignissimos eius enim error id inventore itaque minima omnis pariatur quam quas, quis sit totam unde vel. Non optio quas saepe. Ab adipisci consequuntur, culpa dolore earum eos esse excepturi illum maiores non nostrum numquam placeat provident quaerat quia! Accusamus, aliquid aperiam assumenda consequuntur deleniti dicta dignissimos dolores eaque eligendi eum explicabo impedit incidunt itaque maiores minus molestiae molestias mollitia nesciunt non numquam omnis pariatur qui quisquam quod reprehenderit rerum similique suscipit tempora ullam, voluptatum. Ab beatae, consequuntur dicta doloribus excepturi facere fugiat inventore, itaque nesciunt placeat quis voluptatem. Doloribus esse eveniet explicabo fugit harum magnam sed voluptate. Aperiam aut dolor ea, enim error eveniet fuga fugiat iusto magnam pariatur perferendis placeat, porro quo rem sapiente sit tempore.
+    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusantium ad alias amet aperiam, aspernatur aut blanditiis consequatur dicta eius eum excepturi fugiat fugit hic, id ipsum iste iusto molestiae nam nihil non odio omnis possimus praesentium quae quas repellendus tempora voluptatibus? Accusamus architecto at aut blanditiis cum delectus deleniti dignissimos ducimus eaque earum enim eos esse excepturi exercitationem fuga illum impedit in incidunt iste iusto, laboriosam magni maxime molestiae mollitia nesciunt nihil numquam pariatur possimus praesentium quasi quisquam quos reiciendis repellendus reprehenderit sed sit suscipit. Corporis cumque deserunt distinctio doloremque eos inventore labore laudantium quae quidem, reiciendis velit voluptas. Consequatur distinctio, et eveniet facilis nemo nobis odio sunt voluptas! Ab asperiores commodi culpa et, eum eveniet facere facilis fuga hic incidunt labore laudantium minima natus nisi nobis, obcaecati quam, repellat similique sit tempora temporibus unde velit voluptate! Animi architecto at fugiat in officiis quaerat sunt! Adipisci amet beatae, consequuntur dignissimos, eaque excepturi in itaque laborum minus molestias quam, quos suscipit tempore ullam voluptate? Aliquam aliquid animi atque blanditiis corporis deserunt eius est explicabo iste laudantium minus non, perspiciatis praesentium quam quo repellendus, velit? A architecto cumque dolores ducimus iste omnis quos ratione sed. Animi autem cumque distinctio dolore doloribus dolorum error facilis hic id laudantium natus officiis quasi, recusandae repellat reprehenderit similique sit, tempora tempore velit voluptatum? Ab amet at blanditiis deserunt dolores facere hic maxime quia temporibus? Ad adipisci alias at blanditiis consequatur corporis debitis deleniti deserunt dolores doloribus earum et excepturi harum illum inventore labore libero magnam minima minus nemo nihil odit, officiis perferendis perspiciatis placeat porro praesentium provident quae qui quidem quisquam quod sint ullam vel, vero vitae voluptatum? A ad aspernatur autem consectetur consequatur exercitationem, explicabo facere illo ipsam ipsum maiores minima necessitatibus nobis obcaecati, pariatur praesentium quod sapiente sed suscipit velit! Commodi consequatur eligendi minima sequi? Maxime nostrum recusandae soluta. Accusamus aspernatur assumenda dicta distinctio itaque laboriosam modi quam tempore ullam! Atque aut corporis cumque dolorem ea enim et facere iusto labore laboriosam minus, nam natus, recusandae reiciendis sit tenetur unde veritatis voluptatum. Ad animi architecto aspernatur consequatur debitis deleniti earum, eligendi et eveniet excepturi impedit incidunt iure laboriosam minus molestias necessitatibus non nostrum officiis, quam quas quisquam quod ratione repudiandae rerum veniam! Ea eaque itaque non odio, quidem tempora. Adipisci beatae consectetur consequuntur culpa cum cupiditate dignissimos eius enim error id inventore itaque minima omnis pariatur quam quas, quis sit totam unde vel. Non optio quas saepe. Ab adipisci consequuntur, culpa dolore earum eos esse excepturi illum maiores non nostrum numquam placeat provident quaerat quia! Accusamus, aliquid aperiam assumenda consequuntur deleniti dicta dignissimos dolores eaque eligendi eum explicabo impedit incidunt itaque maiores minus molestiae molestias mollitia nesciunt non numquam omnis pariatur qui quisquam quod reprehenderit rerum similique suscipit tempora ullam, voluptatum. Ab beatae, consequuntur dicta doloribus excepturi facere fugiat inventore, itaque nesciunt placeat quis voluptatem. Doloribus esse eveniet explicabo fugit harum magnam sed voluptate. Aperiam aut dolor ea, enim error eveniet fuga fugiat iusto magnam pariatur perferendis placeat, porro quo rem sapiente sit tempore.
 
     {{ $collectibles->links('pagination::default') }}
-
-    @push('scripts')
-        <script>
-            function leftScroll() {
-                const left = document.querySelector(".responsive-table__wrapper");
-                left.scrollBy({
-                    top: 0,
-                    left: -250,
-                    behavior: 'smooth'
-                });
-            }
-            function rightScroll() {
-                const right = document.querySelector(".responsive-table__wrapper");
-                right.scrollBy({
-                    top: 0,
-                    left: 250,
-                    behavior: 'smooth'
-                });
-            }
-
-            function handleScroll() {
-                let parent = document.querySelector('.responsive-table__wrapper');
-                let child = parent.querySelector('.responsive-table__scroll-buttons_fixed');
-                let parentPosition = parent.getBoundingClientRect();
-                let right =  window.innerWidth - 18 - (parentPosition.x + parentPosition.width);
-
-                let parentTop = parent.getBoundingClientRect().top || 0;
-                let crossChildHeight = 0;
-                if( child.clientHeight > parent.getBoundingClientRect().bottom ) {
-                    crossChildHeight = parent.getBoundingClientRect().bottom - child.clientHeight;
-                }
-                if( parseInt( crossChildHeight ) < 0 ) {
-                    parent.classList.remove( 'responsive-table__wrapper_fixed' );
-                    parent.classList.add( 'responsive-table__wrapper_absolute' );
-                } else {
-                    parent.classList.remove( 'responsive-table__wrapper_absolute' );
-                    if( parentTop <= crossChildHeight ) {
-                        parent.classList.add( 'responsive-table__wrapper_fixed' );
-                        child.style.right = right + 'px';
-                    } else {
-                        parent.classList.remove( 'responsive-table__wrapper_fixed' );
-                        child.style.right = 0;
-                    }
-                }
-            }
-            document.addEventListener( 'scroll', handleScroll );
-        </script>
-    @endpush
-
 </x-layouts.admin>
