@@ -49,6 +49,8 @@ class RelationMultipleFilter extends AbstractFilter
     {
         $this->relatedModels = [];
 
+//        dd(request()->input('filters'));
+
         if(request()->input('filters.'.$this->key)) {
             $relatedCollection = $this->relation::select(['id', 'name'])->whereIn('id', $this->requestValue())->get();
 
@@ -84,6 +86,23 @@ class RelationMultipleFilter extends AbstractFilter
         }
 
         return '';
+    }
+
+    public function preparedSelected()
+    {
+        if(!empty($this->relatedModels)) {
+            $selected = [];
+
+            foreach($this->relatedModels as $key => $model) {
+                if($model) {
+                    $selected[$model->{$this->field}] = $model->name;
+                }
+            }
+
+            return $selected;
+        }
+
+        return [];
     }
 
     public function view(): string
