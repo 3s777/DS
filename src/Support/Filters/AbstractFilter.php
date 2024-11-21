@@ -21,7 +21,7 @@ abstract class AbstractFilter implements Stringable
 
     protected string $table;
 
-    protected string|null $field;
+    protected ?string $field;
 
     protected string|array|null $placeholder;
 
@@ -35,7 +35,7 @@ abstract class AbstractFilter implements Stringable
         string $title,
         string $key,
         string $table,
-        string|null $field = null,
+        ?string $field = null,
         string|array|null $placeholder = null
     )
     {
@@ -64,9 +64,14 @@ abstract class AbstractFilter implements Stringable
         return $this;
     }
 
-    public function setField(string|null $field): static
+    public function setField(?string $field): static
     {
-        $this->field = $field;
+        $this->field = 'id';
+
+        if($field) {
+            $this->field = $field;
+        }
+
         return $this;
     }
 

@@ -19,16 +19,26 @@ class Enum extends Component
         public string $selectName,
         public array|Collection $options,
         public bool $nameAsValue = false,
+        public ?string $valueMethod = null,
         public ?string $label = null,
         public ?string $defaultOption = null,
-        public ?string $selected = null,
-        public bool $required = false
+        public string|array|null $selected = null,
+        public bool $required = false,
+        public bool $multiple = false
     ) {
-        $this->filteredName = Str::of($this->selectName)->replace('[', '.')->remove(']')->value();
+        $this->filteredName = Str::of($this->selectName)
+            ->replace('[]','')
+            ->replace('[', '.')
+            ->remove(']')
+            ->value();
     }
 
     public function isOld(string $key): bool
     {
+        if(is_array(old($this->filteredName))) {
+            return in_array($key, old($this->filteredName));
+        }
+
         if(old($this->filteredName) == $key) {
             return true;
         }
@@ -37,6 +47,10 @@ class Enum extends Component
     }
 
     public function isSelected(string $key): bool {
+        if(is_array($this->selected) && !old()) {
+            return in_array($key, $this->selected);
+        }
+
         if($this->selected && !old()) {
             return $key == $this->selected;
         }
@@ -46,6 +60,10 @@ class Enum extends Component
 
     public function getValue(): string
     {
+//        if($this->valueMethod) {
+//            return $this->valueMethod;
+//        }
+
         if($this->nameAsValue) {
             return 'name';
         }

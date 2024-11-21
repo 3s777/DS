@@ -4,6 +4,7 @@ namespace Domain\Shelf\FilterRegistrars;
 
 use App\Contracts\FilterRegistrar;
 use App\Filters\DatesFilter;
+use App\Filters\EnumFilter;
 use App\Filters\RelationFilter;
 use App\Filters\RelationMultipleFilter;
 use App\Filters\SearchFilter;
@@ -12,6 +13,8 @@ use Domain\Game\Models\GameDeveloper;
 use Domain\Game\Models\GameGenre;
 use Domain\Game\Models\GamePlatform;
 use Domain\Game\Models\GamePublisher;
+use Domain\Shelf\Enums\CollectibleTypeEnum;
+use Domain\Shelf\Enums\ConditionEnum;
 
 class CollectibleFilterRegistrar implements FilterRegistrar
 {
@@ -19,9 +22,9 @@ class CollectibleFilterRegistrar implements FilterRegistrar
     {
         return [
             'dates' => DatesFilter::make(
-                __('common.dates'),
+                __('common.collectibles'),
                 'dates',
-                'games',
+                'collectibles',
                 placeholder: [
                     'from' => __('filters.dates_from'),
                     'to' => __('filters.dates_to'),
@@ -30,16 +33,32 @@ class CollectibleFilterRegistrar implements FilterRegistrar
             'search' => SearchFilter::make(
                 __('common.search'),
                 'search',
-                'games',
+                'collectibles',
                 alternativeFields: ['alternative_names']
             ),
             'user' => RelationFilter::make(
                 trans_choice('user.users', 1),
                 'user',
-                'games',
+                'collectibles',
                 'user_id',
                 trans_choice('user.choose', 1),
                 User::class
+            ),
+            'condition' => EnumFilter::make(
+                __('common.condition'),
+                'condition',
+                'collectibles',
+                ConditionEnum::class,
+                'condition',
+                __('common.choose_condition')
+            ),
+            'type' => EnumFilter::make(
+                trans_choice('collectible.type', 1),
+                'collectable_type',
+                'collectibles',
+                CollectibleTypeEnum::class,
+                'collectable_type',
+                __('collectible.choose_type')
             ),
         ];
     }

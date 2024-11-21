@@ -9,9 +9,12 @@ use Domain\Shelf\Models\Collectible;
 use Domain\Shelf\Models\Shelf;
 use Illuminate\Database\Eloquent\Collection;
 use Spatie\ViewModels\ViewModel;
+use Support\Traits\HasSelectedUser;
 
 class CollectibleUpdateViewModel extends ViewModel
 {
+    use HasSelectedUser;
+
     public ?Collectible $collectible;
 
     public function __construct(Collectible $collectible = null)
@@ -39,16 +42,21 @@ class CollectibleUpdateViewModel extends ViewModel
         return $this->collectible ?? null;
     }
 
-    public function selectedUser(): array {
-        $selectedUser = [];
-        if($this->collectible?->user) {
-            $selectedUser = [
-                'key' => $this->collectible->user->id,
-                'value' => $this->collectible->user->name,
-            ];
-        }
+//    public function selectedUser(): array {
+//        $selectedUser = [];
+//        if($this->collectible?->user) {
+//            $selectedUser = [
+//                'key' => $this->collectible->user->id,
+//                'value' => $this->collectible->user->name,
+//            ];
+//        }
+//
+//        return $selectedUser;
+//    }
 
-        return $selectedUser;
+    public function selectedUser(): array
+    {
+        return $this->getSelectedUser($this->collectible);
     }
 
     public function users()

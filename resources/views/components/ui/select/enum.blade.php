@@ -2,6 +2,7 @@
     class="choices-{{ $name }}"
     id="{{ $name }}"
     :required="$required"
+    :multiple="$multiple"
     :name="$selectName"
     :label="$label"
     :error="$filteredName">

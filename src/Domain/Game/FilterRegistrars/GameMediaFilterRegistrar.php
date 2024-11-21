@@ -8,6 +8,7 @@ use App\Filters\RelationFilter;
 use App\Filters\RelationMultipleFilter;
 use App\Filters\SearchFilter;
 use Domain\Auth\Models\User;
+use Domain\Game\Models\Game;
 use Domain\Game\Models\GameDeveloper;
 use Domain\Game\Models\GameGenre;
 use Domain\Game\Models\GamePlatform;
@@ -72,6 +73,14 @@ class GameMediaFilterRegistrar implements FilterRegistrar
                 'id',
                 trans_choice('game_platform.choose', 1),
                 GamePlatform::class
+            ),
+            'games' => RelationMultipleFilter::make(
+                trans_choice('game.games', 2),
+                'games',
+                'games',
+                'id',
+                trans_choice('game.choose', 1),
+                Game::class
             ),
         ];
     }

@@ -37,17 +37,6 @@ class RelationFilter extends AbstractFilter
         return $this;
     }
 
-    public function setField(string|null $field): static
-    {
-        $this->field = 'id';
-
-        if($field) {
-            $this->field = $field;
-        }
-
-        return $this;
-    }
-
     public function setRelatedModel(): static
     {
         $this->relatedModel = [];

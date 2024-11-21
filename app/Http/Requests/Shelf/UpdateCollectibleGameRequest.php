@@ -89,7 +89,7 @@ class UpdateCollectibleGameRequest extends FormRequest
             ],
             'sale.price_old' => [
                 'exclude_unless:target,sale',
-                'required',
+                'nullable',
                 'numeric'
             ],
             'auction.price' => [
@@ -133,6 +133,7 @@ class UpdateCollectibleGameRequest extends FormRequest
             'kit_conditions' => __('collectible.kit_conditions'),
             'target' => __('collectible.target'),
             'sale.price' => __('collectible.sale_price'),
+            'sale.price_old' => __('collectible.sale_price_old'),
             'auction.price' => __('collectible.auction_price'),
             'auction.step' => __('collectible.auction_step'),
             'auction.to' => __('collectible.auction_stop_date'),

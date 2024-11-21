@@ -18,7 +18,7 @@ enum CollectibleTypeEnum: string
     public function morphName():string {
         return match($this) {
             CollectibleTypeEnum::Game => 'game_media',
-            CollectibleTypeEnum::Book => 'booke',
+            CollectibleTypeEnum::Book => 'book',
             default => 'game_media',
         };
     }
