@@ -2,7 +2,6 @@
 
 namespace App\Filters;
 
-use Domain\Shelf\Enums\ConditionEnum;
 use Support\Filters\AbstractFilter;
 use Illuminate\Database\Eloquent\Builder;
 use Support\Traits\Makeable;
@@ -28,14 +27,18 @@ class EnumFilter extends AbstractFilter
 
         $this->setEnum($enum);
 
-
-            $this->callbackPreparedValues = $callbackPreparedValues;
-
+        $this->setCallbackPreparedValues($callbackPreparedValues);
     }
 
     public function setEnum(string $enum): static
     {
         $this->enum = $enum;
+        return $this;
+    }
+
+    private function setCallbackPreparedValues(?callable $callback): static
+    {
+        $this->callbackPreparedValues = $callback;
         return $this;
     }
 

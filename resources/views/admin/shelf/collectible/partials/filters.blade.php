@@ -46,6 +46,19 @@
             </x-ui.form.group>
         </x-grid.col>
 
+        <x-grid.col xl="3" lg="4" md="6" sm="12">
+            <x-ui.form.group>
+                <x-ui.select.enum
+                    name="target"
+                    select-name="filters[target]"
+                    :selected="request('filters.target')"
+                    :options="$targets"
+                    :default-option="__('collectible.target')"
+                    :label="__('collectible.choose_target')"
+                    :placeholder="__('collectible.target')" />
+            </x-ui.form.group>
+        </x-grid.col>
+
         <x-slot:buttons></x-slot:buttons>
     </x-admin.filters-form>
 </x-admin.filters>

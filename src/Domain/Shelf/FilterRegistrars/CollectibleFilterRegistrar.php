@@ -15,6 +15,8 @@ use Domain\Game\Models\GamePlatform;
 use Domain\Game\Models\GamePublisher;
 use Domain\Shelf\Enums\CollectibleTypeEnum;
 use Domain\Shelf\Enums\ConditionEnum;
+use Domain\Shelf\Enums\TargetEnum;
+use Illuminate\Support\Arr;
 
 class CollectibleFilterRegistrar implements FilterRegistrar
 {
@@ -61,13 +63,23 @@ class CollectibleFilterRegistrar implements FilterRegistrar
                 __('collectible.choose_type'),
                 function ($value) {
                     $types = CollectibleTypeEnum::cases();
+
                     foreach($types as $type) {
                         if($type->morphName() == $value) {
                             return $type->name();
                         }
                     }
+
                     return '';
                 }
+            ),
+            'target' => EnumFilter::make(
+                __('collectible.target'),
+                'target',
+                'collectibles',
+                TargetEnum::class,
+                'target',
+                __('common.choose_target')
             ),
         ];
     }
