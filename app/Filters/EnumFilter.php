@@ -12,6 +12,7 @@ class EnumFilter extends AbstractFilter
     use Makeable;
 
     protected ?string $enum;
+    protected mixed $callbackPreparedValues;
 
     public function __construct(
         string $title,
@@ -20,11 +21,16 @@ class EnumFilter extends AbstractFilter
         string $enum,
         ?string $field = null,
         ?string $placeholder = null,
+        ?callable $callbackPreparedValues = null,
     )
     {
         parent::__construct($title, $key, $table, $field, $placeholder);
 
         $this->setEnum($enum);
+
+
+            $this->callbackPreparedValues = $callbackPreparedValues;
+
     }
 
     public function setEnum(string $enum): static
@@ -46,6 +52,10 @@ class EnumFilter extends AbstractFilter
 
     public function preparedValues(): string|array
     {
+        if($this->callbackPreparedValues) {
+            return call_user_func($this->callbackPreparedValues, $this->requestValue());
+        }
+
         if(is_array($this->requestValue())) {
             $selected = [];
 

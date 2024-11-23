@@ -58,17 +58,17 @@ class Enum extends Component
         return $this->isOld($key);
     }
 
-    public function getValue(): string
+    public function getValue($enum): string
     {
-//        if($this->valueMethod) {
-//            return $this->valueMethod;
-//        }
-
-        if($this->nameAsValue) {
-            return 'name';
+        if($this->valueMethod) {
+            return call_user_func(array($enum, $this->valueMethod));
         }
 
-        return 'value';
+        if($this->nameAsValue) {
+            return $enum->name;
+        }
+
+        return  $enum->value;
     }
 
     /**

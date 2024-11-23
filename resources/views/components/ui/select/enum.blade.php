@@ -15,8 +15,8 @@
 
     @foreach($options as $option)
         <x-ui.form.option
-            :value="$option->$getValue"
-            :selected="$isSelected($option->$getValue)">
+            :value="$getValue($option)"
+            :selected="$isSelected($getValue($option))">
                 {{ $option->name() }}
         </x-ui.form.option>
     @endforeach

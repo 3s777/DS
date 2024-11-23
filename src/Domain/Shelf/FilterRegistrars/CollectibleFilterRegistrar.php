@@ -58,7 +58,16 @@ class CollectibleFilterRegistrar implements FilterRegistrar
                 'collectibles',
                 CollectibleTypeEnum::class,
                 'collectable_type',
-                __('collectible.choose_type')
+                __('collectible.choose_type'),
+                function ($value) {
+                    $types = CollectibleTypeEnum::cases();
+                    foreach($types as $type) {
+                        if($type->morphName() == $value) {
+                            return $type->name();
+                        }
+                    }
+                    return '';
+                }
             ),
         ];
     }
