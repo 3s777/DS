@@ -2,13 +2,12 @@
 
 namespace Database\Factories;
 
-use App\Models\Condition;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
- * @extends Factory<Condition>
+ * @extends \Illuminate\Database\Eloquent\Factories\Factory<\Domain\Shelf\Models\Category>
  */
-class ConditionFactory extends Factory
+class CategoryFactory extends Factory
 {
     /**
      * Define the model's default state.
@@ -18,7 +17,7 @@ class ConditionFactory extends Factory
     public function definition(): array
     {
         return [
-            'title' => $this->faker->title()
+            //
         ];
     }
 }
