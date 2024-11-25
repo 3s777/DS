@@ -61,15 +61,24 @@ class EnumFilter extends AbstractFilter
 
         if(is_array($this->requestValue())) {
             $selected = [];
-
-            foreach($this->requestValue() as $value) {
-                    $selected[$value] = $this->enum::tryFrom($value)?->name() ?? '';
+            if (class_exists($this->enum)) {
+                foreach ($this->requestValue() as $key => $value) {
+                    $selected[$key] = $this->enum::tryFrom($value)?->name() ?? '';
+                }
             }
 
             return $selected;
         }
 
         return $this->enum::tryFrom($this->requestValue())?->name() ?? '';
+    }
+
+    public function options() {
+        if (class_exists($this->enum)) {
+            return $this->enum::cases();
+        }
+
+        return [];
     }
 
     public function view(): string

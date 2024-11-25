@@ -30,6 +30,8 @@ return [
     'choose_collectable' => 'Выберите носитель',
     'purchase_price' => 'Цена покупки',
     'purchased_at' => 'Дата покупки',
+    'purchased_at_from' => 'Начальная дата покупки',
+    'purchased_at_to' => 'Конечная дата покупки',
     'seller' => 'Продавец',
     'sale_price' => 'Цена продажи',
     'sale_price_old' => 'Старая цена',

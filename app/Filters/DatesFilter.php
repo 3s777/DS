@@ -66,7 +66,7 @@ class DatesFilter extends AbstractFilter
             $toDate = $this->toDate()->format('d.m.Y');
         }
 
-        $dates = $fromDate ?? $toDate;
+        $fromDate ? $dates = $fromDate : $dates = $toDate;
 
         if($fromDate && $toDate) {
             $dates = $fromDate.' - '.$toDate;

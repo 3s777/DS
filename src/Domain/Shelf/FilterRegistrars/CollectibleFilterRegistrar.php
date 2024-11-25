@@ -6,17 +6,11 @@ use App\Contracts\FilterRegistrar;
 use App\Filters\DatesFilter;
 use App\Filters\EnumFilter;
 use App\Filters\RelationFilter;
-use App\Filters\RelationMultipleFilter;
 use App\Filters\SearchFilter;
 use Domain\Auth\Models\User;
-use Domain\Game\Models\GameDeveloper;
-use Domain\Game\Models\GameGenre;
-use Domain\Game\Models\GamePlatform;
-use Domain\Game\Models\GamePublisher;
 use Domain\Shelf\Enums\CollectibleTypeEnum;
 use Domain\Shelf\Enums\ConditionEnum;
 use Domain\Shelf\Enums\TargetEnum;
-use Illuminate\Support\Arr;
 
 class CollectibleFilterRegistrar implements FilterRegistrar
 {
@@ -24,7 +18,7 @@ class CollectibleFilterRegistrar implements FilterRegistrar
     {
         return [
             'dates' => DatesFilter::make(
-                __('common.collectibles'),
+                __('common.dates'),
                 'dates',
                 'collectibles',
                 placeholder: [
@@ -36,7 +30,7 @@ class CollectibleFilterRegistrar implements FilterRegistrar
                 __('common.search'),
                 'search',
                 'collectibles',
-                alternativeFields: ['alternative_names']
+                alternativeFields: ['article_number']
             ),
             'user' => RelationFilter::make(
                 trans_choice('user.users', 1),
@@ -54,7 +48,7 @@ class CollectibleFilterRegistrar implements FilterRegistrar
                 'condition',
                 __('common.choose_condition')
             ),
-            'type' => EnumFilter::make(
+            'collectable_type' => EnumFilter::make(
                 trans_choice('collectible.type', 1),
                 'collectable_type',
                 'collectibles',
@@ -79,7 +73,29 @@ class CollectibleFilterRegistrar implements FilterRegistrar
                 'collectibles',
                 TargetEnum::class,
                 'target',
-                __('common.choose_target')
+                __('collectible.choose_target')
+            ),
+            'purchased_dates' => DatesFilter::make(
+                __('collectible.purchased_at'),
+                'purchased_dates',
+                'collectibles',
+                'purchased_at',
+                placeholder: [
+                    'from' => __('collectible.purchased_at_from'),
+                    'to' => __('collectible.purchased_at_to'),
+                ]
+            ),
+            'seller' => SearchFilter::make(
+                __('collectible.seller'),
+                'seller',
+                'collectibles',
+                'seller'
+            ),
+            'additional_field' => SearchFilter::make(
+                trans_choice('common.additional_fields', 1),
+                'additional_field',
+                'collectibles',
+                'additional_field'
             ),
         ];
     }

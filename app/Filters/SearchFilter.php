@@ -41,6 +41,15 @@ class SearchFilter extends AbstractFilter
         return $this;
     }
 
+    public function placeholder(string $key = ''): string|array|null
+    {
+        if($this->placeholder) {
+            return $this->placeholder;
+        }
+
+        return $this->title;
+    }
+
     public function apply(Builder $query): Builder
     {
         return $query->when($this->requestValue(), function (Builder $query) {

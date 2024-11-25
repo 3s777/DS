@@ -38,21 +38,6 @@ class CollectibleIndexViewModel extends ViewModel
         return $typeEnum?->name();
     }
 
-    public function conditions(): array
-    {
-        return ConditionEnum::cases();
-    }
-
-    public function types(): array
-    {
-        return CollectibleTypeEnum::cases();
-    }
-
-    public function targets(): array
-    {
-        return TargetEnum::cases();
-    }
-
     public function collectibles()
     {
         return Collectible::query()
