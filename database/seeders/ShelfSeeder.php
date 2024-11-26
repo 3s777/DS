@@ -8,6 +8,7 @@ use Domain\Game\Models\GameDeveloper;
 use Domain\Game\Models\GameGenre;
 use Domain\Game\Models\GameMedia;
 use Domain\Game\Models\GamePlatform;
+use Domain\Game\Models\GamePlatformManufacturer;
 use Domain\Game\Models\GamePublisher;
 use Domain\Shelf\Models\Collectible;
 use Domain\Shelf\Models\KitItem;
@@ -16,12 +17,6 @@ use Illuminate\Database\Seeder;
 
 class ShelfSeeder extends Seeder
 {
-    public function test($factory)
-    {
-        return $factory;
-    }
-
-
     public function run(): void
     {
         // TODO::Возможно стоит полностью переделать сиды.
@@ -38,16 +33,22 @@ class ShelfSeeder extends Seeder
                 GameMedia::factory(5)
                     ->has(
                         Game::factory(1)
-                            ->has(GameDeveloper::factory(2), 'developers')
-                            ->has(GamePublisher::factory(2), 'publishers')
-                            ->has(GameGenre::factory(3), 'genres')
-                            ->has(GamePlatform::factory(2), 'platforms'),
+                            ->has(GameDeveloper::factory(2)->for($user, 'user'), 'developers')
+                            ->has(GamePublisher::factory(2)->for($user, 'user'), 'publishers')
+                            ->has(GameGenre::factory(3)->for($user, 'user'), 'genres')
+                            ->has(GamePlatform::factory(2)
+                                ->for(GamePlatformManufacturer::factory()->for($user, 'user'), 'game_platform_manufacturer')
+                                ->for($user, 'user'), 'platforms')
+                            ->for($user, 'user'),
                         'games'
                     )
-                    ->has(GameDeveloper::factory(2), 'developers')
-                    ->has(GamePublisher::factory(2), 'publishers')
-                    ->has(GameGenre::factory(3), 'genres')
-                    ->has(GamePlatform::factory(2), 'platforms')
+                    ->has(GameDeveloper::factory(2)->for($user, 'user'), 'developers')
+                    ->has(GamePublisher::factory(2)->for($user, 'user'), 'publishers')
+                    ->has(GameGenre::factory(3)->for($user, 'user'), 'genres')
+                    ->has(GamePlatform::factory(2)
+                        ->for(GamePlatformManufacturer::factory()->for($user, 'user'), 'game_platform_manufacturer')
+                        ->for($user, 'user'), 'platforms')
+//                    ->for($user, 'user')
             ]);
 
             $collectableFactory
@@ -57,7 +58,7 @@ class ShelfSeeder extends Seeder
                     ->for($user, 'user')
                     ->hasKitConditions(),
                     'collectibles')
-                ->for(User::factory(), 'user')
+                ->for($user, 'user')
                 ->create();
         }
 

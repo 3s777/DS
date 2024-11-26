@@ -15,7 +15,6 @@
                             :placeholder="trans_choice('common.name', 1)"
                             id="name"
                             name="name"
-                            :value="old('name')"
                             required
                             autocomplete="on"
                             autofocus>
@@ -29,7 +28,6 @@
                             :placeholder="trans_choice('common.numbers', 1)"
                             id="number"
                             name="number"
-                            :value="old('number')"
                             autocomplete="on">
                         </x-ui.form.input-text>
                     </x-ui.form.group>

@@ -27,6 +27,7 @@ class GameMediaFactory extends Factory
             'article_number' => fake()->numberBetween(10000, 100000),
             'released_at' => fake()->date(),
             'user_id' => User::factory(),
+            'category_id' => 1,
         ];
     }
 }

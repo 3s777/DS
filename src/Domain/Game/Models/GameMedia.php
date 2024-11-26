@@ -7,6 +7,7 @@ use Database\Factories\Game\GameMediaFactory;
 use Domain\Auth\Models\User;
 use Domain\Game\FilterRegistrars\GameMediaFilterRegistrar;
 use Domain\Game\QueryBuilders\GameMediaQueryBuilder;
+use Domain\Shelf\Models\Category;
 use Domain\Shelf\Models\Collectible;
 use Domain\Shelf\Models\KitItem;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -134,5 +135,10 @@ class GameMedia extends Model implements HasMedia
     public function collectibles(): MorphMany
     {
         return $this->morphMany(Collectible::class, 'collectable');
+    }
+
+    public function category(): BelongsTo
+    {
+        return $this->belongsTo(Category::class);
     }
 }

@@ -1,7 +1,8 @@
 <?php
 
-namespace Database\Factories;
+namespace Database\Factories\Shelf;
 
+use Domain\Shelf\Models\Category;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -9,6 +10,7 @@ use Illuminate\Database\Eloquent\Factories\Factory;
  */
 class CategoryFactory extends Factory
 {
+    protected $model = Category::class;
     /**
      * Define the model's default state.
      *
@@ -17,7 +19,8 @@ class CategoryFactory extends Factory
     public function definition(): array
     {
         return [
-            //
+            'name' => $this->translations(['en', 'ru'], [fake()->name(), fake()->name()]),
+            'description' => $this->translations(['en', 'ru'], [fake()->sentence(), fake()->sentence()])
         ];
     }
 }

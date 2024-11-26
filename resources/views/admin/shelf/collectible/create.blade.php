@@ -15,7 +15,6 @@
                             :placeholder="trans_choice('common.name', 1)"
                             id="name"
                             name="name"
-                            :value="old('name')"
                             required
                             autocomplete="on"
                             autofocus>
@@ -56,7 +55,6 @@
                             :placeholder="trans_choice('common.article_numbers', 1)"
                             id="article_number"
                             name="article_number"
-                            :value="old('article_number')"
                             autocomplete="on">
                         </x-ui.form.input-text>
                     </x-ui.form.group>
@@ -82,7 +80,6 @@
                             name="price"
                             type="number"
                             step="0.01"
-                            :value="old('price')"
                             autocomplete="on">
                         </x-ui.form.input-text>
                     </x-ui.form.group>
@@ -94,7 +91,6 @@
                             :placeholder="trans_choice('collectible.seller', 1)"
                             id="seller"
                             name="seller"
-                            :value="old('seller')"
                             autocomplete="on">
                         </x-ui.form.input-text>
                     </x-ui.form.group>
@@ -105,8 +101,7 @@
                         <x-ui.form.datepicker
                             :placeholder="trans_choice('collectible.purchase_date', 1)"
                             id="purchase_date"
-                            name="purchase_date"
-                            :value="old('purchase_date')">
+                            name="purchase_date">
                         </x-ui.form.datepicker>
                     </x-ui.form.group>
                 </x-grid.col>

@@ -1,6 +1,7 @@
 <?php
 
 use Domain\Auth\Models\User;
+use Domain\Shelf\Models\Category;
 use Domain\Shelf\Models\Shelf;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
@@ -32,6 +33,10 @@ return new class extends Migration
             $table->jsonb('auction')->nullable();
             $table->string('thumbnail')->nullable();
             $table->jsonb('description')->nullable();
+            $table->foreignIdFor(Category::class)
+                ->constrained()
+                ->cascadeOnUpdate()
+                ->cascadeOnDelete();
             $table->foreignIdFor(User::class)->constrained();
 
             $table->softDeletes();

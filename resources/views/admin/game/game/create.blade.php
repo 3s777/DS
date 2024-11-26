@@ -15,7 +15,6 @@
                             :placeholder="trans_choice('common.name', 1)"
                             id="name"
                             name="name"
-                            :value="old('name')"
                             required
                             autocomplete="on"
                             autofocus>
@@ -29,7 +28,6 @@
                             :placeholder="__('common.slug')"
                             id="slug"
                             name="slug"
-                            :value="old('slug')"
                             autocomplete="on">
                         </x-ui.form.input-text>
                     </x-ui.form.group>
@@ -40,8 +38,7 @@
                         <x-ui.form.datepicker
                             :placeholder="__('game.released_at')"
                             id="released_at"
-                            name="released_at"
-                            :value="old('released_at')">
+                            name="released_at">
                         </x-ui.form.datepicker>
                     </x-ui.form.group>
                 </x-grid.col>

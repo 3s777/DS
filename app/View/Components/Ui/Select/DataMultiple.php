@@ -18,15 +18,19 @@ class DataMultiple extends Component
         public ?string $defaultOption = null,
         public array|null $selected = null,
         public bool $required = false,
-        public bool $showOld = true
+        public bool $showOld = true,
+        public bool $selectByValue = false,
     ) {
         $this->filteredName = to_dot_name($selectName);
     }
 
 
     public function isSelected(string $key): bool {
-
         if(($this->selected && !old()) || ($this->selected && !$this->showOld)) {
+            if($this->selectByValue) {
+                return in_array($key, $this->selected);
+            }
+
             return array_key_exists($key, $this->selected);
         }
 

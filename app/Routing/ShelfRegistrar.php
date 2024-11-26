@@ -3,6 +3,7 @@
 namespace App\Routing;
 
 use App\Contracts\RouteRegistrar;
+use App\Http\Controllers\Shelf\CategoryController;
 use App\Http\Controllers\Shelf\CollectibleController;
 use App\Http\Controllers\Shelf\CollectibleGameController;
 use App\Http\Controllers\Shelf\KitItemController;
@@ -38,6 +39,9 @@ class ShelfRegistrar extends BaseRouteRegistrar implements RouteRegistrar
                             $this->massDelete('kit-items', KitItemController::class);
                             Route::post('/kit-items/get/html-conditions', [KitItemController::class, 'getHtmlConditions'])->name('kit-items.get.html-conditions');
                             Route::resource('kit-items', KitItemController::class);
+
+                            $this->massDelete('categories', CategoryController::class);
+                            Route::resource('categories', CategoryController::class);
                         });
                     });
             });

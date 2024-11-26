@@ -8,6 +8,7 @@ use Domain\Game\Models\GameDeveloper;
 use Domain\Game\Models\GameGenre;
 use Domain\Game\Models\GameMedia;
 use Domain\Game\Models\GamePlatform;
+use Domain\Game\Models\GamePlatformManufacturer;
 use Domain\Game\Models\GamePublisher;
 use Domain\Shelf\Models\Collectible;
 use Domain\Shelf\Models\KitItem;
@@ -36,16 +37,22 @@ class TestUserDataSeeder extends Seeder
             GameMedia::factory(5)
                 ->has(
                     Game::factory(1)
-                        ->has(GameDeveloper::factory(2), 'developers')
-                        ->has(GamePublisher::factory(2), 'publishers')
-                        ->has(GameGenre::factory(3), 'genres')
-                        ->has(GamePlatform::factory(2), 'platforms'),
+                        ->has(GameDeveloper::factory(2)->for($testUser, 'user'), 'developers')
+                        ->has(GamePublisher::factory(2)->for($testUser, 'user'), 'publishers')
+                        ->has(GameGenre::factory(3)->for($testUser, 'user'), 'genres')
+                        ->has(GamePlatform::factory(2)
+                            ->for(GamePlatformManufacturer::factory()->for($testUser, 'user'), 'game_platform_manufacturer')
+                            ->for($testUser, 'user'), 'platforms')
+                        ->for($testUser, 'user'),
                     'games'
                 )
-                ->has(GameDeveloper::factory(2), 'developers')
-                ->has(GamePublisher::factory(2), 'publishers')
-                ->has(GameGenre::factory(3), 'genres')
-                ->has(GamePlatform::factory(2), 'platforms')
+                ->has(GameDeveloper::factory(2)->for($testUser, 'user'), 'developers')
+                ->has(GamePublisher::factory(2)->for($testUser, 'user'), 'publishers')
+                ->has(GameGenre::factory(3)->for($testUser, 'user'), 'genres')
+                ->has(GamePlatform::factory(2)
+                    ->for(GamePlatformManufacturer::factory()->for($testUser, 'user'), 'game_platform_manufacturer')
+                    ->for($testUser, 'user'), 'platforms')
+                ->for($testUser, 'user')
         ]);
 
         $collectableFactory

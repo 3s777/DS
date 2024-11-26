@@ -50,6 +50,7 @@ class CollectibleFactory extends Factory
             'article_number' => fake()->title(),
             'condition' => Arr::random(ConditionEnum::cases())->value,
             'user_id' => User::factory(),
+            'category_id' => 1,
             'shelf_id' => Shelf::factory(),
 //            'collectable_type' => fake()->randomElement([
 //                'game_media'

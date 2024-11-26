@@ -12,6 +12,7 @@ class DatabaseSeeder extends Seeder
         $this->call([
 //            UserSeeder::class,
             RolesAndPermissionsSeeder::class,
+            CategoryDataSeeder::class,
             TestUserDataSeeder::class,
 //            GameMediaSeeder::class,
             ShelfSeeder::class,

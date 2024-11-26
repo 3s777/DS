@@ -1,6 +1,7 @@
 <?php
 
 use Domain\Auth\Models\User;
+use Domain\Shelf\Models\Category;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -22,6 +23,10 @@ return new class extends Migration
             $table->date('released_at')->nullable();
             $table->jsonb('description')->nullable();
             $table->string('thumbnail')->nullable();
+            $table->foreignIdFor(Category::class)
+                ->constrained()
+                ->cascadeOnUpdate()
+                ->cascadeOnDelete();
             $table->foreignIdFor(User::class)
                 ->constrained();
 

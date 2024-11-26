@@ -39,7 +39,7 @@ class KitItemServiceTest extends TestCase
      * @test
      * @return void
      */
-    public function it_game_created_success(): void
+    public function it_kit_item_created_success(): void
     {
         $this->assertDatabaseMissing('kit_items', [
             'slug' => Str::slug($this->request['name'])
@@ -62,7 +62,7 @@ class KitItemServiceTest extends TestCase
      * @test
      * @return void
      */
-    public function it_game_updated_success(): void
+    public function it_kit_item_updated_success(): void
     {
 
         $createRequest = new Request($this->request);
