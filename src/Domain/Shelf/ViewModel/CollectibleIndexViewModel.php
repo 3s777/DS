@@ -11,6 +11,7 @@ use Domain\Game\Models\GamePlatform;
 use Domain\Shelf\Enums\CollectibleTypeEnum;
 use Domain\Shelf\Enums\ConditionEnum;
 use Domain\Shelf\Enums\TargetEnum;
+use Domain\Shelf\Models\Category;
 use Domain\Shelf\Models\Collectible;
 use Domain\Shelf\Models\Shelf;
 use Illuminate\Database\Eloquent\Relations\Relation;
@@ -36,6 +37,11 @@ class CollectibleIndexViewModel extends ViewModel
         $typeEnum = CollectibleTypeEnum::tryFrom($typeClassName);
 
         return $typeEnum?->name();
+    }
+
+    public function categories()
+    {
+        return Category::select('id', 'name')->get()->toArray();
     }
 
     public function collectibles()

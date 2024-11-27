@@ -62,6 +62,7 @@ class CollectibleService
 
             $collectible->collectable_id = $data->collectable;
             $collectible->collectable_type = $data->collectable_type;
+            $collectible->category_id = $data->category_id;
 
             $collectible->save();
 

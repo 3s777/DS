@@ -23,10 +23,6 @@ return new class extends Migration
             $table->date('released_at')->nullable();
             $table->jsonb('description')->nullable();
             $table->string('thumbnail')->nullable();
-            $table->foreignIdFor(Category::class)
-                ->constrained()
-                ->cascadeOnUpdate()
-                ->cascadeOnDelete();
             $table->foreignIdFor(User::class)
                 ->constrained();
 

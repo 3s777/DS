@@ -136,9 +136,4 @@ class GameMedia extends Model implements HasMedia
     {
         return $this->morphMany(Collectible::class, 'collectable');
     }
-
-    public function category(): BelongsTo
-    {
-        return $this->belongsTo(Category::class);
-    }
 }

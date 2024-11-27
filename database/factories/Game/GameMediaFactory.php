@@ -26,8 +26,7 @@ class GameMediaFactory extends Factory
             'description' => $this->translations(['en', 'ru'], [fake()->text(), fake()->text()]),
             'article_number' => fake()->numberBetween(10000, 100000),
             'released_at' => fake()->date(),
-            'user_id' => User::factory(),
-            'category_id' => 1,
+            'user_id' => User::factory()
         ];
     }
 }

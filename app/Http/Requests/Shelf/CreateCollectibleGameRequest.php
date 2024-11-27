@@ -23,6 +23,7 @@ class CreateCollectibleGameRequest extends FormRequest
     {
         $this->merge([
             'collectable_type' => CollectibleTypeEnum::Game->morphName(),
+            'category_id' => 1
         ]);
     }
 
@@ -87,6 +88,11 @@ class CreateCollectibleGameRequest extends FormRequest
             'collectable_type' => [
                 'required',
                 'string'
+            ],
+            'category_id' => [
+                'required',
+                'integer',
+                'exists:Domain\Shelf\Models\Category,id'
             ],
             'kit_conditions' => [
                 'required'
