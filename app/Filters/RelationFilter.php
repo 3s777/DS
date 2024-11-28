@@ -65,6 +65,11 @@ class RelationFilter extends AbstractFilter
         return '';
     }
 
+    public function getPreparedOptions()
+    {
+        return $this->relation::all()->pluck('name', 'id')->toArray();
+    }
+
     public function view(): string
     {
         //        return 'components.common.filters.search';

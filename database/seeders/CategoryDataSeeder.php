@@ -10,11 +10,11 @@ class CategoryDataSeeder extends Seeder
     public function run(): void
     {
         Category::create(
-            ['name' => 'Книга']
+            ['name' => 'Игра']
         );
 
         Category::create(
-            ['name' => 'Игра']
+            ['name' => 'Книга']
         );
     }
 }

@@ -11,6 +11,7 @@ use Domain\Auth\Models\User;
 use Domain\Shelf\Enums\CollectibleTypeEnum;
 use Domain\Shelf\Enums\ConditionEnum;
 use Domain\Shelf\Enums\TargetEnum;
+use Domain\Shelf\Models\Category;
 
 class CollectibleFilterRegistrar implements FilterRegistrar
 {
@@ -48,25 +49,33 @@ class CollectibleFilterRegistrar implements FilterRegistrar
                 'condition',
                 __('common.choose_condition')
             ),
-            'collectable_type' => EnumFilter::make(
-                trans_choice('collectible.type', 1),
-                'collectable_type',
+            'category' => RelationFilter::make(
+                trans_choice('collectible.category.categories', 1),
+                'category',
                 'collectibles',
-                CollectibleTypeEnum::class,
-                'collectable_type',
-                __('collectible.choose_type'),
-                function ($value) {
-                    $types = CollectibleTypeEnum::cases();
-
-                    foreach($types as $type) {
-                        if($type->morphName() == $value) {
-                            return $type->name();
-                        }
-                    }
-
-                    return '';
-                }
+                'category_id',
+                trans_choice('collectible.category.choose', 1),
+                Category::class
             ),
+//            'collectable_type' => EnumFilter::make(
+//                trans_choice('collectible.type', 1),
+//                'collectable_type',
+//                'collectibles',
+//                CollectibleTypeEnum::class,
+//                'collectable_type',
+//                __('collectible.choose_type'),
+//                function ($value) {
+//                    $types = CollectibleTypeEnum::cases();
+//
+//                    foreach($types as $type) {
+//                        if($type->morphName() == $value) {
+//                            return $type->name();
+//                        }
+//                    }
+//
+//                    return '';
+//                }
+//            ),
             'target' => EnumFilter::make(
                 __('collectible.target'),
                 'target',

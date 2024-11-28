@@ -41,7 +41,7 @@ class CollectibleIndexViewModel extends ViewModel
 
     public function categories()
     {
-        return Category::select('id', 'name')->get()->toArray();
+        return Category::select('id', 'name')->get()->pluck('name', 'id')->toArray();
     }
 
     public function collectibles()
