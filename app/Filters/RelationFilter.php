@@ -67,7 +67,7 @@ class RelationFilter extends AbstractFilter
 
     public function getPreparedOptions()
     {
-        return $this->relation::all()->pluck('name', 'id')->toArray();
+        return $this->relation::select('id', 'name')->get()->pluck('name', 'id')->toArray();
     }
 
     public function view(): string

@@ -4,6 +4,8 @@ namespace App\Casts;
 
 use Illuminate\Contracts\Database\Eloquent\CastsAttributes;
 use Illuminate\Database\Eloquent\Model;
+use Support\ValueObjects\PriceValueObject;
+
 
 class Price implements CastsAttributes
 {
@@ -12,9 +14,9 @@ class Price implements CastsAttributes
      *
      * @param  array<string, mixed>  $attributes
      */
-    public function get(Model $model, string $key, mixed $value, array $attributes): int|float
+    public function get(Model $model, string $key, mixed $value, array $attributes): PriceValueObject
     {
-        return $value/100;
+        return PriceValueObject::make($value);
     }
 
     /**
@@ -24,6 +26,10 @@ class Price implements CastsAttributes
      */
     public function set(Model $model, string $key, mixed $value, array $attributes): int
     {
-        return $value*100;
+        if(!$value instanceof PriceValueObject) {
+            $value = PriceValueObject::make($value);
+        }
+
+        return $value->raw();
     }
 }

@@ -6,7 +6,7 @@ use InvalidArgumentException;
 use Stringable;
 use Support\Traits\Makeable;
 
-class Price implements Stringable
+class PriceValueObject implements Stringable
 {
     use Makeable;
 

@@ -39,11 +39,6 @@ class CollectibleIndexViewModel extends ViewModel
         return $typeEnum?->name();
     }
 
-    public function categories()
-    {
-        return Category::select('id', 'name')->get()->pluck('name', 'id')->toArray();
-    }
-
     public function collectibles()
     {
         return Collectible::query()

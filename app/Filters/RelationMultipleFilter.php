@@ -94,6 +94,11 @@ class RelationMultipleFilter extends AbstractFilter
         return [];
     }
 
+    public function getPreparedOptions()
+    {
+        return $this->relation::select('id', 'name')->get()->pluck('name', 'id')->toArray();
+    }
+
     public function view(): string
     {
         //        return 'components.common.filters.search';

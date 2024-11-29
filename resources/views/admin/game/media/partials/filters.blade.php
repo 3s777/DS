@@ -14,13 +14,13 @@
 
         <x-grid.col xl="6" lg="4" md="6" sm="12">
             <x-ui.form.group>
-                <x-common.filters.relation-multiple name="genres" :list="$genres" />
+                <x-common.filters.relation-multiple name="genres" />
             </x-ui.form.group>
         </x-grid.col>
 
         <x-grid.col xl="6" lg="4" md="6" sm="12">
             <x-ui.form.group>
-                <x-common.filters.relation-multiple name="platforms" :list="$platforms" />
+                <x-common.filters.relation-multiple name="platforms" />
             </x-ui.form.group>
         </x-grid.col>
 

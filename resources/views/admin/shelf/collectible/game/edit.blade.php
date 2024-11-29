@@ -86,7 +86,7 @@
                             name="purchase_price"
                             type="number"
                             step="0.01"
-                            :value="$collectible->purchase_price"
+                            :value="$collectible->purchase_price->value()"
                             autocomplete="on">
                         </x-ui.form.input-text>
                     </x-ui.form.group>

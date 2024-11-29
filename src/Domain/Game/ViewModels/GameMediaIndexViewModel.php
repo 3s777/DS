@@ -14,16 +14,6 @@ class GameMediaIndexViewModel extends ViewModel
         //
     }
 
-    public function genres(): array
-    {
-        return GameGenre::select('id', 'name')->get()->toArray();
-    }
-
-    public function platforms(): array
-    {
-        return GamePlatform::select('id', 'name')->get()->toArray();
-    }
-
     public function gameMedias()
     {
         return GameMedia::query()

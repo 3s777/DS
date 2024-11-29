@@ -3,19 +3,19 @@
 namespace Support\Casts;
 
 use Illuminate\Contracts\Database\Eloquent\CastsAttributes;
-use Support\ValueObjects\Price;
+use Support\ValueObjects\PriceValueObject;
 
 class PriceCast implements CastsAttributes
 {
-    public function get($model, string $key, $value, array $attributes): Price
+    public function get($model, string $key, $value, array $attributes): PriceValueObject
     {
-        return Price::make($value);
+        return PriceValueObject::make($value);
     }
 
     public function set($model, string $key, $value, array $attributes): int
     {
-        if(!$value instanceof Price) {
-            $value = Price::make($value);
+        if(!$value instanceof PriceValueObject) {
+            $value = PriceValueObject::make($value);
         }
 
         return $value->raw();

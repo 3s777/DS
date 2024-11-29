@@ -8,7 +8,7 @@
     :selected="request('filters.'.$name)"
     :show-old="false"
     :name="$name"
-    :options="get_filter($name)->getPreparedOptions()"
+    :options="$options ?? get_filter($name)->getPreparedOptions()"
     select-name="{{ 'filters['.$name.']' }}"
     :label="$placeholder"
     defaultOption="{{ get_filter($name)->title() }}">

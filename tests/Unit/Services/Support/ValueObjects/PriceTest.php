@@ -2,7 +2,7 @@
 
 namespace Services\Support\ValueObjects;
 
-use Support\ValueObjects\Price;
+use Support\ValueObjects\PriceValueObject;
 use Tests\TestCase;
 
 class PriceTest extends TestCase
@@ -14,9 +14,9 @@ class PriceTest extends TestCase
 
     public function it_all(): void
     {
-        $price = Price::make(10000);
+        $price = PriceValueObject::make(10000);
 
-        $this->assertInstanceOf(Price::class, $price);
+        $this->assertInstanceOf(PriceValueObject::class, $price);
         $this->assertEquals(100, $price->value());
         $this->assertEquals(10000, $price->raw());
         $this->assertEquals('RUB', $price->currency());
@@ -25,7 +25,7 @@ class PriceTest extends TestCase
 
         $this->expectException(\InvalidArgumentException::class);
 
-        Price::make(-10000);
-        Price::make(10000, 'USD');
+        PriceValueObject::make(-10000);
+        PriceValueObject::make(10000, 'USD');
     }
 }
