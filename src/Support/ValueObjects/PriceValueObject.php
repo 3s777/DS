@@ -15,7 +15,7 @@ class PriceValueObject implements Stringable
     ];
 
     public function __construct(
-        private int $value,
+        private int|float $value,
         private string $currency = 'RUB',
         private int $precision = 100
     ) {
@@ -31,6 +31,11 @@ class PriceValueObject implements Stringable
     public function raw(): int
     {
         return $this->value;
+    }
+
+    public function setValue(): float|int
+    {
+        return $this->value * $this->precision;
     }
 
     public function value(): float|int

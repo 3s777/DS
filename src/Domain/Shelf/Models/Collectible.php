@@ -20,6 +20,7 @@ use Spatie\MediaLibrary\InteractsWithMedia;
 use Spatie\Translatable\HasTranslations;
 use Support\Traits\Models\HasThumbnail;
 use Support\Traits\Models\HasUser;
+use Support\ValueObjects\SaleValueObject;
 
 
 class Collectible extends Model implements HasMedia
@@ -61,6 +62,7 @@ class Collectible extends Model implements HasMedia
         'kit_conditions' => 'array',
         'properties' => 'array',
         'sale' => 'array',
+//        'sale' => SaleValueObject::class,
         'auction' => 'array',
         'purchase_price' => Price::class
     ];

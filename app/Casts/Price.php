@@ -26,10 +26,11 @@ class Price implements CastsAttributes
      */
     public function set(Model $model, string $key, mixed $value, array $attributes): int
     {
+
         if(!$value instanceof PriceValueObject) {
             $value = PriceValueObject::make($value);
         }
 
-        return $value->raw();
+        return $value->setValue();
     }
 }

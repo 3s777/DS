@@ -40,6 +40,8 @@ class CollectibleService
 
             $collectible = Collectible::make($this->preparedFields($data));
 
+            $collectible->category_id = 1;
+
             $shelf = Shelf::find($data->shelf_id);
             $collectible->user_id = $shelf->user_id;
 
@@ -62,7 +64,7 @@ class CollectibleService
 
             $collectible->collectable_id = $data->collectable;
             $collectible->collectable_type = $data->collectable_type;
-            $collectible->category_id = $data->category_id;
+//            $collectible->category_id = $data->category_id;
 
             $collectible->save();
 
