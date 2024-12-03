@@ -2,9 +2,8 @@
 
 namespace Domain\Auth\Actions;
 
-use App\Exceptions\UserCreateEditException;
-use Carbon\Carbon;
 use Domain\Auth\DTOs\NewUserDTO;
+use Domain\Auth\Exceptions\UserCreateEditException;
 use Domain\Auth\Models\User;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Support\Facades\DB;

@@ -2,14 +2,13 @@
 
 namespace App\Http\Controllers\Game;
 
-use App\Exceptions\MassDeletingException;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Game\CreateGamePlatformManufacturerRequest;
 use App\Http\Requests\Game\UpdateGamePlatformManufacturerRequest;
 use App\Http\Requests\MassDeletingRequest;
 use Domain\Game\Models\GamePlatformManufacturer;
-use Domain\Game\ViewModels\GamePlatformManufacturerUpdateViewModel;
 use Domain\Game\ViewModels\GamePlatformManufacturerIndexViewModel;
+use Domain\Game\ViewModels\GamePlatformManufacturerUpdateViewModel;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
 use Illuminate\Foundation\Application;
@@ -17,6 +16,7 @@ use Illuminate\Http\RedirectResponse;
 use Illuminate\Routing\Redirector;
 use Support\Actions\MassDeletingAction;
 use Support\DTOs\MassDeletingDTO;
+use Support\Exceptions\MassDeletingException;
 
 class GamePlatformManufacturerController extends Controller
 {

@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers\Auth;
 
-use App\Exceptions\MassDeletingException;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Auth\User\CreateUserRequest;
 use App\Http\Requests\Auth\User\FilterUserRequest;
@@ -23,6 +22,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Gate;
 use Support\Actions\MassDeletingAction;
 use Support\DTOs\MassDeletingDTO;
+use Support\Exceptions\MassDeletingException;
 use Support\ViewModels\AsyncSelectByQueryViewModel;
 
 class UserController extends Controller

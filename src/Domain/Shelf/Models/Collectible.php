@@ -2,8 +2,6 @@
 
 namespace Domain\Shelf\Models;
 
-use App\Casts\ArrayWithoutUnicode;
-use App\Casts\Price;
 use Database\Factories\Shelf\CollectibleFactory;
 use Domain\Auth\Models\User;
 use Domain\Shelf\FilterRegistrars\CollectibleFilterRegistrar;
@@ -18,9 +16,9 @@ use Mews\Purifier\Casts\CleanHtml;
 use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
 use Spatie\Translatable\HasTranslations;
+use Support\Casts\Price;
 use Support\Traits\Models\HasThumbnail;
 use Support\Traits\Models\HasUser;
-use Support\ValueObjects\SaleValueObject;
 
 
 class Collectible extends Model implements HasMedia

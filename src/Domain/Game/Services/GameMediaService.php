@@ -1,9 +1,9 @@
 <?php namespace Domain\Game\Services;
 
-use App\Exceptions\CrudException;
 use Domain\Game\DTOs\FillGameMediaDTO;
 use Domain\Game\Models\GameMedia;
 use Illuminate\Support\Facades\DB;
+use Support\Exceptions\CrudException;
 use Throwable;
 
 class GameMediaService

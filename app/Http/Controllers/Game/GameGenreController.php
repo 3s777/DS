@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers\Game;
 
-use App\Exceptions\MassDeletingException;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Game\CreateGameGenreRequest;
 use App\Http\Requests\Game\UpdateGameGenreRequest;
@@ -17,6 +16,7 @@ use Illuminate\Http\RedirectResponse;
 use Illuminate\Routing\Redirector;
 use Support\Actions\MassDeletingAction;
 use Support\DTOs\MassDeletingDTO;
+use Support\Exceptions\MassDeletingException;
 
 class GameGenreController extends Controller
 {

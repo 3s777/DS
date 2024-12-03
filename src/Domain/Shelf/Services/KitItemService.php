@@ -1,12 +1,9 @@
 <?php namespace Domain\Shelf\Services;
 
-use App\Exceptions\CrudException;
 use Domain\Shelf\DTOs\FillKitItemDTO;
-use Domain\Shelf\DTOs\FillShelfDTO;
 use Domain\Shelf\Models\KitItem;
-use Domain\Shelf\Models\Shelf;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Str;
+use Support\Exceptions\CrudException;
 use Throwable;
 
 class KitItemService

@@ -2,12 +2,10 @@
 
 namespace App\Http\Controllers\Shelf;
 
-use App\Exceptions\MassDeletingException;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\MassDeletingRequest;
 use App\Http\Requests\Shelf\CreateShelfRequest;
 use App\Http\Requests\Shelf\UpdateShelfRequest;
-use Domain\Game\Models\GameDeveloper;
 use Domain\Shelf\DTOs\FillShelfDTO;
 use Domain\Shelf\Models\Shelf;
 use Domain\Shelf\Services\ShelfService;
@@ -21,8 +19,8 @@ use Illuminate\Http\Request;
 use Illuminate\Routing\Redirector;
 use Support\Actions\MassDeletingAction;
 use Support\DTOs\MassDeletingDTO;
+use Support\Exceptions\MassDeletingException;
 use Support\ViewModels\AsyncSelectAllViewModel;
-use Support\ViewModels\AsyncSelectByQueryViewModel;
 
 class ShelfController extends Controller
 {

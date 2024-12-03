@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers\Game;
 
-use App\Exceptions\MassDeletingException;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Game\CreateGameRequest;
 use App\Http\Requests\Game\UpdateGameRequest;
@@ -10,8 +9,8 @@ use App\Http\Requests\MassDeletingRequest;
 use Domain\Game\DTOs\FillGameDTO;
 use Domain\Game\Models\Game;
 use Domain\Game\Services\GameService;
-use Domain\Game\ViewModels\GameUpdateViewModel;
 use Domain\Game\ViewModels\GameIndexViewModel;
+use Domain\Game\ViewModels\GameUpdateViewModel;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
 use Illuminate\Foundation\Application;
@@ -20,6 +19,7 @@ use Illuminate\Http\Request;
 use Illuminate\Routing\Redirector;
 use Support\Actions\MassDeletingAction;
 use Support\DTOs\MassDeletingDTO;
+use Support\Exceptions\MassDeletingException;
 use Support\ViewModels\AsyncSelectByQueryViewModel;
 
 class GameController extends Controller

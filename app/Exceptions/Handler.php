@@ -2,6 +2,7 @@
 
 namespace App\Exceptions;
 
+use Domain\Auth\Exceptions\UserCreateEditException;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
 use Throwable;
 

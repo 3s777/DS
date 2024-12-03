@@ -5,7 +5,7 @@ namespace Support\Casts;
 use Illuminate\Contracts\Database\Eloquent\CastsAttributes;
 use Support\ValueObjects\PriceValueObject;
 
-class PriceCast implements CastsAttributes
+class Price implements CastsAttributes
 {
     public function get($model, string $key, $value, array $attributes): PriceValueObject
     {
@@ -18,6 +18,6 @@ class PriceCast implements CastsAttributes
             $value = PriceValueObject::make($value);
         }
 
-        return $value->raw();
+        return $value->prepareValue();
     }
 }

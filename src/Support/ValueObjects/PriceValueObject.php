@@ -28,12 +28,17 @@ class PriceValueObject implements Stringable
         }
     }
 
+    private function setValue()
+    {
+        return '';
+    }
+
     public function raw(): int
     {
         return $this->value;
     }
 
-    public function setValue(): float|int
+    public function prepareValue(): float|int
     {
         return $this->value * $this->precision;
     }

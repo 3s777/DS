@@ -57,7 +57,8 @@ class CreateCollectibleGameRequest extends FormRequest
             'purchase_price' => [
                 'nullable',
                 'numeric',
-                'max: 100000000'
+                'max: 100000000',
+                'min: 0'
             ],
             'seller' => [
                 'nullable',
@@ -108,17 +109,23 @@ class CreateCollectibleGameRequest extends FormRequest
             'sale.price' => [
                 'exclude_unless:target,sale',
                 'required',
-                'numeric'
+                'numeric',
+                'max: 100000000',
+                'min: 0'
             ],
             'sale.price_old' => [
                 'exclude_unless:target,sale',
                 'nullable',
-                'numeric'
+                'numeric',
+                'max: 100000000',
+                'min: 0'
             ],
             'auction.price' => [
                 'exclude_unless:target,auction',
                 'required',
-                'numeric'
+                'numeric',
+                'max: 100000000',
+                'min: 0'
             ],
             'auction.step' => [
                 'exclude_unless:target,auction',

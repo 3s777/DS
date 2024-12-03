@@ -1,9 +1,9 @@
 <?php namespace Domain\Shelf\Services;
 
-use App\Exceptions\CrudException;
 use Domain\Shelf\DTOs\FillCategoryDTO;
 use Domain\Shelf\Models\Category;
 use Illuminate\Support\Facades\DB;
+use Support\Exceptions\CrudException;
 use Throwable;
 
 class CategoryService

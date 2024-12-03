@@ -2,8 +2,8 @@
 
 namespace Domain\Auth\Actions;
 
-use App\Exceptions\UserCreateEditException;
 use Domain\Auth\DTOs\UpdateUserDTO;
+use Domain\Auth\Exceptions\UserCreateEditException;
 use Domain\Auth\Models\User;
 use Illuminate\Support\Facades\DB;
 use Throwable;

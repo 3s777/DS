@@ -2,27 +2,25 @@
 
 namespace App\Http\Controllers\Shelf;
 
-use App\Exceptions\MassDeletingException;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\MassDeletingRequest;
 use App\Http\Requests\Shelf\CreateKitItemRequest;
 use App\Http\Requests\Shelf\GetKitItemConditionRequest;
 use App\Http\Requests\Shelf\UpdateKitItemRequest;
-use Domain\Shelf\Services\CollectibleService;
-use Domain\Shelf\ViewModel\KitItemConditionViewModel;
-use Domain\Shelf\ViewModel\KitItemUpdateViewModel;
 use Domain\Shelf\DTOs\FillKitItemDTO;
 use Domain\Shelf\Models\KitItem;
 use Domain\Shelf\Services\KitItemService;
+use Domain\Shelf\ViewModel\KitItemConditionViewModel;
 use Domain\Shelf\ViewModel\KitItemIndexViewModel;
+use Domain\Shelf\ViewModel\KitItemUpdateViewModel;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
 use Illuminate\Foundation\Application;
 use Illuminate\Http\RedirectResponse;
-use Illuminate\Http\Request;
 use Illuminate\Routing\Redirector;
 use Support\Actions\MassDeletingAction;
 use Support\DTOs\MassDeletingDTO;
+use Support\Exceptions\MassDeletingException;
 
 
 class KitItemController extends Controller

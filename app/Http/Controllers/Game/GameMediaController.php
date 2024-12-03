@@ -2,27 +2,24 @@
 
 namespace App\Http\Controllers\Game;
 
-use App\Exceptions\MassDeletingException;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Game\CreateGameMediaRequest;
 use App\Http\Requests\Game\UpdateGameMediaRequest;
 use App\Http\Requests\MassDeletingRequest;
 use Domain\Game\DTOs\FillGameMediaDTO;
-use Domain\Game\Models\GameDeveloper;
 use Domain\Game\Models\GameMedia;
 use Domain\Game\Services\GameMediaService;
-use Domain\Game\ViewModels\GameMediaUpdateViewModel;
 use Domain\Game\ViewModels\GameMediaIndexViewModel;
+use Domain\Game\ViewModels\GameMediaUpdateViewModel;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
-use Illuminate\Support\Facades\View as ViewFacade;
 use Illuminate\Foundation\Application;
 use Illuminate\Http\RedirectResponse;
-use Illuminate\Routing\Redirector;
 use Illuminate\Http\Request;
+use Illuminate\Routing\Redirector;
 use Support\Actions\MassDeletingAction;
 use Support\DTOs\MassDeletingDTO;
-use Domain\Shelf\Enums\CollectibleTypeEnum;
+use Support\Exceptions\MassDeletingException;
 use Support\ViewModels\AsyncSelectByQueryViewModel;
 
 class GameMediaController extends Controller

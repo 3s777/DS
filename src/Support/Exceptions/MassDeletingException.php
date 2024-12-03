@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Exceptions;
+namespace Support\Exceptions;
 
 use Exception;
 use Illuminate\Http\RedirectResponse;

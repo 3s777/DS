@@ -2,25 +2,22 @@
 
 namespace App\Http\Controllers\Shelf;
 
-use App\Exceptions\MassDeletingException;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\MassDeletingRequest;
 use App\Http\Requests\Shelf\GetCollectibleMediaRequest;
-use Domain\Shelf\Services\CollectibleService;
+use Domain\Shelf\Enums\CollectibleTypeEnum;
 use Domain\Shelf\Models\Collectible;
 use Domain\Shelf\ViewModel\CollectibleIndexViewModel;
 use Domain\Shelf\ViewModel\CollectibleMediaViewModel;
 use Domain\Shelf\ViewModel\CollectibleUpdateViewModel;
-use Domain\Shelf\ViewModel\KitItemConditionViewModel;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
 use Illuminate\Database\Eloquent\Relations\Relation;
 use Illuminate\Foundation\Application;
 use Illuminate\Http\RedirectResponse;
-use Illuminate\Http\Request;
 use Support\Actions\MassDeletingAction;
 use Support\DTOs\MassDeletingDTO;
-use Domain\Shelf\Enums\CollectibleTypeEnum;
+use Support\Exceptions\MassDeletingException;
 
 class CollectibleController extends Controller
 {

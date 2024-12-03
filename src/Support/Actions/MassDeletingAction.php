@@ -2,9 +2,9 @@
 
 namespace Support\Actions;
 
-use App\Exceptions\MassDeletingException;
 use Illuminate\Support\Facades\DB;
 use Support\DTOs\MassDeletingDTO;
+use Support\Exceptions\MassDeletingException;
 use Throwable;
 
 class MassDeletingAction

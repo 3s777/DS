@@ -2,16 +2,15 @@
 
 namespace Domain\Shelf\Services;
 
-use App\Exceptions\CrudException;
 use Domain\Shelf\DTOs\FillCollectibleDTO;
 use Domain\Shelf\Models\Collectible;
 use Domain\Shelf\Models\KitItem;
 use Domain\Shelf\Models\Shelf;
-use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
+use Support\Exceptions\CrudException;
+use Support\Transaction;
 use Throwable;
-use Domain\Shelf\Enums\CollectibleTypeEnum;
 
 class CollectibleService
 {
@@ -103,45 +102,43 @@ class CollectibleService
 
     public function update(Collectible $collectible, FillCollectibleDTO $data): Collectible
     {
-        try {
-            DB::beginTransaction();
+        return Transaction::run(
+            function() use($collectible, $data) {
+                $collectible->updateThumbnail(
+                    $data->thumbnail,
+                    $data->thumbnail_uploaded,
+                    ['small', 'medium']
+                );
 
-            $collectible->updateThumbnail(
-                $data->thumbnail,
-                $data->thumbnail_uploaded,
-                ['small', 'medium']
-            );
+                $collectible->fill($this->preparedFields($data));
 
-            $collectible->fill($this->preparedFields($data));
+                $shelf = Shelf::find($data->shelf_id);
+                $collectible->user_id = $shelf->user_id;
 
-            $shelf = Shelf::find($data->shelf_id);
-            $collectible->user_id = $shelf->user_id;
+                if($data->target == 'sale') {
+                    $sale = [
+                        'price' => $data->sale['price'],
+                        'price_old' => $data->sale['price_old'] ?? null
+                    ];
+                    $collectible->sale = $sale;
+                }
 
-            if($data->target == 'sale') {
-                $sale = [
-                    'price' => $data->sale['price'],
-                    'price_old' => $data->sale['price_old'] ?? null
-                ];
-                $collectible->sale = $sale;
+                if($data->target == 'auction') {
+                    $auction = [
+                        'price' => $data->auction['price'],
+                        'to' => $data->auction['to'],
+                        'step' => $data->auction['step']
+                    ];
+                    $collectible->auction = $auction;
+                }
+
+                $collectible->save();
+
+                return $collectible;
+            },
+            function(Throwable $e) {
+                throw new CrudException($e->getMessage());
             }
-
-            if($data->target == 'auction') {
-                $auction = [
-                    'price' => $data->auction['price'],
-                    'to' => $data->auction['to'],
-                    'step' => $data->auction['step']
-                ];
-                $collectible->auction = $auction;
-            }
-
-            $collectible->save();
-
-            DB::commit();
-
-            return $collectible;
-
-        } catch (Throwable $e) {
-            throw new CrudException($e->getMessage());
-        }
+        );
     }
 }
