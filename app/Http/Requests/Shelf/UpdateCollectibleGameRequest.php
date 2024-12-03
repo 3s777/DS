@@ -49,7 +49,7 @@ class UpdateCollectibleGameRequest extends FormRequest
                 'nullable',
                 'numeric',
                 'max: 100000000',
-
+                'min: 0'
             ],
             'seller' => [
                 'nullable',
@@ -126,7 +126,7 @@ class UpdateCollectibleGameRequest extends FormRequest
     public function attributes()
     {
         return [
-            'name' => __('common.name'),
+            'name' => trans_choice('common.name', 1),
             'user_shelf' => trans_choice('user.users', 1),
             'shelf_id' => trans_choice('shelf.shelves', 1),
             'article_number' => trans_choice('common.article_numbers', 1),

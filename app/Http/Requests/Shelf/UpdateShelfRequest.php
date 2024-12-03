@@ -52,7 +52,7 @@ class UpdateShelfRequest extends FormRequest
     public function attributes()
     {
         return [
-            'name' => __('common.name'),
+            'name' => trans_choice('common.name', 1),
             'number' => trans_choice('common.number', 1),
             'description' => __('common.description'),
             'thumbnail' => __('common.thumbnail'),

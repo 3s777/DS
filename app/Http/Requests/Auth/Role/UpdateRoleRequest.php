@@ -45,7 +45,7 @@ class UpdateRoleRequest extends FormRequest
     public function attributes(): array
     {
         return [
-            'name' => __('common.name'),
+            'name' => trans_choice('common.name', 1),
             'display_name' => __('common.display_name'),
             'description' => __('common.description'),
             'permissions' => __('permission.permissions'),

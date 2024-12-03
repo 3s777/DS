@@ -43,7 +43,7 @@ class CreateCategoryRequest extends FormRequest
     public function attributes()
     {
         return [
-            'name' => __('common.name'),
+            'name' => trans_choice('common.name', 1),
             'slug' => __('common.slug'),
             'description' => __('common.description')
         ];

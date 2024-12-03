@@ -34,46 +34,46 @@ class CollectibleService
 
     public function create(FillCollectibleDTO $data): Collectible
     {
-        try {
-            DB::beginTransaction();
 
-            $collectible = Collectible::make($this->preparedFields($data));
+        return Transaction::run(
+            function() use($data) {
+                $collectible = Collectible::make($this->preparedFields($data));
 
-            $collectible->category_id = 1;
+                $collectible->category_id = 1;
 
-            $shelf = Shelf::find($data->shelf_id);
-            $collectible->user_id = $shelf->user_id;
+                $shelf = Shelf::find($data->shelf_id);
+                $collectible->user_id = $shelf->user_id;
 
-            if($data->target == 'sale') {
-                $sale = [
-                    'price' => $data->sale['price'],
-                    'price_old' => $data->sale['price_old'] ?? null
-                ];
-                $collectible->sale = $sale;
-            }
+                if($data->target == 'sale') {
+                    $sale = [
+                        'price' => $data->sale['price'],
+                        'price_old' => $data->sale['price_old'] ?? null
+                    ];
+                    $collectible->sale = $sale;
+                }
 
-            if($data->target == 'auction') {
-                $auction = [
-                    'price' => $data->auction['price'],
-                    'to' => $data->auction['to'],
-                    'step' => $data->auction['step']
-                ];
-                $collectible->auction = $auction;
-            }
+                if($data->target == 'auction') {
+                    $auction = [
+                        'price' => $data->auction['price'],
+                        'to' => $data->auction['to'],
+                        'step' => $data->auction['step']
+                    ];
+                    $collectible->auction = $auction;
+                }
 
-            $collectible->collectable_id = $data->collectable;
-            $collectible->collectable_type = $data->collectable_type;
+                $collectible->collectable_id = $data->collectable;
+                $collectible->collectable_type = $data->collectable_type;
 //            $collectible->category_id = $data->category_id;
 
-            $collectible->save();
+                $collectible->save();
 
-            $kitItems = [];
+                $kitItems = [];
 
-            foreach($data->kit_conditions as $kitItem => $condition) {
-                if(KitItem::find($kitItem)->exists()) {
-                    $kitItems[$kitItem] = ['condition' => $condition];
+                foreach($data->kit_conditions as $kitItem => $condition) {
+                    if(KitItem::find($kitItem)->exists()) {
+                        $kitItems[$kitItem] = ['condition' => $condition];
+                    }
                 }
-            }
 
 //            foreach($data->kit_conditions as $kitItem => $condition) {
                 $collectible->kitItems()->sync($kitItems);
@@ -85,19 +85,18 @@ class CollectibleService
 //            }
 //            $collectible->kitItems()->attach($kitItems);
 
-            $collectible->addImageWithThumbnail(
-                $data->thumbnail,
-                'thumbnail',
-                ['small', 'medium']
-            );
+                $collectible->addImageWithThumbnail(
+                    $data->thumbnail,
+                    'thumbnail',
+                    ['small', 'medium']
+                );
 
-            DB::commit();
-
-            return $collectible;
-
-        } catch (Throwable $e) {
-            throw new CrudException($e->getMessage());
-        }
+                return $collectible;
+            },
+            function(Throwable $e) {
+                throw new CrudException($e->getMessage());
+            }
+        );
     }
 
     public function update(Collectible $collectible, FillCollectibleDTO $data): Collectible
