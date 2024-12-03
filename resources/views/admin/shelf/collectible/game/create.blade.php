@@ -80,6 +80,7 @@
                             name="purchase_price"
                             type="number"
                             step="0.01"
+                            min="0"
                             autocomplete="on">
                         </x-ui.form.input-text>
                     </x-ui.form.group>
@@ -215,6 +216,7 @@
                                     id="sale_price"
                                     name="sale[price]"
                                     step="0.01"
+                                    min="0"
                                     type="number"
                                     autocomplete="on">
                                 </x-ui.form.input-text>
@@ -227,6 +229,7 @@
                                     id="sale_price_old"
                                     name="sale[price_old]"
                                     step="0.01"
+                                    min="0"
                                     type="number"
                                     autocomplete="on">
                                 </x-ui.form.input-text>
@@ -243,6 +246,7 @@
                                     id="auction_price"
                                     name="auction[price]"
                                     step="0.01"
+                                    min="0"
                                     type="number"
                                     autocomplete="on">
                                 </x-ui.form.input-text>
@@ -256,6 +260,7 @@
                                     id="auction_step"
                                     name="auction[step]"
                                     step="0.01"
+                                    min="0"
                                     type="number"
                                     autocomplete="on">
                                 </x-ui.form.input-text>

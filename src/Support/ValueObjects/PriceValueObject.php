@@ -26,19 +26,21 @@ class PriceValueObject implements Stringable
         if(!isset($this->currencies[$currency])) {
             throw new InvalidArgumentException('Currency not allowed');
         }
+
+        $this->setValue();
     }
 
-    private function setValue()
+    private function setValue(): void
     {
-        return '';
+        $this->value = ((int)($this->value * $this->precision)) / $this->precision;
     }
 
-    public function raw(): int
+    public function raw(): float|int
     {
         return $this->value;
     }
 
-    public function prepareValue(): float|int
+    public function prepareValue(): int
     {
         return $this->value * $this->precision;
     }

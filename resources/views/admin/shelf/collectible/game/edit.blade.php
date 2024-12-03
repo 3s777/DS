@@ -86,6 +86,7 @@
                             name="purchase_price"
                             type="number"
                             step="0.01"
+                            min="0"
                             :value="$collectible->purchase_price->value()"
                             autocomplete="on">
                         </x-ui.form.input-text>
@@ -249,6 +250,7 @@
                                     id="sale_price"
                                     name="sale[price]"
                                     step="0.01"
+                                    min="0"
                                     :value="$collectible->sale['price'] ?? ''"
                                     type="number"
                                     autocomplete="on">
@@ -263,6 +265,7 @@
                                     id="sale_price_old"
                                     name="sale[price_old]"
                                     step="0.01"
+                                    min="0"
                                     :value="$collectible->sale['price_old'] ?? ''"
                                     type="number"
                                     autocomplete="on">
@@ -294,6 +297,7 @@
                                     id="auction_step"
                                     name="auction[step]"
                                     step="0.01"
+                                    min="0"
                                     :value="$collectible->auction['step'] ?? ''"
                                     type="number"
                                     autocomplete="on">
