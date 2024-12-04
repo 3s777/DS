@@ -2,13 +2,13 @@
 
 namespace Support\ValueObjects;
 
-use Domain\Shelf\Casts\SaleCast;
+use Domain\Shelf\Casts\Sale;
 use Illuminate\Contracts\Database\Eloquent\Castable;
 use InvalidArgumentException;
 use Stringable;
 use Support\Traits\Makeable;
 
-class SaleValueObject implements Castable
+class SaleValueObject
 {
     use Makeable;
 
@@ -17,26 +17,78 @@ class SaleValueObject implements Castable
     ];
 
     public function __construct(
-        private int $saleFields
+        public int|float      $price,
+        public int|float|null $priceOld = null,
+        private string        $currency = 'RUB',
+        private int           $precision = 100
     ) {
-        if(empty($saleFields)) {
-            throw new InvalidArgumentException('Sale must be an array');
+        if($price < 0 || $priceOld < 0) {
+            throw new InvalidArgumentException('Price must be more than zero');
         }
+
+        $this->setValues();
     }
 
-    public static function castUsing(array $arguments)
+    private function setValues(): void
     {
-        return SaleCast::class;
+        $this->price = ((int)($this->price * $this->precision)) / $this->precision;
+        $this->priceOld = ((int)($this->priceOld * $this->precision)) / $this->precision;
     }
 
     public function raw(): array
     {
-        return $this->saleFields;
+        return [
+            'price' => $this->price,
+            'price_old' => $this->priceOld
+        ];
     }
 
-    public function value(): float|int
+    public function values(): array
     {
-        return $this->value / $this->precision;
+        return [
+            'price' => $this->price / $this->precision,
+            'price_old' => $this->priceOld ? $this->priceOld / $this->precision : null
+        ];
+    }
+
+    public function preparedValues(): array
+    {
+        return [
+            'price' => $this->price * $this->precision,
+            'price_old' => $this->priceOld ? $this->priceOld * $this->precision : null
+        ];
+    }
+
+    public function price()
+    {
+        return $this->values()['price'];
+    }
+
+    public function priceOld()
+    {
+        return $this->values()['price_old'];
+    }
+
+    public function preparePrice()
+    {
+        return $this->preparedValues()['price'];
+    }
+
+    public function preparePriceOld()
+    {
+        return $this->preparedValues()['price_old'];
+    }
+
+    public function viewPrice()
+    {
+        return number_format($this->price(), 2, ',', ' ')
+            . ' ' . $this->symbol();
+    }
+
+    public function viewPriceOld()
+    {
+        return number_format($this->priceOld(), 2, ',', ' ')
+            . ' ' . $this->symbol();
     }
 
     public function currency(): string

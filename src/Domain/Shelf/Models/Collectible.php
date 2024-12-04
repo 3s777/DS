@@ -4,6 +4,7 @@ namespace Domain\Shelf\Models;
 
 use Database\Factories\Shelf\CollectibleFactory;
 use Domain\Auth\Models\User;
+use Domain\Shelf\Casts\Sale;
 use Domain\Shelf\FilterRegistrars\CollectibleFilterRegistrar;
 use Domain\Shelf\QueryBuilders\CollectibleQueryBuilder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -59,8 +60,8 @@ class Collectible extends Model implements HasMedia
         'description' => CleanHtml::class.':custom',
         'kit_conditions' => 'array',
         'properties' => 'array',
-        'sale' => 'array',
-//        'sale' => SaleValueObject::class,
+//        'sale' => 'array',
+        'sale' => Sale::class,
         'auction' => 'array',
         'purchase_price' => Price::class
     ];

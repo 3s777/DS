@@ -12,8 +12,12 @@ class Price implements CastsAttributes
         return PriceValueObject::make($value);
     }
 
-    public function set($model, string $key, $value, array $attributes): int
+    public function set($model, string $key, $value, array $attributes): ?int
     {
+        if(!$value) {
+          return null;
+        }
+
         if(!$value instanceof PriceValueObject) {
             $value = PriceValueObject::make($value);
         }
