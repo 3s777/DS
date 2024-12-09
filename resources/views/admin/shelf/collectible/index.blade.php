@@ -131,7 +131,7 @@
                     <x-ui.responsive-table.column>
                         <span class="responsive-table__label">{{ __('common.sale') }}: </span>
                         @if($collectible->target == 'sale')
-                            <div>{{ __('collectible.sale_price') }}: {{ $collectible->sale->viewPrice() }}</div>
+                            <div>{{ __('collectible.sale_price') }}: {{ $collectible->sale->price }}</div>
                         @endif
                     </x-ui.responsive-table.column>
                     <x-ui.responsive-table.column>

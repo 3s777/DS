@@ -251,7 +251,7 @@
                                     name="sale[price]"
                                     step="0.01"
                                     min="0"
-                                    :value="$collectible->sale?->price() ?? ''"
+                                    :value="$collectible->sale?->price?->value() ?? ''"
                                     type="number"
                                     autocomplete="on">
                                 </x-ui.form.input-text>
@@ -266,7 +266,7 @@
                                     name="sale[price_old]"
                                     step="0.01"
                                     min="0"
-                                    :value="$collectible->sale?->priceOld() ?? ''"
+                                    :value="$collectible->sale?->priceOld?->value() ?? ''"
                                     type="number"
                                     autocomplete="on">
                                 </x-ui.form.input-text>

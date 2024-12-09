@@ -40,8 +40,8 @@ class Sale implements CastsAttributes
         }
 
         return json_encode([
-            'price' => $value->preparePrice(),
-            'price_old' => $value->preparePriceOld(),
+            'price' => $value->price->prepareValue(),
+            'price_old' => $value->priceOld->prepareValue(),
         ]);
     }
 }
