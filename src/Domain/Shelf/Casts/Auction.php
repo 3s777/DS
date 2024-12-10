@@ -4,11 +4,12 @@ namespace Domain\Shelf\Casts;
 
 use Illuminate\Contracts\Database\Eloquent\CastsAttributes;
 use Illuminate\Database\Eloquent\Model;
+use Support\ValueObjects\AuctionValueObject;
 use Support\ValueObjects\SaleValueObject;
 
-class Sale implements CastsAttributes
+class Auction implements CastsAttributes
 {
-    public function get(Model $model, string $key, mixed $value, array $attributes): ?SaleValueObject
+    public function get(Model $model, string $key, mixed $value, array $attributes): ?AuctionValueObject
     {
         if(is_array(json_decode($value))) {
             return null;
@@ -17,9 +18,10 @@ class Sale implements CastsAttributes
         if($value) {
             $jsonValue = json_decode($value);
 
-            return new SaleValueObject(
+            return new AuctionValueObject(
                 $jsonValue->price,
-                $jsonValue->price_old ?? null
+                $jsonValue->step,
+                $jsonValue->to
             );
         }
 
@@ -32,23 +34,22 @@ class Sale implements CastsAttributes
             return null;
         }
 
-
-
-        if(!$value instanceof SaleValueObject) {
+        if(!$value instanceof AuctionValueObject) {
             $price = $value['price'];
-            $priceOld = $value['price_old'] ?: null;
+            $step = $value['step'];
+            $to = $value['to'];
 
-            $value = SaleValueObject::make($price, $priceOld);
+            $value = AuctionValueObject::make($price, $step, $to);
         }
 
         $prices = [
             'price' => $value->price->prepareValue()
         ];
 
-        if($value->priceOld) {
-            $prices['price_old'] = $value->priceOld->prepareValue();
-        }
-
-        return json_encode($prices);
+        return json_encode([
+            'price' => $value->price->prepareValue(),
+            'step' => $value->step,
+            'to' => $value->to
+        ]);
     }
 }

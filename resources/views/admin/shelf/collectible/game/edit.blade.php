@@ -283,7 +283,7 @@
                                     id="auction_price"
                                     name="auction[price]"
                                     step="0.01"
-                                    :value="$collectible->auction['price'] ?? ''"
+                                    :value="$collectible->auction?->price?->value()"
                                     type="number"
                                     autocomplete="on">
                                 </x-ui.form.input-text>
@@ -298,7 +298,7 @@
                                     name="auction[step]"
                                     step="0.01"
                                     min="0"
-                                    :value="$collectible->auction['step'] ?? ''"
+                                    :value="$collectible->auction?->step"
                                     type="number"
                                     autocomplete="on">
                                 </x-ui.form.input-text>
@@ -311,7 +311,7 @@
                                     placeholder="{{ __('collectible.auction_to') }} *"
                                     id="auction_to"
                                     name="auction[to]"
-                                    :value="$collectible->auction['to'] ?? ''">
+                                    :value="$collectible->auction?->to">
                                 </x-ui.form.datepicker>
                             </x-ui.form.group>
                         </x-grid.col>

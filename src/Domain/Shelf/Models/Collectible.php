@@ -4,6 +4,7 @@ namespace Domain\Shelf\Models;
 
 use Database\Factories\Shelf\CollectibleFactory;
 use Domain\Auth\Models\User;
+use Domain\Shelf\Casts\Auction;
 use Domain\Shelf\Casts\Sale;
 use Domain\Shelf\FilterRegistrars\CollectibleFilterRegistrar;
 use Domain\Shelf\QueryBuilders\CollectibleQueryBuilder;
@@ -62,7 +63,7 @@ class Collectible extends Model implements HasMedia
         'properties' => 'array',
 //        'sale' => 'array',
         'sale' => Sale::class,
-        'auction' => 'array',
+        'auction' => Auction::class,
         'purchase_price' => Price::class
     ];
 
