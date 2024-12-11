@@ -9,9 +9,9 @@ class AuctionValueObject
 {
     use Makeable;
 
-    public PriceValueObject $price;
-    public int|float $step;
-    public string $to;
+    private PriceValueObject $price;
+    private PriceValueObject $step;
+    private string $to;
 
     public function __construct(
         int|float $price,
@@ -25,7 +25,22 @@ class AuctionValueObject
         }
 
         $this->price = PriceValueObject::make($price, $currency, $precision);
-        $this->step = $step;
+        $this->step = PriceValueObject::make($step, $currency, $precision);
         $this->to = $to;
+    }
+
+    public function price(): PriceValueObject
+    {
+        return $this->price;
+    }
+
+    public function step(): PriceValueObject
+    {
+        return $this->step;
+    }
+
+    public function to()
+    {
+        return $this->to;
     }
 }

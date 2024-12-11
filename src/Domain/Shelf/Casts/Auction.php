@@ -43,13 +43,13 @@ class Auction implements CastsAttributes
         }
 
         $prices = [
-            'price' => $value->price->prepareValue()
+            'price' => $value->price()->prepareValue()
         ];
 
         return json_encode([
-            'price' => $value->price->prepareValue(),
-            'step' => $value->step,
-            'to' => $value->to
+            'price' => $value->price()->prepareValue(),
+            'step' => $value->step()->prepareValue(),
+            'to' => $value->to()
         ]);
     }
 }

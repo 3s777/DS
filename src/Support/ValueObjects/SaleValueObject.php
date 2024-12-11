@@ -12,8 +12,8 @@ class SaleValueObject
 {
     use Makeable;
 
-    public PriceValueObject $price;
-    public ? PriceValueObject $priceOld;
+    private PriceValueObject $price;
+    private ? PriceValueObject $priceOld;
 
     public function __construct(
         int|float $price,
@@ -32,6 +32,16 @@ class SaleValueObject
     {
         $this->price = PriceValueObject::make($price, $currency, $precision);
         $this->priceOld = $priceOld ? PriceValueObject::make($priceOld, $currency, $precision) : null;
+    }
+
+    public function price(): PriceValueObject
+    {
+        return $this->price;
+    }
+
+    public function priceOld(): ?PriceValueObject
+    {
+        return $this->priceOld;
     }
 
     public function raw(): array

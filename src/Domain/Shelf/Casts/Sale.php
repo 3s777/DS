@@ -32,8 +32,6 @@ class Sale implements CastsAttributes
             return null;
         }
 
-
-
         if(!$value instanceof SaleValueObject) {
             $price = $value['price'];
             $priceOld = $value['price_old'] ?: null;
@@ -42,11 +40,11 @@ class Sale implements CastsAttributes
         }
 
         $prices = [
-            'price' => $value->price->prepareValue()
+            'price' => $value->price()->prepareValue()
         ];
 
-        if($value->priceOld) {
-            $prices['price_old'] = $value->priceOld->prepareValue();
+        if($value->priceOld()) {
+            $prices['price_old'] = $value->priceOld()->prepareValue();
         }
 
         return json_encode($prices);
