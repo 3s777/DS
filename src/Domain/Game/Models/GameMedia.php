@@ -61,6 +61,11 @@ class GameMedia extends Model implements HasMedia
         'users.email'
     ];
 
+    public static function testCast($properties)
+    {
+        return $properties;
+    }
+
     protected static function newFactory(): GameMediaFactory
     {
         return GameMediaFactory::new();

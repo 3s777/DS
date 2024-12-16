@@ -5,6 +5,7 @@ namespace Domain\Shelf\Models;
 use Database\Factories\Shelf\CollectibleFactory;
 use Domain\Auth\Models\User;
 use Domain\Shelf\Casts\Auction;
+use Domain\Shelf\Casts\Properties;
 use Domain\Shelf\Casts\Sale;
 use Domain\Shelf\FilterRegistrars\CollectibleFilterRegistrar;
 use Domain\Shelf\QueryBuilders\CollectibleQueryBuilder;
@@ -60,7 +61,7 @@ class Collectible extends Model implements HasMedia
     protected $casts = [
         'description' => CleanHtml::class.':custom',
         'kit_conditions' => 'array',
-        'properties' => 'array',
+        'properties' => Properties::class,
 //        'sale' => 'array',
         'sale' => Sale::class,
         'auction' => Auction::class,
