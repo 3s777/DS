@@ -10,25 +10,13 @@ use Support\ValueObjects\SaleValueObject;
 
 class Properties implements CastsAttributes
 {
-    public function get(Model $model, string $key, mixed $value, array $attributes): ?AuctionValueObject
+    public function get(Model $model, string $key, mixed $value, array $attributes)
     {
+        $collectableModel = Relation::getMorphedModel($attributes['collectable_type']);
 
+        $properties = $collectableModel::getProperties($value);
 
-        if(is_array(json_decode($value))) {
-            return null;
-        }
-
-        if($value) {
-            $jsonValue = json_decode($value);
-
-            return new AuctionValueObject(
-                $jsonValue->price,
-                $jsonValue->step,
-                $jsonValue->to
-            );
-        }
-
-        return null;
+        return $properties;
     }
 
     public function set(Model $model, string $key, mixed $value, array $attributes)
@@ -36,29 +24,11 @@ class Properties implements CastsAttributes
         if(!$value) {
             return null;
         }
-        $class = Relation::getMorphedModel($attributes['collectable_type']);
 
+        $collectableModel = Relation::getMorphedModel($attributes['collectable_type']);
 
-        dd($class::testCast($value));
+        $properties = $collectableModel::setProperties($value);
 
-
-
-        if(!$value instanceof AuctionValueObject) {
-            $price = $value['price'];
-            $step = $value['step'];
-            $to = $value['to'];
-
-            $value = AuctionValueObject::make($price, $step, $to);
-        }
-
-        $prices = [
-            'price' => $value->price()->prepareValue()
-        ];
-
-        return json_encode([
-            'price' => $value->price()->prepareValue(),
-            'step' => $value->step()->prepareValue(),
-            'to' => $value->to()
-        ]);
+        return json_encode($properties);
     }
 }

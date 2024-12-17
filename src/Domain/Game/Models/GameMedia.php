@@ -2,9 +2,11 @@
 
 namespace Domain\Game\Models;
 
+use App\Contracts\HasProperties;
 use Database\Factories\Game\GameMediaFactory;
 use Domain\Auth\Models\User;
 use Domain\Game\FilterRegistrars\GameMediaFilterRegistrar;
+use Domain\Game\Models\Traits\GameProperties;
 use Domain\Game\QueryBuilders\GameMediaQueryBuilder;
 use Domain\Shelf\Models\Collectible;
 use Domain\Shelf\Models\KitItem;
@@ -23,7 +25,7 @@ use Support\Traits\Models\HasSlug;
 use Support\Traits\Models\HasThumbnail;
 use Support\Traits\Models\HasUser;
 
-class GameMedia extends Model implements HasMedia
+class GameMedia extends Model implements HasMedia, HasProperties
 {
     use HasFactory;
     use HasSlug;
@@ -32,6 +34,7 @@ class GameMedia extends Model implements HasMedia
     use HasThumbnail;
     use HasUser;
     use HasTranslations;
+    use GameProperties;
 
     protected $table = 'game_medias';
 
@@ -60,11 +63,6 @@ class GameMedia extends Model implements HasMedia
         'created_at',
         'users.email'
     ];
-
-    public static function testCast($properties)
-    {
-        return $properties;
-    }
 
     protected static function newFactory(): GameMediaFactory
     {
