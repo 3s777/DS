@@ -5,8 +5,6 @@ namespace Domain\Shelf\Casts;
 use Illuminate\Contracts\Database\Eloquent\CastsAttributes;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\Relation;
-use Support\ValueObjects\AuctionValueObject;
-use Support\ValueObjects\SaleValueObject;
 
 class Properties implements CastsAttributes
 {

@@ -5,6 +5,7 @@ namespace Domain\Shelf\FilterRegistrars;
 use App\Contracts\FilterRegistrar;
 use App\Filters\DatesFilter;
 use App\Filters\EnumFilter;
+use App\Filters\RangeFilter;
 use App\Filters\RelationFilter;
 use App\Filters\SearchFilter;
 use Domain\Auth\Models\User;
@@ -105,6 +106,12 @@ class CollectibleFilterRegistrar implements FilterRegistrar
                 'additional_field',
                 'collectibles',
                 'additional_field'
+            ),
+            'purchase_price' => RangeFilter::make(
+                __('collectible.purchase_price'),
+                'purchase_price',
+                'collectibles',
+                'purchase_price'
             ),
         ];
     }

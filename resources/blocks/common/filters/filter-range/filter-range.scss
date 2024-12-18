@@ -1,0 +1,25 @@
+.filter-range {
+    position: relative;
+
+    &__label {
+        position: absolute;
+        top: -17px;
+        left: 0;
+        font-size: rem(12);
+        line-height: 1;
+        color: $font-main-50;
+    }
+
+    &__inner {
+        display: flex;
+        justify-content: space-between;
+        gap: 12px;
+        align-items: center;
+    }
+
+    &__field:focus ~ .input-text__label,
+    &__field:active ~ .input-text__label,
+    &__field:not(:placeholder-shown) ~ .input-text__label {
+        display: none;
+    }
+}

@@ -23,7 +23,6 @@ use Support\Casts\Price;
 use Support\Traits\Models\HasThumbnail;
 use Support\Traits\Models\HasUser;
 
-
 class Collectible extends Model implements HasMedia
 {
     use HasFactory;
@@ -44,25 +43,17 @@ class Collectible extends Model implements HasMedia
         'additional_field',
         'properties',
         'target',
-//        'sale->price',
-//        'sale->old_price',
-//        'auction->price',
-//        'auction->to',
-//        'auction->step',
         'kit_conditions',
         'condition',
         'description',
         'user_id',
         'thumbnail',
-//        'collectable_id',
-//        'collectable_type'
     ];
 
     protected $casts = [
         'description' => CleanHtml::class.':custom',
         'kit_conditions' => 'array',
         'properties' => Properties::class,
-//        'sale' => 'array',
         'sale' => Sale::class,
         'auction' => Auction::class,
         'purchase_price' => Price::class

@@ -52,6 +52,7 @@ class CreateCollectibleGameRequestFactory extends RequestFactory
             'target' => $target->value,
             'sale' => $sale,
             'auction' => $auction,
+            'category_id' => 1
         ];
     }
 

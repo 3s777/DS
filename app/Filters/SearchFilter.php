@@ -10,6 +10,8 @@ class SearchFilter extends AbstractFilter
 {
     use Makeable;
 
+    protected ?array $alternativeFields;
+
     public function __construct(
         string $title,
         string $key,
