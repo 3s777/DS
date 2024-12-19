@@ -2,6 +2,7 @@
 
 namespace Domain\Shelf\Models;
 
+use Database\Factories\Shelf\CategoryFactory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Mews\Purifier\Casts\CleanHtml;
@@ -33,4 +34,9 @@ class Category extends Model implements Auditable
         'name',
         'description'
     ];
+
+    protected static function newFactory(): CategoryFactory
+    {
+        return CategoryFactory::new();
+    }
 }

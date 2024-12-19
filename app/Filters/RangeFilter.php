@@ -23,17 +23,13 @@ class RangeFilter extends AbstractFilter
     public function apply(Builder $query): Builder
     {
         return $query->when($this->requestValue('from'), function (Builder $query) {
+            $from = PriceValueObject::make($this->requestValue('from'))->prepareValue();
+            $to = PriceValueObject::make($this->requestValue('to', 10000000))->prepareValue();
 
-            if($this->requestValue('from')) {
-                $from = PriceValueObject::make($this->requestValue('from'));
-                $query->where($this->table.'.'.$this->field, '>=', $from->prepareValue());
-            }
-
-            if($this->requestValue('to')) {
-                $to = PriceValueObject::make($this->requestValue('to'));
-                $query->where($this->table.'.'.$this->field, '<=', $to->prepareValue());
-            }
-
+            $query->whereBetween($this->table.'.'.$this->field, [
+                $from,
+                $to
+            ]);
         });
     }
 

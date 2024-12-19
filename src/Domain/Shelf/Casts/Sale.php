@@ -34,7 +34,7 @@ class Sale implements CastsAttributes
 
         if(!$value instanceof SaleValueObject) {
             $price = $value['price'];
-            $priceOld = $value['price_old'] ?: null;
+            $priceOld = $value['price_old'] ?? null;
 
             $value = SaleValueObject::make($price, $priceOld);
         }

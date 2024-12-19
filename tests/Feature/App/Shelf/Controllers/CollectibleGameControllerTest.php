@@ -11,8 +11,10 @@ use Database\Factories\UserFactory;
 use Domain\Auth\Models\Role;
 use Domain\Auth\Models\User;
 use Domain\Game\Models\GameMedia;
+use Domain\Shelf\Models\Category;
 use Domain\Shelf\Models\Collectible;
 use Domain\Shelf\Models\Shelf;
+use Illuminate\Database\Eloquent\Relations\Relation;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Queue;
@@ -35,7 +37,11 @@ class CollectibleGameControllerTest extends TestCase
         Role::create(['name' => config('settings.super_admin_role'), 'display_name' => 'SuperAdmin']);
         $this->user->assignRole('super_admin');
 
-        $this->collectible = CollectibleFactory::new()->for(GameMedia::factory(), 'collectable')->create();
+        $this->collectible = CollectibleFactory::new()->for(GameMedia::factory(), 'collectable')
+            ->for(Category::factory()->create([
+                'model' => Relation::getMorphAlias(GameMedia::class)
+            ]))
+            ->create();
 
         $this->request = CreateCollectibleGameRequest::factory()->hasKitConditions()->create();
     }
@@ -128,6 +134,7 @@ class CollectibleGameControllerTest extends TestCase
      */
     public function it_store_success(): void
     {
+
         $this->actingAs($this->user)
             ->post(action([CollectibleGameController::class, 'store']), $this->request)
             ->assertRedirectToRoute('collectibles.index')
@@ -315,13 +322,13 @@ class CollectibleGameControllerTest extends TestCase
         $this->request['seller'] = 'seller';
         $this->request['purchased_at'] = '2023-01-03';
         $this->request['additional_field'] = 'additional';
-        $this->request['properties']['is_done'] = 1;
-        $this->request['properties']['is_digital'] = 1;
+        $this->request['properties']['is_done'] = true;
+        $this->request['properties']['is_digital'] = true;
         $this->request['collectable'] = 200;
         $this->request['target'] = 'sale';
         $this->request['shelf_id'] = $newShelf->id;
-        $this->request['sale']['price'] = '100';
-        $this->request['sale']['price_old'] = '200';
+        $this->request['sale']['price'] = 100;
+        $this->request['sale']['price_old'] = 200;
 
         $this->actingAs($this->user)
             ->put(
@@ -341,7 +348,7 @@ class CollectibleGameControllerTest extends TestCase
                 $updatedCollectible->name,
                 $updatedCollectible->article_number,
                 $updatedCollectible->condition,
-                $updatedCollectible->purchase_price,
+                $updatedCollectible->purchase_price->value(),
                 $updatedCollectible->seller,
                 $updatedCollectible->purchased_at,
                 $updatedCollectible->additional_field,
@@ -349,8 +356,8 @@ class CollectibleGameControllerTest extends TestCase
                 $updatedCollectible->properties['is_digital'],
                 $updatedCollectible->target,
                 $updatedCollectible->shelf_id,
-                $updatedCollectible->sale['price'],
-                $updatedCollectible->sale['price_old']
+                $updatedCollectible->sale->price()->value(),
+                $updatedCollectible->sale->priceOld()->value()
             ],
             [
                 $this->request['name'],

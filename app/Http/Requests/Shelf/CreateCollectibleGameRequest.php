@@ -2,10 +2,13 @@
 
 namespace App\Http\Requests\Shelf;
 
+use Domain\Game\Models\GameMedia;
 use Domain\Shelf\Enums\CollectibleTypeEnum;
 use Domain\Shelf\Enums\ConditionEnum;
 use Domain\Shelf\Enums\TargetEnum;
+use Domain\Shelf\Models\Category;
 use Domain\Shelf\Models\Collectible;
+use Illuminate\Database\Eloquent\Relations\Relation;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
 
@@ -22,8 +25,8 @@ class CreateCollectibleGameRequest extends FormRequest
     protected function prepareForValidation()
     {
         $this->merge([
-            'collectable_type' => CollectibleTypeEnum::Game->morphName(),
-            'category_id' => 1
+            'collectable_type' => Relation::getMorphAlias(GameMedia::class),
+            'category_id' => Category::where('model', Relation::getMorphAlias(GameMedia::class))->first()->id
         ]);
     }
 

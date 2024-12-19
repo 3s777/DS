@@ -20,6 +20,7 @@ class CategoryFactory extends Factory
     {
         return [
             'name' => $this->translations(['en', 'ru'], [fake()->name(), fake()->name()]),
+            'model' => fake()->unique()->name(),
             'description' => $this->translations(['en', 'ru'], [fake()->sentence(), fake()->sentence()])
         ];
     }

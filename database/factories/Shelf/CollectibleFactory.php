@@ -6,6 +6,7 @@ use Domain\Auth\Models\User;
 use Domain\Game\Models\GameMedia;
 use Domain\Shelf\Enums\ConditionEnum;
 use Domain\Shelf\Enums\TargetEnum;
+use Domain\Shelf\Models\Category;
 use Domain\Shelf\Models\Collectible;
 use Domain\Shelf\Models\KitItem;
 use Domain\Shelf\Models\Shelf;
@@ -28,7 +29,7 @@ class CollectibleFactory extends Factory
      */
     public function definition(): array
     {
-        $target = Arr::random(TargetEnum::cases());
+        $target = TargetEnum::Sale;
         $sale = [];
         $auction = [];
 
@@ -50,7 +51,9 @@ class CollectibleFactory extends Factory
             'article_number' => fake()->title(),
             'condition' => Arr::random(ConditionEnum::cases())->value,
             'user_id' => User::factory(),
-            'category_id' => 1,
+            'category_id' => function(array $attributes) {
+                return Category::where('model', $attributes['collectable_type'])->first();
+            },
             'shelf_id' => Shelf::factory(),
 //            'collectable_type' => fake()->randomElement([
 //                'game_media'

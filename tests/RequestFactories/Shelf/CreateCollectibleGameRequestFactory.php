@@ -7,6 +7,7 @@ use Domain\Game\Models\GameMedia;
 use Domain\Shelf\Enums\CollectibleTypeEnum;
 use Domain\Shelf\Enums\ConditionEnum;
 use Domain\Shelf\Enums\TargetEnum;
+use Domain\Shelf\Models\Category;
 use Domain\Shelf\Models\KitItem;
 use Domain\Shelf\Models\Shelf;
 use Illuminate\Database\Eloquent\Relations\Relation;
@@ -38,6 +39,9 @@ class CreateCollectibleGameRequestFactory extends RequestFactory
         return [
             'name' => fake()->name(),
             'shelf_id' => Shelf::factory(),
+//            'category_id' => Category::factory()->create([
+//                'model' => Relation::getMorphAlias(GameMedia::class)
+//            ]),
             'article_number' => fake()->uuid(),
             'condition' => Arr::random(ConditionEnum::cases())->value,
             'purchase_price' => fake()->numberBetween(1000, 100000),
@@ -51,8 +55,7 @@ class CreateCollectibleGameRequestFactory extends RequestFactory
             'collectable_type' => CollectibleTypeEnum::Game->morphName(),
             'target' => $target->value,
             'sale' => $sale,
-            'auction' => $auction,
-            'category_id' => 1
+            'auction' => $auction
         ];
     }
 
