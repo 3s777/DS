@@ -15,6 +15,7 @@ use Domain\Shelf\Models\Category;
 use Domain\Shelf\Models\Collectible;
 use Domain\Shelf\Models\Shelf;
 use Illuminate\Database\Eloquent\Relations\Relation;
+use Illuminate\Foundation\Testing\DatabaseTruncation;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Queue;
@@ -24,6 +25,7 @@ use Tests\TestCase;
 class CollectibleGameControllerTest extends TestCase
 {
     use RefreshDatabase;
+//    use DatabaseTruncation;
 
     protected User $user;
     protected Collectible $collectible;
@@ -134,7 +136,6 @@ class CollectibleGameControllerTest extends TestCase
      */
     public function it_store_success(): void
     {
-
         $this->actingAs($this->user)
             ->post(action([CollectibleGameController::class, 'store']), $this->request)
             ->assertRedirectToRoute('collectibles.index')
@@ -376,21 +377,4 @@ class CollectibleGameControllerTest extends TestCase
             ]
         );
     }
-//
-//    /**
-//     * @test
-//     * @return void
-//     */
-//    public function it_delete_success(): void
-//    {
-//        $this->actingAs($this->user)
-//            ->delete(action([GameMediaController::class, 'destroy'], [$this->gameMedia->slug]))
-//            ->assertRedirectToRoute('game-medias.index')
-//            ->assertSessionHas('helper_flash_message', __('game_media.deleted'));
-//
-//        $this->assertDatabaseMissing('game_medias', [
-//            'name' => $this->gameMedia->name,
-//            'deleted_at' => null
-//        ]);
-//    }
 }

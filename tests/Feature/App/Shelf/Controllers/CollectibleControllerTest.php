@@ -10,6 +10,7 @@ use Domain\Auth\Models\Role;
 use Domain\Auth\Models\User;
 use Domain\Game\Models\GameMedia;
 use Domain\Shelf\Enums\CollectibleTypeEnum;
+use Domain\Shelf\Models\Category;
 use Domain\Shelf\Models\Collectible;
 use Illuminate\Database\Eloquent\Relations\Relation;
 use Illuminate\Foundation\Testing\RefreshDatabase;
@@ -31,7 +32,12 @@ class CollectibleControllerTest extends TestCase
         Role::create(['name' => config('settings.super_admin_role'), 'display_name' => 'SuperAdmin']);
         $this->user->assignRole('super_admin');
 
-        $this->collectible = CollectibleFactory::new()->for(GameMedia::factory(), 'collectable')->create();
+        $this->collectible = CollectibleFactory::new()
+            ->for(GameMedia::factory(), 'collectable')
+            ->for(Category::factory()->create([
+                'model' => Relation::getMorphAlias(GameMedia::class)
+            ]))
+            ->create();
 
         $this->request = CreateCollectibleGameRequest::factory()->hasKitConditions()->create();
     }

@@ -26,20 +26,16 @@ class CollectibleService
             'purchased_at' => $data->purchased_at,
             'seller' => $data->seller,
             'additional_field' => $data->additional_field,
-            'properties' => $data->properties,
             'target' => $data->target,
-            'description' => $data->description,
+            'description' => $data->description
         ];
     }
 
     public function create(FillCollectibleDTO $data): Collectible
     {
-
         return Transaction::run(
             function() use($data) {
                 $collectible = Collectible::make($this->preparedFields($data));
-
-                $collectible->category_id = 1;
 
                 $shelf = Shelf::find($data->shelf_id);
                 $collectible->user_id = $shelf->user_id;
@@ -63,7 +59,8 @@ class CollectibleService
 
                 $collectible->collectable_id = $data->collectable;
                 $collectible->collectable_type = $data->collectable_type;
-//            $collectible->category_id = $data->category_id;
+                $collectible->properties =  $data->properties;
+                $collectible->category_id = $data->category_id;
 
                 $collectible->save();
 
@@ -130,6 +127,8 @@ class CollectibleService
                     ];
                     $collectible->auction = $auction;
                 }
+
+                $collectible->properties =  $data->properties;
 
                 $collectible->save();
 

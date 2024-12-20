@@ -6,10 +6,13 @@ use App\Http\Requests\Shelf\CreateCollectibleGameRequest;
 use App\Jobs\GenerateSmallThumbnailsJob;
 use App\Jobs\GenerateThumbnailJob;
 use Domain\Auth\Models\User;
+use Domain\Game\Models\GameMedia;
 use Domain\Shelf\DTOs\FillCollectibleDTO;
+use Domain\Shelf\Models\Category;
 use Domain\Shelf\Models\Collectible;
 use Domain\Shelf\Models\Shelf;
 use Domain\Shelf\Services\CollectibleService;
+use Illuminate\Database\Eloquent\Relations\Relation;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Http\Request;
 use Illuminate\Http\UploadedFile;
@@ -28,7 +31,13 @@ class CollectibleServiceTest extends TestCase
     {
         parent::setUp();
 
-        $this->request = CreateCollectibleGameRequest::factory()->hasKitConditions()->create();
+        $this->request = CreateCollectibleGameRequest::factory()->hasKitConditions()->create(
+            [
+                'category_id' => Category::factory()->create([
+                    'model' => Relation::getMorphAlias(GameMedia::class)
+                ])->id,
+            ]
+        );
 
         $this->user = User::factory()->create();
     }
@@ -106,8 +115,8 @@ class CollectibleServiceTest extends TestCase
 
         $updatedCollectible= Collectible::where('name', 'NewNameCollectible')->first();
 
-        $this->assertTrue($updatedCollectible->sale['price'] == $this->request['sale']['price']);
-        $this->assertTrue($updatedCollectible->sale['price_old'] == $this->request['sale']['price_old']);
+        $this->assertTrue($updatedCollectible->sale->price()->value() == $this->request['sale']['price']);
+        $this->assertTrue($updatedCollectible->sale->priceOld()->value() == $this->request['sale']['price_old']);
         $this->assertTrue($updatedCollectible->target == $this->request['target']);
         $this->assertEquals($updatedCollectible->shelf->id, $newShelf->id);
         $this->assertEquals($updatedCollectible->user->id, $newShelf->user->id);

@@ -38,6 +38,7 @@ class FillCategoryDTOTest extends TestCase
     {
         $data = FillCategoryDTO::make(
             name: $this->request['name'],
+            model: $this->request['model'],
             description: $this->request['description']
         );
 

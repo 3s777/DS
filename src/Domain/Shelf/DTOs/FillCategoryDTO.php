@@ -11,6 +11,7 @@ class FillCategoryDTO
 
     public function __construct(
         public readonly string $name,
+        public readonly string $model,
         public readonly ?string $slug = null,
         public readonly ?string $description = null,
     ) {
@@ -20,6 +21,7 @@ class FillCategoryDTO
     {
         return static::make(...$request->only([
             'name',
+            'model',
             'slug',
             'description'
         ]));

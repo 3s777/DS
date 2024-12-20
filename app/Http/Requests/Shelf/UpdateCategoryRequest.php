@@ -29,6 +29,11 @@ class UpdateCategoryRequest extends FormRequest
                 'string',
                 'max:250'
             ],
+            'model' => [
+                'required',
+                'string',
+                'max:250'
+            ],
             'slug' => [
                 'nullable',
                 'string',

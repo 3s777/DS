@@ -124,7 +124,7 @@
                     <x-ui.form.group>
                         <x-ui.form.switcher
                             name="properties[is_done]"
-                            value="fake"
+                            value="1"
                             :label="__('game.is_done')">
                         </x-ui.form.switcher>
                     </x-ui.form.group>

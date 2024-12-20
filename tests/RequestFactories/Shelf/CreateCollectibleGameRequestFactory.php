@@ -39,9 +39,6 @@ class CreateCollectibleGameRequestFactory extends RequestFactory
         return [
             'name' => fake()->name(),
             'shelf_id' => Shelf::factory(),
-//            'category_id' => Category::factory()->create([
-//                'model' => Relation::getMorphAlias(GameMedia::class)
-//            ]),
             'article_number' => fake()->uuid(),
             'condition' => Arr::random(ConditionEnum::cases())->value,
             'purchase_price' => fake()->numberBetween(1000, 100000),
@@ -49,8 +46,10 @@ class CreateCollectibleGameRequestFactory extends RequestFactory
             'purchased_at' => fake()->date(),
             'description' => fake()->text(),
             'additional_field' => fake()->title(),
-            'properties.is_done' => fake()->boolean(),
-            'properties.is_digital' => fake()->boolean(),
+            'properties' => [
+                'is_done' => fake()->boolean(),
+                'is_digital' => true
+            ],
             'collectable' => $gameMedia->id,
             'collectable_type' => CollectibleTypeEnum::Game->morphName(),
             'target' => $target->value,

@@ -10,6 +10,7 @@ class CreateCategoryRequestFactory extends RequestFactory
     {
         return [
             'name' => fake()->name(),
+            'model' => fake()->name(),
             'description' => fake()->sentence()
         ];
     }

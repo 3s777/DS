@@ -30,6 +30,11 @@ class CreateCategoryRequest extends FormRequest
                 'string',
                 'max:250'
             ],
+            'model' => [
+                'required',
+                'string',
+                'max:250'
+            ],
             'slug' => [
                 'nullable',
                 'string',

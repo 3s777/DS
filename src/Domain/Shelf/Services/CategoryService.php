@@ -15,6 +15,7 @@ class CategoryService
 
             $category = Category::create([
                 'name' => $data->name,
+                'model' => $data->model,
                 'slug' => $data->slug,
                 'description' => $data->description
             ]);
@@ -36,6 +37,7 @@ class CategoryService
             $category->fill(
                 [
                     'name' => $data->name,
+                    'model' => $data->model,
                     'slug' => $data->slug,
                     'description' => $data->description
                 ]

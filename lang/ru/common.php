@@ -76,5 +76,6 @@ return [
     'for_collection' => 'В коллекцию',
     'for_sale' => 'Продать',
     'for_auction' => 'На аукцион',
-    'for_exchange' => 'Обменять'
+    'for_exchange' => 'Обменять',
+    'model' => 'Модель|Модели'
 ];

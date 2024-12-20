@@ -46,8 +46,8 @@ class FillCollectibleDTOTest extends TestCase
             purchased_at: $this->request['purchased_at'],
             additional_field: $this->request['additional_field'],
             properties: [
-                'is_done' => $this->request['properties.is_done'],
-                'is_digital' => $this->request['properties.is_digital']
+                'is_done' => $this->request['properties']['is_done'],
+                'is_digital' => $this->request['properties']['is_digital']
             ],
             target: $this->request['target'],
             collectable: $this->request['collectable'],
