@@ -77,7 +77,7 @@ return [
     /*
      * The class that contains the strategy for determining how to remove files.
      */
-    'file_remover_class' => Spatie\MediaLibrary\Support\FileRemover\DefaultFileRemover::class,
+    'file_remover_class' => \Support\MediaLibrary\MediaFileRemover::class,
 
     /*
      * Here you can specify which path generator should be used for the given class.
