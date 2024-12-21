@@ -300,6 +300,16 @@
                     <p>{{ __('common.file.max_size') }} 6Mb</p>
                 </x-ui.form.input-image>
             </div>
+
+            <div class="crud-form__sidebar-wrapper">
+                <x-ui.form.input-image-multiple
+                    class="crud-form__input-image1"
+                    name="thumbnail1"
+                    id="thumbnail1">
+                    <p>{{ __('common.file.format') }} jpg, png</p>
+                    <p>{{ __('common.file.max_size') }} 6Mb</p>
+                </x-ui.form.input-image-multiple>
+            </div>
         </div>
 
         <x-ui.form.group class="crud-form__submit">
