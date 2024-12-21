@@ -58,7 +58,5 @@ class SaleCastTest extends TestCase
 //                'model' => Relation::getMorphAlias(GameMedia::class)
 //            ]))
             ->create();
-
-        dd($collectible);
     }
 }

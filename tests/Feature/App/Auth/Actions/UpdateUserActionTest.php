@@ -89,7 +89,7 @@ class UpdateUserActionTest extends TestCase
             $this->request['first_name'],
             $this->request['slug'],
             $this->request['description'],
-            UploadedFile::fake()->image('photo2.php'),
+            UploadedFile::fake()->image('photo2.doc'),
             null,
             $this->request['is_verified'],
         ), $user);
