@@ -20,6 +20,8 @@ use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Queue;
 use Illuminate\Support\Facades\Storage;
+use Support\ValueObjects\PriceValueObject;
+use Support\ValueObjects\SaleValueObject;
 use Tests\TestCase;
 
 class SaleCastTest extends TestCase
@@ -28,7 +30,7 @@ class SaleCastTest extends TestCase
 
     protected User $user;
     protected Collectible $collectible;
-    protected array $request;
+    protected Category $category;
 
     public function setUp(): void
     {
@@ -38,13 +40,7 @@ class SaleCastTest extends TestCase
         Role::create(['name' => config('settings.super_admin_role'), 'display_name' => 'SuperAdmin']);
         $this->user->assignRole('super_admin');
 
-        $this->collectible = CollectibleFactory::new()->for(GameMedia::factory(), 'collectable')
-            ->for(Category::factory()->create([
-                'model' => Relation::getMorphAlias(GameMedia::class)
-            ]))
-            ->create();
-
-        $this->request = CreateCollectibleGameRequest::factory()->hasKitConditions()->create();
+        $this->category = Category::factory()->create(['model' => Relation::getMorphAlias(GameMedia::class)]);
     }
 
     /**
@@ -54,9 +50,35 @@ class SaleCastTest extends TestCase
     public function it_sale_success():void
     {
         $collectible = CollectibleFactory::new()->for(GameMedia::factory(), 'collectable')
-//            ->for(Category::factory()->create([
-//                'model' => Relation::getMorphAlias(GameMedia::class)
-//            ]))
-            ->create();
+            ->for($this->category)
+            ->create(
+                [
+                    'sale' => [
+                        'price' => 12.99
+                    ]
+                ]
+            );
+
+        $this->assertInstanceOf(SaleValueObject::class, $collectible->sale);
+        $this->assertInstanceOf(PriceValueObject::class, $collectible->sale->price());
+        $this->assertEmpty($collectible->sale->priceOld());
+        $this->assertEquals(1299, $collectible->sale->price()->raw());
+
+        $collectible->sale = [
+            'price' => 14.5989,
+            'price_old' => 55.9888,
+            'test' => 'test'
+        ];
+
+        $collectible->save();
+
+        $this->assertInstanceOf(SaleValueObject::class, $collectible->sale);
+        $this->assertInstanceOf(PriceValueObject::class, $collectible->sale->price());
+        $this->assertInstanceOf(PriceValueObject::class, $collectible->sale->priceOld());
+        $this->assertEquals(1459, $collectible->sale->price()->raw());
+        $this->assertEquals(5598, $collectible->sale->priceOld()->raw());
+
+        $rawSale = json_decode($collectible->getRawOriginal('sale'), true);
+        $this->assertEquals(2, count($rawSale));
     }
 }
