@@ -147,6 +147,7 @@ class CreateCollectibleGameRequest extends FormRequest
                 'mimes:jpg,png',
                 'max:10024'
             ],
+            'thumbnail-multiple' => ['nullable']
         ];
     }
 

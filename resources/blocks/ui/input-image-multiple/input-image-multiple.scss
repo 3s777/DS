@@ -1,0 +1,106 @@
+@use 'sass:math';
+
+.input-image-multiple {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 12px;
+    flex-direction: column;
+
+    &__preview {
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+        flex-wrap: wrap;
+        gap: 12px;
+        width: 100%;
+        border-radius: $small-border-radius;
+        color: $font-main-50;
+        overflow: hidden;
+
+        &-item {
+            position: relative;
+            width: calc(50% - 6px);
+            border-radius: $small-border-radius;
+            overflow: hidden;
+            line-height: 0;
+        }
+
+        &_hidden {
+            &::before,
+            &::after {
+                display: none;
+            }
+        }
+
+        &::before,
+        &::after {
+            position: absolute;
+            content: '';
+            width: math.sqrt(2) * 100%;
+            height: 1px;
+            background-color: $base-dark-like-transparent;
+            z-index: 1;
+        }
+
+        &::before {
+            transform: rotate(45deg);
+        }
+
+        &::after {
+            transform: rotate(-45deg);
+        }
+
+        img {
+            position: relative;
+            z-index: 3;
+            max-width: 100%;
+            max-height: 100%;
+        }
+    }
+
+    &__placeholder-text {
+        position: relative;
+        z-index: 2;
+        padding: 12px 8px;
+        text-align: center;
+        background-color: $base-dark;
+
+        p {
+            margin: 0;
+        };
+    }
+
+    &__submit {
+        width: 100%;
+        padding-left: 12px;
+        padding-right: 12px;
+    }
+
+    &__close {
+        position: absolute;
+        top: 5px;
+        right: 5px;
+        z-index: 5;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 20px;
+        height: 20px;
+        cursor: pointer;
+
+        svg {
+            fill: $opposite-main;
+            width: 20px;
+            height: 20px;
+        }
+    }
+
+    &__inner {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+        aspect-ratio: 1/1;
+    }
+}
