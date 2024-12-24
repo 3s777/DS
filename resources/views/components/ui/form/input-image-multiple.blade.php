@@ -130,28 +130,28 @@
 
                             if (imageIndex !== -1) {
 
-                                // this.imgArr.splice(imageIndex, 1);
+                                this.imgArr.splice(imageIndex, 1);
                             }
                             //
-                            // const files = Array.from(this.$refs.uploadedImages.files);
+                            const files = Array.from(this.$refs.uploadedImages.files);
 
-                            {{--files.splice(imageIndex, 1);--}}
+                            files.splice(imageIndex, 1);
 
-                            {{--const dataTransfer = new DataTransfer();--}}
+                            const dataTransfer = new DataTransfer();
 
-                            {{--files.forEach(file => {--}}
-                            {{--    dataTransfer.items.add(file);--}}
-                            {{--});--}}
+                            files.forEach(file => {
+                                dataTransfer.items.add(file);
+                            });
 
-                            {{--let fileInput = document.getElementById('{{ $id }}');--}}
+                            let fileInput = document.getElementById('{{ $id }}');
 
-                            {{--fileInput.files = dataTransfer.files;--}}
+                            fileInput.files = dataTransfer.files;
 
-                                console.log(imageIndex);
-                            console.log(this.imgArr);
-                            console.log(this.$refs.uploadedImages.files);
-
-
+                            //     console.log(imageIndex);
+                            // console.log(this.imgArr);
+                            // console.log(this.$refs.uploadedImages.files);
+                            //
+                            //
                             //
                             // console.log(dataTransfer.files);
                             //
