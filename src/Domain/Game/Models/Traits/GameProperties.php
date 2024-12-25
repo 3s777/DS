@@ -32,11 +32,11 @@ trait GameProperties
         if($values) {
             $properties = [];
 
-            if(isset($values['is_digital'])) {
+            if(isset($values['is_digital']) && $values['is_digital'] !== false) {
                 $properties['is_digital'] = true;
             }
 
-            if(isset($values['is_done'])) {
+            if(isset($values['is_done']) && $values['is_done'] !== false) {
                 $properties['is_done'] = true;
             }
 

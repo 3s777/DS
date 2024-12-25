@@ -4,14 +4,15 @@ use Domain\Shelf\DTOs\FillCategoryDTO;
 use Domain\Shelf\Models\Category;
 use Illuminate\Support\Facades\DB;
 use Support\Exceptions\CrudException;
+use Support\Transaction;
 use Throwable;
 
 class CategoryService
 {
-    public function create(FillCategoryDTO $data): Category
+    public function create(FillCategoryDTO $data)
     {
-        try {
-            DB::beginTransaction();
+        return Transaction::run(
+            function() use($data) {
 
             $category = Category::create([
                 'name' => $data->name,
@@ -20,19 +21,19 @@ class CategoryService
                 'description' => $data->description
             ]);
 
-            DB::commit();
-
             return $category;
 
-        } catch (Throwable $e) {
-            throw new CrudException($e->getMessage());
-        }
+            },
+            function(Throwable $e) {
+                throw new CrudException($e->getMessage());
+            }
+        );
     }
 
-    public function update(Category $category, FillCategoryDTO $data): Category
+    public function update(Category $category, FillCategoryDTO $data)
     {
-        try {
-            DB::beginTransaction();
+        return Transaction::run(
+            function() use($data, $category) {
 
             $category->fill(
                 [
@@ -43,12 +44,13 @@ class CategoryService
                 ]
             )->save();
 
-            DB::commit();
 
             return $category;
 
-        } catch (Throwable $e) {
-            throw new CrudException($e->getMessage());
-        }
+            },
+            function(Throwable $e) {
+                throw new CrudException($e->getMessage());
+            }
+        );
     }
 }

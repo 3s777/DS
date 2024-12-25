@@ -68,6 +68,15 @@ class Collectible extends Model implements HasMedia
         'users.email'
     ];
 
+    protected static function boot()
+    {
+        parent::boot();
+
+        static::creating(function (Model $item) {
+            $item->category_id = Category::where('model', $item->collectable_type)->first()->id;
+        });
+    }
+
     protected static function newFactory(): CollectibleFactory
     {
         return CollectibleFactory::new();

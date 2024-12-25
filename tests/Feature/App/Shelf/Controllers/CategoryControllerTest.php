@@ -9,6 +9,7 @@ use Database\Factories\UserFactory;
 use Domain\Auth\Models\Role;
 use Domain\Auth\Models\User;
 use Domain\Shelf\Models\Category;
+use Illuminate\Foundation\Testing\DatabaseTruncation;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Str;
 use Tests\TestCase;
@@ -104,6 +105,7 @@ class CategoryControllerTest extends TestCase
      */
     public function it_store_success(): void
     {
+
         $this->actingAs($this->user)
             ->post(action([CategoryController::class, 'store']), $this->request)
             ->assertRedirectToRoute('categories.index')
@@ -120,6 +122,7 @@ class CategoryControllerTest extends TestCase
      */
     public function it_validation_name_fail(): void
     {
+
         $this->app['session']->setPreviousUrl(route('categories.create'));
 
         $this->request['name'] = '';

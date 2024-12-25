@@ -31,7 +31,7 @@ class CollectibleService
         ];
     }
 
-    public function create(FillCollectibleDTO $data): Collectible
+    public function create(FillCollectibleDTO $data)
     {
         return Transaction::run(
             function() use($data) {
@@ -60,7 +60,6 @@ class CollectibleService
                 $collectible->collectable_id = $data->collectable;
                 $collectible->collectable_type = $data->collectable_type;
                 $collectible->properties =  $data->properties;
-                $collectible->category_id = $data->category_id;
 
                 $collectible->save();
 
@@ -96,7 +95,7 @@ class CollectibleService
         );
     }
 
-    public function update(Collectible $collectible, FillCollectibleDTO $data): Collectible
+    public function update(Collectible $collectible, FillCollectibleDTO $data)
     {
         return Transaction::run(
             function() use($collectible, $data) {

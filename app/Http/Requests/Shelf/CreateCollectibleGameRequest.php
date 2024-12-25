@@ -26,7 +26,7 @@ class CreateCollectibleGameRequest extends FormRequest
     {
         $this->merge([
             'collectable_type' => Relation::getMorphAlias(GameMedia::class),
-            'category_id' => Category::where('model', Relation::getMorphAlias(GameMedia::class))->first()->id
+//            'category_id' => Category::where('model', Relation::getMorphAlias(GameMedia::class))->first()->id
         ]);
     }
 
@@ -93,11 +93,11 @@ class CreateCollectibleGameRequest extends FormRequest
                 'required',
                 'string'
             ],
-            'category_id' => [
-                'required',
-                'integer',
-                'exists:Domain\Shelf\Models\Category,id'
-            ],
+//            'category_id' => [
+//                'required',
+//                'integer',
+//                'exists:Domain\Shelf\Models\Category,id'
+//            ],
             'kit_conditions' => [
                 'required'
             ],
