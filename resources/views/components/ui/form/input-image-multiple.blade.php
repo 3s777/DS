@@ -30,10 +30,10 @@
 
 
             <template x-if="imgArr">
-                <template x-for="image in imgArr">
+                <template x-for="(image, index) in imgArr">
                     <template x-if="image">
                     <div class="input-image-multiple__preview-item">
-                        <x-ui.badge class="input-image-multiple__close" @click="clearFile(image)" title="{{ __('common.delete') }}">
+                        <x-ui.badge class="input-image-multiple__close" @click="clearFile(image, index)" title="{{ __('common.delete') }}">
                             <x-svg.close></x-svg.close>
                         </x-ui.badge>
                         <img :src="image" class="imgPreview">
@@ -94,58 +94,83 @@
                             const fileArray = [];
                             const readers = [];
 
+                            const arr = {};
 
+                            console.log(this.$refs.uploadedImages.files);
                             for (let i = 0; i < files.length; i++) {
+                                console.log(files[i]);
                                 const file = files[i];
                                 const reader = new FileReader();
 
                                 const fileReadPromise = new Promise((resolve, reject) => {
                                     reader.onload = function(event) {
-
+                                        arr[i] = event.target.result;
+                                        // arr.set(i,2);
                                         fileArray.splice(i, 0, event.target.result);
                                         resolve();
                                     };
                                     reader.readAsDataURL(file);
                                 });
 
-                                readers.push(fileReadPromise);
+                                readers.splice(i, 0, fileReadPromise);
                             }
 
 
                             Promise.all(readers)
                                 .then(() => {
-                                    this.imgArr = fileArray;
+                                    this.imgArr = arr;
+                                    // this.imgArr = fileArray;
+                                    // console.log(arr);
                                 })
                                 .catch(error => {
                                     console.error(error);
                                 });
 
-                            console.log(this.imgArr);
-                            console.log(this.$refs.uploadedImages.files);
+
+                            // console.log(this.imgArr);
+                            // console.log(this.$refs.uploadedImages.files);
 
                         },
-                        clearFile(image) {
+                        clearFile(image, index) {
 
-                            let imageIndex = this.imgArr.indexOf(image);
+                            console.log(index);
 
-                            if (imageIndex !== -1) {
-
-                                this.imgArr.splice(imageIndex, 1);
-                            }
+                            // let imageIndex = this.imgArr.indexOf(image);
                             //
-                            const files = Array.from(this.$refs.uploadedImages.files);
+                            // console.log(imageIndex);
+                            // console.log(this.$refs.uploadedImages.files);
 
-                            files.splice(imageIndex, 1);
+                            {{--if (imageIndex !== -1) {--}}
 
-                            const dataTransfer = new DataTransfer();
+                            {{--    this.imgArr.splice(imageIndex, 1);--}}
+                            {{--}--}}
+                            {{--//--}}
+                            {{--const files = Array.from(this.$refs.uploadedImages.files);--}}
 
-                            files.forEach(file => {
-                                dataTransfer.items.add(file);
-                            });
+                            {{--files.splice(imageIndex, 1);--}}
 
-                            let fileInput = document.getElementById('{{ $id }}');
+                            {{--const dataTransfer = new DataTransfer();--}}
 
-                            fileInput.files = dataTransfer.files;
+                            {{--files.forEach(file => {--}}
+                            {{--    dataTransfer.items.add(file);--}}
+                            {{--});--}}
+
+                            {{--let fileInput = document.getElementById('{{ $id }}');--}}
+
+                            {{--fileInput.files = dataTransfer.files;--}}
+
+
+
+
+
+
+
+
+
+
+
+
+
 
                             //     console.log(imageIndex);
                             // console.log(this.imgArr);

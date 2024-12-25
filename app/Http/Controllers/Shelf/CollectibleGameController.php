@@ -24,7 +24,7 @@ class CollectibleGameController extends Controller
 
     public function store(CreateCollectibleGameRequest $request, CollectibleService $collectibleService): Application|Redirector|RedirectResponse|\Illuminate\Contracts\Foundation\Application
     {
-//        dd($request);
+        dd($request);
         $collectibleService->create(FillCollectibleDTO::fromRequest($request));
 
         flash()->info(__('collectible.created'));
