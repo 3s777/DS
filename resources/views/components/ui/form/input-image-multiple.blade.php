@@ -3,15 +3,16 @@
     'name',
     'path' => false,
     'uploadedThumbnail' => false,
+    'buttonText' => trans_choice('common.choose_image', 2)
 ])
 
-<div x-data="imgPreview" {{ $attributes->class([
+<div x-data="imgPreviews" {{ $attributes->class([
                 'input-image-multiple__wrapper',
             ])
         }} x-cloak>
     <div class="input-image-multiple">
-        <div class="input-image-multiple__preview" :class="imgSrc || uploadedSrc ? 'input-image-multiple__preview_hidden' : ''">
-            <div class="input-image-multiple__placeholder" x-show="!imgSrc && !uploadedSrc">
+        <div class="input-image-multiple__preview" :class="imgArr || uploadedSrc ? 'input-image-multiple__preview_hidden' : ''">
+            <div class="input-image-multiple__placeholder" x-show="!imgArr && !uploadedSrc">
                 <div class="input-image-multiple__placeholder-text">
                     {{ $slot }}
                 </div>
@@ -28,17 +29,16 @@
                 </template>
             @endif
 
-
             <template x-if="imgArr">
                 <template x-for="(image, index) in imgArr">
-                    <template x-if="image">
+
                     <div class="input-image-multiple__preview-item">
                         <x-ui.badge class="input-image-multiple__close" @click="clearFile(image, index)" title="{{ __('common.delete') }}">
                             <x-svg.close></x-svg.close>
                         </x-ui.badge>
                         <img :src="image" class="imgPreview">
                     </div>
-                    </template>
+
 
                 </template>
             </template>
@@ -64,9 +64,9 @@
 
 
         <x-ui.form.button class="input-image-multiple__submit" tag="label" for="{{ $id }}">
-            {{ __('common.choose_image') }}
+            {{ $buttonText }}
         </x-ui.form.button>
-        <input type="file" multiple hidden id="{{ $id }}"  name="{{ $name }}" accept="image/png, image/jpeg" x-ref="uploadedImages" @change="previewFile">
+        <input type="file" multiple hidden id="{{ $id }}"  name="{{ $name }}" accept="image/png, image/jpeg" x-ref="uploadedImages" @change="previewFiles">
 
         @if($path)
             <input type="text" value="{{ $path }}" hidden id="{{ $id }}_uploaded" x-ref="uploadedFile"  name="{{ $name }}_uploaded">
@@ -78,8 +78,7 @@
     @push('scripts')
         <script>
             document.addEventListener('alpine:init', () => {
-                Alpine.data('imgPreview', () => ({
-                        imgSrc:null,
+                Alpine.data('imgPreviews', () => ({
                         imgArr:null,
                         @if($uploadedThumbnail)
                         uploadedSrc:true,
@@ -89,16 +88,19 @@
                         images() {
                             return Array.from(this.$refs.uploadedImages.files);
                         },
-                        previewFile() {
+                        setImgArr() {
+
+                        },
+                        previewFiles() {
                             const files = this.$refs.uploadedImages.files;
                             const fileArray = [];
                             const readers = [];
 
                             const arr = {};
 
-                            console.log(this.$refs.uploadedImages.files);
+                            // console.log(this.$refs.uploadedImages.files);
                             for (let i = 0; i < files.length; i++) {
-                                console.log(files[i]);
+                                // console.log(files[i]);
                                 const file = files[i];
                                 const reader = new FileReader();
 
@@ -115,10 +117,13 @@
                                 readers.splice(i, 0, fileReadPromise);
                             }
 
-
                             Promise.all(readers)
                                 .then(() => {
                                     this.imgArr = arr;
+
+                                    if(Object.keys(arr).length === 0) {
+                                        this.imgArr = null;
+                                    }
                                     // this.imgArr = fileArray;
                                     // console.log(arr);
                                 })
@@ -126,40 +131,46 @@
                                     console.error(error);
                                 });
 
+                            // if(files.length === 0) {
+                            //     this.imgArr = null;
+                            // }
+
 
                             // console.log(this.imgArr);
                             // console.log(this.$refs.uploadedImages.files);
-
                         },
-                        clearFile(image, index) {
+                        clearFile(image, imageIndex) {
 
-                            console.log(index);
+
 
                             // let imageIndex = this.imgArr.indexOf(image);
                             //
                             // console.log(imageIndex);
                             // console.log(this.$refs.uploadedImages.files);
 
-                            {{--if (imageIndex !== -1) {--}}
+                            if (imageIndex !== -1) {
+                                delete this.imgArr[imageIndex];
+                                // this.imgArr.splice(imageIndex, 1);
+                            }
+                            //
+                            const files = Array.from(this.$refs.uploadedImages.files);
 
-                            {{--    this.imgArr.splice(imageIndex, 1);--}}
-                            {{--}--}}
-                            {{--//--}}
-                            {{--const files = Array.from(this.$refs.uploadedImages.files);--}}
+                            files.splice(imageIndex, 1);
 
-                            {{--files.splice(imageIndex, 1);--}}
+                            const dataTransfer = new DataTransfer();
 
-                            {{--const dataTransfer = new DataTransfer();--}}
+                            files.forEach(file => {
+                                dataTransfer.items.add(file);
+                            });
 
-                            {{--files.forEach(file => {--}}
-                            {{--    dataTransfer.items.add(file);--}}
-                            {{--});--}}
+                            let fileInput = document.getElementById('{{ $id }}');
 
-                            {{--let fileInput = document.getElementById('{{ $id }}');--}}
+                            fileInput.files = dataTransfer.files;
 
-                            {{--fileInput.files = dataTransfer.files;--}}
+                            this.previewFiles();
 
-
+                            // console.log(this.imgArr);
+                            console.log(this.$refs.uploadedImages.files);
 
 
 

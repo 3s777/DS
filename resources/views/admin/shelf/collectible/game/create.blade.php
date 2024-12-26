@@ -292,23 +292,26 @@
 
         <div class="crud-form__sidebar">
             <div class="crud-form__sidebar-wrapper">
-                <x-ui.form.input-image
-                    class="crud-form__input-image"
-                    name="thumbnail"
-                    id="thumbnail">
-                    <p>{{ __('common.file.format') }} jpg, png</p>
-                    <p>{{ __('common.file.max_size') }} 6Mb</p>
-                </x-ui.form.input-image>
-            </div>
-
-            <div class="crud-form__sidebar-wrapper">
-                <x-ui.form.input-image-multiple
-                    class="crud-form__input-image-multiple"
-                    name="thumbnail-multiple[]"
-                    id="thumbnail-multiple">
-                    <p>{{ __('common.file.format') }} jpg, png</p>
-                    <p>{{ __('common.file.max_size') }} 6Mb</p>
-                </x-ui.form.input-image-multiple>
+                <div class="crud-form__sidebar-widget">
+                    <x-ui.form.input-image
+                        class="crud-form__input-image"
+                        name="thumbnail"
+                        id="thumbnail">
+                        <p>{{ __('common.file.format') }} jpg, png</p>
+                        <p>{{ __('common.file.max_size') }} 6Mb</p>
+                    </x-ui.form.input-image>
+                </div>
+                <div class="crud-form__sidebar-widget">
+                    <x-ui.form.input-image-multiple
+                        class="crud-form__input-image-multiple"
+                        name="thumbnail-multiple[]"
+                        id="thumbnail-multiple"
+                        button-text="{{ trans_choice('common.additional_image', 2) }}">
+                        <p>{{ __('common.file.format') }} jpg, png</p>
+                        <p>{{ __('common.file.max_size') }} 6Mb</p>
+                        <p>{{ __('common.file.count', ['count' => 9]) }}</p>
+                    </x-ui.form.input-image-multiple>
+                </div>
             </div>
         </div>
 

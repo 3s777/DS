@@ -8,6 +8,7 @@
     flex-direction: column;
 
     &__preview {
+        position: relative;
         display: flex;
         justify-content: flex-start;
         align-items: center;
@@ -20,10 +21,14 @@
 
         &-item {
             position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
             width: calc(50% - 6px);
             border-radius: $small-border-radius;
             overflow: hidden;
             line-height: 0;
+            aspect-ratio: 1 / 1;
         }
 
         &_hidden {

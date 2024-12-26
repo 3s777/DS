@@ -38,7 +38,7 @@
             </template>
         </div>
         <x-ui.form.button class="input-image__submit" tag="label" for="{{ $id }}">
-            {{ __('common.choose_image') }}
+            {{ trans_choice('common.choose_image', 1) }}
         </x-ui.form.button>
         <input type="file" hidden id="{{ $id }}"  name="{{ $name }}" accept="image/png, image/jpeg" x-ref="myFile" @change="previewFile">
 
