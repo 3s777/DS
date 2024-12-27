@@ -28,6 +28,7 @@ class FillCollectibleDTO
         public readonly ?array $auction = null,
         public readonly ?UploadedFile $thumbnail = null,
         public readonly ?string $thumbnail_uploaded = null,
+        public readonly ?array $thumbnail_multiple = null,
         public readonly ?string $description = null,
     ) {
     }
@@ -52,6 +53,7 @@ class FillCollectibleDTO
             'sale',
             'auction',
             'thumbnail',
+            'thumbnail_multiple',
             'thumbnail_uploaded',
             'description'
         ]));

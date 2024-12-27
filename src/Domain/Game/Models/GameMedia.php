@@ -22,6 +22,7 @@ use Spatie\MediaLibrary\InteractsWithMedia;
 use Spatie\Translatable\HasTranslations;
 use Support\Casts\ArrayWithoutUnicode;
 use Support\Traits\Models\HasSlug;
+use Support\Traits\Models\HasImage;
 use Support\Traits\Models\HasThumbnail;
 use Support\Traits\Models\HasUser;
 
@@ -31,6 +32,7 @@ class GameMedia extends Model implements HasMedia, HasProperties
     use HasSlug;
     use SoftDeletes;
     use InteractsWithMedia;
+    use HasImage;
     use HasThumbnail;
     use HasUser;
     use HasTranslations;
@@ -69,7 +71,7 @@ class GameMedia extends Model implements HasMedia, HasProperties
         return GameMediaFactory::new();
     }
 
-    public function thumbnailDir(): string
+    public function imagesDir(): string
     {
         return 'game_media';
     }

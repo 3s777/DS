@@ -31,36 +31,15 @@
 
             <template x-if="imgArr">
                 <template x-for="(image, index) in imgArr">
-
                     <div class="input-image-multiple__preview-item">
                         <x-ui.badge class="input-image-multiple__close" @click="clearFile(image, index)" title="{{ __('common.delete') }}">
                             <x-svg.close></x-svg.close>
                         </x-ui.badge>
                         <img :src="image" class="imgPreview">
                     </div>
-
-
                 </template>
             </template>
-
-{{--            <template x-if="imgSrc">--}}
-{{--                <div class="input-image-multiple__inner">--}}
-{{--                    <x-ui.badge class="input-image-multiple__close" @click="clearFile" title="{{ __('common.delete') }}">--}}
-{{--                        <x-svg.close></x-svg.close>--}}
-{{--                    </x-ui.badge>--}}
-{{--                    <img :src="imgSrc" class="imgPreview">--}}
-{{--                </div>--}}
-{{--            </template>--}}
-
-
         </div>
-
-
-
-
-
-
-
 
 
         <x-ui.form.button class="input-image-multiple__submit" tag="label" for="{{ $id }}">
@@ -81,9 +60,9 @@
                 Alpine.data('imgPreviews', () => ({
                         imgArr:null,
                         @if($uploadedThumbnail)
-                        uploadedSrc:true,
+                            uploadedSrc:true,
                         @else
-                        uploadedSrc:false,
+                            uploadedSrc:false,
                         @endif
                         images() {
                             return Array.from(this.$refs.uploadedImages.files);
@@ -93,14 +72,12 @@
                         },
                         previewFiles() {
                             const files = this.$refs.uploadedImages.files;
-                            const fileArray = [];
+                            // const fileArray = [];
                             const readers = [];
 
                             const arr = {};
 
-                            // console.log(this.$refs.uploadedImages.files);
                             for (let i = 0; i < files.length; i++) {
-                                // console.log(files[i]);
                                 const file = files[i];
                                 const reader = new FileReader();
 
@@ -108,7 +85,7 @@
                                     reader.onload = function(event) {
                                         arr[i] = event.target.result;
                                         // arr.set(i,2);
-                                        fileArray.splice(i, 0, event.target.result);
+                                        // fileArray.splice(i, 0, event.target.result);
                                         resolve();
                                     };
                                     reader.readAsDataURL(file);
@@ -120,12 +97,9 @@
                             Promise.all(readers)
                                 .then(() => {
                                     this.imgArr = arr;
-
                                     if(Object.keys(arr).length === 0) {
                                         this.imgArr = null;
                                     }
-                                    // this.imgArr = fileArray;
-                                    // console.log(arr);
                                 })
                                 .catch(error => {
                                     console.error(error);
@@ -140,19 +114,10 @@
                             // console.log(this.$refs.uploadedImages.files);
                         },
                         clearFile(image, imageIndex) {
-
-
-
-                            // let imageIndex = this.imgArr.indexOf(image);
-                            //
-                            // console.log(imageIndex);
-                            // console.log(this.$refs.uploadedImages.files);
-
                             if (imageIndex !== -1) {
                                 delete this.imgArr[imageIndex];
-                                // this.imgArr.splice(imageIndex, 1);
                             }
-                            //
+
                             const files = Array.from(this.$refs.uploadedImages.files);
 
                             files.splice(imageIndex, 1);
@@ -169,7 +134,6 @@
 
                             this.previewFiles();
 
-                            // console.log(this.imgArr);
                             console.log(this.$refs.uploadedImages.files);
 
 

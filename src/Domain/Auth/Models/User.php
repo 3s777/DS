@@ -30,6 +30,7 @@ use Spatie\MediaLibrary\InteractsWithMedia;
 use Spatie\Permission\Traits\HasPermissions;
 use Spatie\Permission\Traits\HasRoles;
 use Support\Traits\Models\HasCustomAudit;
+use Support\Traits\Models\HasImage;
 use Support\Traits\Models\HasSlug;
 use Support\Traits\Models\HasThumbnail;
 use OwenIt\Auditing\Auditable as HasAuditable;
@@ -41,6 +42,7 @@ class User extends Authenticatable implements MustVerifyEmail, HasLocalePreferen
     use HasSlug;
     use Notifiable;
     use SoftDeletes;
+    use HasImage;
     use HasThumbnail;
     use InteractsWithMedia;
     use HasRoles;
@@ -113,7 +115,7 @@ class User extends Authenticatable implements MustVerifyEmail, HasLocalePreferen
         return new UserQueryBuilder($query);
     }
 
-    public function thumbnailDir(): string
+    public function imagesDir(): string
     {
         return 'user';
     }

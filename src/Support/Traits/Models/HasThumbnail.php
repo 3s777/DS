@@ -23,29 +23,15 @@ trait HasThumbnail
             }
         });
     }
-    abstract protected function thumbnailDir(): string;
 
-    abstract public function thumbnailSizes(): array;
-
-    public function getThumbnailColumn(): string
+    public function getThumbnailCollection(): string
     {
         return 'thumbnail';
     }
 
-    public function thumbnailStorage(): Filesystem
+    public function getThumbnailColumn(): string
     {
-        return Storage::disk('images');
-    }
-
-    public function generateMediaPath(string $filename): string
-    {
-        $mediaCreatedDate = Carbon::make($this->created_at);
-        $filePath = pathinfo($filename);
-
-        return $this->thumbnailDir().'/'
-            .$mediaCreatedDate->format('Y').'/'
-            .$mediaCreatedDate->format('m').'/'
-            .$filePath['filename'].'/';
+        return 'thumbnail';
     }
 
     /**
@@ -71,59 +57,6 @@ trait HasThumbnail
         return $image;
     }
 
-    public function generateThumbnails($imageFullPath, $specialSizes): void
-    {
-        $defaultThumbnails = $this->thumbnailSizes();
-
-        $imagePathInfo = pathinfo($imageFullPath);
-
-        if($defaultThumbnails) {
-
-            $filteredThumbs = ($specialSizes) ? Arr::only($defaultThumbnails, $specialSizes) : $defaultThumbnails;
-
-            $this->thumbnailStorage()->makeDirectory($imagePathInfo['dirname'].'/webp');
-            //            $this->thumbnailStorage()->makeDirectory($imagePathInfo['dirname'].'/'.$imagePathInfo['extension']);
-
-            foreach($filteredThumbs as $thumb) {
-
-                $webpThumbDir = $imagePathInfo['dirname'].'/webp/'.$thumb[0].'x'.$thumb[1];
-                //                $originalThumbDir = $imagePathInfo['dirname'].'/'.$imagePathInfo['extension'].'/'.$thumb[0].'x'.$thumb[1];
-
-                $this->thumbnailStorage()->makeDirectory($webpThumbDir);
-                //                $this->thumbnailStorage()->makeDirectory($originalThumbDir);
-
-                GenerateSmallThumbnailsJob::dispatch($imageFullPath, $thumb[0], $thumb[1], $webpThumbDir);
-            }
-        }
-    }
-
-    public function generateFullSizes(string $imageFullPath): void
-    {
-        // Generate full image 2048, 100% quality
-        GenerateThumbnailJob::dispatch(
-            $imageFullPath,
-            2048,
-            false
-        );
-
-        // Generate original extension image 1200, 80% quality for webp alternative
-        GenerateThumbnailJob::dispatch(
-            $imageFullPath,
-            1200,
-            false,
-            config('thumbnail.fallback_quality'),
-            'fallback'
-        );
-
-        // Generate webp image 75 quality full size
-        GenerateThumbnailJob::dispatch(
-            $imageFullPath,
-            2048,
-            true,
-            config('thumbnail.webp_quality')
-        );
-    }
-
     /**
      * @throws FileDoesNotExist
      * @throws FileIsTooBig
@@ -146,36 +79,6 @@ trait HasThumbnail
         }
     }
 
-    public function getThumbnailPath(): string
-    {
-        if(config('thumbnail.driver') == 'media_library') {
-            $thumbnailMedia = $this->getFirstMedia($this->getThumbnailColumn());
-
-            if($thumbnailMedia) {
-                return $thumbnailMedia->getPathRelativeToRoot();
-            }
-
-            return '';
-            //            $mediaPath = $this->generateMediaPath($thumbnailMedia->file_name);
-            //            return $mediaPath.$thumbnailMedia->file_name;
-            //            $mediaPath = app(MediaPathGenerator::class)->getPath($thumbnailMedia);
-
-        } else {
-            return $this->{$this->getThumbnailColumn()};
-        }
-    }
-
-    public function getThumbnailPathWebp(): string
-    {
-        $thumbnailPathInfo = pathinfo($this->getThumbnailPath());
-
-        if($thumbnailPathInfo['filename']) {
-            return $thumbnailPathInfo['dirname'].'/'.$thumbnailPathInfo['filename'].'.webp';
-        }
-
-        return '';
-    }
-
     public function deleteAllThumbnails(): void
     {
         if(config('thumbnail.driver') == 'media_library') {
@@ -186,7 +89,7 @@ trait HasThumbnail
 
         if($this->{$this->getThumbnailColumn()}) {
             $imagePathInfo = pathinfo($this->{$this->getThumbnailColumn()});
-            $this->thumbnailStorage()->delete($imagePathInfo['dirname']);
+            $this->imageStorage()->delete($imagePathInfo['dirname']);
         }
     }
 

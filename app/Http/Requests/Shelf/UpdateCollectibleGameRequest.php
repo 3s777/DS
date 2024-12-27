@@ -120,6 +120,15 @@ class UpdateCollectibleGameRequest extends FormRequest
                 'mimes:jpg,png',
                 'max:10024'
             ],
+            'thumbnail_multiple' => [
+                'nullable',
+                'max: 9'
+            ],
+            'thumbnail_multiple.*' => [
+                'nullable',
+                'mimes:jpg,png,jpeg',
+                'max:10024'
+            ]
         ];
     }
 
@@ -146,6 +155,7 @@ class UpdateCollectibleGameRequest extends FormRequest
             'auction.to' => __('collectible.auction_stop_date'),
             'description' => __('common.description'),
             'thumbnail' => __('common.thumbnail'),
+            'thumbnail_multiple' => trans_choice('common.additional_image', 2)
         ];
     }
 }

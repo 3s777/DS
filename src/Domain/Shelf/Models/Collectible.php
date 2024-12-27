@@ -20,6 +20,8 @@ use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
 use Spatie\Translatable\HasTranslations;
 use Support\Casts\Price;
+use Support\Traits\Models\HasImage;
+use Support\Traits\Models\HasImages;
 use Support\Traits\Models\HasThumbnail;
 use Support\Traits\Models\HasUser;
 
@@ -28,7 +30,9 @@ class Collectible extends Model implements HasMedia
     use HasFactory;
     use SoftDeletes;
     use InteractsWithMedia;
+    use HasImage;
     use HasThumbnail;
+    use HasImages;
     use HasUser;
     use HasTranslations;
 
@@ -82,7 +86,7 @@ class Collectible extends Model implements HasMedia
         return CollectibleFactory::new();
     }
 
-    public function thumbnailDir(): string
+    public function imagesDir(): string
     {
         return 'shelf';
     }

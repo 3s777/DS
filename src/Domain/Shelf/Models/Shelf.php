@@ -18,6 +18,7 @@ use Mews\Purifier\Casts\CleanHtml;
 use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
 use Spatie\Translatable\HasTranslations;
+use Support\Traits\Models\HasImage;
 use Support\Traits\Models\HasThumbnail;
 use Support\Traits\Models\HasUser;
 
@@ -26,6 +27,7 @@ class Shelf extends Model implements HasMedia
     use HasFactory;
     use SoftDeletes;
     use InteractsWithMedia;
+    use HasImage;
     use HasThumbnail;
     use HasUser;
     use HasTranslations;
@@ -58,7 +60,7 @@ class Shelf extends Model implements HasMedia
         return ShelfFactory::new();
     }
 
-    public function thumbnailDir(): string
+    public function imagesDir(): string
     {
         return 'shelf';
     }

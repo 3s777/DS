@@ -26,7 +26,6 @@ class CreateCollectibleGameRequest extends FormRequest
     {
         $this->merge([
             'collectable_type' => Relation::getMorphAlias(GameMedia::class),
-//            'category_id' => Category::where('model', Relation::getMorphAlias(GameMedia::class))->first()->id
         ]);
     }
 
@@ -93,11 +92,6 @@ class CreateCollectibleGameRequest extends FormRequest
                 'required',
                 'string'
             ],
-//            'category_id' => [
-//                'required',
-//                'integer',
-//                'exists:Domain\Shelf\Models\Category,id'
-//            ],
             'kit_conditions' => [
                 'required'
             ],
@@ -144,10 +138,18 @@ class CreateCollectibleGameRequest extends FormRequest
             'description' => ['nullable','string'],
             'thumbnail' => [
                 'nullable',
-                'mimes:jpg,png',
+                'mimes:jpg,png,jpeg',
                 'max:10024'
             ],
-            'thumbnail-multiple' => ['nullable']
+            'thumbnail_multiple' => [
+                'nullable',
+                'max: 9'
+            ],
+            'thumbnail_multiple.*' => [
+                'nullable',
+                'mimes:jpg,png,jpeg',
+                'max:10024'
+            ]
         ];
     }
 
@@ -175,6 +177,7 @@ class CreateCollectibleGameRequest extends FormRequest
             'auction.to' => __('collectible.auction_stop_date'),
             'description' => __('common.description'),
             'thumbnail' => __('common.thumbnail'),
+            'thumbnail_multiple' => trans_choice('common.additional_image', 2)
         ];
     }
 }

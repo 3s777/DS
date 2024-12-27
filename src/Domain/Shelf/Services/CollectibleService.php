@@ -61,6 +61,8 @@ class CollectibleService
                 $collectible->collectable_type = $data->collectable_type;
                 $collectible->properties =  $data->properties;
 
+//                dd($data->thumbnail_multiple);
+
                 $collectible->save();
 
                 $kitItems = [];

@@ -304,8 +304,8 @@
                 <div class="crud-form__sidebar-widget">
                     <x-ui.form.input-image-multiple
                         class="crud-form__input-image-multiple"
-                        name="thumbnail-multiple[]"
-                        id="thumbnail-multiple"
+                        name="thumbnail_multiple[]"
+                        id="thumbnail_multiple"
                         button-text="{{ trans_choice('common.additional_image', 2) }}">
                         <p>{{ __('common.file.format') }} jpg, png</p>
                         <p>{{ __('common.file.max_size') }} 6Mb</p>

@@ -32,6 +32,7 @@ return new class extends Migration
             $table->jsonb('sale')->nullable();
             $table->jsonb('auction')->nullable();
             $table->string('thumbnail')->nullable();
+            $table->jsonb('images')->nullable();
             $table->jsonb('description')->nullable();
             $table->foreignIdFor(Category::class)
                 ->constrained()

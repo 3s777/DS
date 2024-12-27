@@ -24,7 +24,7 @@ class Media extends BaseMedia
             $modelCreatedDate = Carbon::make($model->model->created_at);
             $mediaPath = pathinfo($model->file_name);
 
-            $model->dirname = $model->model->thumbnailDir().'/'
+            $model->dirname = $model->model->imagesDir().'/'
                 .$modelCreatedDate->format('Y').'/'
                 .$modelCreatedDate->format('m').'/'
                 .$mediaPath['filename'].'/';
