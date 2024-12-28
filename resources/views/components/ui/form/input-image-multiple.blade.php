@@ -2,8 +2,10 @@
     'id',
     'name',
     'path' => false,
-    'uploadedThumbnail' => false,
-    'buttonText' => trans_choice('common.choose_image', 2)
+    'buttonText' => trans_choice('common.choose_image', 2),
+    'model' => false,
+    'imageSizes' => false,
+    'sizes' => false
 ])
 
 <div x-data="imgPreviews" {{ $attributes->class([
@@ -18,15 +20,33 @@
                 </div>
             </div>
 
-            @if($uploadedThumbnail)
-                <template x-if="uploadedSrc">
-                    <div class="input-image-multiple__inner">
-                        <x-ui.badge class="input-image-multiple__close" @click="clearUploaded" title="{{ __('common.delete') }}">
-                            <x-svg.close></x-svg.close>
-                        </x-ui.badge>
-                        {{ $uploadedThumbnail }}
-                    </div>
-                </template>
+
+
+
+            @if($model)
+
+
+                    @foreach($model->getImages() as $image)
+
+                        <div class="input-image-multiple__preview-item">
+                            <x-ui.badge class="input-image-multiple__close" @click="clearUploaded" title="{{ __('common.delete') }}">
+                                <x-svg.close></x-svg.close>
+                            </x-ui.badge>
+
+
+                                <x-ui.responsive-image
+                                    :model="$model"
+                                    :image-sizes="$imageSizes"
+                                    :path="$image"
+                                    :placeholder="false"
+                                    :sizes="$sizes">
+                                    <x-slot:img alt=""></x-slot:img>
+                                </x-ui.responsive-image>
+
+
+                        </div>
+                    @endforeach
+
             @endif
 
             <template x-if="imgArr">
@@ -59,7 +79,7 @@
             document.addEventListener('alpine:init', () => {
                 Alpine.data('imgPreviews', () => ({
                         imgArr:null,
-                        @if($uploadedThumbnail)
+                        @if($model)
                             uploadedSrc:true,
                         @else
                             uploadedSrc:false,

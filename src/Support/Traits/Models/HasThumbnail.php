@@ -38,13 +38,27 @@ trait HasThumbnail
      * @throws FileDoesNotExist
      * @throws FileIsTooBig
      */
-    protected function addOriginalWithMediaLibrary(UploadedFile $image, $collectionName): string
+    protected function addOriginalWithMediaLibrary(UploadedFile $image, string $collectionName, string $type): string
     {
         $media = $this->addMedia($image)
             ->toMediaCollection($collectionName, 'images');
         //        $mediaPath = app(MediaPathGenerator::class)->getPath($media);
         //        $this->{$this->getThumbnailColumn()} = $mediaPath.$media->file_name;
-        $this->{$this->getThumbnailColumn()} = $media->getPathRelativeToRoot();
+        if($type === $this->getThumbnailColumn()) {
+            $this->{$this->getThumbnailColumn()} = $media->getPathRelativeToRoot();
+        }
+
+        if($type === $this->getImagesColumn()) {
+            $images = $this->{$this->getImagesColumn()};
+
+            if (!$images) {
+                $images = [];
+            }
+
+            $images[] = $media->getPathRelativeToRoot();
+
+            $this->{$this->getImagesColumn()} = $images;
+        }
         $this->save();
 
         return $media->getPathRelativeToRoot();
@@ -64,11 +78,12 @@ trait HasThumbnail
     public function addImageWithThumbnail(
         UploadedFile|null $image,
         string $collectionName = 'default',
-        array $specialSizes = []
+        array $specialSizes = [],
+        string $type = 'thumbnail',
     ): void {
         if($image) {
             if(config('thumbnail.driver') == 'media_library') {
-                $imageFullPath = $this->addOriginalWithMediaLibrary($image, $collectionName);
+                $imageFullPath = $this->addOriginalWithMediaLibrary($image, $collectionName, $type);
             } else {
                 $imageFullPath = $this->addOriginal($image);
             }

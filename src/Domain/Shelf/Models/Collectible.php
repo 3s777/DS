@@ -57,6 +57,7 @@ class Collectible extends Model implements HasMedia
     protected $casts = [
         'description' => CleanHtml::class.':custom',
         'kit_conditions' => 'array',
+        'images' => 'array',
         'properties' => Properties::class,
         'sale' => Sale::class,
         'auction' => Auction::class,

@@ -89,6 +89,18 @@ class CollectibleService
                     ['small', 'medium']
                 );
 
+                if($data->thumbnail_multiple) {
+                    foreach ($data->thumbnail_multiple as $key => $image) {
+                        $collectible->addImageWithThumbnail(
+                            $image,
+                            'images',
+                            ['small', 'medium'],
+                            'images'
+                        );
+                    }
+                }
+
+
                 return $collectible;
             },
             function(Throwable $e) {

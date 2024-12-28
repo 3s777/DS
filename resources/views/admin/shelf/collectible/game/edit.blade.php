@@ -187,6 +187,8 @@
                                     input-name="kit_conditions[{{ $item->id }}]"
                                     class="admin__conditions-item" />
                             @endforeach
+
+                            @dump($collectible->images)
                         </div>
                     </x-ui.form.group>
                 </x-grid.col>
@@ -330,27 +332,44 @@
         </div>
 
         <div class="crud-form__sidebar">
-            <div class="crud-form__sidebar-wrapper">
+
+            <div class="crud-form__sidebar-widget">
                 <x-ui.form.input-image
                     class="crud-form__input-image"
                     name="thumbnail"
-                    id="thumbnail"
-                    :path="$collectible->getThumbnailPath()">
+                    id="thumbnail">
                     @if($collectible->getThumbnailPath())
-                    <x-slot:uploaded-thumbnail>
-                        <x-ui.responsive-image
-                            :model="$collectible"
-                            :image-sizes="['small', 'medium', 'large']"
-                            :path="$collectible->getThumbnailPath()"
-                            :placeholder="false"
-                            sizes="(max-width: 1024px) 100vw, (max-width: 1400px) 30vw, 220px">
-                            <x-slot:img alt="test" title="test title"></x-slot:img>
-                        </x-ui.responsive-image>
-                    </x-slot:uploaded-thumbnail>
+                        <x-slot:uploaded-thumbnail>
+                            <x-ui.responsive-image
+                                :model="$collectible"
+                                :image-sizes="['small', 'medium', 'large']"
+                                :path="$collectible->getThumbnailPath()"
+                                :placeholder="false"
+                                sizes="(max-width: 1024px) 100vw, (max-width: 1400px) 30vw, 220px">
+                                <x-slot:img alt="test" title="test title"></x-slot:img>
+                            </x-ui.responsive-image>
+                        </x-slot:uploaded-thumbnail>
                     @endif
                     <p>{{ __('common.file.format') }} jpg, png</p>
                     <p>{{ __('common.file.max_size') }} 6Mb</p>
                 </x-ui.form.input-image>
+            </div>
+
+
+
+            <div class="crud-form__sidebar-wrapper">
+                <div class="crud-form__sidebar-widget">
+                    <x-ui.form.input-image-multiple
+                        class="crud-form__input-image-multiple"
+                        name="thumbnail_multiple[]"
+                        id="thumbnail_multiple"
+                        :model="$collectible"
+                        :image-sizes="['small', 'medium', 'large']"
+                        sizes="(max-width: 1024px) 100vw, (max-width: 1400px) 30vw, 220px">
+                        <p>{{ __('common.file.format') }} jpg, png</p>
+                        <p>{{ __('common.file.max_size') }} 6Mb</p>
+                    </x-ui.form.input-image-multiple>
+                </div>
             </div>
         </div>
 
