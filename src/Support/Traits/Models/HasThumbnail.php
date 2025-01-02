@@ -2,6 +2,7 @@
 
 namespace Support\Traits\Models;
 
+use App\Contracts\ImagesManager;
 use App\Jobs\GenerateSmallThumbnailsJob;
 use App\Jobs\GenerateThumbnailJob;
 use Carbon\Carbon;
@@ -34,47 +35,16 @@ trait HasThumbnail
         return 'thumbnail';
     }
 
-    /**
-     * @throws FileDoesNotExist
-     * @throws FileIsTooBig
-     */
-    protected function addOriginalWithMediaLibrary(UploadedFile $image, string $collectionName, string $type): string
+    public function imageManager(): ImagesManager
     {
-        $media = $this->addMedia($image)
-            ->toMediaCollection($collectionName, 'images');
-        //        $mediaPath = app(MediaPathGenerator::class)->getPath($media);
-        //        $this->{$this->getThumbnailColumn()} = $mediaPath.$media->file_name;
-        if($type === $this->getThumbnailColumn()) {
-            $this->{$this->getThumbnailColumn()} = $media->getPathRelativeToRoot();
-        }
-
-        if($type === $this->getImagesColumn()) {
-            $images = $this->{$this->getImagesColumn()};
-
-            if (!$images) {
-                $images = [];
-            }
-
-            $images[] = $media->getPathRelativeToRoot();
-
-            $this->{$this->getImagesColumn()} = $images;
-        }
-        $this->save();
-
-        return $media->getPathRelativeToRoot();
+        return app()->make(ImagesManager::class, ['model' => $this]);
     }
 
-    protected function addOriginal(UploadedFile $image): string
+    protected function addOriginalImage(UploadedFile $image, string $collectionName, string $type): string
     {
-        // TODO upload image without MediaLibrary
-        //        $imageDir = $this->generateMediaPath($imageFileName);
-        return $image;
+        return $this->imageManager()->addOriginal($image, $collectionName, $type);
     }
 
-    /**
-     * @throws FileDoesNotExist
-     * @throws FileIsTooBig
-     */
     public function addImageWithThumbnail(
         UploadedFile|null $image,
         string $collectionName = 'default',
@@ -82,11 +52,7 @@ trait HasThumbnail
         string $type = 'thumbnail',
     ): void {
         if($image) {
-            if(config('thumbnail.driver') == 'media_library') {
-                $imageFullPath = $this->addOriginalWithMediaLibrary($image, $collectionName, $type);
-            } else {
-                $imageFullPath = $this->addOriginal($image);
-            }
+            $imageFullPath = $this->addOriginalImage($image, $collectionName, $type);
 
             $this->generateFullSizes($imageFullPath);
 
@@ -96,16 +62,7 @@ trait HasThumbnail
 
     public function deleteAllThumbnails(): void
     {
-        if(config('thumbnail.driver') == 'media_library') {
-            $media = $this->getFirstMedia($this->getThumbnailColumn());
-            $media?->forceDelete();
-            return;
-        }
-
-        if($this->{$this->getThumbnailColumn()}) {
-            $imagePathInfo = pathinfo($this->{$this->getThumbnailColumn()});
-            $this->imageStorage()->delete($imagePathInfo['dirname']);
-        }
+        $this->imageManager()->deleteAllThumbnails();
     }
 
     public function updateThumbnail($newThumbnail, $oldThumbnail = '', $sizes = [])

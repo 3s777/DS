@@ -212,6 +212,7 @@ return [
         App\Providers\DomainServiceProvider::class,
         App\Providers\FilterServiceProvider::class,
         Mews\Purifier\PurifierServiceProvider::class,
+        App\Providers\ImagesServiceProvider::class,
     ],
 
     /*
