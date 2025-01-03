@@ -22,7 +22,7 @@ use Spatie\Translatable\HasTranslations;
 use Support\Casts\Price;
 use Support\Traits\Models\HasImage;
 use Support\Traits\Models\HasImages;
-use Support\Traits\Models\HasThumbnail;
+use Support\Traits\Models\HasFeaturedImage;
 use Support\Traits\Models\HasUser;
 
 class Collectible extends Model implements HasMedia
@@ -31,7 +31,7 @@ class Collectible extends Model implements HasMedia
     use SoftDeletes;
     use InteractsWithMedia;
     use HasImage;
-    use HasThumbnail;
+    use HasFeaturedImage;
     use HasImages;
     use HasUser;
     use HasTranslations;
@@ -51,7 +51,7 @@ class Collectible extends Model implements HasMedia
         'condition',
         'description',
         'user_id',
-        'thumbnail',
+        'featured_image',
     ];
 
     protected $casts = [

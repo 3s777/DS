@@ -19,8 +19,8 @@ class FillGameDTO
         public readonly ?array $platforms = null,
         public readonly ?array $developers = null,
         public readonly ?array $publishers = null,
-        public readonly ?UploadedFile $thumbnail = null,
-        public readonly ?string $thumbnail_uploaded = null,
+        public readonly ?UploadedFile $featured_image = null,
+        public readonly ?string $featured_image_uploaded = null,
         public readonly ?string $description = null,
         public readonly ?string $alternative_names = null
     ) {
@@ -37,8 +37,8 @@ class FillGameDTO
             'platforms',
             'developers',
             'publishers',
-            'thumbnail',
-            'thumbnail_uploaded',
+            'featured_image',
+            'featured_image_uploaded',
             'description',
             'alternative_names'
         ]));

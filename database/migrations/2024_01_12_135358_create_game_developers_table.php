@@ -18,7 +18,7 @@ return new class () extends Migration {
             $table->jsonb('description')->nullable();
             $table->foreignIdFor(User::class)
                 ->constrained();
-            $table->string('thumbnail')->nullable();
+            $table->string('featured_image')->nullable();
 
             $table->softDeletes();
             $table->timestamps();

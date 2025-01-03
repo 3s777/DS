@@ -41,10 +41,10 @@ class CreateUserAction
 
             $user->syncRoles($data->roles);
 
-            if($data->thumbnail) {
+            if($data->featured_image) {
                 $user->addImageWithThumbnail(
-                    $data->thumbnail,
-                    'thumbnail',
+                    $data->featured_image,
+                    'featured_image',
                     ['small', 'medium']
                 );
             }

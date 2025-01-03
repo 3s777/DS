@@ -9,7 +9,7 @@ return [
     'description' => 'Описание',
     'description_notes' => 'Описание и заметки:',
     'email' => 'Email',
-    'thumbnail' => 'Миниатюра',
+    'featured_image' => 'Миниатюра',
     'created_date' => 'Дата добавления',
     'add' => 'Добавить',
     'save' => 'Сохранить',

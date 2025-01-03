@@ -45,7 +45,7 @@ class ResponsiveImage extends Component
 
                 $image
                     ->scaleDown($size[0], $size[1])
-                    ->toWebp(config('thumbnail.webp_quality'))
+                    ->toWebp(config('images.webp_quality'))
                     ->save($storage->path($webpImageDir.'/'.$this->imgPathInfo['filename'].'.webp'));
             }
         }

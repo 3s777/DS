@@ -15,7 +15,7 @@ class UpdateUserAction
         try {
             DB::beginTransaction();
 
-            $user->updateThumbnail($data->thumbnail, $data->thumbnail_uploaded, ['small', 'medium']);
+            $user->updateFeaturedImage($data->featured_image, $data->featured_image_uploaded, ['small', 'medium']);
 
             $user->fill([
                 'name' => $data->name,

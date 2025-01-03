@@ -92,12 +92,12 @@ class UpdateUserRequest extends FormRequest
             ],
             'first_name' => ['nullable','string'],
             'description' => ['nullable','string'],
-            'thumbnail' => [
+            'featured_image' => [
                 'nullable',
                 'mimes:jpg,png',
                 'max:10024'
             ],
-            'thumbnail_selected' => ['nullable', 'string'],
+            'featured_image_selected' => ['nullable', 'string'],
             'is_verified' => ['nullable','in:1']
         ];
     }
@@ -112,7 +112,7 @@ class UpdateUserRequest extends FormRequest
             'roles' => trans_choice('role.roles', 2),
             'permissions' => __('permission.permissions'),
             'description' => __('common.description'),
-            'thumbnail' => __('common.thumbnail'),
+            'featured_image' => __('common.featured_image'),
             'language' => __('common.language'),
             'is_verified' => __('auth.is_verified'),
         ];

@@ -219,11 +219,11 @@ class UserControllerTest extends TestCase
         $this->request['password'] = 'wrong';
         $this->request['language'] = 'test';
         $this->request['roles'] = ['role.not-exist'];
-        $this->request['thumbnail'] = UploadedFile::fake()->image('photo1.php');
+        $this->request['featured_image'] = UploadedFile::fake()->image('photo1.php');
 
         $this->actingAs($this->authUser)
             ->post(action([UserController::class, 'store']), $this->request)
-            ->assertInvalid(['name', 'password', 'language', 'roles', 'thumbnail'])
+            ->assertInvalid(['name', 'password', 'language', 'roles', 'featured_image'])
             ->assertRedirectToRoute('users.create');
 
         $this->assertDatabaseMissing('users', [

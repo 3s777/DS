@@ -47,7 +47,7 @@ class ShelfServiceTest extends TestCase
         ]);
 
         $this->request['user_id'] = $this->user->id;
-        $this->request['thumbnail'] = UploadedFile::fake()->image('photo1.jpg');
+        $this->request['featured_image'] = UploadedFile::fake()->image('photo1.jpg');
 
         $request = new Request($this->request);
 
@@ -90,7 +90,7 @@ class ShelfServiceTest extends TestCase
         $this->request['name'] = 'NewNameShelf';
         $this->request['number'] = '10';
         $this->request['description'] = 'NewDescription';
-        $this->request['thumbnail'] = UploadedFile::fake()->image('photo2.jpg');
+        $this->request['featured_image'] = UploadedFile::fake()->image('photo2.jpg');
 
         $updateRequest = new CreateUserRequest($this->request);
 

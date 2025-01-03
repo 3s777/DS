@@ -46,8 +46,8 @@ class UpdateUserDTOTest extends TestCase
             $this->request['first_name'],
             $this->request['slug'],
             $this->request['description'],
-            $this->request['thumbnail'],
-            $this->request['thumbnail_uploaded'],
+            $this->request['featured_image'],
+            $this->request['featured_image_uploaded'],
             $this->request['is_verified'],
         );
 

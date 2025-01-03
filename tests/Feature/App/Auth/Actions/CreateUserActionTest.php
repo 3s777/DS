@@ -60,7 +60,7 @@ class CreateUserActionTest extends TestCase
             $this->request['first_name'],
             $this->request['slug'],
             $this->request['description'],
-            $this->request['thumbnail'],
+            $this->request['featured_image'],
             $this->request['is_verified'],
         ));
 
@@ -98,7 +98,7 @@ class CreateUserActionTest extends TestCase
             $this->request['first_name'],
             $this->request['slug'],
             $this->request['description'],
-            $this->request['thumbnail'],
+            $this->request['featured_image'],
             $this->request['is_verified'],
         ));
 

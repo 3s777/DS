@@ -36,7 +36,7 @@ class CreateGamePlatformManufacturerRequest extends FormRequest
                 Rule::unique(GamePlatformManufacturer::class)
             ],
             'description' => ['nullable','string'],
-            'thumbnail' => [
+            'featured_image' => [
                 'nullable',
                 'mimes:jpg,png',
                 'max:10024'
@@ -55,7 +55,7 @@ class CreateGamePlatformManufacturerRequest extends FormRequest
             'name' => trans_choice('common.name', 1),
             'slug' => __('common.slug'),
             'description' => __('common.description'),
-            'thumbnail' => __('common.thumbnail'),
+            'featured_image' => __('common.featured_image'),
             'user_id' => trans_choice('user.users', 1),
         ];
     }

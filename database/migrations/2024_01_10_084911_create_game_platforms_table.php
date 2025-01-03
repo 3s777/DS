@@ -22,7 +22,7 @@ return new class () extends Migration {
             $table->foreignIdFor(User::class)
                 ->constrained();
             $table->foreignIdFor(GamePlatformManufacturer::class)->nullable();
-            $table->string('thumbnail')->nullable();
+            $table->string('featured_image')->nullable();
 
             $table->softDeletes();
             $table->timestamps();

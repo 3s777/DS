@@ -124,8 +124,8 @@
             <div class="crud-form__sidebar-wrapper">
                 <x-ui.form.input-image
                     class="crud-form__input-image"
-                    name="thumbnail"
-                    id="thumbnail">
+                    name="featured_image"
+                    id="featured_image">
                     <p>{{ __('common.file.format') }} jpg, png</p>
                     <p>{{ __('common.file.max_size') }} 6Mb</p>
                 </x-ui.form.input-image>

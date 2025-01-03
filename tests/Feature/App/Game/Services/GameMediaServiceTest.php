@@ -52,7 +52,7 @@ class GameMediaServiceTest extends TestCase
         ]);
 
         $this->request['user_id'] = $this->user->id;
-        $this->request['thumbnail'] = UploadedFile::fake()->image('photo1.jpg');
+        $this->request['featured_image'] = UploadedFile::fake()->image('photo1.jpg');
 
         $request = new Request($this->request);
 
@@ -129,7 +129,7 @@ class GameMediaServiceTest extends TestCase
         $this->request['publishers'] = $newPublishers->pluck('id')->toArray();
         $this->request['genres'] = $newGenres->pluck('id')->toArray();
         $this->request['platforms'] = $newPlatforms->pluck('id')->toArray();
-        $this->request['thumbnail'] = UploadedFile::fake()->image('photo2.jpg');
+        $this->request['featured_image'] = UploadedFile::fake()->image('photo2.jpg');
 
         $updateRequest = new CreateUserRequest($this->request);
 

@@ -14,25 +14,25 @@ use Illuminate\Support\Facades\Storage;
 use Spatie\MediaLibrary\MediaCollections\Exceptions\FileDoesNotExist;
 use Spatie\MediaLibrary\MediaCollections\Exceptions\FileIsTooBig;
 
-trait HasThumbnail
+trait HasFeaturedImage
 {
-    protected static function bootHasThumbnail(): void
+    protected static function bootHasFeaturedImage(): void
     {
         static::forceDeleting(function (Model $item) {
-            if (config('thumbnail.driver') != 'media_library') {
+            if (config('images.driver') != 'media_library') {
                 $item->deleteAllThumbnails();
             }
         });
     }
 
-    public function getThumbnailCollection(): string
+    public function getFeaturedImageCollection(): string
     {
-        return 'thumbnail';
+        return 'featured';
     }
 
-    public function getThumbnailColumn(): string
+    public function getFeaturedImageColumn(): string
     {
-        return 'thumbnail';
+        return 'featured_image';
     }
 
     public function imageManager(): ImagesManager
@@ -42,14 +42,16 @@ trait HasThumbnail
 
     protected function addOriginalImage(UploadedFile $image, string $collectionName, string $type): string
     {
-        return $this->imageManager()->addOriginal($image, $collectionName, $type);
+        $imagePath = $this->imageManager()->addOriginal($image, $collectionName, $type);
+        $this->save();
+        return $imagePath;
     }
 
     public function addImageWithThumbnail(
         UploadedFile|null $image,
         string $collectionName = 'default',
         array $specialSizes = [],
-        string $type = 'thumbnail',
+        string $type = 'featured_image',
     ): void {
         if($image) {
             $imageFullPath = $this->addOriginalImage($image, $collectionName, $type);
@@ -60,23 +62,23 @@ trait HasThumbnail
         }
     }
 
-    public function deleteAllThumbnails(): void
+    public function deleteFeaturedImage(): void
     {
         $this->imageManager()->deleteAllThumbnails();
     }
 
-    public function updateThumbnail($newThumbnail, $oldThumbnail = '', $sizes = [])
+    public function updateFeaturedImage($newFeaturedImage, $oldFeaturedImage = '', $sizes = [])
     {
-        if(!$oldThumbnail && !$newThumbnail) {
-            $this->deleteAllThumbnails();
+        if(!$oldFeaturedImage && !$newFeaturedImage) {
+            $this->deleteFeaturedImage();
         }
 
-        if($newThumbnail) {
-            $this->deleteAllThumbnails();
+        if($newFeaturedImage) {
+            $this->deleteFeaturedImage();
 
             $this->addImageWithThumbnail(
-                $newThumbnail,
-                $this->getThumbnailColumn(),
+                $newFeaturedImage,
+                $this->getFeaturedImageColumn(),
                 $sizes
             );
         }

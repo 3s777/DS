@@ -18,23 +18,21 @@ class MediaLibraryImageManager implements ImagesManager
             ->toMediaCollection($collectionName, 'images');
         //        $mediaPath = app(MediaPathGenerator::class)->getPath($media);
         //        $this->{$this->getThumbnailColumn()} = $mediaPath.$media->file_name;
-        if($type === $this->model->getThumbnailColumn()) {
-            $this->model->{$this->model->getThumbnailColumn()} = $media->getPathRelativeToRoot();
+
+        if(method_exists($this->model, 'getFeaturedImageColumn') && $type === $this->model->getFeaturedImageColumn()) {
+                $this->model->{$this->model->getFeaturedImageColumn()} = $media->getPathRelativeToRoot();
         }
 
-        if(method_exists($this->model, 'getImagesColumn')) {
-            if($type === $this->model->getImagesColumn()) {
-                $images = $this->model->{$this->model->getImagesColumn()};
+        if(method_exists($this->model, 'getImagesColumn') && $type === $this->model->getImagesColumn()) {
+            $images = $this->model->{$this->model->getImagesColumn()};
 
-                if (!$images) {
-                    $images = [];
-                }
-
-                $images[] = $media->getPathRelativeToRoot();
-
-                $this->{$this->model->getImagesColumn()} = $images;
+            if (!$images) {
+                $images = [];
             }
-            $this->model->save();
+
+            $images[] = $media->getPathRelativeToRoot();
+
+            $this->model->{$this->model->getImagesColumn()} = $images;
         }
 
         return $media->getPathRelativeToRoot();
@@ -42,7 +40,17 @@ class MediaLibraryImageManager implements ImagesManager
 
     public function deleteAllThumbnails(): void
     {
-        $media = $this->model->getFirstMedia($this->model->getThumbnailColumn());
+        $media = $this->model->getFirstMedia($this->model->getFeaturedImageColumn());
         $media?->forceDelete();
+    }
+
+    public function getThumbnailPath(): string
+    {
+        // TODO: Implement getThumbnailPath() method.
+    }
+
+    public function getImagesPath(): array
+    {
+        // TODO: Implement getImagesPath() method.
     }
 }

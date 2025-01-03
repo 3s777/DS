@@ -126,7 +126,7 @@ class GameMediaControllerTest extends TestCase
         Queue::fake();
         Storage::fake('images');
 
-        $this->request['thumbnail'] = UploadedFile::fake()->image('photo1.jpg');
+        $this->request['featured_image'] = UploadedFile::fake()->image('photo1.jpg');
 
         $this->actingAs($this->user)
             ->post(action([GameMediaController::class, 'store']), $this->request)
@@ -171,15 +171,15 @@ class GameMediaControllerTest extends TestCase
      * @test
      * @return void
      */
-    public function it_validation_thumbnail_fail(): void
+    public function it_validation_featured_image_fail(): void
     {
         $this->app['session']->setPreviousUrl(route('game-medias.create'));
 
-        $this->request['thumbnail'] = UploadedFile::fake()->image('photo1.php');
+        $this->request['featured_image'] = UploadedFile::fake()->image('photo1.php');
 
         $this->actingAs($this->user)
             ->post(action([GameMediaController::class, 'store']), $this->request)
-            ->assertInvalid(['thumbnail'])
+            ->assertInvalid(['featured_image'])
             ->assertRedirectToRoute('game-medias.create');
     }
 

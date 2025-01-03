@@ -20,7 +20,7 @@ return new class () extends Migration {
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->text('description')->nullable();
-            $table->string('thumbnail')->nullable();
+            $table->string('featured_image')->nullable();
             $table->boolean('is_banned')->nullable();
             $table->string('language')->default('en');
             $table->rememberToken();

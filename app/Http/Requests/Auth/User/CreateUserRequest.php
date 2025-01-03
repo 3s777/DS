@@ -93,7 +93,7 @@ class CreateUserRequest extends FormRequest
                 Rule::unique(User::class)
             ],
             'description' => ['nullable','string'],
-            'thumbnail' => [
+            'featured_image' => [
                 'nullable',
                 'mimes:jpg,png',
                 'max:10024'
@@ -111,7 +111,7 @@ class CreateUserRequest extends FormRequest
             'email' => __('common.email'),
             'roles' => trans_choice('role.roles', 2),
             'description' => __('common.description'),
-            'thumbnail' => __('common.thumbnail'),
+            'featured_image' => __('common.featured_image'),
             'language' => __('common.language'),
             'is_verified' => __('auth.is_verified'),
         ];

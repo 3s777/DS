@@ -23,7 +23,7 @@ use Spatie\Translatable\HasTranslations;
 use Support\Casts\ArrayWithoutUnicode;
 use Support\Traits\Models\HasSlug;
 use Support\Traits\Models\HasImage;
-use Support\Traits\Models\HasThumbnail;
+use Support\Traits\Models\HasFeaturedImage;
 use Support\Traits\Models\HasUser;
 
 class GameMedia extends Model implements HasMedia, HasProperties
@@ -33,7 +33,7 @@ class GameMedia extends Model implements HasMedia, HasProperties
     use SoftDeletes;
     use InteractsWithMedia;
     use HasImage;
-    use HasThumbnail;
+    use HasFeaturedImage;
     use HasUser;
     use HasTranslations;
     use GameProperties;

@@ -25,8 +25,8 @@ class GameMediaService
             ]);
 
             $gameMedia->addImageWithThumbnail(
-                $data->thumbnail,
-                'thumbnail',
+                $data->featured_image,
+                'featured_image',
                 ['small', 'medium']
             );
 
@@ -51,9 +51,9 @@ class GameMediaService
         try {
             DB::beginTransaction();
 
-            $gameMedia->updateThumbnail(
-                $data->thumbnail,
-                $data->thumbnail_uploaded,
+            $gameMedia->updateFeaturedImage(
+                $data->featured_image,
+                $data->featured_image_uploaded,
                 ['small', 'medium']
             );
 

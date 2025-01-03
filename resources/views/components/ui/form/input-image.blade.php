@@ -2,7 +2,7 @@
     'id',
     'name',
     'path' => false,
-    'uploadedThumbnail' => false,
+    'uploadedFeaturedImage' => false,
 ])
 
 <div x-data="imgPreview" {{ $attributes->class([
@@ -17,13 +17,13 @@
                 </div>
             </div>
 
-            @if($uploadedThumbnail)
+            @if($uploadedFeaturedImage)
                 <template x-if="uploadedSrc">
                     <div class="input-image__inner">
                         <x-ui.badge class="input-image__close" @click="clearUploaded" title="{{ __('common.delete') }}">
                             <x-svg.close></x-svg.close>
                         </x-ui.badge>
-                        {{ $uploadedThumbnail }}
+                        {{ $uploadedFeaturedImage }}
                     </div>
                 </template>
             @endif
@@ -54,7 +54,7 @@
             document.addEventListener('alpine:init', () => {
                 Alpine.data('imgPreview', () => ({
                         imgSrc:null,
-                        @if($uploadedThumbnail)
+                        @if($uploadedFeaturedImage)
                             uploadedSrc:true,
                         @else
                             uploadedSrc:false,

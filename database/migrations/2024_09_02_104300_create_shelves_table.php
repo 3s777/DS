@@ -17,7 +17,7 @@ return new class extends Migration
             $table->ulid('ulid');
             $table->string('name');
             $table->integer('number')->nullable();
-            $table->string('thumbnail')->nullable();
+            $table->string('featured_image')->nullable();
             $table->jsonb('description')->nullable();
             $table->foreignIdFor(User::class)->constrained();
 

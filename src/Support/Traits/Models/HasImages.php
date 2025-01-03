@@ -16,7 +16,7 @@ trait HasImages
 
     public function getImages(): array
     {
-        if(config('thumbnail.driver') == 'media_library') {
+        if(config('images.driver') == 'media_library') {
             $images = $this->getMedia($this->getImagesCollection());
             $imagesArr = [];
 

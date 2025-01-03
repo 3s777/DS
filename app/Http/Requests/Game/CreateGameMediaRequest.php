@@ -44,7 +44,7 @@ class CreateGameMediaRequest extends FormRequest
                 'date',
                 'date_format:Y-m-d'
             ],
-            'thumbnail' => [
+            'featured_image' => [
                 'nullable',
                 'mimes:jpg,png',
                 'max:10024'
@@ -99,7 +99,7 @@ class CreateGameMediaRequest extends FormRequest
             'platforms' => __('game_platform.platforms'),
             'developers' => __('game_developer.developers'),
             'publishers' => __('game_publisher.publishers'),
-            'thumbnail' => __('common.thumbnail'),
+            'featured_image' => __('common.featured_image'),
             'user_id' => trans_choice('user.users', 1),
         ];
     }

@@ -133,20 +133,20 @@
             <div class="crud-form__sidebar-wrapper">
                 <x-ui.form.input-image
                     class="crud-form__input-image"
-                    name="thumbnail"
-                    id="thumbnail"
-                    :path="$game->getThumbnailPath()">
-                    @if($game->getThumbnailPath())
-                    <x-slot:uploaded-thumbnail>
+                    name="featured_image"
+                    id="featured_image"
+                    :path="$game->getFeaturedImagePath()">
+                    @if($game->getFeaturedImagePath())
+                    <x-slot:uploaded-featured-image>
                         <x-ui.responsive-image
                             :model="$game"
                             :image-sizes="['small', 'medium', 'large']"
-                            :path="$game->getThumbnailPath()"
+                            :path="$game->getFeaturedImagePath()"
                             :placeholder="false"
                             sizes="(max-width: 1024px) 100vw, (max-width: 1400px) 30vw, 220px">
                             <x-slot:img alt="test" title="test title"></x-slot:img>
                         </x-ui.responsive-image>
-                    </x-slot:uploaded-thumbnail>
+                    </x-slot:uploaded-featured-image>
                     @endif
                     <p>{{ __('common.file.format') }} jpg, png</p>
                     <p>{{ __('common.file.max_size') }} 6Mb</p>

@@ -26,9 +26,9 @@ class FillCollectibleDTO
         public readonly ?array $properties = null,
         public readonly ?array $sale = null,
         public readonly ?array $auction = null,
-        public readonly ?UploadedFile $thumbnail = null,
-        public readonly ?string $thumbnail_uploaded = null,
-        public readonly ?array $thumbnail_multiple = null,
+        public readonly ?UploadedFile $featured_image = null,
+        public readonly ?string $featured_image_uploaded = null,
+        public readonly ?array $images = null,
         public readonly ?string $description = null,
     ) {
     }
@@ -52,9 +52,9 @@ class FillCollectibleDTO
             'target',
             'sale',
             'auction',
-            'thumbnail',
-            'thumbnail_multiple',
-            'thumbnail_uploaded',
+            'featured_image',
+            'images',
+            'featured_image_uploaded',
             'description'
         ]));
     }

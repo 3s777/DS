@@ -19,7 +19,7 @@ use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
 use Spatie\Translatable\HasTranslations;
 use Support\Traits\Models\HasImage;
-use Support\Traits\Models\HasThumbnail;
+use Support\Traits\Models\HasFeaturedImage;
 use Support\Traits\Models\HasUser;
 
 class Shelf extends Model implements HasMedia
@@ -28,7 +28,7 @@ class Shelf extends Model implements HasMedia
     use SoftDeletes;
     use InteractsWithMedia;
     use HasImage;
-    use HasThumbnail;
+    use HasFeaturedImage;
     use HasUser;
     use HasTranslations;
 

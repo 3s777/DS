@@ -55,7 +55,7 @@ class CollectibleServiceTest extends TestCase
             'name' => $this->request['name']
         ]);
 
-        $this->request['thumbnail'] = UploadedFile::fake()->image('photo1.jpg');
+        $this->request['featured_image'] = UploadedFile::fake()->image('photo1.jpg');
 
         $gameService = app(CollectibleService::class);
 
@@ -105,7 +105,7 @@ class CollectibleServiceTest extends TestCase
         $this->request['sale']['price'] = '100';
         $this->request['sale']['price_old'] = '200';
         $this->request['description'] = 'NewDescription';
-        $this->request['thumbnail'] = UploadedFile::fake()->image('photo2.jpg');
+        $this->request['featured_image'] = UploadedFile::fake()->image('photo2.jpg');
 
         $collectibleService->update($collectible, FillCollectibleDTO::fromRequest(new Request($this->request)));
 

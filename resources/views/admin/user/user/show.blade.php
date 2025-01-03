@@ -47,11 +47,11 @@
 
                 <div class="crud-show__sidebar">
                     <div class="crud-show__thumbnail">
-                        <a href="{{ asset('storage/images/'.$user->getThumbnailPathWebp())  }}" data-fancybox data-caption="">
+                        <a href="{{ asset('storage/images/'.$user->getFeaturedImagePathWebp())  }}" data-fancybox data-caption="">
                         <x-ui.responsive-image
                             :model="$user"
                             :image-sizes="['small', 'medium', 'large']"
-                            :path="$user->getThumbnailPath()"
+                            :path="$user->getFeaturedImagePath()"
                             sizes="(max-width: 1024px) 100vw, (max-width: 1400px) 30vw, 220px">
                             <x-slot:img height="220" width="220" alt="test" title="test title"></x-slot:img>
                         </x-ui.responsive-image>

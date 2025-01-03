@@ -20,8 +20,8 @@ class UpdateUserDTO
         public readonly ?string $first_name = null,
         public readonly ?string $slug = null,
         public readonly ?string $description = null,
-        public readonly ?UploadedFile $thumbnail = null,
-        public readonly ?string $thumbnail_uploaded = null,
+        public readonly ?UploadedFile $featured_image = null,
+        public readonly ?string $featured_image_uploaded = null,
         public readonly ?int $is_verified = null
     ) {
     }
@@ -38,8 +38,8 @@ class UpdateUserDTO
             'first_name',
             'slug',
             'description',
-            'thumbnail',
-            'thumbnail_uploaded',
+            'featured_image',
+            'featured_image_uploaded',
             'is_verified'
         ]));
     }

@@ -18,7 +18,7 @@ return new class () extends Migration {
             $table->text('alternative_names')->nullable();
             $table->date('released_at')->nullable();
             $table->jsonb('description')->nullable();
-            $table->string('thumbnail')->nullable();
+            $table->string('featured_image')->nullable();
             $table->foreignIdFor(User::class)
                 ->constrained();
 

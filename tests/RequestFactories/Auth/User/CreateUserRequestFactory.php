@@ -19,8 +19,8 @@ class CreateUserRequestFactory extends RequestFactory
            'roles' => [config('settings.default_role'), 'editor'],
            'permissions' => ['entity.*', 'entity.create', 'entity.edit', 'entity.delete'],
            'description' => $this->faker->text(200),
-           'thumbnail' => UploadedFile::fake()->image('photo1.jpg'),
-           'thumbnail_uploaded' => $this->faker->name,
+           'featured_image' => UploadedFile::fake()->image('photo1.jpg'),
+           'featured_image_uploaded' => $this->faker->name,
            'is_verified' => 1,
            'slug' => $this->faker->name,
         ];

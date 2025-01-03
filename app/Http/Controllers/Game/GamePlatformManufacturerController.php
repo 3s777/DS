@@ -37,11 +37,11 @@ class GamePlatformManufacturerController extends Controller
 
     public function store(CreateGamePlatformManufacturerRequest $request): Application|Redirector|RedirectResponse|\Illuminate\Contracts\Foundation\Application
     {
-        $gamePlatformManufacturer = GamePlatformManufacturer::create($request->safe()->except(['thumbnail']));
+        $gamePlatformManufacturer = GamePlatformManufacturer::create($request->safe()->except(['featured_image']));
 
         $gamePlatformManufacturer->addImageWithThumbnail(
-            $request->file('thumbnail'),
-            'thumbnail',
+            $request->file('featured_image'),
+            'featured_image',
             ['small', 'medium']
         );
 
@@ -62,9 +62,9 @@ class GamePlatformManufacturerController extends Controller
 
     public function update(UpdateGamePlatformManufacturerRequest $request, GamePlatformManufacturer $gamePlatformManufacturer): RedirectResponse
     {
-        $gamePlatformManufacturer->updateThumbnail($request->file('thumbnail'), $request->input('thumbnail_uploaded'), ['small', 'medium']);
+        $gamePlatformManufacturer->updateFeaturedImage($request->file('featured_image'), $request->input('featured_image_uploaded'), ['small', 'medium']);
 
-        $gamePlatformManufacturer->fill($request->safe()->except(['thumbnail', 'thumbnail_uploaded']))->save();
+        $gamePlatformManufacturer->fill($request->safe()->except(['featured_image', 'featured_image_uploaded']))->save();
 
         flash()->info(__('game_platform_manufacturer.updated'));
 

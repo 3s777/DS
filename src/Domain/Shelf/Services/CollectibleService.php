@@ -61,7 +61,7 @@ class CollectibleService
                 $collectible->collectable_type = $data->collectable_type;
                 $collectible->properties =  $data->properties;
 
-//                dd($data->thumbnail_multiple);
+//                dd($data->images);
 
                 $collectible->save();
 
@@ -84,13 +84,13 @@ class CollectibleService
 //            $collectible->kitItems()->attach($kitItems);
 
                 $collectible->addImageWithThumbnail(
-                    $data->thumbnail,
-                    'thumbnail',
+                    $data->featured_image,
+                    'featured_image',
                     ['small', 'medium']
                 );
 
-                if($data->thumbnail_multiple) {
-                    foreach ($data->thumbnail_multiple as $key => $image) {
+                if($data->images) {
+                    foreach ($data->images as $key => $image) {
                         $collectible->addImageWithThumbnail(
                             $image,
                             'images',
@@ -113,9 +113,9 @@ class CollectibleService
     {
         return Transaction::run(
             function() use($collectible, $data) {
-                $collectible->updateThumbnail(
-                    $data->thumbnail,
-                    $data->thumbnail_uploaded,
+                $collectible->updateFeaturedImage(
+                    $data->featured_image,
+                    $data->featured_image_uploaded,
                     ['small', 'medium']
                 );
 

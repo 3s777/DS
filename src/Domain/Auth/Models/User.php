@@ -32,7 +32,7 @@ use Spatie\Permission\Traits\HasRoles;
 use Support\Traits\Models\HasCustomAudit;
 use Support\Traits\Models\HasImage;
 use Support\Traits\Models\HasSlug;
-use Support\Traits\Models\HasThumbnail;
+use Support\Traits\Models\HasFeaturedImage;
 use OwenIt\Auditing\Auditable as HasAuditable;
 
 class User extends Authenticatable implements MustVerifyEmail, HasLocalePreference, HasMedia, Auditable
@@ -43,7 +43,7 @@ class User extends Authenticatable implements MustVerifyEmail, HasLocalePreferen
     use Notifiable;
     use SoftDeletes;
     use HasImage;
-    use HasThumbnail;
+    use HasFeaturedImage;
     use InteractsWithMedia;
     use HasRoles;
     use HasPermissions;
@@ -62,7 +62,7 @@ class User extends Authenticatable implements MustVerifyEmail, HasLocalePreferen
         'password',
         'language',
         'first_name',
-        'thumbnail',
+        'featured_image',
         'description',
         'email_verified_at'
     ];

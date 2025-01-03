@@ -26,4 +26,14 @@ class OriginalImageManager implements ImagesManager
 //            $this->imageStorage()->delete($imagePathInfo['dirname']);
 //        }
     }
+
+    public function getThumbnailPath(): string
+    {
+        // TODO: Implement getThumbnailPath() method.
+    }
+
+    public function getImagesPath(): array
+    {
+        // TODO: Implement getImagesPath() method.
+    }
 }

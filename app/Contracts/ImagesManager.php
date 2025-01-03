@@ -14,4 +14,8 @@ interface ImagesManager
 
 
     public function deleteAllThumbnails(): void;
+
+    public function getThumbnailPath(): string;
+
+    public function getImagesPath(): array;
 }

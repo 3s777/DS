@@ -48,11 +48,11 @@ class GameDeveloperController extends Controller
 
     public function store(CreateGameDeveloperRequest $request): Application|Redirector|RedirectResponse|\Illuminate\Contracts\Foundation\Application
     {
-        $gameDeveloper = GameDeveloper::create($request->safe()->except(['thumbnail']));
+        $gameDeveloper = GameDeveloper::create($request->safe()->except(['featured_image']));
 
         $gameDeveloper->addImageWithThumbnail(
-            $request->file('thumbnail'),
-            'thumbnail',
+            $request->file('featured_image'),
+            'featured_image',
             ['small', 'medium']
         );
 
@@ -73,9 +73,9 @@ class GameDeveloperController extends Controller
 
     public function update(UpdateGameDeveloperRequest $request, GameDeveloper $gameDeveloper): RedirectResponse
     {
-        $gameDeveloper->updateThumbnail($request->file('thumbnail'), $request->input('thumbnail_uploaded'), ['small', 'medium']);
+        $gameDeveloper->updateFeaturedImage($request->file('featured_image'), $request->input('featured_image_uploaded'), ['small', 'medium']);
 
-        $gameDeveloper->fill($request->safe()->except(['thumbnail', 'thumbnail_uploaded']))->save();
+        $gameDeveloper->fill($request->safe()->except(['featured_image', 'featured_image_uploaded']))->save();
 
         flash()->info(__('game_developer.updated'));
 

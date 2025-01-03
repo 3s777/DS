@@ -155,7 +155,7 @@ class CollectibleGameControllerTest extends TestCase
         Queue::fake();
         Storage::fake('images');
 
-        $this->request['thumbnail'] = UploadedFile::fake()->image('photo1.jpg');
+        $this->request['featured_image'] = UploadedFile::fake()->image('photo1.jpg');
 
         $this->actingAs($this->user)
             ->post(action([CollectibleGameController::class, 'store']), $this->request)
@@ -296,15 +296,15 @@ class CollectibleGameControllerTest extends TestCase
      * @test
      * @return void
      */
-    public function it_validation_thumbnail_fail(): void
+    public function it_validation_featured_image_fail(): void
     {
         $this->app['session']->setPreviousUrl(route('collectibles.create.game'));
 
-        $this->request['thumbnail'] = UploadedFile::fake()->image('photo1.php');
+        $this->request['featured_image'] = UploadedFile::fake()->image('photo1.php');
 
         $this->actingAs($this->user)
             ->post(action([CollectibleGameController::class, 'store']), $this->request)
-            ->assertInvalid(['thumbnail'])
+            ->assertInvalid(['featured_image'])
             ->assertRedirectToRoute('collectibles.create.game');
     }
 

@@ -42,11 +42,11 @@ class GamePublisherController extends Controller
 
     public function store(CreateGamePublisherRequest $request): Application|Redirector|RedirectResponse|\Illuminate\Contracts\Foundation\Application
     {
-        $gamePublisher = GamePublisher::create($request->safe()->except(['thumbnail']));
+        $gamePublisher = GamePublisher::create($request->safe()->except(['featured_image']));
 
         $gamePublisher->addImageWithThumbnail(
-            $request->file('thumbnail'),
-            'thumbnail',
+            $request->file('featured_image'),
+            'featured_image',
             ['small', 'medium']
         );
 
@@ -67,9 +67,9 @@ class GamePublisherController extends Controller
 
     public function update(UpdateGamePublisherRequest $request, GamePublisher $gamePublisher): RedirectResponse
     {
-        $gamePublisher->updateThumbnail($request->file('thumbnail'), $request->input('thumbnail_uploaded'), ['small', 'medium']);
+        $gamePublisher->updateFeaturedImage($request->file('featured_image'), $request->input('featured_image_uploaded'), ['small', 'medium']);
 
-        $gamePublisher->fill($request->safe()->except(['thumbnail', 'thumbnail_uploaded']))->save();
+        $gamePublisher->fill($request->safe()->except(['featured_image', 'featured_image_uploaded']))->save();
 
         flash()->info(__('game_publisher.updated'));
 

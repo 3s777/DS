@@ -71,7 +71,7 @@ trait HasImage
             $imageFullPath,
             1200,
             false,
-            config('thumbnail.fallback_quality'),
+            config('images.fallback_quality'),
             'fallback'
         );
 
@@ -80,17 +80,17 @@ trait HasImage
             $imageFullPath,
             2048,
             true,
-            config('thumbnail.webp_quality')
+            config('images.webp_quality')
         );
     }
 
-    public function getThumbnailPath(): string
+    public function getFeaturedImagePath(): string
     {
-        if(config('thumbnail.driver') == 'media_library') {
-            $thumbnailMedia = $this->getFirstMedia($this->getThumbnailColumn());
+        if(config('images.driver') == 'media_library') {
+            $featuredImageMedia = $this->getFirstMedia($this->getFeaturedImageColumn());
 
-            if($thumbnailMedia) {
-                return $thumbnailMedia->getPathRelativeToRoot();
+            if($featuredImageMedia) {
+                return $featuredImageMedia->getPathRelativeToRoot();
             }
 
             return '';
@@ -99,16 +99,16 @@ trait HasImage
             //            $mediaPath = app(MediaPathGenerator::class)->getPath($thumbnailMedia);
 
         } else {
-            return $this->{$this->getThumbnailColumn()};
+            return $this->{$this->getFeaturedImageColumn()};
         }
     }
 
-    public function getThumbnailPathWebp(): string
+    public function getFeaturedImagePathWebp(): string
     {
-        $thumbnailPathInfo = pathinfo($this->getThumbnailPath());
+        $featuredImagePathInfo = pathinfo($this->getFeaturedImagePath());
 
-        if($thumbnailPathInfo['filename']) {
-            return $thumbnailPathInfo['dirname'].'/'.$thumbnailPathInfo['filename'].'.webp';
+        if($featuredImagePathInfo['filename']) {
+            return $featuredImagePathInfo['dirname'].'/'.$featuredImagePathInfo['filename'].'.webp';
         }
 
         return '';

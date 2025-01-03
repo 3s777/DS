@@ -13,8 +13,8 @@ class FillShelfDTO
     public function __construct(
         public readonly string $name,
         public readonly ?int $user_id = null,
-        public readonly ?UploadedFile $thumbnail = null,
-        public readonly ?string $thumbnail_uploaded = null,
+        public readonly ?UploadedFile $featured_image = null,
+        public readonly ?string $featured_image_uploaded = null,
         public readonly ?string $description = null,
         public readonly ?int $number = null
     ) {
@@ -25,8 +25,8 @@ class FillShelfDTO
         return static::make(...$request->only([
             'name',
             'user_id',
-            'thumbnail',
-            'thumbnail_uploaded',
+            'featured_image',
+            'featured_image_uploaded',
             'description',
             'number'
         ]));

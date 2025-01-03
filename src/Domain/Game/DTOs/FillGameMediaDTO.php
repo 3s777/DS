@@ -24,8 +24,8 @@ class FillGameMediaDTO
         public readonly ?array $developers = null,
         public readonly ?array $publishers = null,
         public readonly ?array $kit_items = null,
-        public readonly ?UploadedFile $thumbnail = null,
-        public readonly ?string $thumbnail_uploaded = null,
+        public readonly ?UploadedFile $featured_image = null,
+        public readonly ?string $featured_image_uploaded = null,
         public readonly ?string $description = null,
     ) {
     }
@@ -46,8 +46,8 @@ class FillGameMediaDTO
             'developers',
             'publishers',
             'kit_items',
-            'thumbnail',
-            'thumbnail_uploaded',
+            'featured_image',
+            'featured_image_uploaded',
             'description',
         ]));
     }

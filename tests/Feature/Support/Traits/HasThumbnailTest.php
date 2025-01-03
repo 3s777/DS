@@ -34,7 +34,7 @@ class HasThumbnailTest extends TestCase
      * @test
      * @return void
      */
-    public function it_success_fake_upload_and_queue_thumbnail(): void
+    public function it_success_fake_upload_and_queue_featured_image(): void
     {
         Queue::fake();
         Storage::fake('images');
@@ -43,11 +43,11 @@ class HasThumbnailTest extends TestCase
 
         $gameDeveloper->addImageWithThumbnail(
             UploadedFile::fake()->image('photo1.jpg'),
-            'thumbnail',
+            'featured_image',
             ['small', 'medium']
         );
 
-        if(config('thumbnail.driver') == 'media_library') {
+        if(config('images.driver') == 'media_library') {
             $this->assertDatabaseHas('media', [
                 'model_id' => $gameDeveloper->id,
             ]);
@@ -64,13 +64,13 @@ class HasThumbnailTest extends TestCase
      * @test
      * @return void
      */
-    public function it_success_uploads_and_generate_thumbnail(): void
+    public function it_success_uploads_and_generate_featured_image(): void
     {
         $gameDeveloper = GameDeveloperFactory::new()->create();
 
         $gameDeveloper->addImageWithThumbnail(
             UploadedFile::fake()->image('photo1.jpg'),
-            'thumbnail',
+            'featured_image',
         );
 
         $this->assertDatabaseHas('media', [
@@ -79,7 +79,7 @@ class HasThumbnailTest extends TestCase
 
         sleep(10);
 
-        $path = $gameDeveloper->getThumbnailPath();
+        $path = $gameDeveloper->getFeaturedImagePath();
 
         $imagePathInfo = pathinfo($path);
 
@@ -105,7 +105,7 @@ class HasThumbnailTest extends TestCase
      * @test
      * @return void
      */
-    public function it_success_queue_count_thumbnail_sizes(): void
+    public function it_success_queue_count_featured_image_sizes(): void
     {
         Queue::fake();
         Storage::fake('images');
@@ -114,7 +114,7 @@ class HasThumbnailTest extends TestCase
 
         $gameDeveloper->addImageWithThumbnail(
             UploadedFile::fake()->image('photo1.jpg'),
-            'thumbnail'
+            'featured_image'
         );
 
         Queue::assertPushed(GenerateThumbnailJob::class, 3);
@@ -126,7 +126,7 @@ class HasThumbnailTest extends TestCase
      * @test
      * @return void
      */
-    public function it_success_update_uploads_and_generate_thumbnail(): void
+    public function it_success_update_uploads_and_generate_featured_image(): void
     {
         Queue::fake();
         Storage::fake('images');
@@ -135,15 +135,15 @@ class HasThumbnailTest extends TestCase
 
         $gameDeveloper->addImageWithThumbnail(
             UploadedFile::fake()->image('photo1.jpg'),
-            'thumbnail',
+            'featured',
         );
 
-        $oldPath = $gameDeveloper->getThumbnailPath();
+        $oldPath = $gameDeveloper->getFeaturedImagePath();
 
-        $gameDeveloper->updateThumbnail(UploadedFile::fake()->image('photo1.jpg'), 'oldThumbnail');
+        $gameDeveloper->updateFeaturedImage(UploadedFile::fake()->image('photo1.jpg'), 'oldFeaturedImage');
 
         $gameDeveloperNewMedia = GameDeveloper::find($gameDeveloper->id)->first();
-        $newPath = $gameDeveloperNewMedia->getThumbnailPath();
+        $newPath = $gameDeveloperNewMedia->getFeaturedImagePath();
 
         $this->assertFalse($oldPath == $newPath);
 
@@ -151,7 +151,7 @@ class HasThumbnailTest extends TestCase
         //        $oldImagePathInfo = pathinfo($oldPath);
         //        $this->storage->assertMissing($oldImagePathInfo['dirname']);
         //
-        //        $path = $gameDeveloperNewMedia->getThumbnailPath();
+        //        $path = $gameDeveloperNewMedia->getFeaturedImagePath();
         //
         //
         //        $imagePathInfo = pathinfo($path);
@@ -188,13 +188,13 @@ class HasThumbnailTest extends TestCase
 
         $gameDeveloper->addImageWithThumbnail(
             UploadedFile::fake()->image('photo1.jpg'),
-            'thumbnail',
+            'featured',
         );
 
-        $gameDeveloper->updateThumbnail('');
+        $gameDeveloper->updateFeaturedImage('');
 
         $gameDeveloperNewMedia = GameDeveloper::find($gameDeveloper->id)->first();
-        $newPath = $gameDeveloperNewMedia->getThumbnailPath();
+        $newPath = $gameDeveloperNewMedia->getFeaturedImagePath();
 
         $this->assertEmpty($newPath);
     }

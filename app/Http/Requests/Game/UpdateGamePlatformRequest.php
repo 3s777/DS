@@ -51,12 +51,12 @@ class UpdateGamePlatformRequest extends FormRequest
                 'nullable',
                 'string'
             ],
-            'thumbnail' => [
+            'featured_image' => [
                 'nullable',
                 'mimes:jpg,png',
                 'max:10024'
             ],
-            'thumbnail_selected' => ['nullable', 'string'],
+            'featured_image_selected' => ['nullable', 'string'],
             'user_id' => [
                 'nullable',
                 'integer',
@@ -76,7 +76,7 @@ class UpdateGamePlatformRequest extends FormRequest
             'name' => trans_choice('common.name', 1),
             'slug' => __('common.slug'),
             'description' => __('common.description'),
-            'thumbnail' => __('common.thumbnail'),
+            'featured_image' => __('common.featured_image'),
             'user_id' => trans_choice('user.users', 1),
             'type' => __('game_platform_manufacturer.manufacturer'),
             'game_platform_manufacturer_id' => __('game_platform_manufacturer.manufacturer')

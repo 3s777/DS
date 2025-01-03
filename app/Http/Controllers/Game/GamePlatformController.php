@@ -37,11 +37,11 @@ class GamePlatformController extends Controller
 
     public function store(CreateGamePlatformRequest $request): Application|Redirector|RedirectResponse|\Illuminate\Contracts\Foundation\Application
     {
-        $gamePlatform = GamePlatform::create($request->safe()->except(['thumbnail']));
+        $gamePlatform = GamePlatform::create($request->safe()->except(['featured_image']));
 
         $gamePlatform->addImageWithThumbnail(
-            $request->file('thumbnail'),
-            'thumbnail',
+            $request->file('featured_image'),
+            'featured_image',
             ['small', 'medium']
         );
 
@@ -62,9 +62,9 @@ class GamePlatformController extends Controller
 
     public function update(UpdateGamePlatformRequest $request, GamePlatform $gamePlatform): RedirectResponse
     {
-        $gamePlatform->updateThumbnail($request->file('thumbnail'), $request->input('thumbnail_uploaded'), ['small', 'medium']);
+        $gamePlatform->updateFeaturedImage($request->file('featured_image'), $request->input('featured_image_uploaded'), ['small', 'medium']);
 
-        $gamePlatform->fill($request->safe()->except(['thumbnail', 'thumbnail_uploaded']))->save();
+        $gamePlatform->fill($request->safe()->except(['featured_image', 'featured_image_uploaded']))->save();
 
         flash()->info(__('game_platform.updated'));
 

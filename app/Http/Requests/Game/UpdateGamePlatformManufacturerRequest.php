@@ -44,12 +44,12 @@ class UpdateGamePlatformManufacturerRequest extends FormRequest
                 Rule::unique(GamePlatformManufacturer::class)->ignore($this->game_platform_manufacturer)
             ],
             'description' => ['nullable','string'],
-            'thumbnail' => [
+            'featured_image' => [
                 'nullable',
                 'mimes:jpg,png',
                 'max:10024'
             ],
-            'thumbnail_selected' => ['nullable', 'string'],
+            'featured_image_selected' => ['nullable', 'string'],
             'user_id' => [
                 'nullable',
                 'integer',
@@ -64,7 +64,7 @@ class UpdateGamePlatformManufacturerRequest extends FormRequest
             'name' => trans_choice('common.name', 1),
             'slug' => __('common.slug'),
             'description' => __('common.description'),
-            'thumbnail' => __('common.thumbnail'),
+            'featured_image' => __('common.featured_image'),
             'user_id' => trans_choice('user.users', 1),
         ];
     }

@@ -19,7 +19,7 @@ class NewUserDTO
         public readonly ?string $first_name = null,
         public readonly ?string $slug = null,
         public readonly ?string $description = null,
-        public readonly ?UploadedFile $thumbnail = null,
+        public readonly ?UploadedFile $featured_image = null,
         public readonly ?int $is_verified = null
     ) {
     }
@@ -35,7 +35,7 @@ class NewUserDTO
             'first_name',
             'slug',
             'description',
-            'thumbnail',
+            'featured_image',
             'is_verified'
         ]));
     }
