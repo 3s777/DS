@@ -2,10 +2,12 @@
 
 namespace Support\Traits\Models;
 
+use App\Contracts\ImagesManager;
 use App\Jobs\GenerateSmallThumbnailsJob;
 use App\Jobs\GenerateThumbnailJob;
 use Carbon\Carbon;
 use Illuminate\Contracts\Filesystem\Filesystem;
+use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Storage;
 
@@ -15,9 +17,20 @@ trait HasImage
 
     abstract public function thumbnailSizes(): array;
 
-    public function imageStorage(): Filesystem
+    public function imageManager(): ImagesManager
     {
-        return Storage::disk('images');
+        return app()->make(ImagesManager::class, ['model' => $this]);
+    }
+
+
+    public function getStorageDisk(): string
+    {
+        return config('images.disk');
+    }
+
+    private function imagesStorage(): Filesystem
+    {
+        return Storage::disk($this->getStorageDisk());
     }
 
     public function generateMediaPath(string $filename): string
@@ -41,16 +54,16 @@ trait HasImage
 
             $filteredThumbs = ($specialSizes) ? Arr::only($defaultThumbnails, $specialSizes) : $defaultThumbnails;
 
-            $this->imageStorage()->makeDirectory($imagePathInfo['dirname'].'/webp');
-            //            $this->imageStorage()->makeDirectory($imagePathInfo['dirname'].'/'.$imagePathInfo['extension']);
+            $this->imagesStorage()->makeDirectory($imagePathInfo['dirname'].'/webp');
+            //            $this->imagesStorage()->makeDirectory($imagePathInfo['dirname'].'/'.$imagePathInfo['extension']);
 
             foreach($filteredThumbs as $thumb) {
 
                 $webpThumbDir = $imagePathInfo['dirname'].'/webp/'.$thumb[0].'x'.$thumb[1];
                 //                $originalThumbDir = $imagePathInfo['dirname'].'/'.$imagePathInfo['extension'].'/'.$thumb[0].'x'.$thumb[1];
 
-                $this->imageStorage()->makeDirectory($webpThumbDir);
-                //                $this->imageStorage()->makeDirectory($originalThumbDir);
+                $this->imagesStorage()->makeDirectory($webpThumbDir);
+                //                $this->imagesStorage()->makeDirectory($originalThumbDir);
 
                 GenerateSmallThumbnailsJob::dispatch($imageFullPath, $thumb[0], $thumb[1], $webpThumbDir);
             }
@@ -84,33 +97,22 @@ trait HasImage
         );
     }
 
-    public function getFeaturedImagePath(): string
+    protected function addOriginal(UploadedFile $image, string $collectionName): string
     {
-        if(config('images.driver') == 'media_library') {
-            $featuredImageMedia = $this->getFirstMedia($this->getFeaturedImageColumn());
-
-            if($featuredImageMedia) {
-                return $featuredImageMedia->getPathRelativeToRoot();
-            }
-
-            return '';
-            //            $mediaPath = $this->generateMediaPath($thumbnailMedia->file_name);
-            //            return $mediaPath.$thumbnailMedia->file_name;
-            //            $mediaPath = app(MediaPathGenerator::class)->getPath($thumbnailMedia);
-
-        } else {
-            return $this->{$this->getFeaturedImageColumn()};
-        }
+        return $this->imageManager()->add($image, $collectionName);
     }
 
-    public function getFeaturedImagePathWebp(): string
-    {
-        $featuredImagePathInfo = pathinfo($this->getFeaturedImagePath());
+    public function addOriginalWithThumbnail(
+        UploadedFile|null $image,
+        string $collectionName = 'default',
+        array $specialSizes = []
+    ): void {
+        if($image) {
+            $imageFullPath = $this->addOriginal($image, $collectionName);
 
-        if($featuredImagePathInfo['filename']) {
-            return $featuredImagePathInfo['dirname'].'/'.$featuredImagePathInfo['filename'].'.webp';
+            $this->generateFullSizes($imageFullPath);
+
+            $this->generateThumbnails($imageFullPath, $specialSizes);
         }
-
-        return '';
     }
 }

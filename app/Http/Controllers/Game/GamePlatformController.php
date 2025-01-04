@@ -39,9 +39,8 @@ class GamePlatformController extends Controller
     {
         $gamePlatform = GamePlatform::create($request->safe()->except(['featured_image']));
 
-        $gamePlatform->addImageWithThumbnail(
+        $gamePlatform->addFeaturedImageWithThumbnail(
             $request->file('featured_image'),
-            'featured_image',
             ['small', 'medium']
         );
 

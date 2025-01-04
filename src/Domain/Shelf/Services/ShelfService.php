@@ -22,9 +22,8 @@ class ShelfService
                 'description' => $data->description,
             ]);
 
-            $shelf->addImageWithThumbnail(
+            $shelf->addFeaturedImageWithThumbnail(
                 $data->featured_image,
-                'featured_image',
                 ['small', 'medium']
             );
 

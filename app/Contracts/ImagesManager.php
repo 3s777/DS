@@ -6,16 +6,15 @@ use Illuminate\Http\UploadedFile;
 
 interface ImagesManager
 {
-    public function addOriginal(
+    public function add(
         UploadedFile $image,
-        ?string $collectionName,
-        ?string $type
+        ?string $collectionName
     ): string;
 
 
-    public function deleteAllThumbnails(): void;
+    public function deleteFeaturedImage(): void;
 
-    public function getThumbnailPath(): string;
+    public function getFeaturedImagePath(): string;
 
     public function getImagesPath(): array;
 }

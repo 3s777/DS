@@ -12,41 +12,40 @@ class MediaLibraryImageManager implements ImagesManager
     {
     }
 
-    public function addOriginal(UploadedFile $image, ?string $collectionName, ?string $type): string
+    public function add(UploadedFile $image, ?string $collectionName): string
     {
         $media = $this->model->addMedia($image)
-            ->toMediaCollection($collectionName, 'images');
+            ->toMediaCollection($collectionName, $this->model->getStorageDisk());
         //        $mediaPath = app(MediaPathGenerator::class)->getPath($media);
         //        $this->{$this->getThumbnailColumn()} = $mediaPath.$media->file_name;
-
-        if(method_exists($this->model, 'getFeaturedImageColumn') && $type === $this->model->getFeaturedImageColumn()) {
-                $this->model->{$this->model->getFeaturedImageColumn()} = $media->getPathRelativeToRoot();
-        }
-
-        if(method_exists($this->model, 'getImagesColumn') && $type === $this->model->getImagesColumn()) {
-            $images = $this->model->{$this->model->getImagesColumn()};
-
-            if (!$images) {
-                $images = [];
-            }
-
-            $images[] = $media->getPathRelativeToRoot();
-
-            $this->model->{$this->model->getImagesColumn()} = $images;
-        }
 
         return $media->getPathRelativeToRoot();
     }
 
-    public function deleteAllThumbnails(): void
+    public function deleteFeaturedImage(): void
     {
-        $media = $this->model->getFirstMedia($this->model->getFeaturedImageColumn());
-        $media?->forceDelete();
+        $medias = $this->model->getMedia($this->model->getFeaturedImageCollection());
+
+        if($medias) {
+            foreach ($medias as $media) {
+                $media?->forceDelete();
+            }
+        }
     }
 
-    public function getThumbnailPath(): string
+    public function getFeaturedImagePath(): string
     {
-        // TODO: Implement getThumbnailPath() method.
+        $featuredImageMedia = $this->model->getFirstMedia($this->model->getFeaturedImageCollection());
+
+        if($featuredImageMedia) {
+            return $featuredImageMedia->getPathRelativeToRoot();
+        }
+
+        return '';
+
+        //            $mediaPath = $this->generateMediaPath($thumbnailMedia->file_name);
+        //            return $mediaPath.$thumbnailMedia->file_name;
+        //            $mediaPath = app(MediaPathGenerator::class)->getPath($thumbnailMedia);
     }
 
     public function getImagesPath(): array

@@ -44,9 +44,8 @@ class GamePublisherController extends Controller
     {
         $gamePublisher = GamePublisher::create($request->safe()->except(['featured_image']));
 
-        $gamePublisher->addImageWithThumbnail(
+        $gamePublisher->addFeaturedImageWithThumbnail(
             $request->file('featured_image'),
-            'featured_image',
             ['small', 'medium']
         );
 

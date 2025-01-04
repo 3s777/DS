@@ -12,7 +12,7 @@ class OriginalImageManager implements ImagesManager
     {
     }
 
-    public function addOriginal(UploadedFile $image, ?string $collectionName, ?string $type): string
+    public function add(UploadedFile $image, ?string $collectionName): string
     {
         // TODO upload image without MediaLibrary
         // $imageDir = $this->generateMediaPath($imageFileName);
@@ -23,13 +23,13 @@ class OriginalImageManager implements ImagesManager
     {
 //        if($this->{$this->getThumbnailColumn()}) {
 //            $imagePathInfo = pathinfo($this->{$this->getThumbnailColumn()});
-//            $this->imageStorage()->delete($imagePathInfo['dirname']);
+//            $this->imagesStorage()->delete($imagePathInfo['dirname']);
 //        }
     }
 
-    public function getThumbnailPath(): string
+    public function getFeaturedImagePath(): string
     {
-        // TODO: Implement getThumbnailPath() method.
+        return $this->model->{$this->model->getFeaturedImageColumn()};
     }
 
     public function getImagesPath(): array

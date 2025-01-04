@@ -3,31 +3,21 @@
 namespace Support\Traits\Models;
 
 use App\Contracts\ImagesManager;
-use App\Jobs\GenerateSmallThumbnailsJob;
-use App\Jobs\GenerateThumbnailJob;
-use Carbon\Carbon;
-use Illuminate\Contracts\Filesystem\Filesystem;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\UploadedFile;
-use Illuminate\Support\Arr;
-use Illuminate\Support\Facades\Storage;
-use Spatie\MediaLibrary\MediaCollections\Exceptions\FileDoesNotExist;
-use Spatie\MediaLibrary\MediaCollections\Exceptions\FileIsTooBig;
 
 trait HasFeaturedImage
 {
     protected static function bootHasFeaturedImage(): void
     {
         static::forceDeleting(function (Model $item) {
-            if (config('images.driver') != 'media_library') {
-                $item->deleteAllThumbnails();
-            }
+            $item->deleteFeaturedImage();
         });
     }
 
     public function getFeaturedImageCollection(): string
     {
-        return 'featured';
+        return 'featured_image';
     }
 
     public function getFeaturedImageColumn(): string
@@ -35,36 +25,28 @@ trait HasFeaturedImage
         return 'featured_image';
     }
 
-    public function imageManager(): ImagesManager
+    protected function addOriginalFeaturedImage(UploadedFile $image): string
     {
-        return app()->make(ImagesManager::class, ['model' => $this]);
-    }
-
-    protected function addOriginalImage(UploadedFile $image, string $collectionName, string $type): string
-    {
-        $imagePath = $this->imageManager()->addOriginal($image, $collectionName, $type);
+        $imagePath = $this->addOriginal($image, $this->getFeaturedImageCollection());
+        $this->{$this->getFeaturedImageColumn()} = $imagePath;
         $this->save();
         return $imagePath;
     }
 
-    public function addImageWithThumbnail(
-        UploadedFile|null $image,
-        string $collectionName = 'default',
-        array $specialSizes = [],
-        string $type = 'featured_image',
-    ): void {
+    public function addFeaturedImageWithThumbnail(?UploadedFile $image, ?array $specialSizes = []): void
+    {
         if($image) {
-            $imageFullPath = $this->addOriginalImage($image, $collectionName, $type);
-
+            $imageFullPath = $this->addOriginalFeaturedImage($image);
             $this->generateFullSizes($imageFullPath);
-
             $this->generateThumbnails($imageFullPath, $specialSizes);
         }
     }
 
     public function deleteFeaturedImage(): void
     {
-        $this->imageManager()->deleteAllThumbnails();
+        $this->imageManager()->deleteFeaturedImage();
+        $this->{$this->getFeaturedImageColumn()} = null;
+        $this->save();
     }
 
     public function updateFeaturedImage($newFeaturedImage, $oldFeaturedImage = '', $sizes = [])
@@ -76,11 +58,26 @@ trait HasFeaturedImage
         if($newFeaturedImage) {
             $this->deleteFeaturedImage();
 
-            $this->addImageWithThumbnail(
+            $this->addFeaturedImageWithThumbnail(
                 $newFeaturedImage,
-                $this->getFeaturedImageColumn(),
                 $sizes
             );
         }
+    }
+
+    public function getFeaturedImagePath(): string
+    {
+        return $this->imageManager()->getFeaturedImagePath();
+    }
+
+    public function getFeaturedImagePathWebp(): string
+    {
+        $featuredImagePathInfo = pathinfo($this->getFeaturedImagePath());
+
+        if($featuredImagePathInfo['filename']) {
+            return $featuredImagePathInfo['dirname'].'/'.$featuredImagePathInfo['filename'].'.webp';
+        }
+
+        return '';
     }
 }

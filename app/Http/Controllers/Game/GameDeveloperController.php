@@ -50,9 +50,8 @@ class GameDeveloperController extends Controller
     {
         $gameDeveloper = GameDeveloper::create($request->safe()->except(['featured_image']));
 
-        $gameDeveloper->addImageWithThumbnail(
+        $gameDeveloper->addFeaturedImageWithThumbnail(
             $request->file('featured_image'),
-            'featured_image',
             ['small', 'medium']
         );
 

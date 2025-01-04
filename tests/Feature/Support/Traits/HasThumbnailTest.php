@@ -41,9 +41,8 @@ class HasThumbnailTest extends TestCase
 
         $gameDeveloper = GameDeveloperFactory::new()->create();
 
-        $gameDeveloper->addImageWithThumbnail(
+        $gameDeveloper->addFeaturedImageWithThumbnail(
             UploadedFile::fake()->image('photo1.jpg'),
-            'featured_image',
             ['small', 'medium']
         );
 
@@ -68,9 +67,8 @@ class HasThumbnailTest extends TestCase
     {
         $gameDeveloper = GameDeveloperFactory::new()->create();
 
-        $gameDeveloper->addImageWithThumbnail(
-            UploadedFile::fake()->image('photo1.jpg'),
-            'featured_image',
+        $gameDeveloper->addFeaturedImageWithThumbnail(
+            UploadedFile::fake()->image('photo1.jpg')
         );
 
         $this->assertDatabaseHas('media', [
@@ -112,9 +110,8 @@ class HasThumbnailTest extends TestCase
 
         $gameDeveloper = GameDeveloperFactory::new()->create();
 
-        $gameDeveloper->addImageWithThumbnail(
-            UploadedFile::fake()->image('photo1.jpg'),
-            'featured_image'
+        $gameDeveloper->addFeaturedImageWithThumbnail(
+            UploadedFile::fake()->image('photo1.jpg')
         );
 
         Queue::assertPushed(GenerateThumbnailJob::class, 3);
@@ -133,9 +130,8 @@ class HasThumbnailTest extends TestCase
 
         $gameDeveloper = GameDeveloperFactory::new()->create();
 
-        $gameDeveloper->addImageWithThumbnail(
-            UploadedFile::fake()->image('photo1.jpg'),
-            'featured',
+        $gameDeveloper->addFeaturedImageWithThumbnail(
+            UploadedFile::fake()->image('photo1.jpg')
         );
 
         $oldPath = $gameDeveloper->getFeaturedImagePath();
@@ -186,9 +182,8 @@ class HasThumbnailTest extends TestCase
 
         $gameDeveloper = GameDeveloperFactory::new()->create();
 
-        $gameDeveloper->addImageWithThumbnail(
-            UploadedFile::fake()->image('photo1.jpg'),
-            'featured',
+        $gameDeveloper->addFeaturedImageWithThumbnail(
+            UploadedFile::fake()->image('photo1.jpg')
         );
 
         $gameDeveloper->updateFeaturedImage('');

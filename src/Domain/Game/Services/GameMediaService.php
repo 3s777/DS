@@ -24,9 +24,8 @@ class GameMediaService
                 'article_number' => $data->article_number,
             ]);
 
-            $gameMedia->addImageWithThumbnail(
+            $gameMedia->addFeaturedImageWithThumbnail(
                 $data->featured_image,
-                'featured_image',
                 ['small', 'medium']
             );
 

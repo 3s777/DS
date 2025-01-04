@@ -83,19 +83,16 @@ class CollectibleService
 //            }
 //            $collectible->kitItems()->attach($kitItems);
 
-                $collectible->addImageWithThumbnail(
+                $collectible->addFeaturedImageWithThumbnail(
                     $data->featured_image,
-                    'featured_image',
                     ['small', 'medium']
                 );
 
                 if($data->images) {
                     foreach ($data->images as $key => $image) {
-                        $collectible->addImageWithThumbnail(
+                        $collectible->addImagesWithThumbnail(
                             $image,
-                            'images',
                             ['small', 'medium'],
-                            'images'
                         );
                     }
                 }

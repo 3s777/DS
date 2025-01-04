@@ -22,9 +22,8 @@ class GameService
                 'alternative_names' => explode('||', $data->alternative_names)
             ]);
 
-            $game->addImageWithThumbnail(
+            $game->addFeaturedImageWithThumbnail(
                 $data->featured_image,
-                'featured_image',
                 ['small', 'medium']
             );
 
@@ -63,7 +62,6 @@ class GameService
                     'alternative_names'  => explode('||', $data->alternative_names)
                 ]
             )->save();
-
 
 
             $game->genres()->sync($data->genres);
