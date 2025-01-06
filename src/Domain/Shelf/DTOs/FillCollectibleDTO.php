@@ -29,6 +29,7 @@ class FillCollectibleDTO
         public readonly ?UploadedFile $featured_image = null,
         public readonly ?string $featured_image_uploaded = null,
         public readonly ?array $images = null,
+        public readonly ?string $images_delete = null,
         public readonly ?string $description = null,
     ) {
     }
@@ -54,6 +55,7 @@ class FillCollectibleDTO
             'auction',
             'featured_image',
             'images',
+            'images_delete',
             'featured_image_uploaded',
             'description'
         ]));

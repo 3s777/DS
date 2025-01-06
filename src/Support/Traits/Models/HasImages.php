@@ -43,21 +43,15 @@ trait HasImages
 
     public function getImages(): array
     {
-        if(config('images.driver') == 'media_library') {
-            $images = $this->getMedia($this->getImagesCollection());
-            $imagesArr = [];
+        return $this->imageManager()->getImagesPath();
+    }
 
-            if($images) {
-                foreach($images as $image) {
-                    $imagesArr[] = $image->getPathRelativeToRoot();
-                }
+    public function deleteImageByPath(?string $path): void
+    {
+        dd($path);
+    }
 
-                return $imagesArr;
-            }
-
-            return [];
-        }
-
-        return $this->{$this->getImagesColumn()};
+    public function updateImages($newImages, $forDelete, $sizes) {
+        $this->deleteImageByPath($forDelete);
     }
 }

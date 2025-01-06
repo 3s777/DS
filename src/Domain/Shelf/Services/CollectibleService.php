@@ -116,6 +116,12 @@ class CollectibleService
                     ['small', 'medium']
                 );
 
+                $collectible->updateImages(
+                    $data->images,
+                    $data->images_delete,
+                    ['small', 'medium']
+                );
+
                 $collectible->fill($this->preparedFields($data));
 
                 $shelf = Shelf::find($data->shelf_id);

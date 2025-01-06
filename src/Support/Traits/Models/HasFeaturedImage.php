@@ -25,6 +25,22 @@ trait HasFeaturedImage
         return 'featured_image';
     }
 
+    public function getFeaturedImagePath(): string
+    {
+        return $this->imageManager()->getFeaturedImagePath();
+    }
+
+    public function getFeaturedImagePathWebp(): string
+    {
+        $featuredImagePathInfo = pathinfo($this->getFeaturedImagePath());
+
+        if($featuredImagePathInfo['filename']) {
+            return $featuredImagePathInfo['dirname'].'/'.$featuredImagePathInfo['filename'].'.webp';
+        }
+
+        return '';
+    }
+
     protected function addOriginalFeaturedImage(UploadedFile $image): string
     {
         $imagePath = $this->addOriginal($image, $this->getFeaturedImageCollection());
@@ -42,14 +58,7 @@ trait HasFeaturedImage
         }
     }
 
-    public function deleteFeaturedImage(): void
-    {
-        $this->imageManager()->deleteFeaturedImage();
-        $this->{$this->getFeaturedImageColumn()} = null;
-        $this->save();
-    }
-
-    public function updateFeaturedImage($newFeaturedImage, $oldFeaturedImage = '', $sizes = [])
+    public function updateFeaturedImage($newFeaturedImage, $oldFeaturedImage = '', $sizes = []): void
     {
         if(!$oldFeaturedImage && !$newFeaturedImage) {
             $this->deleteFeaturedImage();
@@ -65,19 +74,10 @@ trait HasFeaturedImage
         }
     }
 
-    public function getFeaturedImagePath(): string
+    public function deleteFeaturedImage(): void
     {
-        return $this->imageManager()->getFeaturedImagePath();
-    }
-
-    public function getFeaturedImagePathWebp(): string
-    {
-        $featuredImagePathInfo = pathinfo($this->getFeaturedImagePath());
-
-        if($featuredImagePathInfo['filename']) {
-            return $featuredImagePathInfo['dirname'].'/'.$featuredImagePathInfo['filename'].'.webp';
-        }
-
-        return '';
+        $this->imageManager()->deleteFeaturedImage();
+        $this->{$this->getFeaturedImageColumn()} = null;
+        $this->save();
     }
 }

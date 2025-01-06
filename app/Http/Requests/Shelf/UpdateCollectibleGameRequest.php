@@ -124,10 +124,13 @@ class UpdateCollectibleGameRequest extends FormRequest
                 'nullable',
                 'max: 9'
             ],
-            'images.*' => [
-                'nullable',
-                'mimes:jpg,png,jpeg',
-                'max:10024'
+//            'images.*' => [
+//                'nullable',
+//                'mimes:jpg,png,jpeg',
+//                'max:10024'
+//            ],
+            'images_delete' => [
+                'nullable'
             ]
         ];
     }

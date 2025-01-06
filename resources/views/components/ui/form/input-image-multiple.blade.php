@@ -1,7 +1,6 @@
 @props([
     'id',
     'name',
-    'path' => false,
     'buttonText' => trans_choice('common.choose_image', 2),
     'model' => false,
     'imageSizes' => false,
@@ -29,7 +28,7 @@
                     @foreach($model->getImages() as $image)
 
                         <div class="input-image-multiple__preview-item">
-                            <x-ui.badge class="input-image-multiple__close" @click="clearUploaded" title="{{ __('common.delete') }}">
+                            <x-ui.badge class="input-image-multiple__close" @click="clearUploaded" data-src="{{ $image }}" title="{{ __('common.delete') }}">
                                 <x-svg.close></x-svg.close>
                             </x-ui.badge>
 
@@ -67,9 +66,7 @@
         </x-ui.form.button>
         <input type="file" multiple hidden id="{{ $id }}"  name="{{ $name }}" accept="image/png, image/jpeg" x-ref="uploadedImages" @change="previewFiles">
 
-        @if($path)
-            <input type="text" value="{{ $path }}" hidden id="{{ $id }}_uploaded" x-ref="uploadedFile"  name="{{ $name }}_uploaded">
-        @endif
+        <input type="text" value="" hidden id="{{ $id }}_delete" x-ref="uploadedFile"  name="{{ to_dot_name($name) }}_delete">
     </div>
 </div>
 
@@ -78,24 +75,49 @@
         <script>
             document.addEventListener('alpine:init', () => {
                 Alpine.data('imgPreviews', () => ({
-                        imgArr:null,
+                        imgArr: null,
+                        uploadedFiles: null,
                         @if($model)
                             uploadedSrc:true,
                         @else
                             uploadedSrc:false,
                         @endif
-                        images() {
-                            return Array.from(this.$refs.uploadedImages.files);
-                        },
-                        setImgArr() {
-
-                        },
-                        previewFiles() {
-                            const files = this.$refs.uploadedImages.files;
+                        // images() {
+                        //     return Array.from(this.$refs.uploadedImages.files);
+                        // },
+                        // setImgArr() {
+                        //
+                        // },
+                        previewFiles(refresh = true) {
                             // const fileArray = [];
                             const readers = [];
 
                             const arr = {};
+
+                            if(this.uploadedFiles && refresh) {
+                                const filesUploadedEarlier = Array.from(this.$refs.uploadedImages.files);
+
+                                const dataTransfer = new DataTransfer();
+
+                                console.log(filesUploadedEarlier);
+
+                                filesUploadedEarley.forEach(file => {
+                                    dataTransfer.items.add(file);
+                                });
+
+                                this.uploadedFiles.forEach(file => {
+                                    dataTransfer.items.add(file);
+                                });
+
+
+                                let fileInput = document.getElementById('{{ $id }}');
+
+                                fileInput.files = dataTransfer.files;
+
+                                this.uploadedFiles = Array.from(fileInput.files);
+                            }
+
+                            const files = this.$refs.uploadedImages.files;
 
                             for (let i = 0; i < files.length; i++) {
                                 const file = files[i];
@@ -125,6 +147,8 @@
                                     console.error(error);
                                 });
 
+                            this.uploadedFiles = Array.from(files);
+
                             // if(files.length === 0) {
                             //     this.imgArr = null;
                             // }
@@ -152,9 +176,11 @@
 
                             fileInput.files = dataTransfer.files;
 
-                            this.previewFiles();
+                            this.uploadedFiles = Array.from(fileInput.files);
 
-                            console.log(this.$refs.uploadedImages.files);
+                            this.previewFiles(false);
+
+                            // console.log(this.$refs.uploadedImages.files);
 
 
 
@@ -183,8 +209,28 @@
                             // this.$refs.uploadedImages.value = null;
                         },
                         clearUploaded() {
-                            this.uploadedSrc = null;
-                            this.$refs.uploadedFile.value = null;
+
+
+                            const src   = this.$el.getAttribute('data-src');
+
+                            const parent = this.$el.closest('div.input-image-multiple__preview-item');
+
+                            parent.style.display = "none";
+
+                            // let imagesForDelete = this.$refs.uploadedFile.value;
+
+
+                            this.$refs.uploadedFile.value = this.$refs.uploadedFile.value + src + ',';
+
+                            console.log(this.$refs.uploadedFile.value);
+
+                            //
+                            // this.$refs.uploadedFile.value = imagesForDelete;
+                            //
+                            // console.log(src, parent);
+
+                            // this.uploadedSrc = null;
+                            // this.$refs.uploadedFile.value = null;
                         }
                     })
                 )

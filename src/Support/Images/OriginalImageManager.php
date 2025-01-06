@@ -19,7 +19,7 @@ class OriginalImageManager implements ImagesManager
         return '';
     }
 
-    public function deleteAllThumbnails(): void
+    public function deleteFeaturedImage(): void
     {
 //        if($this->{$this->getThumbnailColumn()}) {
 //            $imagePathInfo = pathinfo($this->{$this->getThumbnailColumn()});
@@ -34,6 +34,6 @@ class OriginalImageManager implements ImagesManager
 
     public function getImagesPath(): array
     {
-        // TODO: Implement getImagesPath() method.
+        return $this->model->{$this->model->getImagesColumn()};
     }
 }

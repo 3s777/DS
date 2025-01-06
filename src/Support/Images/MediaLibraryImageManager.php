@@ -50,6 +50,15 @@ class MediaLibraryImageManager implements ImagesManager
 
     public function getImagesPath(): array
     {
-        // TODO: Implement getImagesPath() method.
+        $images = $this->model->getMedia($this->model->getImagesCollection());
+        $imagesArr = [];
+
+        if($images) {
+            foreach($images as $image) {
+                $imagesArr[] = $image->getPathRelativeToRoot();
+            }
+        }
+
+        return $imagesArr;
     }
 }

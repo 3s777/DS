@@ -332,12 +332,13 @@
         </div>
 
         <div class="crud-form__sidebar">
-
+            <div class="crud-form__sidebar-wrapper">
             <div class="crud-form__sidebar-widget">
                 <x-ui.form.input-image
                     class="crud-form__input-image"
                     name="featured_image"
-                    id="featured_image">
+                    id="featured_image"
+                    :path="$collectible->getFeaturedImagePath()">
                     @if($collectible->getFeaturedImagePath())
                         <x-slot:uploaded-featured-image>
                             <x-ui.responsive-image
@@ -355,9 +356,6 @@
                 </x-ui.form.input-image>
             </div>
 
-
-
-            <div class="crud-form__sidebar-wrapper">
                 <div class="crud-form__sidebar-widget">
                     <x-ui.form.input-image-multiple
                         class="crud-form__input-image-multiple"
@@ -371,6 +369,7 @@
                     </x-ui.form.input-image-multiple>
                 </div>
             </div>
+
         </div>
 
         <x-ui.form.group class="crud-form__submit">
