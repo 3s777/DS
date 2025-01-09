@@ -22,6 +22,12 @@ class MediaLibraryImageManager implements ImagesManager
         return $media->getPathRelativeToRoot();
     }
 
+    public function deleteByPath(string $path): void
+    {
+        $media = $this->model->media->where('file_name', basename($path))->first();
+        $media?->forceDelete();
+    }
+
     public function deleteFeaturedImage(): void
     {
         $medias = $this->model->getMedia($this->model->getFeaturedImageCollection());

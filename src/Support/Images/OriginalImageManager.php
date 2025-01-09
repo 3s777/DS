@@ -19,6 +19,11 @@ class OriginalImageManager implements ImagesManager
         return '';
     }
 
+    public function deleteByPath(string $path): void
+    {
+        // TODO: Implement deleteByPath() method.
+    }
+
     public function deleteFeaturedImage(): void
     {
 //        if($this->{$this->getThumbnailColumn()}) {

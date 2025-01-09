@@ -7,45 +7,31 @@
     'sizes' => false
 ])
 
-<div x-data="imgPreviews" {{ $attributes->class([
-                'input-image-multiple__wrapper',
-            ])
-        }} x-cloak>
+<div x-data="imgPreviews" {{ $attributes->class(['input-image-multiple__wrapper']) }} x-cloak>
     <div class="input-image-multiple">
-        <div class="input-image-multiple__preview" :class="imgArr || uploadedSrc ? 'input-image-multiple__preview_hidden' : ''">
-            <div class="input-image-multiple__placeholder" x-show="!imgArr && !uploadedSrc">
+        <div class="input-image-multiple__preview" :class="imgArr || placeholder ? 'input-image-multiple__preview_hidden' : ''">
+            <div class="input-image-multiple__placeholder" x-show="!imgArr && placeholder">
                 <div class="input-image-multiple__placeholder-text">
                     {{ $slot }}
                 </div>
             </div>
 
-
-
-
             @if($model)
-
-
-                    @foreach($model->getImages() as $image)
-
-                        <div class="input-image-multiple__preview-item">
-                            <x-ui.badge class="input-image-multiple__close" @click="clearUploaded" data-src="{{ $image }}" title="{{ __('common.delete') }}">
-                                <x-svg.close></x-svg.close>
-                            </x-ui.badge>
-
-
-                                <x-ui.responsive-image
-                                    :model="$model"
-                                    :image-sizes="$imageSizes"
-                                    :path="$image"
-                                    :placeholder="false"
-                                    :sizes="$sizes">
-                                    <x-slot:img alt=""></x-slot:img>
-                                </x-ui.responsive-image>
-
-
-                        </div>
-                    @endforeach
-
+                @foreach($model->getImages() as $image)
+                    <div class="input-image-multiple__preview-item">
+                        <x-ui.badge class="input-image-multiple__close" @click="clearUploaded" data-src="{{ $image }}" title="{{ __('common.delete') }}">
+                            <x-svg.close></x-svg.close>
+                        </x-ui.badge>
+                            <x-ui.responsive-image
+                                :model="$model"
+                                :image-sizes="$imageSizes"
+                                :path="$image"
+                                :placeholder="false"
+                                :sizes="$sizes">
+                                <x-slot:img alt=""></x-slot:img>
+                            </x-ui.responsive-image>
+                    </div>
+                @endforeach
             @endif
 
             <template x-if="imgArr">
@@ -60,10 +46,10 @@
             </template>
         </div>
 
-
         <x-ui.form.button class="input-image-multiple__submit" tag="label" for="{{ $id }}">
             {{ $buttonText }}
         </x-ui.form.button>
+
         <input type="file" multiple hidden id="{{ $id }}"  name="{{ $name }}" accept="image/png, image/jpeg" x-ref="uploadedImages" @change="previewFiles">
 
         <input type="text" value="" hidden id="{{ $id }}_delete" x-ref="uploadedFile"  name="{{ to_dot_name($name) }}_delete">
@@ -78,16 +64,10 @@
                         imgArr: null,
                         uploadedFiles: null,
                         @if($model)
-                            uploadedSrc:true,
+                            placeholder:false,
                         @else
-                            uploadedSrc:false,
+                            placeholder:true,
                         @endif
-                        // images() {
-                        //     return Array.from(this.$refs.uploadedImages.files);
-                        // },
-                        // setImgArr() {
-                        //
-                        // },
                         previewFiles(refresh = true) {
                             // const fileArray = [];
                             const readers = [];
@@ -152,10 +132,6 @@
                             // if(files.length === 0) {
                             //     this.imgArr = null;
                             // }
-
-
-                            // console.log(this.imgArr);
-                            // console.log(this.$refs.uploadedImages.files);
                         },
                         clearFile(image, imageIndex) {
                             if (imageIndex !== -1) {
@@ -180,7 +156,6 @@
 
                             this.previewFiles(false);
 
-                            // console.log(this.$refs.uploadedImages.files);
 
 
 
@@ -193,15 +168,7 @@
 
 
 
-                            //     console.log(imageIndex);
-                            // console.log(this.imgArr);
-                            // console.log(this.$refs.uploadedImages.files);
-                            //
-                            //
-                            //
-                            // console.log(dataTransfer.files);
-                            //
-                            // console.log(this.$refs.uploadedImages.files);
+
 
                             // this.$refs.uploadedImages.files.splice(imageIndex, 1);
 
@@ -226,8 +193,6 @@
 
                             //
                             // this.$refs.uploadedFile.value = imagesForDelete;
-                            //
-                            // console.log(src, parent);
 
                             // this.uploadedSrc = null;
                             // this.$refs.uploadedFile.value = null;

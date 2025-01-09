@@ -2,7 +2,9 @@
 
 namespace Support\Traits\Models;
 
+use App\Models\Media;
 use Illuminate\Http\UploadedFile;
+use Illuminate\Support\Arr;
 
 trait HasImages
 {
@@ -46,12 +48,43 @@ trait HasImages
         return $this->imageManager()->getImagesPath();
     }
 
-    public function deleteImageByPath(?string $path): void
+    public function deleteImages(?string $paths): void
     {
-        dd($path);
+        // create array from paths string, implode by ',' and delete empty
+        $pathArr = (array_filter(explode(',', $paths)));
+        $images = $this->{$this->getImagesColumn()};
+
+
+
+        foreach ($pathArr as $path) {
+            $this->imageManager()->deleteByPath($path);
+
+            if (!$images) {
+                $images = [];
+            }
+
+            if (($key = array_search($path, $images)) !== false) {
+                unset($images[$key]);
+            }
+//            $images[] = $imagePath;
+        }
+
+        $this->{$this->getImagesColumn()} = $images;
+
+        $this->save();
     }
 
-    public function updateImages($newImages, $forDelete, $sizes) {
-        $this->deleteImageByPath($forDelete);
+    public function updateImages(?array $newImages, ?string $forDelete, array $sizes): void
+    {
+        $this->deleteImages($forDelete);
+
+        if($newImages) {
+            foreach ($newImages as $image) {
+                $this->addImagesWithThumbnail(
+                    $image,
+                    $sizes,
+                );
+            }
+        }
     }
 }

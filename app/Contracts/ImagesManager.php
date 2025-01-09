@@ -11,6 +11,8 @@ interface ImagesManager
         ?string $collectionName
     ): string;
 
+    public function deleteByPath(string $path): void;
+
     public function deleteFeaturedImage(): void;
 
     public function getFeaturedImagePath(): string;
