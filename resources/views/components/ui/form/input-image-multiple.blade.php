@@ -9,8 +9,8 @@
 
 <div x-data="imgPreviews" {{ $attributes->class(['input-image-multiple__wrapper']) }} x-cloak>
     <div class="input-image-multiple">
-        <div class="input-image-multiple__preview" :class="imgArr || placeholder ? 'input-image-multiple__preview_hidden' : ''">
-            <div class="input-image-multiple__placeholder" x-show="!imgArr && placeholder">
+        <div class="input-image-multiple__preview">
+            <div class="input-image-multiple__placeholder" x-show="!imgArr && !placeholder">
                 <div class="input-image-multiple__placeholder-text">
                     {{ $slot }}
                 </div>
@@ -52,7 +52,7 @@
 
         <input type="file" multiple hidden id="{{ $id }}"  name="{{ $name }}" accept="image/png, image/jpeg" x-ref="uploadedImages" @change="previewFiles">
 
-        <input type="text" value="" hidden id="{{ $id }}_delete" x-ref="uploadedFile"  name="{{ to_dot_name($name) }}_delete">
+        <input type="text" value="" hidden id="{{ $id }}_delete" x-ref="imagesForDeleteStr"  name="{{ to_dot_name($name) }}_delete">
     </div>
 </div>
 
@@ -64,12 +64,11 @@
                         imgArr: null,
                         uploadedFiles: null,
                         @if($model)
-                            placeholder:false,
+                            placeholder:{{ count($model->getImages()) }},
                         @else
-                            placeholder:true,
+                            placeholder:false,
                         @endif
                         previewFiles(refresh = true) {
-                            // const fileArray = [];
                             const readers = [];
 
                             const arr = {};
@@ -79,16 +78,13 @@
 
                                 const dataTransfer = new DataTransfer();
 
-                                console.log(filesUploadedEarlier);
-
-                                filesUploadedEarley.forEach(file => {
+                                filesUploadedEarlier.forEach(file => {
                                     dataTransfer.items.add(file);
                                 });
 
                                 this.uploadedFiles.forEach(file => {
                                     dataTransfer.items.add(file);
                                 });
-
 
                                 let fileInput = document.getElementById('{{ $id }}');
 
@@ -101,6 +97,7 @@
 
                             for (let i = 0; i < files.length; i++) {
                                 const file = files[i];
+
                                 const reader = new FileReader();
 
                                 const fileReadPromise = new Promise((resolve, reject) => {
@@ -128,10 +125,6 @@
                                 });
 
                             this.uploadedFiles = Array.from(files);
-
-                            // if(files.length === 0) {
-                            //     this.imgArr = null;
-                            // }
                         },
                         clearFile(image, imageIndex) {
                             if (imageIndex !== -1) {
@@ -155,47 +148,17 @@
                             this.uploadedFiles = Array.from(fileInput.files);
 
                             this.previewFiles(false);
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                            // this.$refs.uploadedImages.files.splice(imageIndex, 1);
-
-                            // this.imgSrc = null;
-                            // this.$refs.uploadedImages.value = null;
                         },
                         clearUploaded() {
+                            const srcImageForDelete   = this.$el.getAttribute('data-src');
 
+                            const imageParent = this.$el.closest('div.input-image-multiple__preview-item');
 
-                            const src   = this.$el.getAttribute('data-src');
+                            imageParent.style.display = "none";
 
-                            const parent = this.$el.closest('div.input-image-multiple__preview-item');
+                            this.placeholder = this.placeholder-1;
 
-                            parent.style.display = "none";
-
-                            // let imagesForDelete = this.$refs.uploadedFile.value;
-
-
-                            this.$refs.uploadedFile.value = this.$refs.uploadedFile.value + src + ',';
-
-                            console.log(this.$refs.uploadedFile.value);
-
-                            //
-                            // this.$refs.uploadedFile.value = imagesForDelete;
-
-                            // this.uploadedSrc = null;
-                            // this.$refs.uploadedFile.value = null;
+                            this.$refs.imagesForDeleteStr.value = this.$refs.imagesForDeleteStr.value + srcImageForDelete + ',';
                         }
                     })
                 )

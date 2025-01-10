@@ -3,6 +3,7 @@
     'name',
     'path' => false,
     'uploadedFeaturedImage' => false,
+    'buttonText' => trans_choice('common.choose_image', 1),
 ])
 
 <div x-data="imgPreview" {{ $attributes->class([
@@ -38,7 +39,7 @@
             </template>
         </div>
         <x-ui.form.button class="input-image__submit" tag="label" for="{{ $id }}">
-            {{ trans_choice('common.choose_image', 1) }}
+            {{ $buttonText }}
         </x-ui.form.button>
         <input type="file" hidden id="{{ $id }}"  name="{{ $name }}" accept="image/png, image/jpeg" x-ref="myFile" @change="previewFile">
 

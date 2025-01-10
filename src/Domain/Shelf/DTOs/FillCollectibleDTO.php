@@ -54,9 +54,9 @@ class FillCollectibleDTO
             'sale',
             'auction',
             'featured_image',
+            'featured_image_uploaded',
             'images',
             'images_delete',
-            'featured_image_uploaded',
             'description'
         ]));
     }

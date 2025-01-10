@@ -14,7 +14,7 @@ use Illuminate\Support\Facades\Queue;
 use Illuminate\Support\Facades\Storage;
 use Tests\TestCase;
 
-class HasThumbnailTest extends TestCase
+class HasFeaturedImageTest extends TestCase
 {
     use RefreshDatabase;
 

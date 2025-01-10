@@ -73,6 +73,18 @@ class UpdateGameRequest extends FormRequest
                 'nullable',
                 'integer',
                 'exists:Domain\Auth\Models\User,id'
+            ],
+            'images' => [
+                'nullable',
+                'max: 9'
+            ],
+            'images.*' => [
+                'nullable',
+                'mimes:jpg,png,jpeg',
+                'max:10024'
+            ],
+            'images_delete' => [
+                'nullable'
             ]
         ];
     }
@@ -89,6 +101,7 @@ class UpdateGameRequest extends FormRequest
             'developers' => trans_choice('game_developer.developers', 2),
             'publishers' => trans_choice('game_publisher.publishers', 2),
             'featured_image' => __('common.featured_image'),
+            'images' => trans_choice('common.additional_image', 2),
             'user_id' => trans_choice('user.users', 1),
         ];
     }

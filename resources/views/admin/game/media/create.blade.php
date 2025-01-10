@@ -176,13 +176,27 @@
 
         <div class="crud-form__sidebar">
             <div class="crud-form__sidebar-wrapper">
-                <x-ui.form.input-image
-                    class="crud-form__input-image"
-                    name="featured_image"
-                    id="featured_image">
-                    <p>{{ __('common.file.format') }} jpg, png</p>
-                    <p>{{ __('common.file.max_size') }} 6Mb</p>
-                </x-ui.form.input-image>
+                <div class="crud-form__sidebar-widget">
+                    <x-ui.form.input-image
+                        class="crud-form__input-image"
+                        name="featured_image"
+                        id="featured_image">
+                        <p>{{ __('common.file.format') }} jpg, png</p>
+                        <p>{{ __('common.file.max_size') }} 6Mb</p>
+                    </x-ui.form.input-image>
+                </div>
+
+                <div class="crud-form__sidebar-widget">
+                    <x-ui.form.input-image-multiple
+                        class="crud-form__input-image-multiple"
+                        name="images[]"
+                        id="images"
+                        button-text="{{ trans_choice('common.additional_image', 2) }}">
+                        <p>{{ __('common.file.format') }} jpg, png</p>
+                        <p>{{ __('common.file.max_size') }} 6Mb</p>
+                        <p>{{ __('common.file.count', ['count' => 9]) }}</p>
+                    </x-ui.form.input-image-multiple>
+                </div>
             </div>
         </div>
 

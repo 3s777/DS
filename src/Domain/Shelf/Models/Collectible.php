@@ -87,6 +87,19 @@ class Collectible extends Model implements HasMedia
         return CollectibleFactory::new();
     }
 
+    public function registerMediaCollections(): void
+    {
+        $this
+            ->addMediaCollection('featured_image')
+            ->acceptsMimeTypes(['image/jpeg', 'image/png'])
+            ->singleFile();
+
+        $this
+            ->addMediaCollection('images')
+            ->acceptsMimeTypes(['image/jpeg', 'image/png']);
+    }
+
+
     public function imagesDir(): string
     {
         return 'shelf';

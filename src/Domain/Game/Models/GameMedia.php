@@ -21,6 +21,7 @@ use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
 use Spatie\Translatable\HasTranslations;
 use Support\Casts\ArrayWithoutUnicode;
+use Support\Traits\Models\HasImages;
 use Support\Traits\Models\HasSlug;
 use Support\Traits\Models\HasImage;
 use Support\Traits\Models\HasFeaturedImage;
@@ -34,6 +35,7 @@ class GameMedia extends Model implements HasMedia, HasProperties
     use InteractsWithMedia;
     use HasImage;
     use HasFeaturedImage;
+    use HasImages;
     use HasUser;
     use HasTranslations;
     use GameProperties;
@@ -55,6 +57,7 @@ class GameMedia extends Model implements HasMedia, HasProperties
         'description' => CleanHtml::class.':custom',
         'alternative_names' => ArrayWithoutUnicode::class,
         'barcodes' => ArrayWithoutUnicode::class,
+        'images' => 'array',
     ];
 
     public $translatable = ['description'];
@@ -69,6 +72,18 @@ class GameMedia extends Model implements HasMedia, HasProperties
     protected static function newFactory(): GameMediaFactory
     {
         return GameMediaFactory::new();
+    }
+
+    public function registerMediaCollections(): void
+    {
+        $this
+            ->addMediaCollection('featured_image')
+            ->acceptsMimeTypes(['image/jpeg', 'image/png'])
+            ->singleFile();
+
+        $this
+            ->addMediaCollection('images')
+            ->acceptsMimeTypes(['image/jpeg', 'image/png']);
     }
 
     public function imagesDir(): string

@@ -69,6 +69,15 @@ class CreateGameRequest extends FormRequest
                 'nullable',
                 'integer',
                 'exists:Domain\Auth\Models\User,id'
+            ],
+            'images' => [
+                'nullable',
+                'max: 9'
+            ],
+            'images.*' => [
+                'nullable',
+                'mimes:jpg,png,jpeg',
+                'max:10024'
             ]
         ];
     }
@@ -86,6 +95,7 @@ class CreateGameRequest extends FormRequest
             'publishers' => trans_choice('game_publisher.publishers', 2),
             'featured_image' => __('common.featured_image'),
             'user_id' => trans_choice('user.users', 1),
+            'images' => trans_choice('common.additional_image', 2)
         ];
     }
 }

@@ -29,6 +29,15 @@ class GameMediaService
                 ['small', 'medium']
             );
 
+            if($data->images) {
+                foreach ($data->images as $key => $image) {
+                    $gameMedia->addImagesWithThumbnail(
+                        $image,
+                        ['small', 'medium'],
+                    );
+                }
+            }
+
             $gameMedia->games()->sync($data->games);
             $gameMedia->genres()->sync($data->genres);
             $gameMedia->platforms()->sync($data->platforms);
@@ -53,6 +62,12 @@ class GameMediaService
             $gameMedia->updateFeaturedImage(
                 $data->featured_image,
                 $data->featured_image_uploaded,
+                ['small', 'medium']
+            );
+
+            $gameMedia->updateImages(
+                $data->images,
+                $data->images_delete,
                 ['small', 'medium']
             );
 
