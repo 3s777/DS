@@ -1,7 +1,8 @@
 @props([
     'method' => 'POST',
     'preventSubmit' => true,
-    'action' => false
+    'action' => false,
+    'id' => false
 ])
 
 <form
@@ -9,7 +10,8 @@
             'form'
         ])->merge([
             'action' => $action,
-            'method' => 'POST'
+            'method' => 'POST',
+            'id' => $id
         ])
     }}
     @if($preventSubmit)

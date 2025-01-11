@@ -1,14 +1,12 @@
 <x-layouts.admin :search="false">
-    <x-ui.form class="crud-form"
-               method="put"
-               id="edit-form"
-               :action="route('collectibles.update.game', $collectible->id)"
-               enctype="multipart/form-data">
-        <x-ui.title class="crud-form__tile" size="normal" indent="small">
-            {{ __('collectible.edit') }}
-        </x-ui.title>
+    <x-admin.crud-form
+       id="edit-form"
+       :action="route('collectibles.update.game', $collectible->id)"
+       :title="__('collectible.edit')"
+       :model="$collectible"
+       :edit="true"
+       :images="true">
 
-        <div class="crud-form__main">
             <x-grid type="container">
                 <x-grid.col xl="4" ls="6" ml="12" lg="6" md="6" sm="12">
                     <x-ui.form.group>
@@ -317,66 +315,9 @@
                     </x-grid>
                 </div>
             </div>
-        </div>
 
-        <div class="crud-form__description">
-            <x-ui.form.group>
-                <x-libraries.rich-text-editor
-                    name="description"
-                    :value="$collectible->description"
-                    :placeholder="__('common.description')"/>
-            </x-ui.form.group>
-        </div>
-
-        <div class="crud-form__sidebar">
-            <div class="crud-form__sidebar-wrapper">
-                <div class="crud-form__sidebar-widget">
-                    <x-ui.form.input-image
-                        class="crud-form__input-image"
-                        name="featured_image"
-                        id="featured_image"
-                        :path="$collectible->getFeaturedImagePath()">
-                        @if($collectible->getFeaturedImagePath())
-                            <x-slot:uploaded-featured-image>
-                                <x-ui.responsive-image
-                                    :model="$collectible"
-                                    :image-sizes="['small', 'medium', 'large']"
-                                    :path="$collectible->getFeaturedImagePath()"
-                                    :placeholder="false"
-                                    sizes="(max-width: 1024px) 100vw, (max-width: 1400px) 30vw, 220px">
-                                    <x-slot:img alt="test" title="test title"></x-slot:img>
-                                </x-ui.responsive-image>
-                            </x-slot:uploaded-featured-image>
-                        @endif
-                        <p>{{ __('common.file.format') }} jpg, png</p>
-                        <p>{{ __('common.file.max_size') }} 6Mb</p>
-                    </x-ui.form.input-image>
-                </div>
-
-                <div class="crud-form__sidebar-widget">
-                    <x-ui.form.input-image-multiple
-                        class="crud-form__input-image-multiple"
-                        name="images[]"
-                        id="images"
-                        :model="$collectible"
-                        :image-sizes="['small', 'medium', 'large']"
-                        sizes="(max-width: 1024px) 100vw, (max-width: 1400px) 30vw, 220px">
-                        <p>{{ __('common.file.format') }} jpg, png</p>
-                        <p>{{ __('common.file.max_size') }} 6Mb</p>
-                        <p>{{ __('common.file.count', ['count' => 9]) }}</p>
-                    </x-ui.form.input-image-multiple>
-                </div>
-            </div>
-        </div>
-
-        <x-ui.form.group class="crud-form__submit">
-            <x-ui.form.button
-                class="crud-form__submit-button"
-                x-bind:disabled="preventSubmit">
-                    {{ __('common.save') }}
-            </x-ui.form.button>
-        </x-ui.form.group>
-    </x-ui.form>
+        <x-slot:sidebar></x-slot:sidebar>
+    </x-admin.crud-form>
 
     @push('scripts')
         <script>
