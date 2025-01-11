@@ -13,6 +13,8 @@ class GameService
         try {
             DB::beginTransaction();
 
+
+
             $game = Game::create([
                 'name' => $data->name,
                 'slug' => $data->slug,
@@ -55,6 +57,8 @@ class GameService
         try {
             DB::beginTransaction();
 
+
+
             $game->updateFeaturedImage(
                 $data->featured_image,
                 $data->featured_image_uploaded,
@@ -77,6 +81,7 @@ class GameService
                     'alternative_names'  => explode('||', $data->alternative_names)
                 ]
             )->save();
+
 
 
             $game->genres()->sync($data->genres);

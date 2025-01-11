@@ -19,7 +19,7 @@ class DataMultiple extends Component
         public array|null $selected = null,
         public bool $required = false,
         public bool $showOld = true,
-        public bool $selectByValue = false,
+//        public bool $selectByValue = false,
     ) {
         $this->filteredName = to_dot_name($selectName);
     }
@@ -27,11 +27,11 @@ class DataMultiple extends Component
 
     public function isSelected(string $key): bool {
         if(($this->selected && !old()) || ($this->selected && !$this->showOld)) {
-            if($this->selectByValue) {
+//            if($this->selectByValue) {
                 return in_array($key, $this->selected);
-            }
-
-            return array_key_exists($key, $this->selected);
+//            }
+//
+//            return array_key_exists($key, $this->selected);
         }
 
         if(!$this->showOld) {

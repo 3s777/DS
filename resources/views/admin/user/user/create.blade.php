@@ -101,7 +101,6 @@
                             select-name="roles[]"
                             type="input"
                             :selected="[config('settings.default_role')]"
-                            :selectByValue="true"
                             :options="$roles"
                             :label="trans_choice('role.choose', 1)"
                             :required="true"

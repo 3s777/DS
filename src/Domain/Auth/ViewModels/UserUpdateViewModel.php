@@ -29,7 +29,7 @@ class UserUpdateViewModel extends ViewModel
 
     public function selectedRoles(): ?array
     {
-        return $this->user?->roles->pluck('id', 'name')->toArray() ?? null;
+        return $this->user?->roles->pluck('name')->toArray() ?? null;
     }
 
     public function permissions(): array

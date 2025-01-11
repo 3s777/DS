@@ -54,7 +54,7 @@ class GameMediaUpdateViewModel extends ViewModel
 
     public function selectedKitItems(): ?array
     {
-        return $this->gameMedia?->kitItems->pluck('name', 'id')->toArray() ?? null;
+        return $this->gameMedia?->kitItems->pluck('id')->toArray() ?? null;
     }
 
     public function genres(): array
