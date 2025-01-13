@@ -2,6 +2,7 @@
 
 namespace Support\Traits;
 
+use App\Contracts\ImagesManager;
 use App\Jobs\GenerateSmallThumbnailsJob;
 use App\Jobs\GenerateThumbnailJob;
 use Database\Factories\Game\GameDeveloperFactory;
@@ -12,6 +13,7 @@ use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Queue;
 use Illuminate\Support\Facades\Storage;
+use Support\Images\MediaLibraryImageManager;
 use Tests\TestCase;
 
 class HasFeaturedImageTest extends TestCase
@@ -57,6 +59,29 @@ class HasFeaturedImageTest extends TestCase
         Queue::assertPushed(GenerateSmallThumbnailsJob::class, 2);
 
         $gameDeveloper->forceDelete();
+    }
+
+    /**
+     * @test
+     * @return void
+     */
+    public function it_success_get_featured_image_path(): void
+    {
+        Storage::fake('images');
+
+        $gameDeveloper = GameDeveloperFactory::new()->create();
+
+        $gameDeveloper->addFeaturedImageWithThumbnail(
+            UploadedFile::fake()->image('photo1.jpg')
+        );
+
+        $path = $gameDeveloper->getFeaturedImagePath();
+        $pathWebp = $gameDeveloper->getFeaturedImagePathWebp();
+        $imagePathInfo = pathinfo($path);
+
+        $this->assertEquals($gameDeveloper->imagesDir().'/'.date('Y').'/'.date('m').'/'.$imagePathInfo['filename'].'/'.$imagePathInfo['filename'].'.jpg', $path);
+
+        $this->assertEquals($imagePathInfo['dirname'].'/'.$imagePathInfo['filename'].'.webp', $pathWebp);
     }
 
     /**
@@ -141,35 +166,32 @@ class HasFeaturedImageTest extends TestCase
         $gameDeveloperNewMedia = GameDeveloper::find($gameDeveloper->id)->first();
         $newPath = $gameDeveloperNewMedia->getFeaturedImagePath();
 
-        $this->assertFalse($oldPath == $newPath);
-
-        //        $this->storage->assertMissing($oldPath);
-        //        $oldImagePathInfo = pathinfo($oldPath);
-        //        $this->storage->assertMissing($oldImagePathInfo['dirname']);
-        //
-        //        $path = $gameDeveloperNewMedia->getFeaturedImagePath();
-        //
-        //
-        //        $imagePathInfo = pathinfo($path);
-        //
-        //        $this->storage->assertExists($path);
-        //
-        //        $this->storage->assertExists($imagePathInfo['dirname']);
-        //
-        //        $this->storage->assertExists($imagePathInfo['dirname'].'/'.$imagePathInfo['filename'].'.webp');
-        //
-        //        $this->storage->assertExists($imagePathInfo['dirname'].'/'.$imagePathInfo['filename'].'_fallback.'.$imagePathInfo['extension']);
-        //
-        //        foreach($gameDeveloperNewMedia->thumbnailSizes() as $thumb) {
-        //            $this->storage->assertExists($imagePathInfo['dirname'].'/webp/'.$thumb[0].'x'.$thumb[1].'/'.$imagePathInfo['filename'].'.webp');
-        //        }
-        //
-        //        $gameDeveloperNewMedia->forceDelete();
-        //
-        //        $this->storage->assertMissing($path);
-        //        $this->storage->assertMissing($imagePathInfo['dirname']);
+        $this->assertNotEquals($oldPath, $newPath);
     }
 
+
+    /**
+     * @test
+     * @return void
+     */
+    public function it_success_delete_uploads_with_empty_update_thumbnail(): void
+    {
+        Queue::fake();
+        Storage::fake('images');
+
+        $gameDeveloper = GameDeveloperFactory::new()->create();
+
+        $gameDeveloper->addFeaturedImageWithThumbnail(
+            UploadedFile::fake()->image('photo1.jpg')
+        );
+
+        $gameDeveloper->updateFeaturedImage(null, false);
+
+        $gameDeveloperNewMedia = GameDeveloper::find($gameDeveloper->id)->first();
+        $newPath = $gameDeveloperNewMedia->getFeaturedImagePath();
+
+        $this->assertEmpty($newPath);
+    }
 
     /**
      * @test
@@ -186,7 +208,7 @@ class HasFeaturedImageTest extends TestCase
             UploadedFile::fake()->image('photo1.jpg')
         );
 
-        $gameDeveloper->updateFeaturedImage('');
+        $gameDeveloper->deleteFeaturedImage();
 
         $gameDeveloperNewMedia = GameDeveloper::find($gameDeveloper->id)->first();
         $newPath = $gameDeveloperNewMedia->getFeaturedImagePath();

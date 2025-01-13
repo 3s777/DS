@@ -21,7 +21,7 @@ class UpdateUserDTO
         public readonly ?string $slug = null,
         public readonly ?string $description = null,
         public readonly ?UploadedFile $featured_image = null,
-        public readonly ?string $featured_image_uploaded = null,
+        public readonly ?bool $featured_image_uploaded = null,
         public readonly ?int $is_verified = null
     ) {
     }

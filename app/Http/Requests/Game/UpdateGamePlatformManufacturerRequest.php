@@ -49,7 +49,7 @@ class UpdateGamePlatformManufacturerRequest extends FormRequest
                 'mimes:jpg,png',
                 'max:10024'
             ],
-            'featured_image_selected' => ['nullable', 'string'],
+            'featured_image_selected' => ['nullable', 'bool'],
             'user_id' => [
                 'nullable',
                 'integer',

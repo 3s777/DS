@@ -14,7 +14,7 @@ class FillShelfDTO
         public readonly string $name,
         public readonly ?int $user_id = null,
         public readonly ?UploadedFile $featured_image = null,
-        public readonly ?string $featured_image_uploaded = null,
+        public readonly ?bool $featured_image_uploaded = null,
         public readonly ?string $description = null,
         public readonly ?int $number = null
     ) {

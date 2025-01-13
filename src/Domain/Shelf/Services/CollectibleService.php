@@ -110,6 +110,7 @@ class CollectibleService
     {
         return Transaction::run(
             function() use($collectible, $data) {
+
                 $collectible->updateFeaturedImage(
                     $data->featured_image,
                     $data->featured_image_uploaded,

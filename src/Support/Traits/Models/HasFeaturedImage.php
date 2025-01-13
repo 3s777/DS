@@ -58,7 +58,7 @@ trait HasFeaturedImage
         }
     }
 
-    public function updateFeaturedImage($newFeaturedImage, $oldFeaturedImage = '', $sizes = []): void
+    public function updateFeaturedImage(?UploadedFile $newFeaturedImage, ?bool $oldFeaturedImage = true, $sizes = []): void
     {
         if(!$oldFeaturedImage && !$newFeaturedImage) {
             $this->deleteFeaturedImage();

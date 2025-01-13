@@ -25,7 +25,7 @@ class FillGameMediaDTO
         public readonly ?array $publishers = null,
         public readonly ?array $kit_items = null,
         public readonly ?UploadedFile $featured_image = null,
-        public readonly ?string $featured_image_uploaded = null,
+        public readonly ?bool $featured_image_uploaded = null,
         public readonly ?array $images = null,
         public readonly ?string $images_delete = null,
         public readonly ?string $description = null,

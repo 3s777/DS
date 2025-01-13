@@ -1,7 +1,7 @@
 @props([
     'id',
     'name',
-    'path' => false,
+//    'path' => false,
     'uploadedFeaturedImage' => false,
     'buttonText' => trans_choice('common.choose_image', 1),
 ])
@@ -43,8 +43,8 @@
         </x-ui.form.button>
         <input type="file" hidden id="{{ $id }}"  name="{{ $name }}" accept="image/png, image/jpeg" x-ref="myFile" @change="previewFile">
 
-        @if($path)
-            <input type="text" value="{{ $path }}" hidden id="{{ $id }}_uploaded" x-ref="uploadedFile"  name="{{ $name }}_uploaded">
+        @if($uploadedFeaturedImage)
+            <input type="text" value="1" hidden id="{{ $id }}_uploaded" x-ref="uploadedFile"  name="{{ $name }}_uploaded">
         @endif
     </div>
 </div>

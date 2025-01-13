@@ -27,7 +27,7 @@ class FillCollectibleDTO
         public readonly ?array $sale = null,
         public readonly ?array $auction = null,
         public readonly ?UploadedFile $featured_image = null,
-        public readonly ?string $featured_image_uploaded = null,
+        public readonly ?bool $featured_image_uploaded = null,
         public readonly ?array $images = null,
         public readonly ?string $images_delete = null,
         public readonly ?string $description = null,
