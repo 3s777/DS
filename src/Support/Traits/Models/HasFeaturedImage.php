@@ -49,13 +49,15 @@ trait HasFeaturedImage
         return $imagePath;
     }
 
-    public function addFeaturedImageWithThumbnail(?UploadedFile $image, ?array $specialSizes = []): void
+    public function addFeaturedImageWithThumbnail(?UploadedFile $image, ?array $specialSizes = []): string
     {
         if($image) {
             $imageFullPath = $this->addOriginalFeaturedImage($image);
             $this->generateFullSizes($imageFullPath);
             $this->generateThumbnails($imageFullPath, $specialSizes);
         }
+
+        return $imageFullPath ?? '';
     }
 
     public function updateFeaturedImage(?UploadedFile $newFeaturedImage, ?bool $oldFeaturedImage = true, $sizes = []): void

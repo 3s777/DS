@@ -2,18 +2,17 @@
 
 namespace Support\Traits;
 
-use App\Contracts\ImagesManager;
 use App\Jobs\GenerateSmallThumbnailsJob;
 use App\Jobs\GenerateThumbnailJob;
 use Database\Factories\Game\GameDeveloperFactory;
 use Database\Factories\UserFactory;
 use Domain\Auth\Models\User;
 use Domain\Game\Models\GameDeveloper;
+use Illuminate\Contracts\Filesystem\Filesystem;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Queue;
 use Illuminate\Support\Facades\Storage;
-use Support\Images\MediaLibraryImageManager;
 use Tests\TestCase;
 
 class HasFeaturedImageTest extends TestCase
@@ -23,6 +22,7 @@ class HasFeaturedImageTest extends TestCase
     protected User $user;
     protected GameDeveloper $gameDeveloper;
     protected array $request;
+    protected Filesystem $storage;
 
     public function setUp(): void
     {

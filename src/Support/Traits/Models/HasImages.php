@@ -32,13 +32,15 @@ trait HasImages
         return $imagePath;
     }
 
-    public function addImagesWithThumbnail(?UploadedFile $image, ?array $specialSizes): void
+    public function addImagesWithThumbnail(?UploadedFile $image, ?array $specialSizes): string
     {
         if($image) {
             $imageFullPath = $this->addOriginalImages($image);
             $this->generateFullSizes($imageFullPath);
             $this->generateThumbnails($imageFullPath, $specialSizes);
         }
+
+        return $imageFullPath ?? '';
     }
 
     public function getImages(): array
@@ -49,6 +51,10 @@ trait HasImages
     public function deleteImages(?string $paths): void
     {
         // create array from paths string, implode by ',' and delete empty
+
+//        dd(
+//            (array_filter(explode(',', $paths))),
+//        );
         $pathArr = (array_filter(explode(',', $paths)));
         $images = $this->{$this->getImagesColumn()};
 

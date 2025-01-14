@@ -3,6 +3,7 @@
 namespace Support\Images;
 
 use App\Contracts\ImagesManager;
+use App\Models\Media;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\UploadedFile;
 

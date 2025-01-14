@@ -44,7 +44,7 @@ trait HasImage
             .$filePath['filename'].'/';
     }
 
-    public function generateThumbnails($imageFullPath, $specialSizes): void
+    public function generateThumbnails(string $imageFullPath, array $specialSizes): void
     {
         $defaultThumbnails = $this->thumbnailSizes();
 
@@ -106,7 +106,7 @@ trait HasImage
         UploadedFile|null $image,
         string $collectionName = 'default',
         array $specialSizes = []
-    ): void {
+    ): string {
         if($image) {
             $imageFullPath = $this->addOriginal($image, $collectionName);
 
@@ -114,5 +114,7 @@ trait HasImage
 
             $this->generateThumbnails($imageFullPath, $specialSizes);
         }
+
+        return $imageFullPath ?? '';
     }
 }

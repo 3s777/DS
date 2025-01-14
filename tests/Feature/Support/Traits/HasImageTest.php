@@ -6,6 +6,7 @@ use App\Contracts\ImagesManager;
 use App\Jobs\GenerateSmallThumbnailsJob;
 use App\Jobs\GenerateThumbnailJob;
 use App\Models\Media;
+use Carbon\Carbon;
 use Database\Factories\Game\GameDeveloperFactory;
 use Database\Factories\UserFactory;
 use Domain\Auth\Models\User;
@@ -45,9 +46,11 @@ class HasImageTest extends TestCase
     {
         Queue::fake();
 
-        $this->gameDeveloper->addOriginalWithThumbnail(UploadedFile::fake()->image('photo1.jpg'), 'featured_image', ['small', 'medium']);
-
-        $path = $this->gameDeveloper->getFirstMediaUrl('featured_image');
+        $path = $this->gameDeveloper->addOriginalWithThumbnail(
+            UploadedFile::fake()->image('photo1.jpg'),
+            'featured_image',
+            ['small', 'medium']
+        );
 
         Storage::disk('images')->assertExists($path);
 
@@ -56,5 +59,65 @@ class HasImageTest extends TestCase
         Queue::assertPushed(GenerateSmallThumbnailsJob::class, 2);
 
         $this->gameDeveloper->forceDelete();
+    }
+
+    /**
+     * @test
+     * @return void
+     */
+    public function it_success_generate_media_path(): void
+    {
+        $path = $this->gameDeveloper->generateMediaPath('test.jpg');
+
+        $mediaCreatedDate = Carbon::make($this->gameDeveloper->created_at);
+
+        $this->assertEquals(
+            $path,
+            $this->gameDeveloper->imagesDir().'/'
+            .$mediaCreatedDate->format('Y').'/'
+            .$mediaCreatedDate->format('m').'/'
+            .'test/'
+        );
+    }
+
+    /**
+     * @test
+     * @return void
+     */
+    public function it_success_generate_full_sizes(): void
+    {
+        Queue::fake();
+        Storage::fake('images');
+
+        $path = $this->gameDeveloper->generateMediaPath('test.jpg');
+
+        $this->gameDeveloper->generateFullSizes($path);
+
+        Queue::assertPushed(GenerateThumbnailJob::class, 3);
+    }
+
+    /**
+     * @test
+     * @return void
+     */
+    public function it_success_generate_thumbnails(): void
+    {
+        Queue::fake();
+        Storage::fake('images');
+
+        $path = $this->gameDeveloper->generateMediaPath('test.jpg');
+
+        $this->gameDeveloper->generateThumbnails($path, ['small', 'medium']);
+
+        Queue::assertPushed(GenerateSmallThumbnailsJob::class, 2);
+    }
+
+    /**
+     * @test
+     * @return void
+     */
+    public function it_success_image_manager(): void
+    {
+        $this->assertInstanceOf(ImagesManager::class, $this->gameDeveloper->imageManager());
     }
 }
