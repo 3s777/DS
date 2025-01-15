@@ -1,7 +1,6 @@
 @props([
     'action',
     'title',
-    'edit' => false,
     'model' => false,
     'id' => 'create-form',
     'multipart' => 'multipart/form-data',
@@ -13,9 +12,14 @@
 ])
 
 <x-ui.form
-    :class="$sidebar ? 'crud-form' : 'crud-form crud-form_full-width'"
-    :id="$id"
-    :method="$edit ? 'put' : 'post'"
+    {{ $attributes->class([
+            'crud-form',
+            'crud-form_full-width' => !$sidebar
+        ])
+    }}
+{{--    :class="$sidebar ? 'crud-form' : 'crud-form crud-form_full-width'"--}}
+    :id="($model && $id == 'create-form') ? 'edit-form' : $id"
+    :method="$model ? 'put' : 'post'"
     :action="$action"
     :enctype="$multipart">
     <x-ui.title class="crud-form__tile" size="normal" indent="small">
@@ -31,7 +35,7 @@
             <x-ui.form.group>
                 <x-libraries.rich-text-editor
                     name="description"
-                    :value="$edit ? $model->description : ''"
+                    :value="$model ? $model->description : ''"
                     :placeholder="__('common.description')"/>
             </x-ui.form.group>
         </div>
@@ -46,8 +50,8 @@
                             class="crud-form__input-image"
                             name="featured_image"
                             id="featured_image"
-                            :path="$edit ? $model->getFeaturedImagePath() : false">
-                            @if($edit)
+                            :path="$model ? $model->getFeaturedImagePath() : false">
+                            @if($model)
                                 @if($model->getFeaturedImagePath())
                                     <x-slot:uploaded-featured-image>
                                         <x-ui.responsive-image
@@ -73,7 +77,7 @@
                             class="crud-form__input-image-multiple"
                             name="images[]"
                             id="images"
-                            :model="$edit ? $model : false"
+                            :model="$model ? $model : false"
                             :image-sizes="['small', 'medium', 'large']"
                             sizes="(max-width: 1024px) 100vw, (max-width: 1400px) 30vw, 220px">
                             <p>{{ __('common.file.format') }} jpg, png</p>

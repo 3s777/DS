@@ -1,10 +1,8 @@
 <x-layouts.admin :search="false">
     <x-admin.crud-form
-       id="edit-form"
        :action="route('collectibles.update.game', $collectible->id)"
        :title="__('collectible.edit')"
        :model="$collectible"
-       :edit="true"
        :images="true">
 
             <x-grid type="container">
