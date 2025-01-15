@@ -145,31 +145,30 @@ class HasImagesTest extends TestCase
      */
     public function it_success_update_images_with_delete(): void
     {
-        $gameMedia = GameMedia::factory()->create();
-        $path1 = $gameMedia->addImagesWithThumbnail(
+        $path1 = $this->gameMedia->addImagesWithThumbnail(
             UploadedFile::fake()->image('photo1.jpg'),
             ['small', 'medium']
         );
 
-        $path2 = $gameMedia->addImagesWithThumbnail(
+        $path2 = $this->gameMedia->addImagesWithThumbnail(
             UploadedFile::fake()->image('photo2.jpg'),
             ['small', 'medium']
         );
 
-        $gameMedia->updateImages(
+        $this->gameMedia->updateImages(
             [UploadedFile::fake()->image('photo3.jpg'), UploadedFile::fake()->image('photo4.jpg'), UploadedFile::fake()->image('photo5.jpg')],
-            $path1.','.$path2,
+            $path1,
             ['small', 'medium']
         );
 
-        $gameMedia = GameMedia::find($gameMedia->id);
+        $this->storage->assertMissing($path1);
 
-//        dd(Media::all(), $gameMedia->getImages(), $path1, $path2, $gameMedia->images, $gameMedia->getMedia('images'));
+        $this->storage->assertExists($path2);
 
-//        dd($path1, $path2, $this->gameMedia->getImages());
+        $gameMedia = GameMedia::find($this->gameMedia->id);
 
-        $this->assertEquals(count($gameMedia->getImages()), 3);
+        $this->assertEquals(count($gameMedia->getImages()), 4);
 
-        $this->gameMedia->forceDelete();
+        $gameMedia->forceDelete();
     }
 }

@@ -25,7 +25,12 @@ class MediaLibraryImageManager implements ImagesManager
 
     public function deleteByPath(string $path): void
     {
+        // After deleting Media relation don't change.
+        // Media library use method loadMedia
+        // New Media relation can be available in new model object
         $media = $this->model->media->where('file_name', basename($path))->first();
+        // this method don't described in Media Library documentation
+        // $this->model->deleteMedia($media->id);
         $media?->forceDelete();
     }
 
