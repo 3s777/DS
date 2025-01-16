@@ -1,13 +1,8 @@
 <x-layouts.admin :search="false">
-    <x-ui.form class="crud-form"
-               id="create-form"
-               :action="route('game-medias.store')"
-               enctype="multipart/form-data">
-        <x-ui.title class="crud-form__tile" size="normal" indent="small">
-            {{ __('game_media.add') }}
-        </x-ui.title>
-
-        <div class="crud-form__main">
+    <x-admin.crud-form
+        :action="route('game-medias.store')"
+        :title="__('game_media.add')"
+        :images="true">
             <x-grid type="container">
                 <x-grid.col xl="4" ls="6" ml="12" lg="6" md="6" sm="12">
                     <x-ui.form.group>
@@ -161,53 +156,9 @@
                         </x-ui.select.async>
                     </x-ui.form.group>
                 </x-grid.col>
-
             </x-grid>
-        </div>
-
-        <div class="crud-form__description">
-            <x-ui.form.group>
-                <x-libraries.rich-text-editor
-                    name="description"
-                    value=""
-                    :placeholder="__('common.description')"/>
-            </x-ui.form.group>
-        </div>
-
-        <div class="crud-form__sidebar">
-            <div class="crud-form__sidebar-wrapper">
-                <div class="crud-form__sidebar-widget">
-                    <x-ui.form.input-image
-                        class="crud-form__input-image"
-                        name="featured_image"
-                        id="featured_image">
-                        <p>{{ __('common.file.format') }} jpg, png</p>
-                        <p>{{ __('common.file.max_size') }} 6Mb</p>
-                    </x-ui.form.input-image>
-                </div>
-
-                <div class="crud-form__sidebar-widget">
-                    <x-ui.form.input-image-multiple
-                        class="crud-form__input-image-multiple"
-                        name="images[]"
-                        id="images"
-                        button-text="{{ trans_choice('common.additional_image', 2) }}">
-                        <p>{{ __('common.file.format') }} jpg, png</p>
-                        <p>{{ __('common.file.max_size') }} 6Mb</p>
-                        <p>{{ __('common.file.count', ['count' => 9]) }}</p>
-                    </x-ui.form.input-image-multiple>
-                </div>
-            </div>
-        </div>
-
-        <x-ui.form.group class="crud-form__submit">
-            <x-ui.form.button
-                class="crud-form__submit-button"
-                x-bind:disabled="preventSubmit">
-                    {{ __('common.save') }}
-            </x-ui.form.button>
-        </x-ui.form.group>
-    </x-ui.form>
+        <x-slot:sidebar></x-slot:sidebar>
+    </x-admin.crud-form>
 </x-layouts.admin>
 
 

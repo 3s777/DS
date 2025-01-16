@@ -28,7 +28,7 @@
                             @endforeach
                         </x-ui.specifications.item>
 
-                        <x-ui.specifications.item class="crud-show__specification" :title="__('permission.permissions')">
+                        <x-ui.specifications.item class="crud-show__specification" :title="trans_choice('permission.permissions', 2)">
                             @foreach($user->permissions as $permission)
                                 <x-ui.tag :disabled="true" tag="div" color="dark">{{ $permission->display_name }}</x-ui.tag>
                             @endforeach
