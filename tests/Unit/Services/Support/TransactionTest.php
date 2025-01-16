@@ -57,7 +57,7 @@ class TransactionTest extends TestCase
     {
         $this->expectException(CrudException::class);
 
-        $test1 = Transaction::run(
+        Transaction::run(
             function () {
                 return 1/0;
             },
@@ -75,7 +75,7 @@ class TransactionTest extends TestCase
     {
         $this->expectException(TransactionException::class);
 
-        $test2 = Transaction::run(
+        Transaction::run(
             function() {
                 return 1/0;
             }

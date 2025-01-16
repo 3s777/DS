@@ -63,6 +63,7 @@
                         <x-ui.select.async-multiple
                             name="games"
                             select-name="games[]"
+                            id="games"
                             :error="$errors->has('games')"
                             route="select-games"
                             :default-option="trans_choice('game.games', 1)"
@@ -76,6 +77,7 @@
                         <x-ui.select.data-multiple
                             name="genres"
                             select-name="genres[]"
+                            id="genres"
                             :options="$genres"
                             :label="trans_choice('game_genre.choose', 2)"
                             :default-option="trans_choice('game_genre.genres', 2)"
@@ -159,6 +161,44 @@
             </x-grid>
         <x-slot:sidebar></x-slot:sidebar>
     </x-admin.crud-form>
+
+    @push('scripts')
+        <script type="module">
+
+            document.getElementById("games-select").onchange = function(){
+                let games = document.getElementById("games-select");
+                let options = [];
+                let len = games.options.length;
+                for (let i = 0; i < len; i++) {
+                    const option = games.options[i];
+
+                    if (option.selected) {
+                        options.push(option.value);
+                    }
+                }
+
+                setData(options);
+
+                console.log(options)
+            };
+
+            async function setData(games) {
+                try {
+                    const response = await axios.post('{{ route('games-autocomplete') }}', {
+                        games: games
+                    });
+                    let genres = document.getElementById('genres');
+                    genres.value = 1;
+                    // console.log(response.data.result);
+                    return response.data.result;
+                } catch (err) {
+                    @if(!app()->isProduction())
+                    console.log(err);
+                    @endif
+                }
+            }
+        </script>
+   @endpush
 </x-layouts.admin>
 
 

@@ -10,6 +10,7 @@ use Domain\Game\DTOs\FillGameDTO;
 use Domain\Game\Models\Game;
 use Domain\Game\Services\GameService;
 use Domain\Game\ViewModels\GameIndexViewModel;
+use Domain\Game\ViewModels\GamesForAutocompleteViewModel;
 use Domain\Game\ViewModels\GameUpdateViewModel;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
@@ -117,6 +118,13 @@ class GameController extends Controller
             $request->input('query'),
             Game::class,
             trans_choice('game.choose', 2)
+        );
+    }
+
+    public function getForAutocomplete(Request $request)
+    {
+        return new GamesForAutocompleteViewModel(
+            $request->input('games')
         );
     }
 }
