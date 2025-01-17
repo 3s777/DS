@@ -23,7 +23,8 @@ class AsyncDepend extends Component
         public ?string $defaultOption = null,
         public ?array $selected = null,
         public bool $required = false,
-        public bool $showOld = true
+        public bool $showOld = true,
+        public bool $scripts = true
     ) {
         $this->filteredName = to_dot_name($selectName);
         $this->filteredDependName = to_dot_name($dependOn);

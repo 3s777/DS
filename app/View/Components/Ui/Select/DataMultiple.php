@@ -19,6 +19,7 @@ class DataMultiple extends Component
         public array|null $selected = null,
         public bool $required = false,
         public bool $showOld = true,
+        public bool $scripts = true
 //        public bool $selectByValue = false,
     ) {
         $this->filteredName = to_dot_name($selectName);

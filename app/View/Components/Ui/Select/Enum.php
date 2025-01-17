@@ -24,7 +24,8 @@ class Enum extends Component
         public ?string $defaultOption = null,
         public string|array|null $selected = null,
         public bool $required = false,
-        public bool $multiple = false
+        public bool $multiple = false,
+        public bool $scripts = true
     ) {
         $this->filteredName = Str::of($this->selectName)
             ->replace('[]','')

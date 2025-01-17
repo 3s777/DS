@@ -64,6 +64,7 @@
                             name="games"
                             select-name="games[]"
                             id="games"
+                            :scripts="false"
                             :error="$errors->has('games')"
                             route="select-games"
                             :default-option="trans_choice('game.games', 1)"
@@ -74,6 +75,27 @@
 
                 <x-grid.col xl="6" lg="12" md="12" sm="12">
                     <x-ui.form.group>
+{{--                        <x-libraries.choices--}}
+{{--                            class="choices-genres"--}}
+{{--                            id="genres"--}}
+{{--                            name="genres[]"--}}
+{{--                            :label="trans_choice('game_genre.choose', 2)"--}}
+{{--                            error="genres"--}}
+{{--                            multiple>--}}
+
+{{--                            <x-ui.form.option value="">--}}
+{{--                                {{ trans_choice('game_genre.genres', 2) }}--}}
+{{--                            </x-ui.form.option>--}}
+
+{{--                            @foreach($genres as $key => $genre)--}}
+{{--                                <x-ui.form.option--}}
+{{--                                    :value="$key"--}}
+{{--                                    :selected="in_array($key, old('genres', []))">--}}
+{{--                                    {{ $genre }}--}}
+{{--                                </x-ui.form.option>--}}
+{{--                            @endforeach--}}
+{{--                        </x-libraries.choices>--}}
+
                         <x-ui.select.data-multiple
                             name="genres"
                             select-name="genres[]"
@@ -81,6 +103,7 @@
                             :options="$genres"
                             :label="trans_choice('game_genre.choose', 2)"
                             :default-option="trans_choice('game_genre.genres', 2)"
+                            :scripts="false"
                         />
                     </x-ui.form.group>
                 </x-grid.col>
@@ -93,6 +116,7 @@
                             :options="$platforms"
                             :label="trans_choice('game_platform.choose', 2)"
                             :default-option="trans_choice('game_platform.platforms', 2)"
+                            :scripts="false"
                         />
                     </x-ui.form.group>
                 </x-grid.col>
@@ -164,33 +188,131 @@
 
     @push('scripts')
         <script type="module">
+            const games = document.querySelector('.games-select');
+            const choicesGames = new Choices(games, {
+                allowHTML: true,
+                itemSelectText: '',
+                removeItems: true,
+                removeItemButton: true,
+                noResultsText: '{{ __('common.loading') }}',
+                noChoicesText: '{{ __('common.not_found') }}',
+                searchPlaceholderValue: '{{ __('common.search') }}',
+            });
 
-            document.getElementById("games-select").onchange = function(){
+            const genres = document.querySelector('.choices-genres');
+            const genresChoices = new Choices(genres, {
+                itemSelectText: '',
+                removeItems: true,
+                removeItemButton: true,
+                noResultsText: '{{ __('common.not_found') }}',
+                noChoicesText: '{{ __('common.nothing_else') }}',
+            });
+
+            const platforms = document.querySelector('.choices-platforms');
+            const platformsChoices = new Choices(platforms, {
+                itemSelectText: '',
+                removeItems: true,
+                removeItemButton: true,
+                noResultsText: '{{ __('common.not_found') }}',
+                noChoicesText: '{{ __('common.nothing_else') }}',
+            });
+
+            const asyncSearch = games.closest('.choices').querySelector('input[type=search]');
+
+            asyncSearch.addEventListener(
+                'input',
+                debounce(event => choicesGames.setChoices(async () => {
+                    try {
+                        const query = asyncSearch.value ?? null
+                        const response = await axios.post('{{ route('select-games') }}', {
+                            query: query,
+                        });
+                        setTimeout(() => {
+                            asyncSearch.focus();
+                        }, 0);
+
+                        return response.data.result;
+                    } catch (err) {
+                        @if(!app()->isProduction())
+                            console.log(err);
+                        @endif
+                    }
+                }, 'value', 'label', true), 700),
+                false
+            )
+
+
+            let selectGames = document.querySelector(`[name="games[]"]`);
+
+            let selectedForm = selectGames.closest('form');
+
+            let options = selectGames.selectedOptions;
+
+            selectGames.onchange = function () {
+
+                const selectedInputs = document.getElementsByClassName('old_selected_games');
+
+                while(selectedInputs.length > 0){
+                    selectedInputs[0].parentNode.removeChild(selectedInputs[0]);
+                }
+
+                let values = Array.from(options).reduce(function(oldOptions, currentOption) {
+                    oldOptions[currentOption.value] = currentOption.text;
+                    return oldOptions;
+                }, {});
+
+                for (const key in values) {
+                    if(key) {
+                        const input = document.createElement("input");
+                        input.type = "hidden";
+                        input.className = "old_selected_games";
+                        input.name = "old_selected_games[old][" + key + "]";
+                        input.value = values[key];
+
+                        selectedForm.appendChild(input);
+                    }
+                }
+
+
                 let games = document.getElementById("games-select");
-                let options = [];
+                let gamesData = [];
                 let len = games.options.length;
                 for (let i = 0; i < len; i++) {
                     const option = games.options[i];
 
                     if (option.selected) {
-                        options.push(option.value);
+                        gamesData.push(option.value);
                     }
                 }
 
-                setData(options);
-
-                console.log(options)
+                setData(gamesData);
             };
+
+
 
             async function setData(games) {
                 try {
                     const response = await axios.post('{{ route('games-autocomplete') }}', {
                         games: games
                     });
-                    let genres = document.getElementById('genres');
-                    genres.value = 1;
-                    // console.log(response.data.result);
-                    return response.data.result;
+
+                    const gameGenres = [];
+                    response.data.result.forEach((game) => {
+                        game.genres.forEach((genre) => {
+                            gameGenres.push(genre.id.toString());
+                        })
+                    })
+
+                    const gamePlatforms = [];
+                    response.data.result.forEach((game) => {
+                        game.platforms.forEach((platform) => {
+                            gamePlatforms.push(platform.id.toString());
+                        })
+                    })
+
+                    genresChoices.setChoiceByValue(gameGenres);
+                    platformsChoices.setChoiceByValue(gamePlatforms);
+                    // return response.data.result;
                 } catch (err) {
                     @if(!app()->isProduction())
                     console.log(err);

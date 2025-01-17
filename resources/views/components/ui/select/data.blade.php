@@ -24,15 +24,17 @@
 
 </x-libraries.choices>
 
-@push('scripts')
-    <script type="module">
-        const {{ $name }} = document.querySelector('.choices-{{ $name }}');
-        new Choices({{ $name }}, {
-            itemSelectText: '',
-            removeItems: true,
-            removeItemButton: true,
-            noResultsText: '{{ __('common.not_found') }}',
-            noChoicesText: '{{ __('common.nothing_else') }}',
-        });
-    </script>
-@endpush
+@if($scripts)
+    @push('scripts')
+        <script type="module">
+            const {{ $name }} = document.querySelector('.choices-{{ $name }}');
+            new Choices({{ $name }}, {
+                itemSelectText: '',
+                removeItems: true,
+                removeItemButton: true,
+                noResultsText: '{{ __('common.not_found') }}',
+                noChoicesText: '{{ __('common.nothing_else') }}',
+            });
+        </script>
+    @endpush
+@endif

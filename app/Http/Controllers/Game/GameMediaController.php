@@ -41,6 +41,7 @@ class GameMediaController extends Controller
 
     public function store(CreateGameMediaRequest $request, GameMediaService $gameMediaService): Application|Redirector|RedirectResponse|\Illuminate\Contracts\Foundation\Application
     {
+        dd($request);
         $gameMediaService->create(FillGameMediaDTO::fromRequest($request));
 
         flash()->info(__('game_media.created'));
