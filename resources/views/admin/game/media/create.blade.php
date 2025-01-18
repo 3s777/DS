@@ -128,6 +128,7 @@
                             select-name="developers[]"
                             :error="$errors->has('developers')"
                             route="select-game-developers"
+                            :scripts="false"
                             :default-option="trans_choice('game_developer.developers', 1)"
                             :label="trans_choice('game_developer.choose', 2)">
                         </x-ui.select.async-multiple>
@@ -141,6 +142,7 @@
                             select-name="publishers[]"
                             :error="$errors->has('publishers')"
                             route="select-game-publishers"
+                            :scripts="false"
                             :default-option="trans_choice('game_publisher.publishers', 2)"
                             :label="trans_choice('game_publisher.choose', 2)">
                         </x-ui.select.async-multiple>
@@ -189,7 +191,7 @@
     @push('scripts')
         <script type="module">
             const games = document.querySelector('.games-select');
-            const choicesGames = new Choices(games, {
+            const gamesChoices = new Choices(games, {
                 allowHTML: true,
                 itemSelectText: '',
                 removeItems: true,
@@ -217,44 +219,40 @@
                 noChoicesText: '{{ __('common.nothing_else') }}',
             });
 
-            const asyncSearch = games.closest('.choices').querySelector('input[type=search]');
+            const developers = document.querySelector('.developers-select');
+            const developersChoices = new Choices(developers, {
+                allowHTML: true,
+                itemSelectText: '',
+                removeItems: true,
+                removeItemButton: true,
+                noResultsText: '{{ __('common.loading') }}',
+                noChoicesText: '{{ __('common.not_found') }}',
+                searchPlaceholderValue: '{{ __('common.search') }}',
+            });
 
-            asyncSearch.addEventListener(
-                'input',
-                debounce(event => choicesGames.setChoices(async () => {
-                    try {
-                        const query = asyncSearch.value ?? null
-                        const response = await axios.post('{{ route('select-games') }}', {
-                            query: query,
-                        });
-                        setTimeout(() => {
-                            asyncSearch.focus();
-                        }, 0);
+            const publishers = document.querySelector('.publishers-select');
+            const publishersChoices = new Choices(publishers, {
+                allowHTML: true,
+                itemSelectText: '',
+                removeItems: true,
+                removeItemButton: true,
+                noResultsText: '{{ __('common.loading') }}',
+                noChoicesText: '{{ __('common.not_found') }}',
+                searchPlaceholderValue: '{{ __('common.search') }}',
+            });
 
-                        return response.data.result;
-                    } catch (err) {
-                        @if(!app()->isProduction())
-                            console.log(err);
-                        @endif
-                    }
-                }, 'value', 'label', true), 700),
-                false
-            )
+            function changeOld(oldName, select) {
+                const selectedInputs = document.getElementsByClassName(oldName);
 
+                let selectedForm = select.closest('form');
 
-            let selectGames = document.querySelector(`[name="games[]"]`);
-
-            let selectedForm = selectGames.closest('form');
-
-            let options = selectGames.selectedOptions;
-
-            selectGames.onchange = function () {
-
-                const selectedInputs = document.getElementsByClassName('old_selected_games');
+                let options = select.selectedOptions;
 
                 while(selectedInputs.length > 0){
                     selectedInputs[0].parentNode.removeChild(selectedInputs[0]);
                 }
+
+                // console.log(options);
 
                 let values = Array.from(options).reduce(function(oldOptions, currentOption) {
                     oldOptions[currentOption.value] = currentOption.text;
@@ -265,36 +263,23 @@
                     if(key) {
                         const input = document.createElement("input");
                         input.type = "hidden";
-                        input.className = "old_selected_games";
-                        input.name = "old_selected_games[old][" + key + "]";
+                        input.className = oldName;
+                        input.name = oldName + "[old][" + key + "]";
                         input.value = values[key];
 
                         selectedForm.appendChild(input);
                     }
                 }
-
-
-                let games = document.getElementById("games-select");
-                let gamesData = [];
-                let len = games.options.length;
-                for (let i = 0; i < len; i++) {
-                    const option = games.options[i];
-
-                    if (option.selected) {
-                        gamesData.push(option.value);
-                    }
-                }
-
-                setData(gamesData);
-            };
-
-
+            }
 
             async function setData(games) {
+
                 try {
                     const response = await axios.post('{{ route('games-autocomplete') }}', {
                         games: games
                     });
+
+
 
                     const gameGenres = [];
                     response.data.result.forEach((game) => {
@@ -310,8 +295,34 @@
                         })
                     })
 
+                    const gameDevelopers = [];
+                    response.data.result.forEach((game) => {
+                        game.developers.forEach((developer) => {
+                            gameDevelopers.push({value: developer.id.toString(), label: developer.name.toString(), selected: true});
+                        })
+                    })
+
+                    const gamePublishers = [];
+                    response.data.result.forEach((game) => {
+                        game.publishers.forEach((publisher) => {
+                            gamePublishers.push({value: publisher.id.toString(), label: publisher.name.toString(), selected: true});
+                        })
+                    })
+
+                    genresChoices.removeActiveItems();
                     genresChoices.setChoiceByValue(gameGenres);
+
+                    platformsChoices.removeActiveItems();
                     platformsChoices.setChoiceByValue(gamePlatforms);
+
+                    developersChoices.clearStore();
+                    developersChoices.setValue(gameDevelopers);
+
+                    publishersChoices.clearStore();
+                    publishersChoices.setValue(gamePublishers);
+
+                    changeOld('old_selected_developers', selectDevelopers);
+                    changeOld('old_selected_publishers', selectPublishers);
                     // return response.data.result;
                 } catch (err) {
                     @if(!app()->isProduction())
@@ -319,6 +330,102 @@
                     @endif
                 }
             }
+
+            async function setDataToChoices(route, asyncSearch) {
+                try {
+                    const query = asyncSearch.value ?? null
+                    const response = await axios.post(route, {
+                        query: query,
+                    });
+                    setTimeout(() => {
+                        asyncSearch.focus();
+                    }, 0);
+
+                    return response.data.result;
+                } catch (err) {
+                    @if(!app()->isProduction())
+                    console.log(err);
+                    @endif
+                }
+            }
+
+
+            const asyncSearchGames = games.closest('.choices').querySelector('input[type=search]');
+            const asyncSearchDevelopers = developers.closest('.choices').querySelector('input[type=search]');
+            const asyncSearchPublishers = publishers.closest('.choices').querySelector('input[type=search]');
+
+            asyncSearchGames.addEventListener(
+                'input',
+                debounce(event => gamesChoices.setChoices(async () => {
+                    return setDataToChoices('{{ route('select-games') }}', asyncSearchGames);
+                    {{--try {--}}
+                    {{--    const query = asyncSearch.value ?? null--}}
+                    {{--    const response = await axios.post('{{ route('select-games') }}', {--}}
+                    {{--        query: query,--}}
+                    {{--    });--}}
+                    {{--    setTimeout(() => {--}}
+                    {{--        asyncSearch.focus();--}}
+                    {{--    }, 0);--}}
+
+                    {{--    return response.data.result;--}}
+                    {{--} catch (err) {--}}
+                    {{--    @if(!app()->isProduction())--}}
+                    {{--        console.log(err);--}}
+                    {{--    @endif--}}
+                    {{--}--}}
+                }, 'value', 'label', true), 700),
+                false
+            )
+
+            asyncSearchDevelopers.addEventListener(
+                'input',
+                debounce(event => developersChoices.setChoices(async () => {
+                    return setDataToChoices('{{ route('select-game-developers') }}', asyncSearchDevelopers);
+                }, 'value', 'label', true), 700),
+                false
+            )
+
+            asyncSearchPublishers.addEventListener(
+                'input',
+                debounce(event => publishersChoices.setChoices(async () => {
+                    return setDataToChoices('{{ route('select-game-publishers') }}', asyncSearchPublishers);
+                }, 'value', 'label', true), 700),
+                false
+            )
+
+            // let selectedForm = selectGames.closest('form');
+            //
+            // let options = selectGames.selectedOptions;
+
+            const selectGames = document.querySelector(`[name="games[]"]`);
+            const selectDevelopers = document.querySelector(`[name="developers[]"]`);
+            const selectPublishers = document.querySelector(`[name="publishers[]"]`);
+
+            selectGames.onchange = function () {
+                changeOld('old_selected_games', this);
+
+                const games = document.getElementById("games-select");
+                let gamesData = [];
+                let len = games.options.length;
+                for (let i = 0; i < len; i++) {
+                    const option = games.options[i];
+
+                    if (option.selected) {
+                        gamesData.push(option.value);
+                    }
+                }
+
+                setData(gamesData);
+            };
+
+            selectDevelopers.onchange = function () {
+                changeOld('old_selected_developers', this);
+            };
+
+            selectPublishers.onchange = function () {
+                changeOld('old_selected_publishers', this);
+            };
+
         </script>
    @endpush
 </x-layouts.admin>

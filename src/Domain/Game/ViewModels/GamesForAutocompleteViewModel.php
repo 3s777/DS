@@ -14,7 +14,7 @@ class GamesForAutocompleteViewModel extends ViewModel
     {
     }
 
-    public function result()
+    public function result(): array
     {
         if($this->games) {
             $games = Game::query()
@@ -25,6 +25,6 @@ class GamesForAutocompleteViewModel extends ViewModel
                 ->toArray();
         }
 
-        return $games;
+        return $games ?? [];
     }
 }
