@@ -56,6 +56,7 @@ class CollectibleIndexViewModel extends ViewModel
                 'collectibles.additional_field',
                 'collectibles.target',
                 'collectibles.sale',
+                'collectibles.sale->price',
                 'collectibles.auction',
                 'collectibles.created_at',
                 'collectibles.user_id',

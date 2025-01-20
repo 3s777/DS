@@ -3,7 +3,6 @@
 namespace Domain\Game\ViewModels;
 
 use Domain\Game\Models\Game;
-use Illuminate\Support\Facades\Schema;
 use Spatie\ViewModels\ViewModel;
 
 class GamesForAutocompleteViewModel extends ViewModel

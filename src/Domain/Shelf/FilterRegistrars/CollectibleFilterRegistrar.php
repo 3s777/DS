@@ -113,6 +113,12 @@ class CollectibleFilterRegistrar implements FilterRegistrar
                 'collectibles',
                 'purchase_price'
             ),
+            'sale_price' => RangeFilter::make(
+                __('collectible.sale.price'),
+                'sale_price',
+                'collectibles',
+                'sale->price'
+            ),
         ];
     }
 }

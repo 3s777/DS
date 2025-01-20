@@ -252,8 +252,6 @@
                     selectedInputs[0].parentNode.removeChild(selectedInputs[0]);
                 }
 
-                // console.log(options);
-
                 let values = Array.from(options).reduce(function(oldOptions, currentOption) {
                     oldOptions[currentOption.value] = currentOption.text;
                     return oldOptions;
@@ -273,41 +271,33 @@
             }
 
             async function setData(games) {
-
                 try {
                     const response = await axios.post('{{ route('games-autocomplete') }}', {
                         games: games
                     });
 
-
-
                     const gameGenres = [];
+                    const gamePlatforms = [];
+                    const gameDevelopers = [];
+                    const gamePublishers = [];
+
                     response.data.result.forEach((game) => {
                         game.genres.forEach((genre) => {
                             gameGenres.push(genre.id.toString());
                         })
-                    })
 
-                    const gamePlatforms = [];
-                    response.data.result.forEach((game) => {
                         game.platforms.forEach((platform) => {
                             gamePlatforms.push(platform.id.toString());
                         })
-                    })
 
-                    const gameDevelopers = [];
-                    response.data.result.forEach((game) => {
                         game.developers.forEach((developer) => {
                             gameDevelopers.push({value: developer.id.toString(), label: developer.name.toString(), selected: true});
                         })
-                    })
 
-                    const gamePublishers = [];
-                    response.data.result.forEach((game) => {
                         game.publishers.forEach((publisher) => {
                             gamePublishers.push({value: publisher.id.toString(), label: publisher.name.toString(), selected: true});
                         })
-                    })
+                    });
 
                     genresChoices.removeActiveItems();
                     genresChoices.setChoiceByValue(gameGenres);
@@ -323,15 +313,14 @@
 
                     changeOld('old_selected_developers', selectDevelopers);
                     changeOld('old_selected_publishers', selectPublishers);
-                    // return response.data.result;
                 } catch (err) {
                     @if(!app()->isProduction())
-                    console.log(err);
+                        console.log(err);
                     @endif
                 }
             }
 
-            async function setDataToChoices(route, asyncSearch) {
+            async function getDataForChoices(route, asyncSearch) {
                 try {
                     const query = asyncSearch.value ?? null
                     const response = await axios.post(route, {
@@ -344,11 +333,10 @@
                     return response.data.result;
                 } catch (err) {
                     @if(!app()->isProduction())
-                    console.log(err);
+                        console.log(err);
                     @endif
                 }
             }
-
 
             const asyncSearchGames = games.closest('.choices').querySelector('input[type=search]');
             const asyncSearchDevelopers = developers.closest('.choices').querySelector('input[type=search]');
@@ -357,22 +345,7 @@
             asyncSearchGames.addEventListener(
                 'input',
                 debounce(event => gamesChoices.setChoices(async () => {
-                    return setDataToChoices('{{ route('select-games') }}', asyncSearchGames);
-                    {{--try {--}}
-                    {{--    const query = asyncSearch.value ?? null--}}
-                    {{--    const response = await axios.post('{{ route('select-games') }}', {--}}
-                    {{--        query: query,--}}
-                    {{--    });--}}
-                    {{--    setTimeout(() => {--}}
-                    {{--        asyncSearch.focus();--}}
-                    {{--    }, 0);--}}
-
-                    {{--    return response.data.result;--}}
-                    {{--} catch (err) {--}}
-                    {{--    @if(!app()->isProduction())--}}
-                    {{--        console.log(err);--}}
-                    {{--    @endif--}}
-                    {{--}--}}
+                    return getDataForChoices('{{ route('select-games') }}', asyncSearchGames);
                 }, 'value', 'label', true), 700),
                 false
             )
@@ -380,7 +353,7 @@
             asyncSearchDevelopers.addEventListener(
                 'input',
                 debounce(event => developersChoices.setChoices(async () => {
-                    return setDataToChoices('{{ route('select-game-developers') }}', asyncSearchDevelopers);
+                    return getDataForChoices('{{ route('select-game-developers') }}', asyncSearchDevelopers);
                 }, 'value', 'label', true), 700),
                 false
             )
@@ -388,14 +361,10 @@
             asyncSearchPublishers.addEventListener(
                 'input',
                 debounce(event => publishersChoices.setChoices(async () => {
-                    return setDataToChoices('{{ route('select-game-publishers') }}', asyncSearchPublishers);
+                    return getDataForChoices('{{ route('select-game-publishers') }}', asyncSearchPublishers);
                 }, 'value', 'label', true), 700),
                 false
             )
-
-            // let selectedForm = selectGames.closest('form');
-            //
-            // let options = selectGames.selectedOptions;
 
             const selectGames = document.querySelector(`[name="games[]"]`);
             const selectDevelopers = document.querySelector(`[name="developers[]"]`);
@@ -425,9 +394,6 @@
             selectPublishers.onchange = function () {
                 changeOld('old_selected_publishers', this);
             };
-
         </script>
    @endpush
 </x-layouts.admin>
-
-

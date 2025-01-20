@@ -121,7 +121,7 @@ class GameController extends Controller
         );
     }
 
-    public function getForAutocomplete(Request $request)
+    public function getForAutocomplete(Request $request): GamesForAutocompleteViewModel
     {
         return new GamesForAutocompleteViewModel(
             $request->input('games')

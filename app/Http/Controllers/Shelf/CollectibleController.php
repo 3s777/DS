@@ -15,6 +15,7 @@ use Illuminate\Contracts\View\View;
 use Illuminate\Database\Eloquent\Relations\Relation;
 use Illuminate\Foundation\Application;
 use Illuminate\Http\RedirectResponse;
+use Illuminate\Support\Facades\DB;
 use Support\Actions\MassDeletingAction;
 use Support\DTOs\MassDeletingDTO;
 use Support\Exceptions\MassDeletingException;
@@ -28,6 +29,9 @@ class CollectibleController extends Controller
 
     public function index(): View|Application|Factory|\Illuminate\Contracts\Foundation\Application
     {
+//        $models = Collectible::query()->whereBetween('purchase_price', [1000000, 2000000])->get();
+        $models = Collectible::query()->where(DB::raw('("sale"->>\'price\')::int'),'<',10000)->get();
+
         return view('admin.shelf.collectible.index', new CollectibleIndexViewModel());
     }
 

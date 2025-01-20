@@ -16,7 +16,7 @@ class AsyncMultiple extends Component
         public string $route,
         public ?string $label = null,
         public ?string $defaultOption = null,
-        public array|null $selected = null,
+        public ?array $selected = null,
         public bool $required = false,
         public bool $showOld = true,
         public bool $scripts = true

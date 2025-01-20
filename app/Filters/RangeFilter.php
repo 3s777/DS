@@ -22,7 +22,7 @@ class RangeFilter extends AbstractFilter
 
     public function apply(Builder $query): Builder
     {
-        return $query->when($this->requestValue('from'), function (Builder $query) {
+        return $query->when($this->requestValue('from') || $this->requestValue('to'), function (Builder $query) {
             $from = PriceValueObject::make($this->requestValue('from'))->prepareValue();
             $to = PriceValueObject::make($this->requestValue('to', 10000000))->prepareValue();
 
@@ -33,9 +33,8 @@ class RangeFilter extends AbstractFilter
         });
     }
 
-    public function preparedValues(): string
+    public function preparedValues(): ?string
     {
-
         $this->requestValue('from') ? $values = $this->requestValue('from') : $values = $this->requestValue('to');
 
         if($this->requestValue('from') && $this->requestValue('to')) {
