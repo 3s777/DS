@@ -11,6 +11,27 @@ class RangeFilter extends AbstractFilter
 {
     use Makeable;
 
+    protected ?bool $isPrice;
+
+    public function __construct(
+        string $title,
+        string $key,
+        string $table,
+        ?string $field = null,
+        array|string|null $placeholder = null,
+        ?bool $isPrice = false
+    ) {
+        parent::__construct($title, $key, $table, $field, $placeholder);
+
+        $this->setIsPrice($isPrice);
+    }
+
+    public function setIsPrice(bool $isPrice): static
+    {
+        $this->isPrice = $isPrice;
+        return $this;
+    }
+
     public function placeholder(string $key = ''): string|array|null
     {
         if($this->placeholder) {
@@ -23,8 +44,13 @@ class RangeFilter extends AbstractFilter
     public function apply(Builder $query): Builder
     {
         return $query->when($this->requestValue('from') || $this->requestValue('to'), function (Builder $query) {
-            $from = PriceValueObject::make($this->requestValue('from'))->prepareValue();
-            $to = PriceValueObject::make($this->requestValue('to', 10000000))->prepareValue();
+            $from = $this->requestValue('from', 0);
+            $to = $this->requestValue('to', 10000000);
+
+            if($this->isPrice) {
+                $from = PriceValueObject::make($this->requestValue('from'))->prepareValue();
+                $to = PriceValueObject::make($this->requestValue('to', 10000000))->prepareValue();
+            }
 
             $query->whereBetween($this->table.'.'.$this->field, [
                 $from,

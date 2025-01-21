@@ -66,11 +66,11 @@
             </x-ui.form.group>
         </x-grid.col>
 
-        <x-grid.col xl="3" lg="4" md="6" sm="12">
-            <x-ui.form.group>
-                <x-common.filters.range name="sale_price" />
-            </x-ui.form.group>
-        </x-grid.col>
+{{--        <x-grid.col xl="3" lg="4" md="6" sm="12">--}}
+{{--            <x-ui.form.group>--}}
+{{--                <x-common.filters.range name="sale_price" />--}}
+{{--            </x-ui.form.group>--}}
+{{--        </x-grid.col>--}}
 
         <x-slot:buttons></x-slot:buttons>
     </x-admin.filters-form>
