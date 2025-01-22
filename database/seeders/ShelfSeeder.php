@@ -13,6 +13,7 @@ use Domain\Game\Models\GamePublisher;
 use Domain\Shelf\Models\Collectible;
 use Domain\Shelf\Models\KitItem;
 use Domain\Shelf\Models\Shelf;
+use Domain\Trade\Models\Auction;
 use Illuminate\Database\Seeder;
 
 class ShelfSeeder extends Seeder
@@ -61,6 +62,7 @@ class ShelfSeeder extends Seeder
                 ->for($user, 'user')
                 ->create();
         }
+
 
 //        $collectibles = [];
 //        foreach($gameMedias as $media) {

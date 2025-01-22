@@ -29,21 +29,21 @@ class CollectibleFactory extends Factory
      */
     public function definition(): array
     {
-        $target = TargetEnum::Sale;
-        $sale = [];
-        $auction = [];
+        $target = Arr::random(TargetEnum::cases());
+//        $sale = [];
+//        $auction = [];
 
-        if($target->value == 'sale') {
-            $sale = ['price' => rand(100, 20000)];
-        }
-
-        if($target->value == 'auction') {
-            $auction = [
-                'price' => rand(100, 20000),
-                'step' => rand(10, 100),
-                'to' =>  now()->addDays(rand(1, 5))->format('d-m-Y')
-            ];
-        }
+//        if($target->value == 'sale') {
+//            $sale = ['price' => rand(100, 20000)];
+//        }
+//
+//        if($target->value == 'auction') {
+//            $auction = [
+//                'price' => rand(100, 20000),
+//                'step' => rand(10, 100),
+//                'to' =>  now()->addDays(rand(1, 5))->format('d-m-Y')
+//            ];
+//        }
 
         return [
             'name' => fake()->name(),
@@ -67,8 +67,6 @@ class CollectibleFactory extends Factory
             'purchased_at' => fake()->date(),
             'additional_field' => fake()->title(),
             'target' => $target,
-            'sale' => $sale,
-            'auction' => $auction,
             'description' => $this->translations(['en', 'ru'], [fake()->text(), fake()->text()])
         ];
     }
@@ -90,5 +88,23 @@ class CollectibleFactory extends Factory
                 }
             ]
         );
+    }
+
+    public function forSale(): Factory
+    {
+        return $this->state(function (array $attributes) {
+            return [
+                'target' => 'sale',
+            ];
+        });
+    }
+
+    public function forAuction(): Factory
+    {
+        return $this->state(function (array $attributes) {
+            return [
+                'target' => 'auction',
+            ];
+        });
     }
 }
