@@ -18,8 +18,8 @@ class SaleFactory extends Factory
     public function definition(): array
     {
         return [
-            'price' => fake()->numberBetween(100, 1000000),
-            'old_price' => fake()->numberBetween(100, 1000000),
+            'price' => fake()->numberBetween(1, 10000),
+            'price_old' => fake()->numberBetween(1, 10000),
             'quantity' => fake()->numberBetween(1, 100)
         ];
     }

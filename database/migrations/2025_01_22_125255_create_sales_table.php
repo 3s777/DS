@@ -19,8 +19,8 @@ return new class extends Migration
                 ->cascadeOnUpdate()
                 ->cascadeOnDelete();
             $table->unsignedBigInteger('price');
-            $table->unsignedBigInteger('old_price');
-            $table->unsignedInteger('quantity');
+            $table->unsignedBigInteger('price_old')->nullable();
+            $table->unsignedInteger('quantity')->default(1)->nullable();
             $table->softDeletes();
             $table->timestamps();
         });

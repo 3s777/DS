@@ -5,6 +5,8 @@ namespace App\Shelf\Controllers;
 use App\Http\Controllers\Shelf\CollectibleController;
 use App\Http\Requests\Shelf\CreateCollectibleGameRequest;
 use Database\Factories\Shelf\CollectibleFactory;
+use Database\Factories\Trade\AuctionFactory;
+use Database\Factories\Trade\SaleFactory;
 use Database\Factories\UserFactory;
 use Domain\Auth\Models\Role;
 use Domain\Auth\Models\User;
@@ -12,6 +14,7 @@ use Domain\Game\Models\GameMedia;
 use Domain\Shelf\Enums\CollectibleTypeEnum;
 use Domain\Shelf\Models\Category;
 use Domain\Shelf\Models\Collectible;
+use Domain\Trade\Models\Sale;
 use Illuminate\Database\Eloquent\Relations\Relation;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
@@ -38,6 +41,14 @@ class CollectibleControllerTest extends TestCase
                 'model' => Relation::getMorphAlias(GameMedia::class)
             ]))
             ->create();
+
+        if($this->collectible->target === 'sale') {
+            SaleFactory::new()->for($this->collectible, 'collectible')->create();
+        }
+
+        if($this->collectible->target === 'auction') {
+            AuctionFactory::new()->for($this->collectible, 'collectible')->create();
+        }
 
         $this->request = CreateCollectibleGameRequest::factory()->hasKitConditions()->create();
     }

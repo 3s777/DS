@@ -18,13 +18,12 @@ class SaleSeeder extends Seeder
 
         $collectibles = Collectible::where('target', 'sale')->get();
 
-        foreach ($collectibles as $collectible) {
-            Sale::factory()
-                ->for($collectible)
-                ->create();
+        if($collectibles) {
+            foreach ($collectibles as $collectible) {
+                Sale::factory()
+                    ->for($collectible)
+                    ->create();
+            }
         }
-//        $shelves = Shelf::factory()->create();
-
-
     }
 }

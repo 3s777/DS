@@ -7,6 +7,7 @@ use Domain\Shelf\Models\Collectible;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Support\Casts\Price;
 
 class Sale extends Model
 {
@@ -14,9 +15,15 @@ class Sale extends Model
     use HasFactory;
 
     protected $fillable = [
+        'collectible_id',
         'price',
-        'old_price',
+        'price_old',
         'quantity'
+    ];
+
+    protected $casts = [
+        'price' => Price::class,
+        'price_old' => Price::class
     ];
 
     protected static function newFactory(): SaleFactory

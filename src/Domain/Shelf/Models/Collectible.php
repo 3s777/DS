@@ -4,14 +4,15 @@ namespace Domain\Shelf\Models;
 
 use Database\Factories\Shelf\CollectibleFactory;
 use Domain\Auth\Models\User;
-use Domain\Shelf\Casts\Auction;
 use Domain\Shelf\Casts\Properties;
-use Domain\Shelf\Casts\Sale;
 use Domain\Shelf\FilterRegistrars\CollectibleFilterRegistrar;
 use Domain\Shelf\QueryBuilders\CollectibleQueryBuilder;
+use Domain\Trade\Models\Auction;
+use Domain\Trade\Models\Sale;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Database\Eloquent\Relations\MorphTo;
 use Illuminate\Database\Eloquent\Relations\MorphToMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -24,6 +25,8 @@ use Support\Traits\Models\HasImage;
 use Support\Traits\Models\HasImages;
 use Support\Traits\Models\HasFeaturedImage;
 use Support\Traits\Models\HasUser;
+use Domain\Shelf\Casts\Auction as AuctionCast;
+use Domain\Shelf\Casts\Sale as SaleCast;
 
 class Collectible extends Model implements HasMedia
 {
@@ -52,6 +55,8 @@ class Collectible extends Model implements HasMedia
         'description',
         'user_id',
         'featured_image',
+        'sale_data',
+        'auction_data'
     ];
 
     protected $casts = [
@@ -59,8 +64,8 @@ class Collectible extends Model implements HasMedia
         'kit_conditions' => 'array',
         'images' => 'array',
         'properties' => Properties::class,
-        'sale' => Sale::class,
-        'auction' => Auction::class,
+        'sale_data' => SaleCast::class,
+        'auction_data' => AuctionCast::class,
         'purchase_price' => Price::class
     ];
 
@@ -157,5 +162,15 @@ class Collectible extends Model implements HasMedia
     public function category(): BelongsTo
     {
         return $this->belongsTo(Category::class);
+    }
+
+    public function sale(): HasOne
+    {
+        return $this->hasOne(Sale::class);
+    }
+
+    public function auction(): HasOne
+    {
+        return $this->hasOne(Auction::class);
     }
 }

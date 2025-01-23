@@ -357,8 +357,8 @@ class CollectibleGameControllerTest extends TestCase
                 $updatedCollectible->properties['is_digital'],
                 $updatedCollectible->target,
                 $updatedCollectible->shelf_id,
-                $updatedCollectible->sale->price()->value(),
-                $updatedCollectible->sale->priceOld()->value()
+                $updatedCollectible->sale->price->value(),
+                $updatedCollectible->sale->price_old->value()
             ],
             [
                 $this->request['name'],

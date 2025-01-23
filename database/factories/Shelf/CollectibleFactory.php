@@ -66,7 +66,7 @@ class CollectibleFactory extends Factory
             'purchase_price' => fake()->numberBetween(1000, 100000),
             'purchased_at' => fake()->date(),
             'additional_field' => fake()->title(),
-            'target' => $target,
+            'target' => $target->value,
             'description' => $this->translations(['en', 'ru'], [fake()->text(), fake()->text()])
         ];
     }

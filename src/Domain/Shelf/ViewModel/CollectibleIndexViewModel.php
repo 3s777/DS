@@ -55,15 +55,15 @@ class CollectibleIndexViewModel extends ViewModel
                 'collectibles.seller',
                 'collectibles.additional_field',
                 'collectibles.target',
-                'collectibles.sale',
-                'collectibles.sale->price',
-                'collectibles.auction',
+//                'collectibles.sale',
+//                'collectibles.sale->price',
+//                'collectibles.auction',
                 'collectibles.created_at',
                 'collectibles.user_id',
                 'users.name as user_name'
             )
             ->join('users', 'users.id', '=', 'collectibles.user_id')
-            ->with('collectable')
+            ->with(['collectable', 'sale', 'auction'])
             ->filtered()
             ->sorted()
             ->paginate(10)

@@ -115,8 +115,8 @@ class CollectibleServiceTest extends TestCase
 
         $updatedCollectible= Collectible::where('name', 'NewNameCollectible')->first();
 
-        $this->assertTrue($updatedCollectible->sale->price()->value() == $this->request['sale']['price']);
-        $this->assertTrue($updatedCollectible->sale->priceOld()->value() == $this->request['sale']['price_old']);
+        $this->assertTrue($updatedCollectible->sale->price->value() == $this->request['sale']['price']);
+        $this->assertTrue($updatedCollectible->sale->price_old->value() == $this->request['sale']['price_old']);
         $this->assertTrue($updatedCollectible->target == $this->request['target']);
         $this->assertEquals($updatedCollectible->shelf->id, $newShelf->id);
         $this->assertEquals($updatedCollectible->user->id, $newShelf->user->id);

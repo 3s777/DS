@@ -40,23 +40,6 @@ class CollectibleService
                 $shelf = Shelf::find($data->shelf_id);
                 $collectible->user_id = $shelf->user_id;
 
-                if($data->target == 'sale') {
-                    $sale = [
-                        'price' => $data->sale['price'],
-                        'price_old' => $data->sale['price_old'] ?? null
-                    ];
-                    $collectible->sale = $sale;
-                }
-
-                if($data->target == 'auction') {
-                    $auction = [
-                        'price' => $data->auction['price'],
-                        'to' => $data->auction['to'],
-                        'step' => $data->auction['step']
-                    ];
-                    $collectible->auction = $auction;
-                }
-
                 $collectible->collectable_id = $data->collectable;
                 $collectible->collectable_type = $data->collectable_type;
                 $collectible->properties =  $data->properties;
@@ -64,6 +47,40 @@ class CollectibleService
 //                dd($data->images);
 
                 $collectible->save();
+
+                if($data->target == 'sale') {
+                    $collectible->sale()->create([
+                        'price' =>  $data->sale['price'],
+                        'price_old' => $data->sale['price_old'] ?? null
+                    ]);
+
+                    $sale = [
+                        'price' => $collectible->sale->price,
+                        'price_old' => $collectible->sale->price_old
+                    ];
+                    $collectible->sale_data = $sale;
+
+                    $collectible->save();
+                }
+
+                if($data->target == 'auction') {
+                    $collectible->auction()->create([
+                        'price' =>  $data->auction['price'],
+                        'step' => $data->auction['step'],
+                        'to' => $data->auction['to']
+                    ]);
+
+                    $auction = [
+                        'price' => $collectible->auction->price,
+                        'to' => $collectible->auction->to,
+                        'step' => $collectible->auction->step
+                    ];
+                    $collectible->auction_data = $auction;
+
+                    $collectible->save();
+                }
+
+
 
                 $kitItems = [];
 
@@ -129,20 +146,45 @@ class CollectibleService
                 $collectible->user_id = $shelf->user_id;
 
                 if($data->target == 'sale') {
+
+                    $collectible->auction()->delete();
+
+                    $collectible->auction_data = null;
+
+                    $collectible->sale()->updateOrCreate(
+                        ['collectible_id' => $collectible->id],
+                        ['price' =>  $data->sale['price'],
+                        'price_old' => $data->sale['price_old']]
+                    );
+
                     $sale = [
-                        'price' => $data->sale['price'],
-                        'price_old' => $data->sale['price_old'] ?? null
+                        'price' => $collectible->sale->price->raw(),
+                        'price_old' => $collectible->sale->price_old->raw()
                     ];
-                    $collectible->sale = $sale;
+                    $collectible->sale_data = $sale;
+
+                    $collectible->save();
                 }
 
                 if($data->target == 'auction') {
+                    $collectible->sale()->delete();
+                    $collectible->sale_data = null;
+
+                    $collectible->auction()->updateOrCreate(
+                        ['collectible_id' => $collectible->id],
+                        ['price' =>  $data->auction['price'],
+                        'step' => $data->auction['step'],
+                        'to' => $data->auction['to']]
+                    );
+
                     $auction = [
-                        'price' => $data->auction['price'],
-                        'to' => $data->auction['to'],
-                        'step' => $data->auction['step']
+                        'price' => $collectible->auction->price->raw(),
+                        'to' => $collectible->auction->to,
+                        'step' => $collectible->auction->step
                     ];
-                    $collectible->auction = $auction;
+                    $collectible->auction_data = $auction;
+
+                    $collectible->save();
                 }
 
                 $collectible->properties =  $data->properties;

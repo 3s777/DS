@@ -18,10 +18,12 @@ class AuctionSeeder extends Seeder
     {
         $collectibles = Collectible::where('target', 'auction')->get();
 
-        foreach ($collectibles as $collectible) {
-            Auction::factory()
-                ->for($collectible)
-                ->create();
+        if($collectibles) {
+            foreach ($collectibles as $collectible) {
+                Auction::factory()
+                    ->for($collectible)
+                    ->create();
+            }
         }
     }
 }

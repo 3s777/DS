@@ -29,8 +29,8 @@ return new class extends Migration
             $table->jsonb('properties')->nullable();
             $table->morphs('collectable');
             $table->string('target');
-            $table->jsonb('sale')->nullable();
-            $table->jsonb('auction')->nullable();
+            $table->jsonb('sale_data')->nullable();
+            $table->jsonb('auction_data')->nullable();
             $table->string('featured_image')->nullable();
             $table->text('images')->nullable();
             $table->jsonb('description')->nullable();
