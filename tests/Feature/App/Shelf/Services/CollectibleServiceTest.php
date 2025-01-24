@@ -59,6 +59,12 @@ class CollectibleServiceTest extends TestCase
 
         $gameService = app(CollectibleService::class);
 
+        $this->request['target'] = 'auction';
+        $this->request['sale']['price'] = null;
+        $this->request['auction']['price'] = '100';
+        $this->request['auction']['step'] = '200';
+        $this->request['auction']['to'] = '2025-12-20';
+
         $gameService->create(FillCollectibleDTO::fromRequest(
             new Request($this->request)
         ));
@@ -74,6 +80,9 @@ class CollectibleServiceTest extends TestCase
         $this->assertEquals($collectible->shelf, $shelf);
         $this->assertEquals($collectible->user->id, $shelf->user->id);
         $this->assertEquals($collectible->collectable->id, $this->request['collectable']);
+        $this->assertEquals($collectible->auction->price->value(), $collectible->auction_data->price()->value());
+        $this->assertEquals($collectible->auction->step->value(), $collectible->auction_data->step()->value());
+
 
         Queue::assertPushed(GenerateThumbnailJob::class, 3);
         Queue::assertPushed(GenerateSmallThumbnailsJob::class, 2);
@@ -115,12 +124,15 @@ class CollectibleServiceTest extends TestCase
 
         $updatedCollectible= Collectible::where('name', 'NewNameCollectible')->first();
 
-        $this->assertTrue($updatedCollectible->sale->price->value() == $this->request['sale']['price']);
-        $this->assertTrue($updatedCollectible->sale->price_old->value() == $this->request['sale']['price_old']);
-        $this->assertTrue($updatedCollectible->target == $this->request['target']);
+        $this->assertEquals($updatedCollectible->sale->price->value(), $this->request['sale']['price']);
+        $this->assertEquals($updatedCollectible->sale->price_old->value(), $this->request['sale']['price_old']);
+        $this->assertEquals($updatedCollectible->target, $this->request['target']);
         $this->assertEquals($updatedCollectible->shelf->id, $newShelf->id);
         $this->assertEquals($updatedCollectible->user->id, $newShelf->user->id);
         $this->assertNotEquals($updatedCollectible->collectable->id, $this->request['collectable']);
+
+        $this->assertEquals($updatedCollectible->sale->price->value(), $updatedCollectible->sale_data->price()->value());
+        $this->assertEquals($updatedCollectible->sale->price_old->value(), $updatedCollectible->sale_data->priceOld()->value());
 
         Queue::assertPushed(GenerateThumbnailJob::class, 3);
         Queue::assertPushed(GenerateSmallThumbnailsJob::class, 2);

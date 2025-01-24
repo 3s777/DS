@@ -49,7 +49,7 @@ return [
     'sale_price_old' => 'Старая цена',
     'auction_price' => 'Стартовая цена',
     'auction_step' => 'Шаг',
-    'auction_to' => 'Время окончания',
+    'auction_to' => 'Дата и время окончания',
     'kit_conditions' => 'Состояние комплекта',
     'target' => 'Назначение',
     'choose_target' => 'Выберите назначение',

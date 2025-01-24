@@ -133,7 +133,8 @@ class CreateCollectibleGameRequest extends FormRequest
                 'exclude_unless:target,auction',
                 'required',
                 'date',
-                'date_format:Y-m-d'
+                'date_format:Y-m-d',
+                'after:now'
             ],
             'description' => ['nullable','string'],
             'featured_image' => [
@@ -174,10 +175,17 @@ class CreateCollectibleGameRequest extends FormRequest
             'sale.price_old' => __('collectible.sale_price_old'),
             'auction.price' => __('collectible.auction_price'),
             'auction.step' => __('collectible.auction_step'),
-            'auction.to' => __('collectible.auction_stop_date'),
+            'auction.to' => __('collectible.auction_to'),
             'description' => __('common.description'),
             'featured_image' => __('common.featured_image'),
             'images' => trans_choice('common.additional_image', 2)
+        ];
+    }
+
+    public function messages()
+    {
+        return [
+            'after' => __('validation.date_less_now'),
         ];
     }
 }

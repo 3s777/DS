@@ -181,7 +181,7 @@ return [
 
     'attributes' => [
         'user_name' => 'Имя пользователя',
-        'password' => 'Пароль'
+        'password' => 'Пароль',
     ],
 
 
@@ -194,5 +194,6 @@ return [
     'email_not_exist' => 'Пользователя с таким :attribute не существует',
     'array_model_not_exist' => 'Неверное значение поля :attribute',
     'filters_date' => 'Неверный формат даты',
-    'choices_unique' => 'Значение должно быть уникальным'
+    'choices_unique' => 'Значение должно быть уникальным',
+    'date_less_now' => ':attribute должно быть не меньше сегодняшней даты',
 ];
