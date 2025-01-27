@@ -12,6 +12,7 @@ class RangeFilter extends AbstractFilter
     use Makeable;
 
     protected ?bool $isPrice;
+    protected ?string $relation;
 
     public function __construct(
         string $title,
@@ -19,16 +20,24 @@ class RangeFilter extends AbstractFilter
         string $table,
         ?string $field = null,
         array|string|null $placeholder = null,
-        ?bool $isPrice = false
+        ?bool $isPrice = false,
+        ?string $relation = null
     ) {
         parent::__construct($title, $key, $table, $field, $placeholder);
 
         $this->setIsPrice($isPrice);
+        $this->setRelation($relation);
     }
 
     public function setIsPrice(bool $isPrice): static
     {
         $this->isPrice = $isPrice;
+        return $this;
+    }
+
+    public function setRelation(?string $relation): static
+    {
+        $this->relation = $relation;
         return $this;
     }
 
@@ -41,21 +50,43 @@ class RangeFilter extends AbstractFilter
         return $this->title;
     }
 
+    public function rangeValues($from, $to): array
+    {
+        if($this->isPrice) {
+            $from = PriceValueObject::make($from)->prepareValue();
+            $to = PriceValueObject::make($to)->prepareValue();
+        }
+
+        return [
+          'from' => $from,
+          'to' => $to
+        ];
+    }
+
     public function apply(Builder $query): Builder
     {
         return $query->when($this->requestValue('from') || $this->requestValue('to'), function (Builder $query) {
-            $from = $this->requestValue('from', 0);
-            $to = $this->requestValue('to', 10000000);
+            // extract $from and $to variables from rangeValues()
+            extract(
+                $this->rangeValues(
+                    $this->requestValue('from', 0),
+                    $this->requestValue('to', 10000000)
+                )
+            );
 
-            if($this->isPrice) {
-                $from = PriceValueObject::make($this->requestValue('from'))->prepareValue();
-                $to = PriceValueObject::make($this->requestValue('to', 10000000))->prepareValue();
+            if($this->relation) {
+                $query->whereHas($this->relation, function (Builder $q) use($from, $to) {
+                    $q->whereBetween($this->table.'.'.$this->field, [
+                        $from,
+                        $to
+                    ]);
+                });
+            } else {
+                $query->whereBetween($this->table.'.'.$this->field, [
+                    $from,
+                    $to
+                ]);
             }
-
-            $query->whereBetween($this->table.'.'.$this->field, [
-                $from,
-                $to
-            ]);
         });
     }
 

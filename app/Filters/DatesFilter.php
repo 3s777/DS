@@ -11,6 +11,21 @@ class DatesFilter extends AbstractFilter
 {
     use Makeable;
 
+    protected ?string $relation;
+
+    public function __construct(
+        string $title,
+        string $key,
+        string $table,
+        ?string $field = null,
+        array|string|null $placeholder = null,
+        ?string $relation = null
+    ) {
+        parent::__construct($title, $key, $table, $field, $placeholder);
+
+        $this->setRelation($relation);
+    }
+
     public function setField(string|null $field): static
     {
         $this->field = 'created_at';
@@ -22,33 +37,41 @@ class DatesFilter extends AbstractFilter
         return $this;
     }
 
+    public function setRelation(?string $relation): static
+    {
+        $this->relation = $relation;
+        return $this;
+    }
+
     protected function fromDate(): bool|Carbon
     {
-        if($this->requestValue('from')) {
-            return Carbon::createFromFormat('Y-m-d', $this->requestValue('from'));
-        }
-
-        return false;
+        return Carbon::createFromFormat('Y-m-d', $this->requestValue('from','0001-01-01'))
+            ->startOfDay();
     }
 
     protected function toDate(): bool|Carbon
     {
-        if($this->requestValue('to')) {
-            return Carbon::createFromFormat('Y-m-d', $this->requestValue('to'));
-        }
-
-        return false;
+        return Carbon::createFromFormat('Y-m-d', $this->requestValue('to','3000-01-01'))
+            ->endOfDay();
     }
 
     public function apply(Builder $query): Builder
     {
         return $query->when($this->requestValue(), function (Builder $query) {
-            if($this->fromDate()) {
-                $query->whereDate($this->table.'.'.$this->field, '>=', $this->fromDate());
-            }
+//            if($this->fromDate()) {
+//                $query->whereDate($this->table.'.'.$this->field, '>=', $this->fromDate());
+//            }
+//
+//            if($this->toDate()) {
+//                $query->whereDate($this->table.'.'.$this->field, '<=', $this->toDate());
+//            }
 
-            if($this->toDate()) {
-                $query->whereDate($this->table.'.'.$this->field, '<=', $this->toDate());
+            if($this->relation) {
+                $query->whereHas($this->relation, function (Builder $q) {
+                    $q->whereBetween($this->table.'.'.$this->field, [$this->fromDate(), $this->toDate()]);
+                });
+            } else {
+                $query->whereBetween($this->table.'.'.$this->field, [$this->fromDate(), $this->toDate()]);
             }
         });
     }
@@ -58,11 +81,11 @@ class DatesFilter extends AbstractFilter
         $fromDate = '';
         $toDate = '';
 
-        if($this->fromDate()) {
+        if($this->requestValue('from')) {
             $fromDate = $this->fromDate()->format('d.m.Y');
         }
 
-        if($this->toDate()) {
+        if($this->requestValue('to')) {
             $toDate = $this->toDate()->format('d.m.Y');
         }
 

@@ -50,6 +50,8 @@ return [
     'auction_price' => 'Стартовая цена',
     'auction_step' => 'Шаг',
     'auction_to' => 'Дата и время окончания',
+    'auction_at_from' => 'Окончание аукциона от',
+    'auction_at_to' => 'Окончание аукциона до',
     'kit_conditions' => 'Состояние комплекта',
     'target' => 'Назначение',
     'choose_target' => 'Выберите назначение',
