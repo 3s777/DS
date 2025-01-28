@@ -20,7 +20,7 @@ class AuctionFactory extends Factory
         return [
             'price' => fake()->numberBetween(1, 10000),
             'step' => fake()->numberBetween(1, 10),
-            'to' => fake()->date(),
+            'finished_at' => fake()->dateTime(),
         ];
     }
 }

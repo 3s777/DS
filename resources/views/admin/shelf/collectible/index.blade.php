@@ -139,7 +139,7 @@
                         @if($collectible->target == 'auction')
                             <div>{{ __('collectible.auction_price') }}: {{ $collectible->auction?->price }}</div>
                             <div>{{ __('collectible.auction_step') }}: {{ $collectible->auction?->step }}</div>
-                            <div>{{ __('collectible.auction_to') }}: {{ $collectible->auction?->to }}</div>
+                            <div>{{ __('collectible.auction.finished_at') }}: {{ $collectible->auction?->to }}</div>
                         @endif
                     </x-ui.responsive-table.column>
                     <x-ui.responsive-table.column>

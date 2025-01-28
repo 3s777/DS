@@ -21,7 +21,7 @@ class Auction implements CastsAttributes
             return new AuctionValueObject(
                 $jsonValue->price,
                 $jsonValue->step,
-                $jsonValue->to
+                $jsonValue->finished_at
             );
         }
 
@@ -37,9 +37,9 @@ class Auction implements CastsAttributes
         if(!$value instanceof AuctionValueObject) {
             $price = $value['price'];
             $step = $value['step'];
-            $to = $value['to'];
+            $finished_at = $value['finished_at'];
 
-            $value = AuctionValueObject::make($price, $step, $to);
+            $value = AuctionValueObject::make($price, $step, $finished_at);
         }
 
         $prices = [
@@ -49,7 +49,7 @@ class Auction implements CastsAttributes
         return json_encode([
             'price' => $value->price()->prepareValue(),
             'step' => $value->step()->prepareValue(),
-            'to' => $value->to()
+            'finished_at' => $value->finished_at()
         ]);
     }
 }

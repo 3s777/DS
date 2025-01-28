@@ -18,7 +18,7 @@ class Auction extends Model
         'collectible_id',
         'price',
         'step',
-        'to'
+        'finished_at'
     ];
 
     protected $casts = [

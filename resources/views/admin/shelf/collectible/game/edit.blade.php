@@ -303,7 +303,7 @@
                         <x-grid.col xl="4" ls="6" lg="12" md="12" sm="12">
                             <x-ui.form.group>
                                 <x-ui.form.datepicker
-                                    placeholder="{{ __('collectible.auction_to') }} *"
+                                    placeholder="{{ __('collectible.auction.finished_at') }} *"
                                     id="auction_to"
                                     name="auction[to]"
                                     :value="$collectible->auction?->to">

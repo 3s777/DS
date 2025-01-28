@@ -20,7 +20,7 @@ return new class extends Migration
                 ->cascadeOnDelete();
             $table->unsignedBigInteger('price');
             $table->unsignedBigInteger('step');
-            $table->date('to');
+            $table->datetime('finished_at');
             $table->softDeletes();
             $table->timestamps();
         });
