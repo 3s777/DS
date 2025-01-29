@@ -241,7 +241,7 @@
                         <x-grid.col xl="4" ls="6" lg="12" md="12" sm="12">
                             <x-ui.form.group>
                                 <x-ui.form.input-text
-                                    placeholder="{{ __('collectible.sale_price') }} *"
+                                    placeholder="{{ __('collectible.sale.price') }} *"
                                     id="sale_price"
                                     name="sale[price]"
                                     step="0.01"
@@ -256,7 +256,7 @@
                         <x-grid.col xl="4" ls="6" lg="12" md="12" sm="12">
                             <x-ui.form.group>
                                 <x-ui.form.input-text
-                                    placeholder="{{ __('collectible.sale_price_old') }} *"
+                                    placeholder="{{ __('collectible.sale.price_old') }} *"
                                     id="sale_price_old"
                                     name="sale[price_old]"
                                     step="0.01"
@@ -274,7 +274,7 @@
                         <x-grid.col xl="4" ls="6" lg="12" md="12" sm="12">
                             <x-ui.form.group>
                                 <x-ui.form.input-text
-                                    placeholder="{{ __('collectible.auction_price') }} *"
+                                    placeholder="{{ __('collectible.auction.price') }} *"
                                     id="auction_price"
                                     name="auction[price]"
                                     step="0.01"
@@ -288,7 +288,7 @@
                         <x-grid.col xl="4" ls="6" lg="12" md="12" sm="12">
                             <x-ui.form.group>
                                 <x-ui.form.input-text
-                                    placeholder="{{ __('collectible.auction_step') }} *"
+                                    placeholder="{{ __('collectible.auction.step') }} *"
                                     id="auction_step"
                                     name="auction[step]"
                                     step="0.01"
@@ -304,9 +304,10 @@
                             <x-ui.form.group>
                                 <x-ui.form.datepicker
                                     placeholder="{{ __('collectible.auction.finished_at') }} *"
-                                    id="auction_to"
-                                    name="auction[to]"
-                                    :value="$collectible->auction?->to">
+                                    id="auction_finished_at"
+                                    name="auction[finished_at]"
+                                    :time="true"
+                                    :value="$collectible->auction?->finished_at">
                                 </x-ui.form.datepicker>
                             </x-ui.form.group>
                         </x-grid.col>

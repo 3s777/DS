@@ -129,11 +129,10 @@ class CreateCollectibleGameRequest extends FormRequest
                 'required',
                 'numeric'
             ],
-            'auction.to' => [
+            'auction.finished_at' => [
                 'exclude_unless:target,auction',
                 'required',
                 'date',
-                'date_format:Y-m-d',
                 'after:now'
             ],
             'description' => ['nullable','string'],
@@ -171,11 +170,11 @@ class CreateCollectibleGameRequest extends FormRequest
             'collectable' => trans_choice('collectible.collectable', 1),
             'kit_conditions' => __('collectible.kit_conditions'),
             'target' => __('collectible.target'),
-            'sale.price' => __('collectible.sale_price'),
-            'sale.price_old' => __('collectible.sale_price_old'),
-            'auction.price' => __('collectible.auction_price'),
-            'auction.step' => __('collectible.auction_step'),
-            'auction.to' => __('collectible.auction_to'),
+            'sale.price' => __('collectible.sale.price'),
+            'sale.price_old' => __('collectible.sale.price_old'),
+            'auction.price' => __('collectible.auction.price'),
+            'auction.step' => __('collectible.auction.step'),
+            'auction.finished_at' => __('collectible.auction.finished_at'),
             'description' => __('common.description'),
             'featured_image' => __('common.featured_image'),
             'images' => trans_choice('common.additional_image', 2)

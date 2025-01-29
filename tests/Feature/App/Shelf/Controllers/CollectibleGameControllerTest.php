@@ -88,7 +88,7 @@ class CollectibleGameControllerTest extends TestCase
         $this->request['target'] = 'auction';
         $this->request['auction']['price'] = 'fake';
         $this->request['auction']['step'] = 'fake';
-        $this->request['auction']['to'] = 'fake';
+        $this->request['auction']['finished_at'] = 'fake';
     }
 
     /**
@@ -217,7 +217,7 @@ class CollectibleGameControllerTest extends TestCase
             ->assertInvalid([
                 'auction.price',
                 'auction.step',
-                'auction.to'
+                'auction.finished_at'
             ])
             ->assertRedirectToRoute('collectibles.create.game');
 
@@ -283,7 +283,7 @@ class CollectibleGameControllerTest extends TestCase
             ->assertInvalid([
                 'auction.price',
                 'auction.step',
-                'auction.to'
+                'auction.finished_at'
             ])
             ->assertRedirectToRoute('collectibles.create.game');
 

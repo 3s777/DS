@@ -1,9 +1,10 @@
 <?php
 
-namespace Support\ValueObjects;
+namespace Domain\Trade\ValueObjects;
 
 use InvalidArgumentException;
 use Support\Traits\Makeable;
+use Support\ValueObjects\PriceValueObject;
 
 class AuctionValueObject
 {
@@ -11,12 +12,12 @@ class AuctionValueObject
 
     private PriceValueObject $price;
     private PriceValueObject $step;
-    private string $to;
+    private string $finished_at;
 
     public function __construct(
         int|float $price,
         int|float $step,
-        string $to,
+        string $finished_at,
         $currency = 'RUB',
         $precision = 100
     ) {
@@ -26,7 +27,7 @@ class AuctionValueObject
 
         $this->price = PriceValueObject::make($price, $currency, $precision);
         $this->step = PriceValueObject::make($step, $currency, $precision);
-        $this->to = $to;
+        $this->finished_at = $finished_at;
     }
 
     public function price(): PriceValueObject
@@ -39,8 +40,8 @@ class AuctionValueObject
         return $this->step;
     }
 
-    public function to()
+    public function finished_at()
     {
-        return $this->to;
+        return $this->finished_at;
     }
 }

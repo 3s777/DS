@@ -109,10 +109,11 @@ class UpdateCollectibleGameRequest extends FormRequest
                 'required',
                 'numeric'
             ],
-            'auction.to' => [
+            'auction.finished_at' => [
                 'exclude_unless:target,auction',
                 'date',
-                'date_format:Y-m-d'
+                'after:now'
+//                'date_format:Y-m-dTH:m'
             ],
             'description' => ['nullable','string'],
             'featured_image' => [
@@ -152,11 +153,11 @@ class UpdateCollectibleGameRequest extends FormRequest
             'is_digital' => __('game.is_digital'),
             'kit_conditions' => __('collectible.kit_conditions'),
             'target' => __('collectible.target'),
-            'sale.price' => __('collectible.sale_price'),
-            'sale.price_old' => __('collectible.sale_price_old'),
-            'auction.price' => __('collectible.auction_price'),
-            'auction.step' => __('collectible.auction_step'),
-            'auction.to' => __('collectible.auction_stop_date'),
+            'sale.price' => __('collectible.sale.price'),
+            'sale.price_old' => __('collectible.sale.price_old'),
+            'auction.price' => __('collectible.auction.price'),
+            'auction.step' => __('collectible.auction.step'),
+            'auction.finished_at' => __('collectible.auction.finished_at'),
             'description' => __('common.description'),
             'featured_image' => __('common.featured_image'),
             'images' => trans_choice('common.additional_image', 2)

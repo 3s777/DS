@@ -11,9 +11,6 @@ use Domain\Shelf\Models\Category;
 use Domain\Shelf\Models\Collectible;
 use Illuminate\Database\Eloquent\Relations\Relation;
 use Illuminate\Foundation\Testing\RefreshDatabase;
-use Support\ValueObjects\AuctionValueObject;
-use Support\ValueObjects\PriceValueObject;
-use Support\ValueObjects\SaleValueObject;
 use Tests\TestCase;
 
 class PropertiesCastTest extends TestCase

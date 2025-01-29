@@ -2,9 +2,9 @@
 
 namespace Domain\Shelf\Casts;
 
+use Domain\Trade\ValueObjects\SaleValueObject;
 use Illuminate\Contracts\Database\Eloquent\CastsAttributes;
 use Illuminate\Database\Eloquent\Model;
-use Support\ValueObjects\SaleValueObject;
 
 class Sale implements CastsAttributes
 {

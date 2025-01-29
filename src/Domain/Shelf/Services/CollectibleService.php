@@ -47,7 +47,7 @@ class CollectibleService
         $auction = [
             'price' => $collectible->auction->price->value(),
             'step' => $collectible->auction->step->value(),
-            'to' => $collectible->auction->to
+            'finished_at' => $collectible->auction->finished_at
         ];
         $collectible->auction_data = $auction;
 
@@ -82,7 +82,7 @@ class CollectibleService
                     $collectible->auction()->create([
                         'price' =>  $data->auction['price'],
                         'step' => $data->auction['step'],
-                        'to' => $data->auction['to']
+                        'finished_at' => $data->auction['finished_at']
                     ]);
 
                     $this->setAuctionData($collectible);
@@ -170,7 +170,7 @@ class CollectibleService
                         ['collectible_id' => $collectible->id],
                         ['price' =>  $data->auction['price'],
                         'step' => $data->auction['step'],
-                        'to' => $data->auction['to']]
+                        'finished_at' => $data->auction['finished_at']]
                     );
 
                     $this->setAuctionData($collectible);

@@ -9,11 +9,10 @@ use Domain\Auth\Models\User;
 use Domain\Game\Models\GameMedia;
 use Domain\Shelf\Models\Category;
 use Domain\Shelf\Models\Collectible;
+use Domain\Trade\ValueObjects\AuctionValueObject;
 use Illuminate\Database\Eloquent\Relations\Relation;
 use Illuminate\Foundation\Testing\RefreshDatabase;
-use Support\ValueObjects\AuctionValueObject;
 use Support\ValueObjects\PriceValueObject;
-use Support\ValueObjects\SaleValueObject;
 use Tests\TestCase;
 
 class AuctionCastTest extends TestCase
@@ -48,7 +47,7 @@ class AuctionCastTest extends TestCase
                     'auction_data' => [
                         'price' => 10.099,
                         'step' => 05.11,
-                        'to' => '2024-02-13'
+                        'finished_at' => '2024-02-13'
                     ]
                 ]
             );
@@ -56,13 +55,13 @@ class AuctionCastTest extends TestCase
         $this->assertInstanceOf(AuctionValueObject::class, $collectible->auction_data);
         $this->assertInstanceOf(PriceValueObject::class, $collectible->auction_data->price());
         $this->assertInstanceOf(PriceValueObject::class, $collectible->auction_data->step());
-        $this->assertNotEmpty($collectible->auction_data->to());
+        $this->assertNotEmpty($collectible->auction_data->finished_at());
         $this->assertEquals(1009, $collectible->auction_data->price()->raw());
 
         $collectible->auction_data = [
             'price' => 14.5989,
             'step' => 55.9888,
-            'to' => '2025-02-13',
+            'finished_at' => '2025-02-13',
             'test' => 'wrong parameter'
         ];
 

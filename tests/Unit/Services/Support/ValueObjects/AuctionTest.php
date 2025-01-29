@@ -2,10 +2,9 @@
 
 namespace Services\Support\ValueObjects;
 
+use Domain\Trade\ValueObjects\AuctionValueObject;
 use InvalidArgumentException;
-use Support\ValueObjects\AuctionValueObject;
 use Support\ValueObjects\PriceValueObject;
-use Support\ValueObjects\SaleValueObject;
 use Tests\TestCase;
 
 class AuctionTest extends TestCase
@@ -24,7 +23,7 @@ class AuctionTest extends TestCase
         $this->assertInstanceOf(PriceValueObject::class, $auction->price());
         $this->assertEquals(20, $auction->step()->raw());
         $this->assertInstanceOf(PriceValueObject::class, $auction->step());
-        $this->assertEquals('2024-10-03', $auction->to());
+        $this->assertEquals('2024-10-03', $auction->finished_at());
 
         $this->expectException(InvalidArgumentException::class);
 

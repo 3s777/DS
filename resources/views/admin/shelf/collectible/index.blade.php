@@ -131,15 +131,15 @@
                     <x-ui.responsive-table.column>
                         <span class="responsive-table__label">{{ __('common.sale') }}: </span>
                         @if($collectible->target == 'sale')
-                            <div>{{ __('collectible.sale_price') }}: {{ $collectible->sale?->price }}</div>
+                            <div>{{ __('collectible.sale.price') }}: {{ $collectible->sale?->price }}</div>
                         @endif
                     </x-ui.responsive-table.column>
                     <x-ui.responsive-table.column>
                         <span class="responsive-table__label">{{ __('common.auction') }}: </span>
                         @if($collectible->target == 'auction')
-                            <div>{{ __('collectible.auction_price') }}: {{ $collectible->auction?->price }}</div>
-                            <div>{{ __('collectible.auction_step') }}: {{ $collectible->auction?->step }}</div>
-                            <div>{{ __('collectible.auction.finished_at') }}: {{ $collectible->auction?->to }}</div>
+                            <div>{{ __('collectible.auction.price') }}: {{ $collectible->auction?->price }}</div>
+                            <div>{{ __('collectible.auction.step') }}: {{ $collectible->auction?->step }}</div>
+                            <div>{{ __('collectible.auction.finished_at') }}: {{ $collectible->auction?->finished_at }}</div>
                         @endif
                     </x-ui.responsive-table.column>
                     <x-ui.responsive-table.column>

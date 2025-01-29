@@ -1,12 +1,10 @@
 <?php
 
-namespace Support\ValueObjects;
+namespace Domain\Trade\ValueObjects;
 
-use Domain\Shelf\Casts\Sale;
-use Illuminate\Contracts\Database\Eloquent\Castable;
 use InvalidArgumentException;
-use Stringable;
 use Support\Traits\Makeable;
+use Support\ValueObjects\PriceValueObject;
 
 class SaleValueObject
 {

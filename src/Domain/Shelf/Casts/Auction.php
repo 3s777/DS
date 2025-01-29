@@ -2,10 +2,9 @@
 
 namespace Domain\Shelf\Casts;
 
+use Domain\Trade\ValueObjects\AuctionValueObject;
 use Illuminate\Contracts\Database\Eloquent\CastsAttributes;
 use Illuminate\Database\Eloquent\Model;
-use Support\ValueObjects\AuctionValueObject;
-use Support\ValueObjects\SaleValueObject;
 
 class Auction implements CastsAttributes
 {

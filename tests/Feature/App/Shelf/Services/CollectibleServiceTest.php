@@ -63,7 +63,7 @@ class CollectibleServiceTest extends TestCase
         $this->request['sale']['price'] = null;
         $this->request['auction']['price'] = '100';
         $this->request['auction']['step'] = '200';
-        $this->request['auction']['to'] = '2025-12-20';
+        $this->request['auction']['finished_at'] = '2025-12-20';
 
         $gameService->create(FillCollectibleDTO::fromRequest(
             new Request($this->request)

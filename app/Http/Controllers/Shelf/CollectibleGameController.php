@@ -13,6 +13,7 @@ use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
 use Illuminate\Foundation\Application;
 use Illuminate\Http\RedirectResponse;
+use Illuminate\Http\Request;
 use Illuminate\Routing\Redirector;
 
 class CollectibleGameController extends Controller
@@ -33,6 +34,7 @@ class CollectibleGameController extends Controller
 
     public function update(UpdateCollectibleGameRequest $request, Collectible $collectible, CollectibleService $collectibleService): RedirectResponse
     {
+//        dd($request);
         $collectibleService->update($collectible, FillCollectibleDTO::fromRequest($request));
 
         flash()->info(__('collectible.updated'));

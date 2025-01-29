@@ -2,9 +2,9 @@
 
 namespace Services\Support\ValueObjects;
 
+use Domain\Trade\ValueObjects\SaleValueObject;
 use InvalidArgumentException;
 use Support\ValueObjects\PriceValueObject;
-use Support\ValueObjects\SaleValueObject;
 use Tests\TestCase;
 
 class SaleTest extends TestCase

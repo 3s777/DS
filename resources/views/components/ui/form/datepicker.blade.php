@@ -3,6 +3,7 @@
     'name',
     'placeholder' => '',
     'value' => '',
+    'time' => false
 ])
 
 <div class="datepicker">
@@ -10,7 +11,7 @@
     <input
            {{ $attributes->class(['datepicker__field', 'datepicker__field_error' => $errors->has($name)]) }}
            id="{{ $id }}"
-           type="date"
+           type="{{ $time ? 'datetime-local' : 'date' }}"
            name="{{ $name }}"
            value="{{ old(to_dot_name($name)) ? old(to_dot_name($name)) : $value }}" >
 </div>
