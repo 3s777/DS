@@ -41,6 +41,11 @@ class UserController extends Controller
 
     public function index(FilterUserRequest $request): View|Application|Factory|\Illuminate\Contracts\Foundation\Application
     {
+        $user = User::search('asdfsdf')->get();
+
+//
+dd($user);
+
         return view('admin.user.user.index', new UserIndexViewModel());
     }
 
@@ -136,7 +141,8 @@ class UserController extends Controller
         return new AsyncSelectByQueryViewModel(
             $request->input('query'),
             User::class,
-            trans_choice('user.choose', 1)
+            trans_choice('user.choose', 1),
+            fullText: true
         );
     }
 

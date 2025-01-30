@@ -29,7 +29,7 @@ return new class extends Migration
     public function down(): void
     {
         if(!app()->isProduction()) {
-                Schema::dropIfExists('game_genrables');
+            Schema::dropIfExists('game_genrables');
         }
     }
 };

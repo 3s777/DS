@@ -14,7 +14,8 @@ class AsyncSelectByQueryViewModel extends ViewModel
         protected ?array $depended = null,
         protected ?string $searchField = 'name',
         protected ?string $key = 'id',
-        protected ?string $name = 'name'
+        protected ?string $name = 'name',
+        protected bool $fullText = false,
     )
     {
     }
@@ -25,6 +26,15 @@ class AsyncSelectByQueryViewModel extends ViewModel
             ['value' => '', 'label' => __($this->label), 'disabled' => true],
             ['value' => 'not_found', 'label' => __('common.not_found'), 'disabled' => true]
         ];
+    }
+
+    private function makeQuery()
+    {
+        if($this->fullText) {
+            return $this->modelName::search($this->query);
+        }
+
+        return $this->modelName::query()->where($this->searchField, 'ilike', "%{$this->query}%")->select($this->key, $this->name);
     }
 
     public function result(): array
@@ -41,7 +51,7 @@ class AsyncSelectByQueryViewModel extends ViewModel
             $dependedKey = array_key_first($this->depended);
             $dependedValue = $this->depended[$dependedKey];
 
-            $query = $this->modelName::query()->where($this->searchField, 'ilike', "%{$this->query}%")->select($this->key, $this->name);
+            $query = $this->makeQuery();
 
             if (!Schema::hasColumn($query->getModel()->getTable(), $dependedKey) || !$dependedValue) {
                 return $this->setEmpty();
@@ -60,9 +70,11 @@ class AsyncSelectByQueryViewModel extends ViewModel
 
 
         if($this->query) {
-            $query = $this->modelName::query()->where($this->searchField, 'ilike', "%{$this->query}%")->select($this->key, $this->name);
+            $query = $this->makeQuery();
 
-            $models = $query->limit(10)->get();
+            $models = $query->get();
+
+            dd($models);
 
             foreach ($models as $model) {
                 $options[] = ['value' => $model->{$this->key}, 'label' => $model->{$this->name}];

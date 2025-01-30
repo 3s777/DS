@@ -23,6 +23,8 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
+use Laravel\Scout\Attributes\SearchUsingFullText;
+use Laravel\Scout\Attributes\SearchUsingPrefix;
 use Mews\Purifier\Casts\CleanHtml;
 use OwenIt\Auditing\Contracts\Auditable;
 use Spatie\MediaLibrary\HasMedia;
@@ -34,6 +36,7 @@ use Support\Traits\Models\HasImage;
 use Support\Traits\Models\HasSlug;
 use Support\Traits\Models\HasFeaturedImage;
 use OwenIt\Auditing\Auditable as HasAuditable;
+use Laravel\Scout\Searchable;
 
 class User extends Authenticatable implements MustVerifyEmail, HasLocalePreference, HasMedia, Auditable
 {
@@ -49,6 +52,7 @@ class User extends Authenticatable implements MustVerifyEmail, HasLocalePreferen
     use HasPermissions;
     use HasAuditable;
     use HasCustomAudit;
+    use Searchable;
 
     /**
      * The attributes that are mass assignable.
@@ -94,6 +98,15 @@ class User extends Authenticatable implements MustVerifyEmail, HasLocalePreferen
         'email',
         'first_name'
     ];
+
+//    #[SearchUsingPrefix(['name'])]
+    #[SearchUsingFullText(['name'])]
+    public function toSearchableArray(): array
+    {
+        return [
+            'name' => $this->name
+        ];
+    }
 
     protected static function newFactory(): UserFactory
     {
