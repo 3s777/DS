@@ -14,12 +14,15 @@ return new class extends Migration
     {
         Schema::create('shelves', function (Blueprint $table) {
             $table->id();
-            $table->ulid('ulid');
+            $table->ulid('ulid')->index();
             $table->string('name');
             $table->integer('number')->nullable();
             $table->string('featured_image')->nullable();
             $table->jsonb('description')->nullable();
-            $table->foreignIdFor(User::class)->constrained();
+            $table->foreignIdFor(User::class)
+                ->nullable()
+                ->constrained()
+                ->nullOnDelete();
 
             $table->timestamps();
             $table->softDeletes();

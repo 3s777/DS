@@ -16,9 +16,9 @@ return new class extends Migration
     {
         Schema::create('collectibles', function (Blueprint $table) {
             $table->id();
-            $table->ulid('ulid');
-            $table->string('name');
-            $table->string('article_number')->nullable();
+            $table->ulid('ulid')->index();
+            $table->string('name')->index();
+            $table->string('article_number')->nullable()->index();
             $table->string('condition');
             $table->foreignIdFor(Shelf::class)->constrained();
             $table->unsignedBigInteger('purchase_price')->nullable();
@@ -38,7 +38,10 @@ return new class extends Migration
                 ->constrained()
                 ->cascadeOnUpdate()
                 ->cascadeOnDelete();
-            $table->foreignIdFor(User::class)->constrained();
+            $table->foreignIdFor(User::class)
+                ->nullable()
+                ->constrained()
+                ->nullOnDelete();
 
             $table->softDeletes();
             $table->timestamps();

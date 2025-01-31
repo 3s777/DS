@@ -15,13 +15,15 @@ return new class () extends Migration {
             $table->id();
             $table->string('name')->unique();
             $table->string('slug')->unique();
-            $table->text('alternative_names')->nullable();
+            $table->text('alternative_names')->nullable()->index();
             $table->date('released_at')->nullable();
             $table->jsonb('description')->nullable();
             $table->string('featured_image')->nullable();
             $table->text('images')->nullable();
             $table->foreignIdFor(User::class)
-                ->constrained();
+                ->nullable()
+                ->constrained()
+                ->nullOnDelete();
 
             $table->softDeletes();
             $table->timestamps();

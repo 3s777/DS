@@ -14,8 +14,7 @@ class AsyncSelectByQueryViewModel extends ViewModel
         protected ?array $depended = null,
         protected ?string $searchField = 'name',
         protected ?string $key = 'id',
-        protected ?string $name = 'name',
-        protected bool $fullText = false,
+        protected ?string $name = 'name'
     )
     {
     }
@@ -30,10 +29,6 @@ class AsyncSelectByQueryViewModel extends ViewModel
 
     private function makeQuery()
     {
-        if($this->fullText) {
-            return $this->modelName::search($this->query);
-        }
-
         return $this->modelName::query()->where($this->searchField, 'ilike', "%{$this->query}%")->select($this->key, $this->name);
     }
 

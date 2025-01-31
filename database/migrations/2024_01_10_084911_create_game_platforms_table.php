@@ -20,7 +20,9 @@ return new class () extends Migration {
             $table->jsonb('description')->nullable();
             $table->string('type')->default('stationary')->nullable();
             $table->foreignIdFor(User::class)
-                ->constrained();
+                ->nullable()
+                ->constrained()
+                ->nullOnDelete();
             $table->foreignIdFor(GamePlatformManufacturer::class)->nullable();
             $table->string('featured_image')->nullable();
 

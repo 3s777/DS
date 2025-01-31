@@ -19,13 +19,15 @@ return new class extends Migration
             $table->string('slug')->unique();
             $table->string('article_number')->nullable();
             $table->text('barcodes')->nullable();
-            $table->text('alternative_names')->nullable();
+            $table->text('alternative_names')->nullable()->index();
             $table->date('released_at')->nullable();
             $table->jsonb('description')->nullable();
             $table->string('featured_image')->nullable();
             $table->text('images')->nullable();
             $table->foreignIdFor(User::class)
-                ->constrained();
+                ->nullable()
+                ->constrained()
+                ->nullOnDelete();
 
             $table->softDeletes();
             $table->timestamps();

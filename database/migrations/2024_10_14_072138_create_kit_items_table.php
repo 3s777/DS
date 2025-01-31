@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('kit_items', function (Blueprint $table) {
             $table->id();
-            $table->jsonb('name');
+            $table->jsonb('name')->index();
             $table->string('slug')->unique();
             $table->softDeletes();
             $table->timestamps();

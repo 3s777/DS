@@ -17,7 +17,10 @@ return new class () extends Migration {
             $table->string('slug')->unique();
             $table->jsonb('description')->nullable();
             $table->foreignIdFor(User::class)
-                ->constrained();
+                ->nullable()
+                ->constrained()
+                ->cascadeOnDelete()
+                ->cascadeOnUpdate();
 
             $table->softDeletes();
             $table->timestamps();
