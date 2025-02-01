@@ -26,6 +26,7 @@
             </x-slot:sidebar>
 
                 <x-ui.title size="normal" indent="big">Вопрос-ответ</x-ui.title>
+            @dump(auth()->user())
                 <div class="content__main content__main_article">
                     <x-ui.accordion>
                         <x-ui.accordion.item>

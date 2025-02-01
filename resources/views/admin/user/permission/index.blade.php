@@ -38,7 +38,7 @@
                         <span class="responsive-table__label">{{ __('common.created_date') }}: </span> {{ $permission->created_at }}
                     </x-ui.responsive-table.column>
                     <x-ui.responsive-table.column type="action">
-                        <x-common.action-table.buttons :item="$permission" model="permissions" :slug="false" />
+                        <x-common.action-table.buttons :item="$permission" model="admin.permissions" :slug="false" />
                     </x-ui.responsive-table.column>
                 </x-ui.responsive-table.row>
             @endforeach

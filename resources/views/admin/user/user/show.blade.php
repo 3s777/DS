@@ -61,10 +61,10 @@
 
                 <div class="crud-show__action-buttons" x-data x-on:keydown.escape.window="$store.modalDelete.hide = true">
                     <x-ui.form.button class="crud-show__action-button" tag="a">{{ __('user.to_profile') }}</x-ui.form.button>
-                    <x-ui.form.button class="crud-show__action-button" tag="a" :href="route('users.edit', $user->slug)" color="warning">{{ __('common.edit') }}</x-ui.form.button>
+                    <x-ui.form.button class="crud-show__action-button" tag="a" :href="route('admin.users.edit', $user->slug)" color="warning">{{ __('common.edit') }}</x-ui.form.button>
                     <x-ui.form.button class="crud-show__action-button" x-on:click.stop="
                         $store.modalDelete.hide = ! $store.modalDelete.hide;
-                        $store.modalDelete.action = '{{ route('users.destroy', $user->slug) }}'
+                        $store.modalDelete.action = '{{ route('admin.users.destroy', $user->slug) }}'
                         $store.modalDelete.name = '{{ $user->name }}'"
                         tag="a" color="cancel">
                         {{ __('common.delete') }}

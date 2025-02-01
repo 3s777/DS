@@ -42,7 +42,7 @@
                             :selected="$shelf->user ?? false"
                             name="user"
                             select-name="user_id"
-                            route="select-users"
+                            route="admin.select-users"
                             :default-option="trans_choice('user.choose', 1)"
                             :label="trans_choice('user.users', 1)">
                         </x-ui.select.async>

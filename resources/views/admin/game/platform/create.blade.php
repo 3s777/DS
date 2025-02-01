@@ -56,7 +56,7 @@
                         <x-ui.select.async
                             name="user"
                             select-name="user_id"
-                            route="select-users"
+                            route="admin.select-users"
                             :label="trans_choice('user.users', 1)"
                             :default-option="trans_choice('user.choose', 1)">
                         </x-ui.select.async>

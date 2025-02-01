@@ -22,7 +22,7 @@
                     <x-ui.select.async
                         name="user_id"
                         select-name="user_id"
-                        route="select-users"
+                        route="admin.select-users"
                         :required="true"
                         :default-option="trans_choice('user.choose', 1)"
                         :label="__('shelf.user')">

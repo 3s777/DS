@@ -3,7 +3,7 @@
         <x-common.content class="feed">
             <x-common.messages />
 
-
+            @dump(auth('collector')->user())
                 <x-content.item.card class="feed-item sale-item">
                     <x-slot:photos>
                         <x-content.item.photos>

@@ -1,6 +1,6 @@
 <x-layouts.admin :search="false">
     <x-admin.crud-form
-        :action="route('permissions.update', $permission->id)"
+        :action="route('admin.permissions.update', $permission->id)"
         :title="__('permission.edit')"
         :model="$permission">
                 <x-grid type="container">

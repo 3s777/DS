@@ -3,24 +3,24 @@
 namespace App\Routing;
 
 use App\Contracts\RouteRegistrar;
-use App\Http\Controllers\Auth\ForgotPasswordController;
-use App\Http\Controllers\Auth\LoginController;
+use App\Http\Controllers\Auth\Admin\ForgotPasswordController;
+use App\Http\Controllers\Auth\Admin\LoginController;
+use App\Http\Controllers\Auth\Admin\RegisterController;
+use App\Http\Controllers\Auth\Admin\ResetPasswordController;
+use App\Http\Controllers\Auth\Admin\VerifyEmailController;
 use App\Http\Controllers\Auth\PermissionController;
-use App\Http\Controllers\Auth\RegisterController;
-use App\Http\Controllers\Auth\ResetPasswordController;
 use App\Http\Controllers\Auth\RoleController;
 use App\Http\Controllers\Auth\UserController;
-use App\Http\Controllers\Auth\VerifyEmailController;
 use Illuminate\Contracts\Routing\Registrar;
 use Illuminate\Support\Facades\Route;
 
-class AuthRegistrar implements RouteRegistrar
+class AuthAdminRegistrar implements RouteRegistrar
 {
     public function map(Registrar $registrar): void
     {
         Route::middleware('web')
             ->group(function () {
-                Route::prefix('{locale}')->whereIn('locale', config('app.available_locales'))->group(function () {
+                Route::as('admin.')->prefix('{locale}/admin')->whereIn('locale', config('app.available_locales'))->group(function () {
                     Route::controller(LoginController::class)->group(function () {
                         Route::get('/login', 'page')->middleware('guest')->name('login');
                         Route::post('/login', 'handle')->middleware('guest', 'throttle:auth')->name('login.handle');
@@ -52,8 +52,8 @@ class AuthRegistrar implements RouteRegistrar
 //                    Route::get('/findUsers{query?}', [UserController::class, 'getUsers'])->name('find-users');
 
                     Route::post('/select-users', [UserController::class, 'getForSelect'])->name('select-users');
-                    Route::get('/users', [UserController::class, 'publicIndex'])->name('public-users');
-                    Route::prefix('admin')->middleware(['auth', 'verified'])->group(function () {
+//                    Route::get('/users', [UserController::class, 'publicIndex'])->name('public-users');
+                    Route::middleware(['auth:admin', 'verified'])->group(function () {
                         Route::delete('/users/delete-selected', [UserController::class, 'deleteSelected'])->name('users.delete');
                         Route::delete('/users/force-delete-selected', [UserController::class, 'forceDeleteSelected'])->name('users.forceDelete');
                         Route::resource('users', UserController::class)->middleware(['remove.locale']);

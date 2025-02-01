@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use Domain\Auth\Models\Collector;
 use Domain\Auth\Models\User;
 use Domain\Game\Models\Game;
 use Domain\Game\Models\GameDeveloper;
@@ -32,6 +33,16 @@ class TestUserDataSeeder extends Seeder
         $testUser = User::where('name', 'qqqqq')->first();
 
         $testUser->assignRole('super_admin');
+
+        Collector::create([
+            'name' => 'qqqqq_collector',
+            'first_name' => 'Test Name',
+            'slug' => 'qqqqq',
+            'email' => 'qqq@qq.qq',
+            'password' => bcrypt('123456789q'),
+            'email_verified_at' => now(),
+            'language' => 'en'
+        ]);
 
         $collectableFactory = fake()->randomElement([
             GameMedia::factory(5)

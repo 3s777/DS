@@ -63,6 +63,16 @@ class AppRegistrar implements RouteRegistrar
                     });
 
                     Route::get('/demo-select', [PageController::class, 'demoSelect'])->name('demo-select');
+
+
+                    Route::get('/test-admin', function () {
+                        return view('content.page.qa');
+                    })->middleware('auth:admin')->name('admin.test-admin');
+
+                    Route::get('/test-collector', function () {
+                        return view('content.page.qa');
+                    })->middleware('auth:collector')->name('test-collector');
+
                 });
             });
     }

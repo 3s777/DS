@@ -10,7 +10,7 @@
 
                 <x-common.messages class="auth__message" />
 
-                <form class="form" method="POST" action="{{ route('login') }}">
+                <form class="form" method="POST" action="{{ $route }}">
                     @csrf
                     <x-ui.form.group>
                         <x-ui.form.input-text

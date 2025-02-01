@@ -1,10 +1,12 @@
 <?php
 
-namespace App\Http\Controllers\Auth;
+namespace App\Http\Controllers\Auth\Collector;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Auth\LoginRequest;
+use Domain\Auth\Actions\LoginCollectorAction;
 use Domain\Auth\Actions\LoginUserAction;
+use Domain\Auth\DTOs\LoginCollectorDTO;
 use Domain\Auth\DTOs\LoginUserDTO;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
@@ -16,12 +18,14 @@ class LoginController extends Controller
 {
     public function page(): View|Application|Factory|\Illuminate\Contracts\Foundation\Application
     {
-        return view('content.auth.login');
+        return view('content.auth.login', ['route' => route('collector.login.handle')]);
     }
 
-    public function handle(LoginRequest $request, LoginUserAction $action): RedirectResponse
+    //Разобраться с guest в FormRequest
+    public function handle(LoginRequest $request, LoginCollectorAction $action): RedirectResponse
     {
-        $actionData = $action(LoginUserDTO::fromRequest($request));
+
+        $actionData = $action(LoginCollectorDTO::fromRequest($request));
 
         if (array_key_exists('error', $actionData)) {
             flash()->danger(__($actionData['error']));
@@ -40,11 +44,11 @@ class LoginController extends Controller
 
     public function logout(): Application|Redirector|RedirectResponse|\Illuminate\Contracts\Foundation\Application
     {
-        auth()->logout();
-
-        request()->session()->invalidate();
-
-        request()->session()->regenerateToken();
+        auth('collector')->logout();
+//
+//        request()->session()->invalidate();
+//
+//        request()->session()->regenerateToken();
 
         return to_route('home');
     }

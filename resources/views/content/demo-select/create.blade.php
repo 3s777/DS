@@ -14,7 +14,7 @@
                         <x-ui.select.async-multiple
                             name="user_m"
                             select-name="user_idm[]"
-                            route="select-users"
+                            route="admin.select-users"
                             :selected="$users"
                             :required="true"
                             :default-option="trans_choice('user.choose', 1)"
@@ -29,7 +29,7 @@
                             name="user"
                             select-name="user_id"
                             :required="true"
-                            route="select-users"
+                            route="admin.select-users"
                             :default-option="trans_choice('user.choose', 1)"
                             :label="trans_choice('user.users', 1)">
                         </x-ui.select.async>
@@ -67,7 +67,7 @@
                             name="usert"
                             select-name="usert_id"
                             :required="true"
-                            route="select-users"
+                            route="admin.select-users"
                             :selected="['key' => auth()->user()->id, 'value' => auth()->user()->name]"
                             :default-option="trans_choice('user.choose', 1)"
                             :label="trans_choice('user.users', 1)">
@@ -98,7 +98,7 @@
                             name="user1"
                             select-name="user1_id"
                             required
-                            route="select-users"
+                            route="admin.select-users"
 {{--                            :selected="auth()->user()"--}}
                             :default-option="trans_choice('user.choose', 1)"
                             :label="trans_choice('user.users', 1)">
@@ -128,7 +128,7 @@
                             name="user2"
                             select-name="user2_id"
                             required
-                            route="select-users"
+                            route="admin.select-users"
                             :selected="['key' => auth()->user()->id, 'value' => auth()->user()->name]"
                             :default-option="trans_choice('user.choose', 1)"
                             :label="trans_choice('user.users', 1)">

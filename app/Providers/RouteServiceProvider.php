@@ -4,7 +4,8 @@ namespace App\Providers;
 
 use App\Contracts\RouteRegistrar;
 use App\Routing\AppRegistrar;
-use App\Routing\AuthRegistrar;
+use App\Routing\AuthAdminRegistrar;
+use App\Routing\AuthCollectorRegistrar;
 use App\Routing\FilepondRegistrar;
 use App\Routing\GameRegistrar;
 use App\Routing\ShelfRegistrar;
@@ -29,7 +30,8 @@ class RouteServiceProvider extends ServiceProvider
 
     protected array $registrars = [
         AppRegistrar::class,
-        AuthRegistrar::class,
+        AuthAdminRegistrar::class,
+        AuthCollectorRegistrar::class,
         GameRegistrar::class,
         ShelfRegistrar::class,
         FilepondRegistrar::class,

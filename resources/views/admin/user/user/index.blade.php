@@ -9,7 +9,7 @@
 
     @include('admin.user.user.partials.filters')
 
-    <x-common.action-table model-name="users">
+    <x-common.action-table model-name="admin.users">
         <x-common.selectable-order
             class="action-table__selectable-order"
             :sorters="[
@@ -68,7 +68,7 @@
                             class="responsive-table__label">{{ __('common.created_date') }}: </span> {{ $user->created_at }}
                     </x-ui.responsive-table.column>
                     <x-ui.responsive-table.column type="action">
-                        <x-common.action-table.buttons :item="$user" :show="true" model="users"/>
+                        <x-common.action-table.buttons :item="$user" :show="true" model="admin.users"/>
                     </x-ui.responsive-table.column>
                 </x-ui.responsive-table.row>
             @endforeach

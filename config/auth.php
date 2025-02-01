@@ -1,5 +1,7 @@
 <?php
 
+use Domain\Auth\Models\Collector;
+
 return [
 
     /*
@@ -14,7 +16,7 @@ return [
     */
 
     'defaults' => [
-        'guard' => 'web',
+        'guard' => 'admin',
         'passwords' => 'users',
     ],
 
@@ -36,10 +38,14 @@ return [
     */
 
     'guards' => [
-        'web' => [
+        'admin' => [
             'driver' => 'session',
             'provider' => 'users',
         ],
+        'collector' => [
+            'driver' => 'session',
+            'provider' => 'collectors',
+        ]
     ],
 
     /*
@@ -63,6 +69,10 @@ return [
         'users' => [
             'driver' => 'eloquent',
             'model' => \Domain\Auth\Models\User::class,
+        ],
+        'collectors' => [
+            'driver' => 'eloquent',
+            'model' => Collector::class,
         ],
 
         // 'users' => [
@@ -94,6 +104,12 @@ return [
         'users' => [
             'provider' => 'users',
             'table' => 'password_reset_tokens',
+            'expire' => 10,
+            'throttle' => 10,
+        ],
+        'collectors' => [
+            'provider' => 'collectors',
+            'table' => 'password_reset_collectors_tokens',
             'expire' => 10,
             'throttle' => 10,
         ],

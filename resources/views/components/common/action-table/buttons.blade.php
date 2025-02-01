@@ -3,7 +3,7 @@
     'model',
     'show' => false,
     'edit' => true,
-    'slug' => true
+    'slug' => true,
 ])
 
 @aware([

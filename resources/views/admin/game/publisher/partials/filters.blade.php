@@ -20,7 +20,7 @@
                     :label="trans_choice('user.users', 1)"
                     :default-option="trans_choice('user.choose', 1)"
                     selectName="filters[user]"
-                    route="select-users"></x-ui.select.async>
+                    route="admin.select-users"></x-ui.select.async>
             </x-ui.form.group>
         </x-grid.col>
         <x-slot:buttons></x-slot:buttons>

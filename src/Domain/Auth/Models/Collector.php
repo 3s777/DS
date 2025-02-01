@@ -2,10 +2,10 @@
 
 namespace Domain\Auth\Models;
 
-// use Illuminate\Contracts\Auth\MustVerifyEmail;
 use App\Filters\DatesFilter;
 use App\Filters\SearchFilter;
 use App\Models\Image;
+use Database\Factories\CollectorFactory;
 use Database\Factories\UserFactory;
 use Domain\Auth\Notifications\ResetPasswordNotification;
 use Domain\Auth\Notifications\VerifyEmailNotification;
@@ -14,6 +14,7 @@ use Domain\Game\Models\Game;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Contracts\Translation\HasLocalePreference;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
@@ -22,20 +23,20 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
+use Laravel\Scout\Searchable;
 use Mews\Purifier\Casts\CleanHtml;
+use OwenIt\Auditing\Auditable as HasAuditable;
 use OwenIt\Auditing\Contracts\Auditable;
 use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
 use Spatie\Permission\Traits\HasPermissions;
 use Spatie\Permission\Traits\HasRoles;
 use Support\Traits\Models\HasCustomAudit;
+use Support\Traits\Models\HasFeaturedImage;
 use Support\Traits\Models\HasImage;
 use Support\Traits\Models\HasSlug;
-use Support\Traits\Models\HasFeaturedImage;
-use OwenIt\Auditing\Auditable as HasAuditable;
-use Laravel\Scout\Searchable;
 
-class User extends Authenticatable implements MustVerifyEmail, HasLocalePreference, HasMedia, Auditable
+class Collector extends Authenticatable implements MustVerifyEmail, HasLocalePreference, HasMedia, Auditable
 {
     use HasApiTokens;
     use HasFactory;
@@ -96,9 +97,9 @@ class User extends Authenticatable implements MustVerifyEmail, HasLocalePreferen
         'first_name'
     ];
 
-    protected static function newFactory(): UserFactory
+    protected static function newFactory(): CollectorFactory
     {
-        return UserFactory::new();
+        return CollectorFactory::new();
     }
 
     public function sendEmailVerificationNotification(): void
@@ -111,14 +112,14 @@ class User extends Authenticatable implements MustVerifyEmail, HasLocalePreferen
         $this->notify(new ResetPasswordNotification($token));
     }
 
-    public function newEloquentBuilder($query): UserQueryBuilder
-    {
-        return new UserQueryBuilder($query);
-    }
+//    public function newEloquentBuilder($query): UserQueryBuilder
+//    {
+//        return new UserQueryBuilder($query);
+//    }
 
     public function imagesDir(): string
     {
-        return 'user';
+        return 'collector';
     }
 
     public function thumbnailSizes(): array
@@ -148,35 +149,19 @@ class User extends Authenticatable implements MustVerifyEmail, HasLocalePreferen
         ];
     }
 
-//    public function updatePassword($password): void
-//    {
-//        if(!$password) {
-//            $this->deleteAllThumbnails();
-//        }
-//    }
-
-    public function settingsValue(): BelongsToMany
-    {
-        return $this->belongsToMany(UserSettingValue::class);
-    }
 
     public function preferredLocale()
     {
         return $this->language;
     }
 
-//    public function img(): HasOne
-//    {
-//        return $this->hasOne(Image::class);
-//    }
+    public function img(): HasOne
+    {
+        return $this->hasOne(Image::class);
+    }
 
     public function morphImages(): MorphMany
     {
         return $this->morphMany(Image::class, 'imageable');
-    }
-
-    public function games(): HasMany
-    {
-        return $this->hasMany(Game::class);
     }
 }

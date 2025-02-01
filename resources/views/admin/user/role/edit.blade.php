@@ -1,6 +1,6 @@
 <x-layouts.admin :search="false">
     <x-admin.crud-form
-        :action="route('roles.update', $role->id)"
+        :action="route('admin.roles.update', $role->id)"
         :title="__('role.edit')"
         :model="$role">
                 <x-grid type="container">

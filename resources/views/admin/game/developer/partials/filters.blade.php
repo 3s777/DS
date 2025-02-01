@@ -17,7 +17,7 @@
                     :show-old="false"
                     name="user"
                     selectName="filters[user]"
-                    route="select-users"
+                    route="admin.select-users"
                     :label="trans_choice('user.users', 1)"
                     :defaultOption="trans_choice('user.choose', 1)"></x-ui.select.async>
             </x-ui.form.group>
