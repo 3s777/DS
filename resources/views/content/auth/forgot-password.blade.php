@@ -10,7 +10,7 @@
 
                     <x-common.messages class="auth__message" />
 
-                <form class="form" method="POST" action="{{ route('forgot.handle') }}">
+                <form class="form" method="POST" action="{{ route('admin.forgot.handle') }}">
                     @csrf
                     <x-ui.form.group>
                         <x-ui.form.input-text

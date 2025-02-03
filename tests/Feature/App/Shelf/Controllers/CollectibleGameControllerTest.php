@@ -2,8 +2,8 @@
 
 namespace App\Shelf\Controllers;
 
-use App\Http\Controllers\Shelf\CollectibleGameController;
-use App\Http\Requests\Shelf\CreateCollectibleGameRequest;
+use App\Http\Controllers\Shelf\Admin\CollectibleGameController;
+use App\Http\Requests\Shelf\Admin\CreateCollectibleGameRequest;
 use App\Jobs\GenerateSmallThumbnailsJob;
 use App\Jobs\GenerateThumbnailJob;
 use Database\Factories\Shelf\CollectibleFactory;
@@ -15,7 +15,6 @@ use Domain\Shelf\Models\Category;
 use Domain\Shelf\Models\Collectible;
 use Domain\Shelf\Models\Shelf;
 use Illuminate\Database\Eloquent\Relations\Relation;
-use Illuminate\Foundation\Testing\DatabaseTruncation;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Queue;
@@ -56,7 +55,7 @@ class CollectibleGameControllerTest extends TestCase
     ): void
     {
         $this->{$method}(action([CollectibleGameController::class, $action], $params), $request)
-            ->assertRedirectToRoute('login');
+            ->assertRedirectToRoute('admin.login');
     }
 
     private function setFakeRequestData(): void
@@ -138,7 +137,7 @@ class CollectibleGameControllerTest extends TestCase
     {
         $this->actingAs($this->user)
             ->post(action([CollectibleGameController::class, 'store']), $this->request)
-            ->assertRedirectToRoute('collectibles.index')
+            ->assertRedirectToRoute('admin.collectibles.index')
             ->assertSessionHas('helper_flash_message', __('collectible.created'));
 
         $this->assertDatabaseHas('collectibles', [
@@ -159,7 +158,7 @@ class CollectibleGameControllerTest extends TestCase
 
         $this->actingAs($this->user)
             ->post(action([CollectibleGameController::class, 'store']), $this->request)
-            ->assertRedirectToRoute('collectibles.index')
+            ->assertRedirectToRoute('admin.collectibles.index')
             ->assertSessionHas('helper_flash_message', __('collectible.created'));
 
         $this->assertDatabaseHas('collectibles', [
@@ -177,7 +176,7 @@ class CollectibleGameControllerTest extends TestCase
      */
     public function it_validation_create_fail(): void
     {
-        $this->app['session']->setPreviousUrl(route('collectibles.create.game'));
+        $this->app['session']->setPreviousUrl(route('admin.collectibles.create.game'));
 
         $this->setFakeRequestData();
 
@@ -198,7 +197,7 @@ class CollectibleGameControllerTest extends TestCase
                 'target',
                 'shelf_id'
             ])
-            ->assertRedirectToRoute('collectibles.create.game');
+            ->assertRedirectToRoute('admin.collectibles.create.game');
 
         $this->setFakeSaleRequestData();
 
@@ -208,7 +207,7 @@ class CollectibleGameControllerTest extends TestCase
                 'sale.price',
                 'sale.price_old',
             ])
-            ->assertRedirectToRoute('collectibles.create.game');
+            ->assertRedirectToRoute('admin.collectibles.create.game');
 
         $this->setFakeAuctionRequestData();
 
@@ -219,7 +218,7 @@ class CollectibleGameControllerTest extends TestCase
                 'auction.step',
                 'auction.finished_at'
             ])
-            ->assertRedirectToRoute('collectibles.create.game');
+            ->assertRedirectToRoute('admin.collectibles.create.game');
 
         $this->assertDatabaseMissing('collectibles', [
             'name' => $this->request['name']
@@ -232,7 +231,7 @@ class CollectibleGameControllerTest extends TestCase
      */
     public function it_validation_update_fail(): void
     {
-        $this->app['session']->setPreviousUrl(route('collectibles.create.game'));
+        $this->app['session']->setPreviousUrl(route('admin.collectibles.create.game'));
 
         $this->setFakeRequestData();
 
@@ -256,7 +255,7 @@ class CollectibleGameControllerTest extends TestCase
                 'target',
                 'shelf_id'
             ])
-            ->assertRedirectToRoute('collectibles.create.game');
+            ->assertRedirectToRoute('admin.collectibles.create.game');
 
         $this->setFakeSaleRequestData();
 
@@ -270,7 +269,7 @@ class CollectibleGameControllerTest extends TestCase
                 'sale.price',
                 'sale.price_old',
             ])
-            ->assertRedirectToRoute('collectibles.create.game');
+            ->assertRedirectToRoute('admin.collectibles.create.game');
 
         $this->setFakeAuctionRequestData();
 
@@ -285,7 +284,7 @@ class CollectibleGameControllerTest extends TestCase
                 'auction.step',
                 'auction.finished_at'
             ])
-            ->assertRedirectToRoute('collectibles.create.game');
+            ->assertRedirectToRoute('admin.collectibles.create.game');
 
         $this->assertDatabaseMissing('collectibles', [
             'name' => $this->request['name']
@@ -298,14 +297,14 @@ class CollectibleGameControllerTest extends TestCase
      */
     public function it_validation_featured_image_fail(): void
     {
-        $this->app['session']->setPreviousUrl(route('collectibles.create.game'));
+        $this->app['session']->setPreviousUrl(route('admin.collectibles.create.game'));
 
         $this->request['featured_image'] = UploadedFile::fake()->image('photo1.php');
 
         $this->actingAs($this->user)
             ->post(action([CollectibleGameController::class, 'store']), $this->request)
             ->assertInvalid(['featured_image'])
-            ->assertRedirectToRoute('collectibles.create.game');
+            ->assertRedirectToRoute('admin.collectibles.create.game');
     }
 
     /**
@@ -339,7 +338,7 @@ class CollectibleGameControllerTest extends TestCase
                 ),
                 $this->request
             )
-            ->assertRedirectToRoute('collectibles.index')
+            ->assertRedirectToRoute('admin.collectibles.index')
             ->assertSessionHas('helper_flash_message', __('collectible.updated'));
 
         $updatedCollectible = Collectible::find($this->collectible->id);

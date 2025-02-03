@@ -69,8 +69,6 @@ class AsyncSelectByQueryViewModel extends ViewModel
 
             $models = $query->get();
 
-            dd($models);
-
             foreach ($models as $model) {
                 $options[] = ['value' => $model->{$this->key}, 'label' => $model->{$this->name}];
             }

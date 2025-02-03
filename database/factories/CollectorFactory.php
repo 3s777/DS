@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use Domain\Auth\Models\Collector;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Str;
 
@@ -10,6 +11,8 @@ use Illuminate\Support\Str;
  */
 class CollectorFactory extends Factory
 {
+    protected $model = Collector::class;
+
     /**
      * Define the model's default state.
      *

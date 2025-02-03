@@ -2,8 +2,8 @@
 
 namespace App\Shelf\Controllers;
 
-use App\Http\Controllers\Shelf\CollectibleController;
-use App\Http\Requests\Shelf\CreateCollectibleGameRequest;
+use App\Http\Controllers\Shelf\Admin\CollectibleController;
+use App\Http\Requests\Shelf\Admin\CreateCollectibleGameRequest;
 use Database\Factories\Shelf\CollectibleFactory;
 use Database\Factories\Trade\AuctionFactory;
 use Database\Factories\Trade\SaleFactory;
@@ -14,7 +14,6 @@ use Domain\Game\Models\GameMedia;
 use Domain\Shelf\Enums\CollectibleTypeEnum;
 use Domain\Shelf\Models\Category;
 use Domain\Shelf\Models\Collectible;
-use Domain\Trade\Models\Sale;
 use Illuminate\Database\Eloquent\Relations\Relation;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
@@ -61,7 +60,7 @@ class CollectibleControllerTest extends TestCase
     ): void
     {
         $this->{$method}(action([CollectibleController::class, $action], $params), $request)
-            ->assertRedirectToRoute('login');
+            ->assertRedirectToRoute('admin.login');
     }
 
     /**
@@ -111,7 +110,7 @@ class CollectibleControllerTest extends TestCase
     {
         $this->actingAs($this->user)
             ->delete(action([CollectibleController::class, 'destroy'], [$this->collectible->id]))
-            ->assertRedirectToRoute('collectibles.index')
+            ->assertRedirectToRoute('admin.collectibles.index')
             ->assertSessionHas('helper_flash_message', __('collectible.deleted'));
 
         $this->assertDatabaseMissing('collectibles', [

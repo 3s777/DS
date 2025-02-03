@@ -2,7 +2,7 @@
 
 namespace App\Shelf\DTOs;
 
-use App\Http\Requests\Shelf\CreateCategoryRequest;
+use App\Http\Requests\Shelf\Admin\CreateCategoryRequest;
 use Domain\Shelf\DTOs\FillCategoryDTO;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;

@@ -2,7 +2,7 @@
 
 namespace App\Shelf\DTOs;
 
-use App\Http\Requests\Shelf\CreateShelfRequest;
+use App\Http\Requests\Shelf\Admin\CreateShelfRequest;
 use Domain\Shelf\DTOs\FillShelfDTO;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;

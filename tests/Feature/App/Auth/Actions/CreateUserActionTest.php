@@ -6,7 +6,7 @@ use App\Http\Requests\Auth\User\CreateUserRequest;
 use App\Jobs\GenerateSmallThumbnailsJob;
 use App\Jobs\GenerateThumbnailJob;
 use Domain\Auth\Actions\CreateUserAction;
-use Domain\Auth\DTOs\NewUserDTO;
+use Domain\Auth\DTOs\NewAdminDTO;
 use Domain\Auth\Models\Role;
 use Domain\Auth\Models\User;
 use Illuminate\Auth\Events\Registered;
@@ -51,7 +51,7 @@ class CreateUserActionTest extends TestCase
 
         $action = app(CreateUserAction::class);
 
-        $action(NewUserDTO::make(
+        $action(NewAdminDTO::make(
             $this->request['name'],
             $this->request['email'],
             $this->request['password'],
@@ -89,7 +89,7 @@ class CreateUserActionTest extends TestCase
 
         $action = app(CreateUserAction::class);
 
-        $action(NewUserDTO::make(
+        $action(NewAdminDTO::make(
             $this->request['name'],
             $this->request['email'],
             $this->request['password'],

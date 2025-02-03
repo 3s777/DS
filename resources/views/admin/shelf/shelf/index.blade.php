@@ -9,7 +9,7 @@
 
     @include('admin.shelf.shelf.partials.filters')
 
-    <x-common.action-table model-name="shelves">
+    <x-common.action-table model-name="admin.shelves">
         <x-common.selectable-order
             class="action-table__selectable-order"
             :sorters="[
@@ -66,7 +66,7 @@
                         <span class="responsive-table__label">{{ __('common.created_date') }}: </span> {{ $shelf->created_at }}
                     </x-ui.responsive-table.column>
                     <x-ui.responsive-table.column type="action">
-                        <x-common.action-table.buttons :item="$shelf" :slug="false" model="shelves" />
+                        <x-common.action-table.buttons :item="$shelf" :slug="false" model="admin.shelves" />
                     </x-ui.responsive-table.column>
                 </x-ui.responsive-table.row>
             @endforeach

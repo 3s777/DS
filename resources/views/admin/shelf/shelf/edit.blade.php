@@ -1,6 +1,6 @@
 <x-layouts.admin :search="false">
     <x-admin.crud-form
-        :action="route('shelves.update', $shelf->id)"
+        :action="route('admin.shelves.update', $shelf->id)"
         :title="__('shelf.edit')"
         :model="$shelf">
             <x-grid type="container">

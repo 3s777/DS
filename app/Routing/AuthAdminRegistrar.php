@@ -7,10 +7,10 @@ use App\Http\Controllers\Auth\Admin\ForgotPasswordController;
 use App\Http\Controllers\Auth\Admin\LoginController;
 use App\Http\Controllers\Auth\Admin\RegisterController;
 use App\Http\Controllers\Auth\Admin\ResetPasswordController;
+use App\Http\Controllers\Auth\Admin\UserController;
 use App\Http\Controllers\Auth\Admin\VerifyEmailController;
 use App\Http\Controllers\Auth\PermissionController;
 use App\Http\Controllers\Auth\RoleController;
-use App\Http\Controllers\Auth\UserController;
 use Illuminate\Contracts\Routing\Registrar;
 use Illuminate\Support\Facades\Route;
 

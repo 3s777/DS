@@ -2,7 +2,7 @@
 
 namespace Domain\Auth\Actions;
 
-use Domain\Auth\DTOs\NewUserDTO;
+use Domain\Auth\DTOs\NewAdminDTO;
 use Domain\Auth\Exceptions\UserCreateEditException;
 use Domain\Auth\Models\User;
 use Illuminate\Auth\Events\Registered;
@@ -11,7 +11,7 @@ use Throwable;
 
 class CreateUserAction
 {
-    public function __invoke(NewUserDTO $data): ?User
+    public function __invoke(NewAdminDTO $data): ?User
     {
         try {
             DB::beginTransaction();

@@ -6,8 +6,8 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Auth\Role\CreateRoleRequest;
 use App\Http\Requests\Auth\Role\UpdateRoleRequest;
 use Domain\Auth\Models\Role;
-use Domain\Auth\ViewModels\RoleUpdateViewModel;
 use Domain\Auth\ViewModels\RoleIndexViewModel;
+use Domain\Auth\ViewModels\RoleUpdateViewModel;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
 use Illuminate\Foundation\Application;
@@ -44,7 +44,7 @@ class RoleController extends Controller
 
         flash()->info(__('role.created'));
 
-        return to_route('roles.index');
+        return to_route('admin.roles.index');
     }
 
     public function show(string $id)
@@ -71,7 +71,7 @@ class RoleController extends Controller
 
         flash()->info(__('role.updated'));
 
-        return to_route('roles.index');
+        return to_route('admin.roles.index');
     }
 
     public function destroy(Role $role): RedirectResponse
@@ -80,6 +80,6 @@ class RoleController extends Controller
 
         flash()->info(__('role.deleted'));
 
-        return to_route('roles.index');
+        return to_route('admin.roles.index');
     }
 }

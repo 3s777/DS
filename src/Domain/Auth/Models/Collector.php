@@ -9,6 +9,7 @@ use Database\Factories\CollectorFactory;
 use Database\Factories\UserFactory;
 use Domain\Auth\Notifications\ResetPasswordNotification;
 use Domain\Auth\Notifications\VerifyEmailNotification;
+use Domain\Auth\QueryBuilders\CollectorQueryBuilder;
 use Domain\Auth\QueryBuilders\UserQueryBuilder;
 use Domain\Game\Models\Game;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
@@ -112,10 +113,10 @@ class Collector extends Authenticatable implements MustVerifyEmail, HasLocalePre
         $this->notify(new ResetPasswordNotification($token));
     }
 
-//    public function newEloquentBuilder($query): UserQueryBuilder
-//    {
-//        return new UserQueryBuilder($query);
-//    }
+    public function newEloquentBuilder($query): CollectorQueryBuilder
+    {
+        return new CollectorQueryBuilder($query);
+    }
 
     public function imagesDir(): string
     {

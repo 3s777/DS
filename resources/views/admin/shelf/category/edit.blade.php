@@ -1,6 +1,6 @@
 <x-layouts.admin :search="false">
     <x-admin.crud-form
-        :action="route('categories.update', $category->slug)"
+        :action="route('admin.categories.update', $category->slug)"
         :title="__('collectible.category.edit')"
         :model="$category">
         <x-grid type="container">

@@ -2,8 +2,8 @@
 
 namespace App\Game\Controllers;
 
-use App\Http\Controllers\Game\GamePublisherController;
-use App\Http\Requests\Game\CreateGamePublisherRequest;
+use App\Http\Controllers\Game\Admin\GamePublisherController;
+use App\Http\Requests\Game\Admin\CreateGamePublisherRequest;
 use App\Jobs\GenerateSmallThumbnailsJob;
 use App\Jobs\GenerateThumbnailJob;
 use Database\Factories\Game\GamePublisherFactory;
@@ -45,7 +45,7 @@ class GamePublisherControllerTest extends TestCase
         array $request = []
     ): void {
         $this->{$method}(action([GamePublisherController::class, $action], $params), $request)
-            ->assertRedirectToRoute('login');
+            ->assertRedirectToRoute('admin.login');
     }
 
     /**
@@ -109,7 +109,7 @@ class GamePublisherControllerTest extends TestCase
     {
         $this->actingAs($this->user)
             ->post(action([GamePublisherController::class, 'store']), $this->request)
-            ->assertRedirectToRoute('game-publishers.index')
+            ->assertRedirectToRoute('admin.game-publishers.index')
             ->assertSessionHas('helper_flash_message', __('game_publisher.created'));
 
         $this->assertDatabaseHas('game_publishers', [
@@ -130,7 +130,7 @@ class GamePublisherControllerTest extends TestCase
 
         $this->actingAs($this->user)
             ->post(action([GamePublisherController::class, 'store']), $this->request)
-            ->assertRedirectToRoute('game-publishers.index')
+            ->assertRedirectToRoute('admin.game-publishers.index')
             ->assertSessionHas('helper_flash_message', __('game_publisher.created'));
 
         $this->assertDatabaseHas('game_publishers', [
@@ -148,14 +148,14 @@ class GamePublisherControllerTest extends TestCase
      */
     public function it_validation_name_fail(): void
     {
-        $this->app['session']->setPreviousUrl(route('game-publishers.create'));
+        $this->app['session']->setPreviousUrl(route('admin.game-publishers.create'));
 
         $this->request['name'] = '';
 
         $this->actingAs($this->user)
             ->post(action([GamePublisherController::class, 'store']), $this->request)
             ->assertInvalid(['name'])
-            ->assertRedirectToRoute('game-publishers.create');
+            ->assertRedirectToRoute('admin.game-publishers.create');
 
         $this->assertDatabaseMissing('game_publishers', [
             'name' => $this->request['name']
@@ -168,14 +168,14 @@ class GamePublisherControllerTest extends TestCase
      */
     public function it_validation_featured_image_fail(): void
     {
-        $this->app['session']->setPreviousUrl(route('game-publishers.create'));
+        $this->app['session']->setPreviousUrl(route('admin.game-publishers.create'));
 
         $this->request['featured_image'] = UploadedFile::fake()->image('photo1.php');
 
         $this->actingAs($this->user)
             ->post(action([GamePublisherController::class, 'store']), $this->request)
             ->assertInvalid(['featured_image'])
-            ->assertRedirectToRoute('game-publishers.create');
+            ->assertRedirectToRoute('admin.game-publishers.create');
     }
 
     /**
@@ -194,7 +194,7 @@ class GamePublisherControllerTest extends TestCase
                 ),
                 $this->request
             )
-            ->assertRedirectToRoute('game-publishers.index')
+            ->assertRedirectToRoute('admin.game-publishers.index')
             ->assertSessionHas('helper_flash_message', __('game_publisher.updated'));
 
         $this->assertDatabaseHas('game_publishers', [
@@ -210,7 +210,7 @@ class GamePublisherControllerTest extends TestCase
     {
         $this->actingAs($this->user)
             ->delete(action([GamePublisherController::class, 'destroy'], [$this->gamePublisher->slug]))
-            ->assertRedirectToRoute('game-publishers.index')
+            ->assertRedirectToRoute('admin.game-publishers.index')
             ->assertSessionHas('helper_flash_message', __('game_publisher.deleted'));
 
         $this->assertDatabaseMissing('game_publishers', [

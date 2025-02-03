@@ -34,6 +34,7 @@ class TestUserDataSeeder extends Seeder
 
         $testUser->assignRole('super_admin');
 
+        Collector::factory(5)->create();
         Collector::create([
             'name' => 'qqqqq_collector',
             'first_name' => 'Test Name',

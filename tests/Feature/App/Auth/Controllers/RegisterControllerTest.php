@@ -137,7 +137,7 @@ class RegisterControllerTest extends TestCase
         );
 
         $response->assertValid()
-            ->assertRedirectToRoute('login')
+            ->assertRedirectToRoute('admin.login')
             ->assertSessionHas('helper_flash_message', __('auth.register_verify'));
 
         $this->followRedirects($response)->assertSee(__('auth.register_verify'));

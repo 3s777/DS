@@ -41,7 +41,7 @@ class PermissionControllerTest extends TestCase
         array $request = []
     ): void {
         $this->{$method}(action([PermissionController::class, $action], $params), $request)
-            ->assertRedirectToRoute('login');
+            ->assertRedirectToRoute('admin.login');
     }
 
     /**
@@ -105,7 +105,7 @@ class PermissionControllerTest extends TestCase
     {
         $this->actingAs($this->user)
             ->post(action([PermissionController::class, 'store']), $this->request)
-            ->assertRedirectToRoute('permissions.index')
+            ->assertRedirectToRoute('admin.permissions.index')
             ->assertSessionHas('helper_flash_message', __('permission.created'));
 
         $this->assertDatabaseHas('permissions', [
@@ -120,14 +120,14 @@ class PermissionControllerTest extends TestCase
      */
     public function it_validation_name_fail(): void
     {
-        $this->app['session']->setPreviousUrl(route('permissions.create'));
+        $this->app['session']->setPreviousUrl(route('admin.permissions.create'));
 
         $this->request['name'] = '';
 
         $this->actingAs($this->user)
             ->post(action([PermissionController::class, 'store']), $this->request)
             ->assertInvalid(['name'])
-            ->assertRedirectToRoute('permissions.create');
+            ->assertRedirectToRoute('admin.permissions.create');
 
         $this->assertDatabaseMissing('permissions', [
             'name' => $this->request['name']
@@ -150,7 +150,7 @@ class PermissionControllerTest extends TestCase
                 ),
                 $this->updateRequest
             )
-            ->assertRedirectToRoute('permissions.index')
+            ->assertRedirectToRoute('admin.permissions.index')
             ->assertSessionHas('helper_flash_message', __('permission.updated'));
 
         $this->assertDatabaseHas('permissions', [
@@ -176,7 +176,7 @@ class PermissionControllerTest extends TestCase
                 ),
                 $this->updateRequest
             )
-            ->assertRedirectToRoute('permissions.index')
+            ->assertRedirectToRoute('admin.permissions.index')
             ->assertSessionHas('helper_flash_message', __('permission.updated'));
 
         $this->followRedirects($response)->assertSee('ТестРус');
@@ -209,7 +209,7 @@ class PermissionControllerTest extends TestCase
     {
         $this->actingAs($this->user)
             ->delete(action([PermissionController::class, 'destroy'], [$this->permission->id]))
-            ->assertRedirectToRoute('permissions.index')
+            ->assertRedirectToRoute('admin.permissions.index')
             ->assertSessionHas('helper_flash_message', __('permission.deleted'));
 
         $this->assertDatabaseMissing('permissions', [

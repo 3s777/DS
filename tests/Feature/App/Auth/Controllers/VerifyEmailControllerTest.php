@@ -41,7 +41,7 @@ class VerifyEmailControllerTest extends TestCase
         $user = UserFactory::new()->create($request);
 
         $this->post(action([VerifyEmailController::class, 'sendVerifyNotification']), ['email' => $user->email])
-            ->assertRedirectToRoute('verification.notice')
+            ->assertRedirectToRoute('admin.verification.notice')
             ->assertSessionHas('helper_flash_message', __('auth.verify_retry_send'));
 
         Notification::assertSentTo([$user], VerifyEmailNotification::class);
@@ -58,7 +58,7 @@ class VerifyEmailControllerTest extends TestCase
         $user = UserFactory::new()->create();
 
         $this->post(action([VerifyEmailController::class, 'sendVerifyNotification']), ['email' => $user->email])
-            ->assertRedirectToRoute('verification.notice')
+            ->assertRedirectToRoute('admin.verification.notice')
             ->assertSessionHas('helper_flash_message', __('auth.verified'));
 
         Notification::assertNothingSent();
@@ -77,7 +77,7 @@ class VerifyEmailControllerTest extends TestCase
         $user = UserFactory::new()->create($request);
 
         $url = URL::temporarySignedRoute(
-            'verification.verify',
+            'admin.verification.verify',
             now()->addMinutes(60),
             [
                 'id' => $user->id,
@@ -105,7 +105,7 @@ class VerifyEmailControllerTest extends TestCase
         $user = UserFactory::new()->create($request);
 
         $url = URL::temporarySignedRoute(
-            'verification.verify',
+            'admin.verification.verify',
             now()->addMinutes(60),
             [
                 'id' => $user->id,
@@ -132,7 +132,7 @@ class VerifyEmailControllerTest extends TestCase
         $user = UserFactory::new()->create($request);
 
         $url = URL::temporarySignedRoute(
-            'verification.verify',
+            'admin.verification.verify',
             now()->addMinutes(60),
             [
                 'id' => '99999999999',

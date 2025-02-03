@@ -8,7 +8,7 @@ use App\Jobs\GenerateThumbnailJob;
 use Database\Seeders\PermissionsTestSeeder;
 use Domain\Auth\Actions\CreateUserAction;
 use Domain\Auth\Actions\UpdateUserAction;
-use Domain\Auth\DTOs\NewUserDTO;
+use Domain\Auth\DTOs\NewAdminDTO;
 use Domain\Auth\DTOs\UpdateUserDTO;
 use Domain\Auth\Models\Permission;
 use Domain\Auth\Models\Role;
@@ -55,7 +55,7 @@ class UpdateUserActionTest extends TestCase
 
         $createAction = app(CreateUserAction::class);
 
-        $createAction(NewUserDTO::make(
+        $createAction(NewAdminDTO::make(
             $this->request['name'],
             $this->request['email'],
             $this->request['password'],

@@ -3,7 +3,7 @@
 namespace App\Shelf\Services;
 
 use App\Http\Requests\Auth\User\CreateUserRequest;
-use App\Http\Requests\Shelf\CreateShelfRequest;
+use App\Http\Requests\Shelf\Admin\CreateShelfRequest;
 use App\Jobs\GenerateSmallThumbnailsJob;
 use App\Jobs\GenerateThumbnailJob;
 use Domain\Auth\Models\User;

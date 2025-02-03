@@ -35,13 +35,13 @@ class VerifyEmailController extends Controller
 
             flash()->info(__('auth.verified'));
 
-            return to_route('verification.notice');
+            return to_route('admin.verification.notice');
         }
 
         $user->sendEmailVerificationNotification();
 
         flash()->info(__('auth.verify_retry_send'));
 
-        return to_route('verification.notice');
+        return to_route('admin.verification.notice');
     }
 }

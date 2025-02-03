@@ -10,7 +10,7 @@
 
                 <x-common.messages class="auth__message" />
 
-                <form method="POST" action="{{ route('password.handle') }}">
+                <form method="POST" action="{{ route('admin.password.handle') }}">
                     @csrf
                     <input type="hidden" name="token" value="{{ $token }}">
 

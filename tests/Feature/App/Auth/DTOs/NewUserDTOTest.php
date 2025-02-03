@@ -4,7 +4,7 @@ namespace App\Auth\DTOs;
 
 use App\Http\Requests\Auth\RegisterRequest;
 use App\Http\Requests\Auth\User\CreateUserRequest;
-use Domain\Auth\DTOs\NewUserDTO;
+use Domain\Auth\DTOs\NewAdminDTO;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
@@ -25,9 +25,9 @@ class NewUserDTOTest extends TestCase
      */
     public function it_instance_created_from_register_request_success(): void
     {
-        $data = NewUserDTO::fromRequest(new RegisterRequest($this->request));
+        $data = NewAdminDTO::fromRequest(new RegisterRequest($this->request));
 
-        $this->assertInstanceOf(NewUserDTO::class, $data);
+        $this->assertInstanceOf(NewAdminDTO::class, $data);
     }
 
     /**
@@ -36,9 +36,9 @@ class NewUserDTOTest extends TestCase
      */
     public function it_instance_created_from_create_request_success(): void
     {
-        $data = NewUserDTO::fromRequest(new CreateUserRequest($this->request));
+        $data = NewAdminDTO::fromRequest(new CreateUserRequest($this->request));
 
-        $this->assertInstanceOf(NewUserDTO::class, $data);
+        $this->assertInstanceOf(NewAdminDTO::class, $data);
     }
 
 
@@ -48,13 +48,13 @@ class NewUserDTOTest extends TestCase
      */
     public function it_instance_created_success(): void
     {
-        $data = NewUserDTO::make(
+        $data = NewAdminDTO::make(
             $this->request['name'],
             $this->request['email'],
             $this->request['password'],
             $this->request['language']
         );
 
-        $this->assertInstanceOf(NewUserDTO::class, $data);
+        $this->assertInstanceOf(NewAdminDTO::class, $data);
     }
 }

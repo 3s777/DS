@@ -1,6 +1,6 @@
 <x-layouts.admin :search="false">
     <x-admin.crud-form
-        :action="route('collectibles.store.game')"
+        :action="route('admin.collectibles.store.game')"
         :title="__('collectible.add')"
         :images="true">
         <x-grid type="container">
@@ -36,7 +36,7 @@
                         name="shelf"
                         select-name="shelf_id"
                         :required="true"
-                        route="shelves.select"
+                        route="admin.shelves.select"
                         depend-on="user_id"
                         depend-field="user_id"
                         :default-option="trans_choice('shelf.choose', 1)"
@@ -332,7 +332,7 @@
             async function setKit(mediaValue) {
                 try {
                     const media = mediaValue ?? null
-                    const response = await axios.post('{{ route('kit-items.get.html-conditions') }}', {
+                    const response = await axios.post('{{ route('admin.kit-items.get.html-conditions') }}', {
                         media: media,
                         model: 'Game'
                     });

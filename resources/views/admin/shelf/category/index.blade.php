@@ -3,7 +3,7 @@
             {{ __('collectible.category.list') }}
     </x-ui.title>
 
-    <x-common.action-table model-name="categories">
+    <x-common.action-table model-name="admin.categories">
         <x-ui.responsive-table :empty="$categories->isEmpty()">
             <x-ui.responsive-table.header>
                 <x-ui.responsive-table.column type="select" name="check">
@@ -38,7 +38,7 @@
                         <span class="responsive-table__label">{{ __('common.created_date') }}: </span> {{ $item->created_at }}
                     </x-ui.responsive-table.column>
                     <x-ui.responsive-table.column type="action">
-                        <x-common.action-table.buttons :item="$item" model="categories" />
+                        <x-common.action-table.buttons :item="$item" model="admin.categories" />
                     </x-ui.responsive-table.column>
                 </x-ui.responsive-table.row>
             @endforeach

@@ -4,7 +4,7 @@ namespace App\Auth\Actions;
 
 use App\Http\Requests\Auth\RegisterRequest;
 use Domain\Auth\Contracts\RegisterNewUserContract;
-use Domain\Auth\DTOs\NewUserDTO;
+use Domain\Auth\DTOs\NewAdminDTO;
 use Domain\Auth\Models\Role;
 use Domain\Auth\Models\User;
 use Domain\Auth\Notifications\VerifyEmailNotification;
@@ -44,7 +44,7 @@ class RegisterNewUserActionTest extends TestCase
 
         $action = app(RegisterNewUserContract::class);
 
-        $action(NewUserDTO::make(
+        $action(NewAdminDTO::make(
             $this->request['name'],
             $this->request['email'],
             $this->request['password'],
@@ -68,7 +68,7 @@ class RegisterNewUserActionTest extends TestCase
 
         $action = app(RegisterNewUserContract::class);
 
-        $action(NewUserDTO::make(
+        $action(NewAdminDTO::make(
             $this->request['name'],
             $this->request['email'],
             $this->request['password'],
@@ -90,7 +90,7 @@ class RegisterNewUserActionTest extends TestCase
     {
         $action = app(RegisterNewUserContract::class);
 
-        $action(NewUserDTO::make(
+        $action(NewAdminDTO::make(
             $this->request['name'],
             $this->request['email'],
             $this->request['password'],

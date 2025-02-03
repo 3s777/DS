@@ -3,7 +3,7 @@
 namespace App\Game\Services;
 
 use App\Http\Requests\Auth\User\CreateUserRequest;
-use App\Http\Requests\Game\CreateGameRequest;
+use App\Http\Requests\Game\Admin\CreateGameRequest;
 use App\Jobs\GenerateSmallThumbnailsJob;
 use App\Jobs\GenerateThumbnailJob;
 use Domain\Auth\Models\User;

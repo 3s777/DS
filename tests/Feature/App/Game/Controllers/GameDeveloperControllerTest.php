@@ -2,8 +2,8 @@
 
 namespace App\Game\Controllers;
 
-use App\Http\Controllers\Game\GameDeveloperController;
-use App\Http\Requests\Game\CreateGameDeveloperRequest;
+use App\Http\Controllers\Game\Admin\GameDeveloperController;
+use App\Http\Requests\Game\Admin\CreateGameDeveloperRequest;
 use App\Jobs\GenerateSmallThumbnailsJob;
 use App\Jobs\GenerateThumbnailJob;
 use Database\Factories\Game\GameDeveloperFactory;
@@ -46,7 +46,7 @@ class GameDeveloperControllerTest extends TestCase
         array $request = []
     ): void {
         $this->{$method}(action([GameDeveloperController::class, $action], $params), $request)
-            ->assertRedirectToRoute('login');
+            ->assertRedirectToRoute('admin.login');
     }
 
     /**
@@ -111,7 +111,7 @@ class GameDeveloperControllerTest extends TestCase
 
         $this->actingAs($this->user)
             ->post(action([GameDeveloperController::class, 'store']), $this->request)
-            ->assertRedirectToRoute('game-developers.index')
+            ->assertRedirectToRoute('admin.game-developers.index')
             ->assertSessionHas('helper_flash_message', __('game_developer.created'));
 
         $this->assertDatabaseHas('game_developers', [
@@ -132,7 +132,7 @@ class GameDeveloperControllerTest extends TestCase
 
         $this->actingAs($this->user)
             ->post(action([GameDeveloperController::class, 'store']), $this->request)
-            ->assertRedirectToRoute('game-developers.index')
+            ->assertRedirectToRoute('admin.game-developers.index')
             ->assertSessionHas('helper_flash_message', __('game_developer.created'));
 
         $this->assertDatabaseHas('game_developers', [
@@ -150,14 +150,14 @@ class GameDeveloperControllerTest extends TestCase
      */
     public function it_validation_name_fail(): void
     {
-        $this->app['session']->setPreviousUrl(route('game-developers.create'));
+        $this->app['session']->setPreviousUrl(route('admin.game-developers.create'));
 
         $this->request['name'] = '';
 
         $this->actingAs($this->user)
             ->post(action([GameDeveloperController::class, 'store']), $this->request)
             ->assertInvalid(['name'])
-            ->assertRedirectToRoute('game-developers.create');
+            ->assertRedirectToRoute('admin.game-developers.create');
 
         $this->assertDatabaseMissing('game_developers', [
             'name' => $this->request['name']
@@ -170,14 +170,14 @@ class GameDeveloperControllerTest extends TestCase
      */
     public function it_validation_featured_image_fail(): void
     {
-        $this->app['session']->setPreviousUrl(route('game-developers.create'));
+        $this->app['session']->setPreviousUrl(route('admin.game-developers.create'));
 
         $this->request['featured_image'] = UploadedFile::fake()->image('photo1.php');
 
         $this->actingAs($this->user)
             ->post(action([GameDeveloperController::class, 'store']), $this->request)
             ->assertInvalid(['featured_image'])
-            ->assertRedirectToRoute('game-developers.create');
+            ->assertRedirectToRoute('admin.game-developers.create');
     }
 
     /**
@@ -196,7 +196,7 @@ class GameDeveloperControllerTest extends TestCase
                 ),
                 $this->request
             )
-            ->assertRedirectToRoute('game-developers.index')
+            ->assertRedirectToRoute('admin.game-developers.index')
             ->assertSessionHas('helper_flash_message', __('game_developer.updated'));
 
         $this->assertDatabaseHas('game_developers', [
@@ -212,7 +212,7 @@ class GameDeveloperControllerTest extends TestCase
     {
         $this->actingAs($this->user)
             ->delete(action([GameDeveloperController::class, 'destroy'], [$this->gameDeveloper->slug]))
-            ->assertRedirectToRoute('game-developers.index')
+            ->assertRedirectToRoute('admin.game-developers.index')
             ->assertSessionHas('helper_flash_message', __('game_developer.deleted'));
 
         $this->assertDatabaseMissing('game_developers', [

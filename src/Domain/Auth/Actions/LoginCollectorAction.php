@@ -3,7 +3,7 @@
 namespace Domain\Auth\Actions;
 
 use Domain\Auth\DTOs\LoginCollectorDTO;
-use Domain\Auth\DTOs\LoginUserDTO;
+use Domain\Auth\DTOs\LoginAdminDTO;
 use Domain\Auth\Models\Collector;
 use Domain\Auth\Models\User;
 use Illuminate\Support\Facades\Auth;

@@ -1,6 +1,6 @@
 <x-layouts.admin :search="false">
     <x-admin.crud-form
-        :action="route('kit-items.update', $kitItem->slug)"
+        :action="route('admin.kit-items.update', $kitItem->slug)"
         :title="__('collectible.kit.edit')"
         :model="$kitItem"
         :featured-image="false"

@@ -1,6 +1,6 @@
 <x-layouts.admin :search="false">
     <x-admin.crud-form
-        :action="route('game-publishers.update', $gamePublisher->slug)"
+        :action="route('admin.game-publishers.update', $gamePublisher->slug)"
         :title="__('game_publisher.edit')"
         :model="$gamePublisher">
             <x-grid type="container">

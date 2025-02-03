@@ -2,8 +2,8 @@
 
 namespace App\Shelf\Controllers;
 
-use App\Http\Controllers\Shelf\ShelfController;
-use App\Http\Requests\Shelf\CreateShelfRequest;
+use App\Http\Controllers\Shelf\Admin\ShelfController;
+use App\Http\Requests\Shelf\Admin\CreateShelfRequest;
 use App\Jobs\GenerateSmallThumbnailsJob;
 use App\Jobs\GenerateThumbnailJob;
 use Database\Factories\Shelf\ShelfFactory;
@@ -46,7 +46,7 @@ class ShelfControllerTest extends TestCase
         array $request = []
     ): void {
         $this->{$method}(action([ShelfController::class, $action], $params), $request)
-            ->assertRedirectToRoute('login');
+            ->assertRedirectToRoute('admin.login');
     }
 
     /**
@@ -111,7 +111,7 @@ class ShelfControllerTest extends TestCase
 
         $this->actingAs($this->user)
             ->post(action([ShelfController::class, 'store']), $this->request)
-            ->assertRedirectToRoute('shelves.index')
+            ->assertRedirectToRoute('admin.shelves.index')
             ->assertSessionHas('helper_flash_message', __('shelf.created'));
 
         $this->assertDatabaseHas('shelves', [
@@ -132,7 +132,7 @@ class ShelfControllerTest extends TestCase
 
         $this->actingAs($this->user)
             ->post(action([ShelfController::class, 'store']), $this->request)
-            ->assertRedirectToRoute('shelves.index')
+            ->assertRedirectToRoute('admin.shelves.index')
             ->assertSessionHas('helper_flash_message', __('shelf.created'));
 
         $this->assertDatabaseHas('shelves', [
@@ -150,7 +150,7 @@ class ShelfControllerTest extends TestCase
      */
     public function it_validation_name_fail(): void
     {
-        $this->app['session']->setPreviousUrl(route('shelves.create'));
+        $this->app['session']->setPreviousUrl(route('admin.shelves.create'));
 
         $this->request['name'] = '';
         $this->request['number'] = 'not_numbers';
@@ -158,7 +158,7 @@ class ShelfControllerTest extends TestCase
         $this->actingAs($this->user)
             ->post(action([ShelfController::class, 'store']), $this->request)
             ->assertInvalid(['name', 'number'])
-            ->assertRedirectToRoute('shelves.create');
+            ->assertRedirectToRoute('admin.shelves.create');
 
         $this->assertDatabaseMissing('shelves', [
             'name' => $this->request['name']
@@ -171,14 +171,14 @@ class ShelfControllerTest extends TestCase
      */
     public function it_validation_featured_image_fail(): void
     {
-        $this->app['session']->setPreviousUrl(route('shelves.create'));
+        $this->app['session']->setPreviousUrl(route('admin.shelves.create'));
 
         $this->request['featured_image'] = UploadedFile::fake()->image('photo1.php');
 
         $this->actingAs($this->user)
             ->post(action([ShelfController::class, 'store']), $this->request)
             ->assertInvalid(['featured_image'])
-            ->assertRedirectToRoute('shelves.create');
+            ->assertRedirectToRoute('admin.shelves.create');
     }
 
     /**
@@ -197,7 +197,7 @@ class ShelfControllerTest extends TestCase
                 ),
                 $this->request
             )
-            ->assertRedirectToRoute('shelves.index')
+            ->assertRedirectToRoute('admin.shelves.index')
             ->assertSessionHas('helper_flash_message', __('shelf.updated'));
 
         $this->assertDatabaseHas('shelves', [
@@ -213,7 +213,7 @@ class ShelfControllerTest extends TestCase
     {
         $this->actingAs($this->user)
             ->delete(action([ShelfController::class, 'destroy'], [$this->shelf->id]))
-            ->assertRedirectToRoute('shelves.index')
+            ->assertRedirectToRoute('admin.shelves.index')
             ->assertSessionHas('helper_flash_message', __('shelf.deleted'));
 
         $this->assertDatabaseMissing('shelves', [

@@ -29,6 +29,6 @@ class ForgotPasswordController extends Controller
         //            flash()->info(__($status), 'warning');
         //        }
 
-        return to_route('forgot');
+        return to_route('admin.forgot');
     }
 }

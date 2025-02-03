@@ -1,6 +1,6 @@
 <x-layouts.admin :search="false">
     <x-admin.crud-form
-        :action="route('game-medias.store')"
+        :action="route('admin.game-medias.store')"
         :title="__('game_media.add')"
         :images="true">
             <x-grid type="container">
@@ -272,7 +272,7 @@
 
             async function setData(games) {
                 try {
-                    const response = await axios.post('{{ route('games-autocomplete') }}', {
+                    const response = await axios.post('{{ route('admin.games-autocomplete') }}', {
                         games: games
                     });
 

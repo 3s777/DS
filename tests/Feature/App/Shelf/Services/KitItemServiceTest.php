@@ -2,20 +2,13 @@
 
 namespace App\Shelf\Services;
 
-use App\Http\Requests\Auth\User\CreateUserRequest;
-
-use App\Http\Requests\Shelf\CreateKitItemRequest;
-use App\Jobs\GenerateSmallThumbnailsJob;
-use App\Jobs\GenerateThumbnailJob;
+use App\Http\Requests\Shelf\Admin\CreateKitItemRequest;
 use Domain\Auth\Models\User;
 use Domain\Shelf\DTOs\FillKitItemDTO;
 use Domain\Shelf\Models\KitItem;
 use Domain\Shelf\Services\KitItemService;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Http\Request;
-use Illuminate\Http\UploadedFile;
-use Illuminate\Support\Facades\Queue;
-use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 use Tests\TestCase;
 

@@ -4,8 +4,8 @@ namespace App\Http\Controllers\Auth\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Auth\LoginRequest;
-use Domain\Auth\Actions\LoginUserAction;
-use Domain\Auth\DTOs\LoginUserDTO;
+use Domain\Auth\Actions\LoginAdminAction;
+use Domain\Auth\DTOs\LoginAdminDTO;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
 use Illuminate\Foundation\Application;
@@ -19,9 +19,9 @@ class LoginController extends Controller
         return view('content.auth.login', ['route' => route('admin.login.handle')]);
     }
 
-    public function handle(LoginRequest $request, LoginUserAction $action): RedirectResponse
+    public function handle(LoginRequest $request, LoginAdminAction $action): RedirectResponse
     {
-        $actionData = $action(LoginUserDTO::fromRequest($request));
+        $actionData = $action(LoginAdminDTO::fromRequest($request));
 
         if (array_key_exists('error', $actionData)) {
             flash()->danger(__($actionData['error']));
@@ -30,7 +30,7 @@ class LoginController extends Controller
         }
 
         if(array_key_exists('not_verified', $actionData)) {
-            return to_route('verification.notice');
+            return to_route('admin.verification.notice');
         }
 
         $request->session()->regenerate();

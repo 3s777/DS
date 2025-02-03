@@ -1,6 +1,6 @@
 <x-layouts.admin :search="false">
     <x-admin.crud-form
-       :action="route('collectibles.update.game', $collectible->id)"
+       :action="route('admin.collectibles.update.game', $collectible->id)"
        :title="__('collectible.edit')"
        :model="$collectible"
        :images="true">
@@ -41,7 +41,7 @@
                             select-name="shelf_id"
                             :required="true"
                             :selected="$collectible->shelf->id"
-                            route="shelves.select"
+                            route="admin.shelves.select"
                             depend-on="user_id"
                             depend-field="user_id"
                             :default-option="trans_choice('shelf.choose', 1)"

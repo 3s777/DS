@@ -2,7 +2,7 @@
 
 namespace App\Shelf\Services;
 
-use App\Http\Requests\Shelf\CreateCollectibleGameRequest;
+use App\Http\Requests\Shelf\Admin\CreateCollectibleGameRequest;
 use App\Jobs\GenerateSmallThumbnailsJob;
 use App\Jobs\GenerateThumbnailJob;
 use Domain\Auth\Models\User;

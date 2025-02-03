@@ -2,8 +2,8 @@
 
 namespace App\Shelf\Controllers;
 
-use App\Http\Controllers\Shelf\KitItemController;
-use App\Http\Requests\Shelf\CreateKitItemRequest;
+use App\Http\Controllers\Shelf\Admin\KitItemController;
+use App\Http\Requests\Shelf\Admin\CreateKitItemRequest;
 use Database\Factories\Shelf\KitItemFactory;
 use Database\Factories\UserFactory;
 use Domain\Auth\Models\Role;
@@ -42,7 +42,7 @@ class KitItemControllerTest extends TestCase
         array $request = []
     ): void {
         $this->{$method}(action([KitItemController::class, $action], $params), $request)
-            ->assertRedirectToRoute('login');
+            ->assertRedirectToRoute('admin.login');
     }
 
     /**
@@ -106,7 +106,7 @@ class KitItemControllerTest extends TestCase
     {
         $this->actingAs($this->user)
             ->post(action([KitItemController::class, 'store']), $this->request)
-            ->assertRedirectToRoute('kit-items.index')
+            ->assertRedirectToRoute('admin.kit-items.index')
             ->assertSessionHas('helper_flash_message', __('collectible.kit.created'));
 
         $this->assertDatabaseHas('kit_items', [
@@ -120,14 +120,14 @@ class KitItemControllerTest extends TestCase
      */
     public function it_validation_name_fail(): void
     {
-        $this->app['session']->setPreviousUrl(route('kit-items.create'));
+        $this->app['session']->setPreviousUrl(route('admin.kit-items.create'));
 
         $this->request['name'] = '';
 
         $this->actingAs($this->user)
             ->post(action([KitItemController::class, 'store']), $this->request)
             ->assertInvalid(['name'])
-            ->assertRedirectToRoute('kit-items.create');
+            ->assertRedirectToRoute('admin.kit-items.create');
 
         $this->assertDatabaseMissing('kit_items', [
             'slug' => Str::slug($this->request['name'])
@@ -150,7 +150,7 @@ class KitItemControllerTest extends TestCase
                 ),
                 $this->request
             )
-            ->assertRedirectToRoute('kit-items.index')
+            ->assertRedirectToRoute('admin.kit-items.index')
             ->assertSessionHas('helper_flash_message', __('collectible.kit.updated'));
 
         $this->assertDatabaseHas('kit_items', [
@@ -166,7 +166,7 @@ class KitItemControllerTest extends TestCase
     {
         $this->actingAs($this->user)
             ->delete(action([KitItemController::class, 'destroy'], [$this->kitItem->slug]))
-            ->assertRedirectToRoute('kit-items.index')
+            ->assertRedirectToRoute('admin.kit-items.index')
             ->assertSessionHas('helper_flash_message', __('collectible.kit.deleted'));
 
         $this->assertDatabaseMissing('kit_items', [

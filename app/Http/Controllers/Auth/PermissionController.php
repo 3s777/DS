@@ -30,7 +30,7 @@ class PermissionController extends Controller
 
         flash()->info(__('permission.created'));
 
-        return to_route('permissions.index');
+        return to_route('admin.permissions.index');
     }
 
     public function show(string $id)
@@ -49,7 +49,7 @@ class PermissionController extends Controller
 
         flash()->info(__('permission.updated'));
 
-        return to_route('permissions.index');
+        return to_route('admin.permissions.index');
     }
 
     public function destroy(Permission $permission): RedirectResponse
@@ -58,6 +58,6 @@ class PermissionController extends Controller
 
         flash()->info(__('permission.deleted'));
 
-        return to_route('permissions.index');
+        return to_route('admin.permissions.index');
     }
 }

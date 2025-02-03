@@ -44,7 +44,7 @@ class RoleControllerTest extends TestCase
         array $request = []
     ): void {
         $this->{$method}(action([RoleController::class, $action], $params), $request)
-            ->assertRedirectToRoute('login');
+            ->assertRedirectToRoute('admin.login');
     }
 
     /**
@@ -108,7 +108,7 @@ class RoleControllerTest extends TestCase
     {
         $this->actingAs($this->user)
             ->post(action([RoleController::class, 'store']), $this->request)
-            ->assertRedirectToRoute('roles.index')
+            ->assertRedirectToRoute('admin.roles.index')
             ->assertSessionHas('helper_flash_message', __('role.created'));
 
         $role = Role::where('name', $this->request['name'])->first();
@@ -129,7 +129,7 @@ class RoleControllerTest extends TestCase
 
         $this->actingAs($this->user)
             ->post(action([RoleController::class, 'store']), $this->request)
-            ->assertRedirectToRoute('roles.index')
+            ->assertRedirectToRoute('admin.roles.index')
             ->assertSessionHas('helper_flash_message', __('role.created'));
 
         $role = Role::where('name', $this->request['name'])->first();
@@ -146,7 +146,7 @@ class RoleControllerTest extends TestCase
      */
     public function it_validation_name_fail(): void
     {
-        $this->app['session']->setPreviousUrl(route('roles.create'));
+        $this->app['session']->setPreviousUrl(route('admin.roles.create'));
 
         $this->request['name'] = '';
         $this->request['display_name'] = '';
@@ -154,7 +154,7 @@ class RoleControllerTest extends TestCase
         $this->actingAs($this->user)
             ->post(action([RoleController::class, 'store']), $this->request)
             ->assertInvalid(['name', 'display_name'])
-            ->assertRedirectToRoute('roles.create');
+            ->assertRedirectToRoute('admin.roles.create');
 
         $this->assertDatabaseMissing('roles', [
             'name' => $this->request['name']
@@ -167,14 +167,14 @@ class RoleControllerTest extends TestCase
      */
     public function it_validation_permission_fail(): void
     {
-        $this->app['session']->setPreviousUrl(route('roles.create'));
+        $this->app['session']->setPreviousUrl(route('admin.roles.create'));
 
         $this->request['permissions'] = ['permission.not-exist'];
 
         $this->actingAs($this->user)
             ->post(action([RoleController::class, 'store']), $this->request)
             ->assertInvalid(['permissions'])
-            ->assertRedirectToRoute('roles.create');
+            ->assertRedirectToRoute('admin.roles.create');
 
         $this->assertDatabaseMissing('roles', [
             'name' => $this->request['name']
@@ -198,7 +198,7 @@ class RoleControllerTest extends TestCase
                 ),
                 $this->request
             )
-            ->assertRedirectToRoute('roles.index')
+            ->assertRedirectToRoute('admin.roles.index')
             ->assertSessionHas('helper_flash_message', __('role.updated'));
 
         $role = Role::where('name', $this->request['name'])->first();
@@ -228,7 +228,7 @@ class RoleControllerTest extends TestCase
                 ),
                 $this->request
             )
-            ->assertRedirectToRoute('roles.index')
+            ->assertRedirectToRoute('admin.roles.index')
             ->assertSessionHas('helper_flash_message', __('role.updated'));
 
         $this->followRedirects($response)->assertSee('ТестРус');
@@ -261,7 +261,7 @@ class RoleControllerTest extends TestCase
     {
         $this->actingAs($this->user)
             ->delete(action([RoleController::class, 'destroy'], [$this->role->id]))
-            ->assertRedirectToRoute('roles.index')
+            ->assertRedirectToRoute('admin.roles.index')
             ->assertSessionHas('helper_flash_message', __('role.deleted'));
 
         $this->assertDatabaseMissing('roles', [

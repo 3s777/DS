@@ -1,6 +1,6 @@
 <x-layouts.admin :search="false">
     <x-admin.crud-form
-        :action="route('games.store')"
+        :action="route('admin.games.store')"
         :title="__('game.add')"
         :images="true">
             <x-grid type="container">

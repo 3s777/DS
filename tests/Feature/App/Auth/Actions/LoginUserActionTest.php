@@ -3,8 +3,8 @@
 namespace App\Auth\Actions;
 
 use Database\Factories\UserFactory;
-use Domain\Auth\Actions\LoginUserAction;
-use Domain\Auth\DTOs\LoginUserDTO;
+use Domain\Auth\Actions\LoginAdminAction;
+use Domain\Auth\DTOs\LoginAdminDTO;
 use Domain\Auth\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
@@ -32,9 +32,9 @@ class LoginUserActionTest extends TestCase
      */
     public function it_login_user_success(): void
     {
-        $action = app(LoginUserAction::class);
+        $action = app(LoginAdminAction::class);
 
-        $actionData = $action(LoginUserDTO::make(
+        $actionData = $action(LoginAdminDTO::make(
             $this->user->email,
             $this->password,
         ));
@@ -48,9 +48,9 @@ class LoginUserActionTest extends TestCase
      */
     public function it_login_user_password_fail(): void
     {
-        $action = app(LoginUserAction::class);
+        $action = app(LoginAdminAction::class);
 
-        $actionData = $action(LoginUserDTO::make(
+        $actionData = $action(LoginAdminDTO::make(
             $this->user->email,
             str()->random(10),
         ));
@@ -64,9 +64,9 @@ class LoginUserActionTest extends TestCase
      */
     public function it_login_user_remember_success(): void
     {
-        $action = app(LoginUserAction::class);
+        $action = app(LoginAdminAction::class);
 
-        $actionData = $action(LoginUserDTO::make(
+        $actionData = $action(LoginAdminDTO::make(
             $this->user->email,
             $this->password,
             true

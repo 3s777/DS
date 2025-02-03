@@ -2,19 +2,14 @@
 
 namespace App\Game\Controllers;
 
-use App\Http\Controllers\Game\GameGenreController;
-use App\Http\Requests\Game\CreateGameGenreRequest;
-use App\Jobs\GenerateSmallThumbnailsJob;
-use App\Jobs\GenerateThumbnailJob;
+use App\Http\Controllers\Game\Admin\GameGenreController;
+use App\Http\Requests\Game\Admin\CreateGameGenreRequest;
 use Database\Factories\Game\GameGenreFactory;
 use Database\Factories\UserFactory;
 use Domain\Auth\Models\Role;
 use Domain\Auth\Models\User;
 use Domain\Game\Models\GameGenre;
 use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Http\UploadedFile;
-use Illuminate\Support\Facades\Queue;
-use Illuminate\Support\Facades\Storage;
 use Tests\TestCase;
 
 // TODO: add policy tests
@@ -46,7 +41,7 @@ class GameGenreControllerTest extends TestCase
         array $request = []
     ): void {
         $this->{$method}(action([GameGenreController::class, $action], $params), $request)
-            ->assertRedirectToRoute('login');
+            ->assertRedirectToRoute('admin.login');
     }
 
     /**
@@ -111,7 +106,7 @@ class GameGenreControllerTest extends TestCase
 
         $this->actingAs($this->user)
             ->post(action([GameGenreController::class, 'store']), $this->request)
-            ->assertRedirectToRoute('game-genres.index')
+            ->assertRedirectToRoute('admin.game-genres.index')
             ->assertSessionHas('helper_flash_message', __('game_genre.created'));
 
         $this->assertDatabaseHas('game_genres', [
@@ -125,14 +120,14 @@ class GameGenreControllerTest extends TestCase
      */
     public function it_validation_name_fail(): void
     {
-        $this->app['session']->setPreviousUrl(route('game-genres.create'));
+        $this->app['session']->setPreviousUrl(route('admin.game-genres.create'));
 
         $this->request['name'] = '';
 
         $this->actingAs($this->user)
             ->post(action([GameGenreController::class, 'store']), $this->request)
             ->assertInvalid(['name'])
-            ->assertRedirectToRoute('game-genres.create');
+            ->assertRedirectToRoute('admin.game-genres.create');
 
         $this->assertDatabaseMissing('game_genres', [
             'name' => $this->request['name']
@@ -155,7 +150,7 @@ class GameGenreControllerTest extends TestCase
                 ),
                 $this->request
             )
-            ->assertRedirectToRoute('game-genres.index')
+            ->assertRedirectToRoute('admin.game-genres.index')
             ->assertSessionHas('helper_flash_message', __('game_genre.updated'));
 
         $this->assertDatabaseHas('game_genres', [
@@ -171,7 +166,7 @@ class GameGenreControllerTest extends TestCase
     {
         $this->actingAs($this->user)
             ->delete(action([GameGenreController::class, 'destroy'], [$this->gameDeveloper->slug]))
-            ->assertRedirectToRoute('game-genres.index')
+            ->assertRedirectToRoute('admin.game-genres.index')
             ->assertSessionHas('helper_flash_message', __('game_genre.deleted'));
 
         $this->assertDatabaseMissing('game_genres', [

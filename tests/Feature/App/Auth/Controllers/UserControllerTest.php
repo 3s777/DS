@@ -2,7 +2,7 @@
 
 namespace App\Auth\Controllers;
 
-use App\Http\Controllers\Auth\UserController;
+use App\Http\Controllers\Auth\Admin\UserController;
 use App\Http\Requests\Auth\User\CreateUserRequest;
 use App\Jobs\GenerateSmallThumbnailsJob;
 use App\Jobs\GenerateThumbnailJob;
@@ -51,7 +51,7 @@ class UserControllerTest extends TestCase
         array $request = []
     ): void {
         $this->{$method}(action([UserController::class, $action], $params), $request)
-            ->assertRedirectToRoute('login');
+            ->assertRedirectToRoute('admin.login');
     }
 
     /**
@@ -118,7 +118,7 @@ class UserControllerTest extends TestCase
 
         $this->actingAs($this->authUser)
             ->post(action([UserController::class, 'store']), $this->request)
-            ->assertRedirectToRoute('users.index')
+            ->assertRedirectToRoute('admin.users.index')
             ->assertSessionHas('helper_flash_message', __('user.created'));
 
         $user = User::where('name', $this->request['name'])->first();
@@ -157,7 +157,7 @@ class UserControllerTest extends TestCase
                 ),
                 $this->request
             )
-            ->assertRedirectToRoute('users.index')
+            ->assertRedirectToRoute('admin.users.index')
             ->assertSessionHas('helper_flash_message', __('user.updated'));
 
         $user = User::where('name', 'newname')->first();
@@ -179,7 +179,7 @@ class UserControllerTest extends TestCase
     {
         $this->actingAs($this->authUser)
             ->delete(action([UserController::class, 'destroy'], [$this->testingUser->slug]))
-            ->assertRedirectToRoute('users.index')
+            ->assertRedirectToRoute('admin.users.index')
             ->assertSessionHas('helper_flash_message', __('user.deleted'));
 
         $this->assertDatabaseMissing('users', [
@@ -200,7 +200,7 @@ class UserControllerTest extends TestCase
 
         $this->actingAs($this->authUser)
             ->post(action([UserController::class, 'store']), $this->request)
-            ->assertRedirectToRoute('users.index')
+            ->assertRedirectToRoute('admin.users.index')
             ->assertSessionHas('helper_flash_message', __('user.created'));
 
         $user = User::where('name', $this->request['name'])->first();
@@ -213,7 +213,7 @@ class UserControllerTest extends TestCase
      */
     public function it_create_validation_fail(): void
     {
-        $this->app['session']->setPreviousUrl(route('users.create'));
+        $this->app['session']->setPreviousUrl(route('admin.users.create'));
 
         $this->request['name'] = '';
         $this->request['password'] = 'wrong';
@@ -224,7 +224,7 @@ class UserControllerTest extends TestCase
         $this->actingAs($this->authUser)
             ->post(action([UserController::class, 'store']), $this->request)
             ->assertInvalid(['name', 'password', 'language', 'roles', 'featured_image'])
-            ->assertRedirectToRoute('users.create');
+            ->assertRedirectToRoute('admin.users.create');
 
         $this->assertDatabaseMissing('users', [
             'name' => $this->request['name']
@@ -237,7 +237,7 @@ class UserControllerTest extends TestCase
      */
     public function it_update_validation_fail(): void
     {
-        $this->app['session']->setPreviousUrl(route('users.edit', [$this->testingUser->slug]));
+        $this->app['session']->setPreviousUrl(route('admin.users.edit', [$this->testingUser->slug]));
 
         $this->request['name'] = '';
         $this->request['language'] = 'test';
@@ -253,7 +253,7 @@ class UserControllerTest extends TestCase
                 $this->request
             )
             ->assertInvalid(['name', 'language', 'roles', 'permissions'])
-            ->assertRedirectToRoute('users.edit', [$this->testingUser->slug]);
+            ->assertRedirectToRoute('admin.users.edit', [$this->testingUser->slug]);
 
         $this->assertDatabaseMissing('users', [
             'name' => $this->request['name']

@@ -2,7 +2,7 @@
 
 namespace App\Game\Controllers;
 
-use App\Http\Controllers\Game\GamePublisherController;
+use App\Http\Controllers\Game\Admin\GamePublisherController;
 use Carbon\Carbon;
 use Database\Factories\Game\GamePublisherFactory;
 use Domain\Auth\Models\Role;
@@ -153,7 +153,7 @@ class GamePublisherFilterTest extends TestCase
         $this->actingAs($this->user)
             ->get(action([GamePublisherController::class, 'index'], $request))
             ->assertInvalid(['filters.dates.from', 'filters.dates.to'])
-            ->assertRedirectToRoute('game-publishers.index');
+            ->assertRedirectToRoute('admin.game-publishers.index');
     }
 
     /**

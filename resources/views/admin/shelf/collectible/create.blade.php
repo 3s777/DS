@@ -1,7 +1,7 @@
 <x-layouts.admin :search="false">
     <x-ui.form class="crud-form"
                id="create-form"
-               :action="route('collectibles.store')"
+               :action="route('admin.collectibles.store')"
                enctype="multipart/form-data">
         <x-ui.title class="crud-form__tile" size="normal" indent="small">
             {{ __('collectible.add') }}

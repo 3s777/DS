@@ -2,7 +2,7 @@
 
 namespace App\Game\Controllers;
 
-use App\Http\Controllers\Game\GameDeveloperController;
+use App\Http\Controllers\Game\Admin\GameDeveloperController;
 use Carbon\Carbon;
 use Database\Factories\Game\GameDeveloperFactory;
 use Domain\Auth\Models\Role;
@@ -158,7 +158,7 @@ class GameDeveloperFilterTest extends TestCase
         $this->actingAs($this->user)
             ->get(action([GameDeveloperController::class, 'index'], $request))
             ->assertInvalid(['filters.dates.from', 'filters.dates.to'])
-            ->assertRedirectToRoute('game-developers.index');
+            ->assertRedirectToRoute('admin.game-developers.index');
     }
 
     /**

@@ -3,7 +3,7 @@
         {{ __('game_platform_manufacturer.list') }}
     </x-ui.title>
 
-    <x-common.action-table model-name="game-platform-manufacturers">
+    <x-common.action-table model-name="admin.game-platform-manufacturers">
         <x-common.selectable-order
             class="action-table__selectable-order"
             :sorters="[
@@ -53,7 +53,7 @@
                         <span class="responsive-table__label">{{ __('common.created_date') }}: </span> {{ $manufacturer->created_at }}
                     </x-ui.responsive-table.column>
                     <x-ui.responsive-table.column type="action">
-                        <x-common.action-table.buttons :item="$manufacturer" model="game-platform-manufacturers" />
+                        <x-common.action-table.buttons :item="$manufacturer" model="admin.game-platform-manufacturers" />
                     </x-ui.responsive-table.column>
                 </x-ui.responsive-table.row>
             @endforeach

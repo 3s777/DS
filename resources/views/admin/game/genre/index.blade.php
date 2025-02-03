@@ -3,7 +3,7 @@
         {{ __('game_genre.list') }}
     </x-ui.title>
 
-    <x-common.action-table model-name="game-genres">
+    <x-common.action-table model-name="admin.game-genres">
         <x-common.selectable-order
             class="action-table__selectable-order"
             :sorters="[
@@ -53,7 +53,7 @@
                         <span class="responsive-table__label">{{ __('common.created_date') }}: </span> {{ $genre->created_at }}
                     </x-ui.responsive-table.column>
                     <x-ui.responsive-table.column type="action">
-                        <x-common.action-table.buttons :item="$genre" model="game-genres" />
+                        <x-common.action-table.buttons :item="$genre" model="admin.game-genres" />
                     </x-ui.responsive-table.column>
                 </x-ui.responsive-table.row>
             @endforeach

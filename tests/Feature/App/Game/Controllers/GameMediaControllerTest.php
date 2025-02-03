@@ -2,8 +2,8 @@
 
 namespace App\Game\Controllers;
 
-use App\Http\Controllers\Game\GameMediaController;
-use App\Http\Requests\Game\CreateGameMediaRequest;
+use App\Http\Controllers\Game\Admin\GameMediaController;
+use App\Http\Requests\Game\Admin\CreateGameMediaRequest;
 use App\Jobs\GenerateSmallThumbnailsJob;
 use App\Jobs\GenerateThumbnailJob;
 use Database\Factories\Game\GameMediaFactory;
@@ -45,7 +45,7 @@ class GameMediaControllerTest extends TestCase
         array $request = []
     ): void {
         $this->{$method}(action([GameMediaController::class, $action], $params), $request)
-            ->assertRedirectToRoute('login');
+            ->assertRedirectToRoute('admin.login');
     }
 
     /**
@@ -109,7 +109,7 @@ class GameMediaControllerTest extends TestCase
     {
         $this->actingAs($this->user)
             ->post(action([GameMediaController::class, 'store']), $this->request)
-            ->assertRedirectToRoute('game-medias.index')
+            ->assertRedirectToRoute('admin.game-medias.index')
             ->assertSessionHas('helper_flash_message', __('game_media.created'));
 
         $this->assertDatabaseHas('game_medias', [
@@ -130,7 +130,7 @@ class GameMediaControllerTest extends TestCase
 
         $this->actingAs($this->user)
             ->post(action([GameMediaController::class, 'store']), $this->request)
-            ->assertRedirectToRoute('game-medias.index')
+            ->assertRedirectToRoute('admin.game-medias.index')
             ->assertSessionHas('helper_flash_message', __('game_media.created'));
 
         $this->assertDatabaseHas('game_medias', [
@@ -148,7 +148,7 @@ class GameMediaControllerTest extends TestCase
      */
     public function it_validation_fail(): void
     {
-        $this->app['session']->setPreviousUrl(route('game-medias.create'));
+        $this->app['session']->setPreviousUrl(route('admin.game-medias.create'));
 
         $this->request['name'] = '';
         $this->request['article_number'] = ['fake', 'fake 2'];
@@ -160,7 +160,7 @@ class GameMediaControllerTest extends TestCase
         $this->actingAs($this->user)
             ->post(action([GameMediaController::class, 'store']), $this->request)
             ->assertInvalid(['name', 'article_number', 'alternative_names', 'barcodes', 'user_id', 'genres'])
-            ->assertRedirectToRoute('game-medias.create');
+            ->assertRedirectToRoute('admin.game-medias.create');
 
         $this->assertDatabaseMissing('game_medias', [
             'name' => $this->request['name']
@@ -173,14 +173,14 @@ class GameMediaControllerTest extends TestCase
      */
     public function it_validation_featured_image_fail(): void
     {
-        $this->app['session']->setPreviousUrl(route('game-medias.create'));
+        $this->app['session']->setPreviousUrl(route('admin.game-medias.create'));
 
         $this->request['featured_image'] = UploadedFile::fake()->image('photo1.php');
 
         $this->actingAs($this->user)
             ->post(action([GameMediaController::class, 'store']), $this->request)
             ->assertInvalid(['featured_image'])
-            ->assertRedirectToRoute('game-medias.create');
+            ->assertRedirectToRoute('admin.game-medias.create');
     }
 
     /**
@@ -199,7 +199,7 @@ class GameMediaControllerTest extends TestCase
                 ),
                 $this->request
             )
-            ->assertRedirectToRoute('game-medias.index')
+            ->assertRedirectToRoute('admin.game-medias.index')
             ->assertSessionHas('helper_flash_message', __('game_media.updated'));
 
         $this->assertDatabaseHas('game_medias', [
@@ -215,7 +215,7 @@ class GameMediaControllerTest extends TestCase
     {
         $this->actingAs($this->user)
             ->delete(action([GameMediaController::class, 'destroy'], [$this->gameMedia->slug]))
-            ->assertRedirectToRoute('game-medias.index')
+            ->assertRedirectToRoute('admin.game-medias.index')
             ->assertSessionHas('helper_flash_message', __('game_media.deleted'));
 
         $this->assertDatabaseMissing('game_medias', [

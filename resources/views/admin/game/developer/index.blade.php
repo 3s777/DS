@@ -9,7 +9,7 @@
 
     @include('admin.game.developer.partials.filters')
 
-    <x-common.action-table model-name="game-developers">
+    <x-common.action-table model-name="admin.game-developers">
         <x-common.selectable-order
             class="action-table__selectable-order"
             :sorters="[
@@ -59,7 +59,7 @@
                         <span class="responsive-table__label">{{ __('common.created_date') }}: </span> {{ $developer->created_at }}
                     </x-ui.responsive-table.column>
                     <x-ui.responsive-table.column type="action">
-                        <x-common.action-table.buttons :item="$developer" model="game-developers" />
+                        <x-common.action-table.buttons :item="$developer" model="admin.game-developers" />
                     </x-ui.responsive-table.column>
                 </x-ui.responsive-table.row>
             @endforeach

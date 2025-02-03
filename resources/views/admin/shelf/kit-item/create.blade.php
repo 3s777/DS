@@ -1,6 +1,6 @@
 <x-layouts.admin :search="false">
     <x-admin.crud-form
-        :action="route('kit-items.store')"
+        :action="route('admin.kit-items.store')"
         :title="__('collectible.kit.add')"
         :featured-image="false"
         :description="false">

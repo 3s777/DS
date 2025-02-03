@@ -9,7 +9,7 @@
 
     @include('admin.shelf.collectible.partials.filters')
 
-    <x-common.action-table model-name="shelves">
+    <x-common.action-table model-name="admin.collectibles">
         <x-common.selectable-order
             class="action-table__selectable-order"
             :sorters="[
@@ -149,7 +149,7 @@
                         <span class="responsive-table__label">{{ __('common.created_date') }}: </span> {{ $collectible->created_at }}
                     </x-ui.responsive-table.column>
                     <x-ui.responsive-table.column type="action">
-                        <x-common.action-table.buttons :item="$collectible" :slug="false" model="collectibles" />
+                        <x-common.action-table.buttons :item="$collectible" :slug="false" model="admin.collectibles" />
                     </x-ui.responsive-table.column>
                 </x-ui.responsive-table.row>
             @endforeach

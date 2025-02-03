@@ -2,14 +2,13 @@
 
 namespace App\Shelf\Controllers;
 
-use App\Http\Controllers\Shelf\CategoryController;
-use App\Http\Requests\Shelf\CreateCategoryRequest;
+use App\Http\Controllers\Shelf\Admin\CategoryController;
+use App\Http\Requests\Shelf\Admin\CreateCategoryRequest;
 use Database\Factories\Shelf\CategoryFactory;
 use Database\Factories\UserFactory;
 use Domain\Auth\Models\Role;
 use Domain\Auth\Models\User;
 use Domain\Shelf\Models\Category;
-use Illuminate\Foundation\Testing\DatabaseTruncation;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Str;
 use Tests\TestCase;
@@ -43,7 +42,7 @@ class CategoryControllerTest extends TestCase
         array $request = []
     ): void {
         $this->{$method}(action([CategoryController::class, $action], $params), $request)
-            ->assertRedirectToRoute('login');
+            ->assertRedirectToRoute('admin.login');
     }
 
     /**
@@ -108,7 +107,7 @@ class CategoryControllerTest extends TestCase
 
         $this->actingAs($this->user)
             ->post(action([CategoryController::class, 'store']), $this->request)
-            ->assertRedirectToRoute('categories.index')
+            ->assertRedirectToRoute('admin.categories.index')
             ->assertSessionHas('helper_flash_message', __('collectible.category.created'));
 
         $this->assertDatabaseHas('categories', [
@@ -123,14 +122,14 @@ class CategoryControllerTest extends TestCase
     public function it_validation_name_fail(): void
     {
 
-        $this->app['session']->setPreviousUrl(route('categories.create'));
+        $this->app['session']->setPreviousUrl(route('admin.categories.create'));
 
         $this->request['name'] = '';
 
         $this->actingAs($this->user)
             ->post(action([CategoryController::class, 'store']), $this->request)
             ->assertInvalid(['name'])
-            ->assertRedirectToRoute('categories.create');
+            ->assertRedirectToRoute('admin.categories.create');
 
         $this->assertDatabaseMissing('categories', [
             'slug' => Str::slug($this->request['name'])
@@ -154,7 +153,7 @@ class CategoryControllerTest extends TestCase
                 ),
                 $this->request
             )
-            ->assertRedirectToRoute('categories.index')
+            ->assertRedirectToRoute('admin.categories.index')
             ->assertSessionHas('helper_flash_message', __('collectible.category.updated'));
 
         $this->assertDatabaseHas('categories', [
@@ -174,7 +173,7 @@ class CategoryControllerTest extends TestCase
     {
         $this->actingAs($this->user)
             ->delete(action([CategoryController::class, 'destroy'], [$this->category->slug]))
-            ->assertRedirectToRoute('categories.index')
+            ->assertRedirectToRoute('admin.categories.index')
             ->assertSessionHas('helper_flash_message', __('collectible.category.deleted'));
 
         $this->assertDatabaseMissing('categories', [

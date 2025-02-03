@@ -2,9 +2,7 @@
 
 namespace App\Shelf\Services;
 
-use App\Http\Requests\Auth\User\CreateUserRequest;
-
-use App\Http\Requests\Shelf\CreateCategoryRequest;
+use App\Http\Requests\Shelf\Admin\CreateCategoryRequest;
 use Domain\Auth\Models\User;
 use Domain\Shelf\DTOs\FillCategoryDTO;
 use Domain\Shelf\Models\Category;

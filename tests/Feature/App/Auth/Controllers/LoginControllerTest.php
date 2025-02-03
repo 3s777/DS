@@ -103,7 +103,7 @@ class LoginControllerTest extends TestCase
         ];
 
         $this->post(action([LoginController::class, 'handle']), $request)
-            ->assertRedirectToRoute('verification.notice');
+            ->assertRedirectToRoute('admin.verification.notice');
 
         $this->assertGuest();
     }

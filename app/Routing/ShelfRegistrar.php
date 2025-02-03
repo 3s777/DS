@@ -3,11 +3,11 @@
 namespace App\Routing;
 
 use App\Contracts\RouteRegistrar;
-use App\Http\Controllers\Shelf\CategoryController;
-use App\Http\Controllers\Shelf\CollectibleController;
-use App\Http\Controllers\Shelf\CollectibleGameController;
-use App\Http\Controllers\Shelf\KitItemController;
-use App\Http\Controllers\Shelf\ShelfController;
+use App\Http\Controllers\Shelf\Admin\CategoryController;
+use App\Http\Controllers\Shelf\Admin\CollectibleController;
+use App\Http\Controllers\Shelf\Admin\CollectibleGameController;
+use App\Http\Controllers\Shelf\Admin\KitItemController;
+use App\Http\Controllers\Shelf\Admin\ShelfController;
 use Illuminate\Contracts\Routing\Registrar;
 use Illuminate\Support\Facades\Route;
 
@@ -17,7 +17,12 @@ class ShelfRegistrar extends BaseRouteRegistrar implements RouteRegistrar
     {
         Route::middleware('web')
             ->group(function () {
-                Route::prefix('{locale}')
+
+                Route::prefix('{locale}')->whereIn('locale', config('app.available_locales'))->group(function () {
+
+                });
+
+                Route::as('admin.')->prefix('{locale}')
                     ->whereIn('locale', config('app.available_locales'))
                     ->group(function () {
                         Route::prefix('admin')

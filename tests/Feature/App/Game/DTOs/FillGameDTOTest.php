@@ -2,7 +2,7 @@
 
 namespace App\Game\DTOs;
 
-use App\Http\Requests\Game\CreateGameRequest;
+use App\Http\Requests\Game\Admin\CreateGameRequest;
 use Domain\Game\DTOs\FillGameDTO;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
