@@ -13,7 +13,7 @@ class CollectorUpdateViewModel extends ViewModel
 {
     public ?Collector $collector;
 
-    public function __construct(User $collector = null)
+    public function __construct(Collector $collector = null)
     {
         $this->collector = $collector;
     }
@@ -25,17 +25,19 @@ class CollectorUpdateViewModel extends ViewModel
 
     public function roles(): array
     {
-        return Role::all()->select('name', 'display_name')->pluck('display_name', 'name')->toArray();
+        return Role::where('guard_name', 'collector')->select('name', 'display_name')->pluck('display_name', 'name')->toArray();
     }
 
     public function selectedRoles(): ?array
     {
-        return $this->user?->roles->pluck('name')->toArray() ?? null;
+        return $this->collector?->roles->pluck('name')->toArray() ?? null;
     }
 
     public function permissions(): array
     {
-        return Permission::all()->select('name', 'display_name')->toArray();
+//        dd(Permission::select('name', 'display_name')->get()->toArray(),  Permission::all()->where('guard_name', 'collector')->select('name', 'display_name')->toArray());
+
+        return Permission::all()->where('guard_name', 'collector')->select('name', 'display_name')->toArray();
     }
 
     public function rolePermissions(): array

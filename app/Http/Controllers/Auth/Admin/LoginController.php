@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Auth\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Auth\LoginRequest;
+use App\Http\Requests\Auth\Admin\LoginRequest;
 use Domain\Auth\Actions\LoginAdminAction;
 use Domain\Auth\DTOs\LoginAdminDTO;
 use Illuminate\Contracts\View\Factory;
@@ -16,7 +16,7 @@ class LoginController extends Controller
 {
     public function page(): View|Application|Factory|\Illuminate\Contracts\Foundation\Application
     {
-        return view('content.auth.login', ['route' => route('admin.login.handle')]);
+        return view('content.auth.login');
     }
 
     public function handle(LoginRequest $request, LoginAdminAction $action): RedirectResponse
@@ -42,9 +42,9 @@ class LoginController extends Controller
     {
         auth()->logout();
 
-        request()->session()->invalidate();
-
-        request()->session()->regenerateToken();
+//        request()->session()->invalidate();
+//
+//        request()->session()->regenerateToken();
 
         return to_route('home');
     }

@@ -2,8 +2,8 @@
 
 namespace App\Auth\Controllers;
 
-use App\Http\Controllers\Auth\Admin\UserController;
-use App\Http\Requests\Auth\User\CreateUserRequest;
+use App\Http\Controllers\Auth\Admin\AdminController;
+use App\Http\Requests\Auth\Admin\CreateAdminRequest;
 use App\Jobs\GenerateSmallThumbnailsJob;
 use App\Jobs\GenerateThumbnailJob;
 use Database\Factories\UserFactory;
@@ -18,7 +18,7 @@ use Illuminate\Support\Facades\Storage;
 use Spatie\Permission\PermissionRegistrar;
 use Tests\TestCase;
 
-class UserControllerTest extends TestCase
+class AdminControllerTest extends TestCase
 {
     use RefreshDatabase;
 
@@ -36,7 +36,7 @@ class UserControllerTest extends TestCase
 
         $this->testingUser = UserFactory::new()->create();
 
-        $this->request = CreateUserRequest::factory()->create();
+        $this->request = CreateAdminRequest::factory()->create();
 
         $this->artisan('db:seed', ['--class' => PermissionsTestSeeder::class]);
 
@@ -50,7 +50,7 @@ class UserControllerTest extends TestCase
         array $params = [],
         array $request = []
     ): void {
-        $this->{$method}(action([UserController::class, $action], $params), $request)
+        $this->{$method}(action([AdminController::class, $action], $params), $request)
             ->assertRedirectToRoute('admin.login');
     }
 
@@ -75,7 +75,7 @@ class UserControllerTest extends TestCase
     public function it_index_success(): void
     {
         $this->actingAs($this->authUser)
-            ->get(action([UserController::class, 'index']))
+            ->get(action([AdminController::class, 'index']))
             ->assertOk()
             ->assertSee(__('user.list'))
             ->assertViewIs('admin.user.user.index');
@@ -88,7 +88,7 @@ class UserControllerTest extends TestCase
     public function it_create_success(): void
     {
         $this->actingAs($this->authUser)
-            ->get(action([UserController::class, 'create']))
+            ->get(action([AdminController::class, 'create']))
             ->assertOk()
             ->assertSee(__('user.add'))
             ->assertViewIs('admin.user.user.create');
@@ -101,7 +101,7 @@ class UserControllerTest extends TestCase
     public function it_edit_success(): void
     {
         $this->actingAs($this->authUser)
-            ->get(action([UserController::class, 'edit'], [$this->testingUser->slug]))
+            ->get(action([AdminController::class, 'edit'], [$this->testingUser->slug]))
             ->assertOk()
             ->assertSee($this->testingUser->name)
             ->assertViewIs('admin.user.user.edit');
@@ -117,7 +117,7 @@ class UserControllerTest extends TestCase
         Storage::fake('images');
 
         $this->actingAs($this->authUser)
-            ->post(action([UserController::class, 'store']), $this->request)
+            ->post(action([AdminController::class, 'store']), $this->request)
             ->assertRedirectToRoute('admin.users.index')
             ->assertSessionHas('helper_flash_message', __('user.created'));
 
@@ -152,7 +152,7 @@ class UserControllerTest extends TestCase
         $this->actingAs($this->authUser)
             ->put(
                 action(
-                    [UserController::class, 'update'],
+                    [AdminController::class, 'update'],
                     [$this->testingUser->slug]
                 ),
                 $this->request
@@ -178,7 +178,7 @@ class UserControllerTest extends TestCase
     public function it_delete_success(): void
     {
         $this->actingAs($this->authUser)
-            ->delete(action([UserController::class, 'destroy'], [$this->testingUser->slug]))
+            ->delete(action([AdminController::class, 'destroy'], [$this->testingUser->slug]))
             ->assertRedirectToRoute('admin.users.index')
             ->assertSessionHas('helper_flash_message', __('user.deleted'));
 
@@ -199,7 +199,7 @@ class UserControllerTest extends TestCase
         $role->givePermissionTo('entity.*');
 
         $this->actingAs($this->authUser)
-            ->post(action([UserController::class, 'store']), $this->request)
+            ->post(action([AdminController::class, 'store']), $this->request)
             ->assertRedirectToRoute('admin.users.index')
             ->assertSessionHas('helper_flash_message', __('user.created'));
 
@@ -222,7 +222,7 @@ class UserControllerTest extends TestCase
         $this->request['featured_image'] = UploadedFile::fake()->image('photo1.php');
 
         $this->actingAs($this->authUser)
-            ->post(action([UserController::class, 'store']), $this->request)
+            ->post(action([AdminController::class, 'store']), $this->request)
             ->assertInvalid(['name', 'password', 'language', 'roles', 'featured_image'])
             ->assertRedirectToRoute('admin.users.create');
 
@@ -247,7 +247,7 @@ class UserControllerTest extends TestCase
         $this->actingAs($this->authUser)
             ->put(
                 action(
-                    [UserController::class, 'update'],
+                    [AdminController::class, 'update'],
                     [$this->testingUser->slug]
                 ),
                 $this->request

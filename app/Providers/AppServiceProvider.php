@@ -49,6 +49,7 @@ class AppServiceProvider extends ServiceProvider
             'game_platform' => 'Domain\Game\Models\GamePlatform',
             'game_platform_manufacturer' => 'Domain\Game\Models\GamePlatformManufacturer',
             'user' => 'Domain\Auth\Models\User',
+            'collector' => 'Domain\Auth\Models\Collector',
             'permission' => 'Domain\Auth\Models\Permission',
             'role' => 'Domain\Auth\Models\Role',
             'kit_item' => 'Domain\Shelf\Models\KitItem',

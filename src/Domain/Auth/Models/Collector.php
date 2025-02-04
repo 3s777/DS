@@ -90,6 +90,8 @@ class Collector extends Authenticatable implements MustVerifyEmail, HasLocalePre
         'description' => CleanHtml::class.':custom',
     ];
 
+    protected $guard_name = 'collector';
+
     public array $sortedFields = [
         'id',
         'name',

@@ -1,13 +1,13 @@
 <?php
 
-namespace App\Http\Requests\Auth\User;
+namespace App\Http\Requests\Auth\Admin;
 
 use Illuminate\Contracts\Validation\ValidationRule;
 use Illuminate\Foundation\Http\FormRequest;
 
-class FilterUserRequest extends FormRequest
+class FilterAdminRequest extends FormRequest
 {
-    protected $redirectRoute = 'users.index';
+    protected $redirectRoute = 'admin.users.index';
 
     /**
      * Determine if the user is authorized to make this request.

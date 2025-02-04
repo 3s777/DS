@@ -2,7 +2,7 @@
 
 namespace App\Game\Services;
 
-use App\Http\Requests\Auth\User\CreateUserRequest;
+use App\Http\Requests\Auth\Admin\CreateAdminRequest;
 use App\Http\Requests\Game\Admin\CreateGameMediaRequest;
 use App\Jobs\GenerateSmallThumbnailsJob;
 use App\Jobs\GenerateThumbnailJob;
@@ -131,7 +131,7 @@ class GameMediaServiceTest extends TestCase
         $this->request['platforms'] = $newPlatforms->pluck('id')->toArray();
         $this->request['featured_image'] = UploadedFile::fake()->image('photo2.jpg');
 
-        $updateRequest = new CreateUserRequest($this->request);
+        $updateRequest = new CreateAdminRequest($this->request);
 
         $gameMediaService->update($gameMedia, FillGameMediaDTO::fromRequest($updateRequest));
 

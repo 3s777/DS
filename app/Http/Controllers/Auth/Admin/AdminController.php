@@ -3,12 +3,12 @@
 namespace App\Http\Controllers\Auth\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Auth\User\CreateUserRequest;
-use App\Http\Requests\Auth\User\FilterUserRequest;
-use App\Http\Requests\Auth\User\UpdateUserRequest;
+use App\Http\Requests\Auth\Admin\CreateAdminRequest;
+use App\Http\Requests\Auth\Admin\FilterAdminRequest;
+use App\Http\Requests\Auth\Admin\UpdateAdminRequest;
 use App\Http\Requests\MassDeletingRequest;
-use Domain\Auth\Actions\CreateUserAction;
-use Domain\Auth\Actions\UpdateUserAction;
+use Domain\Auth\Actions\CreateAdminAction;
+use Domain\Auth\Actions\UpdateAdminAction;
 use Domain\Auth\DTOs\NewAdminDTO;
 use Domain\Auth\DTOs\UpdateUserDTO;
 use Domain\Auth\Models\User;
@@ -25,7 +25,7 @@ use Support\DTOs\MassDeletingDTO;
 use Support\Exceptions\MassDeletingException;
 use Support\ViewModels\AsyncSelectByQueryViewModel;
 
-class UserController extends Controller
+class AdminController extends Controller
 {
     public function __construct()
     {
@@ -39,7 +39,7 @@ class UserController extends Controller
 //        ]);
 //    }
 
-    public function index(FilterUserRequest $request): View|Application|Factory|\Illuminate\Contracts\Foundation\Application
+    public function index(FilterAdminRequest $request): View|Application|Factory|\Illuminate\Contracts\Foundation\Application
     {
         return view('admin.user.user.index', new AdminIndexViewModel());
     }
@@ -49,7 +49,7 @@ class UserController extends Controller
         return view('admin.user.user.create', new AdminUpdateViewModel());
     }
 
-    public function store(CreateUserRequest $request, CreateUserAction $action): RedirectResponse
+    public function store(CreateAdminRequest $request, CreateAdminAction $action): RedirectResponse
     {
         $action(NewAdminDTO::fromRequest($request));
 
@@ -68,7 +68,7 @@ class UserController extends Controller
         return view('admin.user.user.edit', new AdminUpdateViewModel($user));
     }
 
-    public function update(UpdateUserRequest $request, User $user, UpdateUserAction $action): RedirectResponse
+    public function update(UpdateAdminRequest $request, User $user, UpdateAdminAction $action): RedirectResponse
     {
         $action(UpdateUserDTO::fromRequest($request), $user);
 

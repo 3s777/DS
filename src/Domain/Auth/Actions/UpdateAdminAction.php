@@ -8,7 +8,7 @@ use Domain\Auth\Models\User;
 use Illuminate\Support\Facades\DB;
 use Throwable;
 
-class UpdateUserAction
+class UpdateAdminAction
 {
     public function __invoke(UpdateUserDTO $data, User $user): User
     {
@@ -32,7 +32,7 @@ class UpdateUserAction
 
             if(!$user->email_verified_at && $data->is_verified) {
                 $verifyAction = app(VerifyEmailAction::class);
-                $verifyAction($user->id);
+                $verifyAction($user);
             }
 
             if(!$data->is_verified) {

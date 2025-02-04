@@ -1,12 +1,11 @@
 <?php
 
-namespace Tests\RequestFactories\Auth\User;
+namespace Tests\RequestFactories\Auth\Admin;
 
-use App\Models\Language;
 use Illuminate\Http\UploadedFile;
 use Worksome\RequestFactories\RequestFactory;
 
-class CreateUserRequestFactory extends RequestFactory
+class CreateAdminRequestFactory extends RequestFactory
 {
     public function definition(): array
     {

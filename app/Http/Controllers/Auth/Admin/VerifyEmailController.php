@@ -3,8 +3,8 @@
 namespace App\Http\Controllers\Auth\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Auth\SendEmailVerifyRequest;
-use App\Http\Requests\Auth\VerifyEmailRequest;
+use App\Http\Requests\Auth\Admin\SendEmailVerifyRequest;
+use App\Http\Requests\Auth\Admin\VerifyEmailRequest;
 use Domain\Auth\Actions\VerifyEmailAction;
 use Domain\Auth\Models\User;
 use Illuminate\Support\Facades\Auth;
@@ -18,7 +18,9 @@ class VerifyEmailController extends Controller
 
     public function handle(VerifyEmailRequest $request, VerifyEmailAction $action, $id)
     {
-        $user = $action($id);
+        $user = User::find($id);
+
+        $action($user);
 
         Auth::loginUsingId($user->id);
 

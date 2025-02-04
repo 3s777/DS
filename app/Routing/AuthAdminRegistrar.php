@@ -7,7 +7,7 @@ use App\Http\Controllers\Auth\Admin\ForgotPasswordController;
 use App\Http\Controllers\Auth\Admin\LoginController;
 use App\Http\Controllers\Auth\Admin\RegisterController;
 use App\Http\Controllers\Auth\Admin\ResetPasswordController;
-use App\Http\Controllers\Auth\Admin\UserController;
+use App\Http\Controllers\Auth\Admin\AdminController;
 use App\Http\Controllers\Auth\Admin\VerifyEmailController;
 use App\Http\Controllers\Auth\PermissionController;
 use App\Http\Controllers\Auth\RoleController;
@@ -51,12 +51,12 @@ class AuthAdminRegistrar implements RouteRegistrar
 
 //                    Route::get('/findUsers{query?}', [UserController::class, 'getUsers'])->name('find-users');
 
-                    Route::post('/select-users', [UserController::class, 'getForSelect'])->name('select-users');
+                    Route::post('/select-users', [AdminController::class, 'getForSelect'])->name('select-users');
 //                    Route::get('/users', [UserController::class, 'publicIndex'])->name('public-users');
                     Route::middleware(['auth:admin', 'verified'])->group(function () {
-                        Route::delete('/users/delete-selected', [UserController::class, 'deleteSelected'])->name('users.delete');
-                        Route::delete('/users/force-delete-selected', [UserController::class, 'forceDeleteSelected'])->name('users.forceDelete');
-                        Route::resource('users', UserController::class)->middleware(['remove.locale']);
+                        Route::delete('/users/delete-selected', [AdminController::class, 'deleteSelected'])->name('users.delete');
+                        Route::delete('/users/force-delete-selected', [AdminController::class, 'forceDeleteSelected'])->name('users.forceDelete');
+                        Route::resource('users', AdminController::class)->middleware(['remove.locale']);
                         Route::resource('roles', RoleController::class)->middleware(['remove.locale']);
                         Route::resource('permissions', PermissionController::class)->middleware(['remove.locale']);
                     });

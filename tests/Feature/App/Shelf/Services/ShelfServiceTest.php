@@ -2,7 +2,7 @@
 
 namespace App\Shelf\Services;
 
-use App\Http\Requests\Auth\User\CreateUserRequest;
+use App\Http\Requests\Auth\Admin\CreateAdminRequest;
 use App\Http\Requests\Shelf\Admin\CreateShelfRequest;
 use App\Jobs\GenerateSmallThumbnailsJob;
 use App\Jobs\GenerateThumbnailJob;
@@ -92,7 +92,7 @@ class ShelfServiceTest extends TestCase
         $this->request['description'] = 'NewDescription';
         $this->request['featured_image'] = UploadedFile::fake()->image('photo2.jpg');
 
-        $updateRequest = new CreateUserRequest($this->request);
+        $updateRequest = new CreateAdminRequest($this->request);
 
         $shelfService->update($shelf, FillShelfDTO::fromRequest($updateRequest));
 

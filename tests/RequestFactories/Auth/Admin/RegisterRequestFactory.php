@@ -1,8 +1,7 @@
 <?php
 
-namespace Tests\RequestFactories\Auth;
+namespace Tests\RequestFactories\Auth\Admin;
 
-use App\Models\Language;
 use Worksome\RequestFactories\RequestFactory;
 
 class RegisterRequestFactory extends RequestFactory

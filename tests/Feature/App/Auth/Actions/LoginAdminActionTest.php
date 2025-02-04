@@ -9,7 +9,7 @@ use Domain\Auth\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
-class LoginUserActionTest extends TestCase
+class LoginAdminActionTest extends TestCase
 {
     use RefreshDatabase;
 

@@ -3,11 +3,9 @@
 namespace App\Http\Controllers\Auth\Collector;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Auth\LoginRequest;
+use App\Http\Requests\Auth\Admin\LoginRequest;
 use Domain\Auth\Actions\LoginCollectorAction;
-use Domain\Auth\Actions\LoginAdminAction;
 use Domain\Auth\DTOs\LoginCollectorDTO;
-use Domain\Auth\DTOs\LoginAdminDTO;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
 use Illuminate\Foundation\Application;
@@ -18,10 +16,9 @@ class LoginController extends Controller
 {
     public function page(): View|Application|Factory|\Illuminate\Contracts\Foundation\Application
     {
-        return view('content.auth.login', ['route' => route('collector.login.handle')]);
+        return view('content.auth-collector.login');
     }
 
-    //Разобраться с guest в FormRequest
     public function handle(LoginRequest $request, LoginCollectorAction $action): RedirectResponse
     {
 
@@ -45,10 +42,10 @@ class LoginController extends Controller
     public function logout(): Application|Redirector|RedirectResponse|\Illuminate\Contracts\Foundation\Application
     {
         auth('collector')->logout();
-//
-//        request()->session()->invalidate();
-//
-//        request()->session()->regenerateToken();
+
+        request()->session()->invalidate();
+
+        request()->session()->regenerateToken();
 
         return to_route('home');
     }

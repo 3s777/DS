@@ -1,8 +1,8 @@
 <x-layouts.admin :search="false">
     <x-admin.crud-form
-        :action="route('admin.users.update', $user->slug)"
-        :title="__('user.edit')"
-        :model="$user">
+        :action="route('admin.collectors.update', $collector->slug)"
+        :title="__('user.collector.edit')"
+        :model="$collector">
             <x-grid type="container">
                 <x-grid.col xl="4" ls="6" ml="12" lg="6" md="6" sm="12">
                     <x-ui.form.group>
@@ -10,7 +10,7 @@
                             :placeholder="__('auth.username')"
                             id="name"
                             name="name"
-                            :value="$user->name"
+                            :value="$collector->name"
                             required
                             autocomplete="on"
                             autofocus>
@@ -24,7 +24,7 @@
                             :placeholder="__('auth.first_name')"
                             id="first_name"
                             name="first_name"
-                            :value="$user->first_name"
+                            :value="$collector->first_name"
                             autocomplete="on">
                         </x-ui.form.input-text>
                     </x-ui.form.group>
@@ -36,7 +36,7 @@
                             :placeholder="__('common.slug')"
                             id="slug"
                             name="slug"
-                            :value="$user->slug"
+                            :value="$collector->slug"
                             autocomplete="on">
                         </x-ui.form.input-text>
                     </x-ui.form.group>
@@ -49,7 +49,7 @@
                             select-name="language"
                             :options="$languages"
                             :label="__('common.language')"
-                            :selected="$user->language"
+                            :selected="$collector->language"
                         />
                     </x-ui.form.group>
                 </x-grid.col>
@@ -62,7 +62,7 @@
                             id="email"
                             name="email"
                             required
-                            :value="$user->email"
+                            :value="$collector->email"
                             autocomplete="on">
                         </x-ui.form.input-text>
                     </x-ui.form.group>
@@ -85,7 +85,7 @@
                             name="is_verified"
                             :value="1"
                             :label="__('auth.is_verified')"
-                            :checked="$user->email_verified_at">
+                            :checked="$collector->email_verified_at">
                         </x-ui.form.switcher>
                     </x-ui.form.group>
                 </x-grid.col>
@@ -120,7 +120,7 @@
                                                 :disabled="in_array($permission['name'], $rolePermissions)"
                                                 :checked="old()
                                                     ? in_array($permission['name'], old('permissions', []))
-                                                    : $user->hasPermissionTo($permission['name'])">
+                                                    : $collector->hasPermissionTo($permission['name'])">
                                             </x-ui.form.input-checkbox>
                                         </x-ui.form.group>
                                     </x-grid.col>

@@ -3,18 +3,19 @@
 namespace App\Http\Controllers\Auth\Collector;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Auth\User\CreateUserRequest;
-use App\Http\Requests\Auth\User\FilterUserRequest;
-use App\Http\Requests\Auth\User\UpdateUserRequest;
+
+use App\Http\Requests\Auth\Collector\CreateCollectorRequest;
+use App\Http\Requests\Auth\Collector\FilterCollectorRequest;
+use App\Http\Requests\Auth\Collector\UpdateCollectorRequest;
 use App\Http\Requests\MassDeletingRequest;
-use Domain\Auth\Actions\CreateUserAction;
-use Domain\Auth\Actions\UpdateUserAction;
-use Domain\Auth\DTOs\NewAdminDTO;
-use Domain\Auth\DTOs\UpdateUserDTO;
+use Domain\Auth\Actions\CreateCollectorAction;
+use Domain\Auth\Actions\UpdateCollectorAction;
+use Domain\Auth\DTOs\NewCollectorDTO;
+use Domain\Auth\DTOs\UpdateCollectorDTO;
+use Domain\Auth\Models\Collector;
 use Domain\Auth\Models\User;
-use Domain\Auth\ViewModels\AdminIndexViewModel;
-use Domain\Auth\ViewModels\AdminUpdateViewModel;
 use Domain\Auth\ViewModels\CollectorIndexViewModel;
+use Domain\Auth\ViewModels\CollectorUpdateViewModel;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
 use Illuminate\Foundation\Application;
@@ -30,61 +31,54 @@ class CollectorController extends Controller
 {
     public function __construct()
     {
-        $this->authorizeResource(User::class, 'user');
+        $this->authorizeResource(Collector::class, 'collector');
     }
 
-//    protected function resourceAbilityMap(): array
-//    {
-//        return array_merge(parent::resourceAbilityMap(), [
-//            'getForSelect' => 'getForSelect'
-//        ]);
-//    }
-
-    public function index(FilterUserRequest $request): View|Application|Factory|\Illuminate\Contracts\Foundation\Application
+    public function index(FilterCollectorRequest $request): View|Application|Factory|\Illuminate\Contracts\Foundation\Application
     {
         return view('admin.user.collector.index', new CollectorIndexViewModel());
     }
 
     public function create(): View|Application|Factory|\Illuminate\Contracts\Foundation\Application
     {
-        return view('admin.user.user.create', new AdminUpdateViewModel());
+        return view('admin.user.collector.create', new CollectorUpdateViewModel());
     }
 
-    public function store(CreateUserRequest $request, CreateUserAction $action): RedirectResponse
+    public function store(CreateCollectorRequest $request, CreateCollectorAction $action): RedirectResponse
     {
-        $action(NewAdminDTO::fromRequest($request));
+        $action(NewCollectorDTO::fromRequest($request));
 
-        flash()->info(__('user.created'));
+        flash()->info(__('user.collector.created'));
 
-        return to_route('admin.users.index');
+        return to_route('admin.collectors.index');
     }
 
-    public function show(User $user)
+    public function show(Collector $collector)
     {
-        return view('admin.user.user.show', compact(['user']));
+        return view('admin.user.collector.show', compact(['collector']));
     }
 
-    public function edit(User $user): View|Application|Factory|\Illuminate\Contracts\Foundation\Application
+    public function edit(Collector $collector): View|Application|Factory|\Illuminate\Contracts\Foundation\Application
     {
-        return view('admin.user.user.edit', new AdminUpdateViewModel($user));
+        return view('admin.user.collector.edit', new CollectorUpdateViewModel($collector));
     }
 
-    public function update(UpdateUserRequest $request, User $user, UpdateUserAction $action): RedirectResponse
+    public function update(UpdateCollectorRequest $request, Collector $collector, UpdateCollectorAction $action): RedirectResponse
     {
-        $action(UpdateUserDTO::fromRequest($request), $user);
+        $action(UpdateCollectorDTO::fromRequest($request), $collector);
 
-        flash()->info(__('user.updated'));
+        flash()->info(__('user.collector.updated'));
 
-        return to_route('admin.users.index');
+        return to_route('admin.collectors.index');
     }
 
-    public function destroy(User $user): RedirectResponse
+    public function destroy(Collector $collector): RedirectResponse
     {
-        $user->delete();
+        $collector->delete();
 
-        flash()->info(__('user.deleted'));
+        flash()->info(__('user.collector.deleted'));
 
-        return to_route('admin.users.index');
+        return to_route('admin.collectors.index');
     }
 
     /**
@@ -94,14 +88,14 @@ class CollectorController extends Controller
     {
         $deletingAction(
             MassDeletingDTO::make(
-                'Domain\Auth\Models\User',
+                Collector::class,
                 $request->input('ids')
             )
         );
 
-        flash()->info(__('user.mass_deleted'));
+        flash()->info(__('user.collector.mass_deleted'));
 
-        return to_route('admin.users.index');
+        return to_route('admin.collectors.index');
     }
 
     /**
@@ -111,47 +105,25 @@ class CollectorController extends Controller
     {
         $deletingAction(
             MassDeletingDTO::make(
-                'Domain\Auth\Models\User',
+                Collector::class,
                 $request->input('ids'),
                 true
             )
         );
 
-        flash()->info(__('user.mass_force_deleted'));
+        flash()->info(__('user.collector.mass_force_deleted'));
 
-        return to_route('admin.users.index');
-    }
-
-
-    public function publicIndex()
-    {
-        $users = User::all();
-
-        return view('content.users.index', compact('users'));
+        return to_route('admin.collectors.index');
     }
 
     public function getForSelect(Request $request): AsyncSelectByQueryViewModel
     {
-        Gate::authorize('getForSelect', User::class);
+        Gate::authorize('getForSelect', Collector::class);
 
         return new AsyncSelectByQueryViewModel(
             $request->input('query'),
-            User::class,
-            trans_choice('user.choose', 1)
+            Collector::class,
+            trans_choice('user.collector.choose', 1)
         );
     }
-
-    public function findUsers($param = null)
-    {
-        $users = null;
-
-        if ($param) {
-            $users = User::where('name', 'LIKE', '%'.$param.'%')->get();
-        } else {
-            $users = User::all();
-        }
-
-        return response()->json($users);
-    }
-
 }

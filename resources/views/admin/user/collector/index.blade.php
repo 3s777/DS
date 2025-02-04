@@ -3,11 +3,11 @@
         @if(request('filters.search'))
             {{ __('filters.result') }} "{{ request('filters.search') }}"
         @else
-            {{ __('user.list') }}
+            {{ __('user.collector.list') }}
         @endif
     </x-ui.title>
 
-    @include('admin.user.user.partials.filters')
+    @include('admin.user.collector.partials.filters')
 
     <x-common.action-table model-name="admin.collectors">
         <x-common.selectable-order

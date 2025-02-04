@@ -2,12 +2,12 @@
 
 namespace App\Auth\Actions;
 
-use App\Http\Requests\Auth\User\CreateUserRequest;
+use App\Http\Requests\Auth\Admin\CreateAdminRequest;
 use App\Jobs\GenerateSmallThumbnailsJob;
 use App\Jobs\GenerateThumbnailJob;
 use Database\Seeders\PermissionsTestSeeder;
-use Domain\Auth\Actions\CreateUserAction;
-use Domain\Auth\Actions\UpdateUserAction;
+use Domain\Auth\Actions\CreateAdminAction;
+use Domain\Auth\Actions\UpdateAdminAction;
 use Domain\Auth\DTOs\NewAdminDTO;
 use Domain\Auth\DTOs\UpdateUserDTO;
 use Domain\Auth\Models\Permission;
@@ -23,7 +23,7 @@ use Illuminate\Support\Facades\Queue;
 use Illuminate\Support\Facades\Storage;
 use Tests\TestCase;
 
-class UpdateUserActionTest extends TestCase
+class UpdateAdminActionTest extends TestCase
 {
     use RefreshDatabase;
 
@@ -33,7 +33,7 @@ class UpdateUserActionTest extends TestCase
     {
         parent::setUp();
 
-        $this->request = CreateUserRequest::factory()->create();
+        $this->request = CreateAdminRequest::factory()->create();
 
         Role::create(['name' => config('settings.default_role'), 'display_name' => 'User']);
         Role::create(['name' => 'editor', 'display_name' => 'Editor']);
@@ -53,7 +53,7 @@ class UpdateUserActionTest extends TestCase
             Verified::class
         ]);
 
-        $createAction = app(CreateUserAction::class);
+        $createAction = app(CreateAdminAction::class);
 
         $createAction(NewAdminDTO::make(
             $this->request['name'],
@@ -77,7 +77,7 @@ class UpdateUserActionTest extends TestCase
         $role = Role::where('name', config('settings.default_role'))->first();
         $role->givePermissionTo('entity.*');
 
-        $updateAction = app(UpdateUserAction::class);
+        $updateAction = app(UpdateAdminAction::class);
 
         $updateAction(UpdateUserDTO::make(
             'newName',

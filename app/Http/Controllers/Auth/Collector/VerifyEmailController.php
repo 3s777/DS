@@ -3,8 +3,8 @@
 namespace App\Http\Controllers\Auth\Collector;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Auth\SendEmailVerifyRequest;
-use App\Http\Requests\Auth\VerifyEmailRequest;
+use App\Http\Requests\Auth\Admin\SendEmailVerifyRequest;
+use App\Http\Requests\Auth\Admin\VerifyEmailRequest;
 use Domain\Auth\Actions\VerifyEmailAction;
 use Domain\Auth\Models\User;
 use Illuminate\Support\Facades\Auth;

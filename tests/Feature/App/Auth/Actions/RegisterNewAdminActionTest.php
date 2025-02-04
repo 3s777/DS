@@ -2,7 +2,7 @@
 
 namespace App\Auth\Actions;
 
-use App\Http\Requests\Auth\RegisterRequest;
+use App\Http\Requests\Auth\Admin\RegisterRequest;
 use Domain\Auth\Contracts\RegisterNewUserContract;
 use Domain\Auth\DTOs\NewAdminDTO;
 use Domain\Auth\Models\Role;
@@ -15,7 +15,7 @@ use Illuminate\Support\Facades\Event;
 use Illuminate\Support\Facades\Notification;
 use Tests\TestCase;
 
-class RegisterNewUserActionTest extends TestCase
+class RegisterNewAdminActionTest extends TestCase
 {
     use RefreshDatabase;
 

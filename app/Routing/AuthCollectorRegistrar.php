@@ -24,7 +24,6 @@ class AuthCollectorRegistrar implements RouteRegistrar
                     Route::post('/select-collectors', [CollectorController::class, 'getForSelect'])->name('select-collectors');
 
                     Route::controller(LoginController::class)->group(function () {
-//                        Route::get('/login', 'page')->middleware('guest')->name('login');
                         Route::get('/login', 'page')->middleware('guest:collector')->name('login');
                         Route::post('/login', 'handle')->middleware('guest:collector', 'throttle:auth')->name('login.handle');
                         Route::delete('/logout', 'logout')->name('logout');

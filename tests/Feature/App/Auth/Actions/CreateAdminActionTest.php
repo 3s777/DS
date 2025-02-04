@@ -2,10 +2,10 @@
 
 namespace App\Auth\Actions;
 
-use App\Http\Requests\Auth\User\CreateUserRequest;
+use App\Http\Requests\Auth\Admin\CreateAdminRequest;
 use App\Jobs\GenerateSmallThumbnailsJob;
 use App\Jobs\GenerateThumbnailJob;
-use Domain\Auth\Actions\CreateUserAction;
+use Domain\Auth\Actions\CreateAdminAction;
 use Domain\Auth\DTOs\NewAdminDTO;
 use Domain\Auth\Models\Role;
 use Domain\Auth\Models\User;
@@ -18,7 +18,7 @@ use Illuminate\Support\Facades\Queue;
 use Illuminate\Support\Facades\Storage;
 use Tests\TestCase;
 
-class CreateUserActionTest extends TestCase
+class CreateAdminActionTest extends TestCase
 {
     use RefreshDatabase;
 
@@ -28,7 +28,7 @@ class CreateUserActionTest extends TestCase
     {
         parent::setUp();
 
-        $this->request = CreateUserRequest::factory()->create();
+        $this->request = CreateAdminRequest::factory()->create();
 
         Role::create(['name' => config('settings.default_role'), 'display_name' => 'User']);
         Role::create(['name' => 'editor', 'display_name' => 'Editor']);
@@ -49,7 +49,7 @@ class CreateUserActionTest extends TestCase
             'email' => $this->request['email']
         ]);
 
-        $action = app(CreateUserAction::class);
+        $action = app(CreateAdminAction::class);
 
         $action(NewAdminDTO::make(
             $this->request['name'],
@@ -87,7 +87,7 @@ class CreateUserActionTest extends TestCase
             Verified::class
         ]);
 
-        $action = app(CreateUserAction::class);
+        $action = app(CreateAdminAction::class);
 
         $action(NewAdminDTO::make(
             $this->request['name'],

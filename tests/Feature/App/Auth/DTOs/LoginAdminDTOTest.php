@@ -2,12 +2,12 @@
 
 namespace App\Auth\DTOs;
 
-use App\Http\Requests\Auth\LoginRequest;
+use App\Http\Requests\Auth\Admin\LoginRequest;
 use Domain\Auth\DTOs\LoginAdminDTO;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
-class LoginUserDTOTest extends TestCase
+class LoginAdminDTOTest extends TestCase
 {
     use RefreshDatabase;
 

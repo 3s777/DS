@@ -1,7 +1,7 @@
 <x-layouts.admin :search="false">
     <x-admin.crud-form
-        :action="route('admin.users.store')"
-        :title="__('user.add')">
+        :action="route('admin.collectors.store')"
+        :title="__('user.collector.add')">
             <x-grid type="container">
                 <x-grid.col xl="4" ls="6" ml="12" lg="6" md="6" sm="12">
                     <x-ui.form.group>
@@ -94,7 +94,7 @@
                             name="roles"
                             select-name="roles[]"
                             type="input"
-                            :selected="[config('settings.default_role')]"
+                            :selected="[config('settings.default_collector_role')]"
                             :options="$roles"
                             :label="trans_choice('role.choose', 1)"
                             :required="true"

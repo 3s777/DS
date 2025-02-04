@@ -9,7 +9,7 @@ use Illuminate\Auth\Events\Registered;
 use Illuminate\Support\Facades\DB;
 use Throwable;
 
-class CreateUserAction
+class CreateAdminAction
 {
     public function __invoke(NewAdminDTO $data): ?User
     {
@@ -30,7 +30,7 @@ class CreateUserAction
 
             if($data->is_verified) {
                 $verifyAction = app(VerifyEmailAction::class);
-                $verifyAction($user->id);
+                $verifyAction($user);
             }
 
             $user->audit(

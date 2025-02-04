@@ -27,7 +27,7 @@ class VerifyEmailActionTest extends TestCase
 
         $action = app(VerifyEmailAction::class);
 
-        $verificatedUser = $action($user->id);
+        $verificatedUser = $action($user);
 
         $this->assertNotNull($verificatedUser->email_verified_at);
     }
@@ -48,7 +48,7 @@ class VerifyEmailActionTest extends TestCase
 
         $action = app(VerifyEmailAction::class);
 
-        $action($user->id);
+        $action($user);
 
         Event::assertDispatched(Verified::class);
 

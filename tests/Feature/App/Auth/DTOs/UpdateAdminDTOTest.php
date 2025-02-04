@@ -2,12 +2,12 @@
 
 namespace App\Auth\DTOs;
 
-use App\Http\Requests\Auth\User\CreateUserRequest;
+use App\Http\Requests\Auth\Admin\CreateAdminRequest;
 use Domain\Auth\DTOs\UpdateUserDTO;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
-class UpdateUserDTOTest extends TestCase
+class UpdateAdminDTOTest extends TestCase
 {
     use RefreshDatabase;
 
@@ -15,7 +15,7 @@ class UpdateUserDTOTest extends TestCase
     {
         parent::setUp();
 
-        $this->request = CreateUserRequest::factory()->create();
+        $this->request = CreateAdminRequest::factory()->create();
     }
 
     /**
@@ -24,7 +24,7 @@ class UpdateUserDTOTest extends TestCase
      */
     public function it_instance_created_from_form_request_success(): void
     {
-        $data = UpdateUserDTO::fromRequest(new CreateUserRequest($this->request));
+        $data = UpdateUserDTO::fromRequest(new CreateAdminRequest($this->request));
 
         $this->assertInstanceOf(UpdateUserDTO::class, $data);
     }
