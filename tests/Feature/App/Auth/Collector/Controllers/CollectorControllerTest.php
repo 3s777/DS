@@ -2,11 +2,18 @@
 
 namespace App\Auth\Collector\Controllers;
 
+use App\Http\Controllers\Auth\Admin\AdminController;
+use App\Http\Controllers\Auth\Collector\CollectorController;
+use App\Http\Requests\Auth\Collector\CreateCollectorRequest;
 use App\Jobs\GenerateSmallThumbnailsJob;
 use App\Jobs\GenerateThumbnailJob;
+use Database\Factories\CollectorFactory;
+use Database\Factories\UserFactory;
 use Database\Seeders\PermissionsTestSeeder;
+use Domain\Auth\Models\Collector;
 use Domain\Auth\Models\Permission;
 use Domain\Auth\Models\Role;
+use Domain\Auth\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Queue;
@@ -19,7 +26,7 @@ class CollectorControllerTest extends TestCase
     use RefreshDatabase;
 
     protected User $authUser;
-    protected User $testingUser;
+    protected Collector $testingCollector;
     protected array $request;
 
     public function setUp(): void
@@ -30,14 +37,20 @@ class CollectorControllerTest extends TestCase
 
         $this->authUser = UserFactory::new()->create();
 
-        $this->testingUser = UserFactory::new()->create();
+        $this->testingCollector = CollectorFactory::new()->create();
 
-        $this->request = CreateAdminRequest::factory()->create();
+        $this->request = CreateCollectorRequest::factory()->create();
 
         $this->artisan('db:seed', ['--class' => PermissionsTestSeeder::class]);
 
         Role::create(['name' => 'user', 'display_name' => 'User']);
         Role::create(['name' => 'editor', 'display_name' => 'Editor']);
+        Role::create(['name' => 'super_admin', 'display_name' => 'SuperAdmin']);
+
+        Role::create(['name' => 'collector', 'display_name' => 'Collector', 'guard_name' => 'collector']);
+        Permission::create(['name' => 'entity.*', 'display_name' => 'Entity', 'guard_name' => 'collector']);
+
+        $this->authUser->assignRole('super_admin');
     }
 
     public function checkNotAuthRedirect(
@@ -71,10 +84,10 @@ class CollectorControllerTest extends TestCase
     public function it_index_success(): void
     {
         $this->actingAs($this->authUser)
-            ->get(action([AdminController::class, 'index']))
+            ->get(action([CollectorController::class, 'index']))
             ->assertOk()
-            ->assertSee(__('user.list'))
-            ->assertViewIs('admin.user.user.index');
+            ->assertSee(__('user.collector.list'))
+            ->assertViewIs('admin.user.collector.index');
     }
 
     /**
@@ -84,10 +97,10 @@ class CollectorControllerTest extends TestCase
     public function it_create_success(): void
     {
         $this->actingAs($this->authUser)
-            ->get(action([AdminController::class, 'create']))
+            ->get(action([CollectorController::class, 'create']))
             ->assertOk()
-            ->assertSee(__('user.add'))
-            ->assertViewIs('admin.user.user.create');
+            ->assertSee(__('user.collector.add'))
+            ->assertViewIs('admin.user.collector.create');
     }
 
     /**
@@ -97,10 +110,10 @@ class CollectorControllerTest extends TestCase
     public function it_edit_success(): void
     {
         $this->actingAs($this->authUser)
-            ->get(action([AdminController::class, 'edit'], [$this->testingUser->slug]))
+            ->get(action([CollectorController::class, 'edit'], [$this->testingCollector->slug]))
             ->assertOk()
-            ->assertSee($this->testingUser->name)
-            ->assertViewIs('admin.user.user.edit');
+            ->assertSee($this->testingCollector->name)
+            ->assertViewIs('admin.user.collector.edit');
     }
 
     /**
@@ -113,15 +126,15 @@ class CollectorControllerTest extends TestCase
         Storage::fake('images');
 
         $this->actingAs($this->authUser)
-            ->post(action([AdminController::class, 'store']), $this->request)
-            ->assertRedirectToRoute('admin.users.index')
-            ->assertSessionHas('helper_flash_message', __('user.created'));
+            ->post(action([CollectorController::class, 'store']), $this->request)
+            ->assertRedirectToRoute('admin.collectors.index')
+            ->assertSessionHas('helper_flash_message', __('user.collector.created'));
 
-        $user = User::where('name', $this->request['name'])->first();
-        $this->assertTrue($user->hasAllRoles($this->request['roles']));
-        $this->assertNotNull($user->email_verified_at);
+        $collector = Collector::where('name', $this->request['name'])->first();
+        $this->assertTrue($collector->hasAllRoles($this->request['roles']));
+        $this->assertNotNull($collector->email_verified_at);
 
-        $this->assertDatabaseHas('users', [
+        $this->assertDatabaseHas('collectors', [
             'name' => $this->request['name']
         ]);
 
@@ -149,7 +162,7 @@ class CollectorControllerTest extends TestCase
             ->put(
                 action(
                     [AdminController::class, 'update'],
-                    [$this->testingUser->slug]
+                    [$this->testingCollector->slug]
                 ),
                 $this->request
             )
@@ -174,12 +187,12 @@ class CollectorControllerTest extends TestCase
     public function it_delete_success(): void
     {
         $this->actingAs($this->authUser)
-            ->delete(action([AdminController::class, 'destroy'], [$this->testingUser->slug]))
-            ->assertRedirectToRoute('admin.users.index')
-            ->assertSessionHas('helper_flash_message', __('user.deleted'));
+            ->delete(action([CollectorController::class, 'destroy'], [$this->testingCollector->slug]))
+            ->assertRedirectToRoute('admin.collectors.index')
+            ->assertSessionHas('helper_flash_message', __('user.collector.deleted'));
 
-        $this->assertDatabaseMissing('users', [
-            'name' => $this->testingUser->name,
+        $this->assertDatabaseMissing('collectors', [
+            'name' => $this->testingCollector->name,
             'deleted_at' => null
         ]);
     }
@@ -190,7 +203,7 @@ class CollectorControllerTest extends TestCase
      */
     public function it_has_wildcard_permissions_via_role_success(): void
     {
-        $role = Role::where('name', config('settings.default_role'))->first();
+        $role = Role::where('name', config('settings.default_collector_role'))->first();
 
         $role->givePermissionTo('entity.*');
 
@@ -233,7 +246,7 @@ class CollectorControllerTest extends TestCase
      */
     public function it_update_validation_fail(): void
     {
-        $this->app['session']->setPreviousUrl(route('admin.users.edit', [$this->testingUser->slug]));
+        $this->app['session']->setPreviousUrl(route('admin.users.edit', [$this->testingCollector->slug]));
 
         $this->request['name'] = '';
         $this->request['language'] = 'test';
@@ -244,12 +257,12 @@ class CollectorControllerTest extends TestCase
             ->put(
                 action(
                     [AdminController::class, 'update'],
-                    [$this->testingUser->slug]
+                    [$this->testingCollector->slug]
                 ),
                 $this->request
             )
             ->assertInvalid(['name', 'language', 'roles', 'permissions'])
-            ->assertRedirectToRoute('admin.users.edit', [$this->testingUser->slug]);
+            ->assertRedirectToRoute('admin.users.edit', [$this->testingCollector->slug]);
 
         $this->assertDatabaseMissing('users', [
             'name' => $this->request['name']
