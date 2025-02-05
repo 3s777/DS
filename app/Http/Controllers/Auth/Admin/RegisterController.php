@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Auth\Admin\RegisterRequest;
 use Domain\Auth\Contracts\RegisterNewUserContract;
 use Domain\Auth\DTOs\NewAdminDTO;
+use Domain\Auth\DTOs\NewCollectorDTO;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
 use Illuminate\Foundation\Application;
@@ -22,7 +23,7 @@ class RegisterController extends Controller
     public function handle(RegisterRequest $request, RegisterNewUserContract $action): RedirectResponse
     {
         // TODO try catch
-        $action(NewAdminDTO::fromRequest($request));
+        $action(NewCollectorDTO::fromRequest($request));
 
         flash()->info(__('auth.register_verify'));
 

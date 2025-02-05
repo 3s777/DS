@@ -7,8 +7,8 @@ use App\Filters\DatesFilter;
 use App\Filters\SearchFilter;
 use App\Models\Image;
 use Database\Factories\UserFactory;
-use Domain\Auth\Notifications\ResetPasswordNotification;
-use Domain\Auth\Notifications\VerifyEmailNotification;
+use Domain\Auth\Notifications\ResetPasswordAdminNotification;
+use Domain\Auth\Notifications\VerifyEmailAdminNotification;
 use Domain\Auth\QueryBuilders\UserQueryBuilder;
 use Domain\Game\Models\Game;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
@@ -103,12 +103,12 @@ class User extends Authenticatable implements MustVerifyEmail, HasLocalePreferen
 
     public function sendEmailVerificationNotification(): void
     {
-        $this->notify(new VerifyEmailNotification());
+        $this->notify(new VerifyEmailAdminNotification());
     }
 
     public function sendPasswordResetNotification($token): void
     {
-        $this->notify(new ResetPasswordNotification($token));
+        $this->notify(new ResetPasswordAdminNotification($token));
     }
 
     public function newEloquentBuilder($query): UserQueryBuilder

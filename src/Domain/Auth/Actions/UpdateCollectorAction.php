@@ -32,7 +32,7 @@ class UpdateCollectorAction
 
             if(!$collector->email_verified_at && $data->is_verified) {
                 $verifyAction = app(VerifyEmailAction::class);
-                $verifyAction($collector->id);
+                $verifyAction($collector);
             }
 
             if(!$data->is_verified) {

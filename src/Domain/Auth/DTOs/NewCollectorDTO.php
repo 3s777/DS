@@ -3,11 +3,14 @@
 namespace Domain\Auth\DTOs;
 
 
+use Domain\Auth\Contracts\NewUserDTOContract;
 use Illuminate\Http\Request;
 use Illuminate\Http\UploadedFile;
+use Support\Traits\Makeable;
 
-class NewCollectorDTO extends NewUserDTO
+class NewCollectorDTO implements NewUserDTOContract
 {
+    use Makeable;
 
     public function __construct(
         public readonly string $name,

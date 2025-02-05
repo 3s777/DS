@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Auth\Collector;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Auth\Admin\ForgotPasswordRequest;
+use App\Http\Requests\Auth\Collector\ForgotPasswordRequest;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
 use Illuminate\Foundation\Application;
@@ -14,7 +14,7 @@ class ForgotPasswordController extends Controller
 {
     public function page(): View|Application|Factory|\Illuminate\Contracts\Foundation\Application
     {
-        return view('content.auth.forgot-password');
+        return view('content.auth-collector.forgot-password');
     }
 
     public function handle(ForgotPasswordRequest $request): RedirectResponse
@@ -25,10 +25,6 @@ class ForgotPasswordController extends Controller
 
         flash()->info(__($status), 'warning');
 
-        //        if($status === Password::RESET_LINK_SENT) {
-        //            flash()->info(__($status), 'warning');
-        //        }
-
-        return to_route('forgot');
+        return to_route('collector.forgot');
     }
 }

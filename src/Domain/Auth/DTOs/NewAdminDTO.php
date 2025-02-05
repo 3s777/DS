@@ -2,11 +2,12 @@
 
 namespace Domain\Auth\DTOs;
 
+use Domain\Auth\Contracts\NewUserDTOContract;
 use Illuminate\Http\Request;
 use Illuminate\Http\UploadedFile;
 use Support\Traits\Makeable;
 
-class NewAdminDTO
+class NewAdminDTO implements NewUserDTOContract
 {
     use Makeable;
 

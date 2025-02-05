@@ -17,7 +17,7 @@
                         </x-ui.message>
                     </x-ui.form.group>
 
-                    <form action="{{ route('verification.send') }}" method="POST">
+                    <form action="{{ route('collector.verification.send') }}" method="POST">
                         @csrf
 
                         <x-ui.form.group>

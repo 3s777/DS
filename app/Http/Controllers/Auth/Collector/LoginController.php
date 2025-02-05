@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Auth\Collector;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Auth\Admin\LoginRequest;
+use App\Http\Requests\Auth\Collector\LoginRequest;
 use Domain\Auth\Actions\LoginCollectorAction;
 use Domain\Auth\DTOs\LoginCollectorDTO;
 use Illuminate\Contracts\View\Factory;

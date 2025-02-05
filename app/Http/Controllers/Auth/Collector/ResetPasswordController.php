@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Auth\Collector;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Auth\Admin\ResetPasswordRequest;
+use App\Http\Requests\Auth\Collector\ResetPasswordRequest;
 use Domain\Auth\Models\User;
 use Illuminate\Auth\Events\PasswordReset;
 use Illuminate\Contracts\View\Factory;
@@ -17,7 +17,7 @@ class ResetPasswordController extends Controller
     public function page(string $token): View|Application|Factory|\Illuminate\Contracts\Foundation\Application
     {
         return view(
-            'content.auth.reset-password',
+            'content.auth-collector.reset-password',
             ['token' => $token,]
         );
     }
@@ -41,7 +41,7 @@ class ResetPasswordController extends Controller
         if ($status === Password::PASSWORD_RESET) {
             flash()->info(__($status));
 
-            return to_route('login');
+            return to_route('collector.login');
         }
 
         return back()->withErrors(['email' => __($status)]);

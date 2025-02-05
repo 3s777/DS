@@ -7,8 +7,10 @@ use App\Filters\SearchFilter;
 use App\Models\Image;
 use Database\Factories\CollectorFactory;
 use Database\Factories\UserFactory;
-use Domain\Auth\Notifications\ResetPasswordNotification;
-use Domain\Auth\Notifications\VerifyEmailNotification;
+use Domain\Auth\Notifications\ResetPasswordAdminNotification;
+use Domain\Auth\Notifications\ResetPasswordCollectorNotification;
+use Domain\Auth\Notifications\VerifyEmailAdminNotification;
+use Domain\Auth\Notifications\VerifyEmailCollectorNotification;
 use Domain\Auth\QueryBuilders\CollectorQueryBuilder;
 use Domain\Auth\QueryBuilders\UserQueryBuilder;
 use Domain\Game\Models\Game;
@@ -107,12 +109,12 @@ class Collector extends Authenticatable implements MustVerifyEmail, HasLocalePre
 
     public function sendEmailVerificationNotification(): void
     {
-        $this->notify(new VerifyEmailNotification());
+        $this->notify(new VerifyEmailCollectorNotification());
     }
 
     public function sendPasswordResetNotification($token): void
     {
-        $this->notify(new ResetPasswordNotification($token));
+        $this->notify(new ResetPasswordCollectorNotification($token));
     }
 
     public function newEloquentBuilder($query): CollectorQueryBuilder

@@ -7,6 +7,7 @@ use App\Http\Requests\Auth\Admin\SendEmailVerifyRequest;
 use App\Http\Requests\Auth\Admin\VerifyEmailRequest;
 use Domain\Auth\Actions\VerifyEmailAction;
 use Domain\Auth\Models\User;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Auth;
 
 class VerifyEmailController extends Controller
@@ -16,7 +17,7 @@ class VerifyEmailController extends Controller
         return view('content.auth.verify');
     }
 
-    public function handle(VerifyEmailRequest $request, VerifyEmailAction $action, $id)
+    public function handle(VerifyEmailRequest $request, VerifyEmailAction $action, $id): RedirectResponse
     {
         $user = User::find($id);
 
@@ -29,7 +30,7 @@ class VerifyEmailController extends Controller
         return to_route('search');
     }
 
-    public function sendVerifyNotification(SendEmailVerifyRequest $request)
+    public function sendVerifyNotification(SendEmailVerifyRequest $request): RedirectResponse
     {
         $user = User::where('email', $request->only(['email']))->first();
 

@@ -4,7 +4,7 @@
             <x-ui.card class="auth__card">
                 <x-slot:header>
                     <x-ui.title tag="h1">
-                        {{ __('auth.register') }}
+                        {{ __('auth.register') }} admin
                     </x-ui.title>
                 </x-slot>
 
