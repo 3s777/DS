@@ -1,13 +1,13 @@
 <?php
 
-namespace App\Auth\Admin\Controllers;
+namespace App\Auth\Collector\Controllers;
 
-use App\Http\Controllers\Auth\Admin\LoginController;
-use App\Http\Controllers\Auth\Admin\RegisterController;
-use App\Http\Requests\Auth\Admin\RegisterRequest;
-use Database\Factories\UserFactory;
+use App\Http\Controllers\Auth\Collector\LoginController;
+use App\Http\Controllers\Auth\Collector\RegisterController;
+use App\Http\Requests\Auth\Collector\RegisterRequest;
+use Database\Factories\CollectorFactory;
+use Domain\Auth\Models\Collector;
 use Domain\Auth\Models\Role;
-use Domain\Auth\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Testing\TestResponse;
 use Tests\TestCase;
@@ -24,7 +24,7 @@ class RegisterControllerTest extends TestCase
 
         $this->request = RegisterRequest::factory()->create();
 
-        Role::create(['name' => config('settings.default_role'), 'display_name' => 'User']);
+        Role::create(['name' => config('settings.default_collector_role'), 'display_name' => 'User', 'guard_name' => 'collector']);
 
     }
 
@@ -36,11 +36,6 @@ class RegisterControllerTest extends TestCase
         );
     }
 
-    private function findUser(): User
-    {
-        return User::where('email', $this->request['email'])->first();
-    }
-
     /**
      * @test
      * @return void
@@ -50,7 +45,7 @@ class RegisterControllerTest extends TestCase
         $this->get(action([RegisterController::class, 'page']))
             ->assertOk()
             ->assertSee(__('auth.register'))
-            ->assertViewIs('content.auth.register');
+            ->assertViewIs('content.auth-collector.register');
     }
 
     /**
@@ -95,11 +90,11 @@ class RegisterControllerTest extends TestCase
      */
     public function it_should_fail_validation_on_unique_email(): void
     {
-        UserFactory::new()->create([
+        CollectorFactory::new()->create([
             'email' => $this->request['email']
         ]);
 
-        $this->assertDatabaseHas('users', [
+        $this->assertDatabaseHas('collectors', [
             'email' => $this->request['email']
         ]);
 
@@ -113,11 +108,11 @@ class RegisterControllerTest extends TestCase
      */
     public function it_should_fail_validation_on_unique_username(): void
     {
-        UserFactory::new()->create([
+        CollectorFactory::new()->create([
             'name' => $this->request['name']
         ]);
 
-        $this->assertDatabaseHas('users', [
+        $this->assertDatabaseHas('collectors', [
             'name' => $this->request['name']
         ]);
 
@@ -137,7 +132,7 @@ class RegisterControllerTest extends TestCase
         );
 
         $response->assertValid()
-            ->assertRedirectToRoute('admin.login')
+            ->assertRedirectToRoute('collector.login')
             ->assertSessionHas('helper_flash_message', __('auth.register_verify'));
 
         $this->followRedirects($response)->assertSee(__('auth.register_verify'));
@@ -151,12 +146,12 @@ class RegisterControllerTest extends TestCase
     {
         $password = '123456789';
 
-        $user = UserFactory::new()->create([
+        $collector = CollectorFactory::new()->create([
             'password' => bcrypt($password),
         ]);
 
         $request = [
-            'email' => $user->email,
+            'email' => $collector->email,
             'password' => $password,
         ];
 

@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Auth\Admin\Controllers;
+namespace App\Auth\Collector\Controllers;
 
-use App\Http\Controllers\Auth\Admin\LoginController;
-use App\Http\Controllers\Auth\Admin\ResetPasswordController;
-use Database\Factories\UserFactory;
-use Domain\Auth\Models\User;
+use App\Http\Controllers\Auth\Collector\LoginController;
+use App\Http\Controllers\Auth\Collector\ResetPasswordController;
+use Database\Factories\CollectorFactory;
+use Domain\Auth\Models\Collector;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Password;
 use Tests\TestCase;
@@ -16,7 +16,7 @@ class ResetPasswordControllerTest extends TestCase
 
     private string $token;
 
-    private User $user;
+    private Collector $collector;
 
     private string $password;
 
@@ -26,8 +26,8 @@ class ResetPasswordControllerTest extends TestCase
     {
         parent::setUp();
 
-        $this->user = UserFactory::new()->create();
-        $this->token = Password::createToken($this->user);
+        $this->collector = CollectorFactory::new()->create();
+        $this->token = Password::createToken($this->collector);
         $this->password = '123456789q';
         $this->password_confirmation = '123456789q';
     }
@@ -40,7 +40,7 @@ class ResetPasswordControllerTest extends TestCase
     {
         $this->get(action([ResetPasswordController::class, 'page'], ['token' => $this->token]))
             ->assertOk()
-            ->assertViewIs('content.auth.reset-password');
+            ->assertViewIs('content.auth-collector.reset-password');
     }
 
     /**
@@ -52,7 +52,7 @@ class ResetPasswordControllerTest extends TestCase
         Password::shouldReceive('reset')
             ->once()
             ->withSomeofArgs([
-                'email' => $this->user->email,
+                'email' => $this->collector->email,
                 'password' => $this->password,
                 'password_confirmation' => $this->password_confirmation,
                 'token' => $this->token
@@ -60,7 +60,7 @@ class ResetPasswordControllerTest extends TestCase
             ->andReturn(Password::PASSWORD_RESET);
 
         $response = $this->post(action([ResetPasswordController::class, 'handle']), [
-            'email' => $this->user->email,
+            'email' => $this->collector->email,
             'password' => $this->password,
             'password_confirmation' => $this->password_confirmation,
             'token' => $this->token
@@ -76,7 +76,7 @@ class ResetPasswordControllerTest extends TestCase
     public function it_token_fail(): void
     {
         $response = $this->post(action([ResetPasswordController::class, 'handle']), [
-            'email' => $this->user->email,
+            'email' => $this->collector->email,
             'password' => $this->password,
             'password_confirmation' => $this->password_confirmation,
             'token' => 'wrong_token'

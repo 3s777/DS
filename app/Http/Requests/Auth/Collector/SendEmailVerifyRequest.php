@@ -11,7 +11,7 @@ class SendEmailVerifyRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return auth()->guest();
+        return auth('collector')->guest();
     }
 
     /**
@@ -27,7 +27,7 @@ class SendEmailVerifyRequest extends FormRequest
                 'string',
                 'email',
                 'max:255',
-                'exists:users,email'
+                'exists:collectors,email'
             ],
         ];
     }

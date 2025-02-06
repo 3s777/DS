@@ -31,7 +31,7 @@ class LoginController extends Controller
         }
 
         if(array_key_exists('not_verified', $actionData)) {
-            return to_route('verification.notice');
+            return to_route('collector.verification.notice');
         }
 
         $request->session()->regenerate();

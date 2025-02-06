@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests\Auth\Collector;
 
+use Domain\Auth\Models\Collector;
 use Domain\Auth\Models\User;
 use Illuminate\Foundation\Http\FormRequest;
 
@@ -12,13 +13,13 @@ class VerifyEmailRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        $user = User::find($this->route('id'));
+        $collector = Collector::find($this->route('id'));
 
-        if(!$user) {
+        if(!$collector) {
             return false;
         }
 
-        if (! hash_equals(sha1($user->getEmailForVerification()), (string) $this->route('hash'))) {
+        if (! hash_equals(sha1($collector->getEmailForVerification()), (string) $this->route('hash'))) {
             return false;
         }
 

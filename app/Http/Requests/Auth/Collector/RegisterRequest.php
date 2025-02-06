@@ -3,7 +3,7 @@
 namespace App\Http\Requests\Auth\Collector;
 
 use App\Rules\LatinLowercaseRule;
-use Domain\Auth\Models\User;
+use Domain\Auth\Models\Collector;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
 use Illuminate\Validation\Rules\Password;
@@ -15,7 +15,7 @@ class RegisterRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return auth()->guest();
+        return auth('collector')->guest();
     }
 
     /**
@@ -31,14 +31,14 @@ class RegisterRequest extends FormRequest
                 'max:30',
                 'min:3',
                 new LatinLowercaseRule(),
-                Rule::unique(User::class)
+                Rule::unique(Collector::class)
             ],
             'email' => [
                 'required',
                 'string',
                 'email',
                 'max:255',
-                Rule::unique(User::class),
+                Rule::unique(Collector::class),
             ],
             'password' => ['required',
                 'confirmed',

@@ -38,7 +38,7 @@ class LoginControllerTest extends TestCase
     {
         $this->get(action([LoginController::class, 'page']))
             ->assertOk()
-            ->assertSee('Войти')
+            ->assertSee(__('auth.login'))
             ->assertViewIs('content.auth.login');
 
     }

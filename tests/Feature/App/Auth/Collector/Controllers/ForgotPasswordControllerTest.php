@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Auth\Admin\Controllers;
+namespace App\Auth\Collector\Controllers;
 
-use App\Http\Controllers\Auth\Admin\ForgotPasswordController;
-use Database\Factories\UserFactory;
-use Domain\Auth\Notifications\ResetPasswordAdminNotification;
+use App\Http\Controllers\Auth\Collector\ForgotPasswordController;
+use Database\Factories\CollectorFactory;
+use Domain\Auth\Notifications\ResetPasswordCollectorNotification;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Notification;
 use Tests\TestCase;
@@ -28,7 +28,7 @@ class ForgotPasswordControllerTest extends TestCase
     {
         $this->get(action([ForgotPasswordController::class, 'page']))
             ->assertOk()
-            ->assertViewIs('content.auth.forgot-password');
+            ->assertViewIs('content.auth-collector.forgot-password');
     }
 
     /**
@@ -37,12 +37,12 @@ class ForgotPasswordControllerTest extends TestCase
      */
     public function it_handle_success(): void
     {
-        $user = UserFactory::new()->create($this->testingCredentials());
+        $collector = CollectorFactory::new()->create($this->testingCredentials());
 
         $this->post(action([ForgotPasswordController::class, 'handle']), $this->testingCredentials())
-            ->assertRedirectToRoute('admin.forgot');
+            ->assertRedirectToRoute('collector.forgot');
 
-        Notification::assertSentTo([$user], ResetPasswordAdminNotification::class);
+        Notification::assertSentTo([$collector], ResetPasswordCollectorNotification::class);
     }
 
     /**
@@ -51,10 +51,10 @@ class ForgotPasswordControllerTest extends TestCase
      */
     public function it_handle_fail(): void
     {
-        $this->assertDatabaseMissing('users', $this->testingCredentials());
+        $this->assertDatabaseMissing('collectors', $this->testingCredentials());
 
         $this->post(action([ForgotPasswordController::class, 'handle']), $this->testingCredentials())
-            ->assertRedirectToRoute('admin.forgot');
+            ->assertRedirectToRoute('collector.forgot');
 
         Notification::assertNothingSent();
     }

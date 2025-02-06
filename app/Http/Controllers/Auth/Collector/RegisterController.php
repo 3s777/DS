@@ -22,6 +22,7 @@ class RegisterController extends Controller
 
     public function handle(RegisterRequest $request): RedirectResponse
     {
+
         // TODO try catch
         app()->bind(RegisterNewUserContract:: class, RegisterNewCollectorAction::class);
 

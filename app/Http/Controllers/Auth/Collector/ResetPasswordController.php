@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Auth\Collector;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Auth\Collector\ResetPasswordRequest;
+use Domain\Auth\Models\Collector;
 use Domain\Auth\Models\User;
 use Illuminate\Auth\Events\PasswordReset;
 use Illuminate\Contracts\View\Factory;
@@ -24,17 +25,16 @@ class ResetPasswordController extends Controller
 
     public function handle(ResetPasswordRequest $request): RedirectResponse
     {
-
-        $status = Password::reset(
+        $status = Password::broker('collectors')->reset(
             $request->only('email', 'password', 'password_confirmation', 'token'),
-            function (User $user, string $password) {
-                $user->forceFill(
+            function (Collector $collector, string $password) {
+                $collector->forceFill(
                     ['password' => bcrypt($password),]
                 )->setRememberToken(str()->random(60));
 
-                $user->save();
+                $collector->save();
 
-                event(new PasswordReset($user));
+                event(new PasswordReset($collector));
             }
         );
 

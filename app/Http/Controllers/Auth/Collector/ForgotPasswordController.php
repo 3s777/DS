@@ -19,7 +19,7 @@ class ForgotPasswordController extends Controller
 
     public function handle(ForgotPasswordRequest $request): RedirectResponse
     {
-        $status = Password::sendResetLink(
+        $status = Password::broker('collectors')->sendResetLink(
             $request->only('email')
         );
 

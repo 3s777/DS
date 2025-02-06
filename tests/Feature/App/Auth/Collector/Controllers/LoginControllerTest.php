@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Auth\Admin\Controllers;
+namespace App\Auth\Collector\Controllers;
 
-use App\Http\Controllers\Auth\Admin\LoginController;
-use Database\Factories\UserFactory;
-use Domain\Auth\Models\User;
+use App\Http\Controllers\Auth\Collector\LoginController;
+use Database\Factories\CollectorFactory;
+use Domain\Auth\Models\Collector;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
@@ -12,7 +12,7 @@ class LoginControllerTest extends TestCase
 {
     use RefreshDatabase;
 
-    protected User $user;
+    protected Collector $collector;
     protected string $password = '123456789';
     protected array $request;
 
@@ -20,12 +20,12 @@ class LoginControllerTest extends TestCase
     {
         parent::setUp();
 
-        $this->user = UserFactory::new()->create([
+        $this->collector = CollectorFactory::new()->create([
             'password' => bcrypt($this->password),
         ]);
 
         $this->request = [
-            'email' => $this->user->email,
+            'email' => $this->collector->email,
             'password' => $this->password,
         ];
     }
@@ -38,8 +38,8 @@ class LoginControllerTest extends TestCase
     {
         $this->get(action([LoginController::class, 'page']))
             ->assertOk()
-            ->assertSee('Войти')
-            ->assertViewIs('content.auth.login');
+            ->assertSee(__('auth.login'))
+            ->assertViewIs('content.auth-collector.login');
 
     }
 
@@ -66,7 +66,7 @@ class LoginControllerTest extends TestCase
         $response->assertValid()
             ->assertRedirectToRoute('search');
 
-        $this->assertAuthenticatedAs($this->user);
+        $this->assertAuthenticatedAs($this->collector, 'collector');
     }
 
     /**
@@ -92,7 +92,7 @@ class LoginControllerTest extends TestCase
      */
     public function it_not_verified_fail(): void
     {
-        $user = UserFactory::new()->create([
+        $user = CollectorFactory::new()->create([
             'password' => bcrypt($this->password),
             'email_verified_at' => null,
         ]);
@@ -103,9 +103,9 @@ class LoginControllerTest extends TestCase
         ];
 
         $this->post(action([LoginController::class, 'handle']), $request)
-            ->assertRedirectToRoute('admin.verification.notice');
+            ->assertRedirectToRoute('collector.verification.notice');
 
-        $this->assertGuest();
+        $this->assertGuest('collector');
     }
 
     /**
@@ -114,11 +114,11 @@ class LoginControllerTest extends TestCase
      */
     public function it_logout_success(): void
     {
-        $user = UserFactory::new()->create();
+        $collector = CollectorFactory::new()->create();
 
-        $this->actingAs($user)->delete(action([LoginController::class, 'logout']));
+        $this->actingAs($collector)->delete(action([LoginController::class, 'logout']));
 
-        $this->assertGuest();
+        $this->assertGuest('collector');
     }
 
     /**

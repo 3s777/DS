@@ -148,33 +148,33 @@ class CollectorControllerTest extends TestCase
      */
     public function it_update_success(): void
     {
-        Permission::create(['name' => 'test', 'display_name' => 'Test']);
-        Role::create(['name' => 'superadmin', 'display_name' =>'Super Admin']);
-        $role = Role::where('name', config('settings.default_role'))->first();
+        Permission::create(['name' => 'test', 'display_name' => 'Test', 'guard_name' => 'collector']);
+        Role::create(['name' => 'superadmin', 'display_name' =>'Super Admin', 'guard_name' => 'collector']);
+        $role = Role::where('name', config('settings.default_collector_role'))->first();
         $role->givePermissionTo('entity.*');
 
         $this->request['name'] = 'newName';
         $this->request['first_name'] = 'New First Name';
-        $this->request['roles'] = ['user', 'superadmin'];
+        $this->request['roles'] = ['collector', 'superadmin'];
         $this->request['permissions'] = ['test'];
 
         $this->actingAs($this->authUser)
             ->put(
                 action(
-                    [AdminController::class, 'update'],
+                    [CollectorController::class, 'update'],
                     [$this->testingCollector->slug]
                 ),
                 $this->request
             )
-            ->assertRedirectToRoute('admin.users.index')
-            ->assertSessionHas('helper_flash_message', __('user.updated'));
+            ->assertRedirectToRoute('admin.collectors.index')
+            ->assertSessionHas('helper_flash_message', __('user.collector.updated'));
 
-        $user = User::where('name', 'newname')->first();
-        $this->assertTrue($user->hasAllPermissions(['entity.edit', 'entity.delete', 'test']));
-        $this->assertTrue($user->hasAllRoles([config('settings.default_role'), 'superadmin']));
-        $this->assertFalse($user->hasRole('editor'));
+        $collector = Collector::where('name', 'newname')->first();
+        $this->assertTrue($collector->hasAllPermissions(['entity.edit', 'entity.delete', 'test']));
+        $this->assertTrue($collector->hasAllRoles([config('settings.default_collector_role'), 'superadmin']));
+        $this->assertFalse($collector->hasRole('editor'));
 
-        $this->assertDatabaseHas('users', [
+        $this->assertDatabaseHas('collectors', [
             'name' => 'newname',
             'first_name' => 'New First Name'
         ]);
@@ -208,12 +208,12 @@ class CollectorControllerTest extends TestCase
         $role->givePermissionTo('entity.*');
 
         $this->actingAs($this->authUser)
-            ->post(action([AdminController::class, 'store']), $this->request)
-            ->assertRedirectToRoute('admin.users.index')
-            ->assertSessionHas('helper_flash_message', __('user.created'));
+            ->post(action([CollectorController::class, 'store']), $this->request)
+            ->assertRedirectToRoute('admin.collectors.index')
+            ->assertSessionHas('helper_flash_message', __('user.collector.created'));
 
-        $user = User::where('name', $this->request['name'])->first();
-        $this->assertTrue($user->hasAllPermissions(['entity.create', 'entity.edit', 'entity.delete']));
+        $collector = Collector::where('name', $this->request['name'])->first();
+        $this->assertTrue($collector->hasAllPermissions(['entity.create', 'entity.edit', 'entity.delete']));
     }
 
     /**
@@ -246,7 +246,7 @@ class CollectorControllerTest extends TestCase
      */
     public function it_update_validation_fail(): void
     {
-        $this->app['session']->setPreviousUrl(route('admin.users.edit', [$this->testingCollector->slug]));
+        $this->app['session']->setPreviousUrl(route('admin.collectors.edit', [$this->testingCollector->slug]));
 
         $this->request['name'] = '';
         $this->request['language'] = 'test';
@@ -256,15 +256,15 @@ class CollectorControllerTest extends TestCase
         $this->actingAs($this->authUser)
             ->put(
                 action(
-                    [AdminController::class, 'update'],
+                    [CollectorController::class, 'update'],
                     [$this->testingCollector->slug]
                 ),
                 $this->request
             )
             ->assertInvalid(['name', 'language', 'roles', 'permissions'])
-            ->assertRedirectToRoute('admin.users.edit', [$this->testingCollector->slug]);
+            ->assertRedirectToRoute('admin.collectors.edit', [$this->testingCollector->slug]);
 
-        $this->assertDatabaseMissing('users', [
+        $this->assertDatabaseMissing('collectors', [
             'name' => $this->request['name']
         ]);
     }
