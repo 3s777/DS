@@ -23,7 +23,7 @@ return new class extends Migration
                 ->constrained()
                 ->cascadeOnDelete()
                 ->cascadeOnUpdate();
-            $table->tinyInteger('condition')->nullable();
+            $table->smallInteger('condition')->nullable();
             $table->timestamps();
         });
     }

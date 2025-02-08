@@ -12,6 +12,7 @@ use Domain\Trade\Models\Sale;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Database\Eloquent\Relations\MorphTo;
 use Illuminate\Database\Eloquent\Relations\MorphToMany;
@@ -149,15 +150,15 @@ class Collectible extends Model implements HasMedia
         return $this->morphTo();
     }
 
-//    public function kitItems(): BelongsToMany
-//    {
-//        return $this->belongsToMany(KitItem::class);
-//    }
-
-    public function kitItems(): MorphToMany
+    public function kitItems(): BelongsToMany
     {
-        return $this->morphToMany(KitItem::class, 'kitable')->withPivot('condition');
+        return $this->belongsToMany(KitItem::class)->withPivot('condition');
     }
+
+//    public function kitItems(): MorphToMany
+//    {
+//        return $this->morphToMany(KitItem::class, 'kitable')->withPivot('condition');
+//    }
 
     public function category(): BelongsTo
     {

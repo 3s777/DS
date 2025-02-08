@@ -19,7 +19,6 @@ return new class extends Migration
                 ->cascadeOnDelete()
                 ->cascadeOnUpdate();
             $table->morphs('kitable');
-            $table->smallInteger('condition')->nullable();
             $table->timestamps();
         });
     }

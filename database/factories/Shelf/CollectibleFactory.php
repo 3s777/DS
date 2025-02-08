@@ -87,7 +87,11 @@ class CollectibleFactory extends Factory
                     return $kitConditions;
                 }
             ]
-        );
+        )->afterCreating(function (Collectible $collectible) {
+            foreach($collectible->kit_conditions as $id => $condition)  {
+                $collectible->kitItems()->attach($id, ['condition' => $condition]);
+            }
+        });
     }
 
     public function forSale(): Factory
