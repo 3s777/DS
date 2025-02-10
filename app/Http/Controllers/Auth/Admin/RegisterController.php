@@ -11,6 +11,7 @@ use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
 use Illuminate\Foundation\Application;
 use Illuminate\Http\RedirectResponse;
+use Support\Transaction;
 
 class RegisterController extends Controller
 {
@@ -22,7 +23,6 @@ class RegisterController extends Controller
 
     public function handle(RegisterRequest $request, RegisterNewUserContract $action): RedirectResponse
     {
-        // TODO try catch
         $action(NewCollectorDTO::fromRequest($request));
 
         flash()->info(__('auth.register_verify'));
