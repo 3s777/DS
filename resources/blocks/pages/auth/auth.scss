@@ -9,6 +9,11 @@
         width: 400px;
     }
 
+    &__card_admin {
+        background-color: $base-dark;
+        border: 2px solid $opposite-main;
+    }
+
     &__forgot-link {
         display: block;
         margin-top: 12px;
@@ -22,5 +27,9 @@
 
     &__message {
         margin-bottom: 16px;
+    }
+
+    .input-checkbox__field + &__remember_admin.input-checkbox__label:before {
+        background-color: $base-dark-like-transparent;
     }
 }

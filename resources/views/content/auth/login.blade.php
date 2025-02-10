@@ -1,7 +1,7 @@
 <x-layouts.main title="{{ __('auth.login') }}" :search="false">
     <x-grid.container>
         <x-common.content class="auth__content">
-            <x-ui.card class="auth__card">
+            <x-ui.card class="auth__card auth__card_admin">
                 <x-slot:header>
                     <x-ui.title tag="h1">
                         {{ __('auth.login') }}
@@ -42,6 +42,7 @@
                         <x-ui.form.input-checkbox
                             id="remember"
                             name="remember"
+                            label-class="auth__remember_admin"
                             label="{{ __('auth.remember') }}"
                         >
                         </x-ui.form.input-checkbox>
@@ -52,9 +53,9 @@
                             {{ __('auth.login') }}
                         </x-ui.form.button>
 
-                        @if (Route::has('forgot'))
+                        @if (Route::has('admin.forgot'))
                             <div class="auth__forgot">
-                                <a class="auth__forgot-link" href="{{ route('forgot') }}">
+                                <a class="auth__forgot-link" href="{{ route('admin.forgot') }}">
                                     {{ __('auth.forgot_question') }}
                                 </a>
                             </div>

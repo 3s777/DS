@@ -31,7 +31,55 @@
         <div x-on:click="moreOpen = false"  class="main-menu__more-close">
             <x-svg.close class="main-menu__close-icon"></x-svg.close>
         </div>
-        Тут будет дополнительное меню<br>
+            @guest
+                @if(Route::currentRouteName() != 'admin.login')
+                <x-ui.form.group>
+                    <div class="auth-menu__item">
+                        <x-ui.form.button
+                            tag="a"
+                            class="auth-menu__link"
+                            href="{{ route('admin.login') }}">
+                            {{ __('auth.login') }} админ
+                        </x-ui.form.button>
+                    </div>
+                </x-ui.form.group>
+                @endif
+                @if (Route::has('admin.register') && Route::currentRouteName() != 'admin.register')
+                    <x-ui.form.group>
+                        <div class="auth-menu__item">
+                            <x-ui.form.button
+                                tag="a"
+                                class="auth-menu__link"
+                                href="{{ route('admin.register') }}">
+                                {{ __('auth.register') }} админ
+                            </x-ui.form.button>
+                        </div>
+                    </x-ui.form.group>
+                @endif
+            @else
+                <div class="profile-menu__auth">
+                    <div class="profile-menu__links">
+                        <a class="profile-menu__username " href="#">
+                            {{ Auth::user()->name }}
+                        </a>
+
+                        <div class="profile-menu__logout">
+                            <a class="profile-menu__logout-link"
+                               href="{{ route('admin.logout') }}"
+                               onclick="event.preventDefault();
+                               document.getElementById('logout-form').submit(); ">
+                                {{ __('auth.logout') }}
+                            </a>
+
+                            <form id="logout-form" action="{{ route('admin.logout') }}" method="POST">
+                                @method('DELETE')
+                                @csrf
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            @endguest
+
         Тут будет дополнительное меню<br>
         Тут будет дополнительное меню<br>
         Тут будет дополнительное меню<br>

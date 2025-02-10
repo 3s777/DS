@@ -6,7 +6,8 @@
     'size' => false,
     'checked' => false,
     'disabled' => false,
-    'value' => false
+    'value' => false,
+    'labelClass' => false
 ])
 
 <div class="input-checkbox">
@@ -27,7 +28,7 @@
                 ]) }}
     >
 
-    <label class="input-checkbox__label" for="{{ $id }}">
+    <label class="input-checkbox__label @if($labelClass) {{ $labelClass }} @endif" for="{{ $id }}">
         <span class="input-checkbox__label-wrapper">{{ $label }}</span>
     </label>
 </div>

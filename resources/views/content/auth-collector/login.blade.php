@@ -52,9 +52,9 @@
                             {{ __('auth.login') }}
                         </x-ui.form.button>
 
-                        @if (Route::has('forgot'))
+                        @if (Route::has('collector.forgot'))
                             <div class="auth__forgot">
-                                <a class="auth__forgot-link" href="{{ route('forgot') }}">
+                                <a class="auth__forgot-link" href="{{ route('collector.forgot') }}">
                                     {{ __('auth.forgot_question') }}
                                 </a>
                             </div>

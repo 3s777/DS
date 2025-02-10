@@ -1,20 +1,19 @@
 <x-layouts.main title="{{ __('auth.forgot') }}" :search="false">
     <x-grid.container>
         <x-common.content class="auth__content">
-            <x-ui.card class="auth__card">
+            <x-ui.card class="auth__card auth__card_admin">
                 <x-slot:header>
                     <x-ui.title tag="h1">
                         {{ __('auth.reset') }}
                     </x-ui.title>
                 </x-slot>
 
-                    <x-common.messages class="auth__message" />
+                <x-common.messages class="auth__message" />
 
                 <form class="form" method="POST" action="{{ route('admin.forgot.handle') }}">
                     @csrf
                     <x-ui.form.group>
                         <x-ui.form.input-text
-
                             id="email"
                             name="email"
                             type="email"
