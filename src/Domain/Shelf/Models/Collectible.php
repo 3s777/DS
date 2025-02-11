@@ -76,7 +76,10 @@ class Collectible extends Model implements HasMedia
         'id',
         'name',
         'created_at',
-        'users.email'
+        'purchase_price',
+//        'users.email',
+        'article_number',
+        'additional_field'
     ];
 
     protected static function boot()

@@ -57,7 +57,7 @@ class DatesFilter extends AbstractFilter
 
     public function apply(Builder $query): Builder
     {
-        return $query->when($this->requestValue(), function (Builder $query) {
+        return $query->when($this->requestValue('from') || $this->requestValue('to'), function (Builder $query) {
 //            if($this->fromDate()) {
 //                $query->whereDate($this->table.'.'.$this->field, '>=', $this->fromDate());
 //            }

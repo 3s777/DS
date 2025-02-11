@@ -115,7 +115,7 @@ class CollectibleFilterRegistrar implements FilterRegistrar
                 isPrice: true
             ),
             'sale_price' => RangeFilter::make(
-                __('collectible.sale_price'),
+                __('collectible.sale.price'),
                 'sale_price',
                 'sales',
                 'price',
@@ -123,14 +123,14 @@ class CollectibleFilterRegistrar implements FilterRegistrar
                 relation: 'sale'
             ),
             'auction_dates' => DatesFilter::make(
-                __('collectible.auction_to'),
+                __('collectible.auction.finished_at'),
                 'auction_dates',
                 'auctions',
-                'to',
+                'finished_at',
                 relation: 'auction',
                 placeholder: [
-                    'from' => __('collectible.auction_at_from'),
-                    'to' => __('collectible.auction_at_to'),
+                    'from' => __('collectible.auction.at_from'),
+                    'to' => __('collectible.auction.at_to'),
                 ]
             ),
         ];

@@ -74,7 +74,7 @@
                 <x-ui.responsive-table.column name="auction">
                     {{ __('common.auction') }}
                 </x-ui.responsive-table.column>
-                <x-ui.responsive-table.column name="users.name" sortable="true">
+                <x-ui.responsive-table.column name="users.namfe" sortable="true">
                     {{ trans_choice('user.users', 1) }}
                 </x-ui.responsive-table.column>
                 <x-ui.responsive-table.column name="created_at" sortable="true">
