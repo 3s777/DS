@@ -12,7 +12,7 @@ class FillShelfDTO
 
     public function __construct(
         public readonly string $name,
-        public readonly ?int $user_id = null,
+        public readonly ?int $collector_id = null,
         public readonly ?UploadedFile $featured_image = null,
         public readonly ?bool $featured_image_uploaded = null,
         public readonly ?string $description = null,
@@ -24,7 +24,7 @@ class FillShelfDTO
     {
         return static::make(...$request->only([
             'name',
-            'user_id',
+            'collector_id',
             'featured_image',
             'featured_image_uploaded',
             'description',

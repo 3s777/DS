@@ -35,6 +35,11 @@ class UpdateKitItemRequest extends FormRequest
                 'max:250',
                 Rule::unique(KitItem::class)->ignore($this->kit_item)
             ],
+            'user_id' => [
+                'nullable',
+                'integer',
+                'exists:Domain\Auth\Models\User,id',
+            ]
         ];
     }
 

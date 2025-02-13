@@ -1,5 +1,6 @@
 <?php
 
+use Domain\Auth\Models\Collector;
 use Domain\Auth\Models\User;
 use Domain\Shelf\Models\Category;
 use Domain\Shelf\Models\Shelf;
@@ -40,6 +41,9 @@ return new class extends Migration
                 ->cascadeOnDelete();
             $table->foreignIdFor(User::class)
                 ->nullable()
+                ->constrained()
+                ->nullOnDelete();
+            $table->foreignIdFor(Collector::class)
                 ->constrained()
                 ->nullOnDelete();
 

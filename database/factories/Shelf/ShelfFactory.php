@@ -2,7 +2,7 @@
 
 namespace Database\Factories\Shelf;
 
-use Domain\Auth\Models\User;
+use Domain\Auth\Models\Collector;
 use Domain\Shelf\Models\Shelf;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Str;
@@ -25,7 +25,7 @@ class ShelfFactory extends Factory
             'number' => rand(0, 100),
             'ulid' => Str::ulid(),
             'description' => $this->translations(['en', 'ru'], [fake()->text(), fake()->text()]),
-            'user_id' => User::factory(),
+            'collector_id' => Collector::factory(),
         ];
     }
 }

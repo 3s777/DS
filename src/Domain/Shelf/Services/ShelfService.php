@@ -18,7 +18,7 @@ class ShelfService
                 'name' => $data->name,
                 'number' => $data->number,
                 'ulid' => Str::ulid(),
-                'user_id' => $data->user_id,
+                'collector_id' => $data->collector_id,
                 'description' => $data->description,
             ]);
 
@@ -51,7 +51,7 @@ class ShelfService
                 [
                     'name' => $data->name,
                     'number' => $data->number,
-                    'user_id' => $data->user_id ?? $shelf->user_id,
+                    'collector_id' => $data->collector_id ?? $shelf->collector_id,
                     'description' => $data->description,
                 ]
             )->save();

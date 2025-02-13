@@ -18,7 +18,7 @@ class GamePlatformManufacturerIndexViewModel extends ViewModel
     {
         return GamePlatformManufacturer::query()
             ->select('game_platform_manufacturers.id', 'game_platform_manufacturers.name', 'game_platform_manufacturers.created_at', 'game_platform_manufacturers.slug', 'game_platform_manufacturers.user_id', 'users.name as user_name')
-            ->join('users', 'users.id', '=', 'game_platform_manufacturers.user_id')
+            ->leftJoin('users', 'users.id', '=', 'game_platform_manufacturers.user_id')
             ->orderBy('id', 'DESC')
             ->paginate(100)
             ->withQueryString();

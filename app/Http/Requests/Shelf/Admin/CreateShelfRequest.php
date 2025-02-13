@@ -41,10 +41,10 @@ class CreateShelfRequest extends FormRequest
                 'mimes:jpg,png',
                 'max:10024'
             ],
-            'user_id' => [
-                'nullable',
+            'collector_id' => [
+                'required',
                 'integer',
-                'exists:Domain\Auth\Models\User,id'
+                'exists:Domain\Auth\Models\Collector,id'
             ]
         ];
     }
@@ -53,10 +53,10 @@ class CreateShelfRequest extends FormRequest
     {
         return [
             'name' => trans_choice('common.name', 1),
-            'number' => trans_choice('common.number', 1),
+            'number' => trans_choice('common.numbers', 1),
             'description' => __('common.description'),
             'featured_image' => __('common.featured_image'),
-            'user_id' => trans_choice('user.users', 1),
+            'collector_id' => trans_choice('user.collectors', 1),
         ];
     }
 }

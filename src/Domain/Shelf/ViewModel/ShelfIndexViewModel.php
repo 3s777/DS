@@ -20,8 +20,8 @@ class ShelfIndexViewModel extends ViewModel
     public function shelves()
     {
         return Shelf::query()
-            ->select('shelves.id', 'shelves.name', 'shelves.number', 'shelves.created_at', 'shelves.user_id', 'users.name as user_name')
-            ->join('users', 'users.id', '=', 'shelves.user_id')
+            ->select('shelves.id', 'shelves.name', 'shelves.number', 'shelves.created_at', 'shelves.collector_id', 'collectors.name as collector_name')
+            ->join('collectors', 'collectors.id', '=', 'shelves.collector_id')
             ->filtered()
             ->sorted()
             ->paginate(10)

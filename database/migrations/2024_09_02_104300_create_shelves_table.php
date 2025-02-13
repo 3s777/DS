@@ -1,6 +1,6 @@
 <?php
 
-use Domain\Auth\Models\User;
+use Domain\Auth\Models\Collector;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -19,10 +19,10 @@ return new class extends Migration
             $table->integer('number')->nullable();
             $table->string('featured_image')->nullable();
             $table->jsonb('description')->nullable();
-            $table->foreignIdFor(User::class)
-                ->nullable()
+            $table->foreignIdFor(Collector::class)
                 ->constrained()
-                ->nullOnDelete();
+                ->cascadeOnUpdate()
+                ->cascadeOnDelete();
 
             $table->timestamps();
             $table->softDeletes();

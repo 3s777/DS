@@ -35,6 +35,11 @@ class CreateKitItemRequest extends FormRequest
                 'max:250',
                 Rule::unique(KitItem::class)
             ],
+            'user_id' => [
+                'nullable',
+                'integer',
+                'exists:Domain\Auth\Models\User,id'
+            ]
         ];
     }
 

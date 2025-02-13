@@ -61,7 +61,7 @@ class CollectibleService
                 $collectible = Collectible::make($this->preparedFields($data));
 
                 $shelf = Shelf::find($data->shelf_id);
-                $collectible->user_id = $shelf->user_id;
+                $collectible->collector_id = $shelf->collector_id;
 
                 $collectible->collectable_id = $data->collectable;
                 $collectible->collectable_type = $data->collectable_type;
@@ -146,7 +146,7 @@ class CollectibleService
                 $collectible->fill($this->preparedFields($data));
 
                 $shelf = Shelf::find($data->shelf_id);
-                $collectible->user_id = $shelf->user_id;
+                $collectible->collector_id = $shelf->collector_id;
 
                 if($data->target == 'sale') {
                     $collectible->auction()->delete();

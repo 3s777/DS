@@ -19,8 +19,7 @@ return new class () extends Migration {
             $table->foreignIdFor(User::class)
                 ->nullable()
                 ->constrained()
-                ->cascadeOnDelete()
-                ->cascadeOnUpdate();
+                ->nullOnDelete();
 
             $table->softDeletes();
             $table->timestamps();

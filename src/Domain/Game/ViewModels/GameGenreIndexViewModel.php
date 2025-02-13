@@ -16,7 +16,7 @@ class GameGenreIndexViewModel extends ViewModel
     {
         return GameGenre::query()
             ->select('game_genres.id', 'game_genres.name', 'game_genres.created_at', 'game_genres.slug', 'game_genres.user_id', 'users.name as user_name')
-            ->join('users', 'users.id', '=', 'game_genres.user_id')
+            ->leftJoin('users', 'users.id', '=', 'game_genres.user_id')
             ->paginate(10)
             ->withQueryString();
     }

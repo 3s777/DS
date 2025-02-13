@@ -16,7 +16,7 @@
                 'id' => __('common.id'),
                 'name' => trans_choice('common.name', 1),
                 'number' => trans_choice('common.number', 1),
-                'users.name' => trans_choice('user.users', 1),
+                'users.name' => trans_choice('user.collectors', 1),
                 'created_at' => __('common.created_date'),
             ]" />
 
@@ -34,8 +34,8 @@
                 <x-ui.responsive-table.column sortable="true" name="number">
                     {{ trans_choice('common.numbers', 1) }}
                 </x-ui.responsive-table.column>
-                <x-ui.responsive-table.column name="users.name" sortable="true">
-                    {{ trans_choice('user.users', 1) }}
+                <x-ui.responsive-table.column name="collectors.name" sortable="true">
+                    {{ trans_choice('user.collectors', 1) }}
                 </x-ui.responsive-table.column>
                 <x-ui.responsive-table.column name="created_at" sortable="true">
                     {{ __('common.created_date') }}
@@ -60,7 +60,7 @@
                         <span class="responsive-table__label">{{ trans_choice('common.numbers', 1) }}: </span> {{ $shelf->number }}
                     </x-ui.responsive-table.column>
                     <x-ui.responsive-table.column>
-                        <span class="responsive-table__label">{{ trans_choice('user.users', 1) }}: </span> {{ $shelf->user_name }}
+                        <span class="responsive-table__label">{{ trans_choice('user.collectors', 1) }}: </span> {{ $shelf->collector_name }}
                     </x-ui.responsive-table.column>
                     <x-ui.responsive-table.column>
                         <span class="responsive-table__label">{{ __('common.created_date') }}: </span> {{ $shelf->created_at }}

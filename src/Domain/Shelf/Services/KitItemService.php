@@ -15,7 +15,8 @@ class KitItemService
 
             $kitItem = KitItem::create([
                 'name' => $data->name,
-                'slug' => $data->slug
+                'slug' => $data->slug,
+                'user_id' => $data->user_id,
             ]);
 
             DB::commit();
@@ -35,7 +36,8 @@ class KitItemService
             $kitItem->fill(
                 [
                     'name' => $data->name,
-                    'slug' => $data->slug
+                    'slug' => $data->slug,
+                    'user_id' => $data->user_id,
                 ]
             )->save();
 

@@ -29,7 +29,7 @@ class GameDeveloperIndexViewModel extends ViewModel
 //            ->with(['media'])
 //            ->with(['user:id,name,email'])
             ->select('game_developers.id', 'game_developers.name', 'game_developers.created_at', 'game_developers.slug', 'game_developers.user_id', 'users.name as user_name')
-            ->join('users', 'users.id', '=', 'game_developers.user_id')
+            ->leftJoin('users', 'users.id', '=', 'game_developers.user_id')
             ->filtered()
             ->sorted()
             ->paginate(10)

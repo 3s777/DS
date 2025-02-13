@@ -52,7 +52,11 @@ class AuthCollectorRegistrar implements RouteRegistrar
 
                 });
 
+
+
                 Route::as('admin.')->prefix('{locale}/admin')->middleware(['auth', 'verified'])->group(function () {
+                    Route::post('/select-collectors', [CollectorController::class, 'getForSelect'])->name('select-collectors');
+
                     Route::delete('/collectors/delete-selected', [CollectorController::class, 'deleteSelected'])->name('collectors.delete');
                     Route::delete('/collectors/force-delete-selected', [CollectorController::class, 'forceDeleteSelected'])->name('collectors.forceDelete');
                     Route::resource('collectors', CollectorController::class)->middleware(['remove.locale']);

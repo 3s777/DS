@@ -15,6 +15,9 @@
                 <x-ui.responsive-table.column name="name">
                     {{ trans_choice('common.name', 1) }}
                 </x-ui.responsive-table.column>
+                <x-ui.responsive-table.column name="users.name">
+                    {{ trans_choice('user.users', 1) }}
+                </x-ui.responsive-table.column>
                 <x-ui.responsive-table.column name="created_at">
                     {{ __('common.created_date') }}
                 </x-ui.responsive-table.column>
@@ -33,6 +36,9 @@
                     </x-ui.responsive-table.column>
                     <x-ui.responsive-table.column>
                         <span class="responsive-table__label">{{ trans_choice('common.name', 1) }}: </span> {{ $item->name }}
+                    </x-ui.responsive-table.column>
+                    <x-ui.responsive-table.column>
+                        <span class="responsive-table__label">{{ trans_choice('user.users', 1) }}: </span> {{ $item->user_name }}
                     </x-ui.responsive-table.column>
                     <x-ui.responsive-table.column>
                         <span class="responsive-table__label">{{ __('common.created_date') }}: </span> {{ $item->created_at }}

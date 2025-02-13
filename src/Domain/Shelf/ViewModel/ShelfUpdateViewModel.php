@@ -4,11 +4,11 @@ namespace Domain\Shelf\ViewModel;
 
 use Domain\Shelf\Models\Shelf;
 use Spatie\ViewModels\ViewModel;
-use Support\Traits\HasSelectedUser;
+use Support\Traits\HasSelectedCollector;
 
 class ShelfUpdateViewModel extends ViewModel
 {
-    use HasSelectedUser;
+    use HasSelectedCollector;
 
     public ?Shelf $shelf;
 
@@ -22,20 +22,8 @@ class ShelfUpdateViewModel extends ViewModel
         return $this->shelf ?? null;
     }
 
-//    public function selectedUser(): array {
-//        $selectedUser = [];
-//        if($this->shelf?->user) {
-//           $selectedUser = [
-//               'key' => $this->shelf->user->id,
-//               'value' => $this->shelf->user->name,
-//           ];
-//        }
-//
-//        return $selectedUser;
-//    }
-
-    public function selectedUser(): array
+    public function selectedCollector(): array
     {
-        return $this->getSelectedUser($this->shelf);
+        return $this->getSelectedCollector($this->shelf);
     }
 }

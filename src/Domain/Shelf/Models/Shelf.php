@@ -2,25 +2,22 @@
 
 namespace Domain\Shelf\Models;
 
-use Database\Factories\Shelf\CollectibleFactory;
 use Database\Factories\Shelf\ShelfFactory;
-use Domain\Auth\Models\User;
-use Domain\Game\Models\GamePlatform;
+use Domain\Auth\Models\Collector;
 use Domain\Shelf\FilterRegistrars\ShelfFilterRegistrar;
 use Domain\Shelf\QueryBuilders\ShelfQueryBuilder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
-use Illuminate\Database\Eloquent\Relations\MorphToMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Mews\Purifier\Casts\CleanHtml;
 use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
 use Spatie\Translatable\HasTranslations;
+use Support\Traits\Models\HasCollector;
 use Support\Traits\Models\HasImage;
 use Support\Traits\Models\HasFeaturedImage;
-use Support\Traits\Models\HasUser;
 
 class Shelf extends Model implements HasMedia
 {
@@ -29,16 +26,15 @@ class Shelf extends Model implements HasMedia
     use InteractsWithMedia;
     use HasImage;
     use HasFeaturedImage;
-    use HasUser;
     use HasTranslations;
-
+    use HasCollector;
 
     protected $fillable = [
         'name',
         'number',
         'ulid',
         'description',
-        'user_id',
+        'collector_id',
     ];
 
     protected $casts = [
@@ -51,8 +47,7 @@ class Shelf extends Model implements HasMedia
         'id',
         'name',
         'number',
-        'created_at',
-        'users.email'
+        'created_at'
     ];
 
     protected static function newFactory(): ShelfFactory
@@ -89,9 +84,9 @@ class Shelf extends Model implements HasMedia
         return new ShelfQueryBuilder($query);
     }
 
-    public function user(): BelongsTo
+    public function collector(): BelongsTo
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(Collector::class);
     }
 
     public function collectibles(): HasMany

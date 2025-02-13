@@ -55,7 +55,7 @@ class ShelfSeeder extends Seeder
             $collectableFactory
                 ->has(KitItem::factory(rand(1,3)), 'kitItems')
                 ->has(Collectible::factory()
-                    ->for(Shelf::factory()->for($user, 'user'), 'shelf')
+                    ->for(Shelf::factory(), 'shelf')
                     ->for($user, 'user')
                     ->hasKitConditions(),
                     'collectibles')
