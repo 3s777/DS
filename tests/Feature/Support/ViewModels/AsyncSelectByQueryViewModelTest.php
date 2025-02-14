@@ -3,6 +3,7 @@
 namespace Support\ViewModels;
 
 use Database\Factories\UserFactory;
+use Domain\Auth\Models\Collector;
 use Domain\Auth\Models\Role;
 use Domain\Shelf\Models\KitItem;
 use Domain\Shelf\Models\Shelf;
@@ -13,12 +14,14 @@ use Tests\TestCase;
 class AsyncSelectByQueryViewModelTest extends TestCase
 {
     use RefreshDatabase;
+    protected Collector $collector;
 
     public function setUp(): void
     {
         parent::setUp();
 
         $this->user = UserFactory::new()->create();
+        $this->collector = Collector::factory()->create();
         Role::create(['name' => config('settings.super_admin_role'), 'display_name' => 'SuperAdmin']);
         $this->user->assignRole('super_admin');
     }
@@ -63,14 +66,14 @@ class AsyncSelectByQueryViewModelTest extends TestCase
      */
     public function it_success_get_select_depended(): void
     {
-        Shelf::factory()->create(['name' => 'TestName', 'user_id' => $this->user->id]);
-        Shelf::factory(3)->create(['user_id' => $this->user->id]);
+        Shelf::factory()->create(['name' => 'TestName', 'collector_id' => $this->collector->id]);
+        Shelf::factory(3)->create(['collector_id' => $this->collector->id]);
 
         $select = new AsyncSelectByQueryViewModel(
             'estNam',
             Shelf::class,
             trans_choice('shelf.choose', 1),
-            ['user_id' => $this->user->id]
+            ['collector_id' => $this->collector->id]
         );
 
         $expectedResult = [
@@ -93,14 +96,14 @@ class AsyncSelectByQueryViewModelTest extends TestCase
      */
     public function it_fail_get_select_wrong_depended(): void
     {
-        Shelf::factory()->create(['name' => 'TestName', 'user_id' => $this->user->id]);
-        Shelf::factory(3)->create(['user_id' => $this->user->id]);
+        Shelf::factory()->create(['name' => 'TestName', 'collector_id' => $this->collector->id]);
+        Shelf::factory(3)->create(['collector_id' => $this->collector->id]);
 
         $select = new AsyncSelectByQueryViewModel(
             'estNam',
             Shelf::class,
             trans_choice('shelf.choose', 1),
-            ['wrong_model_id' => $this->user->id]
+            ['wrong_model_id' => $this->collector->id]
         );
 
         $expectedResult = [

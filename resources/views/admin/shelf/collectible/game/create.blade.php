@@ -20,12 +20,12 @@
             <x-grid.col xl="4" ls="6" ml="12" lg="6" md="6" sm="12">
                 <x-ui.form.group>
                     <x-ui.select.async
-                        name="user_id"
-                        select-name="user_id"
-                        route="admin.select-users"
+                        name="collector_id"
+                        select-name="collector_id"
+                        route="admin.select-collectors"
                         :required="true"
-                        :default-option="trans_choice('user.choose', 1)"
-                        :label="__('shelf.user')">
+                        :default-option="trans_choice('user.collector.choose', 1)"
+                        :label="__('shelf.collector')">
                     </x-ui.select.async>
                 </x-ui.form.group>
             </x-grid.col>
@@ -37,8 +37,8 @@
                         select-name="shelf_id"
                         :required="true"
                         route="admin.shelves.select"
-                        depend-on="user_id"
-                        depend-field="user_id"
+                        depend-on="collector_id"
+                        depend-field="collector_id"
                         :default-option="trans_choice('shelf.choose', 1)"
                         :label="trans_choice('shelf.shelves', 1)" />
                 </x-ui.form.group>

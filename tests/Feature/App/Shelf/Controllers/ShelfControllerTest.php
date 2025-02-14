@@ -8,6 +8,7 @@ use App\Jobs\GenerateSmallThumbnailsJob;
 use App\Jobs\GenerateThumbnailJob;
 use Database\Factories\Shelf\ShelfFactory;
 use Database\Factories\UserFactory;
+use Domain\Auth\Models\Collector;
 use Domain\Auth\Models\Role;
 use Domain\Auth\Models\User;
 use Domain\Shelf\Models\Shelf;
@@ -37,6 +38,7 @@ class ShelfControllerTest extends TestCase
         $this->shelf = ShelfFactory::new()->create();
 
         $this->request = CreateShelfRequest::factory()->create();
+        $this->request['collector_id'] = Collector::factory()->create()->id;
     }
 
     public function checkNotAuthRedirect(
@@ -243,10 +245,11 @@ class ShelfControllerTest extends TestCase
      */
     public function it_success_get_for_select(): void
     {
-        $shelf = Shelf::factory()->create(['user_id' => $this->user->id]);
+        $collector = Collector::factory()->create();
+        $shelf = Shelf::factory()->create(['collector_id' => $collector->id]);
 
         $this->actingAs($this->user)
-            ->post(action([ShelfController::class, 'getForSelect'], ['depended' => ['user_id' => $this->user->id]]))
+            ->post(action([ShelfController::class, 'getForSelect'], ['depended' => ['collector_id' => $collector->id]]))
             ->assertJson(['result' => [
                 ['value' => '', 'label' => trans_choice('shelf.choose', 1), 'disabled' => true],
                 ['value' => $shelf->id, 'label' => $shelf->name]

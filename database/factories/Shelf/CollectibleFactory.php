@@ -2,6 +2,7 @@
 
 namespace Database\Factories\Shelf;
 
+use Domain\Auth\Models\Collector;
 use Domain\Auth\Models\User;
 use Domain\Game\Models\GameMedia;
 use Domain\Shelf\Enums\ConditionEnum;
@@ -50,11 +51,16 @@ class CollectibleFactory extends Factory
             'ulid' => Str::ulid(),
             'article_number' => fake()->title(),
             'condition' => Arr::random(ConditionEnum::cases())->value,
-            'user_id' => User::factory(),
+//            'user_id' => User::factory(),
+
             'category_id' => function(array $attributes) {
                 return Category::where('model', $attributes['collectable_type'])->first();
             },
             'shelf_id' => Shelf::factory(),
+            'collector_id' => function(array $attributes) {
+                $shelf = Shelf::find($attributes['shelf_id']);
+                return $shelf->collector_id;
+            },
 //            'collectable_type' => fake()->randomElement([
 //                'game_media'
 //            ]),

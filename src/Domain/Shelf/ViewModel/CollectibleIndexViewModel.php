@@ -60,9 +60,9 @@ class CollectibleIndexViewModel extends ViewModel
 //                'collectibles.auction',
                 'collectibles.created_at',
                 'collectibles.user_id',
-                'users.name as user_name'
+                'collectors.name as collector_name'
             )
-            ->join('users', 'users.id', '=', 'collectibles.user_id')
+            ->leftJoin('collectors', 'collectors.id', '=', 'collectibles.collector_id')
             ->with(['collectable', 'sale', 'auction'])
             ->filtered()
             ->sorted()

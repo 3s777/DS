@@ -3,6 +3,7 @@
 namespace Domain\Shelf\Models;
 
 use Database\Factories\Shelf\CollectibleFactory;
+use Domain\Auth\Models\Collector;
 use Domain\Auth\Models\User;
 use Domain\Shelf\Casts\Properties;
 use Domain\Shelf\FilterRegistrars\CollectibleFilterRegistrar;
@@ -55,6 +56,7 @@ class Collectible extends Model implements HasMedia
         'condition',
         'description',
         'user_id',
+        'collector_id',
         'featured_image',
         'sale_data',
         'auction_data'
@@ -141,6 +143,11 @@ class Collectible extends Model implements HasMedia
     public function user(): BelongsTo
     {
         return $this->belongsTo(User::class);
+    }
+
+    public function collector(): BelongsTo
+    {
+        return $this->belongsTo(Collector::class);
     }
 
     public function shelf(): BelongsTo

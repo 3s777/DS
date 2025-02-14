@@ -5,6 +5,7 @@ namespace App\Shelf\Services;
 use App\Http\Requests\Shelf\Admin\CreateCollectibleGameRequest;
 use App\Jobs\GenerateSmallThumbnailsJob;
 use App\Jobs\GenerateThumbnailJob;
+use Domain\Auth\Models\Collector;
 use Domain\Auth\Models\User;
 use Domain\Game\Models\GameMedia;
 use Domain\Shelf\DTOs\FillCollectibleDTO;
@@ -26,6 +27,7 @@ class CollectibleServiceTest extends TestCase
 
     protected array $request;
     protected User $user;
+    protected Collector $collector;
 
     protected function setUp(): void
     {
@@ -40,6 +42,7 @@ class CollectibleServiceTest extends TestCase
         );
 
         $this->user = User::factory()->create();
+        $this->collector = Collector::factory()->create();
     }
 
     /**
@@ -78,7 +81,7 @@ class CollectibleServiceTest extends TestCase
         $shelf = Shelf::find($this->request['shelf_id']);
 
         $this->assertEquals($collectible->shelf, $shelf);
-        $this->assertEquals($collectible->user->id, $shelf->user->id);
+        $this->assertEquals($collectible->collector->id, $shelf->collector->id);
         $this->assertEquals($collectible->collectable->id, $this->request['collectable']);
         $this->assertEquals($collectible->auction->price->value(), $collectible->auction_data->price()->value());
         $this->assertEquals($collectible->auction->step->value(), $collectible->auction_data->step()->value());
@@ -128,7 +131,7 @@ class CollectibleServiceTest extends TestCase
         $this->assertEquals($updatedCollectible->sale->price_old->value(), $this->request['sale']['price_old']);
         $this->assertEquals($updatedCollectible->target, $this->request['target']);
         $this->assertEquals($updatedCollectible->shelf->id, $newShelf->id);
-        $this->assertEquals($updatedCollectible->user->id, $newShelf->user->id);
+        $this->assertEquals($updatedCollectible->collector->id, $newShelf->collector->id);
         $this->assertNotEquals($updatedCollectible->collectable->id, $this->request['collectable']);
 
         $this->assertEquals($updatedCollectible->sale->price->value(), $updatedCollectible->sale_data->price()->value());

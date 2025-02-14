@@ -6,6 +6,7 @@ use App\Http\Requests\Auth\Admin\CreateAdminRequest;
 use App\Http\Requests\Shelf\Admin\CreateShelfRequest;
 use App\Jobs\GenerateSmallThumbnailsJob;
 use App\Jobs\GenerateThumbnailJob;
+use Domain\Auth\Models\Collector;
 use Domain\Auth\Models\User;
 use Domain\Shelf\DTOs\FillShelfDTO;
 use Domain\Shelf\Models\Shelf;
@@ -23,6 +24,7 @@ class ShelfServiceTest extends TestCase
 
     protected array $request;
     protected User $user;
+    protected Collector $collector;
 
     protected function setUp(): void
     {
@@ -31,6 +33,7 @@ class ShelfServiceTest extends TestCase
         $this->request = CreateShelfRequest::factory()->create();
 
         $this->user = User::factory()->create();
+        $this->collector = Collector::factory()->create();
     }
 
     /**
@@ -46,7 +49,7 @@ class ShelfServiceTest extends TestCase
             'name' => $this->request['name']
         ]);
 
-        $this->request['user_id'] = $this->user->id;
+        $this->request['collector_id'] = $this->collector->id;
         $this->request['featured_image'] = UploadedFile::fake()->image('photo1.jpg');
 
         $request = new Request($this->request);
@@ -75,7 +78,7 @@ class ShelfServiceTest extends TestCase
         Queue::fake();
         Storage::fake('images');
 
-        $this->request['user_id'] = $this->user->id;
+        $this->request['collector_id'] = $this->collector->id;
 
         $createRequest = new Request($this->request);
 

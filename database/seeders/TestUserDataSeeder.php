@@ -34,8 +34,7 @@ class TestUserDataSeeder extends Seeder
 
         $testUser->assignRole('super_admin');
 
-        Collector::factory(5)->create();
-        Collector::create([
+        $testCollector = Collector::create([
             'name' => 'qqqqq_collector',
             'first_name' => 'Test Name',
             'slug' => 'qqqqq',
@@ -70,7 +69,7 @@ class TestUserDataSeeder extends Seeder
         $collectableFactory
             ->has(KitItem::factory(rand(1,3)), 'kitItems')
             ->has(Collectible::factory()
-                ->for(Shelf::factory(), 'shelf')
+                ->for(Shelf::factory()->for($testCollector, 'collector'), 'shelf')
                 ->for($testUser, 'user')
                 ->hasKitConditions(),
                 'collectibles')

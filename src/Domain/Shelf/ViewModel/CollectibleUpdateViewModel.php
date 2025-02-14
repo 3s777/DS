@@ -6,14 +6,12 @@ use Domain\Auth\Models\User;
 use Domain\Shelf\Enums\CollectibleTypeEnum;
 use Domain\Shelf\Enums\ConditionEnum;
 use Domain\Shelf\Models\Collectible;
-use Domain\Shelf\Models\Shelf;
-use Illuminate\Database\Eloquent\Collection;
 use Spatie\ViewModels\ViewModel;
-use Support\Traits\HasSelectedUser;
+use Support\Traits\HasSelectedCollector;
 
 class CollectibleUpdateViewModel extends ViewModel
 {
-    use HasSelectedUser;
+    use HasSelectedCollector;
 
     public ?Collectible $collectible;
 
@@ -32,10 +30,10 @@ class CollectibleUpdateViewModel extends ViewModel
         return CollectibleTypeEnum::cases();
     }
 
-    public function shelves(): Collection
-    {
-        return Shelf::where('user_id', auth()->user()->id)->get();
-    }
+//    public function shelves(): Collection
+//    {
+//        return Shelf::where('user_id', auth()->user()->id)->get();
+//    }
 
     public function collectible(): ?Collectible
     {
@@ -54,13 +52,13 @@ class CollectibleUpdateViewModel extends ViewModel
 //        return $selectedUser;
 //    }
 
-    public function selectedUser(): array
+    public function selectedCollector(): array
     {
-        return $this->getSelectedUser($this->collectible);
+        return $this->getSelectedCollector($this->collectible);
     }
 
-    public function users()
-    {
-        return User::limit(3)->get()->pluck('name', 'id')->toArray();
-    }
+//    public function users()
+//    {
+//        return User::limit(3)->get()->pluck('name', 'id')->toArray();
+//    }
 }

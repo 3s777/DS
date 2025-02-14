@@ -26,7 +26,7 @@
                 'additional_field' => trans_choice('common.additional_fields', 1),
                 'sale' => __('common.sale'),
                 'auction' => __('common.auction'),
-                'users.name' => trans_choice('user.users', 1),
+                'users.name' => trans_choice('user.collectors', 1),
                 'created_at' => __('common.created_date'),
             ]" />
 
@@ -75,7 +75,7 @@
                     {{ __('common.auction') }}
                 </x-ui.responsive-table.column>
                 <x-ui.responsive-table.column name="users.namfe" sortable="true">
-                    {{ trans_choice('user.users', 1) }}
+                    {{ trans_choice('user.collectors', 1) }}
                 </x-ui.responsive-table.column>
                 <x-ui.responsive-table.column name="created_at" sortable="true">
                     {{ __('common.created_date') }}
@@ -143,7 +143,7 @@
                         @endif
                     </x-ui.responsive-table.column>
                     <x-ui.responsive-table.column>
-                        <span class="responsive-table__label">{{ trans_choice('user.users', 1) }}: </span> {{ $collectible->user_name }}
+                        <span class="responsive-table__label">{{ trans_choice('user.collectors', 1) }}: </span> {{ $collectible->collector_name }}
                     </x-ui.responsive-table.column>
                     <x-ui.responsive-table.column>
                         <span class="responsive-table__label">{{ __('common.created_date') }}: </span> {{ $collectible->created_at }}
