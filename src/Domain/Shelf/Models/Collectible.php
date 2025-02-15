@@ -52,6 +52,7 @@ class Collectible extends Model implements HasMedia
         'additional_field',
         'properties',
         'target',
+        'kit_score',
         'kit_conditions',
         'condition',
         'description',

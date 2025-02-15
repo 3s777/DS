@@ -49,6 +49,7 @@ class CollectibleIndexViewModel extends ViewModel
                 'collectibles.condition',
                 'collectibles.collectable_id',
                 'collectibles.collectable_type',
+                'collectibles.kit_score',
                 'collectibles.kit_conditions',
                 'collectibles.purchase_price',
                 'collectibles.purchased_at',

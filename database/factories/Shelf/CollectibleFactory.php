@@ -61,6 +61,7 @@ class CollectibleFactory extends Factory
                 $shelf = Shelf::find($attributes['shelf_id']);
                 return $shelf->collector_id;
             },
+            'kit_score' => rand(1,10),
 //            'collectable_type' => fake()->randomElement([
 //                'game_media'
 //            ]),

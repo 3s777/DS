@@ -17,7 +17,11 @@ class KitItemConditionViewModel extends ViewModel
         $modelClass = CollectibleTypeEnum::{$this->model}->value;
         $media = $modelClass::find($this->media);
 
-        $html = '';
+//        $html = '';
+
+        $html = Blade::render(
+            '<x-ui.star-rating name="kit_score" :hide-none-button="true" :title="__(\'collectible.kit.score\')" input-name="kit_score" class="admin__conditions-item" />'
+        );
 
         foreach($media->kitItems as $kitItem) {
 //            $html .= ViewFacade::make("components.ui.star-rating")
@@ -33,6 +37,7 @@ class KitItemConditionViewModel extends ViewModel
                 ['name' => $kitItem->id, 'title' => $kitItem->name]
             );
         }
+
 
         return $html;
     }

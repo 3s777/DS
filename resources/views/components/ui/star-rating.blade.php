@@ -6,7 +6,7 @@
     'responsive' => true,
     'count' => 10,
     'numClass'=> false,
-    'noneButton' => false,
+    'hideNoneButton' => false,
     'value' => false,
     'labelClass' => false,
     'groupClass' => false
@@ -23,7 +23,7 @@
 
             <input style="display: none" class="star-rating__input" name="@if($inputName){{$inputName}}@else{{'star-rating_'.$name }}@endif" value="" type="radio" checked>
 
-            @unless($noneButton)
+            @unless($hideNoneButton)
                 <input
                     class="star-rating__input star-rating__input_none"
                     name="@if($inputName){{$inputName}}@else{{'star-rating_'.$name }}@endif"

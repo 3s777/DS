@@ -26,6 +26,7 @@ return new class extends Migration
             $table->date('purchased_at')->nullable();
             $table->string('seller')->nullable();
             $table->string('additional_field')->nullable();
+            $table->smallInteger('kit_score')->nullable();
             $table->jsonb('kit_conditions')->nullable();
             $table->jsonb('properties')->nullable();
             $table->morphs('collectable');

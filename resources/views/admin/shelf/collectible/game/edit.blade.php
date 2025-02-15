@@ -164,20 +164,19 @@
                 <x-grid.col xl="5" ls="6" lg="12" md="12" sm="12">
                     <x-ui.form.group>
                         <div id="kit" class="admin__conditions">
+                            <x-ui.star-rating
+                                name="kit_score"
+                                input-name="kit_score"
+                                :hide-none-button="true"
+                                :title="__('collectible.kit.score')"
+                                :value="$collectible->kit_score"
+                                class="admin__conditions-item" />
+
                             @foreach($collectible->kitItems as $item)
                                 <x-ui.star-rating
                                     :name="$item->id"
                                     :title="$item->name"
                                     :value="$item->pivot->condition"
-                                    input-name="kit_conditionss[{{ $item->id }}]"
-                                    class="admin__conditions-item" />
-                            @endforeach
-
-                            @foreach($collectible->collectable->kitItems as $item)
-                                <x-ui.star-rating
-                                    :name="$item->id"
-                                    :title="$item->name"
-                                    :value="$collectible->kit_conditions[$item->id]"
                                     input-name="kit_conditions[{{ $item->id }}]"
                                     class="admin__conditions-item" />
                             @endforeach

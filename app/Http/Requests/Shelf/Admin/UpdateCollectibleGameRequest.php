@@ -72,11 +72,16 @@ class UpdateCollectibleGameRequest extends FormRequest
             'properties.is_digital' => [
                 'boolean'
             ],
+            'kit_score' => [
+                'required',
+                'integer'
+            ],
             'kit_conditions' => [
                 'required'
             ],
             'kit_conditions.*' => [
-                'sometimes',
+//                'sometimes',
+                'nullable',
                 'numeric'
             ],
             'target' => [

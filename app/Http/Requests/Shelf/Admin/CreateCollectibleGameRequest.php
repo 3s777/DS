@@ -90,11 +90,15 @@ class CreateCollectibleGameRequest extends FormRequest
                 'required',
                 'string'
             ],
+            'kit_score' => [
+                'nullable',
+                'integer'
+            ],
             'kit_conditions' => [
                 'required'
             ],
             'kit_conditions.*' => [
-                'sometimes',
+                'nullable',
                 'integer'
             ],
             'target' => [

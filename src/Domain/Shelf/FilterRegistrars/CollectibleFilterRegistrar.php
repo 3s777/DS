@@ -8,6 +8,7 @@ use App\Filters\EnumFilter;
 use App\Filters\RangeFilter;
 use App\Filters\RelationFilter;
 use App\Filters\SearchFilter;
+use Domain\Auth\Models\Collector;
 use Domain\Auth\Models\User;
 use Domain\Shelf\Enums\CollectibleTypeEnum;
 use Domain\Shelf\Enums\ConditionEnum;
@@ -33,6 +34,14 @@ class CollectibleFilterRegistrar implements FilterRegistrar
                 'search',
                 'collectibles',
                 alternativeFields: ['article_number']
+            ),
+            'collector' => RelationFilter::make(
+                trans_choice('user.collectors', 1),
+                'collector',
+                'collectibles',
+                'collector_id',
+                trans_choice('user.collector.choose', 1),
+                Collector::class
             ),
             'user' => RelationFilter::make(
                 trans_choice('user.users', 1),
