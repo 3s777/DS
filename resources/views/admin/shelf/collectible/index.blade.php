@@ -20,7 +20,6 @@
                 'type' => trans_choice('collectible.type', 1),
                 'media' => trans_choice('collectible.collectable', 1),
                 'kit_score' => __('collectible.kit.items'),
-                'kit_conditions' => __('collectible.kit.items'),
                 'purchase_price' => __('collectible.purchase_price'),
                 'purchase_at' => __('collectible.purchased_at'),
                 'seller' =>  __('collectible.seller'),
@@ -48,16 +47,13 @@
                 <x-ui.responsive-table.column sortable="true" name="condition">
                     {{ __('common.condition') }}
                 </x-ui.responsive-table.column>
-                <x-ui.responsive-table.column sortable="true" name="type">
+                <x-ui.responsive-table.column sortable="true" name="category_id">
                     {{ trans_choice('collectible.type', 1) }}
                 </x-ui.responsive-table.column>
-                <x-ui.responsive-table.column sortable="true" name="collectable.name">
+                <x-ui.responsive-table.column name="collectable.name">
                     {{ trans_choice('collectible.collectable', 1) }}
                 </x-ui.responsive-table.column>
-                <x-ui.responsive-table.column name="collectable.kit_score">
-                    {{ __('collectible.kit.items') }}
-                </x-ui.responsive-table.column>
-                <x-ui.responsive-table.column name="collectable.kit_conditions">
+                <x-ui.responsive-table.column sortable="true" name="kit_score">
                     {{ __('collectible.kit.items') }}
                 </x-ui.responsive-table.column>
                 <x-ui.responsive-table.column sortable="true" name="purchase_price">
@@ -72,13 +68,13 @@
                 <x-ui.responsive-table.column sortable="true" name="additional_field">
                     {{ trans_choice('common.additional_fields', 1) }}
                 </x-ui.responsive-table.column>
-                <x-ui.responsive-table.column name="sale">
+                <x-ui.responsive-table.column sortable="true" name="sale_data">
                     {{ __('common.sale') }}
                 </x-ui.responsive-table.column>
-                <x-ui.responsive-table.column name="auction">
+                <x-ui.responsive-table.column sortable="true" name="auction_data">
                     {{ __('common.auction') }}
                 </x-ui.responsive-table.column>
-                <x-ui.responsive-table.column name="users.namfe" sortable="true">
+                <x-ui.responsive-table.column sortable="true" name="collectors.name">
                     {{ trans_choice('user.collectors', 1) }}
                 </x-ui.responsive-table.column>
                 <x-ui.responsive-table.column name="created_at" sortable="true">
@@ -107,7 +103,9 @@
                         <span class="responsive-table__label">{{ __('common.condition') }}: </span> {{ $getConditionName($collectible->condition) }}
                     </x-ui.responsive-table.column>
                     <x-ui.responsive-table.column>
-                        <span class="responsive-table__label">{{ trans_choice('collectible.type', 1) }}: </span> {{ $getTypeName($collectible->collectable_type) }}
+                        <span class="responsive-table__label">{{ trans_choice('collectible.type', 1) }}: </span>
+{{--                        {{ $getTypeName($collectible->collectable_type) }}--}}
+                        {{ $collectible->category->name }}
                     </x-ui.responsive-table.column>
                     <x-ui.responsive-table.column>
                         <span class="responsive-table__label">{{ trans_choice('collectible.collectable', 1) }}: </span> {{ $collectible->collectable->name }}
@@ -115,14 +113,6 @@
                     <x-ui.responsive-table.column>
                         <span class="responsive-table__label">{{ __('collectible.kit.items') }}: </span>
                         {{ $collectible->kit_score }}
-                    </x-ui.responsive-table.column>
-                    <x-ui.responsive-table.column>
-                        <span class="responsive-table__label">{{ __('collectible.kit.items') }}: </span>
-                        @if($collectible->kit_conditions)
-                            @foreach($collectible->kit_conditions as $title => $value)
-                                <div>{{ $title }}: {{ $value }}</div>
-                            @endforeach
-                        @endif
                     </x-ui.responsive-table.column>
                     <x-ui.responsive-table.column>
                         <span class="responsive-table__label">{{ __('collectible.purchase_price') }}: </span> {{ $collectible->purchase_price }}

@@ -56,6 +56,9 @@ class CollectibleIndexViewModel extends ViewModel
                 'collectibles.seller',
                 'collectibles.additional_field',
                 'collectibles.target',
+                'collectibles.category_id',
+                'collectibles.sale_data',
+                'collectibles.auction_data',
 //                'collectibles.sale',
 //                'collectibles.sale->price',
 //                'collectibles.auction',
@@ -64,7 +67,7 @@ class CollectibleIndexViewModel extends ViewModel
                 'collectors.name as collector_name'
             )
             ->leftJoin('collectors', 'collectors.id', '=', 'collectibles.collector_id')
-            ->with(['collectable', 'sale', 'auction'])
+            ->with(['collectable:id,name', 'sale', 'auction','category:id,name'])
             ->filtered()
             ->sorted()
             ->paginate(10)

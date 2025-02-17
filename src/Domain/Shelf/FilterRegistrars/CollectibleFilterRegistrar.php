@@ -131,6 +131,12 @@ class CollectibleFilterRegistrar implements FilterRegistrar
                 isPrice: true,
                 relation: 'sale'
             ),
+            'kit_score' => RangeFilter::make(
+                __('collectible.kit.score_title'),
+                'kit_score',
+                'collectibles',
+                'kit_score'
+            ),
             'auction_dates' => DatesFilter::make(
                 __('collectible.auction.finished_at'),
                 'auction_dates',

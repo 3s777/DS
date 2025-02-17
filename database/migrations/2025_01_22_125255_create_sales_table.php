@@ -20,6 +20,7 @@ return new class extends Migration
                 ->cascadeOnDelete();
             $table->unsignedBigInteger('price');
             $table->unsignedBigInteger('price_old')->nullable();
+            $table->boolean('bidding')->nullable();
             $table->unsignedInteger('quantity')->default(1)->nullable();
             $table->softDeletes();
             $table->timestamps();

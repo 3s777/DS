@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use Carbon\Carbon;
 use Domain\Auth\Models\User;
 use Domain\Game\Models\GameMedia;
 use Domain\Shelf\Models\Collectible;
@@ -20,9 +21,19 @@ class AuctionSeeder extends Seeder
 
         if($collectibles) {
             foreach ($collectibles as $collectible) {
-                Auction::factory()
+                $auction = Auction::factory()
                     ->for($collectible)
                     ->create();
+
+
+
+                $collectible->auction_data = [
+                    'price' => $auction->price->value(),
+                    'step' => $auction->step->value(),
+                    'finished_at' => $auction->finished_at->format('Y-m-d H:i:s')
+                ];
+
+                $collectible->save();
             }
         }
     }

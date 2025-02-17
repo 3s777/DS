@@ -80,6 +80,12 @@ class Collectible extends Model implements HasMedia
         'name',
         'created_at',
         'purchase_price',
+        'purchased_at',
+        'kit_score',
+        'condition',
+        'seller',
+        'sale_data',
+        'auction_data',
 //        'users.email',
         'article_number',
         'additional_field'

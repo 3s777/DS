@@ -18,6 +18,7 @@ class Sale extends Model
         'collectible_id',
         'price',
         'price_old',
+        'bidding',
         'quantity'
     ];
 

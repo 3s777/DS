@@ -19,7 +19,8 @@ class Sale implements CastsAttributes
 
             return new SaleValueObject(
                 $jsonValue->price,
-                $jsonValue->price_old ?? null
+                $jsonValue->price_old ?? null,
+                bidding: $jsonValue->bidding ?? null
             );
         }
 
@@ -35,18 +36,23 @@ class Sale implements CastsAttributes
         if(!$value instanceof SaleValueObject) {
             $price = $value['price'];
             $priceOld = $value['price_old'] ?? null;
+            $bidding = $value['bidding'] ?? null;
 
-            $value = SaleValueObject::make($price, $priceOld);
+            $value = SaleValueObject::make($price, $priceOld, bidding: $bidding);
         }
 
-        $prices = [
+        $sale = [
             'price' => $value->price()->prepareValue()
         ];
 
         if($value->priceOld()) {
-            $prices['price_old'] = $value->priceOld()->prepareValue();
+            $sale['price_old'] = $value->priceOld()->prepareValue();
         }
 
-        return json_encode($prices);
+        if($value->bidding()) {
+            $sale['bidding'] = $value->bidding();
+        }
+
+        return json_encode($sale);
     }
 }

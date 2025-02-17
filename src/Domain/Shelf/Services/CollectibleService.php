@@ -36,8 +36,10 @@ class CollectibleService
     {
         $sale = [
             'price' => $collectible->sale->price->value(),
-            'price_old' => $collectible->sale->price_old->value()
+            'price_old' => $collectible->sale->price_old->value(),
+            'bidding' => $collectible->sale->bidding
         ];
+
         $collectible->sale_data = $sale;
 
         $collectible->save();
@@ -50,6 +52,7 @@ class CollectibleService
             'step' => $collectible->auction->step->value(),
             'finished_at' => $collectible->auction->finished_at
         ];
+
         $collectible->auction_data = $auction;
 
         $collectible->save();
@@ -86,7 +89,8 @@ class CollectibleService
                 if($data->target == 'sale') {
                     $collectible->sale()->create([
                         'price' =>  $data->sale['price'],
-                        'price_old' => $data->sale['price_old'] ?? null
+                        'price_old' => $data->sale['price_old'] ?? null,
+                        'bidding' => $data->sale['bidding'] ?? null,
                     ]);
 
                     $this->setSaleData($collectible);
@@ -170,7 +174,8 @@ class CollectibleService
                     $collectible->sale()->updateOrCreate(
                         ['collectible_id' => $collectible->id],
                         ['price' =>  $data->sale['price'],
-                        'price_old' => $data->sale['price_old']]
+                        'price_old' => $data->sale['price_old'],
+                        'bidding' => $data->sale['bidding'] ?? null]
                     );
 
                     $this->setSaleData($collectible);

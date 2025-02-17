@@ -230,6 +230,16 @@
                             </x-ui.form.input-text>
                         </x-ui.form.group>
                     </x-grid.col>
+
+                    <x-grid.col xl="4" ls="6" lg="12" md="12" sm="12">
+                        <x-ui.form.group>
+                            <x-ui.form.switcher
+                                name="sale[bidding]"
+                                value="1"
+                                label="Торг">
+                            </x-ui.form.switcher>
+                        </x-ui.form.group>
+                    </x-grid.col>
                 </x-grid>
             </div>
             <div class="collectible-target__fields collectible-target__auction" style="display: none">

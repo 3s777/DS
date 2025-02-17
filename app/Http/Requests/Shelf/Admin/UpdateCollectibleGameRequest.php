@@ -73,7 +73,7 @@ class UpdateCollectibleGameRequest extends FormRequest
                 'boolean'
             ],
             'kit_score' => [
-                'required',
+                'nullable',
                 'integer'
             ],
             'kit_conditions' => [
@@ -101,6 +101,11 @@ class UpdateCollectibleGameRequest extends FormRequest
                 'numeric',
                 'max: 100000000',
                 'min: 0'
+            ],
+            'sale.bidding' => [
+                'exclude_unless:target,sale',
+                'nullable',
+                'boolean',
             ],
             'auction.price' => [
                 'exclude_unless:target,auction',

@@ -20,9 +20,16 @@ class SaleSeeder extends Seeder
 
         if($collectibles) {
             foreach ($collectibles as $collectible) {
-                Sale::factory()
+                $sale = Sale::factory()
                     ->for($collectible)
                     ->create();
+
+                $collectible->sale_data = [
+                    'price' => $sale->price->value(),
+                    'price_old' => $sale->price_old->value()
+                ];
+
+                $collectible->save();
             }
         }
     }

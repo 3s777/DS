@@ -80,6 +80,12 @@
 
         <x-grid.col xl="3" lg="4" md="6" sm="12">
             <x-ui.form.group>
+                <x-common.filters.range name="kit_score" />
+            </x-ui.form.group>
+        </x-grid.col>
+
+        <x-grid.col xl="3" lg="4" md="6" sm="12">
+            <x-ui.form.group>
                 <x-common.filters.dates name="auction_dates" />
             </x-ui.form.group>
         </x-grid.col>
