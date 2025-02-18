@@ -2,7 +2,7 @@
 
 namespace Domain\Shelf\ViewModel;
 
-use Domain\Auth\Models\User;
+use Domain\Settings\Models\Country;
 use Domain\Shelf\Enums\CollectibleTypeEnum;
 use Domain\Shelf\Enums\ConditionEnum;
 use Domain\Shelf\Models\Collectible;
@@ -55,6 +55,21 @@ class CollectibleUpdateViewModel extends ViewModel
     public function selectedCollector(): array
     {
         return $this->getSelectedCollector($this->collectible);
+    }
+
+
+    public function countries(): array
+    {
+        return Country::select('id', 'name')->get()->pluck('name', 'id')->toArray();
+    }
+
+    public function shipping()
+    {
+        return [
+          'none' => 'Отсутствует',
+          'world' => 'По всему миру',
+          'countries' => 'Выбранные страны'
+        ];
     }
 
 //    public function users()

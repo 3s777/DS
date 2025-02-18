@@ -1,7 +1,8 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Settings;
 
+use App\Http\Controllers\Controller;
 use Domain\Setting\Enums\ColorThemeEnum;
 
 class ColorThemeController extends Controller

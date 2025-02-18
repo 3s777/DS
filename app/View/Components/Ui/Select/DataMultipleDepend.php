@@ -17,6 +17,7 @@ class DataMultipleDepend extends Component
         public string $dependOn,
         public string $dependField,
         public string $route,
+        public ?bool $dependDisabled,
         public array $options = [],
         public ?string $label = null,
         public ?string $defaultOption = null,

@@ -101,6 +101,15 @@ final class AdminSidebarMenuComposer
                     ->add(MenuItem::make(route('admin.permissions.create'), __('common.add')))
                     ->add(MenuItem::make(route('admin.permissions.index'), __('common.list')))
                 )
+            )
+            ->add(MenuGroup::make()
+                ->setLabel(trans_choice('settings.settings', 2))
+                ->setIcon('users')
+                ->add(MenuGroup::make()
+                    ->setLabel(trans_choice('settings.country.countries', 2))
+                    ->add(MenuItem::make(route('admin.countries.create'), __('common.add')))
+                    ->add(MenuItem::make(route('admin.countries.index'), __('common.list')))
+                )
             );
 
             $view->with('menu', $menu);

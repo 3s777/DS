@@ -3,9 +3,9 @@
 namespace App\Routing;
 
 use App\Contracts\RouteRegistrar;
-use App\Http\Controllers\ColorThemeController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\PageController;
+use App\Http\Controllers\Settings\ColorThemeController;
 use Illuminate\Contracts\Routing\Registrar;
 use Illuminate\Support\Facades\Route;
 
@@ -20,9 +20,6 @@ class AppRegistrar implements RouteRegistrar
                 Route::get('/{locale?}', HomeController::class)->whereIn('locale', config('app.available_locales'))->name('home');
 
                 Route::prefix('{locale}')->whereIn('locale', config('app.available_locales'))->group(function () {
-
-
-                    Route::get('/set-theme/{theme}', ColorThemeController::class)->name('set.theme')->middleware(['remove.locale']);;
 
                     Route::get('/ui', function () {
                         return view('content.ui.index');

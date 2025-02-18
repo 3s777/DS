@@ -3,7 +3,7 @@
 namespace App\View\Components\Common;
 
 use Closure;
-use Domain\Setting\Enums\ColorThemeEnum;
+use Domain\Settings\Enums\ColorThemeEnum;
 use Illuminate\Contracts\View\View;
 use Illuminate\View\Component;
 

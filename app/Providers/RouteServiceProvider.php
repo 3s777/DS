@@ -8,6 +8,7 @@ use App\Routing\AuthAdminRegistrar;
 use App\Routing\AuthCollectorRegistrar;
 use App\Routing\FilepondRegistrar;
 use App\Routing\GameRegistrar;
+use App\Routing\SettingRegistrar;
 use App\Routing\ShelfRegistrar;
 use Illuminate\Cache\RateLimiting\Limit;
 use Illuminate\Contracts\Routing\Registrar;
@@ -29,6 +30,7 @@ class RouteServiceProvider extends ServiceProvider
     public const HOME = '/';
 
     protected array $registrars = [
+        SettingRegistrar::class,
         AppRegistrar::class,
         AuthAdminRegistrar::class,
         AuthCollectorRegistrar::class,

@@ -1,6 +1,6 @@
 <?php
 
-namespace Domain\Setting\Enums;
+namespace Domain\Settings\Enums;
 
 enum LanguageEnum: string
 {

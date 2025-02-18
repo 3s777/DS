@@ -6,7 +6,7 @@ use Domain\Auth\Models\Collector;
 use Domain\Auth\Models\Permission;
 use Domain\Auth\Models\Role;
 use Domain\Auth\Models\User;
-use Domain\Setting\Enums\LanguageEnum;
+use Domain\Settings\Enums\LanguageEnum;
 use Spatie\ViewModels\ViewModel;
 
 class CollectorUpdateViewModel extends ViewModel

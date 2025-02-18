@@ -240,6 +240,49 @@
                             </x-ui.form.switcher>
                         </x-ui.form.group>
                     </x-grid.col>
+
+                    <x-grid.col xl="4" ls="6" lg="12" md="12" sm="12">
+                        <x-ui.form.group>
+                            <x-ui.select.data
+                                name="sale_country"
+                                select-name="sale[country_id]"
+                                id="sale_country_id"
+                                :options="$countries"
+                                :label="trans_choice('settings.country.choose', 1)"
+                                :default-option="trans_choice('settings.country.countries', 1)"
+                            />
+                        </x-ui.form.group>
+                    </x-grid.col>
+
+                    <x-grid.col xl="4" ls="6" lg="12" md="12" sm="12">
+                        <x-ui.form.group>
+                            <x-ui.select.data
+                                name="sale_shipping"
+                                select-name="sale[shipping]"
+                                id="sale_shipping"
+                                :options="$shipping"
+                                selected="world"
+                                :label="trans_choice('settings.country.choose', 1)"
+                            />
+                        </x-ui.form.group>
+                    </x-grid.col>
+
+                    <x-grid.col xl="4" ls="6" lg="12" md="12" sm="12">
+                        <x-ui.form.group>
+                            <x-ui.select.data-multiple
+                                name="sale_shipping_country"
+                                select-name="sale[shipping_country]"
+                                id="sale_shipping_country"
+                                depend-on="sale[shipping]"
+                                depend-field="sale_shipping"
+                                :depend-disabled="true"
+                                :route="false"
+                                :options="$countries"
+                                :label="trans_choice('settings.country.choose', 1)"
+                                :default-option="trans_choice('settings.country.countries', 1)"
+                            />
+                        </x-ui.form.group>
+                    </x-grid.col>
                 </x-grid>
             </div>
             <div class="collectible-target__fields collectible-target__auction" style="display: none">
