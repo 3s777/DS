@@ -55,6 +55,8 @@ class AppServiceProvider extends ServiceProvider
             'kit_item' => 'Domain\Shelf\Models\KitItem',
             'collectable' => 'Domain\Shelf\Models\Collectible',
             'category' => 'Domain\Shelf\Models\Category',
+            'sale' => 'Domain\Trade\Models\Sale',
+            'auction' => 'Domain\Trade\Models\Auction',
         ]);
 
 //        Translatable::fallback(

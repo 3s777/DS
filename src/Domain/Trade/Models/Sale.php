@@ -3,10 +3,12 @@
 namespace Domain\Trade\Models;
 
 use Database\Factories\Trade\SaleFactory;
+use Domain\Settings\Models\Country;
 use Domain\Shelf\Models\Collectible;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\MorphToMany;
 use Support\Casts\Price;
 
 class Sale extends Model
@@ -19,7 +21,9 @@ class Sale extends Model
         'price',
         'price_old',
         'bidding',
-        'quantity'
+        'quantity',
+        'country_id',
+        'shipping'
     ];
 
     protected $casts = [
@@ -35,5 +39,15 @@ class Sale extends Model
     public function collectible(): BelongsTo
     {
         return $this->belongsTo(Collectible::class);
+    }
+
+    public function country(): BelongsTo
+    {
+        return $this->belongsTo(Country::class);
+    }
+
+    public function shipping_countries(): MorphToMany
+    {
+        return $this->morphToMany(Country::class, 'countriesable');
     }
 }

@@ -236,7 +236,7 @@
                             <x-ui.form.switcher
                                 name="sale[bidding]"
                                 value="1"
-                                label="Торг">
+                                :label="__('collectible.sale.bidding')">
                             </x-ui.form.switcher>
                         </x-ui.form.group>
                     </x-grid.col>
@@ -256,31 +256,28 @@
 
                     <x-grid.col xl="4" ls="6" lg="12" md="12" sm="12">
                         <x-ui.form.group>
-                            <x-ui.select.data
+                            <x-ui.select.enum
                                 name="sale_shipping"
                                 select-name="sale[shipping]"
                                 id="sale_shipping"
                                 :options="$shipping"
-                                selected="world"
-                                :label="trans_choice('settings.country.choose', 1)"
-                            />
+                                selected="country"
+                                :label="__('collectible.shipping.option')"/>
                         </x-ui.form.group>
                     </x-grid.col>
 
                     <x-grid.col xl="4" ls="6" lg="12" md="12" sm="12">
                         <x-ui.form.group>
-                            <x-ui.select.data-multiple
-                                name="sale_shipping_country"
-                                select-name="sale[shipping_country]"
-                                id="sale_shipping_country"
-                                depend-on="sale[shipping]"
-                                depend-field="sale_shipping"
-                                :depend-disabled="true"
-                                :route="false"
-                                :options="$countries"
-                                :label="trans_choice('settings.country.choose', 1)"
-                                :default-option="trans_choice('settings.country.countries', 1)"
-                            />
+                            <div id="sale_shipping_countries_block" style="display: none">
+                                <x-ui.select.data-multiple
+                                    name="sale_shipping_countries"
+                                    select-name="sale[shipping_countries][]"
+                                    id="sale_shipping_countries"
+                                    :options="$countries"
+                                    :label="__('collectible.shipping.choose_countries')"
+                                    :default-option="trans_choice('settings.country.countries', 2)"
+                                />
+                            </div>
                         </x-ui.form.group>
                     </x-grid.col>
                 </x-grid>
@@ -416,6 +413,24 @@
 
             collectableSelect.addEventListener('change', async function() {
                 setKit(this.value);
+            });
+
+            const shippingSelect = document.getElementById('sale_shipping');
+            const shippingCountries = document.getElementById('sale_shipping_countries_block');
+
+            if(shippingSelect.value === 'selected') {
+                shippingCountries.style.display = 'block';
+            } else {
+                shippingCountries.style.display = 'none';
+            }
+
+            shippingSelect.addEventListener('change', function handleChange(event) {
+
+                if(event.target.value === 'selected') {
+                    shippingCountries.style.display = 'block';
+                } else {
+                    shippingCountries.style.display = 'none';
+                }
             });
         </script>
     @endpush

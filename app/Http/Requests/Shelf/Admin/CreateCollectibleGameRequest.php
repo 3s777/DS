@@ -6,6 +6,7 @@ use Domain\Game\Models\GameMedia;
 use Domain\Shelf\Enums\ConditionEnum;
 use Domain\Shelf\Enums\TargetEnum;
 use Domain\Shelf\Models\Collectible;
+use Domain\Trade\Enums\ShippingEnum;
 use Illuminate\Database\Eloquent\Relations\Relation;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
@@ -124,6 +125,21 @@ class CreateCollectibleGameRequest extends FormRequest
                 'nullable',
                 'boolean',
             ],
+            'sale.country_id' => [
+                'exclude_unless:target,sale',
+                'integer',
+                'exists:Domain\Settings\Models\Country,id'
+            ],
+            'sale.shipping' => [
+                'required',
+                Rule::enum(ShippingEnum::class)
+            ],
+            'sale.shipping_countries' => [
+                'exclude_unless:sale.shipping,selected',
+                'required',
+                'array',
+                'exists:Domain\Settings\Models\Country,id'
+            ],
             'auction.price' => [
                 'exclude_unless:target,auction',
                 'required',
@@ -179,6 +195,10 @@ class CreateCollectibleGameRequest extends FormRequest
             'target' => __('collectible.target'),
             'sale.price' => __('collectible.sale.price'),
             'sale.price_old' => __('collectible.sale.price_old'),
+            'sale.bidding' => __('collectible.sale.bidding'),
+            'sale.country_id' => trans_choice('settings.country.countries', 1),
+            'sale.shipping' => __('collectible.shipping.option'),
+            'sale.shipping_countries' => __('collectible.shipping.choose_countries'),
             'auction.price' => __('collectible.auction.price'),
             'auction.step' => __('collectible.auction.step'),
             'auction.finished_at' => __('collectible.auction.finished_at'),

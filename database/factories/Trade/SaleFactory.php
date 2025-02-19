@@ -4,6 +4,7 @@ namespace Database\Factories\Trade;
 
 use Domain\Game\Models\Game;
 use Domain\Game\Models\GameMedia;
+use Domain\Settings\Models\Country;
 use Domain\Shelf\Models\Collectible;
 use Domain\Trade\Models\Sale;
 use Illuminate\Database\Eloquent\Factories\Factory;
@@ -20,7 +21,9 @@ class SaleFactory extends Factory
         return [
             'price' => fake()->numberBetween(1, 10000),
             'price_old' => fake()->numberBetween(1, 10000),
-            'quantity' => fake()->numberBetween(1, 100)
+            'quantity' => fake()->numberBetween(1, 100),
+            'country_id' => Country::factory()->create(),
+            'shipping' => 'world'
         ];
     }
 }

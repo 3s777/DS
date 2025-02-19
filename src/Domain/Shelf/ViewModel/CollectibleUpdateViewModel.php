@@ -6,6 +6,7 @@ use Domain\Settings\Models\Country;
 use Domain\Shelf\Enums\CollectibleTypeEnum;
 use Domain\Shelf\Enums\ConditionEnum;
 use Domain\Shelf\Models\Collectible;
+use Domain\Trade\Enums\ShippingEnum;
 use Spatie\ViewModels\ViewModel;
 use Support\Traits\HasSelectedCollector;
 
@@ -65,11 +66,13 @@ class CollectibleUpdateViewModel extends ViewModel
 
     public function shipping()
     {
-        return [
-          'none' => 'Отсутствует',
-          'world' => 'По всему миру',
-          'countries' => 'Выбранные страны'
-        ];
+//        return [
+//          'none' => 'Отсутствует',
+//          'world' => 'По всему миру',
+//          'countries' => 'Выбранные страны'
+//        ];
+
+        return ShippingEnum::cases();
     }
 
 //    public function users()

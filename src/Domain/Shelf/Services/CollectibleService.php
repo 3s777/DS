@@ -6,6 +6,7 @@ use Domain\Shelf\DTOs\FillCollectibleDTO;
 use Domain\Shelf\Models\Collectible;
 use Domain\Shelf\Models\KitItem;
 use Domain\Shelf\Models\Shelf;
+use Domain\Trade\Enums\ShippingEnum;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
 use Support\Exceptions\CrudException;
@@ -37,7 +38,9 @@ class CollectibleService
         $sale = [
             'price' => $collectible->sale->price->value(),
             'price_old' => $collectible->sale->price_old->value(),
-            'bidding' => $collectible->sale->bidding
+            'bidding' => $collectible->sale->bidding,
+            'country_id' => $collectible->sale->country->id,
+            'shipping' => ShippingEnum::tryFrom($collectible->sale->shipping)->value
         ];
 
         $collectible->sale_data = $sale;
@@ -60,8 +63,6 @@ class CollectibleService
 
     public function create(FillCollectibleDTO $data)
     {
-
-
         return Transaction::run(
             function() use($data) {
 
@@ -91,6 +92,8 @@ class CollectibleService
                         'price' =>  $data->sale['price'],
                         'price_old' => $data->sale['price_old'] ?? null,
                         'bidding' => $data->sale['bidding'] ?? null,
+                        'country_id' => $data->sale['country_id'] ?? null,
+                        'shipping' => $data->sale['shipping'] ?? null
                     ]);
 
                     $this->setSaleData($collectible);
@@ -115,6 +118,8 @@ class CollectibleService
                 }
 
                 $collectible->kitItems()->sync($kitItems);
+
+                $collectible->sale->shipping_countries()->sync($data->sale['shipping_countries']);
 
 //            $kitItems = [];
 //            foreach($data->kit_conditions as $key=>$value) {

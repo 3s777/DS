@@ -47,9 +47,18 @@ return [
     'purchased_at_from' => 'Начальная дата покупки',
     'purchased_at_to' => 'Конечная дата покупки',
     'seller' => 'Продавец',
+    'shipping' => [
+        'none' => 'Отсутствует',
+        'world' => 'По всему миру',
+        'selected' => 'В выбранные страны',
+        'country' => 'По стране',
+        'option' => 'Вариант доставки',
+        'choose_countries' => 'Страны доставки'
+    ],
     'sale' => [
         'price' => 'Цена продажи',
         'price_old' => 'Старая цена',
+        'bidding' => 'Торг'
     ],
     'auction' => [
         'price' => 'Стартовая цена',
