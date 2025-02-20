@@ -16,12 +16,19 @@ class SaleValueObject
     private ?string $country_id;
     private ?string $shipping;
 
+    private ?int $quantity;
+    private ?string $reservation;
+    private ?bool $self_delivery;
+
     public function __construct(
         int|float $price,
+        int $quantity,
         string $country_id,
         string $shipping,
         int|float|null $priceOld = null,
         ?bool $bidding = false,
+        ?bool $self_delivery = true,
+        ?string $reservation = 'none',
         string $currency = 'RUB',
         int $precision = 100
     ) {
@@ -34,6 +41,9 @@ class SaleValueObject
         $this->bidding = $bidding;
         $this->country_id = $country_id;
         $this->shipping = $shipping;
+        $this->quantity = $quantity;
+        $this->reservation = $reservation;
+        $this->self_delivery = $self_delivery;
     }
 
     private function setPrices(int|float $price, int|float|null $priceOld, string $currency, int $precision): void
@@ -67,14 +77,32 @@ class SaleValueObject
         return $this->shipping;
     }
 
+    public function reservation(): ?string
+    {
+        return $this->reservation;
+    }
+
+    public function self_delivery(): ?bool
+    {
+        return $this->self_delivery;
+    }
+
+    public function quantity(): ?int
+    {
+        return $this->quantity;
+    }
+
     public function raw(): array
     {
         return [
             'price' => $this->price,
+            'quantity' => $this->quantity,
             'price_old' => $this->priceOld,
             'bidding' => $this->bidding,
             'country_id' => $this->country_id,
-            'shipping' => $this->shipping
+            'shipping' => $this->shipping,
+            'self_delivery' => $this->self_delivery,
+            'reservation' => $this->reservation
         ];
     }
 

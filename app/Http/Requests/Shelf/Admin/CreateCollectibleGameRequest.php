@@ -6,6 +6,7 @@ use Domain\Game\Models\GameMedia;
 use Domain\Shelf\Enums\ConditionEnum;
 use Domain\Shelf\Enums\TargetEnum;
 use Domain\Shelf\Models\Collectible;
+use Domain\Trade\Enums\ReservationEnum;
 use Domain\Trade\Enums\ShippingEnum;
 use Illuminate\Database\Eloquent\Relations\Relation;
 use Illuminate\Foundation\Http\FormRequest;
@@ -120,22 +121,45 @@ class CreateCollectibleGameRequest extends FormRequest
                 'max: 100000000',
                 'min: 0'
             ],
+            'sale.quantity' => [
+                'exclude_unless:target,sale',
+                'required',
+                'numeric',
+                'max: 100000000',
+                'min: 1'
+            ],
             'sale.bidding' => [
                 'exclude_unless:target,sale',
                 'nullable',
                 'boolean',
             ],
-            'sale.country_id' => [
-                'exclude_unless:target,sale',
+            'sale.reservation' => [
+                'required',
+                Rule::enum(ReservationEnum::class)
+            ],
+            'self_delivery' => [
+                Rule::excludeIf(function () {
+                    return $this->target !== 'sale' && $this->target !== 'auction';
+                }),
+                'nullable',
+                'boolean',
+            ],
+            'country_id' => [
+                Rule::excludeIf(function () {
+                    return $this->target !== 'sale' && $this->target !== 'auction';
+                }),
                 'integer',
                 'exists:Domain\Settings\Models\Country,id'
             ],
-            'sale.shipping' => [
+            'shipping' => [
+                Rule::excludeIf(function () {
+                    return $this->target !== 'sale' && $this->target !== 'auction';
+                }),
                 'required',
                 Rule::enum(ShippingEnum::class)
             ],
-            'sale.shipping_countries' => [
-                'exclude_unless:sale.shipping,selected',
+            'shipping_countries' => [
+                'exclude_unless:shipping,selected',
                 'required',
                 'array',
                 'exists:Domain\Settings\Models\Country,id'
@@ -195,10 +219,13 @@ class CreateCollectibleGameRequest extends FormRequest
             'target' => __('collectible.target'),
             'sale.price' => __('collectible.sale.price'),
             'sale.price_old' => __('collectible.sale.price_old'),
+            'sale.quantity' => __('common.quantity'),
+            'sale.reservation' => __('collectible.reservation.choose'),
             'sale.bidding' => __('collectible.sale.bidding'),
-            'sale.country_id' => trans_choice('settings.country.countries', 1),
-            'sale.shipping' => __('collectible.shipping.option'),
-            'sale.shipping_countries' => __('collectible.shipping.choose_countries'),
+            'country_id' => trans_choice('settings.country.countries', 1),
+            'shipping' => __('collectible.shipping.option'),
+            'shipping_countries' => __('collectible.shipping.choose_countries'),
+            'self_delivery' => __('collectible.shipping.self_delivery'),
             'auction.price' => __('collectible.auction.price'),
             'auction.step' => __('collectible.auction.step'),
             'auction.finished_at' => __('collectible.auction.finished_at'),

@@ -23,7 +23,10 @@ class SaleFactory extends Factory
             'price_old' => fake()->numberBetween(1, 10000),
             'quantity' => fake()->numberBetween(1, 100),
             'country_id' => Country::factory()->create(),
-            'shipping' => 'world'
+            'shipping' => 'world',
+            'reservation' => 'none',
+            'self_delivery' => fake()->boolean,
+            'bidding' => fake()->boolean
         ];
     }
 }

@@ -266,6 +266,32 @@
                             </x-ui.form.group>
                         </x-grid.col>
 
+                        <x-grid.col xl="4" ls="6" lg="12" md="12" sm="12">
+                            <x-ui.form.group>
+                                <x-ui.form.input-text
+                                    placeholder="{{ __('common.quantity') }} *"
+                                    id="sale_quantity"
+                                    name="sale[quantity]"
+                                    step="1"
+                                    min="1"
+                                    :value="$collectible->sale->quantity ?? 0"
+                                    type="number"
+                                    autocomplete="on">
+                                </x-ui.form.input-text>
+                            </x-ui.form.group>
+                        </x-grid.col>
+
+                        <x-grid.col xl="4" ls="6" lg="12" md="12" sm="12">
+                            <x-ui.form.group>
+                                <x-ui.select.enum
+                                    name="sale_reservation"
+                                    select-name="sale[reservation]"
+                                    id="sale_reservation"
+                                    :options="$reservation"
+                                    :selected="$collectible->sale->reservation ?? 'none'"
+                                    :label="__('collectible.reservation.choose')"/>
+                            </x-ui.form.group>
+                        </x-grid.col>
 
                         <x-grid.col xl="4" ls="6" lg="12" md="12" sm="12">
                             <x-ui.form.group>
@@ -273,12 +299,10 @@
                                     name="sale[bidding]"
                                     value="1"
                                     :checked="$collectible->sale?->bidding ?? false"
-                                    label="Торг">
+                                    :label="__('collectible.sale.bidding')">
                                 </x-ui.form.switcher>
                             </x-ui.form.group>
                         </x-grid.col>
-
-
                     </x-grid>
                 </div>
                 <div class="collectible-target__fields collectible-target__auction" style="display: none">
@@ -325,6 +349,63 @@
                         </x-grid.col>
                     </x-grid>
                 </div>
+
+                <div class="collectible-target__fields collectible-target__shipping" id="collectible-target__shipping" style="display: none">
+                    <x-grid type="container">
+                        <x-grid.col xl="4" ls="6" lg="12" md="12" sm="12">
+                            <x-ui.form.group>
+                                <x-ui.select.data
+                                    name="country_id"
+                                    select-name="country_id"
+                                    id="country_id"
+                                    :options="$countries"
+                                    :selected="$collectible->sale?->country_id"
+                                    :label="trans_choice('settings.country.choose', 1)"
+                                    :default-option="trans_choice('settings.country.countries', 1)"
+                                />
+                            </x-ui.form.group>
+                        </x-grid.col>
+
+                        <x-grid.col xl="4" ls="6" lg="12" md="12" sm="12">
+                            <x-ui.form.group>
+                                <x-ui.select.enum
+                                    name="shipping"
+                                    select-name="shipping"
+                                    id="shipping"
+                                    :options="$shipping"
+                                    :selected="$collectible->sale?->shipping"
+                                    :label="__('collectible.shipping.option')"/>
+                            </x-ui.form.group>
+                        </x-grid.col>
+
+                        <x-grid.col xl="4" ls="6" lg="12" md="12" sm="12">
+                            <x-ui.form.group>
+                                <div id="shipping_countries_block" style="display: none">
+                                    <x-ui.select.data-multiple
+                                        name="shipping_countries"
+                                        select-name="shipping_countries[]"
+                                        id="shipping_countries"
+                                        :options="$countries"
+                                        :selected="$selectedShippingCountries"
+                                        :label="__('collectible.shipping.choose_countries')"
+                                        :default-option="trans_choice('settings.country.countries', 2)"
+                                    />
+                                </div>
+                            </x-ui.form.group>
+                        </x-grid.col>
+
+                        <x-grid.col xl="4" ls="6" lg="12" md="12" sm="12">
+                            <x-ui.form.group>
+                                <x-ui.form.switcher
+                                    name="self_delivery"
+                                    value="1"
+                                    :checked="$collectible->sale?->self_delivery ?? false"
+                                    :label="__('collectible.shipping.self_delivery')">
+                                </x-ui.form.switcher>
+                            </x-ui.form.group>
+                        </x-grid.col>
+                    </x-grid>
+                </div>
             </div>
 
         <x-slot:sidebar></x-slot:sidebar>
@@ -334,22 +415,30 @@
         <script>
             var targets = document.querySelectorAll('input[type=radio][name="target"]');
 
+            const shipping = document.getElementById('collectible-target__shipping');
+
             function hideTarget() {
                 document.querySelectorAll('.collectible-target__fields').forEach(function(el) {
                     el.style.display = 'none';
                 });
+
+                shipping.style.display = 'none';
             }
 
             function setTargetSale() {
                 document.querySelectorAll('.collectible-target__sale').forEach(function(el) {
                     el.style.display = 'block';
                 });
+
+                shipping.style.display = 'block';
             }
 
             function setTargetAuction() {
                 document.querySelectorAll('.collectible-target__auction').forEach(function(el) {
                     el.style.display = 'block';
                 });
+
+                shipping.style.display = 'block';
             }
 
             targets.forEach( target => {
@@ -377,6 +466,24 @@
                     }
                 }
             ));
+
+            const shippingSelect = document.getElementById('shipping');
+            const shippingCountries = document.getElementById('shipping_countries_block');
+
+            if(shippingSelect.value === 'selected') {
+                shippingCountries.style.display = 'block';
+            } else {
+                shippingCountries.style.display = 'none';
+            }
+
+            shippingSelect.addEventListener('change', function handleChange(event) {
+
+                if(event.target.value === 'selected') {
+                    shippingCountries.style.display = 'block';
+                } else {
+                    shippingCountries.style.display = 'none';
+                }
+            });
         </script>
     @endpush
 </x-layouts.admin>

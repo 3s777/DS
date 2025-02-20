@@ -5,6 +5,7 @@ namespace Database\Seeders;
 use Domain\Auth\Models\User;
 use Domain\Game\Models\GameMedia;
 use Domain\Shelf\Models\Collectible;
+use Domain\Trade\Enums\ReservationEnum;
 use Domain\Trade\Enums\ShippingEnum;
 use Domain\Trade\Models\Sale;
 use Illuminate\Database\Seeder;
@@ -28,8 +29,12 @@ class SaleSeeder extends Seeder
                 $collectible->sale_data = [
                     'price' => $sale->price->value(),
                     'country_id' => $sale->country->id,
+                    'quantity' => rand(1, 100),
                     'shipping' => ShippingEnum::tryFrom($sale->shipping)->value,
-                    'price_old' => $sale->price_old->value()
+                    'price_old' => $sale->price_old->value(),
+                    'self_delivery' => $sale->self_delivery,
+                    'bidding' => $sale->bidding,
+                    'reservation' => ReservationEnum::tryFrom($sale->reservation)->value,
                 ];
 
                 $collectible->save();

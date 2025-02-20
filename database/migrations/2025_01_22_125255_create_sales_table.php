@@ -29,6 +29,8 @@ return new class extends Migration
                 ->cascadeOnUpdate()
                 ->nullOnDelete();
             $table->string('shipping');
+            $table->boolean('self_delivery')->default(true);
+            $table->string('reservation')->nullable();
             $table->softDeletes();
             $table->timestamps();
         });

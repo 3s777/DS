@@ -19,10 +19,13 @@ class Sale implements CastsAttributes
 
             return new SaleValueObject(
                 $jsonValue->price,
+                $jsonValue->quantity,
                 $jsonValue->country_id,
                 $jsonValue->shipping,
                 $jsonValue->price_old ?? null,
-                $jsonValue->bidding ?? null
+                $jsonValue->bidding ?? null,
+                $jsonValue->self_delivery ?? null,
+                $jsonValue->reservation ?? 'none'
             );
         }
 
@@ -37,18 +40,33 @@ class Sale implements CastsAttributes
 
         if(!$value instanceof SaleValueObject) {
             $price = $value['price'];
+            $quantity = $value['quantity'];
             $country_id = $value['country_id'];
             $shipping = $value['shipping'];
             $priceOld = $value['price_old'] ?? null;
-            $bidding = $value['bidding'] ?? null;
+            $bidding = (bool)$value['bidding'];
+            $self_delivery = (bool)$value['self_delivery'];
+            $reservation = $value['reservation'] ?? 'none';
 
-            $value = SaleValueObject::make($price, $country_id, $shipping, $priceOld, $bidding);
+            $value = SaleValueObject::make(
+                $price,
+                $quantity,
+                $country_id,
+                $shipping,
+                $priceOld,
+                $bidding,
+                $self_delivery,
+                $reservation
+            );
         }
 
         $sale = [
             'price' => $value->price()->prepareValue(),
+            'quantity' => $value->quantity(),
             'country_id' => $value->country_id(),
-            'shipping' => $value->shipping()
+            'shipping' => $value->shipping(),
+            'self_delivery' => $value->self_delivery(),
+            'reservation' => $value->reservation()
         ];
 
         if($value->priceOld()) {

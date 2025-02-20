@@ -1,5 +1,6 @@
 <?php
 
+use Domain\Settings\Models\Country;
 use Domain\Shelf\Models\Collectible;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
@@ -21,6 +22,13 @@ return new class extends Migration
             $table->unsignedBigInteger('price');
             $table->unsignedBigInteger('step');
             $table->datetime('finished_at');
+            $table->foreignIdFor(Country::class)
+                ->nullable()
+                ->constrained()
+                ->cascadeOnUpdate()
+                ->nullOnDelete();
+            $table->string('shipping');
+            $table->boolean('self_delivery')->default(true);
             $table->softDeletes();
             $table->timestamps();
         });

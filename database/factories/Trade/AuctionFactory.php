@@ -4,6 +4,7 @@ namespace Database\Factories\Trade;
 
 use Domain\Game\Models\Game;
 use Domain\Game\Models\GameMedia;
+use Domain\Settings\Models\Country;
 use Domain\Shelf\Models\Collectible;
 use Domain\Trade\Models\Auction;
 use Illuminate\Database\Eloquent\Factories\Factory;
@@ -21,6 +22,9 @@ class AuctionFactory extends Factory
             'price' => fake()->numberBetween(1, 10000),
             'step' => fake()->numberBetween(1, 10),
             'finished_at' => fake()->dateTime(),
+            'country_id' => Country::factory()->create(),
+            'shipping' => 'world',
+            'self_delivery' => fake()->boolean,
         ];
     }
 }

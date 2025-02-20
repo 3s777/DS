@@ -13,11 +13,17 @@ class AuctionValueObject
     private PriceValueObject $price;
     private PriceValueObject $step;
     private string $finished_at;
+    private ?string $country_id;
+    private ?string $shipping;
+    private ?bool $self_delivery;
 
     public function __construct(
         int|float $price,
         int|float $step,
         string $finished_at,
+        string $country_id,
+        string $shipping,
+        ?bool $self_delivery = true,
         $currency = 'RUB',
         $precision = 100
     ) {
@@ -28,6 +34,9 @@ class AuctionValueObject
         $this->price = PriceValueObject::make($price, $currency, $precision);
         $this->step = PriceValueObject::make($step, $currency, $precision);
         $this->finished_at = $finished_at;
+        $this->country_id = $country_id;
+        $this->shipping = $shipping;
+        $this->self_delivery = $self_delivery;
     }
 
     public function price(): PriceValueObject
@@ -43,5 +52,20 @@ class AuctionValueObject
     public function finished_at()
     {
         return $this->finished_at;
+    }
+
+    public function country_id(): ?string
+    {
+        return $this->country_id;
+    }
+
+    public function shipping(): ?string
+    {
+        return $this->shipping;
+    }
+
+    public function self_delivery(): ?bool
+    {
+        return $this->self_delivery;
     }
 }

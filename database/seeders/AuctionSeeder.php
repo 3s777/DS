@@ -6,6 +6,7 @@ use Carbon\Carbon;
 use Domain\Auth\Models\User;
 use Domain\Game\Models\GameMedia;
 use Domain\Shelf\Models\Collectible;
+use Domain\Trade\Enums\ShippingEnum;
 use Domain\Trade\Models\Auction;
 use Domain\Trade\Models\Sale;
 use Illuminate\Database\Seeder;
@@ -25,12 +26,13 @@ class AuctionSeeder extends Seeder
                     ->for($collectible)
                     ->create();
 
-
-
                 $collectible->auction_data = [
                     'price' => $auction->price->value(),
                     'step' => $auction->step->value(),
-                    'finished_at' => $auction->finished_at->format('Y-m-d H:i:s')
+                    'finished_at' => $auction->finished_at->format('Y-m-d H:i:s'),
+                    'country_id' => $auction->country->id,
+                    'shipping' => ShippingEnum::tryFrom($auction->shipping)->value,
+                    'self_delivery' => $auction->self_delivery,
                 ];
 
                 $collectible->save();

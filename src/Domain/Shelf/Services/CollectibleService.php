@@ -6,6 +6,7 @@ use Domain\Shelf\DTOs\FillCollectibleDTO;
 use Domain\Shelf\Models\Collectible;
 use Domain\Shelf\Models\KitItem;
 use Domain\Shelf\Models\Shelf;
+use Domain\Trade\Enums\ReservationEnum;
 use Domain\Trade\Enums\ShippingEnum;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
@@ -40,7 +41,10 @@ class CollectibleService
             'price_old' => $collectible->sale->price_old->value(),
             'bidding' => $collectible->sale->bidding,
             'country_id' => $collectible->sale->country->id,
-            'shipping' => ShippingEnum::tryFrom($collectible->sale->shipping)->value
+            'shipping' => ShippingEnum::tryFrom($collectible->sale->shipping)->value,
+            'quantity' => $collectible->sale->quantity,
+            'reservation' => ReservationEnum::tryFrom($collectible->sale->reservation)->value,
+            'self_delivery' => $collectible->sale->self_delivery
         ];
 
         $collectible->sale_data = $sale;
@@ -53,7 +57,10 @@ class CollectibleService
         $auction = [
             'price' => $collectible->auction->price->value(),
             'step' => $collectible->auction->step->value(),
-            'finished_at' => $collectible->auction->finished_at
+            'finished_at' => $collectible->auction->finished_at,
+            'country_id' => $collectible->auction->country->id,
+            'shipping' => ShippingEnum::tryFrom($collectible->auction->shipping)->value,
+            'self_delivery' => $collectible->auction->self_delivery
         ];
 
         $collectible->auction_data = $auction;
@@ -91,22 +98,36 @@ class CollectibleService
                     $collectible->sale()->create([
                         'price' =>  $data->sale['price'],
                         'price_old' => $data->sale['price_old'] ?? null,
-                        'bidding' => $data->sale['bidding'] ?? null,
-                        'country_id' => $data->sale['country_id'] ?? null,
-                        'shipping' => $data->sale['shipping'] ?? null
+                        'quantity' => $data->sale['quantity'] ?? 1,
+                        'bidding' => $data->sale['bidding'] ?? false,
+                        'country_id' => $data->country_id,
+                        'shipping' => $data->shipping ?? 'country',
+                        'self_delivery' => $data->self_delivery ?? false,
+                        'reservation' => $data->sale['reservation'] ?? 'none',
                     ]);
 
                     $this->setSaleData($collectible);
+
+                    if(isset($data->shipping_countries)) {
+                        $collectible->sale->shippingCountries()->sync($data->shipping_countries);
+                    }
                 }
 
                 if($data->target == 'auction') {
                     $collectible->auction()->create([
                         'price' =>  $data->auction['price'],
                         'step' => $data->auction['step'],
-                        'finished_at' => $data->auction['finished_at']
+                        'finished_at' => $data->auction['finished_at'],
+                        'country_id' => $data->country_id,
+                        'shipping' => $data->shipping ?? 'country',
+                        'self_delivery' => $data->self_delivery ?? false,
                     ]);
 
                     $this->setAuctionData($collectible);
+
+                    if(isset($data->shipping_countries)) {
+                        $collectible->auction->shippingCountries()->sync($data->shipping_countries);
+                    }
                 }
 
                 $kitItems = [];
@@ -119,7 +140,6 @@ class CollectibleService
 
                 $collectible->kitItems()->sync($kitItems);
 
-                $collectible->sale->shipping_countries()->sync($data->sale['shipping_countries']);
 
 //            $kitItems = [];
 //            foreach($data->kit_conditions as $key=>$value) {
@@ -178,12 +198,23 @@ class CollectibleService
 
                     $collectible->sale()->updateOrCreate(
                         ['collectible_id' => $collectible->id],
-                        ['price' =>  $data->sale['price'],
-                        'price_old' => $data->sale['price_old'],
-                        'bidding' => $data->sale['bidding'] ?? null]
+                        [
+                            'price' =>  $data->sale['price'],
+                            'price_old' => $data->sale['price_old'],
+                            'bidding' => $data->sale['bidding'] ?? false,
+                            'quantity' => $data->sale['quantity'] ?? 1,
+                            'country_id' => $data->country_id,
+                            'shipping' => $data->shipping ?? 'country',
+                            'self_delivery' => $data->self_delivery ?? false,
+                            'reservation' => $data->sale['reservation'] ?? 'none',
+                        ]
                     );
 
                     $this->setSaleData($collectible);
+
+                    if(isset($data->shipping_countries)) {
+                        $collectible->sale->shippingCountries()->sync($data->shipping_countries);
+                    }
                 }
 
                 if($data->target == 'auction') {
