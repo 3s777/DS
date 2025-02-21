@@ -309,6 +309,34 @@
                             </x-ui.form.datepicker>
                         </x-ui.form.group>
                     </x-grid.col>
+
+                    <x-grid.col xl="4" ls="6" lg="12" md="12" sm="12">
+                        <x-ui.form.group>
+                            <x-ui.form.input-text
+                                placeholder="{{ __('collectible.auction.blitz') }}"
+                                id="auction_blitz"
+                                name="auction[blitz]"
+                                step="0.01"
+                                min="0"
+                                type="number"
+                                autocomplete="on">
+                            </x-ui.form.input-text>
+                        </x-ui.form.group>
+                    </x-grid.col>
+
+                    <x-grid.col xl="4" ls="6" lg="12" md="12" sm="12">
+                        <x-ui.form.group>
+                            <x-ui.form.input-text
+                                placeholder="{{ __('collectible.auction.renewal') }}"
+                                id="auction_renewal"
+                                name="auction[renewal]"
+                                step="1"
+                                min="0"
+                                type="number"
+                                autocomplete="on">
+                            </x-ui.form.input-text>
+                        </x-ui.form.group>
+                    </x-grid.col>
                 </x-grid>
             </div>
 

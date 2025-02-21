@@ -22,6 +22,8 @@ return new class extends Migration
             $table->unsignedBigInteger('price');
             $table->unsignedBigInteger('step');
             $table->datetime('finished_at');
+            $table->unsignedBigInteger('blitz')->nullable();
+            $table->smallInteger('renewal')->nullable();
             $table->foreignIdFor(Country::class)
                 ->nullable()
                 ->constrained()

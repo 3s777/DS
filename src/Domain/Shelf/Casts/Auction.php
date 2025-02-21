@@ -21,6 +21,8 @@ class Auction implements CastsAttributes
                 $jsonValue->price,
                 $jsonValue->step,
                 $jsonValue->finished_at,
+                $jsonValue->blitz,
+                $jsonValue->renewal,
                 $jsonValue->country_id,
                 $jsonValue->shipping,
                 $jsonValue->self_delivery ?? null,
@@ -40,6 +42,8 @@ class Auction implements CastsAttributes
             $price = $value['price'];
             $step = $value['step'];
             $finished_at = $value['finished_at'];
+            $blitz = $value['blitz'];
+            $renewal = $value['renewal'];
             $country_id = $value['country_id'];
             $shipping = $value['shipping'];
             $self_delivery = (bool)$value['self_delivery'];
@@ -48,6 +52,8 @@ class Auction implements CastsAttributes
                 $price,
                 $step,
                 $finished_at,
+                $blitz,
+                $renewal,
                 $country_id,
                 $shipping,
                 $self_delivery
@@ -62,6 +68,8 @@ class Auction implements CastsAttributes
             'price' => $value->price()->prepareValue(),
             'step' => $value->step()->prepareValue(),
             'finished_at' => $value->finished_at(),
+            'blitz' => $value->blitz()->prepareValue(),
+            'renewal' => $value->renewal(),
             'country_id' => $value->country_id(),
             'shipping' => $value->shipping(),
             'self_delivery' => $value->self_delivery(),

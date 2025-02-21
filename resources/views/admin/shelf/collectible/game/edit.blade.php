@@ -274,7 +274,7 @@
                                     name="sale[quantity]"
                                     step="1"
                                     min="1"
-                                    :value="$collectible->sale->quantity ?? 0"
+                                    :value="$collectible->sale?->quantity"
                                     type="number"
                                     autocomplete="on">
                                 </x-ui.form.input-text>
@@ -288,7 +288,7 @@
                                     select-name="sale[reservation]"
                                     id="sale_reservation"
                                     :options="$reservation"
-                                    :selected="$collectible->sale->reservation ?? 'none'"
+                                    :selected="$collectible->sale?->reservation ?? 'none'"
                                     :label="__('collectible.reservation.choose')"/>
                             </x-ui.form.group>
                         </x-grid.col>
@@ -347,6 +347,36 @@
                                 </x-ui.form.datepicker>
                             </x-ui.form.group>
                         </x-grid.col>
+
+                        <x-grid.col xl="4" ls="6" lg="12" md="12" sm="12">
+                            <x-ui.form.group>
+                                <x-ui.form.input-text
+                                    placeholder="{{ __('collectible.auction.blitz') }}"
+                                    id="auction_blitz"
+                                    name="auction[blitz]"
+                                    step="0.01"
+                                    min="0"
+                                    :value="$collectible->auction?->blitz->value()"
+                                    type="number"
+                                    autocomplete="on">
+                                </x-ui.form.input-text>
+                            </x-ui.form.group>
+                        </x-grid.col>
+
+                        <x-grid.col xl="4" ls="6" lg="12" md="12" sm="12">
+                            <x-ui.form.group>
+                                <x-ui.form.input-text
+                                    placeholder="{{ __('collectible.auction.renewal') }}"
+                                    id="auction_renewal"
+                                    name="auction[renewal]"
+                                    step="1"
+                                    min="0"
+                                    :value="$collectible->auction?->renewal"
+                                    type="number"
+                                    autocomplete="on">
+                                </x-ui.form.input-text>
+                            </x-ui.form.group>
+                        </x-grid.col>
                     </x-grid>
                 </div>
 
@@ -359,7 +389,7 @@
                                     select-name="country_id"
                                     id="country_id"
                                     :options="$countries"
-                                    :selected="$collectible->sale?->country_id"
+                                    :selected="$selectedCountry"
                                     :label="trans_choice('settings.country.choose', 1)"
                                     :default-option="trans_choice('settings.country.countries', 1)"
                                 />
@@ -373,24 +403,22 @@
                                     select-name="shipping"
                                     id="shipping"
                                     :options="$shipping"
-                                    :selected="$collectible->sale?->shipping"
+                                    :selected="$selectedShipping"
                                     :label="__('collectible.shipping.option')"/>
                             </x-ui.form.group>
                         </x-grid.col>
 
-                        <x-grid.col xl="4" ls="6" lg="12" md="12" sm="12">
+                        <x-grid.col xl="4" ls="6" lg="12" md="12" sm="12" id="shipping_countries_block" style="display: none">
                             <x-ui.form.group>
-                                <div id="shipping_countries_block" style="display: none">
-                                    <x-ui.select.data-multiple
-                                        name="shipping_countries"
-                                        select-name="shipping_countries[]"
-                                        id="shipping_countries"
-                                        :options="$countries"
-                                        :selected="$selectedShippingCountries"
-                                        :label="__('collectible.shipping.choose_countries')"
-                                        :default-option="trans_choice('settings.country.countries', 2)"
-                                    />
-                                </div>
+                                <x-ui.select.data-multiple
+                                    name="shipping_countries"
+                                    select-name="shipping_countries[]"
+                                    id="shipping_countries"
+                                    :options="$countries"
+                                    :selected="$selectedShippingCountries"
+                                    :label="__('collectible.shipping.choose_countries')"
+                                    :default-option="trans_choice('settings.country.countries', 2)"
+                                />
                             </x-ui.form.group>
                         </x-grid.col>
 
@@ -399,7 +427,7 @@
                                 <x-ui.form.switcher
                                     name="self_delivery"
                                     value="1"
-                                    :checked="$collectible->sale?->self_delivery ?? false"
+                                    :checked="$selectedSelfDelivery"
                                     :label="__('collectible.shipping.self_delivery')">
                                 </x-ui.form.switcher>
                             </x-ui.form.group>

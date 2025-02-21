@@ -182,6 +182,16 @@ class CreateCollectibleGameRequest extends FormRequest
                 'date',
                 'after:now'
             ],
+            'auction.blitz' => [
+                'exclude_unless:target,auction',
+                'nullable',
+                'numeric'
+            ],
+            'auction.renewal' => [
+                'exclude_unless:target,auction',
+                'nullable',
+                'numeric'
+            ],
             'description' => ['nullable','string'],
             'featured_image' => [
                 'nullable',
@@ -229,6 +239,8 @@ class CreateCollectibleGameRequest extends FormRequest
             'auction.price' => __('collectible.auction.price'),
             'auction.step' => __('collectible.auction.step'),
             'auction.finished_at' => __('collectible.auction.finished_at'),
+            'auction.blitz' => __('collectible.auction.blitz'),
+            'auction.renewal' => __('collectible.auction.renewal'),
             'description' => __('common.description'),
             'featured_image' => __('common.featured_image'),
             'images' => trans_choice('common.additional_image', 2)

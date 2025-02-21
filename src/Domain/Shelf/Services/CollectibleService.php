@@ -58,6 +58,8 @@ class CollectibleService
             'price' => $collectible->auction->price->value(),
             'step' => $collectible->auction->step->value(),
             'finished_at' => $collectible->auction->finished_at,
+            'blitz' => $collectible->auction->blitz->value(),
+            'renewal' => $collectible->auction->renewal,
             'country_id' => $collectible->auction->country->id,
             'shipping' => ShippingEnum::tryFrom($collectible->auction->shipping)->value,
             'self_delivery' => $collectible->auction->self_delivery
@@ -118,6 +120,8 @@ class CollectibleService
                         'price' =>  $data->auction['price'],
                         'step' => $data->auction['step'],
                         'finished_at' => $data->auction['finished_at'],
+                        'blitz' => $data->auction['blitz'],
+                        'renewal' => $data->auction['renewal'],
                         'country_id' => $data->country_id,
                         'shipping' => $data->shipping ?? 'country',
                         'self_delivery' => $data->self_delivery ?? false,
@@ -223,12 +227,23 @@ class CollectibleService
 
                     $collectible->auction()->updateOrCreate(
                         ['collectible_id' => $collectible->id],
-                        ['price' =>  $data->auction['price'],
-                        'step' => $data->auction['step'],
-                        'finished_at' => $data->auction['finished_at']]
+                        [
+                            'price' =>  $data->auction['price'],
+                            'step' => $data->auction['step'],
+                            'finished_at' => $data->auction['finished_at'],
+                            'blitz' => $data->auction['blitz'],
+                            'renewal' => $data->auction['renewal'],
+                            'country_id' => $data->country_id,
+                            'shipping' => $data->shipping ?? 'country',
+                            'self_delivery' => $data->self_delivery ?? false,
+                        ]
                     );
 
                     $this->setAuctionData($collectible);
+
+                    if(isset($data->shipping_countries)) {
+                        $collectible->auction->shippingCountries()->sync($data->shipping_countries);
+                    }
                 }
 
                 $collectible->properties =  $data->properties;

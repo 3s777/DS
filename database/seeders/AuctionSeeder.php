@@ -30,6 +30,8 @@ class AuctionSeeder extends Seeder
                     'price' => $auction->price->value(),
                     'step' => $auction->step->value(),
                     'finished_at' => $auction->finished_at->format('Y-m-d H:i:s'),
+                    'blitz' => $auction->blitz->value(),
+                    'renewal' => $auction->renewal,
                     'country_id' => $auction->country->id,
                     'shipping' => ShippingEnum::tryFrom($auction->shipping)->value,
                     'self_delivery' => $auction->self_delivery,

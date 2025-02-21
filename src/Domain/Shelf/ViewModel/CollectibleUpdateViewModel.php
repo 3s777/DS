@@ -67,7 +67,20 @@ class CollectibleUpdateViewModel extends ViewModel
 
     public function selectedShippingCountries(): array
     {
-        return $this->collectible?->sale?->shippingCountries->pluck('id')->toArray() ?? [];
+        return match($this->collectible?->target) {
+            'sale' => $this->collectible->sale?->shippingCountries->pluck('id')->toArray(),
+            'auction' => $this->collectible?->auction?->shippingCountries->pluck('id')->toArray(),
+            default => []
+        };
+    }
+
+    public function selectedCountry(): bool|int
+    {
+        return match($this->collectible?->target) {
+            'sale' => $this->collectible->sale?->country_id,
+            'auction' => $this->collectible->auction?->country_id,
+            default => false
+        };
     }
 
     public function shipping(): array
@@ -75,13 +88,26 @@ class CollectibleUpdateViewModel extends ViewModel
         return ShippingEnum::cases();
     }
 
+    public function selectedShipping(): bool|string
+    {
+        return match($this->collectible?->target) {
+            'sale' => $this->collectible->sale?->shipping,
+            'auction' => $this->collectible->auction?->shipping,
+            default => false
+        };
+    }
+
+    public function selectedSelfDelivery(): bool
+    {
+        return match($this->collectible?->target) {
+            'sale' => $this->collectible->sale?->self_delivery,
+            'auction' => $this->collectible->auction?->self_delivery,
+            default => false
+        };
+    }
+
     public function reservation(): array
     {
         return ReservationEnum::cases();
     }
-
-//    public function users()
-//    {
-//        return User::limit(3)->get()->pluck('name', 'id')->toArray();
-//    }
 }

@@ -22,6 +22,8 @@ class AuctionFactory extends Factory
             'price' => fake()->numberBetween(1, 10000),
             'step' => fake()->numberBetween(1, 10),
             'finished_at' => fake()->dateTime(),
+            'blitz' => fake()->numberBetween(1, 10000),
+            'renewal' => fake()->numberBetween(1, 10),
             'country_id' => Country::factory()->create(),
             'shipping' => 'world',
             'self_delivery' => fake()->boolean,

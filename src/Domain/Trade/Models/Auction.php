@@ -21,6 +21,8 @@ class Auction extends Model
         'price',
         'step',
         'finished_at',
+        'blitz',
+        'renewal',
         'country_id',
         'shipping',
         'self_delivery'
@@ -28,7 +30,8 @@ class Auction extends Model
 
     protected $casts = [
         'price' => Price::class,
-        'step' => Price::class
+        'step' => Price::class,
+        'blitz' => Price::class
     ];
 
     protected static function newFactory(): AuctionFactory

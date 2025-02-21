@@ -13,6 +13,10 @@ class AuctionValueObject
     private PriceValueObject $price;
     private PriceValueObject $step;
     private string $finished_at;
+
+    private ?PriceValueObject $blitz;
+
+    private ?int $renewal;
     private ?string $country_id;
     private ?string $shipping;
     private ?bool $self_delivery;
@@ -21,6 +25,8 @@ class AuctionValueObject
         int|float $price,
         int|float $step,
         string $finished_at,
+        int|float $blitz,
+        int $renewal,
         string $country_id,
         string $shipping,
         ?bool $self_delivery = true,
@@ -34,6 +40,8 @@ class AuctionValueObject
         $this->price = PriceValueObject::make($price, $currency, $precision);
         $this->step = PriceValueObject::make($step, $currency, $precision);
         $this->finished_at = $finished_at;
+        $this->blitz = PriceValueObject::make($blitz, $currency, $precision);
+        $this->renewal = $renewal;
         $this->country_id = $country_id;
         $this->shipping = $shipping;
         $this->self_delivery = $self_delivery;
@@ -49,9 +57,19 @@ class AuctionValueObject
         return $this->step;
     }
 
-    public function finished_at()
+    public function finished_at(): string
     {
         return $this->finished_at;
+    }
+
+    public function blitz(): PriceValueObject
+    {
+        return $this->blitz;
+    }
+
+    public function renewal(): int
+    {
+        return $this->renewal;
     }
 
     public function country_id(): ?string
