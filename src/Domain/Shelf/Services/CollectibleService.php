@@ -6,8 +6,12 @@ use Domain\Shelf\DTOs\FillCollectibleDTO;
 use Domain\Shelf\Models\Collectible;
 use Domain\Shelf\Models\KitItem;
 use Domain\Shelf\Models\Shelf;
+use Domain\Trade\DTOs\FillAuctionDTO;
+use Domain\Trade\DTOs\FillSaleDTO;
 use Domain\Trade\Enums\ReservationEnum;
 use Domain\Trade\Enums\ShippingEnum;
+use Domain\Trade\Services\AuctionService;
+use Domain\Trade\Services\SaleService;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
 use Support\Exceptions\CrudException;
@@ -44,7 +48,7 @@ class CollectibleService
             'shipping' => ShippingEnum::tryFrom($collectible->sale->shipping)->value,
             'quantity' => $collectible->sale->quantity,
             'reservation' => ReservationEnum::tryFrom($collectible->sale->reservation)->value,
-            'self_delivery' => $collectible->sale->self_delivery
+            'self_delivery' => $collectible->sale->self_delivery,
         ];
 
         $collectible->sale_data = $sale;
@@ -68,6 +72,38 @@ class CollectibleService
         $collectible->auction_data = $auction;
 
         $collectible->save();
+    }
+
+    protected function createSaleDTO(int $collectible_id, FillCollectibleDTO $data): FillSaleDTO
+    {
+        return new FillSaleDTO(
+            $collectible_id,
+            $data->sale['price'],
+            $data->sale['quantity'],
+            $data->sale['bidding'] ?? false,
+            $data->country_id,
+            $data->shipping,
+            $data->self_delivery ?? false,
+            $data->sale['reservation'],
+            $data->sale['price_old'],
+            $data->shipping_countries
+        );
+    }
+
+    protected function createAuctionDTO(int $collectible_id, FillCollectibleDTO $data): FillAuctionDTO
+    {
+        return new FillAuctionDTO(
+            $collectible_id,
+            $data->auction['price'],
+            $data->auction['step'],
+            $data->auction['finished_at'],
+            $data->country_id,
+            $data->shipping,
+            $data->self_delivery ?? false,
+            $data->auction['blitz'],
+            $data->auction['renewal'],
+            $data->shipping_countries
+        );
     }
 
     public function create(FillCollectibleDTO $data)
@@ -97,41 +133,46 @@ class CollectibleService
                 $collectible->save();
 
                 if($data->target == 'sale') {
-                    $collectible->sale()->create([
-                        'price' =>  $data->sale['price'],
-                        'price_old' => $data->sale['price_old'] ?? null,
-                        'quantity' => $data->sale['quantity'] ?? 1,
-                        'bidding' => $data->sale['bidding'] ?? false,
-                        'country_id' => $data->country_id,
-                        'shipping' => $data->shipping ?? 'country',
-                        'self_delivery' => $data->self_delivery ?? false,
-                        'reservation' => $data->sale['reservation'] ?? 'none',
-                    ]);
+//                    $collectible->sale()->create([
+//                        'price' =>  $data->sale['price'],
+//                        'price_old' => $data->sale['price_old'],
+//                        'quantity' => $data->sale['quantity'],
+//                        'bidding' => $data->sale['bidding'] ?? false,
+//                        'country_id' => $data->country_id,
+//                        'shipping' => $data->shipping,
+//                        'self_delivery' => $data->self_delivery ?? false,
+//                        'reservation' => $data->sale['reservation'],
+//                    ]);
+//                    if(isset($data->shipping_countries)) {
+//                        $collectible->sale->shippingCountries()->sync($data->shipping_countries);
+//                    }
+
+                    $saleService = new SaleService();
+                    $saleService->create($this->createSaleDTO($collectible->id, $data));
 
                     $this->setSaleData($collectible);
-
-                    if(isset($data->shipping_countries)) {
-                        $collectible->sale->shippingCountries()->sync($data->shipping_countries);
-                    }
                 }
 
                 if($data->target == 'auction') {
-                    $collectible->auction()->create([
-                        'price' =>  $data->auction['price'],
-                        'step' => $data->auction['step'],
-                        'finished_at' => $data->auction['finished_at'],
-                        'blitz' => $data->auction['blitz'],
-                        'renewal' => $data->auction['renewal'],
-                        'country_id' => $data->country_id,
-                        'shipping' => $data->shipping ?? 'country',
-                        'self_delivery' => $data->self_delivery ?? false,
-                    ]);
+//                    $collectible->auction()->create([
+//                        'price' =>  $data->auction['price'],
+//                        'step' => $data->auction['step'],
+//                        'finished_at' => $data->auction['finished_at'],
+//                        'blitz' => $data->auction['blitz'],
+//                        'renewal' => $data->auction['renewal'],
+//                        'country_id' => $data->country_id,
+//                        'shipping' => $data->shipping ?? 'country',
+//                        'self_delivery' => $data->self_delivery ?? false,
+//                    ]);
+
+                    $auctionService = new AuctionService();
+                    $auctionService->create($this->createAuctionDTO($collectible->id, $data));
 
                     $this->setAuctionData($collectible);
 
-                    if(isset($data->shipping_countries)) {
-                        $collectible->auction->shippingCountries()->sync($data->shipping_countries);
-                    }
+//                    if(isset($data->shipping_countries)) {
+//                        $collectible->auction->shippingCountries()->sync($data->shipping_countries);
+//                    }
                 }
 
                 $kitItems = [];
@@ -197,53 +238,77 @@ class CollectibleService
 
                 if($data->target == 'sale') {
                     $collectible->auction()->delete();
-
                     $collectible->auction_data = null;
 
-                    $collectible->sale()->updateOrCreate(
-                        ['collectible_id' => $collectible->id],
-                        [
-                            'price' =>  $data->sale['price'],
-                            'price_old' => $data->sale['price_old'],
-                            'bidding' => $data->sale['bidding'] ?? false,
-                            'quantity' => $data->sale['quantity'] ?? 1,
-                            'country_id' => $data->country_id,
-                            'shipping' => $data->shipping ?? 'country',
-                            'self_delivery' => $data->self_delivery ?? false,
-                            'reservation' => $data->sale['reservation'] ?? 'none',
-                        ]
-                    );
+
+                    $saleService = new SaleService();
+                    if($collectible->sale) {
+                        $saleService->update($collectible->sale, $this->createSaleDTO($collectible->id, $data));
+                    } else {
+                        $saleService->create($this->createSaleDTO($collectible->id, $data));
+                    }
+
+
+
+
+//                    $collectible->sale()->updateOrCreate(
+//                        ['collectible_id' => $collectible->id],
+//                        [
+//                            'price' =>  $data->sale['price'],
+//                            'price_old' => $data->sale['price_old'],
+//                            'bidding' => $data->sale['bidding'] ?? false,
+//                            'quantity' => $data->sale['quantity'],
+//                            'country_id' => $data->country_id,
+//                            'shipping' => $data->shipping,
+//                            'self_delivery' => $data->self_delivery ?? false,
+//                            'reservation' => $data->sale['reservation'],
+//                        ]
+//                    );
 
                     $this->setSaleData($collectible);
 
-                    if(isset($data->shipping_countries)) {
-                        $collectible->sale->shippingCountries()->sync($data->shipping_countries);
-                    }
+//                    if(isset($data->shipping_countries)) {
+//                        $collectible->sale->shippingCountries()->sync($data->shipping_countries);
+//                    }
                 }
 
                 if($data->target == 'auction') {
                     $collectible->sale()->delete();
                     $collectible->sale_data = null;
 
-                    $collectible->auction()->updateOrCreate(
-                        ['collectible_id' => $collectible->id],
-                        [
-                            'price' =>  $data->auction['price'],
-                            'step' => $data->auction['step'],
-                            'finished_at' => $data->auction['finished_at'],
-                            'blitz' => $data->auction['blitz'],
-                            'renewal' => $data->auction['renewal'],
-                            'country_id' => $data->country_id,
-                            'shipping' => $data->shipping ?? 'country',
-                            'self_delivery' => $data->self_delivery ?? false,
-                        ]
-                    );
+//                    $collectible->auction()->updateOrCreate(
+//                        ['collectible_id' => $collectible->id],
+//                        [
+//                            'price' =>  $data->auction['price'],
+//                            'step' => $data->auction['step'],
+//                            'finished_at' => $data->auction['finished_at'],
+//                            'blitz' => $data->auction['blitz'],
+//                            'renewal' => $data->auction['renewal'],
+//                            'country_id' => $data->country_id,
+//                            'shipping' => $data->shipping ?? 'country',
+//                            'self_delivery' => $data->self_delivery ?? false,
+//                        ]
+//                    );
+
+                    $auctionService = new AuctionService();
+                    if($collectible->auction) {
+                        $auctionService->update($collectible->auction, $this->createAuctionDTO($collectible->id, $data));
+                    } else {
+                        $auctionService->create($this->createAuctionDTO($collectible->id, $data));
+                    }
 
                     $this->setAuctionData($collectible);
 
-                    if(isset($data->shipping_countries)) {
-                        $collectible->auction->shippingCountries()->sync($data->shipping_countries);
-                    }
+//                    if(isset($data->shipping_countries)) {
+//                        $collectible->auction->shippingCountries()->sync($data->shipping_countries);
+//                    }
+                }
+
+                if($data->target != 'auction' && $data->target != 'sale') {
+                    $collectible->sale()->delete();
+                    $collectible->auction()->delete();
+                    $collectible->sale_data = null;
+                    $collectible->auction_data = null;
                 }
 
                 $collectible->properties =  $data->properties;

@@ -19,18 +19,20 @@ return new class extends Migration
                 ->constrained()
                 ->cascadeOnUpdate()
                 ->cascadeOnDelete();
-            $table->unsignedBigInteger('price');
-            $table->unsignedBigInteger('price_old')->nullable();
-            $table->boolean('bidding')->default(false);
-            $table->unsignedInteger('quantity')->default(1);
             $table->foreignIdFor(Country::class)
                 ->nullable()
                 ->constrained()
                 ->cascadeOnUpdate()
                 ->nullOnDelete();
+
+            $table->unsignedBigInteger('price');
+            $table->unsignedBigInteger('price_old')->nullable();
+            $table->unsignedInteger('quantity')->default(1);
+            $table->boolean('bidding')->default(false);
+            $table->boolean('self_delivery')->default(false);
             $table->string('shipping');
-            $table->boolean('self_delivery')->default(true);
-            $table->string('reservation')->nullable();
+            $table->string('reservation');
+
             $table->softDeletes();
             $table->timestamps();
         });

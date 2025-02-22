@@ -148,6 +148,7 @@ class CreateCollectibleGameRequest extends FormRequest
                 Rule::excludeIf(function () {
                     return $this->target !== 'sale' && $this->target !== 'auction';
                 }),
+                'required',
                 'integer',
                 'exists:Domain\Settings\Models\Country,id'
             ],

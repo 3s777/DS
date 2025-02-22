@@ -32,55 +32,14 @@ class CollectibleUpdateViewModel extends ViewModel
         return CollectibleTypeEnum::cases();
     }
 
-//    public function shelves(): Collection
-//    {
-//        return Shelf::where('user_id', auth()->user()->id)->get();
-//    }
-
     public function collectible(): ?Collectible
     {
         return $this->collectible ?? null;
     }
 
-//    public function selectedUser(): array {
-//        $selectedUser = [];
-//        if($this->collectible?->user) {
-//            $selectedUser = [
-//                'key' => $this->collectible->user->id,
-//                'value' => $this->collectible->user->name,
-//            ];
-//        }
-//
-//        return $selectedUser;
-//    }
-
-    public function selectedCollector(): array
-    {
-        return $this->getSelectedCollector($this->collectible);
-    }
-
-
     public function countries(): array
     {
         return Country::select('id', 'name')->get()->pluck('name', 'id')->toArray();
-    }
-
-    public function selectedShippingCountries(): array
-    {
-        return match($this->collectible?->target) {
-            'sale' => $this->collectible->sale?->shippingCountries->pluck('id')->toArray(),
-            'auction' => $this->collectible?->auction?->shippingCountries->pluck('id')->toArray(),
-            default => []
-        };
-    }
-
-    public function selectedCountry(): bool|int
-    {
-        return match($this->collectible?->target) {
-            'sale' => $this->collectible->sale?->country_id,
-            'auction' => $this->collectible->auction?->country_id,
-            default => false
-        };
     }
 
     public function shipping(): array
@@ -88,26 +47,42 @@ class CollectibleUpdateViewModel extends ViewModel
         return ShippingEnum::cases();
     }
 
-    public function selectedShipping(): bool|string
+    public function reservation(): array
+    {
+        return ReservationEnum::cases();
+    }
+
+    private function tradeModel()
     {
         return match($this->collectible?->target) {
-            'sale' => $this->collectible->sale?->shipping,
-            'auction' => $this->collectible->auction?->shipping,
+            'sale' => $this->collectible->sale,
+            'auction' => $this->collectible->auction,
             default => false
         };
+    }
+
+    public function selectedCountry(): bool|int
+    {
+        return $this->tradeModel() ? $this->tradeModel()->country_id : false;
+    }
+
+    public function selectedShipping(): bool|string
+    {
+        return $this->tradeModel() ? $this->tradeModel()->shipping : false;
+    }
+
+    public function selectedShippingCountries(): array
+    {
+        return $this->tradeModel() ? $this->tradeModel()->shippingCountries->pluck('id')->toArray() : [];
     }
 
     public function selectedSelfDelivery(): bool
     {
-        return match($this->collectible?->target) {
-            'sale' => $this->collectible->sale?->self_delivery,
-            'auction' => $this->collectible->auction?->self_delivery,
-            default => false
-        };
+        return $this->tradeModel() ? $this->tradeModel()->self_delivery : true;
     }
 
-    public function reservation(): array
+    public function selectedCollector(): array
     {
-        return ReservationEnum::cases();
+        return $this->getSelectedCollector($this->collectible);
     }
 }

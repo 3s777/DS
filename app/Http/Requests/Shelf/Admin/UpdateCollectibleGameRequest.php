@@ -124,6 +124,7 @@ class UpdateCollectibleGameRequest extends FormRequest
                 Rule::excludeIf(function () {
                     return $this->target !== 'sale' && $this->target !== 'auction';
                 }),
+                'required',
                 'integer',
                 'exists:Domain\Settings\Models\Country,id'
             ],
@@ -135,9 +136,7 @@ class UpdateCollectibleGameRequest extends FormRequest
                 Rule::enum(ShippingEnum::class)
             ],
             'shipping_countries' => [
-                Rule::excludeIf(function () {
-                    return $this->target !== 'sale' && $this->target !== 'auction';
-                }),
+                'exclude_unless:shipping,selected',
                 'required',
                 'array',
                 'exists:Domain\Settings\Models\Country,id'

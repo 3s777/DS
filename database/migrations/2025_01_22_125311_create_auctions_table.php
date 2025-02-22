@@ -19,18 +19,20 @@ return new class extends Migration
                 ->constrained()
                 ->cascadeOnUpdate()
                 ->cascadeOnDelete();
-            $table->unsignedBigInteger('price');
-            $table->unsignedBigInteger('step');
-            $table->datetime('finished_at');
-            $table->unsignedBigInteger('blitz')->nullable();
-            $table->smallInteger('renewal')->nullable();
             $table->foreignIdFor(Country::class)
                 ->nullable()
                 ->constrained()
                 ->cascadeOnUpdate()
                 ->nullOnDelete();
+
+            $table->unsignedBigInteger('price');
+            $table->unsignedBigInteger('step');
+            $table->datetime('finished_at');
+            $table->unsignedBigInteger('blitz')->nullable();
+            $table->smallInteger('renewal')->nullable();
             $table->string('shipping');
-            $table->boolean('self_delivery')->default(true);
+            $table->boolean('self_delivery')->default(false);
+
             $table->softDeletes();
             $table->timestamps();
         });

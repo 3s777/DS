@@ -234,7 +234,7 @@
                     </x-grid.col>
                 </x-grid>
 
-                <div class="collectible-target__fields collectible-target__sale" style="display: none">
+                <div class="collectible-target__fields collectible-target__sale" id="collectible-target__sale" style="display: none">
                     <x-grid type="container">
                         <x-grid.col xl="4" ls="6" lg="12" md="12" sm="12">
                             <x-ui.form.group>
@@ -305,7 +305,7 @@
                         </x-grid.col>
                     </x-grid>
                 </div>
-                <div class="collectible-target__fields collectible-target__auction" style="display: none">
+                <div class="collectible-target__fields collectible-target__auction" id="collectible-target__auction" style="display: none">
                     <x-grid type="container">
                         <x-grid.col xl="4" ls="6" lg="12" md="12" sm="12">
                             <x-ui.form.group>
@@ -444,6 +444,8 @@
             var targets = document.querySelectorAll('input[type=radio][name="target"]');
 
             const shipping = document.getElementById('collectible-target__shipping');
+            const sale = document.getElementById('collectible-target__sale');
+            const auction = document.getElementById('collectible-target__auction')
 
             function hideTarget() {
                 document.querySelectorAll('.collectible-target__fields').forEach(function(el) {
@@ -454,18 +456,12 @@
             }
 
             function setTargetSale() {
-                document.querySelectorAll('.collectible-target__sale').forEach(function(el) {
-                    el.style.display = 'block';
-                });
-
+                sale.style.display = 'block';
                 shipping.style.display = 'block';
             }
 
             function setTargetAuction() {
-                document.querySelectorAll('.collectible-target__auction').forEach(function(el) {
-                    el.style.display = 'block';
-                });
-
+                auction.style.display = 'block';
                 shipping.style.display = 'block';
             }
 
