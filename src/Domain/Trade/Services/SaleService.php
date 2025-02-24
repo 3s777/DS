@@ -1,6 +1,7 @@
 <?php namespace Domain\Trade\Services;
 
 use Domain\Trade\DTOs\FillSaleDTO;
+use Domain\Trade\Enums\ShippingEnum;
 use Domain\Trade\Models\Sale;
 use Support\Exceptions\CrudException;
 use Support\Transaction;
@@ -25,8 +26,8 @@ class SaleService
                 'price_old' => $data->price_old,
             ]);
 
-            if(isset($data->shipping_countries)) {
-                $sale->shippingCountries()->sync($data->shipping_countries);
+            if($data->shipping == ShippingEnum::Selected->value) {
+                $sale->shippingCountries()->attach($data->shipping_countries);
             }
 
             return $sale;
@@ -56,8 +57,10 @@ class SaleService
                 ]
             )->save();
 
-            if(isset($data->shipping_countries)) {
+            if($data->shipping == ShippingEnum::Selected->value) {
                 $sale->shippingCountries()->sync($data->shipping_countries);
+            } else {
+                $sale->shippingCountries()->detach();
             }
 
             return $sale;

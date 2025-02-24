@@ -25,8 +25,8 @@ class AuctionValueObject
         int|float $price,
         int|float $step,
         string $finished_at,
-        int|float $blitz,
-        int $renewal,
+        null|int|float $blitz,
+        ?int $renewal,
         string $country_id,
         string $shipping,
         ?bool $self_delivery = true,
@@ -62,12 +62,12 @@ class AuctionValueObject
         return $this->finished_at;
     }
 
-    public function blitz(): PriceValueObject
+    public function blitz(): ?PriceValueObject
     {
         return $this->blitz;
     }
 
-    public function renewal(): int
+    public function renewal(): ?int
     {
         return $this->renewal;
     }

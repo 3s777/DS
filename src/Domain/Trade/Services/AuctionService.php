@@ -3,6 +3,7 @@
 namespace Domain\Trade\Services;
 
 use Domain\Trade\DTOs\FillAuctionDTO;
+use Domain\Trade\Enums\ShippingEnum;
 use Domain\Trade\Models\Auction;
 use Support\Exceptions\CrudException;
 use Support\Transaction;
@@ -27,8 +28,8 @@ class AuctionService
                 'renewal' => $data->renewal,
             ]);
 
-            if(isset($data->shipping_countries)) {
-                $auction->shippingCountries()->sync($data->shipping_countries);
+            if($data->shipping == ShippingEnum::Selected->value) {
+                $auction->shippingCountries()->attach($data->shipping_countries);
             }
 
             return $auction;
@@ -58,8 +59,10 @@ class AuctionService
                 ]
             )->save();
 
-            if(isset($data->shipping_countries)) {
+            if($data->shipping == ShippingEnum::Selected->value) {
                 $auction->shippingCountries()->sync($data->shipping_countries);
+            } else {
+                $auction->shippingCountries()->detach();
             }
 
             return $auction;

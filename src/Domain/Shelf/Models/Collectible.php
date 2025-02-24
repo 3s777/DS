@@ -7,9 +7,11 @@ use Domain\Auth\Models\Collector;
 use Domain\Auth\Models\User;
 use Domain\Shelf\Casts\Properties;
 use Domain\Shelf\FilterRegistrars\CollectibleFilterRegistrar;
+use Domain\Shelf\Observers\CollectibleObserver;
 use Domain\Shelf\QueryBuilders\CollectibleQueryBuilder;
 use Domain\Trade\Models\Auction;
 use Domain\Trade\Models\Sale;
+use Illuminate\Database\Eloquent\Attributes\ObservedBy;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -30,6 +32,7 @@ use Support\Traits\Models\HasUser;
 use Domain\Shelf\Casts\Auction as AuctionCast;
 use Domain\Shelf\Casts\Sale as SaleCast;
 
+#[ObservedBy([CollectibleObserver::class])]
 class Collectible extends Model implements HasMedia
 {
     use HasFactory;
@@ -90,15 +93,6 @@ class Collectible extends Model implements HasMedia
         'article_number',
         'additional_field'
     ];
-
-    protected static function boot()
-    {
-        parent::boot();
-
-        static::creating(function (Model $item) {
-            $item->category_id = Category::where('model', $item->collectable_type)->first()->id;
-        });
-    }
 
     protected static function newFactory(): CollectibleFactory
     {

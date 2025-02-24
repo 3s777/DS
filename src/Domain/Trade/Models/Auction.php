@@ -5,16 +5,21 @@ namespace Domain\Trade\Models;
 use Database\Factories\Trade\AuctionFactory;
 use Domain\Settings\Models\Country;
 use Domain\Shelf\Models\Collectible;
+use Domain\Trade\Observers\AuctionObserver;
+use Illuminate\Database\Eloquent\Attributes\ObservedBy;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\MorphToMany;
+use Illuminate\Database\Eloquent\SoftDeletes;
 use Support\Casts\Price;
 
+#[ObservedBy([AuctionObserver::class])]
 class Auction extends Model
 {
     /** @use HasFactory<\Database\Factories\Trade\AuctionFactory> */
     use HasFactory;
+    use SoftDeletes;
 
     protected $fillable = [
         'collectible_id',
