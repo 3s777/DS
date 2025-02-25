@@ -36,7 +36,8 @@ class Auction extends Model
     protected $casts = [
         'price' => Price::class,
         'step' => Price::class,
-        'blitz' => Price::class
+        'blitz' => Price::class,
+        'finished_at' => 'datetime'
     ];
 
     protected static function newFactory(): AuctionFactory

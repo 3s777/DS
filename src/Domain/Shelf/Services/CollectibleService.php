@@ -4,15 +4,12 @@ namespace Domain\Shelf\Services;
 
 use Domain\Shelf\DTOs\FillCollectibleDTO;
 use Domain\Shelf\Models\Collectible;
-use Domain\Shelf\Models\KitItem;
 use Domain\Shelf\Models\Shelf;
 use Domain\Trade\DTOs\FillAuctionDTO;
 use Domain\Trade\DTOs\FillSaleDTO;
-use Domain\Trade\Enums\ReservationEnum;
-use Domain\Trade\Enums\ShippingEnum;
 use Domain\Trade\Services\AuctionService;
 use Domain\Trade\Services\SaleService;
-use Illuminate\Support\Facades\DB;
+use Illuminate\Support\HigherOrderTapProxy;
 use Illuminate\Support\Str;
 use Support\Exceptions\CrudException;
 use Support\Transaction;
@@ -37,43 +34,6 @@ class CollectibleService
             'description' => $data->description,
             'properties' => $data->properties
         ];
-    }
-
-    private function setSaleData(Collectible $collectible): void
-    {
-        $sale = [
-            'price' => $collectible->sale->price->value(),
-            'price_old' => $collectible->sale->price_old->value(),
-            'bidding' => $collectible->sale->bidding,
-            'country_id' => $collectible->sale->country->id,
-            'shipping' => ShippingEnum::tryFrom($collectible->sale->shipping)->value,
-            'quantity' => $collectible->sale->quantity,
-            'reservation' => ReservationEnum::tryFrom($collectible->sale->reservation)->value,
-            'self_delivery' => $collectible->sale->self_delivery,
-        ];
-
-        $collectible->sale_data = $sale;
-
-        $collectible->save();
-    }
-
-    private function setAuctionData(Collectible $collectible): void
-    {
-
-        $auction = [
-            'price' => $collectible->auction->price->value(),
-            'step' => $collectible->auction->step->value(),
-            'finished_at' => $collectible->auction->finished_at,
-            'blitz' => $collectible->auction->blitz->value(),
-            'renewal' => $collectible->auction->renewal,
-            'country_id' => $collectible->auction->country->id,
-            'shipping' => ShippingEnum::tryFrom($collectible->auction->shipping)->value,
-            'self_delivery' => $collectible->auction->self_delivery
-        ];
-
-        $collectible->auction_data = $auction;
-
-        $collectible->save();
     }
 
     private function createSaleDTO(int $collectible_id, FillCollectibleDTO $data): FillSaleDTO
@@ -108,38 +68,19 @@ class CollectibleService
         );
     }
 
-    private function syncTradeWithTarget(string $target, Collectible $collectible): void
-    {
-        if($target == 'sale') {
-            $collectible->auction()->delete();
-            $collectible->auction_data = null;
-        }
-
-        if($target == 'auction') {
-            $collectible->sale()->delete();
-            $collectible->sale_data = null;
-        }
-
-        if($target != 'auction' && $target != 'sale') {
-            $collectible->sale()->delete();
-            $collectible->auction()->delete();
-            $collectible->sale_data = null;
-            $collectible->auction_data = null;
-        }
-    }
-
     public function create(FillCollectibleDTO $data)
     {
         return Transaction::run(
             function() use($data) {
-                $collectible = Collectible::make($this->preparedFields($data));
 
+                // create Collectible, attach Self, Collector, Collectable
+                $collectible = Collectible::make($this->preparedFields($data));
                 $shelf = Shelf::find($data->shelf_id);
                 $collectible->collector_id = $shelf->collector_id;
-
                 $collectible->collectable_id = $data->collectable;
                 $collectible->collectable_type = $data->collectable_type;
 
+                // calculate kit_score as avg kit items condition if kit_score is empty
                 if(!$data->kit_score) {
                     $kit = array_filter($data->kit_conditions, function ($condition) {
                         return $condition;
@@ -152,70 +93,25 @@ class CollectibleService
 
                 $collectible->save();
 
+                // attach Sale or Auction
                 if($data->target == 'sale') {
-//                    $collectible->sale()->create([
-//                        'price' =>  $data->sale['price'],
-//                        'price_old' => $data->sale['price_old'],
-//                        'quantity' => $data->sale['quantity'],
-//                        'bidding' => $data->sale['bidding'] ?? false,
-//                        'country_id' => $data->country_id,
-//                        'shipping' => $data->shipping,
-//                        'self_delivery' => $data->self_delivery ?? false,
-//                        'reservation' => $data->sale['reservation'],
-//                    ]);
-//                    if(isset($data->shipping_countries)) {
-//                        $collectible->sale->shippingCountries()->sync($data->shipping_countries);
-//                    }
-
                     $saleService = new SaleService();
                     $saleService->create($this->createSaleDTO($collectible->id, $data));
-
-//                    $this->setSaleData($collectible);
                 }
 
                 if($data->target == 'auction') {
-//                    $collectible->auction()->create([
-//                        'price' =>  $data->auction['price'],
-//                        'step' => $data->auction['step'],
-//                        'finished_at' => $data->auction['finished_at'],
-//                        'blitz' => $data->auction['blitz'],
-//                        'renewal' => $data->auction['renewal'],
-//                        'country_id' => $data->country_id,
-//                        'shipping' => $data->shipping ?? 'country',
-//                        'self_delivery' => $data->self_delivery ?? false,
-//                    ]);
-
-
-
                     $auctionService = new AuctionService();
                     $auctionService->create($this->createAuctionDTO($collectible->id, $data));
-
-
-
-                    $this->setAuctionData($collectible);
-
-//                    if(isset($data->shipping_countries)) {
-//                        $collectible->auction->shippingCountries()->sync($data->shipping_countries);
-//                    }
                 }
 
-                $kitItems = [];
+                // attach KitItems with pivot
+                $kitItemsWithCondition = array_map(
+                    function ($value) { return ['condition' => $value]; },
+                    $data->kit_conditions ?? []
+                );
+                $collectible->kitItems()->attach($kitItemsWithCondition);
 
-                foreach($data->kit_conditions as $kitItem => $condition) {
-                    if(KitItem::find($kitItem)->exists()) {
-                        $kitItems[$kitItem] = ['condition' => $condition];
-                    }
-                }
-
-                $collectible->kitItems()->sync($kitItems);
-
-
-//            $kitItems = [];
-//            foreach($data->kit_conditions as $key=>$value) {
-//                $kitItems[$key] = ['condition' => $value];
-//            }
-//            $collectible->kitItems()->attach($kitItems);
-
+                // attach Images
                 $collectible->addFeaturedImageWithThumbnail(
                     $data->featured_image,
                     ['small', 'medium']
@@ -243,6 +139,7 @@ class CollectibleService
         return Transaction::run(
             function() use($collectible, $data) {
 
+                // update Images
                 $collectible->updateFeaturedImage(
                     $data->featured_image,
                     $data->featured_image_uploaded,
@@ -255,19 +152,20 @@ class CollectibleService
                     ['small', 'medium']
                 );
 
+                // update fields
                 $collectible->fill($this->preparedFields($data));
                 $shelf = Shelf::find($data->shelf_id);
                 $collectible->collector_id = $shelf->collector_id;
 
+                // update or create Sale or Auction
                 if($data->target == 'sale') {
                     $saleService = new SaleService();
+
                     if($collectible->sale) {
                         $saleService->update($collectible->sale, $this->createSaleDTO($collectible->id, $data));
                     } else {
                         $saleService->create($this->createSaleDTO($collectible->id, $data));
                     }
-
-//                    $this->setSaleData($collectible);
                 }
 
                 if($data->target == 'auction') {
@@ -278,23 +176,16 @@ class CollectibleService
                     } else {
                         $auctionService->create($this->createAuctionDTO($collectible->id, $data));
                     }
-
-//                    dd($collectible, $collectible->auction);
-//
-//                    $this->setAuctionData($collectible);
                 }
 
                 $collectible->save();
 
-                $kitItems = [];
-
-                foreach($data->kit_conditions as $kitItem => $condition) {
-                    if(KitItem::find($kitItem)->exists()) {
-                        $kitItems[$kitItem] = ['condition' => $condition];
-                    }
-                }
-
-                $collectible->kitItems()->sync($kitItems);
+                // sync KitItems
+                $kitItemsWithCondition = array_map(
+                    function ($value) { return ['condition' => $value]; },
+                    $data->kit_conditions ?? []
+                );
+                $collectible->kitItems()->sync($kitItemsWithCondition);
 
                 return $collectible;
             },

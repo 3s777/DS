@@ -1,13 +1,13 @@
 <?php
 
-namespace Services\Support\ValueObjects;
+namespace App\Trade\ValueObjects;
 
 use Domain\Trade\ValueObjects\AuctionValueObject;
 use InvalidArgumentException;
 use Support\ValueObjects\PriceValueObject;
 use Tests\TestCase;
 
-class AuctionTest extends TestCase
+class AuctionValueObjectTest extends TestCase
 {
     /**
      * @test

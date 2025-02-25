@@ -42,8 +42,8 @@ class Auction implements CastsAttributes
             $price = $value['price'];
             $step = $value['step'];
             $finished_at = $value['finished_at'];
-            $blitz = $value['blitz'];
-            $renewal = $value['renewal'];
+            $blitz = $value['blitz'] ?? null;
+            $renewal = $value['renewal'] ?? null;
             $country_id = $value['country_id'];
             $shipping = $value['shipping'];
             $self_delivery = (bool)$value['self_delivery'];

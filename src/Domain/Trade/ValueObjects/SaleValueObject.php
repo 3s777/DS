@@ -13,7 +13,7 @@ class SaleValueObject
     private PriceValueObject $price;
     private ?PriceValueObject $priceOld;
     private ?bool $bidding;
-    private ?string $country_id;
+    private ?int $country_id;
     private ?string $shipping;
 
     private ?int $quantity;
@@ -23,7 +23,7 @@ class SaleValueObject
     public function __construct(
         int|float $price,
         int $quantity,
-        string $country_id,
+        int $country_id,
         string $shipping,
         int|float|null $priceOld = null,
         ?bool $bidding = false,

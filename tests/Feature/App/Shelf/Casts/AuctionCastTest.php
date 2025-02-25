@@ -7,8 +7,10 @@ use Database\Factories\UserFactory;
 use Domain\Auth\Models\Role;
 use Domain\Auth\Models\User;
 use Domain\Game\Models\GameMedia;
+use Domain\Settings\Models\Country;
 use Domain\Shelf\Models\Category;
 use Domain\Shelf\Models\Collectible;
+use Domain\Trade\Enums\ShippingEnum;
 use Domain\Trade\ValueObjects\AuctionValueObject;
 use Illuminate\Database\Eloquent\Relations\Relation;
 use Illuminate\Foundation\Testing\RefreshDatabase;
@@ -38,8 +40,9 @@ class AuctionCastTest extends TestCase
      * @test
      * @return void
      */
-    public function it_sale_success():void
+    public function it_auction_success():void
     {
+        $country = Country::factory()->create();
         $collectible = CollectibleFactory::new()->for(GameMedia::factory(), 'collectable')
             ->for($this->category)
             ->create(
@@ -47,7 +50,10 @@ class AuctionCastTest extends TestCase
                     'auction_data' => [
                         'price' => 10.099,
                         'step' => 05.11,
-                        'finished_at' => '2024-02-13'
+                        'finished_at' => '2024-02-13T10:10',
+                        'country_id' => $country->id,
+                        'shipping' => ShippingEnum::None->value,
+                        'self_delivery' => false
                     ]
                 ]
             );
@@ -57,12 +63,19 @@ class AuctionCastTest extends TestCase
         $this->assertInstanceOf(PriceValueObject::class, $collectible->auction_data->step());
         $this->assertNotEmpty($collectible->auction_data->finished_at());
         $this->assertEquals(1009, $collectible->auction_data->price()->raw());
+        $this->assertFalse($collectible->auction_data->self_delivery());
+        $this->assertEquals($collectible->auction_data->country_id(), $country->id);
 
         $collectible->auction_data = [
             'price' => 14.5989,
             'step' => 55.9888,
             'finished_at' => '2025-02-13',
-            'test' => 'wrong parameter'
+            'blitz' => 963,
+            'renewal' => 5,
+            'test' => 'wrong parameter',
+            'country_id' => $country->id,
+            'shipping' => ShippingEnum::None->value,
+            'self_delivery' => false
         ];
 
         $collectible->save();
@@ -70,10 +83,12 @@ class AuctionCastTest extends TestCase
         $this->assertInstanceOf(AuctionValueObject::class, $collectible->auction_data);
         $this->assertInstanceOf(PriceValueObject::class, $collectible->auction_data->price());
         $this->assertInstanceOf(PriceValueObject::class, $collectible->auction_data->step());
+        $this->assertInstanceOf(PriceValueObject::class, $collectible->auction_data->blitz());
         $this->assertEquals(1459, $collectible->auction_data->price()->raw());
         $this->assertEquals(5598, $collectible->auction_data->step()->raw());
+        $this->assertEquals(96300, $collectible->auction_data->blitz()->raw());
 
         $rawAuction = json_decode($collectible->getRawOriginal('auction_data'), true);
-        $this->assertEquals(3, count($rawAuction));
+        $this->assertEquals(8, count($rawAuction));
     }
 }

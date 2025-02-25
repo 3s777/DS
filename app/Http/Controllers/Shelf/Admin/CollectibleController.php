@@ -82,7 +82,7 @@ class CollectibleController extends Controller
     {
         $deletingAction(
             MassDeletingDTO::make(
-                'Domain\Collectible\Models\Collectible',
+                Collectible::class,
                 $request->input('ids')
             )
         );
@@ -99,7 +99,7 @@ class CollectibleController extends Controller
     {
         $deletingAction(
             MassDeletingDTO::make(
-                'Domain\Collectible\Models\Collectible',
+                Collectible::class,
                 $request->input('ids'),
                 true
             )

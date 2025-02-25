@@ -5,8 +5,8 @@ namespace Domain\Trade\Models;
 use Database\Factories\Trade\SaleFactory;
 use Domain\Settings\Models\Country;
 use Domain\Shelf\Models\Collectible;
-use Domain\Trade\Enums\ReservationEnum;
-use Domain\Trade\Enums\ShippingEnum;
+use Domain\Trade\Observers\SaleObserver;
+use Illuminate\Database\Eloquent\Attributes\ObservedBy;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -14,6 +14,7 @@ use Illuminate\Database\Eloquent\Relations\MorphToMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Support\Casts\Price;
 
+#[ObservedBy([SaleObserver::class])]
 class Sale extends Model
 {
     /** @use HasFactory<\Database\Factories\Trade\SaleFactory> */
@@ -36,30 +37,6 @@ class Sale extends Model
         'price' => Price::class,
         'price_old' => Price::class
     ];
-
-//    protected static function boot()
-//    {
-//        parent::boot();
-//
-//        static::created(function(Model $item) {
-//            $collectible = Collectible::find($item->collectible_id);
-//
-//            $sale = [
-//                'price' => $collectible->sale->price->value(),
-//                'price_old' => $collectible->sale->price_old->value(),
-//                'bidding' => $collectible->sale->bidding,
-//                'country_id' => $collectible->sale->country->id,
-//                'shipping' => ShippingEnum::tryFrom($collectible->sale->shipping)->value,
-//                'quantity' => $collectible->sale->quantity,
-//                'reservation' => ReservationEnum::tryFrom($collectible->sale->reservation)->value,
-//                'self_delivery' => $collectible->sale->self_delivery
-//            ];
-//
-//            $collectible->sale_data = $sale;
-//
-//            $collectible->save();
-//        });
-//    }
 
     protected static function newFactory(): SaleFactory
     {
