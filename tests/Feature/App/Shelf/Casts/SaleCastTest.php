@@ -7,8 +7,10 @@ use Database\Factories\UserFactory;
 use Domain\Auth\Models\Role;
 use Domain\Auth\Models\User;
 use Domain\Game\Models\GameMedia;
+use Domain\Settings\Models\Country;
 use Domain\Shelf\Models\Category;
 use Domain\Shelf\Models\Collectible;
+use Domain\Trade\Enums\ShippingEnum;
 use Domain\Trade\ValueObjects\SaleValueObject;
 use Illuminate\Database\Eloquent\Relations\Relation;
 use Illuminate\Foundation\Testing\RefreshDatabase;
@@ -40,12 +42,16 @@ class SaleCastTest extends TestCase
      */
     public function it_sale_success():void
     {
+        $country = Country::factory()->create();
         $collectible = CollectibleFactory::new()->for(GameMedia::factory(), 'collectable')
             ->for($this->category)
             ->create(
                 [
                     'sale_data' => [
-                        'price' => 12.99
+                        'price' => 12.99,
+                        'quantity' => 1,
+                        'country_id' => $country->id,
+                        'shipping' => ShippingEnum::None->value,
                     ]
                 ]
             );
@@ -57,6 +63,9 @@ class SaleCastTest extends TestCase
 
         $collectible->sale_data = [
             'price' => 14.5989,
+            'quantity' => 1,
+            'country_id' => $country->id,
+            'shipping' => ShippingEnum::None->value,
             'price_old' => 55.9888,
             'test' => 'test'
         ];
@@ -70,6 +79,6 @@ class SaleCastTest extends TestCase
         $this->assertEquals(5598, $collectible->sale_data->priceOld()->raw());
 
         $rawSale = json_decode($collectible->getRawOriginal('sale_data'), true);
-        $this->assertEquals(2, count($rawSale));
+        $this->assertEquals(8, count($rawSale));
     }
 }

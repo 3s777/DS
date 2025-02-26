@@ -27,7 +27,7 @@ class SaleValueObject
         string $shipping,
         int|float|null $priceOld = null,
         ?bool $bidding = false,
-        ?bool $self_delivery = true,
+        ?bool $self_delivery = false,
         ?string $reservation = 'none',
         string $currency = 'RUB',
         int $precision = 100

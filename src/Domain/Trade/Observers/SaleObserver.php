@@ -12,7 +12,7 @@ class SaleObserver
     {
         $sale = [
             'price' => $sale->price->value(),
-            'price_old' => $sale->price_old->value(),
+            'price_old' => $sale->price_old?->value(),
             'bidding' => $sale->bidding,
             'country_id' => $sale->country->id,
             'shipping' => $sale->shipping,

@@ -220,7 +220,7 @@
                     <x-grid.col xl="4" ls="6" lg="12" md="12" sm="12">
                         <x-ui.form.group>
                             <x-ui.form.input-text
-                                placeholder="{{ __('collectible.sale.price_old') }} *"
+                                placeholder="{{ __('collectible.sale.price_old') }}"
                                 id="sale_price_old"
                                 name="sale[price_old]"
                                 step="0.01"

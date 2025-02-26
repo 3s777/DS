@@ -25,11 +25,11 @@ class AuctionValueObject
         int|float $price,
         int|float $step,
         string $finished_at,
-        null|int|float $blitz,
-        ?int $renewal,
         string $country_id,
         string $shipping,
-        ?bool $self_delivery = true,
+        bool $self_delivery = false,
+        null|int|float $blitz = null,
+        ?int $renewal = null,
         $currency = 'RUB',
         $precision = 100
     ) {
@@ -40,7 +40,7 @@ class AuctionValueObject
         $this->price = PriceValueObject::make($price, $currency, $precision);
         $this->step = PriceValueObject::make($step, $currency, $precision);
         $this->finished_at = $finished_at;
-        $this->blitz = PriceValueObject::make($blitz, $currency, $precision);
+        $this->blitz = $blitz ? PriceValueObject::make($blitz, $currency, $precision) : null;
         $this->renewal = $renewal;
         $this->country_id = $country_id;
         $this->shipping = $shipping;

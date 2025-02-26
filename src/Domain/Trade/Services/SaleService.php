@@ -11,8 +11,7 @@ class SaleService
 {
     public function create(FillSaleDTO $data)
     {
-        return Transaction::run(
-            function() use($data) {
+
 
             $sale = Sale::create([
                 'collectible_id' => $data->collectible_id,
@@ -32,11 +31,7 @@ class SaleService
 
             return $sale;
 
-            },
-            function(Throwable $e) {
-                throw new CrudException($e->getMessage());
-            }
-        );
+
     }
 
     public function update(Sale $sale, FillSaleDTO $data)

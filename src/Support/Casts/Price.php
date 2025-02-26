@@ -7,9 +7,13 @@ use Support\ValueObjects\PriceValueObject;
 
 class Price implements CastsAttributes
 {
-    public function get($model, string $key, $value, array $attributes): PriceValueObject
+    public function get($model, string $key, $value, array $attributes): ?PriceValueObject
     {
-        return PriceValueObject::make($value);
+        if($value) {
+            return PriceValueObject::make($value);
+        }
+
+        return null;
     }
 
     public function set($model, string $key, $value, array $attributes): ?int

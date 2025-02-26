@@ -44,8 +44,8 @@ class Sale implements CastsAttributes
             $country_id = $value['country_id'];
             $shipping = $value['shipping'];
             $priceOld = $value['price_old'] ?? null;
-            $bidding = (bool)$value['bidding'];
-            $self_delivery = (bool)$value['self_delivery'];
+            $bidding = $value['bidding'] ?? null;
+            $self_delivery = $value['self_delivery'] ?? null;
             $reservation = $value['reservation'] ?? 'none';
 
             $value = SaleValueObject::make(
@@ -66,16 +66,18 @@ class Sale implements CastsAttributes
             'country_id' => $value->country_id(),
             'shipping' => $value->shipping(),
             'self_delivery' => $value->self_delivery(),
-            'reservation' => $value->reservation()
+            'reservation' => $value->reservation(),
+            'price_old' => $value->priceOld()?->prepareValue(),
+            'bidding' => $value->bidding()
         ];
-
-        if($value->priceOld()) {
-            $sale['price_old'] = $value->priceOld()->prepareValue();
-        }
-
-        if($value->bidding()) {
-            $sale['bidding'] = $value->bidding();
-        }
+//
+//        if($value->priceOld()) {
+//            $sale['price_old'] = $value->priceOld()->prepareValue();
+//        }
+//
+//        if($value->bidding()) {
+//            $sale['bidding'] = $value->bidding();
+//        }
 
         return json_encode($sale);
     }

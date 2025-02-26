@@ -70,8 +70,7 @@ class CollectibleService
 
     public function create(FillCollectibleDTO $data)
     {
-        return Transaction::run(
-            function() use($data) {
+
 
                 // create Collectible, attach Self, Collector, Collectable
                 $collectible = Collectible::make($this->preparedFields($data));
@@ -127,11 +126,7 @@ class CollectibleService
                 }
 
                 return $collectible;
-            },
-            function(Throwable $e) {
-                throw new CrudException($e->getMessage());
-            }
-        );
+
     }
 
     public function update(Collectible $collectible, FillCollectibleDTO $data)

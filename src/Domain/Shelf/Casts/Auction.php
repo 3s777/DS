@@ -18,14 +18,14 @@ class Auction implements CastsAttributes
             $jsonValue = json_decode($value);
 
             return new AuctionValueObject(
-                $jsonValue->price,
-                $jsonValue->step,
-                $jsonValue->finished_at,
-                $jsonValue->blitz,
-                $jsonValue->renewal,
-                $jsonValue->country_id,
-                $jsonValue->shipping,
-                $jsonValue->self_delivery ?? null,
+                price: $jsonValue->price,
+                step: $jsonValue->step,
+                finished_at: $jsonValue->finished_at,
+                country_id: $jsonValue->country_id,
+                shipping: $jsonValue->shipping,
+                self_delivery: $jsonValue->self_delivery,
+                blitz: $jsonValue->blitz,
+                renewal: $jsonValue->renewal,
             );
         }
 
@@ -42,21 +42,21 @@ class Auction implements CastsAttributes
             $price = $value['price'];
             $step = $value['step'];
             $finished_at = $value['finished_at'];
-            $blitz = $value['blitz'] ?? null;
-            $renewal = $value['renewal'] ?? null;
             $country_id = $value['country_id'];
             $shipping = $value['shipping'];
-            $self_delivery = (bool)$value['self_delivery'];
+            $blitz = $value['blitz'] ?? null;
+            $renewal = $value['renewal'] ?? null;
+            $self_delivery = $value['self_delivery'] ?? false;
 
             $value = AuctionValueObject::make(
-                $price,
-                $step,
-                $finished_at,
-                $blitz,
-                $renewal,
-                $country_id,
-                $shipping,
-                $self_delivery
+                price:$price,
+                step:$step,
+                finished_at:$finished_at,
+                country_id:$country_id,
+                shipping:$shipping,
+                self_delivery:$self_delivery,
+                blitz:$blitz,
+                renewal:$renewal,
             );
         }
 
@@ -64,11 +64,12 @@ class Auction implements CastsAttributes
 //            'price' => $value->price()->prepareValue()
 //        ];
 
+
         return json_encode([
             'price' => $value->price()->prepareValue(),
             'step' => $value->step()->prepareValue(),
             'finished_at' => $value->finished_at(),
-            'blitz' => $value->blitz()->prepareValue(),
+            'blitz' => $value->blitz()?->prepareValue(),
             'renewal' => $value->renewal(),
             'country_id' => $value->country_id(),
             'shipping' => $value->shipping(),

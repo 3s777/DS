@@ -7,6 +7,7 @@ use App\Http\Controllers\Auth\Admin\ResetPasswordController;
 use Database\Factories\UserFactory;
 use Domain\Auth\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Password;
 use Tests\TestCase;
 
@@ -47,7 +48,7 @@ class ResetPasswordControllerTest extends TestCase
      * @test
      * @return void
      */
-    public function it_handle_success(): void
+    public function it_password_reset_success(): void
     {
         Password::shouldReceive('reset')
             ->once()
@@ -67,6 +68,25 @@ class ResetPasswordControllerTest extends TestCase
         ]);
 
         $response->assertRedirect(action([LoginController::class, 'page']));
+    }
+
+    /**
+     * @test
+     * @return void
+     */
+    public function it_handle_success(): void
+    {
+
+        $response = $this->post(action([ResetPasswordController::class, 'handle']), [
+            'email' => $this->user->email,
+            'password' => 'new_password',
+            'password_confirmation' => 'new_password',
+            'token' => $this->token,
+        ]);
+
+        $response->assertRedirect(action([LoginController::class, 'page']));
+
+        $this->assertTrue(Hash::check('new_password', $this->user->fresh()->password));
     }
 
     /**

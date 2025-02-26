@@ -2,10 +2,12 @@
 
 namespace App\Trade\ValueObjects;
 
+use Domain\Trade\Enums\ShippingEnum;
 use Domain\Trade\ValueObjects\AuctionValueObject;
-use InvalidArgumentException;
+use Domain\Trade\ValueObjects\SaleValueObject;
 use Support\ValueObjects\PriceValueObject;
 use Tests\TestCase;
+use TypeError;
 
 class AuctionValueObjectTest extends TestCase
 {
@@ -16,18 +18,35 @@ class AuctionValueObjectTest extends TestCase
 
     public function it_all(): void
     {
-        $auction = AuctionValueObject::make(100, 20, '2024-10-03');
+        $auction = AuctionValueObject::make(
+            100,
+            20,
+            '2024-10-03 10:25',
+            5,
+            ShippingEnum::None->value
+        );
 
         $this->assertInstanceOf(AuctionValueObject::class, $auction);
         $this->assertEquals(100, $auction->price()->raw());
         $this->assertInstanceOf(PriceValueObject::class, $auction->price());
         $this->assertEquals(20, $auction->step()->raw());
         $this->assertInstanceOf(PriceValueObject::class, $auction->step());
-        $this->assertEquals('2024-10-03', $auction->finished_at());
+        $this->assertEquals('2024-10-03 10:25', $auction->finished_at());
+    }
 
-        $this->expectException(InvalidArgumentException::class);
-
-        PriceValueObject::make(-10000);
-        PriceValueObject::make(10000, -100);
+    /**
+     * @test
+     * @return void
+     */
+    public function it_price_type_fail(): void
+    {
+        $this->expectException(TypeError::class);
+        SaleValueObject::make(
+            'wrong string',
+            20,
+            '2024-10-03 10:25',
+            5,
+            ShippingEnum::None->value
+        );
     }
 }

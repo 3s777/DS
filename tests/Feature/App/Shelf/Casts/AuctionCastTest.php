@@ -53,7 +53,6 @@ class AuctionCastTest extends TestCase
                         'finished_at' => '2024-02-13T10:10',
                         'country_id' => $country->id,
                         'shipping' => ShippingEnum::None->value,
-                        'self_delivery' => false
                     ]
                 ]
             );
@@ -71,11 +70,10 @@ class AuctionCastTest extends TestCase
             'step' => 55.9888,
             'finished_at' => '2025-02-13',
             'blitz' => 963,
-            'renewal' => 5,
             'test' => 'wrong parameter',
             'country_id' => $country->id,
             'shipping' => ShippingEnum::None->value,
-            'self_delivery' => false
+            'self_delivery' => true
         ];
 
         $collectible->save();
@@ -87,6 +85,7 @@ class AuctionCastTest extends TestCase
         $this->assertEquals(1459, $collectible->auction_data->price()->raw());
         $this->assertEquals(5598, $collectible->auction_data->step()->raw());
         $this->assertEquals(96300, $collectible->auction_data->blitz()->raw());
+        $this->assertTrue($collectible->auction_data->self_delivery());
 
         $rawAuction = json_decode($collectible->getRawOriginal('auction_data'), true);
         $this->assertEquals(8, count($rawAuction));
