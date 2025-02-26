@@ -73,7 +73,7 @@ class Collectible extends Model implements HasMedia
         'properties' => Properties::class,
         'sale_data' => SaleCast::class,
         'auction_data' => AuctionCast::class,
-//        'purchase_price' => Price::class
+        'purchase_price' => Price::class
     ];
 
     public $translatable = ['description'];

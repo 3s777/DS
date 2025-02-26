@@ -443,7 +443,8 @@
 
     @push('scripts')
         <script>
-            var targets = document.querySelectorAll('input[type=radio][name="target"]');
+            const targets = document.querySelectorAll('input[type=radio][name="target"]');
+            const activeTarget = document.querySelector('input[type=radio][name="target"]:checked');
 
             const shipping = document.getElementById('collectible-target__shipping');
             const sale = document.getElementById('collectible-target__sale');
@@ -466,18 +467,29 @@
                 auction.style.display = 'block';
                 shipping.style.display = 'block';
             }
+            //
+            // targets.forEach( target => {
 
-            targets.forEach( target => {
-                hideTarget();
+            console.log(activeTarget);
 
-                @if(old('target') == 'sale' || $collectible->target == 'sale')
-                    setTargetSale();
-                @endif
+                // hideTarget();
 
-                @if(old('target') == 'auction' || $collectible->target == 'auction')
-                    setTargetAuction();
-                @endif
-            })
+                if(activeTarget.value === 'sale') {
+                    setTargetSale()
+                }
+
+                if(activeTarget.value === 'auction') {
+                    setTargetAuction()
+                }
+
+{{--                @if(old('target') == 'sale' || $collectible->target == 'sale')--}}
+{{--                    setTargetSale();--}}
+{{--                @endif--}}
+
+{{--                @if(old('target') == 'auction' || $collectible->target == 'auction')--}}
+{{--                    setTargetAuction();--}}
+{{--                @endif--}}
+//             })
 
             targets.forEach(target => target.addEventListener('change',
                 function() {

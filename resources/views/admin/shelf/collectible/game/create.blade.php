@@ -425,17 +425,15 @@
             }
 
             @if(old('target'))
-                targets.forEach( target => {
-                    hideTarget();
+                hideTarget();
 
-                    @if(old('target') == 'sale')
-                        setTargetSale();
-                    @endif
+                @if(old('target') == 'sale')
+                    setTargetSale();
+                @endif
 
-                    @if(old('target') == 'auction')
-                        setTargetAuction();
-                    @endif
-                })
+                @if(old('target') == 'auction')
+                    setTargetAuction();
+                @endif
             @endif
 
             targets.forEach(target => target.addEventListener('change',
