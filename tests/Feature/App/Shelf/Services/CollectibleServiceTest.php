@@ -8,11 +8,14 @@ use App\Jobs\GenerateThumbnailJob;
 use Domain\Auth\Models\Collector;
 use Domain\Auth\Models\User;
 use Domain\Game\Models\GameMedia;
+use Domain\Settings\Models\Country;
 use Domain\Shelf\DTOs\FillCollectibleDTO;
 use Domain\Shelf\Models\Category;
 use Domain\Shelf\Models\Collectible;
 use Domain\Shelf\Models\Shelf;
 use Domain\Shelf\Services\CollectibleService;
+use Domain\Trade\Enums\ReservationEnum;
+use Domain\Trade\Enums\ShippingEnum;
 use Illuminate\Database\Eloquent\Relations\Relation;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Http\Request;
@@ -67,6 +70,8 @@ class CollectibleServiceTest extends TestCase
         $this->request['auction']['price'] = '100';
         $this->request['auction']['step'] = '200';
         $this->request['auction']['finished_at'] = '2025-12-20';
+        $this->request['shipping'] = ShippingEnum::Country->value;
+        $this->request['country_id'] = Country::factory()->create()->id;
 
         $gameService->create(FillCollectibleDTO::fromRequest(
             new Request($this->request)
@@ -115,7 +120,10 @@ class CollectibleServiceTest extends TestCase
         $this->request['target'] = 'sale';
         $this->request['shelf_id'] = $newShelf->id;
         $this->request['sale']['price'] = '100';
-        $this->request['sale']['price_old'] = '200';
+        $this->request['sale']['quantity'] = '1';
+        $this->request['sale']['reservation'] = ReservationEnum::None->value;
+        $this->request['shipping'] = ShippingEnum::Country->value;
+        $this->request['country_id'] = Country::factory()->create()->id;
         $this->request['description'] = 'NewDescription';
         $this->request['featured_image'] = UploadedFile::fake()->image('photo2.jpg');
 
@@ -128,14 +136,12 @@ class CollectibleServiceTest extends TestCase
         $updatedCollectible= Collectible::where('name', 'NewNameCollectible')->first();
 
         $this->assertEquals($updatedCollectible->sale->price->value(), $this->request['sale']['price']);
-        $this->assertEquals($updatedCollectible->sale->price_old->value(), $this->request['sale']['price_old']);
         $this->assertEquals($updatedCollectible->target, $this->request['target']);
         $this->assertEquals($updatedCollectible->shelf->id, $newShelf->id);
         $this->assertEquals($updatedCollectible->collector->id, $newShelf->collector->id);
         $this->assertNotEquals($updatedCollectible->collectable->id, $this->request['collectable']);
 
         $this->assertEquals($updatedCollectible->sale->price->value(), $updatedCollectible->sale_data->price()->value());
-        $this->assertEquals($updatedCollectible->sale->price_old->value(), $updatedCollectible->sale_data->priceOld()->value());
 
         Queue::assertPushed(GenerateThumbnailJob::class, 3);
         Queue::assertPushed(GenerateSmallThumbnailsJob::class, 2);

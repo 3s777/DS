@@ -32,7 +32,6 @@ class CollectibleService
             'additional_field' => $data->additional_field,
             'target' => $data->target,
             'description' => $data->description,
-            'properties' => $data->properties
         ];
     }
 
@@ -47,7 +46,7 @@ class CollectibleService
             $data->shipping,
             $data->self_delivery ?? false,
             $data->sale['reservation'],
-            $data->sale['price_old'],
+            $data->sale['price_old'] ?? null,
             $data->shipping_countries
         );
     }
@@ -62,8 +61,8 @@ class CollectibleService
             $data->country_id,
             $data->shipping,
             $data->self_delivery ?? false,
-            $data->auction['blitz'],
-            $data->auction['renewal'],
+            $data->auction['blitz'] ?? null,
+            $data->auction['renewal'] ?? null,
             $data->shipping_countries
         );
     }
@@ -73,19 +72,14 @@ class CollectibleService
         return Transaction::run(
             function() use($data) {
 
-                // create Collectible, attach Self, Collector, Collectable
-                $fields = $this->preparedFields($data);
-                $fields['collectable_id'] = $data->collectable;
-                $fields['collectable_type'] = $data->collectable_type;
-
-                $collectible = Collectible::make($fields);
+                // create Collectible, attach Collector, Collectable and Properties
+                $collectible = Collectible::make($this->preparedFields($data));
                 $shelf = Shelf::find($data->shelf_id);
 
                 $collectible->collector_id = $shelf->collector_id;
-//                $collectible->collectable_id = $data->collectable;
-//                $collectible->collectable_type = $data->collectable_type;
-
-
+                $collectible->collectable_id = $data->collectable;
+                $collectible->collectable_type = $data->collectable_type;
+                $collectible->properties = $data->properties;
 
                 // calculate kit_score as avg kit items condition if kit_score is empty
                 if(!$data->kit_score) {
@@ -184,6 +178,8 @@ class CollectibleService
                         $auctionService->create($this->createAuctionDTO($collectible->id, $data));
                     }
                 }
+
+                $collectible->properties =  $data->properties;
 
                 $collectible->save();
 

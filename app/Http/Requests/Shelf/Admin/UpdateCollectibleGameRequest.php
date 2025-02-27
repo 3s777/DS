@@ -117,6 +117,7 @@ class UpdateCollectibleGameRequest extends FormRequest
                 'boolean',
             ],
             'sale.reservation' => [
+                'exclude_unless:target,sale',
                 'required',
                 Rule::enum(ReservationEnum::class)
             ],

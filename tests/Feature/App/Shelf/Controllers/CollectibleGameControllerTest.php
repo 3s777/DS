@@ -11,9 +11,11 @@ use Database\Factories\UserFactory;
 use Domain\Auth\Models\Role;
 use Domain\Auth\Models\User;
 use Domain\Game\Models\GameMedia;
+use Domain\Settings\Models\Country;
 use Domain\Shelf\Models\Category;
 use Domain\Shelf\Models\Collectible;
 use Domain\Shelf\Models\Shelf;
+use Domain\Trade\Enums\ReservationEnum;
 use Illuminate\Database\Eloquent\Relations\Relation;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Http\UploadedFile;
@@ -329,6 +331,10 @@ class CollectibleGameControllerTest extends TestCase
         $this->request['shelf_id'] = $newShelf->id;
         $this->request['sale']['price'] = 100;
         $this->request['sale']['price_old'] = 200;
+        $this->request['sale']['quantity'] = 1;
+        $this->request['sale']['reservation'] = ReservationEnum::None->value;
+        $this->request['country_id'] = Country::factory()->create()->id;
+        $this->request['shipping'] = ReservationEnum::None->value;
 
         $this->actingAs($this->user)
             ->put(
