@@ -70,14 +70,22 @@ class CollectibleService
 
     public function create(FillCollectibleDTO $data)
     {
-
+        return Transaction::run(
+            function() use($data) {
 
                 // create Collectible, attach Self, Collector, Collectable
-                $collectible = Collectible::make($this->preparedFields($data));
+                $fields = $this->preparedFields($data);
+                $fields['collectable_id'] = $data->collectable;
+                $fields['collectable_type'] = $data->collectable_type;
+
+                $collectible = Collectible::make($fields);
                 $shelf = Shelf::find($data->shelf_id);
+
                 $collectible->collector_id = $shelf->collector_id;
-                $collectible->collectable_id = $data->collectable;
-                $collectible->collectable_type = $data->collectable_type;
+//                $collectible->collectable_id = $data->collectable;
+//                $collectible->collectable_type = $data->collectable_type;
+
+
 
                 // calculate kit_score as avg kit items condition if kit_score is empty
                 if(!$data->kit_score) {
@@ -126,7 +134,11 @@ class CollectibleService
                 }
 
                 return $collectible;
-
+            },
+            function(Throwable $e) {
+                throw new CrudException($e->getMessage());
+            }
+        );
     }
 
     public function update(Collectible $collectible, FillCollectibleDTO $data)

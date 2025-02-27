@@ -356,7 +356,7 @@
                                     name="auction[blitz]"
                                     step="0.01"
                                     min="0"
-                                    :value="$collectible->auction?->blitz->value()"
+                                    :value="$collectible->auction?->blitz?->value()"
                                     type="number"
                                     autocomplete="on">
                                 </x-ui.form.input-text>
@@ -436,8 +436,6 @@
                 </div>
             </div>
 
-        @dump(old())
-
         <x-slot:sidebar></x-slot:sidebar>
     </x-admin.crud-form>
 
@@ -469,8 +467,6 @@
             }
             //
             // targets.forEach( target => {
-
-            console.log(activeTarget);
 
                 // hideTarget();
 

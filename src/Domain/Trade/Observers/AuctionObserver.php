@@ -13,7 +13,7 @@ class AuctionObserver
             'price' => $auction->price->value(),
             'step' => $auction->step->value(),
             'finished_at' => $auction->finished_at,
-            'blitz' => $auction->blitz->value(),
+            'blitz' => $auction->blitz?->value(),
             'renewal' => $auction->renewal,
             'country_id' => $auction->country->id,
             'shipping' => $auction->shipping,

@@ -70,7 +70,7 @@ class Sale implements CastsAttributes
             'price_old' => $value->priceOld()?->prepareValue(),
             'bidding' => $value->bidding()
         ];
-//
+
 //        if($value->priceOld()) {
 //            $sale['price_old'] = $value->priceOld()->prepareValue();
 //        }
