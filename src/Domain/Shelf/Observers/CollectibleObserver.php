@@ -2,10 +2,9 @@
 
 namespace Domain\Shelf\Observers;
 
+use Domain\Shelf\Enums\TargetEnum;
 use Domain\Shelf\Models\Category;
 use Domain\Shelf\Models\Collectible;
-use Domain\Trade\Enums\ReservationEnum;
-use Domain\Trade\Enums\ShippingEnum;
 
 class CollectibleObserver
 {
@@ -17,15 +16,15 @@ class CollectibleObserver
     public function updated(Collectible $collectible): void
     {
         if($collectible->isDirty('target')) {
-            if($collectible->target == 'sale' && $collectible->auction) {
+            if($collectible->target == TargetEnum::Sale->value && $collectible->auction) {
                 $collectible->auction->delete();
             }
 
-            if($collectible->target == 'auction' && $collectible->sale) {
+            if($collectible->target == TargetEnum::Auction->value && $collectible->sale) {
                 $collectible->sale->delete();
             }
 
-            if($collectible->target != 'auction' && $collectible->target != 'sale') {
+            if($collectible->target != TargetEnum::Auction->value && $collectible->target != TargetEnum::Sale->value) {
                 if($collectible->sale) {
                     $collectible->sale->delete();
                 }

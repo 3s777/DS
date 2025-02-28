@@ -6,7 +6,7 @@ use InvalidArgumentException;
 use Support\Traits\Makeable;
 use Support\ValueObjects\PriceValueObject;
 
-class SaleValueObject
+readonly class SaleValueObject
 {
     use Makeable;
 
@@ -15,7 +15,6 @@ class SaleValueObject
     private ?bool $bidding;
     private ?int $country_id;
     private ?string $shipping;
-
     private ?int $quantity;
     private ?string $reservation;
     private ?bool $self_delivery;

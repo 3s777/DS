@@ -16,6 +16,7 @@ use Domain\Shelf\Models\Category;
 use Domain\Shelf\Models\Collectible;
 use Domain\Shelf\Models\Shelf;
 use Domain\Trade\Enums\ReservationEnum;
+use Domain\Trade\Enums\ShippingEnum;
 use Illuminate\Database\Eloquent\Relations\Relation;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Http\UploadedFile;
@@ -334,7 +335,7 @@ class CollectibleGameControllerTest extends TestCase
         $this->request['sale']['quantity'] = 1;
         $this->request['sale']['reservation'] = ReservationEnum::None->value;
         $this->request['country_id'] = Country::factory()->create()->id;
-        $this->request['shipping'] = ReservationEnum::None->value;
+        $this->request['shipping'] = ShippingEnum::None->value;
 
         $this->actingAs($this->user)
             ->put(

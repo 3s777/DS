@@ -20,9 +20,10 @@ class CreateCollectibleGameRequestFactory extends RequestFactory
     public function definition(): array
     {
         $gameMedia = GameMedia::factory()->has(KitItem::factory(rand(1,3)), 'kitItems')->create();
+        $countries = Country::factory(3)->create();
 
-        $target = Arr::random(TargetEnum::cases());
-//        $target = TargetEnum::Sale;
+//        $target = Arr::random(TargetEnum::cases());
+        $target = TargetEnum::Collection;
         $sale = [];
         $auction = [];
 
@@ -39,12 +40,11 @@ class CreateCollectibleGameRequestFactory extends RequestFactory
             $auction = [
                 'price' => rand(100, 20000),
                 'step' => rand(10, 100),
-                'finished_at' =>  now()->addDays(rand(1, 5))->format('Y-m-d'),
+                'finished_at' =>  now()->addDays(rand(1, 5))->format('Y-m-d H:m'),
                 'blitz' => fake()->numberBetween(1, 10000),
                 'renewal' => fake()->numberBetween(1, 10),
             ];
         }
-
 
         $collectibleData = [
             'name' => fake()->name(),
@@ -68,13 +68,12 @@ class CreateCollectibleGameRequestFactory extends RequestFactory
         ];
 
         if($target->value == 'auction' || $target->value == 'sale') {
-            $country = Country::factory()->create();
             $collectibleData['shipping'] = Arr::random(ShippingEnum::cases())->value;
-            $collectibleData['country_id'] = $country->id;
+            $collectibleData['country_id'] = $countries->first()->id;
             $collectibleData['self_delivery'] = fake()->boolean;
 
             if($collectibleData['shipping'] == ShippingEnum::Selected->value) {
-                $collectibleData['shipping_countries'] = [$country->id];
+                $collectibleData['shipping_countries'] = [$countries];
             }
         }
 
@@ -84,19 +83,43 @@ class CreateCollectibleGameRequestFactory extends RequestFactory
     public function hasKitConditions(): static
     {
         return $this->state(
-        [
-            'kit_conditions' => function(array $properties) {
-                $className = Relation::getMorphedModel(CollectibleTypeEnum::Game->morphName());
-                $collectable = $className::find($properties['collectable']);
-                $kitConditions = [];
+            [
+                'kit_conditions' => function(array $properties) {
+                    $className = Relation::getMorphedModel(CollectibleTypeEnum::Game->morphName());
+                    $collectable = $className::find($properties['collectable']);
+                    $kitConditions = [];
 
-                foreach($collectable->kitItems as $kitItem)  {
-                    $kitConditions[$kitItem->id] = rand(1,10);
+                    foreach($collectable->kitItems as $kitItem)  {
+                        $kitConditions[$kitItem->id] = rand(1,10);
+                    }
+
+                    return $kitConditions;
                 }
-
-                return $kitConditions;
-            }
-        ]
+            ]
         );
+    }
+
+    public function hasSale()
+    {
+        $countries = Country::factory(3)->create();
+
+        $sale = [
+            'target' => 'sale',
+            'sale' => [
+                'price' => rand(100, 20000),
+                'quantity' => fake()->numberBetween(1, 100),
+                'reservation' => Arr::random(ReservationEnum::cases())->value,
+                'bidding' => fake()->boolean
+            ],
+            'shipping' => Arr::random(ShippingEnum::cases())->value,
+            'country_id' => $countries->first()->id,
+            'self_delivery' => fake()->boolean,
+        ];
+
+        if($sale['shipping'] == ShippingEnum::Selected->value) {
+            $sale['shipping_countries'] = [$countries];
+        }
+
+        return $this->state($sale);
     }
 }

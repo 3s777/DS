@@ -3,6 +3,7 @@
 namespace App\Shelf\Controllers;
 
 use App\Http\Controllers\Shelf\Admin\CollectibleController;
+use App\Http\Controllers\Shelf\Admin\CollectibleGameController;
 use App\Http\Requests\Shelf\Admin\CreateCollectibleGameRequest;
 use Database\Factories\Shelf\CollectibleFactory;
 use Database\Factories\Trade\AuctionFactory;
@@ -11,9 +12,13 @@ use Database\Factories\UserFactory;
 use Domain\Auth\Models\Role;
 use Domain\Auth\Models\User;
 use Domain\Game\Models\GameMedia;
+use Domain\Settings\Models\Country;
 use Domain\Shelf\Enums\CollectibleTypeEnum;
+use Domain\Shelf\Enums\TargetEnum;
 use Domain\Shelf\Models\Category;
 use Domain\Shelf\Models\Collectible;
+use Domain\Trade\Enums\ReservationEnum;
+use Domain\Trade\Enums\ShippingEnum;
 use Illuminate\Database\Eloquent\Relations\Relation;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
@@ -113,9 +118,67 @@ class CollectibleControllerTest extends TestCase
             ->assertRedirectToRoute('admin.collectibles.index')
             ->assertSessionHas('helper_flash_message', __('collectible.deleted'));
 
-        $this->assertDatabaseMissing('collectibles', [
-            'name' => $this->collectible->name,
-            'deleted_at' => null
-        ]);
+        $this->assertSoftDeleted($this->collectible);
+    }
+
+    /**
+     * @test
+     * @return void
+     */
+    public function it_deleted_with_sale_success(): void
+    {
+        $this->request['target'] = TargetEnum::Sale->value;
+        $this->request['sale']['price'] = 100;
+        $this->request['sale']['price_old'] = 200;
+        $this->request['sale']['quantity'] = 1;
+        $this->request['sale']['reservation'] = ReservationEnum::None->value;
+        $this->request['country_id'] = Country::factory()->create()->id;
+        $this->request['shipping'] = ShippingEnum::None->value;
+
+        $this->actingAs($this->user)
+            ->post(action([CollectibleGameController::class, 'store']), $this->request)
+            ->assertRedirectToRoute('admin.collectibles.index')
+            ->assertSessionHas('helper_flash_message', __('collectible.created'));
+
+        $collectible = Collectible::where('name', $this->request['name'])->first();
+        $sale = $collectible->sale;
+
+        $this->actingAs($this->user)
+            ->delete(action([CollectibleController::class, 'destroy'], [$collectible]))
+            ->assertRedirectToRoute('admin.collectibles.index')
+            ->assertSessionHas('helper_flash_message', __('collectible.deleted'));
+
+        $this->assertSoftDeleted($collectible);
+        $this->assertSoftDeleted($sale);
+    }
+
+    /**
+     * @test
+     * @return void
+     */
+    public function it_deleted_with_auction_success(): void
+    {
+        $this->request['target'] = TargetEnum::Auction->value;
+        $this->request['auction']['price'] = '100';
+        $this->request['auction']['step'] = '200';
+        $this->request['auction']['finished_at'] = '2025-12-20';
+        $this->request['shipping'] = ShippingEnum::Country->value;
+        $this->request['country_id'] = Country::factory()->create()->id;
+
+        $this->actingAs($this->user)
+            ->post(action([CollectibleGameController::class, 'store']), $this->request)
+            ->assertRedirectToRoute('admin.collectibles.index')
+            ->assertSessionHas('helper_flash_message', __('collectible.created'));
+
+        $collectible = Collectible::where('name', $this->request['name'])->first();
+        $auction = $collectible->auction;
+
+        $this->actingAs($this->user)
+            ->delete(action([CollectibleController::class, 'destroy'], [$collectible]))
+            ->assertRedirectToRoute('admin.collectibles.index')
+            ->assertSessionHas('helper_flash_message', __('collectible.deleted'));
+
+        $this->assertSoftDeleted($collectible);
+        $this->assertSoftDeleted($auction);
     }
 }
