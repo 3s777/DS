@@ -50,11 +50,23 @@ class CollectibleServiceTest extends TestCase
             ]
         );
 
-        $this->saleRequest = CreateCollectibleGameRequest::factory()->hasSale()->hasKitConditions()->create(
+        $this->saleRequest = CreateCollectibleGameRequest::factory()
+            ->hasSale()
+            ->hasKitConditions()
+            ->create(
             [
                 'category_id' => $category->id,
             ]
         );
+
+        $this->auctionRequest = CreateCollectibleGameRequest::factory()
+            ->hasAuction()
+            ->hasKitConditions()
+            ->create(
+                [
+                    'category_id' => $category->id,
+                ]
+            );
 
         $this->user = User::factory()->create();
         $this->collector = Collector::factory()->create();
@@ -112,23 +124,15 @@ class CollectibleServiceTest extends TestCase
 
         $gameService = app(CollectibleService::class);
 
-        $this->request['target'] = TargetEnum::Auction->value;
-        $this->request['sale']['price'] = null;
-        $this->request['auction']['price'] = '100';
-        $this->request['auction']['step'] = '200';
-        $this->request['auction']['finished_at'] = '2025-12-20';
-        $this->request['shipping'] = ShippingEnum::Country->value;
-        $this->request['country_id'] = $this->country->id;
-
         $gameService->create(FillCollectibleDTO::fromRequest(
-            new Request($this->request)
+            new Request($this->auctionRequest)
         ));
 
         $this->assertDatabaseHas('collectibles', [
-            'name' => $this->request['name']
+            'name' => $this->auctionRequest['name']
         ]);
 
-        $collectible = Collectible::where('name', $this->request['name'])->first();
+        $collectible = Collectible::where('name', $this->auctionRequest['name'])->first();
 
         $this->assertNotNull($collectible->auction_data);
         $this->assertInstanceOf(Auction::class, $collectible->auction);
@@ -148,15 +152,7 @@ class CollectibleServiceTest extends TestCase
 
         $gameService = app(CollectibleService::class);
 
-//        $this->request['target'] = TargetEnum::Sale->value;
-//        $this->request['sale']['price'] = 100;
-//        $this->request['sale']['quantity'] = '2';
-//        $this->request['sale']['reservation'] = ReservationEnum::None->value;
-//        $this->request['shipping'] = ShippingEnum::Country->value;
-        $this->saleRequest['country_id'] = $this->country->id;
-//        $this->request['self_delivery'] = true;
-
-        dump($this->country->id, $this->saleRequest['country_id']);
+        $this->saleRequest['self_delivery'] = true;
 
         $gameService->create(FillCollectibleDTO::fromRequest(
             new Request($this->saleRequest)
@@ -235,19 +231,11 @@ class CollectibleServiceTest extends TestCase
     {
         $collectibleService = app(CollectibleService::class);
 
-        $this->request['target'] = TargetEnum::Auction->value;
-        $this->request['sale']['price'] = null;
-        $this->request['auction']['price'] = '100';
-        $this->request['auction']['step'] = '200';
-        $this->request['auction']['finished_at'] = '2025-12-20';
-        $this->request['shipping'] = ShippingEnum::Country->value;
-        $this->request['country_id'] = $this->country->id;
-
         $collectibleService->create(FillCollectibleDTO::fromRequest(
-            new Request($this->request)
+            new Request($this->auctionRequest)
         ));
 
-        $collectible = Collectible::where('name', $this->request['name'])->first();
+        $collectible = Collectible::where('name', $this->auctionRequest['name'])->first();
 
         $this->assertNotNull($collectible->auction_data);
         $this->assertInstanceOf(Auction::class, $collectible->auction);
@@ -276,7 +264,7 @@ class CollectibleServiceTest extends TestCase
         $this->assertInstanceOf(Sale::class, $updatedCollectible->sale);
 
         $this->assertEquals($updatedCollectible->sale->price->value(), $this->request['sale']['price']);
-        $this->assertEquals('sale', $updatedCollectible->target);
+        $this->assertEquals(TargetEnum::Sale->value, $updatedCollectible->target);
         $this->assertNotEquals($updatedCollectible->collectable->id, $this->request['collectable']);
 
         $this->assertEquals($updatedCollectible->sale->price->value(), $updatedCollectible->sale_data->price()->value());
@@ -290,19 +278,11 @@ class CollectibleServiceTest extends TestCase
     {
         $collectibleService = app(CollectibleService::class);
 
-        $this->request['target'] = TargetEnum::Auction->value;
-        $this->request['sale']['price'] = null;
-        $this->request['auction']['price'] = '100';
-        $this->request['auction']['step'] = '200';
-        $this->request['auction']['finished_at'] = '2025-12-20';
-        $this->request['shipping'] = ShippingEnum::Country->value;
-        $this->request['country_id'] = $this->country->id;
-
         $collectibleService->create(FillCollectibleDTO::fromRequest(
-            new Request($this->request)
+            new Request($this->auctionRequest)
         ));
 
-        $collectible = Collectible::where('name', $this->request['name'])->first();
+        $collectible = Collectible::where('name', $this->auctionRequest['name'])->first();
 
         $this->assertNotNull($collectible->auction_data);
         $this->assertInstanceOf(Auction::class, $collectible->auction);

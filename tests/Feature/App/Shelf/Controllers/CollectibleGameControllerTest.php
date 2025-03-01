@@ -83,6 +83,12 @@ class CollectibleGameControllerTest extends TestCase
         $this->request['target'] = 'sale';
         $this->request['sale']['price'] = 'fake';
         $this->request['sale']['price_old'] = 'fake';
+        $this->request['sale']['quantity'] = 'fake';
+        $this->request['sale']['bidding'] = 'fake';
+        $this->request['sale']['reservation'] = 'fake';
+        $this->request['shipping'] = 'fake';
+        $this->request['self_delivery'] = 'fake';
+        $this->request['country_id'] = 'fake';
     }
 
     private function setFakeAuctionRequestData(): void
@@ -91,6 +97,11 @@ class CollectibleGameControllerTest extends TestCase
         $this->request['auction']['price'] = 'fake';
         $this->request['auction']['step'] = 'fake';
         $this->request['auction']['finished_at'] = 'fake';
+        $this->request['auction']['blitz'] = 'fake';
+        $this->request['auction']['renewal'] = 'fake';
+        $this->request['shipping'] = 'fake';
+        $this->request['self_delivery'] = 'fake';
+        $this->request['country_id'] = 'fake';
     }
 
     /**
@@ -209,6 +220,12 @@ class CollectibleGameControllerTest extends TestCase
             ->assertInvalid([
                 'sale.price',
                 'sale.price_old',
+                'sale.quantity',
+                'sale.bidding',
+                'sale.reservation',
+                'country_id',
+                'shipping',
+                'self_delivery'
             ])
             ->assertRedirectToRoute('admin.collectibles.create.game');
 
@@ -219,7 +236,12 @@ class CollectibleGameControllerTest extends TestCase
             ->assertInvalid([
                 'auction.price',
                 'auction.step',
-                'auction.finished_at'
+                'auction.finished_at',
+                'auction.blitz',
+                'auction.renewal',
+                'country_id',
+                'shipping',
+                'self_delivery'
             ])
             ->assertRedirectToRoute('admin.collectibles.create.game');
 
@@ -271,6 +293,11 @@ class CollectibleGameControllerTest extends TestCase
             ->assertInvalid([
                 'sale.price',
                 'sale.price_old',
+                'sale.bidding',
+                'sale.reservation',
+                'country_id',
+                'shipping',
+                'self_delivery'
             ])
             ->assertRedirectToRoute('admin.collectibles.create.game');
 
@@ -285,7 +312,12 @@ class CollectibleGameControllerTest extends TestCase
             ->assertInvalid([
                 'auction.price',
                 'auction.step',
-                'auction.finished_at'
+                'auction.finished_at',
+                'auction.blitz',
+                'auction.renewal',
+                'country_id',
+                'shipping',
+                'self_delivery'
             ])
             ->assertRedirectToRoute('admin.collectibles.create.game');
 

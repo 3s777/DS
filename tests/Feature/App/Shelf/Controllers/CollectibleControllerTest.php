@@ -127,20 +127,14 @@ class CollectibleControllerTest extends TestCase
      */
     public function it_deleted_with_sale_success(): void
     {
-        $this->request['target'] = TargetEnum::Sale->value;
-        $this->request['sale']['price'] = 100;
-        $this->request['sale']['price_old'] = 200;
-        $this->request['sale']['quantity'] = 1;
-        $this->request['sale']['reservation'] = ReservationEnum::None->value;
-        $this->request['country_id'] = Country::factory()->create()->id;
-        $this->request['shipping'] = ShippingEnum::None->value;
+        $request = CreateCollectibleGameRequest::factory()->hasSale()->hasKitConditions()->create();
 
         $this->actingAs($this->user)
-            ->post(action([CollectibleGameController::class, 'store']), $this->request)
+            ->post(action([CollectibleGameController::class, 'store']), $request)
             ->assertRedirectToRoute('admin.collectibles.index')
             ->assertSessionHas('helper_flash_message', __('collectible.created'));
 
-        $collectible = Collectible::where('name', $this->request['name'])->first();
+        $collectible = Collectible::where('name', $request['name'])->first();
         $sale = $collectible->sale;
 
         $this->actingAs($this->user)
@@ -158,19 +152,14 @@ class CollectibleControllerTest extends TestCase
      */
     public function it_deleted_with_auction_success(): void
     {
-        $this->request['target'] = TargetEnum::Auction->value;
-        $this->request['auction']['price'] = '100';
-        $this->request['auction']['step'] = '200';
-        $this->request['auction']['finished_at'] = '2025-12-20';
-        $this->request['shipping'] = ShippingEnum::Country->value;
-        $this->request['country_id'] = Country::factory()->create()->id;
+        $request = CreateCollectibleGameRequest::factory()->hasAuction()->hasKitConditions()->create();
 
         $this->actingAs($this->user)
-            ->post(action([CollectibleGameController::class, 'store']), $this->request)
+            ->post(action([CollectibleGameController::class, 'store']), $request)
             ->assertRedirectToRoute('admin.collectibles.index')
             ->assertSessionHas('helper_flash_message', __('collectible.created'));
 
-        $collectible = Collectible::where('name', $this->request['name'])->first();
+        $collectible = Collectible::where('name', $request['name'])->first();
         $auction = $collectible->auction;
 
         $this->actingAs($this->user)

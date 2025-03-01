@@ -143,7 +143,9 @@ class UpdateCollectibleGameRequest extends FormRequest
                 'exists:Domain\Settings\Models\Country,id'
             ],
             'self_delivery' => [
-                'exclude_unless:target,sale',
+                Rule::excludeIf(function () {
+                    return $this->target !== 'sale' && $this->target !== 'auction';
+                }),
                 'nullable',
                 'boolean',
             ],
