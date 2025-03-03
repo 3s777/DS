@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Game\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Game\Admin\CreateGameRequest;
+use App\Http\Requests\Game\Admin\FilterGameRequest;
 use App\Http\Requests\Game\Admin\UpdateGameRequest;
 use App\Http\Requests\MassDeletingRequest;
 use Domain\Game\DTOs\FillGameDTO;
@@ -30,7 +31,7 @@ class GameController extends Controller
         $this->authorizeResource(Game::class, 'game');
     }
 
-    public function index(): View|Application|Factory|\Illuminate\Contracts\Foundation\Application
+    public function index(FilterGameRequest $request): View|Application|Factory|\Illuminate\Contracts\Foundation\Application
     {
         return view('admin.game.game.index', new GameIndexViewModel());
     }

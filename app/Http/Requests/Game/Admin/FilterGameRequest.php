@@ -6,7 +6,7 @@ use Illuminate\Foundation\Http\FormRequest;
 
 class FilterGameRequest extends FormRequest
 {
-    protected $redirectRoute = 'games.index';
+    protected $redirectRoute = 'admin.games.index';
 
     /**
      * Determine if the user is authorized to make this request.
@@ -35,6 +35,10 @@ class FilterGameRequest extends FormRequest
                 'date',
                 'date_format:Y-m-d'
             ],
+            'filters.genres' => ['nullable', 'array'],
+            'filters.platforms' => ['nullable', 'array'],
+            'filters.developers' => ['nullable', 'array'],
+            'filters.publishers' => ['nullable', 'array'],
             'filters.user' => [
                 'nullable',
                 'integer',
@@ -57,6 +61,10 @@ class FilterGameRequest extends FormRequest
             'filters.search' => __('common.search'),
             'filters.dates' => __('common.dates'),
             'filters.user' => trans_choice('user.users', 1),
+            'filters.genres' => trans_choice('game.genre.genres', 2),
+            'filters.platforms' => trans_choice('game.platform.platforms', 2),
+            'filters.developers' => trans_choice('game.developer.developers', 2),
+            'filters.publishers' => trans_choice('game.publisher.publishers', 2),
         ];
     }
 }
