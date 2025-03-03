@@ -72,7 +72,7 @@ class GamePlatformControllerTest extends TestCase
         $this->actingAs($this->user)
             ->get(action([GamePlatformController::class, 'index']))
             ->assertOk()
-            ->assertSee(__('game_platform.list'))
+            ->assertSee(__('game.platform.list'))
             ->assertViewIs('admin.game.platform.index');
     }
 
@@ -85,7 +85,7 @@ class GamePlatformControllerTest extends TestCase
         $this->actingAs($this->user)
             ->get(action([GamePlatformController::class, 'create']))
             ->assertOk()
-            ->assertSee(__('game_platform.add'))
+            ->assertSee(__('game.platform.add'))
             ->assertViewIs('admin.game.platform.create');
     }
 
@@ -111,7 +111,7 @@ class GamePlatformControllerTest extends TestCase
         $this->actingAs($this->user)
             ->post(action([GamePlatformController::class, 'store']), $this->request)
             ->assertRedirectToRoute('admin.game-platforms.index')
-            ->assertSessionHas('helper_flash_message', __('game_platform.created'));
+            ->assertSessionHas('helper_flash_message', __('game.platform.created'));
 
         $this->assertDatabaseHas('game_platforms', [
             'name' => $this->request['name']
@@ -132,7 +132,7 @@ class GamePlatformControllerTest extends TestCase
         $this->actingAs($this->user)
             ->post(action([GamePlatformController::class, 'store']), $this->request)
             ->assertRedirectToRoute('admin.game-platforms.index')
-            ->assertSessionHas('helper_flash_message', __('game_platform.created'));
+            ->assertSessionHas('helper_flash_message', __('game.platform.created'));
 
         $this->assertDatabaseHas('game_platforms', [
             'name' => $this->request['name']
@@ -196,7 +196,7 @@ class GamePlatformControllerTest extends TestCase
                 $this->request
             )
             ->assertRedirectToRoute('admin.game-platforms.index')
-            ->assertSessionHas('helper_flash_message', __('game_platform.updated'));
+            ->assertSessionHas('helper_flash_message', __('game.platform.updated'));
 
         $this->assertDatabaseHas('game_platforms', [
             'name' => $this->request['name']
@@ -212,7 +212,7 @@ class GamePlatformControllerTest extends TestCase
         $this->actingAs($this->user)
             ->delete(action([GamePlatformController::class, 'destroy'], [$this->gamePlatform->slug]))
             ->assertRedirectToRoute('admin.game-platforms.index')
-            ->assertSessionHas('helper_flash_message', __('game_platform.deleted'));
+            ->assertSessionHas('helper_flash_message', __('game.platform.deleted'));
 
         $this->assertDatabaseMissing('game_platforms', [
             'name' => $this->gamePlatform->name,

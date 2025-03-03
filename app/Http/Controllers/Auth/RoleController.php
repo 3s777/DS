@@ -42,7 +42,7 @@ class RoleController extends Controller
 
         $role->syncPermissions($request->input('permissions'));
 
-        flash()->info(__('role.created'));
+        flash()->info(__('user.role.created'));
 
         return to_route('admin.roles.index');
     }
@@ -69,7 +69,7 @@ class RoleController extends Controller
 
         $role->syncPermissions($request->input('permissions'));
 
-        flash()->info(__('role.updated'));
+        flash()->info(__('user.role.updated'));
 
         return to_route('admin.roles.index');
     }
@@ -78,7 +78,7 @@ class RoleController extends Controller
     {
         $role->delete();
 
-        flash()->info(__('role.deleted'));
+        flash()->info(__('user.role.deleted'));
 
         return to_route('admin.roles.index');
     }

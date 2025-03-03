@@ -1,6 +1,6 @@
 <x-layouts.admin :search="false">
     <x-ui.title size="normal" indent="big">
-            {{ __('permission.list') }}
+            {{ __('user.permission.list') }}
     </x-ui.title>
 
     <x-common.action-table model-name="permissions" :mass-delete="false" :selectable="false">

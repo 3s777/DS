@@ -98,7 +98,7 @@
                             type="input"
                             :selected="$selectedRoles"
                             :options="$roles"
-                            :label="trans_choice('role.choose', 1)"/>
+                            :label="trans_choice('user.role.choose', 1)"/>
                     </x-ui.form.group>
                 </x-grid.col>
             </x-grid>
@@ -106,7 +106,7 @@
             <x-ui.form.group>
                 <x-ui.accordion>
                     <x-ui.accordion.item  padding="none" color="light">
-                        <x-ui.accordion.title>{{ __('permission.additional') }}</x-ui.accordion.title>
+                        <x-ui.accordion.title>{{ __('user.permission.additional') }}</x-ui.accordion.title>
                         <x-ui.accordion.content>
                             <x-grid type="container">
                                 @foreach($permissions as $key => $permission)

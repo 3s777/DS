@@ -22,13 +22,13 @@
                             <x-ui.tag :disabled="true" tag="div" color="dark">{{ $user->language }}</x-ui.tag>
                         </x-ui.specifications.item>
 
-                        <x-ui.specifications.item class="crud-show__specification" :title="trans_choice('role.roles', 2)">
+                        <x-ui.specifications.item class="crud-show__specification" :title="trans_choice('user.role.roles', 2)">
                             @foreach($user->roles as $role)
                                 <x-ui.tag :disabled="true" tag="div" color="dark">{{ $role->display_name }}</x-ui.tag>
                             @endforeach
                         </x-ui.specifications.item>
 
-                        <x-ui.specifications.item class="crud-show__specification" :title="trans_choice('permission.permissions', 2)">
+                        <x-ui.specifications.item class="crud-show__specification" :title="trans_choice('user.permission.permissions', 2)">
                             @foreach($user->permissions as $permission)
                                 <x-ui.tag :disabled="true" tag="div" color="dark">{{ $permission->display_name }}</x-ui.tag>
                             @endforeach

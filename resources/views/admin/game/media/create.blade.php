@@ -1,7 +1,7 @@
 <x-layouts.admin :search="false">
     <x-admin.crud-form
         :action="route('admin.game-medias.store')"
-        :title="__('game_media.add')"
+        :title="__('game.media.add')"
         :images="true">
             <x-grid type="container">
                 <x-grid.col xl="4" ls="6" ml="12" lg="6" md="6" sm="12">
@@ -20,7 +20,7 @@
                 <x-grid.col xl="4" ls="6" ml="12" lg="6" md="6" sm="12">
                     <x-ui.form.group>
                         <x-ui.form.datepicker
-                            :placeholder="__('game_media.released_at')"
+                            :placeholder="__('game.media.released_at')"
                             id="released_at"
                             name="released_at">
                         </x-ui.form.datepicker>
@@ -79,12 +79,12 @@
 {{--                            class="choices-genres"--}}
 {{--                            id="genres"--}}
 {{--                            name="genres[]"--}}
-{{--                            :label="trans_choice('game_genre.choose', 2)"--}}
+{{--                            :label="trans_choice('game.genre.choose', 2)"--}}
 {{--                            error="genres"--}}
 {{--                            multiple>--}}
 
 {{--                            <x-ui.form.option value="">--}}
-{{--                                {{ trans_choice('game_genre.genres', 2) }}--}}
+{{--                                {{ trans_choice('game.genre.genres', 2) }}--}}
 {{--                            </x-ui.form.option>--}}
 
 {{--                            @foreach($genres as $key => $genre)--}}
@@ -101,8 +101,8 @@
                             select-name="genres[]"
                             id="genres"
                             :options="$genres"
-                            :label="trans_choice('game_genre.choose', 2)"
-                            :default-option="trans_choice('game_genre.genres', 2)"
+                            :label="trans_choice('game.genre.choose', 2)"
+                            :default-option="trans_choice('game.genre.genres', 2)"
                             :scripts="false"
                         />
                     </x-ui.form.group>
@@ -114,8 +114,8 @@
                             name="platforms"
                             select-name="platforms[]"
                             :options="$platforms"
-                            :label="trans_choice('game_platform.choose', 2)"
-                            :default-option="trans_choice('game_platform.platforms', 2)"
+                            :label="trans_choice('game.platform.choose', 2)"
+                            :default-option="trans_choice('game.platform.platforms', 2)"
                             :scripts="false"
                         />
                     </x-ui.form.group>
@@ -129,8 +129,8 @@
                             :error="$errors->has('developers')"
                             route="select-game-developers"
                             :scripts="false"
-                            :default-option="trans_choice('game_developer.developers', 1)"
-                            :label="trans_choice('game_developer.choose', 2)">
+                            :default-option="trans_choice('game.developer.developers', 1)"
+                            :label="trans_choice('game.developer.choose', 2)">
                         </x-ui.select.async-multiple>
                     </x-ui.form.group>
                 </x-grid.col>
@@ -143,8 +143,8 @@
                             :error="$errors->has('publishers')"
                             route="select-game-publishers"
                             :scripts="false"
-                            :default-option="trans_choice('game_publisher.publishers', 2)"
-                            :label="trans_choice('game_publisher.choose', 2)">
+                            :default-option="trans_choice('game.publisher.publishers', 2)"
+                            :label="trans_choice('game.publisher.choose', 2)">
                         </x-ui.select.async-multiple>
                     </x-ui.form.group>
                 </x-grid.col>

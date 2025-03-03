@@ -1,6 +1,6 @@
 <x-layouts.admin :search="false">
     <x-ui.title size="normal" indent="big">
-        {{ __('game_platform.list') }}
+        {{ __('game.platform.list') }}
     </x-ui.title>
 
     <x-common.action-table model-name="admin.game-platforms">
@@ -25,10 +25,10 @@
                     {{ trans_choice('common.name', 1) }}
                 </x-ui.responsive-table.column>
                 <x-ui.responsive-table.column name="type">
-                    {{ __('game_platform.type') }}
+                    {{ __('game.platform.type') }}
                 </x-ui.responsive-table.column>
                 <x-ui.responsive-table.column name="manufacturer">
-                    {{ trans_choice('game_platform_manufacturer.manufacturers', 1) }}
+                    {{ trans_choice('game.platform_manufacturer.manufacturers', 1) }}
                 </x-ui.responsive-table.column>
                 <x-ui.responsive-table.column name="users.name">
                     {{ trans_choice('user.users', 1) }}
@@ -53,13 +53,13 @@
                         <span class="responsive-table__label">{{ trans_choice('common.name', 1) }}: </span> {{ $platform->name }}
                     </x-ui.responsive-table.column>
                     <x-ui.responsive-table.column>
-                        <span class="responsive-table__label">{{ __('game_platform.type') }}: </span>
+                        <span class="responsive-table__label">{{ __('game.platform.type') }}: </span>
                         @if($platform->type)
                             {{ $getTypeName($platform->type) }}
                         @endif
                     </x-ui.responsive-table.column>
                     <x-ui.responsive-table.column>
-                        <span class="responsive-table__label">{{ trans_choice('game_platform_manufacturer.manufacturers', 1) }}: </span>
+                        <span class="responsive-table__label">{{ trans_choice('game.platform_manufacturer.manufacturers', 1) }}: </span>
                             {{ $platform->manufacturer_name }}
                     </x-ui.responsive-table.column>
                     <x-ui.responsive-table.column>

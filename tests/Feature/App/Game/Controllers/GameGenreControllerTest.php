@@ -67,7 +67,7 @@ class GameGenreControllerTest extends TestCase
         $this->actingAs($this->user)
             ->get(action([GameGenreController::class, 'index']))
             ->assertOk()
-            ->assertSee(__('game_genre.list'))
+            ->assertSee(__('game.genre.list'))
             ->assertViewIs('admin.game.genre.index');
     }
 
@@ -80,7 +80,7 @@ class GameGenreControllerTest extends TestCase
         $this->actingAs($this->user)
             ->get(action([GameGenreController::class, 'create']))
             ->assertOk()
-            ->assertSee(__('game_genre.add'))
+            ->assertSee(__('game.genre.add'))
             ->assertViewIs('admin.game.genre.create');
     }
 
@@ -107,7 +107,7 @@ class GameGenreControllerTest extends TestCase
         $this->actingAs($this->user)
             ->post(action([GameGenreController::class, 'store']), $this->request)
             ->assertRedirectToRoute('admin.game-genres.index')
-            ->assertSessionHas('helper_flash_message', __('game_genre.created'));
+            ->assertSessionHas('helper_flash_message', __('game.genre.created'));
 
         $this->assertDatabaseHas('game_genres', [
             'name' => $this->request['name']
@@ -151,7 +151,7 @@ class GameGenreControllerTest extends TestCase
                 $this->request
             )
             ->assertRedirectToRoute('admin.game-genres.index')
-            ->assertSessionHas('helper_flash_message', __('game_genre.updated'));
+            ->assertSessionHas('helper_flash_message', __('game.genre.updated'));
 
         $this->assertDatabaseHas('game_genres', [
             'name' => $this->request['name']
@@ -167,7 +167,7 @@ class GameGenreControllerTest extends TestCase
         $this->actingAs($this->user)
             ->delete(action([GameGenreController::class, 'destroy'], [$this->gameDeveloper->slug]))
             ->assertRedirectToRoute('admin.game-genres.index')
-            ->assertSessionHas('helper_flash_message', __('game_genre.deleted'));
+            ->assertSessionHas('helper_flash_message', __('game.genre.deleted'));
 
         $this->assertDatabaseMissing('game_genres', [
             'name' => $this->gameDeveloper->name,

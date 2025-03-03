@@ -42,35 +42,35 @@ class GameFilterRegistrar implements FilterRegistrar
                 User::class
             ),
             'genres' => RelationMultipleFilter::make(
-                trans_choice('game_genre.genres', 2),
+                trans_choice('game.genre.genres', 2),
                 'genres',
                 'game_genres',
                 'id',
-                trans_choice('game_genre.choose', 1),
+                trans_choice('game.genre.choose', 1),
                 GameGenre::class
             ),
             'developers' => RelationMultipleFilter::make(
-                trans_choice('game_developer.developers', 2),
+                trans_choice('game.developer.developers', 2),
                 'developers',
                 'game_developers',
                 'id',
-                trans_choice('game_developer.choose', 1),
+                trans_choice('game.developer.choose', 1),
                 GameDeveloper::class
             ),
             'publishers' => RelationMultipleFilter::make(
-                trans_choice('game_publisher.publishers', 2),
+                trans_choice('game.publisher.publishers', 2),
                 'publishers',
                 'game_publishers',
                 'id',
-                trans_choice('game_publisher.choose', 1),
+                trans_choice('game.publisher.choose', 1),
                 GamePublisher::class
             ),
             'platforms' => RelationMultipleFilter::make(
-                trans_choice('game_platform.platforms', 2),
+                trans_choice('game.platform.platforms', 2),
                 'platforms',
                 'game_platforms',
                 'id',
-                trans_choice('game_platform.choose', 1),
+                trans_choice('game.platform.choose', 1),
                 GamePlatform::class
             ),
         ];

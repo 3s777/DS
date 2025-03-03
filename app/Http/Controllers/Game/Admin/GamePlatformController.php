@@ -44,7 +44,7 @@ class GamePlatformController extends Controller
             ['small', 'medium']
         );
 
-        flash()->info(__('game_platform.created'));
+        flash()->info(__('game.platform.created'));
 
         return to_route('admin.game-platforms.index');
     }
@@ -65,7 +65,7 @@ class GamePlatformController extends Controller
 
         $gamePlatform->fill($request->safe()->except(['featured_image', 'featured_image_uploaded']))->save();
 
-        flash()->info(__('game_platform.updated'));
+        flash()->info(__('game.platform.updated'));
 
         return to_route('admin.game-platforms.index');
     }
@@ -74,7 +74,7 @@ class GamePlatformController extends Controller
     {
         $gamePlatform->delete();
 
-        flash()->info(__('game_platform.deleted'));
+        flash()->info(__('game.platform.deleted'));
 
         return to_route('admin.game-platforms.index');
     }
@@ -91,7 +91,7 @@ class GamePlatformController extends Controller
             )
         );
 
-        flash()->info(__('game_platform.mass_deleted'));
+        flash()->info(__('game.platform.mass_deleted'));
 
         return to_route('admin.game-platforms.index');
     }
@@ -109,7 +109,7 @@ class GamePlatformController extends Controller
             )
         );
 
-        flash()->info(__('game_platform.mass_force_deleted'));
+        flash()->info(__('game.platform.mass_force_deleted'));
 
         return to_route('admin.game-platforms.index');
     }

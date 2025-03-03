@@ -1,6 +1,6 @@
 <x-layouts.admin :search="false">
     <x-ui.title size="normal" indent="big">
-        {{ __('game_genre.list') }}
+        {{ __('game.genre.list') }}
     </x-ui.title>
 
     <x-common.action-table model-name="admin.game-genres">

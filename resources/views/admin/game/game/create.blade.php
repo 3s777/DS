@@ -53,8 +53,8 @@
                             name="genres"
                             select-name="genres[]"
                             :options="$genres"
-                            :label="trans_choice('game_genre.choose', 2)"
-                            :default-option="trans_choice('game_genre.genres', 2)" />
+                            :label="trans_choice('game.genre.choose', 2)"
+                            :default-option="trans_choice('game.genre.genres', 2)" />
                     </x-ui.form.group>
                 </x-grid.col>
 
@@ -64,8 +64,8 @@
                             name="platforms"
                             select-name="platforms[]"
                             :options="$platforms"
-                            :label="trans_choice('game_platform.choose', 2)"
-                            :default-option="trans_choice('game_platform.platforms', 2)" />
+                            :label="trans_choice('game.platform.choose', 2)"
+                            :default-option="trans_choice('game.platform.platforms', 2)" />
                     </x-ui.form.group>
                 </x-grid.col>
 
@@ -75,8 +75,8 @@
                             name="developers"
                             select-name="developers[]"
                             route="select-game-developers"
-                            :default-option="trans_choice('game_developer.developers', 1)"
-                            :label="trans_choice('game_developer.choose', 2)">
+                            :default-option="trans_choice('game.developer.developers', 1)"
+                            :label="trans_choice('game.developer.choose', 2)">
                         </x-ui.select.async-multiple>
                     </x-ui.form.group>
                 </x-grid.col>
@@ -87,8 +87,8 @@
                             name="publishers"
                             select-name="publishers[]"
                             route="select-game-publishers"
-                            :default-option="trans_choice('game_publisher.publishers', 2)"
-                            :label="trans_choice('game_publisher.choose', 2)">
+                            :default-option="trans_choice('game.publisher.publishers', 2)"
+                            :label="trans_choice('game.publisher.choose', 2)">
                         </x-ui.select.async-multiple>
                     </x-ui.form.group>
                 </x-grid.col>

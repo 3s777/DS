@@ -78,8 +78,8 @@ class UpdateGamePlatformRequest extends FormRequest
             'description' => __('common.description'),
             'featured_image' => __('common.featured_image'),
             'user_id' => trans_choice('user.users', 1),
-            'type' => __('game_platform_manufacturer.manufacturer'),
-            'game_platform_manufacturer_id' => __('game_platform_manufacturer.manufacturer')
+            'type' => __('game.platform_manufacturer.manufacturer'),
+            'game_platform_manufacturer_id' => __('game.platform_manufacturer.manufacturer')
         ];
     }
 }

@@ -109,7 +109,7 @@ class CreateCollectorRequest extends FormRequest
             'slug' => __('common.slug'),
             'first_name' => __('auth.first_name'),
             'email' => __('common.email'),
-            'roles' => trans_choice('role.roles', 2),
+            'roles' => trans_choice('user.role.roles', 2),
             'description' => __('common.description'),
             'featured_image' => __('common.featured_image'),
             'language' => __('common.language'),

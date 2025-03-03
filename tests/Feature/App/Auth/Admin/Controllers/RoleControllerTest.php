@@ -70,7 +70,7 @@ class RoleControllerTest extends TestCase
         $this->actingAs($this->user)
             ->get(action([RoleController::class, 'index']))
             ->assertOk()
-            ->assertSee(__('role.list'))
+            ->assertSee(__('user.role.list'))
             ->assertViewIs('admin.user.role.index');
     }
 
@@ -83,7 +83,7 @@ class RoleControllerTest extends TestCase
         $this->actingAs($this->user)
             ->get(action([RoleController::class, 'create']))
             ->assertOk()
-            ->assertSee(__('role.add'))
+            ->assertSee(__('user.role.add'))
             ->assertViewIs('admin.user.role.create');
     }
 
@@ -109,7 +109,7 @@ class RoleControllerTest extends TestCase
         $this->actingAs($this->user)
             ->post(action([RoleController::class, 'store']), $this->request)
             ->assertRedirectToRoute('admin.roles.index')
-            ->assertSessionHas('helper_flash_message', __('role.created'));
+            ->assertSessionHas('helper_flash_message', __('user.role.created'));
 
         $role = Role::where('name', $this->request['name'])->first();
         $this->assertTrue($role->hasAllPermissions(['entity.*', 'entity.create', 'entity.edit', 'entity.delete']));
@@ -130,7 +130,7 @@ class RoleControllerTest extends TestCase
         $this->actingAs($this->user)
             ->post(action([RoleController::class, 'store']), $this->request)
             ->assertRedirectToRoute('admin.roles.index')
-            ->assertSessionHas('helper_flash_message', __('role.created'));
+            ->assertSessionHas('helper_flash_message', __('user.role.created'));
 
         $role = Role::where('name', $this->request['name'])->first();
         $this->assertTrue($role->hasAllPermissions(['entity.create', 'entity.edit', 'entity.delete']));
@@ -199,7 +199,7 @@ class RoleControllerTest extends TestCase
                 $this->request
             )
             ->assertRedirectToRoute('admin.roles.index')
-            ->assertSessionHas('helper_flash_message', __('role.updated'));
+            ->assertSessionHas('helper_flash_message', __('user.role.updated'));
 
         $role = Role::where('name', $this->request['name'])->first();
         $this->assertTrue($role->hasAllPermissions(['entity.edit', 'entity.delete']));
@@ -229,7 +229,7 @@ class RoleControllerTest extends TestCase
                 $this->request
             )
             ->assertRedirectToRoute('admin.roles.index')
-            ->assertSessionHas('helper_flash_message', __('role.updated'));
+            ->assertSessionHas('helper_flash_message', __('user.role.updated'));
 
         $this->followRedirects($response)->assertSee('ТестРус');
 
@@ -262,7 +262,7 @@ class RoleControllerTest extends TestCase
         $this->actingAs($this->user)
             ->delete(action([RoleController::class, 'destroy'], [$this->role->id]))
             ->assertRedirectToRoute('admin.roles.index')
-            ->assertSessionHas('helper_flash_message', __('role.deleted'));
+            ->assertSessionHas('helper_flash_message', __('user.role.deleted'));
 
         $this->assertDatabaseMissing('roles', [
             'name' => $this->role->name,

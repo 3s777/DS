@@ -72,7 +72,7 @@ class GamePlatformManufacturerControllerTest extends TestCase
         $this->actingAs($this->user)
             ->get(action([GamePlatformManufacturerController::class, 'index']))
             ->assertOk()
-            ->assertSee(__('game_platform_manufacturer.list'))
+            ->assertSee(__('game.platform_manufacturer.list'))
             ->assertViewIs('admin.game.platform-manufacturer.index');
     }
 
@@ -85,7 +85,7 @@ class GamePlatformManufacturerControllerTest extends TestCase
         $this->actingAs($this->user)
             ->get(action([GamePlatformManufacturerController::class, 'create']))
             ->assertOk()
-            ->assertSee(__('game_platform_manufacturer.add'))
+            ->assertSee(__('game.platform_manufacturer.add'))
             ->assertViewIs('admin.game.platform-manufacturer.create');
     }
 
@@ -112,7 +112,7 @@ class GamePlatformManufacturerControllerTest extends TestCase
         $this->actingAs($this->user)
             ->post(action([GamePlatformManufacturerController::class, 'store']), $this->request)
             ->assertRedirectToRoute('admin.game-platform-manufacturers.index')
-            ->assertSessionHas('helper_flash_message', __('game_platform_manufacturer.created'));
+            ->assertSessionHas('helper_flash_message', __('game.platform_manufacturer.created'));
 
         $this->assertDatabaseHas('game_platform_manufacturers', [
             'name' => $this->request['name']
@@ -133,7 +133,7 @@ class GamePlatformManufacturerControllerTest extends TestCase
         $this->actingAs($this->user)
             ->post(action([GamePlatformManufacturerController::class, 'store']), $this->request)
             ->assertRedirectToRoute('admin.game-platform-manufacturers.index')
-            ->assertSessionHas('helper_flash_message', __('game_platform_manufacturer.created'));
+            ->assertSessionHas('helper_flash_message', __('game.platform_manufacturer.created'));
 
         $this->assertDatabaseHas('game_platform_manufacturers', [
             'name' => $this->request['name']
@@ -197,7 +197,7 @@ class GamePlatformManufacturerControllerTest extends TestCase
                 $this->request
             )
             ->assertRedirectToRoute('admin.game-platform-manufacturers.index')
-            ->assertSessionHas('helper_flash_message', __('game_platform_manufacturer.updated'));
+            ->assertSessionHas('helper_flash_message', __('game.platform_manufacturer.updated'));
 
         $this->assertDatabaseHas('game_platform_manufacturers', [
             'name' => $this->request['name']
@@ -213,7 +213,7 @@ class GamePlatformManufacturerControllerTest extends TestCase
         $this->actingAs($this->user)
             ->delete(action([GamePlatformManufacturerController::class, 'destroy'], [$this->gameDeveloper->slug]))
             ->assertRedirectToRoute('admin.game-platform-manufacturers.index')
-            ->assertSessionHas('helper_flash_message', __('game_platform_manufacturer.deleted'));
+            ->assertSessionHas('helper_flash_message', __('game.platform_manufacturer.deleted'));
 
         $this->assertDatabaseMissing('game_platform_manufacturers', [
             'name' => $this->gameDeveloper->name,

@@ -28,7 +28,7 @@ class PermissionController extends Controller
     {
         Permission::create($request->safe()->toArray());
 
-        flash()->info(__('permission.created'));
+        flash()->info(__('user.permission.created'));
 
         return to_route('admin.permissions.index');
     }
@@ -47,7 +47,7 @@ class PermissionController extends Controller
     {
         $permission->fill($request->validated())->save();
 
-        flash()->info(__('permission.updated'));
+        flash()->info(__('user.permission.updated'));
 
         return to_route('admin.permissions.index');
     }
@@ -56,7 +56,7 @@ class PermissionController extends Controller
     {
         $permission->delete();
 
-        flash()->info(__('permission.deleted'));
+        flash()->info(__('user.permission.deleted'));
 
         return to_route('admin.permissions.index');
     }

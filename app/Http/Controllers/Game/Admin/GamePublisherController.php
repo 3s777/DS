@@ -49,7 +49,7 @@ class GamePublisherController extends Controller
             ['small', 'medium']
         );
 
-        flash()->info(__('game_publisher.created'));
+        flash()->info(__('game.publisher.created'));
 
         return to_route('admin.game-publishers.index');
     }
@@ -70,7 +70,7 @@ class GamePublisherController extends Controller
 
         $gamePublisher->fill($request->safe()->except(['featured_image', 'featured_image_uploaded']))->save();
 
-        flash()->info(__('game_publisher.updated'));
+        flash()->info(__('game.publisher.updated'));
 
         return to_route('admin.game-publishers.index');
     }
@@ -79,7 +79,7 @@ class GamePublisherController extends Controller
     {
         $gamePublisher->delete();
 
-        flash()->info(__('game_publisher.deleted'));
+        flash()->info(__('game.publisher.deleted'));
 
         return to_route('admin.game-publishers.index');
     }
@@ -96,7 +96,7 @@ class GamePublisherController extends Controller
             )
         );
 
-        flash()->info(__('game_publisher.mass_deleted'));
+        flash()->info(__('game.publisher.mass_deleted'));
 
         return to_route('admin.game-publishers.index');
     }
@@ -114,7 +114,7 @@ class GamePublisherController extends Controller
             )
         );
 
-        flash()->info(__('game_publisher.mass_force_deleted'));
+        flash()->info(__('game.publisher.mass_force_deleted'));
 
         return to_route('admin.game-publishers.index');
     }
@@ -124,7 +124,7 @@ class GamePublisherController extends Controller
         return new AsyncSelectByQueryViewModel(
             $request->input('query'),
             GamePublisher::class,
-            trans_choice('game_publisher.choose', 2)
+            trans_choice('game.publisher.choose', 2)
         );
     }
 }

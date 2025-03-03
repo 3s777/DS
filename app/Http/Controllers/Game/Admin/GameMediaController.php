@@ -43,7 +43,7 @@ class GameMediaController extends Controller
     {
         $gameMediaService->create(FillGameMediaDTO::fromRequest($request));
 
-        flash()->info(__('game_media.created'));
+        flash()->info(__('game.media.created'));
 
         return to_route('admin.game-medias.index');
     }
@@ -62,7 +62,7 @@ class GameMediaController extends Controller
     {
         $gameMediaService->update($gameMedia, FillGameMediaDTO::fromRequest($request));
 
-        flash()->info(__('game_media.updated'));
+        flash()->info(__('game.media.updated'));
 
         return to_route('admin.game-medias.index');
     }
@@ -71,7 +71,7 @@ class GameMediaController extends Controller
     {
         $gameMedia->delete();
 
-        flash()->info(__('game_media.deleted'));
+        flash()->info(__('game.media.deleted'));
 
         return to_route('admin.game-medias.index');
     }
@@ -88,7 +88,7 @@ class GameMediaController extends Controller
             )
         );
 
-        flash()->info(__('game_media.mass_deleted'));
+        flash()->info(__('game.media.mass_deleted'));
 
         return to_route('admin.game-medias.index');
     }
@@ -106,7 +106,7 @@ class GameMediaController extends Controller
             )
         );
 
-        flash()->info(__('game_media.mass_force_deleted'));
+        flash()->info(__('game.media.mass_force_deleted'));
 
         return to_route('admin.game-medias.index');
     }
@@ -116,7 +116,7 @@ class GameMediaController extends Controller
         return new AsyncSelectByQueryViewModel(
             $request->input('query'),
             GameMedia::class,
-            trans_choice('game_media.choose', 2)
+            trans_choice('game.media.choose', 2)
         );
     }
 }

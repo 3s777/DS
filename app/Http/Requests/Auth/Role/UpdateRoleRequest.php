@@ -48,7 +48,7 @@ class UpdateRoleRequest extends FormRequest
             'name' => trans_choice('common.name', 1),
             'display_name' => __('common.display_name'),
             'description' => __('common.description'),
-            'permissions' => __('permission.permissions'),
+            'permissions' => __('user.permission.permissions'),
         ];
     }
 }

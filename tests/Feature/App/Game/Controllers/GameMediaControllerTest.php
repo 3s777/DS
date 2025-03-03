@@ -71,7 +71,7 @@ class GameMediaControllerTest extends TestCase
         $this->actingAs($this->user)
             ->get(action([GameMediaController::class, 'index']))
             ->assertOk()
-            ->assertSee(__('game_media.list'))
+            ->assertSee(__('game.media.list'))
             ->assertViewIs('admin.game.media.index');
     }
 
@@ -84,7 +84,7 @@ class GameMediaControllerTest extends TestCase
         $this->actingAs($this->user)
             ->get(action([GameMediaController::class, 'create']))
             ->assertOk()
-            ->assertSee(__('game_media.add'))
+            ->assertSee(__('game.media.add'))
             ->assertViewIs('admin.game.media.create');
     }
 
@@ -110,7 +110,7 @@ class GameMediaControllerTest extends TestCase
         $this->actingAs($this->user)
             ->post(action([GameMediaController::class, 'store']), $this->request)
             ->assertRedirectToRoute('admin.game-medias.index')
-            ->assertSessionHas('helper_flash_message', __('game_media.created'));
+            ->assertSessionHas('helper_flash_message', __('game.media.created'));
 
         $this->assertDatabaseHas('game_medias', [
             'name' => $this->request['name']
@@ -131,7 +131,7 @@ class GameMediaControllerTest extends TestCase
         $this->actingAs($this->user)
             ->post(action([GameMediaController::class, 'store']), $this->request)
             ->assertRedirectToRoute('admin.game-medias.index')
-            ->assertSessionHas('helper_flash_message', __('game_media.created'));
+            ->assertSessionHas('helper_flash_message', __('game.media.created'));
 
         $this->assertDatabaseHas('game_medias', [
             'name' => $this->request['name']
@@ -213,7 +213,7 @@ class GameMediaControllerTest extends TestCase
                 $this->request
             )
             ->assertRedirectToRoute('admin.game-medias.index')
-            ->assertSessionHas('helper_flash_message', __('game_media.updated'));
+            ->assertSessionHas('helper_flash_message', __('game.media.updated'));
 
         $this->assertDatabaseHas('game_medias', [
             'name' => $this->request['name']
@@ -269,7 +269,7 @@ class GameMediaControllerTest extends TestCase
         $this->actingAs($this->user)
             ->delete(action([GameMediaController::class, 'destroy'], [$this->gameMedia->slug]))
             ->assertRedirectToRoute('admin.game-medias.index')
-            ->assertSessionHas('helper_flash_message', __('game_media.deleted'));
+            ->assertSessionHas('helper_flash_message', __('game.media.deleted'));
 
         $this->assertDatabaseMissing('game_medias', [
             'name' => $this->gameMedia->name,

@@ -71,7 +71,7 @@ class GamePublisherControllerTest extends TestCase
         $this->actingAs($this->user)
             ->get(action([GamePublisherController::class, 'index']))
             ->assertOk()
-            ->assertSee(__('game_publisher.list'))
+            ->assertSee(__('game.publisher.list'))
             ->assertViewIs('admin.game.publisher.index');
     }
 
@@ -84,7 +84,7 @@ class GamePublisherControllerTest extends TestCase
         $this->actingAs($this->user)
             ->get(action([GamePublisherController::class, 'create']))
             ->assertOk()
-            ->assertSee(__('game_publisher.add'))
+            ->assertSee(__('game.publisher.add'))
             ->assertViewIs('admin.game.publisher.create');
     }
 
@@ -110,7 +110,7 @@ class GamePublisherControllerTest extends TestCase
         $this->actingAs($this->user)
             ->post(action([GamePublisherController::class, 'store']), $this->request)
             ->assertRedirectToRoute('admin.game-publishers.index')
-            ->assertSessionHas('helper_flash_message', __('game_publisher.created'));
+            ->assertSessionHas('helper_flash_message', __('game.publisher.created'));
 
         $this->assertDatabaseHas('game_publishers', [
             'name' => $this->request['name']
@@ -131,7 +131,7 @@ class GamePublisherControllerTest extends TestCase
         $this->actingAs($this->user)
             ->post(action([GamePublisherController::class, 'store']), $this->request)
             ->assertRedirectToRoute('admin.game-publishers.index')
-            ->assertSessionHas('helper_flash_message', __('game_publisher.created'));
+            ->assertSessionHas('helper_flash_message', __('game.publisher.created'));
 
         $this->assertDatabaseHas('game_publishers', [
             'name' => $this->request['name']
@@ -195,7 +195,7 @@ class GamePublisherControllerTest extends TestCase
                 $this->request
             )
             ->assertRedirectToRoute('admin.game-publishers.index')
-            ->assertSessionHas('helper_flash_message', __('game_publisher.updated'));
+            ->assertSessionHas('helper_flash_message', __('game.publisher.updated'));
 
         $this->assertDatabaseHas('game_publishers', [
             'name' => $this->request['name']
@@ -211,7 +211,7 @@ class GamePublisherControllerTest extends TestCase
         $this->actingAs($this->user)
             ->delete(action([GamePublisherController::class, 'destroy'], [$this->gamePublisher->slug]))
             ->assertRedirectToRoute('admin.game-publishers.index')
-            ->assertSessionHas('helper_flash_message', __('game_publisher.deleted'));
+            ->assertSessionHas('helper_flash_message', __('game.publisher.deleted'));
 
         $this->assertDatabaseMissing('game_publishers', [
             'name' => $this->gamePublisher->name,

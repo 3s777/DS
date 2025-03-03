@@ -3,7 +3,7 @@
         @if(request('filters.search'))
             {{ __('filters.result') }} "{{ request('filters.search') }}"
         @else
-            {{ __('game_developer.list') }}
+            {{ __('game.developer.list') }}
         @endif
     </x-ui.title>
 

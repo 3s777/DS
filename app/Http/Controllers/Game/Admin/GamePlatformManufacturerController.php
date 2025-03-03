@@ -44,7 +44,7 @@ class GamePlatformManufacturerController extends Controller
             ['small', 'medium']
         );
 
-        flash()->info(__('game_platform_manufacturer.created'));
+        flash()->info(__('game.platform_manufacturer.created'));
 
         return to_route('admin.game-platform-manufacturers.index');
     }
@@ -65,7 +65,7 @@ class GamePlatformManufacturerController extends Controller
 
         $gamePlatformManufacturer->fill($request->safe()->except(['featured_image', 'featured_image_uploaded']))->save();
 
-        flash()->info(__('game_platform_manufacturer.updated'));
+        flash()->info(__('game.platform_manufacturer.updated'));
 
         return to_route('admin.game-platform-manufacturers.index');
     }
@@ -74,7 +74,7 @@ class GamePlatformManufacturerController extends Controller
     {
         $gamePlatformManufacturer->delete();
 
-        flash()->info(__('game_platform_manufacturer.deleted'));
+        flash()->info(__('game.platform_manufacturer.deleted'));
 
         return to_route('admin.game-platform-manufacturers.index');
     }
@@ -91,7 +91,7 @@ class GamePlatformManufacturerController extends Controller
             )
         );
 
-        flash()->info(__('game_platform_manufacturer.mass_deleted'));
+        flash()->info(__('game.platform_manufacturer.mass_deleted'));
 
         return to_route('admin.game-platform-manufacturers.index');
     }
@@ -109,7 +109,7 @@ class GamePlatformManufacturerController extends Controller
             )
         );
 
-        flash()->info(__('game_platform_manufacturer.mass_force_deleted'));
+        flash()->info(__('game.platform_manufacturer.mass_force_deleted'));
 
         return to_route('admin.game-platform-manufacturers.index');
     }

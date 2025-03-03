@@ -55,7 +55,7 @@ class GameDeveloperController extends Controller
             ['small', 'medium']
         );
 
-        flash()->info(__('game_developer.created'));
+        flash()->info(__('game.developer.created'));
 
         return to_route('admin.game-developers.index');
     }
@@ -76,7 +76,7 @@ class GameDeveloperController extends Controller
 
         $gameDeveloper->fill($request->safe()->except(['featured_image', 'featured_image_uploaded']))->save();
 
-        flash()->info(__('game_developer.updated'));
+        flash()->info(__('game.developer.updated'));
 
         return to_route('admin.game-developers.index');
     }
@@ -85,7 +85,7 @@ class GameDeveloperController extends Controller
     {
         $gameDeveloper->delete();
 
-        flash()->info(__('game_developer.deleted'));
+        flash()->info(__('game.developer.deleted'));
 
         return to_route('admin.game-developers.index');
     }
@@ -102,7 +102,7 @@ class GameDeveloperController extends Controller
             )
         );
 
-        flash()->info(__('game_developer.mass_deleted'));
+        flash()->info(__('game.developer.mass_deleted'));
 
         return to_route('admin.game-developers.index');
     }
@@ -120,7 +120,7 @@ class GameDeveloperController extends Controller
             )
         );
 
-        flash()->info(__('game_developer.mass_force_deleted'));
+        flash()->info(__('game.developer.mass_force_deleted'));
 
         return to_route('admin.game-developers.index');
     }
@@ -130,7 +130,7 @@ class GameDeveloperController extends Controller
         return new AsyncSelectByQueryViewModel(
             $request->input('query'),
             GameDeveloper::class,
-            trans_choice('game_developer.choose', 2)
+            trans_choice('game.developer.choose', 2)
         );
     }
 }

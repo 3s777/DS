@@ -126,7 +126,7 @@ class CollectibleGameControllerTest extends TestCase
 //        $this->actingAs($this->user)
 //            ->get(action([GameMediaController::class, 'index']))
 //            ->assertOk()
-//            ->assertSee(__('game_media.list'))
+//            ->assertSee(__('game.media.list'))
 //            ->assertViewIs('admin.game.media.index');
 //    }
 

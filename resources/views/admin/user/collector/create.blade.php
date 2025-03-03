@@ -96,7 +96,7 @@
                             type="input"
                             :selected="[config('settings.default_collector_role')]"
                             :options="$roles"
-                            :label="trans_choice('role.choose', 1)"
+                            :label="trans_choice('user.role.choose', 1)"
                             :required="true"
                         />
                     </x-ui.form.group>

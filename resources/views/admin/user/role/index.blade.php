@@ -1,6 +1,6 @@
 <x-layouts.admin :search="false">
     <x-ui.title size="normal" indent="big">
-            {{ __('role.list') }}
+            {{ __('user.role.list') }}
     </x-ui.title>
 
     <x-common.action-table model-name="roles" :mass-delete="false" :selectable="false">

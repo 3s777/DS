@@ -1,7 +1,7 @@
 <x-layouts.admin :search="false">
     <x-admin.crud-form
         :action="route('admin.game-platforms.update', $gamePlatform->slug)"
-        :title="__('game_platform.edit')"
+        :title="__('game.platform.edit')"
         :model="$gamePlatform">
             <x-grid type="container">
                 <x-grid.col xl="4" ls="6" ml="12" lg="6" md="6" sm="12">
@@ -38,8 +38,8 @@
                             required
                             :selected="$gamePlatform->type"
                             :options="$types"
-                            :default-option="__('game_platform.choose_type')"
-                            :label="__('game_platform.choose_type')" />
+                            :default-option="__('game.platform.choose_type')"
+                            :label="__('game.platform.choose_type')" />
                     </x-ui.form.group>
                 </x-grid.col>
 
@@ -51,8 +51,8 @@
                             :show-old="true"
                             :options="$manufacturers"
                             :selected="$selectedManufacturer"
-                            :default-option="trans_choice('game_platform_manufacturer.manufacturers', 1)"
-                            :placeholder="trans_choice('game_platform_manufacturer.choose', 1)" />
+                            :default-option="trans_choice('game.platform_manufacturer.manufacturers', 1)"
+                            :placeholder="trans_choice('game.platform_manufacturer.choose', 1)" />
                     </x-ui.form.group>
                 </x-grid.col>
 

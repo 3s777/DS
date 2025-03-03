@@ -39,7 +39,7 @@ class GameGenreController extends Controller
     {
         $gameGenre = GameGenre::create($request->safe()->toArray());
 
-        flash()->info(__('game_genre.created'));
+        flash()->info(__('game.genre.created'));
 
         return to_route('admin.game-genres.index');
     }
@@ -59,7 +59,7 @@ class GameGenreController extends Controller
 
         $gameGenre->fill($request->safe()->toArray())->save();
 
-        flash()->info(__('game_genre.updated'));
+        flash()->info(__('game.genre.updated'));
 
         return to_route('admin.game-genres.index');
     }
@@ -68,7 +68,7 @@ class GameGenreController extends Controller
     {
         $gameGenre->delete();
 
-        flash()->info(__('game_genre.deleted'));
+        flash()->info(__('game.genre.deleted'));
 
         return to_route('admin.game-genres.index');
     }
@@ -85,7 +85,7 @@ class GameGenreController extends Controller
             )
         );
 
-        flash()->info(__('game_genre.mass_deleted'));
+        flash()->info(__('game.genre.mass_deleted'));
 
         return to_route('admin.game-genres.index');
     }
@@ -103,7 +103,7 @@ class GameGenreController extends Controller
             )
         );
 
-        flash()->info(__('game_genre.mass_force_deleted'));
+        flash()->info(__('game.genre.mass_force_deleted'));
 
         return to_route('admin.game-genres.index');
     }
