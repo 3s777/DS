@@ -156,10 +156,23 @@ class GameMediaControllerTest extends TestCase
         $this->request['barcodes'] = ['fake', 'fake 2'];
         $this->request['user_id'] = 1500000;
         $this->request['genres'] = 1500000;
+        $this->request['platforms'] = 1500000;
+        $this->request['developers'] = 1500000;
+        $this->request['publishers'] = 1500000;
 
         $this->actingAs($this->user)
             ->post(action([GameMediaController::class, 'store']), $this->request)
-            ->assertInvalid(['name', 'article_number', 'alternative_names', 'barcodes', 'user_id', 'genres'])
+            ->assertInvalid([
+                'name',
+                'article_number',
+                'alternative_names',
+                'barcodes',
+                'user_id',
+                'genres',
+                'platforms',
+                'developers',
+                'publishers'
+            ])
             ->assertRedirectToRoute('admin.game-medias.create');
 
         $this->assertDatabaseMissing('game_medias', [
@@ -205,6 +218,46 @@ class GameMediaControllerTest extends TestCase
         $this->assertDatabaseHas('game_medias', [
             'name' => $this->request['name']
         ]);
+    }
+
+    /**
+     * @test
+     * @return void
+     */
+    public function it_update_validation_fail(): void
+    {
+        $this->app['session']->setPreviousUrl(route('admin.game-medias.edit', $this->gameMedia->slug));
+
+        $this->request['name'] = '';
+        $this->request['article_number'] = ['fake', 'fake 2'];
+        $this->request['alternative_names'] = ['fake', 'fake 2'];
+        $this->request['barcodes'] = ['fake', 'fake 2'];
+        $this->request['user_id'] = 1500000;
+        $this->request['genres'] = 1500000;
+        $this->request['platforms'] = 1500000;
+        $this->request['developers'] = 1500000;
+        $this->request['publishers'] = 1500000;
+
+        $this->actingAs($this->user)
+            ->put(
+                action(
+                    [GameMediaController::class, 'update'],
+                    [$this->gameMedia->slug]
+                ),
+                $this->request
+            )
+            ->assertInvalid([
+                'name',
+                'article_number',
+                'alternative_names',
+                'barcodes',
+                'user_id',
+                'genres',
+                'platforms',
+                'developers',
+                'publishers'
+                ])
+            ->assertRedirectToRoute('admin.game-medias.edit', $this->gameMedia->slug);
     }
 
     /**

@@ -152,10 +152,26 @@ class GameControllerTest extends TestCase
         $this->app['session']->setPreviousUrl(route('admin.games.create'));
 
         $this->request['name'] = '';
+        $this->request['released_at'] = 'fake';
+        $this->request['alternative_names'] = ['fake', 'fake 2'];
+        $this->request['user_id'] = 1500000;
+        $this->request['genres'] = 1500000;
+        $this->request['platforms'] = 1500000;
+        $this->request['developers'] = 1500000;
+        $this->request['publishers'] = 1500000;
 
         $this->actingAs($this->user)
             ->post(action([GameController::class, 'store']), $this->request)
-            ->assertInvalid(['name'])
+            ->assertInvalid([
+                'name',
+                'released_at',
+                'alternative_names',
+                'user_id',
+                'genres',
+                'platforms',
+                'developers',
+                'publishers'
+            ])
             ->assertRedirectToRoute('admin.games.create');
 
         $this->assertDatabaseMissing('games', [
@@ -201,6 +217,45 @@ class GameControllerTest extends TestCase
         $this->assertDatabaseHas('games', [
             'name' => $this->request['name']
         ]);
+    }
+
+    /**
+     * @test
+     * @return void
+     */
+    public function it_update_validation_fail(): void
+    {
+        $this->app['session']->setPreviousUrl(route('admin.games.edit', $this->game->slug));
+
+        $this->request['name'] = '';
+        $this->request['released_at'] = 'fake';
+        $this->request['alternative_names'] = ['fake', 'fake 2'];
+        $this->request['user_id'] = 1500000;
+        $this->request['genres'] = 1500000;
+        $this->request['platforms'] = 1500000;
+        $this->request['developers'] = 1500000;
+        $this->request['publishers'] = 1500000;
+
+        $this->actingAs($this->user)
+            ->put(
+                action(
+                    [GameController::class, 'update'],
+                    [$this->game->slug]
+                ),
+                $this->request
+            )
+            ->assertInvalid([
+                    'name',
+                    'released_at',
+                    'alternative_names',
+                    'user_id',
+                    'genres',
+                    'platforms',
+                    'developers',
+                    'publishers'
+                ]
+            )
+            ->assertRedirectToRoute('admin.games.edit', $this->game->slug);
     }
 
     /**

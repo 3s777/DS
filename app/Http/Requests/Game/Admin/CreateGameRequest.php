@@ -35,6 +35,7 @@ class CreateGameRequest extends FormRequest
                 'string', Rule::unique(Game::class)
             ],
             'description' => ['nullable','string'],
+            'alternative_names' => ['nullable','string'],
             'released_at' => [
                 'nullable',
                 'date',
@@ -89,6 +90,7 @@ class CreateGameRequest extends FormRequest
             'slug' => __('common.slug'),
             'description' => __('common.description'),
             'released_at' => __('game.released_at'),
+            'alternative_names' => __('common.alternative_names'),
             'genres' => trans_choice('game_genre.genres', 2),
             'platforms' => trans_choice('game_platform.platforms', 2),
             'developers' => trans_choice('game_developer.developers', 2),

@@ -36,6 +36,7 @@ class UpdateGameRequest extends FormRequest
                 Rule::unique(Game::class)->ignore($this->game)
             ],
             'description' => ['nullable','string'],
+            'alternative_names' => ['nullable','string'],
             'released_at' => [
                 'nullable',
                 'date',
@@ -93,6 +94,7 @@ class UpdateGameRequest extends FormRequest
             'name' => trans_choice('common.name', 1),
             'slug' => __('common.slug'),
             'description' => __('common.description'),
+            'alternative_names' => __('common.alternative_names'),
             'released_at' => __('game.released_at'),
             'genres' => trans_choice('game_genre.genres', 2),
             'platforms' => trans_choice('game_platform.platforms', 2),
