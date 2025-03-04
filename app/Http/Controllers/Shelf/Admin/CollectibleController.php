@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Shelf\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\MassDeletingRequest;
+use App\Http\Requests\Shelf\Admin\FilterCollectibleRequest;
 use App\Http\Requests\Shelf\Admin\GetCollectibleMediaRequest;
 use Domain\Shelf\Enums\CollectibleTypeEnum;
 use Domain\Shelf\Models\Collectible;
@@ -26,7 +27,7 @@ class CollectibleController extends Controller
         $this->authorizeResource(Collectible::class, 'collectible');
     }
 
-    public function index(): View|Application|Factory|\Illuminate\Contracts\Foundation\Application
+    public function index(FilterCollectibleRequest $request): View|Application|Factory|\Illuminate\Contracts\Foundation\Application
     {
 //        $models = Collectible::query()->where(DB::raw('("sale"->>\'price\')::int'),'<',10000)->get();
         return view('admin.shelf.collectible.index', new CollectibleIndexViewModel());

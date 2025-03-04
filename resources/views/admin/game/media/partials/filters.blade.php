@@ -44,6 +44,18 @@
 
         <x-grid.col xl="3" lg="4" md="6" sm="12">
             <x-ui.form.group>
+                <x-common.filters.dates name="released_at" />
+            </x-ui.form.group>
+        </x-grid.col>
+
+        <x-grid.col xl="3" lg="4" md="6" sm="12">
+            <x-ui.form.group>
+                <x-common.filters.dates name="released_at" direction="to" />
+            </x-ui.form.group>
+        </x-grid.col>
+
+        <x-grid.col xl="3" lg="4" md="6" sm="12">
+            <x-ui.form.group>
                 <x-common.filters.relation-async name="user" route="admin.select-users" />
             </x-ui.form.group>
         </x-grid.col>

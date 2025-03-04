@@ -8,7 +8,7 @@
     <div class="filter-range__inner">
         <x-ui.form.input-text
             class="filter-range__field"
-            placeholder="От"
+            :placeholder="__('common.from')"
             :id="$name"
             :value="request('filters.'.$name.'.from')"
             name='filters[{{ $name }}][from]'
@@ -17,7 +17,7 @@
         -
         <x-ui.form.input-text
             class="filter-range__field"
-            placeholder="До"
+            :placeholder="__('common.to')"
             :id="$name"
             :value="request('filters.'.$name.'.to')"
             name='filters[{{ $name }}][to]'

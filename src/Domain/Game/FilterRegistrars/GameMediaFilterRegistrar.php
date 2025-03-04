@@ -82,6 +82,16 @@ class GameMediaFilterRegistrar implements FilterRegistrar
                 trans_choice('game.choose', 1),
                 Game::class
             ),
+            'released_at' => DatesFilter::make(
+                __('game.released_at'),
+                'released_at',
+                'game_medias',
+                'released_at',
+                placeholder: [
+                    'from' => __('game.released_at_from'),
+                    'to' => __('game.released_at_to'),
+                ]
+            ),
         ];
     }
 }

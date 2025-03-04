@@ -24,13 +24,27 @@ class FilterGameRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'filters.search' => ['nullable', 'string'],
+            'filters.search' => [
+                'nullable',
+                'string',
+                'max:250'
+            ],
             'filters.dates.from' => [
                 'nullable',
                 'date',
                 'date_format:Y-m-d'
             ],
             'filters.dates.to' => [
+                'nullable',
+                'date',
+                'date_format:Y-m-d'
+            ],
+            'filters.released_at.from' => [
+                'nullable',
+                'date',
+                'date_format:Y-m-d'
+            ],
+            'filters.released_at.to' => [
                 'nullable',
                 'date',
                 'date_format:Y-m-d'
@@ -65,6 +79,8 @@ class FilterGameRequest extends FormRequest
             'filters.platforms' => trans_choice('game.platform.platforms', 2),
             'filters.developers' => trans_choice('game.developer.developers', 2),
             'filters.publishers' => trans_choice('game.publisher.publishers', 2),
+            'filters.released_at.from' => __('game.released_at_from'),
+            'filters.released_at.to' => __('game.released_at_to'),
         ];
     }
 }

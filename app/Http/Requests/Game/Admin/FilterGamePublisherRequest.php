@@ -24,7 +24,11 @@ class FilterGamePublisherRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'filters.search' => ['nullable', 'string'],
+            'filters.search' => [
+                'nullable',
+                'string',
+                'max:250'
+            ],
             'filters.dates.from' => [
                 'nullable',
                 'date',

@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Game\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Game\Admin\CreateGameMediaRequest;
+use App\Http\Requests\Game\Admin\FilterGameMediaRequest;
 use App\Http\Requests\Game\Admin\UpdateGameMediaRequest;
 use App\Http\Requests\MassDeletingRequest;
 use Domain\Game\DTOs\FillGameMediaDTO;
@@ -29,7 +30,7 @@ class GameMediaController extends Controller
         $this->authorizeResource(GameMedia::class, 'game_media');
     }
 
-    public function index(): View|Application|Factory|\Illuminate\Contracts\Foundation\Application
+    public function index(FilterGameMediaRequest $request): View|Application|Factory|\Illuminate\Contracts\Foundation\Application
     {
         return view('admin.game.media.index', new GameMediaIndexViewModel());
     }

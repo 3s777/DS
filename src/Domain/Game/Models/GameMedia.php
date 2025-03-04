@@ -54,6 +54,7 @@ class GameMedia extends Model implements HasMedia, HasProperties
     ];
 
     protected $casts = [
+        'released_at' => 'date',
         'description' => CleanHtml::class.':custom',
         'alternative_names' => ArrayWithoutUnicode::class,
         'barcodes' => ArrayWithoutUnicode::class,

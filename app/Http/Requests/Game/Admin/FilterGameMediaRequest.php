@@ -4,9 +4,9 @@ namespace App\Http\Requests\Game\Admin;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class FilterGameDeveloperRequest extends FormRequest
+class FilterGameMediaRequest extends FormRequest
 {
-    protected $redirectRoute = 'admin.game-developers.index';
+    protected $redirectRoute = 'admin.game-medias.index';
 
     /**
      * Determine if the user is authorized to make this request.
@@ -39,6 +39,21 @@ class FilterGameDeveloperRequest extends FormRequest
                 'date',
                 'date_format:Y-m-d'
             ],
+            'filters.released_at.from' => [
+                'nullable',
+                'date',
+                'date_format:Y-m-d'
+            ],
+            'filters.released_at.to' => [
+                'nullable',
+                'date',
+                'date_format:Y-m-d'
+            ],
+            'filters.genres' => ['nullable', 'array'],
+            'filters.platforms' => ['nullable', 'array'],
+            'filters.developers' => ['nullable', 'array'],
+            'filters.publishers' => ['nullable', 'array'],
+            'filters.games' => ['nullable', 'array'],
             'filters.user' => [
                 'nullable',
                 'integer',
@@ -61,6 +76,13 @@ class FilterGameDeveloperRequest extends FormRequest
             'filters.search' => __('common.search'),
             'filters.dates' => __('common.dates'),
             'filters.user' => trans_choice('user.users', 1),
+            'filters.genres' => trans_choice('game.genre.genres', 2),
+            'filters.platforms' => trans_choice('game.platform.platforms', 2),
+            'filters.developers' => trans_choice('game.developer.developers', 2),
+            'filters.publishers' => trans_choice('game.publisher.publishers', 2),
+            'filters.games' => trans_choice('game.games', 2),
+            'filters.released_at.from' => __('game.released_at_from'),
+            'filters.released_at.to' => __('game.released_at_to'),
         ];
     }
 }

@@ -73,6 +73,16 @@ class GameFilterRegistrar implements FilterRegistrar
                 trans_choice('game.platform.choose', 1),
                 GamePlatform::class
             ),
+            'released_at' => DatesFilter::make(
+                __('game.released_at'),
+                'released_at',
+                'games',
+                'released_at',
+                placeholder: [
+                    'from' => __('game.released_at_from'),
+                    'to' => __('game.released_at_to'),
+                ]
+            ),
         ];
     }
 }

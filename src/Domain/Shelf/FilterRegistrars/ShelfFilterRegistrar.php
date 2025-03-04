@@ -21,7 +21,7 @@ class ShelfFilterRegistrar implements FilterRegistrar
             'dates' => DatesFilter::make(
                 __('common.dates'),
                 'dates',
-                'games',
+                'shelves',
                 placeholder: [
                     'from' => __('filters.dates_from'),
                     'to' => __('filters.dates_to'),
@@ -30,15 +30,15 @@ class ShelfFilterRegistrar implements FilterRegistrar
             'search' => SearchFilter::make(
                 __('common.search'),
                 'search',
-                'games',
+                'shelves',
                 alternativeFields: ['alternative_names']
             ),
-            'user' => RelationFilter::make(
-                trans_choice('user.users', 1),
-                'user',
-                'games',
-                'user_id',
-                trans_choice('user.choose', 1),
+            'collector' => RelationFilter::make(
+                trans_choice('user.collectors', 1),
+                'collector',
+                'shelves',
+                'collector_id',
+                trans_choice('user.collector.choose', 1),
                 User::class
             ),
         ];

@@ -81,5 +81,7 @@ return [
     'for_auction' => 'На аукцион',
     'for_exchange' => 'Обменять',
     'model' => 'Модель|Модели',
-    'quantity' => 'Количество'
+    'quantity' => 'Количество',
+    'from' => 'От',
+    'to' => 'До'
 ];

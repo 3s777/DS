@@ -1,12 +1,12 @@
 <?php
 
-namespace App\Http\Requests\Game\Admin;
+namespace App\Http\Requests\Shelf\Admin;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class FilterGameDeveloperRequest extends FormRequest
+class FilterShelfRequest extends FormRequest
 {
-    protected $redirectRoute = 'admin.game-developers.index';
+    protected $redirectRoute = 'admin.shelves.index';
 
     /**
      * Determine if the user is authorized to make this request.
@@ -39,10 +39,10 @@ class FilterGameDeveloperRequest extends FormRequest
                 'date',
                 'date_format:Y-m-d'
             ],
-            'filters.user' => [
+            'filters.collector' => [
                 'nullable',
                 'integer',
-                'exists:Domain\Auth\Models\User,id'
+                'exists:Domain\Auth\Models\Collector,id'
             ],
         ];
     }
@@ -60,7 +60,7 @@ class FilterGameDeveloperRequest extends FormRequest
         return [
             'filters.search' => __('common.search'),
             'filters.dates' => __('common.dates'),
-            'filters.user' => trans_choice('user.users', 1),
+            'filters.collector' => trans_choice('user.collectors', 1),
         ];
     }
 }

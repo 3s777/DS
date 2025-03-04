@@ -44,6 +44,7 @@ class Game extends Model implements HasMedia
     ];
 
     protected $casts = [
+        'released_at' => 'date',
         'description' => CleanHtml::class.':custom',
         'alternative_names' => ArrayWithoutUnicode::class,
         'images' => 'array',
