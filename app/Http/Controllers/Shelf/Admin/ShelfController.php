@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Shelf\Admin;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\MassDeletingRequest;
 use App\Http\Requests\Shelf\Admin\CreateShelfRequest;
+use App\Http\Requests\Shelf\Admin\FilterShelfRequest;
 use App\Http\Requests\Shelf\Admin\UpdateShelfRequest;
 use Domain\Shelf\DTOs\FillShelfDTO;
 use Domain\Shelf\Models\Shelf;
@@ -29,7 +30,7 @@ class ShelfController extends Controller
         $this->authorizeResource(Shelf::class, 'shelf');
     }
 
-    public function index(): View|Application|Factory|\Illuminate\Contracts\Foundation\Application
+    public function index(FilterShelfRequest $request): View|Application|Factory|\Illuminate\Contracts\Foundation\Application
     {
         return view('admin.shelf.shelf.index', new ShelfIndexViewModel());
     }

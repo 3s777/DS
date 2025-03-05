@@ -7,6 +7,7 @@ use App\Filters\DatesFilter;
 use App\Filters\RelationFilter;
 use App\Filters\RelationMultipleFilter;
 use App\Filters\SearchFilter;
+use Domain\Auth\Models\Collector;
 use Domain\Auth\Models\User;
 use Domain\Game\Models\GameDeveloper;
 use Domain\Game\Models\GameGenre;
@@ -39,7 +40,7 @@ class ShelfFilterRegistrar implements FilterRegistrar
                 'shelves',
                 'collector_id',
                 trans_choice('user.collector.choose', 1),
-                User::class
+                Collector::class
             ),
         ];
     }

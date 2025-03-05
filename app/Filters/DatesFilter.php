@@ -26,7 +26,7 @@ class DatesFilter extends AbstractFilter
         $this->setRelation($relation);
     }
 
-    public function setField(string|null $field): static
+    protected function setField(string|null $field): static
     {
         $this->field = 'created_at';
 
@@ -37,7 +37,7 @@ class DatesFilter extends AbstractFilter
         return $this;
     }
 
-    public function setRelation(?string $relation): static
+    protected function setRelation(?string $relation): static
     {
         $this->relation = $relation;
         return $this;

@@ -46,25 +46,25 @@ abstract class AbstractFilter implements Stringable
         $this->setPlaceholder($placeholder);
     }
 
-    public function setTitle(string $title): static
+    protected function setTitle(string $title): static
     {
         $this->title = $title;
         return $this;
     }
 
-    public function setKey(string $key): static
+    protected function setKey(string $key): static
     {
         $this->key = $key;
         return $this;
     }
 
-    public function setTable(string $table): static
+    protected function setTable(string $table): static
     {
         $this->table = $table;
         return $this;
     }
 
-    public function setField(?string $field): static
+    protected function setField(?string $field): static
     {
         $this->field = 'id';
 
@@ -75,7 +75,7 @@ abstract class AbstractFilter implements Stringable
         return $this;
     }
 
-    public function setPlaceholder(string|array|null $placeholder): static
+    protected function setPlaceholder(string|array|null $placeholder): static
     {
         $this->placeholder = $placeholder;
         return $this;

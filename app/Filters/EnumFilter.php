@@ -30,7 +30,7 @@ class EnumFilter extends AbstractFilter
         $this->setCallbackPreparedValues($callbackPreparedValues);
     }
 
-    public function setEnum(string $enum): static
+    protected function setEnum(string $enum): static
     {
         $this->enum = $enum;
         return $this;

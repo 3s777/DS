@@ -29,28 +29,19 @@ class RangeFilter extends AbstractFilter
         $this->setRelation($relation);
     }
 
-    public function setIsPrice(bool $isPrice): static
+    protected function setIsPrice(bool $isPrice): static
     {
         $this->isPrice = $isPrice;
         return $this;
     }
 
-    public function setRelation(?string $relation): static
+    protected function setRelation(?string $relation): static
     {
         $this->relation = $relation;
         return $this;
     }
 
-    public function placeholder(string $key = ''): string|array|null
-    {
-        if($this->placeholder) {
-            return $this->placeholder;
-        }
-
-        return $this->title;
-    }
-
-    public function rangeValues($from, $to): array
+    protected function rangeValues($from, $to): array
     {
         if($this->isPrice) {
             $from = PriceValueObject::make($from)->prepareValue();
@@ -61,6 +52,15 @@ class RangeFilter extends AbstractFilter
           'from' => $from,
           'to' => $to
         ];
+    }
+
+    public function placeholder(string $key = ''): string|array|null
+    {
+        if($this->placeholder) {
+            return $this->placeholder;
+        }
+
+        return $this->title;
     }
 
     public function apply(Builder $query): Builder

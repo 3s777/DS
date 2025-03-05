@@ -25,7 +25,8 @@ class Enum extends Component
         public string|array|null $selected = null,
         public bool $required = false,
         public bool $multiple = false,
-        public bool $scripts = true
+        public bool $scripts = true,
+        public bool $showOld = true
     ) {
         $this->filteredName = Str::of($this->selectName)
             ->replace('[]','')
@@ -36,6 +37,10 @@ class Enum extends Component
 
     public function isOld(string $key): bool
     {
+        if(!$this->showOld) {
+            return false;
+        }
+
         if(is_array(old($this->filteredName))) {
             return in_array($key, old($this->filteredName));
         }

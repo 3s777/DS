@@ -26,7 +26,7 @@ class SearchFilter extends AbstractFilter
         $this->setAlternativeFields($alternativeFields);
     }
 
-    public function setField(string|null $field): static
+    protected function setField(string|null $field): static
     {
         $this->field = 'name';
 
@@ -37,7 +37,7 @@ class SearchFilter extends AbstractFilter
         return $this;
     }
 
-    public function setAlternativeFields(?array $alternativeFields): static
+    protected function setAlternativeFields(?array $alternativeFields): static
     {
         $this->alternativeFields = $alternativeFields;
         return $this;

@@ -31,13 +31,13 @@ class RelationFilter extends AbstractFilter
         $this->setRelatedModel();
     }
 
-    public function setRelation(string $relation): static
+    protected function setRelation(string $relation): static
     {
         $this->relation = $relation;
         return $this;
     }
 
-    public function setRelatedModel(): static
+    protected function setRelatedModel(): static
     {
         $this->relatedModel = [];
 
