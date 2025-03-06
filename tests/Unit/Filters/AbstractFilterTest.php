@@ -18,7 +18,6 @@ use Tests\TestCase;
 class AbstractFilterTest extends TestCase
 {
     use RefreshDatabase;
-    use InteractsWithViews;
 
     /**
      * @test
