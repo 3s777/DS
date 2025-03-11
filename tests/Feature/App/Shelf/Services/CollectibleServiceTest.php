@@ -105,8 +105,8 @@ class CollectibleServiceTest extends TestCase
         $shelf = Shelf::find($this->request['shelf_id']);
 
         $this->assertEquals($collectible->shelf, $shelf);
-        $this->assertEquals($collectible->collector->id, $shelf->collector->id);
-        $this->assertEquals($collectible->collectable->id, $this->request['collectable']);
+        $this->assertSame($collectible->collector->id, $shelf->collector->id);
+        $this->assertSame($collectible->collectable->id, $this->request['collectable']);
 
         Queue::assertPushed(GenerateThumbnailJob::class, 3);
         Queue::assertPushed(GenerateSmallThumbnailsJob::class, 2);
@@ -136,8 +136,8 @@ class CollectibleServiceTest extends TestCase
 
         $this->assertNotNull($collectible->auction_data);
         $this->assertInstanceOf(Auction::class, $collectible->auction);
-        $this->assertEquals($collectible->auction->price->value(), $collectible->auction_data->price()->value());
-        $this->assertEquals($collectible->auction->step->value(), $collectible->auction_data->step()->value());
+        $this->assertSame($collectible->auction->price->value(), $collectible->auction_data->price()->value());
+        $this->assertSame($collectible->auction->step->value(), $collectible->auction_data->step()->value());
     }
 
     /**
@@ -166,8 +166,8 @@ class CollectibleServiceTest extends TestCase
 
         $this->assertNotNull($collectible->sale_data);
         $this->assertInstanceOf(Sale::class, $collectible->sale);
-        $this->assertEquals($collectible->sale->price->value(), $collectible->sale_data->price()->value());
-        $this->assertEquals($collectible->sale->quantity, $collectible->sale_data->quantity());
+        $this->assertSame($collectible->sale->price->value(), $collectible->sale_data->price()->value());
+        $this->assertSame($collectible->sale->quantity, $collectible->sale_data->quantity());
         $this->assertTrue($collectible->sale->self_delivery);
         $this->assertTrue($collectible->sale_data->self_delivery());
     }
@@ -195,8 +195,8 @@ class CollectibleServiceTest extends TestCase
         $this->request['collectable'] = 200;
         $this->request['target'] = TargetEnum::Sale->value;
         $this->request['shelf_id'] = $newShelf->id;
-        $this->request['sale']['price'] = '100';
-        $this->request['sale']['quantity'] = '1';
+        $this->request['sale']['price'] = 100;
+        $this->request['sale']['quantity'] = 1;
         $this->request['sale']['reservation'] = ReservationEnum::None->value;
         $this->request['shipping'] = ShippingEnum::Country->value;
         $this->request['country_id'] = $this->country->id;
@@ -211,13 +211,13 @@ class CollectibleServiceTest extends TestCase
 
         $updatedCollectible= Collectible::where('name', 'NewNameCollectible')->first();
 
-        $this->assertEquals($updatedCollectible->sale->price->value(), $this->request['sale']['price']);
-        $this->assertEquals($updatedCollectible->target, $this->request['target']);
-        $this->assertEquals($updatedCollectible->shelf->id, $newShelf->id);
-        $this->assertEquals($updatedCollectible->collector->id, $newShelf->collector->id);
-        $this->assertNotEquals($updatedCollectible->collectable->id, $this->request['collectable']);
+        $this->assertSame($updatedCollectible->sale->price->value(), $this->request['sale']['price']);
+        $this->assertSame($updatedCollectible->target, $this->request['target']);
+        $this->assertSame($updatedCollectible->shelf->id, $newShelf->id);
+        $this->assertSame($updatedCollectible->collector->id, $newShelf->collector->id);
+        $this->assertNotSame($updatedCollectible->collectable->id, $this->request['collectable']);
 
-        $this->assertEquals($updatedCollectible->sale->price->value(), $updatedCollectible->sale_data->price()->value());
+        $this->assertSame($updatedCollectible->sale->price->value(), $updatedCollectible->sale_data->price()->value());
 
         Queue::assertPushed(GenerateThumbnailJob::class, 3);
         Queue::assertPushed(GenerateSmallThumbnailsJob::class, 2);
@@ -245,9 +245,9 @@ class CollectibleServiceTest extends TestCase
         $this->request['name'] = 'NewNameCollectible';
         $this->request['collectable'] = 200;
         $this->request['target'] = TargetEnum::Sale->value;
-        $this->request['sale']['price'] = '100';
-        $this->request['sale']['price_old'] = '200.55';
-        $this->request['sale']['quantity'] = '1';
+        $this->request['sale']['price'] = 100;
+        $this->request['sale']['price_old'] = 200.55;
+        $this->request['sale']['quantity'] = 1;
         $this->request['sale']['reservation'] = ReservationEnum::None->value;
         $this->request['shipping'] = ShippingEnum::Country->value;
         $this->request['country_id'] = $this->country->id;
@@ -263,11 +263,11 @@ class CollectibleServiceTest extends TestCase
         $this->assertNotNull($updatedCollectible->sale_data);
         $this->assertInstanceOf(Sale::class, $updatedCollectible->sale);
 
-        $this->assertEquals($updatedCollectible->sale->price->value(), $this->request['sale']['price']);
-        $this->assertEquals(TargetEnum::Sale->value, $updatedCollectible->target);
-        $this->assertNotEquals($updatedCollectible->collectable->id, $this->request['collectable']);
+        $this->assertSame($updatedCollectible->sale->price->value(), $this->request['sale']['price']);
+        $this->assertSame(TargetEnum::Sale->value, $updatedCollectible->target);
+        $this->assertNotSame($updatedCollectible->collectable->id, $this->request['collectable']);
 
-        $this->assertEquals($updatedCollectible->sale->price->value(), $updatedCollectible->sale_data->price()->value());
+        $this->assertSame($updatedCollectible->sale->price->value(), $updatedCollectible->sale_data->price()->value());
     }
 
     /**

@@ -71,7 +71,7 @@ class HasImageTest extends TestCase
 
         $mediaCreatedDate = Carbon::make($this->gameDeveloper->created_at);
 
-        $this->assertEquals(
+        $this->assertSame(
             $path,
             $this->gameDeveloper->imagesDir().'/'
             .$mediaCreatedDate->format('Y').'/'

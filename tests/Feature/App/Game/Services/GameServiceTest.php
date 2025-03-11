@@ -134,9 +134,9 @@ class GameServiceTest extends TestCase
 
         $updatedGame= Game::where('name', 'NewNameGame')->first();
 
-        $this->assertTrue($updatedGame->slug == $this->request['slug']);
-        $this->assertTrue($updatedGame->released_at == $this->request['released_at']);
-        $this->assertTrue($updatedGame->description == $this->request['description']);
+        $this->assertSame($updatedGame->slug, $this->request['slug']);
+        $this->assertSame($updatedGame->released_at->format('Y-m-d'), $this->request['released_at']);
+        $this->assertSame($updatedGame->description, $this->request['description']);
 
         foreach($this->request['developers'] as $developer) {
             $this->assertTrue($updatedGame->developers->contains($developer));

@@ -54,12 +54,12 @@ class AuctionServiceTest extends TestCase
         $this->assertInstanceOf(PriceValueObject::class, $auction->collectible->auction_data->price());
         $this->assertInstanceOf(PriceValueObject::class, $auction->collectible->auction_data->step());
         $this->assertInstanceOf(PriceValueObject::class, $auction->collectible->auction_data->blitz());
-        $this->assertEquals($auction->collectible->auction_data->price()->value(), $this->request['price']);
-        $this->assertEquals($auction->collectible->auction_data->step()->value(), $this->request['step']);
-        $this->assertEquals($auction->collectible->auction_data->self_delivery(), $this->request['self_delivery']);
-        $this->assertEquals($auction->price->value(), $this->request['price']);
-        $this->assertEquals($auction->finished_at->format('Y-m-d H:m'), $this->request['finished_at']);
-        $this->assertEquals($auction->self_delivery, $this->request['self_delivery']);
+        $this->assertSame($auction->collectible->auction_data->price()->value(), $this->request['price']);
+        $this->assertSame($auction->collectible->auction_data->step()->value(), $this->request['step']);
+        $this->assertSame($auction->collectible->auction_data->self_delivery(), $this->request['self_delivery']);
+        $this->assertSame($auction->price->value(), $this->request['price']);
+        $this->assertSame($auction->finished_at->format('Y-m-d H:m'), $this->request['finished_at']);
+        $this->assertSame($auction->self_delivery, $this->request['self_delivery']);
     }
 
     /**
@@ -95,18 +95,18 @@ class AuctionServiceTest extends TestCase
 
         $updatedAuction = Auction::find($auction->id);
 
-        $this->assertEquals($updatedAuction->price->value(), $this->request['price']);
-        $this->assertEquals($auction->collectible_id, $updatedAuction->collectible_id);
+        $this->assertSame($updatedAuction->price->value(), $this->request['price']);
+        $this->assertSame($auction->collectible_id, $updatedAuction->collectible_id);
         $this->assertInstanceOf(AuctionValueObject::class, $updatedAuction->collectible->auction_data);
         $this->assertInstanceOf(PriceValueObject::class, $updatedAuction->collectible->auction_data->price());
         $this->assertInstanceOf(PriceValueObject::class, $updatedAuction->collectible->auction_data->step());
         $this->assertInstanceOf(PriceValueObject::class, $updatedAuction->collectible->auction_data->blitz());
-        $this->assertEquals($updatedAuction->collectible->auction_data->price()->value(), $this->request['price']);
-        $this->assertEquals($updatedAuction->collectible->auction_data->blitz()->value(), $this->request['blitz']);
-        $this->assertEquals($updatedAuction->collectible->auction_data->renewal(), $this->request['renewal']);
+        $this->assertSame($updatedAuction->collectible->auction_data->price()->value(), $this->request['price']);
+        $this->assertSame($updatedAuction->collectible->auction_data->blitz()->value(), $this->request['blitz']);
+        $this->assertSame($updatedAuction->collectible->auction_data->renewal(), $this->request['renewal']);
         $this->assertTrue($updatedAuction->self_delivery);
-        $this->assertEquals($updatedAuction->price->value(), $this->request['price']);
-        $this->assertEquals($updatedAuction->finished_at->format('Y-m-d H:i'), '2026-10-03 10:15');
+        $this->assertSame($updatedAuction->price->value(), $this->request['price']);
+        $this->assertSame($updatedAuction->finished_at->format('Y-m-d H:i'), '2026-10-03 10:15');
     }
 
     /**

@@ -81,6 +81,6 @@ class CategoryServiceTest extends TestCase
 
         $updatedCategory = Category::where('slug', 'newslug')->first();
 
-        $this->assertTrue($updatedCategory->slug == $this->request['slug']);
+        $this->assertSame($updatedCategory->slug, $this->request['slug']);
     }
 }

@@ -91,7 +91,7 @@ class ShelfServiceTest extends TestCase
         $shelf = Shelf::where('name', $this->request['name'])->first();
 
         $this->request['name'] = 'NewNameShelf';
-        $this->request['number'] = '10';
+        $this->request['number'] = 10;
         $this->request['description'] = 'NewDescription';
         $this->request['featured_image'] = UploadedFile::fake()->image('photo2.jpg');
 
@@ -105,8 +105,8 @@ class ShelfServiceTest extends TestCase
 
         $updatedShelf= Shelf::where('name', 'NewNameShelf')->first();
 
-        $this->assertTrue($updatedShelf->number == $this->request['number']);
-        $this->assertTrue($updatedShelf->description == $this->request['description']);
+        $this->assertSame($updatedShelf->number, $this->request['number']);
+        $this->assertSame($updatedShelf->description, $this->request['description']);
         $this->assertNotNull($updatedShelf->ulid);
 
         Queue::assertPushed(GenerateThumbnailJob::class, 3);

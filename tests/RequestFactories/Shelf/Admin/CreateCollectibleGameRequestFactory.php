@@ -29,7 +29,7 @@ class CreateCollectibleGameRequestFactory extends RequestFactory
         if($target->value == TargetEnum::Sale->value) {
             $sale = [
                 'price' => rand(100, 20000),
-                'quantity' => fake()->numberBetween(1, 100),
+                'quantity' => rand(1, 100),
                 'reservation' => Arr::random(ReservationEnum::cases())->value,
                 'bidding' => fake()->boolean
             ];
@@ -40,8 +40,8 @@ class CreateCollectibleGameRequestFactory extends RequestFactory
                 'price' => rand(100, 20000),
                 'step' => rand(10, 100),
                 'finished_at' =>  now()->addDays(rand(1, 5))->format('Y-m-d H:m'),
-                'blitz' => fake()->numberBetween(1, 10000),
-                'renewal' => fake()->numberBetween(1, 10),
+                'blitz' => rand(1, 10000),
+                'renewal' => rand(1, 10),
             ];
         }
 
@@ -50,7 +50,7 @@ class CreateCollectibleGameRequestFactory extends RequestFactory
             'shelf_id' => Shelf::factory(),
             'article_number' => fake()->uuid(),
             'condition' => Arr::random(ConditionEnum::cases())->value,
-            'purchase_price' => fake()->numberBetween(1000, 100000),
+            'purchase_price' => rand(1000, 100000),
             'seller' => fake()->name(),
             'purchased_at' => fake()->date(),
             'description' => fake()->text(),
@@ -106,7 +106,7 @@ class CreateCollectibleGameRequestFactory extends RequestFactory
             'target' => TargetEnum::Sale->value,
             'sale' => [
                 'price' => rand(100, 20000),
-                'quantity' => fake()->numberBetween(1, 100),
+                'quantity' => rand(1, 100),
                 'reservation' => Arr::random(ReservationEnum::cases())->value,
                 'bidding' => fake()->boolean
             ],
@@ -132,8 +132,8 @@ class CreateCollectibleGameRequestFactory extends RequestFactory
                 'price' => rand(100, 20000),
                 'step' => rand(10, 100),
                 'finished_at' =>  now()->addDays(rand(1, 5))->format('Y-m-d H:m'),
-                'blitz' => fake()->numberBetween(1, 10000),
-                'renewal' => fake()->numberBetween(1, 10),
+                'blitz' => rand(1, 10000),
+                'renewal' => rand(1, 10),
             ],
             'shipping' => Arr::random(ShippingEnum::cases())->value,
             'country_id' => $countries->first()->id,

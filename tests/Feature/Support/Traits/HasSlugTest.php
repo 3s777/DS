@@ -51,7 +51,7 @@ class HasSlugTest extends TestCase
         $kitItem->slug = 'New TEst $slug';
         $kitItem->save();
 
-        $this->assertTrue($kitItem->slug == 'new-test-slug');
+        $this->assertSame($kitItem->slug, 'new-test-slug');
     }
 
     /**
@@ -65,9 +65,9 @@ class HasSlugTest extends TestCase
         $i = 0;
         foreach ($kitItems as $item) {
             if($i > 0) {
-                $this->assertTrue($item->slug == 'test-slug-'.$i);
+                $this->assertSame($item->slug, 'test-slug-'.$i);
             } else {
-                $this->assertTrue($item->slug == 'test-slug');
+                $this->assertSame($item->slug, 'test-slug');
             }
 
             $i++;
@@ -77,11 +77,11 @@ class HasSlugTest extends TestCase
         $kitItem2->slug = 'test-slug-2';
         $kitItem2->save();
 
-        $this->assertTrue($kitItem2->slug == 'test-slug-2');
+        $this->assertSame($kitItem2->slug, 'test-slug-2');
 
         $kitItem2->slug = 'test-slug-3';
         $kitItem2->save();
 
-        $this->assertTrue($kitItem2->slug == 'test-slug-3-1');
+        $this->assertSame($kitItem2->slug, 'test-slug-3-1');
     }
 }

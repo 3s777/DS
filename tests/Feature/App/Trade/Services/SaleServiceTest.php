@@ -54,12 +54,12 @@ class SaleServiceTest extends TestCase
         $this->assertInstanceOf(SaleValueObject::class, $sale->collectible->sale_data);
         $this->assertInstanceOf(PriceValueObject::class, $sale->collectible->sale_data->price());
         $this->assertInstanceOf(PriceValueObject::class, $sale->collectible->sale_data->priceOld());
-        $this->assertEquals($sale->collectible->sale_data->price()->value(), $this->request['price']);
-        $this->assertEquals($sale->collectible->sale_data->quantity(), $this->request['quantity']);
-        $this->assertEquals($sale->collectible->sale_data->self_delivery(), $this->request['self_delivery']);
-        $this->assertEquals($sale->price->value(), $this->request['price']);
-        $this->assertEquals($sale->quantity, $this->request['quantity']);
-        $this->assertEquals($sale->self_delivery, $this->request['self_delivery']);
+        $this->assertSame($sale->collectible->sale_data->price()->value(), $this->request['price']);
+        $this->assertSame($sale->collectible->sale_data->quantity(), $this->request['quantity']);
+        $this->assertSame($sale->collectible->sale_data->self_delivery(), $this->request['self_delivery']);
+        $this->assertSame($sale->price->value(), $this->request['price']);
+        $this->assertSame($sale->quantity, $this->request['quantity']);
+        $this->assertSame($sale->self_delivery, $this->request['self_delivery']);
     }
 
     /**
@@ -95,18 +95,18 @@ class SaleServiceTest extends TestCase
 
         $updatedSale = Sale::find($sale->id);
 
-        $this->assertEquals($updatedSale->price->value(), $this->request['price']);
-        $this->assertEquals($sale->collectible_id, $updatedSale->collectible_id);
+        $this->assertSame($updatedSale->price->value(), $this->request['price']);
+        $this->assertSame($sale->collectible_id, $updatedSale->collectible_id);
         $this->assertInstanceOf(SaleValueObject::class, $updatedSale->collectible->sale_data);
         $this->assertInstanceOf(PriceValueObject::class, $updatedSale->collectible->sale_data->price());
         $this->assertInstanceOf(PriceValueObject::class, $updatedSale->collectible->sale_data->priceOld());
-        $this->assertEquals($updatedSale->collectible->sale_data->price()->value(), $this->request['price']);
-        $this->assertEquals($updatedSale->collectible->sale_data->quantity(), $this->request['quantity']);
+        $this->assertSame($updatedSale->collectible->sale_data->price()->value(), $this->request['price']);
+        $this->assertSame($updatedSale->collectible->sale_data->quantity(), $this->request['quantity']);
         $this->assertTrue($updatedSale->self_delivery);
         $this->assertTrue($updatedSale->bidding);
-        $this->assertEquals($updatedSale->price->value(), $this->request['price']);
-        $this->assertEquals($updatedSale->quantity, $this->request['quantity']);
-        $this->assertEquals($updatedSale->self_delivery, $this->request['self_delivery']);
+        $this->assertSame($updatedSale->price->value(), $this->request['price']);
+        $this->assertSame($updatedSale->quantity, $this->request['quantity']);
+        $this->assertSame($updatedSale->self_delivery, $this->request['self_delivery']);
     }
 
     /**

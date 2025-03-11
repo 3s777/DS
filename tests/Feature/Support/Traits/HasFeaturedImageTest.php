@@ -79,9 +79,9 @@ class HasFeaturedImageTest extends TestCase
         $pathWebp = $gameDeveloper->getFeaturedImagePathWebp();
         $imagePathInfo = pathinfo($path);
 
-        $this->assertEquals($gameDeveloper->imagesDir().'/'.date('Y').'/'.date('m').'/'.$imagePathInfo['filename'].'/'.$imagePathInfo['filename'].'.jpg', $path);
+        $this->assertSame($gameDeveloper->imagesDir().'/'.date('Y').'/'.date('m').'/'.$imagePathInfo['filename'].'/'.$imagePathInfo['filename'].'.jpg', $path);
 
-        $this->assertEquals($imagePathInfo['dirname'].'/'.$imagePathInfo['filename'].'.webp', $pathWebp);
+        $this->assertSame($imagePathInfo['dirname'].'/'.$imagePathInfo['filename'].'.webp', $pathWebp);
     }
 
     /**
@@ -166,7 +166,7 @@ class HasFeaturedImageTest extends TestCase
         $gameDeveloperNewMedia = GameDeveloper::find($gameDeveloper->id)->first();
         $newPath = $gameDeveloperNewMedia->getFeaturedImagePath();
 
-        $this->assertNotEquals($oldPath, $newPath);
+        $this->assertNotSame($oldPath, $newPath);
     }
 
 

@@ -61,9 +61,9 @@ class AuctionCastTest extends TestCase
         $this->assertInstanceOf(PriceValueObject::class, $collectible->auction_data->price());
         $this->assertInstanceOf(PriceValueObject::class, $collectible->auction_data->step());
         $this->assertNotEmpty($collectible->auction_data->finished_at());
-        $this->assertEquals(1009, $collectible->auction_data->price()->raw());
+        $this->assertSame(1009, $collectible->auction_data->price()->raw());
         $this->assertFalse($collectible->auction_data->self_delivery());
-        $this->assertEquals($collectible->auction_data->country_id(), $country->id);
+        $this->assertSame($collectible->auction_data->country_id(), $country->id);
 
         $collectible->auction_data = [
             'price' => 14.5989,
@@ -82,12 +82,12 @@ class AuctionCastTest extends TestCase
         $this->assertInstanceOf(PriceValueObject::class, $collectible->auction_data->price());
         $this->assertInstanceOf(PriceValueObject::class, $collectible->auction_data->step());
         $this->assertInstanceOf(PriceValueObject::class, $collectible->auction_data->blitz());
-        $this->assertEquals(1459, $collectible->auction_data->price()->raw());
-        $this->assertEquals(5598, $collectible->auction_data->step()->raw());
-        $this->assertEquals(96300, $collectible->auction_data->blitz()->raw());
+        $this->assertSame(1459, $collectible->auction_data->price()->raw());
+        $this->assertSame(5598, $collectible->auction_data->step()->raw());
+        $this->assertSame(96300, $collectible->auction_data->blitz()->raw());
         $this->assertTrue($collectible->auction_data->self_delivery());
 
         $rawAuction = json_decode($collectible->getRawOriginal('auction_data'), true);
-        $this->assertEquals(8, count($rawAuction));
+        $this->assertSame(8, count($rawAuction));
     }
 }

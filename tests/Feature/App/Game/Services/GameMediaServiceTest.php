@@ -141,9 +141,9 @@ class GameMediaServiceTest extends TestCase
 
         $updatedGameMedia= GameMedia::where('name', 'NewNameGameMedia')->first();
 
-        $this->assertTrue($updatedGameMedia->slug == $this->request['slug']);
-        $this->assertTrue($updatedGameMedia->released_at == $this->request['released_at']);
-        $this->assertTrue($updatedGameMedia->description == $this->request['description']);
+        $this->assertSame($updatedGameMedia->slug, $this->request['slug']);
+        $this->assertSame($updatedGameMedia->released_at->format('Y-m-d'), $this->request['released_at']);
+        $this->assertSame($updatedGameMedia->description, $this->request['description']);
 
         foreach($this->request['games'] as $game) {
             $this->assertTrue($updatedGameMedia->games->contains($game));

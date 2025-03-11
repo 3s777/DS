@@ -111,7 +111,7 @@ class HasImagesTest extends TestCase
             ['small', 'medium']
         );
 
-        $this->assertEquals($this->gameMedia->getImages(), [$path1, $path2]);
+        $this->assertSame($this->gameMedia->getImages(), [$path1, $path2]);
 
         $this->gameMedia->forceDelete();
     }
@@ -134,7 +134,7 @@ class HasImagesTest extends TestCase
 
         $this->gameMedia->updateImages([UploadedFile::fake()->image('photo3.jpg'), UploadedFile::fake()->image('photo4.jpg')], null, ['small', 'medium']);
 
-        $this->assertEquals(count($this->gameMedia->getImages()), 4);
+        $this->assertSame(count($this->gameMedia->getImages()), 4);
 
         $this->gameMedia->forceDelete();
     }
@@ -167,7 +167,7 @@ class HasImagesTest extends TestCase
 
         $gameMedia = GameMedia::find($this->gameMedia->id);
 
-        $this->assertEquals(count($gameMedia->getImages()), 4);
+        $this->assertSame(count($gameMedia->getImages()), 4);
 
         $gameMedia->forceDelete();
     }

@@ -353,7 +353,7 @@ class CollectibleGameControllerTest extends TestCase
         $this->request['name'] = 'newName';
         $this->request['article_number'] = 'newNumber';
         $this->request['condition'] = 'new';
-        $this->request['purchase_price'] = '100';
+        $this->request['purchase_price'] = 100;
         $this->request['seller'] = 'seller';
         $this->request['purchased_at'] = '2023-01-03';
         $this->request['additional_field'] = 'additional';
@@ -382,7 +382,7 @@ class CollectibleGameControllerTest extends TestCase
 
         $updatedCollectible = Collectible::find($this->collectible->id);
 
-        $this->assertEquals(
+        $this->assertSame(
             [
                 $updatedCollectible->name,
                 $updatedCollectible->article_number,

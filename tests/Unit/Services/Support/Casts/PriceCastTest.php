@@ -48,13 +48,13 @@ class PriceCastTest extends TestCase
             );
 
         $this->assertInstanceOf(PriceValueObject::class, $collectible->purchase_price);
-        $this->assertEquals(1299, $collectible->purchase_price->raw());
+        $this->assertSame(1299, $collectible->purchase_price->raw());
 
         $collectible->purchase_price = 14.5989;
 
         $collectible->save();
 
         $this->assertInstanceOf(PriceValueObject::class, $collectible->purchase_price);
-        $this->assertEquals(1459, $collectible->purchase_price->raw());
+        $this->assertSame(1459, $collectible->purchase_price->raw());
     }
 }

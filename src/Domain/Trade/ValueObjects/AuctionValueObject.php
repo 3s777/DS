@@ -72,7 +72,7 @@ class AuctionValueObject
         return $this->renewal;
     }
 
-    public function country_id(): ?string
+    public function country_id(): ?int
     {
         return $this->country_id;
     }

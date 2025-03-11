@@ -162,7 +162,7 @@ class CategoryControllerTest extends TestCase
 
         $updatedCategory = Category::where(['slug' => Str::slug($this->request['name'])])->first();
 
-        $this->assertEquals('new Description', $updatedCategory->description);
+        $this->assertSame('new Description', $updatedCategory->description);
     }
 
     /**

@@ -2,6 +2,7 @@
 
 namespace Services\Support\ValueObjects;
 
+use Domain\Trade\ValueObjects\AuctionValueObject;
 use Support\ValueObjects\PriceValueObject;
 use Tests\TestCase;
 
@@ -17,10 +18,10 @@ class PriceTest extends TestCase
         $price = PriceValueObject::make(10000);
 
         $this->assertInstanceOf(PriceValueObject::class, $price);
-        $this->assertEquals(100, $price->value());
-        $this->assertEquals(10000, $price->raw());
-        $this->assertEquals('RUB', $price->currency());
-        $this->assertEquals('₽', $price->symbol());
+        $this->assertSame(100, $price->value());
+        $this->assertSame(10000, $price->raw());
+        $this->assertSame('RUB', $price->currency());
+        $this->assertSame('₽', $price->symbol());
         $this->assertEquals('100,00 ₽', $price);
 
         $this->expectException(\InvalidArgumentException::class);

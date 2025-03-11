@@ -60,6 +60,6 @@ class PropertiesCastTest extends TestCase
         $this->assertTrue($collectible->properties['is_digital']);
 
         $rawProperties = json_decode($collectible->getRawOriginal('properties'), true);
-        $this->assertEquals(1, count($rawProperties));
+        $this->assertSame(1, count($rawProperties));
     }
 }

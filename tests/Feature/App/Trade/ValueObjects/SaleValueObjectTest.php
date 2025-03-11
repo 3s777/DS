@@ -29,15 +29,16 @@ class SaleValueObjectTest extends TestCase
             ReservationEnum::None->value,
         );
 
+
         $this->assertInstanceOf(SaleValueObject::class, $sale);
-        $this->assertEquals(100, $sale->price()->raw());
+        $this->assertSame(100, $sale->price()->raw());
         $this->assertInstanceOf(PriceValueObject::class, $sale->price());
-        $this->assertEquals(500, $sale->priceOld()->raw());
+        $this->assertSame(500, $sale->priceOld()->raw());
         $this->assertInstanceOf(PriceValueObject::class, $sale->priceOld());
         $this->assertEquals([
             'price' => PriceValueObject::make(100),
-            'price_old' => PriceValueObject::make(500),
             'quantity' => 2,
+            'price_old' => PriceValueObject::make(500),
             'bidding' => false,
             'country_id' => 5,
             'shipping' => ShippingEnum::None->value,

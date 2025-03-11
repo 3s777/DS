@@ -81,6 +81,6 @@ class CountryServiceTest extends TestCase
 
         $updatedCountry = Country::where('slug', 'newslug')->first();
 
-        $this->assertTrue($updatedCountry->slug == $this->request['slug']);
+        $this->assertSame($updatedCountry->slug, $this->request['slug']);
     }
 }

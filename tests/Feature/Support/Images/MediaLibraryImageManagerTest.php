@@ -54,7 +54,7 @@ class MediaLibraryImageManagerTest extends TestCase
         $path = $this->imagesManager->add(UploadedFile::fake()->image('photo1.jpg'), 'featured_image');
         Storage::disk('images')->assertExists($path);
 
-        $this->assertEquals(
+        $this->assertSame(
             Storage::disk('images')->url($path),
             $this->gameDeveloper->getFirstMediaUrl('featured_image')
         );
@@ -104,7 +104,7 @@ class MediaLibraryImageManagerTest extends TestCase
         $path = $this->imagesManager->add(UploadedFile::fake()->image('photo1.jpg'), 'featured_image');
         Storage::disk('images')->assertExists($path);
 
-        $this->assertEquals(
+        $this->assertSame(
             $path,
             $this->imagesManager->getFeaturedImagePath()
         );

@@ -81,6 +81,6 @@ class KitItemServiceTest extends TestCase
 
         $updatedKitItem = KitItem::where('slug', 'newslug')->first();
 
-        $this->assertTrue($updatedKitItem->slug == $this->request['slug']);
+        $this->assertSame($updatedKitItem->slug, $this->request['slug']);
     }
 }

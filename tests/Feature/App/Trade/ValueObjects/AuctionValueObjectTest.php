@@ -27,11 +27,11 @@ class AuctionValueObjectTest extends TestCase
         );
 
         $this->assertInstanceOf(AuctionValueObject::class, $auction);
-        $this->assertEquals(100, $auction->price()->raw());
+        $this->assertSame(100, $auction->price()->raw());
         $this->assertInstanceOf(PriceValueObject::class, $auction->price());
-        $this->assertEquals(20, $auction->step()->raw());
+        $this->assertSame(20, $auction->step()->raw());
         $this->assertInstanceOf(PriceValueObject::class, $auction->step());
-        $this->assertEquals('2024-10-03 10:25', $auction->finished_at());
+        $this->assertSame('2024-10-03 10:25', $auction->finished_at());
     }
 
     /**

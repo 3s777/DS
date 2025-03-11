@@ -54,7 +54,7 @@ class AsyncSelectByQueryViewModelTest extends TestCase
             $expectedResult[] =  ['value' => $shelf->id, 'label' => $shelf->name];
         }
 
-        $this->assertEquals(
+        $this->assertSame(
             $select->result(),
             $expectedResult
         );
@@ -84,7 +84,7 @@ class AsyncSelectByQueryViewModelTest extends TestCase
 
         $expectedResult[] =  ['value' => $expectedShelf->id, 'label' => $expectedShelf->name];
 
-        $this->assertEquals(
+        $this->assertSame(
             $select->result(),
             $expectedResult
         );
@@ -111,7 +111,7 @@ class AsyncSelectByQueryViewModelTest extends TestCase
             ['value' => 'not_found', 'label' => __('common.not_found'), 'disabled' => true]
         ];
 
-        $this->assertEquals(
+        $this->assertSame(
             $select->result(),
             $expectedResult
         );

@@ -59,7 +59,7 @@ class SaleCastTest extends TestCase
         $this->assertInstanceOf(SaleValueObject::class, $collectible->sale_data);
         $this->assertInstanceOf(PriceValueObject::class, $collectible->sale_data->price());
         $this->assertEmpty($collectible->sale_data->priceOld());
-        $this->assertEquals(1299, $collectible->sale_data->price()->raw());
+        $this->assertSame(1299, $collectible->sale_data->price()->raw());
 
         $collectible->sale_data = [
             'price' => 14.5989,
@@ -75,10 +75,10 @@ class SaleCastTest extends TestCase
         $this->assertInstanceOf(SaleValueObject::class, $collectible->sale_data);
         $this->assertInstanceOf(PriceValueObject::class, $collectible->sale_data->price());
         $this->assertInstanceOf(PriceValueObject::class, $collectible->sale_data->priceOld());
-        $this->assertEquals(1459, $collectible->sale_data->price()->raw());
-        $this->assertEquals(5598, $collectible->sale_data->priceOld()->raw());
+        $this->assertSame(1459, $collectible->sale_data->price()->raw());
+        $this->assertSame(5598, $collectible->sale_data->priceOld()->raw());
 
         $rawSale = json_decode($collectible->getRawOriginal('sale_data'), true);
-        $this->assertEquals(8, count($rawSale));
+        $this->assertSame(8, count($rawSale));
     }
 }
