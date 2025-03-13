@@ -38,9 +38,9 @@ class ShelfFilterRegistrar implements FilterRegistrar
                 trans_choice('user.collectors', 1),
                 'collector',
                 'shelves',
+                Collector::class,
                 'collector_id',
                 trans_choice('user.collector.choose', 1),
-                Collector::class
             ),
         ];
     }

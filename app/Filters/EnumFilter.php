@@ -73,7 +73,8 @@ class EnumFilter extends AbstractFilter
         return $this->enum::tryFrom($this->requestValue())?->name() ?? '';
     }
 
-    public function options() {
+    public function options(): array
+    {
         if (class_exists($this->enum)) {
             return $this->enum::cases();
         }

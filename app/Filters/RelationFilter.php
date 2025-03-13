@@ -20,9 +20,9 @@ class RelationFilter extends AbstractFilter
         string $title,
         string $key,
         string $table,
+        string $relation,
         ?string $field = null,
         ?string $placeholder = null,
-        ?string $relation = null
     )
     {
         parent::__construct($title, $key, $table, $field, $placeholder);
@@ -65,7 +65,7 @@ class RelationFilter extends AbstractFilter
         return '';
     }
 
-    public function getPreparedOptions()
+    public function getPreparedOptions(): array
     {
         return $this->relation::select('id', 'name')->get()->pluck('name', 'id')->toArray();
     }

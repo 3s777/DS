@@ -39,17 +39,17 @@ class CollectibleFilterRegistrar implements FilterRegistrar
                 trans_choice('user.collectors', 1),
                 'collector',
                 'collectibles',
+                Collector::class,
                 'collector_id',
                 trans_choice('user.collector.choose', 1),
-                Collector::class
             ),
             'user' => RelationFilter::make(
                 trans_choice('user.users', 1),
                 'user',
                 'collectibles',
+                User::class,
                 'user_id',
                 trans_choice('user.choose', 1),
-                User::class
             ),
             'condition' => EnumFilter::make(
                 __('common.condition'),
@@ -63,9 +63,9 @@ class CollectibleFilterRegistrar implements FilterRegistrar
                 trans_choice('collectible.category.categories', 1),
                 'category',
                 'collectibles',
+                Category::class,
                 'category_id',
                 trans_choice('collectible.category.choose', 1),
-                Category::class
             ),
 //            'collectable_type' => EnumFilter::make(
 //                trans_choice('collectible.type', 1),

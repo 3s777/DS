@@ -2,15 +2,14 @@
 
 namespace Filters;
 
-use App\Filters\DatesFilter;
+use App\Filters\RangeFilter;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Http\Request;
-use Illuminate\Support\Carbon;
 use Mockery;
 use Tests\TestCase;
 
-class DatesFilterTest extends TestCase
+class RangeFilterTest extends TestCase
 {
     use RefreshDatabase;
 
@@ -23,23 +22,20 @@ class DatesFilterTest extends TestCase
         $request = Request::create('/', 'GET', [
             'filters' => [
                 'test-key' => [
-                    'from' => '2025-01-01',
-                    'to' => '2025-02-01'
+                    'from' => '12',
+                    'to' => '130'
                 ]
             ],
         ]);
 
         $this->app->instance('request', $request);
 
-        $filter = new DatesFilter(
+        $filter = new RangeFilter(
             'test-title',
             'test-key',
             'test-table',
             'test-field',
-            [
-                'from' => 'test_from',
-                'to' => 'test_to'
-            ]
+            'test-placeholder'
         );
 
         $query = Mockery::mock(Builder::class);
@@ -55,10 +51,56 @@ class DatesFilterTest extends TestCase
 
         $query->shouldReceive('whereBetween')
             ->with('test-table.test-field', [
-                Carbon::createFromFormat('Y-m-d', '2025-01-01')
-                    ->startOfDay(),
-                Carbon::createFromFormat('Y-m-d', '2025-02-01')
-                    ->endOfDay()
+                12,
+                130
+            ])
+            ->once()
+            ->andReturn($query);
+
+        $filter->apply($query);
+    }
+
+    /**
+     * @test
+     * @return void
+     */
+    public function it_filter_created_and_apply_with_price_success(): void
+    {
+        $request = Request::create('/', 'GET', [
+            'filters' => [
+                'test-key' => [
+                    'from' => '12',
+                    'to' => '130'
+                ]
+            ],
+        ]);
+
+        $this->app->instance('request', $request);
+
+        $filter = new RangeFilter(
+            'test-title',
+            'test-key',
+            'test-table',
+            'test-field',
+            'test-placeholder',
+            isPrice: true,
+        );
+
+        $query = Mockery::mock(Builder::class);
+
+        $query->shouldReceive('when')
+            ->once()
+            ->andReturnUsing(function ($value, $callback) use ($query) {
+                if ($value) {
+                    $callback($query);
+                }
+                return $query;
+            });
+
+        $query->shouldReceive('whereBetween')
+            ->with('test-table.test-field', [
+                1200,
+                13000
             ])
             ->once()
             ->andReturn($query);
@@ -75,24 +117,21 @@ class DatesFilterTest extends TestCase
         $request = Request::create('/', 'GET', [
             'filters' => [
                 'test-key' => [
-                    'from' => '2025-01-01',
-                    'to' => '2025-02-01'
+                    'from' => '12',
+                    'to' => '130'
                 ]
             ],
         ]);
 
         $this->app->instance('request', $request);
 
-        $filter = new DatesFilter(
+        $filter = new RangeFilter(
             'test-title',
             'test-key',
             'test-table',
             'test-field',
-            [
-                'from' => 'test_from',
-                'to' => 'test_to'
-            ],
-            'test-relation'
+            'test-placeholder',
+            relation: 'test-relation'
         );
 
         $query = Mockery::mock(Builder::class);
@@ -117,10 +156,8 @@ class DatesFilterTest extends TestCase
 
         $query->shouldReceive('whereBetween')
             ->with('test-table.test-field', [
-                Carbon::createFromFormat('Y-m-d', '2025-01-01')
-                    ->startOfDay(),
-                Carbon::createFromFormat('Y-m-d', '2025-02-01')
-                    ->endOfDay()
+                12,
+                130
             ])
             ->once()
             ->andReturn($query);
@@ -137,32 +174,26 @@ class DatesFilterTest extends TestCase
         $request = Request::create('/', 'GET', [
             'filters' => [
                 'test-key' => [
-                    'from' => '2025-01-01',
-                    'to' => '2025-02-01'
+                    'from' => 13,
+                    'to' => 120
                 ]
             ],
         ]);
 
         $this->app->instance('request', $request);
 
-        $filter = new DatesFilter(
+        $filter = new RangeFilter(
             'test-title-dates',
             'test-key',
             'test-table',
             'test-field',
-            [
-                'from' => 'test_from',
-                'to' => 'test_to'
-            ],
-            'test-relation'
+            'test-placeholder',
+            relation: 'test-relation'
         );
 
-        $this->assertSame('test_from', $filter->placeholder('from'));
-        $this->assertSame('test_to', $filter->placeholder('to'));
-        $this->assertSame('components.common.filters.dates', $filter->view());
-        $this->assertSame('01.01.2025 - 01.02.2025', $filter->preparedValues());
+        $this->assertSame('test-placeholder', $filter->placeholder());
+        $this->assertSame('13 - 120', $filter->preparedValues());
     }
-
 
     /**
      * @test
@@ -173,25 +204,22 @@ class DatesFilterTest extends TestCase
         $request = Request::create('/', 'GET', [
             'filters' => [
                 'test-key' => [
-                    'from' => '2025-01-01'
+                    'from' => 11
                 ]
             ],
         ]);
 
         $this->app->instance('request', $request);
 
-        $filter = new DatesFilter(
+        $filter = new RangeFilter(
             'test-title-dates',
             'test-key',
             'test-table',
             'test-field',
-            [
-                'from' => 'test_from',
-                'to' => 'test_to'
-            ]
+            'test-placeholder'
         );
 
-        $this->assertSame('01.01.2025', $filter->preparedValues());
+        $this->assertSame('11', $filter->preparedValues());
 
         $query = Mockery::mock(Builder::class);
 
@@ -206,10 +234,8 @@ class DatesFilterTest extends TestCase
 
         $query->shouldReceive('whereBetween')
             ->with('test-table.test-field', [
-                Carbon::createFromFormat('Y-m-d', '2025-01-01')
-                    ->startOfDay(),
-                Carbon::createFromFormat('Y-m-d', '3000-01-01')
-                    ->endOfDay()
+                11,
+                10000000
             ])
             ->once()
             ->andReturn($query);
@@ -226,25 +252,21 @@ class DatesFilterTest extends TestCase
         $request = Request::create('/', 'GET', [
             'filters' => [
                 'test-key' => [
-                    'to' => '2025-02-01'
+                    'to' => 20
                 ]
             ],
         ]);
 
         $this->app->instance('request', $request);
 
-        $filter = new DatesFilter(
+        $filter = new RangeFilter(
             'test-title-dates',
             'test-key',
             'test-table',
-            'test-field',
-            [
-                'from' => 'test_from',
-                'to' => 'test_to'
-            ]
+            'test-field'
         );
 
-        $this->assertSame('01.02.2025', $filter->preparedValues());
+        $this->assertSame('20', $filter->preparedValues());
 
         $query = Mockery::mock(Builder::class);
 
@@ -259,10 +281,8 @@ class DatesFilterTest extends TestCase
 
         $query->shouldReceive('whereBetween')
             ->with('test-table.test-field', [
-                Carbon::createFromFormat('Y-m-d', '0001-01-01')
-                    ->startOfDay(),
-                Carbon::createFromFormat('Y-m-d', '2025-02-01')
-                    ->endOfDay()
+                0,
+                20
             ])
             ->once()
             ->andReturn($query);
@@ -284,12 +304,12 @@ class DatesFilterTest extends TestCase
 
         $this->app->instance('request', $request);
 
-        $filter = new DatesFilter(
+        $filter = new RangeFilter(
             'test-title',
             'test-key',
             'test-table',
         );
 
-        $this->assertNull($filter->placeholder());
+        $this->assertSame('test-title', $filter->placeholder());
     }
 }

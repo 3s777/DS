@@ -36,9 +36,9 @@ class GameDeveloperFilterRegistrar implements FilterRegistrar
                 trans_choice('user.users', 1),
                 'user',
                 'game_developers',
+                User::class,
                 'user_id',
-                __('users.choose'),
-                User::class
+                __('users.choose')
             ),
         ];
     }

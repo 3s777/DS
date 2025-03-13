@@ -17,9 +17,9 @@ class RelationMultipleFilter extends AbstractFilter
         string $title,
         string $key,
         string $table,
+        string $relation,
         ?string $field = null,
         ?string $placeholder = null,
-        ?string $relation = null
     )
     {
         parent::__construct($title, $key, $table, $field, $placeholder);
@@ -77,7 +77,7 @@ class RelationMultipleFilter extends AbstractFilter
         return '';
     }
 
-    public function preparedSelected()
+    public function preparedSelected(): array
     {
         if(!empty($this->relatedModels)) {
             $selected = [];
@@ -94,7 +94,7 @@ class RelationMultipleFilter extends AbstractFilter
         return [];
     }
 
-    public function getPreparedOptions()
+    public function getPreparedOptions(): array
     {
         return $this->relation::select('id', 'name')->get()->pluck('name', 'id')->toArray();
     }

@@ -103,6 +103,6 @@ class RangeFilter extends AbstractFilter
 
     public function view(): string
     {
-        return 'components.common.filters.search';
+        return '';
     }
 }

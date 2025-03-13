@@ -36,9 +36,9 @@ class GamePublisherFilterRegistrar implements FilterRegistrar
                 trans_choice('user.users', 1),
                 'user',
                 'game_publishers',
+                User::class,
                 'user_id',
-                trans_choice('user.choose', 1),
-                User::class
+                trans_choice('user.choose', 1)
             ),
         ];
     }
