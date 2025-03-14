@@ -2,11 +2,9 @@
 
 namespace Domain\Game\Models;
 
-use App\Filters\DatesFilter;
-use App\Filters\RelationFilter;
-use App\Filters\SearchFilter;
 use Database\Factories\Game\GamePublisherFactory;
 use Domain\Auth\Models\User;
+use Domain\Game\FilterRegistrars\GamePublisherFilterRegistrar;
 use Domain\Game\QueryBuilders\GamePublisherQueryBuilder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -78,26 +76,7 @@ class GamePublisher extends Model implements HasMedia
 
     public function availableFilters(): array
     {
-        return [
-            'dates' => DatesFilter::make(
-                __('common.dates'),
-                'dates',
-                'game_publishers'
-            ),
-            'search' => SearchFilter::make(
-                __('common.search'),
-                'search',
-                'game_publishers'
-            ),
-            'user' => RelationFilter::make(
-                trans_choice('user.users', 1),
-                'user',
-                'game_publishers',
-                'user_id',
-                trans_choice('user.choose', 1),
-                User::class
-            ),
-        ];
+        return app(GamePublisherFilterRegistrar::class)->filtersList();
     }
 
 //    public function getRouteKeyName(): string
