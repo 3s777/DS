@@ -1,8 +1,10 @@
 <?php
 
-namespace App\Auth\Admin\Controllers;
+namespace App\Auth\Collector\Controllers;
 
 use App\Http\Controllers\Auth\Admin\AdminController;
+use App\Http\Controllers\Auth\Collector\CollectorController;
+use Database\Factories\CollectorFactory;
 use Database\Factories\UserFactory;
 use Domain\Auth\Models\Role;
 use Domain\Auth\Models\User;
@@ -12,13 +14,13 @@ use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 use Tests\Traits\HasFilters;
 
-class AdminFilterTest extends TestCase
+class CollectorFilterTest extends TestCase
 {
     use RefreshDatabase;
     use HasFilters;
 
     protected User $user;
-    protected Collection $users;
+    protected Collection $collectors;
 
     public function setUp(): void
     {
@@ -28,19 +30,19 @@ class AdminFilterTest extends TestCase
         Role::create(['name' => config('settings.super_admin_role'), 'display_name' => 'SuperAdmin']);
         $this->user->assignRole('super_admin');
 
-        $this->users = UserFactory::new()
+        $this->collectors = CollectorFactory::new()
             ->count(8)
             ->create();
     }
 
     public function getFactory(): Factory
     {
-        return UserFactory::new();
+        return CollectorFactory::new();
     }
 
     public function getAction(): array
     {
-        return [AdminController::class, 'index'];
+        return [CollectorController::class, 'index'];
     }
 
     public function getUser(): User
@@ -50,12 +52,12 @@ class AdminFilterTest extends TestCase
 
     public function getViewData(): string
     {
-        return 'users';
+        return 'collectors';
     }
 
     public function getModels(): Collection
     {
-        return $this->users;
+        return $this->collectors;
     }
 
     /**
@@ -110,7 +112,7 @@ class AdminFilterTest extends TestCase
         $this->actingAs($this->user)
             ->get(action($this->getAction(), $request))
             ->assertInvalid(['filters.dates.from', 'filters.dates.to'])
-            ->assertRedirectToRoute('admin.users.index');
+            ->assertRedirectToRoute('admin.collectors.index');
     }
 
     /**

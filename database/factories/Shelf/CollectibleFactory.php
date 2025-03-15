@@ -49,7 +49,7 @@ class CollectibleFactory extends Factory
         return [
             'name' => fake()->name(),
             'ulid' => Str::ulid(),
-            'article_number' => fake()->title(),
+            'article_number' => fake()->word(),
             'condition' => Arr::random(ConditionEnum::cases())->value,
 //            'user_id' => User::factory(),
 
@@ -72,7 +72,7 @@ class CollectibleFactory extends Factory
             'seller' => fake()->name(),
             'purchase_price' => fake()->numberBetween(1000, 100000),
             'purchased_at' => fake()->date(),
-            'additional_field' => fake()->title(),
+            'additional_field' => fake()->name(),
             'target' => $target->value,
             'description' => $this->translations(['en', 'ru'], [fake()->text(), fake()->text()])
         ];

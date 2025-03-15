@@ -13,6 +13,8 @@ class RangeFilter extends AbstractFilter
 
     protected ?bool $isPrice;
     protected ?string $relation;
+    protected int $minFrom;
+    protected int $maxTo;
 
     public function __construct(
         string $title,
@@ -21,12 +23,16 @@ class RangeFilter extends AbstractFilter
         ?string $field = null,
         array|string|null $placeholder = null,
         ?bool $isPrice = false,
-        ?string $relation = null
+        ?string $relation = null,
+        int $minFrom = 0,
+        int $maxTo = 100000000
     ) {
         parent::__construct($title, $key, $table, $field, $placeholder);
 
         $this->setIsPrice($isPrice);
         $this->setRelation($relation);
+        $this->setMinFrom($minFrom);
+        $this->setMaxTo($maxTo);
     }
 
     protected function setIsPrice(bool $isPrice): static
@@ -38,6 +44,18 @@ class RangeFilter extends AbstractFilter
     protected function setRelation(?string $relation): static
     {
         $this->relation = $relation;
+        return $this;
+    }
+
+    protected function setMinFrom(int $minFrom): static
+    {
+        $this->minFrom = $minFrom;
+        return $this;
+    }
+
+    protected function setMaxTo(int $maxTo): static
+    {
+        $this->maxTo = $maxTo;
         return $this;
     }
 
@@ -69,8 +87,8 @@ class RangeFilter extends AbstractFilter
             // extract $from and $to variables from rangeValues()
             extract(
                 $this->rangeValues(
-                    $this->requestValue('from', 0),
-                    $this->requestValue('to', 10000000)
+                    $this->requestValue('from', $this->minFrom),
+                    $this->requestValue('to', $this->maxTo)
                 )
             );
 

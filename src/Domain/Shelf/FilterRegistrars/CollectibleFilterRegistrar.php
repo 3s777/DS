@@ -135,7 +135,8 @@ class CollectibleFilterRegistrar implements FilterRegistrar
                 __('collectible.kit.score_title'),
                 'kit_score',
                 'collectibles',
-                'kit_score'
+                'kit_score',
+                maxTo: 100
             ),
             'auction_dates' => DatesFilter::make(
                 __('collectible.auction.finished_at'),

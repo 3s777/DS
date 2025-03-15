@@ -3,10 +3,9 @@
 namespace Domain\Auth\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
-use App\Filters\DatesFilter;
-use App\Filters\SearchFilter;
 use App\Models\Image;
 use Database\Factories\UserFactory;
+use Domain\Auth\FilterRegitrars\AdminFilterRegistrar;
 use Domain\Auth\Notifications\ResetPasswordAdminNotification;
 use Domain\Auth\Notifications\VerifyEmailAdminNotification;
 use Domain\Auth\QueryBuilders\UserQueryBuilder;
@@ -16,7 +15,6 @@ use Illuminate\Contracts\Translation\HasLocalePreference;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
-use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Database\Eloquent\Relations\MorphMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -134,18 +132,7 @@ class User extends Authenticatable implements MustVerifyEmail, HasLocalePreferen
 
     public function availableFilters(): array
     {
-        return [
-            'dates' => DatesFilter::make(
-                __('common.dates'),
-                'dates',
-                'users'
-            ),
-            'search' => SearchFilter::make(
-                __('common.search'),
-                'search',
-                'users'
-            ),
-        ];
+        return app(AdminFilterRegistrar::class)->filtersList();
     }
 
 //    public function updatePassword($password): void

@@ -1,9 +1,12 @@
 <?php
 
-namespace App\Auth\Admin\Controllers;
+namespace App\Shelf\Controllers;
 
-use App\Http\Controllers\Auth\Admin\AdminController;
-use Database\Factories\UserFactory;
+use App\Http\Controllers\Game\Admin\GameDeveloperController;
+use App\Http\Controllers\Shelf\Admin\ShelfController;
+use Database\Factories\Game\GameDeveloperFactory;
+use Database\Factories\Shelf\ShelfFactory;
+use Domain\Auth\Models\Collector;
 use Domain\Auth\Models\Role;
 use Domain\Auth\Models\User;
 use Illuminate\Database\Eloquent\Collection;
@@ -12,13 +15,13 @@ use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 use Tests\Traits\HasFilters;
 
-class AdminFilterTest extends TestCase
+class ShelfFilterTest extends TestCase
 {
     use RefreshDatabase;
     use HasFilters;
 
     protected User $user;
-    protected Collection $users;
+    protected Collection $shelves;
 
     public function setUp(): void
     {
@@ -28,19 +31,19 @@ class AdminFilterTest extends TestCase
         Role::create(['name' => config('settings.super_admin_role'), 'display_name' => 'SuperAdmin']);
         $this->user->assignRole('super_admin');
 
-        $this->users = UserFactory::new()
-            ->count(8)
+        $this->shelves = ShelfFactory::new()
+            ->count(10)
             ->create();
     }
 
     public function getFactory(): Factory
     {
-        return UserFactory::new();
+        return ShelfFactory::new();
     }
 
     public function getAction(): array
     {
-        return [AdminController::class, 'index'];
+        return [ShelfController::class, 'index'];
     }
 
     public function getUser(): User
@@ -50,12 +53,12 @@ class AdminFilterTest extends TestCase
 
     public function getViewData(): string
     {
-        return 'users';
+        return 'shelves';
     }
 
     public function getModels(): Collection
     {
-        return $this->users;
+        return $this->shelves;
     }
 
     /**
@@ -99,18 +102,28 @@ class AdminFilterTest extends TestCase
      * @test
      * @return void
      */
+    public function it_success_user_filtered_response(): void
+    {
+        $this->userFilter('collector', 'collector_id', Collector::class);
+    }
+
+    /**
+     * @test
+     * @return void
+     */
     public function it_should_validation_filters_fail(): void
     {
         $request = [
             'filters' => [
                 'dates' => ['from' => 'string', 'to' => '202222-01-01'],
+                'collector' => 'wrong_user'
              ]
         ];
 
         $this->actingAs($this->user)
             ->get(action($this->getAction(), $request))
-            ->assertInvalid(['filters.dates.from', 'filters.dates.to'])
-            ->assertRedirectToRoute('admin.users.index');
+            ->assertInvalid(['filters.dates.from', 'filters.dates.to', 'filters.collector'])
+            ->assertRedirectToRoute('admin.shelves.index');
     }
 
     /**
@@ -142,6 +155,19 @@ class AdminFilterTest extends TestCase
             ->assertSeeInOrder(
                 $this->getModels()->sortBy('name')
                     ->flatMap(fn ($item) => [$item->name])
+                    ->toArray()
+            );
+
+        $request = [
+            'sort' => 'collectors.name'
+        ];
+
+        $this->actingAs($this->user)
+            ->get(action($this->getAction(), $request))
+            ->assertOk()
+            ->assertSeeInOrder(
+                $this->getModels()->sortBy('collector.name')
+                    ->flatMap(fn ($item) => [$item->collector->name])
                     ->toArray()
             );
 

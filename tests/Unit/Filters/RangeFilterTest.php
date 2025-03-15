@@ -235,7 +235,7 @@ class RangeFilterTest extends TestCase
         $query->shouldReceive('whereBetween')
             ->with('test-table.test-field', [
                 11,
-                10000000
+                100000000
             ])
             ->once()
             ->andReturn($query);

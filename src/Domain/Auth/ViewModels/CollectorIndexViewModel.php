@@ -18,7 +18,7 @@ class CollectorIndexViewModel extends ViewModel
             ->select('collectors.id', 'collectors.name', 'collectors.slug', 'collectors.first_name', 'collectors.created_at', 'collectors.email')
             ->filtered()
             ->sorted()
-            ->paginate(10)
+            ->paginate(50)
             ->withQueryString();
     }
 }

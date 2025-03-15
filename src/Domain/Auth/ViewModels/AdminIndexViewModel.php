@@ -18,7 +18,7 @@ class AdminIndexViewModel extends ViewModel
             ->select('users.id', 'users.name', 'users.slug', 'users.first_name', 'users.created_at', 'users.email')
             ->filtered()
             ->sorted()
-            ->paginate(10)
+            ->paginate(50)
             ->withQueryString();
     }
 }
