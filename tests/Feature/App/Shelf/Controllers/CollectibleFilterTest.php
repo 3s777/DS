@@ -10,6 +10,7 @@ use Domain\Auth\Models\Role;
 use Domain\Auth\Models\User;
 use Domain\Game\Models\GameMedia;
 use Domain\Shelf\Models\Category;
+use Domain\Shelf\Models\Collectible;
 use Domain\Trade\Models\Auction;
 use Domain\Trade\Models\Sale;
 use Illuminate\Database\Eloquent\Factories\Factory;
@@ -361,48 +362,108 @@ class CollectibleFilterTest extends TestCase
     }
 
 
-//
-//    /**
-//     * @test
-//     * @return void
-//     */
-//    public function it_success_games_filtered_response(): void
-//    {
-//        $this->relationFilter('games', Game::class, 'games');
-//    }
 
-//    /**
-//     * @test
-//     * @return void
-//     */
-//    public function it_should_validation_filters_fail(): void
-//    {
-//        $request = [
-//            'filters' => [
-//                'dates' => ['from' => 'string', 'to' => '202222-01-01'],
-//                'user' => 'wrong_user',
-//                'genres' => 'wrong_data',
-//                'platforms' => 'wrong_data',
-//                'publishers' => 'wrong_data',
-//                'developers' => 'wrong_data',
-//                'games' => 'wrong_data'
-//            ]
-//        ];
-//
-//        $this->actingAs($this->user)
-//            ->get(action($this->getAction(), $request))
-//            ->assertInvalid([
-//                'filters.dates.from',
-//                'filters.dates.to',
-//                'filters.user',
-//                'filters.genres',
-//                'filters.platforms',
-//                'filters.publishers',
-//                'filters.developers',
-//                'filters.games'
-//            ])
-//            ->assertRedirectToRoute('admin.game-medias.index');
-//    }
+    /**
+     * @test
+     * @return void
+     */
+    public function it_success_category_filtered_response(): void
+    {
+        $expectedCategory = Category::factory()->create([
+            'model' => 'test'
+        ]);
+
+        $gameMedia = GameMedia::factory()->create();
+
+        $expectedModels = Collectible::withoutEvents(function () use ($expectedCategory, $gameMedia) {
+            return Collectible::factory()
+                ->count(2)
+                ->for($gameMedia, 'collectable')
+                ->for($expectedCategory, 'category')
+                ->create();
+        });
+
+        $request = [
+            'filters' => [
+                'category' => $expectedCategory->id
+            ]
+        ];
+
+        $this->actingAs($this->getUser())
+            ->get(action($this->getAction(), $request))
+            ->assertOk()
+            ->assertViewHas($this->getViewData())
+            ->assertSee($expectedModels->pluck('name')->toArray())
+            ->assertDontSee($this->getModels()->pluck('name')->toArray());
+    }
+
+    /**
+     * @test
+     * @return void
+     */
+    public function it_success_target_filtered_response(): void
+    {
+        $this->valueFilter('target', 'target');
+    }
+
+    /**
+     * @test
+     * @return void
+     */
+    public function it_success_condition_filtered_response(): void
+    {
+        $this->valueFilter('condition', 'condition', true);
+    }
+
+    /**
+     * @test
+     * @return void
+     */
+    public function it_should_validation_filters_fail(): void
+    {
+        $request = [
+            'filters' => [
+                'dates' => ['from' => 'string', 'to' => '202222-01-01'],
+                'user' => 'wrong_user',
+                'collector' => 'wrong_collector',
+                'condition' => 'wrong_condition',
+                'category' => 'wrong_category',
+                'target' => ['wrong_data'],
+                'purchased_dates' => ['from' => 'string', 'to' => '202222-01-01'],
+                'seller' => ['wrong_data'],
+                'additional_field' => ['wrong_data'],
+                'purchase_price' => ['from' => 'string', 'to' => 'string'],
+                'sale_price' => ['from' => 'string', 'to' => 'string'],
+                'kit_score' => ['from' => 'string', 'to' => 'string'],
+                'auction_dates' => ['from' => 'string', 'to' => '202222-01-01'],
+            ]
+        ];
+
+        $this->actingAs($this->user)
+            ->get(action($this->getAction(), $request))
+            ->assertInvalid([
+                'filters.dates.from',
+                'filters.dates.to',
+                'filters.user',
+                'filters.collector',
+                'filters.condition',
+                'filters.category',
+                'filters.target',
+                'filters.purchased_dates.from',
+                'filters.purchased_dates.to',
+                'filters.seller',
+                'filters.additional_field',
+                'filters.purchase_price.from',
+                'filters.purchase_price.to',
+                'filters.sale_price.from',
+                'filters.sale_price.to',
+                'filters.kit_score.from',
+                'filters.kit_score.to',
+                'filters.auction_dates.from',
+                'filters.auction_dates.to',
+            ])
+            ->assertRedirectToRoute('admin.collectibles.index');
+    }
 //
 //    /**
 //     * @test

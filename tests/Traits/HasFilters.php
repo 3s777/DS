@@ -41,6 +41,28 @@ trait HasFilters
         $this->baseAssertion($request, $expectedModel, $this->getModels());
     }
 
+    public function valueFilter(string $filterName, string $field, bool $multiple = false): void
+    {
+        $expectedModel = $this->getFactory()
+            ->create([$field => 'search test']);
+
+        $request = [
+            'filters' => [
+                $filterName => 'search test'
+            ]
+        ];
+
+        if($multiple) {
+            $request = [
+                'filters' => [
+                    $filterName => ['search test']
+                ]
+            ];
+        }
+
+        $this->baseAssertion($request, $expectedModel, $this->getModels());
+    }
+
     public function datesFilter(
         string $filterName = 'dates',
         string $field = 'created_at'
