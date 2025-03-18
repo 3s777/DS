@@ -9,6 +9,7 @@ use Domain\Auth\Models\Collector;
 use Domain\Auth\Models\Role;
 use Domain\Auth\Models\User;
 use Domain\Game\Models\GameMedia;
+use Domain\Shelf\Enums\ConditionEnum;
 use Domain\Shelf\Models\Category;
 use Domain\Shelf\Models\Collectible;
 use Domain\Trade\Models\Auction;
@@ -19,11 +20,13 @@ use Illuminate\Database\Eloquent\Relations\Relation;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 use Tests\Traits\HasFilters;
+use Tests\Traits\HasSorters;
 
 class CollectibleFilterTest extends TestCase
 {
     use RefreshDatabase;
     use HasFilters;
+    use HasSorters;
 
     protected User $user;
     protected Category $category;
@@ -464,63 +467,26 @@ class CollectibleFilterTest extends TestCase
             ])
             ->assertRedirectToRoute('admin.collectibles.index');
     }
-//
-//    /**
-//     * @test
-//     * @return void
-//     */
-//    public function it_success_sorted_response(): void
-//    {
-//        $request = [
-//            'sort' => 'id'
-//        ];
-//
-//        $this->actingAs($this->user)
-//            ->get(action($this->getAction(), $request))
-//            ->assertOk()
-//            ->assertSeeInOrder(
-//                $this->getModels()->sortBy('id')
-//                    ->flatMap(fn ($item) => [$item->id])
-//                    ->toArray()
-//            );
-//
-//        $request = [
-//            'sort' => 'name'
-//        ];
-//
-//        $this->actingAs($this->user)
-//            ->get(action($this->getAction(), $request))
-//            ->assertOk()
-//            ->assertSeeInOrder(
-//                $this->getModels()->sortBy('name')
-//                    ->flatMap(fn ($item) => [$item->name])
-//                    ->toArray()
-//            );
-//
-//        $request = [
-//            'sort' => 'users.name'
-//        ];
-//
-//        $this->actingAs($this->user)
-//            ->get(action($this->getAction(), $request))
-//            ->assertOk()
-//            ->assertSeeInOrder(
-//                $this->getModels()->sortBy('user.name')
-//                    ->flatMap(fn ($item) => [$item->user->name])
-//                    ->toArray()
-//            );
-//
-//        $request = [
-//            'sort' => 'created_at'
-//        ];
-//
-//        $this->actingAs($this->user)
-//            ->get(action($this->getAction(), $request))
-//            ->assertOk()
-//            ->assertSeeInOrder(
-//                $this->getModels()->sortBy('created_at')
-//                    ->flatMap(fn ($item) => [$item->created_at])
-//                    ->toArray()
-//            );
-//    }
+
+    /**
+     * @test
+     * @return void
+     */
+    public function it_success_sorted_response(): void
+    {
+        $this->checkSortOrder('id');
+        $this->checkSortOrder('name');
+        $this->checkSortOrder('created_at');
+        $this->checkSortOrder('article_number');
+        $this->checkSortOrder('kit_score');
+        $this->checkSortOrder('purchase_price');
+        $this->checkSortOrder('purchased_at');
+        $this->checkSortOrder('seller');
+        $this->checkSortOrder('additional_field');
+        $this->checkEnumSortOrder('condition', ConditionEnum::class);
+        $this->checkSortOrder('collectors.name', 'collector.name', 'collector->name');
+        $this->checkSortOrder('category_id', 'category_id', 'category->name');
+        $this->checkSortOrder('auction_data');
+        $this->checkSortOrder('sale_data');
+    }
 }

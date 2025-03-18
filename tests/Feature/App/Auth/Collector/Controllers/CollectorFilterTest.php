@@ -13,11 +13,13 @@ use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 use Tests\Traits\HasFilters;
+use Tests\Traits\HasSorters;
 
 class CollectorFilterTest extends TestCase
 {
     use RefreshDatabase;
     use HasFilters;
+    use HasSorters;
 
     protected User $user;
     protected Collection $collectors;
@@ -121,43 +123,8 @@ class CollectorFilterTest extends TestCase
      */
     public function it_success_sorted_response(): void
     {
-        $request = [
-            'sort' => 'id'
-        ];
-
-        $this->actingAs($this->user)
-            ->get(action($this->getAction(), $request))
-            ->assertOk()
-            ->assertSeeInOrder(
-                $this->getModels()->sortBy('id')
-                    ->flatMap(fn ($item) => [$item->id])
-                    ->toArray()
-            );
-
-        $request = [
-            'sort' => 'name'
-        ];
-
-        $this->actingAs($this->user)
-            ->get(action($this->getAction(), $request))
-            ->assertOk()
-            ->assertSeeInOrder(
-                $this->getModels()->sortBy('name')
-                    ->flatMap(fn ($item) => [$item->name])
-                    ->toArray()
-            );
-
-        $request = [
-            'sort' => 'created_at'
-        ];
-
-        $this->actingAs($this->user)
-            ->get(action($this->getAction(), $request))
-            ->assertOk()
-            ->assertSeeInOrder(
-                $this->getModels()->sortBy('created_at')
-                    ->flatMap(fn ($item) => [$item->created_at])
-                    ->toArray()
-            );
+        $this->checkSortOrder('id');
+        $this->checkSortOrder('name');
+        $this->checkSortOrder('created_at');
     }
 }

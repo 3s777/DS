@@ -6,9 +6,9 @@ use Illuminate\Contracts\Database\Eloquent\Builder;
 
 class Sorter
 {
-    public const SORT_KEY = 'sort';
+    protected const SORT_KEY = 'sort';
 
-    public const SORT_ORDER = 'order';
+    protected const SORT_ORDER = 'order';
 
     public function __construct(
         protected array $columns = [],
@@ -28,12 +28,13 @@ class Sorter
             );
         }
 
-        $sortData['order'] = $sortData['order']->contains(['asc', 'desc']) ? $sortData['order'] : 'asc';
+        $sortData['order'] = $sortData['order']->contains(['asc', 'desc']) ? $sortData['order'] : str('asc');
 
-        return $query->when($sortData['key']->contains($this->columns()), function (Builder $query) use ($sortData) {
+//        return $query->when($sortData['key']->contains($this->columns()), function (Builder $query) use ($sortData) {
+        return $query->when(in_array($sortData['key'], $this->columns()), function (Builder $query) use ($sortData) {
             $query->orderBy(
-                $sortData['key'],
-                $sortData['order']
+                $sortData['key']->value(),
+                $sortData['order']->value(),
             );
         });
     }

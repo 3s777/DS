@@ -9,13 +9,16 @@ use Domain\Auth\Models\User;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Testing\Fluent\Concerns\Has;
 use Tests\TestCase;
 use Tests\Traits\HasFilters;
+use Tests\Traits\HasSorters;
 
 class GameDeveloperFilterTest extends TestCase
 {
     use RefreshDatabase;
     use HasFilters;
+    use HasSorters;
 
     protected User $user;
     protected Collection $gameDevelopers;
@@ -129,56 +132,9 @@ class GameDeveloperFilterTest extends TestCase
      */
     public function it_success_sorted_response(): void
     {
-        $request = [
-            'sort' => 'id'
-        ];
-
-        $this->actingAs($this->user)
-            ->get(action($this->getAction(), $request))
-            ->assertOk()
-            ->assertSeeInOrder(
-                $this->getModels()->sortBy('id')
-                    ->flatMap(fn ($item) => [$item->id])
-                    ->toArray()
-            );
-
-        $request = [
-            'sort' => 'name'
-        ];
-
-        $this->actingAs($this->user)
-            ->get(action($this->getAction(), $request))
-            ->assertOk()
-            ->assertSeeInOrder(
-                $this->getModels()->sortBy('name')
-                    ->flatMap(fn ($item) => [$item->name])
-                    ->toArray()
-            );
-
-        $request = [
-            'sort' => 'users.name'
-        ];
-
-        $this->actingAs($this->user)
-            ->get(action($this->getAction(), $request))
-            ->assertOk()
-            ->assertSeeInOrder(
-                $this->getModels()->sortBy('user.name')
-                    ->flatMap(fn ($item) => [$item->user->name])
-                    ->toArray()
-            );
-
-        $request = [
-            'sort' => 'created_at'
-        ];
-
-        $this->actingAs($this->user)
-            ->get(action($this->getAction(), $request))
-            ->assertOk()
-            ->assertSeeInOrder(
-                $this->getModels()->sortBy('created_at')
-                    ->flatMap(fn ($item) => [$item->created_at])
-                    ->toArray()
-            );
+        $this->checkSortOrder('id');
+        $this->checkSortOrder('name');
+        $this->checkSortOrder('created_at');
+        $this->checkSortOrder('users.name', 'user.name', 'user->name');
     }
 }
