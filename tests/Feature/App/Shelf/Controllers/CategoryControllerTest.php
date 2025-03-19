@@ -32,7 +32,7 @@ class CategoryControllerTest extends TestCase
 
         $this->category = CategoryFactory::new()->create();
 
-        $this->request = CreateCategoryRequest::factory()->create();
+        $this->request = CreateCategoryRequest::factory()->create(['model' => 'game_media']);
     }
 
     public function checkNotAuthRedirect(
