@@ -5,6 +5,7 @@ namespace Domain\Shelf\Models;
 use Database\Factories\Shelf\CategoryFactory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 use Mews\Purifier\Casts\CleanHtml;
 use OwenIt\Auditing\Auditable as HasAuditable;
 use OwenIt\Auditing\Contracts\Auditable;
@@ -19,6 +20,7 @@ class Category extends Model implements Auditable
     use HasTranslations;
     use HasAuditable;
     use HasCustomAudit;
+    use SoftDeletes;
 
     protected $fillable = [
         'name',

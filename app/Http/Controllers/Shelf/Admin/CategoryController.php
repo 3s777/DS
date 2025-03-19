@@ -35,7 +35,7 @@ class CategoryController extends Controller
 
     public function create(): View|Application|Factory|\Illuminate\Contracts\Foundation\Application
     {
-        return view('admin.shelf.category.create');
+        return view('admin.shelf.category.create', new CategoryUpdateViewModel());
     }
 
     public function store(CreateCategoryRequest $request, CategoryService $category): Application|Redirector|RedirectResponse|\Illuminate\Contracts\Foundation\Application
@@ -66,9 +66,9 @@ class CategoryController extends Controller
         return to_route('admin.categories.index');
     }
 
-    public function destroy(Category $category): RedirectResponse
+    public function destroy(Category $category, CategoryService $categoryService): RedirectResponse
     {
-        $category->delete();
+        $categoryService->setModelNullOnDelete($category->id);
 
         flash()->info(__('collectible.category.deleted'));
 
@@ -78,8 +78,10 @@ class CategoryController extends Controller
     /**
      * @throws MassDeletingException
      */
-    public function deleteSelected(MassDeletingRequest $request, MassDeletingAction $deletingAction): RedirectResponse
+    public function deleteSelected(MassDeletingRequest $request, MassDeletingAction $deletingAction, CategoryService $categoryService): RedirectResponse
     {
+        $categoryService->setModelNullOnDelete($request->input('ids'));
+
         $deletingAction(
             MassDeletingDTO::make(
                 Category::class,

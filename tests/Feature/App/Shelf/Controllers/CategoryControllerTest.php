@@ -180,5 +180,8 @@ class CategoryControllerTest extends TestCase
             'slug' => Str::slug($this->request['name']),
             'deleted_at' => null
         ]);
+
+        $this->category->refresh();
+        $this->assertNull($this->category->model);
     }
 }

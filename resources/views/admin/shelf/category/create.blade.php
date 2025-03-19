@@ -18,14 +18,13 @@
 
                 <x-grid.col xl="4" ls="6" ml="12" lg="6" md="6" sm="12">
                     <x-ui.form.group>
-                        <x-ui.form.input-text
-                            :placeholder="trans_choice('common.model', 1)"
-                            id="model"
+                        <x-ui.select.data
                             name="model"
-                            required
-                            autocomplete="on"
-                            autofocus>
-                        </x-ui.form.input-text>
+                            select-name="model"
+                            :options="$collectables"
+                            :required="true"
+                            :default-option="trans_choice('common.model', 1)"
+                            :label="trans_choice('common.choose_model', 1)" />
                     </x-ui.form.group>
                 </x-grid.col>
 

@@ -40,9 +40,9 @@ class CategoryServiceTest extends TestCase
 
         $request = new Request($this->request);
 
-        $kitItemService = app(CategoryService::class);
+        $categoryService = app(CategoryService::class);
 
-        $kitItemService->create(FillCategoryDTO::fromRequest(
+        $categoryService->create(FillCategoryDTO::fromRequest(
             $request
         ));
 
@@ -57,12 +57,11 @@ class CategoryServiceTest extends TestCase
      */
     public function it_category_updated_success(): void
     {
-
         $createRequest = new Request($this->request);
 
-        $kitItemService = app(CategoryService::class);
+        $categoryService = app(CategoryService::class);
 
-        $kitItemService->create(FillCategoryDTO::fromRequest(
+        $categoryService->create(FillCategoryDTO::fromRequest(
             $createRequest
         ));
 
@@ -73,7 +72,7 @@ class CategoryServiceTest extends TestCase
 
         $updateRequest = new Request($this->request);
 
-        $kitItemService->update($category, FillCategoryDTO::fromRequest($updateRequest));
+        $categoryService->update($category, FillCategoryDTO::fromRequest($updateRequest));
 
         $this->assertDatabaseHas('categories', [
             'slug' => 'newslug',
@@ -82,5 +81,45 @@ class CategoryServiceTest extends TestCase
         $updatedCategory = Category::where('slug', 'newslug')->first();
 
         $this->assertSame($updatedCategory->slug, $this->request['slug']);
+    }
+
+    /**
+     * @test
+     * @return void
+     */
+    public function it_category_model_null_after_deleting_success(): void
+    {
+        $categoryService = app(CategoryService::class);
+
+        // test null model with array
+        $categories = Category::factory(5)->create();
+        foreach ($categories as $category) {
+            $this->assertNotNull($category->model);
+        }
+        $ids = $categories->pluck('id')->toArray();
+        $categoryService->setModelNullOnDelete($ids);
+        $categories = Category::all();
+        foreach ($categories as $category) {
+            $this->assertNull($category->model);
+        }
+
+        // test null model with string
+        $newCategories = Category::factory(5)->create();
+        foreach ($newCategories as $category) {
+            $this->assertNotNull($category->model);
+        }
+        $newIds = $newCategories->pluck('id')->toArray();
+        $newIds = implode(',', $newIds);
+        $categoryService->setModelNullOnDelete($newIds);
+        $categories = Category::all();
+        foreach ($categories as $category) {
+            $this->assertNull($category->model);
+        }
+
+        // test null model with id
+        $category = Category::factory()->create();
+        $categoryService->setModelNullOnDelete($category->id);
+        $category->refresh();
+        $this->assertNull($category->model);
     }
 }

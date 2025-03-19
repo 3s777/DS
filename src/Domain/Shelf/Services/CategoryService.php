@@ -53,4 +53,17 @@ class CategoryService
             }
         );
     }
+
+    public function setModelNullOnDelete(int|string|array $ids): void
+    {
+        if(!is_array($ids)) {
+            $ids = explode(",", $ids);
+        }
+
+        foreach ($ids as $id) {
+            $category = Category::find($id);
+            $category->model = null;
+            $category->save();
+        }
+    }
 }

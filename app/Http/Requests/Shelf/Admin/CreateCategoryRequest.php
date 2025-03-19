@@ -32,7 +32,9 @@ class CreateCategoryRequest extends FormRequest
             'model' => [
                 'required',
                 'string',
-                'max:250'
+                'max:250',
+                Rule::in(array_keys(config('settings.collectables'))),
+                Rule::unique(Category::class)
             ],
             'slug' => [
                 'nullable',

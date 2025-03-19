@@ -39,7 +39,7 @@ return new class extends Migration
             $table->foreignIdFor(Category::class)
                 ->constrained()
                 ->cascadeOnUpdate()
-                ->cascadeOnDelete();
+                ->nullOnDelete();
             $table->foreignIdFor(User::class)
                 ->nullable()
                 ->constrained()

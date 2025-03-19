@@ -32,7 +32,9 @@ class UpdateCategoryRequest extends FormRequest
             'model' => [
                 'required',
                 'string',
-                'max:250'
+                'max:250',
+                Rule::in(array_keys(config('settings.collectables'))),
+                Rule::unique(Category::class)->ignore($this->category)
             ],
             'slug' => [
                 'nullable',
@@ -49,7 +51,8 @@ class UpdateCategoryRequest extends FormRequest
         return [
             'name' => trans_choice('common.name', 1),
             'slug' => __('common.slug'),
-            'description' => __('common.description')
+            'description' => __('common.description'),
+            'model' => trans_choice('common.model', 1)
         ];
     }
 }
