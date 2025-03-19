@@ -5,10 +5,8 @@ namespace Support\ViewModels;
 use Database\Factories\UserFactory;
 use Domain\Auth\Models\Collector;
 use Domain\Auth\Models\Role;
-use Domain\Shelf\Models\KitItem;
 use Domain\Shelf\Models\Shelf;
 use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Http\Request;
 use Tests\TestCase;
 
 class AsyncSelectAllViewModelTest extends TestCase
@@ -45,7 +43,7 @@ class AsyncSelectAllViewModelTest extends TestCase
             ['value' => '', 'label' => trans_choice('shelf.choose', 1), 'disabled' => true]
         ];
 
-        foreach($shelves as $shelf) {
+        foreach ($shelves as $shelf) {
             $expectedResult[] =  ['value' => $shelf->id, 'label' => $shelf->name];
         }
 

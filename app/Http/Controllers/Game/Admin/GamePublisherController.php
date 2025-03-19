@@ -8,9 +8,7 @@ use App\Http\Requests\Game\Admin\FilterGamePublisherRequest;
 use App\Http\Requests\Game\Admin\UpdateGamePublisherRequest;
 use App\Http\Requests\MassDeletingRequest;
 use Domain\Game\Models\GamePublisher;
-use Domain\Game\ViewModels\GameDeveloperListSelectViewModel;
 use Domain\Game\ViewModels\GamePublisherIndexViewModel;
-use Domain\Game\ViewModels\GamePublisherListSelectViewModel;
 use Domain\Game\ViewModels\GamePublisherUpdateViewModel;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
@@ -128,4 +126,3 @@ class GamePublisherController extends Controller
         );
     }
 }
-

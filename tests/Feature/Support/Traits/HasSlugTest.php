@@ -64,7 +64,7 @@ class HasSlugTest extends TestCase
 
         $i = 0;
         foreach ($kitItems as $item) {
-            if($i > 0) {
+            if ($i > 0) {
                 $this->assertSame($item->slug, 'test-slug-'.$i);
             } else {
                 $this->assertSame($item->slug, 'test-slug');

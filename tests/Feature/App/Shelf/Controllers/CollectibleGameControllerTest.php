@@ -27,7 +27,7 @@ use Tests\TestCase;
 class CollectibleGameControllerTest extends TestCase
 {
     use RefreshDatabase;
-//    use DatabaseTruncation;
+    //    use DatabaseTruncation;
 
     protected User $user;
     protected Collectible $collectible;
@@ -55,8 +55,7 @@ class CollectibleGameControllerTest extends TestCase
         string $method = 'get',
         array  $params = [],
         array  $request = []
-    ): void
-    {
+    ): void {
         $this->{$method}(action([CollectibleGameController::class, $action], $params), $request)
             ->assertRedirectToRoute('admin.login');
     }
@@ -110,25 +109,25 @@ class CollectibleGameControllerTest extends TestCase
      */
     public function it_pages_success(): void
     {
-//        $this->checkNotAuthRedirect('index');
+        //        $this->checkNotAuthRedirect('index');
         $this->checkNotAuthRedirect('create');
-//        $this->checkNotAuthRedirect('edit', 'get', [$this->collectible->slug]);
+        //        $this->checkNotAuthRedirect('edit', 'get', [$this->collectible->slug]);
         $this->checkNotAuthRedirect('store', 'post', $this->request);
         $this->checkNotAuthRedirect('update', 'put', [$this->collectible->id], $this->request);
     }
 
-//    /**
-//     * @test
-//     * @return void
-//     */
-//    public function it_index_success(): void
-//    {
-//        $this->actingAs($this->user)
-//            ->get(action([GameMediaController::class, 'index']))
-//            ->assertOk()
-//            ->assertSee(__('game.media.list'))
-//            ->assertViewIs('admin.game.media.index');
-//    }
+    //    /**
+    //     * @test
+    //     * @return void
+    //     */
+    //    public function it_index_success(): void
+    //    {
+    //        $this->actingAs($this->user)
+    //            ->get(action([GameMediaController::class, 'index']))
+    //            ->assertOk()
+    //            ->assertSee(__('game.media.list'))
+    //            ->assertViewIs('admin.game.media.index');
+    //    }
 
     /**
      * @test
@@ -265,7 +264,9 @@ class CollectibleGameControllerTest extends TestCase
                 action(
                     [CollectibleGameController::class, 'update'],
                     [$this->collectible->id]
-                ), $this->request)
+                ),
+                $this->request
+            )
             ->assertInvalid([
                 'name',
                 'article_number',
@@ -289,7 +290,9 @@ class CollectibleGameControllerTest extends TestCase
                 action(
                     [CollectibleGameController::class, 'update'],
                     [$this->collectible->id]
-                ), $this->request)
+                ),
+                $this->request
+            )
             ->assertInvalid([
                 'sale.price',
                 'sale.price_old',
@@ -308,7 +311,9 @@ class CollectibleGameControllerTest extends TestCase
                 action(
                     [CollectibleGameController::class, 'update'],
                     [$this->collectible->id]
-                ), $this->request)
+                ),
+                $this->request
+            )
             ->assertInvalid([
                 'auction.price',
                 'auction.step',

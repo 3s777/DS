@@ -52,7 +52,7 @@ trait HasFilters
             ]
         ];
 
-        if($multiple) {
+        if ($multiple) {
             $request = [
                 'filters' => [
                     $filterName => ['search test']
@@ -66,8 +66,7 @@ trait HasFilters
     public function datesFilter(
         string $filterName = 'dates',
         string $field = 'created_at'
-    ): void
-    {
+    ): void {
         $models = $this->getFactory()
             ->count(10)
             ->create([$field => Carbon::tomorrow()]);
@@ -92,8 +91,7 @@ trait HasFilters
         string $relationName,
         string $filterName = 'dates',
         string $field = 'created_at',
-    ): void
-    {
+    ): void {
         $models = $this->getFactory()
             ->has($relationClass::factory()->state([
                 $field => Carbon::tomorrow()
@@ -124,8 +122,7 @@ trait HasFilters
         string $relationName,
         string $filterName = 'dates',
         string $field = 'created_at',
-    ): void
-    {
+    ): void {
         $models = $this->getFactory()
             ->has($relationClass::factory()->state([
                 $field => Carbon::yesterday()
@@ -155,8 +152,7 @@ trait HasFilters
         string $relationName,
         string $filterName = 'dates',
         string $field = 'created_at',
-    ): void
-    {
+    ): void {
         $models = $this->getFactory()
             ->has($relationClass::factory()->state([
                 $field => Carbon::tomorrow()
@@ -221,8 +217,7 @@ trait HasFilters
         string $filterName = 'user',
         string $field = 'user_id',
         string $userModel = User::class
-    ): void
-    {
+    ): void {
         $user = $userModel::factory()->create();
 
         $expectedModel = $this->getFactory()
@@ -241,7 +236,7 @@ trait HasFilters
     {
         $models = $this->getFactory()
             ->count(10)
-            ->create([$field => fn() => rand(1,5)]);
+            ->create([$field => fn () => rand(1, 5)]);
 
         $expectedModel = $this->getFactory()
             ->create([$field => 10]);
@@ -262,7 +257,7 @@ trait HasFilters
     {
         $models = $this->getFactory()
             ->count(10)
-            ->create([$field => fn() => rand(1,5)]);
+            ->create([$field => fn () => rand(1, 5)]);
 
         $expectedModel = $this->getFactory()
             ->create([$field => 10]);
@@ -282,7 +277,7 @@ trait HasFilters
     {
         $models = $this->getFactory()
             ->count(10)
-            ->create([$field => fn() => rand(5,10)]);
+            ->create([$field => fn () => rand(5, 10)]);
 
         $expectedModel = $this->getFactory()
             ->create([$field => 3]);
@@ -302,8 +297,7 @@ trait HasFilters
         string $filterName,
         string $relationModel,
         string $relationName
-    ): void
-    {
+    ): void {
         $relationModels = $relationModel::factory(3)->create();
         $expectedModels = $this->getFactory()
             ->count(2)

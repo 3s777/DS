@@ -108,4 +108,3 @@ class GameGenreController extends Controller
         return to_route('admin.game-genres.index');
     }
 }
-

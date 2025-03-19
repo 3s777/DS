@@ -6,17 +6,17 @@ use Support\Sorters\Sorter;
 use Support\Filters\FilterManager;
 use Support\Flash\Flash;
 
-if(!function_exists('flash')) {
+if (!function_exists('flash')) {
     function flash(): Flash
     {
         return app(Flash::class);
     }
 }
 
-if(!function_exists('filters')) {
+if (!function_exists('filters')) {
     function filters($availableFilters = []): array
     {
-        if(!empty($availableFilters)) {
+        if (!empty($availableFilters)) {
             return app(FilterManager::class)
                 ->registerFilters($availableFilters)
                 ->items();
@@ -26,14 +26,14 @@ if(!function_exists('filters')) {
     }
 }
 
-if(!function_exists('get_filter')) {
+if (!function_exists('get_filter')) {
     function get_filter($filterName)
     {
         return filters()[$filterName];
     }
 }
 
-if(!function_exists('filter_url')) {
+if (!function_exists('filter_url')) {
     function filter_url(array $params = []): string
     {
         return route(Route::currentRouteName(), [
@@ -43,7 +43,7 @@ if(!function_exists('filter_url')) {
     }
 }
 
-if(!function_exists('sorter')) {
+if (!function_exists('sorter')) {
     function sorter($fields, $defaultField, $defaultOrder): Sorter
     {
         return app(
@@ -58,9 +58,9 @@ if(!function_exists('sorter')) {
 }
 
 
-if(!function_exists('filterInputName')) {
+if (!function_exists('filterInputName')) {
     function to_dot_name(string $name): string
     {
-        return Str::of($name)->replace('[]','')->replace('[', '.')->remove(']')->value();
+        return Str::of($name)->replace('[]', '')->replace('[', '.')->remove(']')->value();
     }
 }

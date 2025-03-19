@@ -39,7 +39,8 @@ class GamePlatformUpdateViewModel extends ViewModel
         return GamePlatformTypeEnum::cases();
     }
 
-    public function selectedUser(): array {
+    public function selectedUser(): array
+    {
         return $this->getSelectedUser($this->gamePlatform);
     }
 }

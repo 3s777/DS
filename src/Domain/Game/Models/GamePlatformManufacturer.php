@@ -3,7 +3,6 @@
 namespace Domain\Game\Models;
 
 use Database\Factories\Game\GamePlatformManufacturerFactory;
-use Database\Factories\Game\GamePublisherFactory;
 use Domain\Auth\Models\User;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;

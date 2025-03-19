@@ -48,7 +48,7 @@ class HasFeaturedImageTest extends TestCase
             ['small', 'medium']
         );
 
-        if(config('images.driver') == 'media_library') {
+        if (config('images.driver') == 'media_library') {
             $this->assertDatabaseHas('media', [
                 'model_id' => $gameDeveloper->id,
             ]);
@@ -114,7 +114,7 @@ class HasFeaturedImageTest extends TestCase
 
         $this->storage->assertExists($imagePathInfo['dirname'].'/'.$imagePathInfo['filename'].'_fallback.'.$imagePathInfo['extension']);
 
-        foreach($gameDeveloper->thumbnailSizes() as $thumb) {
+        foreach ($gameDeveloper->thumbnailSizes() as $thumb) {
             $this->storage->assertExists($imagePathInfo['dirname'].'/webp/'.$thumb[0].'x'.$thumb[1].'/'.$imagePathInfo['filename'].'.webp');
         }
 

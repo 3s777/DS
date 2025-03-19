@@ -8,28 +8,28 @@ use Domain\Shelf\Models\Collectible;
 
 class CollectibleObserver
 {
-    public function creating(Collectible $collectible):void
+    public function creating(Collectible $collectible): void
     {
         $collectible->category_id = Category::where('model', $collectible->collectable_type)->first()->id;
     }
 
     public function updated(Collectible $collectible): void
     {
-        if($collectible->isDirty('target')) {
-            if($collectible->target == TargetEnum::Sale->value && $collectible->auction) {
+        if ($collectible->isDirty('target')) {
+            if ($collectible->target == TargetEnum::Sale->value && $collectible->auction) {
                 $collectible->auction->delete();
             }
 
-            if($collectible->target == TargetEnum::Auction->value && $collectible->sale) {
+            if ($collectible->target == TargetEnum::Auction->value && $collectible->sale) {
                 $collectible->sale->delete();
             }
 
-            if($collectible->target != TargetEnum::Auction->value && $collectible->target != TargetEnum::Sale->value) {
-                if($collectible->sale) {
+            if ($collectible->target != TargetEnum::Auction->value && $collectible->target != TargetEnum::Sale->value) {
+                if ($collectible->sale) {
                     $collectible->sale->delete();
                 }
 
-                if($collectible->auction) {
+                if ($collectible->auction) {
                     $collectible->auction->delete();
                 }
             }
@@ -38,11 +38,11 @@ class CollectibleObserver
 
     public function deleted(Collectible $collectible): void
     {
-        if($collectible->sale) {
+        if ($collectible->sale) {
             $collectible->sale->delete();
         }
 
-        if($collectible->auction) {
+        if ($collectible->auction) {
             $collectible->auction->delete();
         }
     }

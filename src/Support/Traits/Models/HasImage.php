@@ -50,14 +50,14 @@ trait HasImage
 
         $imagePathInfo = pathinfo($imageFullPath);
 
-        if($defaultThumbnails) {
+        if ($defaultThumbnails) {
 
             $filteredThumbs = ($specialSizes) ? Arr::only($defaultThumbnails, $specialSizes) : $defaultThumbnails;
 
             $this->imagesStorage()->makeDirectory($imagePathInfo['dirname'].'/webp');
             //            $this->imagesStorage()->makeDirectory($imagePathInfo['dirname'].'/'.$imagePathInfo['extension']);
 
-            foreach($filteredThumbs as $thumb) {
+            foreach ($filteredThumbs as $thumb) {
 
                 $webpThumbDir = $imagePathInfo['dirname'].'/webp/'.$thumb[0].'x'.$thumb[1];
                 //                $originalThumbDir = $imagePathInfo['dirname'].'/'.$imagePathInfo['extension'].'/'.$thumb[0].'x'.$thumb[1];
@@ -107,7 +107,7 @@ trait HasImage
         string $collectionName = 'default',
         array $specialSizes = []
     ): string {
-        if($image) {
+        if ($image) {
             $imageFullPath = $this->addOriginal($image, $collectionName);
 
             $this->generateFullSizes($imageFullPath);

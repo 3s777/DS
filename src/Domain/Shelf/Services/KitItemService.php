@@ -1,4 +1,6 @@
-<?php namespace Domain\Shelf\Services;
+<?php
+
+namespace Domain\Shelf\Services;
 
 use Domain\Shelf\DTOs\FillKitItemDTO;
 use Domain\Shelf\Models\KitItem;

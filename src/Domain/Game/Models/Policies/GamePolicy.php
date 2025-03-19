@@ -36,11 +36,11 @@ class GamePolicy
      */
     public function update(User $user, Game $game): bool
     {
-       if($user->can('games.edit')) {
-           return true;
-       }
+        if ($user->can('games.edit')) {
+            return true;
+        }
 
-       return $user->id == $game->user_id;
+        return $user->id == $game->user_id;
     }
 
     /**

@@ -36,11 +36,11 @@ class GameGenrePolicy
      */
     public function update(User $user, GameGenre $gameGenre): bool
     {
-       if($user->can('game-genres.edit')) {
-           return true;
-       }
+        if ($user->can('game-genres.edit')) {
+            return true;
+        }
 
-       return $user->id == $gameGenre->user_id;
+        return $user->id == $gameGenre->user_id;
     }
 
     /**

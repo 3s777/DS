@@ -9,7 +9,8 @@ enum ColorThemeEnum: string
     case Light = 'light';
     case Dark = 'dark';
 
-    public function theme():string {
+    public function theme(): string
+    {
         return match($this) {
             ColorThemeEnum::Green => 'theme_green',
             ColorThemeEnum::Light => 'theme_light theme__opposite_dark',

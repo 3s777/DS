@@ -24,11 +24,11 @@ class RegisterController extends Controller
     {
 
         // TODO try catch
-        app()->bind(RegisterNewUserContract:: class, RegisterNewCollectorAction::class);
+        app()->bind(RegisterNewUserContract::class, RegisterNewCollectorAction::class);
 
         $action = app(RegisterNewUserContract::class);
-//
-//        $action = new RegisterNewCollectorAction();
+        //
+        //        $action = new RegisterNewCollectorAction();
 
         $action(NewCollectorDTO::fromRequest($request));
 

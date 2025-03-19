@@ -30,7 +30,7 @@ class LoginController extends Controller
             return back()->onlyInput('email');
         }
 
-        if(array_key_exists('not_verified', $actionData)) {
+        if (array_key_exists('not_verified', $actionData)) {
             return to_route('collector.verification.notice');
         }
 

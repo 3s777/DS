@@ -29,27 +29,27 @@ class CollectibleController extends Controller
 
     public function index(FilterCollectibleRequest $request): View|Application|Factory|\Illuminate\Contracts\Foundation\Application
     {
-//        $models = Collectible::query()->where(DB::raw('("sale"->>\'price\')::int'),'<',10000)->get();
+        //        $models = Collectible::query()->where(DB::raw('("sale"->>\'price\')::int'),'<',10000)->get();
         return view('admin.shelf.collectible.index', new CollectibleIndexViewModel());
     }
 
-//    public function create(): View|Application|Factory|\Illuminate\Contracts\Foundation\Application
-//    {
-//        return view('admin.shelf.collectible.create', new CollectibleUpdateViewModel());
-//    }
-//
-//    public function store(CreateCollectibleRequest $request): Application|Redirector|RedirectResponse|\Illuminate\Contracts\Foundation\Application
-//    {
-//        $collectibleService->create(FillCollectibleDTO::fromRequest($request));
-//
-//        flash()->info(__('collectible.created'));
-//
-//        return to_route('collectibles.index');
-//    }
-//
-//    public function show(string $id)
-//    {
-//    }
+    //    public function create(): View|Application|Factory|\Illuminate\Contracts\Foundation\Application
+    //    {
+    //        return view('admin.shelf.collectible.create', new CollectibleUpdateViewModel());
+    //    }
+    //
+    //    public function store(CreateCollectibleRequest $request): Application|Redirector|RedirectResponse|\Illuminate\Contracts\Foundation\Application
+    //    {
+    //        $collectibleService->create(FillCollectibleDTO::fromRequest($request));
+    //
+    //        flash()->info(__('collectible.created'));
+    //
+    //        return to_route('collectibles.index');
+    //    }
+    //
+    //    public function show(string $id)
+    //    {
+    //    }
 
     public function edit(Collectible $collectible): View|Application|Factory|\Illuminate\Contracts\Foundation\Application
     {
@@ -58,14 +58,14 @@ class CollectibleController extends Controller
         return view('admin.shelf.collectible.'.$type.'.edit', new CollectibleUpdateViewModel($collectible));
     }
 
-//    public function update(UpdateCollectibleRequest $request, Collectible $collectible, CollectibleService $collectibleService): RedirectResponse
-//    {
-//        $collectibleService->update($collectible, FillCollectibleDTO::fromRequest($request));
-//
-//        flash()->info(__('collectible.updated'));
-//
-//        return to_route('collectibles.index');
-//    }
+    //    public function update(UpdateCollectibleRequest $request, Collectible $collectible, CollectibleService $collectibleService): RedirectResponse
+    //    {
+    //        $collectibleService->update($collectible, FillCollectibleDTO::fromRequest($request));
+    //
+    //        flash()->info(__('collectible.updated'));
+    //
+    //        return to_route('collectibles.index');
+    //    }
 
     public function destroy(Collectible $collectible): RedirectResponse
     {

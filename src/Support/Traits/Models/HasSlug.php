@@ -19,7 +19,7 @@ trait HasSlug
 
     protected function makeSlug()
     {
-        if(!$this->{$this->slugColumn()}) {
+        if (!$this->{$this->slugColumn()}) {
             $slug = $this->slugUnique(
                 str($this->{$this->slugFrom()})
                     ->slug()

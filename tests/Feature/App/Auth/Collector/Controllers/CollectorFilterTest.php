@@ -2,10 +2,8 @@
 
 namespace App\Auth\Collector\Controllers;
 
-use App\Http\Controllers\Auth\Admin\AdminController;
 use App\Http\Controllers\Auth\Collector\CollectorController;
 use Database\Factories\CollectorFactory;
-use Database\Factories\UserFactory;
 use Domain\Auth\Models\Role;
 use Domain\Auth\Models\User;
 use Illuminate\Database\Eloquent\Collection;

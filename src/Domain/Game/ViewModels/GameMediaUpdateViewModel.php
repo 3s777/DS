@@ -2,7 +2,6 @@
 
 namespace Domain\Game\ViewModels;
 
-use Domain\Game\Models\Game;
 use Domain\Game\Models\GameGenre;
 use Domain\Game\Models\GameMedia;
 use Domain\Game\Models\GamePlatform;

@@ -16,11 +16,11 @@ final readonly class PriceValueObject implements Stringable
         private int $precision = 100,
         private array $currencies  =  ['RUB' => '₽']
     ) {
-        if($value < 0) {
+        if ($value < 0) {
             throw new InvalidArgumentException('Price must be more than zero');
         }
 
-        if(!isset($this->currencies[$currency])) {
+        if (!isset($this->currencies[$currency])) {
             throw new InvalidArgumentException('Currency not allowed');
         }
     }

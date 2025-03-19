@@ -20,8 +20,7 @@ class RelationMultipleFilter extends AbstractFilter
         string $relation,
         ?string $field = null,
         ?string $placeholder = null,
-    )
-    {
+    ) {
         parent::__construct($title, $key, $table, $field, $placeholder);
 
         $this->setRelation($relation);
@@ -38,14 +37,14 @@ class RelationMultipleFilter extends AbstractFilter
     {
         $this->relatedModels = [];
 
-//        dd(request()->input('filters'));
+        //        dd(request()->input('filters'));
 
-        if(request()->input('filters.'.$this->key)) {
+        if (request()->input('filters.'.$this->key)) {
             $relatedCollection = $this->relation::select(['id', 'name'])->whereIn('id', $this->requestValue())->get();
 
             $this->relatedModels = array_map(function ($value) use ($relatedCollection) {
                 return $relatedCollection->find($value);
-            }, request()->input('filters.'.$this->key) );
+            }, request()->input('filters.'.$this->key));
         }
 
         return $this;
@@ -55,18 +54,18 @@ class RelationMultipleFilter extends AbstractFilter
     {
         return $query->when($this->requestValue(), function (Builder $query) {
             $query->whereHas($this->key, function (Builder $query) {
-                $query->whereIn($this->table.'.'.$this->field,   $this->requestValue());
+                $query->whereIn($this->table.'.'.$this->field, $this->requestValue());
             });
         });
     }
 
     public function preparedValues(): mixed
     {
-        if(!empty($this->relatedModels)) {
+        if (!empty($this->relatedModels)) {
             $names = [];
 
-            foreach($this->relatedModels as $key => $model) {
-                if($model) {
+            foreach ($this->relatedModels as $key => $model) {
+                if ($model) {
                     $names[$key] = $model->name;
                 }
             }
@@ -79,11 +78,11 @@ class RelationMultipleFilter extends AbstractFilter
 
     public function preparedSelected(): array
     {
-        if(!empty($this->relatedModels)) {
+        if (!empty($this->relatedModels)) {
             $selected = [];
 
-            foreach($this->relatedModels as $key => $model) {
-                if($model) {
+            foreach ($this->relatedModels as $key => $model) {
+                if ($model) {
                     $selected[$model->{$this->field}] = $model->name;
                 }
             }

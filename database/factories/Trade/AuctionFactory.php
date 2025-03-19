@@ -2,10 +2,7 @@
 
 namespace Database\Factories\Trade;
 
-use Domain\Game\Models\Game;
-use Domain\Game\Models\GameMedia;
 use Domain\Settings\Models\Country;
-use Domain\Shelf\Models\Collectible;
 use Domain\Trade\Enums\ShippingEnum;
 use Domain\Trade\Models\Auction;
 use Illuminate\Database\Eloquent\Factories\Factory;

@@ -2,7 +2,6 @@
 
 use Domain\Auth\Models\User;
 use Domain\Game\Models\GamePlatformManufacturer;
-use Domain\Game\Models\GamePlatformType;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;

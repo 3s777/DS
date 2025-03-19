@@ -14,7 +14,7 @@ class Authenticate extends Middleware
      */
     protected function redirectTo(Request $request): ?string
     {
-        if(!$request->expectsJson()) {
+        if (!$request->expectsJson()) {
             if (Route::is('admin.*')) {
                 Auth::shouldUse('admin');
                 return route('admin.login', ['locale' => $request->segment(1)]);

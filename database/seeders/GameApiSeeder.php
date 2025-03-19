@@ -20,7 +20,7 @@ class GameApiSeeder extends Seeder
     {
         $user = User::where('name', 'qqqqq')->first();
 
-        for($i = 1; $i <= 10; $i++) {
+        for ($i = 1; $i <= 10; $i++) {
             $games = $gamesApi->getGamesByPlatform(16, $i);
 
             foreach ($games as $game) {
@@ -32,7 +32,7 @@ class GameApiSeeder extends Seeder
                     'user_id' => 11,
                 ]);
 
-                if(empty($currentGame->alternative_names)) {
+                if (empty($currentGame->alternative_names)) {
                     $currentGame->alternative_names = $game->alternative_names;
                     $currentGame->save();
                 }

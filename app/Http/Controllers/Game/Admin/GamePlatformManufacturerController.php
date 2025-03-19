@@ -114,4 +114,3 @@ class GamePlatformManufacturerController extends Controller
         return to_route('admin.game-platform-manufacturers.index');
     }
 }
-

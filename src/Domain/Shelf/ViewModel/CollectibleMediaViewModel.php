@@ -2,7 +2,6 @@
 
 namespace Domain\Shelf\ViewModel;
 
-use Domain\Shelf\Enums\CollectibleTypeEnum;
 use Spatie\ViewModels\ViewModel;
 
 class CollectibleMediaViewModel extends ViewModel
@@ -22,7 +21,7 @@ class CollectibleMediaViewModel extends ViewModel
             ['value' => '', 'label' => trans_choice('collectible.choose_media', 1), 'disabled' => true]
         ];
 
-        if(!$this->query) {
+        if (!$this->query) {
             $options[] = ['value' => 'not_found', 'label' => __('common.not_found'), 'disabled' => true];
             return $options;
         }

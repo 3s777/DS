@@ -5,7 +5,6 @@ namespace App\Http\Controllers\Auth\Collector;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Auth\Collector\ResetPasswordRequest;
 use Domain\Auth\Models\Collector;
-use Domain\Auth\Models\User;
 use Illuminate\Auth\Events\PasswordReset;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;

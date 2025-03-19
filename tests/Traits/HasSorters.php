@@ -4,7 +4,6 @@ namespace Tests\Traits;
 
 use Domain\Auth\Models\User;
 use Illuminate\Database\Eloquent\Collection;
-use UnitEnum;
 
 trait HasSorters
 {

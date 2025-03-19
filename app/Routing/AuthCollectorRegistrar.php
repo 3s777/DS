@@ -3,8 +3,6 @@
 namespace App\Routing;
 
 use App\Contracts\RouteRegistrar;
-
-
 use App\Http\Controllers\Auth\Collector\CollectorController;
 use App\Http\Controllers\Auth\Collector\ForgotPasswordController;
 use App\Http\Controllers\Auth\Collector\LoginController;

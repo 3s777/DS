@@ -2,16 +2,10 @@
 
 namespace Filters;
 
-use App\Filters\SearchFilter;
-use Domain\Shelf\FilterRegistrars\CollectibleFilterRegistrar;
-
 use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Foundation\Testing\Concerns\InteractsWithViews;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
-use Mockery;
-use Support\DTOs\MassDeletingDTO;
 use Support\Filters\AbstractFilter;
 use Tests\TestCase;
 
@@ -33,14 +27,13 @@ class AbstractFilterTest extends TestCase
 
         $this->app->instance('request', $request);
 
-        $filter = new class(
+        $filter = new class (
             'test-title',
             'test-key',
             'test-table',
             'test-field',
             'test-placeholder'
         ) extends AbstractFilter {
-
             public function apply(Builder $query): Builder
             {
                 return $query;
@@ -79,7 +72,7 @@ class AbstractFilterTest extends TestCase
      */
     public function it_filter_created_with_placeholder_array_success(): void
     {
-        $filter = new class(
+        $filter = new class (
             'test-title',
             'test-key',
             'test-table',
@@ -89,7 +82,6 @@ class AbstractFilterTest extends TestCase
                 'to' => 'test-placeholder-to'
             ]
         ) extends AbstractFilter {
-
             public function apply(Builder $query): Builder
             {
                 return $query;
@@ -116,12 +108,11 @@ class AbstractFilterTest extends TestCase
      */
     public function it_filter_created_without_additional_parameters_success(): void
     {
-        $filter = new class(
+        $filter = new class (
             'test-title',
             'test-key',
             'test-table'
         ) extends AbstractFilter {
-
             public function apply(Builder $query): Builder
             {
                 return $query;

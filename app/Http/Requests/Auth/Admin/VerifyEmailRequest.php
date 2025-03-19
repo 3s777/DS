@@ -14,7 +14,7 @@ class VerifyEmailRequest extends FormRequest
     {
         $user = User::find($this->route('id'));
 
-        if(!$user) {
+        if (!$user) {
             return false;
         }
 

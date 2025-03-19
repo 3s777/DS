@@ -9,7 +9,7 @@ trait HasCollector
     protected static function bootHasCollector(): void
     {
         static::creating(function (Model $item) {
-            if(empty($item->collector_id)) {
+            if (empty($item->collector_id)) {
                 $item->collector_id = auth('collector')->id();
             }
         });

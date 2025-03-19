@@ -2,8 +2,6 @@
 
 namespace Domain\Trade\Observers;
 
-use Domain\Trade\Enums\ReservationEnum;
-use Domain\Trade\Enums\ShippingEnum;
 use Domain\Trade\Models\Sale;
 
 class SaleObserver
@@ -38,7 +36,7 @@ class SaleObserver
 
     public function deleted(Sale $sale): void
     {
-        if($sale->collectible) {
+        if ($sale->collectible) {
             $sale->collectible->sale_data = null;
             $sale->collectible->save();
         }

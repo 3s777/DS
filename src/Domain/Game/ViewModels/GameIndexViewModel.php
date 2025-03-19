@@ -4,9 +4,6 @@ namespace Domain\Game\ViewModels;
 
 use Domain\Auth\Models\User;
 use Domain\Game\Models\Game;
-use Domain\Game\Models\GameDeveloper;
-use Domain\Game\Models\GameGenre;
-use Domain\Game\Models\GamePlatform;
 use Spatie\ViewModels\ViewModel;
 
 class GameIndexViewModel extends ViewModel

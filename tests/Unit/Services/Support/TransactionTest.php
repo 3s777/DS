@@ -59,7 +59,7 @@ class TransactionTest extends TestCase
 
         Transaction::run(
             function () {
-                return 1/0;
+                return 1 / 0;
             },
             function (Throwable $e) {
                 throw new CrudException($e->getMessage());
@@ -76,8 +76,8 @@ class TransactionTest extends TestCase
         $this->expectException(TransactionException::class);
 
         Transaction::run(
-            function() {
-                return 1/0;
+            function () {
+                return 1 / 0;
             }
         );
     }

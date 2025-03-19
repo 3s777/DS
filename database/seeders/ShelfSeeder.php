@@ -13,7 +13,6 @@ use Domain\Game\Models\GamePublisher;
 use Domain\Shelf\Models\Collectible;
 use Domain\Shelf\Models\KitItem;
 use Domain\Shelf\Models\Shelf;
-use Domain\Trade\Models\Auction;
 use Illuminate\Database\Seeder;
 
 class ShelfSeeder extends Seeder
@@ -53,33 +52,35 @@ class ShelfSeeder extends Seeder
             ]);
 
             $collectableFactory
-                ->has(KitItem::factory(rand(1,3)), 'kitItems')
-                ->has(Collectible::factory()
+                ->has(KitItem::factory(rand(1, 3)), 'kitItems')
+                ->has(
+                    Collectible::factory()
                     ->for(Shelf::factory(), 'shelf')
 //                    ->for($user, 'user')
                     ->hasKitConditions(),
-                    'collectibles')
+                    'collectibles'
+                )
                 ->for($user, 'user')
                 ->create();
         }
 
 
-//        $collectibles = [];
-//        foreach($gameMedias as $media) {
-//            $collectibles[] = Collectible::factory(5)
-//                ->for($users->random())
-//                ->tests($media)
-//                ->hasKitConditions();
-//        }
-//
-//        $collectionCollectibles = collect($collectibles);
+        //        $collectibles = [];
+        //        foreach($gameMedias as $media) {
+        //            $collectibles[] = Collectible::factory(5)
+        //                ->for($users->random())
+        //                ->tests($media)
+        //                ->hasKitConditions();
+        //        }
+        //
+        //        $collectionCollectibles = collect($collectibles);
 
-//            Shelf::factory(2)
-//                ->has($collectionCollectibles->random()),
-////                    ->state(['kit_conditions' => 'test']),
-//                    'collectibles')
-//                ->for($user, 'user')
-//                ->create();
-//        }
+        //            Shelf::factory(2)
+        //                ->has($collectionCollectibles->random()),
+        ////                    ->state(['kit_conditions' => 'test']),
+        //                    'collectibles')
+        //                ->for($user, 'user')
+        //                ->create();
+        //        }
     }
 }

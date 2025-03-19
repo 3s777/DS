@@ -43,11 +43,11 @@ class RangeFilterTest extends TestCase
         $query->shouldReceive('when')
             ->once()
             ->andReturnUsing(function ($value, $callback) use ($query) {
-            if ($value) {
-                $callback($query);
-            }
-            return $query;
-        });
+                if ($value) {
+                    $callback($query);
+                }
+                return $query;
+            });
 
         $query->shouldReceive('whereBetween')
             ->with('test-table.test-field', [

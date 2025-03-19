@@ -17,7 +17,7 @@ class Media extends BaseMedia
         parent::boot();
 
         static::creating(function ($model) {
-            if(auth()->user()) {
+            if (auth()->user()) {
                 $model->user()->associate(auth()->user()) ;
             }
 

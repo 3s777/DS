@@ -4,8 +4,6 @@ namespace Database\Seeders;
 
 use Domain\Auth\Models\Permission;
 use Domain\Auth\Models\Role;
-use Domain\Auth\Models\User;
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
 class RolesAndPermissionsSeeder extends Seeder

@@ -29,7 +29,7 @@ class LoginController extends Controller
             return back()->onlyInput('email');
         }
 
-        if(array_key_exists('not_verified', $actionData)) {
+        if (array_key_exists('not_verified', $actionData)) {
             return to_route('admin.verification.notice');
         }
 
@@ -42,9 +42,9 @@ class LoginController extends Controller
     {
         auth()->logout();
 
-//        request()->session()->invalidate();
-//
-//        request()->session()->regenerateToken();
+        //        request()->session()->invalidate();
+        //
+        //        request()->session()->regenerateToken();
 
         return to_route('home');
     }

@@ -18,8 +18,8 @@ class ModelExistsInArrayRule implements ValidationRule
      */
     public function validate(string $attribute, mixed $value, Closure $fail): void
     {
-        foreach($value as $key) {
-            if(!$this->modelName::where($this->modelKey, $key)->exists()) {
+        foreach ($value as $key) {
+            if (!$this->modelName::where($this->modelKey, $key)->exists()) {
                 $fail('validation.array_model_not_exist')->translate();
             }
         }

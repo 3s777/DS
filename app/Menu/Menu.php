@@ -33,7 +33,7 @@ class Menu implements IteratorAggregate, Countable
 
     public function addIf(bool|callable $condition, MenuItem $item): self
     {
-        if(is_callable($condition) ? $condition() : $condition) {
+        if (is_callable($condition) ? $condition() : $condition) {
             $this->items[] = $item;
         }
 
@@ -77,7 +77,7 @@ class Menu implements IteratorAggregate, Countable
             $item['group'] = $item['group'] ?? '';
             $item['class'] = $item['class'] ?? '';
 
-            if(is_array($item['group'])) {
+            if (is_array($item['group'])) {
                 $group = MenuGroup::make()
                     ->setLabel($item['label'])
                     ->setLink($item['link'])

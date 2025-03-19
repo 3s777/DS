@@ -22,6 +22,6 @@ class CategoryUpdateViewModel extends ViewModel
 
     public function collectables(): array
     {
-        return Arr::map(config('settings.collectables'), fn($value) => __($value));
+        return Arr::map(config('settings.collectables'), fn ($value) => __($value));
     }
 }

@@ -22,7 +22,6 @@ use Support\Actions\MassDeletingAction;
 use Support\DTOs\MassDeletingDTO;
 use Support\Exceptions\MassDeletingException;
 
-
 class KitItemController extends Controller
 {
     public function __construct()

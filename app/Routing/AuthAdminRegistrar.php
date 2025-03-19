@@ -49,10 +49,10 @@ class AuthAdminRegistrar implements RouteRegistrar
                     });
 
 
-//                    Route::get('/findUsers{query?}', [UserController::class, 'getUsers'])->name('find-users');
+                    //                    Route::get('/findUsers{query?}', [UserController::class, 'getUsers'])->name('find-users');
 
                     Route::post('/select-users', [AdminController::class, 'getForSelect'])->name('select-users');
-//                    Route::get('/users', [UserController::class, 'publicIndex'])->name('public-users');
+                    //                    Route::get('/users', [UserController::class, 'publicIndex'])->name('public-users');
                     Route::middleware(['auth:admin', 'verified'])->group(function () {
                         Route::delete('/users/delete-selected', [AdminController::class, 'deleteSelected'])->name('users.delete');
                         Route::delete('/users/force-delete-selected', [AdminController::class, 'forceDeleteSelected'])->name('users.forceDelete');

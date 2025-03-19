@@ -61,7 +61,7 @@ class RangeFilter extends AbstractFilter
 
     protected function rangeValues($from, $to): array
     {
-        if($this->isPrice) {
+        if ($this->isPrice) {
             $from = PriceValueObject::make($from)->prepareValue();
             $to = PriceValueObject::make($to)->prepareValue();
         }
@@ -74,7 +74,7 @@ class RangeFilter extends AbstractFilter
 
     public function placeholder(string $key = ''): string|array|null
     {
-        if($this->placeholder) {
+        if ($this->placeholder) {
             return $this->placeholder;
         }
 
@@ -92,8 +92,8 @@ class RangeFilter extends AbstractFilter
                 )
             );
 
-            if($this->relation) {
-                $query->whereHas($this->relation, function (Builder $q) use($from, $to) {
+            if ($this->relation) {
+                $query->whereHas($this->relation, function (Builder $q) use ($from, $to) {
                     $q->whereBetween($this->table.'.'.$this->field, [
                         $from,
                         $to
@@ -112,7 +112,7 @@ class RangeFilter extends AbstractFilter
     {
         $this->requestValue('from') ? $values = $this->requestValue('from') : $values = $this->requestValue('to');
 
-        if($this->requestValue('from') && $this->requestValue('to')) {
+        if ($this->requestValue('from') && $this->requestValue('to')) {
             $values = $this->requestValue('from').' - '.$this->requestValue('to');
         }
 

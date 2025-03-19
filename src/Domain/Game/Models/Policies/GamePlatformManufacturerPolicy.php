@@ -36,11 +36,11 @@ class GamePlatformManufacturerPolicy
      */
     public function update(User $user, GamePlatformManufacturer $manufacturer): bool
     {
-       if($user->can('game-platform-manufacturers.edit')) {
-           return true;
-       }
+        if ($user->can('game-platform-manufacturers.edit')) {
+            return true;
+        }
 
-       return $user->id == $manufacturer->user_id;
+        return $user->id == $manufacturer->user_id;
     }
 
     /**

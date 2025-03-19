@@ -13,7 +13,6 @@ use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Str;
 use Tests\TestCase;
 
-
 class CategoryControllerTest extends TestCase
 {
     use RefreshDatabase;

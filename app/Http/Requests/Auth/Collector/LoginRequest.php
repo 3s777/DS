@@ -11,7 +11,7 @@ class LoginRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        if(auth('admin')->check()) {
+        if (auth('admin')->check()) {
             return auth('collector')->guest();
         }
 

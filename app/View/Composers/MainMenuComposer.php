@@ -3,7 +3,6 @@
 namespace App\View\Composers;
 
 use App\Menu\Menu;
-use App\Menu\MenuGroup;
 use App\Menu\MenuItem;
 use Illuminate\View\View;
 

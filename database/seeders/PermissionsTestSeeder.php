@@ -3,8 +3,6 @@
 namespace Database\Seeders;
 
 use Domain\Auth\Models\Permission;
-use Domain\Auth\Models\Role;
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
 class PermissionsTestSeeder extends Seeder

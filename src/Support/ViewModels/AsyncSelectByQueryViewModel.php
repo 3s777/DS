@@ -15,8 +15,7 @@ class AsyncSelectByQueryViewModel extends ViewModel
         protected ?string $searchField = 'name',
         protected ?string $key = 'id',
         protected ?string $name = 'name'
-    )
-    {
+    ) {
     }
 
     private function setEmpty(): array
@@ -38,11 +37,11 @@ class AsyncSelectByQueryViewModel extends ViewModel
             ['value' => '', 'label' => __($this->label), 'disabled' => true]
         ];
 
-//        if($this->depended && !request('depended')) {
-//            return $this->setEmpty();
-//        }
+        //        if($this->depended && !request('depended')) {
+        //            return $this->setEmpty();
+        //        }
 
-        if($this->depended && $this->query) {
+        if ($this->depended && $this->query) {
             $dependedKey = array_key_first($this->depended);
             $dependedValue = $this->depended[$dependedKey];
 
@@ -64,7 +63,7 @@ class AsyncSelectByQueryViewModel extends ViewModel
         }
 
 
-        if($this->query) {
+        if ($this->query) {
             $query = $this->makeQuery();
 
             $models = $query->get();

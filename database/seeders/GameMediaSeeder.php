@@ -11,7 +11,6 @@ use Domain\Game\Models\GamePlatform;
 use Domain\Game\Models\GamePublisher;
 use Domain\Shelf\Models\KitItem;
 use Illuminate\Database\Seeder;
-use Services\GamesDbApi\GamesDbApiContract;
 
 class GameMediaSeeder extends Seeder
 {

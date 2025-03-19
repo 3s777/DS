@@ -2,13 +2,9 @@
 
 namespace Domain\Game\ViewModels;
 
-use Domain\Auth\Models\User;
 use Domain\Game\Models\Game;
-use Domain\Game\Models\GameDeveloper;
 use Domain\Game\Models\GameGenre;
 use Domain\Game\Models\GamePlatform;
-use Domain\Game\Models\GamePublisher;
-use Illuminate\Database\Eloquent\Collection;
 use Spatie\ViewModels\ViewModel;
 use Support\Traits\HasSelectedUser;
 

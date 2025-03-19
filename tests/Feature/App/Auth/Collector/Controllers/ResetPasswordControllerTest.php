@@ -50,24 +50,24 @@ class ResetPasswordControllerTest extends TestCase
      */
     public function it_handle_success(): void
     {
-//        Password::shouldReceive('reset')
-//            ->once()
-//            ->withSomeofArgs([
-//                'email' => $this->collector->email,
-//                'password' => $this->password,
-//                'password_confirmation' => $this->password_confirmation,
-//                'token' => $this->token
-//            ])
-//            ->andReturn(Password::PASSWORD_RESET);
-//
-//        $response = $this->post(action([ResetPasswordController::class, 'handle']), [
-//            'email' => $this->collector->email,
-//            'password' => $this->password,
-//            'password_confirmation' => $this->password_confirmation,
-//            'token' => $this->token
-//        ]);
-//
-//        $response->assertRedirect(action([LoginController::class, 'page']));
+        //        Password::shouldReceive('reset')
+        //            ->once()
+        //            ->withSomeofArgs([
+        //                'email' => $this->collector->email,
+        //                'password' => $this->password,
+        //                'password_confirmation' => $this->password_confirmation,
+        //                'token' => $this->token
+        //            ])
+        //            ->andReturn(Password::PASSWORD_RESET);
+        //
+        //        $response = $this->post(action([ResetPasswordController::class, 'handle']), [
+        //            'email' => $this->collector->email,
+        //            'password' => $this->password,
+        //            'password_confirmation' => $this->password_confirmation,
+        //            'token' => $this->token
+        //        ]);
+        //
+        //        $response->assertRedirect(action([LoginController::class, 'page']));
 
 
         $response = $this->post(action([ResetPasswordController::class, 'handle']), [

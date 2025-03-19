@@ -22,7 +22,8 @@ class KitItemUpdateViewModel extends ViewModel
         return $this->kitItem ?? null;
     }
 
-    public function selectedUser(): array {
+    public function selectedUser(): array
+    {
         return $this->getSelectedUser($this->kitItem);
     }
 }

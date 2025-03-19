@@ -33,7 +33,7 @@ final readonly class AuctionValueObject
         $currency = 'RUB',
         $precision = 100
     ) {
-        if($price < 0 || $step < 0) {
+        if ($price < 0 || $step < 0) {
             throw new InvalidArgumentException('Price or step must be more than zero');
         }
 

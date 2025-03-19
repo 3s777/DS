@@ -3,7 +3,6 @@
 namespace App\Shelf\Controllers;
 
 use App\Http\Controllers\Shelf\Admin\CollectibleController;
-use Carbon\Carbon;
 use Database\Factories\Shelf\CollectibleFactory;
 use Domain\Auth\Models\Collector;
 use Domain\Auth\Models\Role;
@@ -239,7 +238,7 @@ class CollectibleFilterTest extends TestCase
     {
         $models = $this->getFactory()
             ->has(Sale::factory()->state([
-                'price' => fn() => rand(1, 5)
+                'price' => fn () => rand(1, 5)
             ]), 'sale')
             ->count(10)
             ->create();
@@ -270,7 +269,7 @@ class CollectibleFilterTest extends TestCase
     {
         $models = $this->getFactory()
             ->has(Sale::factory()->state([
-                'price' => fn() => rand(1, 5)
+                'price' => fn () => rand(1, 5)
             ]), 'sale')
             ->count(10)
             ->create();
@@ -300,7 +299,7 @@ class CollectibleFilterTest extends TestCase
     {
         $models = $this->getFactory()
             ->has(Sale::factory()->state([
-                'price' => fn() => rand(5, 10)
+                'price' => fn () => rand(5, 10)
             ]), 'sale')
             ->count(10)
             ->create();

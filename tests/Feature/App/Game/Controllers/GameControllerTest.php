@@ -17,7 +17,6 @@ use Illuminate\Support\Facades\Queue;
 use Illuminate\Support\Facades\Storage;
 use Tests\TestCase;
 
-
 class GameControllerTest extends TestCase
 {
     use RefreshDatabase;
@@ -244,7 +243,8 @@ class GameControllerTest extends TestCase
                 ),
                 $this->request
             )
-            ->assertInvalid([
+            ->assertInvalid(
+                [
                     'name',
                     'released_at',
                     'alternative_names',

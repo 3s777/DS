@@ -1,4 +1,6 @@
-<?php namespace Domain\Shelf\Services;
+<?php
+
+namespace Domain\Shelf\Services;
 
 use Domain\Shelf\DTOs\FillShelfDTO;
 use Domain\Shelf\Models\Shelf;

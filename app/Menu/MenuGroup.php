@@ -76,24 +76,24 @@ class MenuGroup extends Menu
 
     protected function recursiveCheckIsActive($item): bool
     {
-        foreach($item->all() as $item) {
+        foreach ($item->all() as $item) {
 
-            if($item->type() === 'link') {
+            if ($item->type() === 'link') {
                 $path = parse_url($item->link(), PHP_URL_PATH) ?? '/';
 
-                if(request()->path() === '/') {
+                if (request()->path() === '/') {
                     foreach (config('app.available_locales') as $locale) {
-                        if($path === '/'.$locale) {
+                        if ($path === '/'.$locale) {
                             return true;
                         }
                     }
                 }
 
-                if(request()->fullUrlIs($item->link() . '?*', $item->link())) {
+                if (request()->fullUrlIs($item->link() . '?*', $item->link())) {
                     return true;
                 }
             } else {
-                if($this->recursiveCheckIsActive($item)) {
+                if ($this->recursiveCheckIsActive($item)) {
                     return true;
                 }
             }

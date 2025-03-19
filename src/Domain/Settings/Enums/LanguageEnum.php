@@ -8,7 +8,8 @@ enum LanguageEnum: string
     case UA = 'ua';
     case EN = 'en';
 
-    public function name():string {
+    public function name(): string
+    {
         return match($this) {
             LanguageEnum::RU => __('common.languages.ru'),
             LanguageEnum::UA => __('common.languages.ua'),

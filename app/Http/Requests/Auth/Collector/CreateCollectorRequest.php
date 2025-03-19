@@ -35,13 +35,13 @@ class CreateCollectorRequest extends FormRequest
         $roles = request('roles');
         $defaultRole = config('settings.default_collector_role');
 
-        if(!$roles) {
+        if (!$roles) {
             $this->merge([
                 'roles' => [$defaultRole]
             ]);
         }
 
-        if($roles && !in_array($defaultRole, $roles)) {
+        if ($roles && !in_array($defaultRole, $roles)) {
             $roles[] = $defaultRole;
 
             $this->merge([

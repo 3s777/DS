@@ -5,7 +5,6 @@ namespace App\Trade\ValueObjects;
 use Domain\Trade\Enums\ReservationEnum;
 use Domain\Trade\Enums\ShippingEnum;
 use Domain\Trade\ValueObjects\SaleValueObject;
-use InvalidArgumentException;
 use Support\ValueObjects\PriceValueObject;
 use Tests\TestCase;
 use TypeError;

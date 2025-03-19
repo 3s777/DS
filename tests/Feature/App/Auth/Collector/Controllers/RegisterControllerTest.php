@@ -6,7 +6,6 @@ use App\Http\Controllers\Auth\Collector\LoginController;
 use App\Http\Controllers\Auth\Collector\RegisterController;
 use App\Http\Requests\Auth\Collector\RegisterRequest;
 use Database\Factories\CollectorFactory;
-use Domain\Auth\Models\Collector;
 use Domain\Auth\Models\Role;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Testing\TestResponse;

@@ -37,11 +37,11 @@ class GameDeveloperController extends Controller
     {
         $developer = GameDeveloper::first();
 
-//        $this->authorize('view', $developer);
+        //        $this->authorize('view', $developer);
 
-//        if(auth()->user()->cannot('view', $developer)) {
-//            abort(403);
-//        }
+        //        if(auth()->user()->cannot('view', $developer)) {
+        //            abort(403);
+        //        }
 
         return view('admin.game.developer.create', new GameDeveloperUpdateViewModel());
     }
@@ -134,4 +134,3 @@ class GameDeveloperController extends Controller
         );
     }
 }
-

@@ -21,8 +21,7 @@ class EnumFilter extends AbstractFilter
         ?string $field = null,
         ?string $placeholder = null,
         ?callable $callbackPreparedValues = null,
-    )
-    {
+    ) {
         parent::__construct($title, $key, $table, $field, $placeholder);
 
         $this->setEnum($enum);
@@ -45,7 +44,7 @@ class EnumFilter extends AbstractFilter
     public function apply(Builder $query): Builder
     {
         return $query->when($this->requestValue(), function (Builder $query) {
-            if(is_array($this->requestValue())) {
+            if (is_array($this->requestValue())) {
                 $query->whereIn($this->table.'.'.$this->field, $this->requestValue());
             } else {
                 $query->where($this->table.'.'.$this->field, $this->requestValue());
@@ -55,11 +54,11 @@ class EnumFilter extends AbstractFilter
 
     public function preparedValues(): string|array
     {
-        if($this->callbackPreparedValues) {
+        if ($this->callbackPreparedValues) {
             return call_user_func($this->callbackPreparedValues, $this->requestValue());
         }
 
-        if(is_array($this->requestValue())) {
+        if (is_array($this->requestValue())) {
             $selected = [];
             if (class_exists($this->enum)) {
                 foreach ($this->requestValue() as $key => $value) {

@@ -38,7 +38,7 @@ class MediaLibraryImageManager implements ImagesManager
     {
         $medias = $this->model->getMedia($this->model->getFeaturedImageCollection());
 
-        if($medias) {
+        if ($medias) {
             foreach ($medias as $media) {
                 $media?->forceDelete();
             }
@@ -49,7 +49,7 @@ class MediaLibraryImageManager implements ImagesManager
     {
         $featuredImageMedia = $this->model->getFirstMedia($this->model->getFeaturedImageCollection());
 
-        if($featuredImageMedia) {
+        if ($featuredImageMedia) {
             return $featuredImageMedia->getPathRelativeToRoot();
         }
 
@@ -65,8 +65,8 @@ class MediaLibraryImageManager implements ImagesManager
         $images = $this->model->getMedia($this->model->getImagesCollection());
         $imagesArr = [];
 
-        if($images) {
-            foreach($images as $image) {
+        if ($images) {
+            foreach ($images as $image) {
                 $imagesArr[] = $image->getPathRelativeToRoot();
             }
         }

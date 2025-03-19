@@ -54,10 +54,10 @@ class CollectibleServiceTest extends TestCase
             ->hasSale()
             ->hasKitConditions()
             ->create(
-            [
+                [
                 'category_id' => $category->id,
             ]
-        );
+            );
 
         $this->auctionRequest = CreateCollectibleGameRequest::factory()
             ->hasAuction()
@@ -209,7 +209,7 @@ class CollectibleServiceTest extends TestCase
             'name' => 'NewNameCollectible',
         ]);
 
-        $updatedCollectible= Collectible::where('name', 'NewNameCollectible')->first();
+        $updatedCollectible = Collectible::where('name', 'NewNameCollectible')->first();
 
         $this->assertSame($updatedCollectible->sale->price->value(), $this->request['sale']['price']);
         $this->assertSame($updatedCollectible->target, $this->request['target']);
@@ -255,7 +255,7 @@ class CollectibleServiceTest extends TestCase
 
         $collectibleService->update($collectible, FillCollectibleDTO::fromRequest(new Request($this->request)));
 
-        $updatedCollectible= Collectible::where('name', 'NewNameCollectible')->first();
+        $updatedCollectible = Collectible::where('name', 'NewNameCollectible')->first();
 
         $this->assertNull($updatedCollectible->auction_data);
         $this->assertNull($updatedCollectible->auction);
@@ -293,7 +293,7 @@ class CollectibleServiceTest extends TestCase
 
         $collectibleService->update($collectible, FillCollectibleDTO::fromRequest(new Request($this->request)));
 
-        $updatedCollectible= Collectible::find($collectible->id);
+        $updatedCollectible = Collectible::find($collectible->id);
 
         $this->assertNull($updatedCollectible->auction_data);
         $this->assertNull($updatedCollectible->auction);

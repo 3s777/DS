@@ -15,7 +15,7 @@ class RegisterNewAdminAction implements RegisterNewUserContract
     public function __invoke(NewUserDTOContract $data)
     {
         return Transaction::run(
-            function() use($data) {
+            function () use ($data) {
                 $user = User::create([
                     'name' => $data->name,
                     'email' => $data->email,
@@ -29,7 +29,7 @@ class RegisterNewAdminAction implements RegisterNewUserContract
 
                 return $user;
             },
-            function(Throwable $e) {
+            function (Throwable $e) {
                 throw new RegisterException($e->getMessage());
             }
         );

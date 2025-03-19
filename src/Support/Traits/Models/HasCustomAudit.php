@@ -2,7 +2,6 @@
 
 namespace Support\Traits\Models;
 
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Event;
 use OwenIt\Auditing\Events\AuditCustom;
 

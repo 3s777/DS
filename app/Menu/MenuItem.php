@@ -15,8 +15,7 @@ class MenuItem
         protected string $label,
         protected ?string $icon = null,
         protected ?string $class = null
-    )
-    {
+    ) {
     }
 
     public function type(): string
@@ -55,9 +54,9 @@ class MenuItem
     {
         $path = parse_url($this->link(), PHP_URL_PATH) ?? '/';
 
-        if(request()->path() === '/') {
+        if (request()->path() === '/') {
             foreach (config('app.available_locales') as $locale) {
-                if($path === '/'.$locale) {
+                if ($path === '/'.$locale) {
                     return true;
                 }
             }

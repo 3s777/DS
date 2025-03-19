@@ -79,10 +79,10 @@ class GamePublisher extends Model implements HasMedia
         return app(GamePublisherFilterRegistrar::class)->filtersList();
     }
 
-//    public function getRouteKeyName(): string
-//    {
-//        return 'slug';
-//    }
+    //    public function getRouteKeyName(): string
+    //    {
+    //        return 'slug';
+    //    }
 
     public function newEloquentBuilder($query): GamePublisherQueryBuilder
     {

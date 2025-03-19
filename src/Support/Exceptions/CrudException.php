@@ -10,7 +10,7 @@ class CrudException extends Exception
 {
     public function render(Request $request): ?RedirectResponse
     {
-        if(app()->isProduction()) {
+        if (app()->isProduction()) {
             flash()->danger(__('errors.try_later'));
 
             return session()->previousUrl()

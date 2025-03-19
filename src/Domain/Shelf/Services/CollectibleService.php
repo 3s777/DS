@@ -9,7 +9,6 @@ use Domain\Trade\DTOs\FillAuctionDTO;
 use Domain\Trade\DTOs\FillSaleDTO;
 use Domain\Trade\Services\AuctionService;
 use Domain\Trade\Services\SaleService;
-use Illuminate\Support\HigherOrderTapProxy;
 use Illuminate\Support\Str;
 use Support\Exceptions\CrudException;
 use Support\Transaction;
@@ -17,7 +16,8 @@ use Throwable;
 
 class CollectibleService
 {
-    private function preparedFields(FillCollectibleDTO $data) {
+    private function preparedFields(FillCollectibleDTO $data)
+    {
         return [
             'name' => $data->name,
             'ulid' => Str::ulid(),
@@ -70,7 +70,7 @@ class CollectibleService
     public function create(FillCollectibleDTO $data)
     {
         return Transaction::run(
-            function() use($data) {
+            function () use ($data) {
 
                 // create Collectible, attach Collector, Collectable and Properties
                 $collectible = Collectible::make($this->preparedFields($data));
@@ -82,25 +82,25 @@ class CollectibleService
                 $collectible->properties = $data->properties;
 
                 // calculate kit_score as avg kit items condition if kit_score is empty
-                if(!$data->kit_score) {
+                if (!$data->kit_score) {
                     $kit = array_filter($data->kit_conditions, function ($condition) {
                         return $condition;
                     });
 
-                    if(!empty($kit)) {
-                        $collectible->kit_score = round(array_sum($kit)/count($kit));
+                    if (!empty($kit)) {
+                        $collectible->kit_score = round(array_sum($kit) / count($kit));
                     }
                 }
 
                 $collectible->save();
 
                 // attach Sale or Auction
-                if($data->target == 'sale') {
+                if ($data->target == 'sale') {
                     $saleService = new SaleService();
                     $saleService->create($this->createSaleDTO($collectible->id, $data));
                 }
 
-                if($data->target == 'auction') {
+                if ($data->target == 'auction') {
                     $auctionService = new AuctionService();
                     $auctionService->create($this->createAuctionDTO($collectible->id, $data));
                 }
@@ -118,7 +118,7 @@ class CollectibleService
                     ['small', 'medium']
                 );
 
-                if($data->images) {
+                if ($data->images) {
                     foreach ($data->images as $key => $image) {
                         $collectible->addImagesWithThumbnail(
                             $image,
@@ -129,7 +129,7 @@ class CollectibleService
 
                 return $collectible;
             },
-            function(Throwable $e) {
+            function (Throwable $e) {
                 throw new CrudException($e->getMessage());
             }
         );
@@ -138,7 +138,7 @@ class CollectibleService
     public function update(Collectible $collectible, FillCollectibleDTO $data)
     {
         return Transaction::run(
-            function() use($collectible, $data) {
+            function () use ($collectible, $data) {
 
                 // update Images
                 $collectible->updateFeaturedImage(
@@ -159,20 +159,20 @@ class CollectibleService
                 $collectible->collector_id = $shelf->collector_id;
 
                 // update or create Sale or Auction
-                if($data->target == 'sale') {
+                if ($data->target == 'sale') {
                     $saleService = new SaleService();
 
-                    if($collectible->sale) {
+                    if ($collectible->sale) {
                         $saleService->update($collectible->sale, $this->createSaleDTO($collectible->id, $data));
                     } else {
                         $saleService->create($this->createSaleDTO($collectible->id, $data));
                     }
                 }
 
-                if($data->target == 'auction') {
+                if ($data->target == 'auction') {
                     $auctionService = new AuctionService();
 
-                    if($collectible->auction) {
+                    if ($collectible->auction) {
                         $auctionService->update($collectible->auction, $this->createAuctionDTO($collectible->id, $data));
                     } else {
                         $auctionService->create($this->createAuctionDTO($collectible->id, $data));
@@ -192,7 +192,7 @@ class CollectibleService
 
                 return $collectible;
             },
-            function(Throwable $e) {
+            function (Throwable $e) {
                 throw new CrudException($e->getMessage());
             }
         );

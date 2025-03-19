@@ -5,7 +5,6 @@ namespace Feature\Support\Traits;
 use App\Contracts\ImagesManager;
 use App\Jobs\GenerateSmallThumbnailsJob;
 use App\Jobs\GenerateThumbnailJob;
-use App\Models\Media;
 use Carbon\Carbon;
 use Database\Factories\Game\GameDeveloperFactory;
 use Database\Factories\UserFactory;

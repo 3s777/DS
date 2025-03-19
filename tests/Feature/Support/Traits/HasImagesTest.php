@@ -4,14 +4,9 @@ namespace Feature\Support\Traits;
 
 use App\Jobs\GenerateSmallThumbnailsJob;
 use App\Jobs\GenerateThumbnailJob;
-use App\Models\Media;
-use Database\Factories\Game\GameDeveloperFactory;
 use Database\Factories\UserFactory;
 use Domain\Auth\Models\User;
-use Domain\Game\Models\Game;
-use Domain\Game\Models\GameDeveloper;
 use Domain\Game\Models\GameMedia;
-use Domain\Shelf\Models\Collectible;
 use Illuminate\Contracts\Filesystem\Filesystem;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Http\UploadedFile;

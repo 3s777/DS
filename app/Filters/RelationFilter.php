@@ -2,9 +2,6 @@
 
 namespace App\Filters;
 
-use Domain\Auth\Models\User;
-use Illuminate\Database\Eloquent\Model;
-use Illuminate\Support\Arr;
 use Support\Filters\AbstractFilter;
 use Illuminate\Database\Eloquent\Builder;
 use Support\Traits\Makeable;
@@ -23,8 +20,7 @@ class RelationFilter extends AbstractFilter
         string $relation,
         ?string $field = null,
         ?string $placeholder = null,
-    )
-    {
+    ) {
         parent::__construct($title, $key, $table, $field, $placeholder);
 
         $this->setRelation($relation);
@@ -41,7 +37,7 @@ class RelationFilter extends AbstractFilter
     {
         $this->relatedModel = [];
 
-        if(request()->input('filters.'.$this->key)) {
+        if (request()->input('filters.'.$this->key)) {
             $model = $this->relation::find($this->requestValue());
             $this->relatedModel = ['key' => $model->id, 'value' => $model->name];
         }
@@ -58,7 +54,7 @@ class RelationFilter extends AbstractFilter
 
     public function preparedValues(): string
     {
-        if($this->relatedModel) {
+        if ($this->relatedModel) {
             return $this->relatedModel['value'];
         }
 

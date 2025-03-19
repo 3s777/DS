@@ -19,7 +19,7 @@ class Properties implements CastsAttributes
 
     public function set(Model $model, string $key, mixed $value, array $attributes)
     {
-        if(!$value) {
+        if (!$value) {
             return null;
         }
 

@@ -9,7 +9,7 @@ trait HasSelectedUser
     protected function getSelectedUser(?Model $model): array
     {
         $selectedUser = [];
-        if($model?->user) {
+        if ($model?->user) {
             $selectedUser = [
                 'key' => $model->user->id,
                 'value' => $model->user->name,

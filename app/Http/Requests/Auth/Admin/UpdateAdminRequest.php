@@ -35,7 +35,7 @@ class UpdateAdminRequest extends FormRequest
         $roles = request('roles');
         $defaultRole = config('settings.default_role');
 
-        if($roles && !in_array($defaultRole, $roles)) {
+        if ($roles && !in_array($defaultRole, $roles)) {
             $roles[] = $defaultRole;
 
             $this->merge([

@@ -33,7 +33,7 @@ class CollectibleGameController extends Controller
 
     public function update(UpdateCollectibleGameRequest $request, Collectible $collectible, CollectibleService $collectibleService): RedirectResponse
     {
-//        dd($request);
+        //        dd($request);
         $collectibleService->update($collectible, FillCollectibleDTO::fromRequest($request));
 
         flash()->info(__('collectible.updated'));

@@ -2,7 +2,6 @@
 
 namespace Domain\Game\ViewModels;
 
-use Domain\Game\Models\GameDeveloper;
 use Domain\Game\Models\GamePublisher;
 use Spatie\ViewModels\ViewModel;
 

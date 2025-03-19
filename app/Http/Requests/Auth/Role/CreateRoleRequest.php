@@ -7,7 +7,6 @@ use Domain\Auth\Models\Role;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
 
-
 class CreateRoleRequest extends FormRequest
 {
     /**

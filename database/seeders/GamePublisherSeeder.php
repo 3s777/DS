@@ -2,7 +2,6 @@
 
 namespace Database\Seeders;
 
-use Domain\Auth\Models\User;
 use Domain\Game\Models\GamePublisher;
 use Illuminate\Database\Seeder;
 

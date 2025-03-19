@@ -9,7 +9,8 @@ enum TargetEnum: string
     case Auction = 'auction';
     case Exchange = 'exchange';
 
-    public function name():string {
+    public function name(): string
+    {
         return match($this) {
             TargetEnum::Sale => __('common.for_sale'),
             TargetEnum::Auction => __('common.for_auction'),

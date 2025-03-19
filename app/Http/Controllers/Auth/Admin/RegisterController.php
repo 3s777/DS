@@ -5,13 +5,11 @@ namespace App\Http\Controllers\Auth\Admin;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Auth\Admin\RegisterRequest;
 use Domain\Auth\Contracts\RegisterNewUserContract;
-use Domain\Auth\DTOs\NewAdminDTO;
 use Domain\Auth\DTOs\NewCollectorDTO;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
 use Illuminate\Foundation\Application;
 use Illuminate\Http\RedirectResponse;
-use Support\Transaction;
 
 class RegisterController extends Controller
 {

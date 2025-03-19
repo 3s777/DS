@@ -1,4 +1,6 @@
-<?php namespace Domain\Settings\Services;
+<?php
+
+namespace Domain\Settings\Services;
 
 use Domain\Settings\DTOs\FillCountryDTO;
 use Domain\Settings\Models\Country;

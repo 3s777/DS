@@ -135,12 +135,12 @@ class User extends Authenticatable implements MustVerifyEmail, HasLocalePreferen
         return app(AdminFilterRegistrar::class)->filtersList();
     }
 
-//    public function updatePassword($password): void
-//    {
-//        if(!$password) {
-//            $this->deleteAllThumbnails();
-//        }
-//    }
+    //    public function updatePassword($password): void
+    //    {
+    //        if(!$password) {
+    //            $this->deleteAllThumbnails();
+    //        }
+    //    }
 
     public function settingsValue(): BelongsToMany
     {
@@ -152,10 +152,10 @@ class User extends Authenticatable implements MustVerifyEmail, HasLocalePreferen
         return $this->language;
     }
 
-//    public function img(): HasOne
-//    {
-//        return $this->hasOne(Image::class);
-//    }
+    //    public function img(): HasOne
+    //    {
+    //        return $this->hasOne(Image::class);
+    //    }
 
     public function morphImages(): MorphMany
     {

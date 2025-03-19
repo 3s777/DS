@@ -2,14 +2,12 @@
 
 namespace Filters;
 
-use App\Filters\RelationFilter;
 use App\Filters\RelationMultipleFilter;
 use Domain\Shelf\Models\Shelf;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Http\Request;
 use Mockery;
-use PhpParser\Node\Expr\AssignOp\ShiftLeft;
 use Tests\TestCase;
 
 class RelationMultipleFilterTest extends TestCase
@@ -46,11 +44,11 @@ class RelationMultipleFilterTest extends TestCase
         $query->shouldReceive('when')
             ->once()
             ->andReturnUsing(function ($value, $callback) use ($query) {
-            if ($value) {
-                $callback($query);
-            }
-            return $query;
-        });
+                if ($value) {
+                    $callback($query);
+                }
+                return $query;
+            });
 
         $query->shouldReceive('whereHas')
             ->once()
@@ -62,7 +60,7 @@ class RelationMultipleFilterTest extends TestCase
             });
 
         $query->shouldReceive('whereIn')
-            ->with('test-table.test-field',  $shelves->pluck('id')->toArray())
+            ->with('test-table.test-field', $shelves->pluck('id')->toArray())
             ->once()
             ->andReturn($query);
 

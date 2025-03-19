@@ -5,10 +5,8 @@ namespace Support\ViewModels;
 use Database\Factories\UserFactory;
 use Domain\Auth\Models\Collector;
 use Domain\Auth\Models\Role;
-use Domain\Shelf\Models\KitItem;
 use Domain\Shelf\Models\Shelf;
 use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Http\Request;
 use Tests\TestCase;
 
 class AsyncSelectByQueryViewModelTest extends TestCase
@@ -50,7 +48,7 @@ class AsyncSelectByQueryViewModelTest extends TestCase
 
         $this->assertCount(2, $expectedShelves);
 
-        foreach($expectedShelves as $shelf) {
+        foreach ($expectedShelves as $shelf) {
             $expectedResult[] =  ['value' => $shelf->id, 'label' => $shelf->name];
         }
 

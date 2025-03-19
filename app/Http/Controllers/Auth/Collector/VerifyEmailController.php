@@ -7,7 +7,6 @@ use App\Http\Requests\Auth\Collector\SendEmailVerifyRequest;
 use App\Http\Requests\Auth\Collector\VerifyEmailRequest;
 use Domain\Auth\Actions\VerifyEmailAction;
 use Domain\Auth\Models\Collector;
-use Domain\Auth\Models\User;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Auth;
 

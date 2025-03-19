@@ -29,7 +29,7 @@ class Enum extends Component
         public bool $showOld = true
     ) {
         $this->filteredName = Str::of($this->selectName)
-            ->replace('[]','')
+            ->replace('[]', '')
             ->replace('[', '.')
             ->remove(']')
             ->value();
@@ -37,27 +37,28 @@ class Enum extends Component
 
     public function isOld(string $key): bool
     {
-        if(!$this->showOld) {
+        if (!$this->showOld) {
             return false;
         }
 
-        if(is_array(old($this->filteredName))) {
+        if (is_array(old($this->filteredName))) {
             return in_array($key, old($this->filteredName));
         }
 
-        if(old($this->filteredName) == $key) {
+        if (old($this->filteredName) == $key) {
             return true;
         }
 
         return false;
     }
 
-    public function isSelected(string $key): bool {
-        if(is_array($this->selected) && !old()) {
+    public function isSelected(string $key): bool
+    {
+        if (is_array($this->selected) && !old()) {
             return in_array($key, $this->selected);
         }
 
-        if($this->selected && !old()) {
+        if ($this->selected && !old()) {
             return $key == $this->selected;
         }
 
@@ -66,11 +67,11 @@ class Enum extends Component
 
     public function getValue($enum): string
     {
-        if($this->valueMethod) {
+        if ($this->valueMethod) {
             return call_user_func(array($enum, $this->valueMethod));
         }
 
-        if($this->nameAsValue) {
+        if ($this->nameAsValue) {
             return $enum->name;
         }
 

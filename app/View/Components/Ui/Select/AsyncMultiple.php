@@ -25,18 +25,18 @@ class AsyncMultiple extends Component
     }
 
 
-//    public function isSelected(string $key): bool {
-//
-//        if(($this->selected && !old()) || ($this->selected && !$this->showOld)) {
-//            return in_array($key, $this->selected);
-//        }
-//
-//        if(!$this->showOld) {
-//            return false;
-//        }
-//
-//        return in_array($key, old($this->filteredName, []));
-//    }
+    //    public function isSelected(string $key): bool {
+    //
+    //        if(($this->selected && !old()) || ($this->selected && !$this->showOld)) {
+    //            return in_array($key, $this->selected);
+    //        }
+    //
+    //        if(!$this->showOld) {
+    //            return false;
+    //        }
+    //
+    //        return in_array($key, old($this->filteredName, []));
+    //    }
 
 
     public function render(): View|Closure|string

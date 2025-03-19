@@ -2,13 +2,7 @@
 
 namespace Domain\Shelf\ViewModel;
 
-use Domain\Auth\Models\User;
-use Domain\Game\Models\Game;
-use Domain\Game\Models\GameDeveloper;
-use Domain\Game\Models\GameGenre;
-use Domain\Game\Models\GamePlatform;
 use Domain\Shelf\Models\KitItem;
-use Domain\Shelf\Models\Shelf;
 use Spatie\ViewModels\ViewModel;
 
 class KitItemIndexViewModel extends ViewModel

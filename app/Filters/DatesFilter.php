@@ -30,7 +30,7 @@ class DatesFilter extends AbstractFilter
     {
         $this->field = 'created_at';
 
-        if($field) {
+        if ($field) {
             $this->field = $field;
         }
 
@@ -45,28 +45,28 @@ class DatesFilter extends AbstractFilter
 
     protected function fromDate(): bool|Carbon
     {
-        return Carbon::createFromFormat('Y-m-d', $this->requestValue('from','0001-01-01'))
+        return Carbon::createFromFormat('Y-m-d', $this->requestValue('from', '0001-01-01'))
             ->startOfDay();
     }
 
     protected function toDate(): bool|Carbon
     {
-        return Carbon::createFromFormat('Y-m-d', $this->requestValue('to','3000-01-01'))
+        return Carbon::createFromFormat('Y-m-d', $this->requestValue('to', '3000-01-01'))
             ->endOfDay();
     }
 
     public function apply(Builder $query): Builder
     {
         return $query->when($this->requestValue('from') || $this->requestValue('to'), function (Builder $query) {
-//            if($this->fromDate()) {
-//                $query->whereDate($this->table.'.'.$this->field, '>=', $this->fromDate());
-//            }
-//
-//            if($this->toDate()) {
-//                $query->whereDate($this->table.'.'.$this->field, '<=', $this->toDate());
-//            }
+            //            if($this->fromDate()) {
+            //                $query->whereDate($this->table.'.'.$this->field, '>=', $this->fromDate());
+            //            }
+            //
+            //            if($this->toDate()) {
+            //                $query->whereDate($this->table.'.'.$this->field, '<=', $this->toDate());
+            //            }
 
-            if($this->relation) {
+            if ($this->relation) {
                 $query->whereHas($this->relation, function (Builder $q) {
                     $q->whereBetween($this->table.'.'.$this->field, [$this->fromDate(), $this->toDate()]);
                 });
@@ -81,17 +81,17 @@ class DatesFilter extends AbstractFilter
         $fromDate = '';
         $toDate = '';
 
-        if($this->requestValue('from')) {
+        if ($this->requestValue('from')) {
             $fromDate = $this->fromDate()->format('d.m.Y');
         }
 
-        if($this->requestValue('to')) {
+        if ($this->requestValue('to')) {
             $toDate = $this->toDate()->format('d.m.Y');
         }
 
         $fromDate ? $dates = $fromDate : $dates = $toDate;
 
-        if($fromDate && $toDate) {
+        if ($fromDate && $toDate) {
             $dates = $fromDate.' - '.$toDate;
         }
 

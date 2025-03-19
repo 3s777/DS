@@ -1,8 +1,9 @@
-<?php namespace Domain\Shelf\Services;
+<?php
+
+namespace Domain\Shelf\Services;
 
 use Domain\Shelf\DTOs\FillCategoryDTO;
 use Domain\Shelf\Models\Category;
-use Illuminate\Support\Facades\DB;
 use Support\Exceptions\CrudException;
 use Support\Transaction;
 use Throwable;
@@ -12,19 +13,19 @@ class CategoryService
     public function create(FillCategoryDTO $data)
     {
         return Transaction::run(
-            function() use($data) {
+            function () use ($data) {
 
-            $category = Category::create([
-                'name' => $data->name,
-                'model' => $data->model,
-                'slug' => $data->slug,
-                'description' => $data->description
-            ]);
+                $category = Category::create([
+                    'name' => $data->name,
+                    'model' => $data->model,
+                    'slug' => $data->slug,
+                    'description' => $data->description
+                ]);
 
-            return $category;
+                return $category;
 
             },
-            function(Throwable $e) {
+            function (Throwable $e) {
                 throw new CrudException($e->getMessage());
             }
         );
@@ -33,22 +34,22 @@ class CategoryService
     public function update(Category $category, FillCategoryDTO $data)
     {
         return Transaction::run(
-            function() use($data, $category) {
+            function () use ($data, $category) {
 
-            $category->fill(
-                [
-                    'name' => $data->name,
-                    'model' => $data->model,
-                    'slug' => $data->slug,
-                    'description' => $data->description
-                ]
-            )->save();
+                $category->fill(
+                    [
+                        'name' => $data->name,
+                        'model' => $data->model,
+                        'slug' => $data->slug,
+                        'description' => $data->description
+                    ]
+                )->save();
 
 
-            return $category;
+                return $category;
 
             },
-            function(Throwable $e) {
+            function (Throwable $e) {
                 throw new CrudException($e->getMessage());
             }
         );
@@ -56,7 +57,7 @@ class CategoryService
 
     public function setModelNullOnDelete(int|string|array $ids): void
     {
-        if(!is_array($ids)) {
+        if (!is_array($ids)) {
             $ids = explode(",", $ids);
         }
 

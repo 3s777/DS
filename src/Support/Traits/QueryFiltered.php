@@ -8,7 +8,7 @@ trait QueryFiltered
 {
     public function filtered()
     {
-        if(request('filters')) {
+        if (request('filters')) {
             return app(Pipeline::class)
                 ->send($this)
                 ->through(filters($this->model->availableFilters()))

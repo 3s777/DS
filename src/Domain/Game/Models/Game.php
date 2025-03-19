@@ -52,17 +52,17 @@ class Game extends Model implements HasMedia
 
     public $translatable = ['description'];
 
-//    protected function asJson($value)
-//    {
-//        return json_encode($value, JSON_UNESCAPED_UNICODE);
-//    }
+    //    protected function asJson($value)
+    //    {
+    //        return json_encode($value, JSON_UNESCAPED_UNICODE);
+    //    }
 
-//    protected function alternativeNames(): Attribute
-//    {
-//        return Attribute::make(
-//            set: fn (?string $value) => json_encode(explode('||', $value)),
-//        );
-//    }
+    //    protected function alternativeNames(): Attribute
+    //    {
+    //        return Attribute::make(
+    //            set: fn (?string $value) => json_encode(explode('||', $value)),
+    //        );
+    //    }
 
     public array $sortedFields = [
         'id',

@@ -2,9 +2,6 @@
 
 namespace Domain\Game\Models;
 
-use App\Filters\DatesFilter;
-use App\Filters\RelationFilter;
-use App\Filters\SearchFilter;
 use Database\Factories\Game\GameDeveloperFactory;
 use Domain\Auth\Models\User;
 use Domain\Game\FilterRegistrars\GameDeveloperFilterRegistrar;
@@ -87,10 +84,10 @@ class GameDeveloper extends Model implements HasMedia
         return app(GameDeveloperFilterRegistrar::class)->filtersList();
     }
 
-//    public function getRouteKeyName(): string
-//    {
-//        return 'slug';
-//    }
+    //    public function getRouteKeyName(): string
+    //    {
+    //        return 'slug';
+    //    }
 
     public function newEloquentBuilder($query): GameDeveloperQueryBuilder
     {

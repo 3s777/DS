@@ -3,9 +3,7 @@
 namespace Domain\Auth\Actions;
 
 use Domain\Auth\DTOs\LoginCollectorDTO;
-use Domain\Auth\DTOs\LoginAdminDTO;
 use Domain\Auth\Models\Collector;
-use Domain\Auth\Models\User;
 use Illuminate\Support\Facades\Auth;
 
 class LoginCollectorAction
@@ -16,7 +14,7 @@ class LoginCollectorAction
 
         $actionResponse = ['collector' => $collector];
 
-        if($collector && !$collector->email_verified_at) {
+        if ($collector && !$collector->email_verified_at) {
             $actionResponse['not_verified'] = true;
 
             return $actionResponse;

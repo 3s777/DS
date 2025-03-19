@@ -5,7 +5,6 @@ namespace Domain\Auth\ViewModels;
 use Domain\Auth\Models\Collector;
 use Domain\Auth\Models\Permission;
 use Domain\Auth\Models\Role;
-use Domain\Auth\Models\User;
 use Domain\Settings\Enums\LanguageEnum;
 use Spatie\ViewModels\ViewModel;
 
@@ -35,7 +34,7 @@ class CollectorUpdateViewModel extends ViewModel
 
     public function permissions(): array
     {
-//        dd(Permission::select('name', 'display_name')->get()->toArray(),  Permission::all()->where('guard_name', 'collector')->select('name', 'display_name')->toArray());
+        //        dd(Permission::select('name', 'display_name')->get()->toArray(),  Permission::all()->where('guard_name', 'collector')->select('name', 'display_name')->toArray());
 
         return Permission::all()->where('guard_name', 'collector')->select('name', 'display_name')->toArray();
     }

@@ -2,7 +2,6 @@
 
 namespace Services\Support\ValueObjects;
 
-use Domain\Trade\ValueObjects\AuctionValueObject;
 use InvalidArgumentException;
 use Support\ValueObjects\PriceValueObject;
 use Tests\TestCase;

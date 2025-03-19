@@ -71,7 +71,7 @@ class UpdateAdminActionTest extends TestCase
         $this->artisan('db:seed', ['--class' => PermissionsTestSeeder::class]);
 
         Permission::create(['name' => 'test', 'display_name' => 'Test']);
-        Role::create(['name' => 'superadmin', 'display_name' =>'Super Admin']);
+        Role::create(['name' => 'superadmin', 'display_name' => 'Super Admin']);
         $role = Role::where('name', config('settings.default_role'))->first();
         $role->givePermissionTo('entity.*');
 
@@ -108,5 +108,5 @@ class UpdateAdminActionTest extends TestCase
         Event::assertDispatched(Verified::class);
     }
 
-//    TODO test exception without HTTP
+    //    TODO test exception without HTTP
 }

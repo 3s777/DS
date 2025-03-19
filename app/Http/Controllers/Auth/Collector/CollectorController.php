@@ -3,7 +3,6 @@
 namespace App\Http\Controllers\Auth\Collector;
 
 use App\Http\Controllers\Controller;
-
 use App\Http\Requests\Auth\Collector\CreateCollectorRequest;
 use App\Http\Requests\Auth\Collector\FilterCollectorRequest;
 use App\Http\Requests\Auth\Collector\UpdateCollectorRequest;
@@ -13,7 +12,6 @@ use Domain\Auth\Actions\UpdateCollectorAction;
 use Domain\Auth\DTOs\NewCollectorDTO;
 use Domain\Auth\DTOs\UpdateCollectorDTO;
 use Domain\Auth\Models\Collector;
-use Domain\Auth\Models\User;
 use Domain\Auth\ViewModels\CollectorIndexViewModel;
 use Domain\Auth\ViewModels\CollectorUpdateViewModel;
 use Illuminate\Contracts\View\Factory;

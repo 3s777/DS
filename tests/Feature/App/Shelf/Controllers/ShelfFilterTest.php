@@ -2,9 +2,7 @@
 
 namespace App\Shelf\Controllers;
 
-use App\Http\Controllers\Game\Admin\GameDeveloperController;
 use App\Http\Controllers\Shelf\Admin\ShelfController;
-use Database\Factories\Game\GameDeveloperFactory;
 use Database\Factories\Shelf\ShelfFactory;
 use Domain\Auth\Models\Collector;
 use Domain\Auth\Models\Role;

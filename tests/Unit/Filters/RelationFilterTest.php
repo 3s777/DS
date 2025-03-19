@@ -44,14 +44,14 @@ class RelationFilterTest extends TestCase
         $query->shouldReceive('when')
             ->once()
             ->andReturnUsing(function ($value, $callback) use ($query) {
-            if ($value) {
-                $callback($query);
-            }
-            return $query;
-        });
+                if ($value) {
+                    $callback($query);
+                }
+                return $query;
+            });
 
         $query->shouldReceive('where')
-            ->with('test-table.test-field',  $shelf->id)
+            ->with('test-table.test-field', $shelf->id)
             ->once()
             ->andReturn($query);
 

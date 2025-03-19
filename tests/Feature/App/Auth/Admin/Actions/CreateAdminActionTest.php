@@ -114,27 +114,27 @@ class CreateAdminActionTest extends TestCase
      * @test
      * @return void
      */
-//    TODO test exception without HTTP
-//    public function it_handle_user_exception_sent(): void
-//    {
-//        Exceptions::fake();
-//
-//        $this->expectException(UserCreateEditException::class);
-//
-//        $action = app(CreateUserAction::class);
-//
-//        $action(NewUserDTO::make(
-//            $this->request['name'],
-//            $this->request['email'],
-//            null,
-//            $this->request['language_id'],
-//        ));
-//
-//        Exceptions::assertReported(UserCreateEditException::class);
-//
-//
-//        $this->assertDatabaseMissing('users', [
-//            'email' => $this->request['email']
-//        ]);
-//    }
+    //    TODO test exception without HTTP
+    //    public function it_handle_user_exception_sent(): void
+    //    {
+    //        Exceptions::fake();
+    //
+    //        $this->expectException(UserCreateEditException::class);
+    //
+    //        $action = app(CreateUserAction::class);
+    //
+    //        $action(NewUserDTO::make(
+    //            $this->request['name'],
+    //            $this->request['email'],
+    //            null,
+    //            $this->request['language_id'],
+    //        ));
+    //
+    //        Exceptions::assertReported(UserCreateEditException::class);
+    //
+    //
+    //        $this->assertDatabaseMissing('users', [
+    //            'email' => $this->request['email']
+    //        ]);
+    //    }
 }

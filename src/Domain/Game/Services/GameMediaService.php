@@ -1,4 +1,6 @@
-<?php namespace Domain\Game\Services;
+<?php
+
+namespace Domain\Game\Services;
 
 use Domain\Game\DTOs\FillGameMediaDTO;
 use Domain\Game\Models\GameMedia;
@@ -29,7 +31,7 @@ class GameMediaService
                 ['small', 'medium']
             );
 
-            if($data->images) {
+            if ($data->images) {
                 foreach ($data->images as $key => $image) {
                     $gameMedia->addImagesWithThumbnail(
                         $image,

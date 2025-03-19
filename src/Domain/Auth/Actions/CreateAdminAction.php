@@ -28,7 +28,7 @@ class CreateAdminAction
 
             event(new Registered($user));
 
-            if($data->is_verified) {
+            if ($data->is_verified) {
                 $verifyAction = app(VerifyEmailAction::class);
                 $verifyAction($user);
             }
@@ -41,7 +41,7 @@ class CreateAdminAction
 
             $user->syncRoles($data->roles);
 
-            if($data->featured_image) {
+            if ($data->featured_image) {
                 $user->addFeaturedImageWithThumbnail(
                     $data->featured_image,
                     ['small', 'medium']

@@ -75,7 +75,7 @@ class UpdateCollectorActionTest extends TestCase
 
         Permission::create(['name' => 'test', 'display_name' => 'Test', 'guard_name' => 'collector']);
         Permission::create(['name' => 'entity.*', 'display_name' => 'Entity', 'guard_name' => 'collector']);
-        Role::create(['name' => 'superadmin', 'display_name' =>'Super Admin', 'guard_name' => 'collector']);
+        Role::create(['name' => 'superadmin', 'display_name' => 'Super Admin', 'guard_name' => 'collector']);
         $role = Role::where('name', config('settings.default_collector_role'))->first();
         $role->givePermissionTo('entity.*');
 
@@ -112,5 +112,5 @@ class UpdateCollectorActionTest extends TestCase
         Event::assertDispatched(Verified::class);
     }
 
-//    TODO test exception without HTTP
+    //    TODO test exception without HTTP
 }

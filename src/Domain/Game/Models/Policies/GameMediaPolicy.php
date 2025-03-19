@@ -36,11 +36,11 @@ class GameMediaPolicy
      */
     public function update(User $user, GameMedia $gameMedia): bool
     {
-       if($user->can('game-medias.edit')) {
-           return true;
-       }
+        if ($user->can('game-medias.edit')) {
+            return true;
+        }
 
-       return $user->id == $gameMedia->user_id;
+        return $user->id == $gameMedia->user_id;
     }
 
     /**

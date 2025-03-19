@@ -13,14 +13,13 @@ class Transaction
         Closure $callback,
         Closure $onError = null,
         Closure $onSuccess = null,
-    )
-    {
+    ) {
         DB::beginTransaction();
 
         try {
             return tap($callback(), function ($result) use ($onSuccess) {
 
-                if(!is_null($onSuccess)) {
+                if (!is_null($onSuccess)) {
                     $onSuccess($result);
                 }
 
@@ -30,7 +29,7 @@ class Transaction
         } catch (Throwable $e) {
             DB::rollBack();
 
-            if(!is_null($onError)) {
+            if (!is_null($onError)) {
                 $onError($e);
             }
 

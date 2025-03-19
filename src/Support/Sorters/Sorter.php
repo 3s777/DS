@@ -21,7 +21,7 @@ class Sorter
     {
         $sortData = $this->sortData();
 
-        if(!request('sort')) {
+        if (!request('sort')) {
             $query->orderBy(
                 $this->defaultField,
                 $this->defaultOrder
@@ -30,7 +30,7 @@ class Sorter
 
         $sortData['order'] = $sortData['order']->contains(['asc', 'desc']) ? $sortData['order'] : str('asc');
 
-//        return $query->when($sortData['key']->contains($this->columns()), function (Builder $query) use ($sortData) {
+        //        return $query->when($sortData['key']->contains($this->columns()), function (Builder $query) use ($sortData) {
         return $query->when(in_array($sortData['key'], $this->columns()), function (Builder $query) use ($sortData) {
             $query->orderBy(
                 $sortData['key']->value(),

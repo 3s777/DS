@@ -19,8 +19,7 @@ class SearchFilter extends AbstractFilter
         ?string $field = null,
         ?string $placeholder = null,
         ?array $alternativeFields = null
-    )
-    {
+    ) {
         parent::__construct($title, $key, $table, $field, $placeholder);
 
         $this->setAlternativeFields($alternativeFields);
@@ -30,7 +29,7 @@ class SearchFilter extends AbstractFilter
     {
         $this->field = 'name';
 
-        if($field) {
+        if ($field) {
             $this->field = $field;
         }
 
@@ -45,7 +44,7 @@ class SearchFilter extends AbstractFilter
 
     public function placeholder(string $key = ''): string|array|null
     {
-        if($this->placeholder) {
+        if ($this->placeholder) {
             return $this->placeholder;
         }
 
@@ -56,8 +55,8 @@ class SearchFilter extends AbstractFilter
     {
         return $query->when($this->requestValue(), function (Builder $query) {
             $query->where($this->table.'.'.$this->field, 'ILIKE', '%'.$this->requestValue().'%');
-            if($this->alternativeFields) {
-                foreach($this->alternativeFields as $field) {
+            if ($this->alternativeFields) {
+                foreach ($this->alternativeFields as $field) {
                     $query->orWhere($this->table.'.'.$field, 'ILIKE', '%'.$this->requestValue().'%');
                 }
             }

@@ -36,11 +36,11 @@ class GamePlatformPolicy
      */
     public function update(User $user, GamePlatform $platform): bool
     {
-       if($user->can('game-platforms.edit')) {
-           return true;
-       }
+        if ($user->can('game-platforms.edit')) {
+            return true;
+        }
 
-       return $user->id == $platform->user_id;
+        return $user->id == $platform->user_id;
     }
 
     /**

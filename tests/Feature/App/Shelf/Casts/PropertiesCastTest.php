@@ -36,7 +36,7 @@ class PropertiesCastTest extends TestCase
      * @test
      * @return void
      */
-    public function it_sale_success():void
+    public function it_sale_success(): void
     {
         $collectible = CollectibleFactory::new()->for(GameMedia::factory(), 'collectable')
             ->for($this->category)

@@ -93,9 +93,9 @@ class Shelf extends Model implements HasMedia
     {
         return $this->hasMany(Collectible::class);
     }
-//
-//    public function platforms(): MorphToMany
-//    {
-//        return $this->morphToMany(GamePlatform::class, 'game_platformable');
-//    }
+    //
+    //    public function platforms(): MorphToMany
+    //    {
+    //        return $this->morphToMany(GamePlatform::class, 'game_platformable');
+    //    }
 }

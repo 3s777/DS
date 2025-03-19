@@ -36,11 +36,11 @@ class CollectiblePolicy
      */
     public function update(User $user, Collectible $collectible): bool
     {
-       if($user->can('collectibles.edit')) {
-           return true;
-       }
+        if ($user->can('collectibles.edit')) {
+            return true;
+        }
 
-       return $user->id == $collectible->user_id;
+        return $user->id == $collectible->user_id;
     }
 
     /**

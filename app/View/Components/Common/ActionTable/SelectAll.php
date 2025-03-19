@@ -13,7 +13,7 @@ class SelectAll extends Component
         public string $ids = '',
         public string $names = '',
     ) {
-        foreach($models as $model) {
+        foreach ($models as $model) {
             $this->ids .= "'$model->id',";
             $this->names .= "'".htmlspecialchars($model->name)."',";
         }

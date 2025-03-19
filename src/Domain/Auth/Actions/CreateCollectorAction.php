@@ -2,11 +2,9 @@
 
 namespace Domain\Auth\Actions;
 
-use Domain\Auth\DTOs\NewAdminDTO;
 use Domain\Auth\DTOs\NewCollectorDTO;
 use Domain\Auth\Exceptions\UserCreateEditException;
 use Domain\Auth\Models\Collector;
-use Domain\Auth\Models\User;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Support\Facades\DB;
 use Throwable;
@@ -30,7 +28,7 @@ class CreateCollectorAction
 
             event(new Registered($collector));
 
-            if($data->is_verified) {
+            if ($data->is_verified) {
                 $verifyAction = app(VerifyEmailAction::class);
                 $verifyAction($collector);
             }
@@ -43,7 +41,7 @@ class CreateCollectorAction
 
             $collector->syncRoles($data->roles);
 
-            if($data->featured_image) {
+            if ($data->featured_image) {
                 $collector->addFeaturedImageWithThumbnail(
                     $data->featured_image,
                     ['small', 'medium']

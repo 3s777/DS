@@ -43,7 +43,7 @@ class MassDeletingActionTest extends TestCase
 
         $this->assertDatabaseCount('game_developers', 5);
 
-        foreach($this->models as $model) {
+        foreach ($this->models as $model) {
             $this->assertModelExists($model);
             $this->assertSoftDeleted($model);
         }
@@ -70,7 +70,7 @@ class MassDeletingActionTest extends TestCase
 
         $this->assertDatabaseCount('game_developers', 2);
 
-        foreach($undeletedModels as $model) {
+        foreach ($undeletedModels as $model) {
             $this->assertModelExists($model);
 
             $this->assertDatabaseHas('game_developers', [
@@ -78,7 +78,7 @@ class MassDeletingActionTest extends TestCase
             ]);
         }
 
-        foreach($this->models as $model) {
+        foreach ($this->models as $model) {
             $this->assertModelMissing($model);
 
             $this->assertDatabaseMissing('game_developers', [

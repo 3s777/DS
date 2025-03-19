@@ -4,16 +4,11 @@ namespace Tests\RequestFactories\Trade;
 
 use Domain\Game\Models\GameMedia;
 use Domain\Settings\Models\Country;
-use Domain\Shelf\Enums\CollectibleTypeEnum;
-use Domain\Shelf\Enums\ConditionEnum;
-use Domain\Shelf\Enums\TargetEnum;
 use Domain\Shelf\Models\Category;
 use Domain\Shelf\Models\Collectible;
 use Domain\Shelf\Models\KitItem;
-use Domain\Shelf\Models\Shelf;
 use Domain\Trade\Enums\ReservationEnum;
 use Domain\Trade\Enums\ShippingEnum;
-use Illuminate\Database\Eloquent\Relations\Relation;
 use Illuminate\Support\Arr;
 use Worksome\RequestFactories\RequestFactory;
 
@@ -21,7 +16,7 @@ class CreateSaleRequestFactory extends RequestFactory
 {
     public function definition(): array
     {
-        $gameMedia = GameMedia::factory()->has(KitItem::factory(rand(1,3)), 'kitItems')->create();
+        $gameMedia = GameMedia::factory()->has(KitItem::factory(rand(1, 3)), 'kitItems')->create();
         $countries = Country::factory(3)->create();
         $category = Category::factory(['model' => 'game_media'])->create();
         $collectible = Collectible::factory(
@@ -43,7 +38,7 @@ class CreateSaleRequestFactory extends RequestFactory
             'self_delivery' => fake()->boolean,
         ];
 
-        if($collectibleData['shipping'] == ShippingEnum::Selected->value) {
+        if ($collectibleData['shipping'] == ShippingEnum::Selected->value) {
             $collectibleData['shipping_countries'] = $countries->pluck('id')->toArray();
         }
 

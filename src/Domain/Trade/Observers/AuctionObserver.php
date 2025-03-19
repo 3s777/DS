@@ -2,7 +2,6 @@
 
 namespace Domain\Trade\Observers;
 
-use Domain\Trade\Enums\ShippingEnum;
 use Domain\Trade\Models\Auction;
 
 class AuctionObserver
@@ -36,7 +35,7 @@ class AuctionObserver
 
     public function deleted(Auction $auction): void
     {
-        if($auction->collectible) {
+        if ($auction->collectible) {
             $auction->collectible->auction_data = null;
             $auction->collectible->save();
         }

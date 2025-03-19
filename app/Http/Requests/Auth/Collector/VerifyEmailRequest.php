@@ -15,7 +15,7 @@ class VerifyEmailRequest extends FormRequest
     {
         $collector = Collector::find($this->route('id'));
 
-        if(!$collector) {
+        if (!$collector) {
             return false;
         }
 

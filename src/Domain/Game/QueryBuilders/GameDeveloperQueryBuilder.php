@@ -11,5 +11,5 @@ class GameDeveloperQueryBuilder extends Builder
     use QueryFiltered;
     use QuerySorted;
 
-//    protected $model = GameDeveloper::class;
+    //    protected $model = GameDeveloper::class;
 }

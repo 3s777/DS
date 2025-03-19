@@ -9,7 +9,7 @@ trait HasSelectedCollector
     protected function getSelectedCollector(?Model $model): array
     {
         $selectedCollector = [];
-        if($model?->collector) {
+        if ($model?->collector) {
             $selectedCollector = [
                 'key' => $model->collector->id,
                 'value' => $model->collector->name,

@@ -140,7 +140,7 @@ class AdminControllerTest extends TestCase
     public function it_update_success(): void
     {
         Permission::create(['name' => 'test', 'display_name' => 'Test']);
-        Role::create(['name' => 'superadmin', 'display_name' =>'Super Admin']);
+        Role::create(['name' => 'superadmin', 'display_name' => 'Super Admin']);
         $role = Role::where('name', config('settings.default_role'))->first();
         $role->givePermissionTo('entity.*');
 

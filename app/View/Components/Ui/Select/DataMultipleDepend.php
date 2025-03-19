@@ -34,8 +34,8 @@ class DataMultipleDepend extends Component
     {
         $oldValues = '';
 
-        if(old($this->filteredName)) {
-            foreach(old($this->filteredName) as $oldValue) {
+        if (old($this->filteredName)) {
+            foreach (old($this->filteredName) as $oldValue) {
                 $oldValues .= $oldValue.',';
             }
         }

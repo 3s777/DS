@@ -2,9 +2,7 @@
 
 namespace Domain\Game\ViewModels;
 
-use Domain\Auth\Models\User;
 use Domain\Game\Models\GameGenre;
-use Domain\Game\Models\GamePublisher;
 use Spatie\ViewModels\ViewModel;
 use Support\Traits\HasSelectedUser;
 
@@ -24,7 +22,8 @@ class GameGenreUpdateViewModel extends ViewModel
         return $this->gameGenre ?? null;
     }
 
-    public function selectedUser(): array {
+    public function selectedUser(): array
+    {
         return $this->getSelectedUser($this->gameGenre);
     }
 }

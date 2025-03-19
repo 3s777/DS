@@ -40,7 +40,7 @@ class AuctionCastTest extends TestCase
      * @test
      * @return void
      */
-    public function it_auction_success():void
+    public function it_auction_success(): void
     {
         $country = Country::factory()->create();
         $collectible = CollectibleFactory::new()->for(GameMedia::factory(), 'collectable')

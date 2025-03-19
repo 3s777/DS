@@ -12,13 +12,9 @@ use Database\Factories\UserFactory;
 use Domain\Auth\Models\Role;
 use Domain\Auth\Models\User;
 use Domain\Game\Models\GameMedia;
-use Domain\Settings\Models\Country;
 use Domain\Shelf\Enums\CollectibleTypeEnum;
-use Domain\Shelf\Enums\TargetEnum;
 use Domain\Shelf\Models\Category;
 use Domain\Shelf\Models\Collectible;
-use Domain\Trade\Enums\ReservationEnum;
-use Domain\Trade\Enums\ShippingEnum;
 use Illuminate\Database\Eloquent\Relations\Relation;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
@@ -46,11 +42,11 @@ class CollectibleControllerTest extends TestCase
             ]))
             ->create();
 
-        if($this->collectible->target === 'sale') {
+        if ($this->collectible->target === 'sale') {
             SaleFactory::new()->for($this->collectible, 'collectible')->create();
         }
 
-        if($this->collectible->target === 'auction') {
+        if ($this->collectible->target === 'auction') {
             AuctionFactory::new()->for($this->collectible, 'collectible')->create();
         }
 
@@ -62,8 +58,7 @@ class CollectibleControllerTest extends TestCase
         string $method = 'get',
         array  $params = [],
         array  $request = []
-    ): void
-    {
+    ): void {
         $this->{$method}(action([CollectibleController::class, $action], $params), $request)
             ->assertRedirectToRoute('admin.login');
     }

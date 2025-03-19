@@ -32,12 +32,12 @@ class AdminController extends Controller
         $this->authorizeResource(User::class, 'user');
     }
 
-//    protected function resourceAbilityMap(): array
-//    {
-//        return array_merge(parent::resourceAbilityMap(), [
-//            'getForSelect' => 'getForSelect'
-//        ]);
-//    }
+    //    protected function resourceAbilityMap(): array
+    //    {
+    //        return array_merge(parent::resourceAbilityMap(), [
+    //            'getForSelect' => 'getForSelect'
+    //        ]);
+    //    }
 
     public function index(FilterAdminRequest $request): View|Application|Factory|\Illuminate\Contracts\Foundation\Application
     {

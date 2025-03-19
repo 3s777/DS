@@ -31,7 +31,7 @@ final readonly class SaleValueObject
         string $currency = 'RUB',
         int $precision = 100
     ) {
-        if($price < 0 || $priceOld < 0) {
+        if ($price < 0 || $priceOld < 0) {
             throw new InvalidArgumentException('Price must be more than zero');
         }
 

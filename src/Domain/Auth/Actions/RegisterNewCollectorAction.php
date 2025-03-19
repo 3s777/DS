@@ -15,7 +15,7 @@ class RegisterNewCollectorAction implements RegisterNewUserContract
     public function __invoke(NewUserDTOContract $data)
     {
         return Transaction::run(
-            function() use($data) {
+            function () use ($data) {
                 $collector = Collector::create([
                     'name' => $data->name,
                     'email' => $data->email,
@@ -29,11 +29,10 @@ class RegisterNewCollectorAction implements RegisterNewUserContract
 
                 return $collector;
             },
-            function(Throwable $e) {
+            function (Throwable $e) {
                 throw new RegisterException($e->getMessage());
             }
         );
 
     }
 }
-

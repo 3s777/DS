@@ -9,7 +9,6 @@ use Domain\Auth\Models\User;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Testing\Fluent\Concerns\Has;
 use Tests\TestCase;
 use Tests\Traits\HasFilters;
 use Tests\Traits\HasSorters;

@@ -17,7 +17,7 @@ class ThemeSwitcher extends Component
     {
         $switchers = [];
 
-        foreach(ColorThemeEnum::cases() as $theme) {
+        foreach (ColorThemeEnum::cases() as $theme) {
             $switchers[] = $theme->value;
         }
 

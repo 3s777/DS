@@ -26,10 +26,10 @@ class OriginalImageManager implements ImagesManager
 
     public function deleteFeaturedImage(): void
     {
-//        if($this->{$this->getThumbnailColumn()}) {
-//            $imagePathInfo = pathinfo($this->{$this->getThumbnailColumn()});
-//            $this->imagesStorage()->delete($imagePathInfo['dirname']);
-//        }
+        //        if($this->{$this->getThumbnailColumn()}) {
+        //            $imagePathInfo = pathinfo($this->{$this->getThumbnailColumn()});
+        //            $this->imagesStorage()->delete($imagePathInfo['dirname']);
+        //        }
     }
 
     public function getFeaturedImagePath(): string

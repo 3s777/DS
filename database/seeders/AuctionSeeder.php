@@ -2,13 +2,8 @@
 
 namespace Database\Seeders;
 
-use Carbon\Carbon;
-use Domain\Auth\Models\User;
-use Domain\Game\Models\GameMedia;
 use Domain\Shelf\Models\Collectible;
-use Domain\Trade\Enums\ShippingEnum;
 use Domain\Trade\Models\Auction;
-use Domain\Trade\Models\Sale;
 use Illuminate\Database\Seeder;
 
 class AuctionSeeder extends Seeder
@@ -20,7 +15,7 @@ class AuctionSeeder extends Seeder
     {
         $collectibles = Collectible::where('target', 'auction')->get();
 
-        if($collectibles) {
+        if ($collectibles) {
             foreach ($collectibles as $collectible) {
                 $auction = Auction::factory()
                     ->for($collectible)

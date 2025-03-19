@@ -2,7 +2,6 @@
 
 namespace Support\Traits\Models;
 
-use App\Contracts\ImagesManager;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\UploadedFile;
 
@@ -34,7 +33,7 @@ trait HasFeaturedImage
     {
         $featuredImagePathInfo = pathinfo($this->getFeaturedImagePath());
 
-        if($featuredImagePathInfo['filename']) {
+        if ($featuredImagePathInfo['filename']) {
             return $featuredImagePathInfo['dirname'].'/'.$featuredImagePathInfo['filename'].'.webp';
         }
 
@@ -51,7 +50,7 @@ trait HasFeaturedImage
 
     public function addFeaturedImageWithThumbnail(?UploadedFile $image, ?array $specialSizes = []): string
     {
-        if($image) {
+        if ($image) {
             $imageFullPath = $this->addOriginalFeaturedImage($image);
             $this->generateFullSizes($imageFullPath);
             $this->generateThumbnails($imageFullPath, $specialSizes);
@@ -62,11 +61,11 @@ trait HasFeaturedImage
 
     public function updateFeaturedImage(?UploadedFile $newFeaturedImage, ?bool $oldFeaturedImage = true, $sizes = []): void
     {
-        if(!$oldFeaturedImage && !$newFeaturedImage) {
+        if (!$oldFeaturedImage && !$newFeaturedImage) {
             $this->deleteFeaturedImage();
         }
 
-        if($newFeaturedImage) {
+        if ($newFeaturedImage) {
             $this->deleteFeaturedImage();
 
             $this->addFeaturedImageWithThumbnail(

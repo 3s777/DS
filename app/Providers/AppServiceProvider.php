@@ -59,8 +59,8 @@ class AppServiceProvider extends ServiceProvider
             'auction' => 'Domain\Trade\Models\Auction',
         ]);
 
-//        Translatable::fallback(
-//            fallbackLocale: 'ru',
-//        );
+        //        Translatable::fallback(
+        //            fallbackLocale: 'ru',
+        //        );
     }
 }

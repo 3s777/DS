@@ -19,7 +19,7 @@ class LanguageSwitcher extends Component
         $current = Route::current();
         $switchers = [];
 
-        foreach(config('app.available_locales') as $locale) {
+        foreach (config('app.available_locales') as $locale) {
             $switchers[$locale] = URL::toRoute($current, ['locale' => $locale] + $current->parameters(), true);
         }
 

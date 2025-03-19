@@ -20,12 +20,11 @@ use Support\Actions\MassDeletingAction;
 use Support\DTOs\MassDeletingDTO;
 use Support\Exceptions\MassDeletingException;
 
-
 class CategoryController extends Controller
 {
     public function __construct()
     {
-//        $this->authorizeResource(KitItem::class, 'kit-item');
+        //        $this->authorizeResource(KitItem::class, 'kit-item');
     }
 
     public function index(): View|Application|Factory|\Illuminate\Contracts\Foundation\Application

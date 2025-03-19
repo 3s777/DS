@@ -14,7 +14,7 @@ class LoginAdminAction
 
         $actionResponse = ['user' => $user];
 
-        if($user && !$user->email_verified_at) {
+        if ($user && !$user->email_verified_at) {
             $actionResponse['not_verified'] = true;
 
             return $actionResponse;

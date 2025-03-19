@@ -67,19 +67,19 @@ class GameServiceTest extends TestCase
 
         $game = Game::where('name', $this->request['name'])->first();
 
-        foreach($this->request['developers'] as $developer) {
+        foreach ($this->request['developers'] as $developer) {
             $this->assertTrue($game->developers->contains($developer));
         }
 
-        foreach($this->request['publishers'] as $publisher) {
+        foreach ($this->request['publishers'] as $publisher) {
             $this->assertTrue($game->publishers->contains($publisher));
         }
 
-        foreach($this->request['genres'] as $genre) {
+        foreach ($this->request['genres'] as $genre) {
             $this->assertTrue($game->genres->contains($genre));
         }
 
-        foreach($this->request['platforms'] as $platform) {
+        foreach ($this->request['platforms'] as $platform) {
             $this->assertTrue($game->platforms->contains($platform));
         }
 
@@ -132,25 +132,25 @@ class GameServiceTest extends TestCase
             'name' => 'NewNameGame',
         ]);
 
-        $updatedGame= Game::where('name', 'NewNameGame')->first();
+        $updatedGame = Game::where('name', 'NewNameGame')->first();
 
         $this->assertSame($updatedGame->slug, $this->request['slug']);
         $this->assertSame($updatedGame->released_at->format('Y-m-d'), $this->request['released_at']);
         $this->assertSame($updatedGame->description, $this->request['description']);
 
-        foreach($this->request['developers'] as $developer) {
+        foreach ($this->request['developers'] as $developer) {
             $this->assertTrue($updatedGame->developers->contains($developer));
         }
 
-        foreach($this->request['publishers'] as $publisher) {
+        foreach ($this->request['publishers'] as $publisher) {
             $this->assertTrue($updatedGame->publishers->contains($publisher));
         }
 
-        foreach($this->request['genres'] as $genre) {
+        foreach ($this->request['genres'] as $genre) {
             $this->assertTrue($updatedGame->genres->contains($genre));
         }
 
-        foreach($this->request['platforms'] as $platform) {
+        foreach ($this->request['platforms'] as $platform) {
             $this->assertTrue($updatedGame->platforms->contains($platform));
         }
 

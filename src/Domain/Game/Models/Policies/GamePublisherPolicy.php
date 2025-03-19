@@ -36,11 +36,11 @@ class GamePublisherPolicy
      */
     public function update(User $user, GamePublisher $gamePublisher): bool
     {
-       if($user->can('game-publishers.edit')) {
-           return true;
-       }
+        if ($user->can('game-publishers.edit')) {
+            return true;
+        }
 
-       return $user->id == $gamePublisher->user_id;
+        return $user->id == $gamePublisher->user_id;
     }
 
     /**

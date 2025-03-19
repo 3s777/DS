@@ -2,7 +2,6 @@
 
 namespace Domain\Settings\ViewModel;
 
-
 use Domain\Settings\Models\Country;
 use Spatie\ViewModels\ViewModel;
 

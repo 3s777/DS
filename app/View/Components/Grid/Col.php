@@ -38,7 +38,7 @@ class Col extends Component
     {
         $colName = 'col';
 
-        if($this->noGap) {
+        if ($this->noGap) {
             $colName = 'col-ng';
         }
 
@@ -54,7 +54,7 @@ class Col extends Component
         $fullColName = '';
 
         foreach ($sizes as $name => $size) {
-            if($size > 0) {
+            if ($size > 0) {
                 $fullColName .= $colName . '-'.$name.'-' .$size.' ';
             }
         }

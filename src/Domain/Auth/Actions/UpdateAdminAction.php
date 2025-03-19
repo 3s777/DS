@@ -26,16 +26,16 @@ class UpdateAdminAction
                 'description' => $data->description
             ]);
 
-            if($data->password) {
+            if ($data->password) {
                 $user->password = bcrypt($data->password);
             }
 
-            if(!$user->email_verified_at && $data->is_verified) {
+            if (!$user->email_verified_at && $data->is_verified) {
                 $verifyAction = app(VerifyEmailAction::class);
                 $verifyAction($user);
             }
 
-            if(!$data->is_verified) {
+            if (!$data->is_verified) {
                 $user->email_verified_at = null;
             }
 
@@ -49,23 +49,24 @@ class UpdateAdminAction
 
             $user->syncRoles($data->roles);
 
-            $rolePermissions = $user->getPermissionsViaRoles()->pluck( 'name')->toArray();
+            $rolePermissions = $user->getPermissionsViaRoles()->pluck('name')->toArray();
 
             $resultPermissions = array_diff($data->permissions ?? [], $rolePermissions);
 
             $resultPermissions = array_filter(
                 $resultPermissions,
-                function($permission) use($user) {
+                function ($permission) use ($user) {
                     $isRoleHasPermission = true;
 
-                    foreach($user->roles as $role) {
-                        if($role->hasPermissionTo($permission) ) {
+                    foreach ($user->roles as $role) {
+                        if ($role->hasPermissionTo($permission)) {
                             $isRoleHasPermission = false;
                         }
                     }
 
                     return $isRoleHasPermission;
-                });
+                }
+            );
 
             $user->audit(
                 'changePermission',

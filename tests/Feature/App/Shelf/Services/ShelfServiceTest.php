@@ -103,7 +103,7 @@ class ShelfServiceTest extends TestCase
             'name' => 'NewNameShelf',
         ]);
 
-        $updatedShelf= Shelf::where('name', 'NewNameShelf')->first();
+        $updatedShelf = Shelf::where('name', 'NewNameShelf')->first();
 
         $this->assertSame($updatedShelf->number, $this->request['number']);
         $this->assertSame($updatedShelf->description, $this->request['description']);

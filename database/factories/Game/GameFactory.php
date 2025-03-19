@@ -4,7 +4,6 @@ namespace Database\Factories\Game;
 
 use Domain\Auth\Models\User;
 use Domain\Game\Models\Game;
-use Domain\Game\Models\GameDeveloper;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**

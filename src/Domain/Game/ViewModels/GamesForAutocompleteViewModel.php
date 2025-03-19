@@ -9,13 +9,12 @@ class GamesForAutocompleteViewModel extends ViewModel
 {
     public function __construct(
         protected ?array $games,
-    )
-    {
+    ) {
     }
 
     public function result(): array
     {
-        if($this->games) {
+        if ($this->games) {
             $games = Game::query()
                 ->select(['id'])
                 ->with(['developers:id,name', 'publishers:id,name', 'genres:id,name', 'platforms:id,name'])

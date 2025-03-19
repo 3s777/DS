@@ -26,16 +26,16 @@ class UpdateCollectorAction
                 'description' => $data->description
             ]);
 
-            if($data->password) {
+            if ($data->password) {
                 $collector->password = bcrypt($data->password);
             }
 
-            if(!$collector->email_verified_at && $data->is_verified) {
+            if (!$collector->email_verified_at && $data->is_verified) {
                 $verifyAction = app(VerifyEmailAction::class);
                 $verifyAction($collector);
             }
 
-            if(!$data->is_verified) {
+            if (!$data->is_verified) {
                 $collector->email_verified_at = null;
             }
 
@@ -49,23 +49,24 @@ class UpdateCollectorAction
 
             $collector->syncRoles($data->roles);
 
-            $rolePermissions = $collector->getPermissionsViaRoles()->pluck( 'name')->toArray();
+            $rolePermissions = $collector->getPermissionsViaRoles()->pluck('name')->toArray();
 
             $resultPermissions = array_diff($data->permissions ?? [], $rolePermissions);
 
             $resultPermissions = array_filter(
                 $resultPermissions,
-                function($permission) use($collector) {
+                function ($permission) use ($collector) {
                     $isRoleHasPermission = true;
 
-                    foreach($collector->roles as $role) {
-                        if($role->hasPermissionTo($permission) ) {
+                    foreach ($collector->roles as $role) {
+                        if ($role->hasPermissionTo($permission)) {
                             $isRoleHasPermission = false;
                         }
                     }
 
                     return $isRoleHasPermission;
-                });
+                }
+            );
 
             $collector->audit(
                 'changePermission',

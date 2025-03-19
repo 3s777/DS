@@ -9,7 +9,7 @@ class Price implements CastsAttributes
 {
     public function get($model, string $key, $value, array $attributes): ?PriceValueObject
     {
-        if($value) {
+        if ($value) {
             return PriceValueObject::make($value);
         }
 
@@ -18,11 +18,11 @@ class Price implements CastsAttributes
 
     public function set($model, string $key, $value, array $attributes): ?int
     {
-        if(!$value) {
-          return null;
+        if (!$value) {
+            return null;
         }
 
-        if(!$value instanceof PriceValueObject) {
+        if (!$value instanceof PriceValueObject) {
             $value = PriceValueObject::make($value);
         }
 

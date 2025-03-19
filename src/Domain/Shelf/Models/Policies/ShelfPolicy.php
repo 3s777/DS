@@ -36,11 +36,11 @@ class ShelfPolicy
      */
     public function update(User $user, Shelf $shelf): bool
     {
-       if($user->can('shelves.edit')) {
-           return true;
-       }
+        if ($user->can('shelves.edit')) {
+            return true;
+        }
 
-       return $user->id == $shelf->user_id;
+        return $user->id == $shelf->user_id;
     }
 
     /**

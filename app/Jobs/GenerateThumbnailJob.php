@@ -8,7 +8,6 @@ use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Support\Facades\Storage;
-
 use Intervention\Image\Drivers\Gd\Driver;
 use Intervention\Image\ImageManager;
 
@@ -37,20 +36,20 @@ class GenerateThumbnailJob implements ShouldQueue
         $manager = new ImageManager(new Driver());
         $image = $manager->read($thumbnailStorage->path($this->imageFullPath));
 
-        if($this->scaleDown) {
+        if ($this->scaleDown) {
             $image->scaleDown($this->scaleDown);
         }
 
-        if($this->isWebp) {
+        if ($this->isWebp) {
             $image->toWebp($this->quality)
                 ->save($thumbnailStorage->path($imagePathInfo['dirname'].'/'.$imagePathInfo['filename']).'.webp');
         }
 
-        if($this->prefix) {
+        if ($this->prefix) {
             $image->save($thumbnailStorage->path($imagePathInfo['dirname'].'/'.$imagePathInfo['filename'].'_'.$this->prefix.'.'.$imagePathInfo['extension']), $this->quality);
         }
 
-        if(!$this->isWebp && !$this->prefix) {
+        if (!$this->isWebp && !$this->prefix) {
             $image->save($thumbnailStorage->path($this->imageFullPath));
         }
     }

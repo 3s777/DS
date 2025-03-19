@@ -13,7 +13,7 @@ class CollectibleSeeder extends Seeder
      */
     public function run(): void
     {
-//        $shelves = Shelf::factory()->create();
+        //        $shelves = Shelf::factory()->create();
 
         Collectible::factory(2)
             ->recycle(User::factory(3)->create())

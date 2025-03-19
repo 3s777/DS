@@ -37,8 +37,7 @@ abstract class AbstractFilter implements Stringable
         string $table,
         ?string $field = null,
         string|array|null $placeholder = null
-    )
-    {
+    ) {
         $this->setTitle($title);
         $this->setKey($key);
         $this->setTable($table);
@@ -68,7 +67,7 @@ abstract class AbstractFilter implements Stringable
     {
         $this->field = 'id';
 
-        if($field) {
+        if ($field) {
             $this->field = $field;
         }
 
@@ -93,7 +92,7 @@ abstract class AbstractFilter implements Stringable
 
     public function placeholder(string $key = ''): string|array|null
     {
-        if($key && is_array($this->placeholder)) {
+        if ($key && is_array($this->placeholder)) {
             return $this->placeholder[$key];
         }
 

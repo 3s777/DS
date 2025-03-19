@@ -28,19 +28,20 @@ class Data extends Component
 
     public function isOld(string $key): bool
     {
-        if(old($this->filteredName) == $key) {
+        if (old($this->filteredName) == $key) {
             return true;
         }
 
         return false;
     }
 
-    public function isSelected(string $key): bool {
-        if(($this->selected && !old()) || ($this->selected && !$this->showOld)) {
+    public function isSelected(string $key): bool
+    {
+        if (($this->selected && !old()) || ($this->selected && !$this->showOld)) {
             return $key == $this->selected;
         }
 
-        if(!$this->showOld) {
+        if (!$this->showOld) {
             return false;
         }
 

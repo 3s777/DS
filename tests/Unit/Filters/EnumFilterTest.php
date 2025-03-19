@@ -42,11 +42,11 @@ class EnumFilterTest extends TestCase
         $query->shouldReceive('when')
             ->once()
             ->andReturnUsing(function ($value, $callback) use ($query) {
-            if ($value) {
-                $callback($query);
-            }
-            return $query;
-        });
+                if ($value) {
+                    $callback($query);
+                }
+                return $query;
+            });
 
         $query->shouldReceive('where')
             ->with('test-table.test-field', $filter->requestValue())
@@ -174,7 +174,7 @@ class EnumFilterTest extends TestCase
             'test-key',
             'test-table',
             ConditionEnum::class,
-            callbackPreparedValues: function() {
+            callbackPreparedValues: function () {
                 return 'test-prepared';
             }
         );

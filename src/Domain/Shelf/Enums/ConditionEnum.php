@@ -11,7 +11,8 @@ enum ConditionEnum: string
 
     case Other = 'other';
 
-    public function name():string {
+    public function name(): string
+    {
         return match($this) {
             ConditionEnum::Used => __('common.used'),
             ConditionEnum::Refurbished => __('common.refurbished'),

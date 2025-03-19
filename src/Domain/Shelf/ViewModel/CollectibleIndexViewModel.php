@@ -2,18 +2,9 @@
 
 namespace Domain\Shelf\ViewModel;
 
-use Domain\Auth\Models\User;
-use Domain\Game\Enums\GamePlatformTypeEnum;
-use Domain\Game\Models\Game;
-use Domain\Game\Models\GameDeveloper;
-use Domain\Game\Models\GameGenre;
-use Domain\Game\Models\GamePlatform;
 use Domain\Shelf\Enums\CollectibleTypeEnum;
 use Domain\Shelf\Enums\ConditionEnum;
-use Domain\Shelf\Enums\TargetEnum;
-use Domain\Shelf\Models\Category;
 use Domain\Shelf\Models\Collectible;
-use Domain\Shelf\Models\Shelf;
 use Illuminate\Database\Eloquent\Relations\Relation;
 use Spatie\ViewModels\ViewModel;
 
@@ -59,9 +50,9 @@ class CollectibleIndexViewModel extends ViewModel
                 'collectibles.category_id',
                 'collectibles.sale_data',
                 'collectibles.auction_data',
-//                'collectibles.sale',
-//                'collectibles.sale->price',
-//                'collectibles.auction',
+                //                'collectibles.sale',
+                //                'collectibles.sale->price',
+                //                'collectibles.auction',
                 'collectibles.created_at',
                 'collectibles.user_id',
                 'collectors.name as collector_name'

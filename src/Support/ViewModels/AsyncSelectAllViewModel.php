@@ -13,8 +13,7 @@ class AsyncSelectAllViewModel extends ViewModel
         protected ?array $depended = null,
         protected ?string $key = 'id',
         protected ?string $name = 'name'
-    )
-    {
+    ) {
     }
 
     private function setEmpty(): array
@@ -31,12 +30,12 @@ class AsyncSelectAllViewModel extends ViewModel
             ['value' => '', 'label' => __($this->label), 'disabled' => true]
         ];
 
-//        if($this->depended && !request('depended')) {
-//            return $this->setEmpty();
-//        }
+        //        if($this->depended && !request('depended')) {
+        //            return $this->setEmpty();
+        //        }
 
-        if($this->depended) {
-//            $dependedData = request('depended');
+        if ($this->depended) {
+            //            $dependedData = request('depended');
             $dependedKey = array_key_first($this->depended);
             $dependedValue = $this->depended[$dependedKey];
 

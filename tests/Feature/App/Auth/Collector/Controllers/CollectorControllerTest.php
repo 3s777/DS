@@ -149,7 +149,7 @@ class CollectorControllerTest extends TestCase
     public function it_update_success(): void
     {
         Permission::create(['name' => 'test', 'display_name' => 'Test', 'guard_name' => 'collector']);
-        Role::create(['name' => 'superadmin', 'display_name' =>'Super Admin', 'guard_name' => 'collector']);
+        Role::create(['name' => 'superadmin', 'display_name' => 'Super Admin', 'guard_name' => 'collector']);
         $role = Role::where('name', config('settings.default_collector_role'))->first();
         $role->givePermissionTo('entity.*');
 

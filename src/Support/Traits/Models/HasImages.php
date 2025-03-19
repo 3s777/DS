@@ -34,7 +34,7 @@ trait HasImages
 
     public function addImagesWithThumbnail(?UploadedFile $image, ?array $specialSizes): string
     {
-        if($image) {
+        if ($image) {
             $imageFullPath = $this->addOriginalImages($image);
             $this->generateFullSizes($imageFullPath);
             $this->generateThumbnails($imageFullPath, $specialSizes);
@@ -52,9 +52,9 @@ trait HasImages
     {
         // create array from paths string, implode by ',' and delete empty
 
-//        dd(
-//            (array_filter(explode(',', $paths))),
-//        );
+        //        dd(
+        //            (array_filter(explode(',', $paths))),
+        //        );
         $pathArr = (array_filter(explode(',', $paths)));
         $images = $this->{$this->getImagesColumn()};
 
@@ -73,11 +73,11 @@ trait HasImages
 
     public function updateImages(?array $newImages, ?string $forDelete, array $sizes): void
     {
-        if($forDelete) {
+        if ($forDelete) {
             $this->deleteImages($forDelete);
         }
 
-        if($newImages) {
+        if ($newImages) {
             foreach ($newImages as $image) {
                 $this->addImagesWithThumbnail(
                     $image,

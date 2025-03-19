@@ -5,13 +5,11 @@ namespace App\Http\Controllers\Settings\Admin;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Settings\Admin\CreateCountryRequest;
 use App\Http\Requests\Settings\Admin\UpdateCountryRequest;
-use App\Http\Requests\Shelf\Admin\GetKitItemConditionRequest;
 use Domain\Settings\DTOs\FillCountryDTO;
 use Domain\Settings\Models\Country;
 use Domain\Settings\Services\CountryService;
 use Domain\Settings\ViewModel\CountryIndexViewModel;
 use Domain\Settings\ViewModel\CountryUpdateViewModel;
-use Domain\Shelf\ViewModel\KitItemConditionViewModel;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
 use Illuminate\Foundation\Application;
@@ -20,12 +18,11 @@ use Illuminate\Http\Request;
 use Illuminate\Routing\Redirector;
 use Support\ViewModels\AsyncSelectByQueryViewModel;
 
-
 class CountryController extends Controller
 {
     public function __construct()
     {
-//        $this->authorizeResource(KitItem::class, 'kit-item');
+        //        $this->authorizeResource(KitItem::class, 'kit-item');
     }
 
     public function index(): View|Application|Factory|\Illuminate\Contracts\Foundation\Application

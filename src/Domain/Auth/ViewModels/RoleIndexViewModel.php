@@ -2,7 +2,6 @@
 
 namespace Domain\Auth\ViewModels;
 
-
 use Domain\Auth\Models\Role;
 use Illuminate\Support\Facades\Cache;
 use Spatie\ViewModels\ViewModel;

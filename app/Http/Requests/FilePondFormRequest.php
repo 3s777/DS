@@ -30,7 +30,7 @@ class FilePondFormRequest extends FormRequest
     {
         $filepondField = config('filepond.key');
 
-        if($this->files->get($filepondField) && !is_array($this->files->get($filepondField))) {
+        if ($this->files->get($filepondField) && !is_array($this->files->get($filepondField))) {
             return [
                 $filepondField => ['required','image', 'mimes:png,jpg'],
             ];

@@ -67,12 +67,14 @@ class TestUserDataSeeder extends Seeder
         ]);
 
         $collectableFactory
-            ->has(KitItem::factory(rand(1,3)), 'kitItems')
-            ->has(Collectible::factory()
+            ->has(KitItem::factory(rand(1, 3)), 'kitItems')
+            ->has(
+                Collectible::factory()
                 ->for(Shelf::factory()->for($testCollector, 'collector'), 'shelf')
                 ->for($testUser, 'user')
                 ->hasKitConditions(),
-                'collectibles')
+                'collectibles'
+            )
             ->for(User::factory(), 'user')
             ->create();
     }

@@ -9,7 +9,8 @@ enum ShippingEnum: string
     case Selected = 'selected';
     case Country = 'country';
 
-    public function name():string {
+    public function name(): string
+    {
         return match($this) {
             ShippingEnum::None => __('collectible.shipping.none'),
             ShippingEnum::World => __('collectible.shipping.world'),

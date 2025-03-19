@@ -2,9 +2,7 @@
 
 namespace Domain\Game\ViewModels;
 
-use Domain\Game\Models\GameDeveloper;
 use Domain\Game\Models\GamePlatformManufacturer;
-use Domain\Game\Models\GamePublisher;
 use Spatie\ViewModels\ViewModel;
 
 class GamePlatformManufacturerIndexViewModel extends ViewModel

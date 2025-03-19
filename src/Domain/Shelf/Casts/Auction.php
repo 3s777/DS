@@ -10,11 +10,11 @@ class Auction implements CastsAttributes
 {
     public function get(Model $model, string $key, mixed $value, array $attributes): ?AuctionValueObject
     {
-        if(is_array(json_decode($value))) {
+        if (is_array(json_decode($value))) {
             return null;
         }
 
-        if($value) {
+        if ($value) {
             $jsonValue = json_decode($value);
 
             return new AuctionValueObject(
@@ -34,11 +34,11 @@ class Auction implements CastsAttributes
 
     public function set(Model $model, string $key, mixed $value, array $attributes)
     {
-        if(!$value) {
+        if (!$value) {
             return null;
         }
 
-        if(!$value instanceof AuctionValueObject) {
+        if (!$value instanceof AuctionValueObject) {
             $price = $value['price'];
             $step = $value['step'];
             $finished_at = $value['finished_at'];
@@ -60,9 +60,9 @@ class Auction implements CastsAttributes
             );
         }
 
-//        $prices = [
-//            'price' => $value->price()->prepareValue()
-//        ];
+        //        $prices = [
+        //            'price' => $value->price()->prepareValue()
+        //        ];
 
 
         return json_encode([
