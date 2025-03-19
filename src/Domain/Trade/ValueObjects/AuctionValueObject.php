@@ -6,7 +6,7 @@ use InvalidArgumentException;
 use Support\Traits\Makeable;
 use Support\ValueObjects\PriceValueObject;
 
-class AuctionValueObject
+final readonly class AuctionValueObject
 {
     use Makeable;
 

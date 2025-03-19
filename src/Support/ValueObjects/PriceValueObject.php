@@ -6,18 +6,15 @@ use InvalidArgumentException;
 use Stringable;
 use Support\Traits\Makeable;
 
-class PriceValueObject implements Stringable
+final readonly class PriceValueObject implements Stringable
 {
     use Makeable;
-
-    private array $currencies = [
-        'RUB' => '₽'
-    ];
 
     public function __construct(
         private int|float $value,
         private string $currency = 'RUB',
-        private int $precision = 100
+        private int $precision = 100,
+        private array $currencies  =  ['RUB' => '₽']
     ) {
         if($value < 0) {
             throw new InvalidArgumentException('Price must be more than zero');
@@ -26,28 +23,27 @@ class PriceValueObject implements Stringable
         if(!isset($this->currencies[$currency])) {
             throw new InvalidArgumentException('Currency not allowed');
         }
-
-        $this->setValue();
     }
 
-    private function setValue(): void
+    // Cut off the extra digits after the decimal point and round them up again for validation
+    private function validatedValue(): float|int
     {
-        $this->value = ((int)($this->value * $this->precision)) / $this->precision;
+        return ((int)($this->value * $this->precision)) / $this->precision;
     }
 
     public function raw(): float|int
     {
-        return $this->value;
+        return $this->validatedValue();
     }
 
     public function prepareValue(): int
     {
-        return $this->value * $this->precision;
+        return $this->validatedValue() * $this->precision;
     }
 
     public function value(): float|int
     {
-        return $this->value / $this->precision;
+        return $this->validatedValue() / $this->precision;
     }
 
     public function currency(): string
