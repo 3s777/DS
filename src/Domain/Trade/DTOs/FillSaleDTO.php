@@ -5,21 +5,21 @@ namespace Domain\Trade\DTOs;
 use Illuminate\Http\Request;
 use Support\Traits\Makeable;
 
-class FillSaleDTO
+final readonly class FillSaleDTO
 {
     use Makeable;
 
     public function __construct(
-        public readonly int $collectible_id,
-        public readonly int $price,
-        public readonly int $quantity,
-        public readonly bool $bidding,
-        public readonly int $country_id,
-        public readonly string $shipping,
-        public readonly bool $self_delivery,
-        public readonly string $reservation,
-        public readonly ?int $price_old = null,
-        public readonly ?array $shipping_countries = null
+        public int $collectible_id,
+        public int $price,
+        public int $quantity,
+        public bool $bidding,
+        public int $country_id,
+        public string $shipping,
+        public bool $self_delivery,
+        public string $reservation,
+        public ?int $price_old = null,
+        public ?array $shipping_countries = null
     ) {
     }
 

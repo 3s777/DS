@@ -4,14 +4,14 @@ namespace Support\DTOs;
 
 use Support\Traits\Makeable;
 
-class MassDeletingDTO
+final readonly class MassDeletingDTO
 {
     use Makeable;
 
     public function __construct(
-        public readonly string $modelNamespace,
-        public readonly array|string $ids,
-        public readonly bool $isForce = false
+        public string $modelNamespace,
+        public array|string $ids,
+        public bool $isForce = false
     ) {
     }
 }

@@ -6,36 +6,36 @@ use Illuminate\Http\Request;
 use Illuminate\Http\UploadedFile;
 use Support\Traits\Makeable;
 
-class FillCollectibleDTO
+final readonly class FillCollectibleDTO
 {
     use Makeable;
 
     public function __construct(
-        public readonly string $name,
-        public readonly int $shelf_id,
-        public readonly string $condition,
-        public readonly array $kit_conditions,
-        public readonly string $target,
-        public readonly ?int $kit_score = null,
-        public readonly ?int $collectable = null,
-        public readonly ?string $collectable_type = null,
-        public readonly ?string $article_number = null,
-        public readonly ?float $purchase_price = null,
-        public readonly ?string $purchased_at = null,
-        public readonly ?string $seller = null,
-        public readonly ?string $additional_field = null,
-        public readonly ?array $properties = null,
-        public readonly ?array $sale = null,
-        public readonly ?array $auction = null,
-        public readonly ?int $country_id = null,
-        public readonly ?string $shipping = null,
-        public readonly ?array $shipping_countries = null,
-        public readonly ?bool $self_delivery = null,
-        public readonly ?UploadedFile $featured_image = null,
-        public readonly ?bool $featured_image_uploaded = null,
-        public readonly ?array $images = null,
-        public readonly ?string $images_delete = null,
-        public readonly ?string $description = null,
+        public string $name,
+        public int $shelf_id,
+        public string $condition,
+        public array $kit_conditions,
+        public string $target,
+        public ?int $kit_score = null,
+        public ?int $collectable = null,
+        public ?string $collectable_type = null,
+        public ?string $article_number = null,
+        public ?float $purchase_price = null,
+        public ?string $purchased_at = null,
+        public ?string $seller = null,
+        public ?string $additional_field = null,
+        public ?array $properties = null,
+        public ?array $sale = null,
+        public ?array $auction = null,
+        public ?int $country_id = null,
+        public ?string $shipping = null,
+        public ?array $shipping_countries = null,
+        public ?bool $self_delivery = null,
+        public ?UploadedFile $featured_image = null,
+        public ?bool $featured_image_uploaded = null,
+        public ?array $images = null,
+        public ?string $images_delete = null,
+        public ?string $description = null,
     ) {
     }
 

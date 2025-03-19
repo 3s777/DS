@@ -6,17 +6,17 @@ use Illuminate\Http\Request;
 use Illuminate\Http\UploadedFile;
 use Support\Traits\Makeable;
 
-class FillShelfDTO
+final readonly class FillShelfDTO
 {
     use Makeable;
 
     public function __construct(
-        public readonly string $name,
-        public readonly ?int $collector_id = null,
-        public readonly ?UploadedFile $featured_image = null,
-        public readonly ?bool $featured_image_uploaded = null,
-        public readonly ?string $description = null,
-        public readonly ?int $number = null
+        public string $name,
+        public ?int $collector_id = null,
+        public ?UploadedFile $featured_image = null,
+        public ?bool $featured_image_uploaded = null,
+        public ?string $description = null,
+        public ?int $number = null
     ) {
     }
 

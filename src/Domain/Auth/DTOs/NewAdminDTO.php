@@ -7,21 +7,21 @@ use Illuminate\Http\Request;
 use Illuminate\Http\UploadedFile;
 use Support\Traits\Makeable;
 
-class NewAdminDTO implements NewUserDTOContract
+final readonly class NewAdminDTO implements NewUserDTOContract
 {
     use Makeable;
 
     public function __construct(
-        public readonly string $name,
-        public readonly string $email,
-        public readonly string $password,
-        public readonly string $language,
-        public readonly ?array $roles = null,
-        public readonly ?string $first_name = null,
-        public readonly ?string $slug = null,
-        public readonly ?string $description = null,
-        public readonly ?UploadedFile $featured_image = null,
-        public readonly ?int $is_verified = null
+        public string $name,
+        public string $email,
+        public string $password,
+        public string $language,
+        public ?array $roles = null,
+        public ?string $first_name = null,
+        public ?string $slug = null,
+        public ?string $description = null,
+        public ?UploadedFile $featured_image = null,
+        public ?int $is_verified = null
     ) {
     }
 

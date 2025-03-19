@@ -6,29 +6,29 @@ use Illuminate\Http\Request;
 use Illuminate\Http\UploadedFile;
 use Support\Traits\Makeable;
 
-class FillGameMediaDTO
+final readonly class FillGameMediaDTO
 {
     use Makeable;
 
     public function __construct(
-        public readonly string $name,
-        public readonly ?string $article_number = null,
-        public readonly ?string $barcodes = null,
-        public readonly ?string $alternative_names = null,
-        public readonly ?int $user_id = null,
-        public readonly ?string $slug = null,
-        public readonly ?string $released_at = null,
-        public readonly ?array $games = null,
-        public readonly ?array $genres = null,
-        public readonly ?array $platforms = null,
-        public readonly ?array $developers = null,
-        public readonly ?array $publishers = null,
-        public readonly ?array $kit_items = null,
-        public readonly ?UploadedFile $featured_image = null,
-        public readonly ?bool $featured_image_uploaded = null,
-        public readonly ?array $images = null,
-        public readonly ?string $images_delete = null,
-        public readonly ?string $description = null,
+        public string $name,
+        public ?string $article_number = null,
+        public ?string $barcodes = null,
+        public ?string $alternative_names = null,
+        public ?int $user_id = null,
+        public ?string $slug = null,
+        public ?string $released_at = null,
+        public ?array $games = null,
+        public ?array $genres = null,
+        public ?array $platforms = null,
+        public ?array $developers = null,
+        public ?array $publishers = null,
+        public ?array $kit_items = null,
+        public ?UploadedFile $featured_image = null,
+        public ?bool $featured_image_uploaded = null,
+        public ?array $images = null,
+        public ?string $images_delete = null,
+        public ?string $description = null,
     ) {
     }
 

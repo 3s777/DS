@@ -5,13 +5,13 @@ namespace Domain\Settings\DTOs;
 use Illuminate\Http\Request;
 use Support\Traits\Makeable;
 
-class FillCountryDTO
+final readonly class FillCountryDTO
 {
     use Makeable;
 
     public function __construct(
-        public readonly string $name,
-        public readonly ?string $slug = null,
+        public string $name,
+        public ?string $slug = null,
     ) {
     }
 

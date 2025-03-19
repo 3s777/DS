@@ -5,15 +5,15 @@ namespace Domain\Shelf\DTOs;
 use Illuminate\Http\Request;
 use Support\Traits\Makeable;
 
-class FillCategoryDTO
+final readonly class FillCategoryDTO
 {
     use Makeable;
 
     public function __construct(
-        public readonly string $name,
-        public readonly string $model,
-        public readonly ?string $slug = null,
-        public readonly ?string $description = null,
+        public string $name,
+        public string $model,
+        public ?string $slug = null,
+        public ?string $description = null,
     ) {
     }
 

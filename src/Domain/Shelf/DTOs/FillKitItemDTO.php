@@ -5,14 +5,14 @@ namespace Domain\Shelf\DTOs;
 use Illuminate\Http\Request;
 use Support\Traits\Makeable;
 
-class FillKitItemDTO
+final readonly class FillKitItemDTO
 {
     use Makeable;
 
     public function __construct(
-        public readonly string $name,
-        public readonly ?string $slug = null,
-        public readonly ?int $user_id = null,
+        public string $name,
+        public ?string $slug = null,
+        public ?int $user_id = null,
     ) {
     }
 

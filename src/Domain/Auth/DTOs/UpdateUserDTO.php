@@ -6,23 +6,23 @@ use Illuminate\Http\Request;
 use Illuminate\Http\UploadedFile;
 use Support\Traits\Makeable;
 
-class UpdateUserDTO
+final readonly class UpdateUserDTO
 {
     use Makeable;
 
     public function __construct(
-        public readonly string $name,
-        public readonly string $email,
-        public readonly string $language,
-        public readonly array $roles,
-        public readonly ?array $permissions = null,
-        public readonly ?string $password = null,
-        public readonly ?string $first_name = null,
-        public readonly ?string $slug = null,
-        public readonly ?string $description = null,
-        public readonly ?UploadedFile $featured_image = null,
-        public readonly ?bool $featured_image_uploaded = null,
-        public readonly ?int $is_verified = null
+        public string $name,
+        public string $email,
+        public string $language,
+        public array $roles,
+        public ?array $permissions = null,
+        public ?string $password = null,
+        public ?string $first_name = null,
+        public ?string $slug = null,
+        public ?string $description = null,
+        public ?UploadedFile $featured_image = null,
+        public ?bool $featured_image_uploaded = null,
+        public ?int $is_verified = null
     ) {
     }
 

@@ -6,25 +6,25 @@ use Illuminate\Http\Request;
 use Illuminate\Http\UploadedFile;
 use Support\Traits\Makeable;
 
-class FillGameDTO
+final readonly class FillGameDTO
 {
     use Makeable;
 
     public function __construct(
-        public readonly string $name,
-        public readonly ?int $user_id = null,
-        public readonly ?string $slug = null,
-        public readonly ?string $released_at = null,
-        public readonly ?array $genres = null,
-        public readonly ?array $platforms = null,
-        public readonly ?array $developers = null,
-        public readonly ?array $publishers = null,
-        public readonly ?UploadedFile $featured_image = null,
-        public readonly ?bool $featured_image_uploaded = null,
-        public readonly ?array $images = null,
-        public readonly ?string $images_delete = null,
-        public readonly ?string $description = null,
-        public readonly ?string $alternative_names = null
+        public string $name,
+        public ?int $user_id = null,
+        public ?string $slug = null,
+        public ?string $released_at = null,
+        public ?array $genres = null,
+        public ?array $platforms = null,
+        public ?array $developers = null,
+        public ?array $publishers = null,
+        public ?UploadedFile $featured_image = null,
+        public ?bool $featured_image_uploaded = null,
+        public ?array $images = null,
+        public ?string $images_delete = null,
+        public ?string $description = null,
+        public ?string $alternative_names = null
     ) {
     }
 
