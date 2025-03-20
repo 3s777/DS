@@ -56,6 +56,12 @@ final class AdminSidebarMenuComposer
                 )
                 ->add(
                     MenuGroup::make()
+                        ->setLabel(trans_choice('game.variation.variations', 2))
+                        ->add(MenuItem::make(route('admin.game-media-variations.create'), __('common.add')))
+                        ->add(MenuItem::make(route('admin.game-media-variations.index'), __('common.list')))
+                )
+                ->add(
+                    MenuGroup::make()
                     ->setLabel(trans_choice('game.games', 2))
                     ->add(MenuItem::make(route('admin.games.create'), __('common.add')))
                     ->add(MenuItem::make(route('admin.games.index'), __('common.list')))

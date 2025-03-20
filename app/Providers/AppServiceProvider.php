@@ -44,6 +44,7 @@ class AppServiceProvider extends ServiceProvider
             'shelf' => 'Domain\Shelf\Models\Shelf',
             'game' => 'Domain\Game\Models\Game',
             'game_media' => 'Domain\Game\Models\GameMedia',
+            'game_media_variation' => 'Domain\Game\Models\GameMediaVariation',
             'game_developer' => 'Domain\Game\Models\GameDeveloper',
             'game_publisher' => 'Domain\Game\Models\GamePublisher',
             'game_platform' => 'Domain\Game\Models\GamePlatform',

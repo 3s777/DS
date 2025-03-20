@@ -7,6 +7,7 @@ use App\Http\Controllers\Game\Admin\GameController;
 use App\Http\Controllers\Game\Admin\GameDeveloperController;
 use App\Http\Controllers\Game\Admin\GameGenreController;
 use App\Http\Controllers\Game\Admin\GameMediaController;
+use App\Http\Controllers\Game\Admin\GameMediaVariationController;
 use App\Http\Controllers\Game\Admin\GamePlatformController;
 use App\Http\Controllers\Game\Admin\GamePlatformManufacturerController;
 use App\Http\Controllers\Game\Admin\GamePublisherController;
@@ -23,6 +24,7 @@ class GameRegistrar extends BaseRouteRegistrar implements RouteRegistrar
                     Route::post('/select-game-developers', [GameDeveloperController::class, 'getForSelect'])->name('select-game-developers');
                     Route::post('/select-game-publishers', [GamePublisherController::class, 'getForSelect'])->name('select-game-publishers');
                     Route::post('/select-game-media', [GameMediaController::class, 'getForSelect'])->name('game-media.select');
+                    Route::post('/select-game-media-variation', [GameMediaVariationController::class, 'getForSelect'])->name('game-media-variation.select');
                     Route::post('/select-games', [GameController::class, 'getForSelect'])->name('select-games');
                 });
 
@@ -30,6 +32,9 @@ class GameRegistrar extends BaseRouteRegistrar implements RouteRegistrar
                     Route::prefix('admin')->middleware(['auth', 'verified', 'remove.locale'])->group(function () {
                         $this->massDelete('game-medias', GameMediaController::class);
                         Route::resource('game-medias', GameMediaController::class);
+
+                        $this->massDelete('game-media-variations', GameMediaVariationController::class);
+                        Route::resource('game-media-variations', GameMediaVariationController::class);
 
                         $this->massDelete('games', GameController::class);
                         Route::post('/games-autocomplete', [GameController::class, 'getForAutocomplete'])->name('games-autocomplete');

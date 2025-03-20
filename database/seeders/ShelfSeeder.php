@@ -7,6 +7,7 @@ use Domain\Game\Models\Game;
 use Domain\Game\Models\GameDeveloper;
 use Domain\Game\Models\GameGenre;
 use Domain\Game\Models\GameMedia;
+use Domain\Game\Models\GameMediaVariation;
 use Domain\Game\Models\GamePlatform;
 use Domain\Game\Models\GamePlatformManufacturer;
 use Domain\Game\Models\GamePublisher;
@@ -48,6 +49,9 @@ class ShelfSeeder extends Seeder
                     ->has(GamePlatform::factory(2)
                         ->for(GamePlatformManufacturer::factory()->for($user, 'user'), 'game_platform_manufacturer')
                         ->for($user, 'user'), 'platforms')
+                    ->has(GameMediaVariation::factory(3)
+                        ->has(KitItem::factory(rand(1, 3)), 'kitItems'), 'variations'
+                    )
 //                    ->for($user, 'user')
             ]);
 

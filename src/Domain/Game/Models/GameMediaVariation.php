@@ -2,18 +2,15 @@
 
 namespace Domain\Game\Models;
 
-use App\Contracts\HasProperties;
-use Database\Factories\Game\GameMediaFactory;
+use Database\Factories\Game\GameMediaVariationFactory;
 use Domain\Auth\Models\User;
-use Domain\Game\FilterRegistrars\GameMediaFilterRegistrar;
-use Domain\Game\Models\Traits\GameProperties;
-use Domain\Game\QueryBuilders\GameMediaQueryBuilder;
+use Domain\Game\FilterRegistrars\GameMediaVariationFilterRegistrar;
+use Domain\Game\QueryBuilders\GameMediaVariationQueryBuilder;
 use Domain\Shelf\Models\Collectible;
 use Domain\Shelf\Models\KitItem;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\MorphMany;
 use Illuminate\Database\Eloquent\Relations\MorphToMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -28,7 +25,7 @@ use Support\Traits\Models\HasImage;
 use Support\Traits\Models\HasFeaturedImage;
 use Support\Traits\Models\HasUser;
 
-class GameMedia extends Model implements HasMedia, HasProperties
+class GameMediaVariation extends Model implements HasMedia
 {
     use HasFactory;
     use HasSlug;
@@ -39,9 +36,8 @@ class GameMedia extends Model implements HasMedia, HasProperties
     use HasImages;
     use HasUser;
     use HasTranslations;
-    use GameProperties;
 
-    protected $table = 'game_medias';
+    protected $table = 'game_media_variations';
 
     protected $fillable = [
         'name',
@@ -50,12 +46,10 @@ class GameMedia extends Model implements HasMedia, HasProperties
         'barcodes',
         'alternative_names',
         'description',
-        'user_id',
-        'released_at'
+        'user_id'
     ];
 
     protected $casts = [
-        'released_at' => 'date',
         'description' => CleanHtml::class.':custom',
         'alternative_names' => ArrayWithoutUnicode::class,
         'barcodes' => ArrayWithoutUnicode::class,
@@ -71,9 +65,9 @@ class GameMedia extends Model implements HasMedia, HasProperties
         'users.email'
     ];
 
-    protected static function newFactory(): GameMediaFactory
+    protected static function newFactory(): GameMediaVariationFactory
     {
-        return GameMediaFactory::new();
+        return GameMediaVariationFactory::new();
     }
 
     public function registerMediaCollections(): void
@@ -90,7 +84,7 @@ class GameMedia extends Model implements HasMedia, HasProperties
 
     public function imagesDir(): string
     {
-        return 'game_media';
+        return 'game_media_variation';
     }
 
     public function thumbnailSizes(): array
@@ -109,12 +103,12 @@ class GameMedia extends Model implements HasMedia, HasProperties
 
     public function availableFilters(): array
     {
-        return app(GameMediaFilterRegistrar::class)->filtersList();
+        return app(GameMediaVariationFilterRegistrar::class)->filtersList();
     }
 
-    public function newEloquentBuilder($query): GameMediaQueryBuilder
+    public function newEloquentBuilder($query): GameMediaVariationQueryBuilder
     {
-        return new GameMediaQueryBuilder($query);
+        return new GameMediaVariationQueryBuilder($query);
     }
 
     public function user(): BelongsTo
@@ -122,29 +116,9 @@ class GameMedia extends Model implements HasMedia, HasProperties
         return $this->belongsTo(User::class);
     }
 
-    public function developers(): MorphToMany
+    public function gameMedia(): BelongsTo
     {
-        return $this->morphToMany(GameDeveloper::class, 'game_developerable');
-    }
-
-    public function publishers(): MorphToMany
-    {
-        return $this->morphToMany(GamePublisher::class, 'game_publisherable');
-    }
-
-    public function genres(): MorphToMany
-    {
-        return $this->morphToMany(GameGenre::class, 'game_genrable');
-    }
-
-    public function platforms(): MorphToMany
-    {
-        return $this->morphToMany(GamePlatform::class, 'game_platformable');
-    }
-
-    public function games(): MorphToMany
-    {
-        return $this->morphToMany(Game::class, 'gameable');
+        return $this->belongsTo(GameMedia::class);
     }
 
     public function kitItems(): MorphToMany
@@ -155,10 +129,5 @@ class GameMedia extends Model implements HasMedia, HasProperties
     public function collectibles(): MorphMany
     {
         return $this->morphMany(Collectible::class, 'collectable');
-    }
-
-    public function variations(): HasMany
-    {
-        return $this->hasMany(GameMediaVariation::class);
     }
 }
