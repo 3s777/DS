@@ -13,10 +13,17 @@ class MediaLibraryImageManager implements ImagesManager
     {
     }
 
-    public function add(UploadedFile $image, ?string $collectionName): string
+    public function add(string|UploadedFile $image, ?string $collectionName): string
     {
-        $media = $this->model->addMedia($image)
-            ->toMediaCollection($collectionName, $this->model->getStorageDisk());
+        if(is_string($image)) {
+            $media = $this->model->addMedia($image)
+                ->preservingOriginal()
+                ->toMediaCollection($collectionName, $this->model->getStorageDisk());
+        } else {
+            $media = $this->model->addMedia($image)
+                ->toMediaCollection($collectionName, $this->model->getStorageDisk());
+        }
+
         //        $mediaPath = app(MediaPathGenerator::class)->getPath($media);
         //        $this->{$this->getThumbnailColumn()} = $mediaPath.$media->file_name;
 

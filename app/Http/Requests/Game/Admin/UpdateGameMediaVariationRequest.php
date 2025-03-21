@@ -35,45 +35,21 @@ class UpdateGameMediaVariationRequest extends FormRequest
                 'max:250',
                 Rule::unique(GameMedia::class)->ignore($this->game_media)
             ],
+            'game_media_id' => [
+                'required',
+                'integer',
+                'exists:Domain\Game\Models\GameMedia,id'
+            ],
             'article_number' => ['nullable','string'],
             'alternative_names' => ['nullable','string'],
             'barcodes' => ['nullable','string'],
             'description' => ['nullable','string'],
-            'released_at' => [
-                'nullable',
-                'date',
-                'date_format:Y-m-d'
-            ],
             'featured_image' => [
                 'nullable',
                 'mimes:jpg,png',
                 'max:10024'
             ],
             'featured_image_selected' => ['nullable', 'bool'],
-            'games' => [
-                'nullable',
-                'array',
-                'exists:games,id'
-            ],
-            'genres' => [
-                'nullable',
-                'array',
-                'exists:game_genres,id'
-            ],
-            'platforms' => [
-                'nullable',
-                'array',
-                'exists:game_platforms,id'
-            ],
-            'developers' => [
-                'nullable',
-                'array',
-                'exists:game_developers,id'
-            ],
-            'publishers' => [
-                'array',
-                'exists:game_publishers,id'
-            ],
             'kit_items' => [
                 'required',
                 'array',
@@ -108,12 +84,8 @@ class UpdateGameMediaVariationRequest extends FormRequest
             'alternative_names' => __('common.alternative_names'),
             'barcodes' => trans_choice('common.barcodes', 2),
             'description' => __('common.description'),
-            'released_at' => __('game.released_at'),
-            'games' => __('game.games'),
-            'genres' => trans_choice('game.genre.genres', 2),
-            'platforms' => __('game.platform.platforms'),
-            'developers' => __('game.developer.developers'),
-            'publishers' => __('game.publisher.publishers'),
+            'game_media_id' => trans_choice('game.media.medias', 2),
+            'kit_items' => __('collectible.kit.items'),
             'featured_image' => __('common.featured_image'),
             'user_id' => trans_choice('user.users', 1),
             'images' => trans_choice('common.additional_image', 2)

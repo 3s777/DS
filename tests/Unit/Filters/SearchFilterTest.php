@@ -48,6 +48,13 @@ class SearchFilterTest extends TestCase
             });
 
         $query->shouldReceive('where')
+            ->once()
+            ->andReturnUsing(function ($callback) use ($query) {
+                $callback($query);
+                return $query;
+            });
+
+        $query->shouldReceive('where')
             ->with('test-table.test-field', 'ILIKE', '%'.$filter->requestValue().'%')
             ->once()
             ->andReturn($query);

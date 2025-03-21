@@ -7,7 +7,7 @@ use Illuminate\Http\UploadedFile;
 interface ImagesManager
 {
     public function add(
-        UploadedFile $image,
+        string|UploadedFile $image,
         ?string $collectionName
     ): string;
 

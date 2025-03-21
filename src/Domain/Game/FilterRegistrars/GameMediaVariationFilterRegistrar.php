@@ -11,6 +11,7 @@ use Domain\Auth\Models\User;
 use Domain\Game\Models\Game;
 use Domain\Game\Models\GameDeveloper;
 use Domain\Game\Models\GameGenre;
+use Domain\Game\Models\GameMedia;
 use Domain\Game\Models\GamePlatform;
 use Domain\Game\Models\GamePublisher;
 
@@ -22,7 +23,7 @@ class GameMediaVariationFilterRegistrar implements FilterRegistrar
             'dates' => DatesFilter::make(
                 __('common.dates'),
                 'dates',
-                'game_medias',
+                'game_media_variations',
                 placeholder: [
                     'from' => __('filters.dates_from'),
                     'to' => __('filters.dates_to'),
@@ -31,66 +32,24 @@ class GameMediaVariationFilterRegistrar implements FilterRegistrar
             'search' => SearchFilter::make(
                 __('common.search'),
                 'search',
-                'game_medias',
-                alternativeFields: ['alternative_names']
+                'game_media_variations',
+                alternativeFields: ['alternative_names', 'barcodes', 'article_number']
+            ),
+            'media' => RelationFilter::make(
+                trans_choice('game.media.medias', 1),
+                'media',
+                'game_media_variations',
+                GameMedia::class,
+                'game_media_id',
+                trans_choice('game.media.choose', 1)
             ),
             'user' => RelationFilter::make(
                 trans_choice('user.users', 1),
                 'user',
-                'game_medias',
+                'game_media_variations',
                 User::class,
                 'user_id',
                 trans_choice('user.choose', 1)
-            ),
-            'genres' => RelationMultipleFilter::make(
-                trans_choice('game.genre.genres', 2),
-                'genres',
-                'game_genres',
-                GameGenre::class,
-                'id',
-                trans_choice('game.genre.choose', 1)
-            ),
-            'developers' => RelationMultipleFilter::make(
-                trans_choice('game.developer.developers', 2),
-                'developers',
-                'game_developers',
-                GameDeveloper::class,
-                'id',
-                trans_choice('game.developer.choose', 1)
-            ),
-            'publishers' => RelationMultipleFilter::make(
-                trans_choice('game.publisher.publishers', 2),
-                'publishers',
-                'game_publishers',
-                GamePublisher::class,
-                'id',
-                trans_choice('game.publisher.choose', 1)
-            ),
-            'platforms' => RelationMultipleFilter::make(
-                trans_choice('game.platform.platforms', 2),
-                'platforms',
-                'game_platforms',
-                GamePlatform::class,
-                'id',
-                trans_choice('game.platform.choose', 1)
-            ),
-            'games' => RelationMultipleFilter::make(
-                trans_choice('game.games', 2),
-                'games',
-                'games',
-                Game::class,
-                'id',
-                trans_choice('game.choose', 1)
-            ),
-            'released_at' => DatesFilter::make(
-                __('game.released_at'),
-                'released_at',
-                'game_medias',
-                'released_at',
-                placeholder: [
-                    'from' => __('game.released_at_from'),
-                    'to' => __('game.released_at_to'),
-                ]
             ),
         ];
     }

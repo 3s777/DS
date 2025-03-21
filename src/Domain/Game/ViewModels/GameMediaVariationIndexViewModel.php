@@ -19,13 +19,16 @@ class GameMediaVariationIndexViewModel extends ViewModel
             ->select(
                 'game_media_variations.id',
                 'game_media_variations.name',
+                'game_media_variations.article_number',
+                'game_media_variations.alternative_names',
                 'game_media_variations.created_at',
                 'game_media_variations.slug',
                 'game_media_variations.user_id',
                 'game_media_variations.game_media_id',
+                'game_medias.name as game_media_name',
                 'users.name as user_name'
             )
-            ->with(['gameMedia:id,name'])
+            ->leftJoin('game_medias', 'game_medias.id', '=', 'game_media_variations.game_media_id')
             ->leftJoin('users', 'users.id', '=', 'game_media_variations.user_id')
             ->filtered()
             ->sorted()

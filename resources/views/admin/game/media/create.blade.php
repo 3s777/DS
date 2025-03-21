@@ -4,7 +4,7 @@
         :title="__('game.media.add')"
         :images="true">
             <x-grid type="container">
-                <x-grid.col xl="4" ls="6" ml="12" lg="6" md="6" sm="12">
+                <x-grid.col xl="6" ls="6" ml="12" lg="6" md="6" sm="12">
                     <x-ui.form.group>
                         <x-ui.form.input-text
                             :placeholder="trans_choice('common.name', 1)"
@@ -17,7 +17,19 @@
                     </x-ui.form.group>
                 </x-grid.col>
 
-                <x-grid.col xl="4" ls="6" ml="12" lg="6" md="6" sm="12">
+                <x-grid.col xl="6" ls="6" ml="12" lg="6" md="6" sm="12">
+                    <x-ui.form.group>
+                        <x-ui.form.input-text
+                            :placeholder="trans_choice('collectible.variation.base_name', 1)"
+                            id="variation_name"
+                            name="variation_name"
+                            autocomplete="on"
+                            autofocus>
+                        </x-ui.form.input-text>
+                    </x-ui.form.group>
+                </x-grid.col>
+
+                <x-grid.col xl="6" ls="6" ml="12" lg="6" md="6" sm="12">
                     <x-ui.form.group>
                         <x-ui.form.datepicker
                             :placeholder="__('game.media.released_at')"
@@ -27,7 +39,7 @@
                     </x-ui.form.group>
                 </x-grid.col>
 
-                <x-grid.col xl="4" ls="6" ml="12" lg="6" md="6" sm="12">
+                <x-grid.col xl="6" ls="6" ml="12" lg="6" md="6" sm="12">
                     <x-ui.form.group>
                         <x-ui.form.input-text
                             :placeholder="trans_choice('common.article_numbers', 1)"

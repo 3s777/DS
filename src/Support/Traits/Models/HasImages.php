@@ -16,7 +16,7 @@ trait HasImages
         return 'images';
     }
 
-    protected function addOriginalImages(UploadedFile $image): string
+    protected function addOriginalImages(string|UploadedFile $image): string
     {
         $imagePath = $this->addOriginal($image, $this->getImagesColumn());
 
@@ -32,7 +32,7 @@ trait HasImages
         return $imagePath;
     }
 
-    public function addImagesWithThumbnail(?UploadedFile $image, ?array $specialSizes): string
+    public function addImagesWithThumbnail(null|string|UploadedFile $image, ?array $specialSizes): string
     {
         if ($image) {
             $imageFullPath = $this->addOriginalImages($image);

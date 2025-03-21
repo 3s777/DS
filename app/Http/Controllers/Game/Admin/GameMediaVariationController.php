@@ -44,7 +44,7 @@ class GameMediaVariationController extends Controller
     {
         $gameMediaService->create(FillGameMediaVariationDTO::fromRequest($request));
 
-        flash()->info(__('game.variation.created'));
+        flash()->info(__('collectible.variation.created'));
 
         return to_route('admin.game-media-variations.index');
     }
@@ -54,16 +54,16 @@ class GameMediaVariationController extends Controller
         //
     }
 
-    public function edit(GameMediaVariation $gameMedia): View|Application|Factory|\Illuminate\Contracts\Foundation\Application
+    public function edit(GameMediaVariation $gameMediaVariation): View|Application|Factory|\Illuminate\Contracts\Foundation\Application
     {
-        return view('admin.game.variation.edit', new GameMediaVariationUpdateViewModel($gameMedia));
+        return view('admin.game.variation.edit', new GameMediaVariationUpdateViewModel($gameMediaVariation));
     }
 
     public function update(UpdateGameMediaVariationRequest $request, GameMediaVariation $gameMediaVariation, GameMediaVariationService $gameMediaVariationService): RedirectResponse
     {
         $gameMediaVariationService->update($gameMediaVariation, FillGameMediaVariationDTO::fromRequest($request));
 
-        flash()->info(__('game.variation.updated'));
+        flash()->info(__('collectible.variation.updated'));
 
         return to_route('admin.game-media-variations.index');
     }
@@ -72,7 +72,7 @@ class GameMediaVariationController extends Controller
     {
         $gameMedia->delete();
 
-        flash()->info(__('game.variation.deleted'));
+        flash()->info(__('collectible.variation.deleted'));
 
         return to_route('admin.game-media-variations.index');
     }
@@ -89,7 +89,7 @@ class GameMediaVariationController extends Controller
             )
         );
 
-        flash()->info(__('game.variation.mass_deleted'));
+        flash()->info(__('collectible.variation.mass_deleted'));
 
         return to_route('admin.game-media-variations.index');
     }
@@ -107,7 +107,7 @@ class GameMediaVariationController extends Controller
             )
         );
 
-        flash()->info(__('game.variation.mass_force_deleted'));
+        flash()->info(__('collectible.variation.mass_force_deleted'));
 
         return to_route('admin.game-media-variations.index');
     }
@@ -117,7 +117,7 @@ class GameMediaVariationController extends Controller
         return new AsyncSelectByQueryViewModel(
             $request->input('query'),
             GameMediaVariation::class,
-            trans_choice('game.variation.choose', 2)
+            trans_choice('collectible.variation.choose', 2)
         );
     }
 }

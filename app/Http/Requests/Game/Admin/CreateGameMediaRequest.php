@@ -3,6 +3,7 @@
 namespace App\Http\Requests\Game\Admin;
 
 use Domain\Game\Models\GameMedia;
+use Domain\Game\Models\GameMediaVariation;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
 
@@ -28,6 +29,10 @@ class CreateGameMediaRequest extends FormRequest
                 'required',
                 'max:250',
                 Rule::unique(GameMedia::class)
+            ],
+            'variation_name' => [
+                'max:250',
+                Rule::unique(GameMediaVariation::class, 'name')
             ],
             'slug' => [
                 'nullable',
@@ -100,6 +105,7 @@ class CreateGameMediaRequest extends FormRequest
     {
         return [
             'name' => trans_choice('common.name', 1),
+            'variation_name' => __('collectible.variation.base_name'),
             'slug' => __('common.slug'),
             'article_number' => trans_choice('common.article_numbers', 1),
             'alternative_names' => __('common.alternative_names'),
@@ -111,6 +117,7 @@ class CreateGameMediaRequest extends FormRequest
             'platforms' => __('game.platform.platforms'),
             'developers' => __('game.developer.developers'),
             'publishers' => __('game.publisher.publishers'),
+            'kit_items' => __('collectible.kit.items'),
             'featured_image' => __('common.featured_image'),
             'user_id' => trans_choice('user.users', 1),
             'images' => trans_choice('common.additional_image', 2)

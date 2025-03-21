@@ -17,10 +17,12 @@ class GameMediaVariationService
         try {
             DB::beginTransaction();
 
-            $gameMedia = GameMediaVariation::create([
+
+
+            $gameMediaVariation = GameMediaVariation::create([
                 'name' => $data->name,
                 'slug' => $data->slug,
-                'released_at' => $data->released_at,
+                'game_media_id' => $data->game_media_id,
                 'user_id' => $data->user_id,
                 'description' => $data->description,
                 'alternative_names'  => explode('||', $data->alternative_names),
@@ -28,30 +30,28 @@ class GameMediaVariationService
                 'article_number' => $data->article_number,
             ]);
 
-            $gameMedia->addFeaturedImageWithThumbnail(
+
+
+            $gameMediaVariation->addFeaturedImageWithThumbnail(
                 $data->featured_image,
                 ['small', 'medium']
             );
 
+
             if ($data->images) {
                 foreach ($data->images as $key => $image) {
-                    $gameMedia->addImagesWithThumbnail(
+                    $gameMediaVariation->addImagesWithThumbnail(
                         $image,
                         ['small', 'medium'],
                     );
                 }
             }
 
-            $gameMedia->games()->sync($data->games);
-            $gameMedia->genres()->sync($data->genres);
-            $gameMedia->platforms()->sync($data->platforms);
-            $gameMedia->developers()->sync($data->developers);
-            $gameMedia->publishers()->sync($data->publishers);
-            $gameMedia->kitItems()->sync($data->kit_items);
+            $gameMediaVariation->kitItems()->sync($data->kit_items);
 
             DB::commit();
 
-            return $gameMedia;
+            return $gameMediaVariation;
 
         } catch (Throwable $e) {
             throw new CrudException($e->getMessage());
@@ -79,7 +79,7 @@ class GameMediaVariationService
                 [
                     'name' => $data->name,
                     'slug' => $data->slug,
-                    'released_at' => $data->released_at,
+                    'game_media_id' => $data->game_media_id,
                     'user_id' => $data->user_id ?? $gameMediaVariation->user_id,
                     'description' => $data->description,
                     'alternative_names'  => explode('||', $data->alternative_names),
@@ -88,7 +88,6 @@ class GameMediaVariationService
                 ]
             )->save();
 
-//            $gameMedia->publishers()->sync($data->publishers);
             $gameMediaVariation->kitItems()->sync($data->kit_items);
 
             DB::commit();

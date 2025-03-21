@@ -12,6 +12,7 @@ final readonly class FillGameMediaDTO
 
     public function __construct(
         public string $name,
+        public ?string $variation_name = null,
         public ?string $article_number = null,
         public ?string $barcodes = null,
         public ?string $alternative_names = null,
@@ -36,6 +37,7 @@ final readonly class FillGameMediaDTO
     {
         return static::make(...$request->only([
             'name',
+            'variation_name',
             'article_number',
             'barcodes',
             'alternative_names',

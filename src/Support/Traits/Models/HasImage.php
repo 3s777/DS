@@ -97,13 +97,13 @@ trait HasImage
         );
     }
 
-    protected function addOriginal(UploadedFile $image, string $collectionName): string
+    protected function addOriginal(string|UploadedFile $image, string $collectionName): string
     {
         return $this->imageManager()->add($image, $collectionName);
     }
 
     public function addOriginalWithThumbnail(
-        UploadedFile|null $image,
+        string|UploadedFile|null $image,
         string $collectionName = 'default',
         array $specialSizes = []
     ): string {

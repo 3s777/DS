@@ -68,7 +68,7 @@ class GameMedia extends Model implements HasMedia, HasProperties
         'id',
         'name',
         'created_at',
-        'users.email'
+        'users.name'
     ];
 
     protected static function newFactory(): GameMediaFactory

@@ -114,6 +114,7 @@ class UpdateGameMediaRequest extends FormRequest
             'platforms' => __('game.platform.platforms'),
             'developers' => __('game.developer.developers'),
             'publishers' => __('game.publisher.publishers'),
+            'kit_items' => __('collectible.kit.items'),
             'featured_image' => __('common.featured_image'),
             'user_id' => trans_choice('user.users', 1),
             'images' => trans_choice('common.additional_image', 2)

@@ -3,17 +3,22 @@
 namespace Domain\Game\Services;
 
 use Domain\Game\DTOs\FillGameMediaDTO;
+use Domain\Game\DTOs\FillGameMediaVariationDTO;
+use Domain\Game\Models\Game;
 use Domain\Game\Models\GameMedia;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\HigherOrderTapProxy;
 use Support\Exceptions\CrudException;
+use Support\Transaction;
 use Throwable;
 
 class GameMediaService
 {
-    public function create(FillGameMediaDTO $data): GameMedia
+    public function create(FillGameMediaDTO $data): HigherOrderTapProxy|GameMedia
     {
-        try {
-            DB::beginTransaction();
+        return Transaction::run(
+            function () use ($data) {
 
             $gameMedia = GameMedia::create([
                 'name' => $data->name,
@@ -47,19 +52,53 @@ class GameMediaService
             $gameMedia->publishers()->sync($data->publishers);
             $gameMedia->kitItems()->sync($data->kit_items);
 
-            DB::commit();
+            if($gameMedia->getImages()) {
+                $variationImages = array_map(function ($value) {
+                    return(Storage::disk('images')->path($value));
+                }, $gameMedia->getImages());
+            }
+
+            $variationDTO = FillGameMediaVariationDTO::make(
+                name: $data->variation_name ?? $data->name,
+                game_media_id: $gameMedia->id,
+                article_number: $data->article_number,
+                barcodes: $data->barcodes,
+                alternative_names: $data->alternative_names,
+                user_id: $data->user_id,
+                slug: $data->slug,
+                kit_items: $data->kit_items,
+                featured_image: $gameMedia->getFeaturedImagePath() ? Storage::disk('images')->path($gameMedia->getFeaturedImagePath()) : null,
+                featured_image_uploaded: $data->featured_image_uploaded,
+                images: $variationImages ?? null,
+                images_delete: $data->images_delete,
+                description: $data->description,
+            );
+
+            if ($gameMedia->getImages()) {
+                foreach ($gameMedia->getImages() as $key => $image) {
+                    $gameMedia->addImagesWithThumbnail(
+                        Storage::disk('images')->path($image),
+                        ['small', 'medium'],
+                    );
+                }
+            }
+
+            $variationService = new GameMediaVariationService();
+            $variationService->create($variationDTO);
 
             return $gameMedia;
 
-        } catch (Throwable $e) {
-            throw new CrudException($e->getMessage());
-        }
+            },
+            function (Throwable $e) {
+                throw new CrudException($e->getMessage());
+            }
+        );
     }
 
-    public function update(GameMedia $gameMedia, FillGameMediaDTO $data): GameMedia
+    public function update(GameMedia $gameMedia, FillGameMediaDTO $data): HigherOrderTapProxy|GameMedia
     {
-        try {
-            DB::beginTransaction();
+        return Transaction::run(
+            function () use ($gameMedia, $data) {
 
             $gameMedia->updateFeaturedImage(
                 $data->featured_image,
@@ -93,12 +132,12 @@ class GameMediaService
             $gameMedia->publishers()->sync($data->publishers);
             $gameMedia->kitItems()->sync($data->kit_items);
 
-            DB::commit();
-
             return $gameMedia;
 
-        } catch (Throwable $e) {
-            throw new CrudException($e->getMessage());
-        }
+            },
+            function (Throwable $e) {
+                throw new CrudException($e->getMessage());
+            }
+        );
     }
 }

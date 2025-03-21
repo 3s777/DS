@@ -23,13 +23,20 @@ class GameMediaVariationUpdateViewModel extends ViewModel
 
     public function gameMediaVariation(): ?GameMediaVariation
     {
-        $this->gameMediaVariation?->load(['game_medias:id,name']);
+        $this->gameMediaVariation?->load(['gameMedia:id,name']);
         return $this->gameMediaVariation ?? null;
     }
 
     public function selectedGameMedia(): ?array
     {
-        return $this->gameMediaVariation?->gameMedia->pluck('name', 'id')->toArray() ?? null;
+        if ($this->gameMediaVariation?->gameMedia) {
+            $selectedGameMedia = [
+                'key' => $this->gameMediaVariation->gameMedia->id,
+                'value' => $this->gameMediaVariation->gameMedia->name,
+            ];
+        }
+
+        return $selectedGameMedia ?? null;
     }
 
     public function selectedKitItems(): ?array

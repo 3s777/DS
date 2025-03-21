@@ -24,8 +24,8 @@ class GameMediaVariationFactory extends Factory
             'name' => fake()->name(),
             'description' => $this->translations(['en', 'ru'], [fake()->text(), fake()->text()]),
             'article_number' => fake()->numberBetween(10000, 100000),
-            'barcodes' => fake()->numberBetween(1000000, 9000000),
-            'alternative_names' => fake()->name(),
+            'barcodes' => [fake()->numberBetween(1000000, 9000000)],
+            'alternative_names' => [fake()->name()],
             'user_id' => User::factory(),
             'is_main' => false,
             'region' => array_rand(['pal', 'ntsc'])

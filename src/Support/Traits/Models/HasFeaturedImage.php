@@ -40,7 +40,7 @@ trait HasFeaturedImage
         return '';
     }
 
-    protected function addOriginalFeaturedImage(UploadedFile $image): string
+    protected function addOriginalFeaturedImage(string|UploadedFile $image): string
     {
         $imagePath = $this->addOriginal($image, $this->getFeaturedImageCollection());
         $this->{$this->getFeaturedImageColumn()} = $imagePath;
@@ -48,7 +48,7 @@ trait HasFeaturedImage
         return $imagePath;
     }
 
-    public function addFeaturedImageWithThumbnail(?UploadedFile $image, ?array $specialSizes = []): string
+    public function addFeaturedImageWithThumbnail(null|string|UploadedFile $image, ?array $specialSizes = []): string
     {
         if ($image) {
             $imageFullPath = $this->addOriginalFeaturedImage($image);
@@ -59,7 +59,7 @@ trait HasFeaturedImage
         return $imageFullPath ?? '';
     }
 
-    public function updateFeaturedImage(?UploadedFile $newFeaturedImage, ?bool $oldFeaturedImage = true, $sizes = []): void
+    public function updateFeaturedImage(null|string|UploadedFile $newFeaturedImage, ?bool $oldFeaturedImage = true, $sizes = []): void
     {
         if (!$oldFeaturedImage && !$newFeaturedImage) {
             $this->deleteFeaturedImage();

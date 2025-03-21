@@ -46,7 +46,8 @@ class GameMediaVariation extends Model implements HasMedia
         'barcodes',
         'alternative_names',
         'description',
-        'user_id'
+        'user_id',
+        'game_media_id'
     ];
 
     protected $casts = [
@@ -61,8 +62,10 @@ class GameMediaVariation extends Model implements HasMedia
     public array $sortedFields = [
         'id',
         'name',
+        'article_number',
+        'game_medias.name',
         'created_at',
-        'users.email'
+        'users.name'
     ];
 
     protected static function newFactory(): GameMediaVariationFactory
