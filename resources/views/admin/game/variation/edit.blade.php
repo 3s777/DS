@@ -101,6 +101,17 @@
                         </x-ui.select.async>
                     </x-ui.form.group>
                 </x-grid.col>
+
+                <x-grid.col xl="4" ls="6" lg="12" md="12" sm="12">
+                    <x-ui.form.group>
+                        <x-ui.form.switcher
+                            name="is_main"
+                            value="1"
+                            :checked="$gameMediaVariation->is_main"
+                            :label="__('collectible.variation.main')">
+                        </x-ui.form.switcher>
+                    </x-ui.form.group>
+                </x-grid.col>
             </x-grid>
         <x-slot:sidebar></x-slot:sidebar>
     </x-admin.crud-form>

@@ -5,9 +5,11 @@ namespace Domain\Game\Models;
 use Database\Factories\Game\GameMediaVariationFactory;
 use Domain\Auth\Models\User;
 use Domain\Game\FilterRegistrars\GameMediaVariationFilterRegistrar;
+use Domain\Game\Observers\GameMediaVariationObserver;
 use Domain\Game\QueryBuilders\GameMediaVariationQueryBuilder;
 use Domain\Shelf\Models\Collectible;
 use Domain\Shelf\Models\KitItem;
+use Illuminate\Database\Eloquent\Attributes\ObservedBy;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -25,6 +27,7 @@ use Support\Traits\Models\HasImage;
 use Support\Traits\Models\HasFeaturedImage;
 use Support\Traits\Models\HasUser;
 
+#[ObservedBy([GameMediaVariationObserver::class])]
 class GameMediaVariation extends Model implements HasMedia
 {
     use HasFactory;
@@ -47,7 +50,8 @@ class GameMediaVariation extends Model implements HasMedia
         'alternative_names',
         'description',
         'user_id',
-        'game_media_id'
+        'game_media_id',
+        'is_main'
     ];
 
     protected $casts = [
@@ -93,6 +97,7 @@ class GameMediaVariation extends Model implements HasMedia
     public function thumbnailSizes(): array
     {
         return [
+            'extra_small' => ['100', '100'],
             'small' => ['220', '220'],
             'medium' => ['500', '500'],
             'full_preview' => ['550', '550'],

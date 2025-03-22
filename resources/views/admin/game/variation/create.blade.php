@@ -1,7 +1,7 @@
 <x-layouts.admin :search="false">
     <x-admin.crud-form
         :action="route('admin.game-media-variations.store')"
-        :title="__('game.media.add')"
+        :title="__('collectible.variation.add')"
         :images="true">
             <x-grid type="container">
                 <x-grid.col xl="4" ls="6" ml="12" lg="6" md="6" sm="12">
@@ -94,6 +94,16 @@
                             :default-option="trans_choice('user.choose', 1)"
                             :label="trans_choice('user.users', 1)">
                         </x-ui.select.async>
+                    </x-ui.form.group>
+                </x-grid.col>
+
+                <x-grid.col xl="4" ls="6" lg="12" md="12" sm="12">
+                    <x-ui.form.group>
+                        <x-ui.form.switcher
+                            name="is_main"
+                            value="1"
+                            :label="__('collectible.variation.main')">
+                        </x-ui.form.switcher>
                     </x-ui.form.group>
                 </x-grid.col>
             </x-grid>

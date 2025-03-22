@@ -5,7 +5,7 @@
         :model="$gameMedia"
         :images="true">
             <x-grid type="container">
-                <x-grid.col xl="4" ls="6" ml="12" lg="6" md="6" sm="12">
+                <x-grid.col xl="6" ls="6" ml="12" lg="6" md="6" sm="12">
                     <x-ui.form.group>
                         <x-ui.form.input-text
                             :placeholder="trans_choice('common.name', 1)"
@@ -19,48 +19,6 @@
                     </x-ui.form.group>
                 </x-grid.col>
 
-                <x-grid.col xl="4" ls="6" ml="12" lg="6" md="6" sm="12">
-                    <x-ui.form.group>
-                        <x-ui.form.datepicker
-                            :placeholder="__('game.media.released_at')"
-                            id="released_at"
-                            name="released_at"
-                            :value="$gameMedia->released_at">
-                        </x-ui.form.datepicker>
-                    </x-ui.form.group>
-                </x-grid.col>
-
-                <x-grid.col xl="4" ls="6" ml="12" lg="6" md="6" sm="12">
-                    <x-ui.form.group>
-                        <x-ui.form.input-text
-                            :placeholder="trans_choice('common.article_numbers', 1)"
-                            id="article_number"
-                            name="article_number"
-                            :value="$gameMedia->article_number"
-                            autocomplete="on">
-                        </x-ui.form.input-text>
-                    </x-ui.form.group>
-                </x-grid.col>
-
-                <x-grid.col xl="12" ls="12" ml="12" lg="6" md="6" sm="12">
-                    <x-ui.form.group>
-                        <x-ui.select.input
-                            name="alternative_names"
-                            :placeholder="__('common.alternative_names')"
-                            :value="implode('||', $gameMedia->alternative_names)"
-                        />
-                    </x-ui.form.group>
-                </x-grid.col>
-
-                <x-grid.col xl="6" ls="6" ml="12" lg="6" md="6" sm="12">
-                    <x-ui.form.group>
-                        <x-ui.select.input
-                            name="barcodes"
-                            :placeholder="trans_choice('common.enter_barcodes', 2)"
-                            :value="implode('||', $gameMedia->barcodes)"
-                        />
-                    </x-ui.form.group>
-                </x-grid.col>
 
                 <x-grid.col xl="6" ls="6" ml="12" lg="6" md="6" sm="12">
                     <x-ui.form.group>
@@ -123,16 +81,14 @@
                     </x-ui.form.group>
                 </x-grid.col>
 
-                <x-grid.col xl="12" lg="12" md="12" sm="12">
+                <x-grid.col xl="4" ls="6" ml="12" lg="6" md="6" sm="12">
                     <x-ui.form.group>
-                        <x-ui.select.data-multiple
-                            name="kit_items"
-                            select-name="kit_items[]"
-                            :selected="$selectedKitItems"
-                            :options="$kitItems"
-                            :label="trans_choice('collectible.kit.choose', 2)"
-                            :default-option="trans_choice('collectible.kit.items', 2)"
-                        />
+                        <x-ui.form.datepicker
+                            :placeholder="__('game.media.released_at')"
+                            id="released_at"
+                            name="released_at"
+                            :value="$gameMedia->released_at">
+                        </x-ui.form.datepicker>
                     </x-ui.form.group>
                 </x-grid.col>
 
@@ -161,6 +117,90 @@
                     </x-ui.form.group>
                 </x-grid.col>
             </x-grid>
+
+            <x-grid type="container">
+                <x-grid.col xl="12">
+                    <x-ui.title indent="small">Доступные вариации</x-ui.title>
+                </x-grid.col>
+
+                    @foreach($gameMedia->variations as $variation)
+                        <x-grid.col xl="6" ls="6" ml="12" lg="6" md="6" sm="12">
+                            <x-common.action-horizontal-preview
+                                :model="$variation"
+                                route-prefix="admin.game-media-variations">
+                                <x-slot:image>
+                                    <a href="{{ asset('/storage/images/'.$variation->getFeaturedImagePathWebp()) }}" data-fancybox="">
+                                        <x-ui.responsive-image
+                                            :model="$variation"
+                                            :image-sizes="['extra_small','small','medium']"
+                                            :path="$variation->getFeaturedImagePath()"
+                                            :placeholder="false"
+                                            sizes="100px">
+                                            <x-slot:img alt="" title=""></x-slot:img>
+                                        </x-ui.responsive-image>
+                                    </a>
+                                </x-slot:image>
+                                {{ $variation->article_number }}
+                            </x-common.action-horizontal-preview>
+                        </x-grid.col>
+                    @endforeach
+
+            </x-grid>
+
+            <x-grid type="container">
+                <x-grid.col xl="12">
+                    <x-ui.title>Возможно в будущем удалить</x-ui.title>
+                </x-grid.col>
+
+                <x-grid.col xl="6" ls="6" ml="12" lg="6" md="6" sm="12">
+                    <x-ui.form.group>
+                        <x-ui.form.input-text
+                            :placeholder="trans_choice('common.article_numbers', 1)"
+                            id="article_number"
+                            name="article_number"
+                            :value="$gameMedia->article_number"
+                            autocomplete="on">
+                        </x-ui.form.input-text>
+                    </x-ui.form.group>
+                </x-grid.col>
+
+                <x-grid.col xl="12" ls="12" ml="12" lg="6" md="6" sm="12">
+                    <x-ui.form.group>
+                        <x-ui.select.input
+                            name="alternative_names"
+                            :placeholder="__('common.alternative_names')"
+                            :value="implode('||', $gameMedia->alternative_names)"
+                        />
+                    </x-ui.form.group>
+                </x-grid.col>
+
+                <x-grid.col xl="12" ls="12" ml="12" lg="6" md="6" sm="12">
+                    <x-ui.form.group>
+                        <x-ui.select.input
+                            name="barcodes"
+                            :placeholder="trans_choice('common.enter_barcodes', 2)"
+                            :value="implode('||', $gameMedia->barcodes)"
+                        />
+                    </x-ui.form.group>
+                </x-grid.col>
+
+                <x-grid.col xl="12" lg="12" md="12" sm="12">
+                    <x-ui.form.group>
+                        <x-ui.select.data-multiple
+                            name="kit_items"
+                            select-name="kit_items[]"
+                            :selected="$selectedKitItems"
+                            :options="$kitItems"
+                            :label="trans_choice('collectible.kit.choose', 2)"
+                            :default-option="trans_choice('collectible.kit.items', 2)"
+                        />
+                    </x-ui.form.group>
+                </x-grid.col>
+
+            </x-grid>
         <x-slot:sidebar></x-slot:sidebar>
     </x-admin.crud-form>
+
 </x-layouts.admin>
+
+

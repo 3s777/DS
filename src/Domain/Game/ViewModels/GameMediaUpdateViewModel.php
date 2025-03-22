@@ -22,7 +22,15 @@ class GameMediaUpdateViewModel extends ViewModel
 
     public function gameMedia(): ?GameMedia
     {
-        $this->gameMedia?->load(['genres:id,name', 'platforms:id,name', 'developers:id,name', 'publishers:id,name', 'games:id,name']);
+        $this->gameMedia?->load([
+            'genres:id,name',
+            'platforms:id,name',
+            'developers:id,name',
+            'publishers:id,name',
+            'games:id,name',
+            'mainVariation:id,name,is_main,game_media_id',
+            'variations'
+        ]);
         return $this->gameMedia ?? null;
     }
 

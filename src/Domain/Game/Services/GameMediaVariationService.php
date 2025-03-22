@@ -17,8 +17,6 @@ class GameMediaVariationService
         try {
             DB::beginTransaction();
 
-
-
             $gameMediaVariation = GameMediaVariation::create([
                 'name' => $data->name,
                 'slug' => $data->slug,
@@ -28,9 +26,8 @@ class GameMediaVariationService
                 'alternative_names'  => explode('||', $data->alternative_names),
                 'barcodes'  => explode('||', $data->barcodes),
                 'article_number' => $data->article_number,
+                'is_main' => $data->is_main
             ]);
-
-
 
             $gameMediaVariation->addFeaturedImageWithThumbnail(
                 $data->featured_image,
@@ -85,10 +82,12 @@ class GameMediaVariationService
                     'alternative_names'  => explode('||', $data->alternative_names),
                     'barcodes'  => explode('||', $data->barcodes),
                     'article_number' => $data->article_number,
+                    'is_main' => $data->is_main
                 ]
             )->save();
 
             $gameMediaVariation->kitItems()->sync($data->kit_items);
+
 
             DB::commit();
 

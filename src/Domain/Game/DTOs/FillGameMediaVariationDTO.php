@@ -24,6 +24,7 @@ final readonly class FillGameMediaVariationDTO
         public ?array $images = null,
         public ?string $images_delete = null,
         public ?string $description = null,
+        public bool $is_main = false,
     ) {
     }
 
@@ -43,6 +44,7 @@ final readonly class FillGameMediaVariationDTO
             'images',
             'images_delete',
             'description',
+            'is_main'
         ]));
     }
 }

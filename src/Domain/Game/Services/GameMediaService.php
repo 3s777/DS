@@ -15,6 +15,31 @@ use Throwable;
 
 class GameMediaService
 {
+    private function createMainVariationDTO(GameMedia $gameMedia, FillGameMediaDTO $data): FillGameMediaVariationDTO
+    {
+        if($gameMedia->getImages()) {
+            $variationImages = array_map(function ($value) {
+                return(Storage::disk('images')->path($value));
+            }, $gameMedia->getImages());
+        }
+
+        return $variationDTO = FillGameMediaVariationDTO::make(
+            name: $data->variation_name ?? $data->name,
+            game_media_id: $gameMedia->id,
+            article_number: $data->article_number,
+            barcodes: $data->barcodes,
+            alternative_names: $data->alternative_names,
+            user_id: $data->user_id,
+            kit_items: $data->kit_items,
+            featured_image: $gameMedia->getFeaturedImagePath() ? Storage::disk('images')->path($gameMedia->getFeaturedImagePath()) : null,
+            featured_image_uploaded: $data->featured_image_uploaded,
+            images: $variationImages ?? null,
+            images_delete: $data->images_delete,
+            description: $data->description,
+            is_main: true
+        );
+    }
+
     public function create(FillGameMediaDTO $data): HigherOrderTapProxy|GameMedia
     {
         return Transaction::run(
@@ -52,39 +77,8 @@ class GameMediaService
             $gameMedia->publishers()->sync($data->publishers);
             $gameMedia->kitItems()->sync($data->kit_items);
 
-            if($gameMedia->getImages()) {
-                $variationImages = array_map(function ($value) {
-                    return(Storage::disk('images')->path($value));
-                }, $gameMedia->getImages());
-            }
-
-            $variationDTO = FillGameMediaVariationDTO::make(
-                name: $data->variation_name ?? $data->name,
-                game_media_id: $gameMedia->id,
-                article_number: $data->article_number,
-                barcodes: $data->barcodes,
-                alternative_names: $data->alternative_names,
-                user_id: $data->user_id,
-                slug: $data->slug,
-                kit_items: $data->kit_items,
-                featured_image: $gameMedia->getFeaturedImagePath() ? Storage::disk('images')->path($gameMedia->getFeaturedImagePath()) : null,
-                featured_image_uploaded: $data->featured_image_uploaded,
-                images: $variationImages ?? null,
-                images_delete: $data->images_delete,
-                description: $data->description,
-            );
-
-            if ($gameMedia->getImages()) {
-                foreach ($gameMedia->getImages() as $key => $image) {
-                    $gameMedia->addImagesWithThumbnail(
-                        Storage::disk('images')->path($image),
-                        ['small', 'medium'],
-                    );
-                }
-            }
-
             $variationService = new GameMediaVariationService();
-            $variationService->create($variationDTO);
+            $variationService->create($this->createMainVariationDTO($gameMedia, $data));
 
             return $gameMedia;
 

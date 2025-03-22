@@ -68,9 +68,9 @@ class GameMediaVariationController extends Controller
         return to_route('admin.game-media-variations.index');
     }
 
-    public function destroy(GameMediaVariation $gameMedia): RedirectResponse
+    public function destroy(GameMediaVariation $gameMediaVariation): RedirectResponse
     {
-        $gameMedia->delete();
+        $gameMediaVariation->delete();
 
         flash()->info(__('collectible.variation.deleted'));
 

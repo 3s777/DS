@@ -20,6 +20,8 @@
 
         <x-common.footer />
 
+        @stack('modals')
+
         @vite(['resources/js/app.js'])
 
         @stack('scripts')

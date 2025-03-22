@@ -67,6 +67,10 @@ class CreateGameMediaVariationRequest extends FormRequest
                 'nullable',
                 'mimes:jpg,png,jpeg',
                 'max:10024'
+            ],
+            'is_main' => [
+                'nullable',
+                'boolean'
             ]
         ];
     }
@@ -84,7 +88,8 @@ class CreateGameMediaVariationRequest extends FormRequest
             'kit_items' => __('collectible.kit.items'),
             'featured_image' => __('common.featured_image'),
             'user_id' => trans_choice('user.users', 1),
-            'images' => trans_choice('common.additional_image', 2)
+            'images' => trans_choice('common.additional_image', 2),
+            'is_main' => __('collectible.variation.main')
         ];
     }
 }

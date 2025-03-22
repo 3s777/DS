@@ -3,6 +3,7 @@
 namespace App\Http\Requests\Game\Admin;
 
 use Domain\Game\Models\GameMedia;
+use Domain\Game\Models\GameMediaVariation;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
 
@@ -27,13 +28,13 @@ class UpdateGameMediaVariationRequest extends FormRequest
             'name' => [
                 'required',
                 'max:250',
-                Rule::unique(GameMedia::class)->ignore($this->game_media)
+                Rule::unique(GameMediaVariation::class)->ignore($this->game_media_variation)
             ],
             'slug' => [
                 'nullable',
                 'string',
                 'max:250',
-                Rule::unique(GameMedia::class)->ignore($this->game_media)
+                Rule::unique(GameMediaVariation::class)->ignore($this->game_media_variation)
             ],
             'game_media_id' => [
                 'required',
@@ -71,6 +72,10 @@ class UpdateGameMediaVariationRequest extends FormRequest
             ],
             'images_delete' => [
                 'nullable'
+            ],
+            'is_main' => [
+                'nullable',
+                'boolean'
             ]
         ];
     }
@@ -88,7 +93,8 @@ class UpdateGameMediaVariationRequest extends FormRequest
             'kit_items' => __('collectible.kit.items'),
             'featured_image' => __('common.featured_image'),
             'user_id' => trans_choice('user.users', 1),
-            'images' => trans_choice('common.additional_image', 2)
+            'images' => trans_choice('common.additional_image', 2),
+            'is_main' => __('collectible.variation.main')
         ];
     }
 }

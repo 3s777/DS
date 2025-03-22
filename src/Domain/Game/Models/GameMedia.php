@@ -14,6 +14,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Database\Eloquent\Relations\MorphMany;
 use Illuminate\Database\Eloquent\Relations\MorphToMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -160,5 +161,10 @@ class GameMedia extends Model implements HasMedia, HasProperties
     public function variations(): HasMany
     {
         return $this->hasMany(GameMediaVariation::class);
+    }
+
+    public function mainVariation(): HasOne
+    {
+        return $this->variations()->one()->where('is_main', true);
     }
 }
