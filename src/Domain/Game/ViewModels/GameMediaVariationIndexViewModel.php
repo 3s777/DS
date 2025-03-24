@@ -25,6 +25,7 @@ class GameMediaVariationIndexViewModel extends ViewModel
                 'game_media_variations.slug',
                 'game_media_variations.user_id',
                 'game_media_variations.game_media_id',
+                'game_media_variations.is_main',
                 'game_medias.name as game_media_name',
                 'users.name as user_name'
             )

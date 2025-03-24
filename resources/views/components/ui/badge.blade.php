@@ -5,6 +5,7 @@
     'align' => false,
     'ribbonAlign' => false,
     'bookmarkAlign' => false,
+    'inline' => false,
 ])
 
 <div
@@ -16,6 +17,7 @@
             'badge_align_'.$align => $align,
             'badge_ribbon_align_'.$ribbonAlign => $ribbonAlign,
             'badge_bookmark_align_'.$bookmarkAlign => $bookmarkAlign,
+            'badge_inline' => $inline
         ])
     }}>
     {{ $slot }}

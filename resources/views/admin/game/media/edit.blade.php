@@ -19,7 +19,6 @@
                     </x-ui.form.group>
                 </x-grid.col>
 
-
                 <x-grid.col xl="6" ls="6" ml="12" lg="6" md="6" sm="12">
                     <x-ui.form.group>
                         <x-ui.select.async-multiple
@@ -120,11 +119,11 @@
 
             <x-grid type="container">
                 <x-grid.col xl="12">
-                    <x-ui.title indent="small">Доступные вариации</x-ui.title>
+                    <x-ui.title indent="small">{{ __('collectible.variation.available') }}</x-ui.title>
                 </x-grid.col>
 
                     @foreach($gameMedia->variations as $variation)
-                        <x-grid.col xl="6" ls="6" ml="12" lg="6" md="6" sm="12">
+                        <x-grid.col xl="6" ls="6" ml="12">
                             <x-common.action-horizontal-preview
                                 :model="$variation"
                                 route-prefix="admin.game-media-variations">
@@ -140,7 +139,12 @@
                                         </x-ui.responsive-image>
                                     </a>
                                 </x-slot:image>
-                                {{ $variation->article_number }}
+                                <div>{{ $variation->article_number }}</div>
+                                @if($variation->is_main)
+                                    <x-ui.tag  color="success" size="small">
+                                        {{ trans_choice('common.main', 1) }}
+                                    </x-ui.tag>
+                                @endif
                             </x-common.action-horizontal-preview>
                         </x-grid.col>
                     @endforeach

@@ -3,7 +3,8 @@
     'standard' => true,
     'indent' => 'right',
     'color' => false,
-    'disabled' => false
+    'disabled' => false,
+    'size' => false
 ])
 
 <{{ $tag }}
@@ -11,7 +12,8 @@
             'tag',
             'tag_standard' => $standard,
             'tag_color_'.$color => $color,
-            'tag_disabled' => $disabled
+            'tag_disabled' => $disabled,
+            'tag_size_'.$size => $size
         ])
     }}>
     {{ $slot }}

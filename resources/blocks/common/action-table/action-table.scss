@@ -29,6 +29,12 @@
         border-radius: 0 0 $small-border-radius $small-border-radius;
     }
 
+    &__success-icon {
+        width: 24px;
+        height: 24px;
+        fill: $opposite-main;
+    }
+
     @include breakpoint-max($md) {
         &__select-all + .input-checkbox__label:before {
             background-color: $base-dark-transparent;

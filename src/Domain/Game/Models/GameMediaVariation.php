@@ -69,6 +69,7 @@ class GameMediaVariation extends Model implements HasMedia
         'article_number',
         'game_medias.name',
         'created_at',
+        'is_main',
         'users.name'
     ];
 

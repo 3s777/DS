@@ -17,6 +17,7 @@
                 'name' => trans_choice('common.name', 1),
                 'article_number' => trans_choice('common.article_numbers', 1),
                 'game_medias.name' => trans_choice('user.users', 1),
+                'is_main' => trans_choice('common.main', 1),
                 'users.name' => trans_choice('game.media.medias', 1),
                 'created_at' => __('common.created_date'),
             ]" />
@@ -34,6 +35,9 @@
                 </x-ui.responsive-table.column>
                 <x-ui.responsive-table.column sortable="true" name="article_number">
                     {{ trans_choice('common.article_numbers', 1) }}
+                </x-ui.responsive-table.column>
+                <x-ui.responsive-table.column sortable="true" name="is_main">
+                    {{ trans_choice('common.main', 1) }}
                 </x-ui.responsive-table.column>
                 <x-ui.responsive-table.column name="alternative_names">
                     {{ trans_choice('common.alternative_names', 1) }}
@@ -67,6 +71,10 @@
                     <x-ui.responsive-table.column>
                         <span class="responsive-table__label">{{ trans_choice('common.article_numbers', 1) }}: </span>
                         {{ $variation->article_number }}
+                    </x-ui.responsive-table.column>
+                    <x-ui.responsive-table.column>
+                        <span class="responsive-table__label">{{ trans_choice('common.main', 1) }}: </span>
+                        @if($variation->is_main) <x-svg.success class="action-table__success-icon"></x-svg.success> @endif
                     </x-ui.responsive-table.column>
                     <x-ui.responsive-table.column>
                         <span class="responsive-table__label">{{ trans_choice('common.name', 1) }}: </span>
