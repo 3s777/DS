@@ -63,6 +63,21 @@ trait HasFilters
         $this->baseAssertion($request, $expectedModel, $this->getModels());
     }
 
+
+    public function booleanFilter(string $filterName, string $field): void
+    {
+        $expectedModel = $this->getFactory()
+            ->create([$field => true]);
+
+        $request = [
+            'filters' => [
+                $filterName => '1'
+            ]
+        ];
+
+        $this->baseAssertion($request, $expectedModel, $this->getModels());
+    }
+
     public function datesFilter(
         string $filterName = 'dates',
         string $field = 'created_at'

@@ -49,6 +49,10 @@ class FilterGameMediaVariationRequest extends FormRequest
                 'date',
                 'date_format:Y-m-d'
             ],
+            'filters.is_main' => [
+              'nullable',
+              'boolean'
+            ],
             'filters.genres' => ['nullable', 'array'],
             'filters.platforms' => ['nullable', 'array'],
             'filters.developers' => ['nullable', 'array'],
@@ -83,6 +87,7 @@ class FilterGameMediaVariationRequest extends FormRequest
             'filters.games' => trans_choice('game.games', 2),
             'filters.released_at.from' => __('game.released_at_from'),
             'filters.released_at.to' => __('game.released_at_to'),
+            'filters.is_main' => __('collectible.variation.main')
         ];
     }
 }

@@ -2,27 +2,27 @@
 
 namespace App\Game\Controllers;
 
-use App\Http\Controllers\Game\Admin\GameMediaController;
-use App\Http\Requests\Game\Admin\CreateGameMediaRequest;
+use App\Http\Controllers\Game\Admin\GameMediaVariationController;
+use App\Http\Requests\Game\Admin\CreateGameMediaVariationRequest;
 use App\Jobs\GenerateSmallThumbnailsJob;
 use App\Jobs\GenerateThumbnailJob;
-use Database\Factories\Game\GameMediaFactory;
+use Database\Factories\Game\GameMediaVariationFactory;
 use Database\Factories\UserFactory;
 use Domain\Auth\Models\Role;
 use Domain\Auth\Models\User;
-use Domain\Game\Models\GameMedia;
+use Domain\Game\Models\GameMediaVariation;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Queue;
 use Illuminate\Support\Facades\Storage;
 use Tests\TestCase;
 
-class GameMediaControllerTest extends TestCase
+class GameMediaVariationControllerTest extends TestCase
 {
     use RefreshDatabase;
 
     protected User $user;
-    protected GameMedia $gameMedia;
+    protected GameMediaVariation $gameMediaVariation;
     protected array $request;
 
     public function setUp(): void
@@ -33,9 +33,9 @@ class GameMediaControllerTest extends TestCase
         Role::create(['name' => config('settings.super_admin_role'), 'display_name' => 'SuperAdmin']);
         $this->user->assignRole('super_admin');
 
-        $this->gameMedia = GameMediaFactory::new()->create();
+        $this->gameMediaVariation = GameMediaVariationFactory::new()->create();
 
-        $this->request = CreateGameMediaRequest::factory()->create();
+        $this->request = CreateGameMediaVariationRequest::factory()->create();
     }
 
     public function checkNotAuthRedirect(
@@ -44,7 +44,7 @@ class GameMediaControllerTest extends TestCase
         array $params = [],
         array $request = []
     ): void {
-        $this->{$method}(action([GameMediaController::class, $action], $params), $request)
+        $this->{$method}(action([GameMediaVariationController::class, $action], $params), $request)
             ->assertRedirectToRoute('admin.login');
     }
 
@@ -56,10 +56,10 @@ class GameMediaControllerTest extends TestCase
     {
         $this->checkNotAuthRedirect('index');
         $this->checkNotAuthRedirect('create');
-        $this->checkNotAuthRedirect('edit', 'get', [$this->gameMedia->slug]);
-        $this->checkNotAuthRedirect('store', 'post', [$this->gameMedia->slug], $this->request);
-        $this->checkNotAuthRedirect('update', 'put', [$this->gameMedia->slug], $this->request);
-        $this->checkNotAuthRedirect('destroy', 'delete', [$this->gameMedia->slug]);
+        $this->checkNotAuthRedirect('edit', 'get', [$this->gameMediaVariation->slug]);
+        $this->checkNotAuthRedirect('store', 'post', [$this->gameMediaVariation->slug], $this->request);
+        $this->checkNotAuthRedirect('update', 'put', [$this->gameMediaVariation->slug], $this->request);
+        $this->checkNotAuthRedirect('destroy', 'delete', [$this->gameMediaVariation->slug]);
     }
 
     /**
@@ -69,10 +69,10 @@ class GameMediaControllerTest extends TestCase
     public function it_index_success(): void
     {
         $this->actingAs($this->user)
-            ->get(action([GameMediaController::class, 'index']))
+            ->get(action([GameMediaVariationController::class, 'index']))
             ->assertOk()
-            ->assertSee(__('game.media.list'))
-            ->assertViewIs('admin.game.media.index');
+            ->assertSee(__('collectible.variation.list'))
+            ->assertViewIs('admin.game.variation.index');
     }
 
     /**
@@ -82,10 +82,10 @@ class GameMediaControllerTest extends TestCase
     public function it_create_success(): void
     {
         $this->actingAs($this->user)
-            ->get(action([GameMediaController::class, 'create']))
+            ->get(action([GameMediaVariationController::class, 'create']))
             ->assertOk()
-            ->assertSee(__('game.media.add'))
-            ->assertViewIs('admin.game.media.create');
+            ->assertSee(__('collectible.variation.add'))
+            ->assertViewIs('admin.game.variation.create');
     }
 
     /**
@@ -95,10 +95,10 @@ class GameMediaControllerTest extends TestCase
     public function it_edit_success(): void
     {
         $this->actingAs($this->user)
-            ->get(action([GameMediaController::class, 'edit'], [$this->gameMedia->slug]))
+            ->get(action([GameMediaVariationController::class, 'edit'], [$this->gameMediaVariation->slug]))
             ->assertOk()
-            ->assertSee($this->gameMedia->name)
-            ->assertViewIs('admin.game.media.edit');
+            ->assertSee($this->gameMediaVariation->name)
+            ->assertViewIs('admin.game.variation.edit');
     }
 
     /**
@@ -108,11 +108,11 @@ class GameMediaControllerTest extends TestCase
     public function it_store_success(): void
     {
         $this->actingAs($this->user)
-            ->post(action([GameMediaController::class, 'store']), $this->request)
-            ->assertRedirectToRoute('admin.game-medias.index')
-            ->assertSessionHas('helper_flash_message', __('game.media.created'));
+            ->post(action([GameMediaVariationController::class, 'store']), $this->request)
+            ->assertRedirectToRoute('admin.game-media-variations.index')
+            ->assertSessionHas('helper_flash_message', __('collectible.variation.created'));
 
-        $this->assertDatabaseHas('game_medias', [
+        $this->assertDatabaseHas('game_media_variations', [
             'name' => $this->request['name']
         ]);
     }
@@ -129,21 +129,17 @@ class GameMediaControllerTest extends TestCase
         $this->request['featured_image'] = UploadedFile::fake()->image('photo1.jpg');
 
         $this->actingAs($this->user)
-            ->post(action([GameMediaController::class, 'store']), $this->request)
-            ->assertRedirectToRoute('admin.game-medias.index')
-            ->assertSessionHas('helper_flash_message', __('game.media.created'));
-
-        $this->assertDatabaseHas('game_medias', [
-            'name' => $this->request['name']
-        ]);
+            ->post(action([GameMediaVariationController::class, 'store']), $this->request)
+            ->assertRedirectToRoute('admin.game-media-variations.index')
+            ->assertSessionHas('helper_flash_message', __('collectible.variation.created'));
 
         $this->assertDatabaseHas('game_media_variations', [
             'name' => $this->request['name']
         ]);
 
-        Queue::assertPushed(GenerateThumbnailJob::class, 6);
+        Queue::assertPushed(GenerateThumbnailJob::class, 3);
 
-        Queue::assertPushed(GenerateSmallThumbnailsJob::class, 4);
+        Queue::assertPushed(GenerateSmallThumbnailsJob::class, 2);
     }
 
     /**
@@ -152,34 +148,30 @@ class GameMediaControllerTest extends TestCase
      */
     public function it_validation_fail(): void
     {
-        $this->app['session']->setPreviousUrl(route('admin.game-medias.create'));
+        $this->app['session']->setPreviousUrl(route('admin.game-media-variations.create'));
 
         $this->request['name'] = '';
         $this->request['article_number'] = ['fake', 'fake 2'];
         $this->request['alternative_names'] = ['fake', 'fake 2'];
         $this->request['barcodes'] = ['fake', 'fake 2'];
         $this->request['user_id'] = 1500000;
-        $this->request['genres'] = 1500000;
-        $this->request['platforms'] = 1500000;
-        $this->request['developers'] = 1500000;
-        $this->request['publishers'] = 1500000;
+        $this->request['is_main'] = 1500000;
+        $this->request['game_media_id'] = 'fake';
 
         $this->actingAs($this->user)
-            ->post(action([GameMediaController::class, 'store']), $this->request)
+            ->post(action([GameMediaVariationController::class, 'store']), $this->request)
             ->assertInvalid([
                 'name',
                 'article_number',
                 'alternative_names',
                 'barcodes',
                 'user_id',
-                'genres',
-                'platforms',
-                'developers',
-                'publishers'
+                'is_main',
+                'game_media_id',
             ])
-            ->assertRedirectToRoute('admin.game-medias.create');
+            ->assertRedirectToRoute('admin.game-media-variations.create');
 
-        $this->assertDatabaseMissing('game_medias', [
+        $this->assertDatabaseMissing('game_media_variations', [
             'name' => $this->request['name']
         ]);
     }
@@ -190,14 +182,14 @@ class GameMediaControllerTest extends TestCase
      */
     public function it_validation_featured_image_fail(): void
     {
-        $this->app['session']->setPreviousUrl(route('admin.game-medias.create'));
+        $this->app['session']->setPreviousUrl(route('admin.game-media-variations.create'));
 
         $this->request['featured_image'] = UploadedFile::fake()->image('photo1.php');
 
         $this->actingAs($this->user)
-            ->post(action([GameMediaController::class, 'store']), $this->request)
+            ->post(action([GameMediaVariationController::class, 'store']), $this->request)
             ->assertInvalid(['featured_image'])
-            ->assertRedirectToRoute('admin.game-medias.create');
+            ->assertRedirectToRoute('admin.game-media-variations.create');
     }
 
     /**
@@ -211,15 +203,15 @@ class GameMediaControllerTest extends TestCase
         $this->actingAs($this->user)
             ->put(
                 action(
-                    [GameMediaController::class, 'update'],
-                    [$this->gameMedia->slug]
+                    [GameMediaVariationController::class, 'update'],
+                    [$this->gameMediaVariation->slug]
                 ),
                 $this->request
             )
-            ->assertRedirectToRoute('admin.game-medias.index')
-            ->assertSessionHas('helper_flash_message', __('game.media.updated'));
+            ->assertRedirectToRoute('admin.game-media-variations.index')
+            ->assertSessionHas('helper_flash_message', __('collectible.variation.updated'));
 
-        $this->assertDatabaseHas('game_medias', [
+        $this->assertDatabaseHas('game_media_variations', [
             'name' => $this->request['name']
         ]);
     }
@@ -230,23 +222,21 @@ class GameMediaControllerTest extends TestCase
      */
     public function it_update_validation_fail(): void
     {
-        $this->app['session']->setPreviousUrl(route('admin.game-medias.edit', $this->gameMedia->slug));
+        $this->app['session']->setPreviousUrl(route('admin.game-media-variations.edit', $this->gameMediaVariation->slug));
 
         $this->request['name'] = '';
         $this->request['article_number'] = ['fake', 'fake 2'];
         $this->request['alternative_names'] = ['fake', 'fake 2'];
         $this->request['barcodes'] = ['fake', 'fake 2'];
         $this->request['user_id'] = 1500000;
-        $this->request['genres'] = 1500000;
-        $this->request['platforms'] = 1500000;
-        $this->request['developers'] = 1500000;
-        $this->request['publishers'] = 1500000;
+        $this->request['is_main'] = 1500000;
+        $this->request['game_media_id'] = 1500000;
 
         $this->actingAs($this->user)
             ->put(
                 action(
-                    [GameMediaController::class, 'update'],
-                    [$this->gameMedia->slug]
+                    [GameMediaVariationController::class, 'update'],
+                    [$this->gameMediaVariation->slug]
                 ),
                 $this->request
             )
@@ -256,12 +246,10 @@ class GameMediaControllerTest extends TestCase
                 'alternative_names',
                 'barcodes',
                 'user_id',
-                'genres',
-                'platforms',
-                'developers',
-                'publishers'
+                'is_main',
+                'game_media_id'
                 ])
-            ->assertRedirectToRoute('admin.game-medias.edit', $this->gameMedia->slug);
+            ->assertRedirectToRoute('admin.game-media-variations.edit', $this->gameMediaVariation->slug);
     }
 
     /**
@@ -271,12 +259,12 @@ class GameMediaControllerTest extends TestCase
     public function it_delete_success(): void
     {
         $this->actingAs($this->user)
-            ->delete(action([GameMediaController::class, 'destroy'], [$this->gameMedia->slug]))
-            ->assertRedirectToRoute('admin.game-medias.index')
-            ->assertSessionHas('helper_flash_message', __('game.media.deleted'));
+            ->delete(action([GameMediaVariationController::class, 'destroy'], [$this->gameMediaVariation->slug]))
+            ->assertRedirectToRoute('admin.game-media-variations.index')
+            ->assertSessionHas('helper_flash_message', __('collectible.variation.deleted'));
 
-        $this->assertDatabaseMissing('game_medias', [
-            'name' => $this->gameMedia->name,
+        $this->assertDatabaseMissing('game_media_variations', [
+            'name' => $this->gameMediaVariation->name,
             'deleted_at' => null
         ]);
     }

@@ -12,6 +12,7 @@ use Domain\Game\Models\Game;
 use Domain\Game\Models\GameDeveloper;
 use Domain\Game\Models\GameGenre;
 use Domain\Game\Models\GameMedia;
+use Domain\Game\Models\GameMediaVariation;
 use Domain\Game\Models\GamePlatform;
 use Domain\Game\Models\GamePublisher;
 use Domain\Game\Services\GameMediaService;
@@ -88,8 +89,17 @@ class GameMediaServiceTest extends TestCase
             $this->assertTrue($gameMedia->platforms->contains($platform));
         }
 
-        Queue::assertPushed(GenerateThumbnailJob::class, 3);
-        Queue::assertPushed(GenerateSmallThumbnailsJob::class, 2);
+        $this->assertDatabaseHas('game_media_variations', [
+            'name' => $this->request['name']
+        ]);
+
+        $gameVariation = GameMediaVariation::where('name', $this->request['name'])->first();
+
+        $this->assertTrue($gameVariation->is_main);
+        $this->assertSame($gameVariation->barcodes, $gameMedia->barcodes);
+
+        Queue::assertPushed(GenerateThumbnailJob::class, 6);
+        Queue::assertPushed(GenerateSmallThumbnailsJob::class, 4);
     }
 
 
