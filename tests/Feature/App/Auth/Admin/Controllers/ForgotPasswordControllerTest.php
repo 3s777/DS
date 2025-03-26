@@ -2,7 +2,7 @@
 
 namespace App\Auth\Admin\Controllers;
 
-use App\Http\Controllers\Auth\Admin\ForgotPasswordController;
+use App\Http\Controllers\Auth\Public\Admin\ForgotPasswordController;
 use Database\Factories\UserFactory;
 use Domain\Auth\Notifications\ResetPasswordAdminNotification;
 use Illuminate\Foundation\Testing\RefreshDatabase;

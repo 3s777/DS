@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Auth\Collector;
+namespace App\Http\Controllers\Auth\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Auth\Collector\CreateCollectorRequest;

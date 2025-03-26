@@ -54,6 +54,7 @@ return [
     'expand_menu' => 'Развернуть меню',
     'collapse_menu' => 'Свернуть меню',
     'statistic' => 'Статистика',
+    'confidential' => 'Конфиденциальность',
     'list' => 'Список',
     'article_numbers' => 'Артикул|Артикулы',
     'barcodes' => 'Штрихкод|Штрихкоды',

@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Controllers\Auth\Admin;
+namespace App\Http\Controllers\Auth\Public\Collector;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Auth\Admin\ResetPasswordRequest;
-use Domain\Auth\Models\User;
+use App\Http\Requests\Auth\Collector\ResetPasswordRequest;
+use Domain\Auth\Models\Collector;
 use Illuminate\Auth\Events\PasswordReset;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
@@ -17,31 +17,30 @@ class ResetPasswordController extends Controller
     public function page(string $token): View|Application|Factory|\Illuminate\Contracts\Foundation\Application
     {
         return view(
-            'content.auth.reset-password',
+            'content.auth-collector.reset-password',
             ['token' => $token,]
         );
     }
 
     public function handle(ResetPasswordRequest $request): RedirectResponse
     {
-
-        $status = Password::reset(
+        $status = Password::broker('collectors')->reset(
             $request->only('email', 'password', 'password_confirmation', 'token'),
-            function (User $user, string $password) {
-                $user->forceFill(
+            function (Collector $collector, string $password) {
+                $collector->forceFill(
                     ['password' => bcrypt($password),]
                 )->setRememberToken(str()->random(60));
 
-                $user->save();
+                $collector->save();
 
-                event(new PasswordReset($user));
+                event(new PasswordReset($collector));
             }
         );
 
         if ($status === Password::PASSWORD_RESET) {
             flash()->info(__($status));
 
-            return to_route('admin.login');
+            return to_route('collector.login');
         }
 
         return back()->withErrors(['email' => __($status)]);

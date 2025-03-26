@@ -2,7 +2,7 @@
 
 namespace App\Auth\Collector\Controllers;
 
-use App\Http\Controllers\Auth\Collector\LoginController;
+use App\Http\Controllers\Auth\Public\Collector\LoginController;
 use Database\Factories\CollectorFactory;
 use Domain\Auth\Models\Collector;
 use Illuminate\Foundation\Testing\RefreshDatabase;

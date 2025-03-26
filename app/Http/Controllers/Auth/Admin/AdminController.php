@@ -122,13 +122,6 @@ class AdminController extends Controller
     }
 
 
-    public function publicIndex()
-    {
-        $users = User::all();
-
-        return view('content.users.index', compact('users'));
-    }
-
     public function getForSelect(Request $request): AsyncSelectByQueryViewModel
     {
         Gate::authorize('getForSelect', User::class);
@@ -151,6 +144,13 @@ class AdminController extends Controller
         }
 
         return response()->json($users);
+    }
+
+    public function publicIndex()
+    {
+        $users = User::all();
+
+        return view('content.users.index', compact('users'));
     }
 
 }

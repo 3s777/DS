@@ -2,7 +2,7 @@
 
 namespace App\Auth\Admin\Controllers;
 
-use App\Http\Controllers\Auth\PermissionController;
+use App\Http\Controllers\Auth\Admin\PermissionController;
 use App\Http\Requests\Auth\Permission\CreatePermissionRequest;
 use App\Http\Requests\Auth\Permission\UpdatePermissionRequest;
 use Database\Factories\PermissionFactory;

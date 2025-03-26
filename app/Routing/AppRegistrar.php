@@ -24,8 +24,6 @@ class AppRegistrar implements RouteRegistrar
                         return view('content.ui.index');
                     })->name('ui');
 
-
-
                     Route::view('/game-carrier', 'content.game-carrier.index')
                         ->name('game-carrier');
 
@@ -38,12 +36,6 @@ class AppRegistrar implements RouteRegistrar
                     })->name('search');
 
 
-
-
-                    Route::get('/profile', function () {
-                        return view('content.profile.index');
-                    })->name('profile');
-
                     Route::get('/rules', function () {
                         return view('content.page.index');
                     })->name('rules');
@@ -52,14 +44,7 @@ class AppRegistrar implements RouteRegistrar
                         return view('content.page.qa');
                     })->name('qa');
 
-                    Route::prefix('admin')->middleware(['auth', 'verified'])->group(function () {
-                        Route::get('/', function () {
-                            return view('admin.index');
-                        })->name('admin');
-                    });
-
                     Route::get('/demo-select', [PageController::class, 'demoSelect'])->name('demo-select');
-
 
                     Route::get('/test-admin', function () {
                         return view('content.page.qa');

@@ -14,7 +14,7 @@
     <body class="body {{ session()->get('color.theme') }}">
         <x-common.header />
 
-        <main class="main">
+        <main class="main" x-data="{collapseSidebar: $persist(false)}">
             {{ $slot }}
         </main>
 

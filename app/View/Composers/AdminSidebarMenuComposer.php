@@ -13,7 +13,13 @@ final class AdminSidebarMenuComposer
     {
         $menu = Menu::make()
             ->add(MenuItem::make(route('home'), __('common.statistic'), 'statistic'))
-            ->add(MenuItem::make(route('admin.users.show', ['user' => auth()->user()->slug ]), __('user.profile'), 'profile'))
+            ->add(
+                MenuItem::make(
+                    route('admin.users.show', ['user' => auth()->user()->slug ]),
+                    trans_choice('user.profile.profiles',1),
+                    'profile'
+                    )
+                )
             ->add(
                 MenuGroup::make()
                 ->setLabel(trans_choice('shelf.shelves', 2))

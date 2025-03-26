@@ -1,12 +1,12 @@
 <?php
 
-namespace App\Http\Controllers\Auth\Collector;
+namespace App\Http\Controllers\Auth\Public\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Auth\Collector\SendEmailVerifyRequest;
-use App\Http\Requests\Auth\Collector\VerifyEmailRequest;
+use App\Http\Requests\Auth\Admin\SendEmailVerifyRequest;
+use App\Http\Requests\Auth\Admin\VerifyEmailRequest;
 use Domain\Auth\Actions\VerifyEmailAction;
-use Domain\Auth\Models\Collector;
+use Domain\Auth\Models\User;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Auth;
 
@@ -14,16 +14,16 @@ class VerifyEmailController extends Controller
 {
     public function page()
     {
-        return view('content.auth-collector.verify');
+        return view('content.auth.verify');
     }
 
     public function handle(VerifyEmailRequest $request, VerifyEmailAction $action, $id): RedirectResponse
     {
-        $collector = Collector::find($id);
+        $user = User::find($id);
 
-        $action($collector);
+        $action($user);
 
-        Auth::login($collector);
+        Auth::loginUsingId($user->id);
 
         flash()->info(__('auth.verified'));
 
@@ -32,19 +32,19 @@ class VerifyEmailController extends Controller
 
     public function sendVerifyNotification(SendEmailVerifyRequest $request): RedirectResponse
     {
-        $collector = Collector::where('email', $request->only(['email']))->first();
+        $user = User::where('email', $request->only(['email']))->first();
 
-        if ($collector->hasVerifiedEmail()) {
+        if ($user->hasVerifiedEmail()) {
 
             flash()->info(__('auth.verified'));
 
-            return to_route('collector.verification.notice');
+            return to_route('admin.verification.notice');
         }
 
-        $collector->sendEmailVerificationNotification();
+        $user->sendEmailVerificationNotification();
 
         flash()->info(__('auth.verify_retry_send'));
 
-        return to_route('collector.verification.notice');
+        return to_route('admin.verification.notice');
     }
 }

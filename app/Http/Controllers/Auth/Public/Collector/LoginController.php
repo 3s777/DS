@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Http\Controllers\Auth\Admin;
+namespace App\Http\Controllers\Auth\Public\Collector;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Auth\Admin\LoginRequest;
-use Domain\Auth\Actions\LoginAdminAction;
-use Domain\Auth\DTOs\LoginAdminDTO;
+use App\Http\Requests\Auth\Collector\LoginRequest;
+use Domain\Auth\Actions\LoginCollectorAction;
+use Domain\Auth\DTOs\LoginCollectorDTO;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
 use Illuminate\Foundation\Application;
@@ -16,12 +16,13 @@ class LoginController extends Controller
 {
     public function page(): View|Application|Factory|\Illuminate\Contracts\Foundation\Application
     {
-        return view('content.auth.login');
+        return view('content.auth-collector.login');
     }
 
-    public function handle(LoginRequest $request, LoginAdminAction $action): RedirectResponse
+    public function handle(LoginRequest $request, LoginCollectorAction $action): RedirectResponse
     {
-        $actionData = $action(LoginAdminDTO::fromRequest($request));
+
+        $actionData = $action(LoginCollectorDTO::fromRequest($request));
 
         if (array_key_exists('error', $actionData)) {
             flash()->danger(__($actionData['error']));
@@ -30,7 +31,7 @@ class LoginController extends Controller
         }
 
         if (array_key_exists('not_verified', $actionData)) {
-            return to_route('admin.verification.notice');
+            return to_route('collector.verification.notice');
         }
 
         $request->session()->regenerate();
@@ -40,11 +41,11 @@ class LoginController extends Controller
 
     public function logout(): Application|Redirector|RedirectResponse|\Illuminate\Contracts\Foundation\Application
     {
-        auth()->logout();
+        auth('collector')->logout();
 
-        //        request()->session()->invalidate();
-        //
-        //        request()->session()->regenerateToken();
+        request()->session()->invalidate();
+
+        request()->session()->regenerateToken();
 
         return to_route('home');
     }

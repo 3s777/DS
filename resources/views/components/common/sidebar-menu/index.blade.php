@@ -1,4 +1,5 @@
 @props([
+    'menu',
     'hideButton' => false
 ])
 

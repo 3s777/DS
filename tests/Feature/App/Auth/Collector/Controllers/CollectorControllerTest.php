@@ -3,7 +3,7 @@
 namespace App\Auth\Collector\Controllers;
 
 use App\Http\Controllers\Auth\Admin\AdminController;
-use App\Http\Controllers\Auth\Collector\CollectorController;
+use App\Http\Controllers\Auth\Admin\CollectorController;
 use App\Http\Requests\Auth\Collector\CreateCollectorRequest;
 use App\Jobs\GenerateSmallThumbnailsJob;
 use App\Jobs\GenerateThumbnailJob;

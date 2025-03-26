@@ -3,12 +3,13 @@
 namespace App\Routing;
 
 use App\Contracts\RouteRegistrar;
-use App\Http\Controllers\Auth\Collector\CollectorController;
-use App\Http\Controllers\Auth\Collector\ForgotPasswordController;
-use App\Http\Controllers\Auth\Collector\LoginController;
-use App\Http\Controllers\Auth\Collector\RegisterController;
-use App\Http\Controllers\Auth\Collector\ResetPasswordController;
-use App\Http\Controllers\Auth\Collector\VerifyEmailController;
+use App\Http\Controllers\Auth\Admin\CollectorController;
+use App\Http\Controllers\Auth\Public\Collector\ForgotPasswordController;
+use App\Http\Controllers\Auth\Public\Collector\LoginController;
+use App\Http\Controllers\Auth\Public\Collector\ProfileController;
+use App\Http\Controllers\Auth\Public\Collector\RegisterController;
+use App\Http\Controllers\Auth\Public\Collector\ResetPasswordController;
+use App\Http\Controllers\Auth\Public\Collector\VerifyEmailController;
 use Illuminate\Contracts\Routing\Registrar;
 use Illuminate\Support\Facades\Route;
 
@@ -48,6 +49,11 @@ class AuthCollectorRegistrar implements RouteRegistrar
                         Route::post('/email/verification-notification', 'sendVerifyNotification')->middleware(['throttle:6,1'])->name('verification.send');
                     });
 
+                });
+
+                Route::prefix('{locale}')->controller(ProfileController::class)->group(function() {
+                    Route::get('/profile', 'show')->name('profile');
+                    Route::get('/profile/settings', 'settings')->name('profile.settings');
                 });
 
 

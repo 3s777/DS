@@ -1,7 +1,7 @@
 <x-layouts.admin :search="false">
     <x-ui.form class="crud-form"
                id="create-form"
-               :action="route('collectibles.store.game')"
+               :action="route('admin.collectibles.store.game')"
                enctype="multipart/form-data">
         <x-ui.title class="crud-form__tile" size="normal" indent="small">
             {{ __('collectible.add') }}
@@ -15,7 +15,7 @@
                             name="user_m"
                             select-name="user_idm[]"
                             route="admin.select-users"
-                            :selected="$users"
+{{--                            :selected="$users"--}}
                             :required="true"
                             :default-option="trans_choice('user.choose', 1)"
                             :label="trans_choice('user.users', 1)">
@@ -42,7 +42,7 @@
                             name="shelf"
                             select-name="shelf-async[test]"
                             :required="true"
-                            route="shelves.select"
+                            route="admin.shelves.select"
                             depend-on="user_id"
                             depend-field="user_id"
 {{--                            :selected="[auth()->user()->id => auth()->user()->name]"--}}
@@ -82,7 +82,7 @@
                             name="shelft"
                             select-name="shelft-async"
                             :required="true"
-                            route="shelves.select"
+                            route="admin.shelves.select"
                             depend-on="usert_id"
                             depend-field="user_id"
                                                         :selected="[auth()->user()->id => auth()->user()->name]"
@@ -112,7 +112,7 @@
                             name="shelf1"
                             select-name="shelf1_id"
                             required
-                            route="shelves.select"
+                            route="admin.shelves.select"
                             depend-on="user1_id"
                             depend-field="user_id"
 {{--                            selected="12"--}}
@@ -142,7 +142,7 @@
                             name="shelf2"
                             select-name="shelf2_id[]"
                             required
-                            route="shelves.select"
+                            route="admin.shelves.select"
                             depend-on="user2_id"
                             depend-field="user_id"
                             :selected="[12,13]"

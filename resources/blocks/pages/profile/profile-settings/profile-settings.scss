@@ -1,0 +1,34 @@
+.profile-settings {
+    &__main {
+        display: flex;
+        gap: 24px;
+        padding: 16px 0;
+    }
+
+    &__avatar {
+        flex-shrink: 0;
+        flex-basis: 220px;
+    }
+
+    &__info {
+        display: flex;
+        flex-wrap: wrap;
+        flex-basis: calc(100% - 244px);
+        column-gap: 24px;
+        row-gap: 36px;
+    }
+
+    &__info-field {
+        width: calc((100% - 24px*(2 - 1))/2);
+    }
+
+    &__description {
+        flex-basis: 100%;
+    }
+
+    &__input-image {
+        .input-image__preview {
+            border-radius: 50%;
+        }
+    }
+}

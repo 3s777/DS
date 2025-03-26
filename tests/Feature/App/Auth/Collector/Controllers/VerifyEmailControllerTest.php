@@ -2,7 +2,7 @@
 
 namespace App\Auth\Collector\Controllers;
 
-use App\Http\Controllers\Auth\Collector\VerifyEmailController;
+use App\Http\Controllers\Auth\Public\Collector\VerifyEmailController;
 use Database\Factories\CollectorFactory;
 use Domain\Auth\Notifications\VerifyEmailCollectorNotification;
 use Illuminate\Foundation\Testing\RefreshDatabase;

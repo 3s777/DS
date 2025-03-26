@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Auth\Admin;
+namespace App\Http\Controllers\Auth\Public\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Auth\Admin\RegisterRequest;

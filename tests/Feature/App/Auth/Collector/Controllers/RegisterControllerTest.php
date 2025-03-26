@@ -2,8 +2,8 @@
 
 namespace App\Auth\Collector\Controllers;
 
-use App\Http\Controllers\Auth\Collector\LoginController;
-use App\Http\Controllers\Auth\Collector\RegisterController;
+use App\Http\Controllers\Auth\Public\Collector\LoginController;
+use App\Http\Controllers\Auth\Public\Collector\RegisterController;
 use App\Http\Requests\Auth\Collector\RegisterRequest;
 use Database\Factories\CollectorFactory;
 use Domain\Auth\Models\Role;

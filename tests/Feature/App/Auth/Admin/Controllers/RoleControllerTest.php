@@ -2,7 +2,7 @@
 
 namespace App\Auth\Admin\Controllers;
 
-use App\Http\Controllers\Auth\RoleController;
+use App\Http\Controllers\Auth\Admin\RoleController;
 use App\Http\Requests\Auth\Role\CreateRoleRequest;
 use Database\Factories\RoleFactory;
 use Database\Factories\UserFactory;

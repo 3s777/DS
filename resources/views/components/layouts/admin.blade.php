@@ -21,7 +21,7 @@
                     }}
                     wrapper-class="admin__content">
                     <x-slot:sidebar>
-                        <x-common.sidebar-menu class="admin__menu" />
+                        @include('admin.menu')
                     </x-slot:sidebar>
 
                     <x-common.messages class="admin__messages" />
