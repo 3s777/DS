@@ -5,7 +5,14 @@
                 @include('content.profile.menu')
             </x-slot:sidebar>
             <x-ui.title indent="normal">{{ __('user.profile.settings') }}</x-ui.title>
-            <x-ui.form class="profile__settings" :action="route('profile.settings')">
+
+            <x-common.messages class="profile-settings__messages" />
+
+            <x-ui.form
+                class="profile-settings__form"
+                :action="route('profile.settings.update')"
+                method="put"
+                enctype="multipart/form-data">
                 <div class="profile-settings__main">
                     <div class="profile-settings__avatar">
                         <x-ui.form.input-image
@@ -64,6 +71,16 @@
                                 </x-ui.form.input-text>
                             </div>
 
+                            <div class="profile-settings__info-field">
+                                <x-ui.select.enum
+                                    name="language"
+                                    select-name="language"
+                                    :selected="auth('collector')->user()->language"
+                                    :options="$languages"
+                                    :label="__('common.language')"
+                                />
+                            </div>
+
                             <div class="profile-settings__description">
                                 <x-libraries.rich-text-editor
                                     name="description"
@@ -72,13 +89,60 @@
                             </div>
                     </div>
                 </div>
-                <x-ui.form.group class="crud-form__submit">
+
+                <div class="profile-settings__password">
+                    <x-ui.title indent="normal">{{ __('auth.change_password') }}</x-ui.title>
+
+                    <div class="profile-settings__password-inner">
+                        <div class="profile-settings__password-field">
+                            <x-ui.form.input-text
+                                id="current_password"
+                                name="current_password"
+                                type="password"
+                                value=""
+                                placeholder="{{ __('auth.current_password') }}">
+                            </x-ui.form.input-text>
+                        </div>
+                        <div class="profile-settings__password-field">
+                            <x-ui.form.input-text
+                                id="new_password"
+                                name="new_password"
+                                type="password"
+                                value=""
+                                placeholder="{{ __('auth.new_password') }}">
+                            </x-ui.form.input-text>
+                        </div>
+                        <div class="profile-settings__password-field">
+                            <x-ui.form.input-text
+                                id="new_password_confirmation"
+                                name="new_password_confirmation"
+                                type="password"
+                                value=""
+                                placeholder="{{ __('auth.confirm_new_password') }}">
+                            </x-ui.form.input-text>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="profile-settings__other">
+                    <x-ui.title indent="normal">{{ __('common.other_settings') }}</x-ui.title>
+                    <div class="profile-settings__other-field">
+                        <div class="profile-settings__other-inner">
+                            <x-ui.title tag="div" size="small" indent="normal">
+                                {{ __('common.choose_theme_color') }}
+                            </x-ui.title>
+                            <x-common.theme-switcher class="profile-settings__theme-switcher" />
+                        </div>
+                    </div>
+                </div>
+
+                <div class="profile-settings__submit">
                     <x-ui.form.button
                         class="crud-form__submit-button"
                         x-bind:disabled="preventSubmit">
-                        {{ __('common.save') }}
+                        {{ __('common.save_settings') }}
                     </x-ui.form.button>
-                </x-ui.form.group>
+                </div>
 
             </x-ui.form>
         </x-common.content>

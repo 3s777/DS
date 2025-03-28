@@ -3,6 +3,11 @@
         display: flex;
         gap: 24px;
         padding: 16px 0;
+        margin-bottom: 24px;
+    }
+
+    &__messages {
+        margin-bottom: 24px;
     }
 
     &__avatar {
@@ -31,4 +36,31 @@
             border-radius: 50%;
         }
     }
+
+    &__password {
+        margin-bottom: 36px;
+    }
+
+    &__password-inner {
+        display: flex;
+        justify-content: space-between;
+        gap: 24px;
+    }
+
+    &__password-field {
+        flex-basis: 33%;
+    }
+
+    &__other {
+        margin-bottom: 36px;
+    }
+
+    &__theme-switcher {
+        .theme-switcher__color {
+            width: 36px;
+            height: 36px;
+        }
+    }
+
+
 }

@@ -6,7 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Auth\Permission\CreatePermissionRequest;
 use App\Http\Requests\Auth\Permission\UpdatePermissionRequest;
 use Domain\Auth\Models\Permission;
-use Domain\Auth\ViewModels\PermissionIndexViewModel;
+use Domain\Auth\ViewModels\Admin\PermissionIndexViewModel;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
 use Illuminate\Foundation\Application;

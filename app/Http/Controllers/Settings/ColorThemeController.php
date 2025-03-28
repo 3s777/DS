@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Settings;
 
 use App\Http\Controllers\Controller;
-use Domain\Setting\Enums\ColorThemeEnum;
+use Domain\Settings\Enums\ColorThemeEnum;
 
 class ColorThemeController extends Controller
 {

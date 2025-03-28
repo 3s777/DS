@@ -51,9 +51,13 @@ class AuthCollectorRegistrar implements RouteRegistrar
 
                 });
 
-                Route::prefix('{locale}')->controller(ProfileController::class)->group(function() {
+                Route::prefix('{locale}')
+                    ->controller(ProfileController::class)
+                    ->middleware('auth:collector')
+                    ->group(function() {
                     Route::get('/profile', 'show')->name('profile');
                     Route::get('/profile/settings', 'settings')->name('profile.settings');
+                    Route::put('/profile/settings', 'updateSettings')->name('profile.settings.update');
                 });
 
 

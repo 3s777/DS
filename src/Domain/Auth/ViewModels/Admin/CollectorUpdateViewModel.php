@@ -1,6 +1,6 @@
 <?php
 
-namespace Domain\Auth\ViewModels;
+namespace Domain\Auth\ViewModels\Admin;
 
 use Domain\Auth\Models\Collector;
 use Domain\Auth\Models\Permission;
