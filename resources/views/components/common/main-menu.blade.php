@@ -31,7 +31,7 @@
         <div x-on:click="moreOpen = false"  class="main-menu__more-close">
             <x-svg.close class="main-menu__close-icon"></x-svg.close>
         </div>
-            @guest
+            @guest('admin')
                 @if(Route::currentRouteName() != 'admin.login')
                 <x-ui.form.group>
                     <div class="auth-menu__item">
@@ -60,7 +60,7 @@
                 <div class="profile-menu__auth">
                     <div class="profile-menu__links">
                         <a class="profile-menu__username " href="#">
-                            {{ Auth::user()->name }}
+                            {{ Auth::guard('admin')->user()->name }}
                         </a>
 
                         <div class="profile-menu__logout">

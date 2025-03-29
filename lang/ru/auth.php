@@ -19,6 +19,7 @@ return [
     'current_password' => 'Текущий пароль',
     'new_password' => 'Новый пароль',
     'confirm_new_password' => 'Повторите новый пароль',
+    'password_updated' => 'Пароль изменен',
     'remember' => 'Запомнить меня',
     'username' => 'Имя пользователя',
     'first_name' => 'Полное имя',

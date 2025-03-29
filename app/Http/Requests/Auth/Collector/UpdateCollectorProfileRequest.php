@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests\Auth\Collector;
 
+use App\Rules\CurrentPasswordRule;
 use App\Rules\LatinLowercaseRule;
 use Domain\Auth\Models\User;
 use Illuminate\Contracts\Validation\ValidationRule;
@@ -45,7 +46,8 @@ class UpdateCollectorProfileRequest extends FormRequest
             ],
             'featured_image_selected' => ['nullable', 'bool'],
             'current_password' => [
-                'required_with:new_password'
+                'required_with:new_password',
+                new CurrentPasswordRule(auth('collector')->user())
             ],
             'new_password' => [
                 'nullable',

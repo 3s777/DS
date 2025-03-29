@@ -2,49 +2,43 @@
 
 namespace Domain\Auth\Services;
 
-use Domain\Auth\Actions\VerifyEmailAction;
 use Domain\Auth\DTOs\UpdateCollectorProfileDTO;
 use Domain\Auth\Exceptions\UserCreateEditException;
 use Domain\Auth\Models\Collector;
-use Domain\Game\DTOs\FillGameDTO;
-use Domain\Game\Models\Game;
-use Illuminate\Contracts\Auth\Authenticatable;
-use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\HigherOrderTapProxy;
 use Support\Exceptions\CrudException;
+use Support\Transaction;
 use Throwable;
 
 class CollectorProfileService
 {
-    public function update(UpdateCollectorProfileDTO $data): Authenticatable
+    public function update(UpdateCollectorProfileDTO $data): Collector|HigherOrderTapProxy
     {
-        try {
-            DB::beginTransaction();
+        return Transaction::run(function () use ($data) {
 
-            $collector = Collector::find(auth('collector')->user()->id);
+                $collector = auth('collector')->user();
 
-            $collector->updateFeaturedImage($data->featured_image, $data->featured_image_uploaded, ['small', 'medium']);
+                $collector->updateFeaturedImage($data->featured_image, $data->featured_image_uploaded, ['small', 'medium']);
 
-            $collector->fill([
-                'language' => $data->language,
-                'first_name' => $data->first_name,
-                'description' => $data->description
-            ]);
+                $collector->fill([
+                    'language' => $data->language,
+                    'first_name' => $data->first_name,
+                    'description' => $data->description
+                ]);
 
-//            if ($data->password) {
-//                auth('collector')->user()->password = bcrypt($data->password);
-//            }
+                if ($data->new_password) {
+                    if (Hash::check($data->current_password, $collector->password)) {
+                        $collector->password = bcrypt($data->new_password);
+                    }
+                }
 
-
-
-
-
-            $collector->save();
-
-
-            DB::commit();
-            return $collector;
-        } catch (Throwable $e) {
-            throw new UserCreateEditException($e->getMessage());
-        }
+                $collector->save();
+                return $collector;
+            },
+            function (Throwable $e) {
+                throw new UserCreateEditException($e->getMessage());
+            }
+        );
     }
 }

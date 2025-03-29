@@ -1,0 +1,48 @@
+.profile {
+    &__avatar {
+        flex-shrink: 0;
+        overflow: hidden;
+        border-radius: $border-radius;
+        line-height: 0;
+    }
+
+    &__main {
+        display: flex;
+        gap: 24px;
+        padding: 20px;
+        background-color: $base-dark-like-transparent;
+        border-radius: $big-border-radius;
+    }
+
+    &__info {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 24px;
+        flex-basis: 100%;
+    }
+
+    &__info-title {
+        flex-basis: 40%;
+    }
+
+    &__name {
+        margin-bottom: 8px;
+        font-size: rem(24);
+    }
+
+    &__rating-inner {
+        min-width: 100px;
+        height: 100px;
+        padding: 12px;
+
+        .rating__title {
+            font-size: rem(16);
+        }
+
+        .rating__value {
+            font-size: rem(32);
+        }
+    }
+
+}

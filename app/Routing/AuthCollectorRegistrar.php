@@ -58,6 +58,8 @@ class AuthCollectorRegistrar implements RouteRegistrar
                     Route::get('/profile', 'show')->name('profile');
                     Route::get('/profile/settings', 'settings')->name('profile.settings');
                     Route::put('/profile/settings', 'updateSettings')->name('profile.settings.update');
+                    Route::get('/profile/confidential', 'confidential')->name('profile.confidential');
+                    Route::delete('/profile/delete', 'delete')->name('profile.delete');
                 });
 
 

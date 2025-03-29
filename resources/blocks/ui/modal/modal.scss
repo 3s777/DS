@@ -28,6 +28,7 @@
         background-color: $base-light-like-transparent;
         border-radius: $big-border-radius;
         box-shadow: $base-box-shadow;
+        font-size: rem(18);
 
         @include breakpoint-max($xl) {
             width: 90%;
