@@ -37,7 +37,7 @@
                 {{--            </x-ui.avatar>--}}
 
                 <div class="profile-menu__links">
-                    <a class="profile-menu__username " href="#">
+                    <a class="profile-menu__username " href="{{ route('profile') }}">
                         {{ Auth::guard('collector')->user()->name }}
                     </a>
 

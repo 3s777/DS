@@ -1,34 +1,54 @@
 .profile {
-    &__avatar {
-        flex-shrink: 0;
-        overflow: hidden;
-        border-radius: $border-radius;
-        line-height: 0;
-    }
-
     &__main {
         display: flex;
+        justify-content: space-between;
         gap: 24px;
+        align-items: center;
         padding: 20px;
         background-color: $base-dark-like-transparent;
         border-radius: $big-border-radius;
     }
 
+    &__avatar {
+        flex-basis: 100px;
+        flex-shrink: 0;
+        overflow: hidden;
+        border-radius: $border-radius;
+        line-height: 0;
+
+        img {
+            width: 100%;
+        }
+    }
+
     &__info {
         display: flex;
-        justify-content: space-between;
+        justify-content: flex-start;
         align-items: center;
         gap: 24px;
-        flex-basis: 100%;
     }
 
     &__info-title {
-        flex-basis: 40%;
+        max-width: 180px;
+        overflow: hidden;
+        transition: .3s;
+    }
+
+    .content_collapsed &__info-title {
+        max-width: 250px;
     }
 
     &__name {
         margin-bottom: 8px;
-        font-size: rem(24);
+        font-size: rem(22);
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+
+    &__username {
+        overflow: hidden;
+        text-overflow: ellipsis;
+        word-break: break-word;
     }
 
     &__rating-inner {
@@ -41,8 +61,167 @@
         }
 
         .rating__value {
-            font-size: rem(32);
+            font-size: rem(28);
         }
     }
+
+    &__summary {
+        display: flex;
+        gap: 24px;
+    }
+
+    &__summary-item {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        flex-direction: column;
+        min-width: 100px;
+        height: 100px;
+        background: $additional-main;
+        border-radius: 8px;
+    }
+
+    &__summary-inner {
+        display: block;
+        padding: 12px;
+        text-align: center;
+        text-decoration: none;
+    }
+
+    &__summary-title {
+        width: 100%;
+        max-width: 90px;
+        margin: 0 auto;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        font-size: rem(16);
+        text-align: center;
+    }
+
+    &__summary-value {
+        max-width: 90px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        font-size: rem(26);
+    }
+
+    @include breakpoint-max($xl) {
+        &__main {
+            gap: 18px;
+        }
+
+        &__avatar {
+            flex-basis: 80px;
+        }
+
+        &__info {
+            gap: 18px;
+        }
+
+        &__info-title {
+            max-width: 150px;
+        }
+
+        &__name {
+            font-size: rem(20);
+        }
+
+        &__username {
+            font-size: rem(12);
+        }
+
+        &__summary {
+            gap: 18px;
+        }
+
+        &__summary-inner {
+            padding: 12px;
+        }
+
+        &__summary-item {
+            min-width: auto;
+            width: auto;
+            height: 80px;
+        }
+
+        &__summary-title {
+            max-width: 70px;
+            font-size: rem(12);
+        }
+
+        &__summary-value {
+            max-width: 70px;
+            font-size: rem(20);
+        }
+
+        &__rating {
+            flex-basis: 80px;
+        }
+
+        &__rating-inner {
+            min-width: 80px;
+            width: 80px;
+            height: 80px;
+        }
+
+        &__rating-inner .rating__title {
+            font-size: rem(12);
+        }
+
+        &__rating-inner .rating__value {
+            font-size: rem(20);
+        }
+    }
+
+    @include breakpoint-max($ml) {
+        &__info {
+            flex-basis: 38%;
+            flex-shrink: 0;
+        }
+
+        &__summary {
+            flex-basis: calc(62% - 120px);
+            flex-wrap: wrap;
+            gap: 4%;
+            row-gap: 12px;
+        }
+
+        &__summary-inner {
+
+            padding: 8px;
+        }
+
+        &__summary-item {
+            width: 48%;
+            height: auto;
+        }
+
+        &__summary-title {
+            max-width: 90px;
+            width: auto;
+            font-size: rem(12);
+        }
+
+        &__summary-value {
+            max-width: 90px;
+            width: auto;
+            margin: 0 auto;
+            font-size: rem(20);
+        }
+
+        &__rating-inner .rating__title {
+            font-size: rem(12);
+        }
+
+        &__rating-inner .rating__value {
+            font-size: rem(20);
+        }
+    }
+
+    @include breakpoint-max($md) {
+
+    }
+
+
 
 }

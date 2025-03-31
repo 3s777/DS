@@ -1,7 +1,7 @@
 @props([
     'rating',
     'maxValue' => '10',
-    'title' => 'Рейтинг',
+    'title' => __('common.rating'),
     'classPrefix' => false
 ])
 

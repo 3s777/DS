@@ -8,7 +8,9 @@
             'content',
             'content_sidebar' => $sidebar
         ])
-    }}>
+    }}
+    :class="collapseSidebar ?  'content_collapsed' : ''"
+>
     @if($sidebar)
         <aside
             class="content__sidebar"

@@ -91,5 +91,8 @@ return [
     'no' => 'Нет',
     'choose_theme_color' => 'Выберите цвет темы',
     'other_settings' => 'Другие настройки',
-    'save_settings' => 'Сохранить настройки'
+    'save_settings' => 'Сохранить настройки',
+    'favorite' => 'Избранное',
+    'wishful' => 'Желаемое',
+    'rating' => 'Рейтинг'
 ];

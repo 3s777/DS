@@ -14,7 +14,7 @@ final class ProfileMenuComposer
         $menu = Menu::make()
             ->add(MenuItem::make(route('profile'), __('common.statistic'), 'statistic'))
             ->add(MenuItem::make(route('profile.settings'), trans_choice('settings.settings', 2), 'profile'))
-            ->add(MenuItem::make(route('profile.confidential'), __('common.confidential'), 'statistic'));
+            ->add(MenuItem::make(route('profile.confidential'), __('common.confidential'), 'lock'));
 
         $view->with('menu', $menu);
     }
