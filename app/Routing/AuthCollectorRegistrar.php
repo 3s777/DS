@@ -10,6 +10,7 @@ use App\Http\Controllers\Auth\Public\Collector\ProfileController;
 use App\Http\Controllers\Auth\Public\Collector\RegisterController;
 use App\Http\Controllers\Auth\Public\Collector\ResetPasswordController;
 use App\Http\Controllers\Auth\Public\Collector\VerifyEmailController;
+use App\Http\Controllers\Auth\Public\Collector\CollectorController as PublicCollectorController;
 use Illuminate\Contracts\Routing\Registrar;
 use Illuminate\Support\Facades\Route;
 
@@ -61,6 +62,14 @@ class AuthCollectorRegistrar implements RouteRegistrar
                     Route::get('/profile/confidential', 'confidential')->name('profile.confidential');
                     Route::delete('/profile/delete', 'delete')->name('profile.delete');
                 });
+
+                Route::prefix('{locale}')
+                    ->controller(PublicCollectorController::class)
+                    ->middleware('auth:collector')
+                    ->group(function() {
+                        Route::get('/collectors', 'index')->name('collectors');
+                    });
+
 
 
 

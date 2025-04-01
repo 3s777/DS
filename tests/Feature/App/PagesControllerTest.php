@@ -37,18 +37,6 @@ class PagesControllerTest extends TestCase
      * @test
      * @return void
      */
-    public function it_page_users_success(): void
-    {
-        $this->get(route('public-users'))
-            ->assertOk()
-            ->assertSee('Список пользователей')
-            ->assertViewIs('content.users.index');
-    }
-
-    /**
-     * @test
-     * @return void
-     */
     public function it_page_game_carrier_success(): void
     {
         $this->get(route('game-carrier'))

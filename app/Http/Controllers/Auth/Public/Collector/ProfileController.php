@@ -7,6 +7,7 @@ use App\Http\Requests\Auth\Collector\UpdateCollectorProfileRequest;
 use Domain\Auth\DTOs\UpdateCollectorProfileDTO;
 use Domain\Auth\Services\CollectorProfileService;
 use Domain\Auth\ViewModels\Public\CollectorProfileSettingsViewModel;
+use Domain\Auth\ViewModels\Public\CollectorProfileViewModel;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
 use Illuminate\Foundation\Application;
@@ -17,7 +18,7 @@ class ProfileController extends Controller
 {
     public function show(): View|Application|Factory|\Illuminate\Contracts\Foundation\Application
     {
-        return view('content.profile.index');
+        return view('content.profile.index', new CollectorProfileViewModel());
     }
 
     public function settings(): View|Application|Factory|\Illuminate\Contracts\Foundation\Application

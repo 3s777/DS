@@ -8,9 +8,12 @@ use Domain\Auth\FilterRegitrars\CollectorFilterRegistrar;
 use Domain\Auth\Notifications\ResetPasswordCollectorNotification;
 use Domain\Auth\Notifications\VerifyEmailCollectorNotification;
 use Domain\Auth\QueryBuilders\CollectorQueryBuilder;
+use Domain\Shelf\Models\Collectible;
+use Domain\Shelf\Models\Shelf;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Contracts\Translation\HasLocalePreference;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Database\Eloquent\Relations\MorphMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -148,5 +151,15 @@ class Collector extends Authenticatable implements MustVerifyEmail, HasLocalePre
     public function morphImages(): MorphMany
     {
         return $this->morphMany(Image::class, 'imageable');
+    }
+
+    public function shelves(): HasMany
+    {
+        return $this->hasMany(Shelf::class);
+    }
+
+    public function collectibles(): HasMany
+    {
+        return $this->hasMany(Collectible::class);
     }
 }

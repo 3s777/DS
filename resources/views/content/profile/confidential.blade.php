@@ -1,4 +1,4 @@
-<x-layouts.main title="{{ __('user.profile.settings_confidential') }}" :search="false">
+<x-layouts.main title="{{ __('user.profile.settings_confidential') }}">
     <x-grid.container>
         <x-common.content class="profile-confidential">
             <x-slot:sidebar>

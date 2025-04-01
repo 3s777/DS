@@ -1,4 +1,4 @@
-<x-layouts.main title="{{ __('Users') }}" :search="false">
+<x-layouts.main title="{{ __('Users') }}">
     <x-grid.container>
         <x-common.content class="profile-settings">
             <x-slot:sidebar>
@@ -28,7 +28,7 @@
                                         :image-sizes="['small', 'medium', 'large']"
                                         :path="auth('collector')->user()->getFeaturedImagePath()"
                                         :placeholder="false"
-                                        sizes="(max-width: 1024px) 100vw, (max-width: 1400px) 30vw, 220px">
+                                        sizes="220px">
                                         <x-slot:img alt="test" title="test title"></x-slot:img>
                                     </x-ui.responsive-image>
                                 </x-slot:uploaded-featured-image>

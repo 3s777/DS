@@ -24,7 +24,7 @@
     }
 
     &__info-field {
-        width: calc((100% - 24px*(2 - 1))/2);
+        flex-basis: calc((100% - 24px*(2 - 1))/2);
     }
 
     &__description {
@@ -62,5 +62,42 @@
         }
     }
 
+    @include breakpoint-max($ml) {
+        &__info-field {
+            flex-basis: 100%;
+        }
 
+        &__password-inner {
+            flex-wrap: wrap;
+        }
+
+        &__password-field {
+            flex-basis: 100%;
+        }
+    }
+
+    @include breakpoint-max($sm) {
+        &__main {
+            flex-wrap: wrap;
+            gap: 36px;
+        }
+
+        &__avatar {
+            flex-basis: 100%;
+        }
+
+        &__info {
+            flex-basis: 100%;
+        }
+
+        &__input-image {
+            .input-image {
+                gap: 24px;
+            }
+            
+            .input-image__preview {
+                width: 220px;
+            }
+        }
+    }
 }
