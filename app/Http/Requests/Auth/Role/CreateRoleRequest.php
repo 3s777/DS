@@ -33,6 +33,10 @@ class CreateRoleRequest extends FormRequest
                 Rule::unique(Role::class)
             ],
             'display_name' => ['required','string'],
+            'guard_name' => [
+                'required',
+                'in:admin,collector'
+            ],
             'description' => ['nullable','string'],
             'permissions' => [
                 'nullable',
@@ -50,6 +54,7 @@ class CreateRoleRequest extends FormRequest
             'display_name' => __('common.display_name'),
             'description' => __('common.description'),
             'permissions' => __('user.permission.permissions'),
+            'guard_name' => __('user.type')
         ];
     }
 

@@ -17,7 +17,13 @@ class RoleIndexViewModel extends ViewModel
     {
         return Cache::rememberForever('roles_all', function () {
             return Role::query()
-                ->select('roles.id', 'roles.name', 'roles.display_name', 'roles.created_at')
+                ->select(
+                    'roles.id',
+                    'roles.name',
+                    'roles.display_name',
+                    'roles.guard_name',
+                    'roles.created_at'
+                )
                 ->paginate(100)
                 ->withQueryString();
         });

@@ -1,14 +1,10 @@
-.users {
+.collector-search {
+    position: relative;
 
     &__list {
         display: grid;
         grid-template-columns: repeat(4, 1fr);
         gap: 16px;
         margin-top: 32px;
-    }
-
-    &__card {
-        position: relative;
-        align-self: start;
     }
 }

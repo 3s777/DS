@@ -32,6 +32,10 @@ class CreatePermissionRequest extends FormRequest
                 Rule::unique(Permission::class)
             ],
             'display_name' => ['required','string'],
+            'guard_name' => [
+                'required',
+                'in:admin,collector'
+            ],
             'description' => ['nullable','string']
         ];
     }
@@ -42,6 +46,7 @@ class CreatePermissionRequest extends FormRequest
             'name' => trans_choice('common.name', 1),
             'display_name' => __('common.display_name'),
             'description' => __('common.description'),
+            'guard_name' => __('user.type')
         ];
     }
 }

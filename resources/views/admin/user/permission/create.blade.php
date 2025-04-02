@@ -27,6 +27,21 @@
                         </x-ui.form.input-text>
                     </x-ui.form.group>
                 </x-grid.col>
+
+                <x-grid.col xl="4" ls="6" ml="12" lg="6" md="6" sm="12">
+                    <x-ui.form.group>
+                        <x-ui.select.data
+                            name="guard_name"
+                            select-name="guard_name"
+                            required
+                            :options="[
+                                'admin' => trans_choice('user.admins', 1),
+                                'collector' => trans_choice('user.collectors', 1)
+                            ]"
+                            :default-option="__('user.type')"
+                            :label="__('user.choose_type')" />
+                    </x-ui.form.group>
+                </x-grid.col>
             </x-grid>
     </x-admin.crud-form>
 </x-layouts.admin>

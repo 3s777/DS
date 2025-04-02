@@ -15,6 +15,9 @@
                 <x-ui.responsive-table.column name="first_name">
                     {{ __('common.display_name') }}
                 </x-ui.responsive-table.column>
+                <x-ui.responsive-table.column name="guard_name">
+                    {{ __('user.type') }}
+                </x-ui.responsive-table.column>
                 <x-ui.responsive-table.column name="created_at">
                     {{ __('common.created_date') }}
                 </x-ui.responsive-table.column>
@@ -33,6 +36,9 @@
                     </x-ui.responsive-table.column>
                     <x-ui.responsive-table.column>
                         <span class="responsive-table__label">{{ __('common.display_name') }}: </span> {{ $permission->display_name }}
+                    </x-ui.responsive-table.column>
+                    <x-ui.responsive-table.column>
+                        <span class="responsive-table__label">{{ __('user.type') }}: </span> {{ $permission->guard_name }}
                     </x-ui.responsive-table.column>
                     <x-ui.responsive-table.column>
                         <span class="responsive-table__label">{{ __('common.created_date') }}: </span> {{ $permission->created_at }}

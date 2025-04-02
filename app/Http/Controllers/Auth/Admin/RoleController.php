@@ -5,7 +5,9 @@ namespace App\Http\Controllers\Auth\Admin;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Auth\Role\CreateRoleRequest;
 use App\Http\Requests\Auth\Role\UpdateRoleRequest;
+use Domain\Auth\DTOs\FillRoleDTO;
 use Domain\Auth\Models\Role;
+use Domain\Auth\Services\RoleService;
 use Domain\Auth\ViewModels\Admin\RoleIndexViewModel;
 use Domain\Auth\ViewModels\Admin\RoleUpdateViewModel;
 use Illuminate\Contracts\View\Factory;
@@ -30,17 +32,9 @@ class RoleController extends Controller
         return view('admin.user.role.create', new RoleUpdateViewModel());
     }
 
-    public function store(CreateRoleRequest $request): RedirectResponse
+    public function store(CreateRoleRequest $request, RoleService $roleService): RedirectResponse
     {
-        $role = Role::create($request->safe()->except(['permissions']));
-
-        $role->audit(
-            'changePermission',
-            [],
-            ['permissions' => $request->input('permissions') ?? []]
-        );
-
-        $role->syncPermissions($request->input('permissions'));
+        $roleService->create(FillRoleDTO::fromRequest($request));
 
         flash()->info(__('user.role.created'));
 
@@ -57,17 +51,9 @@ class RoleController extends Controller
         return view('admin.user.role.edit', new RoleUpdateViewModel($role));
     }
 
-    public function update(UpdateRoleRequest $request, Role $role): RedirectResponse
+    public function update(UpdateRoleRequest $request, Role $role, RoleService $roleService): RedirectResponse
     {
-        $role->fill($request->safe()->except(['permissions']))->save();
-
-        $role->audit(
-            'changePermission',
-            ['permissions' => $role->permissions->pluck(['name'])],
-            ['permissions' => $request->input('permissions') ?? []]
-        );
-
-        $role->syncPermissions($request->input('permissions'));
+        $roleService->update($role, FillRoleDTO::fromRequest($request));
 
         flash()->info(__('user.role.updated'));
 

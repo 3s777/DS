@@ -32,16 +32,16 @@ class UpdateCollectorRequest extends FormRequest
                 ->value(),
         ]);
 
-        $roles = request('roles');
-        $defaultRole = config('settings.default_collector_role');
-
-        if ($roles && !in_array($defaultRole, $roles)) {
-            $roles[] = $defaultRole;
-
-            $this->merge([
-                'roles' => $roles
-            ]);
-        }
+//        $roles = request('roles');
+//        $defaultRole = config('settings.default_collector_role');
+//
+//        if ($roles && !in_array($defaultRole, $roles)) {
+//            $roles[] = $defaultRole;
+//
+//            $this->merge([
+//                'roles' => $roles
+//            ]);
+//        }
     }
 
     /**

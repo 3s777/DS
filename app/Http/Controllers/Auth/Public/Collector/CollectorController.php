@@ -19,6 +19,6 @@ class CollectorController extends Controller
 {
     public function index(): View|Application|Factory|\Illuminate\Contracts\Foundation\Application
     {
-        return view('content.users.index', new CollectorsViewModel());
+        return view('content.collector.search', new CollectorsViewModel());
     }
 }

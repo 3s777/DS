@@ -17,7 +17,13 @@ class PermissionIndexViewModel extends ViewModel
     {
         return Cache::rememberForever('permissions_all', function () {
             return Permission::query()
-                ->select('permissions.id', 'permissions.name', 'permissions.display_name', 'permissions.created_at')
+                ->select(
+                    'permissions.id',
+                    'permissions.name',
+                    'permissions.display_name',
+                    'permissions.guard_name',
+                    'permissions.created_at'
+                )
                 ->paginate(100)
                 ->withQueryString();
         });
