@@ -4,8 +4,8 @@ namespace App\Auth\Admin\Controllers;
 
 use App\Http\Controllers\Auth\Admin\RoleController;
 use App\Http\Requests\Auth\Role\CreateRoleRequest;
-use Database\Factories\RoleFactory;
-use Database\Factories\UserFactory;
+use Database\Factories\Auth\RoleFactory;
+use Database\Factories\Auth\UserFactory;
 use Database\Seeders\PermissionsTestSeeder;
 use Domain\Auth\Models\Role;
 use Domain\Auth\Models\User;
@@ -32,7 +32,7 @@ class RoleControllerTest extends TestCase
 
         $this->role = RoleFactory::new()->create();
 
-        $this->request = CreateRoleRequest::factory()->create();
+        $this->request = CreateRoleRequest::factory()->create(['guard_name' => 'admin']);
 
         $this->artisan('db:seed', ['--class' => PermissionsTestSeeder::class]);
     }
@@ -106,6 +106,8 @@ class RoleControllerTest extends TestCase
      */
     public function it_store_success(): void
     {
+        $this->request['permissions_admin'] = ['entity.*', 'entity.create', 'entity.edit', 'entity.delete'];
+
         $this->actingAs($this->user)
             ->post(action([RoleController::class, 'store']), $this->request)
             ->assertRedirectToRoute('admin.roles.index')
@@ -123,9 +125,33 @@ class RoleControllerTest extends TestCase
      * @test
      * @return void
      */
+    public function it_store_guard_collector_success(): void
+    {
+        $this->request['guard_name'] = 'collector';
+        $this->request['permissions_admin'] = ['entity.*', 'entity.create', 'entity.edit', 'entity.delete'];
+        $this->request['permissions_collector'] = ['entity_collector.*', 'entity_collector.create', 'entity_collector.edit', 'entity_collector.delete'];
+
+        $this->actingAs($this->user)
+            ->post(action([RoleController::class, 'store']), $this->request)
+            ->assertRedirectToRoute('admin.roles.index')
+            ->assertSessionHas('helper_flash_message', __('user.role.created'));
+
+        $role = Role::where('name', $this->request['name'])->first();
+        $this->assertFalse($role->hasAllPermissions(['entity.*', 'entity.create', 'entity.edit', 'entity.delete']));
+        $this->assertTrue($role->hasAllPermissions(['entity_collector.*', 'entity_collector.create', 'entity_collector.edit', 'entity_collector.delete']));
+
+        $this->assertDatabaseHas('roles', [
+            'name' => $this->request['name']
+        ]);
+    }
+
+    /**
+     * @test
+     * @return void
+     */
     public function it_has_wildcard_permissions_success(): void
     {
-        $this->request['permissions'] = ['entity.*'];
+        $this->request['permissions_admin'] = ['entity.*'];
 
         $this->actingAs($this->user)
             ->post(action([RoleController::class, 'store']), $this->request)
@@ -144,16 +170,17 @@ class RoleControllerTest extends TestCase
      * @test
      * @return void
      */
-    public function it_validation_name_fail(): void
+    public function it_validation_name_and_guard_fail(): void
     {
         $this->app['session']->setPreviousUrl(route('admin.roles.create'));
 
         $this->request['name'] = '';
         $this->request['display_name'] = '';
+        $this->request['guard_name'] = 'false_name';
 
         $this->actingAs($this->user)
             ->post(action([RoleController::class, 'store']), $this->request)
-            ->assertInvalid(['name', 'display_name'])
+            ->assertInvalid(['name', 'display_name', 'guard_name'])
             ->assertRedirectToRoute('admin.roles.create');
 
         $this->assertDatabaseMissing('roles', [
@@ -169,11 +196,11 @@ class RoleControllerTest extends TestCase
     {
         $this->app['session']->setPreviousUrl(route('admin.roles.create'));
 
-        $this->request['permissions'] = ['permission.not-exist'];
+        $this->request['permissions_admin'] = ['permission.not-exist'];
 
         $this->actingAs($this->user)
             ->post(action([RoleController::class, 'store']), $this->request)
-            ->assertInvalid(['permissions'])
+            ->assertInvalid(['permissions_admin'])
             ->assertRedirectToRoute('admin.roles.create');
 
         $this->assertDatabaseMissing('roles', [
@@ -188,7 +215,8 @@ class RoleControllerTest extends TestCase
     public function it_update_success(): void
     {
         $this->request['name'] = 'newName';
-        $this->request['permissions'] = ['entity.edit', 'entity.delete'];
+        $this->request['permissions_admin'] = ['entity.edit', 'entity.delete'];
+        $this->request['permissions_collector'] = ['entity_collector.edit', 'entity_collector.delete'];
 
         $this->actingAs($this->user)
             ->put(
@@ -202,6 +230,7 @@ class RoleControllerTest extends TestCase
             ->assertSessionHas('helper_flash_message', __('user.role.updated'));
 
         $role = Role::where('name', $this->request['name'])->first();
+        $this->assertFalse($role->hasAllPermissions(['entity_collector.edit', 'entity_collector.delete']));
         $this->assertTrue($role->hasAllPermissions(['entity.edit', 'entity.delete']));
         $this->assertFalse($role->hasAllPermissions(['entity.*', 'entity.create']));
 

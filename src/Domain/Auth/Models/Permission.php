@@ -2,7 +2,7 @@
 
 namespace Domain\Auth\Models;
 
-use Database\Factories\PermissionFactory;
+use Database\Factories\Auth\PermissionFactory;
 use Domain\Auth\Observers\PermissionObserver;
 use Illuminate\Database\Eloquent\Attributes\ObservedBy;
 use Illuminate\Database\Eloquent\Factories\HasFactory;

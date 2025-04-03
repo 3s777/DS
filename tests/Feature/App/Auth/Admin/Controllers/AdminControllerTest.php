@@ -6,7 +6,7 @@ use App\Http\Controllers\Auth\Admin\AdminController;
 use App\Http\Requests\Auth\Admin\CreateAdminRequest;
 use App\Jobs\GenerateSmallThumbnailsJob;
 use App\Jobs\GenerateThumbnailJob;
-use Database\Factories\UserFactory;
+use Database\Factories\Auth\UserFactory;
 use Database\Seeders\PermissionsTestSeeder;
 use Domain\Auth\Models\Permission;
 use Domain\Auth\Models\Role;
@@ -62,6 +62,7 @@ class AdminControllerTest extends TestCase
     {
         $this->checkNotAuthRedirect('index');
         $this->checkNotAuthRedirect('create');
+        $this->checkNotAuthRedirect('show', 'get', [$this->authUser->slug]);
         $this->checkNotAuthRedirect('edit', 'get', [$this->authUser->slug]);
         $this->checkNotAuthRedirect('store', 'post', [$this->authUser->slug], $this->request);
         $this->checkNotAuthRedirect('update', 'put', [$this->authUser->slug], $this->request);
@@ -131,6 +132,19 @@ class AdminControllerTest extends TestCase
 
         Queue::assertPushed(GenerateThumbnailJob::class, 3);
         Queue::assertPushed(GenerateSmallThumbnailsJob::class, 2);
+    }
+
+    /**
+     * @test
+     * @return void
+     */
+    public function it_show_success(): void
+    {
+        $this->actingAs($this->authUser)
+            ->get(action([AdminController::class, 'show'], [$this->testingUser->slug]))
+            ->assertOk()
+            ->assertSee($this->testingUser->name)
+            ->assertViewIs('admin.user.user.show');
     }
 
     /**

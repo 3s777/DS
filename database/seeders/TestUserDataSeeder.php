@@ -35,7 +35,7 @@ class TestUserDataSeeder extends Seeder
         $testUser->assignRole('super_admin');
 
         $testCollector = Collector::create([
-            'name' => 'qqqqq_collector',
+            'name' => 'qqqqq.collector',
             'first_name' => 'Test Name',
             'slug' => 'qqqqq',
             'email' => 'qqq@qq.qq',
@@ -43,6 +43,8 @@ class TestUserDataSeeder extends Seeder
             'email_verified_at' => now(),
             'language' => 'en'
         ]);
+
+        $testCollector->assignRole('collector');
 
         $collectableFactory = fake()->randomElement([
             GameMedia::factory(5)

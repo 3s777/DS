@@ -4,8 +4,8 @@ namespace App\Settings\Controllers;
 
 use App\Http\Controllers\Settings\Admin\CountryController;
 use App\Http\Requests\Settings\Admin\CreateCountryRequest;
+use Database\Factories\Auth\UserFactory;
 use Database\Factories\Settings\CountryFactory;
-use Database\Factories\UserFactory;
 use Domain\Auth\Models\Role;
 use Domain\Auth\Models\User;
 use Domain\Settings\Models\Country;

@@ -3,7 +3,7 @@
 namespace App\Auth\Admin\Controllers;
 
 use App\Http\Controllers\Auth\Admin\AdminController;
-use Database\Factories\UserFactory;
+use Database\Factories\Auth\UserFactory;
 use Domain\Auth\Models\Role;
 use Domain\Auth\Models\User;
 use Illuminate\Database\Eloquent\Collection;

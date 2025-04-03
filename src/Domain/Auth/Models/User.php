@@ -4,7 +4,7 @@ namespace Domain\Auth\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 use App\Models\Image;
-use Database\Factories\UserFactory;
+use Database\Factories\Auth\UserFactory;
 use Domain\Auth\FilterRegitrars\AdminFilterRegistrar;
 use Domain\Auth\Notifications\ResetPasswordAdminNotification;
 use Domain\Auth\Notifications\VerifyEmailAdminNotification;
@@ -20,18 +20,18 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
+use Laravel\Scout\Searchable;
 use Mews\Purifier\Casts\CleanHtml;
+use OwenIt\Auditing\Auditable as HasAuditable;
 use OwenIt\Auditing\Contracts\Auditable;
 use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
 use Spatie\Permission\Traits\HasPermissions;
 use Spatie\Permission\Traits\HasRoles;
 use Support\Traits\Models\HasCustomAudit;
+use Support\Traits\Models\HasFeaturedImage;
 use Support\Traits\Models\HasImage;
 use Support\Traits\Models\HasSlug;
-use Support\Traits\Models\HasFeaturedImage;
-use OwenIt\Auditing\Auditable as HasAuditable;
-use Laravel\Scout\Searchable;
 
 class User extends Authenticatable implements MustVerifyEmail, HasLocalePreference, HasMedia, Auditable
 {

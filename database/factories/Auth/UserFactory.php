@@ -1,18 +1,17 @@
 <?php
 
-namespace Database\Factories;
+namespace Database\Factories\Auth;
 
-use Domain\Auth\Models\Collector;
+use Domain\Auth\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Str;
 
 /**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\Domain\Auth\Models\Collector>
+ * @extends \Illuminate\Database\Eloquent\Factories\Factory<\Domain\Auth\Models\User>
  */
-class CollectorFactory extends Factory
+class UserFactory extends Factory
 {
-    protected $model = Collector::class;
-
+    protected $model = User::class;
     /**
      * Define the model's default state.
      *

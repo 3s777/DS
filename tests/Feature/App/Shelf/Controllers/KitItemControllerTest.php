@@ -4,8 +4,8 @@ namespace App\Shelf\Controllers;
 
 use App\Http\Controllers\Shelf\Admin\KitItemController;
 use App\Http\Requests\Shelf\Admin\CreateKitItemRequest;
+use Database\Factories\Auth\UserFactory;
 use Database\Factories\Shelf\KitItemFactory;
-use Database\Factories\UserFactory;
 use Domain\Auth\Models\Role;
 use Domain\Auth\Models\User;
 use Domain\Shelf\Models\KitItem;

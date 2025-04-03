@@ -2,8 +2,8 @@
 
 namespace App\Shelf\Casts;
 
+use Database\Factories\Auth\UserFactory;
 use Database\Factories\Shelf\CollectibleFactory;
-use Database\Factories\UserFactory;
 use Domain\Auth\Models\Role;
 use Domain\Auth\Models\User;
 use Domain\Game\Models\GameMedia;

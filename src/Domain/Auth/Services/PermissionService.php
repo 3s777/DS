@@ -2,44 +2,33 @@
 
 namespace Domain\Auth\Services;
 
+use Domain\Auth\DTOs\FillPermissionDTO;
 use Domain\Auth\DTOs\FillRoleDTO;
 use Domain\Auth\Exceptions\UserCreateEditException;
+use Domain\Auth\Models\Permission;
 use Domain\Auth\Models\Role;
 use Domain\Shelf\DTOs\FillCategoryDTO;
 use Domain\Shelf\Models\Category;
+use Illuminate\Support\HigherOrderTapProxy;
 use Support\Exceptions\CrudException;
 use Support\Transaction;
 use Throwable;
 
-class RoleService
+class PermissionService
 {
-    public function create(FillRoleDTO $data)
+    public function create(FillPermissionDTO $data): HigherOrderTapProxy|Permission
     {
         return Transaction::run(
             function () use ($data) {
 
-                $role = Role::create([
+                $permission = Permission::create([
                     'name' => $data->name,
                     'display_name' => $data->display_name,
                     'guard_name' => $data->guard_name,
                     'description' => $data->description
                 ]);
 
-                $permissions = $data->permissions_admin;
-
-                if($role->guard_name === 'collector') {
-                    $permissions = $data->permissions_collector;
-                }
-
-                $role->syncPermissions($permissions);
-
-                $role->audit(
-                    'changePermission',
-                    [],
-                    ['permissions' => $permissions ?? []]
-                );
-
-                return $role;
+                return $permission;
             },
             function (Throwable $e) {
                 throw new UserCreateEditException($e->getMessage());
@@ -47,12 +36,12 @@ class RoleService
         );
     }
 
-    public function update(Role $role, FillRoleDTO $data)
+    public function update(Permission $permission, FillPermissionDTO $data)
     {
         return Transaction::run(
-            function () use ($data, $role) {
+            function () use ($data, $permission) {
 
-                $role->fill(
+                $permission->fill(
                     [
                         'name' => $data->name,
                         'display_name' => $data->display_name,
@@ -61,21 +50,7 @@ class RoleService
                     ]
                 )->save();
 
-                $permissions = $data->permissions_admin;
-
-                if($role->guard_name === 'collector') {
-                    $permissions = $data->permissions_collector;
-                }
-
-                $role->syncPermissions($permissions);
-
-                $role->audit(
-                    'changePermission',
-                    ['permissions' => $role->permissions->pluck(['name'])],
-                    ['permissions' => $permissions ?? []]
-                );
-
-                return $role;
+                return $permission;
             },
             function (Throwable $e) {
                 throw new UserCreateEditException($e->getMessage());

@@ -4,8 +4,8 @@ namespace App\Shelf\Controllers;
 
 use App\Http\Controllers\Shelf\Admin\CategoryController;
 use App\Http\Requests\Shelf\Admin\CreateCategoryRequest;
+use Database\Factories\Auth\UserFactory;
 use Database\Factories\Shelf\CategoryFactory;
-use Database\Factories\UserFactory;
 use Domain\Auth\Models\Role;
 use Domain\Auth\Models\User;
 use Domain\Shelf\Models\Category;

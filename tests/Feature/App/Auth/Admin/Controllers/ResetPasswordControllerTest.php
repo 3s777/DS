@@ -4,7 +4,7 @@ namespace App\Auth\Admin\Controllers;
 
 use App\Http\Controllers\Auth\Public\Admin\LoginController;
 use App\Http\Controllers\Auth\Public\Admin\ResetPasswordController;
-use Database\Factories\UserFactory;
+use Database\Factories\Auth\UserFactory;
 use Domain\Auth\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Hash;

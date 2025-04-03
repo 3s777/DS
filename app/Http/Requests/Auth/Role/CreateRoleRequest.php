@@ -38,7 +38,13 @@ class CreateRoleRequest extends FormRequest
                 'in:admin,collector'
             ],
             'description' => ['nullable','string'],
-            'permissions' => [
+            'permissions_admin' => [
+                'nullable',
+                'array',
+                'exists:permissions,name'
+//                new ModelExistsInArrayRule('Domain\Auth\Models\Permission', 'name'),
+            ],
+            'permissions_collector' => [
                 'nullable',
                 'array',
                 'exists:permissions,name'
@@ -53,7 +59,8 @@ class CreateRoleRequest extends FormRequest
             'name' => trans_choice('common.name', 1),
             'display_name' => __('common.display_name'),
             'description' => __('common.description'),
-            'permissions' => __('user.permission.permissions'),
+            'permissions_admin' => __('user.permission.permissions'),
+            'permissions_collector' => __('user.permission.permissions'),
             'guard_name' => __('user.type')
         ];
     }

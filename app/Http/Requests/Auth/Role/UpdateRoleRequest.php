@@ -34,10 +34,16 @@ class UpdateRoleRequest extends FormRequest
             ],
             'display_name' => ['required','string'],
             'description' => ['nullable','string'],
-            'permissions' => [
+            'permissions_admin' => [
                 'nullable',
                 'array',
-                new ModelExistsInArrayRule('Domain\Auth\Models\Permission', 'name'),
+                'exists:permissions,name'
+//                new ModelExistsInArrayRule('Domain\Auth\Models\Permission', 'name'),
+            ],
+            'permissions_collector' => [
+                'nullable',
+                'array',
+                'exists:permissions,name',
             ]
         ];
     }
@@ -48,7 +54,9 @@ class UpdateRoleRequest extends FormRequest
             'name' => trans_choice('common.name', 1),
             'display_name' => __('common.display_name'),
             'description' => __('common.description'),
-            'permissions' => __('user.permission.permissions'),
+            'permissions_admin' => __('user.permission.permissions'),
+            'permissions_collector' => __('user.permission.permissions'),
+            'guard_name' => __('user.type')
         ];
     }
 }

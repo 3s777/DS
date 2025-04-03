@@ -4,8 +4,8 @@ namespace App\Game\Controllers;
 
 use App\Http\Controllers\Game\Admin\GameGenreController;
 use App\Http\Requests\Game\Admin\CreateGameGenreRequest;
+use Database\Factories\Auth\UserFactory;
 use Database\Factories\Game\GameGenreFactory;
-use Database\Factories\UserFactory;
 use Domain\Auth\Models\Role;
 use Domain\Auth\Models\User;
 use Domain\Game\Models\GameGenre;

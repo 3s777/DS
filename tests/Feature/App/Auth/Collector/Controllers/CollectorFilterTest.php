@@ -3,7 +3,7 @@
 namespace App\Auth\Collector\Controllers;
 
 use App\Http\Controllers\Auth\Admin\CollectorController;
-use Database\Factories\CollectorFactory;
+use Database\Factories\Auth\CollectorFactory;
 use Domain\Auth\Models\Role;
 use Domain\Auth\Models\User;
 use Illuminate\Database\Eloquent\Collection;

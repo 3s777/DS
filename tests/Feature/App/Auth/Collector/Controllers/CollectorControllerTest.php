@@ -7,8 +7,8 @@ use App\Http\Controllers\Auth\Admin\CollectorController;
 use App\Http\Requests\Auth\Collector\CreateCollectorRequest;
 use App\Jobs\GenerateSmallThumbnailsJob;
 use App\Jobs\GenerateThumbnailJob;
-use Database\Factories\CollectorFactory;
-use Database\Factories\UserFactory;
+use Database\Factories\Auth\CollectorFactory;
+use Database\Factories\Auth\UserFactory;
 use Database\Seeders\PermissionsTestSeeder;
 use Domain\Auth\Models\Collector;
 use Domain\Auth\Models\Permission;
@@ -71,6 +71,7 @@ class CollectorControllerTest extends TestCase
     {
         $this->checkNotAuthRedirect('index');
         $this->checkNotAuthRedirect('create');
+        $this->checkNotAuthRedirect('show', 'get', [$this->authUser->slug]);
         $this->checkNotAuthRedirect('edit', 'get', [$this->authUser->slug]);
         $this->checkNotAuthRedirect('store', 'post', [$this->authUser->slug], $this->request);
         $this->checkNotAuthRedirect('update', 'put', [$this->authUser->slug], $this->request);
@@ -140,6 +141,19 @@ class CollectorControllerTest extends TestCase
 
         Queue::assertPushed(GenerateThumbnailJob::class, 3);
         Queue::assertPushed(GenerateSmallThumbnailsJob::class, 2);
+    }
+
+    /**
+     * @test
+     * @return void
+     */
+    public function it_show_success(): void
+    {
+        $this->actingAs($this->authUser)
+            ->get(action([CollectorController::class, 'show'], [$this->testingCollector->slug]))
+            ->assertOk()
+            ->assertSee($this->testingCollector->name)
+            ->assertViewIs('admin.user.collector.show');
     }
 
     /**
@@ -261,7 +275,7 @@ class CollectorControllerTest extends TestCase
                 ),
                 $this->request
             )
-            ->assertInvalid(['name', 'language', 'roles', 'permissions'])
+            ->assertInvalid(['name', 'language', 'roles', 'permissions', 'f'])
             ->assertRedirectToRoute('admin.collectors.edit', [$this->testingCollector->slug]);
 
         $this->assertDatabaseMissing('collectors', [

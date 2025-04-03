@@ -91,7 +91,13 @@ class RolesAndPermissionsSeeder extends Seeder
             'ru' => 'Игровой издатель. Удалить'
         ]]);
 
-        $role = Role::create(['name' => 'user', 'display_name' => [
+        Permission::create(['name' => 'test-collector', 'guard_name' => 'collector', 'display_name' => [
+            'en' => 'Test Collector',
+            'ru' => 'Test Collector'
+        ]]);
+
+        // Default admin role
+        Role::create(['name' => 'user', 'display_name' => [
             'en' => 'User',
             'ru' => 'Пользователь'
         ]]);
@@ -106,13 +112,24 @@ class RolesAndPermissionsSeeder extends Seeder
             'en' => 'Admin',
             'ru' => 'Администратор'
         ]]);
-        $role->givePermissionTo(Permission::whereNotIn('name', ['all.*', 'all.delete'])->get());
+        $role->givePermissionTo(Permission::whereNotIn('name', ['all.*', 'all.delete'])->where('guard_name', 'admin')->get());
 
         $role = Role::create(['name' => 'super_admin', 'display_name' => [
             'en' => 'Super Admin',
             'ru' => 'Супер администратор'
         ]]);
-        $role->givePermissionTo(Permission::all());
+        $role->givePermissionTo(Permission::all()->where('guard_name', 'admin'));
+
+        // Default collector role
+        Role::create(['name' => 'collector', 'guard_name' => 'collector', 'display_name' => [
+            'en' => 'Collector',
+            'ru' => trans_choice('user.collectors', 1)
+        ]]);
+
+        Role::create(['name' => 'seller', 'guard_name' => 'collector', 'display_name' => [
+            'en' => 'Seller',
+            'ru' => 'Продавец'
+        ]]);
 
     }
 }

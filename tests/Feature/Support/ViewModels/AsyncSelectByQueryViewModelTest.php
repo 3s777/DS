@@ -2,7 +2,7 @@
 
 namespace Support\ViewModels;
 
-use Database\Factories\UserFactory;
+use Database\Factories\Auth\UserFactory;
 use Domain\Auth\Models\Collector;
 use Domain\Auth\Models\Role;
 use Domain\Shelf\Models\Shelf;

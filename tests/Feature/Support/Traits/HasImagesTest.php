@@ -4,7 +4,7 @@ namespace Feature\Support\Traits;
 
 use App\Jobs\GenerateSmallThumbnailsJob;
 use App\Jobs\GenerateThumbnailJob;
-use Database\Factories\UserFactory;
+use Database\Factories\Auth\UserFactory;
 use Domain\Auth\Models\User;
 use Domain\Game\Models\GameMedia;
 use Illuminate\Contracts\Filesystem\Filesystem;

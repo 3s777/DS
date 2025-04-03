@@ -3,6 +3,7 @@
 namespace App\Http\Requests\Auth\Collector;
 
 use App\Rules\LatinLowercaseRule;
+use Domain\Auth\Models\Collector;
 use Domain\Auth\Models\User;
 use Illuminate\Contracts\Validation\ValidationRule;
 use Illuminate\Foundation\Http\FormRequest;
@@ -32,16 +33,16 @@ class UpdateCollectorRequest extends FormRequest
                 ->value(),
         ]);
 
-//        $roles = request('roles');
-//        $defaultRole = config('settings.default_collector_role');
-//
-//        if ($roles && !in_array($defaultRole, $roles)) {
-//            $roles[] = $defaultRole;
-//
-//            $this->merge([
-//                'roles' => $roles
-//            ]);
-//        }
+        $roles = request('roles');
+        $defaultRole = config('settings.default_collector_role');
+
+        if ($roles && !in_array($defaultRole, $roles)) {
+            $roles[] = $defaultRole;
+
+            $this->merge([
+                'roles' => $roles
+            ]);
+        }
     }
 
     /**
@@ -57,14 +58,14 @@ class UpdateCollectorRequest extends FormRequest
                 'max:30',
                 'min:3',
                 new LatinLowercaseRule(),
-                Rule::unique(User::class)->ignore($this->user)
+                Rule::unique(Collector::class)->ignore($this->collector)
             ],
             'email' => [
                 'required',
                 'string',
                 'email',
                 'max:255',
-                Rule::unique(User::class)->ignore($this->user),
+                Rule::unique(Collector::class)->ignore($this->collector),
             ],
             'password' => [
                 'nullable',
@@ -73,7 +74,7 @@ class UpdateCollectorRequest extends FormRequest
             'slug' => [
                 'nullable',
                 'string',
-                Rule::unique(User::class)->ignore($this->user)
+                Rule::unique(Collector::class)->ignore($this->collector)
             ],
             'language' => [
                 'required',

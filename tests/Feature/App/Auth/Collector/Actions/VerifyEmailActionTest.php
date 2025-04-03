@@ -2,7 +2,7 @@
 
 namespace App\Auth\Collector\Actions;
 
-use Database\Factories\CollectorFactory;
+use Database\Factories\Auth\CollectorFactory;
 use Domain\Auth\Actions\VerifyEmailAction;
 use Illuminate\Auth\Events\Verified;
 use Illuminate\Foundation\Testing\RefreshDatabase;

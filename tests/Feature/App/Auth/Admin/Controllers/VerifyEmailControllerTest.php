@@ -3,7 +3,7 @@
 namespace App\Auth\Admin\Controllers;
 
 use App\Http\Controllers\Auth\Public\Admin\VerifyEmailController;
-use Database\Factories\UserFactory;
+use Database\Factories\Auth\UserFactory;
 use Domain\Auth\Notifications\VerifyEmailAdminNotification;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Notification;

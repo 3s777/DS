@@ -12,6 +12,7 @@ class CreatePermissionRequestFactory extends RequestFactory
             'name' => fake()->name(),
             'display_name' => fake()->name(),
             'description' => fake()->text(),
+            'guard_name' => fake()->randomElement(['admin', 'collector'])
         ];
     }
 }

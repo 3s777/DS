@@ -2,7 +2,7 @@
 
 namespace App\Auth\Admin\Actions;
 
-use Database\Factories\UserFactory;
+use Database\Factories\Auth\UserFactory;
 use Domain\Auth\Actions\VerifyEmailAction;
 use Illuminate\Auth\Events\Verified;
 use Illuminate\Foundation\Testing\RefreshDatabase;

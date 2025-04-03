@@ -5,7 +5,7 @@ namespace App\Auth\Admin\Controllers;
 use App\Http\Controllers\Auth\Public\Admin\LoginController;
 use App\Http\Controllers\Auth\Public\Admin\RegisterController;
 use App\Http\Requests\Auth\Admin\RegisterRequest;
-use Database\Factories\UserFactory;
+use Database\Factories\Auth\UserFactory;
 use Domain\Auth\Models\Role;
 use Domain\Auth\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;

@@ -2,7 +2,7 @@
 
 namespace App\Auth\Collector\Actions;
 
-use Database\Factories\CollectorFactory;
+use Database\Factories\Auth\CollectorFactory;
 use Domain\Auth\Actions\LoginCollectorAction;
 use Domain\Auth\DTOs\LoginCollectorDTO;
 use Domain\Auth\Models\Collector;

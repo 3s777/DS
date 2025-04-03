@@ -12,7 +12,8 @@ class CreateRoleRequestFactory extends RequestFactory
             'name' => fake()->name(),
             'display_name' => fake()->name(),
             'description' => fake()->text(),
-            'permissions' => ['entity.*', 'entity.create', 'entity.edit', 'entity.delete']
+//            'permissions_admin' => ['entity.*', 'entity.create', 'entity.edit', 'entity.delete'],
+            'guard_name' => fake()->randomElement(['admin', 'collector'])
         ];
     }
 }

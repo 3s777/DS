@@ -4,8 +4,8 @@ namespace Feature\Support\Images;
 
 use App\Contracts\ImagesManager;
 use App\Models\Media;
+use Database\Factories\Auth\UserFactory;
 use Database\Factories\Game\GameDeveloperFactory;
-use Database\Factories\UserFactory;
 use Domain\Auth\Models\User;
 use Domain\Game\Models\GameDeveloper;
 use Domain\Game\Models\GameMedia;

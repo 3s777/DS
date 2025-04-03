@@ -5,7 +5,7 @@ namespace App\Auth\Collector\Controllers;
 use App\Http\Controllers\Auth\Public\Collector\LoginController;
 use App\Http\Controllers\Auth\Public\Collector\RegisterController;
 use App\Http\Requests\Auth\Collector\RegisterRequest;
-use Database\Factories\CollectorFactory;
+use Database\Factories\Auth\CollectorFactory;
 use Domain\Auth\Models\Role;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Testing\TestResponse;

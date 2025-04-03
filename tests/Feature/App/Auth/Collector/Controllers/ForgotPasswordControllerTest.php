@@ -3,7 +3,7 @@
 namespace App\Auth\Collector\Controllers;
 
 use App\Http\Controllers\Auth\Public\Collector\ForgotPasswordController;
-use Database\Factories\CollectorFactory;
+use Database\Factories\Auth\CollectorFactory;
 use Domain\Auth\Notifications\ResetPasswordCollectorNotification;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Notification;

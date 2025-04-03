@@ -3,7 +3,7 @@
 namespace Domain\Auth\Models;
 
 use App\Models\Image;
-use Database\Factories\CollectorFactory;
+use Database\Factories\Auth\CollectorFactory;
 use Domain\Auth\FilterRegitrars\CollectorFilterRegistrar;
 use Domain\Auth\Notifications\ResetPasswordCollectorNotification;
 use Domain\Auth\Notifications\VerifyEmailCollectorNotification;

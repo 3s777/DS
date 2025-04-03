@@ -5,7 +5,9 @@ namespace App\Http\Controllers\Auth\Admin;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Auth\Permission\CreatePermissionRequest;
 use App\Http\Requests\Auth\Permission\UpdatePermissionRequest;
+use Domain\Auth\DTOs\FillPermissionDTO;
 use Domain\Auth\Models\Permission;
+use Domain\Auth\Services\PermissionService;
 use Domain\Auth\ViewModels\Admin\PermissionIndexViewModel;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
@@ -24,9 +26,9 @@ class PermissionController extends Controller
         return view('admin.user.permission.create');
     }
 
-    public function store(CreatePermissionRequest $request): RedirectResponse
+    public function store(CreatePermissionRequest $request, PermissionService $permissionService): RedirectResponse
     {
-        Permission::create($request->safe()->toArray());
+        $permissionService->create(FillPermissionDTO::fromRequest($request));
 
         flash()->info(__('user.permission.created'));
 
@@ -43,9 +45,9 @@ class PermissionController extends Controller
         return view('admin.user.permission.edit', compact(['permission']));
     }
 
-    public function update(UpdatePermissionRequest $request, Permission $permission): RedirectResponse
+    public function update(UpdatePermissionRequest $request, Permission $permission, PermissionService $permissionService): RedirectResponse
     {
-        $permission->fill($request->validated())->save();
+        $permissionService->update($permission, FillPermissionDTO::fromRequest($request));
 
         flash()->info(__('user.permission.updated'));
 

@@ -1,16 +1,16 @@
 <?php
 
-namespace Database\Factories;
+namespace Database\Factories\Auth;
 
-use Domain\Auth\Models\Permission;
+use Domain\Auth\Models\Role;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
  * @extends \Illuminate\Database\Eloquent\Factories\Factory<\Domain\Auth\Models\User>
  */
-class PermissionFactory extends Factory
+class RoleFactory extends Factory
 {
-    protected $model = Permission::class;
+    protected $model = Role::class;
     /**
      * Define the model's default state.
      *
@@ -22,6 +22,7 @@ class PermissionFactory extends Factory
             'name' => fake()->name(),
             'display_name' => $this->translations(['en', 'ru'], [fake()->name(), fake()->name()]),
             'description' => fake()->text(200),
+            'guard_name' => 'admin'
         ];
     }
 }
