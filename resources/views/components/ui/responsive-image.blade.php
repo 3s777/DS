@@ -13,6 +13,8 @@
             {{ asset('storage/images/'.$imgPathInfo['dirname'].'/'.$imgPathInfo['filename'].'.webp') }} 2048w,
         "
             sizes="{{ $sizes }}"
+            @if($width) width="{{ $width }}" @endif
+            @if($height) height="{{ $height }}" @endif
         />
         <img
             {{ $img->attributes->class([

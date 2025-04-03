@@ -40,9 +40,17 @@
         display: block;
         flex-basis: 100px;
         flex-shrink: 0;
+        text-align: center;
+        width: 100px;
         overflow: hidden;
         border-radius: $small-border-radius;
         line-height: 0;
+
+
+        img {
+            width: auto;
+            height: auto;
+        }
     }
 
     &__info {

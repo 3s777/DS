@@ -20,7 +20,9 @@ class ResponsiveImage extends Component
         public array $imageSizes,
         public string $sizes,
         public string $path = '',
-        public bool $placeholder = true
+        public bool $placeholder = true,
+        public ?int $width = null,
+        public ?int $height = null
     ) {
         $this->imgPathInfo = pathinfo($this->path);
     }

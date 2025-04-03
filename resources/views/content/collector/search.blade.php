@@ -17,7 +17,6 @@
                 </x-ui.title>
             </div>
 
-
             <div class="collector-search__list">
                 @foreach($collectors as $collector)
                     <x-ui.card class="collector-preview" size="small">
@@ -32,7 +31,9 @@
                                                 :model="auth('collector')->user()"
                                                 :image-sizes="['extra_small', 'small']"
                                                 :path="$collector->getFeaturedImagePath()"
-                                                :placeholder="false"
+                                                :placeholder="true"
+                                                width="100"
+                                                height="100"
                                                 sizes="(max-width: 768px) 100px, (max-width: 1400px) 80px, 100px">
                                                 <x-slot:img alt="test" title="test title"></x-slot:img>
                                             </x-ui.responsive-image>
