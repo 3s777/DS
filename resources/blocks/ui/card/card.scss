@@ -31,11 +31,19 @@
 
     @include breakpoint-max($ml) {
         padding: 24px;
+
+        &_size_small {
+            padding: 16px;
+        }
     }
 
     @include breakpoint-max($sm) {
         padding: 20px 12px;
         border-radius: $small-border-radius;
+
+        &_size_small {
+            padding: 12px 10px;
+        }
     }
 }
 

@@ -1,16 +1,21 @@
 .counter-buttons {
+    display: flex;
+    justify-content: space-between;
+    //flex-wrap: wrap;
+    gap: 6px;
+    width: 100%;
 
-    &_light {
-        display: flex;
-        justify-content: flex-start;
-        flex-wrap: wrap;
-        width: 100%;
-    }
+    //&_light {
+    //    display: flex;
+    //    justify-content: space-between;
+    //    //flex-wrap: wrap;
+    //    gap: 6px;
+    //    width: 100%;
+    //}
 
     &__button_light {
         position: relative;
         padding: 4px;
-        margin-right: 6px;
         margin-bottom: 4px;
         background: none;
         border: 1px solid $opposite-main-20;

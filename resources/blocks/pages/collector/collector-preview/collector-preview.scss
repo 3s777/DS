@@ -24,7 +24,8 @@
 
     &__main {
         display: flex;
-        align-items: center;
+        gap: 12px;
+        align-items: stretch;
 
         a {
             text-decoration: none;
@@ -32,7 +33,7 @@
     }
 
     &__avatar {
-        margin-right: 12px;
+        width: 100px;
         line-height: 0;
     }
 
@@ -40,22 +41,27 @@
         display: block;
         flex-basis: 100px;
         flex-shrink: 0;
-        text-align: center;
         width: 100px;
-        overflow: hidden;
-        border-radius: $small-border-radius;
+        padding-top: 6px;
+        text-align: center;
         line-height: 0;
-
+        aspect-ratio: 1 / 1;
 
         img {
             width: auto;
             height: auto;
+            max-width: 100%;
+            max-height: 100%;
+            border-radius: $small-border-radius;
+            overflow: hidden;
         }
     }
 
     &__info {
         display: flex;
         flex-wrap: wrap;
+        flex-direction: column;
+        justify-content: space-around;
         width: 100%;
     }
 
@@ -97,10 +103,29 @@
     }
 
     &__buttons {
-        display: flex;
-        justify-content: flex-start;
-        flex-wrap: wrap;
+        //display: grid;
+        //grid-template-columns: repeat(auto-fit, minmax(50px, max-content));
+        //justify-content: space-between;
+        //gap: 6px;
         width: 100%;
         margin-top: 16px;
+        max-width: 100%;
     }
+
+    &__button {
+        min-width: 50px;
+        max-width: max-content;
+    }
+
+    &__badge {
+        //max-width: 24px;
+        text-overflow: ellipsis;
+        overflow: hidden;
+    }
+
+    //@include breakpoint-max($xl) {
+    //    &__buttons {
+    //        justify-content: flex-end;
+    //    }
+    //}
 }
