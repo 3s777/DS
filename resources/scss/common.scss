@@ -12,8 +12,9 @@
 @import "../blocks/common/content/content";
 @import "../blocks/common/sidebar-menu/sidebar-menu";
 @import "../blocks/common/pagination/pagination";
-@import "../blocks/common/current-filters/current-filters";
-@import "../blocks/common/filter-badge/filter-badge";
+@import "../blocks/common/filters/current-filters/current-filters";
+@import "../blocks/common/filters/filters";
+@import "../blocks/common/filters/filter-badge/filter-badge";
 @import "../blocks/common/missing/missing";
 @import "../blocks/common/action-table/action-table";
 @import "../blocks/common/selectable-order/selectable-order";

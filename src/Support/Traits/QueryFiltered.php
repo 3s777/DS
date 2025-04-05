@@ -6,12 +6,19 @@ use Illuminate\Pipeline\Pipeline;
 
 trait QueryFiltered
 {
-    public function filtered()
+    public function filtered(?array $filters = null, ?string $key = 'filters', bool $is_admin = false)
     {
-        if (request('filters')) {
+
+        if($is_admin) {
+            $filters = $filters ?? $this->model->availableFilters(true);
+        } else {
+            $filters = $filters ?? $this->model->availableFilters();
+        }
+
+        if (request($key)) {
             return app(Pipeline::class)
                 ->send($this)
-                ->through(filters($this->model->availableFilters()))
+                ->through(filters($filters))
                 ->thenReturn();
         }
 
@@ -19,4 +26,6 @@ trait QueryFiltered
         filters($this->model->availableFilters());
         return $this;
     }
+
+
 }

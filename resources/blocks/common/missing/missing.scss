@@ -5,11 +5,22 @@
     gap: 8px;
     padding-top: 16px;
     padding-bottom: 16px;
-    font-size: 1.2rem;
+    font-size: rem(20);
 
     & svg {
         stroke: $opposite-main;
         stroke-width: 3px;
         fill: none;
+    }
+
+    &__card {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 8px;
+    }
+
+    @include breakpoint-max($md) {
+        font-size: rem(16);
     }
 }

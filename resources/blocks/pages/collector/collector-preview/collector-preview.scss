@@ -62,7 +62,12 @@
         flex-wrap: wrap;
         flex-direction: column;
         justify-content: space-around;
-        width: 100%;
+        flex-basis: 100%;
+        overflow: hidden;
+    }
+
+    &__avatar ~ &__info {
+        flex-basis: calc(100% - 100px);
     }
 
     &__name {
@@ -70,12 +75,16 @@
         padding-top: 4px;
         font-size: rem(18);
         font-weight: 700;
+        overflow: hidden;
+        text-overflow: ellipsis;
     }
 
     &__nickname {
         width: 100%;
         margin-top: 8px;
-        font-size: rem(18);
+        font-size: rem(16);
+        overflow: hidden;
+        text-overflow: ellipsis;
     }
 
     &__main-buttons {
@@ -88,8 +97,15 @@
     &__subscribe {
         display: flex;
         justify-content: space-between;
+        flex-wrap: wrap;
+        gap: 8px;
         width: 100%;
         margin-top: 8px;
+    }
+
+    &__subscribe-button {
+        padding-left: 20px;
+        padding-right: 20px;
     }
 
     &__message-icon {
@@ -107,6 +123,7 @@
         //grid-template-columns: repeat(auto-fit, minmax(50px, max-content));
         //justify-content: space-between;
         //gap: 6px;
+        justify-content: flex-end;
         width: 100%;
         margin-top: 16px;
         max-width: 100%;
@@ -123,9 +140,28 @@
         overflow: hidden;
     }
 
-    //@include breakpoint-max($xl) {
-    //    &__buttons {
-    //        justify-content: flex-end;
-    //    }
-    //}
+    @include breakpoint-max($ml) {
+        &__buttons {
+            justify-content: flex-end;
+        }
+
+        &__subscribe-button {
+            padding-left: 16px;
+            padding-right: 16px;
+        }
+    }
+
+    @include breakpoint-max($sl) {
+        &__button {
+            min-width: 40px
+        }
+
+        &__button {
+            svg {
+                width: 16px;
+                height: 16px;
+            }
+        }
+
+    }
 }

@@ -13,6 +13,7 @@
                     @if(auth('collector')->user()->getFeaturedImagePath())
                         <div class="profile__avatar">
                             <x-ui.responsive-image
+                                class="profile__avatar-img"
                                 :model="auth('collector')->user()"
                                 :image-sizes="['extra_small', 'small']"
                                 :path="auth('collector')->user()->getFeaturedImagePath()"

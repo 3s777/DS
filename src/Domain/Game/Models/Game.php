@@ -107,8 +107,12 @@ class Game extends Model implements HasMedia
         ];
     }
 
-    public function availableFilters(): array
+    public function availableFilters(bool $is_admin = false): array
     {
+        if($is_admin) {
+            return app(GameFilterRegistrar::class)->filtersList();
+        }
+
         return app(GameFilterRegistrar::class)->filtersList();
     }
 

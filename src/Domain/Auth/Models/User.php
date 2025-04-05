@@ -5,7 +5,7 @@ namespace Domain\Auth\Models;
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 use App\Models\Image;
 use Database\Factories\Auth\UserFactory;
-use Domain\Auth\FilterRegitrars\AdminFilterRegistrar;
+use Domain\Auth\FilterRegitrars\Admin\AdminFilterRegistrar;
 use Domain\Auth\Notifications\ResetPasswordAdminNotification;
 use Domain\Auth\Notifications\VerifyEmailAdminNotification;
 use Domain\Auth\QueryBuilders\UserQueryBuilder;

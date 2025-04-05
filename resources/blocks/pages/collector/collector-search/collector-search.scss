@@ -16,6 +16,11 @@
         min-width: 0;
     }
 
+    &__missing {
+        flex-basis: 100%;
+        font-size: rem(24);
+    }
+
     @include breakpoint-max($xl) {
         &__list {
             grid-template-columns: repeat(3, 1fr);

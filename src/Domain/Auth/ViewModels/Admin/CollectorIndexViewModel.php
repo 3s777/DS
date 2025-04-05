@@ -16,7 +16,7 @@ class CollectorIndexViewModel extends ViewModel
     {
         return Collector::query()
             ->select('collectors.id', 'collectors.name', 'collectors.slug', 'collectors.first_name', 'collectors.created_at', 'collectors.email')
-            ->filtered()
+            ->filtered(is_admin:true)
             ->sorted()
             ->paginate(50)
             ->withQueryString();

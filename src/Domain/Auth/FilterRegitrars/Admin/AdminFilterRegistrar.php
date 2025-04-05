@@ -1,6 +1,6 @@
 <?php
 
-namespace Domain\Auth\FilterRegitrars;
+namespace Domain\Auth\FilterRegitrars\Admin;
 
 use App\Contracts\FilterRegistrar;
 use App\Filters\DatesFilter;

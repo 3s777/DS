@@ -13,11 +13,21 @@
         flex-basis: 100px;
         flex-shrink: 0;
         overflow: hidden;
-        border-radius: $border-radius;
+        text-align: center;
         line-height: 0;
+    }
+
+    &__avatar-img {
+        width: 100px;
+        aspect-ratio: 1/1;
 
         img {
-            width: 100%;
+            width: auto;
+            height: auto;
+            max-width: 100%;
+            max-height: 100%;
+            border-radius: $border-radius;
+            overflow: hidden;
         }
     }
 
@@ -329,6 +339,17 @@
     @include breakpoint-max($xs) {
         &__summary-value {
             max-width: 80px;
+        }
+    }
+
+    @include breakpoint-max($sl) {
+        &__info {
+            flex-wrap: wrap;
+            max-width: 100%;
+        }
+
+        &__avatar {
+            flex-basis: 100%;
         }
     }
 }

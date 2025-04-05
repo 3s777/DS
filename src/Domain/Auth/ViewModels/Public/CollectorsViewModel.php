@@ -2,14 +2,34 @@
 
 namespace Domain\Auth\ViewModels\Public;
 
+use Domain\Auth\FilterRegitrars\Public\CollectorFilterRegistrar;
 use Domain\Auth\Models\Collector;
-use Illuminate\Database\Eloquent\Collection;
+use Domain\Shelf\Enums\TargetEnum;
+use Illuminate\Contracts\Pagination\LengthAwarePaginator;
+use Illuminate\Database\Eloquent\Builder;
 use Spatie\ViewModels\ViewModel;
 
 class CollectorsViewModel extends ViewModel
 {
-    public function collectors(): Collection
+    public function collectors(): LengthAwarePaginator
     {
-        return Collector::all();
+        return Collector::select(['id', 'slug', 'name', 'first_name'])
+            ->with(['media'])
+            ->withCount([
+                'collectibles as collection' => function(Builder $query) {
+                    $query->where('target', TargetEnum::Collection);
+                },
+                'collectibles as sale' => function(Builder $query) {
+                    $query->where('target', TargetEnum::Sale);
+                },
+                'collectibles as auction' => function(Builder $query) {
+                    $query->where('target', TargetEnum::Auction);
+                },
+                'collectibles as exchange' => function(Builder $query) {
+                    $query->where('target', TargetEnum::Exchange);
+                }
+            ])
+            ->filtered(app(CollectorFilterRegistrar::class)->filtersList())
+            ->paginate(30);
     }
 }

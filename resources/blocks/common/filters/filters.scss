@@ -1,0 +1,52 @@
+.filters {
+    margin-bottom: 24px;
+
+    &__header {
+        display: flex;
+        justify-content: flex-start;
+        gap: 12px;
+        margin-bottom: 24px;
+    }
+
+    &__search {
+        flex-basis: 100%;
+    }
+
+    &__content {
+        margin-bottom: 24px;
+    }
+
+    &__buttons {
+        display: flex;
+        justify-content: center;
+        gap: 16px;
+    }
+
+    &__trigger {
+        padding: 10px 15px;
+    }
+
+    &__badges {
+
+    }
+
+    @include breakpoint-max($md) {
+        margin-bottom: 28px;
+
+        &__buttons {
+            flex-wrap: wrap;
+        }
+
+        .current-filters {
+            padding-bottom: 8px;
+        }
+    }
+
+    @include breakpoint-max($sm) {
+        &__buttons {
+            .button {
+                width: 100%;
+            }
+        }
+    }
+}

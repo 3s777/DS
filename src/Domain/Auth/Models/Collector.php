@@ -4,10 +4,10 @@ namespace Domain\Auth\Models;
 
 use App\Models\Image;
 use Database\Factories\Auth\CollectorFactory;
-use Domain\Auth\FilterRegitrars\CollectorFilterRegistrar;
 use Domain\Auth\Notifications\ResetPasswordCollectorNotification;
 use Domain\Auth\Notifications\VerifyEmailCollectorNotification;
 use Domain\Auth\QueryBuilders\CollectorQueryBuilder;
+use Domain\Game\FilterRegistrars\GameFilterRegistrar;
 use Domain\Shelf\Models\Collectible;
 use Domain\Shelf\Models\Shelf;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
@@ -32,6 +32,9 @@ use Support\Traits\Models\HasCustomAudit;
 use Support\Traits\Models\HasFeaturedImage;
 use Support\Traits\Models\HasImage;
 use Support\Traits\Models\HasSlug;
+use Domain\Auth\FilterRegitrars\Public\CollectorFilterRegistrar;
+use Domain\Auth\FilterRegitrars\Admin\CollectorFilterRegistrar as AdminFilterRegistrar;
+
 
 class Collector extends Authenticatable implements MustVerifyEmail, HasLocalePreference, HasMedia, Auditable
 {
@@ -132,8 +135,12 @@ class Collector extends Authenticatable implements MustVerifyEmail, HasLocalePre
         ];
     }
 
-    public function availableFilters(): array
+    public function availableFilters(bool $is_admin = false): array
     {
+        if($is_admin) {
+            return app(AdminFilterRegistrar::class)->filtersList();
+        }
+
         return app(CollectorFilterRegistrar::class)->filtersList();
     }
 
