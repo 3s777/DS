@@ -23,7 +23,7 @@ class GameMediaIndexViewModel extends ViewModel
             ->leftJoin('users', 'users.id', '=', 'game_medias.user_id')
 //            ->join('game_game_genre', 'games.id', '=', 'game_game_genre.game_id')
 //            ->join('game_genres', 'game_genres.id', '=', 'game_game_genre.game_genre_id')
-            ->filtered()
+            ->filteredAdmin()
             ->sorted()
             ->paginate(10)
             ->withQueryString();

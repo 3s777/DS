@@ -26,7 +26,7 @@
                             <div class="collector-preview__main">
                                 @if($collector->getFeaturedImagePath())
                                     <div class="collector-preview__avatar">
-                                        <a href="">
+                                        <a href="{{ route('collector', $collector->slug) }}">
                                             <x-ui.responsive-image
                                                 class="collector-preview__img"
                                                 :model="auth('collector')->user()"
@@ -36,15 +36,15 @@
                                                 width="100"
                                                 height="100"
                                                 sizes="100px">
-                                                <x-slot:img alt="test" title="test title"></x-slot:img>
+                                                <x-slot:img alt="{{ '@'.$collector->name }}" title="{{ '@'.$collector->name }}"></x-slot:img>
                                             </x-ui.responsive-image>
                                         </a>
                                     </div>
                                 @endif
                                 <div class="collector-preview__info">
-                                    <div class="collector-preview__name"><a href="">{{ $collector->first_name }}</a></div>
+                                    <div class="collector-preview__name"><a href="{{ route('collector', $collector->slug) }}">{{ $collector->first_name }}</a></div>
                                     <div class="collector-preview__nickname">
-                                        <a href="">{{ '@'.$collector->name }}</a>
+                                        <a href="{{ route('collector', $collector->slug) }}">{{ '@'.$collector->name }}</a>
                                     </div>
                                     <div class="collector-preview__subscribe">
                                         <x-ui.form.button class="collector-preview__subscribe-button" size="small">Подписаться</x-ui.form.button>

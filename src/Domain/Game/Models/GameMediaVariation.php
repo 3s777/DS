@@ -110,7 +110,7 @@ class GameMediaVariation extends Model implements HasMedia
         ];
     }
 
-    public function availableFilters(): array
+    public function availableAdminFilters(): array
     {
         return app(GameMediaVariationFilterRegistrar::class)->filtersList();
     }

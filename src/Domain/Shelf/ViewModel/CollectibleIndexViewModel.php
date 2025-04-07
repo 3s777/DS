@@ -59,7 +59,7 @@ class CollectibleIndexViewModel extends ViewModel
             )
             ->leftJoin('collectors', 'collectors.id', '=', 'collectibles.collector_id')
             ->with(['collectable:id,name', 'sale', 'auction','category:id,name'])
-            ->filtered()
+            ->filteredAdmin()
             ->sorted()
             ->paginate(10)
             ->withQueryString();

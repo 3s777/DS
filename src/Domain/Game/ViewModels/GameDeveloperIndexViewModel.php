@@ -30,7 +30,7 @@ class GameDeveloperIndexViewModel extends ViewModel
 //            ->with(['user:id,name,email'])
             ->select('game_developers.id', 'game_developers.name', 'game_developers.created_at', 'game_developers.slug', 'game_developers.user_id', 'users.name as user_name')
             ->leftJoin('users', 'users.id', '=', 'game_developers.user_id')
-            ->filtered()
+            ->filteredAdmin()
             ->sorted()
             ->paginate(10)
             ->withQueryString();

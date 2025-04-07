@@ -10,14 +10,20 @@
     }}>
 
     @if($card)
-        <x-ui.card class="missing__card" :body="false">
-    @endif
+        <x-ui.card class="card missing__card" :body="false">
+
         @if($icon)
             <x-svg.missing></x-svg.missing>
         @endif
 
         {{ $slot }}
-    @if($card)
+
         </x-ui.card>
+    @else
+        @if($icon)
+            <x-svg.missing></x-svg.missing>
+        @endif
+
+        {{ $slot }}
     @endif
 </div>

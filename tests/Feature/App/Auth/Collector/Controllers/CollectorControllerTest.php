@@ -275,7 +275,7 @@ class CollectorControllerTest extends TestCase
                 ),
                 $this->request
             )
-            ->assertInvalid(['name', 'language', 'roles', 'permissions', 'f'])
+            ->assertInvalid(['name', 'language', 'roles', 'permissions'])
             ->assertRedirectToRoute('admin.collectors.edit', [$this->testingCollector->slug]);
 
         $this->assertDatabaseMissing('collectors', [

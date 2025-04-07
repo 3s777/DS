@@ -79,7 +79,7 @@ class GameDeveloper extends Model implements HasMedia
         ];
     }
 
-    public function availableFilters(): array
+    public function availableAdminFilters(): array
     {
         return app(GameDeveloperFilterRegistrar::class)->filtersList();
     }

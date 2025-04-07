@@ -130,7 +130,7 @@ class User extends Authenticatable implements MustVerifyEmail, HasLocalePreferen
         ];
     }
 
-    public function availableFilters(): array
+    public function availableAdminFilters(): array
     {
         return app(AdminFilterRegistrar::class)->filtersList();
     }

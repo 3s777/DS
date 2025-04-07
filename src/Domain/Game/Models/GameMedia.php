@@ -108,7 +108,7 @@ class GameMedia extends Model implements HasMedia, HasProperties
         ];
     }
 
-    public function availableFilters(): array
+    public function availableAdminFilters(): array
     {
         return app(GameMediaFilterRegistrar::class)->filtersList();
     }

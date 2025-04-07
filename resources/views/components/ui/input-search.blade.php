@@ -20,7 +20,8 @@
                     'method' => $method
                 ])
             }}
-            :class="search_active ? 'input-search__form_active' : ''">
+            :class="search_active ? 'input-search__form_active' : ''"
+            x-data="{ preventSearchSubmit: false }" x-on:submit="preventSearchSubmit = true">
 
             @if($method === 'post')
                 @csrf
@@ -42,7 +43,7 @@
 
             {{ $slot }}
 
-            <button class="input-search__form-button">
+            <button class="input-search__form-button" x-bind:disabled="preventSearchSubmit">
                 <x-svg.search class="input-search__icon"></x-svg.search>
             </button>
         </form>

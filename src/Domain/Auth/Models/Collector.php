@@ -33,7 +33,7 @@ use Support\Traits\Models\HasFeaturedImage;
 use Support\Traits\Models\HasImage;
 use Support\Traits\Models\HasSlug;
 use Domain\Auth\FilterRegitrars\Public\CollectorFilterRegistrar;
-use Domain\Auth\FilterRegitrars\Admin\CollectorFilterRegistrar as AdminFilterRegistrar;
+use Domain\Auth\FilterRegitrars\Admin\CollectorFilterRegistrar as AdminCollectorFilterRegistrar;
 
 
 class Collector extends Authenticatable implements MustVerifyEmail, HasLocalePreference, HasMedia, Auditable
@@ -135,15 +135,15 @@ class Collector extends Authenticatable implements MustVerifyEmail, HasLocalePre
         ];
     }
 
-    public function availableFilters(bool $is_admin = false): array
+    public function availableAdminFilters(): array
     {
-        if($is_admin) {
-            return app(AdminFilterRegistrar::class)->filtersList();
-        }
-
-        return app(CollectorFilterRegistrar::class)->filtersList();
+        return app(AdminCollectorFilterRegistrar::class)->filtersList();
     }
 
+    public function availableFilters(): array
+    {
+        return app(CollectorFilterRegistrar::class)->filtersList();
+    }
 
     public function preferredLocale()
     {

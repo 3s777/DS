@@ -16,7 +16,7 @@ class AdminIndexViewModel extends ViewModel
     {
         return User::query()
             ->select('users.id', 'users.name', 'users.slug', 'users.first_name', 'users.created_at', 'users.email')
-            ->filtered()
+            ->filteredAdmin()
             ->sorted()
             ->paginate(50)
             ->withQueryString();

@@ -74,7 +74,7 @@ class GamePublisher extends Model implements HasMedia
         ];
     }
 
-    public function availableFilters(): array
+    public function availableAdminFilters(): array
     {
         return app(GamePublisherFilterRegistrar::class)->filtersList();
     }

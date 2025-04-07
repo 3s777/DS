@@ -65,13 +65,18 @@ class AuthCollectorRegistrar implements RouteRegistrar
 
                 Route::prefix('{locale}')
                     ->controller(PublicCollectorController::class)
-                    ->middleware('auth:collector')
+//                    ->middleware('auth:collector')
+                    ->middleware(['remove.locale'])
                     ->group(function() {
                         Route::get('/collectors', 'index')->name('collectors');
+                        Route::get('/collector/{collector}', 'show')->name('collector');
+                        Route::get('/collector/{collector}/collection', 'showCollection')->name('collector.collection');
+                        Route::get('/collector/{collector}/sale', 'showSale')->name('collector.sale');
+                        Route::get('/collector/{collector}/auction', 'showAuction')->name('collector.auction');
+                        Route::get('/collector/{collector}/wishlist', 'showWishlist')->name('collector.wishlist');
+                        Route::get('/collector/{collector}/exchange', 'showExchange')->name('collector.exchange');
+                        Route::get('/collector/{collector}/blog', 'showBlog')->name('collector.blog');
                     });
-
-
-
 
                 Route::as('admin.')->prefix('{locale}/admin')->middleware(['auth', 'verified'])->group(function () {
                     Route::post('/select-collectors', [CollectorController::class, 'getForSelect'])->name('select-collectors');

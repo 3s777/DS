@@ -1,4 +1,5 @@
 @props([
+    'get' => false,
     'method' => 'POST',
     'preventSubmit' => true,
     'action' => false,
@@ -10,7 +11,7 @@
             'form'
         ])->merge([
             'action' => $action,
-            'method' => 'POST',
+            'method' => $get ? 'GET' :'POST',
             'id' => $id
         ])
     }}
@@ -18,8 +19,10 @@
         x-data="{ preventSubmit: false }" x-on:submit="preventSubmit = true"
         @endif
     >
-    @csrf
-    @method($method)
+    @if(!$get)
+        @csrf
+        @method($method)
+    @endif
 
     {{ $slot }}
 </form>

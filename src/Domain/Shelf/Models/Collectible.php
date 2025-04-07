@@ -133,7 +133,7 @@ class Collectible extends Model implements HasMedia
         ];
     }
 
-    public function availableFilters(): array
+    public function availableAdminFilters(): array
     {
         return app(CollectibleFilterRegistrar::class)->filtersList();
     }
