@@ -8,6 +8,7 @@ use App\Routing\AuthAdminRegistrar;
 use App\Routing\AuthCollectorRegistrar;
 use App\Routing\FilepondRegistrar;
 use App\Routing\GameRegistrar;
+use App\Routing\PageRegistrar;
 use App\Routing\SettingRegistrar;
 use App\Routing\ShelfRegistrar;
 use Illuminate\Cache\RateLimiting\Limit;
@@ -36,6 +37,7 @@ class RouteServiceProvider extends ServiceProvider
         AuthCollectorRegistrar::class,
         GameRegistrar::class,
         ShelfRegistrar::class,
+        PageRegistrar::class,
         FilepondRegistrar::class,
     ];
 

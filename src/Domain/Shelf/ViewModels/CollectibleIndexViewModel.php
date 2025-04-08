@@ -1,6 +1,6 @@
 <?php
 
-namespace Domain\Shelf\ViewModel;
+namespace Domain\Shelf\ViewModels;
 
 use Domain\Shelf\Enums\CollectibleTypeEnum;
 use Domain\Shelf\Enums\ConditionEnum;

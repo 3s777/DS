@@ -1,6 +1,6 @@
 <?php
 
-namespace Domain\Settings\ViewModel;
+namespace Domain\Settings\ViewModels;
 
 use Domain\Settings\Models\Country;
 use Spatie\ViewModels\ViewModel;

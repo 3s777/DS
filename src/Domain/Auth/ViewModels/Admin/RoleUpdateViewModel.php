@@ -18,15 +18,15 @@ class RoleUpdateViewModel extends ViewModel
 
     public function permissionsAdmin(): array
     {
-//        return Cache::rememberForever('permissions_select', function () {
+        return Cache::rememberForever('permissions_select', function () {
             return Permission::all()->where('guard_name', 'admin')->select('name', 'display_name')->toArray();
-//        });
+        });
     }
 
     public function permissionsCollector(): array
     {
-//        return Cache::rememberForever('permissions_select', function () {
+        return Cache::rememberForever('permissions_select', function () {
             return Permission::all()->where('guard_name', 'collector')->select('name', 'display_name')->toArray();
-//        });
+        });
     }
 }

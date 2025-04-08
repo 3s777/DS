@@ -1,6 +1,6 @@
 <?php
 
-namespace Domain\Shelf\ViewModel;
+namespace Domain\Shelf\ViewModels;
 
 use Domain\Shelf\Models\KitItem;
 use Spatie\ViewModels\ViewModel;

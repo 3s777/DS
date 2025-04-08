@@ -15,6 +15,7 @@ class CollectorFilterRegistrar implements FilterRegistrar
                 __('common.search'),
                 'search',
                 'collectors',
+                alternativeFields: ['first_name']
             )
         ];
     }

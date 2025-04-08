@@ -12,12 +12,14 @@ use Domain\Shelf\Models\Collectible;
 use Domain\Shelf\Models\Shelf;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Contracts\Translation\HasLocalePreference;
+use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Database\Eloquent\Relations\MorphMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Mail\Attachment;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 use Laravel\Scout\Searchable;
@@ -90,6 +92,13 @@ class Collector extends Authenticatable implements MustVerifyEmail, HasLocalePre
     ];
 
     protected $guard_name = 'collector';
+
+    protected function username(): Attribute
+    {
+        return Attribute::make(
+            get: fn() => '@'.$this->name
+        );
+    }
 
     public array $sortedFields = [
         'id',

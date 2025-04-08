@@ -5,7 +5,7 @@
         </a>
 
         <a href="{{ route('feed') }}" class="mobile-main-menu__link">
-            <x-svg.shelfs class="mobile-main-menu__item-icon"></x-svg.shelfs>
+            <x-svg.shelves class="mobile-main-menu__item-icon"></x-svg.shelves>
         </a>
 
         <a href="{{ route('feed') }}" class="mobile-main-menu__link">

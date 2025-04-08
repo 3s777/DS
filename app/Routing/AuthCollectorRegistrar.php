@@ -53,6 +53,7 @@ class AuthCollectorRegistrar implements RouteRegistrar
                 });
 
                 Route::prefix('{locale}')
+                    ->whereIn('locale', config('app.available_locales'))
                     ->controller(ProfileController::class)
                     ->middleware('auth:collector')
                     ->group(function() {
@@ -64,6 +65,7 @@ class AuthCollectorRegistrar implements RouteRegistrar
                 });
 
                 Route::prefix('{locale}')
+                    ->whereIn('locale', config('app.available_locales'))
                     ->controller(PublicCollectorController::class)
 //                    ->middleware('auth:collector')
                     ->middleware(['remove.locale'])

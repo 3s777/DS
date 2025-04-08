@@ -8,7 +8,7 @@ use App\Http\Requests\Shelf\Admin\UpdateCollectibleGameRequest;
 use Domain\Shelf\DTOs\FillCollectibleDTO;
 use Domain\Shelf\Models\Collectible;
 use Domain\Shelf\Services\CollectibleService;
-use Domain\Shelf\ViewModel\CollectibleUpdateViewModel;
+use Domain\Shelf\ViewModels\CollectibleUpdateViewModel;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
 use Illuminate\Foundation\Application;

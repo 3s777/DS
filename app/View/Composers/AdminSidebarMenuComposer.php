@@ -23,7 +23,7 @@ final class AdminSidebarMenuComposer
             ->add(
                 MenuGroup::make()
                 ->setLabel(trans_choice('shelf.shelves', 2))
-                ->setIcon('game')
+                ->setIcon('shelves')
                 ->add(
                     MenuGroup::make()
                     ->setLabel(trans_choice('shelf.shelves', 2))
@@ -135,13 +135,24 @@ final class AdminSidebarMenuComposer
             ->add(
                 MenuGroup::make()
                 ->setLabel(trans_choice('settings.settings', 2))
-                ->setIcon('users')
+                ->setIcon('settings')
                 ->add(
                     MenuGroup::make()
                     ->setLabel(trans_choice('settings.country.countries', 2))
                     ->add(MenuItem::make(route('admin.countries.create'), __('common.add')))
                     ->add(MenuItem::make(route('admin.countries.index'), __('common.list')))
                 )
+            )
+            ->add(
+                MenuGroup::make()
+                    ->setLabel(trans_choice('page.pages', 2))
+                    ->setIcon('page')
+                    ->add(
+                        MenuGroup::make()
+                            ->setLabel(trans_choice('page.pages', 2))
+                            ->add(MenuItem::make(route('admin.pages.create'), __('common.add')))
+                            ->add(MenuItem::make(route('admin.pages.index'), __('common.list')))
+                    )
             );
 
         $view->with('menu', $menu);

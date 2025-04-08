@@ -25,36 +25,36 @@ class CollectorController extends Controller
 
     public function show(Collector $collector)
     {
-        dd($collector);
+        return view('content.collector.index', compact('collector'));
     }
 
     public function showCollection(Collector $collector)
     {
-        dd($collector);
+        return view('content.collector.collection', compact('collector'));
     }
 
     public function showSale(Collector $collector)
     {
-        dd($collector);
+        return view('content.collector.sale', compact('collector'));
     }
 
     public function showAuction(Collector $collector)
     {
-        dd($collector);
+        return view('content.collector.auction', compact('collector'));
     }
 
     public function showWishlist(Collector $collector)
     {
-        dd($collector);
+        return view('content.collector.wishlist', compact('collector'));
     }
 
     public function showExchange(Collector $collector)
     {
-        dd($collector);
+        return view('content.collector.exchange', compact('collector'));
     }
 
     public function showBlog(Collector $collector)
     {
-        dd($collector);
+        return view('content.collector.blog', compact('collector'));
     }
 }

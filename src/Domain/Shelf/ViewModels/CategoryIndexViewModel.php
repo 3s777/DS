@@ -1,6 +1,6 @@
 <?php
 
-namespace Domain\Shelf\ViewModel;
+namespace Domain\Shelf\ViewModels;
 
 use Domain\Shelf\Models\Category;
 use Spatie\ViewModels\ViewModel;

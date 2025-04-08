@@ -58,6 +58,7 @@ class AppServiceProvider extends ServiceProvider
             'category' => 'Domain\Shelf\Models\Category',
             'sale' => 'Domain\Trade\Models\Sale',
             'auction' => 'Domain\Trade\Models\Auction',
+            'page' => 'Domain\Page\Models\Page',
         ]);
 
         //        Translatable::fallback(

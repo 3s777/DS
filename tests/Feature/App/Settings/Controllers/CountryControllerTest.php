@@ -29,7 +29,7 @@ class CountryControllerTest extends TestCase
         Role::create(['name' => config('settings.super_admin_role'), 'display_name' => 'SuperAdmin']);
         $this->user->assignRole('super_admin');
 
-        $this->country = CountryFactory::new()->create();
+
 
         $this->request = CreateCountryRequest::factory()->create();
     }
