@@ -14,7 +14,11 @@
 
             <div class="profile-menu header__profile-menu">
                 <div class="profile-menu__inner">
-                    <x-common.auth-menu class="header__auth-menu" />
+                    @if(request()->routeIs('admin.*'))
+                        <x-admin.auth-menu class="header__auth-menu" />
+                    @else
+                        <x-common.auth-menu class="header__auth-menu" />
+                    @endif
                     <x-common.chat-icon-notification class="header__chat-icon" count="5" />
                     <x-common.site-settings class="header__site-settings" />
                 </div>

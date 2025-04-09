@@ -24,6 +24,13 @@ class Localization
         //            abort(404);
         //        }
 
+        if (auth('collector')->check()) {
+            if ($currentLocale != session('locale') && $currentLocale) {
+                auth('collector')->user()->language = $currentLocale;
+                auth('collector')->user()->save();
+            }
+        }
+
         if (auth()->check()) {
             if ($currentLocale != session('locale') && $currentLocale) {
                 auth()->user()->language = $currentLocale;
