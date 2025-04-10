@@ -7,6 +7,7 @@ use App\Jobs\GenerateSmallThumbnailsJob;
 use App\Jobs\GenerateThumbnailJob;
 use Domain\Auth\Models\User;
 use Domain\Page\DTOs\FillPageDTO;
+use Domain\Page\Models\Page;
 use Domain\Page\Services\Admin\PageService;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Http\Request;
@@ -45,9 +46,9 @@ class PageServiceTest extends TestCase
             'slug' => Str::slug($this->request['name'])
         ]);
 
-        $request = new Request($this->request);
-
         $this->request['featured_image'] = UploadedFile::fake()->image('photo1.jpg');
+
+        $request = new Request($this->request);
 
         $pageService = app(PageService::class);
 
@@ -63,35 +64,42 @@ class PageServiceTest extends TestCase
         Queue::assertPushed(GenerateSmallThumbnailsJob::class, 2);
     }
 
-//    /**
-//     * @test
-//     * @return void
-//     */
-//    public function it_category_updated_success(): void
-//    {
-//        $createRequest = new Request($this->request);
-//
-//        $categoryService = app(CategoryService::class);
-//
-//        $categoryService->create(FillCategoryDTO::fromRequest(
-//            $createRequest
-//        ));
-//
-//        $category = Category::where('slug', Str::slug($this->request['name']))->first();
-//
-//        $this->request['name'] = 'NewNameGame';
-//        $this->request['slug'] = 'newslug';
-//
-//        $updateRequest = new Request($this->request);
-//
-//        $categoryService->update($category, FillCategoryDTO::fromRequest($updateRequest));
-//
-//        $this->assertDatabaseHas('categories', [
-//            'slug' => 'newslug',
-//        ]);
-//
-//        $updatedCategory = Category::where('slug', 'newslug')->first();
-//
-//        $this->assertSame($updatedCategory->slug, $this->request['slug']);
-//    }
+    /**
+     * @test
+     * @return void
+     */
+    public function it_category_updated_success(): void
+    {
+        Queue::fake();
+        Storage::fake('images');
+
+        $createRequest = new Request($this->request);
+
+        $pageService = app(PageService::class);
+
+        $pageService->create(FillPageDTO::fromRequest(
+            $createRequest
+        ));
+
+        $page = Page::where('slug', Str::slug($this->request['name']))->first();
+
+        $this->request['name'] = 'NewNamePage';
+        $this->request['slug'] = 'newslug';
+        $this->request['featured_image'] = UploadedFile::fake()->image('photo1.jpg');
+
+        $updateRequest = new Request($this->request);
+
+        $pageService->update($page, FillPageDTO::fromRequest($updateRequest));
+
+        $this->assertDatabaseHas('pages', [
+            'slug' => 'newslug',
+        ]);
+
+        $updatedPage = Page::where('slug', 'newslug')->first();
+
+        $this->assertSame($updatedPage->slug, $this->request['slug']);
+
+        Queue::assertPushed(GenerateThumbnailJob::class, 3);
+        Queue::assertPushed(GenerateSmallThumbnailsJob::class, 2);
+    }
 }
