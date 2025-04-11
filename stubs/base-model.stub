@@ -3,12 +3,42 @@
 namespace {{ namespace }};
 
 {{ importFactoryTrait }}
+{{ importSoftDeleteTrait }}
+{{ importSlugTrait }}
+{{ importTranslatableTrait }}
+{{ importHasMediaTrait }}
+{{ importInteractsWithMediaTrait }}
+{{ importFeaturedImageTrait }}
+{{ importImageTrait }}
+{{ importImagesTrait }}
+{{ importCleanHtmlCast }}
 {{ factoryImport }}
+{{ importBelongTo }}
+{{ importUserModel }}
+{{ importHasUserTrait }}
 use Illuminate\Database\Eloquent\Model;
 
 {{ class }}
 {
     {{ factoryTrait }}
+    {{ softDeleteTrait }}
+    {{ slugTrait }}
+    {{ translatableTrait }}
+    {{ interactsWithMediaTrait }}
+    {{ featuredImageTrait }}
+    {{ imageTrait }}
+    {{ imagesTrait }}
+    {{ hasUserTrait }}
+
+    {{ fillable }}
+
+    {{ casts }}
 
     {{ factoryDefinition }}
+
+    {{ imageProperties }}
+
+    {{ translatable }}
+
+    {{ userRelation }}
 }

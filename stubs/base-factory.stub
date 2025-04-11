@@ -1,0 +1,16 @@
+<?php
+
+namespace {{ factoryNamespace }};
+
+use Illuminate\Database\Eloquent\Factories\Factory;
+use {{ namespacedModel }}
+
+/**
+ * @extends \Illuminate\Database\Eloquent\Factories\Factory<\{{ namespacedModel }}>
+ */
+class {{ factory }}Factory extends Factory
+{
+     {{ factoryModel }}
+
+     {{ definition }}
+}
