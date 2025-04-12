@@ -3,7 +3,8 @@
 namespace {{ factoryNamespace }};
 
 use Illuminate\Database\Eloquent\Factories\Factory;
-use {{ namespacedModel }}
+use {{ namespacedModel }};
+{{ userModel }}
 
 /**
  * @extends \Illuminate\Database\Eloquent\Factories\Factory<\{{ namespacedModel }}>

@@ -2,12 +2,13 @@
 
 namespace App\Console\Commands;
 
+use App\Console\BaseCommand;
 use Illuminate\Console\Command;
 use Illuminate\Contracts\Console\PromptsForMissingInput;
 use function Laravel\Prompts\text;
 use function Laravel\Prompts\confirm;
 
-class MakeModelCommand extends Command implements PromptsForMissingInput
+class MakeModelCommand extends BaseCommand implements PromptsForMissingInput
 {
 //    protected $signature = 'ds:model {name} {--m|migration} {--f|factory}';
     protected $signature = 'ds:model {name}';
@@ -16,6 +17,8 @@ class MakeModelCommand extends Command implements PromptsForMissingInput
 
     public function handle(): int
     {
+        $name = str($this->argument('name'))->ucfirst();
+        $this->domain = text('What Domain?');
         $isMigration = confirm('Create Migration?');
         $isFactory = confirm('Create Factory?');
         $jsonName = confirm('Is name must be json?');
@@ -26,32 +29,99 @@ class MakeModelCommand extends Command implements PromptsForMissingInput
         $isUser = confirm('Is User?');
         $isSoftDelete = confirm('Is SoftDelete?');
         $isTranslatable = confirm('Translatable?');
-        $domain = text('What Domain?');
 
-        $name = str($this->argument('name'))->ucfirst();
+        $modelNamespace = "Domain\\$this->domain\Models";
+        $importCleanHtmlCast = $isDescription ? "use Mews\Purifier\Casts\CleanHtml;" : "";
+        $fillable = $this->makeFillable($isSlug, $isDescription, $isFeaturedImage, $isImages);
+        $class = $this->makeClass($name, $isFeaturedImage);
+        $casts = $this->makeCasts($isDescription, $isImages);
 
-        $stubModelContent = file_get_contents(base_path('stubs/base-model.stub'));
+        $replace = [
+            "{{ namespace }}" => $modelNamespace,
+            "{{ class }}" => $class,
+            "{{ casts }}" => $casts,
+            "{{ fillable }}" => $fillable,
+            "{{ importCleanHtmlCast }}" => $importCleanHtmlCast,
+        ];
 
-        $modelNamespace = "Domain\\$domain\Models";
+        $imageData = $this->makeImages($isFeaturedImage, $isImages);
+        $importFactory = $this->makeImportFactory($isFactory);
+        $slug = $this->makeSlug($isSlug);
+        $user = $this->makeUser($isUser);
+        $translatable = $this->makeTranslatable($isTranslatable);
+        $softDelete = $this->makeSofDelete($isSoftDelete);
 
+        $resultReplace = array_merge(
+            $replace,
+            $imageData,
+            $importFactory,
+            $slug,
+            $user,
+            $translatable,
+            $softDelete
+        );
 
+        $this->outputFilePath = base_path("src/Domain/$this->domain/Models/$name.php");
+        $this->setStubContent('base-model');
+        $this->createFromStub($resultReplace);
+        $this->createFile();
+
+        if($isMigration) {
+            $this->callSilent('ds:migration', [
+                'name' => $this->argument('name'),
+                '--is-child' => true,
+                '--json-name' => $jsonName,
+                '--is-slug' => $isSlug,
+                '--is-featured-image' => $isFeaturedImage,
+                '--is-images' => $isImages,
+                '--is-description' => $isDescription,
+                '--is-user' => $isUser,
+                '--is-soft-delete' => $isSoftDelete,
+                '--is-translatable' => $isTranslatable,
+            ]);
+        }
+
+        if($isFactory) {
+            $this->call('ds:factory', [
+                'name' => $this->argument('name'),
+                '--is-child' => true,
+                '--domain' => $this->domain,
+                '--json-name' => $jsonName,
+                '--is-description' => $isDescription,
+                '--is-user' => $isUser,
+                '--is-translatable' => $isTranslatable,
+            ]);
+        }
+
+        return self::SUCCESS;
+    }
+
+    private function makeSofDelete(bool $isSoftDelete = false): array
+    {
         $importSoftDeleteTrait = $isSoftDelete ? "use Illuminate\Database\Eloquent\SoftDeletes;" : "";
         $softDeleteTrait = $isSoftDelete ? "use SoftDeletes;" : "";
-        $importSlugTrait = $isSlug ? "use Support\Traits\Models\HasSlug;" : "";
-        $slugTrait = $isSlug ? "use HasSlug;" : "";
+
+        return [
+            '{{ importSoftDeleteTrait }}' => $importSoftDeleteTrait,
+            '{{ softDeleteTrait }}' => $softDeleteTrait,
+        ];
+    }
+
+    private function makeTranslatable(bool $isTranslatable = false): array
+    {
         $importTranslatableTrait = $isTranslatable ? "use Spatie\Translatable\HasTranslations;" : "";
         $translatableTrait = $isTranslatable ? "use HasTranslations;" : "";
         $translatable = $isTranslatable ? "public \$translatable = ['name', 'description'];" : "";
-        $importFactoryTrait = $isFactory ? "use Illuminate\Database\Eloquent\Factories\HasFactory;" : "";
-        $factoryTrait = $isFactory ? "use HasFactory;" : "";
-        $factoryImport = $isFactory ? "use Database\Factories\\$domain\\{$domain}Factory;" : "";
-        $factoryDefinition = $isFactory ? "protected static function newFactory(): PageFactory
+
+        return [
+            '{{ importTranslatableTrait }}' => $importTranslatableTrait,
+            '{{ translatableTrait }}' => $translatableTrait,
+            '{{ translatable }}' => $translatable,
+        ];
+    }
+
+    private function makeUser(bool $isUser = false): array
     {
-        return {$domain}Factory::new();
-    }" : "";
-
-        $importCleanHtmlCast = $isDescription ? "use Mews\Purifier\Casts\CleanHtml;" : "";
-
         $importUserModel = $isUser ? "use Domain\Auth\Models\User;" : "";
         $importHasUserTrait = $isUser ? "use Support\Traits\Models\HasUser;" : "";
         $importBelongTo = $isUser ? "use Illuminate\Database\Eloquent\Relations\BelongsTo;" : "";
@@ -61,147 +131,42 @@ class MakeModelCommand extends Command implements PromptsForMissingInput
         return \$this->belongsTo(User::class);
     }" : "";
 
-
-        $fillable = $this->makeFillable($isSlug, $isDescription, $isFeaturedImage, $isImages);
-        $imageData = $this->makeImages($isFeaturedImage, $isImages);
-        $class = $this->makeClass($name, $isFeaturedImage);
-        $casts = $this->makeCasts($isDescription, $isImages);
-
-        $stubModelContent = str_replace(
-            [
-                "{{ namespace }}",
-                "{{ class }}",
-                "{{ importFactoryTrait }}",
-                "{{ factoryTrait }}",
-                "{{ factoryImport }}",
-                "{{ factoryDefinition }}",
-                "{{ importSoftDeleteTrait }}",
-                "{{ softDeleteTrait }}",
-                "{{ importSlugTrait }}",
-                "{{ slugTrait }}",
-                "{{ importTranslatableTrait }}",
-                "{{ translatableTrait }}",
-                "{{ translatable }}",
-                "{{ importHasMediaTrait }}",
-                "{{ importFeaturedImageTrait }}",
-                "{{ importImageTrait }}",
-                "{{ importImagesTrait }}",
-                "{{ importInteractsWithMediaTrait }}",
-                "{{ featuredImageTrait }}",
-                "{{ imageTrait }}",
-                "{{ imagesTrait }}",
-                "{{ imageProperties }}",
-                "{{ interactsWithMediaTrait }}",
-                "{{ importCleanHtmlCast }}",
-                "{{ importBelongTo }}",
-                "{{ importUserModel }}",
-                "{{ importHasUserTrait }}",
-                "{{ hasUserTrait }}",
-                "{{ userRelation }}",
-                "{{ casts }}",
-                "{{ fillable }}"
-            ],
-            [
-                $modelNamespace,
-                $class,
-                $importFactoryTrait,
-                $factoryTrait,
-                $factoryImport,
-                $factoryDefinition,
-                $importSoftDeleteTrait,
-                $softDeleteTrait,
-                $importSlugTrait,
-                $slugTrait,
-                $importTranslatableTrait,
-                $translatableTrait,
-                $translatable,
-                $imageData['importHasMediaTrait'],
-                $imageData['importFeaturedImageTrait'],
-                $imageData['importImageTrait'],
-                $imageData['importImagesTrait'],
-                $imageData['importInteractsWithMediaTrait'],
-                $imageData['featuredImageTrait'],
-                $imageData['imageTrait'],
-                $imageData['imagesTrait'],
-                $imageData['imageProperties'],
-                $imageData['interactsWithMediaTrait'],
-                $importCleanHtmlCast,
-                $importBelongTo,
-                $importUserModel,
-                $importHasUserTrait,
-                $hasUserTrait,
-                $userRelation,
-                $casts,
-                $fillable
-            ],
-            $stubModelContent
-        );
-
-
-        if($isMigration) {
-            $this->makeMigration(
-                $this->argument('name'),
-                $jsonName,
-                $isSlug,
-                $isFeaturedImage,
-                $isUser,
-                $isDescription,
-                $isSoftDelete
-            );
-        }
-
-        if($isFactory) {
-            $this->makeFactory(
-                $name,
-                $domain,
-                $namespacedModel,
-                $isUser = false,
-                $isDescription = false,
-                $isTranslatable  = false
-            );
-        }
-
-
-        file_put_contents(
-            base_path("src/Domain/$domain/Models/$name.php"),
-            $stubModelContent
-        );
-
-        return self::SUCCESS;
+        return [
+            '{{ importUserModel }}' => $importUserModel,
+            '{{ importHasUserTrait }}' => $importHasUserTrait,
+            '{{ importBelongTo }}' => $importBelongTo,
+            '{{ hasUserTrait }}' => $hasUserTrait,
+            '{{ userRelation }}' => $userRelation
+        ];
     }
 
-    private function makeClass(
-        string $name,
-        bool $isFeaturedImage = false
-    ): string
+    private function makeSlug(bool $isSlug = false):array
     {
-        $class = "class $name extends Model";
+        $importSlugTrait = $isSlug ? "use Support\Traits\Models\HasSlug;" : "";
+        $slugTrait = $isSlug ? "use HasSlug;" : "";
 
-        if($isFeaturedImage) {
-            $class .= " implements HasMedia";
-        }
-
-        return $class;
+        return [
+            '{{ importSlugTrait }}' => $importSlugTrait,
+            '{{ slugTrait }}' =>$slugTrait,
+        ];
     }
 
-    private function makeCasts(bool $isDescription = false, bool $isImages = false): string
+    private function makeImportFactory(bool $isFactory = false):array
     {
-        $casts = "protected \$casts = [";
+        $importFactoryTrait = $isFactory ? "use Illuminate\Database\Eloquent\Factories\HasFactory;" : "";
+        $factoryTrait = $isFactory ? "use HasFactory;" : "";
+        $factoryImport = $isFactory ? "use Database\Factories\\$this->domain\\{$this->domain}Factory;" : "";
+        $factoryDefinition = $isFactory ? "protected static function newFactory(): PageFactory
+    {
+        return {$this->domain}Factory::new();
+    }" : "";
 
-        if($isDescription) {
-            $casts .= "
-        'description' => CleanHtml::class.':custom',";
-        }
-
-        if($isImages) {
-            $casts .= "
-        'images' => 'array',";
-        }
-
-        $casts .= "
-    ];";
-
-        return $casts;
+        return [
+            '{{ importFactoryTrait }}' => $importFactoryTrait,
+            '{{ factoryTrait }}' => $factoryTrait,
+            '{{ factoryImport }}' => $factoryImport,
+            '{{ factoryDefinition }}' => $factoryDefinition
+        ];
     }
 
     private function makeImages(bool $isFeaturedImage = false, $isImages = false): array
@@ -235,22 +200,35 @@ class MakeModelCommand extends Command implements PromptsForMissingInput
         ];
     }" : "";
 
-        $imageData = [
-            'importFeaturedImageTrait' => $importFeaturedImageTrait,
-            'importImageTrait' => $importImageTrait,
-            'importImagesTrait' => $importImagesTrait,
-            'importHasMediaTrait' => $importHasMediaTrait,
-            'importInteractsWithMediaTrait' => $importInteractsWithMediaTrait,
-            'featuredImageTrait' => $featuredImageTrait,
-            'imageTrait' => $imageTrait,
-            'imagesTrait' => $imagesTrait,
-            'interactsWithMediaTrait' => $interactsWithMediaTrait,
-            'imageFolderName' => $imageFolderName,
-            'imageProperties' => $imageProperties
+        return [
+            '{{ importFeaturedImageTrait }}' => $importFeaturedImageTrait,
+            '{{ importImageTrait }}' => $importImageTrait,
+            '{{ importImagesTrait }}' => $importImagesTrait,
+            '{{ importHasMediaTrait }}' => $importHasMediaTrait,
+            '{{ importInteractsWithMediaTrait }}' => $importInteractsWithMediaTrait,
+            '{{ featuredImageTrait }}' => $featuredImageTrait,
+            '{{ imageTrait }}' => $imageTrait,
+            '{{ imagesTrait }}' => $imagesTrait,
+            '{{ interactsWithMediaTrait }}' => $interactsWithMediaTrait,
+            '{{ imageFolderName }}' => $imageFolderName,
+            '{{ imageProperties }}' => $imageProperties
         ];
-
-        return $imageData;
     }
+
+    private function makeClass(
+        string $name,
+        bool $isFeaturedImage = false
+    ): string
+    {
+        $class = "class $name extends Model";
+
+        if($isFeaturedImage) {
+            $class .= " implements HasMedia";
+        }
+
+        return $class;
+    }
+
 
     private function makeFillable(
         bool $isSlug = false,
@@ -288,110 +266,23 @@ class MakeModelCommand extends Command implements PromptsForMissingInput
         return $fillable;
     }
 
-    private function makeMigration(
-        string $name,
-        bool $jsonName = false,
-        bool $isSlug = false,
-        bool $isFeaturedImage = false,
-        bool $isUser = false,
-        bool $isDescription = false,
-        bool $isSoftDelete  = false
-    )
+    private function makeCasts(bool $isDescription = false, bool $isImages = false): string
     {
-        $migrationName = str($name)
-            ->pluralStudly()
-            ->snake();
+        $casts = "protected \$casts = [";
 
-        $migrationFileName = date('Y_m_d_His').'_create_'.$migrationName.'_table.php';
+        if($isDescription) {
+            $casts .= "
+        'description' => CleanHtml::class.':custom',";
+        }
 
-        $stubMigrationContent = file_get_contents(base_path('stubs/base-migration.create.stub'));
+        if($isImages) {
+            $casts .= "
+        'images' => 'array',";
+        }
 
-        $fieldName = $jsonName ? '$table->jsonb(\'name\');' : '$table->string(\'name\');';
-        $fieldSlug = $isSlug ? '$table->string(\'slug\')->unique();' : '';
-        $fieldFeaturedImage = $isFeaturedImage ? '$table->string(\'featured_image\')->nullable();' : '';
-        $fieldDescription = $isDescription ? '$table->jsonb(\'description\')->nullable();' : '';
-        $fieldUser = $isUser ? '$table->foreignIdFor(User::class)
-                    ->nullable()
-                    ->constrained()
-                    ->nullOnDelete();' : '';
-        $userModel = $isUser ? 'use Domain\Auth\Models\User;' : '';
-        $fieldSoftDelete = $isSoftDelete ? '$table->softDeletes();' : '';
+        $casts .= "
+    ];";
 
-        $stubMigrationContent = str_replace(
-            [
-                "{{ table }}",
-                "{{ fieldName }}",
-                "{{ fieldSlug }}",
-                "{{ fieldFeaturedImage }}",
-                "{{ fieldDescription }}",
-                "{{ fieldUser }}",
-                "{{ userModel }}",
-                "{{ fieldSoftDelete }}"
-            ],
-            [
-                $migrationName,
-                $fieldName,
-                $fieldSlug,
-                $fieldFeaturedImage,
-                $fieldDescription,
-                $fieldUser,
-                $userModel,
-                $fieldSoftDelete
-            ],
-            $stubMigrationContent
-        );
-
-        file_put_contents(
-            database_path("migrations/$migrationFileName"),
-            $stubMigrationContent
-        );
-    }
-
-    private function makeFactory(
-        string $name,
-        string $domain,
-        string $namespacedModel,
-        bool $isUser = false,
-        bool $isDescription = false,
-        bool $isTranslatable  = false
-    )
-    {
-
-        $factoryFileName = "{$name}Factory.php";
-
-        $stubFactoryContent = file_get_contents(base_path('stubs/base-factory.stub'));
-
-        $factory = "{$name}Factory";
-        $factoryNamespace = "Database\Factories\{$name}";
-        $factoryModel = "protected \$model = $name::class;";
-        $definition = "public function definition(): array
-    {
-        return [
-            //
-        ];
-    }";
-
-        $stubFactoryContent = str_replace(
-            [
-                "{{ factoryNamespace }}",
-                "{{ namespacedModel }}",
-                "{{ factory }}",
-                "{{ factoryModel }}",
-                "{{ definition }}",
-            ],
-            [
-                $factoryNamespace,
-                $namespacedModel,
-                $factory,
-                $factoryModel,
-                $definition,
-            ],
-            $stubFactoryContent
-        );
-
-        file_put_contents(
-            database_path("factories/$domain/$factoryFileName"),
-            $stubFactoryContent
-        );
+        return $casts;
     }
 }

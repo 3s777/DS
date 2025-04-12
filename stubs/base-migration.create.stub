@@ -16,6 +16,7 @@ return new class extends Migration
             {{ fieldFeaturedImage }}
             {{ fieldDescription }}
             {{ fieldUser }}
+            {{ fieldImages }}
 
             {{ fieldSoftDelete }}
             $table->timestamps();
