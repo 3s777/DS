@@ -23,12 +23,12 @@ use Illuminate\Database\Eloquent\Model;
     {{ factoryTrait }}
     {{ softDeleteTrait }}
     {{ slugTrait }}
+    {{ hasUserTrait }}
     {{ translatableTrait }}
     {{ interactsWithMediaTrait }}
     {{ featuredImageTrait }}
     {{ imageTrait }}
     {{ imagesTrait }}
-    {{ hasUserTrait }}
 
     {{ fillable }}
 

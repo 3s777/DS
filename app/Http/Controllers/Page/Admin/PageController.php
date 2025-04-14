@@ -4,8 +4,6 @@ namespace App\Http\Controllers\Page\Admin;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Page\Admin\CreatePageRequest;
 use App\Http\Requests\Page\Admin\UpdatePageRequest;
-use App\Http\Requests\Settings\Admin\CreateCountryRequest;
-use App\Http\Requests\Settings\Admin\UpdateCountryRequest;
 use Domain\Page\DTOs\FillPageDTO;
 use Domain\Page\Models\Page;
 use Domain\Page\Services\Admin\PageService;
@@ -15,9 +13,7 @@ use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
 use Illuminate\Foundation\Application;
 use Illuminate\Http\RedirectResponse;
-use Illuminate\Http\Request;
 use Illuminate\Routing\Redirector;
-use Support\ViewModels\AsyncSelectByQueryViewModel;
 
 class PageController extends Controller
 {

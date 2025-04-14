@@ -51,7 +51,7 @@ class MakeFactoryCommand extends BaseCommand implements PromptsForMissingInput
         bool $isDescription,
         bool $isUser,
         bool $isTranslatable
-    )
+    ): array
     {
         $factoryNamespace = "Database\Factories\\$this->domain";
         $factoryModel = "protected \$model = $name::class;";

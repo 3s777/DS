@@ -21,6 +21,10 @@ class MakeModelCommand extends BaseCommand implements PromptsForMissingInput
         $this->domain = text('What Domain?');
         $isMigration = confirm('Create Migration?');
         $isFactory = confirm('Create Factory?');
+        $isController = confirm('Create Controller?');
+        $isRequest = confirm('Create Request?');
+        $isDTO = confirm('Create DTO?');
+        $isViewModels = confirm('Create VeiwModels?');
         $jsonName = confirm('Is name must be json?');
         $isSlug = confirm('Is slug?');
         $isFeaturedImage = confirm('Is Featured Image?');
@@ -67,7 +71,7 @@ class MakeModelCommand extends BaseCommand implements PromptsForMissingInput
         $this->createFile();
 
         if($isMigration) {
-            $this->callSilent('ds:migration', [
+            $this->call('ds:migration', [
                 'name' => $this->argument('name'),
                 '--is-child' => true,
                 '--json-name' => $jsonName,
@@ -90,6 +94,50 @@ class MakeModelCommand extends BaseCommand implements PromptsForMissingInput
                 '--is-description' => $isDescription,
                 '--is-user' => $isUser,
                 '--is-translatable' => $isTranslatable,
+            ]);
+        }
+
+        if($isController) {
+            $this->call('ds:controller', [
+                'name' => $this->argument('name'),
+                '--is-child' => true,
+                '--domain' => $this->domain
+            ]);
+        }
+
+        if($isRequest) {
+            $this->call('ds:request', [
+                'name' => $this->argument('name'),
+                '--is-child' => true,
+                '--with-update' => true,
+                '--domain' => $this->domain,
+                '--is-slug' => $isSlug,
+                '--is-featured-image' => $isFeaturedImage,
+                '--is-images' => $isImages,
+                '--is-description' => $isDescription,
+                '--is-user' => $isUser,
+            ]);
+        }
+
+        if($isDTO) {
+            $this->call('ds:dto', [
+                'name' => $this->argument('name'),
+                '--is-child' => true,
+                '--domain' => $this->domain,
+                '--is-slug' => $isSlug,
+                '--is-featured-image' => $isFeaturedImage,
+                '--is-images' => $isImages,
+                '--is-description' => $isDescription,
+                '--is-user' => $isUser,
+            ]);
+        }
+
+        if($isViewModels) {
+            $this->call('ds:vmodel', [
+                'name' => $this->argument('name'),
+                '--is-child' => true,
+                '--domain' => $this->domain,
+                '--is-user' => $isUser,
             ]);
         }
 

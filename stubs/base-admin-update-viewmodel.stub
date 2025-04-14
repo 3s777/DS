@@ -1,0 +1,21 @@
+<?php
+
+namespace {{ namespace }};
+
+use Domain\{{ domain }}\Models\{{ model }};
+use Spatie\ViewModels\ViewModel;
+
+class {{ model }}UpdateViewModel extends ViewModel
+{
+    public ?{{ model }} ${{ camelModel }};
+
+    public function __construct({{ model }} ${{ camelModel }} = null)
+    {
+        $this->{{ camelModel }} = ${{ camelModel }};
+    }
+
+    public function {{ camelModel }}(): ?{{ model }}
+    {
+        return $this->{{ camelModel }} ?? null;
+    }
+}

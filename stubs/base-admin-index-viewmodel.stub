@@ -1,0 +1,19 @@
+<?php
+
+namespace {{ namespace }};
+
+use Domain\{{ domain }}\Models\{{ model }};
+use Spatie\ViewModels\ViewModel;
+
+class {{ model }}IndexViewModel extends ViewModel
+{
+    public function __construct()
+    {
+        //
+    }
+
+    public function {{ camelPluralModel }}()
+    {
+        {{ query }}
+    }
+}

@@ -20,6 +20,7 @@ class PageRegistrar implements RouteRegistrar
                             ->middleware(['auth', 'verified', 'remove.locale'])
                             ->group(function () {
                                 Route::resource('pages', PageController::class);
+                                Route::resource('page_categories', PageCategoryController::class);
                             });
                     });
 

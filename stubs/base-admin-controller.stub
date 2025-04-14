@@ -1,0 +1,72 @@
+<?php
+
+namespace {{ namespace }};
+
+use App\Http\Controllers\Controller;
+use App\Http\Requests\{{ domain }}\Admin\Create{{ model }}Request;
+use App\Http\Requests\{{ domain }}\Admin\Update{{ model }}Request;
+use Domain\{{ domain }}\DTOs\Fill{{ model }}DTO;
+use Domain\{{ domain }}\Models\{{ model }};
+use Domain\{{ domain }}\Services\Admin\{{ model }}Service;
+use Domain\{{ domain }}\ViewModels\Admin\{{ model }}IndexViewModel;
+use Domain\{{ domain }}\ViewModels\Admin\{{ model }}UpdateViewModel;
+use Illuminate\Contracts\View\Factory;
+use Illuminate\Contracts\View\View;
+use Illuminate\Foundation\Application;
+use Illuminate\Http\RedirectResponse;
+use Illuminate\Routing\Redirector;
+
+class {{ model }}Controller extends Controller
+{
+    public function __construct()
+    {
+        //        $this->authorizeResource({{ model }}::class, '{{ kebabModel }}');
+    }
+
+    public function index(): View|Application|Factory|\Illuminate\Contracts\Foundation\Application
+    {
+        return view('admin.{{ snakeDomain }}.{{ kebabModel }}.index', new {{ model }}IndexViewModel());
+    }
+
+    public function create(): View|Application|Factory|\Illuminate\Contracts\Foundation\Application
+    {
+        return view('admin.{{ snakeDomain }}.{{ kebabModel }}.create');
+    }
+
+    public function store(Create{{ model }}Request $request, {{ model }}Service ${{ camelModel }}Service): Application|Redirector|RedirectResponse|\Illuminate\Contracts\Foundation\Application
+    {
+        ${{ camelModel }}Service->create(Fill{{ model }}DTO::fromRequest($request));
+
+        flash()->info(__('{{ kebabDomain }}.{{ snakeModel }}.created'));
+
+        return to_route('admin.{{ kebabPluralModel }}.index');
+    }
+
+    public function show(string $id)
+    {
+        //
+    }
+
+    public function edit({{ model }} ${{ camelModel }}): View|Application|Factory|\Illuminate\Contracts\Foundation\Application
+    {
+        return view('admin.{{ snakeDomain }}.{{ kebabModel }}.edit', new {{ model }}UpdateViewModel(${{ camelModel }}));
+    }
+
+    public function update(Update{{ model }}Request $request, {{ model }} ${{ camelModel }}, {{ model }}Service ${{ camelModel }}Service): RedirectResponse
+    {
+        ${{ camelModel }}Service->update(${{ camelModel }}, Fill{{ model }}DTO::fromRequest($request));
+
+        flash()->info(__('{{ kebabDomain }}.{{ snakeModel }}.updated'));
+
+        return to_route('admin.{{ kebabPluralModel }}.index');
+    }
+
+    public function destroy({{ model }} ${{ camelModel }}): RedirectResponse
+    {
+        ${{ camelModel }}->delete();
+
+        flash()->info(__('{{ kebabDomain }}.{{ snakeModel }}.deleted'));
+
+        return to_route('admin.{{ kebabPluralModel }}.index');
+    }
+}

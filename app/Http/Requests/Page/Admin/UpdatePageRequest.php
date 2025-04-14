@@ -2,7 +2,7 @@
 
 namespace App\Http\Requests\Page\Admin;
 
-use Domain\Shelf\Models\Category;
+use Domain\Page\Models\Page;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
 
@@ -33,7 +33,7 @@ class UpdatePageRequest extends FormRequest
                 'nullable',
                 'string',
                 'max:250',
-                Rule::unique(Category::class)->ignore($this->category)
+                Rule::unique(Page::class)->ignore($this->page)
             ],
             'description' => ['nullable','string'],
             'featured_image' => [

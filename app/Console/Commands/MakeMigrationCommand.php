@@ -69,7 +69,7 @@ class MakeMigrationCommand extends BaseCommand implements PromptsForMissingInput
         bool $isSoftDelete,
         bool $isImages,
         bool $isTranslatable
-    )
+    ): array
     {
         $fieldName = $jsonName ? '$table->jsonb(\'name\');' : '$table->string(\'name\');';
         $fieldSlug = $isSlug ? '$table->string(\'slug\')->unique();' : '';
