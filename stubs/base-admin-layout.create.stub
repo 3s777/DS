@@ -1,0 +1,28 @@
+<x-layouts.admin :search="false">
+    <x-admin.crud-form
+        :action="route('admin.{{ kebabPluralModel }}.store')"
+        :title="__('{{ kebabDomain }}.{{ snakeModel }}.add')"
+        {{ images }}
+        {{ description }}>
+            <x-grid type="container">
+                <x-grid.col xl="4" ls="6" ml="12" lg="6" md="6" sm="12">
+                    <x-ui.form.group>
+                        <x-ui.form.input-text
+                            :placeholder="trans_choice('common.name', 1)"
+                            id="name"
+                            name="name"
+                            required
+                            autocomplete="on"
+                            autofocus>
+                        </x-ui.form.input-text>
+                    </x-ui.form.group>
+                </x-grid.col>
+
+                {{ slug }}
+
+                {{ user }}
+
+            </x-grid>
+        {{ sidebar }}
+    </x-admin.crud-form>
+</x-layouts.admin>

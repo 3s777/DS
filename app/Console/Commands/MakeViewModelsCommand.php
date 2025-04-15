@@ -59,7 +59,7 @@ class MakeViewModelsCommand extends BaseCommand implements PromptsForMissingInpu
         return self::SUCCESS;
     }
 
-    private function prepareQuery(string $model, string $databaseName, bool $isUser)
+    private function prepareQuery(string $model, string $databaseName, bool $isUser): string
     {
         $query = "return $model::query()
             ->select('$databaseName.id', '$databaseName.name', '$databaseName.slug', '$databaseName.created_at',";

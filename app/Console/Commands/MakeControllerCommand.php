@@ -10,7 +10,7 @@ use function Laravel\Prompts\confirm;
 
 class MakeControllerCommand extends BaseCommand implements PromptsForMissingInput
 {
-    protected $signature = 'ds:controller {name} {--is-child} {--domain}';
+    protected $signature = 'ds:controller {name} {--is-child} {--domain} {--is-mass-delete}';
 
     protected $description = 'New Controller';
 
@@ -19,7 +19,7 @@ class MakeControllerCommand extends BaseCommand implements PromptsForMissingInpu
         $name = $this->argument('name');
         $isChild = $this->option('is-child');
         $this->domain = $isChild ? $this->option('domain') : text('What domain is?');
-//        $isMigration = confirm('Create Migration?');
+        $isMassDelete = $isChild ? $this->option('is-mass-delete') : confirm('Do you need mass deleting?');
 
         $namespace = "App\Http\Controllers\\$this->domain\Admin";
         $model = str($name)->ucfirst();
@@ -46,7 +46,12 @@ class MakeControllerCommand extends BaseCommand implements PromptsForMissingInpu
         ];
 
         $this->outputFilePath = base_path("app/Http/Controllers/$this->domain/Admin/{$name}Controller.php");
-        $this->setStubContent('base-admin-controller');
+        if($isMassDelete) {
+            $this->setStubContent('base-admin-controller.mass-delete');
+        } else {
+            $this->setStubContent('base-admin-controller');
+        }
+
         $this->createFromStub($replace);
         $this->createFile();
 

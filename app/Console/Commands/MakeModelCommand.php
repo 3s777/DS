@@ -25,6 +25,8 @@ class MakeModelCommand extends BaseCommand implements PromptsForMissingInput
         $isRequest = confirm('Create Request?');
         $isDTO = confirm('Create DTO?');
         $isViewModels = confirm('Create VeiwModels?');
+        $isService = confirm('Create Service?');
+        $isViews = confirm('Create Views?');
         $jsonName = confirm('Is name must be json?');
         $isSlug = confirm('Is slug?');
         $isFeaturedImage = confirm('Is Featured Image?');
@@ -33,6 +35,8 @@ class MakeModelCommand extends BaseCommand implements PromptsForMissingInput
         $isUser = confirm('Is User?');
         $isSoftDelete = confirm('Is SoftDelete?');
         $isTranslatable = confirm('Translatable?');
+        $isMassDelete = confirm('Do you need mass deleting?');
+        $isFilters = confirm('Use filters?');
 
         $modelNamespace = "Domain\\$this->domain\Models";
         $importCleanHtmlCast = $isDescription ? "use Mews\Purifier\Casts\CleanHtml;" : "";
@@ -101,7 +105,8 @@ class MakeModelCommand extends BaseCommand implements PromptsForMissingInput
             $this->call('ds:controller', [
                 'name' => $this->argument('name'),
                 '--is-child' => true,
-                '--domain' => $this->domain
+                '--domain' => $this->domain,
+                '--is-mass-delete' => $isMassDelete
             ]);
         }
 
@@ -138,6 +143,34 @@ class MakeModelCommand extends BaseCommand implements PromptsForMissingInput
                 '--is-child' => true,
                 '--domain' => $this->domain,
                 '--is-user' => $isUser,
+            ]);
+        }
+
+        if($isService) {
+            $this->call('ds:service', [
+                'name' => $this->argument('name'),
+                '--is-child' => true,
+                '--domain' => $this->domain,
+                '--is-slug' => $isSlug,
+                '--is-featured-image' => $isFeaturedImage,
+                '--is-images' => $isImages,
+                '--is-description' => $isDescription,
+                '--is-user' => $isUser,
+            ]);
+        }
+
+        if($isViews) {
+            $this->call('ds:views', [
+                'name' => $this->argument('name'),
+                '--is-child' => true,
+                '--domain' => $this->domain,
+                '--is-slug' => $isSlug,
+                '--is-featured-image' => $isFeaturedImage,
+                '--is-images' => $isImages,
+                '--is-description' => $isDescription,
+                '--is-user' => $isUser,
+                '--is-mass-delete' => $isMassDelete,
+                '--is-filters' => $isFilters
             ]);
         }
 

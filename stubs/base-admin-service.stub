@@ -2,120 +2,53 @@
 
 namespace {{ namespace }};
 
-
-namespace Domain\Game\Services;
-
 use Domain\{{ domain }}\DTOs\Fill{{ model }}DTO;
 use Illuminate\Support\HigherOrderTapProxy;
 use Domain\{{ domain }}\Models\{{ model }};
-use Illuminate\Support\Facades\DB;
 use Support\Exceptions\CrudException;
+use Support\Transaction;
 use Throwable;
 
 class {{ model }}Service
 {
-    public function create(Fill{{ model }}DTO $data): HigherOrderTapProxy|Page
+    public function create(Fill{{ model }}DTO $data): HigherOrderTapProxy|{{ model }}
     {
-
-    return Transaction::run(
-                function () use ($data) {
-
-                $game = Game::create([
-                    'name' => $data->name,
-                    'slug' => $data->slug,
-                    'user_id' => $data->user_id,
-                    'description' => $data->description,
+        return Transaction::run(
+            function () use ($data) {
+                ${{ camelModel }} = {{ model }}::create([
+                    {{ fields }}
                 ]);
 
-                $game->addFeaturedImageWithThumbnail(
-                    $data->featured_image,
-                    ['small', 'medium']
-                );
+                {{ addFeaturedImage }}
 
-                if ($data->images) {
-                    foreach ($data->images as $key => $image) {
-                        $game->addImagesWithThumbnail(
-                            $image,
-                            ['small', 'medium'],
-                        );
-                    }
-                }
+                {{ addImages }}
 
-                DB::commit();
-
-                return $game;
-                },
-                function (Throwable $e) {
-                    throw new CrudException($e->getMessage());
-                }
-            );
-
-
-        try {
-            DB::beginTransaction();
-
-            $game = Game::create([
-                'name' => $data->name,
-                'slug' => $data->slug,
-                'user_id' => $data->user_id,
-                'description' => $data->description,
-            ]);
-
-            $game->addFeaturedImageWithThumbnail(
-                $data->featured_image,
-                ['small', 'medium']
-            );
-
-            if ($data->images) {
-                foreach ($data->images as $key => $image) {
-                    $game->addImagesWithThumbnail(
-                        $image,
-                        ['small', 'medium'],
-                    );
-                }
+                return ${{ camelModel }};
+            },
+            function (Throwable $e) {
+                throw new CrudException($e->getMessage());
             }
-
-            DB::commit();
-
-            return $game;
-
-        } catch (Throwable $e) {
-            throw new CrudException($e->getMessage());
-        }
+        );
     }
 
-    public function update(Game $game, FillGameDTO $data): Game
+    public function update({{ model }} ${{ camelModel }}, Fill{{ model }}DTO $data): HigherOrderTapProxy|{{ model }}
     {
-        try {
-            DB::beginTransaction();
+        return Transaction::run(
+            function () use ($data, ${{ camelModel }}) {
+                {{ updateFeaturedImage }}
 
-            $game->updateFeaturedImage(
-                $data->featured_image,
-                $data->featured_image_uploaded,
-                ['small', 'medium']
-            );
+                {{ updateImages }}
 
-            $game->updateImages(
-                $data->images,
-                $data->images_delete,
-                ['small', 'medium']
-            );
+                ${{ camelModel }}->fill([
+                    {{ updateFields }}
+                ])
+                ->save();
 
-            $game->fill(
-                [
-                    'name' => $data->name,
-                    'slug' => $data->slug,
-                    'user_id' => $data->user_id ?? $game->user_id,
-                    'description' => $data->description,
-                ]
-            )->save();
-
-            DB::commit();
-
-            return $game;
-
-        } catch (Throwable $e) {
-            throw new CrudException($e->getMessage());
-        }
+                return ${{ camelModel }};
+            },
+            function (Throwable $e) {
+                throw new CrudException($e->getMessage());
+            }
+        );
     }
 }
