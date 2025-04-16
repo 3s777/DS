@@ -50,19 +50,22 @@ class MakeViewsCommand extends BaseCommand implements PromptsForMissingInput
         $kebabDomain = str($this->domain)->kebab();
         $kebabModel = str($model)->kebab();
         $fields = $this->makeFields($camelModel, $isSlug, $isUser);
-        $massDelete = $isMassDelete ? ':mass-delete="false" :selectable="false"' : '';
+        $massDelete = $isMassDelete ? '' : ':mass-delete="false" :selectable="false"';
+        $langModel = str($name)->remove($this->domain)->snake();
         $checkboxHeader = $isMassDelete ? '<x-ui.responsive-table.column type="select" name="check">
                     <x-common.action-table.select-all :models="$'.$camelPluralModel.'" />
                 </x-ui.responsive-table.column>' : '';
         $checkboxRow = $isMassDelete ? '<x-ui.responsive-table.column type="select">
                      <x-common.action-table.row-checkbox :model="$item" />
                 </x-ui.responsive-table.column>' : '';
+        $kebabModelWithoutDomain = str($name)->remove($this->domain)->kebab();
 
         $replace = [
             "{{ namespace }}" => $namespace,
             "{{ model }}" => $model,
             "{{ kebabPluralModel }}" => $kebabPluralModel,
             "{{ snakeModel }}" => $snakeModel,
+            "{{ langModel }}" => $langModel,
             "{{ camelModel }}" => $camelModel,
             "{{ kebabDomain }}" => $kebabDomain,
             "{{ sidebar }}" => $sidebar,
@@ -74,18 +77,19 @@ class MakeViewsCommand extends BaseCommand implements PromptsForMissingInput
             "{{ camelPluralModel }}" => $camelPluralModel,
             "{{ checkboxHeader }}" => $checkboxHeader,
             "{{ checkboxRow }}" => $checkboxRow,
+            "{{ kebabModelWithoutDomain }}" => $kebabModelWithoutDomain,
         ];
 
-        if(!File::exists(base_path("resources/views/admin/{$kebabDomain}/{$kebabModel}"))) {
-            File::makeDirectory(base_path("resources/views/admin/{$kebabDomain}/{$kebabModel}"));
+        if(!File::exists(base_path("resources/views/admin/{$kebabDomain}/{$langModel}"))) {
+            File::makeDirectory(base_path("resources/views/admin/{$kebabDomain}/{$langModel}"));
         }
 
-        $this->outputFilePath = base_path("resources/views/admin/{$kebabDomain}/{$kebabModel}/create.blade.php");
+        $this->outputFilePath = base_path("resources/views/admin/{$kebabDomain}/{$langModel}/create.blade.php");
         $this->setStubContent('base-admin-layout.create');
         $this->createFromStub($replace);
         $this->createFile();
 
-        $this->outputFilePath = base_path("resources/views/admin/{$kebabDomain}/{$kebabModel}/index.blade.php");
+        $this->outputFilePath = base_path("resources/views/admin/{$kebabDomain}/{$langModel}/index.blade.php");
         if($isFilters) {
             $this->setStubContent('base-admin-layout.index-filter');
         } else {
@@ -95,11 +99,11 @@ class MakeViewsCommand extends BaseCommand implements PromptsForMissingInput
         $this->createFile();
 
         if($isFilters) {
-            if(!File::exists(base_path("resources/views/admin/{$kebabDomain}/{$kebabModel}/partials"))) {
-                File::makeDirectory(base_path("resources/views/admin/{$kebabDomain}/{$kebabModel}/partials"));
+            if(!File::exists(base_path("resources/views/admin/{$kebabDomain}/{$langModel}/partials"))) {
+                File::makeDirectory(base_path("resources/views/admin/{$kebabDomain}/{$langModel}/partials"));
             }
 
-            $this->outputFilePath = base_path("resources/views/admin/{$kebabDomain}/{$kebabModel}/partials/filters.blade.php");
+            $this->outputFilePath = base_path("resources/views/admin/{$kebabDomain}/{$langModel}/partials/filters.blade.php");
             $this->setStubContent('base-admin-layout.filters');
             $this->createFromStub($replace);
             $this->createFile();
@@ -109,7 +113,7 @@ class MakeViewsCommand extends BaseCommand implements PromptsForMissingInput
         $replace['{{ slug }}'] = $updatedFields['{{ slug }}'];
         $replace['{{ user }}'] = $updatedFields['{{ user }}'];
 
-        $this->outputFilePath = base_path("resources/views/admin/{$kebabDomain}/{$kebabModel}/edit.blade.php");
+        $this->outputFilePath = base_path("resources/views/admin/{$kebabDomain}/{$langModel}/edit.blade.php");
         $this->setStubContent('base-admin-layout.edit');
         $this->createFromStub($replace);
         $this->createFile();
@@ -133,7 +137,7 @@ class MakeViewsCommand extends BaseCommand implements PromptsForMissingInput
 
             if($isUpdate) {
                 $slug .=  '
-                            :selected="$selectedUser"';
+                            :value="$'.$camelModel.'->slug"';
             }
 
             $slug .= '
@@ -155,7 +159,7 @@ class MakeViewsCommand extends BaseCommand implements PromptsForMissingInput
 
             if($isUpdate) {
                 $user .=  '
-                            :value="$'.$camelModel.'->slug"';
+                            :selected="$selectedUser"';
             }
 
             $user .= '

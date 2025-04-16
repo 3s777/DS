@@ -153,6 +153,12 @@ final class AdminSidebarMenuComposer
                             ->add(MenuItem::make(route('admin.pages.create'), __('common.add')))
                             ->add(MenuItem::make(route('admin.pages.index'), __('common.list')))
                     )
+                    ->add(
+                        MenuGroup::make()
+                            ->setLabel(trans_choice('page.category.categories', 2))
+                            ->add(MenuItem::make(route('admin.page-categories.create'), __('common.add')))
+                            ->add(MenuItem::make(route('admin.page-categories.index'), __('common.list')))
+                    )
             );
 
         $view->with('menu', $menu);

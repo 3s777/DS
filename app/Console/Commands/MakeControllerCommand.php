@@ -26,11 +26,13 @@ class MakeControllerCommand extends BaseCommand implements PromptsForMissingInpu
         $kebabModel = str($name)->kebab();
         $snakeModel = str($name)->snake();
         $camelModel = str($name)->camel();
-        $kebabPluralModel = str($name)->pluralStudly()->snake();
+        $kebabPluralModel = str($name)->pluralStudly()->kebab();
         $domain = str($this->domain)->ucfirst();
         $kebabDomain = str($this->domain)->kebab();
         $snakeDomain = str($this->domain)->snake();
         $camelDomain = str($this->domain)->camel();
+        $langModel = str($name)->remove($this->domain)->snake();
+        $kebabModelWithoutDomain = str($name)->remove($this->domain)->kebab();
 
         $replace = [
             "{{ namespace }}" => $namespace,
@@ -42,7 +44,9 @@ class MakeControllerCommand extends BaseCommand implements PromptsForMissingInpu
             "{{ kebabDomain }}" => $kebabDomain,
             "{{ snakeDomain }}" => $snakeDomain,
             "{{ camelDomain }}" => $camelDomain,
-            "{{ kebabPluralModel }}" => $kebabPluralModel
+            "{{ kebabPluralModel }}" => $kebabPluralModel,
+            "{{ langModel }}" => $langModel,
+            "{{ kebabModelWithoutDomain }}" => $kebabModelWithoutDomain,
         ];
 
         $this->outputFilePath = base_path("app/Http/Controllers/$this->domain/Admin/{$name}Controller.php");

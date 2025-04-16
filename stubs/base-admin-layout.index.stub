@@ -1,6 +1,6 @@
 <x-layouts.admin :search="false">
     <x-ui.title size="normal" indent="big">
-            {{ __('{{ kebabDomain }}.{{ snakeModel }}.list') }}
+            {{ __('{{ kebabDomain }}.{{ langModel }}.list') }}
     </x-ui.title>
 
     <x-common.action-table model-name="admin.{{ kebabPluralModel }}" {{ massDelete }}>

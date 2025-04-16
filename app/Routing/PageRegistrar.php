@@ -3,11 +3,13 @@
 namespace App\Routing;
 
 use App\Contracts\RouteRegistrar;
+use App\Http\Controllers\Game\Admin\GameMediaController;
+use App\Http\Controllers\Page\Admin\PageCategoryController;
 use App\Http\Controllers\Page\Admin\PageController;
 use Illuminate\Contracts\Routing\Registrar;
 use Illuminate\Support\Facades\Route;
 
-class PageRegistrar implements RouteRegistrar
+class PageRegistrar extends BaseRouteRegistrar implements RouteRegistrar
 {
     public function map(Registrar $registrar): void
     {
@@ -20,7 +22,8 @@ class PageRegistrar implements RouteRegistrar
                             ->middleware(['auth', 'verified', 'remove.locale'])
                             ->group(function () {
                                 Route::resource('pages', PageController::class);
-                                Route::resource('page_categories', PageCategoryController::class);
+                                $this->massDelete('page-categories', PageCategoryController::class);
+                                Route::resource('page-categories', PageCategoryController::class);
                             });
                     });
 

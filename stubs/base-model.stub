@@ -16,6 +16,7 @@ namespace {{ namespace }};
 {{ importBelongTo }}
 {{ importUserModel }}
 {{ importHasUserTrait }}
+{{ importFilters }}
 use Illuminate\Database\Eloquent\Model;
 
 {{ class }}
@@ -39,6 +40,8 @@ use Illuminate\Database\Eloquent\Model;
     {{ imageProperties }}
 
     {{ translatable }}
+
+    {{ filters }}
 
     {{ userRelation }}
 }

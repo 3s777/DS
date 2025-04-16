@@ -1,0 +1,33 @@
+<?php
+
+namespace {{ namespace }};
+
+use App\Contracts\FilterRegistrar;
+use App\Filters\DatesFilter;
+use App\Filters\SearchFilter;
+{{ importUser }}
+
+class {{ model }}FilterRegistrar implements FilterRegistrar
+{
+    public function filtersList(): array
+    {
+        return [
+            'dates' => DatesFilter::make(
+                __('common.dates'),
+                'dates',
+                '{{ databaseModel }}',
+                placeholder: [
+                    'from' => __('filters.dates_from'),
+                    'to' => __('filters.dates_to'),
+                ]
+            ),
+            'search' => SearchFilter::make(
+                __('common.search'),
+                'search',
+                '{{ databaseModel }}'
+            ),
+            {{ user }}
+        ];
+    }
+}
+

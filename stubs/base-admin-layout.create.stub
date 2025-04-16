@@ -1,7 +1,7 @@
 <x-layouts.admin :search="false">
     <x-admin.crud-form
         :action="route('admin.{{ kebabPluralModel }}.store')"
-        :title="__('{{ kebabDomain }}.{{ snakeModel }}.add')"
+        :title="__('{{ kebabDomain }}.{{ langModel }}.add')"
         {{ images }}
         {{ description }}>
             <x-grid type="container">

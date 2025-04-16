@@ -29,19 +29,19 @@ class {{ model }}Controller extends Controller
 
     public function index(): View|Application|Factory|\Illuminate\Contracts\Foundation\Application
     {
-        return view('admin.{{ snakeDomain }}.{{ kebabModel }}.index', new {{ model }}IndexViewModel());
+        return view('admin.{{ snakeDomain }}.{{ kebabModelWithoutDomain }}.index', new {{ model }}IndexViewModel());
     }
 
     public function create(): View|Application|Factory|\Illuminate\Contracts\Foundation\Application
     {
-        return view('admin.{{ snakeDomain }}.{{ kebabModel }}.create');
+        return view('admin.{{ snakeDomain }}.{{ kebabModelWithoutDomain }}.create');
     }
 
     public function store(Create{{ model }}Request $request, {{ model }}Service ${{ camelModel }}Service): Application|Redirector|RedirectResponse|\Illuminate\Contracts\Foundation\Application
     {
         ${{ camelModel }}Service->create(Fill{{ model }}DTO::fromRequest($request));
 
-        flash()->info(__('{{ kebabDomain }}.{{ snakeModel }}.created'));
+        flash()->info(__('{{ kebabDomain }}.{{ langModel }}.created'));
 
         return to_route('admin.{{ kebabPluralModel }}.index');
     }
@@ -53,14 +53,14 @@ class {{ model }}Controller extends Controller
 
     public function edit({{ model }} ${{ camelModel }}): View|Application|Factory|\Illuminate\Contracts\Foundation\Application
     {
-        return view('admin.{{ snakeDomain }}.{{ kebabModel }}.edit', new {{ model }}UpdateViewModel(${{ camelModel }}));
+        return view('admin.{{ snakeDomain }}.{{ kebabModelWithoutDomain }}.edit', new {{ model }}UpdateViewModel(${{ camelModel }}));
     }
 
     public function update(Update{{ model }}Request $request, {{ model }} ${{ camelModel }}, {{ model }}Service ${{ camelModel }}Service): RedirectResponse
     {
         ${{ camelModel }}Service->update(${{ camelModel }}, Fill{{ model }}DTO::fromRequest($request));
 
-        flash()->info(__('{{ kebabDomain }}.{{ snakeModel }}.updated'));
+        flash()->info(__('{{ kebabDomain }}.{{ langModel }}.updated'));
 
         return to_route('admin.{{ kebabPluralModel }}.index');
     }
@@ -69,7 +69,7 @@ class {{ model }}Controller extends Controller
     {
         ${{ camelModel }}->delete();
 
-        flash()->info(__('{{ kebabDomain }}.{{ snakeModel }}.deleted'));
+        flash()->info(__('{{ kebabDomain }}.{{ langModel }}.deleted'));
 
         return to_route('admin.{{ kebabPluralModel }}.index');
     }
@@ -86,7 +86,7 @@ class {{ model }}Controller extends Controller
                 )
             );
 
-            flash()->info(__('{{ kebabDomain }}.{{ snakeModel }}.mass_deleted'));
+            flash()->info(__('{{ kebabDomain }}.{{ langModel }}.mass_deleted'));
 
             return to_route('admin.{{ kebabPluralModel }}.index');
         }
@@ -104,7 +104,7 @@ class {{ model }}Controller extends Controller
                 )
             );
 
-            flash()->info(__('{{ kebabDomain }}.{{ snakeModel }}.mass_force_deleted'));
+            flash()->info(__('{{ kebabDomain }}.{{ langModel }}.mass_force_deleted'));
 
             return to_route('admin.{{ kebabPluralModel }}.index');
         }

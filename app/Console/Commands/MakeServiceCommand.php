@@ -5,6 +5,7 @@ namespace App\Console\Commands;
 use App\Console\BaseCommand;
 use Illuminate\Console\Command;
 use Illuminate\Contracts\Console\PromptsForMissingInput;
+use Illuminate\Support\Facades\File;
 use function Laravel\Prompts\text;
 use function Laravel\Prompts\confirm;
 
@@ -50,6 +51,11 @@ class MakeServiceCommand extends BaseCommand implements PromptsForMissingInput
         ];
 
         $replace = array_merge($replace, $replaceImages);
+
+        if(!File::exists(base_path("src/Domain/$this->domain/Services"))) {
+            File::makeDirectory(base_path("src/Domain/$this->domain/Services"));
+            File::makeDirectory(base_path("src/Domain/$this->domain/Services/Admin/"));
+        }
 
         $this->outputFilePath = base_path("src/Domain/$this->domain/Services/Admin/{$name}Service.php");
         $this->setStubContent('base-admin-service');

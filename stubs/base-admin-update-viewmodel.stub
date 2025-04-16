@@ -4,15 +4,20 @@ namespace {{ namespace }};
 
 use Domain\{{ domain }}\Models\{{ model }};
 use Spatie\ViewModels\ViewModel;
+{{ importUserTrait }}
 
 class {{ model }}UpdateViewModel extends ViewModel
 {
+    {{ userTrait }}
+
     public ?{{ model }} ${{ camelModel }};
 
     public function __construct({{ model }} ${{ camelModel }} = null)
     {
         $this->{{ camelModel }} = ${{ camelModel }};
     }
+
+    {{ selectedUser }}
 
     public function {{ camelModel }}(): ?{{ model }}
     {

@@ -1,7 +1,7 @@
 <x-layouts.admin :search="false">
     <x-admin.crud-form
         :action="route('admin.{{ kebabPluralModel }}.update', ${{ camelModel }}->slug)"
-        :title="__('{{ kebabDomain }}.{{ snakeModel }}.edit')"
+        :title="__('{{ kebabDomain }}.{{ langModel }}.edit')"
         :model="${{ camelModel }}"
         {{ images }}
         {{ description }}>

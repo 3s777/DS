@@ -51,7 +51,7 @@ class MakeRequestCommand extends BaseCommand implements PromptsForMissingInput
         $this->createFile();
 
         if($withUpdate) {
-            $updateReplace = $this->makeUpdateReplace($name, $replace, $isFeaturedImage, $isImages);
+            $updateReplace = $this->makeUpdateReplace($name, $replace, $isFeaturedImage, $isImages, $isSlug);
 
             $this->outputFilePath = base_path("app/Http/Requests/$this->domain/Admin/Update{$name}Request.php");
             $this->setStubContent('base-admin-request');
@@ -125,8 +125,16 @@ class MakeRequestCommand extends BaseCommand implements PromptsForMissingInput
         ];
     }
 
-    private function makeUpdateReplace(string $name, array $replace, bool $isFeaturedImage, bool $isImages): array
+    private function makeUpdateReplace(string $name, array $replace, bool $isFeaturedImage, bool $isImages, bool $isSlug): array
     {
+        $snakeModel = str($name)->snake();
+        $slug = $isSlug ? "'slug' => [
+                'nullable',
+                'string',
+                'max:250',
+                Rule::unique($name::class)->ignore(\$this->{$snakeModel})
+            ]," : "";
+
         $requestName = "Update{$name}Request";
         $featuredImage = $isFeaturedImage ? "'featured_image' => [
                 'nullable',
@@ -148,6 +156,7 @@ class MakeRequestCommand extends BaseCommand implements PromptsForMissingInput
                 'nullable'
             ]," : "";
 
+        $replace['{{ slug }}'] = $slug;
         $replace['{{ requestName }}'] = $requestName;
         $replace['{{ featuredImage }}'] = $featuredImage;
         $replace['{{ images }}'] = $images;
