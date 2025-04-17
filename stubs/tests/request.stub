@@ -1,0 +1,17 @@
+<?php
+
+namespace Tests\RequestFactories\{{ domain }}\Admin;
+
+use Worksome\RequestFactories\RequestFactory;
+
+class Create{{ model }}RequestFactory extends RequestFactory
+{
+    public function definition(): array
+    {
+        return [
+            'name' => fake()->name(),
+            'description' => fake()->sentence()
+        ];
+    }
+}
+

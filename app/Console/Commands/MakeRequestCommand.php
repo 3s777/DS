@@ -19,6 +19,7 @@ class MakeRequestCommand extends BaseCommand implements PromptsForMissingInput
     {--is-images}
     {--is-description}
     {--is-user}
+    {--is-filters}
     ';
 
     protected $description = 'New Request';
@@ -35,6 +36,7 @@ class MakeRequestCommand extends BaseCommand implements PromptsForMissingInput
         $isImages = $isChild ? $this->option('is-images') : confirm('Is Images?');
         $isDescription = $isChild ? $this->option('is-description') : confirm('Is Description?');
         $isUser = $isChild ? $this->option('is-user') : confirm('Is User?');
+        $isFilters = $isChild ? $this->option('is-filters') : confirm('Use filters?');
 
         $replace = $this->prepareReplace(
             $name,
@@ -59,6 +61,13 @@ class MakeRequestCommand extends BaseCommand implements PromptsForMissingInput
             $this->createFile();
         }
 
+        if($isFilters) {
+            $this->outputFilePath = base_path("app/Http/Requests/$this->domain/Admin/Filter{$name}Request.php");
+            $this->setStubContent('base-admin-request.filters');
+            $this->createFromStub($replace);
+            $this->createFile();
+        }
+
         return self::SUCCESS;
     }
 
@@ -75,6 +84,7 @@ class MakeRequestCommand extends BaseCommand implements PromptsForMissingInput
         $requestName = "Create{$name}Request";
         $namespace = "App\Http\Requests\\$this->domain\Admin";
         $importModel = "use Domain\\$this->domain\Models\\$name;";
+        $kebabPluralModel = str($name)->pluralStudly()->kebab();
         $slug = $isSlug ? "'slug' => [
                 'nullable',
                 'string',
@@ -121,7 +131,8 @@ class MakeRequestCommand extends BaseCommand implements PromptsForMissingInput
             "{{ featuredImage }}" => $featuredImage,
             "{{ featuredImageAttribute }}" => $featuredImageAttribute,
             "{{ images }}" => $images,
-            "{{ imagesAttribute }}" => $imagesAttribute
+            "{{ imagesAttribute }}" => $imagesAttribute,
+            "{{ kebabPluralModel }}" => $kebabPluralModel
         ];
     }
 

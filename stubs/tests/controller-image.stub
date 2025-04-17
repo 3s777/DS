@@ -1,0 +1,260 @@
+<?php
+
+namespace App\{{ domain }}\Controllers;
+
+use App\Http\Controllers\{{ domain }}\Admin\{{ model }}Controller;
+use App\Http\Requests\{{ domain }}\Admin\Create{{ model }}Request;
+use App\Jobs\GenerateSmallThumbnailsJob;
+use App\Jobs\GenerateThumbnailJob;
+use Database\Factories\Auth\UserFactory;
+use Database\Factories\{{ domain }}\{{ model }}Factory;
+use Domain\Auth\Models\Role;
+use Domain\Auth\Models\User;
+use Domain\{{ domain }}\Models\{{ model }};
+use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Http\UploadedFile;
+use Illuminate\Support\Facades\Queue;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Str;
+use Tests\TestCase;
+
+class {{ model }}ControllerTest extends TestCase
+{
+    use RefreshDatabase;
+
+    protected User $user;
+    protected {{ model }} ${{ camelModel }};
+    protected array $request;
+
+    public function setUp(): void
+    {
+        parent::setUp();
+
+        $this->user = UserFactory::new()->create();
+        Role::create(['name' => config('settings.super_admin_role'), 'display_name' => 'SuperAdmin']);
+        $this->user->assignRole('super_admin');
+
+        $this->{{ camelModel }} = {{ model }}Factory::new()->create();
+
+        $this->request = Create{{ model }}Request::factory()->create();
+    }
+
+    public function checkNotAuthRedirect(
+        string $action,
+        string $method = 'get',
+        array $params = [],
+        array $request = []
+    ): void {
+        $this->{$method}(action([{{ model }}Controller::class, $action], $params), $request)
+            ->assertRedirectToRoute('admin.login');
+    }
+
+    /**
+     * @test
+     * @return void
+     */
+    public function it_pages_success(): void
+    {
+        $this->checkNotAuthRedirect('index');
+        $this->checkNotAuthRedirect('create');
+        $this->checkNotAuthRedirect('edit', 'get', [$this->{{ camelModel }}->slug]);
+        $this->checkNotAuthRedirect('store', 'post', [$this->{{ camelModel }}->slug], $this->request);
+        $this->checkNotAuthRedirect('update', 'put', [$this->{{ camelModel }}->slug], $this->request);
+        $this->checkNotAuthRedirect('destroy', 'delete', [$this->{{ camelModel }}->slug]);
+    }
+
+    /**
+     * @test
+     * @return void
+     */
+    public function it_index_success(): void
+    {
+        $this->actingAs($this->user)
+            ->get(action([{{ model }}Controller::class, 'index']))
+            ->assertOk()
+            ->assertSee(__('{{ kebabDomain }}.{{ langModel }}.list'))
+            ->assertViewIs('admin.{{ snakeDomain }}.{{ kebabModelWithoutDomain }}.index');
+    }
+
+    /**
+     * @test
+     * @return void
+     */
+    public function it_create_success(): void
+    {
+        $this->actingAs($this->user)
+            ->get(action([{{ model }}Controller::class, 'create']))
+            ->assertOk()
+            ->assertSee(__('{{ kebabDomain }}.{{ langModel }}.add'))
+            ->assertViewIs('admin.{{ snakeDomain }}.{{ kebabModelWithoutDomain }}.create');
+    }
+
+    /**
+     * @test
+     * @return void
+     */
+    public function it_edit_success(): void
+    {
+        $this->actingAs($this->user)
+            ->get(action([{{ model }}Controller::class, 'edit'], [$this->{{ camelModel }}->slug]))
+            ->assertOk()
+            ->assertSee($this->{{ camelModel }}->name)
+            ->assertViewIs('admin.{{ snakeDomain }}.{{ kebabModelWithoutDomain }}.edit');
+    }
+
+    /**
+     * @test
+     * @return void
+     */
+    public function it_store_success(): void
+    {
+        $this->actingAs($this->user)
+            ->post(action([{{ model }}Controller::class, 'store']), $this->request)
+            ->assertRedirectToRoute('admin.{{ kebabPluralModel }}.index')
+            ->assertSessionHas('helper_flash_message', __('{{ kebabDomain }}.{{ langModel }}.created'));
+
+        $this->assertDatabaseHas('{{ databaseModel }}', [
+            'slug' => Str::slug($this->request['name'])
+        ]);
+    }
+
+    /**
+     * @test
+     * @return void
+     */
+    public function it_store_with_image_success(): void
+    {
+        Queue::fake();
+        Storage::fake('images');
+
+        $this->request['featured_image'] = UploadedFile::fake()->image('photo1.jpg');
+
+        $this->actingAs($this->user)
+            ->post(action([{{ model }}Controller::class, 'store']), $this->request)
+            ->assertRedirectToRoute('admin.{{ kebabPluralModel }}.index')
+            ->assertSessionHas('helper_flash_message', __('{{ kebabDomain }}.{{ langModel }}.created'));
+
+        $this->assertDatabaseHas('{{ databaseModel }}', [
+            'slug' => Str::slug($this->request['name'])
+        ]);
+
+        Queue::assertPushed(GenerateThumbnailJob::class, 3);
+
+        Queue::assertPushed(GenerateSmallThumbnailsJob::class, 2);
+    }
+
+    /**
+     * @test
+     * @return void
+     */
+    public function it_validation_name_fail(): void
+    {
+        $this->app['session']->setPreviousUrl(route('admin.{{ kebabPluralModel }}.create'));
+
+        $this->request['name'] = '';
+        $this->request['slug'] = [];
+        $this->request['user_id'] = 1500000;
+
+        $this->actingAs($this->user)
+            ->post(action([{{ model }}Controller::class, 'store']), $this->request)
+            ->assertInvalid([
+                'name',
+                'slug',
+                'user_id',
+            ])
+            ->assertRedirectToRoute('admin.{{ kebabPluralModel }}.create');
+
+        $this->assertDatabaseMissing('{{ databaseModel }}', [
+            'slug' => Str::slug($this->request['name'])
+        ]);
+    }
+
+    /**
+     * @test
+     * @return void
+     */
+    public function it_validation_featured_image_fail(): void
+    {
+        $this->app['session']->setPreviousUrl(route('admin.{{ kebabPluralModel }}.create'));
+
+        $this->request['featured_image'] = UploadedFile::fake()->image('photo1.php');
+
+        $this->actingAs($this->user)
+            ->post(action([{{ model }}Controller::class, 'store']), $this->request)
+            ->assertInvalid(['featured_image'])
+            ->assertRedirectToRoute('admin.{{ kebabPluralModel }}.create');
+    }
+
+    /**
+     * @test
+     * @return void
+     */
+    public function it_update_success(): void
+    {
+        $this->request['name'] = 'newName';
+
+        $this->actingAs($this->user)
+            ->put(
+                action(
+                    [{{ model }}Controller::class, 'update'],
+                    [$this->{{ camelModel }}->slug]
+                ),
+                $this->request
+            )
+            ->assertRedirectToRoute('admin.{{ kebabPluralModel }}.index')
+            ->assertSessionHas('helper_flash_message', __('{{ kebabDomain }}.{{ langModel }}.updated'));
+
+        $this->assertDatabaseHas('{{ databaseModel }}', [
+            'slug' => Str::slug($this->request['name'])
+        ]);
+    }
+
+    /**
+     * @test
+     * @return void
+     */
+    public function it_update_validation_fail(): void
+    {
+        $this->app['session']->setPreviousUrl(route('admin.{{ kebabPluralModel }}.edit', $this->{{ camelModel }}->slug));
+
+        $this->request['name'] = '';
+        $this->request['slug'] = [];
+        $this->request['user_id'] = 1500000;
+
+        $this->actingAs($this->user)
+            ->put(
+                action(
+                    [{{ model }}Controller::class, 'update'],
+                    [$this->{{ camelModel }}->slug]
+                ),
+                $this->request
+            )
+            ->assertInvalid(
+                [
+                    'name',
+                    'slug',
+                    'user_id',
+                ]
+            )
+            ->assertRedirectToRoute('admin.{{ kebabPluralModel }}.edit', $this->{{ camelModel }}->slug);
+    }
+
+    /**
+     * @test
+     * @return void
+     */
+    public function it_delete_success(): void
+    {
+        $this->actingAs($this->user)
+            ->delete(action([{{ model }}Controller::class, 'destroy'], [$this->{{ camelModel }}->slug]))
+            ->assertRedirectToRoute('admin.{{ kebabPluralModel }}.index')
+            ->assertSessionHas('helper_flash_message', __('{{ kebabDomain }}.{{ langModel }}.deleted'));
+
+        $this->assertDatabaseMissing('{{ databaseModel }}', [
+            'slug' => Str::slug($this->request['name']),
+            'deleted_at' => null
+        ]);
+    }
+}
+
+

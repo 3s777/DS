@@ -38,6 +38,7 @@ trait HasFilters
             ]
         ];
 
+
         $this->baseAssertion($request, $expectedModel, $this->getModels());
     }
 

@@ -37,6 +37,7 @@ class MakeModelCommand extends BaseCommand implements PromptsForMissingInput
         $isTranslatable = confirm('Translatable?');
         $isMassDelete = confirm('Do you need mass deleting?');
         $isFilters = confirm('Use filters?');
+        $isTests = confirm('Use tests?');
 
         $modelNamespace = "Domain\\$this->domain\Models";
         $importCleanHtmlCast = $isDescription ? "use Mews\Purifier\Casts\CleanHtml;" : "";
@@ -58,7 +59,7 @@ class MakeModelCommand extends BaseCommand implements PromptsForMissingInput
         $user = $this->makeUser($isUser);
         $translatable = $this->makeTranslatable($isTranslatable);
         $softDelete = $this->makeSofDelete($isSoftDelete);
-        $filters = $this->prepareFilters($name, $this->domain);
+        $filters = $this->prepareFilters($name, $this->domain, $isFilters);
 
         $resultReplace = array_merge(
             $replace,
@@ -108,7 +109,8 @@ class MakeModelCommand extends BaseCommand implements PromptsForMissingInput
                 'name' => $this->argument('name'),
                 '--is-child' => true,
                 '--domain' => $this->domain,
-                '--is-mass-delete' => $isMassDelete
+                '--is-mass-delete' => $isMassDelete,
+                '--is-filters' => $isFilters
             ]);
         }
 
@@ -123,6 +125,7 @@ class MakeModelCommand extends BaseCommand implements PromptsForMissingInput
                 '--is-images' => $isImages,
                 '--is-description' => $isDescription,
                 '--is-user' => $isUser,
+                '--is-filters' => $isFilters
             ]);
         }
 
@@ -189,6 +192,16 @@ class MakeModelCommand extends BaseCommand implements PromptsForMissingInput
                 'name' => $this->argument('name'),
                 '--is-child' => true,
                 '--domain' => $this->domain,
+            ]);
+        }
+
+        if($isTests) {
+            $this->call('ds:tests', [
+                'name' => $this->argument('name'),
+                '--is-child' => true,
+                '--domain' => $this->domain,
+                '--is-featured-image' => $isFeaturedImage,
+                '--is-filters' => $isFilters
             ]);
         }
 
@@ -391,9 +404,9 @@ class MakeModelCommand extends BaseCommand implements PromptsForMissingInput
         return $casts;
     }
 
-    private function prepareFilters(string $model, string $domain): array
+    private function prepareFilters(string $model, string $domain, bool $isFilters): array
     {
-        $filters = "public array \$sortedFields = [
+        $filters = $isFilters ? "public array \$sortedFields = [
         'id',
         'name',
         'created_at',
@@ -413,10 +426,10 @@ class MakeModelCommand extends BaseCommand implements PromptsForMissingInput
     public function newEloquentBuilder(\$query): {$model}QueryBuilder
     {
         return new {$model}QueryBuilder(\$query);
-    }";
+    }" : "";
 
-        $importFilters = "use Domain\\$domain\FilterRegistrars\\{$model}FilterRegistrar;
-use Domain\\$domain\QueryBuilders\\{$model}QueryBuilder;";
+        $importFilters = $isFilters ? "use Domain\\$domain\FilterRegistrars\\{$model}FilterRegistrar;
+use Domain\\$domain\QueryBuilders\\{$model}QueryBuilder;" : "";
 
         return [
             '{{ filters }}' => $filters,

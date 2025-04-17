@@ -1,0 +1,93 @@
+<?php
+
+namespace App\{{ domain }}\Services;
+
+use App\Http\Requests\Auth\Admin\CreateAdminRequest;
+use App\Http\Requests\{{ domain }}\Admin\Create{{ model }}Request;
+use Domain\Auth\Models\User;
+use Domain\{{ domain }}\DTOs\Fill{{ model }}DTO;
+use Domain\{{ domain }}\Models\{{ model }};
+use Domain\{{ domain }}\Services\Admin\{{ model }}Service;
+use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Http\Request;
+use Illuminate\Support\Str;
+use Tests\TestCase;
+
+class {{ model }}ServiceTest extends TestCase
+{
+    use RefreshDatabase;
+
+    protected array $request;
+    protected User $user;
+
+    protected function setUp(): void
+    {
+        parent::setUp();
+
+        $this->request = Create{{ model }}Request::factory()->create();
+
+        $this->user = User::factory()->create();
+    }
+
+    /**
+     * @test
+     * @return void
+     */
+    public function it_{{ snakeModel }}_created_success(): void
+    {
+        $this->assertDatabaseMissing('{{ databaseModel }}', [
+            'slug' => Str::slug($this->request['name'])
+        ]);
+
+        $this->request['user_id'] = $this->user->id;
+
+        $request = new Request($this->request);
+
+        ${{ camelModel }}Service = app({{ model }}Service::class);
+
+        ${{ camelModel }}Service->create(Fill{{ model }}DTO::fromRequest(
+            $request
+        ));
+
+        $this->assertDatabaseHas('{{ databaseModel }}', [
+            'slug' => Str::slug($this->request['name'])
+        ]);
+    }
+
+
+    /**
+     * @test
+     * @return void
+     */
+    public function it_{{ snakeModel }}_updated_success(): void
+    {
+        $this->request['user_id'] = $this->user->id;
+
+        $createRequest = new Request($this->request);
+
+        ${{ camelModel }}Service = app({{ model }}Service::class);
+
+        ${{ camelModel }}Service->create(Fill{{ model }}DTO::fromRequest(
+            $createRequest
+        ));
+
+        ${{ camelModel }} = {{ model }}::where('slug', Str::slug($this->request['name']))->first();
+
+        $this->request['name'] = 'NewName{{ model }}';
+        $this->request['slug'] = 'new-slug';
+        $this->request['description'] = 'NewDescription';
+
+        $updateRequest = new CreateAdminRequest($this->request);
+
+        ${{ camelModel }}Service->update(${{ camelModel }}, Fill{{ model }}DTO::fromRequest($updateRequest));
+
+        $this->assertDatabaseHas('{{ databaseModel }}', [
+            'slug' => $this->request['slug']
+        ]);
+
+        $updated{{ model }} = {{ model }}::where('slug', $this->request['slug'])->first();
+
+        $this->assertSame($updated{{ model }}->slug, $this->request['slug']);
+        $this->assertSame($updated{{ model }}->description, $this->request['description']);
+    }
+}

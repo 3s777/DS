@@ -1,0 +1,47 @@
+<?php
+
+namespace App\{{ domain }}\DTOs;
+
+use App\Http\Requests\{{ domain }}\Admin\Create{{ model }}Request;
+use Domain\{{ domain }}\DTOs\Fill{{ model }}DTO;
+use Illuminate\Foundation\Testing\RefreshDatabase;
+use Tests\TestCase;
+
+class Fill{{ model }}DTOTest extends TestCase
+{
+    use RefreshDatabase;
+
+    protected function setUp(): void
+    {
+        parent::setUp();
+
+        $this->request = Create{{ model }}Request::factory()->create();
+    }
+
+    /**
+     * @test
+     * @return void
+     */
+    public function it_instance_created_from_create_request_success(): void
+    {
+        $data = Fill{{ model }}DTO::fromRequest(new Create{{ model }}Request($this->request));
+
+        $this->assertInstanceOf(Fill{{ model }}DTO::class, $data);
+    }
+
+
+    /**
+     * @test
+     * @return void
+     */
+    public function it_instance_created_success(): void
+    {
+        $data = Fill{{ model }}DTO::make(
+            name: $this->request['name'],
+            description: $this->request['description']
+        );
+
+        $this->assertInstanceOf(Fill{{ model }}DTO::class, $data);
+    }
+}
+

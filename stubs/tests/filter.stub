@@ -1,26 +1,26 @@
 <?php
 
-namespace App\Game\Controllers;
+namespace App\{{ domain }}\Controllers;
 
-use App\Http\Controllers\Game\Admin\GameDeveloperController;
-use Database\Factories\Game\GameDeveloperFactory;
+use App\Http\Controllers\{{ domain }}\Admin\{{ model }}Controller;
+use Database\Factories\{{ domain }}\{{ model }}Factory;
 use Domain\Auth\Models\Role;
 use Domain\Auth\Models\User;
-use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Factories\Factory;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 use Tests\Traits\HasFilters;
 use Tests\Traits\HasSorters;
 
-class GameDeveloperFilterTest extends TestCase
+class {{ model }}FilterTest extends TestCase
 {
     use RefreshDatabase;
     use HasFilters;
     use HasSorters;
 
     protected User $user;
-    protected Collection $gameDevelopers;
+    protected Collection ${{ camelModel }};
 
     public function setUp(): void
     {
@@ -30,19 +30,19 @@ class GameDeveloperFilterTest extends TestCase
         Role::create(['name' => config('settings.super_admin_role'), 'display_name' => 'SuperAdmin']);
         $this->user->assignRole('super_admin');
 
-        $this->gameDevelopers = GameDeveloperFactory::new()
+        $this->{{ camelModel }} = {{ model }}Factory::new()
             ->count(10)
             ->create();
     }
 
     public function getFactory(): Factory
     {
-        return GameDeveloperFactory::new();
+        return {{ model }}Factory::new();
     }
 
     public function getAction(): array
     {
-        return [GameDeveloperController::class, 'index'];
+        return [{{ model }}Controller::class, 'index'];
     }
 
     public function getUser(): User
@@ -52,12 +52,12 @@ class GameDeveloperFilterTest extends TestCase
 
     public function getViewData(): string
     {
-        return 'developers';
+        return '{{ camelPluralModel }}';
     }
 
     public function getModels(): Collection
     {
-        return $this->gameDevelopers;
+        return $this->{{ camelModel }};
     }
 
     /**
@@ -87,7 +87,6 @@ class GameDeveloperFilterTest extends TestCase
         $this->datesToFilter();
     }
 
-
     /**
      * @test
      * @return void
@@ -96,6 +95,8 @@ class GameDeveloperFilterTest extends TestCase
     {
         $this->datesFilter();
     }
+
+
 
     /**
      * @test
@@ -115,14 +116,18 @@ class GameDeveloperFilterTest extends TestCase
         $request = [
             'filters' => [
                 'dates' => ['from' => 'string', 'to' => '202222-01-01'],
-                'user' => 'wrong_user'
+                'user' => 'wrong_user',
              ]
         ];
 
         $this->actingAs($this->user)
             ->get(action($this->getAction(), $request))
-            ->assertInvalid(['filters.dates.from', 'filters.dates.to', 'filters.user'])
-            ->assertRedirectToRoute('admin.game-developers.index');
+            ->assertInvalid([
+                'filters.dates.from',
+                'filters.dates.to',
+                'filters.user',
+                ])
+            ->assertRedirectToRoute('admin.{{ kebabPluralModel }}.index');
     }
 
     /**
