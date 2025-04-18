@@ -3,6 +3,7 @@
 namespace Support\Sorters;
 
 use Illuminate\Contracts\Database\Eloquent\Builder;
+use Spatie\Translatable\HasTranslations;
 
 class Sorter
 {
@@ -21,6 +22,7 @@ class Sorter
     {
         $sortData = $this->sortData();
 
+
         if (!request('sort')) {
             $query->orderBy(
                 $this->defaultField,
@@ -32,10 +34,25 @@ class Sorter
 
         //        return $query->when($sortData['key']->contains($this->columns()), function (Builder $query) use ($sortData) {
         return $query->when(in_array($sortData['key'], $this->columns()), function (Builder $query) use ($sortData) {
-            $query->orderBy(
-                $sortData['key']->value(),
-                $sortData['order']->value(),
-            );
+            $model = $query->getModel();
+            $tableName = $model->getTable();
+
+            if(
+                in_array(HasTranslations::class, class_uses($model))
+                && in_array($sortData['key']->value(), $model->translatable)
+            ) {
+                $locale =  app()->getLocale();
+                $field = $sortData['key']->value();
+                $order = $sortData['order']->value();
+
+                $query->orderByRaw("$tableName.$field->>'{$locale}' $order");
+            } else {
+                $query->orderBy(
+                    $sortData['key']->value(),
+                    $sortData['order']->value(),
+                );
+            }
+
         });
     }
 

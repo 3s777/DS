@@ -94,10 +94,12 @@ class MakeViewModelsCommand extends BaseCommand implements PromptsForMissingInpu
             $query .= "
             ->filteredAdmin()
             ->sorted()";
+        } else {
+            $query .= "
+            ->orderBy('id', 'DESC')";
         }
 
         $query .= "
-            ->orderBy('id', 'DESC')
             ->paginate(10)
             ->withQueryString();";
 

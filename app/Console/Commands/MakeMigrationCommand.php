@@ -6,11 +6,13 @@ use App\Console\BaseCommand;
 use Illuminate\Console\Command;
 use Illuminate\Contracts\Console\PromptsForMissingInput;
 use function Laravel\Prompts\confirm;
+use function Laravel\Prompts\text;
 
 class MakeMigrationCommand extends BaseCommand implements PromptsForMissingInput
 {
     protected $signature = 'ds:migration {name}
     {--is-child}
+    {--domain}
     {--json-name}
     {--is-slug}
     {--is-featured-image}
@@ -33,15 +35,14 @@ class MakeMigrationCommand extends BaseCommand implements PromptsForMissingInput
         $isUser = $isChild ? $this->option('is-user') : confirm('Is User?');
         $isSoftDelete = $isChild ? $this->option('is-soft-delete') : confirm('Is SoftDelete?');
         $isTranslatable = $isChild ? $this->option('is-translatable') : confirm('Translatable?');
+        $this->model = $this->argument('name');
+        $this->domain = $isChild ? $this->option('domain') : text('What domain is?');
+        $modelNames = $this->setModelNames();
 
-        $migrationName = str($this->argument('name'))
-            ->pluralStudly()
-            ->snake();
-
-        $migrationFileName = date('Y_m_d_His').'_create_'.$migrationName.'_table.php';
+        $migrationFileName = date('Y_m_d_His').'_create_'.$modelNames['databaseModel'].'_table.php';
 
         $replace = $this->prepareReplace(
-            $migrationName,
+            $modelNames['databaseModel'],
             $jsonName,
             $isSlug,
             $isFeaturedImage,

@@ -29,6 +29,8 @@ trait HasSorters
 //            dump($s);
 //        }
 
+//        dump($this->getModels());
+
         $this->actingAs($this->getUser())
             ->get(action($this->getAction(), $request))
             ->assertOk()

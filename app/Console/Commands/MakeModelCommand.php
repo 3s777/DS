@@ -54,7 +54,7 @@ class MakeModelCommand extends BaseCommand implements PromptsForMissingInput
         ];
 
         $imageData = $this->makeImages($isFeaturedImage, $isImages);
-        $importFactory = $this->makeImportFactory($isFactory);
+        $importFactory = $this->makeImportFactory($name, $isFactory);
         $slug = $this->makeSlug($isSlug);
         $user = $this->makeUser($isUser);
         $translatable = $this->makeTranslatable($isTranslatable);
@@ -263,14 +263,14 @@ class MakeModelCommand extends BaseCommand implements PromptsForMissingInput
         ];
     }
 
-    private function makeImportFactory(bool $isFactory = false):array
+    private function makeImportFactory(string $model, bool $isFactory = false):array
     {
         $importFactoryTrait = $isFactory ? "use Illuminate\Database\Eloquent\Factories\HasFactory;" : "";
         $factoryTrait = $isFactory ? "use HasFactory;" : "";
-        $factoryImport = $isFactory ? "use Database\Factories\\$this->domain\\{$this->domain}Factory;" : "";
-        $factoryDefinition = $isFactory ? "protected static function newFactory(): PageFactory
+        $factoryImport = $isFactory ? "use Database\Factories\\$this->domain\\{$model}Factory;" : "";
+        $factoryDefinition = $isFactory ? "protected static function newFactory(): {$model}Factory
     {
-        return {$this->domain}Factory::new();
+        return {$model}Factory::new();
     }" : "";
 
         return [

@@ -22,22 +22,23 @@ class MakeFactoryCommand extends BaseCommand implements PromptsForMissingInput
     public function handle(): int
     {
         $isChild = $this->option('is-child');
-        $name = str($this->argument('name'))->ucfirst();
+        $this->model = $this->argument('name');
         $this->domain = $isChild ? $this->option('domain') : text('What domain is?');
         $jsonName = $isChild ? $this->option('json-name') : confirm('Is name must be json?');
         $isDescription = $isChild ? $this->option('is-description') : confirm('Is Description?');
         $isUser = $isChild ? $this->option('is-user') : confirm('Is User?');
         $isTranslatable = $isChild ? $this->option('is-translatable') : confirm('Translatable?');
+        $this->setModelNames();
+        $this->setDomainNames();
 
         $replace = $this->prepareReplace(
-            $name,
             $jsonName,
             $isDescription,
             $isUser,
             $isTranslatable
         );
 
-        $this->outputFilePath = database_path("factories/{$this->domain}/{$name}Factory.php");
+        $this->outputFilePath = database_path("factories/{$this->domain}/{$this->model}Factory.php");
         $this->setStubContent('base-factory');
         $this->createFromStub($replace);
         $this->createFile();
@@ -46,7 +47,6 @@ class MakeFactoryCommand extends BaseCommand implements PromptsForMissingInput
     }
 
     private function prepareReplace(
-        string $name,
         bool $jsonName,
         bool $isDescription,
         bool $isUser,
@@ -54,8 +54,8 @@ class MakeFactoryCommand extends BaseCommand implements PromptsForMissingInput
     ): array
     {
         $factoryNamespace = "Database\Factories\\$this->domain";
-        $factoryModel = "protected \$model = $name::class;";
-        $namespacedModel = "Domain\\$this->domain\Models\\$name";
+        $factoryModel = "protected \$model = $this->model::class;";
+        $namespacedModel = "Domain\\$this->domain\Models\\$this->model";
         $userModel = $isUser ? "use Domain\Auth\Models\User;" : "";
 
         $definition = $this->makeDefinition(
@@ -68,7 +68,7 @@ class MakeFactoryCommand extends BaseCommand implements PromptsForMissingInput
         return [
             "{{ factoryNamespace }}" => $factoryNamespace,
             "{{ namespacedModel }}" => $namespacedModel,
-            "{{ factory }}" => $name,
+            "{{ factory }}" => $this->model,
             "{{ factoryModel }}" => $factoryModel,
             "{{ definition }}" => $definition,
             "{{ userModel }}" => $userModel

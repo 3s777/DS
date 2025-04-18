@@ -18,7 +18,8 @@ class DatabaseSeeder extends Seeder
 //            GameMediaSeeder::class,
             ShelfSeeder::class,
             SaleSeeder::class,
-            AuctionSeeder::class
+            AuctionSeeder::class,
+            PageCategorySeeder::class
         ]);
     }
 }

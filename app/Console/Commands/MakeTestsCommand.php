@@ -22,38 +22,27 @@ class MakeTestsCommand extends BaseCommand implements PromptsForMissingInput
 
     public function handle(): int
     {
-        $name = $this->argument('name');
         $isChild = $this->option('is-child');
         $this->domain = $isChild ? $this->option('domain') : text('What domain is?');
+        $this->model = $this->argument('name');
         $isFeaturedImage = $isChild ? $this->option('is-featured-image') : confirm('Is Featured Image?');
         $isFilters = $isChild ? $this->option('is-filters') : confirm('Use filters?');
-
-        $model = str($name)->ucfirst();
-        $kebabModel = str($name)->kebab();
-        $snakeModel = str($name)->snake();
-        $camelModel = str($name)->camel();
-        $camelPluralModel = str($name)->pluralStudly()->camel();
-        $kebabPluralModel = str($name)->pluralStudly()->kebab();
-        $domain = str($this->domain)->ucfirst();
-        $snakeDomain = str($this->domain)->snake();
-        $kebabDomain = str($this->domain)->kebab();
-        $langModel = str($name)->remove($this->domain)->snake();
-        $kebabModelWithoutDomain = str($name)->remove($this->domain)->kebab();
-        $databaseModel = str($name)->pluralStudly()->snake();
+        $modelNames = $this->setModelNames();
+        $domainNames = $this->setDomainNames();
 
         $replace = [
-            "{{ model }}" => $model,
-            "{{ kebabModel }}" => $kebabModel,
-            "{{ snakeModel }}" => $snakeModel,
-            "{{ camelModel }}" => $camelModel,
-            "{{ camelPluralModel }}" => $camelPluralModel,
-            "{{ snakeDomain }}" => $snakeDomain,
-            "{{ kebabDomain }}" => $kebabDomain,
-            "{{ domain }}" => $domain,
-            "{{ kebabPluralModel }}" => $kebabPluralModel,
-            "{{ langModel }}" => $langModel,
-            "{{ kebabModelWithoutDomain }}" => $kebabModelWithoutDomain,
-            "{{ databaseModel }}" => $databaseModel
+            "{{ model }}" => $this->model,
+            "{{ kebabModel }}" => $modelNames['kebabModel'],
+            "{{ snakeModel }}" => $modelNames['snakeModel'],
+            "{{ camelModel }}" => $modelNames['camelModel'],
+            "{{ camelPluralModel }}" => $modelNames['camelPluralModel'],
+            "{{ snakeDomain }}" => $domainNames['snakeDomain'],
+            "{{ kebabDomain }}" => $domainNames['kebabDomain'],
+            "{{ domain }}" => $this->domain,
+            "{{ kebabPluralModel }}" => $modelNames['kebabPluralModel'],
+            "{{ langModel }}" => $modelNames['langModel'],
+            "{{ kebabModelWithoutDomain }}" => $modelNames['kebabModelWithoutDomain'],
+            "{{ databaseModel }}" => $modelNames['databaseModel']
         ];
 
         if(!File::exists(base_path("tests/Feature/App/$this->domain/"))) {
@@ -65,12 +54,12 @@ class MakeTestsCommand extends BaseCommand implements PromptsForMissingInput
             File::makeDirectory(base_path("tests/RequestFactories/$this->domain/Admin"));
         }
 
-        $this->outputFilePath = base_path("tests/RequestFactories/$this->domain/Admin/Create{$name}RequestFactory.php");
+        $this->outputFilePath = base_path("tests/RequestFactories/$this->domain/Admin/Create{$this->model}RequestFactory.php");
         $this->setStubContent('tests/request');
         $this->createFromStub($replace);
         $this->createFile();
 
-        $this->outputFilePath = base_path("tests/Feature/App/$this->domain/Controllers/{$name}ControllerTest.php");
+        $this->outputFilePath = base_path("tests/Feature/App/$this->domain/Controllers/{$this->model}ControllerTest.php");
         if ($isFeaturedImage) {
             $this->setStubContent('tests/controller-image');
         } else {
@@ -80,18 +69,18 @@ class MakeTestsCommand extends BaseCommand implements PromptsForMissingInput
         $this->createFile();
 
         if($isFilters) {
-            $this->outputFilePath = base_path("tests/Feature/App/$this->domain/Controllers/{$name}FilterTest.php");
+            $this->outputFilePath = base_path("tests/Feature/App/$this->domain/Controllers/{$this->model}FilterTest.php");
             $this->setStubContent('tests/filter');
             $this->createFromStub($replace);
             $this->createFile();
         }
 
-        $this->outputFilePath = base_path("tests/Feature/App/$this->domain/DTOs/Fill{$name}DTOTest.php");
+        $this->outputFilePath = base_path("tests/Feature/App/$this->domain/DTOs/Fill{$this->model}DTOTest.php");
         $this->setStubContent('tests/dto');
         $this->createFromStub($replace);
         $this->createFile();
 
-        $this->outputFilePath = base_path("tests/Feature/App/$this->domain/Services/{$name}ServiceTest.php");
+        $this->outputFilePath = base_path("tests/Feature/App/$this->domain/Services/{$this->model}ServiceTest.php");
         if ($isFeaturedImage) {
             $this->setStubContent('tests/service-image');
         } else {

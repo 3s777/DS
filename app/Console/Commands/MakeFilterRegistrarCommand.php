@@ -21,14 +21,15 @@ class MakeFilterRegistrarCommand extends BaseCommand implements PromptsForMissin
 
     public function handle(): int
     {
-        $name = $this->argument('name');
         $isChild = $this->option('is-child');
         $this->domain = $isChild ? $this->option('domain') : text('What domain is?');
+        $this->model = $this->argument('name');
         $isUser = $isChild ? $this->option('is-user') : confirm('Is User?');
+        $modelNames = $this->setModelNames();
+        $this->setDomainNames();
 
-        $model = str($name)->ucfirst();
         $namespace = "Domain\\$this->domain\FilterRegistrars";
-        $databaseModel = str($name)->pluralStudly()->snake();
+        $databaseModel = $modelNames['databaseModel'];
         $importUser = $isUser ? "use Domain\Auth\Models\User;
 use App\Filters\RelationFilter;" : "";
         $user = $isUser ? "'user' => RelationFilter::make(
@@ -42,9 +43,9 @@ use App\Filters\RelationFilter;" : "";
 
         $replace = [
             "{{ namespace }}" => $namespace,
-            "{{ model }}" => $model,
+            "{{ model }}" => $this->model,
             "{{ importUser }}" => $importUser,
-            "{{ databaseModel }}" => $databaseModel,
+            "{{ databaseModel }}" => $modelNames['databaseModel'],
             "{{ user }}" => $user
         ];
 
@@ -52,7 +53,7 @@ use App\Filters\RelationFilter;" : "";
             File::makeDirectory(base_path("src/Domain/$this->domain/FilterRegistrars"));
         }
 
-        $this->outputFilePath = base_path("src/Domain/$this->domain/FilterRegistrars/{$name}FilterRegistrar.php");
+        $this->outputFilePath = base_path("src/Domain/$this->domain/FilterRegistrars/{$this->model}FilterRegistrar.php");
         $this->setStubContent('base-admin-filter-registrar');
         $this->createFromStub($replace);
         $this->createFile();

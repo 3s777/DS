@@ -20,23 +20,24 @@ class MakeQueryBuilderCommand extends BaseCommand implements PromptsForMissingIn
 
     public function handle(): int
     {
-        $name = $this->argument('name');
         $isChild = $this->option('is-child');
         $this->domain = $isChild ? $this->option('domain') : text('What domain is?');
+        $this->model = $this->argument('name');
+        $this->setModelNames();
+        $this->setDomainNames();
 
-        $model = str($name)->ucfirst();
         $namespace = "Domain\\$this->domain\QueryBuilders";
 
         $replace = [
             "{{ namespace }}" => $namespace,
-            "{{ model }}" => $model,
+            "{{ model }}" => $this->model,
         ];
 
         if(!File::exists(base_path("src/Domain/$this->domain/QueryBuilders"))) {
             File::makeDirectory(base_path("src/Domain/$this->domain/QueryBuilders"));
         }
 
-        $this->outputFilePath = base_path("src/Domain/$this->domain/QueryBuilders/{$name}QueryBuilder.php");
+        $this->outputFilePath = base_path("src/Domain/$this->domain/QueryBuilders/{$this->model}QueryBuilder.php");
         $this->setStubContent('base-admin-query-builder');
         $this->createFromStub($replace);
         $this->createFile();

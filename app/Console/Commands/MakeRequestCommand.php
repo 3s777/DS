@@ -26,9 +26,9 @@ class MakeRequestCommand extends BaseCommand implements PromptsForMissingInput
 
     public function handle(): int
     {
-        $name = $this->argument('name');
         $isChild = $this->option('is-child');
         $this->domain = $isChild ? $this->option('domain') : text('What domain is?');
+        $this->model = $this->argument('name');
         $isChild = $this->option('is-child');
         $withUpdate = $isChild ? true : $this->option('with-update');
         $isSlug = $isChild ? $this->option('is-slug') : confirm('Is slug?');
@@ -37,9 +37,11 @@ class MakeRequestCommand extends BaseCommand implements PromptsForMissingInput
         $isDescription = $isChild ? $this->option('is-description') : confirm('Is Description?');
         $isUser = $isChild ? $this->option('is-user') : confirm('Is User?');
         $isFilters = $isChild ? $this->option('is-filters') : confirm('Use filters?');
+        $modelNames = $this->setModelNames();
+        $domainNames = $this->setDomainNames();
 
         $replace = $this->prepareReplace(
-            $name,
+            $this->model,
             $isSlug,
             $isDescription,
             $isUser,
@@ -47,22 +49,22 @@ class MakeRequestCommand extends BaseCommand implements PromptsForMissingInput
             $isImages
         );
 
-        $this->outputFilePath = base_path("app/Http/Requests/$this->domain/Admin/Create{$name}Request.php");
+        $this->outputFilePath = base_path("app/Http/Requests/$this->domain/Admin/Create{$this->model}Request.php");
         $this->setStubContent('base-admin-request');
         $this->createFromStub($replace);
         $this->createFile();
 
         if($withUpdate) {
-            $updateReplace = $this->makeUpdateReplace($name, $replace, $isFeaturedImage, $isImages, $isSlug);
+            $updateReplace = $this->makeUpdateReplace($this->model, $replace, $isFeaturedImage, $isImages, $isSlug);
 
-            $this->outputFilePath = base_path("app/Http/Requests/$this->domain/Admin/Update{$name}Request.php");
+            $this->outputFilePath = base_path("app/Http/Requests/$this->domain/Admin/Update{$this->model}Request.php");
             $this->setStubContent('base-admin-request');
             $this->createFromStub($updateReplace);
             $this->createFile();
         }
 
         if($isFilters) {
-            $this->outputFilePath = base_path("app/Http/Requests/$this->domain/Admin/Filter{$name}Request.php");
+            $this->outputFilePath = base_path("app/Http/Requests/$this->domain/Admin/Filter{$this->model}Request.php");
             $this->setStubContent('base-admin-request.filters');
             $this->createFromStub($replace);
             $this->createFile();
@@ -72,7 +74,6 @@ class MakeRequestCommand extends BaseCommand implements PromptsForMissingInput
     }
 
     private function prepareReplace(
-        string $name,
         bool $isSlug,
         bool $isDescription,
         bool $isUser,
@@ -80,16 +81,16 @@ class MakeRequestCommand extends BaseCommand implements PromptsForMissingInput
         bool $isImages
     ): array
     {
-        $model = str($name)->ucfirst();
-        $requestName = "Create{$name}Request";
+
+        $requestName = "Create{$this->model}Request";
         $namespace = "App\Http\Requests\\$this->domain\Admin";
-        $importModel = "use Domain\\$this->domain\Models\\$name;";
-        $kebabPluralModel = str($name)->pluralStudly()->kebab();
+        $importModel = "use Domain\\$this->domain\Models\\$this->model;";
+        $kebabPluralModel = str($this->model)->pluralStudly()->kebab();
         $slug = $isSlug ? "'slug' => [
                 'nullable',
                 'string',
                 'max:250',
-                Rule::unique($model::class)
+                Rule::unique($this->model::class)
             ]," : "";
         $slugAttribute = $isSlug ? "'slug' => __('common.slug')," : "";
         $description = $isDescription ? "'description' => ['nullable','string']," : "";
@@ -119,7 +120,7 @@ class MakeRequestCommand extends BaseCommand implements PromptsForMissingInput
 
         return [
             "{{ namespace }}" => $namespace,
-            "{{ model }}" => $model,
+            "{{ model }}" => $this->model,
             "{{ requestName }}" => $requestName,
             "{{ importModel }}" => $importModel,
             "{{ slug }}" => $slug,

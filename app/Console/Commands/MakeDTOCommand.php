@@ -25,23 +25,24 @@ class MakeDTOCommand extends BaseCommand implements PromptsForMissingInput
 
     public function handle(): int
     {
-        $name = $this->argument('name');
         $isChild = $this->option('is-child');
+        $this->model = $this->argument('name');
         $this->domain = $isChild ? $this->option('domain') : text('What domain is?');
         $isSlug = $isChild ? $this->option('is-slug') : confirm('Is slug?');
         $isFeaturedImage = $isChild ? $this->option('is-featured-image') : confirm('Is Featured Image?');
         $isImages = $isChild ? $this->option('is-images') : confirm('Is Images?');
         $isDescription = $isChild ? $this->option('is-description') : confirm('Is Description?');
         $isUser = $isChild ? $this->option('is-user') : confirm('Is User?');
+        $modelNames = $this->setModelNames();
+        $domainNames = $this->setDomainNames();
 
-        $model = str($name)->ucfirst();
         $namespace = "Domain\\$this->domain\DTOs";
         $attributes = $this->makeAttributes($isSlug, $isDescription, $isUser, $isFeaturedImage, $isImages);
         $attributesNames = $this->makeAttributesNames($isSlug, $isDescription, $isUser, $isFeaturedImage, $isImages);
 
         $replace = [
             "{{ namespace }}" => $namespace,
-            "{{ model }}" => $model,
+            "{{ model }}" => $this->model,
             "{{ attributes }}" => $attributes,
             "{{ attributesNames }}" => $attributesNames
         ];
@@ -50,7 +51,7 @@ class MakeDTOCommand extends BaseCommand implements PromptsForMissingInput
             File::makeDirectory(base_path("src/Domain/$this->domain/DTOs"));
         }
 
-        $this->outputFilePath = base_path("src/Domain/$this->domain/DTOs/Fill{$name}DTO.php");
+        $this->outputFilePath = base_path("src/Domain/$this->domain/DTOs/Fill{$this->model}DTO.php");
         $this->setStubContent('base-admin-dto');
         $this->createFromStub($replace);
         $this->createFile();
