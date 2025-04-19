@@ -20,13 +20,16 @@ class PageService
                 $page = Page::create([
                     'name' => $data->name,
                     'slug' => $data->slug,
-                    'description' => $data->description
+                    'description' => $data->description,
+                    'user_id' => $data->user_id
                 ]);
 
                 $page->addFeaturedImageWithThumbnail(
                     $data->featured_image,
                     ['small', 'medium']
                 );
+
+                $page->categories()->sync($data->categories);
 
                 return $page;
             },
@@ -50,9 +53,12 @@ class PageService
                     [
                         'name' => $data->name,
                         'slug' => $data->slug,
-                        'description' => $data->description
+                        'description' => $data->description,
+                        'user_id' => $data->user_id ?? $page->user_id,
                     ]
                 )->save();
+
+                $page->categories()->sync($data->categories);
 
                 return $page;
             },

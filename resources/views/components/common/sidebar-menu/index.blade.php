@@ -1,10 +1,13 @@
 @props([
     'menu',
-    'hideButton' => false
+    'hideButton' => false,
+    'collapsable' => true
 ])
 
 <nav
-    :class="collapseSidebar ?  'sidebar-menu_collapsed' : ''"
+    @if($collapsable)
+        :class="collapseSidebar ?  'sidebar-menu_collapsed' : ''"
+    @endif
     {{ $attributes->class([
             'sidebar-menu'
         ])

@@ -1,6 +1,7 @@
 @props([
     'sidebar' => false,
-    'wrapperClass' => false
+    'wrapperClass' => false,
+    'collapsable' => true
 ])
 
 <div
@@ -14,7 +15,9 @@
     @if($sidebar)
         <aside
             class="content__sidebar"
-            :class="collapseSidebar ?  'content__sidebar_collapsed' : ''"
+            @if($collapsable)
+                :class="collapseSidebar ?  'content__sidebar_collapsed' : ''"
+            @endif
             {{ $sidebar->attributes->class([
                 'content__sidebar'
             ])

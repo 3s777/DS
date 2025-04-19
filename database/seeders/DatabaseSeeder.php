@@ -19,7 +19,7 @@ class DatabaseSeeder extends Seeder
             ShelfSeeder::class,
             SaleSeeder::class,
             AuctionSeeder::class,
-            PageCategorySeeder::class
+            PageCategorySeeder::class,
         ]);
     }
 }

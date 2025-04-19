@@ -21,24 +21,22 @@ class MakeViewModelsCommand extends BaseCommand implements PromptsForMissingInpu
 
     public function handle(): int
     {
-        $name = $this->argument('name');
         $isChild = $this->option('is-child');
         $this->domain = $isChild ? $this->option('domain') : text('What domain is?');
+        $this->model = $this->argument('name');
         $isUser = $isChild ? $this->option('is-user') : confirm('Is User?');
         $isFilters = $isChild ? $this->option('is-filters') : confirm('Use filters?');
+        $modelNames = $this->setModelNames();
+        $domainNames = $this->setDomainNames();
 
-        $model = str($name)->ucfirst();
         $namespace = "Domain\\$this->domain\ViewModels\Admin";
-        $camelPluralModel = str($name)->pluralStudly()->camel();
-        $camelModel = str($name)->camel();
-        $databaseName = str($name)->pluralStudly()->snake();
-        $query = $this->prepareQuery($model, $databaseName, $isUser, $isFilters);
+        $query = $this->prepareQuery($modelNames['databaseModel'], $isUser, $isFilters);
 
         $replace = [
             "{{ namespace }}" => $namespace,
-            "{{ model }}" => $model,
+            "{{ model }}" => $this->model,
             "{{ domain }}" => $this->domain,
-            "{{ camelPluralModel }}" => $camelPluralModel,
+            "{{ camelPluralModel }}" => $modelNames['camelPluralModel'],
             "{{ query }}" => $query
         ];
 
@@ -47,29 +45,29 @@ class MakeViewModelsCommand extends BaseCommand implements PromptsForMissingInpu
             File::makeDirectory(base_path("src/Domain/$this->domain/ViewModels/Admin/"));
         }
 
-        $this->outputFilePath = base_path("src/Domain/$this->domain/ViewModels/Admin/{$name}IndexViewModel.php");
+        $this->outputFilePath = base_path("src/Domain/$this->domain/ViewModels/Admin/{$this->model}IndexViewModel.php");
         $this->setStubContent('base-admin-index-viewmodel');
         $this->createFromStub($replace);
         $this->createFile();
 
         $selectedUser = $isUser ? "public function selectedUser(): array
     {
-        return \$this->getSelectedUser(\$this->{$camelModel});
+        return \$this->getSelectedUser(\$this->{$modelNames['camelModel']});
     }" : "";
         $importUserTrait = $isUser ? "use Support\Traits\HasSelectedUser;" : "";
         $userTrait = $isUser ? "use HasSelectedUser;" : "";
 
         $updateReplace = [
             "{{ namespace }}" => $namespace,
-            "{{ model }}" => $model,
+            "{{ model }}" => $this->model,
             "{{ domain }}" => $this->domain,
-            "{{ camelModel }}" => $camelModel,
+            "{{ camelModel }}" => $modelNames['camelModel'],
             "{{ selectedUser }}" => $selectedUser,
             "{{ importUserTrait }}" => $importUserTrait,
             "{{ userTrait }}" => $userTrait,
         ];
 
-        $this->outputFilePath = base_path("src/Domain/$this->domain/ViewModels/Admin/{$name}UpdateViewModel.php");
+        $this->outputFilePath = base_path("src/Domain/$this->domain/ViewModels/Admin/{$this->model}UpdateViewModel.php");
         $this->setStubContent('base-admin-update-viewmodel');
         $this->createFromStub($updateReplace);
         $this->createFile();
@@ -77,14 +75,14 @@ class MakeViewModelsCommand extends BaseCommand implements PromptsForMissingInpu
         return self::SUCCESS;
     }
 
-    private function prepareQuery(string $model, string $databaseName, bool $isUser, bool $isFilters): string
+    private function prepareQuery(string $databaseModel, bool $isUser, bool $isFilters): string
     {
-        $query = "return $model::query()
-            ->select('$databaseName.id', '$databaseName.name', '$databaseName.slug', '$databaseName.created_at',";
+        $query = "return $this->model::query()
+            ->select('$databaseModel.id', '$databaseModel.name', '$databaseModel.slug', '$databaseModel.created_at',";
         if($isUser)
         {
             $query .= " 'users.name as user_name')
-            ->leftJoin('users', 'users.id', '=', '$databaseName.user_id')";
+            ->leftJoin('users', 'users.id', '=', '$databaseModel.user_id')";
         } else {
             $query .= ")";
         }

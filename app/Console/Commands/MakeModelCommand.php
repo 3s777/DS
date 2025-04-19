@@ -17,8 +17,9 @@ class MakeModelCommand extends BaseCommand implements PromptsForMissingInput
 
     public function handle(): int
     {
-        $name = str($this->argument('name'))->ucfirst();
+        $name = $this->argument('name');
         $this->domain = text('What Domain?');
+        $this->model = $this->argument('name');
         $isMigration = confirm('Create Migration?');
         $isFactory = confirm('Create Factory?');
         $isController = confirm('Create Controller?');
@@ -38,11 +39,13 @@ class MakeModelCommand extends BaseCommand implements PromptsForMissingInput
         $isMassDelete = confirm('Do you need mass deleting?');
         $isFilters = confirm('Use filters?');
         $isTests = confirm('Use tests?');
+        $this->setModelNames();
+        $this->setDomainNames();
 
         $modelNamespace = "Domain\\$this->domain\Models";
         $importCleanHtmlCast = $isDescription ? "use Mews\Purifier\Casts\CleanHtml;" : "";
         $fillable = $this->makeFillable($isSlug, $isDescription, $isFeaturedImage, $isImages, $isUser);
-        $class = $this->makeClass($name, $isFeaturedImage);
+        $class = $this->makeClass($isFeaturedImage);
         $casts = $this->makeCasts($isDescription, $isImages);
 
         $replace = [
@@ -54,12 +57,12 @@ class MakeModelCommand extends BaseCommand implements PromptsForMissingInput
         ];
 
         $imageData = $this->makeImages($isFeaturedImage, $isImages);
-        $importFactory = $this->makeImportFactory($name, $isFactory);
+        $importFactory = $this->makeImportFactory($isFactory);
         $slug = $this->makeSlug($isSlug);
         $user = $this->makeUser($isUser);
         $translatable = $this->makeTranslatable($isTranslatable);
         $softDelete = $this->makeSofDelete($isSoftDelete);
-        $filters = $this->prepareFilters($name, $this->domain, $isFilters);
+        $filters = $this->prepareFilters($isFilters);
 
         $resultReplace = array_merge(
             $replace,
@@ -72,14 +75,14 @@ class MakeModelCommand extends BaseCommand implements PromptsForMissingInput
             $filters
         );
 
-        $this->outputFilePath = base_path("src/Domain/$this->domain/Models/$name.php");
+        $this->outputFilePath = base_path("src/Domain/$this->domain/Models/$this->model.php");
         $this->setStubContent('base-model');
         $this->createFromStub($resultReplace);
         $this->createFile();
 
         if($isMigration) {
             $this->call('ds:migration', [
-                'name' => $this->argument('name'),
+                'name' => $name,
                 '--is-child' => true,
                 '--json-name' => $jsonName,
                 '--is-slug' => $isSlug,
@@ -94,7 +97,7 @@ class MakeModelCommand extends BaseCommand implements PromptsForMissingInput
 
         if($isFactory) {
             $this->call('ds:factory', [
-                'name' => $this->argument('name'),
+                'name' => $name,
                 '--is-child' => true,
                 '--domain' => $this->domain,
                 '--json-name' => $jsonName,
@@ -106,7 +109,7 @@ class MakeModelCommand extends BaseCommand implements PromptsForMissingInput
 
         if($isController) {
             $this->call('ds:controller', [
-                'name' => $this->argument('name'),
+                'name' => $name,
                 '--is-child' => true,
                 '--domain' => $this->domain,
                 '--is-mass-delete' => $isMassDelete,
@@ -116,7 +119,7 @@ class MakeModelCommand extends BaseCommand implements PromptsForMissingInput
 
         if($isRequest) {
             $this->call('ds:request', [
-                'name' => $this->argument('name'),
+                'name' => $name,
                 '--is-child' => true,
                 '--with-update' => true,
                 '--domain' => $this->domain,
@@ -131,7 +134,7 @@ class MakeModelCommand extends BaseCommand implements PromptsForMissingInput
 
         if($isDTO) {
             $this->call('ds:dto', [
-                'name' => $this->argument('name'),
+                'name' => $name,
                 '--is-child' => true,
                 '--domain' => $this->domain,
                 '--is-slug' => $isSlug,
@@ -144,7 +147,7 @@ class MakeModelCommand extends BaseCommand implements PromptsForMissingInput
 
         if($isViewModels) {
             $this->call('ds:vmodel', [
-                'name' => $this->argument('name'),
+                'name' => $name,
                 '--is-child' => true,
                 '--domain' => $this->domain,
                 '--is-filters' => $isFilters,
@@ -154,7 +157,7 @@ class MakeModelCommand extends BaseCommand implements PromptsForMissingInput
 
         if($isService) {
             $this->call('ds:service', [
-                'name' => $this->argument('name'),
+                'name' => $name,
                 '--is-child' => true,
                 '--domain' => $this->domain,
                 '--is-slug' => $isSlug,
@@ -167,7 +170,7 @@ class MakeModelCommand extends BaseCommand implements PromptsForMissingInput
 
         if($isViews) {
             $this->call('ds:views', [
-                'name' => $this->argument('name'),
+                'name' => $name,
                 '--is-child' => true,
                 '--domain' => $this->domain,
                 '--is-slug' => $isSlug,
@@ -182,14 +185,14 @@ class MakeModelCommand extends BaseCommand implements PromptsForMissingInput
 
         if($isFilters) {
             $this->call('ds:filter-registrar', [
-                'name' => $this->argument('name'),
+                'name' => $name,
                 '--is-child' => true,
                 '--domain' => $this->domain,
                 '--is-user' => $isUser,
             ]);
 
             $this->call('ds:builder', [
-                'name' => $this->argument('name'),
+                'name' => $name,
                 '--is-child' => true,
                 '--domain' => $this->domain,
             ]);
@@ -197,7 +200,7 @@ class MakeModelCommand extends BaseCommand implements PromptsForMissingInput
 
         if($isTests) {
             $this->call('ds:tests', [
-                'name' => $this->argument('name'),
+                'name' => $name,
                 '--is-child' => true,
                 '--domain' => $this->domain,
                 '--is-featured-image' => $isFeaturedImage,
@@ -263,14 +266,14 @@ class MakeModelCommand extends BaseCommand implements PromptsForMissingInput
         ];
     }
 
-    private function makeImportFactory(string $model, bool $isFactory = false):array
+    private function makeImportFactory(bool $isFactory = false):array
     {
         $importFactoryTrait = $isFactory ? "use Illuminate\Database\Eloquent\Factories\HasFactory;" : "";
         $factoryTrait = $isFactory ? "use HasFactory;" : "";
-        $factoryImport = $isFactory ? "use Database\Factories\\$this->domain\\{$model}Factory;" : "";
-        $factoryDefinition = $isFactory ? "protected static function newFactory(): {$model}Factory
+        $factoryImport = $isFactory ? "use Database\Factories\\$this->domain\\{$this->model}Factory;" : "";
+        $factoryDefinition = $isFactory ? "protected static function newFactory(): {$this->model}Factory
     {
-        return {$model}Factory::new();
+        return {$this->model}Factory::new();
     }" : "";
 
         return [
@@ -328,11 +331,10 @@ class MakeModelCommand extends BaseCommand implements PromptsForMissingInput
     }
 
     private function makeClass(
-        string $name,
         bool $isFeaturedImage = false
     ): string
     {
-        $class = "class $name extends Model";
+        $class = "class $this->model extends Model";
 
         if($isFeaturedImage) {
             $class .= " implements HasMedia";
@@ -404,7 +406,7 @@ class MakeModelCommand extends BaseCommand implements PromptsForMissingInput
         return $casts;
     }
 
-    private function prepareFilters(string $model, string $domain, bool $isFilters): array
+    private function prepareFilters(bool $isFilters): array
     {
         $filters = $isFilters ? "public array \$sortedFields = [
         'id',
@@ -415,7 +417,7 @@ class MakeModelCommand extends BaseCommand implements PromptsForMissingInput
 
     public function availableAdminFilters(): array
     {
-        return app({$model}FilterRegistrar::class)->filtersList();
+        return app({$this->model}FilterRegistrar::class)->filtersList();
     }
 
     public function availableFilters(): array
@@ -423,13 +425,13 @@ class MakeModelCommand extends BaseCommand implements PromptsForMissingInput
         return [];
     }
 
-    public function newEloquentBuilder(\$query): {$model}QueryBuilder
+    public function newEloquentBuilder(\$query): {$this->model}QueryBuilder
     {
-        return new {$model}QueryBuilder(\$query);
+        return new {$this->model}QueryBuilder(\$query);
     }" : "";
 
-        $importFilters = $isFilters ? "use Domain\\$domain\FilterRegistrars\\{$model}FilterRegistrar;
-use Domain\\$domain\QueryBuilders\\{$model}QueryBuilder;" : "";
+        $importFilters = $isFilters ? "use Domain\\$this->domain\FilterRegistrars\\{$this->model}FilterRegistrar;
+use Domain\\$this->domain\QueryBuilders\\{$this->model}QueryBuilder;" : "";
 
         return [
             '{{ filters }}' => $filters,

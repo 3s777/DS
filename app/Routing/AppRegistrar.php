@@ -35,15 +35,6 @@ class AppRegistrar implements RouteRegistrar
                         return view('content.search.index');
                     })->name('search');
 
-
-                    Route::get('/rules', function () {
-                        return view('content.page.index');
-                    })->name('rules');
-
-                    Route::get('/qa', function () {
-                        return view('content.page.qa');
-                    })->name('qa');
-
                     Route::get('/demo-select', [PageController::class, 'demoSelect'])->name('demo-select');
 
                     Route::get('/test-admin', function () {

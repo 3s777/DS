@@ -41,7 +41,6 @@ class MakeRequestCommand extends BaseCommand implements PromptsForMissingInput
         $domainNames = $this->setDomainNames();
 
         $replace = $this->prepareReplace(
-            $this->model,
             $isSlug,
             $isDescription,
             $isUser,
@@ -55,7 +54,7 @@ class MakeRequestCommand extends BaseCommand implements PromptsForMissingInput
         $this->createFile();
 
         if($withUpdate) {
-            $updateReplace = $this->makeUpdateReplace($this->model, $replace, $isFeaturedImage, $isImages, $isSlug);
+            $updateReplace = $this->makeUpdateReplace($modelNames, $replace, $isFeaturedImage, $isImages, $isSlug);
 
             $this->outputFilePath = base_path("app/Http/Requests/$this->domain/Admin/Update{$this->model}Request.php");
             $this->setStubContent('base-admin-request');
@@ -81,7 +80,6 @@ class MakeRequestCommand extends BaseCommand implements PromptsForMissingInput
         bool $isImages
     ): array
     {
-
         $requestName = "Create{$this->model}Request";
         $namespace = "App\Http\Requests\\$this->domain\Admin";
         $importModel = "use Domain\\$this->domain\Models\\$this->model;";
@@ -137,17 +135,17 @@ class MakeRequestCommand extends BaseCommand implements PromptsForMissingInput
         ];
     }
 
-    private function makeUpdateReplace(string $name, array $replace, bool $isFeaturedImage, bool $isImages, bool $isSlug): array
+    private function makeUpdateReplace(array $modelNames, array $replace, bool $isFeaturedImage, bool $isImages, bool $isSlug): array
     {
-        $snakeModel = str($name)->snake();
+
         $slug = $isSlug ? "'slug' => [
                 'nullable',
                 'string',
                 'max:250',
-                Rule::unique($name::class)->ignore(\$this->{$snakeModel})
+                Rule::unique($this->model::class)->ignore(\$this->{$modelNames['snakeModel']})
             ]," : "";
 
-        $requestName = "Update{$name}Request";
+        $requestName = "Update{$this->model}Request";
         $featuredImage = $isFeaturedImage ? "'featured_image' => [
                 'nullable',
                 'mimes:jpg,png',

@@ -41,6 +41,16 @@ class CreatePageRequest extends FormRequest
                 'max:10024'
             ],
             'description' => ['nullable','string'],
+            'user_id' => [
+                'nullable',
+                'integer',
+                'exists:Domain\Auth\Models\User,id'
+            ],
+            'categories' => [
+                'required',
+                'array',
+                'exists:Domain\Page\Models\PageCategory,id'
+            ],
         ];
     }
 
@@ -51,6 +61,8 @@ class CreatePageRequest extends FormRequest
             'slug' => __('common.slug'),
             'description' => __('common.description'),
             'featured_image' => __('common.featured_image'),
+            'user_id' => trans_choice('user.users', 1),
+            'categories' => trans_choice('page.category.categories', 2)
         ];
     }
 }

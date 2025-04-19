@@ -25,26 +25,26 @@ class MakeServiceCommand extends BaseCommand implements PromptsForMissingInput
 
     public function handle(): int
     {
-        $name = $this->argument('name');
         $isChild = $this->option('is-child');
         $this->domain = $isChild ? $this->option('domain') : text('What domain is?');
+        $this->model = $this->argument('name');
         $isSlug = $isChild ? $this->option('is-slug') : confirm('Is slug?');
         $isFeaturedImage = $isChild ? $this->option('is-featured-image') : confirm('Is Featured Image?');
         $isImages = $isChild ? $this->option('is-images') : confirm('Is Images?');
         $isDescription = $isChild ? $this->option('is-description') : confirm('Is Description?');
         $isUser = $isChild ? $this->option('is-user') : confirm('Is User?');
+        $modelNames = $this->setModelNames();
+        $domainNames = $this->setDomainNames();
 
-        $model = str($name)->ucfirst();
-        $camelModel = str($name)->camel();
         $namespace = "Domain\\$this->domain\Services\Admin";
-        $fields = $this->makeFields($camelModel, $isSlug, $isDescription, $isUser);
-        $updateFields = $this->makeFields($camelModel, $isSlug, $isDescription, $isUser, true);
-        $replaceImages = $this->prepareImages($camelModel, $isFeaturedImage, $isImages);
+        $fields = $this->makeFields($modelNames['camelModel'], $isSlug, $isDescription, $isUser);
+        $updateFields = $this->makeFields($modelNames['camelModel'], $isSlug, $isDescription, $isUser, true);
+        $replaceImages = $this->prepareImages($modelNames['camelModel'], $isFeaturedImage, $isImages);
 
         $replace = [
             "{{ namespace }}" => $namespace,
-            "{{ model }}" => $model,
-            "{{ camelModel }}" => $camelModel,
+            "{{ model }}" => $this->model,
+            "{{ camelModel }}" => $modelNames['camelModel'],
             "{{ domain }}" => $this->domain,
             "{{ fields }}" => $fields,
             "{{ updateFields }}" => $updateFields,
@@ -57,7 +57,7 @@ class MakeServiceCommand extends BaseCommand implements PromptsForMissingInput
             File::makeDirectory(base_path("src/Domain/$this->domain/Services/Admin/"));
         }
 
-        $this->outputFilePath = base_path("src/Domain/$this->domain/Services/Admin/{$name}Service.php");
+        $this->outputFilePath = base_path("src/Domain/$this->domain/Services/Admin/{$this->model}Service.php");
         $this->setStubContent('base-admin-service');
         $this->createFromStub($replace);
         $this->createFile();

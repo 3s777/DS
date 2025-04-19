@@ -27,9 +27,9 @@ class MakeViewsCommand extends BaseCommand implements PromptsForMissingInput
 
     public function handle(): int
     {
-        $name = $this->argument('name');
         $isChild = $this->option('is-child');
         $this->domain = $isChild ? $this->option('domain') : text('What domain is?');
+        $this->model = $this->argument('name');
         $isSlug = $isChild ? $this->option('is-slug') : confirm('Is slug?');
         $isFeaturedImage = $isChild ? $this->option('is-featured-image') : confirm('Is Featured Image?');
         $isImages = $isChild ? $this->option('is-images') : confirm('Is Images?');
@@ -37,59 +37,53 @@ class MakeViewsCommand extends BaseCommand implements PromptsForMissingInput
         $isUser = $isChild ? $this->option('is-user') : confirm('Is User?');
         $isMassDelete = $isChild ? $this->option('is-mass-delete') : confirm('Do you need mass deleting?');
         $isFilters = $isChild ? $this->option('is-filters') : confirm('Use filters?');
+        $modelNames = $this->setModelNames();
+        $domainNames = $this->setDomainNames();
 
-        $model = str($name)->ucfirst();
         $namespace = "Domain\\$this->domain\DTOs";
-        $kebabPluralModel = str($name)->pluralStudly()->kebab();
-        $snakeModel = str($name)->snake();
-        $camelModel = str($name)->camel();
-        $camelPluralModel = str($name)->pluralStudly()->camel();
         $sidebar = $isFeaturedImage ? "<x-slot:sidebar></x-slot:sidebar>" : "";
         $images = $isFeaturedImage ? ":images=\"true\"" : "";
         $description = $isDescription ? "" : ":description=\"false\"";
-        $kebabDomain = str($this->domain)->kebab();
-        $kebabModel = str($model)->kebab();
-        $fields = $this->makeFields($camelModel, $isSlug, $isUser);
+        $fields = $this->makeFields($modelNames['camelModel'], $isSlug, $isUser);
         $massDelete = $isMassDelete ? '' : ':mass-delete="false" :selectable="false"';
-        $langModel = str($name)->remove($this->domain)->snake();
         $checkboxHeader = $isMassDelete ? '<x-ui.responsive-table.column type="select" name="check">
-                    <x-common.action-table.select-all :models="$'.$camelPluralModel.'" />
+                    <x-common.action-table.select-all :models="$'.$modelNames['camelPluralModel'].'" />
                 </x-ui.responsive-table.column>' : '';
         $checkboxRow = $isMassDelete ? '<x-ui.responsive-table.column type="select">
                      <x-common.action-table.row-checkbox :model="$item" />
                 </x-ui.responsive-table.column>' : '';
-        $kebabModelWithoutDomain = str($name)->remove($this->domain)->kebab();
+        $kebabModelWithoutDomain = str($this->model)->remove($this->domain)->kebab();
 
         $replace = [
             "{{ namespace }}" => $namespace,
-            "{{ model }}" => $model,
-            "{{ kebabPluralModel }}" => $kebabPluralModel,
-            "{{ snakeModel }}" => $snakeModel,
-            "{{ langModel }}" => $langModel,
-            "{{ camelModel }}" => $camelModel,
-            "{{ kebabDomain }}" => $kebabDomain,
+            "{{ model }}" => $this->model,
+            "{{ kebabPluralModel }}" => $modelNames['kebabPluralModel'],
+            "{{ snakeModel }}" => $modelNames['snakeModel'],
+            "{{ langModel }}" => $modelNames['langModel'],
+            "{{ camelModel }}" => $modelNames['camelModel'],
+            "{{ kebabDomain }}" => $domainNames['kebabDomain'],
             "{{ sidebar }}" => $sidebar,
             "{{ images }}" => $images,
             "{{ description }}" => $description,
             "{{ slug }}" => $fields['{{ slug }}'],
             "{{ user }}" => $fields['{{ user }}'],
             "{{ massDelete }}" => $massDelete,
-            "{{ camelPluralModel }}" => $camelPluralModel,
+            "{{ camelPluralModel }}" => $modelNames['camelPluralModel'],
             "{{ checkboxHeader }}" => $checkboxHeader,
             "{{ checkboxRow }}" => $checkboxRow,
             "{{ kebabModelWithoutDomain }}" => $kebabModelWithoutDomain,
         ];
 
-        if(!File::exists(base_path("resources/views/admin/{$kebabDomain}/{$langModel}"))) {
-            File::makeDirectory(base_path("resources/views/admin/{$kebabDomain}/{$langModel}"));
+        if(!File::exists(base_path("resources/views/admin/{$domainNames['kebabDomain']}/{$modelNames['langModel']}"))) {
+            File::makeDirectory(base_path("resources/views/admin/{$domainNames['kebabDomain']}/{$modelNames['langModel']}"));
         }
 
-        $this->outputFilePath = base_path("resources/views/admin/{$kebabDomain}/{$langModel}/create.blade.php");
+        $this->outputFilePath = base_path("resources/views/admin/{$domainNames['kebabDomain']}/{$modelNames['langModel']}/create.blade.php");
         $this->setStubContent('base-admin-layout.create');
         $this->createFromStub($replace);
         $this->createFile();
 
-        $this->outputFilePath = base_path("resources/views/admin/{$kebabDomain}/{$langModel}/index.blade.php");
+        $this->outputFilePath = base_path("resources/views/admin/{$domainNames['kebabDomain']}/{$modelNames['langModel']}/index.blade.php");
         if($isFilters) {
             $this->setStubContent('base-admin-layout.index-filter');
         } else {
@@ -99,21 +93,21 @@ class MakeViewsCommand extends BaseCommand implements PromptsForMissingInput
         $this->createFile();
 
         if($isFilters) {
-            if(!File::exists(base_path("resources/views/admin/{$kebabDomain}/{$langModel}/partials"))) {
-                File::makeDirectory(base_path("resources/views/admin/{$kebabDomain}/{$langModel}/partials"));
+            if(!File::exists(base_path("resources/views/admin/{$domainNames['kebabDomain']}/{$modelNames['langModel']}/partials"))) {
+                File::makeDirectory(base_path("resources/views/admin/{$domainNames['kebabDomain']}/{$modelNames['langModel']}/partials"));
             }
 
-            $this->outputFilePath = base_path("resources/views/admin/{$kebabDomain}/{$langModel}/partials/filters.blade.php");
+            $this->outputFilePath = base_path("resources/views/admin/{$domainNames['kebabDomain']}/{$modelNames['langModel']}/partials/filters.blade.php");
             $this->setStubContent('base-admin-layout.filters');
             $this->createFromStub($replace);
             $this->createFile();
         }
 
-        $updatedFields = $this->makeFields($camelModel, $isSlug, $isUser, true);
+        $updatedFields = $this->makeFields($modelNames['camelModel'], $isSlug, $isUser, true);
         $replace['{{ slug }}'] = $updatedFields['{{ slug }}'];
         $replace['{{ user }}'] = $updatedFields['{{ user }}'];
 
-        $this->outputFilePath = base_path("resources/views/admin/{$kebabDomain}/{$langModel}/edit.blade.php");
+        $this->outputFilePath = base_path("resources/views/admin/{$domainNames['kebabDomain']}/{$modelNames['langModel']}/edit.blade.php");
         $this->setStubContent('base-admin-layout.edit');
         $this->createFromStub($replace);
         $this->createFile();

@@ -2,11 +2,11 @@
 
 namespace App\Http\Requests\Page\Admin;
 
-use Domain\Page\Models\Page;
+use Domain\Page\Models\PageCategory;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
 
-class UpdatePageRequest extends FormRequest
+class CreatePageCategoryRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -33,23 +33,17 @@ class UpdatePageRequest extends FormRequest
                 'nullable',
                 'string',
                 'max:250',
-                Rule::unique(Page::class)->ignore($this->page)
+                Rule::unique(PageCategory::class)
             ],
             'description' => ['nullable','string'],
-            'featured_image' => [
-                'nullable',
-                'mimes:jpg,png',
-                'max:10024'
-            ],
-            'featured_image_selected' => ['nullable', 'bool'],
             'user_id' => [
                 'nullable',
                 'integer',
                 'exists:Domain\Auth\Models\User,id'
             ],
-            'categories' => [
-                'required',
-                'array',
+            'parent_id' => [
+                'nullable',
+                'integer',
                 'exists:Domain\Page\Models\PageCategory,id'
             ],
         ];
@@ -61,9 +55,8 @@ class UpdatePageRequest extends FormRequest
             'name' => trans_choice('common.name', 1),
             'slug' => __('common.slug'),
             'description' => __('common.description'),
-            'featured_image' => __('common.featured_image'),
             'user_id' => trans_choice('user.users', 1),
-            'categories' => trans_choice('page.category.categories', 2)
+            'parent_id' => __('page.category.parent'),
         ];
     }
 }

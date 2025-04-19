@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Http\UploadedFile;
 use Support\Traits\Makeable;
 
-final readonly class FillPageDTO
+final readonly class FillPageCategoryDTO
 {
     use Makeable;
 
@@ -14,10 +14,8 @@ final readonly class FillPageDTO
         public string $name,
         public ?string $slug = null,
         public ?string $description = null,
-        public ?UploadedFile $featured_image = null,
-        public ?bool $featured_image_uploaded = null,
         public ?int $user_id = null,
-        public ?array $categories = null,
+        public ?int $parent_id = null,
     ) {
     }
 
@@ -27,10 +25,8 @@ final readonly class FillPageDTO
             'name',
             'slug',
             'description',
-            'featured_image',
-            'featured_image_uploaded',
             'user_id',
-            'categories'
+            'parent_id'
         ]));
     }
 }

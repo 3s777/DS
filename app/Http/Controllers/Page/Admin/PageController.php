@@ -29,7 +29,7 @@ class PageController extends Controller
 
     public function create(): View|Application|Factory|\Illuminate\Contracts\Foundation\Application
     {
-        return view('admin.page.page.create');
+        return view('admin.page.page.create', new PageUpdateViewModel());
     }
 
     public function store(CreatePageRequest $request, PageService $pageService): Application|Redirector|RedirectResponse|\Illuminate\Contracts\Foundation\Application

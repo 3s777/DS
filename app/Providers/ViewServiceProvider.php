@@ -5,6 +5,7 @@ namespace App\Providers;
 use App\View\Composers\AdminSidebarMenuComposer;
 use App\View\Composers\MainMenuComposer;
 use App\View\Composers\ProfileMenuComposer;
+use App\View\Composers\RulesMenuComposer;
 use Illuminate\Foundation\Vite;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\View;
@@ -28,6 +29,7 @@ class ViewServiceProvider extends ServiceProvider
 
         View::composer('admin.menu', AdminSidebarMenuComposer::class);
         View::composer('content.profile.menu', ProfileMenuComposer::class);
+        View::composer('content.rules.menu', RulesMenuComposer::class);
         View::composer('components.common.main-menu', MainMenuComposer::class);
     }
 }

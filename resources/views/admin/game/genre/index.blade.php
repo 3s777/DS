@@ -26,7 +26,7 @@
                 </x-ui.responsive-table.column>
                 <x-ui.responsive-table.column name="users.name">
                     {{ trans_choice('user.users', 1) }}
-                </x-ui.responsive-table.column>
+                </x-ui.responsive-table.column>z
                 <x-ui.responsive-table.column name="created_at">
                     {{ __('common.created_date') }}
                 </x-ui.responsive-table.column>
