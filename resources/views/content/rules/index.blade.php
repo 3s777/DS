@@ -1,4 +1,4 @@
-<x-layouts.main title="{{ __('Users') }}" :search="false">
+<x-layouts.main title="{{ __('Users') }}">
     <x-grid.container>
         <x-common.content class="rules" :collapsable="false">
             <x-slot:sidebar>
