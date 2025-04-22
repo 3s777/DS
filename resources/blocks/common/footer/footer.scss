@@ -2,15 +2,125 @@
     position: relative;
     text-align: center;
 
+    a {
+        text-decoration: none;
+
+        &:hover {
+            text-decoration: underline;
+        }
+    }
+
     &__inner {
         position: relative;
         z-index: 1000;
-        padding: 200px 0 50px 0;
-        //background-image: url("../images/f-bg.png");
-        //background-repeat: repeat-x;
+        padding: 28px 0 28px 0;
     }
 
+    &__main {
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 24px;
+    }
 
+    &__media {
+        display: flex;
+        justify-content: center;
+        flex-direction: column;
+        flex-basis: 23%;
+        gap: 24px;
+    }
+
+    &__logo {
+        justify-content: center;
+    }
+
+    &__site-icon {
+        height: 44px;
+        margin-right: 12px;
+    }
+
+    &__site-name {
+        height: 44px;
+    }
+
+    &__social {
+        display: flex;
+        justify-content: center;
+        flex-wrap: wrap;
+        gap: 12px;
+        flex-basis: 23%;
+
+        svg {
+            width: 24px;
+            height: 24px;
+            fill: $opposite-main;
+        }
+    }
+
+    &__social-title {
+        font-size: rem(18);
+    }
+
+    &__donate {
+        flex-basis: 23%;
+    }
+
+    &__donate-title {
+        margin-bottom: 20px;
+        font-size: rem(16);
+    }
+
+    &__donate-form {
+        display: flex;
+        justify-content: space-between;
+        flex-wrap: wrap;
+        gap: 12px;
+    }
+
+    &__donate-field {
+        display: flex;
+        gap: 8px;
+        align-items: center;
+        flex-basis: 100%;
+    }
+
+    &__donate-submit {
+        flex-shrink: 0;
+        flex-basis: 100%;
+
+        .button {
+            height: 50px;
+        }
+    }
+
+    &__links {
+        flex-basis: 50%;
+    }
+
+    &__menu {
+        display: flex;
+        justify-content: space-between;
+        flex-wrap: wrap;
+    }
+
+    &__menu-link {
+        display: block;
+        flex-basis: 33%;
+        padding: 4px 8px;
+        text-align: left;
+
+        &:nth-child(3n)  {
+            text-align: right;
+        }
+    }
+
+    &__politics {
+        display: flex;
+        justify-content: center;
+        flex-wrap: wrap;
+        gap: 24px;
+        margin-bottom: 12px;
+    }
 
     &__waves-wrapper {
         position: absolute;
@@ -53,6 +163,21 @@
         animation-duration: 40s;
         fill: $base-dark;
     }
+
+    //&__numbers {
+    //    display: flex;
+    //    justify-content: center;
+    //    gap: 32px;
+    //}
+    //
+    //&__number {
+    //    margin-bottom: 12px;
+    //}
+    //
+    //&__number-value {
+    //    font-size: rem(32);
+    //    font-weight: 700;
+    //}
 
     @include breakpoint-max($ml) {
     }

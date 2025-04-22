@@ -14,7 +14,6 @@
                     @csrf
                     <x-ui.form.group type="flex">
                         <x-ui.form.input-text
-
                             id="name"
                             name="name"
                             type="text"
