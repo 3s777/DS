@@ -1,0 +1,153 @@
+openapi: 3.0.4
+info:
+  title: DS
+  description: DS api
+  version: 1.0.0
+servers:
+  - url: 'http://localhost/api'
+    description: 'Local API server'
+tags:
+  - name: Authenticate
+  - name: Collectors
+paths:
+  /authenticate:
+    post:
+      tags:
+        - Authenticate
+      operationId: authenticate
+      summary: 'Login user'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                email:
+                  type: string
+                  example: 'info@test.com'
+                password:
+                  type: string
+                  example: '***'
+      responses:
+        200:
+          description: 'Successful'
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  token:
+                    type: string
+                    example: 'sdfJsdfmUJKLsdfx...'
+        401:
+          $ref: '#/components/responses/Unauthorized'
+        422:
+          $ref: '#/components/responses/ValidationException'
+
+    delete:
+      tags:
+        - Authenticate
+      operationId: logout
+      security:
+        - jwt: []
+      summary: 'Logout user'
+      responses:
+        204:
+          description: 'No Content'
+        401:
+          $ref: '#/components/responses/Unauthorized'
+
+  /register:
+    post:
+      tags:
+        - Autheticate
+      summary: 'Register user'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                  example: 'user.name'
+                email:
+                  type: string
+                  example: 'info@user.mail'
+                password:
+                  type: string
+                  format: password
+                  example: '***'
+                password_confirmation:
+                  type: string
+                  format: password
+                  example: '***'
+              required:
+                - name
+                - email
+                - password
+                - password_confirmation
+      responses:
+        201:
+          $ref: '#/components/responses/Success'
+        422:
+          $ref: '#/components/responses/ValidationException'
+  /users:
+    get:
+      tags:
+        - Collectors
+      summary: 'Collectors listing'
+      parameters:
+        - name: 'filters[search]'
+          in: query
+          required: false
+          schema:
+            type: string
+            example: 'search query'
+
+
+
+
+components:
+  securitySchemes:
+    jwt:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+
+  responses:
+    ValidationException:
+      description: 'Validation errors'
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              message:
+                type: string
+              errors:
+                type: object
+                additionalProperties:
+                  type: array
+                  items:
+                    type: string
+    Unauthorized:
+      description: 'Unauthorized'
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              message:
+                type: string
+    Success:
+      description: 'Successful'
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              message:
+                type: string
