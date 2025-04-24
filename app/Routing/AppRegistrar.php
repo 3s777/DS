@@ -3,10 +3,15 @@
 namespace App\Routing;
 
 use App\Contracts\RouteRegistrar;
+use App\Http\Controllers\API\DocController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\PageController;
 use Illuminate\Contracts\Routing\Registrar;
+
+use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Response;
 use Illuminate\Support\Facades\Route;
+use Symfony\Component\HttpFoundation\JsonResponse;
 
 class AppRegistrar implements RouteRegistrar
 {
@@ -44,6 +49,11 @@ class AppRegistrar implements RouteRegistrar
                     Route::get('/test-collector', function () {
                         return view('content.page.qa');
                     })->middleware('auth:collector')->name('test-collector');
+
+                    Route::controller(DocController::class)->group(function () {
+                        Route::get('/api/v1/docs', 'showDocV1')->name('api.v1.docs');
+                        Route::get('/api/v1/openapi.yaml', 'contentV1')->name('openapi.v1.yaml');
+                    })->middleware('auth:collector');
 
                 });
             });

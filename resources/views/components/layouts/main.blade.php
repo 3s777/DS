@@ -26,6 +26,7 @@
 
         @stack('scripts')
 
+
         <script type="module">
             Fancybox.defaults.l10n = {
                 CLOSE: "{{ __('fancybox.close') }}",

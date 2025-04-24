@@ -1,0 +1,18 @@
+type: object
+properties:
+  id:
+    type: integer
+  name:
+    type: string
+  slug:
+    type: string
+  first_name:
+    type: string
+  collection:
+    type: integer
+  auction:
+    type: integer
+  sale:
+    type: integer
+  exchange:
+    type: integer
