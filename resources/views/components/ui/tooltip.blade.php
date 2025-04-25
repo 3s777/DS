@@ -1,6 +1,5 @@
 @props([
     'id' => false,
-    'arrow' => true
 ])
 
 <div
@@ -14,7 +13,13 @@
         ])
     }}>
     {{ $slot }}
-    @if($arrow)
-        <div id="arrow" class="tooltip__arrow"></div>
-    @endif
 </div>
+
+@pushonce('scripts')
+    <script type="module">
+        tippy('[data-tippy-content]', {
+            theme: 'light',
+            trigger: 'click'
+        });
+    </script>
+@endpushonce

@@ -124,41 +124,38 @@
                         class="tooltip_trigger"
                         color="info"
                         tooltip="true"
+                        data-tippy-content="Big tooltip tooltip tooltip tooltip tooltip tooltip"
                         data-tooltip="tooltip_1">
                         ?
                     </x-ui.form.button>
-                    <x-ui.tooltip
-                        class="tooltip_1"
-                        id="tooltip">
-                        Big tooltip tooltip tooltip tooltip tooltip tooltip tooltip tooltip tooltip tooltip tooltip tooltip tooltip tooltip tooltip tooltip tooltip
-                    </x-ui.tooltip>
 
                     <x-ui.form.button
                         class="tooltip_trigger"
                         color="cancel"
                         tooltip-size="big"
                         tooltip="true"
+                        data-tippy-content="Big tooltip tooltip tooltip tooltip tooltip tooltip tooltip tooltip tooltip tooltip tooltip tooltip"
                         data-tooltip="tooltip_2">
                         ?
                     </x-ui.form.button>
-                    <x-ui.tooltip
-                        class="tooltip_2"
-                        id="tooltip2">
-                        Big tooltip tooltip tooltip tooltip tooltip tooltip tooltip tooltip tooltip tooltip tooltip tooltip tooltip tooltip tooltip tooltip tooltip
-                    </x-ui.tooltip>
 
                     <x-ui.form.button
                         class="tooltip_trigger"
                         tooltip-size="extra-small"
                         tooltip="true"
+                        data-tippy-content="Big tooltip tooltip tooltip tooltip tooltip tooltip tooltip tooltip tooltip tooltip tooltip tooltip tooltip tooltip tooltip tooltip tooltip"
                         data-tooltip="tooltip_3">
                         ?
                     </x-ui.form.button>
-                    <x-ui.tooltip
-                        class="tooltip_3"
-                        id="tooltip3">
-                        Big tooltip tooltip tooltip tooltip tooltip tooltip tooltip tooltip tooltip tooltip tooltip tooltip tooltip tooltip tooltip tooltip tooltip
-                    </x-ui.tooltip>
+
+                    <x-ui.form.button
+                        class="tooltip_tippy"
+                        color="info"
+                        tooltip="true"
+                        data-tippy-content="Big tooltip tooltip tooltip tooltip tooltip tooltip tooltip tooltip tooltip tooltip tooltip tooltip tooltip tooltip tooltip tooltip tooltip"
+                        data-tooltip="tooltip_tippy">
+                        ?
+                    </x-ui.form.button>
                 </div>
             </x-grid.col>
 

@@ -7,3 +7,8 @@
         timeout = setTimeout(() => func.apply(context, args), delay);
     };
 }
+
+ tippy('[data-tippy-content]', {
+     theme: 'light',
+     trigger: 'click'
+ });

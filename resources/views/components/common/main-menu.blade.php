@@ -32,42 +32,17 @@
             <x-svg.close class="main-menu__close-icon"></x-svg.close>
         </div>
         <div class="main-menu__sub">
-            <div class="main-menu__sub-item">
-                <a href="{{ route('collectors') }}" class="main-menu__sub-link">
-                    <x-svg.users class="main-menu__sub-link-icon"></x-svg.users>
-                    <div class="main-menu__sub-link-label">
-                        <div class="main-menu__sub-link-title">Пользователи</div>
-                        <div class="main-menu__sub-link-description">Найти других коллекционеров</div>
-                    </div>
-                </a>
-            </div>
-            <div class="main-menu__sub-item">
-                <a href="" class="main-menu__sub-link">
-                    <x-svg.users class="main-menu__sub-link-icon"></x-svg.users>
-                    <div class="main-menu__sub-link-label">
-                        <div class="main-menu__sub-link-title">Пользователи</div>
-                        <div class="main-menu__sub-link-description">Найти других коллекционеров</div>
-                    </div>
-                </a>
-            </div>
-            <div class="main-menu__sub-item">
-                <a href="" class="main-menu__sub-link">
-                    <x-svg.users class="main-menu__sub-link-icon"></x-svg.users>
-                    <div class="main-menu__sub-link-label">
-                        <div class="main-menu__sub-link-title">Пользователи</div>
-                        <div class="main-menu__sub-link-description">Найти других коллекционеров</div>
-                    </div>
-                </a>
-            </div>
-            <div class="main-menu__sub-item">
-                <a href="" class="main-menu__sub-link">
-                    <x-svg.profile class="main-menu__sub-link-icon"></x-svg.profile>
-                    <div class="main-menu__sub-link-label">
-                        <div class="main-menu__sub-link-title">Админка</div>
-                        <div class="main-menu__sub-link-description">Войти в административную панель</div>
-                    </div>
-                </a>
-            </div>
+            @foreach($subMenu as $link)
+                <div class="main-menu__sub-item">
+                    <a href="{{ $link->link() }}" class="main-menu__sub-link">
+                        <x-dynamic-component component="svg.{{ $link->icon() }}" class="main-menu__sub-link-icon" />
+                        <div class="main-menu__sub-link-label">
+                            <div class="main-menu__sub-link-title">{{ $link->label() }}</div>
+                            <div class="main-menu__sub-link-description">{{ $link->description() }}</div>
+                        </div>
+                    </a>
+                </div>
+            @endforeach
         </div>
     </div>
 </nav>

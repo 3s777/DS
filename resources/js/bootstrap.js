@@ -102,6 +102,11 @@ window.FilePondPluginImageResize = FilePondPluginImageResize;
 import Quill from "quill";
 window.Quill = Quill;
 
+import tippy from 'tippy.js';
+window.tippy = tippy;
+import 'tippy.js/dist/tippy.css';
+import 'tippy.js/themes/light.css';
+
 // import SwaggerUI from 'swagger-ui';
 // window.SwaggerUI = SwaggerUI;
 // import 'swagger-ui/dist/swagger-ui.css';
