@@ -1,0 +1,10 @@
+    public function {{name}}({{parameters}}{{resolver}} $resolver, {{responder}} $responder): Response
+    {
+        try {
+            return $responder->respond(
+                $resolver->with({{with-parameters}})
+            );
+        } catch (Throwable $e) {
+            return $responder->error($e);
+        }
+    }

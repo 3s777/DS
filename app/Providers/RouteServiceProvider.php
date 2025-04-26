@@ -3,6 +3,7 @@
 namespace App\Providers;
 
 use App\Contracts\RouteRegistrar;
+use App\Routing\ApiRegistrar;
 use App\Routing\AppRegistrar;
 use App\Routing\AuthAdminRegistrar;
 use App\Routing\AuthCollectorRegistrar;
@@ -39,6 +40,7 @@ class RouteServiceProvider extends ServiceProvider
         ShelfRegistrar::class,
         PageRegistrar::class,
         FilepondRegistrar::class,
+        ApiRegistrar::class
     ];
 
     /**

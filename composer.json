@@ -12,6 +12,7 @@
         "laravel/sanctum": "^4.0",
         "laravel/scout": "^10.12",
         "laravel/tinker": "^2.8",
+        "lcobucci/jwt": "^5.5",
         "mews/purifier": "^3.4",
         "owen-it/laravel-auditing": "^13.6",
         "spatie/laravel-medialibrary": "^11.0.0",

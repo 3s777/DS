@@ -2,10 +2,14 @@
 
 namespace App\Providers;
 
+use App\Guards\JWTGuard;
+use Domain\Auth\JWT;
 use Domain\Game\Models\GameDeveloper;
 use Domain\Game\Models\Policies\GameDeveloperPolicy;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\Relation;
+use Illuminate\Foundation\Application;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\ServiceProvider;
 
@@ -65,5 +69,17 @@ class AppServiceProvider extends ServiceProvider
         //        Translatable::fallback(
         //            fallbackLocale: 'ru',
         //        );
+
+        $this->app->instance(JWT::class, new JWT(
+            config('auth.jwt_secret')
+        ));
+
+        Auth::extend('jwt', function (Application $app, string $name, array $config) {
+            return new JWTGuard(
+                $app[JWT::class],
+                Auth::createUserProvider($config['provider']),
+                $app['request']
+            );
+        });
     }
 }

@@ -4,6 +4,8 @@ use Domain\Auth\Models\Collector;
 
 return [
 
+    'jwt_secret' => env('JWT_SECRET'),
+
     /*
     |--------------------------------------------------------------------------
     | Authentication Defaults

@@ -1,0 +1,10 @@
+    public function {{name}}({{form-request}} $request, {{resolver}} $resolver, {{responder}} $responder): Response
+    {
+        try {
+            return $responder->respond(
+                $resolver->with($request->toDto())
+            );
+        } catch (Throwable $e) {
+            return $responder->error($e);
+        }
+    }
