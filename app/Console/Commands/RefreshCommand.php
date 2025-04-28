@@ -18,7 +18,11 @@ class RefreshCommand extends Command
 
         $this->call('cache:clear');
 
-        $this->call('migrate:fresh', [
+//        $this->call('migrate:fresh', [
+//            '--seed' => true,
+//        ]);
+
+        $this->call('migrate:refresh', [
             '--seed' => true,
         ]);
 

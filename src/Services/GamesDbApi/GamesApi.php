@@ -70,7 +70,6 @@ class GamesApi implements GamesDbApiContract
     {
         $games = [];
 
-
         $response = Http::get($this->host."/games?key=$this->key&platforms=$platform&page=$page");
 
         foreach ($response->json('results') as $game) {
@@ -87,8 +86,6 @@ class GamesApi implements GamesDbApiContract
                 $currentGame['platforms'],
             );
         }
-
-
 
 
         return $games;

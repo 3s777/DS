@@ -28,7 +28,7 @@ return new class () extends Migration {
     public function down(): void
     {
         if (!app()->isProduction()) {
-            Schema::dropIfExists('game_publiserables');
+            Schema::dropIfExists('game_publisherables');
         }
     }
 };

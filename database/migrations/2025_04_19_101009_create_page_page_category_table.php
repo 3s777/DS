@@ -33,7 +33,7 @@ return new class extends Migration
     public function down(): void
     {
         if(!app()->isProduction()) {
-            Schema::dropIfExists('page_page_categories');
+            Schema::dropIfExists('page_page_category');
         }
     }
 };
