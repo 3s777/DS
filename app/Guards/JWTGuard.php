@@ -39,6 +39,26 @@ final class JWTGuard implements Guard
         return $this->user = $this->provider->retrieveById($id);
     }
 
+    public function retrieveIdByCredentials(string $email, string $password): ?string
+    {
+        $credentials = [
+            'email' => $email,
+            'password' => $password
+        ];
+
+        $user = $this->validate($credentials);
+
+        if ($user === null) {
+           return null;
+        }
+
+        if (!$this->provider->validateCredentials($user, $credentials)) {
+           return null;
+        }
+
+        return (string) $user->getAuthIdentifier();
+    }
+
     public function validate(array $credentials = [])
     {
         return $this->provider->retrieveByCredentials($credentials);

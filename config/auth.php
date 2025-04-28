@@ -47,6 +47,10 @@ return [
         'collector' => [
             'driver' => 'session',
             'provider' => 'collectors',
+        ],
+        'jwt' => [
+            'driver' => 'jwt',
+            'provider' => 'users'
         ]
     ],
 

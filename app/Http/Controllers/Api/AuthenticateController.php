@@ -12,11 +12,22 @@ use App\Http\Requests\Api\AuthenticateFormRequest;
 
 final class AuthenticateController
 {
-    public function __invoke(AuthenticateFormRequest $request, AuthenticateResolver $resolver, AuthenticateResponder $responder): Response
+    public function authenticate(AuthenticateFormRequest $request, AuthenticateResolver $resolver, AuthenticateResponder $responder): Response
     {
         try {
             return $responder->respond(
                 $resolver->with($request->toDto())
+            );
+        } catch (Throwable $e) {
+            return $responder->error($e);
+        }
+    }
+
+    public function logout(AuthenticateResolver $resolver, AuthenticateResponder $responder): Response
+    {
+        try {
+            return $responder->respond(
+                $resolver->with()
             );
         } catch (Throwable $e) {
             return $responder->error($e);

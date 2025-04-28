@@ -11,18 +11,29 @@ class AuthenticateFormRequest extends FormRequest
 {
     public function authorize(): bool
     {
-        return false;
+        return auth()->guest();
     }
 
     public function rules(): array
     {
         return [
-            //
+            'email' => ['required', 'email'],
+            'password' => ['required']
+        ];
+    }
+
+    public function attributes(): array
+    {
+        return [
+            'email' => __('validation.attributes.user_name')
         ];
     }
 
     public function toDto(): AuthenticateDto
     {
-        return new AuthenticateDto();
+        return new AuthenticateDto(
+            $this->input('email'),
+            $this->input('password')
+        );
     }
 }
