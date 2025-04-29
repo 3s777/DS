@@ -2,6 +2,9 @@
 
 namespace App\Exceptions;
 
+use Domain\Auth\Exceptions\JWTExpiredException;
+use Domain\Auth\Exceptions\JWTParserException;
+use Domain\Auth\Exceptions\JWTValidatorException;
 use Domain\Auth\Exceptions\UserCreateEditException;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
 use Throwable;
@@ -48,6 +51,24 @@ class Handler extends ExceptionHandler
 
         $this->reportable(function (UserCreateEditException $e) {
             // ...
+        });
+
+        $this->renderable(function (JWTExpiredException $e) {
+            return response()->json([
+                'errors' => [],
+            ], 401);
+        });
+
+        $this->renderable(function (JWTValidatorException $e) {
+            return response()->json([
+                'errors' => [],
+            ], 401);
+        });
+
+        $this->renderable(function (JWTParserException $e) {
+            return response()->json([
+                'errors' => [],
+            ], 401);
         });
     }
 }

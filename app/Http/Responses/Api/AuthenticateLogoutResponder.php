@@ -14,20 +14,35 @@ use App\Http\Responses\Api\AuthenticateLogoutResolver;
 /**
 * @implements ResponderContract<AuthenticateLogoutResolver>
 **/
-class AuthenticateLogoutResponder implements ResponderContract
+class AuthenticateLogoutResponder extends AbstractApiResponder
 {
     public function __construct(private readonly ResponseFactory $response)
     {
 
     }
 
+    public function type(): string
+    {
+        return 'tokens';
+    }
+
+    public function links(): array
+    {
+        return [];
+    }
+
     public function respond(ResponseResolverContract $resolver): Response
     {
-        return $this->response->json([]);
+        $resolver->resolve();
+
+        return $this->response->noContent();
     }
 
     public function error(Throwable $e): Response
     {
-        return $this->response->json([]);
+        return $this->response->json(
+            $this->errorResponse('authenticate', 'Authenticate error'),
+            Response::HTTP_UNAUTHORIZED
+        );
     }
 }

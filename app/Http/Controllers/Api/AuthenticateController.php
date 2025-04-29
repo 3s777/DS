@@ -4,6 +4,10 @@ declare(strict_types=1);
 
 namespace App\Http\Controllers\Api;
 
+
+use App\Http\Responses\Api\AuthenticateLogoutResolver;
+use App\Http\Responses\Api\AuthenticateLogoutResponder;
+use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Throwable;
 use App\Http\Responses\Api\AuthenticateResolver;
@@ -23,11 +27,13 @@ final class AuthenticateController
         }
     }
 
-    public function logout(AuthenticateResolver $resolver, AuthenticateResponder $responder): Response
+    public function logout(AuthenticateLogoutResolver $resolver, AuthenticateLogoutResponder $responder, Request $request): Response
     {
         try {
             return $responder->respond(
-                $resolver->with()
+                $resolver->with(
+                    $request->bearerToken()
+                )
             );
         } catch (Throwable $e) {
             return $responder->error($e);

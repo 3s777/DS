@@ -15,12 +15,24 @@ use App\Http\Responses\Api\AuthenticateResolver;
 /**
 * @implements ResponderContract<AuthenticateResolver>
 **/
-class AuthenticateResponder implements ResponderContract
+class AuthenticateResponder extends AbstractApiResponder
 {
-
     public function __construct(private readonly ResponseFactory $response)
     {
 
+    }
+
+    public function type(): string
+    {
+        return 'tokens';
+    }
+
+    public function links(): array
+    {
+        return [
+            'self' => route('api.authenticate'),
+            'logout' => route('api.logout'),
+        ];
     }
 
     public function respond(ResponseResolverContract $resolver): Response
@@ -28,18 +40,24 @@ class AuthenticateResponder implements ResponderContract
         $token = $resolver->resolve();
 
         if ($token === null) {
-            return $this->response->json([]);
+            return $this->response->json(
+                $this->errorResponse('user credentials', 'Credentials is invalid'),
+                Response::HTTP_UNAUTHORIZED
+            );
         }
 
-        return $this->response->json([
-            'token' => $token
-        ]);
+        return $this->response->json(
+            $this->successResponse($token, [
+                'token' => $token,
+            ])
+        );
     }
 
     public function error(Throwable $e): Response
     {
-        return $this->response->json([
-            'errors' => []
-        ]);
+        return $this->response->json(
+            $this->errorResponse('authenticate', 'Authenticate error'),
+            Response::HTTP_UNAUTHORIZED
+        );
     }
 }

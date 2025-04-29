@@ -2,7 +2,9 @@
 
 namespace Domain\Auth;
 
+use DateTimeImmutable;
 use Domain\Auth\Exceptions\JWTExpiredException;
+use Domain\Auth\Exceptions\JWTParserException;
 use Domain\Auth\Exceptions\JWTValidatorException;
 use Lcobucci\JWT\Configuration;
 use Lcobucci\JWT\Encoder;
@@ -13,6 +15,7 @@ use Lcobucci\JWT\Signer\Key\InMemory;
 use Lcobucci\JWT\Token\Builder;
 use Lcobucci\JWT\Token\Parser;
 use Lcobucci\JWT\Validation\Constraint\SignedWith;
+use Throwable;
 
 final readonly class JWT
 {
@@ -32,10 +35,15 @@ final readonly class JWT
 
         return $builder
             ->issuedAt(now()->toImmutable())
-            ->expiresAt(now()->toImmutable()->addHour())
+            ->expiresAt($this->getExpiresAt())
             ->relatedTo($id)
             ->getToken(new Sha256(), InMemory::base64Encoded($this->secret))
             ->toString();
+    }
+
+    public function getExpiresAt(): DateTimeImmutable
+    {
+        return now()->toImmutable()->addHour();
     }
 
     /**
@@ -48,7 +56,13 @@ final readonly class JWT
             $this->encoder
         );
 
-        $parsedToken = $parser->parse($token);
+        try {
+            $parsedToken = $parser->parse($token);
+        } catch (Throwable $e) {
+            throw new JWTParserException($e->getMessage());
+        }
+
+
         $key = InMemory::base64Encoded($this->secret);
 
         $configuration = Configuration::forSymmetricSigner(
@@ -56,7 +70,14 @@ final readonly class JWT
             $key
         );
 
-        $configuration->setValidationConstraints(
+//        $configuration->setValidationConstraints(
+//            new SignedWith(
+//                new Sha256(),
+//                $key
+//            )
+//        );
+
+        $configuration->withValidationConstraints(
             new SignedWith(
                 new Sha256(),
                 $key
