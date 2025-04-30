@@ -3,7 +3,7 @@
 namespace App\Console\Commands\Api;
 
 use App\Console\BaseCommand;
-use Database\Seeders\Api\GameStagingSeeder;
+use Database\Seeders\Api\GameToStagingSeeder;
 use Illuminate\Contracts\Console\PromptsForMissingInput;
 
 class GameSeederCommand extends BaseCommand implements PromptsForMissingInput
@@ -21,7 +21,7 @@ class GameSeederCommand extends BaseCommand implements PromptsForMissingInput
 
         $bar->start();
 
-        $gameSeeder = new GameStagingSeeder();
+        $gameSeeder = new GameToStagingSeeder();
 
         for ($page = $startPage; $page <= $endPage; $page++) {
             $gameSeeder->run($page);

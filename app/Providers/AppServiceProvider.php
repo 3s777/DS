@@ -70,6 +70,8 @@ class AppServiceProvider extends ServiceProvider
         //            fallbackLocale: 'ru',
         //        );
 
+
+
         $this->app->instance(JWT::class, new JWT(
             config('auth.jwt_secret')
         ));

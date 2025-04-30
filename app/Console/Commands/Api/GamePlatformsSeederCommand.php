@@ -3,11 +3,11 @@
 namespace App\Console\Commands\Api;
 
 use App\Console\BaseCommand;
-use Database\Seeders\Api\GameStagingSeeder;
-use Database\Seeders\Api\PlatformStagingSeeder;
+use Database\Seeders\Api\GameToStagingSeeder;
+use Database\Seeders\Api\GamePlatformToStagingSeeder;
 use Illuminate\Contracts\Console\PromptsForMissingInput;
 
-class PlatformsSeederCommand extends BaseCommand implements PromptsForMissingInput
+class GamePlatformsSeederCommand extends BaseCommand implements PromptsForMissingInput
 {
     protected $signature = 'ds:seed_platform';
 
@@ -22,7 +22,7 @@ class PlatformsSeederCommand extends BaseCommand implements PromptsForMissingInp
 
         $bar->start();
 
-        $platformSeeder = new PlatformStagingSeeder();
+        $platformSeeder = new GamePlatformToStagingSeeder();
 
         for ($page = $startPage; $page <= $endPage; $page++) {
             $platformSeeder->run($page);

@@ -70,25 +70,25 @@ final readonly class JWT
             $key
         );
 
-//        $configuration->setValidationConstraints(
-//            new SignedWith(
-//                new Sha256(),
-//                $key
-//            )
-//        );
-
-        $configuration->withValidationConstraints(
+        $configuration->setValidationConstraints(
             new SignedWith(
                 new Sha256(),
                 $key
             )
         );
 
-        if ($configuration->validator()->validate($parsedToken, ...$configuration->validationConstraints())) {
+//        $configuration->withValidationConstraints(
+//            new SignedWith(
+//                new Sha256(),
+//                $key
+//            )
+//        );
+
+        if (!$configuration->validator()->validate($parsedToken, ...$configuration->validationConstraints())) {
             throw new JWTValidatorException('Validation failed');
         }
 
-        if(!$parsedToken->isExpired(now())) {
+        if ($parsedToken->isExpired(now())) {
             throw new JWTExpiredException('Token expired');
         }
 

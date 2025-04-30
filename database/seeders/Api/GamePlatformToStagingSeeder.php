@@ -6,17 +6,14 @@ use App\Models\ApiStagingData;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Http;
 
-class PlatformStagingSeeder extends Seeder
+class GamePlatformToStagingSeeder extends BaseApiSeeder
 {
     /**
      * Run the database seeds.
      */
     public function run(int $page): void
     {
-        $host = config('api.games_host');
-        $key = config('api.games_key');
-
-            $response = Http::get($host . "/platforms?key=$key&page=$page");
+            $response = Http::get($this->host . "/platforms?key=$this->key&page=$page");
 
             foreach ($response->json('results') as $platform) {
 
@@ -24,13 +21,14 @@ class PlatformStagingSeeder extends Seeder
                     ->where('data_type', 'platform')
                     ->exists())
                 {
-                    $response = Http::get($host . '/platforms/' . $platform['id'] . '?key='.$key);
+                    $response = Http::get($this->host . '/platforms/' . $platform['id'] . '?key='.$this->key);
 
                     $currentPlatform = $response->json();
                     ApiStagingData::create([
                         'data' => $currentPlatform,
                         'data_id' => $platform['id'],
-                        'data_type' => 'platform'
+                        'data_type' => 'platform',
+                        'source' => 'game_api_1'
                     ]);
                 }
             }
