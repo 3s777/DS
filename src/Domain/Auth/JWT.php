@@ -26,7 +26,7 @@ final readonly class JWT
     {
     }
 
-    public function create(string $id): string
+    public function create(string $id, bool $refresh = false): string
     {
         $builder = new Builder(
             $this->encoder,
@@ -35,7 +35,7 @@ final readonly class JWT
 
         return $builder
             ->issuedAt(now()->toImmutable())
-            ->expiresAt($this->getExpiresAt())
+            ->expiresAt($refresh ? now()->toImmutable()->addDay() : $this->getExpiresAt())
             ->relatedTo($id)
             ->getToken(new Sha256(), InMemory::base64Encoded($this->secret))
             ->toString();

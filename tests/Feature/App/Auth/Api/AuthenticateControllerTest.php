@@ -2,27 +2,19 @@
 
 namespace App\Auth\Api;
 
+use App\Enums\ApiErrorCode;
+use App\Http\Responses\Api\TokenResponse;
 use Domain\Auth\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\TestCase;
 use Illuminate\Testing\TestResponse;
+use Symfony\Component\HttpFoundation\Response;
+use Tests\Traits\ApiRequests;
 
 final class AuthenticateControllerTest extends TestCase
 {
     use RefreshDatabase;
-
-    private function tokenRequest(bool $invalid = false): TestResponse
-    {
-        $user = User::factory()->create([
-            'email' => 'test@test.test',
-            'password' => bcrypt('secret')
-        ]);
-
-        return $this->postJson(route('api.authenticate'), [
-            'email' => $user->email,
-            'password' => $invalid ? 'password' : 'secret',
-        ]);
-    }
+    use ApiRequests;
 
     /**
      * @test
@@ -33,21 +25,27 @@ final class AuthenticateControllerTest extends TestCase
         $response = $this->tokenRequest();
 
         $response
-            ->assertOk()
+            ->assertCreated()
             ->assertJsonStructure([
                 'data' => [
                     'type',
                     'id',
                     'attributes' => [
-                        'token'
+                        'token',
+                        'refresh_token'
                     ]
                 ],
                 'links'
             ]);
 
         $token = $response->json('data.id');
+        $refreshToken = $response->json('data.attributes.refresh_token');
 
         $this->assertStringContainsString('.', $token);
+
+        $response->assertJson(
+            app(TokenResponse::class)->withTokens($token, $refreshToken)->toArray()
+        );
     }
 
     /**
@@ -58,7 +56,16 @@ final class AuthenticateControllerTest extends TestCase
     {
         $response = $this->tokenRequest(true);
 
-        $response->assertUnauthorized();
+        $response
+            ->assertUnprocessable()
+            ->assertJson(
+                app(TokenResponse::class)->toFailure(
+                    ApiErrorCode::CREDENTIALS_INVALID,
+                    Response::HTTP_UNPROCESSABLE_ENTITY
+                )->toArray()
+            );
+
+
     }
 
     /**
@@ -81,7 +88,13 @@ final class AuthenticateControllerTest extends TestCase
         $this
             ->withToken($token)
             ->deleteJson(route('api.logout'))
-            ->assertUnauthorized();
+            ->assertUnauthorized()
+            ->assertJson(
+                app(TokenResponse::class)->toFailure(
+                    ApiErrorCode::TOKEN_EXPIRED,
+                    Response::HTTP_UNAUTHORIZED
+                )->toArray()
+            );
     }
 
     /**
@@ -96,7 +109,13 @@ final class AuthenticateControllerTest extends TestCase
             ->assertUnauthorized()
             ->assertJsonStructure([
                 'errors'
-            ]);
+            ])
+            ->assertJson(
+                app(TokenResponse::class)->toFailure(
+                    ApiErrorCode::TOKEN_INVALID,
+                    Response::HTTP_UNAUTHORIZED
+                )->toArray()
+            );
     }
 
     /**
@@ -134,5 +153,30 @@ final class AuthenticateControllerTest extends TestCase
             ->withToken($token)
             ->deleteJson(route('api.logout'))
             ->assertUnauthorized();
+    }
+
+    /**
+     * @test
+     * @return void
+     */
+    public function it_token_refreshed_successful(): void
+    {
+        $response = $this->tokenRequest();
+
+        $refreshToken = $response->json('data.attributes.refresh_token');
+
+        $this->travelTo(now()->toImmutable()->addHours(2));
+
+        $response = $this->putJson(route('api.refresh'), [
+            'refresh_token' => $refreshToken,
+        ]);
+
+        $token = $response->json('data.id');
+
+        $refreshToken = $response->json('data.attributes.refresh_token');
+
+        $response->assertJson(
+            app(TokenResponse::class)->withTokens($token, $refreshToken)->toArray()
+        );
     }
 }

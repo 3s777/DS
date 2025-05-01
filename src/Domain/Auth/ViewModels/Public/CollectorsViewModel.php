@@ -11,9 +11,9 @@ use Spatie\ViewModels\ViewModel;
 
 class CollectorsViewModel extends ViewModel
 {
-    public function collectors(): LengthAwarePaginator
+    public function collectors()
     {
-        return Collector::select(['id', 'slug', 'name', 'first_name'])
+        return Collector::query()->select(['id', 'slug', 'name', 'first_name'])
             ->with(['media'])
             ->withCount([
                 'collectibles as collection' => function(Builder $query) {
@@ -30,6 +30,6 @@ class CollectorsViewModel extends ViewModel
                 }
             ])
             ->filtered(app(CollectorFilterRegistrar::class)->filtersList())
-            ->paginate(30);
+            ->paginate(1);
     }
 }

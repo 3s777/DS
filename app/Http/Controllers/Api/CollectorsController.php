@@ -1,25 +1,28 @@
 <?php
 
-declare(strict_types=1);
-
 namespace App\Http\Controllers\Api;
 
-use Symfony\Component\HttpFoundation\Response;
-use Throwable;
-use App\Http\Responses\Api\CollectorsCollectorsshowResolver;
-use App\Http\Responses\Api\CollectorsCollectorsshowResponder;
+use App\Http\Responses\Api\ApiData;
+use App\Http\Responses\Transformers\CollectorsTransformer;
+use Domain\Auth\Models\Collector;
+use Domain\Auth\ViewModels\Public\CollectorsViewModel;
 
 final class CollectorsController
 {
-    public function collectorsshow(string $slug,CollectorsCollectorsshowResolver $resolver, CollectorsCollectorsshowResponder $responder): Response
+    public function index(CollectorsViewModel $viewModel)
     {
-        try {
-            return $responder->respond(
-                $resolver->with($slug,)
-            );
-        } catch (Throwable $e) {
-            return $responder->error($e);
-        }
-    }
+        $col = $viewModel->collectors();
+//
+//        $col->getCollection()->transform(fn(Collector $collector) => new ApiData(
+//            'collector',
+//                $collector->getKey(),
+//            $collector->toArray()
+//        ));
 
+
+
+        $col->getCollection()->transform(fn(Collector $collector) => (new CollectorsTransformer($collector)));
+
+        return $col;
+    }
 }

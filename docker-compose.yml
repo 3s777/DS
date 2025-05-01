@@ -24,6 +24,15 @@ services:
         depends_on:
             - pgsql
             - redis
+#    buggregator:
+#        image: ghcr.io/buggregator/server:dev
+#        ports:
+#            - 8005:8000
+#            - 1025:1025
+#            - 9912:9912
+#            - 9913:9913
+#        networks:
+#            - sail
     pgsql:
         image: 'postgres:15'
         ports:

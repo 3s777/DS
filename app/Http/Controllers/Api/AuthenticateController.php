@@ -1,43 +1,52 @@
 <?php
 
-declare(strict_types=1);
-
 namespace App\Http\Controllers\Api;
 
-
-use App\Http\Responses\Api\AuthenticateLogoutResolver;
-use App\Http\Responses\Api\AuthenticateLogoutResponder;
-use Illuminate\Http\Request;
+use App\Actions\Api\CreateTokenAction;
+use App\Actions\Api\RefreshTokenAction;
+use App\Enums\ApiErrorCode;
+use App\Http\Requests\Api\RefreshTokenFormRequest;
+use App\Http\Responses\Api\TokenResponse;
 use Symfony\Component\HttpFoundation\Response;
-use Throwable;
-use App\Http\Responses\Api\AuthenticateResolver;
-use App\Http\Responses\Api\AuthenticateResponder;
 use App\Http\Requests\Api\AuthenticateFormRequest;
 
 final class AuthenticateController
 {
-    public function authenticate(AuthenticateFormRequest $request, AuthenticateResolver $resolver, AuthenticateResponder $responder): Response
+    public function authenticate(AuthenticateFormRequest $request, CreateTokenAction $action, TokenResponse $response): TokenResponse
     {
-        try {
-            return $responder->respond(
-                $resolver->with($request->toDto())
+        [$token, $refresh] = $action->handle($request->toDto());
+
+        if ($token === null) {
+            return $response->toFailure(
+                ApiErrorCode::CREDENTIALS_INVALID,
+                Response::HTTP_UNPROCESSABLE_ENTITY
             );
-        } catch (Throwable $e) {
-            return $responder->error($e);
         }
+
+        return $response->withTokens($token, $refresh);
     }
 
-    public function logout(AuthenticateLogoutResolver $resolver, AuthenticateLogoutResponder $responder, Request $request): Response
+    public function logout(): Response
     {
-        try {
-            return $responder->respond(
-                $resolver->with(
-                    $request->bearerToken()
-                )
+        auth()->logout();
+
+        return response()->noContent();
+    }
+
+    public function refresh(RefreshTokenFormRequest $request, RefreshTokenAction $action, TokenResponse $response): TokenResponse
+    {
+        [$token, $refresh] = $action->handle(
+            $request->input('refresh_token')
+        );
+
+        if ($token === null) {
+            return $response->toFailure(
+                ApiErrorCode::TOKEN_REFRESH_FAILED,
+                Response::HTTP_UNPROCESSABLE_ENTITY
             );
-        } catch (Throwable $e) {
-            return $responder->error($e);
         }
+
+        return $response->withTokens($token, $refresh);
     }
 
 }

@@ -2,11 +2,14 @@
 
 namespace App\Exceptions;
 
+use App\Enums\ApiErrorCode;
+use App\Http\Responses\Api\TokenResponse;
 use Domain\Auth\Exceptions\JWTExpiredException;
 use Domain\Auth\Exceptions\JWTParserException;
 use Domain\Auth\Exceptions\JWTValidatorException;
 use Domain\Auth\Exceptions\UserCreateEditException;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
+use Symfony\Component\HttpFoundation\Response;
 use Throwable;
 
 class Handler extends ExceptionHandler
@@ -54,21 +57,24 @@ class Handler extends ExceptionHandler
         });
 
         $this->renderable(function (JWTExpiredException $e) {
-            return response()->json([
-                'errors' => [],
-            ], 401);
+            return app(TokenResponse::class)->toFailure(
+                ApiErrorCode::TOKEN_EXPIRED,
+                Response::HTTP_UNAUTHORIZED
+            );
         });
 
         $this->renderable(function (JWTValidatorException $e) {
-            return response()->json([
-                'errors' => [],
-            ], 401);
+            return app(TokenResponse::class)->toFailure(
+                ApiErrorCode::TOKEN_INVALID,
+                Response::HTTP_UNAUTHORIZED
+            );
         });
 
         $this->renderable(function (JWTParserException $e) {
-            return response()->json([
-                'errors' => [],
-            ], 401);
+            return app(TokenResponse::class)->toFailure(
+                ApiErrorCode::TOKEN_INVALID,
+                Response::HTTP_UNAUTHORIZED
+            );
         });
     }
 }

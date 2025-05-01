@@ -14,6 +14,7 @@ final class JWTGuard implements Guard
     use GuardHelpers;
 
     public const BLACKLIST_KEY = 'blacklist_token_';
+//    public bool $blackListChecked = false;
 
     public function __construct(
         private JWT $jwt,
@@ -31,9 +32,11 @@ final class JWTGuard implements Guard
             return null;
         }
 
-        if (cache()->has(self::BLACKLIST_KEY . $token)) {
-            return null;
-        }
+//        if (!$this->blackListChecked && cache()->has(self::BLACKLIST_KEY . $token)) {
+//            return null;
+//        }
+//
+//        $this->blackListChecked = true;
 
         if ($this->user !== null) {
             return $this->user;
@@ -50,6 +53,8 @@ final class JWTGuard implements Guard
         $token = request()?->bearerToken();
 
         cache()->put(self::BLACKLIST_KEY . $token, $token, $this->jwt->getExpiresAt());
+
+//        $this->blackListChecked = false;
 
         $this->user = null;
     }
