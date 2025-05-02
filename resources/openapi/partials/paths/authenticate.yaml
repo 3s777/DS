@@ -1,0 +1,46 @@
+post:
+  tags:
+    - Authenticate
+  operationId: authenticate
+  summary: 'Login user'
+  requestBody:
+    required: true
+    content:
+      application/json:
+        schema:
+          type: object
+          properties:
+            email:
+              type: string
+              example: 'info@test.com'
+            password:
+              type: string
+              example: '***'
+  responses:
+    200:
+      description: 'Successful'
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              token:
+                type: string
+                example: 'sdfJsdfmUJKLsdfx...'
+    401:
+      $ref: './../responses/Unauthorized.yaml'
+    422:
+      $ref: './../responses/ValidationException.yaml'
+
+delete:
+  tags:
+    - Authenticate
+  operationId: logout
+  security:
+    - jwt: []
+  summary: 'Logout user'
+  responses:
+    204:
+      description: 'No Content'
+    401:
+      $ref: './../responses/Unauthorized.yaml'

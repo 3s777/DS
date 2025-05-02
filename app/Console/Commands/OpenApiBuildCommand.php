@@ -3,16 +3,26 @@
 namespace App\Console\Commands;
 
 use Illuminate\Console\Command;
+use Illuminate\Filesystem\Filesystem;
 use Illuminate\Support\Facades\File;
 use Symfony\Component\Console\Attribute\AsCommand;
 use Symfony\Component\Yaml\Yaml;
 
-#[AsCommand('openapi:generate')]
-class OpenApiCodeGenCommand extends Command
+#[AsCommand('openapi:build')]
+class OpenApiBuildCommand extends Command
 {
     public function handle(): int
     {
         $data = Yaml::parseFile(resource_path('openapi/v1.yaml'));
+
+        $yamlData = Yaml::dump($data, 10, 2);
+
+        (new Filesystem)->put(
+            resource_path('openapi/v1_build.yaml'),
+            $yamlData
+        );
+
+        dd($yamlData);
 
 
         $this->generateFile(

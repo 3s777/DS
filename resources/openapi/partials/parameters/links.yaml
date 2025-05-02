@@ -1,0 +1,20 @@
+current_page:
+  type: string
+  default: 1
+first_page_url:
+  type: string
+from:
+  type: integer
+  default: 1
+next_page_url:
+  type: string
+  nullable: true
+prev_page_url:
+  type: string
+  nullable: true
+to:
+  type: integer
+path:
+  type: string
+per_page:
+  type: integer

@@ -1,0 +1,14 @@
+description: 'Validation errors'
+content:
+  application/json:
+    schema:
+      type: object
+      properties:
+        message:
+          type: string
+        errors:
+          type: object
+          additionalProperties:
+            type: array
+            items:
+              type: string

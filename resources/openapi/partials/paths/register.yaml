@@ -1,0 +1,35 @@
+post:
+  tags:
+    - Authenticate
+  summary: 'Register user'
+  requestBody:
+    required: true
+    content:
+      application/json:
+        schema:
+          type: object
+          properties:
+            name:
+              type: string
+              example: 'user.name'
+            email:
+              type: string
+              example: 'info@user.mail'
+            password:
+              type: string
+              format: password
+              example: '***'
+            password_confirmation:
+              type: string
+              format: password
+              example: '***'
+          required:
+            - name
+            - email
+            - password
+            - password_confirmation
+  responses:
+    201:
+      $ref: './../responses/Success.yaml'
+    422:
+      $ref: './../responses/ValidationException.yaml'

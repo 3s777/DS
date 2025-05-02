@@ -1,0 +1,25 @@
+get:
+  tags:
+    - Collectors
+  operationId: 'CollectorsIndex'
+  summary: 'Collectors listing'
+  parameters:
+    - name: 'filters[search]'
+      in: query
+      required: false
+      schema:
+        type: string
+        example: 'search query'
+    - name: 'page'
+      in: query
+      required: false
+      schema:
+        type: integer
+        default: 1
+  responses:
+    200:
+      description: 'Successful'
+      content:
+        application/json:
+          schema:
+            $ref: './../schemas/CollectorsCollection.yaml'

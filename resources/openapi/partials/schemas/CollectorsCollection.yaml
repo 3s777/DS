@@ -1,0 +1,8 @@
+type: object
+properties:
+  $ref: './../parameters/links.yaml'
+  data:
+    type: array
+    items: {
+      $ref: './Collector.yaml'
+    }
