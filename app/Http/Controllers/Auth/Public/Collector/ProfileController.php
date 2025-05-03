@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Auth\Public\Collector;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Auth\Collector\UpdateCollectorProfileRequest;
+use App\Http\Requests\Auth\Public\UpdateCollectorProfileRequest;
 use Domain\Auth\DTOs\UpdateCollectorProfileDTO;
 use Domain\Auth\Services\CollectorProfileService;
 use Domain\Auth\ViewModels\Public\CollectorProfileSettingsViewModel;

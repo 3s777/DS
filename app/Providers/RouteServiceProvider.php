@@ -3,7 +3,8 @@
 namespace App\Providers;
 
 use App\Contracts\RouteRegistrar;
-use App\Routing\ApiRegistrar;
+use App\Routing\Api\ApiRegistrar;
+use App\Routing\Api\DocumentationRegistrar;
 use App\Routing\AppRegistrar;
 use App\Routing\AuthAdminRegistrar;
 use App\Routing\AuthCollectorRegistrar;
@@ -18,7 +19,6 @@ use Illuminate\Foundation\Support\Providers\RouteServiceProvider as ServiceProvi
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\RateLimiter;
 use RuntimeException;
-use Symfony\Component\HttpFoundation\Response as ResponseAlias;
 
 class RouteServiceProvider extends ServiceProvider
 {
@@ -40,7 +40,8 @@ class RouteServiceProvider extends ServiceProvider
         ShelfRegistrar::class,
         PageRegistrar::class,
         FilepondRegistrar::class,
-        ApiRegistrar::class
+        ApiRegistrar::class,
+        DocumentationRegistrar::class
     ];
 
     /**

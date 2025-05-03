@@ -2,7 +2,7 @@
 
 namespace App\Auth\Admin\Services;
 
-use App\Http\Requests\Auth\Role\CreateRoleRequest;
+use App\Http\Requests\Auth\Admin\CreateRoleRequest;
 use Database\Seeders\PermissionsTestSeeder;
 use Domain\Auth\DTOs\FillRoleDTO;
 use Domain\Auth\Models\Role;

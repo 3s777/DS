@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Auth\Public\Collector;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Auth\Collector\RegisterRequest;
+use App\Http\Requests\Auth\Public\RegisterCollectorRequest;
 use Domain\Auth\Actions\RegisterNewCollectorAction;
 use Domain\Auth\Contracts\RegisterNewUserContract;
 use Domain\Auth\DTOs\NewCollectorDTO;
@@ -20,7 +20,7 @@ class RegisterController extends Controller
         return view('content.auth-collector.register');
     }
 
-    public function handle(RegisterRequest $request): RedirectResponse
+    public function handle(RegisterCollectorRequest $request): RedirectResponse
     {
 
         // TODO try catch

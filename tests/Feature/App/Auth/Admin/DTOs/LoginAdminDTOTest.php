@@ -2,7 +2,7 @@
 
 namespace App\Auth\Admin\DTOs;
 
-use App\Http\Requests\Auth\Admin\LoginRequest;
+use App\Http\Requests\Auth\Public\LoginAdminRequest;
 use Domain\Auth\DTOs\LoginAdminDTO;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
@@ -15,7 +15,7 @@ class LoginAdminDTOTest extends TestCase
     {
         parent::setUp();
 
-        $this->request = LoginRequest::factory()->create();
+        $this->request = LoginAdminRequest::factory()->create();
     }
 
     /**
@@ -24,7 +24,7 @@ class LoginAdminDTOTest extends TestCase
      */
     public function it_instance_created_from_login_request_success(): void
     {
-        $data = LoginAdminDTO::fromRequest(new LoginRequest($this->request));
+        $data = LoginAdminDTO::fromRequest(new LoginAdminRequest($this->request));
 
         $this->assertInstanceOf(LoginAdminDTO::class, $data);
     }

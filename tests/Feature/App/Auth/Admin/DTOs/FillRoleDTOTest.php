@@ -2,7 +2,7 @@
 
 namespace App\Auth\Admin\DTOs;
 
-use App\Http\Requests\Auth\Role\CreateRoleRequest;
+use App\Http\Requests\Auth\Admin\CreateRoleRequest;
 use Domain\Auth\DTOs\FillRoleDTO;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;

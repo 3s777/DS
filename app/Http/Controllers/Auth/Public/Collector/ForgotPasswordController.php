@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Auth\Public\Collector;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Auth\Collector\ForgotPasswordRequest;
+use App\Http\Requests\Auth\Public\ForgotPasswordCollectorRequest;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
 use Illuminate\Foundation\Application;
@@ -17,7 +17,7 @@ class ForgotPasswordController extends Controller
         return view('content.auth-collector.forgot-password');
     }
 
-    public function handle(ForgotPasswordRequest $request): RedirectResponse
+    public function handle(ForgotPasswordCollectorRequest $request): RedirectResponse
     {
         $status = Password::broker('collectors')->sendResetLink(
             $request->only('email')

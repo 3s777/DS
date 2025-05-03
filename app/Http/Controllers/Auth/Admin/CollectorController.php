@@ -3,9 +3,9 @@
 namespace App\Http\Controllers\Auth\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Auth\Collector\CreateCollectorRequest;
-use App\Http\Requests\Auth\Collector\FilterCollectorRequest;
-use App\Http\Requests\Auth\Collector\UpdateCollectorRequest;
+use App\Http\Requests\Auth\Admin\CreateCollectorRequest;
+use App\Http\Requests\Auth\Admin\FilterCollectorRequest;
+use App\Http\Requests\Auth\Admin\UpdateCollectorRequest;
 use App\Http\Requests\MassDeletingRequest;
 use Domain\Auth\Actions\CreateCollectorAction;
 use Domain\Auth\Actions\UpdateCollectorAction;

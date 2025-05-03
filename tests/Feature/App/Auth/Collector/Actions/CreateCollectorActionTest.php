@@ -2,14 +2,13 @@
 
 namespace App\Auth\Collector\Actions;
 
-use App\Http\Requests\Auth\Collector\CreateCollectorRequest;
+use App\Http\Requests\Auth\Admin\CreateCollectorRequest;
 use App\Jobs\GenerateSmallThumbnailsJob;
 use App\Jobs\GenerateThumbnailJob;
 use Domain\Auth\Actions\CreateCollectorAction;
 use Domain\Auth\DTOs\NewCollectorDTO;
 use Domain\Auth\Models\Collector;
 use Domain\Auth\Models\Role;
-use Domain\Auth\Models\User;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Auth\Events\Verified;
 use Illuminate\Auth\Listeners\SendEmailVerificationNotification;

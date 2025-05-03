@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Auth\Public\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Auth\Admin\LoginRequest;
+use App\Http\Requests\Auth\Public\LoginAdminRequest;
 use Domain\Auth\Actions\LoginAdminAction;
 use Domain\Auth\DTOs\LoginAdminDTO;
 use Illuminate\Contracts\View\Factory;
@@ -19,7 +19,7 @@ class LoginController extends Controller
         return view('content.auth.login');
     }
 
-    public function handle(LoginRequest $request, LoginAdminAction $action): RedirectResponse
+    public function handle(LoginAdminRequest $request, LoginAdminAction $action): RedirectResponse
     {
         $actionData = $action(LoginAdminDTO::fromRequest($request));
 

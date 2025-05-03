@@ -2,11 +2,11 @@
 
 namespace App\Http\Responses\Api;
 
-use App\Enums\ApiErrorCode;
 use Illuminate\Contracts\Routing\ResponseFactory;
 use Illuminate\Contracts\Support\Arrayable;
 use Illuminate\Contracts\Support\Responsable;
 use Illuminate\Support\Collection;
+use Support\Enums\ApiErrorCode;
 use Symfony\Component\HttpFoundation\Response;
 
 abstract class ApiResponse implements Responsable, Arrayable
@@ -24,27 +24,16 @@ abstract class ApiResponse implements Responsable, Arrayable
 
     abstract public function links(): array;
 
+    public function getStatus(): int
+    {
+        return $this->status;
+    }
+
     public function toSuccess(ApiData $data, int $status = Response::HTTP_OK): static
     {
         $this->status = $status;
         $this->data = array_filter([
             'data' => $data->toArray(),
-            'links' => $this->links() === [] ? null : $this->links(),
-        ]);
-
-        return $this;
-    }
-
-    /**
-     * @param Collection<array-key, ApiData> $items
-     *
-     * @return void
-     */
-    public function toCollection(Collection $items, int $status = Response::HTTP_OK): static
-    {
-        $this->status = $status;
-        $this->data = array_filter([
-            'data' => $items->toArray(),
             'links' => $this->links() === [] ? null : $this->links(),
         ]);
 
@@ -66,10 +55,20 @@ abstract class ApiResponse implements Responsable, Arrayable
         return $this;
     }
 
-
-    public function getStatus(): int
+    /**
+     * @param Collection<array-key, ApiData> $items
+     * @param int $status
+     * @return ApiResponse
+     */
+    public function toCollection(Collection $items, int $status = Response::HTTP_OK): static
     {
-        return $this->status;
+        $this->status = $status;
+        $this->data = array_filter([
+            'data' => $items->toArray(),
+            'links' => $this->links() === [] ? null : $this->links(),
+        ]);
+
+        return $this;
     }
 
     public function toResponse($request): Response

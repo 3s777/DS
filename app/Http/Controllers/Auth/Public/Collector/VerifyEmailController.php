@@ -3,8 +3,8 @@
 namespace App\Http\Controllers\Auth\Public\Collector;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Auth\Collector\SendEmailVerifyRequest;
-use App\Http\Requests\Auth\Collector\VerifyEmailRequest;
+use App\Http\Requests\Auth\Public\SendEmailVerifyCollectorRequest;
+use App\Http\Requests\Auth\Public\VerifyEmailCollectorRequest;
 use Domain\Auth\Actions\VerifyEmailAction;
 use Domain\Auth\Models\Collector;
 use Illuminate\Http\RedirectResponse;
@@ -17,7 +17,7 @@ class VerifyEmailController extends Controller
         return view('content.auth-collector.verify');
     }
 
-    public function handle(VerifyEmailRequest $request, VerifyEmailAction $action, $id): RedirectResponse
+    public function handle(VerifyEmailCollectorRequest $request, VerifyEmailAction $action, $id): RedirectResponse
     {
         $collector = Collector::find($id);
 
@@ -30,7 +30,7 @@ class VerifyEmailController extends Controller
         return to_route('search');
     }
 
-    public function sendVerifyNotification(SendEmailVerifyRequest $request): RedirectResponse
+    public function sendVerifyNotification(SendEmailVerifyCollectorRequest $request): RedirectResponse
     {
         $collector = Collector::where('email', $request->only(['email']))->first();
 

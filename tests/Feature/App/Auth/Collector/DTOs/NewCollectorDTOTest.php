@@ -2,8 +2,8 @@
 
 namespace App\Auth\Admin\DTOs;
 
-use App\Http\Requests\Auth\Collector\CreateCollectorRequest;
-use App\Http\Requests\Auth\Collector\RegisterRequest;
+use App\Http\Requests\Auth\Admin\CreateCollectorRequest;
+use App\Http\Requests\Auth\Public\RegisterCollectorRequest;
 use Domain\Auth\DTOs\NewCollectorDTO;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
@@ -16,7 +16,7 @@ class NewCollectorDTOTest extends TestCase
     {
         parent::setUp();
 
-        $this->request = RegisterRequest::factory()->create();
+        $this->request = RegisterCollectorRequest::factory()->create();
     }
 
     /**
@@ -25,7 +25,7 @@ class NewCollectorDTOTest extends TestCase
      */
     public function it_instance_created_from_register_request_success(): void
     {
-        $data = NewCollectorDTO::fromRequest(new RegisterRequest($this->request));
+        $data = NewCollectorDTO::fromRequest(new RegisterCollectorRequest($this->request));
 
         $this->assertInstanceOf(NewCollectorDTO::class, $data);
     }

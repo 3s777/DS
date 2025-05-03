@@ -2,7 +2,7 @@ type: object
 properties:
   id:
     type: integer
-  nameg:
+  name:
     type: string
   slug:
     type: string

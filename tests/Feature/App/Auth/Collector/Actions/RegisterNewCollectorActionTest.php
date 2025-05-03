@@ -2,7 +2,7 @@
 
 namespace App\Auth\Collector\Actions;
 
-use App\Http\Requests\Auth\Collector\RegisterRequest;
+use App\Http\Requests\Auth\Public\RegisterCollectorRequest;
 use Domain\Auth\Actions\RegisterNewCollectorAction;
 use Domain\Auth\DTOs\NewCollectorDTO;
 use Domain\Auth\Models\Collector;
@@ -25,7 +25,7 @@ class RegisterNewCollectorActionTest extends TestCase
     {
         parent::setUp();
 
-        $this->request = RegisterRequest::factory()->create();
+        $this->request = RegisterCollectorRequest::factory()->create();
 
         Role::create([
             'name' => config('settings.default_collector_role'),

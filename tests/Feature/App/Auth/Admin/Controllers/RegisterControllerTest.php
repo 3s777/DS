@@ -4,7 +4,7 @@ namespace App\Auth\Admin\Controllers;
 
 use App\Http\Controllers\Auth\Public\Admin\LoginController;
 use App\Http\Controllers\Auth\Public\Admin\RegisterController;
-use App\Http\Requests\Auth\Admin\RegisterRequest;
+use App\Http\Requests\Auth\Public\RegisterAdminRequest;
 use Database\Factories\Auth\UserFactory;
 use Domain\Auth\Models\Role;
 use Domain\Auth\Models\User;
@@ -22,7 +22,7 @@ class RegisterControllerTest extends TestCase
     {
         parent::setUp();
 
-        $this->request = RegisterRequest::factory()->create();
+        $this->request = RegisterAdminRequest::factory()->create();
 
         Role::create(['name' => config('settings.default_role'), 'display_name' => 'User']);
 

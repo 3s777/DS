@@ -2,7 +2,7 @@
 
 namespace App\Auth\Admin\DTOs;
 
-use App\Http\Requests\Auth\Collector\CreateCollectorRequest;
+use App\Http\Requests\Auth\Admin\CreateCollectorRequest;
 use Domain\Auth\DTOs\UpdateCollectorDTO;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;

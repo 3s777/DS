@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Auth\Public\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Auth\Admin\RegisterRequest;
+use App\Http\Requests\Auth\Public\RegisterAdminRequest;
 use Domain\Auth\Contracts\RegisterNewUserContract;
 use Domain\Auth\DTOs\NewCollectorDTO;
 use Illuminate\Contracts\View\Factory;
@@ -19,7 +19,7 @@ class RegisterController extends Controller
         return view('content.auth.register');
     }
 
-    public function handle(RegisterRequest $request, RegisterNewUserContract $action): RedirectResponse
+    public function handle(RegisterAdminRequest $request, RegisterNewUserContract $action): RedirectResponse
     {
         $action(NewCollectorDTO::fromRequest($request));
 

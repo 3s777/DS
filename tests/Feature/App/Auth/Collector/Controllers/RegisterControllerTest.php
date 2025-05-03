@@ -4,7 +4,7 @@ namespace App\Auth\Collector\Controllers;
 
 use App\Http\Controllers\Auth\Public\Collector\LoginController;
 use App\Http\Controllers\Auth\Public\Collector\RegisterController;
-use App\Http\Requests\Auth\Collector\RegisterRequest;
+use App\Http\Requests\Auth\Public\RegisterCollectorRequest;
 use Database\Factories\Auth\CollectorFactory;
 use Domain\Auth\Models\Role;
 use Illuminate\Foundation\Testing\RefreshDatabase;
@@ -21,7 +21,7 @@ class RegisterControllerTest extends TestCase
     {
         parent::setUp();
 
-        $this->request = RegisterRequest::factory()->create();
+        $this->request = RegisterCollectorRequest::factory()->create();
 
         Role::create(['name' => config('settings.default_collector_role'), 'display_name' => 'User', 'guard_name' => 'collector']);
 

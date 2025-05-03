@@ -3,8 +3,8 @@
 namespace App\Http\Controllers\Auth\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Auth\Role\CreateRoleRequest;
-use App\Http\Requests\Auth\Role\UpdateRoleRequest;
+use App\Http\Requests\Auth\Admin\CreateRoleRequest;
+use App\Http\Requests\Auth\Admin\UpdateRoleRequest;
 use Domain\Auth\DTOs\FillRoleDTO;
 use Domain\Auth\Models\Role;
 use Domain\Auth\Services\RoleService;

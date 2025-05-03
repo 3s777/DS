@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Auth\Public\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Auth\Admin\ForgotPasswordRequest;
+use App\Http\Requests\Auth\Public\ForgotPasswordAdminRequest;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
 use Illuminate\Foundation\Application;
@@ -17,7 +17,7 @@ class ForgotPasswordController extends Controller
         return view('content.auth.forgot-password');
     }
 
-    public function handle(ForgotPasswordRequest $request): RedirectResponse
+    public function handle(ForgotPasswordAdminRequest $request): RedirectResponse
     {
         $status = Password::sendResetLink(
             $request->only('email')

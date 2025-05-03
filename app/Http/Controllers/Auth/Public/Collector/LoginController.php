@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Auth\Public\Collector;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Auth\Collector\LoginRequest;
+use App\Http\Requests\Auth\Public\LoginCollectorRequest;
 use Domain\Auth\Actions\LoginCollectorAction;
 use Domain\Auth\DTOs\LoginCollectorDTO;
 use Illuminate\Contracts\View\Factory;
@@ -19,7 +19,7 @@ class LoginController extends Controller
         return view('content.auth-collector.login');
     }
 
-    public function handle(LoginRequest $request, LoginCollectorAction $action): RedirectResponse
+    public function handle(LoginCollectorRequest $request, LoginCollectorAction $action): RedirectResponse
     {
 
         $actionData = $action(LoginCollectorDTO::fromRequest($request));

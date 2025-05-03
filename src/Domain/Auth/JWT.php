@@ -48,7 +48,7 @@ final readonly class JWT
 
     /**
      * @throws JWTValidatorException
-     * @throws JWTExpiredException
+     * @throws JWTExpiredException|JWTParserException
      */
     public function parse(string $token): string
     {

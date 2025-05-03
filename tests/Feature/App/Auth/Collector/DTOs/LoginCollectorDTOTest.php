@@ -2,7 +2,7 @@
 
 namespace App\Auth\Admin\DTOs;
 
-use App\Http\Requests\Auth\Collector\LoginRequest;
+use App\Http\Requests\Auth\Public\LoginCollectorRequest;
 use Domain\Auth\DTOs\LoginCollectorDTO;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
@@ -15,7 +15,7 @@ class LoginCollectorDTOTest extends TestCase
     {
         parent::setUp();
 
-        $this->request = LoginRequest::factory()->create();
+        $this->request = LoginCollectorRequest::factory()->create();
     }
 
     /**
@@ -24,7 +24,7 @@ class LoginCollectorDTOTest extends TestCase
      */
     public function it_instance_created_from_login_request_success(): void
     {
-        $data = LoginCollectorDTO::fromRequest(new LoginRequest($this->request));
+        $data = LoginCollectorDTO::fromRequest(new LoginCollectorRequest($this->request));
 
         $this->assertInstanceOf(LoginCollectorDTO::class, $data);
     }

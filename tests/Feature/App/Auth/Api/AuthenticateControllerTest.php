@@ -2,12 +2,10 @@
 
 namespace App\Auth\Api;
 
-use App\Enums\ApiErrorCode;
 use App\Http\Responses\Api\TokenResponse;
-use Domain\Auth\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\TestCase;
-use Illuminate\Testing\TestResponse;
+use Support\Enums\ApiErrorCode;
 use Symfony\Component\HttpFoundation\Response;
 use Tests\Traits\ApiRequests;
 

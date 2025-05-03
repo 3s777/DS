@@ -4,7 +4,7 @@ namespace App\Auth\Collector\Controllers;
 
 use App\Http\Controllers\Auth\Admin\AdminController;
 use App\Http\Controllers\Auth\Admin\CollectorController;
-use App\Http\Requests\Auth\Collector\CreateCollectorRequest;
+use App\Http\Requests\Auth\Admin\CreateCollectorRequest;
 use App\Jobs\GenerateSmallThumbnailsJob;
 use App\Jobs\GenerateThumbnailJob;
 use Database\Factories\Auth\CollectorFactory;

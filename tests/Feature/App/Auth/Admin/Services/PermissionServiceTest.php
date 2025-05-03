@@ -2,7 +2,7 @@
 
 namespace App\Auth\Admin\Services;
 
-use App\Http\Requests\Auth\Permission\CreatePermissionRequest;
+use App\Http\Requests\Auth\Admin\CreatePermissionRequest;
 use Domain\Auth\DTOs\FillPermissionDTO;
 use Domain\Auth\Models\Permission;
 use Domain\Auth\Models\User;

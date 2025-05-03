@@ -3,8 +3,8 @@
 namespace App\Http\Controllers\Auth\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Auth\Permission\CreatePermissionRequest;
-use App\Http\Requests\Auth\Permission\UpdatePermissionRequest;
+use App\Http\Requests\Auth\Admin\CreatePermissionRequest;
+use App\Http\Requests\Auth\Admin\UpdatePermissionRequest;
 use Domain\Auth\DTOs\FillPermissionDTO;
 use Domain\Auth\Models\Permission;
 use Domain\Auth\Services\PermissionService;

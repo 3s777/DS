@@ -2,13 +2,13 @@
 
 namespace App\Exceptions;
 
-use App\Enums\ApiErrorCode;
 use App\Http\Responses\Api\TokenResponse;
 use Domain\Auth\Exceptions\JWTExpiredException;
 use Domain\Auth\Exceptions\JWTParserException;
 use Domain\Auth\Exceptions\JWTValidatorException;
 use Domain\Auth\Exceptions\UserCreateEditException;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
+use Support\Enums\ApiErrorCode;
 use Symfony\Component\HttpFoundation\Response;
 use Throwable;
 

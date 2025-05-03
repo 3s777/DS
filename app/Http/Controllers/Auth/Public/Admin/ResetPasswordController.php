@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Auth\Public\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Auth\Admin\ResetPasswordRequest;
+use App\Http\Requests\Auth\Public\ResetPasswordAdminRequest;
 use Domain\Auth\Models\User;
 use Illuminate\Auth\Events\PasswordReset;
 use Illuminate\Contracts\View\Factory;
@@ -22,7 +22,7 @@ class ResetPasswordController extends Controller
         );
     }
 
-    public function handle(ResetPasswordRequest $request): RedirectResponse
+    public function handle(ResetPasswordAdminRequest $request): RedirectResponse
     {
 
         $status = Password::reset(

@@ -3,8 +3,8 @@
 namespace App\Http\Controllers\Auth\Public\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Auth\Admin\SendEmailVerifyRequest;
-use App\Http\Requests\Auth\Admin\VerifyEmailRequest;
+use App\Http\Requests\Auth\Public\SendEmailVerifyAdminRequest;
+use App\Http\Requests\Auth\Public\VerifyEmailAdminRequest;
 use Domain\Auth\Actions\VerifyEmailAction;
 use Domain\Auth\Models\User;
 use Illuminate\Http\RedirectResponse;
@@ -17,7 +17,7 @@ class VerifyEmailController extends Controller
         return view('content.auth.verify');
     }
 
-    public function handle(VerifyEmailRequest $request, VerifyEmailAction $action, $id): RedirectResponse
+    public function handle(VerifyEmailAdminRequest $request, VerifyEmailAction $action, $id): RedirectResponse
     {
         $user = User::find($id);
 
@@ -30,7 +30,7 @@ class VerifyEmailController extends Controller
         return to_route('search');
     }
 
-    public function sendVerifyNotification(SendEmailVerifyRequest $request): RedirectResponse
+    public function sendVerifyNotification(SendEmailVerifyAdminRequest $request): RedirectResponse
     {
         $user = User::where('email', $request->only(['email']))->first();
 

@@ -3,7 +3,7 @@
 namespace App\Auth\Admin\DTOs;
 
 use App\Http\Requests\Auth\Admin\CreateAdminRequest;
-use App\Http\Requests\Auth\Admin\RegisterRequest;
+use App\Http\Requests\Auth\Public\RegisterAdminRequest;
 use Domain\Auth\DTOs\NewAdminDTO;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
@@ -16,7 +16,7 @@ class NewAdminDTOTest extends TestCase
     {
         parent::setUp();
 
-        $this->request = RegisterRequest::factory()->create();
+        $this->request = RegisterAdminRequest::factory()->create();
     }
 
     /**
@@ -25,7 +25,7 @@ class NewAdminDTOTest extends TestCase
      */
     public function it_instance_created_from_register_request_success(): void
     {
-        $data = NewAdminDTO::fromRequest(new RegisterRequest($this->request));
+        $data = NewAdminDTO::fromRequest(new RegisterAdminRequest($this->request));
 
         $this->assertInstanceOf(NewAdminDTO::class, $data);
     }

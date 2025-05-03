@@ -2,7 +2,7 @@
 
 namespace App\Auth\Admin\Actions;
 
-use App\Http\Requests\Auth\Admin\RegisterRequest;
+use App\Http\Requests\Auth\Public\RegisterAdminRequest;
 use Domain\Auth\Contracts\RegisterNewUserContract;
 use Domain\Auth\DTOs\NewAdminDTO;
 use Domain\Auth\Models\Role;
@@ -25,7 +25,7 @@ class RegisterNewAdminActionTest extends TestCase
     {
         parent::setUp();
 
-        $this->request = RegisterRequest::factory()->create();
+        $this->request = RegisterAdminRequest::factory()->create();
 
         $this->action = app(RegisterNewUserContract::class);
 
