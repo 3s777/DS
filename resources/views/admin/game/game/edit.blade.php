@@ -54,6 +54,7 @@
 
                 <x-grid.col xl="6" lg="12" md="12" sm="12">
                     <x-ui.form.group>
+                        @dump($selectedGenres)
                         <x-ui.select.data-multiple
                             name="genres"
                             select-name="genres[]"

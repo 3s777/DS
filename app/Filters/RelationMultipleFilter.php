@@ -83,7 +83,8 @@ class RelationMultipleFilter extends AbstractFilter
 
             foreach ($this->relatedModels as $key => $model) {
                 if ($model) {
-                    $selected[$model->{$this->field}] = $model->name;
+                    $selected[] = $model->{$this->field};
+//                    $selected[$model->{$this->field}] = $model->name;
                 }
             }
 
