@@ -2,6 +2,7 @@
 
 namespace Database\Seeders\Api;
 
+use App\Models\ApiStagingData;
 use Domain\Auth\Models\User;
 use Domain\Game\Models\Game;
 use Domain\Game\Models\GameDeveloper;
@@ -9,7 +10,6 @@ use Domain\Game\Models\GameGenre;
 use Domain\Game\Models\GamePlatform;
 use Domain\Game\Models\GamePublisher;
 use Illuminate\Database\Seeder;
-use Services\GamesDbApi\GamesDbApiContract;
 
 class GameFromStagingSeeder extends Seeder
 {
@@ -20,56 +20,109 @@ class GameFromStagingSeeder extends Seeder
     {
         $user = User::where('name', 'qqqqq')->first();
 
-        for ($i = 1; $i <= 10; $i++) {
-            $games = $gamesApi->getGamesByPlatform(16, $i);
+            $games = ApiStagingData::query()->where('data_type', 'game')->get();
 
             foreach ($games as $game) {
 
-                $currentGame = Game::createOrFirst([
-                    'name' => $game->name,
-                    'released_at' => $game->released,
-                    'description' => ['en' => $game->description],
-                    'user_id' => 11,
-                ]);
-
-                if (empty($currentGame->alternative_names)) {
-                    $currentGame->alternative_names = $game->alternative_names;
-                    $currentGame->save();
+                if (Game::where('name', $game['data']['name'])->exists()) {
+                    continue;
                 }
 
-                foreach ($game->publishers as $publisher) {
-                    $currentPublisher = GamePublisher::firstOrCreate([
-                        'name' => $publisher['name'],
-                        'user_id' => $user->id
+                $currentGame = Game::create(
+                    [
+                        'name' => $game['data']['name'],
+                    ],
+                    [
+                        'released_at' => $game['data']['released_at'] ?? null,
+                        'description' => ['en' => $game['data']['description'] ?? null],
+                        'alternative_names' => $game['data']['alternative_names'] ?? null,
+                        'user_id' => $user->id,
                     ]);
-                    $currentGame->publishers()->attach($currentPublisher->id);
+
+                if (isset($game['data']['publishers'])) {
+                    foreach ($game['data']['publishers'] as $publisher) {
+                        $stagingPublisher = ApiStagingData::query()
+                            ->where('data_type', 'game_publisher')
+                            ->where('data_id', $publisher['id'])
+                            ->first();
+
+                        $currentPublisher = GamePublisher::firstOrCreate(
+                            [
+                            'name' => $stagingPublisher['data']['name'],
+                            ],
+                            [
+                                'user_id' => $user->id,
+                                'description' => ['en' => $stagingPublisher['data']['description'] ?? null],
+                            ]
+                        );
+
+                        $currentGame->publishers()->attach($currentPublisher->id);
+                    }
                 }
 
-                foreach ($game->developers as $developer) {
-                    $currentDeveloper = GameDeveloper::firstOrCreate([
-                        'name' => $developer['name'],
-                        'slug' => $developer['name'],
-                        'user_id' => $user->id
-                    ]);
-                    $currentGame->developers()->attach($currentDeveloper->id);
+                if (isset($game['data']['developers'])) {
+                    foreach ($game['data']['developers'] as $developer) {
+                        $stagingDeveloper = ApiStagingData::query()
+                            ->where('data_type', 'game_developer')
+                            ->where('data_id', $developer['id'])
+                            ->first();
+
+                        $currentDeveloper = GameDeveloper::firstOrCreate(
+                            [
+                                'name' => $stagingDeveloper['data']['name'],
+                            ],
+                            [
+                                'user_id' => $user->id,
+                                'description' => ['en' => $stagingDeveloper['data']['description'] ?? null],
+                            ]
+                        );
+
+                        $currentGame->developers()->attach($currentDeveloper->id);
+                    }
                 }
 
-                foreach ($game->genres as $genre) {
-                    $currentGenre = GameGenre::firstOrCreate([
-                        'name' => $genre['name'],
-                        'user_id' => $user->id
-                    ]);
-                    $currentGame->genres()->attach($currentGenre->id);
+                if (isset($game['data']['genres'])) {
+                    foreach ($game['data']['genres'] as $genre) {
+                        $stagingGenre = ApiStagingData::query()
+                            ->where('data_type', 'game_genre')
+                            ->where('data_id', $genre['id'])
+                            ->first();
+
+                        $currentGenre = GameGenre::firstOrCreate(
+                            [
+//                                'name' => ['en' => $stagingGenre['data']['name']],
+                                'name' => $stagingGenre['data']['name'],
+                            ],
+                            [
+                                'user_id' => $user->id,
+                                'description' => ['en' => $stagingGenre['data']['description'] ?? null],
+                            ]
+                        );
+
+                        $currentGame->genres()->attach($currentGenre->id);
+                    }
                 }
 
-                foreach ($game->platforms as $platform) {
-                    $currentPlatform = GamePlatform::firstOrCreate([
-                        'name' => $platform['platform']['name'],
-                        'user_id' => $user->id
-                    ]);
-                    $currentGame->platforms()->attach($currentPlatform->id);
+                if (isset($game['data']['platforms'])) {
+                    foreach ($game['data']['platforms'] as $platform) {
+                        $stagingPlatform = ApiStagingData::query()
+                            ->where('data_type', 'game_platform')
+                            ->where('data_id', $platform['platform']['id'])
+                            ->first();
+
+                        $currentPlatform = GamePlatform::firstOrCreate(
+                            [
+                                'name' => $stagingPlatform['data']['name'],
+                            ],
+                            [
+                                'user_id' => $user->id,
+                                'description' => ['en' => $stagingPlatform['data']['description'] ?? null],
+                            ]
+                        );
+
+                        $currentGame->platforms()->attach($currentPlatform->id);
+                    }
                 }
             }
-        }
     }
 }
