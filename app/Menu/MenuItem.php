@@ -15,7 +15,8 @@ class MenuItem
         protected string $label,
         protected ?string $icon = null,
         protected ?string $class = null,
-        protected ?string $description = null
+        protected ?string $description = null,
+        protected ?string $id = null
     ) {
     }
 
@@ -42,6 +43,11 @@ class MenuItem
     public function class(): ?string
     {
         return $this->class;
+    }
+
+    public function id(): ?string
+    {
+        return $this->id;
     }
 
     public function description(): ?string

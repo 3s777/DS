@@ -157,6 +157,10 @@
 {{--                        </div>--}}
 {{--                    </x-ui.card>--}}
             </div>
+            <div class="collector-search__pagination">
+                {{ $collectors->links('pagination::default') }}
+            </div>
+
             @else
                 <x-common.missing class="collector-search__missing" :icon="true" :card="true">
                     {{ __('common.sorry') }}. {{ __('common.not_found') }}

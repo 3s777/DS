@@ -4,6 +4,7 @@ namespace App\Providers;
 
 use Domain\Auth\Providers\AuthServiceProvider;
 use Domain\Game\Providers\GameServiceProvider;
+use Domain\Shelf\Providers\ShelfServiceProvider;
 use Illuminate\Support\ServiceProvider;
 
 class DomainServiceProvider extends ServiceProvider
@@ -19,6 +20,10 @@ class DomainServiceProvider extends ServiceProvider
 
         $this->app->register(
             GameServiceProvider::class
+        );
+
+        $this->app->register(
+            ShelfServiceProvider::class
         );
     }
 

@@ -4,6 +4,7 @@ namespace App\Routing;
 
 use App\Contracts\RouteRegistrar;
 use App\Http\Controllers\Shelf\Admin\CategoryController;
+use App\Http\Controllers\Shelf\Public\CategoryController as PublicCategoryController;
 use App\Http\Controllers\Shelf\Admin\CollectibleController;
 use App\Http\Controllers\Shelf\Admin\CollectibleGameController;
 use App\Http\Controllers\Shelf\Admin\KitItemController;
@@ -19,7 +20,11 @@ class ShelfRegistrar extends BaseRouteRegistrar implements RouteRegistrar
             ->group(function () {
 
                 Route::prefix('{locale}')->whereIn('locale', config('app.available_locales'))->group(function () {
-
+                    Route::controller(PublicCategoryController::class)
+                        ->middleware(['remove.locale'])
+                        ->group(function () {
+                        Route::get('/category/{category}', 'show')->name('category.show');
+                    });
                 });
 
                 Route::as('admin.')->prefix('{locale}')

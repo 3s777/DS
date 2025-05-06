@@ -30,6 +30,6 @@ class CollectorsViewModel extends ViewModel
                 }
             ])
             ->filtered(app(CollectorFilterRegistrar::class)->filtersList())
-            ->paginate(1);
+            ->paginate(4);
     }
 }

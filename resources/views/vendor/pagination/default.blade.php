@@ -3,6 +3,7 @@
         <div class="pagination__pages">
             @if ($paginator->onFirstPage())
                 <x-ui.form.button
+                    class="pagination__pages-nav"
                     tag="span"
                     color="disabled"
                     only-icon="true"
@@ -11,11 +12,12 @@
                     aria-label="{{ __('pagination.previous') }}"
                     title="{{ __('pagination.previous') }}">
                     <x-slot:icon class="button__icon-wrapper_prev">
-                        <x-svg.prev class="button__icon button__icon_small" />
+                        <x-svg.prev class="button__icon button__icon_small pagination__icon" />
                     </x-slot:icon>
                 </x-ui.form.button>
             @else
                 <x-ui.form.button
+                    class="pagination__pages-nav"
                     tag="a"
                     link="{!! $paginator->previousPageUrl() !!}"
                     color="submit"
@@ -26,7 +28,7 @@
                     aria-label="{{ __('pagination.previous') }}"
                     title="{{ __('pagination.previous') }}">
                     <x-slot:icon class="button__icon-wrapper_prev">
-                        <x-svg.prev class="button__icon button__icon_small" />
+                        <x-svg.prev class="button__icon button__icon_small pagination__icon" />
                     </x-slot:icon>
                 </x-ui.form.button>
             @endif
@@ -67,6 +69,7 @@
 
             @if ($paginator->hasMorePages())
                 <x-ui.form.button
+                    class="pagination__pages-nav"
                     tag="a"
                     link="{!! $paginator->nextPageUrl() !!}"
                     color="submit"
@@ -77,11 +80,12 @@
                     aria-label="{{ __('pagination.next') }}"
                     title="{{ __('pagination.next') }}">
                     <x-slot:icon class="button__icon-wrapper_next">
-                        <x-svg.next class="button__icon button__icon_small" />
+                        <x-svg.next class="button__icon button__icon_small pagination__icon" />
                     </x-slot:icon>
                 </x-ui.form.button>
             @else
                 <x-ui.form.button
+                    class="pagination__pages-nav"
                     tag="span"
                     color="disabled"
                     only-icon="true"
@@ -90,7 +94,7 @@
                     aria-label="{{ __('pagination.next') }}"
                     title="{{ __('pagination.next') }}">
                     <x-slot:icon class="button__icon-wrapper_next">
-                        <x-svg.next class="button__icon button__icon_small" />
+                        <x-svg.next class="button__icon button__icon_small pagination__icon" />
                     </x-slot:icon>
                 </x-ui.form.button>
             @endif

@@ -14,8 +14,8 @@ final class  MainMenuComposer
             ->add(MenuItem::make('#', trans_choice('shelf.shelves', 2)))
             ->add(MenuItem::make('#', __('common.blog')))
             ->add(MenuItem::make(route('feed'), __('common.feed')))
-            ->add(MenuItem::make('#', __('common.more'), class: 'main-menu__button-more'))
-            ->add(MenuItem::make(route('search'), __('common.add'), class: 'button_submit'));
+            ->add(MenuItem::make('#', __('common.more'), class: 'main-menu__button-more', id:'more'))
+            ->add(MenuItem::make(route('search'), __('common.add'), class: 'button_submit', id:'add'));
         $view->with('menu', $menu);
     }
 }

@@ -21,6 +21,10 @@
         font-size: rem(24);
     }
 
+    &__pagination {
+        padding: 24px 0;
+    }
+
     @include breakpoint-max($xl) {
         &__list {
             grid-template-columns: repeat(3, 1fr);
