@@ -1,6 +1,6 @@
 <?php
 
-namespace Domain\Game\ViewModels;
+namespace Domain\Game\ViewModels\Admin;
 
 use Domain\Game\Models\Game;
 use Domain\Game\Models\GameGenre;

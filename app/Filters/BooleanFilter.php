@@ -28,7 +28,11 @@ class BooleanFilter extends AbstractFilter
 
     public function preparedValues(): string
     {
-        return $this->placeholder();
+        if($this->requestValue()) {
+            return $this->placeholder();
+        }
+
+        return '';
     }
 
     public function view(): string

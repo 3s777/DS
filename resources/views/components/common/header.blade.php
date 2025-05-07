@@ -1,5 +1,5 @@
 @aware([
-    'search' => true
+    'search' => true,
 ])
 
 <header class="header" x-data>
@@ -32,15 +32,14 @@
 </header>
 
 @if($search)
-    <div class="container">
-        <x-common.main-filters />
-    </div>
+    {{ $slot }}
 @endif
 
 @if($search)
     @push('scripts')
         <script>
             document.addEventListener('alpine:init', () => {
+                Alpine.store('filtersSearchValue', '{{ request('filters.search') }}');
                 Alpine.store('mainFilters', {
                     hide: true,
                 });

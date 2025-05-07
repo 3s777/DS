@@ -14,7 +14,8 @@ class AsyncSelectByQueryViewModel extends ViewModel
         protected ?array $depended = null,
         protected ?string $searchField = 'name',
         protected ?string $key = 'id',
-        protected ?string $name = 'name'
+        protected ?string $name = 'name',
+        protected ?int $limit = 30
     ) {
     }
 
@@ -53,7 +54,7 @@ class AsyncSelectByQueryViewModel extends ViewModel
 
             $query->whereIn($dependedKey, explode(',', $dependedValue));
 
-            $models = $query->get();
+            $models = $query->limit($this->limit)->get();
 
             foreach ($models as $model) {
                 $options[] = ['value' => $model->{$this->key}, 'label' => $model->{$this->name}];
@@ -66,7 +67,7 @@ class AsyncSelectByQueryViewModel extends ViewModel
         if ($this->query) {
             $query = $this->makeQuery();
 
-            $models = $query->get();
+            $models = $query->limit($this->limit)->get();
 
             foreach ($models as $model) {
                 $options[] = ['value' => $model->{$this->key}, 'label' => $model->{$this->name}];

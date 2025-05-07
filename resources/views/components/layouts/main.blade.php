@@ -1,6 +1,8 @@
 @props([
     'title' => '',
     'search' => true,
+    'searchPlaceholder' => false,
+    'mainFilters' => false
 ])
 
 <!doctype html>
@@ -12,7 +14,11 @@
 
     </head>
     <body class="body {{ session()->get('color.theme') }}">
-        <x-common.header />
+        <x-common.header>
+            <x-common.main-filters>
+                {{ $mainFilters }}
+            </x-common.main-filters>
+        </x-common.header>
 
         <main class="main" x-data="{collapseSidebar: $persist(false)}">
             {{ $slot }}
@@ -25,7 +31,6 @@
         @vite(['resources/js/app.js'])
 
         @stack('scripts')
-
 
         <script type="module">
             Fancybox.defaults.l10n = {

@@ -4,10 +4,11 @@ namespace Domain\Auth\Models;
 
 use App\Models\Image;
 use Database\Factories\Auth\CollectorFactory;
+use Domain\Auth\FilterRegitrars\Admin\CollectorFilterRegistrar as AdminCollectorFilterRegistrar;
+use Domain\Auth\FilterRegitrars\Public\CollectorFilterRegistrar;
 use Domain\Auth\Notifications\ResetPasswordCollectorNotification;
 use Domain\Auth\Notifications\VerifyEmailCollectorNotification;
 use Domain\Auth\QueryBuilders\CollectorQueryBuilder;
-use Domain\Game\FilterRegistrars\GameFilterRegistrar;
 use Domain\Shelf\Models\Collectible;
 use Domain\Shelf\Models\Shelf;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
@@ -19,7 +20,6 @@ use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Database\Eloquent\Relations\MorphMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
-use Illuminate\Mail\Attachment;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 use Laravel\Scout\Searchable;
@@ -34,8 +34,6 @@ use Support\Traits\Models\HasCustomAudit;
 use Support\Traits\Models\HasFeaturedImage;
 use Support\Traits\Models\HasImage;
 use Support\Traits\Models\HasSlug;
-use Domain\Auth\FilterRegitrars\Public\CollectorFilterRegistrar;
-use Domain\Auth\FilterRegitrars\Admin\CollectorFilterRegistrar as AdminCollectorFilterRegistrar;
 
 
 class Collector extends Authenticatable implements MustVerifyEmail, HasLocalePreference, HasMedia, Auditable

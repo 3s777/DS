@@ -12,6 +12,7 @@ class RelationMultipleFilter extends AbstractFilter
 
     public array $relatedModels;
     protected string $relation;
+    private bool $async;
 
     public function __construct(
         string $title,
@@ -20,11 +21,13 @@ class RelationMultipleFilter extends AbstractFilter
         string $relation,
         ?string $field = null,
         ?string $placeholder = null,
+        bool $async = false
     ) {
         parent::__construct($title, $key, $table, $field, $placeholder);
 
         $this->setRelation($relation);
         $this->setRelatedModel();
+        $this->setAsync($async);
     }
 
     protected function setRelation(string $relation): static
@@ -47,6 +50,12 @@ class RelationMultipleFilter extends AbstractFilter
             }, request()->input('filters.'.$this->key));
         }
 
+        return $this;
+    }
+
+    protected function setAsync(string $async): static
+    {
+        $this->async = $async;
         return $this;
     }
 
@@ -83,8 +92,11 @@ class RelationMultipleFilter extends AbstractFilter
 
             foreach ($this->relatedModels as $key => $model) {
                 if ($model) {
-                    $selected[] = $model->{$this->field};
-//                    $selected[$model->{$this->field}] = $model->name;
+                    if ($this->async) {
+                        $selected[$model->{$this->field}] = $model->name;
+                    } else {
+                        $selected[] = $model->{$this->field};
+                    }
                 }
             }
 

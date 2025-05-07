@@ -1,6 +1,6 @@
 <?php
 
-namespace Domain\Game\FilterRegistrars;
+namespace Domain\Game\FilterRegistrars\Public;
 
 use App\Contracts\FilterRegistrar;
 use App\Filters\DatesFilter;
@@ -34,14 +34,6 @@ class GameMediaFilterRegistrar implements FilterRegistrar
                 'game_medias',
                 alternativeFields: ['alternative_names']
             ),
-            'user' => RelationFilter::make(
-                trans_choice('user.users', 1),
-                'user',
-                'game_medias',
-                User::class,
-                'user_id',
-                trans_choice('user.choose', 1)
-            ),
             'genres' => RelationMultipleFilter::make(
                 trans_choice('game.genre.genres', 2),
                 'genres',
@@ -56,7 +48,8 @@ class GameMediaFilterRegistrar implements FilterRegistrar
                 'game_developers',
                 GameDeveloper::class,
                 'id',
-                trans_choice('game.developer.choose', 1)
+                trans_choice('game.developer.choose', 1),
+                async: true
             ),
             'publishers' => RelationMultipleFilter::make(
                 trans_choice('game.publisher.publishers', 2),
@@ -64,7 +57,8 @@ class GameMediaFilterRegistrar implements FilterRegistrar
                 'game_publishers',
                 GamePublisher::class,
                 'id',
-                trans_choice('game.publisher.choose', 1)
+                trans_choice('game.publisher.choose', 1),
+                async: true
             ),
             'platforms' => RelationMultipleFilter::make(
                 trans_choice('game.platform.platforms', 2),
@@ -80,7 +74,8 @@ class GameMediaFilterRegistrar implements FilterRegistrar
                 'games',
                 Game::class,
                 'id',
-                trans_choice('game.choose', 1)
+                trans_choice('game.choose', 1),
+                async: true
             ),
             'released_at' => DatesFilter::make(
                 __('game.released_at'),

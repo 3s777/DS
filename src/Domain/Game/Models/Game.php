@@ -4,7 +4,7 @@ namespace Domain\Game\Models;
 
 use Database\Factories\Game\GameFactory;
 use Domain\Auth\Models\User;
-use Domain\Game\FilterRegistrars\GameFilterRegistrar;
+use Domain\Game\FilterRegistrars\Admin\GameFilterRegistrar;
 use Domain\Game\QueryBuilders\GameQueryBuilder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -16,10 +16,10 @@ use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
 use Spatie\Translatable\HasTranslations;
 use Support\Casts\ArrayWithoutUnicode;
+use Support\Traits\Models\HasFeaturedImage;
+use Support\Traits\Models\HasImage;
 use Support\Traits\Models\HasImages;
 use Support\Traits\Models\HasSlug;
-use Support\Traits\Models\HasImage;
-use Support\Traits\Models\HasFeaturedImage;
 use Support\Traits\Models\HasUser;
 
 class Game extends Model implements HasMedia

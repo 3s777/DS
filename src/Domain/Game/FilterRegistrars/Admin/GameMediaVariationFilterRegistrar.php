@@ -1,20 +1,14 @@
 <?php
 
-namespace Domain\Game\FilterRegistrars;
+namespace Domain\Game\FilterRegistrars\Admin;
 
 use App\Contracts\FilterRegistrar;
 use App\Filters\BooleanFilter;
 use App\Filters\DatesFilter;
 use App\Filters\RelationFilter;
-use App\Filters\RelationMultipleFilter;
 use App\Filters\SearchFilter;
 use Domain\Auth\Models\User;
-use Domain\Game\Models\Game;
-use Domain\Game\Models\GameDeveloper;
-use Domain\Game\Models\GameGenre;
 use Domain\Game\Models\GameMedia;
-use Domain\Game\Models\GamePlatform;
-use Domain\Game\Models\GamePublisher;
 
 class GameMediaVariationFilterRegistrar implements FilterRegistrar
 {
@@ -42,7 +36,7 @@ class GameMediaVariationFilterRegistrar implements FilterRegistrar
                 'game_media_variations',
                 GameMedia::class,
                 'game_media_id',
-                trans_choice('game.media.choose', 1)
+                trans_choice('game.media.choose', 1),
             ),
             'user' => RelationFilter::make(
                 trans_choice('user.users', 1),

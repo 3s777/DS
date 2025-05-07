@@ -2,11 +2,11 @@
 
 namespace Domain\Game\Factories;
 
-use Domain\Shelf\Factories\CategorySearchFactory;
+use Domain\Shelf\Contracts\CategorySearchFactoryContract;
 use Domain\Shelf\ViewModels\CategoryIndexViewModel;
 use Spatie\ViewModels\ViewModel;
 
-class BookSearchFactory implements CategorySearchFactory
+class BookSearchFactory implements CategorySearchFactoryContract
 {
 
     public function view(): string

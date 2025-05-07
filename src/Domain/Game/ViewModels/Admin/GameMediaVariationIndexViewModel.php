@@ -1,8 +1,7 @@
 <?php
 
-namespace Domain\Game\ViewModels;
+namespace Domain\Game\ViewModels\Admin;
 
-use Domain\Game\Models\GameMedia;
 use Domain\Game\Models\GameMediaVariation;
 use Spatie\ViewModels\ViewModel;
 

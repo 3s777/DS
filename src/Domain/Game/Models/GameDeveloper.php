@@ -4,7 +4,7 @@ namespace Domain\Game\Models;
 
 use Database\Factories\Game\GameDeveloperFactory;
 use Domain\Auth\Models\User;
-use Domain\Game\FilterRegistrars\GameDeveloperFilterRegistrar;
+use Domain\Game\FilterRegistrars\Admin\GameDeveloperFilterRegistrar;
 use Domain\Game\QueryBuilders\GameDeveloperQueryBuilder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -14,9 +14,9 @@ use Mews\Purifier\Casts\CleanHtml;
 use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
 use Spatie\Translatable\HasTranslations;
-use Support\Traits\Models\HasSlug;
-use Support\Traits\Models\HasImage;
 use Support\Traits\Models\HasFeaturedImage;
+use Support\Traits\Models\HasImage;
+use Support\Traits\Models\HasSlug;
 use Support\Traits\Models\HasUser;
 
 /**

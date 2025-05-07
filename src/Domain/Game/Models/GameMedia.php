@@ -5,7 +5,8 @@ namespace Domain\Game\Models;
 use App\Contracts\HasProperties;
 use Database\Factories\Game\GameMediaFactory;
 use Domain\Auth\Models\User;
-use Domain\Game\FilterRegistrars\GameMediaFilterRegistrar;
+use Domain\Game\FilterRegistrars\Admin\GameMediaFilterRegistrar as AdminGameMediaFilterRegistrar;
+use Domain\Game\FilterRegistrars\Public\GameMediaFilterRegistrar;
 use Domain\Game\Models\Traits\GameProperties;
 use Domain\Game\QueryBuilders\GameMediaQueryBuilder;
 use Domain\Shelf\Models\Collectible;
@@ -23,10 +24,10 @@ use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
 use Spatie\Translatable\HasTranslations;
 use Support\Casts\ArrayWithoutUnicode;
+use Support\Traits\Models\HasFeaturedImage;
+use Support\Traits\Models\HasImage;
 use Support\Traits\Models\HasImages;
 use Support\Traits\Models\HasSlug;
-use Support\Traits\Models\HasImage;
-use Support\Traits\Models\HasFeaturedImage;
 use Support\Traits\Models\HasUser;
 
 class GameMedia extends Model implements HasMedia, HasProperties
@@ -109,6 +110,11 @@ class GameMedia extends Model implements HasMedia, HasProperties
     }
 
     public function availableAdminFilters(): array
+    {
+        return app(AdminGameMediaFilterRegistrar::class)->filtersList();
+    }
+
+    public function availableFilters(): array
     {
         return app(GameMediaFilterRegistrar::class)->filtersList();
     }

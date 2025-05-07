@@ -1,6 +1,6 @@
 <?php
 
-namespace Domain\Game\FilterRegistrars;
+namespace Domain\Game\FilterRegistrars\Admin;
 
 use App\Contracts\FilterRegistrar;
 use App\Filters\DatesFilter;
@@ -8,7 +8,7 @@ use App\Filters\RelationFilter;
 use App\Filters\SearchFilter;
 use Domain\Auth\Models\User;
 
-class GamePublisherFilterRegistrar implements FilterRegistrar
+class GameDeveloperFilterRegistrar implements FilterRegistrar
 {
     public function filtersList(): array
     {
@@ -16,7 +16,7 @@ class GamePublisherFilterRegistrar implements FilterRegistrar
             'dates' => DatesFilter::make(
                 __('common.dates'),
                 'dates',
-                'game_publishers',
+                'game_developers',
                 placeholder: [
                     'from' => __('filters.dates_from'),
                     'to' => __('filters.dates_to'),
@@ -25,15 +25,15 @@ class GamePublisherFilterRegistrar implements FilterRegistrar
             'search' => SearchFilter::make(
                 __('common.search'),
                 'search',
-                'game_publishers'
+                'game_developers',
             ),
             'user' => RelationFilter::make(
                 trans_choice('user.users', 1),
                 'user',
-                'game_publishers',
+                'game_developers',
                 User::class,
                 'user_id',
-                trans_choice('user.choose', 1)
+                __('users.choose')
             ),
         ];
     }

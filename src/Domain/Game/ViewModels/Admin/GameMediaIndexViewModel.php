@@ -1,27 +1,26 @@
 <?php
 
-namespace Domain\Game\ViewModels;
+namespace Domain\Game\ViewModels\Admin;
 
-use Domain\Auth\Models\User;
-use Domain\Game\Models\Game;
+use Domain\Game\Models\GameMedia;
 use Spatie\ViewModels\ViewModel;
 
-class GameIndexViewModel extends ViewModel
+class GameMediaIndexViewModel extends ViewModel
 {
     public function __construct()
     {
         //
     }
 
-    public function games()
+    public function gameMedias()
     {
-        return Game::query()
+        return GameMedia::query()
 //            ->with(['media.model:id,created_at'])
 //            ->with(['media'])
 //            ->with(['user:id,name,email'])
-            ->select('games.id', 'games.name', 'games.created_at', 'games.slug', 'games.user_id', 'users.name as user_name')
+            ->select('game_medias.id', 'game_medias.name', 'game_medias.created_at', 'game_medias.slug', 'game_medias.user_id', 'users.name as user_name')
             ->with(['genres:id,name', 'platforms:id,name', 'developers:id,name', 'publishers:id,name'])
-            ->leftJoin('users', 'users.id', '=', 'games.user_id')
+            ->leftJoin('users', 'users.id', '=', 'game_medias.user_id')
 //            ->join('game_game_genre', 'games.id', '=', 'game_game_genre.game_id')
 //            ->join('game_genres', 'game_genres.id', '=', 'game_game_genre.game_genre_id')
             ->filteredAdmin()

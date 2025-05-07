@@ -1,10 +1,10 @@
 <?php
 
-namespace Domain\Shelf\Factories;
+namespace Domain\Shelf\Contracts;
 
 use Spatie\ViewModels\ViewModel;
 
-interface CategorySearchFactory
+interface CategorySearchFactoryContract
 {
     public function view(): string;
 

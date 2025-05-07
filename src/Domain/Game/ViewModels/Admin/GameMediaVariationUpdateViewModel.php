@@ -1,11 +1,8 @@
 <?php
 
-namespace Domain\Game\ViewModels;
+namespace Domain\Game\ViewModels\Admin;
 
-use Domain\Game\Models\GameGenre;
-use Domain\Game\Models\GameMedia;
 use Domain\Game\Models\GameMediaVariation;
-use Domain\Game\Models\GamePlatform;
 use Domain\Shelf\Models\KitItem;
 use Spatie\ViewModels\ViewModel;
 use Support\Traits\HasSelectedUser;

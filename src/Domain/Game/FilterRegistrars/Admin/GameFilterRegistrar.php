@@ -1,6 +1,6 @@
 <?php
 
-namespace Domain\Game\FilterRegistrars;
+namespace Domain\Game\FilterRegistrars\Admin;
 
 use App\Contracts\FilterRegistrar;
 use App\Filters\DatesFilter;
@@ -55,7 +55,8 @@ class GameFilterRegistrar implements FilterRegistrar
                 'game_developers',
                 GameDeveloper::class,
                 'id',
-                trans_choice('game.developer.choose', 1)
+                trans_choice('game.developer.choose', 1),
+                async: true
             ),
             'publishers' => RelationMultipleFilter::make(
                 trans_choice('game.publisher.publishers', 2),
@@ -63,7 +64,8 @@ class GameFilterRegistrar implements FilterRegistrar
                 'game_publishers',
                 GamePublisher::class,
                 'id',
-                trans_choice('game.publisher.choose', 1)
+                trans_choice('game.publisher.choose', 1),
+                async: true
             ),
             'platforms' => RelationMultipleFilter::make(
                 trans_choice('game.platform.platforms', 2),

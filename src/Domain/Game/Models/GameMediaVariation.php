@@ -4,7 +4,7 @@ namespace Domain\Game\Models;
 
 use Database\Factories\Game\GameMediaVariationFactory;
 use Domain\Auth\Models\User;
-use Domain\Game\FilterRegistrars\GameMediaVariationFilterRegistrar;
+use Domain\Game\FilterRegistrars\Admin\GameMediaVariationFilterRegistrar;
 use Domain\Game\Observers\GameMediaVariationObserver;
 use Domain\Game\QueryBuilders\GameMediaVariationQueryBuilder;
 use Domain\Shelf\Models\Collectible;
@@ -21,10 +21,10 @@ use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
 use Spatie\Translatable\HasTranslations;
 use Support\Casts\ArrayWithoutUnicode;
+use Support\Traits\Models\HasFeaturedImage;
+use Support\Traits\Models\HasImage;
 use Support\Traits\Models\HasImages;
 use Support\Traits\Models\HasSlug;
-use Support\Traits\Models\HasImage;
-use Support\Traits\Models\HasFeaturedImage;
 use Support\Traits\Models\HasUser;
 
 #[ObservedBy([GameMediaVariationObserver::class])]

@@ -1,6 +1,6 @@
 <?php
 
-namespace Domain\Game\ViewModels;
+namespace Domain\Game\ViewModels\Admin;
 
 use Domain\Game\Models\GamePlatformManufacturer;
 use Spatie\ViewModels\ViewModel;
