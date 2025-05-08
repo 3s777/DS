@@ -1,0 +1,31 @@
+.media-card {
+    display: flex;
+    justify-content: flex-start;
+    gap: 24px;
+
+    &__featured {
+        flex-shrink: 0;
+    }
+
+    &__content {
+        flex-basis: 100%;
+    }
+
+    &__inner {
+        display: flex;
+        gap: 24px;
+    }
+
+    &__specifications {
+        flex-basis: 50%;
+    }
+
+    &__variations {
+        flex-basis: 50%;
+    }
+
+    &__variation {
+        width: 100%;
+        margin-bottom: 12px;
+    }
+}

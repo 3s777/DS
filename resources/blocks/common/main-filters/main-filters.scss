@@ -1,6 +1,10 @@
 .main-filters {
     position: relative;
-    margin-bottom: 16px;
+    margin-bottom: 32px;
+    padding: 24px;
+    border: 2px solid $base-main;
+    background-color: $base-dark;
+    border-radius: $medium-border-radius;
 
     &__footer {
         display: flex;

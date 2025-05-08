@@ -18,75 +18,102 @@
                     @endif
                 </x-ui.title>
 
-                @if(request('filters'))
-                    <div class="admin-filters__badges">
-                        <div class="current-filters">
-                            @foreach(filters() as $filter)
-                                @if($loop->first)
-                                    <div class="current-filters__title">{{ __('filters.badges_title') }}: </div>
-                                @endif
-
-                                @if($filter->preparedValues())
-                                    {!! $filter->badgeView() !!}
-                                @endif
-
-                                @if($loop->last)
-                                    <x-ui.badge
-                                        class="current-filters__badge"
-                                        type="tag"
-                                        color="danger">
-                                        <a href="{{ request()->url() }}">
-                                            {{ __('filters.reset_all') }}
-                                        </a>
-                                    </x-ui.badge>
-                                @endif
-                            @endforeach
-                        </div>
-                    </div>
-                @endif
-
-
-                <div class="search__filters">
-                    <div class="search__filters-title">Выбранные фильтры: </div>
-                    <x-ui.badge
-                        class="search__filter"
-                        type="tag"
-                        color="dark">
-                        Playstation 3
-                        <div class="search__filter-delete">
-                            <x-svg.close></x-svg.close>
-                        </div>
-                    </x-ui.badge>
-                    <x-ui.badge
-                        class="search__filter"
-                        type="tag"
-                        color="dark">
-                        Платформер
-                        <div class="search__filter-delete">
-                            <x-svg.close></x-svg.close>
-                        </div>
-                    </x-ui.badge>
-                    <x-ui.badge
-                        class="search__filter"
-                        type="tag"
-                        color="dark">
-                        Capcom
-                        <div class="search__filter-delete">
-                            <x-svg.close></x-svg.close>
-                        </div>
-                    </x-ui.badge>
-                    <x-ui.badge
-                        class="search__filter"
-                        type="tag"
-                        color="dark">
-                        2010
-                        <div class="search__filter-delete">
-                            <x-svg.close></x-svg.close>
-                        </div>
-                    </x-ui.badge>
-                </div>
+                <x-common.filters.badges class="search__filters" />
             </div>
+
+            @foreach($gameMedias as $media)
+                <x-ui.card style="margin-bottom: 24px;">
+
+                    <div class="media-card">
+
+                        <div class="media-card__featured">
+                            <div class="profile__avatar">
+                                <x-ui.responsive-image
+                                    class="profile__avatar-img"
+                                    :model="$media"
+                                    :image-sizes="['large','medium', 'small']"
+                                    :path="$media->getFeaturedImagePath()"
+                                    :placeholder="false"
+                                    sizes="(max-width: 768px) 300px, (max-width: 1400px) 300px, 300px">
+                                    <x-slot:img alt="test" title="test title"></x-slot:img>
+                                </x-ui.responsive-image>
+                            </div>
+                        </div>
+
+                        <div class="media-card__content">
+                            <x-ui.title indent="normal">{{ $media->name }}</x-ui.title>
+                            <div class="media-card__inner">
+                                <div class="media-card__specifications">
+                                    <x-ui.specifications>
+                                        <x-ui.specifications.item title="Платформы">
+                                            @foreach($media->platforms as $platform)
+                                                <x-ui.tag color="dark">{{ $platform->name }}</x-ui.tag>
+                                            @endforeach
+                                        </x-ui.specifications.item>
+                                        <x-ui.specifications.item title="Жанры">
+                                            @foreach($media->genres as $genre)
+                                                <x-ui.tag color="dark">{{ $genre->name }}</x-ui.tag>
+                                            @endforeach
+                                        </x-ui.specifications.item>
+                                        @if($media->released_at)
+                                            <x-ui.specifications.item title="Дата релиза">
+                                                <x-ui.tag color="dark">{{ $media->released_at->format('d.m.Y') }}</x-ui.tag>
+                                            </x-ui.specifications.item>
+                                        @endif
+                                        <x-ui.specifications.item title="Игры">
+                                            @foreach($media->games as $game)
+                                                <x-ui.tag color="dark">{{ $game->name }}</x-ui.tag>
+                                            @endforeach
+                                        </x-ui.specifications.item>
+                                        <x-ui.specifications.item title="Разработчики">
+                                            @foreach($media->developers as $developer)
+                                                <x-ui.tag color="dark">{{ $developer->name }}</x-ui.tag>
+                                            @endforeach
+                                        </x-ui.specifications.item>
+                                        <x-ui.specifications.item title="Издатели">
+                                            @foreach($media->publishers as $publisher)
+                                                <x-ui.tag color="dark">{{ $publisher->name }}</x-ui.tag>
+                                            @endforeach
+                                        </x-ui.specifications.item>
+                                    </x-ui.specifications>
+                                </div>
+                                <div class="media-card__variations">
+                                    @foreach($media->variations as $variation)
+
+                                        <x-ui.card class="media-card__variation" size="small" color="dark" :body="false">
+
+                                                <x-ui.responsive-image
+                                                    :model="$variation"
+                                                    :image-sizes="['extra_small','small']"
+                                                    :path="$variation->getFeaturedImagePath()"
+                                                    :placeholder="false"
+                                                    sizes="(max-width: 768px) 100px, (max-width: 1400px) 100px, 100px">
+                                                    <x-slot:img alt="" title=""></x-slot:img>
+                                                </x-ui.responsive-image>
+
+
+                                            {{ $variation->name }}
+                                        </x-ui.card>
+
+                                    @endforeach
+                                </div>
+                            </div>
+                        </div>
+
+
+                    </div>
+
+
+
+
+                </x-ui.card>
+            @endforeach
+
             <div class="search__result">
+
+
+
+
                 <div class="search__item search-card">
                     <div class="search-card__thumbnail">
                         <a href="{{ route('game-carrier') }}">
@@ -614,9 +641,7 @@
                     />
                 </div>
             </div>
-            <div class="search__show-more">
-                <x-ui.form.button size="big">{{ __('Показать больше') }}</x-ui.form.button>
-            </div>
+
         </x-common.content>
     </x-grid.container>
     @push('scripts')

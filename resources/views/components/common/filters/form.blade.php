@@ -18,7 +18,7 @@
             <div class="filters__buttons">
                 <x-ui.form.button x-bind:disabled="preventSubmit">{{ __('common.filter') }}</x-ui.form.button>
                 <x-ui.form.button tag="a" :link="request()->url()" color="warning">{{ __('common.reset') }}</x-ui.form.button>
-                <x-ui.form.button color="cancel"  x-on:click.prevent="filters_hide = true">{{ __('common.close') }}</x-ui.form.button>
+                <x-ui.form.button color="cancel"  x-on:click.prevent="$store.mainFilters.hide = true">{{ __('common.close') }}</x-ui.form.button>
             </div>
         </x-grid.col>
     @else
