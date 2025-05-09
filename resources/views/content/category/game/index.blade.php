@@ -22,28 +22,73 @@
             </div>
 
             @foreach($gameMedias as $media)
-                <x-ui.card style="margin-bottom: 24px;">
+                <x-ui.card class="media-card" body="false">
 
-                    <div class="media-card">
+                    <x-slot:header>
+                        <x-ui.title indent="big">{{ $media->name }}</x-ui.title>
+                    </x-slot:header>
 
+                    <div class="media-card__body">
                         <div class="media-card__featured">
-                            <div class="profile__avatar">
-                                <x-ui.responsive-image
-                                    class="profile__avatar-img"
-                                    :model="$media"
-                                    :image-sizes="['large','medium', 'small']"
-                                    :path="$media->getFeaturedImagePath()"
-                                    :placeholder="false"
-                                    sizes="(max-width: 768px) 300px, (max-width: 1400px) 300px, 300px">
-                                    <x-slot:img alt="test" title="test title"></x-slot:img>
-                                </x-ui.responsive-image>
+                            <x-ui.responsive-image
+                                class="media-card__featured-img"
+                                :model="$media"
+                                :image-sizes="['large','medium', 'small']"
+                                :path="$media->getFeaturedImagePath()"
+                                :placeholder="true"
+                                :wrapper="true"
+                                wrapper-class="media-card__featured-inner"
+                                sizes="(max-width: 768px) 300px, (max-width: 1400px) 300px, 300px">
+                                <x-slot:img alt="{{ $media->name }}" title="{{ $media->name }}"></x-slot:img>
+                            </x-ui.responsive-image>
+                        </div>
+                        <div class="media-card__buttons">
+                            <div class="media-card__button">
+                                <x-ui.form.button :full-width="true">Предложить вариацию</x-ui.form.button>
+                            </div>
+                            <div class="media-card__button">
+                                <x-ui.form.button :full-width="true">Изменить данные</x-ui.form.button>
                             </div>
                         </div>
 
                         <div class="media-card__content">
-                            <x-ui.title indent="normal">{{ $media->name }}</x-ui.title>
-                            <div class="media-card__inner">
-                                <div class="media-card__specifications">
+                            <div class="media-card__content-inner">
+                                <div class="media-card__variations">
+                                    @foreach($media->variations as $variation)
+                                        <x-ui.card class="media-card__variation" size="small" color="dark" :body="false">
+                                            <div class="media-card__variation-featured">
+                                                <x-ui.responsive-image
+                                                    :model="$variation"
+                                                    :image-sizes="['extra_small','small']"
+                                                    :path="$variation->getFeaturedImagePath()"
+                                                    :placeholder="true"
+                                                    :wrapper="true"
+                                                    wrapper-class="media-card__variation-featured-inner"
+                                                    sizes="(max-width: 768px) 100px, (max-width: 1400px) 100px, 100px">
+                                                    <x-slot:img alt="{{ $variation->name }}" title="{{ $variation->name }}"></x-slot:img>
+                                                </x-ui.responsive-image>
+                                            </div>
+
+                                            {{ $variation->name }}
+                                        </x-ui.card>
+                                    @endforeach
+                                </div>
+
+
+
+                                <div class="media-card__specifications" style="height: 100%">
+
+
+                                    <div  x-data="{ expanded: false }" class="media-card__description-wrapper">
+                                        <div x-bind:class="expanded ? 'media-card__description_full' : ''" class="post media-card__description">
+                                            {!! $media->description !!}
+                                        </div>
+
+                                        <x-ui.form.button x-on:click="expanded = !expanded"
+                                                          x-text="expanded ? 'Свернуть' : 'Показать полностью'">Показать полностью</x-ui.form.button>
+                                    </div>
+
+
                                     <x-ui.specifications>
                                         <x-ui.specifications.item title="Платформы">
                                             @foreach($media->platforms as $platform)
@@ -77,31 +122,10 @@
                                         </x-ui.specifications.item>
                                     </x-ui.specifications>
                                 </div>
-                                <div class="media-card__variations">
-                                    @foreach($media->variations as $variation)
-
-                                        <x-ui.card class="media-card__variation" size="small" color="dark" :body="false">
-
-                                                <x-ui.responsive-image
-                                                    :model="$variation"
-                                                    :image-sizes="['extra_small','small']"
-                                                    :path="$variation->getFeaturedImagePath()"
-                                                    :placeholder="false"
-                                                    sizes="(max-width: 768px) 100px, (max-width: 1400px) 100px, 100px">
-                                                    <x-slot:img alt="" title=""></x-slot:img>
-                                                </x-ui.responsive-image>
-
-
-                                            {{ $variation->name }}
-                                        </x-ui.card>
-
-                                    @endforeach
-                                </div>
                             </div>
                         </div>
-
-
                     </div>
+
 
 
 

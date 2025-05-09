@@ -3,8 +3,8 @@
             'no-image-icon',
         ])
     }}
-     width="100px"
-     height="100px"
+     width="20px"
+     height="20px"
      viewBox="0 0 24 24">
     <g stroke-linecap="round" stroke-width="1" fill="none">
         <path d="M3 5L19 21"/>

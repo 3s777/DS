@@ -1,3 +1,7 @@
+@if($wrapper)
+    <div class="responsive-image__wrapper {{ $wrapperClass }}">
+@endif
+
 @if(!$path && $placeholder)
     <x-ui.image-placeholder></x-ui.image-placeholder>
 @else
@@ -26,4 +30,8 @@
             src="{{ asset('storage/images/'.$fallbackSource) }}"
         />
     </picture>
+@endif
+
+@if($wrapper)
+    </div>
 @endif

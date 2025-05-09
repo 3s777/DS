@@ -20,7 +20,8 @@ class GameMediaIndexViewModel extends ViewModel
                 'game_medias.name',
                 'game_medias.released_at',
                 'game_medias.created_at',
-                'game_medias.slug'
+                'game_medias.slug',
+                'game_medias.description'
             )
             ->with([
                 'games:id,name',
