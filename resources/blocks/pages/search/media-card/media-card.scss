@@ -1,9 +1,14 @@
+:root {
+    --expanded-media-description-height: 100px;
+    --expanded-media-variations-height: 310px;
+}
+
 .media-card {
     margin-bottom: 24px;
 
     &__body {
         display: grid;
-        grid-template-columns: 300px auto;
+        grid-template-columns: 290px auto;
         grid-template-rows: auto 1fr;
         grid-template-areas:
         "featured content"
@@ -23,7 +28,7 @@
         display: flex;
         justify-content: center;
         align-items: center;
-        width: 300px;
+        width: 290px;
         border-radius: 8px;
         background-color: var(--base-dark);
         color: var(--font-main-50);
@@ -51,25 +56,6 @@
         gap: 24px;
     }
 
-    &__description-wrapper {
-        transition: .3s;
-    }
-
-    &__description {
-        max-height: 100px;
-        overflow: hidden;
-        transition: .3s;
-
-        &_full {
-            max-height: 100%;
-            transition: .3s;
-        }
-    }
-
-
-
-
-
     &__variations {
         display: flex;
         justify-content: space-between;
@@ -89,6 +75,10 @@
         width: 100px;
     }
 
+    &__variation-title {
+        margin-bottom: 12px;
+    }
+
     &__no-image-icon {
         stroke: $opposite-main;
         width: 40px;
@@ -98,5 +88,11 @@
             width: 60px;
             height: 60px;
         }
+    }
+}
+
+@include breakpoint-max($md) {
+    :root {
+        --expanded-media-description-height: 200px;
     }
 }

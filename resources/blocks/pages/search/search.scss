@@ -1,4 +1,8 @@
 .search {
+    &__title {
+        margin-bottom: 24px;
+    }
+
     &__result {
         display: grid;
         grid-template-columns: repeat(5, 1fr);

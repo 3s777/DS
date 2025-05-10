@@ -1,0 +1,32 @@
+.expand {
+    &__wrapper {
+        transition: .3s;
+    }
+
+    &__content {
+        position: relative;
+        overflow: hidden;
+
+        &_full.expand__content_hidden {
+            -webkit-mask-image: none;
+            mask-image: none;
+        }
+
+        &_hidden {
+            -webkit-mask-image: linear-gradient(to bottom, black 85%, transparent 100%);
+            mask-image: linear-gradient(to bottom, black 85%, transparent 100%);
+            transition:
+                max-height 0.3s ease,
+                mask-image 0.3s ease;
+        }
+    }
+
+    &__content-buttons {
+        padding: 12px 0;
+        text-align: right;
+    }
+
+    &__content-button {
+        padding: 8px 12px;
+    }
+}

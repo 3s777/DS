@@ -53,40 +53,47 @@
 
                         <div class="media-card__content">
                             <div class="media-card__content-inner">
-                                <div class="media-card__variations">
-                                    @foreach($media->variations as $variation)
-                                        <x-ui.card class="media-card__variation" size="small" color="dark" :body="false">
-                                            <div class="media-card__variation-featured">
-                                                <x-ui.responsive-image
-                                                    :model="$variation"
-                                                    :image-sizes="['extra_small','small']"
-                                                    :path="$variation->getFeaturedImagePath()"
-                                                    :placeholder="true"
-                                                    :wrapper="true"
-                                                    wrapper-class="media-card__variation-featured-inner"
-                                                    sizes="(max-width: 768px) 100px, (max-width: 1400px) 100px, 100px">
-                                                    <x-slot:img alt="{{ $variation->name }}" title="{{ $variation->name }}"></x-slot:img>
-                                                </x-ui.responsive-image>
-                                            </div>
-
-                                            {{ $variation->name }}
-                                        </x-ui.card>
-                                    @endforeach
-                                </div>
 
 
+                                    <x-ui.expand css-height="expanded-media-variations-height" show-text="Показать все вариации">
+                                        <div class="media-card__variations">
+                                        @foreach($media->variations as $variation)
+                                            <x-ui.card class="media-card__variation" size="small" color="dark" :body="false">
+                                                <div class="media-card__variation-featured">
+                                                    <x-ui.responsive-image
+                                                        :model="$variation"
+                                                        :image-sizes="['extra_small','small']"
+                                                        :path="$variation->getFeaturedImagePath()"
+                                                        :placeholder="true"
+                                                        :wrapper="true"
+                                                        wrapper-class="media-card__variation-featured-inner"
+                                                        sizes="(max-width: 768px) 100px, (max-width: 1400px) 100px, 100px">
+                                                        <x-slot:img alt="{{ $variation->name }}" title="{{ $variation->name }}"></x-slot:img>
+                                                    </x-ui.responsive-image>
+                                                </div>
+                                                <div class="media-card__variation-content">
+                                                    <div class="media-card__variation-title">{{ $variation->name }}</div>
+                                                    <div class="media-card__variation-specifications">
+                                                        <x-ui.tag>{{ $variation->article_number }}</x-ui.tag>
+                                                        @foreach($variation->barcodes as $barcode)
+                                                            @if($barcode)
+                                                                <x-ui.tag>{{ $barcode }}</x-ui.tag>
+                                                            @endif
+                                                        @endforeach
+                                                    </div>
+                                                </div>
 
-                                <div class="media-card__specifications" style="height: 100%">
-
-
-                                    <div  x-data="{ expanded: false }" class="media-card__description-wrapper">
-                                        <div x-bind:class="expanded ? 'media-card__description_full' : ''" class="post media-card__description">
-                                            {!! $media->description !!}
+                                            </x-ui.card>
+                                        @endforeach
                                         </div>
+                                    </x-ui.expand>
 
-                                        <x-ui.form.button x-on:click="expanded = !expanded"
-                                                          x-text="expanded ? 'Свернуть' : 'Показать полностью'">Показать полностью</x-ui.form.button>
-                                    </div>
+
+
+                                <div class="media-card__specifications">
+                                    <x-ui.expand class="post" css-height="expanded-media-description-height">
+                                        {!! $media->description !!}
+                                    </x-ui.expand>
 
 
                                     <x-ui.specifications>

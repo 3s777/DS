@@ -29,7 +29,7 @@ class GameMediaIndexViewModel extends ViewModel
                 'platforms:id,name',
                 'developers:id,name',
                 'publishers:id,name',
-                'variations:id,name,game_media_id',
+                'variations:id,name,game_media_id,article_number,barcodes',
                 'variations.media',
                 'media'
             ])
