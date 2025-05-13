@@ -29,8 +29,11 @@ class GameMediaIndexViewModel extends ViewModel
                 'platforms:id,name',
                 'developers:id,name',
                 'publishers:id,name',
-                'variations:id,name,game_media_id,article_number,barcodes',
-                'variations.media',
+                'variations' => function($query) {
+                    $query->select(['id','slug','name','game_media_id','article_number','barcodes','is_main'])
+                        ->with(['media'])
+                        ->orderBy('is_main', 'DESC');
+                },
                 'media'
             ])
             ->filtered()

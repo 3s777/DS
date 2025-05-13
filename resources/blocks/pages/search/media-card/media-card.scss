@@ -6,9 +6,17 @@
 .media-card {
     margin-bottom: 24px;
 
+    a {
+        text-decoration: none;
+
+        &:hover {
+            text-decoration: underline;
+        }
+    }
+
     &__body {
         display: grid;
-        grid-template-columns: 290px auto;
+        grid-template-columns: 296px auto;
         grid-template-rows: auto 1fr;
         grid-template-areas:
         "featured content"
@@ -28,7 +36,7 @@
         display: flex;
         justify-content: center;
         align-items: center;
-        width: 290px;
+        width: 296px;
         border-radius: 8px;
         background-color: var(--base-dark);
         color: var(--font-main-50);
@@ -65,18 +73,7 @@
     }
 
     &__variation {
-        display: flex;
-        gap: 12px;
-        align-items: flex-start;
         flex-basis: calc(50% - 12px);
-    }
-
-    &__variation-featured-inner {
-        width: 100px;
-    }
-
-    &__variation-title {
-        margin-bottom: 12px;
     }
 
     &__no-image-icon {
@@ -89,6 +86,49 @@
             height: 60px;
         }
     }
+
+    @include breakpoint-max($ml) {
+        &__variation {
+            flex-basis: 100%;
+        }
+    }
+
+    @include breakpoint-max($md) {
+        &__body {
+            display: grid;
+            grid-template-columns: 100%;
+            grid-template-rows: auto;
+            grid-template-areas:
+                "featured"
+                "content"
+                "buttons";
+            column-gap: 24px;
+            justify-content: flex-start;
+            gap: 24px;
+        }
+
+        &__featured {
+            display: flex;
+            justify-content: center;
+        }
+    }
+
+    @include breakpoint-max($xs) {
+        &__featured-inner {
+            width: 100%;
+
+            img {
+                max-width: 100%;
+            }
+        }
+    }
+
+}
+
+@include breakpoint-max($ml) {
+    :root {
+        --expanded-media-variations-height: 450px;
+    }
 }
 
 @include breakpoint-max($md) {
@@ -96,3 +136,5 @@
         --expanded-media-description-height: 200px;
     }
 }
+
+

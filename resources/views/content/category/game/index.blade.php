@@ -58,30 +58,41 @@
                                     <x-ui.expand css-height="expanded-media-variations-height" show-text="Показать все вариации">
                                         <div class="media-card__variations">
                                         @foreach($media->variations as $variation)
-                                            <x-ui.card class="media-card__variation" size="small" color="dark" :body="false">
-                                                <div class="media-card__variation-featured">
-                                                    <x-ui.responsive-image
-                                                        :model="$variation"
-                                                        :image-sizes="['extra_small','small']"
-                                                        :path="$variation->getFeaturedImagePath()"
-                                                        :placeholder="true"
-                                                        :wrapper="true"
-                                                        wrapper-class="media-card__variation-featured-inner"
-                                                        sizes="(max-width: 768px) 100px, (max-width: 1400px) 100px, 100px">
-                                                        <x-slot:img alt="{{ $variation->name }}" title="{{ $variation->name }}"></x-slot:img>
-                                                    </x-ui.responsive-image>
-                                                </div>
-                                                <div class="media-card__variation-content">
-                                                    <div class="media-card__variation-title">{{ $variation->name }}</div>
-                                                    <div class="media-card__variation-specifications">
-                                                        <x-ui.tag>{{ $variation->article_number }}</x-ui.tag>
-                                                        @foreach($variation->barcodes as $barcode)
-                                                            @if($barcode)
-                                                                <x-ui.tag>{{ $barcode }}</x-ui.tag>
-                                                            @endif
-                                                        @endforeach
+                                            <x-ui.card class="horizontal-variation media-card__variation" size="small" color="dark" :body="false">
+                                                @if($variation->is_main)
+                                                    <div class="horizontal-variation__main">главная</div>
+                                                @endif
+                                                    <div href="#" class="horizontal-variation__inner">
+                                                        <div class="horizontal-variation__featured">
+                                                            <x-ui.responsive-image
+                                                                :model="$variation"
+                                                                :image-sizes="['extra_small','small']"
+                                                                :path="$variation->getFeaturedImagePath()"
+                                                                :placeholder="true"
+                                                                :wrapper="true"
+                                                                wrapper-class="horizontal-variation__featured-inner"
+                                                                sizes="(max-width: 768px) 100px, (max-width: 1400px) 100px, 100px">
+                                                                <x-slot:img alt="{{ $variation->name }}" title="{{ $variation->name }}"></x-slot:img>
+                                                            </x-ui.responsive-image>
+                                                        </div>
+                                                        <div class="horizontal-variation__content">
+                                                            <div class="horizontal-variation__title">
+                                                                <a href="{{ route('admin.game-media-variations.edit', $variation->slug) }}">
+                                                                    {{ $variation->name }}
+                                                                </a>
+                                                            </div>
+                                                            <div class="horizontal-variation__specifications">
+                                                                <x-ui.tag>{{ $variation->article_number }}</x-ui.tag>
+                                                                @foreach($variation->barcodes as $barcode)
+                                                                    @if($barcode)
+                                                                        <x-ui.tag>{{ $barcode }}</x-ui.tag>
+                                                                    @endif
+                                                                @endforeach
+                                                            </div>
+                                                        </div>
                                                     </div>
-                                                </div>
+
+                                                    <x-ui.form.button href="" class="horizontal-variation__more">Выбрать</x-ui.form.button>
 
                                             </x-ui.card>
                                         @endforeach
