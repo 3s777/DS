@@ -56,12 +56,17 @@
     &__content {
         grid-area: content;
         flex-basis: 100%;
+        min-width: 0;
     }
 
     &__content-inner {
         display: flex;
         flex-wrap: wrap;
         gap: 24px;
+    }
+
+    &__specifications {
+        min-width: 0;
     }
 
     &__variations {
@@ -73,7 +78,7 @@
     }
 
     &__variation {
-        flex-basis: calc(50% - 12px);
+        width: calc(50% - 12px);
     }
 
     &__no-image-icon {

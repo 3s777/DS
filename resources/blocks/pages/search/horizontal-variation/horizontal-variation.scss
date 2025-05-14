@@ -28,6 +28,10 @@
         width: 100px;
     }
 
+    &__content {
+        min-width: 0;
+    }
+
     &__title {
         margin-bottom: 12px;
     }
