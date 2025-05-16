@@ -44,26 +44,25 @@
                         </div>
                         <div class="media-card__buttons">
                             <div class="media-card__button">
-                                <x-ui.form.button :full-width="true">Предложить вариацию</x-ui.form.button>
+                                <x-ui.form.button :full-width="true">{{ __('collectible.variation.offer') }}</x-ui.form.button>
                             </div>
                             <div class="media-card__button">
-                                <x-ui.form.button :full-width="true">Изменить данные</x-ui.form.button>
+                                <x-ui.form.button :full-width="true">{{ __('common.change_data') }}</x-ui.form.button>
                             </div>
                         </div>
 
                         <div class="media-card__content">
                             <div class="media-card__content-inner">
-
-
-                                    <x-ui.expand css-height="expanded-media-variations-height" show-text="Показать все вариации">
-                                        <div class="media-card__variations">
-                                        @foreach($media->variations as $variation)
-                                            <x-ui.card class="horizontal-variation media-card__variation" size="small" color="dark" :body="false">
-                                                @if($variation->is_main)
-                                                    <div class="horizontal-variation__main">главная</div>
-                                                @endif
-                                                    <div href="#" class="horizontal-variation__inner">
-                                                        <div class="horizontal-variation__featured">
+                                <x-ui.expand css-height="expanded-media-variations-height" show-text="{{ __('collectible.variation.show_all') }}">
+                                    <div class="media-card__variations">
+                                    @foreach($media->variations as $variation)
+                                        <x-ui.card class="horizontal-variation media-card__variation" size="small" color="dark" :body="false">
+                                            @if($variation->is_main)
+                                                <div class="horizontal-variation__main">{{ trans_choice('common.main', 1) }}</div>
+                                            @endif
+                                                <div href="#" class="horizontal-variation__inner">
+                                                    <div class="horizontal-variation__featured">
+                                                        <a href="{{ route('admin.game-media-variations.edit', $variation->slug) }}">
                                                             <x-ui.responsive-image
                                                                 :model="$variation"
                                                                 :image-sizes="['extra_small','small']"
@@ -74,30 +73,31 @@
                                                                 sizes="(max-width: 768px) 100px, (max-width: 1400px) 100px, 100px">
                                                                 <x-slot:img alt="{{ $variation->name }}" title="{{ $variation->name }}"></x-slot:img>
                                                             </x-ui.responsive-image>
+                                                        </a>
+                                                    </div>
+                                                    <div class="horizontal-variation__content">
+                                                        <div class="horizontal-variation__title">
+                                                            <a href="{{ route('admin.game-media-variations.edit', $variation->slug) }}">
+                                                                {{ $variation->name }}
+                                                            </a>
                                                         </div>
-                                                        <div class="horizontal-variation__content">
-                                                            <div class="horizontal-variation__title">
-                                                                <a href="{{ route('admin.game-media-variations.edit', $variation->slug) }}">
-                                                                    {{ $variation->name }}
-                                                                </a>
-                                                            </div>
-                                                            <div class="horizontal-variation__specifications">
-                                                                <x-ui.tag>{{ $variation->article_number }}</x-ui.tag>
-                                                                @foreach($variation->barcodes as $barcode)
-                                                                    @if($barcode)
-                                                                        <x-ui.tag>{{ $barcode }}</x-ui.tag>
-                                                                    @endif
-                                                                @endforeach
-                                                            </div>
+                                                        <div class="horizontal-variation__specifications">
+                                                            <x-ui.tag>{{ $variation->article_number }}</x-ui.tag>
+                                                            @foreach($variation->barcodes as $barcode)
+                                                                @if($barcode)
+                                                                    <x-ui.tag>{{ $barcode }}</x-ui.tag>
+                                                                @endif
+                                                            @endforeach
                                                         </div>
                                                     </div>
+                                                </div>
 
-                                                    <x-ui.form.button href="" class="horizontal-variation__more">Выбрать</x-ui.form.button>
+                                                <x-ui.form.button href="" class="horizontal-variation__more">{{ __('common.choose') }}</x-ui.form.button>
 
-                                            </x-ui.card>
-                                        @endforeach
-                                        </div>
-                                    </x-ui.expand>
+                                        </x-ui.card>
+                                    @endforeach
+                                    </div>
+                                </x-ui.expand>
 
 
 
@@ -106,34 +106,33 @@
                                         {!! $media->description !!}
                                     </x-ui.expand>
 
-
                                     <x-ui.specifications>
-                                        <x-ui.specifications.item title="Платформы">
+                                        <x-ui.specifications.item :title="trans_choice('game.platform.platforms', 2)">
                                             @foreach($media->platforms as $platform)
                                                 <x-ui.tag color="dark">{{ $platform->name }}</x-ui.tag>
                                             @endforeach
                                         </x-ui.specifications.item>
-                                        <x-ui.specifications.item title="Жанры">
+                                        <x-ui.specifications.item :title="trans_choice('game.genre.genres', 2)">
                                             @foreach($media->genres as $genre)
                                                 <x-ui.tag color="dark">{{ $genre->name }}</x-ui.tag>
                                             @endforeach
                                         </x-ui.specifications.item>
                                         @if($media->released_at)
-                                            <x-ui.specifications.item title="Дата релиза">
+                                            <x-ui.specifications.item :title="__('game.media.released_at')">
                                                 <x-ui.tag color="dark">{{ $media->released_at->format('d.m.Y') }}</x-ui.tag>
                                             </x-ui.specifications.item>
                                         @endif
-                                        <x-ui.specifications.item title="Игры">
+                                        <x-ui.specifications.item :title="trans_choice('game.games', 2)">
                                             @foreach($media->games as $game)
                                                 <x-ui.tag color="dark">{{ $game->name }}</x-ui.tag>
                                             @endforeach
                                         </x-ui.specifications.item>
-                                        <x-ui.specifications.item title="Разработчики">
+                                        <x-ui.specifications.item :title="trans_choice('game.developer.developers', 2)">
                                             @foreach($media->developers as $developer)
                                                 <x-ui.tag color="dark">{{ $developer->name }}</x-ui.tag>
                                             @endforeach
                                         </x-ui.specifications.item>
-                                        <x-ui.specifications.item title="Издатели">
+                                        <x-ui.specifications.item :title="trans_choice('game.publisher.publishers', 2)">
                                             @foreach($media->publishers as $publisher)
                                                 <x-ui.tag color="dark">{{ $publisher->name }}</x-ui.tag>
                                             @endforeach
@@ -143,23 +142,25 @@
                             </div>
                         </div>
                     </div>
-
-
-
-
-
                 </x-ui.card>
             @endforeach
 
             <div class="search__result">
 
-
-
-
+                @foreach($media->variations as $variation)
                 <div class="search__item search-card">
                     <div class="search-card__thumbnail">
                         <a href="{{ route('game-carrier') }}">
-                            <img class="search-card__img" src="{{ asset('/storage/test-300.jpg') }}" alt="">
+                            <x-ui.responsive-image
+                                :model="$variation"
+                                :image-sizes="['extra_small','small', 'medium']"
+                                :path="$variation->getFeaturedImagePath()"
+                                :placeholder="true"
+                                :wrapper="true"
+                                wrapper-class="search-card__thumbnail-inner"
+                                sizes="(max-width: 768px) 260px, (max-width: 1400px) 260px, 260px">
+                                <x-slot:img alt="{{ $variation->name }}" title="{{ $variation->name }}"></x-slot:img>
+                            </x-ui.responsive-image>
                         </a>
                     </div>
 
@@ -167,7 +168,7 @@
                         <div class="search-card__info">
                             <div class="search-card__title">
                                 <a href="{{ route('game-carrier') }}">
-                                    Naruto Shippuden Ultimate Ninfa Storm Collection Collection
+                                    {{ $variation->name }}
                                 </a>
                             </div>
                             <div class="search-card__details">
@@ -208,480 +209,485 @@
                         favorite="153"
                     />
                 </div>
-                <div class="search__item search-card">
-                    <div class="search-card__thumbnail">
-                        <a href="{{ route('game-carrier') }}">
-                            <img class="search-card__img" src="{{ asset('/storage/test-6.jpg') }}" alt="">
-                        </a>
-                    </div>
+                @endforeach
 
-                    <div class="search-card__main">
-                        <div class="search-card__info">
-                            <div class="search-card__title">
-                                <a href="{{ route('game-carrier') }}">
-                                    Naruto Shippuden Ultimate Ninfa Storm Collection Collection
-                                </a>
-                            </div>
-                            <div class="search-card__details">
-                                <div class="search-card__detail">
-                                    Playstation 3
-                                </div>
-                                <div class="search-card__detail">
-                                    BLES00789
-                                </div>
-                                <div class="search-card__detail">
-                                    Essentials
-                                </div>
-                            </div>
-                            <div class="search-card__more">
-                                <div class="search-card__detail">
-                                    Playstation 3
-                                </div>
-                                <div class="search-card__detail">
-                                    BLES00789
-                                </div>
-                                <div class="search-card__detail">
-                                    Essentials
-                                </div>
-                                <div class="search-card__detail">
-                                    Playstation 3
-                                </div>
-                                <div class="search-card__detail">
-                                    BLES00789
-                                </div>
-                                <div class="search-card__detail">
-                                    Essentials
-                                </div>
-                            </div>
-                        </div>
-                    </div>
 
-                    <x-common.counter-buttons
-                        class="search-card__buttons"
-                        button-class="search-card__button"
-                        badge-class="search-card__badge"
-                        type="light"
-                        add="12"
-                        wishlist="17"
-                        sale="20"
-                        auction="25"
-                        exchange="21"
-                        favorite="153"
-                    />
-                </div>
-                <div class="search__item search-card">
-                    <div class="search-card__thumbnail">
-                        <a href="{{ route('game-carrier') }}">
-                            <img class="search-card__img" src="{{ asset('/storage/test-7.jpg') }}" alt="">
-                        </a>
-                    </div>
 
-                    <div class="search-card__main">
-                        <div class="search-card__info">
-                            <div class="search-card__title">
-                                <a href="{{ route('game-carrier') }}">
-                                    Naruto
-                                </a>
-                            </div>
-                            <div class="search-card__details">
-                                <div class="search-card__detail">
-                                    NES
-                                </div>
-                                <div class="search-card__detail">
-                                    1222
-                                </div>
-                                <div class="search-card__detail">
-                                    Std
-                                </div>
-                            </div>
-                            <div class="search-card__more">
-                                <div class="search-card__detail">
-                                    20/06/2024
-                                </div>
-                            </div>
-                        </div>
-                    </div>
 
-                    <x-common.counter-buttons
-                        class="search-card__buttons"
-                        button-class="search-card__button"
-                        badge-class="search-card__badge"
-                        type="light"
-                        add="12"
-                        wishlist="1200"
-                        sale="5"
-                        auction="25"
-                        exchange="2"
-                        favorite="153"
-                    />
-                </div>
-                <div class="search__item search-card">
-                    <div class="search-card__thumbnail">
-                        <a href="{{ route('game-carrier') }}">
-                            <img class="search-card__img" src="{{ asset('/storage/test-8.jpg') }}" alt="">
-                        </a>
-                    </div>
+{{--                <div class="search__item search-card">--}}
+{{--                    <div class="search-card__thumbnail">--}}
+{{--                        <a href="{{ route('game-carrier') }}">--}}
+{{--                            <img class="search-card__img" src="{{ asset('/storage/test-6.jpg') }}" alt="">--}}
+{{--                        </a>--}}
+{{--                    </div>--}}
 
-                    <div class="search-card__main">
-                        <div class="search-card__info">
-                            <div class="search-card__title">
-                                <a href="{{ route('game-carrier') }}">
-                                    Naruto Shippuden Ultimate Ninfa Storm Collection CollectionNaruto Shippuden Ultimate Ninfa Storm Collection Collection
-                                </a>
-                            </div>
-                            <div class="search-card__details">
-                                <div class="search-card__detail">
-                                    Playstation sdfsdfsdfsdfsdfsdf
-                                </div>
-                                <div class="search-card__detail">
-                                    BLES00789xvcxvxcv
-                                </div>
-                                <div class="search-card__detail">
-                                    Essentialsxcvxcvxcvxcvxcvxcvxcvxcvxcvxcvxcvxcvxcvxcvxcv
-                                </div>
-                            </div>
-                            <div class="search-card__more">
-                                <div class="search-card__detail">
-                                    Playstation 3
-                                </div>
-                                <div class="search-card__detail">
-                                    BLES00789
-                                </div>
-                                <div class="search-card__detail">
-                                    Essentials
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+{{--                    <div class="search-card__main">--}}
+{{--                        <div class="search-card__info">--}}
+{{--                            <div class="search-card__title">--}}
+{{--                                <a href="{{ route('game-carrier') }}">--}}
+{{--                                    Naruto Shippuden Ultimate Ninfa Storm Collection Collection--}}
+{{--                                </a>--}}
+{{--                            </div>--}}
+{{--                            <div class="search-card__details">--}}
+{{--                                <div class="search-card__detail">--}}
+{{--                                    Playstation 3--}}
+{{--                                </div>--}}
+{{--                                <div class="search-card__detail">--}}
+{{--                                    BLES00789--}}
+{{--                                </div>--}}
+{{--                                <div class="search-card__detail">--}}
+{{--                                    Essentials--}}
+{{--                                </div>--}}
+{{--                            </div>--}}
+{{--                            <div class="search-card__more">--}}
+{{--                                <div class="search-card__detail">--}}
+{{--                                    Playstation 3--}}
+{{--                                </div>--}}
+{{--                                <div class="search-card__detail">--}}
+{{--                                    BLES00789--}}
+{{--                                </div>--}}
+{{--                                <div class="search-card__detail">--}}
+{{--                                    Essentials--}}
+{{--                                </div>--}}
+{{--                                <div class="search-card__detail">--}}
+{{--                                    Playstation 3--}}
+{{--                                </div>--}}
+{{--                                <div class="search-card__detail">--}}
+{{--                                    BLES00789--}}
+{{--                                </div>--}}
+{{--                                <div class="search-card__detail">--}}
+{{--                                    Essentials--}}
+{{--                                </div>--}}
+{{--                            </div>--}}
+{{--                        </div>--}}
+{{--                    </div>--}}
 
-                    <x-common.counter-buttons
-                        class="search-card__buttons"
-                        button-class="search-card__button"
-                        badge-class="search-card__badge"
-                        type="light"
-                        add="12"
-                        wishlist="1200"
-                        sale="5"
-                        auction="25"
-                        exchange="2"
-                        favorite="153"
-                    />
-                </div>
-                <div class="search__item search-card">
-                    <div class="search-card__thumbnail">
-                        <a href="{{ route('game-carrier') }}">
-                            <img class="search-card__img" src="{{ asset('/storage/test-9.jpg') }}" alt="">
-                        </a>
-                    </div>
+{{--                    <x-common.counter-buttons--}}
+{{--                        class="search-card__buttons"--}}
+{{--                        button-class="search-card__button"--}}
+{{--                        badge-class="search-card__badge"--}}
+{{--                        type="light"--}}
+{{--                        add="12"--}}
+{{--                        wishlist="17"--}}
+{{--                        sale="20"--}}
+{{--                        auction="25"--}}
+{{--                        exchange="21"--}}
+{{--                        favorite="153"--}}
+{{--                    />--}}
+{{--                </div>--}}
+{{--                <div class="search__item search-card">--}}
+{{--                    <div class="search-card__thumbnail">--}}
+{{--                        <a href="{{ route('game-carrier') }}">--}}
+{{--                            <img class="search-card__img" src="{{ asset('/storage/test-7.jpg') }}" alt="">--}}
+{{--                        </a>--}}
+{{--                    </div>--}}
 
-                    <div class="search-card__main">
-                        <div class="search-card__info">
-                            <div class="search-card__title">
-                                <a href="{{ route('game-carrier') }}">
-                                    Naruto Shippuden Ultimate Ninfa Storm Collection Collection
-                                </a>
-                            </div>
-                            <div class="search-card__details">
-                                <div class="search-card__detail">
-                                    Playstation 3
-                                </div>
-                                <div class="search-card__detail">
-                                    BLES00789
-                                </div>
-                                <div class="search-card__detail">
-                                    Essentials
-                                </div>
-                            </div>
-                            <div class="search-card__more">
-                                <div class="search-card__detail">
-                                    Playstation 3
-                                </div>
-                                <div class="search-card__detail">
-                                    BLES00789
-                                </div>
-                                <div class="search-card__detail">
-                                    Essentials
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+{{--                    <div class="search-card__main">--}}
+{{--                        <div class="search-card__info">--}}
+{{--                            <div class="search-card__title">--}}
+{{--                                <a href="{{ route('game-carrier') }}">--}}
+{{--                                    Naruto--}}
+{{--                                </a>--}}
+{{--                            </div>--}}
+{{--                            <div class="search-card__details">--}}
+{{--                                <div class="search-card__detail">--}}
+{{--                                    NES--}}
+{{--                                </div>--}}
+{{--                                <div class="search-card__detail">--}}
+{{--                                    1222--}}
+{{--                                </div>--}}
+{{--                                <div class="search-card__detail">--}}
+{{--                                    Std--}}
+{{--                                </div>--}}
+{{--                            </div>--}}
+{{--                            <div class="search-card__more">--}}
+{{--                                <div class="search-card__detail">--}}
+{{--                                    20/06/2024--}}
+{{--                                </div>--}}
+{{--                            </div>--}}
+{{--                        </div>--}}
+{{--                    </div>--}}
 
-                    <x-common.counter-buttons
-                        class="search-card__buttons"
-                        button-class="search-card__button"
-                        badge-class="search-card__badge"
-                        type="light"
-                        add="12"
-                        wishlist="1200"
-                        sale="5"
-                        auction="25"
-                        exchange="2"
-                        favorite="153"
-                    />
-                </div>
-                <div class="search__item search-card">
-                    <div class="search-card__thumbnail">
-                        <a href="{{ route('game-carrier') }}">
-                            <img class="search-card__img" src="{{ asset('/storage/test-9.jpg') }}" alt="">
-                        </a>
-                    </div>
+{{--                    <x-common.counter-buttons--}}
+{{--                        class="search-card__buttons"--}}
+{{--                        button-class="search-card__button"--}}
+{{--                        badge-class="search-card__badge"--}}
+{{--                        type="light"--}}
+{{--                        add="12"--}}
+{{--                        wishlist="1200"--}}
+{{--                        sale="5"--}}
+{{--                        auction="25"--}}
+{{--                        exchange="2"--}}
+{{--                        favorite="153"--}}
+{{--                    />--}}
+{{--                </div>--}}
+{{--                <div class="search__item search-card">--}}
+{{--                    <div class="search-card__thumbnail">--}}
+{{--                        <a href="{{ route('game-carrier') }}">--}}
+{{--                            <img class="search-card__img" src="{{ asset('/storage/test-8.jpg') }}" alt="">--}}
+{{--                        </a>--}}
+{{--                    </div>--}}
 
-                    <div class="search-card__main">
-                        <div class="search-card__info">
-                            <div class="search-card__title">
-                                <a href="{{ route('game-carrier') }}">
-                                    Naruto Shippuden Ultimate Ninfa Storm Collection Collection
-                                </a>
-                            </div>
-                            <div class="search-card__details">
-                                <div class="search-card__detail">
-                                    Playstation 3
-                                </div>
-                                <div class="search-card__detail">
-                                    BLES00789
-                                </div>
-                                <div class="search-card__detail">
-                                    Essentials
-                                </div>
-                            </div>
-                            <div class="search-card__more">
-                                <div class="search-card__detail">
-                                    Playstation 3
-                                </div>
-                                <div class="search-card__detail">
-                                    BLES00789
-                                </div>
-                                <div class="search-card__detail">
-                                    Essentials
-                                </div>
-                                <div class="search-card__detail">
-                                    Playstation 3
-                                </div>
-                                <div class="search-card__detail">
-                                    BLES00789
-                                </div>
-                                <div class="search-card__detail">
-                                    Essentials
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+{{--                    <div class="search-card__main">--}}
+{{--                        <div class="search-card__info">--}}
+{{--                            <div class="search-card__title">--}}
+{{--                                <a href="{{ route('game-carrier') }}">--}}
+{{--                                    Naruto Shippuden Ultimate Ninfa Storm Collection CollectionNaruto Shippuden Ultimate Ninfa Storm Collection Collection--}}
+{{--                                </a>--}}
+{{--                            </div>--}}
+{{--                            <div class="search-card__details">--}}
+{{--                                <div class="search-card__detail">--}}
+{{--                                    Playstation sdfsdfsdfsdfsdfsdf--}}
+{{--                                </div>--}}
+{{--                                <div class="search-card__detail">--}}
+{{--                                    BLES00789xvcxvxcv--}}
+{{--                                </div>--}}
+{{--                                <div class="search-card__detail">--}}
+{{--                                    Essentialsxcvxcvxcvxcvxcvxcvxcvxcvxcvxcvxcvxcvxcvxcvxcv--}}
+{{--                                </div>--}}
+{{--                            </div>--}}
+{{--                            <div class="search-card__more">--}}
+{{--                                <div class="search-card__detail">--}}
+{{--                                    Playstation 3--}}
+{{--                                </div>--}}
+{{--                                <div class="search-card__detail">--}}
+{{--                                    BLES00789--}}
+{{--                                </div>--}}
+{{--                                <div class="search-card__detail">--}}
+{{--                                    Essentials--}}
+{{--                                </div>--}}
+{{--                            </div>--}}
+{{--                        </div>--}}
+{{--                    </div>--}}
 
-                    <x-common.counter-buttons
-                        class="search-card__buttons"
-                        button-class="search-card__button"
-                        badge-class="search-card__badge"
-                        type="light"
-                        add="12"
-                        wishlist="1200"
-                        sale="5"
-                        auction="25"
-                        exchange="2"
-                        favorite="153"
-                    />
-                </div>
-                <div class="search__item search-card">
-                    <div class="search-card__thumbnail">
-                        <a href="{{ route('game-carrier') }}">
-                            <img class="search-card__img" src="{{ asset('/storage/test-7.jpg') }}" alt="">
-                        </a>
-                    </div>
+{{--                    <x-common.counter-buttons--}}
+{{--                        class="search-card__buttons"--}}
+{{--                        button-class="search-card__button"--}}
+{{--                        badge-class="search-card__badge"--}}
+{{--                        type="light"--}}
+{{--                        add="12"--}}
+{{--                        wishlist="1200"--}}
+{{--                        sale="5"--}}
+{{--                        auction="25"--}}
+{{--                        exchange="2"--}}
+{{--                        favorite="153"--}}
+{{--                    />--}}
+{{--                </div>--}}
+{{--                <div class="search__item search-card">--}}
+{{--                    <div class="search-card__thumbnail">--}}
+{{--                        <a href="{{ route('game-carrier') }}">--}}
+{{--                            <img class="search-card__img" src="{{ asset('/storage/test-9.jpg') }}" alt="">--}}
+{{--                        </a>--}}
+{{--                    </div>--}}
 
-                    <div class="search-card__main">
-                        <div class="search-card__info">
-                            <div class="search-card__title">
-                                <a href="{{ route('game-carrier') }}">
-                                    Naruto
-                                </a>
-                            </div>
-                            <div class="search-card__details">
-                                <div class="search-card__detail">
-                                    NES
-                                </div>
-                                <div class="search-card__detail">
-                                    1222
-                                </div>
-                                <div class="search-card__detail">
-                                    Std
-                                </div>
-                            </div>
-                            <div class="search-card__more">
-                                <div class="search-card__detail">
-                                    20/06/2024
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+{{--                    <div class="search-card__main">--}}
+{{--                        <div class="search-card__info">--}}
+{{--                            <div class="search-card__title">--}}
+{{--                                <a href="{{ route('game-carrier') }}">--}}
+{{--                                    Naruto Shippuden Ultimate Ninfa Storm Collection Collection--}}
+{{--                                </a>--}}
+{{--                            </div>--}}
+{{--                            <div class="search-card__details">--}}
+{{--                                <div class="search-card__detail">--}}
+{{--                                    Playstation 3--}}
+{{--                                </div>--}}
+{{--                                <div class="search-card__detail">--}}
+{{--                                    BLES00789--}}
+{{--                                </div>--}}
+{{--                                <div class="search-card__detail">--}}
+{{--                                    Essentials--}}
+{{--                                </div>--}}
+{{--                            </div>--}}
+{{--                            <div class="search-card__more">--}}
+{{--                                <div class="search-card__detail">--}}
+{{--                                    Playstation 3--}}
+{{--                                </div>--}}
+{{--                                <div class="search-card__detail">--}}
+{{--                                    BLES00789--}}
+{{--                                </div>--}}
+{{--                                <div class="search-card__detail">--}}
+{{--                                    Essentials--}}
+{{--                                </div>--}}
+{{--                            </div>--}}
+{{--                        </div>--}}
+{{--                    </div>--}}
 
-                    <x-common.counter-buttons
-                        class="search-card__buttons"
-                        button-class="search-card__button"
-                        badge-class="search-card__badge"
-                        type="light"
-                        add="12"
-                        wishlist="1200"
-                        sale="5"
-                        auction="25"
-                        exchange="2"
-                        favorite="153"
-                    />
-                </div>
-                <div class="search__item search-card">
-                    <div class="search-card__thumbnail">
-                        <a href="{{ route('game-carrier') }}">
-                            <img class="search-card__img" src="{{ asset('/storage/test-8.jpg') }}" alt="">
-                        </a>
-                    </div>
+{{--                    <x-common.counter-buttons--}}
+{{--                        class="search-card__buttons"--}}
+{{--                        button-class="search-card__button"--}}
+{{--                        badge-class="search-card__badge"--}}
+{{--                        type="light"--}}
+{{--                        add="12"--}}
+{{--                        wishlist="1200"--}}
+{{--                        sale="5"--}}
+{{--                        auction="25"--}}
+{{--                        exchange="2"--}}
+{{--                        favorite="153"--}}
+{{--                    />--}}
+{{--                </div>--}}
+{{--                <div class="search__item search-card">--}}
+{{--                    <div class="search-card__thumbnail">--}}
+{{--                        <a href="{{ route('game-carrier') }}">--}}
+{{--                            <img class="search-card__img" src="{{ asset('/storage/test-9.jpg') }}" alt="">--}}
+{{--                        </a>--}}
+{{--                    </div>--}}
 
-                    <div class="search-card__main">
-                        <div class="search-card__info">
-                            <div class="search-card__title">
-                                <a href="{{ route('game-carrier') }}">
-                                    Naruto Shippuden Ultimate Ninfa Storm Collection Collection
-                                </a>
-                            </div>
-                            <div class="search-card__details">
-                                <div class="search-card__detail">
-                                    Playstation 3
-                                </div>
-                                <div class="search-card__detail">
-                                    BLES00789
-                                </div>
-                                <div class="search-card__detail">
-                                    Essentials
-                                </div>
-                            </div>
-                            <div class="search-card__more">
-                                <div class="search-card__detail">
-                                    Playstation 3
-                                </div>
-                                <div class="search-card__detail">
-                                    BLES00789
-                                </div>
-                                <div class="search-card__detail">
-                                    Essentials
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+{{--                    <div class="search-card__main">--}}
+{{--                        <div class="search-card__info">--}}
+{{--                            <div class="search-card__title">--}}
+{{--                                <a href="{{ route('game-carrier') }}">--}}
+{{--                                    Naruto Shippuden Ultimate Ninfa Storm Collection Collection--}}
+{{--                                </a>--}}
+{{--                            </div>--}}
+{{--                            <div class="search-card__details">--}}
+{{--                                <div class="search-card__detail">--}}
+{{--                                    Playstation 3--}}
+{{--                                </div>--}}
+{{--                                <div class="search-card__detail">--}}
+{{--                                    BLES00789--}}
+{{--                                </div>--}}
+{{--                                <div class="search-card__detail">--}}
+{{--                                    Essentials--}}
+{{--                                </div>--}}
+{{--                            </div>--}}
+{{--                            <div class="search-card__more">--}}
+{{--                                <div class="search-card__detail">--}}
+{{--                                    Playstation 3--}}
+{{--                                </div>--}}
+{{--                                <div class="search-card__detail">--}}
+{{--                                    BLES00789--}}
+{{--                                </div>--}}
+{{--                                <div class="search-card__detail">--}}
+{{--                                    Essentials--}}
+{{--                                </div>--}}
+{{--                                <div class="search-card__detail">--}}
+{{--                                    Playstation 3--}}
+{{--                                </div>--}}
+{{--                                <div class="search-card__detail">--}}
+{{--                                    BLES00789--}}
+{{--                                </div>--}}
+{{--                                <div class="search-card__detail">--}}
+{{--                                    Essentials--}}
+{{--                                </div>--}}
+{{--                            </div>--}}
+{{--                        </div>--}}
+{{--                    </div>--}}
 
-                    <x-common.counter-buttons
-                        class="search-card__buttons"
-                        button-class="search-card__button"
-                        badge-class="search-card__badge"
-                        type="light"
-                        add="12"
-                        wishlist="1200"
-                        sale="5"
-                        auction="25"
-                        exchange="2"
-                        favorite="153"
-                    />
-                </div>
-                <div class="search__item search-card">
-                    <div class="search-card__thumbnail">
-                        <a href="{{ route('game-carrier') }}">
-                            <img class="search-card__img" src="{{ asset('/storage/test-6.jpg') }}" alt="">
-                        </a>
-                    </div>
+{{--                    <x-common.counter-buttons--}}
+{{--                        class="search-card__buttons"--}}
+{{--                        button-class="search-card__button"--}}
+{{--                        badge-class="search-card__badge"--}}
+{{--                        type="light"--}}
+{{--                        add="12"--}}
+{{--                        wishlist="1200"--}}
+{{--                        sale="5"--}}
+{{--                        auction="25"--}}
+{{--                        exchange="2"--}}
+{{--                        favorite="153"--}}
+{{--                    />--}}
+{{--                </div>--}}
+{{--                <div class="search__item search-card">--}}
+{{--                    <div class="search-card__thumbnail">--}}
+{{--                        <a href="{{ route('game-carrier') }}">--}}
+{{--                            <img class="search-card__img" src="{{ asset('/storage/test-7.jpg') }}" alt="">--}}
+{{--                        </a>--}}
+{{--                    </div>--}}
 
-                    <div class="search-card__main">
-                        <div class="search-card__info">
-                            <div class="search-card__title">
-                                <a href="{{ route('game-carrier') }}">
-                                    Naruto Shippuden Ultimate Ninfa Storm Collection CollectionNaruto Shippuden Ultimate Ninfa Storm Collection Collection
-                                </a>
-                            </div>
-                            <div class="search-card__details">
-                                <div class="search-card__detail">
-                                    Playstation sdfsdfsdfsdfsdfsdf
-                                </div>
-                                <div class="search-card__detail">
-                                    BLES00789xvcxvxcv
-                                </div>
-                                <div class="search-card__detail">
-                                    Essentialsxcvxcvxcvxcvxcvxcvxcvxcvxcvxcvxcvxcvxcvxcvxcv
-                                </div>
-                            </div>
-                            <div class="search-card__more">
-                                <div class="search-card__detail">
-                                    Playstation 3
-                                </div>
-                                <div class="search-card__detail">
-                                    BLES00789
-                                </div>
-                                <div class="search-card__detail">
-                                    Essentials
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+{{--                    <div class="search-card__main">--}}
+{{--                        <div class="search-card__info">--}}
+{{--                            <div class="search-card__title">--}}
+{{--                                <a href="{{ route('game-carrier') }}">--}}
+{{--                                    Naruto--}}
+{{--                                </a>--}}
+{{--                            </div>--}}
+{{--                            <div class="search-card__details">--}}
+{{--                                <div class="search-card__detail">--}}
+{{--                                    NES--}}
+{{--                                </div>--}}
+{{--                                <div class="search-card__detail">--}}
+{{--                                    1222--}}
+{{--                                </div>--}}
+{{--                                <div class="search-card__detail">--}}
+{{--                                    Std--}}
+{{--                                </div>--}}
+{{--                            </div>--}}
+{{--                            <div class="search-card__more">--}}
+{{--                                <div class="search-card__detail">--}}
+{{--                                    20/06/2024--}}
+{{--                                </div>--}}
+{{--                            </div>--}}
+{{--                        </div>--}}
+{{--                    </div>--}}
 
-                    <x-common.counter-buttons
-                        class="search-card__buttons"
-                        button-class="search-card__button"
-                        badge-class="search-card__badge"
-                        type="light"
-                        add="12"
-                        wishlist="1200"
-                        sale="5"
-                        auction="25"
-                        exchange="2"
-                        favorite="153"
-                    />
-                </div>
-                <div class="search__item search-card">
-                    <div class="search-card__thumbnail">
-                        <a href="{{ route('game-carrier') }}">
-                            <img class="search-card__img" src="{{ asset('/storage/test-300.jpg') }}" alt="">
-                        </a>
-                    </div>
+{{--                    <x-common.counter-buttons--}}
+{{--                        class="search-card__buttons"--}}
+{{--                        button-class="search-card__button"--}}
+{{--                        badge-class="search-card__badge"--}}
+{{--                        type="light"--}}
+{{--                        add="12"--}}
+{{--                        wishlist="1200"--}}
+{{--                        sale="5"--}}
+{{--                        auction="25"--}}
+{{--                        exchange="2"--}}
+{{--                        favorite="153"--}}
+{{--                    />--}}
+{{--                </div>--}}
+{{--                <div class="search__item search-card">--}}
+{{--                    <div class="search-card__thumbnail">--}}
+{{--                        <a href="{{ route('game-carrier') }}">--}}
+{{--                            <img class="search-card__img" src="{{ asset('/storage/test-8.jpg') }}" alt="">--}}
+{{--                        </a>--}}
+{{--                    </div>--}}
 
-                    <div class="search-card__main">
-                        <div class="search-card__info">
-                            <div class="search-card__title">
-                                <a href="{{ route('game-carrier') }}">
-                                    Naruto Shippuden Ultimate Ninfa Storm Collection Collection
-                                </a>
-                            </div>
-                            <div class="search-card__details">
-                                <div class="search-card__detail">
-                                    Playstation 3
-                                </div>
-                                <div class="search-card__detail">
-                                    BLES00789
-                                </div>
-                                <div class="search-card__detail">
-                                    Essentials
-                                </div>
-                            </div>
-                            <div class="search-card__more">
-                                <div class="search-card__detail">
-                                    Playstation 3
-                                </div>
-                                <div class="search-card__detail">
-                                    BLES00789
-                                </div>
-                                <div class="search-card__detail">
-                                    Essentials
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+{{--                    <div class="search-card__main">--}}
+{{--                        <div class="search-card__info">--}}
+{{--                            <div class="search-card__title">--}}
+{{--                                <a href="{{ route('game-carrier') }}">--}}
+{{--                                    Naruto Shippuden Ultimate Ninfa Storm Collection Collection--}}
+{{--                                </a>--}}
+{{--                            </div>--}}
+{{--                            <div class="search-card__details">--}}
+{{--                                <div class="search-card__detail">--}}
+{{--                                    Playstation 3--}}
+{{--                                </div>--}}
+{{--                                <div class="search-card__detail">--}}
+{{--                                    BLES00789--}}
+{{--                                </div>--}}
+{{--                                <div class="search-card__detail">--}}
+{{--                                    Essentials--}}
+{{--                                </div>--}}
+{{--                            </div>--}}
+{{--                            <div class="search-card__more">--}}
+{{--                                <div class="search-card__detail">--}}
+{{--                                    Playstation 3--}}
+{{--                                </div>--}}
+{{--                                <div class="search-card__detail">--}}
+{{--                                    BLES00789--}}
+{{--                                </div>--}}
+{{--                                <div class="search-card__detail">--}}
+{{--                                    Essentials--}}
+{{--                                </div>--}}
+{{--                            </div>--}}
+{{--                        </div>--}}
+{{--                    </div>--}}
 
-                    <x-common.counter-buttons
-                        class="search-card__buttons"
-                        button-class="search-card__button"
-                        badge-class="search-card__badge"
-                        type="light"
-                        add="12"
-                        wishlist="1200"
-                        sale="5"
-                        auction="25"
-                        exchange="2"
-                        favorite="153"
-                    />
-                </div>
+{{--                    <x-common.counter-buttons--}}
+{{--                        class="search-card__buttons"--}}
+{{--                        button-class="search-card__button"--}}
+{{--                        badge-class="search-card__badge"--}}
+{{--                        type="light"--}}
+{{--                        add="12"--}}
+{{--                        wishlist="1200"--}}
+{{--                        sale="5"--}}
+{{--                        auction="25"--}}
+{{--                        exchange="2"--}}
+{{--                        favorite="153"--}}
+{{--                    />--}}
+{{--                </div>--}}
+{{--                <div class="search__item search-card">--}}
+{{--                    <div class="search-card__thumbnail">--}}
+{{--                        <a href="{{ route('game-carrier') }}">--}}
+{{--                            <img class="search-card__img" src="{{ asset('/storage/test-6.jpg') }}" alt="">--}}
+{{--                        </a>--}}
+{{--                    </div>--}}
+
+{{--                    <div class="search-card__main">--}}
+{{--                        <div class="search-card__info">--}}
+{{--                            <div class="search-card__title">--}}
+{{--                                <a href="{{ route('game-carrier') }}">--}}
+{{--                                    Naruto Shippuden Ultimate Ninfa Storm Collection CollectionNaruto Shippuden Ultimate Ninfa Storm Collection Collection--}}
+{{--                                </a>--}}
+{{--                            </div>--}}
+{{--                            <div class="search-card__details">--}}
+{{--                                <div class="search-card__detail">--}}
+{{--                                    Playstation sdfsdfsdfsdfsdfsdf--}}
+{{--                                </div>--}}
+{{--                                <div class="search-card__detail">--}}
+{{--                                    BLES00789xvcxvxcv--}}
+{{--                                </div>--}}
+{{--                                <div class="search-card__detail">--}}
+{{--                                    Essentialsxcvxcvxcvxcvxcvxcvxcvxcvxcvxcvxcvxcvxcvxcvxcv--}}
+{{--                                </div>--}}
+{{--                            </div>--}}
+{{--                            <div class="search-card__more">--}}
+{{--                                <div class="search-card__detail">--}}
+{{--                                    Playstation 3--}}
+{{--                                </div>--}}
+{{--                                <div class="search-card__detail">--}}
+{{--                                    BLES00789--}}
+{{--                                </div>--}}
+{{--                                <div class="search-card__detail">--}}
+{{--                                    Essentials--}}
+{{--                                </div>--}}
+{{--                            </div>--}}
+{{--                        </div>--}}
+{{--                    </div>--}}
+
+{{--                    <x-common.counter-buttons--}}
+{{--                        class="search-card__buttons"--}}
+{{--                        button-class="search-card__button"--}}
+{{--                        badge-class="search-card__badge"--}}
+{{--                        type="light"--}}
+{{--                        add="12"--}}
+{{--                        wishlist="1200"--}}
+{{--                        sale="5"--}}
+{{--                        auction="25"--}}
+{{--                        exchange="2"--}}
+{{--                        favorite="153"--}}
+{{--                    />--}}
+{{--                </div>--}}
+{{--                <div class="search__item search-card">--}}
+{{--                    <div class="search-card__thumbnail">--}}
+{{--                        <a href="{{ route('game-carrier') }}">--}}
+{{--                            <img class="search-card__img" src="{{ asset('/storage/test-300.jpg') }}" alt="">--}}
+{{--                        </a>--}}
+{{--                    </div>--}}
+
+{{--                    <div class="search-card__main">--}}
+{{--                        <div class="search-card__info">--}}
+{{--                            <div class="search-card__title">--}}
+{{--                                <a href="{{ route('game-carrier') }}">--}}
+{{--                                    Naruto Shippuden Ultimate Ninfa Storm Collection Collection--}}
+{{--                                </a>--}}
+{{--                            </div>--}}
+{{--                            <div class="search-card__details">--}}
+{{--                                <div class="search-card__detail">--}}
+{{--                                    Playstation 3--}}
+{{--                                </div>--}}
+{{--                                <div class="search-card__detail">--}}
+{{--                                    BLES00789--}}
+{{--                                </div>--}}
+{{--                                <div class="search-card__detail">--}}
+{{--                                    Essentials--}}
+{{--                                </div>--}}
+{{--                            </div>--}}
+{{--                            <div class="search-card__more">--}}
+{{--                                <div class="search-card__detail">--}}
+{{--                                    Playstation 3--}}
+{{--                                </div>--}}
+{{--                                <div class="search-card__detail">--}}
+{{--                                    BLES00789--}}
+{{--                                </div>--}}
+{{--                                <div class="search-card__detail">--}}
+{{--                                    Essentials--}}
+{{--                                </div>--}}
+{{--                            </div>--}}
+{{--                        </div>--}}
+{{--                    </div>--}}
+
+{{--                    <x-common.counter-buttons--}}
+{{--                        class="search-card__buttons"--}}
+{{--                        button-class="search-card__button"--}}
+{{--                        badge-class="search-card__badge"--}}
+{{--                        type="light"--}}
+{{--                        add="12"--}}
+{{--                        wishlist="1200"--}}
+{{--                        sale="5"--}}
+{{--                        auction="25"--}}
+{{--                        exchange="2"--}}
+{{--                        favorite="153"--}}
+{{--                    />--}}
+{{--                </div>--}}
             </div>
 
         </x-common.content>

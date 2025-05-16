@@ -47,9 +47,32 @@
         border-radius: $extra-small-border-radius 0 $extra-small-border-radius 0;
     }
 
-    @include breakpoint-max($ml) {
-        :root {
-            --expanded-media-variations-height: 350px;
+    @include breakpoint-max($sl) {
+        padding-bottom: 30px;
+
+        &__more {
+            opacity: 1;
+            visibility: visible;
         }
+
+        &__inner {
+            flex-wrap: wrap;
+        }
+
+        &__featured {
+            display: flex;
+            justify-content: center;
+            width: 100%;
+        }
+
+        &__content {
+            width: 100%;
+        }
+    }
+}
+
+@include breakpoint-max($ml) {
+    :root {
+        --expanded-media-variations-height: 350px;
     }
 }
