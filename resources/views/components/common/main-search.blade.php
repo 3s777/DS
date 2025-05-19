@@ -18,14 +18,45 @@
                 wrapper-class="main-search__input-search"
                 link="{{ route('search') }}"
                 :placeholder="$searchPlaceholder">
+{{--                <x-ui.select.data--}}
+{{--                    name="manufacturer"--}}
+{{--                    select-name="game_platform_manufacturer_id"--}}
+{{--                    :options="['n' => 'По носителю', 'v' => 'По вариации']"--}}
+{{--                    :placeholder="false" />--}}
+
+                <x-libraries.choices
+                    class="media-type"
+                    id="media-type"
+                    name="filters[media-type-search]"
+                    error="media-type">
+
+                    <x-ui.form.option
+                        value="1">
+                        По носителю
+                    </x-ui.form.option>
+                    <x-ui.form.option
+                        value="2">
+                        По вариации
+                    </x-ui.form.option>
+                </x-libraries.choices>
+
+
+                    @push('scripts')
+                        <script type="module">
+                            const mediaType = document.querySelector('.media-type');
+                            new Choices(mediaType, {
+                                itemSelectText: '',
+                                removeItems: false,
+                                removeItemButton: false,
+                                searchEnabled: false,
+                            });
+                        </script>
+                    @endpush
+
+
+
             </x-ui.input-search>
-            <x-ui.select.data
-                name="manufacturer"
-                select-name="game_platform_manufacturer_id"
-                required
-                :options="['n' => 'По носителю', 'v' => 'По вариации']"
-                :default-option="trans_choice('game.platform_manufacturer.manufacturers', 1)"
-                :label="trans_choice('game.platform_manufacturer.choose', 1)" />
+
 
 
             @if(!$hideFilters)

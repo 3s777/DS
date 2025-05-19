@@ -25,6 +25,12 @@
         height: 22px;
     }
 
+    .choices__inner {
+        padding: 0 28px 0 0 !important;
+        height: auto;
+        min-height: auto;
+    }
+
     @include breakpoint-max($md) {
         &__input-search {
             margin-right: 0;

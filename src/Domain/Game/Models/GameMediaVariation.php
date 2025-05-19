@@ -5,6 +5,7 @@ namespace Domain\Game\Models;
 use Database\Factories\Game\GameMediaVariationFactory;
 use Domain\Auth\Models\User;
 use Domain\Game\FilterRegistrars\Admin\GameMediaVariationFilterRegistrar;
+use Domain\Game\FilterRegistrars\Public\GameMediaFilterRegistrar;
 use Domain\Game\Observers\GameMediaVariationObserver;
 use Domain\Game\QueryBuilders\GameMediaVariationQueryBuilder;
 use Domain\Shelf\Models\Collectible;
@@ -113,6 +114,11 @@ class GameMediaVariation extends Model implements HasMedia
     public function availableAdminFilters(): array
     {
         return app(GameMediaVariationFilterRegistrar::class)->filtersList();
+    }
+
+    public function availableFilters(): array
+    {
+        return app(GameMediaFilterRegistrar::class)->filtersList();
     }
 
     public function newEloquentBuilder($query): GameMediaVariationQueryBuilder

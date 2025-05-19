@@ -28,8 +28,6 @@
     }
 }
 
-
-
 .choices__inner {
     padding: 14px 28px 14px 20px;
     min-height: 50px;
@@ -128,8 +126,6 @@
 }
 
 
-
-
 .choices__list--multiple {
     .choices__item {
         margin-top: 2px;
@@ -154,7 +150,6 @@
     }
 
 }
-
 
 .choices[data-type*=select-multiple] .choices__button,
 .choices[data-type*=text] .choices__button {
@@ -184,6 +179,7 @@
 
 .choices__list--dropdown,
 .choices__list[aria-expanded] {
+    z-index: 1100;
     border: 2px solid $opposite-main;
     background-color: $base-dark-like-transparent;
 
@@ -231,8 +227,6 @@
         background: none;
     }
 }
-
-
 
 @media (min-width:640px) {
     .choices__list--dropdown .choices__item--selectable,
