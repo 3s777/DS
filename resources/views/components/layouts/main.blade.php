@@ -2,7 +2,8 @@
     'title' => '',
     'search' => true,
     'searchPlaceholder' => false,
-    'mainFilters' => false
+    'mainFilters' => false,
+    'hideFilters' => false
 ])
 
 <!doctype html>
@@ -15,9 +16,11 @@
     </head>
     <body class="body {{ session()->get('color.theme') }}">
         <x-common.header>
-            <x-common.main-filters>
-                {{ $mainFilters }}
-            </x-common.main-filters>
+            @if(!$hideFilters)
+                <x-common.main-filters>
+                    {{ $mainFilters }}
+                </x-common.main-filters>
+            @endif
         </x-common.header>
 
         <main class="main" x-data="{collapseSidebar: $persist(false)}">
@@ -25,6 +28,8 @@
         </main>
 
         <x-common.footer />
+
+        <x-common.mobile-main-menu />
 
         @stack('modals')
 

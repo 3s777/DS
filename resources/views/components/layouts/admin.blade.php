@@ -34,6 +34,8 @@
 
         <x-common.footer />
 
+        <x-common.mobile-main-menu />
+
         @stack('modals')
 
         @vite(['resources/js/app.js'])

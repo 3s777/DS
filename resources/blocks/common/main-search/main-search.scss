@@ -1,5 +1,12 @@
 .main-search {
 
+    &_no-filters {
+        .main-search__input {
+            padding: 10px 12px;
+            border-radius: 8px;
+        }
+    }
+
     &__header {
         display: flex;
     }

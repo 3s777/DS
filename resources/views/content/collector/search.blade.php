@@ -1,12 +1,5 @@
-<x-layouts.main title="{{ __('user.collector.list') }}" :search="false">
-    <div class="collector-search__form">
-        <x-grid.container>
-            <x-common.filters
-                :search-placeholder="__('user.collector.enter_name')"
-                :filter-form="false">
-            </x-common.filters>
-        </x-grid.container>
-    </div>
+<x-layouts.main title="{{ __('user.collector.list') }}" :hide-filters="true" :search-placeholder="__('user.collector.enter_name')">
+
 
     <x-grid.container>
         <x-common.content>

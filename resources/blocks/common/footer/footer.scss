@@ -23,7 +23,13 @@
     }
 
     &__links {
-        flex-basis: 50%;
+        width: 50%;
+    }
+
+    &__links-wrapper {
+        padding: 32px;
+        background-color: $base-dark-like-transparent;
+        border-radius: $big-border-radius;
     }
 
     &__menu {
@@ -34,20 +40,20 @@
 
     &__menu-link {
         display: block;
-        flex-basis: 33%;
+        width: 33%;
         padding: 4px 8px;
         text-align: left;
 
-        &:nth-child(3n)  {
-            text-align: right;
-        }
+        //&:nth-child(3n)  {
+        //    text-align: right;
+        //}
     }
 
     &__media {
         display: flex;
         justify-content: center;
         flex-direction: column;
-        flex-basis: 23%;
+        width: 23%;
         gap: 24px;
     }
 
@@ -69,7 +75,6 @@
         justify-content: center;
         flex-wrap: wrap;
         gap: 12px;
-        flex-basis: 23%;
 
         svg {
             width: 24px;
@@ -83,7 +88,7 @@
     }
 
     &__donate {
-        flex-basis: 23%;
+        width: 23%;
     }
 
     &__donate-title {
@@ -102,12 +107,12 @@
         display: flex;
         gap: 8px;
         align-items: center;
-        flex-basis: 100%;
+        width: 100%;
     }
 
     &__donate-submit {
         flex-shrink: 0;
-        flex-basis: 100%;
+        width: 100%;
 
         .button {
             height: 50px;
@@ -164,31 +169,121 @@
         fill: $base-dark;
     }
 
-    //&__numbers {
-    //    display: flex;
-    //    justify-content: center;
-    //    gap: 32px;
-    //}
-    //
-    //&__number {
-    //    margin-bottom: 12px;
-    //}
-    //
-    //&__number-value {
-    //    font-size: rem(32);
-    //    font-weight: 700;
-    //}
+    @include breakpoint-max($xl) {
+        &__menu-link {
+            width: 32%;
+
+            &:nth-child(3n)  {
+                width: 36%;
+            }
+        }
+    }
 
     @include breakpoint-max($ml) {
+        &__main {
+            flex-wrap: wrap;
+        }
+
+        &__links {
+            order: 0;
+            width: 63%;
+        }
+
+        &__media {
+            order: 2;
+            width: 100%;
+            margin-top: 24px;
+        }
+
+        &__donate {
+            order: 1;
+            width: 33%;
+        }
     }
 
     @include breakpoint-max($lg) {
+        padding-bottom: 32px;
+
+        &__main {
+            gap: 32px;
+        }
+
+        &__links {
+            order: 1;
+            width: 100%;
+        }
+
+        &__donate {
+            order: 0;
+            display: flex;
+            justify-content: center;
+            width: 100%;
+        }
+
+        &__donate-form {
+            max-width: 400px;
+        }
+
+        &__media {
+            margin-top: 0;
+        }
+
+        .footer__waves {
+            height: 250px;
+            min-height: 150px;
+            max-height: 300px;
+        }
     }
 
     @include breakpoint-max($md) {
+        &__links-wrapper {
+           padding: 20px;
+        }
+
+        &__menu-link {
+            padding: 4px 0;
+        }
+
+        &__menu-link {
+            width: 50%;
+
+            &:nth-child(3n)  {
+                width: 50%;
+            }
+        }
+
+        &__politics {
+            margin-bottom: 24px;
+        }
+
+        .footer__waves {
+            height: 200px;
+            min-height: 100px;
+            max-height: 250px;
+        }
     }
 
     @include breakpoint-max($sm) {
+        .footer__waves {
+            height: 150px;
+            min-height: 50px;
+            max-height: 200px;
+        }
+    }
+
+    @include breakpoint-max($xs) {
+        &__menu-link {
+            width: 100%;
+
+            &:nth-child(3n)  {
+                width: 100%;
+            }
+        }
+
+        &__menu-link {
+            padding: 6px 0;
+        }
+
     }
 }
 
