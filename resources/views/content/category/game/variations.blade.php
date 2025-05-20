@@ -1,7 +1,7 @@
 <x-layouts.main title="Search" filters="content.category.game.filters" :search-placeholder="__('game.media.search')">
 
     <x-slot:mainFilters>
-        @include('content.category.game.filters')
+        @include('content.category.game.filters-variation')
     </x-slot:mainFilters>
 
     <x-grid.container>
@@ -14,18 +14,18 @@
                     @if(request('filters.search'))
                         {{ __('filters.result') }} "{{ request('filters.search') }}"
                     @else
-                        {{ __('game.media.list') }}
+                        {{ __('game.variation.list') }}
                     @endif
                 </x-ui.title>
 
-                <x-common.filters.badges class="search__filters" />
+                <x-common.filters.badges class="search__filter-badges" />
             </div>
 
-            <div class="search__result">
+            <div class="search__result search__result_variations">
 
                 @foreach($variations as $variation)
-                <div class="search__item search-card">
-                    <div class="search-card__thumbnail">
+                <div class="search__item vertical-variation">
+                    <div class="vertical-variation__thumbnail">
                         <a href="{{ route('game-carrier') }}">
                             <x-ui.responsive-image
                                 :model="$variation"
@@ -33,39 +33,39 @@
                                 :path="$variation->getFeaturedImagePath()"
                                 :placeholder="true"
                                 :wrapper="true"
-                                wrapper-class="search-card__thumbnail-inner"
+                                wrapper-class="vertical-variation__thumbnail-inner"
                                 sizes="(max-width: 768px) 260px, (max-width: 1400px) 260px, 260px">
                                 <x-slot:img alt="{{ $variation->name }}" title="{{ $variation->name }}"></x-slot:img>
                             </x-ui.responsive-image>
                         </a>
                     </div>
 
-                    <div class="search-card__main">
-                        <div class="search-card__info">
-                            <div class="search-card__title">
+                    <div class="vertical-variation__main">
+                        <div class="vertical-variation__info">
+                            <div class="vertical-variation__title">
                                 <a href="{{ route('game-carrier') }}">
                                     {{ $variation->name }}
                                 </a>
                             </div>
-                            <div class="search-card__details">
-                                <div class="search-card__detail">
+                            <div class="vertical-variation__details">
+                                <div class="vertical-variation__detail">
                                     Playstation 3
                                 </div>
-                                <div class="search-card__detail">
+                                <div class="vertical-variation__detail">
                                     BLES00789
                                 </div>
-                                <div class="search-card__detail">
+                                <div class="vertical-variation__detail">
                                     Essentials
                                 </div>
                             </div>
-                            <div class="search-card__more">
-                                <div class="search-card__detail">
+                            <div class="vertical-variation__more">
+                                <div class="vertical-variation__detail">
                                     Playstation 3
                                 </div>
-                                <div class="search-card__detail">
+                                <div class="vertical-variation__detail">
                                     BLES00789
                                 </div>
-                                <div class="search-card__detail">
+                                <div class="vertical-variation__detail">
                                     Essentials
                                 </div>
                             </div>
@@ -73,9 +73,9 @@
                     </div>
 
                     <x-common.counter-buttons
-                        class="search-card__buttons"
-                        button-class="search-card__button"
-                        badge-class="search-card__badge"
+                        class="vertical-variation__buttons"
+                        button-class="vertical-variation__button"
+                        badge-class="vertical-variation__badge"
                         type="light"
                         add="12"
                         wishlist="50"
@@ -90,48 +90,48 @@
 
 
 
-{{--                <div class="search__item search-card">--}}
-{{--                    <div class="search-card__thumbnail">--}}
+{{--                <div class="search__item vertical-variation">--}}
+{{--                    <div class="vertical-variation__thumbnail">--}}
 {{--                        <a href="{{ route('game-carrier') }}">--}}
-{{--                            <img class="search-card__img" src="{{ asset('/storage/test-6.jpg') }}" alt="">--}}
+{{--                            <img class="vertical-variation__img" src="{{ asset('/storage/test-6.jpg') }}" alt="">--}}
 {{--                        </a>--}}
 {{--                    </div>--}}
 
-{{--                    <div class="search-card__main">--}}
-{{--                        <div class="search-card__info">--}}
-{{--                            <div class="search-card__title">--}}
+{{--                    <div class="vertical-variation__main">--}}
+{{--                        <div class="vertical-variation__info">--}}
+{{--                            <div class="vertical-variation__title">--}}
 {{--                                <a href="{{ route('game-carrier') }}">--}}
 {{--                                    Naruto Shippuden Ultimate Ninfa Storm Collection Collection--}}
 {{--                                </a>--}}
 {{--                            </div>--}}
-{{--                            <div class="search-card__details">--}}
-{{--                                <div class="search-card__detail">--}}
+{{--                            <div class="vertical-variation__details">--}}
+{{--                                <div class="vertical-variation__detail">--}}
 {{--                                    Playstation 3--}}
 {{--                                </div>--}}
-{{--                                <div class="search-card__detail">--}}
+{{--                                <div class="vertical-variation__detail">--}}
 {{--                                    BLES00789--}}
 {{--                                </div>--}}
-{{--                                <div class="search-card__detail">--}}
+{{--                                <div class="vertical-variation__detail">--}}
 {{--                                    Essentials--}}
 {{--                                </div>--}}
 {{--                            </div>--}}
-{{--                            <div class="search-card__more">--}}
-{{--                                <div class="search-card__detail">--}}
+{{--                            <div class="vertical-variation__more">--}}
+{{--                                <div class="vertical-variation__detail">--}}
 {{--                                    Playstation 3--}}
 {{--                                </div>--}}
-{{--                                <div class="search-card__detail">--}}
+{{--                                <div class="vertical-variation__detail">--}}
 {{--                                    BLES00789--}}
 {{--                                </div>--}}
-{{--                                <div class="search-card__detail">--}}
+{{--                                <div class="vertical-variation__detail">--}}
 {{--                                    Essentials--}}
 {{--                                </div>--}}
-{{--                                <div class="search-card__detail">--}}
+{{--                                <div class="vertical-variation__detail">--}}
 {{--                                    Playstation 3--}}
 {{--                                </div>--}}
-{{--                                <div class="search-card__detail">--}}
+{{--                                <div class="vertical-variation__detail">--}}
 {{--                                    BLES00789--}}
 {{--                                </div>--}}
-{{--                                <div class="search-card__detail">--}}
+{{--                                <div class="vertical-variation__detail">--}}
 {{--                                    Essentials--}}
 {{--                                </div>--}}
 {{--                            </div>--}}
@@ -139,9 +139,9 @@
 {{--                    </div>--}}
 
 {{--                    <x-common.counter-buttons--}}
-{{--                        class="search-card__buttons"--}}
-{{--                        button-class="search-card__button"--}}
-{{--                        badge-class="search-card__badge"--}}
+{{--                        class="vertical-variation__buttons"--}}
+{{--                        button-class="vertical-variation__button"--}}
+{{--                        badge-class="vertical-variation__badge"--}}
 {{--                        type="light"--}}
 {{--                        add="12"--}}
 {{--                        wishlist="17"--}}
@@ -151,33 +151,33 @@
 {{--                        favorite="153"--}}
 {{--                    />--}}
 {{--                </div>--}}
-{{--                <div class="search__item search-card">--}}
-{{--                    <div class="search-card__thumbnail">--}}
+{{--                <div class="search__item vertical-variation">--}}
+{{--                    <div class="vertical-variation__thumbnail">--}}
 {{--                        <a href="{{ route('game-carrier') }}">--}}
-{{--                            <img class="search-card__img" src="{{ asset('/storage/test-7.jpg') }}" alt="">--}}
+{{--                            <img class="vertical-variation__img" src="{{ asset('/storage/test-7.jpg') }}" alt="">--}}
 {{--                        </a>--}}
 {{--                    </div>--}}
 
-{{--                    <div class="search-card__main">--}}
-{{--                        <div class="search-card__info">--}}
-{{--                            <div class="search-card__title">--}}
+{{--                    <div class="vertical-variation__main">--}}
+{{--                        <div class="vertical-variation__info">--}}
+{{--                            <div class="vertical-variation__title">--}}
 {{--                                <a href="{{ route('game-carrier') }}">--}}
 {{--                                    Naruto--}}
 {{--                                </a>--}}
 {{--                            </div>--}}
-{{--                            <div class="search-card__details">--}}
-{{--                                <div class="search-card__detail">--}}
+{{--                            <div class="vertical-variation__details">--}}
+{{--                                <div class="vertical-variation__detail">--}}
 {{--                                    NES--}}
 {{--                                </div>--}}
-{{--                                <div class="search-card__detail">--}}
+{{--                                <div class="vertical-variation__detail">--}}
 {{--                                    1222--}}
 {{--                                </div>--}}
-{{--                                <div class="search-card__detail">--}}
+{{--                                <div class="vertical-variation__detail">--}}
 {{--                                    Std--}}
 {{--                                </div>--}}
 {{--                            </div>--}}
-{{--                            <div class="search-card__more">--}}
-{{--                                <div class="search-card__detail">--}}
+{{--                            <div class="vertical-variation__more">--}}
+{{--                                <div class="vertical-variation__detail">--}}
 {{--                                    20/06/2024--}}
 {{--                                </div>--}}
 {{--                            </div>--}}
@@ -185,9 +185,9 @@
 {{--                    </div>--}}
 
 {{--                    <x-common.counter-buttons--}}
-{{--                        class="search-card__buttons"--}}
-{{--                        button-class="search-card__button"--}}
-{{--                        badge-class="search-card__badge"--}}
+{{--                        class="vertical-variation__buttons"--}}
+{{--                        button-class="vertical-variation__button"--}}
+{{--                        badge-class="vertical-variation__badge"--}}
 {{--                        type="light"--}}
 {{--                        add="12"--}}
 {{--                        wishlist="1200"--}}
@@ -197,39 +197,39 @@
 {{--                        favorite="153"--}}
 {{--                    />--}}
 {{--                </div>--}}
-{{--                <div class="search__item search-card">--}}
-{{--                    <div class="search-card__thumbnail">--}}
+{{--                <div class="search__item vertical-variation">--}}
+{{--                    <div class="vertical-variation__thumbnail">--}}
 {{--                        <a href="{{ route('game-carrier') }}">--}}
-{{--                            <img class="search-card__img" src="{{ asset('/storage/test-8.jpg') }}" alt="">--}}
+{{--                            <img class="vertical-variation__img" src="{{ asset('/storage/test-8.jpg') }}" alt="">--}}
 {{--                        </a>--}}
 {{--                    </div>--}}
 
-{{--                    <div class="search-card__main">--}}
-{{--                        <div class="search-card__info">--}}
-{{--                            <div class="search-card__title">--}}
+{{--                    <div class="vertical-variation__main">--}}
+{{--                        <div class="vertical-variation__info">--}}
+{{--                            <div class="vertical-variation__title">--}}
 {{--                                <a href="{{ route('game-carrier') }}">--}}
 {{--                                    Naruto Shippuden Ultimate Ninfa Storm Collection CollectionNaruto Shippuden Ultimate Ninfa Storm Collection Collection--}}
 {{--                                </a>--}}
 {{--                            </div>--}}
-{{--                            <div class="search-card__details">--}}
-{{--                                <div class="search-card__detail">--}}
+{{--                            <div class="vertical-variation__details">--}}
+{{--                                <div class="vertical-variation__detail">--}}
 {{--                                    Playstation sdfsdfsdfsdfsdfsdf--}}
 {{--                                </div>--}}
-{{--                                <div class="search-card__detail">--}}
+{{--                                <div class="vertical-variation__detail">--}}
 {{--                                    BLES00789xvcxvxcv--}}
 {{--                                </div>--}}
-{{--                                <div class="search-card__detail">--}}
+{{--                                <div class="vertical-variation__detail">--}}
 {{--                                    Essentialsxcvxcvxcvxcvxcvxcvxcvxcvxcvxcvxcvxcvxcvxcvxcv--}}
 {{--                                </div>--}}
 {{--                            </div>--}}
-{{--                            <div class="search-card__more">--}}
-{{--                                <div class="search-card__detail">--}}
+{{--                            <div class="vertical-variation__more">--}}
+{{--                                <div class="vertical-variation__detail">--}}
 {{--                                    Playstation 3--}}
 {{--                                </div>--}}
-{{--                                <div class="search-card__detail">--}}
+{{--                                <div class="vertical-variation__detail">--}}
 {{--                                    BLES00789--}}
 {{--                                </div>--}}
-{{--                                <div class="search-card__detail">--}}
+{{--                                <div class="vertical-variation__detail">--}}
 {{--                                    Essentials--}}
 {{--                                </div>--}}
 {{--                            </div>--}}
@@ -237,9 +237,9 @@
 {{--                    </div>--}}
 
 {{--                    <x-common.counter-buttons--}}
-{{--                        class="search-card__buttons"--}}
-{{--                        button-class="search-card__button"--}}
-{{--                        badge-class="search-card__badge"--}}
+{{--                        class="vertical-variation__buttons"--}}
+{{--                        button-class="vertical-variation__button"--}}
+{{--                        badge-class="vertical-variation__badge"--}}
 {{--                        type="light"--}}
 {{--                        add="12"--}}
 {{--                        wishlist="1200"--}}
@@ -249,39 +249,39 @@
 {{--                        favorite="153"--}}
 {{--                    />--}}
 {{--                </div>--}}
-{{--                <div class="search__item search-card">--}}
-{{--                    <div class="search-card__thumbnail">--}}
+{{--                <div class="search__item vertical-variation">--}}
+{{--                    <div class="vertical-variation__thumbnail">--}}
 {{--                        <a href="{{ route('game-carrier') }}">--}}
-{{--                            <img class="search-card__img" src="{{ asset('/storage/test-9.jpg') }}" alt="">--}}
+{{--                            <img class="vertical-variation__img" src="{{ asset('/storage/test-9.jpg') }}" alt="">--}}
 {{--                        </a>--}}
 {{--                    </div>--}}
 
-{{--                    <div class="search-card__main">--}}
-{{--                        <div class="search-card__info">--}}
-{{--                            <div class="search-card__title">--}}
+{{--                    <div class="vertical-variation__main">--}}
+{{--                        <div class="vertical-variation__info">--}}
+{{--                            <div class="vertical-variation__title">--}}
 {{--                                <a href="{{ route('game-carrier') }}">--}}
 {{--                                    Naruto Shippuden Ultimate Ninfa Storm Collection Collection--}}
 {{--                                </a>--}}
 {{--                            </div>--}}
-{{--                            <div class="search-card__details">--}}
-{{--                                <div class="search-card__detail">--}}
+{{--                            <div class="vertical-variation__details">--}}
+{{--                                <div class="vertical-variation__detail">--}}
 {{--                                    Playstation 3--}}
 {{--                                </div>--}}
-{{--                                <div class="search-card__detail">--}}
+{{--                                <div class="vertical-variation__detail">--}}
 {{--                                    BLES00789--}}
 {{--                                </div>--}}
-{{--                                <div class="search-card__detail">--}}
+{{--                                <div class="vertical-variation__detail">--}}
 {{--                                    Essentials--}}
 {{--                                </div>--}}
 {{--                            </div>--}}
-{{--                            <div class="search-card__more">--}}
-{{--                                <div class="search-card__detail">--}}
+{{--                            <div class="vertical-variation__more">--}}
+{{--                                <div class="vertical-variation__detail">--}}
 {{--                                    Playstation 3--}}
 {{--                                </div>--}}
-{{--                                <div class="search-card__detail">--}}
+{{--                                <div class="vertical-variation__detail">--}}
 {{--                                    BLES00789--}}
 {{--                                </div>--}}
-{{--                                <div class="search-card__detail">--}}
+{{--                                <div class="vertical-variation__detail">--}}
 {{--                                    Essentials--}}
 {{--                                </div>--}}
 {{--                            </div>--}}
@@ -289,9 +289,9 @@
 {{--                    </div>--}}
 
 {{--                    <x-common.counter-buttons--}}
-{{--                        class="search-card__buttons"--}}
-{{--                        button-class="search-card__button"--}}
-{{--                        badge-class="search-card__badge"--}}
+{{--                        class="vertical-variation__buttons"--}}
+{{--                        button-class="vertical-variation__button"--}}
+{{--                        badge-class="vertical-variation__badge"--}}
 {{--                        type="light"--}}
 {{--                        add="12"--}}
 {{--                        wishlist="1200"--}}
@@ -301,48 +301,48 @@
 {{--                        favorite="153"--}}
 {{--                    />--}}
 {{--                </div>--}}
-{{--                <div class="search__item search-card">--}}
-{{--                    <div class="search-card__thumbnail">--}}
+{{--                <div class="search__item vertical-variation">--}}
+{{--                    <div class="vertical-variation__thumbnail">--}}
 {{--                        <a href="{{ route('game-carrier') }}">--}}
-{{--                            <img class="search-card__img" src="{{ asset('/storage/test-9.jpg') }}" alt="">--}}
+{{--                            <img class="vertical-variation__img" src="{{ asset('/storage/test-9.jpg') }}" alt="">--}}
 {{--                        </a>--}}
 {{--                    </div>--}}
 
-{{--                    <div class="search-card__main">--}}
-{{--                        <div class="search-card__info">--}}
-{{--                            <div class="search-card__title">--}}
+{{--                    <div class="vertical-variation__main">--}}
+{{--                        <div class="vertical-variation__info">--}}
+{{--                            <div class="vertical-variation__title">--}}
 {{--                                <a href="{{ route('game-carrier') }}">--}}
 {{--                                    Naruto Shippuden Ultimate Ninfa Storm Collection Collection--}}
 {{--                                </a>--}}
 {{--                            </div>--}}
-{{--                            <div class="search-card__details">--}}
-{{--                                <div class="search-card__detail">--}}
+{{--                            <div class="vertical-variation__details">--}}
+{{--                                <div class="vertical-variation__detail">--}}
 {{--                                    Playstation 3--}}
 {{--                                </div>--}}
-{{--                                <div class="search-card__detail">--}}
+{{--                                <div class="vertical-variation__detail">--}}
 {{--                                    BLES00789--}}
 {{--                                </div>--}}
-{{--                                <div class="search-card__detail">--}}
+{{--                                <div class="vertical-variation__detail">--}}
 {{--                                    Essentials--}}
 {{--                                </div>--}}
 {{--                            </div>--}}
-{{--                            <div class="search-card__more">--}}
-{{--                                <div class="search-card__detail">--}}
+{{--                            <div class="vertical-variation__more">--}}
+{{--                                <div class="vertical-variation__detail">--}}
 {{--                                    Playstation 3--}}
 {{--                                </div>--}}
-{{--                                <div class="search-card__detail">--}}
+{{--                                <div class="vertical-variation__detail">--}}
 {{--                                    BLES00789--}}
 {{--                                </div>--}}
-{{--                                <div class="search-card__detail">--}}
+{{--                                <div class="vertical-variation__detail">--}}
 {{--                                    Essentials--}}
 {{--                                </div>--}}
-{{--                                <div class="search-card__detail">--}}
+{{--                                <div class="vertical-variation__detail">--}}
 {{--                                    Playstation 3--}}
 {{--                                </div>--}}
-{{--                                <div class="search-card__detail">--}}
+{{--                                <div class="vertical-variation__detail">--}}
 {{--                                    BLES00789--}}
 {{--                                </div>--}}
-{{--                                <div class="search-card__detail">--}}
+{{--                                <div class="vertical-variation__detail">--}}
 {{--                                    Essentials--}}
 {{--                                </div>--}}
 {{--                            </div>--}}
@@ -350,9 +350,9 @@
 {{--                    </div>--}}
 
 {{--                    <x-common.counter-buttons--}}
-{{--                        class="search-card__buttons"--}}
-{{--                        button-class="search-card__button"--}}
-{{--                        badge-class="search-card__badge"--}}
+{{--                        class="vertical-variation__buttons"--}}
+{{--                        button-class="vertical-variation__button"--}}
+{{--                        badge-class="vertical-variation__badge"--}}
 {{--                        type="light"--}}
 {{--                        add="12"--}}
 {{--                        wishlist="1200"--}}
@@ -362,33 +362,33 @@
 {{--                        favorite="153"--}}
 {{--                    />--}}
 {{--                </div>--}}
-{{--                <div class="search__item search-card">--}}
-{{--                    <div class="search-card__thumbnail">--}}
+{{--                <div class="search__item vertical-variation">--}}
+{{--                    <div class="vertical-variation__thumbnail">--}}
 {{--                        <a href="{{ route('game-carrier') }}">--}}
-{{--                            <img class="search-card__img" src="{{ asset('/storage/test-7.jpg') }}" alt="">--}}
+{{--                            <img class="vertical-variation__img" src="{{ asset('/storage/test-7.jpg') }}" alt="">--}}
 {{--                        </a>--}}
 {{--                    </div>--}}
 
-{{--                    <div class="search-card__main">--}}
-{{--                        <div class="search-card__info">--}}
-{{--                            <div class="search-card__title">--}}
+{{--                    <div class="vertical-variation__main">--}}
+{{--                        <div class="vertical-variation__info">--}}
+{{--                            <div class="vertical-variation__title">--}}
 {{--                                <a href="{{ route('game-carrier') }}">--}}
 {{--                                    Naruto--}}
 {{--                                </a>--}}
 {{--                            </div>--}}
-{{--                            <div class="search-card__details">--}}
-{{--                                <div class="search-card__detail">--}}
+{{--                            <div class="vertical-variation__details">--}}
+{{--                                <div class="vertical-variation__detail">--}}
 {{--                                    NES--}}
 {{--                                </div>--}}
-{{--                                <div class="search-card__detail">--}}
+{{--                                <div class="vertical-variation__detail">--}}
 {{--                                    1222--}}
 {{--                                </div>--}}
-{{--                                <div class="search-card__detail">--}}
+{{--                                <div class="vertical-variation__detail">--}}
 {{--                                    Std--}}
 {{--                                </div>--}}
 {{--                            </div>--}}
-{{--                            <div class="search-card__more">--}}
-{{--                                <div class="search-card__detail">--}}
+{{--                            <div class="vertical-variation__more">--}}
+{{--                                <div class="vertical-variation__detail">--}}
 {{--                                    20/06/2024--}}
 {{--                                </div>--}}
 {{--                            </div>--}}
@@ -396,9 +396,9 @@
 {{--                    </div>--}}
 
 {{--                    <x-common.counter-buttons--}}
-{{--                        class="search-card__buttons"--}}
-{{--                        button-class="search-card__button"--}}
-{{--                        badge-class="search-card__badge"--}}
+{{--                        class="vertical-variation__buttons"--}}
+{{--                        button-class="vertical-variation__button"--}}
+{{--                        badge-class="vertical-variation__badge"--}}
 {{--                        type="light"--}}
 {{--                        add="12"--}}
 {{--                        wishlist="1200"--}}
@@ -408,39 +408,39 @@
 {{--                        favorite="153"--}}
 {{--                    />--}}
 {{--                </div>--}}
-{{--                <div class="search__item search-card">--}}
-{{--                    <div class="search-card__thumbnail">--}}
+{{--                <div class="search__item vertical-variation">--}}
+{{--                    <div class="vertical-variation__thumbnail">--}}
 {{--                        <a href="{{ route('game-carrier') }}">--}}
-{{--                            <img class="search-card__img" src="{{ asset('/storage/test-8.jpg') }}" alt="">--}}
+{{--                            <img class="vertical-variation__img" src="{{ asset('/storage/test-8.jpg') }}" alt="">--}}
 {{--                        </a>--}}
 {{--                    </div>--}}
 
-{{--                    <div class="search-card__main">--}}
-{{--                        <div class="search-card__info">--}}
-{{--                            <div class="search-card__title">--}}
+{{--                    <div class="vertical-variation__main">--}}
+{{--                        <div class="vertical-variation__info">--}}
+{{--                            <div class="vertical-variation__title">--}}
 {{--                                <a href="{{ route('game-carrier') }}">--}}
 {{--                                    Naruto Shippuden Ultimate Ninfa Storm Collection Collection--}}
 {{--                                </a>--}}
 {{--                            </div>--}}
-{{--                            <div class="search-card__details">--}}
-{{--                                <div class="search-card__detail">--}}
+{{--                            <div class="vertical-variation__details">--}}
+{{--                                <div class="vertical-variation__detail">--}}
 {{--                                    Playstation 3--}}
 {{--                                </div>--}}
-{{--                                <div class="search-card__detail">--}}
+{{--                                <div class="vertical-variation__detail">--}}
 {{--                                    BLES00789--}}
 {{--                                </div>--}}
-{{--                                <div class="search-card__detail">--}}
+{{--                                <div class="vertical-variation__detail">--}}
 {{--                                    Essentials--}}
 {{--                                </div>--}}
 {{--                            </div>--}}
-{{--                            <div class="search-card__more">--}}
-{{--                                <div class="search-card__detail">--}}
+{{--                            <div class="vertical-variation__more">--}}
+{{--                                <div class="vertical-variation__detail">--}}
 {{--                                    Playstation 3--}}
 {{--                                </div>--}}
-{{--                                <div class="search-card__detail">--}}
+{{--                                <div class="vertical-variation__detail">--}}
 {{--                                    BLES00789--}}
 {{--                                </div>--}}
-{{--                                <div class="search-card__detail">--}}
+{{--                                <div class="vertical-variation__detail">--}}
 {{--                                    Essentials--}}
 {{--                                </div>--}}
 {{--                            </div>--}}
@@ -448,9 +448,9 @@
 {{--                    </div>--}}
 
 {{--                    <x-common.counter-buttons--}}
-{{--                        class="search-card__buttons"--}}
-{{--                        button-class="search-card__button"--}}
-{{--                        badge-class="search-card__badge"--}}
+{{--                        class="vertical-variation__buttons"--}}
+{{--                        button-class="vertical-variation__button"--}}
+{{--                        badge-class="vertical-variation__badge"--}}
 {{--                        type="light"--}}
 {{--                        add="12"--}}
 {{--                        wishlist="1200"--}}
@@ -460,39 +460,39 @@
 {{--                        favorite="153"--}}
 {{--                    />--}}
 {{--                </div>--}}
-{{--                <div class="search__item search-card">--}}
-{{--                    <div class="search-card__thumbnail">--}}
+{{--                <div class="search__item vertical-variation">--}}
+{{--                    <div class="vertical-variation__thumbnail">--}}
 {{--                        <a href="{{ route('game-carrier') }}">--}}
-{{--                            <img class="search-card__img" src="{{ asset('/storage/test-6.jpg') }}" alt="">--}}
+{{--                            <img class="vertical-variation__img" src="{{ asset('/storage/test-6.jpg') }}" alt="">--}}
 {{--                        </a>--}}
 {{--                    </div>--}}
 
-{{--                    <div class="search-card__main">--}}
-{{--                        <div class="search-card__info">--}}
-{{--                            <div class="search-card__title">--}}
+{{--                    <div class="vertical-variation__main">--}}
+{{--                        <div class="vertical-variation__info">--}}
+{{--                            <div class="vertical-variation__title">--}}
 {{--                                <a href="{{ route('game-carrier') }}">--}}
 {{--                                    Naruto Shippuden Ultimate Ninfa Storm Collection CollectionNaruto Shippuden Ultimate Ninfa Storm Collection Collection--}}
 {{--                                </a>--}}
 {{--                            </div>--}}
-{{--                            <div class="search-card__details">--}}
-{{--                                <div class="search-card__detail">--}}
+{{--                            <div class="vertical-variation__details">--}}
+{{--                                <div class="vertical-variation__detail">--}}
 {{--                                    Playstation sdfsdfsdfsdfsdfsdf--}}
 {{--                                </div>--}}
-{{--                                <div class="search-card__detail">--}}
+{{--                                <div class="vertical-variation__detail">--}}
 {{--                                    BLES00789xvcxvxcv--}}
 {{--                                </div>--}}
-{{--                                <div class="search-card__detail">--}}
+{{--                                <div class="vertical-variation__detail">--}}
 {{--                                    Essentialsxcvxcvxcvxcvxcvxcvxcvxcvxcvxcvxcvxcvxcvxcvxcv--}}
 {{--                                </div>--}}
 {{--                            </div>--}}
-{{--                            <div class="search-card__more">--}}
-{{--                                <div class="search-card__detail">--}}
+{{--                            <div class="vertical-variation__more">--}}
+{{--                                <div class="vertical-variation__detail">--}}
 {{--                                    Playstation 3--}}
 {{--                                </div>--}}
-{{--                                <div class="search-card__detail">--}}
+{{--                                <div class="vertical-variation__detail">--}}
 {{--                                    BLES00789--}}
 {{--                                </div>--}}
-{{--                                <div class="search-card__detail">--}}
+{{--                                <div class="vertical-variation__detail">--}}
 {{--                                    Essentials--}}
 {{--                                </div>--}}
 {{--                            </div>--}}
@@ -500,9 +500,9 @@
 {{--                    </div>--}}
 
 {{--                    <x-common.counter-buttons--}}
-{{--                        class="search-card__buttons"--}}
-{{--                        button-class="search-card__button"--}}
-{{--                        badge-class="search-card__badge"--}}
+{{--                        class="vertical-variation__buttons"--}}
+{{--                        button-class="vertical-variation__button"--}}
+{{--                        badge-class="vertical-variation__badge"--}}
 {{--                        type="light"--}}
 {{--                        add="12"--}}
 {{--                        wishlist="1200"--}}
@@ -512,39 +512,39 @@
 {{--                        favorite="153"--}}
 {{--                    />--}}
 {{--                </div>--}}
-{{--                <div class="search__item search-card">--}}
-{{--                    <div class="search-card__thumbnail">--}}
+{{--                <div class="search__item vertical-variation">--}}
+{{--                    <div class="vertical-variation__thumbnail">--}}
 {{--                        <a href="{{ route('game-carrier') }}">--}}
-{{--                            <img class="search-card__img" src="{{ asset('/storage/test-300.jpg') }}" alt="">--}}
+{{--                            <img class="vertical-variation__img" src="{{ asset('/storage/test-300.jpg') }}" alt="">--}}
 {{--                        </a>--}}
 {{--                    </div>--}}
 
-{{--                    <div class="search-card__main">--}}
-{{--                        <div class="search-card__info">--}}
-{{--                            <div class="search-card__title">--}}
+{{--                    <div class="vertical-variation__main">--}}
+{{--                        <div class="vertical-variation__info">--}}
+{{--                            <div class="vertical-variation__title">--}}
 {{--                                <a href="{{ route('game-carrier') }}">--}}
 {{--                                    Naruto Shippuden Ultimate Ninfa Storm Collection Collection--}}
 {{--                                </a>--}}
 {{--                            </div>--}}
-{{--                            <div class="search-card__details">--}}
-{{--                                <div class="search-card__detail">--}}
+{{--                            <div class="vertical-variation__details">--}}
+{{--                                <div class="vertical-variation__detail">--}}
 {{--                                    Playstation 3--}}
 {{--                                </div>--}}
-{{--                                <div class="search-card__detail">--}}
+{{--                                <div class="vertical-variation__detail">--}}
 {{--                                    BLES00789--}}
 {{--                                </div>--}}
-{{--                                <div class="search-card__detail">--}}
+{{--                                <div class="vertical-variation__detail">--}}
 {{--                                    Essentials--}}
 {{--                                </div>--}}
 {{--                            </div>--}}
-{{--                            <div class="search-card__more">--}}
-{{--                                <div class="search-card__detail">--}}
+{{--                            <div class="vertical-variation__more">--}}
+{{--                                <div class="vertical-variation__detail">--}}
 {{--                                    Playstation 3--}}
 {{--                                </div>--}}
-{{--                                <div class="search-card__detail">--}}
+{{--                                <div class="vertical-variation__detail">--}}
 {{--                                    BLES00789--}}
 {{--                                </div>--}}
-{{--                                <div class="search-card__detail">--}}
+{{--                                <div class="vertical-variation__detail">--}}
 {{--                                    Essentials--}}
 {{--                                </div>--}}
 {{--                            </div>--}}
@@ -552,9 +552,9 @@
 {{--                    </div>--}}
 
 {{--                    <x-common.counter-buttons--}}
-{{--                        class="search-card__buttons"--}}
-{{--                        button-class="search-card__button"--}}
-{{--                        badge-class="search-card__badge"--}}
+{{--                        class="vertical-variation__buttons"--}}
+{{--                        button-class="vertical-variation__button"--}}
+{{--                        badge-class="vertical-variation__badge"--}}
 {{--                        type="light"--}}
 {{--                        add="12"--}}
 {{--                        wishlist="1200"--}}

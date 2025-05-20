@@ -37,7 +37,7 @@ class GameVariationsIndexViewModel extends ViewModel
             ])
             ->filtered()
             ->sorted()
-            ->paginate(10)
+            ->paginate(20)
             ->withQueryString();
     }
 }

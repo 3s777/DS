@@ -4,40 +4,50 @@
     }
 
     &__result {
+        margin-bottom: 32px;
+    }
+
+    &__result_medias {
+        display: flex;
+        flex-wrap: wrap;
+        flex-direction: column;
+        gap: 24px;
+    }
+
+    &__result_variations {
         display: grid;
         grid-template-columns: repeat(5, 1fr);
         grid-template-rows: 1fr auto;
         gap: 16px;
-        margin-top: 32px;
     }
 
-    &__filters {
+    &__filter-badges {
         margin-top: 8px;
     }
 
     @include breakpoint-max($xl) {
-        &__result {
+        &__result_variations {
             grid-template-columns: repeat(4, 1fr);
             gap: 24px;
         }
     }
 
     @include breakpoint-max($ml) {
-        &__result {
+        &__result_variations {
             grid-template-columns: repeat(3, 1fr);
             gap: 24px;
         }
     }
 
     @include breakpoint-max($md) {
-        &__result {
+        &__result_variations {
             grid-template-columns: repeat(2, 1fr);
             gap: 20px;
         }
     }
 
     @include breakpoint-max($sm) {
-        &__result {
+        &__result_variations {
             grid-template-columns:1fr;
         }
     }

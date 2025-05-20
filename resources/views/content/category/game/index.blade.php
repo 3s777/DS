@@ -18,11 +18,12 @@
                     @endif
                 </x-ui.title>
 
-                <x-common.filters.badges class="search__filters" />
+                <x-common.filters.badges class="search__filter-badges" />
             </div>
 
-            @foreach($gameMedias as $media)
-                <x-ui.card class="media-card" body="false">
+            <div class="search__result search__result_medias">
+                @foreach($gameMedias as $media)
+                    <x-ui.card class="media-card" body="false">
 
                     <x-slot:header>
                         <x-ui.title indent="big">{{ $media->name }}</x-ui.title>
@@ -143,80 +144,14 @@
                         </div>
                     </div>
                 </x-ui.card>
-            @endforeach
+                @endforeach
+            </div>
 
             <div class="search__pagination">
                 {{ $gameMedias->links('pagination::default') }}
             </div>
 
             <div class="search__result">
-
-                @foreach($media->variations as $variation)
-                <div class="search__item search-card">
-                    <div class="search-card__thumbnail">
-                        <a href="{{ route('game-carrier') }}">
-                            <x-ui.responsive-image
-                                :model="$variation"
-                                :image-sizes="['extra_small','small', 'medium']"
-                                :path="$variation->getFeaturedImagePath()"
-                                :placeholder="true"
-                                :wrapper="true"
-                                wrapper-class="search-card__thumbnail-inner"
-                                sizes="(max-width: 768px) 260px, (max-width: 1400px) 260px, 260px">
-                                <x-slot:img alt="{{ $variation->name }}" title="{{ $variation->name }}"></x-slot:img>
-                            </x-ui.responsive-image>
-                        </a>
-                    </div>
-
-                    <div class="search-card__main">
-                        <div class="search-card__info">
-                            <div class="search-card__title">
-                                <a href="{{ route('game-carrier') }}">
-                                    {{ $variation->name }}
-                                </a>
-                            </div>
-                            <div class="search-card__details">
-                                <div class="search-card__detail">
-                                    Playstation 3
-                                </div>
-                                <div class="search-card__detail">
-                                    BLES00789
-                                </div>
-                                <div class="search-card__detail">
-                                    Essentials
-                                </div>
-                            </div>
-                            <div class="search-card__more">
-                                <div class="search-card__detail">
-                                    Playstation 3
-                                </div>
-                                <div class="search-card__detail">
-                                    BLES00789
-                                </div>
-                                <div class="search-card__detail">
-                                    Essentials
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <x-common.counter-buttons
-                        class="search-card__buttons"
-                        button-class="search-card__button"
-                        badge-class="search-card__badge"
-                        type="light"
-                        add="12"
-                        wishlist="50"
-                        sale="5"
-                        auction="25"
-                        exchange="2"
-                        favorite="153"
-                    />
-                </div>
-                @endforeach
-
-
-
 
 {{--                <div class="search__item search-card">--}}
 {{--                    <div class="search-card__thumbnail">--}}
