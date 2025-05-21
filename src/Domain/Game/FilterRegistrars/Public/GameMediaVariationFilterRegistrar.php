@@ -10,6 +10,7 @@ use App\Filters\SearchFilter;
 use Domain\Game\Models\Game;
 use Domain\Game\Models\GameDeveloper;
 use Domain\Game\Models\GameGenre;
+use Domain\Game\Models\GameMedia;
 use Domain\Game\Models\GamePlatform;
 use Domain\Game\Models\GamePublisher;
 
@@ -21,7 +22,7 @@ class GameMediaVariationFilterRegistrar implements FilterRegistrar
             'dates' => DatesFilter::make(
                 __('common.dates'),
                 'dates',
-                'game_medias',
+                'game_media_variations',
                 placeholder: [
                     'from' => __('filters.dates_from'),
                     'to' => __('filters.dates_to'),
@@ -30,12 +31,12 @@ class GameMediaVariationFilterRegistrar implements FilterRegistrar
             'search' => SearchFilter::make(
                 __('common.search'),
                 'search',
-                'game_medias',
+                'game_media_variations',
                 alternativeFields: ['alternative_names', 'barcodes']
             ),
             'genres' => RelationMultipleFilter::make(
                 trans_choice('game.genre.genres', 2),
-                'genres',
+                'gameMedia.genres',
                 'game_genres',
                 GameGenre::class,
                 'id',
@@ -52,7 +53,7 @@ class GameMediaVariationFilterRegistrar implements FilterRegistrar
             ),
             'publishers' => RelationMultipleFilter::make(
                 trans_choice('game.publisher.publishers', 2),
-                'publishers',
+                'gameMedia.publishers',
                 'game_publishers',
                 GamePublisher::class,
                 'id',
@@ -61,7 +62,7 @@ class GameMediaVariationFilterRegistrar implements FilterRegistrar
             ),
             'platforms' => RelationMultipleFilter::make(
                 trans_choice('game.platform.platforms', 2),
-                'platforms',
+                'gameMedia.platforms',
                 'game_platforms',
                 GamePlatform::class,
                 'id',
@@ -69,7 +70,7 @@ class GameMediaVariationFilterRegistrar implements FilterRegistrar
             ),
             'games' => RelationMultipleFilter::make(
                 trans_choice('game.games', 2),
-                'games',
+                'gameMedia.games',
                 'games',
                 Game::class,
                 'id',
@@ -86,6 +87,14 @@ class GameMediaVariationFilterRegistrar implements FilterRegistrar
                     'from' => __('game.released_at_from'),
                     'to' => __('game.released_at_to'),
                 ]
+            ),
+            'media' => RelationFilter::make(
+                trans_choice('game.media.medias', 1),
+                'media',
+                'game_media_variations',
+                GameMedia::class,
+                'game_media_id',
+                trans_choice('game.media.choose', 1)
             ),
         ];
     }

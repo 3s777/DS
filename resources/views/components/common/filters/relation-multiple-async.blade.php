@@ -1,16 +1,16 @@
 @props([
     'name',
     'route',
-    'placeholder' => get_filter($name)->placeholder()
+    'placeholder',
+    'selectName' => 'filters['.$name.'][]'
 ])
 
 <x-ui.select.async-multiple
     :selected="get_filter($name)->preparedSelected()"
     :show-old="false"
     :name="$name"
-    select-name="{{ 'filters['.$name.'][]' }}"
-{{--    select-name="{{ 'filters[gameMedia][developers][]' }}"--}}
-    :label="$placeholder"
+    select-name="{{ $selectName }}"
+    :label="$placeholder ?? get_filter($name)->placeholder()"
     defaultOption="{{ get_filter($name)->title() }}"
     :route="$route">
 </x-ui.select.async-multiple>

@@ -1,14 +1,15 @@
 @props([
     'name',
-    'options' => get_filter($name)->getPreparedOptions(),
-    'placeholder' => get_filter($name)->placeholder()
+    'options',
+    'placeholder',
+    'selectName' => 'filters['.$name.'][]'
 ])
 
 <x-ui.select.data-multiple
     :name="$name"
-    select-name="filters[{{ $name }}][]"
-    :options="$options"
-    :label="$placeholder"
+    select-name="{{ $selectName }}"
+    :options="$options ?? get_filter($name)->getPreparedOptions()"
+    :label="$placeholder ?? get_filter($name)->placeholder()"
     default-option="{{ get_filter($name)->title() }}"
     :selected="get_filter($name)->preparedSelected()"
 />

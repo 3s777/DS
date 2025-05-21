@@ -1,7 +1,8 @@
 @props([
     'name',
     'options',
-    'placeholder' => get_filter($name)->placeholder()
+    'placeholder',
+    'selectName' => 'filters['.$name.']'
 ])
 
 <x-ui.select.data
@@ -9,7 +10,7 @@
     :show-old="false"
     :name="$name"
     :options="$options ?? get_filter($name)->getPreparedOptions()"
-    select-name="{{ 'filters['.$name.']' }}"
-    :label="$placeholder"
+    selectName="{{ $selectName }}"
+    :label="$placeholder ?? get_filter($name)->placeholder()"
     defaultOption="{{ get_filter($name)->title() }}">
 </x-ui.select.data>

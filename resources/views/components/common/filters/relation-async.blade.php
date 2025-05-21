@@ -1,7 +1,8 @@
 @props([
     'name',
     'route',
-    'placeholder' => get_filter($name)->placeholder()
+    'placeholder',
+    'selectName' => 'filters['.$name.']'
 ])
 
 <x-ui.select.async
@@ -9,7 +10,7 @@
     :show-old="false"
     :name="$name"
     :select-name="$name"
-    :label="$placeholder"
+    :label="$placeholder ?? get_filter($name)->placeholder()"
     defaultOption="{{ get_filter($name)->title() }}"
-    selectName="filters[{{ $name }}]"
+    selectName="{{ $selectName }}"
     :route="$route" />

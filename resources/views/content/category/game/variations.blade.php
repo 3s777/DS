@@ -26,7 +26,7 @@
                 @foreach($variations as $variation)
                 <div class="search__item vertical-variation">
                     <div class="vertical-variation__thumbnail">
-                        <a href="{{ route('game-carrier') }}">
+                        <a href="{{ route('admin.game-media-variations.edit', $variation->slug) }}">
                             <x-ui.responsive-image
                                 :model="$variation"
                                 :image-sizes="['extra_small','small', 'medium']"
@@ -43,31 +43,19 @@
                     <div class="vertical-variation__main">
                         <div class="vertical-variation__info">
                             <div class="vertical-variation__title">
-                                <a href="{{ route('game-carrier') }}">
+                                <a href="{{ route('admin.game-media-variations.edit', $variation->slug) }}">
                                     {{ $variation->name }}
                                 </a>
                             </div>
                             <div class="vertical-variation__details">
-                                <div class="vertical-variation__detail">
-                                    Playstation 3
-                                </div>
-                                <div class="vertical-variation__detail">
-                                    BLES00789
-                                </div>
-                                <div class="vertical-variation__detail">
-                                    Essentials
-                                </div>
+                                <x-ui.tag color="dark" class="vertical-variation__detail">{{ $variation->article_number }}</x-ui.tag>
                             </div>
                             <div class="vertical-variation__more">
-                                <div class="vertical-variation__detail">
-                                    Playstation 3
-                                </div>
-                                <div class="vertical-variation__detail">
-                                    BLES00789
-                                </div>
-                                <div class="vertical-variation__detail">
-                                    Essentials
-                                </div>
+                                @foreach($variation->barcodes as $barcode)
+                                    @if($barcode)
+                                        <x-ui.tag color="dark" class="vertical-variation__detail">{{ $barcode }}</x-ui.tag>
+                                    @endif
+                                @endforeach
                             </div>
                         </div>
                     </div>

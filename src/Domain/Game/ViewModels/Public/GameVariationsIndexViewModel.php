@@ -2,7 +2,6 @@
 
 namespace Domain\Game\ViewModels\Public;
 
-use Domain\Game\Models\GameMedia;
 use Domain\Game\Models\GameMediaVariation;
 use Spatie\ViewModels\ViewModel;
 
@@ -21,6 +20,8 @@ class GameVariationsIndexViewModel extends ViewModel
                 'game_media_variations.name',
                 'game_media_variations.created_at',
                 'game_media_variations.slug',
+                'game_media_variations.article_number',
+                'game_media_variations.barcodes'
             )
             ->with([
 //                'games:id,name',
@@ -33,6 +34,7 @@ class GameVariationsIndexViewModel extends ViewModel
 //                        ->with(['media'])
 //                        ->orderBy('is_main', 'DESC');
 //                },
+
                 'media'
             ])
             ->filtered()

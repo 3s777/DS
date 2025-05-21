@@ -45,13 +45,8 @@
 
     &__detail {
         align-self: start;
-        margin-bottom: 4px;
-        margin-right: 4px;
         max-width: 100%;
         padding: 4px 8px;
-        border-radius: $small-border-radius;
-        word-wrap: break-word;
-        background: $base-dark-like-transparent;
     }
 
     &__more {
@@ -89,6 +84,8 @@
     }
 
     &__buttons {
+        flex-wrap: wrap;
+        justify-content: flex-start;
         padding: 0 12px 12px 12px;
     }
 }
