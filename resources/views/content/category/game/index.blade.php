@@ -63,7 +63,7 @@
                                             @endif
                                                 <div href="#" class="horizontal-variation__inner">
                                                     <div class="horizontal-variation__featured">
-                                                        <a href="{{ route('admin.game-media-variations.edit', $variation->slug) }}">
+                                                        <a href="{{ route('game.variation.show', $variation->slug) }}">
                                                             <x-ui.responsive-image
                                                                 :model="$variation"
                                                                 :image-sizes="['extra_small','small']"
@@ -78,7 +78,7 @@
                                                     </div>
                                                     <div class="horizontal-variation__content">
                                                         <div class="horizontal-variation__title">
-                                                            <a href="{{ route('admin.game-media-variations.edit', $variation->slug) }}">
+                                                            <a href="{{ route('game.variation.show', $variation->slug) }}">
                                                                 {{ $variation->name }}
                                                             </a>
                                                         </div>

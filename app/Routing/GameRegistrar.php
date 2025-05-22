@@ -8,6 +8,7 @@ use App\Http\Controllers\Game\Admin\GameDeveloperController;
 use App\Http\Controllers\Game\Admin\GameGenreController;
 use App\Http\Controllers\Game\Admin\GameMediaController;
 use App\Http\Controllers\Game\Admin\GameMediaVariationController;
+use App\Http\Controllers\Game\Public\GameMediaVariationController as PublicVariationController;
 use App\Http\Controllers\Game\Admin\GamePlatformController;
 use App\Http\Controllers\Game\Admin\GamePlatformManufacturerController;
 use App\Http\Controllers\Game\Admin\GamePublisherController;
@@ -29,11 +30,10 @@ class GameRegistrar extends BaseRouteRegistrar implements RouteRegistrar
                 });
 
                 Route::prefix('{locale}')->whereIn('locale', config('app.available_locales'))->group(function () {
-                    Route::controller(PublicCategoryController::class)
+                    Route::controller(PublicVariationController::class)
                         ->middleware(['remove.locale'])
                         ->group(function () {
-                            Route::get('/category/{category}', 'show')->name('category.show');
-                            Route::get('/category/{category}/variations', 'variations')->name('category.variations');
+                            Route::get('/game/variation/{game_media_variation}', 'show')->name('game.variation.show');
                         });
                 });
 

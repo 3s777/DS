@@ -26,7 +26,7 @@
                 @foreach($variations as $variation)
                 <div class="search__item vertical-variation">
                     <div class="vertical-variation__thumbnail">
-                        <a href="{{ route('admin.game-media-variations.edit', $variation->slug) }}">
+                        <a href="{{ route('game.variation.show', $variation->slug) }}">
                             <x-ui.responsive-image
                                 :model="$variation"
                                 :image-sizes="['extra_small','small', 'medium']"
@@ -43,7 +43,7 @@
                     <div class="vertical-variation__main">
                         <div class="vertical-variation__info">
                             <div class="vertical-variation__title">
-                                <a href="{{ route('admin.game-media-variations.edit', $variation->slug) }}">
+                                <a href="{{ route('game.variation.show', $variation->slug) }}">
                                     {{ $variation->name }}
                                 </a>
                             </div>

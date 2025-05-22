@@ -33,7 +33,7 @@ class PageRegistrar extends BaseRouteRegistrar implements RouteRegistrar
                     ->middleware(['remove.locale'])
                     ->controller(RulesController::class)
                     ->group(function() {
-                        Route::get('/rules/{page:slug}', 'show')->name('rules.show');
+                        Route::get('/rules/{page}', 'show')->name('rules.show');
                         Route::get('/qa', 'qa')->name('qa');
                     });
 

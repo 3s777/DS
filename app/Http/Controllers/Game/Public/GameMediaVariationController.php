@@ -12,6 +12,7 @@ use Domain\Game\Models\GameMediaVariation;
 use Domain\Game\Services\GameMediaVariationService;
 use Domain\Game\ViewModels\Admin\GameMediaVariationIndexViewModel;
 use Domain\Game\ViewModels\Admin\GameMediaVariationUpdateViewModel;
+use Domain\Game\ViewModels\Public\GameVariationShowViewModel;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
 use Illuminate\Foundation\Application;
@@ -30,8 +31,8 @@ class GameMediaVariationController extends Controller
 //        $this->authorizeResource(GameMediaVariation::class, 'game_media_variation');
     }
 
-    public function show(string $id)
+    public function show(GameMediaVariation $gameMediaVariation)
     {
-        return view();
+        return view('content.variation.game', new GameVariationShowViewModel($gameMediaVariation));
     }
 }
