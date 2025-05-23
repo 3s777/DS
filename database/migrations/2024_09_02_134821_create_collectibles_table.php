@@ -29,6 +29,7 @@ return new class () extends Migration {
             $table->jsonb('kit_conditions')->nullable();
             $table->jsonb('properties')->nullable();
             $table->morphs('collectable');
+            $table->morphs('mediable');
             $table->string('target');
             $table->jsonb('sale_data')->nullable();
             $table->jsonb('auction_data')->nullable();

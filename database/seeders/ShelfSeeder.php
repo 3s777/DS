@@ -31,28 +31,33 @@ class ShelfSeeder extends Seeder
 
         foreach ($users as $user) {
             $collectableFactory = fake()->randomElement([
-                GameMedia::factory(5)
-                    ->has(
-                        Game::factory(1)
+
+                GameMediaVariation::factory(3)
+                    ->for(
+                        GameMedia::factory()
+                            ->has(
+                                Game::factory(1)
+                                    ->has(GameDeveloper::factory(2)->for($user, 'user'), 'developers')
+                                    ->has(GamePublisher::factory(2)->for($user, 'user'), 'publishers')
+                                    ->has(GameGenre::factory(3)->for($user, 'user'), 'genres')
+                                    ->has(GamePlatform::factory(2)
+                                        ->for(GamePlatformManufacturer::factory()->for($user, 'user'), 'game_platform_manufacturer')
+                                        ->for($user, 'user'), 'platforms')
+                                    ->for($user, 'user'),
+                                'games'
+                            )
                             ->has(GameDeveloper::factory(2)->for($user, 'user'), 'developers')
                             ->has(GamePublisher::factory(2)->for($user, 'user'), 'publishers')
                             ->has(GameGenre::factory(3)->for($user, 'user'), 'genres')
                             ->has(GamePlatform::factory(2)
                                 ->for(GamePlatformManufacturer::factory()->for($user, 'user'), 'game_platform_manufacturer')
                                 ->for($user, 'user'), 'platforms')
-                            ->for($user, 'user'),
-                        'games'
-                    )
-                    ->has(GameDeveloper::factory(2)->for($user, 'user'), 'developers')
-                    ->has(GamePublisher::factory(2)->for($user, 'user'), 'publishers')
-                    ->has(GameGenre::factory(3)->for($user, 'user'), 'genres')
-                    ->has(GamePlatform::factory(2)
-                        ->for(GamePlatformManufacturer::factory()->for($user, 'user'), 'game_platform_manufacturer')
-                        ->for($user, 'user'), 'platforms')
-                    ->has(GameMediaVariation::factory(3)
-                        ->has(KitItem::factory(rand(1, 3))->for($user, 'user'), 'kitItems'), 'variations'
-                    )
+                            ->has(GameMediaVariation::factory(3)
+                                ->has(KitItem::factory(rand(1, 3))->for($user, 'user'), 'kitItems'), 'variations'
+                            , 'gameMedia')
+                            ->for($user, 'user')
 //                    ->for($user, 'user')
+                    )
             ]);
 
             $collectableFactory

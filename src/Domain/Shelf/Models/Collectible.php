@@ -163,6 +163,11 @@ class Collectible extends Model implements HasMedia
         return $this->morphTo();
     }
 
+    public function mediable(): MorphTo
+    {
+        return $this->morphTo();
+    }
+
     public function kitItems(): BelongsToMany
     {
         return $this->belongsToMany(KitItem::class)->withPivot('condition');

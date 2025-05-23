@@ -3,6 +3,8 @@
 namespace Database\Factories\Shelf;
 
 use Domain\Auth\Models\User;
+use Domain\Game\Models\GameMedia;
+use Domain\Shelf\Contracts\Collectable;
 use Domain\Shelf\Enums\ConditionEnum;
 use Domain\Shelf\Enums\TargetEnum;
 use Domain\Shelf\Models\Category;
@@ -20,6 +22,12 @@ use Illuminate\Support\Str;
 class CollectibleFactory extends Factory
 {
     protected $model = Collectible::class;
+
+    private function getCollectableModel(string $type, int $id): Collectable
+    {
+        $modelClass = Relation::getMorphedModel($type);
+        return $modelClass::find($id);
+    }
 
     /**
      * Define the model's default state.
@@ -44,6 +52,8 @@ class CollectibleFactory extends Factory
         //            ];
         //        }
 
+
+
         return [
             'name' => fake()->name(),
             'ulid' => Str::ulid(),
@@ -67,6 +77,20 @@ class CollectibleFactory extends Factory
 //                $className = Relation::getMorphedModel($attributes['collectable_type']);
 //                return $className::factory()->has(KitItem::factory(rand(1,3)));
 //            },
+            'mediable_type' => function(array $attributes) {
+                $collectable = $this->getCollectableModel(
+                    $attributes['collectable_type'],
+                    $attributes['collectable_id']
+                );
+                return $collectable->getMediableType();
+            },
+            'mediable_id' => function(array $attributes) {
+                $collectable = $this->getCollectableModel(
+                    $attributes['collectable_type'],
+                    $attributes['collectable_id']
+                );
+                return $collectable->getMediableId();
+            },
             'seller' => fake()->name(),
             'purchase_price' => fake()->numberBetween(1000, 100000),
             'purchased_at' => fake()->date(),

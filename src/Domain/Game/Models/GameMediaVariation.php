@@ -8,6 +8,7 @@ use Domain\Game\FilterRegistrars\Admin\GameMediaVariationFilterRegistrar;
 use Domain\Game\FilterRegistrars\Public\GameMediaVariationFilterRegistrar as VariationFilterRegistrar;
 use Domain\Game\Observers\GameMediaVariationObserver;
 use Domain\Game\QueryBuilders\GameMediaVariationQueryBuilder;
+use Domain\Shelf\Contracts\Collectable;
 use Domain\Shelf\Models\Collectible;
 use Domain\Shelf\Models\KitItem;
 use Illuminate\Database\Eloquent\Attributes\ObservedBy;
@@ -29,7 +30,7 @@ use Support\Traits\Models\HasSlug;
 use Support\Traits\Models\HasUser;
 
 #[ObservedBy([GameMediaVariationObserver::class])]
-class GameMediaVariation extends Model implements HasMedia
+class GameMediaVariation extends Model implements HasMedia, Collectable
 {
     use HasFactory;
     use HasSlug;
@@ -77,6 +78,16 @@ class GameMediaVariation extends Model implements HasMedia
     protected static function newFactory(): GameMediaVariationFactory
     {
         return GameMediaVariationFactory::new();
+    }
+
+    public function getMediableId(): int
+    {
+        return $this->game_media_id;
+    }
+
+    public function getMediableType(): string
+    {
+        return 'game_media';
     }
 
     public function registerMediaCollections(): void

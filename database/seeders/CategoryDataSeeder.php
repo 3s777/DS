@@ -2,7 +2,7 @@
 
 namespace Database\Seeders;
 
-use Domain\Game\Models\GameMedia;
+use Domain\Game\Models\GameMediaVariation;
 use Domain\Shelf\Models\Category;
 use Illuminate\Database\Eloquent\Relations\Relation;
 use Illuminate\Database\Seeder;
@@ -14,7 +14,7 @@ class CategoryDataSeeder extends Seeder
         Category::create(
             [
                 'name' => 'Игра',
-                'model' => Relation::getMorphAlias(GameMedia::class)
+                'model' => Relation::getMorphAlias(GameMediaVariation::class)
             ],
         );
 

@@ -8,6 +8,7 @@ use Domain\Game\Models\Game;
 use Domain\Game\Models\GameDeveloper;
 use Domain\Game\Models\GameGenre;
 use Domain\Game\Models\GameMedia;
+use Domain\Game\Models\GameMediaVariation;
 use Domain\Game\Models\GamePlatform;
 use Domain\Game\Models\GamePlatformManufacturer;
 use Domain\Game\Models\GamePublisher;
@@ -47,25 +48,28 @@ class TestUserDataSeeder extends Seeder
         $testCollector->assignRole('collector');
 
         $collectableFactory = fake()->randomElement([
-            GameMedia::factory(5)
-                ->has(
-                    Game::factory(1)
-                        ->has(GameDeveloper::factory(2)->for($testUser, 'user'), 'developers')
-                        ->has(GamePublisher::factory(2)->for($testUser, 'user'), 'publishers')
-                        ->has(GameGenre::factory(3)->for($testUser, 'user'), 'genres')
-                        ->has(GamePlatform::factory(2)
-                            ->for(GamePlatformManufacturer::factory()->for($testUser, 'user'), 'game_platform_manufacturer')
-                            ->for($testUser, 'user'), 'platforms')
-                        ->for($testUser, 'user'),
-                    'games'
-                )
-                ->has(GameDeveloper::factory(2)->for($testUser, 'user'), 'developers')
-                ->has(GamePublisher::factory(2)->for($testUser, 'user'), 'publishers')
-                ->has(GameGenre::factory(3)->for($testUser, 'user'), 'genres')
-                ->has(GamePlatform::factory(2)
-                    ->for(GamePlatformManufacturer::factory()->for($testUser, 'user'), 'game_platform_manufacturer')
-                    ->for($testUser, 'user'), 'platforms')
-                ->for($testUser, 'user')
+            GameMediaVariation::factory(3)->for(
+                GameMedia::factory()
+                    ->has(
+                        Game::factory(1)
+                            ->has(GameDeveloper::factory(2)->for($testUser, 'user'), 'developers')
+                            ->has(GamePublisher::factory(2)->for($testUser, 'user'), 'publishers')
+                            ->has(GameGenre::factory(3)->for($testUser, 'user'), 'genres')
+                            ->has(GamePlatform::factory(2)
+                                ->for(GamePlatformManufacturer::factory()->for($testUser, 'user'), 'game_platform_manufacturer')
+                                ->for($testUser, 'user'), 'platforms')
+                            ->for($testUser, 'user'),
+                        'games'
+                    )
+                    ->has(GameDeveloper::factory(2)->for($testUser, 'user'), 'developers')
+                    ->has(GamePublisher::factory(2)->for($testUser, 'user'), 'publishers')
+                    ->has(GameGenre::factory(3)->for($testUser, 'user'), 'genres')
+                    ->has(GamePlatform::factory(2)
+                        ->for(GamePlatformManufacturer::factory()->for($testUser, 'user'), 'game_platform_manufacturer')
+                        ->for($testUser, 'user'), 'platforms')
+                    ->for($testUser, 'user'),
+                'gameMedia'
+            )->for($testUser, 'user')
         ]);
 
         $collectableFactory

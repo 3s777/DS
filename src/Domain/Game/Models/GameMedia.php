@@ -9,6 +9,7 @@ use Domain\Game\FilterRegistrars\Admin\GameMediaFilterRegistrar as AdminGameMedi
 use Domain\Game\FilterRegistrars\Public\GameMediaFilterRegistrar;
 use Domain\Game\Models\Traits\GameProperties;
 use Domain\Game\QueryBuilders\GameMediaQueryBuilder;
+use Domain\Shelf\Contracts\Mediable;
 use Domain\Shelf\Models\Collectible;
 use Domain\Shelf\Models\KitItem;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -30,7 +31,7 @@ use Support\Traits\Models\HasImages;
 use Support\Traits\Models\HasSlug;
 use Support\Traits\Models\HasUser;
 
-class GameMedia extends Model implements HasMedia, HasProperties
+class GameMedia extends Model implements HasMedia, HasProperties, Mediable
 {
     use HasFactory;
     use HasSlug;
