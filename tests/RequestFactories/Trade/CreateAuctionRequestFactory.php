@@ -3,6 +3,7 @@
 namespace Tests\RequestFactories\Trade;
 
 use Domain\Game\Models\GameMedia;
+use Domain\Game\Models\GameMediaVariation;
 use Domain\Settings\Models\Country;
 use Domain\Shelf\Models\Category;
 use Domain\Shelf\Models\Collectible;
@@ -15,13 +16,18 @@ class CreateAuctionRequestFactory extends RequestFactory
 {
     public function definition(): array
     {
-        $gameMedia = GameMedia::factory()->has(KitItem::factory(rand(1, 3)), 'kitItems')->create();
+        $gameMediaVariation = GameMediaVariation::factory()
+            ->has(KitItem::factory(rand(1, 3)), 'kitItems')
+            ->for(GameMedia::factory(), 'gameMedia')
+            ->create();
         $countries = Country::factory(3)->create();
         $category = Category::factory(['model' => 'game_media'])->create();
         $collectible = Collectible::factory(
             [
                 'collectable_type' => 'game_media',
-                'collectable_id' => $gameMedia->id
+                'collectable_id' => $gameMediaVariation->id,
+                'mediable_id' => $gameMediaVariation->game_media_id,
+                'mediable_type' => 'game_media',
             ]
         )->create();
 

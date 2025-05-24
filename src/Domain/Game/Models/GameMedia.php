@@ -31,7 +31,7 @@ use Support\Traits\Models\HasImages;
 use Support\Traits\Models\HasSlug;
 use Support\Traits\Models\HasUser;
 
-class GameMedia extends Model implements HasMedia, HasProperties, Mediable
+class GameMedia extends Model implements HasMedia, Mediable
 {
     use HasFactory;
     use HasSlug;
@@ -42,7 +42,6 @@ class GameMedia extends Model implements HasMedia, HasProperties, Mediable
     use HasImages;
     use HasUser;
     use HasTranslations;
-    use GameProperties;
 
     protected $table = 'game_medias';
 

@@ -8,6 +8,7 @@ use Domain\Auth\Models\Collector;
 use Domain\Auth\Models\Role;
 use Domain\Auth\Models\User;
 use Domain\Game\Models\GameMedia;
+use Domain\Game\Models\GameMediaVariation;
 use Domain\Shelf\Enums\ConditionEnum;
 use Domain\Shelf\Models\Category;
 use Domain\Shelf\Models\Collectible;
@@ -40,14 +41,24 @@ class CollectibleFilterTest extends TestCase
         $this->user->assignRole('super_admin');
 
         $this->category = Category::factory()->create([
-            'model' => Relation::getMorphAlias(GameMedia::class)
+            'model' => Relation::getMorphAlias(GameMediaVariation::class)
         ]);
 
+        $gameMediaVariation = GameMediaVariation::factory()
+            ->for(GameMedia::factory(), 'gameMedia')
+            ->create();
+
         $this->collectibles = CollectibleFactory::new()
-            ->for(GameMedia::factory(), 'collectable')
             ->for($this->category, 'category')
             ->count(10)
-            ->create();
+            ->create(
+                [
+                    'collectable_type' => 'game_media_variation',
+                    'collectable_id' => $gameMediaVariation->id,
+                    'mediable_id' => $gameMediaVariation->game_media_id,
+                    'mediable_type' => 'game_media',
+                ]
+            );
     }
 
     public function getFactory(): Factory

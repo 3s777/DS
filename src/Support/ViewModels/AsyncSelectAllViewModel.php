@@ -35,6 +35,7 @@ class AsyncSelectAllViewModel extends ViewModel
         //        }
 
         if ($this->depended) {
+
             //            $dependedData = request('depended');
             $dependedKey = array_key_first($this->depended);
             $dependedValue = $this->depended[$dependedKey];
@@ -48,6 +49,8 @@ class AsyncSelectAllViewModel extends ViewModel
             $query->whereIn($dependedKey, explode(',', $dependedValue));
 
             $models = $query->get();
+
+
 
             foreach ($models as $model) {
                 $options[] = ['value' => $model->{$this->key}, 'label' => $model->{$this->name}];

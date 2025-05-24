@@ -3,6 +3,7 @@
 namespace Tests\RequestFactories\Shelf\Admin;
 
 use Domain\Game\Models\GameMedia;
+use Domain\Game\Models\GameMediaVariation;
 use Domain\Settings\Models\Country;
 use Domain\Shelf\Enums\CollectibleTypeEnum;
 use Domain\Shelf\Enums\ConditionEnum;
@@ -19,7 +20,10 @@ class CreateCollectibleGameRequestFactory extends RequestFactory
 {
     public function definition(): array
     {
-        $gameMedia = GameMedia::factory()->has(KitItem::factory(rand(1, 3)), 'kitItems')->create();
+        $gameMediaVariation = GameMediaVariation::factory()
+            ->has(KitItem::factory(rand(1, 3)), 'kitItems')
+            ->for(GameMedia::factory(), 'gameMedia')
+            ->create();
         $countries = Country::factory(3)->create();
 
         $target = Arr::random(TargetEnum::cases());
@@ -59,8 +63,10 @@ class CreateCollectibleGameRequestFactory extends RequestFactory
                 'is_done' => fake()->boolean(),
                 'is_digital' => true
             ],
-            'collectable' => $gameMedia->id,
+            'collectable' => $gameMediaVariation->id,
             'collectable_type' => CollectibleTypeEnum::Game->morphName(),
+            'mediable_id' => $gameMediaVariation->game_media_id,
+            'mediable_type' => 'game_media',
             'target' => $target->value,
             'sale' => $sale,
             'auction' => $auction

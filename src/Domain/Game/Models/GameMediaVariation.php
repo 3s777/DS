@@ -2,10 +2,12 @@
 
 namespace Domain\Game\Models;
 
+use App\Contracts\HasProperties;
 use Database\Factories\Game\GameMediaVariationFactory;
 use Domain\Auth\Models\User;
 use Domain\Game\FilterRegistrars\Admin\GameMediaVariationFilterRegistrar;
 use Domain\Game\FilterRegistrars\Public\GameMediaVariationFilterRegistrar as VariationFilterRegistrar;
+use Domain\Game\Models\Traits\GameProperties;
 use Domain\Game\Observers\GameMediaVariationObserver;
 use Domain\Game\QueryBuilders\GameMediaVariationQueryBuilder;
 use Domain\Shelf\Contracts\Collectable;
@@ -30,7 +32,7 @@ use Support\Traits\Models\HasSlug;
 use Support\Traits\Models\HasUser;
 
 #[ObservedBy([GameMediaVariationObserver::class])]
-class GameMediaVariation extends Model implements HasMedia, Collectable
+class GameMediaVariation extends Model implements HasMedia, HasProperties, Collectable
 {
     use HasFactory;
     use HasSlug;
@@ -41,6 +43,7 @@ class GameMediaVariation extends Model implements HasMedia, Collectable
     use HasImages;
     use HasUser;
     use HasTranslations;
+    use GameProperties;
 
     protected $table = 'game_media_variations';
 

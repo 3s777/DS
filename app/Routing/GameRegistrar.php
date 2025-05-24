@@ -26,6 +26,8 @@ class GameRegistrar extends BaseRouteRegistrar implements RouteRegistrar
                     Route::post('/select-game-publishers', [GamePublisherController::class, 'getForSelect'])->name('select-game-publishers');
                     Route::post('/select-game-media', [GameMediaController::class, 'getForSelect'])->name('game-media.select');
                     Route::post('/select-game-media-variation', [GameMediaVariationController::class, 'getForSelect'])->name('game-media-variation.select');
+                    Route::post('/select-game-variation-by-media', [GameMediaVariationController::class, 'getForSelectByMedia'])->name('media.game-variation.select');
+
                     Route::post('/select-games', [GameController::class, 'getForSelect'])->name('select-games');
                 });
 

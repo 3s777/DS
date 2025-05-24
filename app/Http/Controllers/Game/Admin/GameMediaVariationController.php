@@ -21,6 +21,7 @@ use Illuminate\Routing\Redirector;
 use Support\Actions\MassDeletingAction;
 use Support\DTOs\MassDeletingDTO;
 use Support\Exceptions\MassDeletingException;
+use Support\ViewModels\AsyncSelectAllViewModel;
 use Support\ViewModels\AsyncSelectByQueryViewModel;
 
 class GameMediaVariationController extends Controller
@@ -118,6 +119,23 @@ class GameMediaVariationController extends Controller
             $request->input('query'),
             GameMediaVariation::class,
             trans_choice('collectible.variation.choose', 2)
+        );
+    }
+
+    public function getForSelectByMedia(Request $request): AsyncSelectAllViewModel
+    {
+//        return new AsyncSelectByQueryViewModel(
+//            $request->input('query'),
+//            GameMediaVariation::class,
+//            trans_choice('collectible.variation.choose', 2)
+//        );
+
+
+
+        return new AsyncSelectAllViewModel(
+            GameMediaVariation::class,
+            trans_choice('collectible.variation.choose', 2),
+            $request->input('depended')
         );
     }
 }

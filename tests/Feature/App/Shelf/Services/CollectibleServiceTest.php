@@ -8,6 +8,7 @@ use App\Jobs\GenerateThumbnailJob;
 use Domain\Auth\Models\Collector;
 use Domain\Auth\Models\User;
 use Domain\Game\Models\GameMedia;
+use Domain\Game\Models\GameMediaVariation;
 use Domain\Settings\Models\Country;
 use Domain\Shelf\DTOs\FillCollectibleDTO;
 use Domain\Shelf\Enums\TargetEnum;
@@ -41,7 +42,7 @@ class CollectibleServiceTest extends TestCase
         parent::setUp();
 
         $category = Category::factory()->create([
-            'model' => Relation::getMorphAlias(GameMedia::class)
+            'model' => Relation::getMorphAlias(GameMediaVariation::class)
         ]);
 
         $this->request = CreateCollectibleGameRequest::factory()->hasKitConditions()->create(

@@ -9,6 +9,7 @@ use Domain\Trade\DTOs\FillAuctionDTO;
 use Domain\Trade\DTOs\FillSaleDTO;
 use Domain\Trade\Services\AuctionService;
 use Domain\Trade\Services\SaleService;
+use Illuminate\Database\Eloquent\Relations\Relation;
 use Illuminate\Support\Str;
 use Support\Exceptions\CrudException;
 use Support\Transaction;
@@ -74,11 +75,17 @@ class CollectibleService
 
                 // create Collectible, attach Collector, Collectable and Properties
                 $collectible = Collectible::make($this->preparedFields($data));
+                $collectableClass = Relation::getMorphedModel($data->collectable_type);
+                $collectable = $collectableClass::find($data->collectable);
                 $shelf = Shelf::find($data->shelf_id);
 
                 $collectible->collector_id = $shelf->collector_id;
                 $collectible->collectable_id = $data->collectable;
                 $collectible->collectable_type = $data->collectable_type;
+
+                $collectible->mediable_id = $collectable->getMediableId();
+                $collectible->mediable_type = $collectable->getMediableType();
+
                 $collectible->properties = $data->properties;
 
                 // calculate kit_score as avg kit items condition if kit_score is empty

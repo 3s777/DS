@@ -12,6 +12,7 @@ use Database\Factories\Trade\SaleFactory;
 use Domain\Auth\Models\Role;
 use Domain\Auth\Models\User;
 use Domain\Game\Models\GameMedia;
+use Domain\Game\Models\GameMediaVariation;
 use Domain\Shelf\Enums\CollectibleTypeEnum;
 use Domain\Shelf\Models\Category;
 use Domain\Shelf\Models\Collectible;
@@ -35,12 +36,22 @@ class CollectibleControllerTest extends TestCase
         Role::create(['name' => config('settings.super_admin_role'), 'display_name' => 'SuperAdmin']);
         $this->user->assignRole('super_admin');
 
-        $this->collectible = CollectibleFactory::new()
-            ->for(GameMedia::factory(), 'collectable')
-            ->for(Category::factory()->create([
-                'model' => Relation::getMorphAlias(GameMedia::class)
-            ]))
+        $gameMediaVariation = GameMediaVariation::factory()
+            ->for(GameMedia::factory(), 'gameMedia')
             ->create();
+
+        $this->collectible = CollectibleFactory::new()
+            ->for(Category::factory()->create([
+                'model' => Relation::getMorphAlias(GameMediaVariation::class)
+            ]))
+            ->create(
+                [
+                    'collectable_type' => 'game_media_variation',
+                    'collectable_id' => $gameMediaVariation->id,
+                    'mediable_id' => $gameMediaVariation->game_media_id,
+                    'mediable_type' => 'game_media',
+                ]
+            );
 
         if ($this->collectible->target === 'sale') {
             SaleFactory::new()->for($this->collectible, 'collectible')->create();

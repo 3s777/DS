@@ -137,19 +137,43 @@
         </x-grid>
 
         <x-grid type="container">
-            <x-grid.col xl="4" ls="6" lg="12" md="12" sm="12">
+            <x-grid.col xl="12" ls="12" lg="12" md="12" sm="12">
                 <x-ui.form.group>
                     <x-ui.select.async
+                        name="game_media_id"
+                        select-name="game_media_id"
+                        :required="true"
+                        route="game-media.select"
+                        :default-option="trans_choice('collectible.choose_mediable', 1)"
+                        :label="trans_choice('collectible.mediable', 1)" />
+                </x-ui.form.group>
+            </x-grid.col>
+
+
+            <x-grid.col xl="12" ls="12" lg="12" md="12" sm="12">
+                <x-ui.form.group>
+{{--                    <x-ui.select.async--}}
+{{--                        name="collectable"--}}
+{{--                        select-name="collectable"--}}
+{{--                        :required="true"--}}
+{{--                        route="game-media-variation.select"--}}
+{{--                        :default-option="trans_choice('collectible.choose_collectable', 1)"--}}
+{{--                        :label="trans_choice('collectible.collectable', 1)" />--}}
+
+
+                    <x-ui.select.data-depend
                         name="collectable"
                         select-name="collectable"
                         :required="true"
-                        route="game-media.select"
+                        route="media.game-variation.select"
+                        depend-on="game_media_id"
+                        depend-field="game_media_id"
                         :default-option="trans_choice('collectible.choose_collectable', 1)"
                         :label="trans_choice('collectible.collectable', 1)" />
                 </x-ui.form.group>
             </x-grid.col>
 
-            <x-grid.col xl="5" ls="6" lg="12" md="12" sm="12">
+            <x-grid.col xl="6" ls="6" lg="12" md="12" sm="12">
                 <x-ui.form.group>
                     <div id="kit" class="admin__conditions"></div>
                 </x-ui.form.group>
@@ -460,6 +484,10 @@
                     const kit = document.getElementById('kit')
                     kit.innerHTML = response.data.html;
 
+                    @if(old('kit_score'))
+                        document.getElementById("star-rating_kit_score-{{old('kit_score')}}").checked = true;
+                    @endif
+
                     @if(old('kit_conditions'))
                         @foreach(old('kit_conditions') as $key => $value)
                             document.getElementById("star-rating_{{$key}}-{{$value}}").checked = true;
@@ -474,11 +502,21 @@
                 }
             }
 
-            const collectableSelect = document.getElementById('collectable-select');
+            const collectableSelect = document.getElementById('collectable');
 
-            window.addEventListener("load", (event) => {
-                if(collectableSelect.value !== '') {
-                    setKit(collectableSelect.value);
+            // window.addEventListener("load", (event) => {
+            //     const collectableField = document.getElementById('collectable');
+            //
+            //     if(collectableField.value !== '') {
+            //         setKit(collectableField.value);
+            //     }
+            // });
+
+            document.addEventListener("loaded-old-depended", function(event) {
+                const collectableField = document.getElementById('collectable');
+
+                if(collectableField.value !== '') {
+                    setKit(collectableField.value);
                 }
             });
 

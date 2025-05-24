@@ -4,7 +4,7 @@ namespace Domain\Shelf\Enums;
 
 enum CollectibleTypeEnum: string
 {
-    case Game = 'Domain\Game\Models\GameMedia';
+    case Game = 'Domain\Game\Models\GameMediaVariation';
     case Book = 'Domain\Book\Models\BookMedia';
 
     public function name(): string
@@ -19,9 +19,9 @@ enum CollectibleTypeEnum: string
     public function morphName(): string
     {
         return match($this) {
-            CollectibleTypeEnum::Game => 'game_media',
+            CollectibleTypeEnum::Game => 'game_media_variation',
             CollectibleTypeEnum::Book => 'book',
-            default => 'game_media',
+            default => 'game_media_variation',
         };
     }
 }

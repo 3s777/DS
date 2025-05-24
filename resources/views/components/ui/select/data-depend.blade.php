@@ -54,7 +54,12 @@
                 @endif
 
                 @if(old($filteredDependName) && $showOld)
-                    selectedChoices.then(() => choices{{ $name }}.setChoiceByValue({{ old($filteredName) }}))
+                    selectedChoices.then(function() {
+                        choices{{ $name }}.setChoiceByValue({{ old($filteredName) }});
+                        let event = new Event("loaded-old-depended", {bubbles: true});
+                        {{ $name }}.dispatchEvent(event);
+                    }
+                )
                 @endif
             }
 

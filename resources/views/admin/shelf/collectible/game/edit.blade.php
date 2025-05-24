@@ -149,7 +149,19 @@
             </x-grid>
 
             <x-grid type="container">
-                <x-grid.col xl="4" ls="6" lg="12" md="12" sm="12">
+                <x-grid.col xl="6" ls="6" lg="12" md="12" sm="12">
+                    <x-ui.form.group>
+                        <x-ui.form.input-text
+                            :placeholder="trans_choice('collectible.mediable', 1)"
+                            id="mediable"
+                            name="mediable"
+                            :value="$collectible->mediable->name"
+                            :disabled="true">
+                        </x-ui.form.input-text>
+                    </x-ui.form.group>
+                </x-grid.col>
+
+                <x-grid.col xl="6" ls="6" lg="12" md="12" sm="12">
                     <x-ui.form.group>
                         <x-ui.form.input-text
                             :placeholder="trans_choice('collectible.collectable', 1)"
@@ -161,7 +173,7 @@
                     </x-ui.form.group>
                 </x-grid.col>
 
-                <x-grid.col xl="5" ls="6" lg="12" md="12" sm="12">
+                <x-grid.col xl="6" ls="6" lg="12" md="12" sm="12">
                     <x-ui.form.group>
                         <div id="kit" class="admin__conditions">
                             <x-ui.star-rating

@@ -85,10 +85,12 @@ class CollectibleFactory extends Factory
                 return $collectable->getMediableType();
             },
             'mediable_id' => function(array $attributes) {
+
                 $collectable = $this->getCollectableModel(
                     $attributes['collectable_type'],
                     $attributes['collectable_id']
                 );
+
                 return $collectable->getMediableId();
             },
             'seller' => fake()->name(),

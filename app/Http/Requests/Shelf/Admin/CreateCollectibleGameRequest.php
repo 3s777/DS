@@ -3,6 +3,7 @@
 namespace App\Http\Requests\Shelf\Admin;
 
 use Domain\Game\Models\GameMedia;
+use Domain\Game\Models\GameMediaVariation;
 use Domain\Shelf\Enums\ConditionEnum;
 use Domain\Shelf\Enums\TargetEnum;
 use Domain\Shelf\Models\Collectible;
@@ -25,7 +26,7 @@ class CreateCollectibleGameRequest extends FormRequest
     protected function prepareForValidation()
     {
         $this->merge([
-            'collectable_type' => Relation::getMorphAlias(GameMedia::class),
+            'collectable_type' => Relation::getMorphAlias(GameMediaVariation::class),
         ]);
     }
 
@@ -86,7 +87,7 @@ class CreateCollectibleGameRequest extends FormRequest
             'collectable' => [
                 'required',
                 'integer',
-                'exists:Domain\Game\Models\GameMedia,id'
+                'exists:Domain\Game\Models\GameMediaVariation,id'
             ],
             'collectable_type' => [
                 'required',
