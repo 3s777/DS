@@ -31,6 +31,7 @@ class CollectibleFilterTest extends TestCase
     protected User $user;
     protected Category $category;
     protected Collection $collectibles;
+    protected array $attributes;
 
     public function setUp(): void
     {
@@ -48,17 +49,17 @@ class CollectibleFilterTest extends TestCase
             ->for(GameMedia::factory(), 'gameMedia')
             ->create();
 
+        $this->attributes = [
+            'collectable_type' => 'game_media_variation',
+            'collectable_id' => $gameMediaVariation->id,
+            'mediable_id' => $gameMediaVariation->game_media_id,
+            'mediable_type' => 'game_media',
+        ];
+
         $this->collectibles = CollectibleFactory::new()
             ->for($this->category, 'category')
             ->count(10)
-            ->create(
-                [
-                    'collectable_type' => 'game_media_variation',
-                    'collectable_id' => $gameMediaVariation->id,
-                    'mediable_id' => $gameMediaVariation->game_media_id,
-                    'mediable_type' => 'game_media',
-                ]
-            );
+            ->create($this->attributes);
     }
 
     public function getFactory(): Factory
@@ -94,7 +95,7 @@ class CollectibleFilterTest extends TestCase
      */
     public function it_success_search_filtered_response(): void
     {
-        $this->searchFilter();
+        $this->searchFilter(createAttributes: $this->attributes);
     }
 
     /**
@@ -103,7 +104,7 @@ class CollectibleFilterTest extends TestCase
      */
     public function it_success_dates_from_filtered_response(): void
     {
-        $this->datesFromFilter();
+        $this->datesFromFilter(createAttributes: $this->attributes);
     }
 
     /**
@@ -112,7 +113,7 @@ class CollectibleFilterTest extends TestCase
      */
     public function it_success_dates_to_filtered_response(): void
     {
-        $this->datesToFilter();
+        $this->datesToFilter(createAttributes: $this->attributes);
     }
 
     /**
@@ -121,7 +122,7 @@ class CollectibleFilterTest extends TestCase
      */
     public function it_success_dates_filtered_response(): void
     {
-        $this->datesFilter();
+        $this->datesFilter(createAttributes: $this->attributes);
     }
 
     /**
@@ -130,7 +131,7 @@ class CollectibleFilterTest extends TestCase
      */
     public function it_success_released_at_from_filtered_response(): void
     {
-        $this->datesFromFilter('purchased_dates', 'purchased_at');
+        $this->datesFromFilter('purchased_dates', 'purchased_at', createAttributes: $this->attributes);
     }
 
     /**
@@ -139,7 +140,7 @@ class CollectibleFilterTest extends TestCase
      */
     public function it_success_released_at_to_filtered_response(): void
     {
-        $this->datesToFilter('purchased_dates', 'purchased_at');
+        $this->datesToFilter('purchased_dates', 'purchased_at', createAttributes: $this->attributes);
     }
 
     /**
@@ -148,7 +149,7 @@ class CollectibleFilterTest extends TestCase
      */
     public function it_success_released_at_filtered_response(): void
     {
-        $this->datesFilter('purchased_dates', 'purchased_at');
+        $this->datesFilter('purchased_dates', 'purchased_at', createAttributes: $this->attributes);
     }
 
     /**
@@ -157,7 +158,7 @@ class CollectibleFilterTest extends TestCase
      */
     public function it_success_user_filtered_response(): void
     {
-        $this->userFilter();
+        $this->userFilter(createAttributes: $this->attributes);
     }
 
     /**
@@ -166,7 +167,7 @@ class CollectibleFilterTest extends TestCase
      */
     public function it_success_collector_filtered_response(): void
     {
-        $this->userFilter('collector', 'collector_id', Collector::class);
+        $this->userFilter('collector', 'collector_id', Collector::class, createAttributes: $this->attributes);
     }
 
     /**
@@ -175,7 +176,7 @@ class CollectibleFilterTest extends TestCase
      */
     public function it_success_search_seller_filtered_response(): void
     {
-        $this->searchFilter('seller', 'seller');
+        $this->searchFilter('seller', 'seller', createAttributes: $this->attributes);
     }
 
     /**
@@ -184,7 +185,7 @@ class CollectibleFilterTest extends TestCase
      */
     public function it_success_search_additional_field_filtered_response(): void
     {
-        $this->searchFilter('additional_field', 'additional_field');
+        $this->searchFilter('additional_field', 'additional_field', createAttributes: $this->attributes);
     }
 
     /**
@@ -193,7 +194,7 @@ class CollectibleFilterTest extends TestCase
      */
     public function it_success_kit_score_filtered_response(): void
     {
-        $this->rangeFilter('kit_score', 'kit_score');
+        $this->rangeFilter('kit_score', 'kit_score', createAttributes: $this->attributes);
     }
 
     /**
@@ -202,7 +203,7 @@ class CollectibleFilterTest extends TestCase
      */
     public function it_success_kit_score_from_filtered_response(): void
     {
-        $this->rangeFromFilter('kit_score', 'kit_score');
+        $this->rangeFromFilter('kit_score', 'kit_score', createAttributes: $this->attributes);
     }
 
     /**
@@ -211,7 +212,7 @@ class CollectibleFilterTest extends TestCase
      */
     public function it_success_kit_score_to_filtered_response(): void
     {
-        $this->rangeToFilter('kit_score', 'kit_score');
+        $this->rangeToFilter('kit_score', 'kit_score', createAttributes: $this->attributes);
     }
 
     /**
@@ -220,7 +221,7 @@ class CollectibleFilterTest extends TestCase
      */
     public function it_success_purchase_price_filtered_response(): void
     {
-        $this->rangeFilter('purchase_price', 'purchase_price');
+        $this->rangeFilter('purchase_price', 'purchase_price', createAttributes: $this->attributes);
     }
 
     /**
@@ -229,7 +230,7 @@ class CollectibleFilterTest extends TestCase
      */
     public function it_success_purchase_price_from_filtered_response(): void
     {
-        $this->rangeFromFilter('purchase_price', 'purchase_price');
+        $this->rangeFromFilter('purchase_price', 'purchase_price', createAttributes: $this->attributes);
     }
 
     /**
@@ -238,7 +239,7 @@ class CollectibleFilterTest extends TestCase
      */
     public function it_success_purchase_price_to_filtered_response(): void
     {
-        $this->rangeToFilter('purchase_price', 'purchase_price');
+        $this->rangeToFilter('purchase_price', 'purchase_price', createAttributes: $this->attributes);
     }
 
     /**
@@ -252,13 +253,14 @@ class CollectibleFilterTest extends TestCase
                 'price' => fn () => rand(1, 5)
             ]), 'sale')
             ->count(10)
-            ->create();
+            ->create($this->attributes);
 
+        $this->attributes['target'] = 'sale';
         $expectedModel = $this->getFactory()
             ->has(Sale::factory()->state([
                 'price' => 10
             ]), 'sale')
-            ->create(['target' => 'sale']);
+            ->create($this->attributes);
 
         $request = [
             'filters' => [
@@ -283,13 +285,14 @@ class CollectibleFilterTest extends TestCase
                 'price' => fn () => rand(1, 5)
             ]), 'sale')
             ->count(10)
-            ->create();
+            ->create($this->attributes);
 
+        $this->attributes['target'] = 'sale';
         $expectedModel = $this->getFactory()
             ->has(Sale::factory()->state([
                 'price' => 10
             ]), 'sale')
-            ->create(['target' => 'sale']);
+            ->create($this->attributes);
 
         $request = [
             'filters' => [
@@ -313,13 +316,14 @@ class CollectibleFilterTest extends TestCase
                 'price' => fn () => rand(5, 10)
             ]), 'sale')
             ->count(10)
-            ->create();
+            ->create($this->attributes);
 
+        $this->attributes['target'] = 'sale';
         $expectedModel = $this->getFactory()
             ->has(Sale::factory()->state([
                 'price' => 3
             ]), 'sale')
-            ->create(['target' => 'sale']);
+            ->create($this->attributes);
 
         $request = [
             'filters' => [
@@ -342,7 +346,8 @@ class CollectibleFilterTest extends TestCase
             Auction::class,
             'auction',
             'auction_dates',
-            'finished_at'
+            'finished_at',
+            createAttributes: $this->attributes
         );
     }
 
@@ -356,7 +361,8 @@ class CollectibleFilterTest extends TestCase
             Auction::class,
             'auction',
             'auction_dates',
-            'finished_at'
+            'finished_at',
+            createAttributes: $this->attributes
         );
     }
 
@@ -370,7 +376,8 @@ class CollectibleFilterTest extends TestCase
             Auction::class,
             'auction',
             'auction_dates',
-            'finished_at'
+            'finished_at',
+            createAttributes: $this->attributes
         );
     }
 
@@ -393,7 +400,7 @@ class CollectibleFilterTest extends TestCase
                 ->count(2)
                 ->for($gameMedia, 'collectable')
                 ->for($expectedCategory, 'category')
-                ->create();
+                ->create($this->attributes);
         });
 
         $request = [
@@ -416,7 +423,11 @@ class CollectibleFilterTest extends TestCase
      */
     public function it_success_target_filtered_response(): void
     {
-        $this->valueFilter('target', 'target');
+        $this->valueFilter(
+            'target',
+            'target',
+            createAttributes: $this->attributes
+        );
     }
 
     /**
@@ -425,7 +436,12 @@ class CollectibleFilterTest extends TestCase
      */
     public function it_success_condition_filtered_response(): void
     {
-        $this->valueFilter('condition', 'condition', true);
+        $this->valueFilter(
+            'condition',
+            'condition',
+            true,
+            createAttributes: $this->attributes
+        );
     }
 
     /**

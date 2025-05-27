@@ -27,10 +27,15 @@ trait HasFilters
             ->assertDontSee($models->pluck('name')->toArray());
     }
 
-    public function searchFilter(string $filterName = 'search', string $field = 'name'): void
+    public function searchFilter(
+        string $filterName = 'search',
+        string $field = 'name',
+        array $createAttributes = []
+    ): void
     {
+        $createAttributes[$field] = 'search test';
         $expectedModel = $this->getFactory()
-            ->create([$field => 'search test']);
+            ->create($createAttributes);
 
         $request = [
             'filters' => [
@@ -42,10 +47,17 @@ trait HasFilters
         $this->baseAssertion($request, $expectedModel, $this->getModels());
     }
 
-    public function valueFilter(string $filterName, string $field, bool $multiple = false): void
+    public function valueFilter(
+        string $filterName,
+        string $field,
+        bool $multiple = false,
+        array $createAttributes = []
+    ): void
     {
+        $createAttributes[$field] = 'search test';
+
         $expectedModel = $this->getFactory()
-            ->create([$field => 'search test']);
+            ->create($createAttributes);
 
         $request = [
             'filters' => [
@@ -65,10 +77,16 @@ trait HasFilters
     }
 
 
-    public function booleanFilter(string $filterName, string $field): void
+    public function booleanFilter(
+        string $filterName,
+        string $field,
+        array $createAttributes = []
+    ): void
     {
+        $createAttributes[$field] = true;
+
         $expectedModel = $this->getFactory()
-            ->create([$field => true]);
+            ->create($createAttributes);
 
         $request = [
             'filters' => [
@@ -81,14 +99,17 @@ trait HasFilters
 
     public function datesFilter(
         string $filterName = 'dates',
-        string $field = 'created_at'
+        string $field = 'created_at',
+        array $createAttributes = []
     ): void {
+        $createAttributes[$field] = Carbon::tomorrow();
         $models = $this->getFactory()
             ->count(10)
-            ->create([$field => Carbon::tomorrow()]);
+            ->create($createAttributes);
 
+        $createAttributes[$field] = Carbon::yesterday();
         $expectedModel = $this->getFactory()
-            ->create([$field => Carbon::yesterday()]);
+            ->create($createAttributes);
 
         $request = [
             'filters' => [
@@ -107,19 +128,20 @@ trait HasFilters
         string $relationName,
         string $filterName = 'dates',
         string $field = 'created_at',
+        array $createAttributes = []
     ): void {
         $models = $this->getFactory()
             ->has($relationClass::factory()->state([
                 $field => Carbon::tomorrow()
             ]), $relationName)
             ->count(10)
-            ->create();
+            ->create($createAttributes);
 
         $expectedModel = $this->getFactory()
             ->has($relationClass::factory()->state([
                 $field => Carbon::yesterday()
             ]), $relationName)
-            ->create();
+            ->create($createAttributes);
 
         $request = [
             'filters' => [
@@ -138,19 +160,20 @@ trait HasFilters
         string $relationName,
         string $filterName = 'dates',
         string $field = 'created_at',
+        array $createAttributes = []
     ): void {
         $models = $this->getFactory()
             ->has($relationClass::factory()->state([
                 $field => Carbon::yesterday()
             ]), $relationName)
             ->count(10)
-            ->create();
+            ->create($createAttributes);
 
         $expectedModel = $this->getFactory()
             ->has($relationClass::factory()->state([
                 $field => Carbon::now()
             ]), $relationName)
-            ->create();
+            ->create($createAttributes);
 
         $request = [
             'filters' => [
@@ -168,19 +191,20 @@ trait HasFilters
         string $relationName,
         string $filterName = 'dates',
         string $field = 'created_at',
+        array $createAttributes = []
     ): void {
         $models = $this->getFactory()
             ->has($relationClass::factory()->state([
                 $field => Carbon::tomorrow()
             ]), $relationName)
             ->count(10)
-            ->create();
+            ->create($createAttributes);
 
         $expectedModel = $this->getFactory()
             ->has($relationClass::factory()->state([
                 $field => Carbon::yesterday()
             ]), $relationName)
-            ->create();
+            ->create($createAttributes);
 
         $request = [
             'filters' => [
@@ -193,14 +217,20 @@ trait HasFilters
         $this->baseAssertion($request, $expectedModel, $models);
     }
 
-    public function datesFromFilter(string $filterName = 'dates', string $field = 'created_at'): void
+    public function datesFromFilter(
+        string $filterName = 'dates',
+        string $field = 'created_at',
+        array $createAttributes = []
+    ): void
     {
+        $createAttributes[$field] = Carbon::yesterday();
         $models = $this->getFactory()
             ->count(10)
-            ->create([$field => Carbon::yesterday()]);
+            ->create($createAttributes);
 
+        $createAttributes[$field] = Carbon::now();
         $expectedModel = $this->getFactory()
-            ->create([$field => Carbon::now()]);
+            ->create($createAttributes);
 
         $request = [
             'filters' => [
@@ -211,14 +241,20 @@ trait HasFilters
         $this->baseAssertion($request, $expectedModel, $models);
     }
 
-    public function datesToFilter(string $filterName = 'dates', string $field = 'created_at'): void
+    public function datesToFilter(
+        string $filterName = 'dates',
+        string $field = 'created_at',
+        array $createAttributes = []
+    ): void
     {
+        $createAttributes[$field] = Carbon::tomorrow();
         $models = $this->getFactory()
             ->count(10)
-            ->create([$field => Carbon::tomorrow()]);
+            ->create($createAttributes);
 
+        $createAttributes[$field] = Carbon::yesterday();
         $expectedModel = $this->getFactory()
-            ->create([$field => Carbon::yesterday()]);
+            ->create($createAttributes);
 
         $request = [
             'filters' => [
@@ -232,12 +268,14 @@ trait HasFilters
     public function userFilter(
         string $filterName = 'user',
         string $field = 'user_id',
-        string $userModel = User::class
+        string $userModel = User::class,
+        array $createAttributes = []
     ): void {
         $user = $userModel::factory()->create();
 
+        $createAttributes[$field] = $user->id;
         $expectedModel = $this->getFactory()
-            ->create([$field => $user->id]);
+            ->create($createAttributes);
 
         $request = [
             'filters' => [
@@ -248,14 +286,20 @@ trait HasFilters
         $this->baseAssertion($request, $expectedModel, $this->getModels());
     }
 
-    public function rangeFilter(string $filterName, string $field): void
+    public function rangeFilter(
+        string $filterName,
+        string $field,
+        array $createAttributes = []
+    ): void
     {
+        $createAttributes[$field] = fn () => rand(1, 5);
         $models = $this->getFactory()
             ->count(10)
-            ->create([$field => fn () => rand(1, 5)]);
+            ->create($createAttributes);
 
+        $createAttributes[$field] = 10;
         $expectedModel = $this->getFactory()
-            ->create([$field => 10]);
+            ->create($createAttributes);
 
         $request = [
             'filters' => [
@@ -269,14 +313,20 @@ trait HasFilters
         $this->baseAssertion($request, $expectedModel, $models);
     }
 
-    public function rangeFromFilter(string $filterName, string $field): void
+    public function rangeFromFilter(
+        string $filterName,
+        string $field,
+        array $createAttributes = []
+    ): void
     {
+        $createAttributes[$field] = fn () => rand(1, 5);
         $models = $this->getFactory()
             ->count(10)
-            ->create([$field => fn () => rand(1, 5)]);
+            ->create($createAttributes);
 
+        $createAttributes[$field] = 10;
         $expectedModel = $this->getFactory()
-            ->create([$field => 10]);
+            ->create($createAttributes);
 
         $request = [
             'filters' => [
@@ -289,14 +339,20 @@ trait HasFilters
         $this->baseAssertion($request, $expectedModel, $models);
     }
 
-    public function rangeToFilter(string $filterName, string $field): void
+    public function rangeToFilter(
+        string $filterName,
+        string $field,
+        array $createAttributes = []
+    ): void
     {
+        $createAttributes[$field] = fn () => rand(5, 10);
         $models = $this->getFactory()
             ->count(10)
-            ->create([$field => fn () => rand(5, 10)]);
+            ->create($createAttributes);
 
+        $createAttributes[$field] = 3;
         $expectedModel = $this->getFactory()
-            ->create([$field => 3]);
+            ->create($createAttributes);
 
         $request = [
             'filters' => [
@@ -312,13 +368,14 @@ trait HasFilters
     public function relationFilter(
         string $filterName,
         string $relationModel,
-        string $relationName
+        string $relationName,
+        array $createAttributes = []
     ): void {
         $relationModels = $relationModel::factory(3)->create();
         $expectedModels = $this->getFactory()
             ->count(2)
             ->hasAttached($relationModels, relationship: $relationName)
-            ->create();
+            ->create($createAttributes);
 
         $request = [
             'filters' => [

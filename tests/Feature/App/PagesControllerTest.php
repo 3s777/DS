@@ -66,6 +66,6 @@ class PagesControllerTest extends TestCase
         $this->get(route('qa'))
             ->assertOk()
             ->assertSee('Вопрос-ответ')
-            ->assertViewIs('content.page.qa');
+            ->assertViewIs('content.rules.qa');
     }
 }

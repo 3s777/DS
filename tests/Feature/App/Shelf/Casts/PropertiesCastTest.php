@@ -7,8 +7,10 @@ use Database\Factories\Shelf\CollectibleFactory;
 use Domain\Auth\Models\Role;
 use Domain\Auth\Models\User;
 use Domain\Game\Models\GameMedia;
+use Domain\Game\Models\GameMediaVariation;
 use Domain\Shelf\Models\Category;
 use Domain\Shelf\Models\Collectible;
+use Domain\Trade\Enums\ShippingEnum;
 use Illuminate\Database\Eloquent\Relations\Relation;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
@@ -29,7 +31,7 @@ class PropertiesCastTest extends TestCase
         Role::create(['name' => config('settings.super_admin_role'), 'display_name' => 'SuperAdmin']);
         $this->user->assignRole('super_admin');
 
-        $this->category = Category::factory()->create(['model' => Relation::getMorphAlias(GameMedia::class)]);
+        $this->category = Category::factory()->create(['model' => Relation::getMorphAlias(GameMediaVariation::class)]);
     }
 
     /**
@@ -38,15 +40,23 @@ class PropertiesCastTest extends TestCase
      */
     public function it_sale_success(): void
     {
-        $collectible = CollectibleFactory::new()->for(GameMedia::factory(), 'collectable')
+        $gameMediaVariation = GameMediaVariation::factory()
+            ->for(GameMedia::factory(), 'gameMedia')
+            ->create();
+
+        $attributes = [
+            'collectable_type' => 'game_media_variation',
+            'collectable_id' => $gameMediaVariation->id,
+            'mediable_id' => $gameMediaVariation->game_media_id,
+            'mediable_type' => 'game_media',
+            'properties' => [
+                'is_done' => 'test'
+            ]
+        ];
+
+        $collectible = CollectibleFactory::new()
             ->for($this->category)
-            ->create(
-                [
-                    'properties' => [
-                        'is_done' => 'test'
-                    ]
-                ]
-            );
+            ->create($attributes);
         $this->assertTrue($collectible->properties['is_done']);
 
         $collectible->properties = [

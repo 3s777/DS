@@ -2,6 +2,8 @@
 
 namespace Sorters;
 
+use Domain\Auth\Models\User;
+use Domain\Page\Models\Page;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Http\Request;
@@ -40,6 +42,10 @@ class SorterTest extends TestCase
                 return $query;
             });
 
+        $query->shouldReceive('getModel')
+            ->once()
+            ->andReturn(new User());
+
         $query->shouldReceive('orderBy')
             ->with('test-key', 'asc')
             ->once()
@@ -76,8 +82,53 @@ class SorterTest extends TestCase
                 return $query;
             });
 
+        $query->shouldReceive('getModel')
+            ->once()
+            ->andReturn(new User());
+
         $query->shouldReceive('orderBy')
             ->with('test-key', 'desc')
+            ->once()
+            ->andReturn($query);
+
+        $sorter->run($query);
+    }
+
+    /**
+     * @test
+     * @return void
+     */
+    public function it_sorted_with_translations_success(): void
+    {
+        $request = Request::create('/', 'GET', [
+            'sort' => 'name',
+        ]);
+
+        $locale = app()->getLocale();
+
+        $this->app->instance('request', $request);
+
+        $sorter = new Sorter(
+            ['name']
+        );
+
+        $query = Mockery::mock(Builder::class);
+
+        $query->shouldReceive('when')
+            ->once()
+            ->andReturnUsing(function ($value, $callback) use ($query) {
+                if ($value) {
+                    $callback($query);
+                }
+                return $query;
+            });
+
+        $query->shouldReceive('getModel')
+            ->once()
+            ->andReturn(new Page());
+
+        $query->shouldReceive('orderByRaw')
+            ->with('pages.name->>\''.$locale.'\' asc')
             ->once()
             ->andReturn($query);
 

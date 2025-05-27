@@ -7,6 +7,7 @@ use Database\Factories\Shelf\CollectibleFactory;
 use Domain\Auth\Models\Role;
 use Domain\Auth\Models\User;
 use Domain\Game\Models\GameMedia;
+use Domain\Game\Models\GameMediaVariation;
 use Domain\Settings\Models\Country;
 use Domain\Shelf\Models\Category;
 use Domain\Shelf\Models\Collectible;
@@ -33,7 +34,7 @@ class AuctionCastTest extends TestCase
         Role::create(['name' => config('settings.super_admin_role'), 'display_name' => 'SuperAdmin']);
         $this->user->assignRole('super_admin');
 
-        $this->category = Category::factory()->create(['model' => Relation::getMorphAlias(GameMedia::class)]);
+        $this->category = Category::factory()->create(['model' => Relation::getMorphAlias(GameMediaVariation::class)]);
     }
 
     /**
@@ -43,19 +44,28 @@ class AuctionCastTest extends TestCase
     public function it_auction_success(): void
     {
         $country = Country::factory()->create();
-        $collectible = CollectibleFactory::new()->for(GameMedia::factory(), 'collectable')
+
+        $gameMediaVariation = GameMediaVariation::factory()
+            ->for(GameMedia::factory(), 'gameMedia')
+            ->create();
+
+        $attributes = [
+            'collectable_type' => 'game_media_variation',
+            'collectable_id' => $gameMediaVariation->id,
+            'mediable_id' => $gameMediaVariation->game_media_id,
+            'mediable_type' => 'game_media',
+            'auction_data' => [
+                'price' => 10.099,
+                'step' => 05.11,
+                'finished_at' => '2024-02-13T10:10',
+                'country_id' => $country->id,
+                'shipping' => ShippingEnum::None->value,
+            ]
+        ];
+
+        $collectible = CollectibleFactory::new()
             ->for($this->category)
-            ->create(
-                [
-                    'auction_data' => [
-                        'price' => 10.099,
-                        'step' => 05.11,
-                        'finished_at' => '2024-02-13T10:10',
-                        'country_id' => $country->id,
-                        'shipping' => ShippingEnum::None->value,
-                    ]
-                ]
-            );
+            ->create($attributes);
 
         $this->assertInstanceOf(AuctionValueObject::class, $collectible->auction_data);
         $this->assertInstanceOf(PriceValueObject::class, $collectible->auction_data->price());

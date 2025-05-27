@@ -94,6 +94,35 @@ class RelationMultipleFilterTest extends TestCase
 
         $this->assertSame($shelves->pluck('name')->toArray(), $filter->preparedValues());
         $this->assertSame(Shelf::all()->pluck('name', 'id')->toArray(), $filter->getPreparedOptions());
+        $this->assertSame($shelves->pluck('id')->toArray(), $filter->preparedSelected());
+    }
+
+    /**
+     * @test
+     * @return void
+     */
+    public function it_filter_async_success(): void
+    {
+        $shelves = Shelf::factory(2)->create();
+        $shelf = Shelf::factory()->create();
+
+        $request = Request::create('/', 'GET', [
+            'filters' => [
+                'test-key' => $shelves->pluck('id')->toArray()
+            ],
+        ]);
+
+        $this->app->instance('request', $request);
+
+        $filter = new RelationMultipleFilter(
+            'test-title',
+            'test-key',
+            'test-table',
+            Shelf::class,
+            placeholder: 'test-placeholder',
+            async: true
+        );
+
         $this->assertSame($shelves->pluck('name', 'id')->toArray(), $filter->preparedSelected());
     }
 }

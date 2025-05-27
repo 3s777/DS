@@ -7,8 +7,10 @@ use Database\Factories\Shelf\CollectibleFactory;
 use Domain\Auth\Models\Role;
 use Domain\Auth\Models\User;
 use Domain\Game\Models\GameMedia;
+use Domain\Game\Models\GameMediaVariation;
 use Domain\Shelf\Models\Category;
 use Domain\Shelf\Models\Collectible;
+use Domain\Trade\Enums\ShippingEnum;
 use Illuminate\Database\Eloquent\Relations\Relation;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Support\ValueObjects\PriceValueObject;
@@ -30,7 +32,7 @@ class PriceCastTest extends TestCase
         Role::create(['name' => config('settings.super_admin_role'), 'display_name' => 'SuperAdmin']);
         $this->user->assignRole('super_admin');
 
-        $this->category = Category::factory()->create(['model' => Relation::getMorphAlias(GameMedia::class)]);
+        $this->category = Category::factory()->create(['model' => Relation::getMorphAlias(GameMediaVariation::class)]);
     }
 
     /**
@@ -39,13 +41,21 @@ class PriceCastTest extends TestCase
      */
     public function it_sale_success(): void
     {
+        $gameMediaVariation = GameMediaVariation::factory()
+            ->for(GameMedia::factory(), 'gameMedia')
+            ->create();
+
+        $attributes = [
+                'collectable_type' => 'game_media_variation',
+                'collectable_id' => $gameMediaVariation->id,
+                'mediable_id' => $gameMediaVariation->game_media_id,
+                'mediable_type' => 'game_media',
+                'purchase_price' => 12.99
+            ];
+
         $collectible = CollectibleFactory::new()->for(GameMedia::factory(), 'collectable')
             ->for($this->category)
-            ->create(
-                [
-                    'purchase_price' => 12.99
-                ]
-            );
+            ->create($attributes);
 
         $this->assertInstanceOf(PriceValueObject::class, $collectible->purchase_price);
         $this->assertSame(1299, $collectible->purchase_price->raw());
