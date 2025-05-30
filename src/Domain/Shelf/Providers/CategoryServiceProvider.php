@@ -21,7 +21,7 @@ class CategoryServiceProvider extends ServiceProvider
     {
         $this->app->bind(CategorySearchFactoryContract::class, function (Application $app, array $parameters) {
             return match($parameters['model']) {
-                'game_media' => new GameMediaSearchFactory(),
+                'game_media_variation' => new GameMediaSearchFactory(),
                 'test' => new BookSearchFactory()
             };
         });
