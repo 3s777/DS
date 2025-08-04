@@ -17,6 +17,9 @@ html {
 }
 
 body {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
     font-family: 'GolosUIWebVF', sans-serif;
     background-color: $base-main;
     color: $font-main;
