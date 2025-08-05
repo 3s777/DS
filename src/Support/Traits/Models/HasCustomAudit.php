@@ -13,6 +13,6 @@ trait HasCustomAudit
         $this->isCustomEvent = true;
         $this->auditCustomOld = $old;
         $this->auditCustomNew = $new;
-        Event::dispatch(AuditCustom::class, [$this]);
+        Event::dispatch(new AuditCustom($this));
     }
 }
