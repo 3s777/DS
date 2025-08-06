@@ -53,7 +53,7 @@ class CountryControllerTest extends TestCase
         $this->checkNotAuthRedirect('index');
         $this->checkNotAuthRedirect('create');
         $this->checkNotAuthRedirect('edit', 'get', [$this->country->slug]);
-        $this->checkNotAuthRedirect('store', 'post', [$this->country->slug], $this->request);
+        $this->checkNotAuthRedirect('store', 'post');
         $this->checkNotAuthRedirect('update', 'put', [$this->country->slug], $this->request);
         $this->checkNotAuthRedirect('destroy', 'delete', [$this->country->slug]);
     }

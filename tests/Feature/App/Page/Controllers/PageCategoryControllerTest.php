@@ -53,7 +53,7 @@ class PageCategoryControllerTest extends TestCase
         $this->checkNotAuthRedirect('index');
         $this->checkNotAuthRedirect('create');
         $this->checkNotAuthRedirect('edit', 'get', [$this->pageCategory->slug]);
-        $this->checkNotAuthRedirect('store', 'post', [$this->pageCategory->slug], $this->request);
+        $this->checkNotAuthRedirect('store', 'post');
         $this->checkNotAuthRedirect('update', 'put', [$this->pageCategory->slug], $this->request);
         $this->checkNotAuthRedirect('destroy', 'delete', [$this->pageCategory->slug]);
     }

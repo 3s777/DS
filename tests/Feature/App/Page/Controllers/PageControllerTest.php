@@ -59,7 +59,7 @@ class PageControllerTest extends TestCase
         $this->checkNotAuthRedirect('index');
         $this->checkNotAuthRedirect('create');
         $this->checkNotAuthRedirect('edit', 'get', [$this->page->slug]);
-        $this->checkNotAuthRedirect('store', 'post', [$this->page->slug], $this->request);
+        $this->checkNotAuthRedirect('store', 'post');
         $this->checkNotAuthRedirect('update', 'put', [$this->page->slug], $this->request);
         $this->checkNotAuthRedirect('destroy', 'delete', [$this->page->slug]);
     }

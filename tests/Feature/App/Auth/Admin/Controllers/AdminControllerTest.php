@@ -64,7 +64,7 @@ class AdminControllerTest extends TestCase
         $this->checkNotAuthRedirect('create');
         $this->checkNotAuthRedirect('show', 'get', [$this->authUser->slug]);
         $this->checkNotAuthRedirect('edit', 'get', [$this->authUser->slug]);
-        $this->checkNotAuthRedirect('store', 'post', [$this->authUser->slug], $this->request);
+        $this->checkNotAuthRedirect('store', 'post');
         $this->checkNotAuthRedirect('update', 'put', [$this->authUser->slug], $this->request);
         $this->checkNotAuthRedirect('destroy', 'delete', [$this->authUser->slug]);
     }

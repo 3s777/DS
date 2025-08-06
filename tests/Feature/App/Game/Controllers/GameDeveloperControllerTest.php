@@ -58,7 +58,7 @@ class GameDeveloperControllerTest extends TestCase
         $this->checkNotAuthRedirect('index');
         $this->checkNotAuthRedirect('create');
         $this->checkNotAuthRedirect('edit', 'get', [$this->gameDeveloper->slug]);
-        $this->checkNotAuthRedirect('store', 'post', [$this->gameDeveloper->slug], $this->request);
+        $this->checkNotAuthRedirect('store', 'post');
         $this->checkNotAuthRedirect('update', 'put', [$this->gameDeveloper->slug], $this->request);
         $this->checkNotAuthRedirect('destroy', 'delete', [$this->gameDeveloper->slug]);
     }

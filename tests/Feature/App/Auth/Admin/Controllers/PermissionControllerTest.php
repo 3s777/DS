@@ -53,7 +53,7 @@ class PermissionControllerTest extends TestCase
         $this->checkNotAuthRedirect('index');
         $this->checkNotAuthRedirect('create');
         $this->checkNotAuthRedirect('edit', 'get', [$this->permission->id]);
-        $this->checkNotAuthRedirect('store', 'post', [$this->permission->id], $this->request);
+        $this->checkNotAuthRedirect('store', 'post');
         $this->checkNotAuthRedirect('update', 'put', [$this->permission->id], $this->request);
         $this->checkNotAuthRedirect('destroy', 'delete', [$this->permission->id]);
     }

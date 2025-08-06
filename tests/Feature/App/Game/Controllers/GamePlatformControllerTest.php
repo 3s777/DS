@@ -58,7 +58,7 @@ class GamePlatformControllerTest extends TestCase
         $this->checkNotAuthRedirect('index');
         $this->checkNotAuthRedirect('create');
         $this->checkNotAuthRedirect('edit', 'get', [$this->gamePlatform->slug]);
-        $this->checkNotAuthRedirect('store', 'post', [$this->gamePlatform->slug], $this->request);
+        $this->checkNotAuthRedirect('store', 'post');
         $this->checkNotAuthRedirect('update', 'put', [$this->gamePlatform->slug], $this->request);
         $this->checkNotAuthRedirect('destroy', 'delete', [$this->gamePlatform->slug]);
     }

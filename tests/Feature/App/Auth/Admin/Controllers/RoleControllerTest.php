@@ -56,7 +56,7 @@ class RoleControllerTest extends TestCase
         $this->checkNotAuthRedirect('index');
         $this->checkNotAuthRedirect('create');
         $this->checkNotAuthRedirect('edit', 'get', [$this->role->id]);
-        $this->checkNotAuthRedirect('store', 'post', [$this->role->id], $this->request);
+        $this->checkNotAuthRedirect('store', 'post');
         $this->checkNotAuthRedirect('update', 'put', [$this->role->id], $this->request);
         $this->checkNotAuthRedirect('destroy', 'delete', [$this->role->id]);
     }

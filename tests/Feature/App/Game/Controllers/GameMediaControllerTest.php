@@ -57,7 +57,7 @@ class GameMediaControllerTest extends TestCase
         $this->checkNotAuthRedirect('index');
         $this->checkNotAuthRedirect('create');
         $this->checkNotAuthRedirect('edit', 'get', [$this->gameMedia->slug]);
-        $this->checkNotAuthRedirect('store', 'post', [$this->gameMedia->slug], $this->request);
+        $this->checkNotAuthRedirect('store', 'post');
         $this->checkNotAuthRedirect('update', 'put', [$this->gameMedia->slug], $this->request);
         $this->checkNotAuthRedirect('destroy', 'delete', [$this->gameMedia->slug]);
     }
