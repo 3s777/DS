@@ -48,11 +48,7 @@ class GameMediaControllerTest extends TestCase
             ->assertRedirectToRoute('admin.login');
     }
 
-    /**
-     * @test
-     * @return void
-     */
-    public function it_pages_success(): void
+    public function test_pages_success(): void
     {
         $this->checkNotAuthRedirect('index');
         $this->checkNotAuthRedirect('create');
@@ -62,11 +58,7 @@ class GameMediaControllerTest extends TestCase
         $this->checkNotAuthRedirect('destroy', 'delete', [$this->gameMedia->slug]);
     }
 
-    /**
-     * @test
-     * @return void
-     */
-    public function it_index_success(): void
+    public function test_index_success(): void
     {
         $this->actingAs($this->user)
             ->get(action([GameMediaController::class, 'index']))
@@ -75,11 +67,7 @@ class GameMediaControllerTest extends TestCase
             ->assertViewIs('admin.game.media.index');
     }
 
-    /**
-     * @test
-     * @return void
-     */
-    public function it_create_success(): void
+    public function test_create_success(): void
     {
         $this->actingAs($this->user)
             ->get(action([GameMediaController::class, 'create']))
@@ -88,11 +76,7 @@ class GameMediaControllerTest extends TestCase
             ->assertViewIs('admin.game.media.create');
     }
 
-    /**
-     * @test
-     * @return void
-     */
-    public function it_edit_success(): void
+    public function test_edtest_success(): void
     {
         $this->actingAs($this->user)
             ->get(action([GameMediaController::class, 'edit'], [$this->gameMedia->slug]))
@@ -101,11 +85,7 @@ class GameMediaControllerTest extends TestCase
             ->assertViewIs('admin.game.media.edit');
     }
 
-    /**
-     * @test
-     * @return void
-     */
-    public function it_store_success(): void
+    public function test_store_success(): void
     {
         $this->actingAs($this->user)
             ->post(action([GameMediaController::class, 'store']), $this->request)
@@ -117,11 +97,7 @@ class GameMediaControllerTest extends TestCase
         ]);
     }
 
-    /**
-     * @test
-     * @return void
-     */
-    public function it_store_with_image_success(): void
+    public function test_store_with_image_success(): void
     {
         Queue::fake();
         Storage::fake('images');
@@ -146,11 +122,7 @@ class GameMediaControllerTest extends TestCase
         Queue::assertPushed(GenerateSmallThumbnailsJob::class, 4);
     }
 
-    /**
-     * @test
-     * @return void
-     */
-    public function it_validation_fail(): void
+    public function test_validation_fail(): void
     {
         $this->app['session']->setPreviousUrl(route('admin.game-medias.create'));
 
@@ -184,11 +156,7 @@ class GameMediaControllerTest extends TestCase
         ]);
     }
 
-    /**
-     * @test
-     * @return void
-     */
-    public function it_validation_featured_image_fail(): void
+    public function test_validation_featured_image_fail(): void
     {
         $this->app['session']->setPreviousUrl(route('admin.game-medias.create'));
 
@@ -200,11 +168,7 @@ class GameMediaControllerTest extends TestCase
             ->assertRedirectToRoute('admin.game-medias.create');
     }
 
-    /**
-     * @test
-     * @return void
-     */
-    public function it_update_success(): void
+    public function test_update_success(): void
     {
         $this->request['name'] = 'newName';
 
@@ -224,11 +188,7 @@ class GameMediaControllerTest extends TestCase
         ]);
     }
 
-    /**
-     * @test
-     * @return void
-     */
-    public function it_update_validation_fail(): void
+    public function test_update_validation_fail(): void
     {
         $this->app['session']->setPreviousUrl(route('admin.game-medias.edit', $this->gameMedia->slug));
 
@@ -264,11 +224,7 @@ class GameMediaControllerTest extends TestCase
             ->assertRedirectToRoute('admin.game-medias.edit', $this->gameMedia->slug);
     }
 
-    /**
-     * @test
-     * @return void
-     */
-    public function it_delete_success(): void
+    public function test_delete_success(): void
     {
         $this->actingAs($this->user)
             ->delete(action([GameMediaController::class, 'destroy'], [$this->gameMedia->slug]))

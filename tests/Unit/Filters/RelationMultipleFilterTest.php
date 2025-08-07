@@ -14,11 +14,7 @@ class RelationMultipleFilterTest extends TestCase
 {
     use RefreshDatabase;
 
-    /**
-     * @test
-     * @return void
-     */
-    public function it_filter_created_and_apply_success(): void
+    public function test_filter_created_and_apply_success(): void
     {
         $shelves = Shelf::factory(2)->create();
 
@@ -67,11 +63,7 @@ class RelationMultipleFilterTest extends TestCase
         $filter->apply($query);
     }
 
-    /**
-     * @test
-     * @return void
-     */
-    public function it_filter_methods_success(): void
+    public function test_filter_methods_success(): void
     {
         $shelves = Shelf::factory(2)->create();
         $shelf = Shelf::factory()->create();
@@ -97,11 +89,7 @@ class RelationMultipleFilterTest extends TestCase
         $this->assertSame($shelves->pluck('id')->toArray(), $filter->preparedSelected());
     }
 
-    /**
-     * @test
-     * @return void
-     */
-    public function it_filter_async_success(): void
+    public function test_filter_async_success(): void
     {
         $shelves = Shelf::factory(2)->create();
         $shelf = Shelf::factory()->create();

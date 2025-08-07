@@ -44,11 +44,7 @@ class GameGenreControllerTest extends TestCase
             ->assertRedirectToRoute('admin.login');
     }
 
-    /**
-     * @test
-     * @return void
-     */
-    public function it_pages_success(): void
+    public function test_pages_success(): void
     {
         $this->checkNotAuthRedirect('index');
         $this->checkNotAuthRedirect('create');
@@ -58,11 +54,7 @@ class GameGenreControllerTest extends TestCase
         $this->checkNotAuthRedirect('destroy', 'delete', [$this->gameDeveloper->slug]);
     }
 
-    /**
-     * @test
-     * @return void
-     */
-    public function it_index_success(): void
+    public function test_index_success(): void
     {
         $this->actingAs($this->user)
             ->get(action([GameGenreController::class, 'index']))
@@ -71,11 +63,7 @@ class GameGenreControllerTest extends TestCase
             ->assertViewIs('admin.game.genre.index');
     }
 
-    /**
-     * @test
-     * @return void
-     */
-    public function it_create_success(): void
+    public function test_create_success(): void
     {
         $this->actingAs($this->user)
             ->get(action([GameGenreController::class, 'create']))
@@ -84,11 +72,7 @@ class GameGenreControllerTest extends TestCase
             ->assertViewIs('admin.game.genre.create');
     }
 
-    /**
-     * @test
-     * @return void
-     */
-    public function it_edit_success(): void
+    public function test_edtest_success(): void
     {
         $this->actingAs($this->user)
             ->get(action([GameGenreController::class, 'edit'], [$this->gameDeveloper->slug]))
@@ -97,11 +81,7 @@ class GameGenreControllerTest extends TestCase
             ->assertViewIs('admin.game.genre.edit');
     }
 
-    /**
-     * @test
-     * @return void
-     */
-    public function it_store_success(): void
+    public function test_store_success(): void
     {
 
         $this->actingAs($this->user)
@@ -114,11 +94,7 @@ class GameGenreControllerTest extends TestCase
         ]);
     }
 
-    /**
-     * @test
-     * @return void
-     */
-    public function it_validation_name_fail(): void
+    public function test_validation_name_fail(): void
     {
         $this->app['session']->setPreviousUrl(route('admin.game-genres.create'));
 
@@ -134,11 +110,7 @@ class GameGenreControllerTest extends TestCase
         ]);
     }
 
-    /**
-     * @test
-     * @return void
-     */
-    public function it_update_success(): void
+    public function test_update_success(): void
     {
         $this->request['name'] = 'newName';
 
@@ -158,11 +130,7 @@ class GameGenreControllerTest extends TestCase
         ]);
     }
 
-    /**
-     * @test
-     * @return void
-     */
-    public function it_delete_success(): void
+    public function test_delete_success(): void
     {
         $this->actingAs($this->user)
             ->delete(action([GameGenreController::class, 'destroy'], [$this->gameDeveloper->slug]))

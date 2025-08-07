@@ -18,11 +18,7 @@ class FillCountryDTOTest extends TestCase
         $this->request = CreateCountryRequest::factory()->create();
     }
 
-    /**
-     * @test
-     * @return void
-     */
-    public function it_instance_created_from_create_request_success(): void
+    public function test_instance_created_from_create_request_success(): void
     {
         $data = FillCountryDTO::fromRequest(new CreateCountryRequest($this->request));
 
@@ -30,11 +26,7 @@ class FillCountryDTOTest extends TestCase
     }
 
 
-    /**
-     * @test
-     * @return void
-     */
-    public function it_instance_created_success(): void
+    public function test_instance_created_success(): void
     {
         $data = FillCountryDTO::make(
             name: $this->request['name'],

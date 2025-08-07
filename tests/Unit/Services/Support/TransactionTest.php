@@ -10,11 +10,7 @@ use Throwable;
 
 class TransactionTest extends TestCase
 {
-    /**
-     * @test
-     * @return void
-     */
-    public function it_success(): void
+    public function test_success(): void
     {
         $test = Transaction::run(
             function () {
@@ -28,11 +24,7 @@ class TransactionTest extends TestCase
         $this->assertEquals(2, $test);
     }
 
-    /**
-     * @test
-     * @return void
-     */
-    public function it_success_with_onSuccess(): void
+    public function test_success_with_onSuccess(): void
     {
         $test = Transaction::run(
             function () {
@@ -49,11 +41,7 @@ class TransactionTest extends TestCase
         $this->assertEquals(2, $test);
     }
 
-    /**
-     * @test
-     * @return void
-     */
-    public function it_fail_with_exception(): void
+    public function test_fail_with_exception(): void
     {
         $this->expectException(CrudException::class);
 
@@ -67,11 +55,7 @@ class TransactionTest extends TestCase
         );
     }
 
-    /**
-     * @test
-     * @return void
-     */
-    public function it_fail_with_default_exception(): void
+    public function test_fail_with_default_exception(): void
     {
         $this->expectException(TransactionException::class);
 

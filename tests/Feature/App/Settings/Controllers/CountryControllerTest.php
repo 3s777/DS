@@ -44,11 +44,7 @@ class CountryControllerTest extends TestCase
             ->assertRedirectToRoute('admin.login');
     }
 
-    /**
-     * @test
-     * @return void
-     */
-    public function it_pages_success(): void
+    public function test_pages_success(): void
     {
         $this->checkNotAuthRedirect('index');
         $this->checkNotAuthRedirect('create');
@@ -58,11 +54,7 @@ class CountryControllerTest extends TestCase
         $this->checkNotAuthRedirect('destroy', 'delete', [$this->country->slug]);
     }
 
-    /**
-     * @test
-     * @return void
-     */
-    public function it_index_success(): void
+    public function test_index_success(): void
     {
         $this->actingAs($this->user)
             ->get(action([CountryController::class, 'index']))
@@ -71,11 +63,7 @@ class CountryControllerTest extends TestCase
             ->assertViewIs('admin.settings.country.index');
     }
 
-    /**
-     * @test
-     * @return void
-     */
-    public function it_create_success(): void
+    public function test_create_success(): void
     {
         $this->actingAs($this->user)
             ->get(action([CountryController::class, 'create']))
@@ -84,11 +72,7 @@ class CountryControllerTest extends TestCase
             ->assertViewIs('admin.settings.country.create');
     }
 
-    /**
-     * @test
-     * @return void
-     */
-    public function it_edit_success(): void
+    public function test_edtest_success(): void
     {
         $this->actingAs($this->user)
             ->get(action([CountryController::class, 'edit'], [$this->country->slug]))
@@ -97,11 +81,7 @@ class CountryControllerTest extends TestCase
             ->assertViewIs('admin.settings.country.edit');
     }
 
-    /**
-     * @test
-     * @return void
-     */
-    public function it_store_success(): void
+    public function test_store_success(): void
     {
         $this->actingAs($this->user)
             ->post(action([CountryController::class, 'store']), $this->request)
@@ -113,11 +93,7 @@ class CountryControllerTest extends TestCase
         ]);
     }
 
-    /**
-     * @test
-     * @return void
-     */
-    public function it_validation_name_fail(): void
+    public function test_validation_name_fail(): void
     {
         $this->app['session']->setPreviousUrl(route('admin.countries.create'));
 
@@ -133,11 +109,7 @@ class CountryControllerTest extends TestCase
         ]);
     }
 
-    /**
-     * @test
-     * @return void
-     */
-    public function it_update_success(): void
+    public function test_update_success(): void
     {
         $this->request['name'] = 'newName';
 
@@ -157,11 +129,7 @@ class CountryControllerTest extends TestCase
         ]);
     }
 
-    /**
-     * @test
-     * @return void
-     */
-    public function it_delete_success(): void
+    public function test_delete_success(): void
     {
         $this->actingAs($this->user)
             ->delete(action([CountryController::class, 'destroy'], [$this->country->slug]))

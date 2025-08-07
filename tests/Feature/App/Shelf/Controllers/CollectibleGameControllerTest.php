@@ -115,11 +115,7 @@ class CollectibleGameControllerTest extends TestCase
         $this->request['country_id'] = 'fake';
     }
 
-    /**
-     * @test
-     * @return void
-     */
-    public function it_pages_success(): void
+    public function test_pages_success(): void
     {
         //        $this->checkNotAuthRedirect('index');
         $this->checkNotAuthRedirect('create');
@@ -132,7 +128,7 @@ class CollectibleGameControllerTest extends TestCase
     //     * @test
     //     * @return void
     //     */
-    //    public function it_index_success(): void
+    //    public function test_index_success(): void
     //    {
     //        $this->actingAs($this->user)
     //            ->get(action([GameMediaController::class, 'index']))
@@ -141,11 +137,7 @@ class CollectibleGameControllerTest extends TestCase
     //            ->assertViewIs('admin.game.media.index');
     //    }
 
-    /**
-     * @test
-     * @return void
-     */
-    public function it_create_success(): void
+    public function test_create_success(): void
     {
         $this->actingAs($this->user)
             ->get(action([CollectibleGameController::class, 'create']))
@@ -154,11 +146,7 @@ class CollectibleGameControllerTest extends TestCase
             ->assertViewIs('admin.shelf.collectible.game.create');
     }
 
-    /**
-     * @test
-     * @return void
-     */
-    public function it_store_success(): void
+    public function test_store_success(): void
     {
         $this->actingAs($this->user)
             ->post(action([CollectibleGameController::class, 'store']), $this->request)
@@ -170,11 +158,7 @@ class CollectibleGameControllerTest extends TestCase
         ]);
     }
 
-    /**
-     * @test
-     * @return void
-     */
-    public function it_store_with_image_success(): void
+    public function test_store_with_image_success(): void
     {
         Queue::fake();
         Storage::fake('images');
@@ -195,11 +179,7 @@ class CollectibleGameControllerTest extends TestCase
         Queue::assertPushed(GenerateSmallThumbnailsJob::class, 2);
     }
 
-    /**
-     * @test
-     * @return void
-     */
-    public function it_validation_create_fail(): void
+    public function test_validation_create_fail(): void
     {
         $this->app['session']->setPreviousUrl(route('admin.collectibles.create.game'));
 
@@ -261,11 +241,7 @@ class CollectibleGameControllerTest extends TestCase
         ]);
     }
 
-    /**
-     * @test
-     * @return void
-     */
-    public function it_validation_update_fail(): void
+    public function test_validation_update_fail(): void
     {
         $this->app['session']->setPreviousUrl(route('admin.collectibles.create.game'));
 
@@ -343,11 +319,7 @@ class CollectibleGameControllerTest extends TestCase
         ]);
     }
 
-    /**
-     * @test
-     * @return void
-     */
-    public function it_validation_featured_image_fail(): void
+    public function test_validation_featured_image_fail(): void
     {
         $this->app['session']->setPreviousUrl(route('admin.collectibles.create.game'));
 
@@ -359,11 +331,7 @@ class CollectibleGameControllerTest extends TestCase
             ->assertRedirectToRoute('admin.collectibles.create.game');
     }
 
-    /**
-     * @test
-     * @return void
-     */
-    public function it_update_success(): void
+    public function test_update_success(): void
     {
         $newShelf = Shelf::factory()->create();
 

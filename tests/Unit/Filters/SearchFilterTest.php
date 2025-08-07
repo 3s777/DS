@@ -13,11 +13,7 @@ class SearchFilterTest extends TestCase
 {
     use RefreshDatabase;
 
-    /**
-     * @test
-     * @return void
-     */
-    public function it_filter_created_and_apply_success(): void
+    public function test_filter_created_and_apply_success(): void
     {
         $request = Request::create('/', 'GET', [
             'filters' => [
@@ -67,11 +63,7 @@ class SearchFilterTest extends TestCase
         $filter->apply($query);
     }
 
-    /**
-     * @test
-     * @return void
-     */
-    public function it_filter_methods_success(): void
+    public function test_filter_methods_success(): void
     {
         $request = Request::create('/', 'GET', [
             'filters' => [
@@ -95,11 +87,7 @@ class SearchFilterTest extends TestCase
         $this->assertSame('test-key-value', $filter->preparedValues());
     }
 
-    /**
-     * @test
-     * @return void
-     */
-    public function it_filter_without_additional_parameters_success(): void
+    public function test_filter_without_additional_parameters_success(): void
     {
         $request = Request::create('/', 'GET', [
             'filters' => [

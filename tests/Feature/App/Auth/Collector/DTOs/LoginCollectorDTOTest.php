@@ -18,22 +18,14 @@ class LoginCollectorDTOTest extends TestCase
         $this->request = LoginCollectorRequest::factory()->create();
     }
 
-    /**
-     * @test
-     * @return void
-     */
-    public function it_instance_created_from_login_request_success(): void
+    public function test_instance_created_from_login_request_success(): void
     {
         $data = LoginCollectorDTO::fromRequest(new LoginCollectorRequest($this->request));
 
         $this->assertInstanceOf(LoginCollectorDTO::class, $data);
     }
 
-    /**
-     * @test
-     * @return void
-     */
-    public function it_instance_created_success(): void
+    public function test_instance_created_success(): void
     {
         $data = LoginCollectorDTO::make(
             $this->request['email'],

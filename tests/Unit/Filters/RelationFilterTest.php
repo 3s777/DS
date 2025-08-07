@@ -14,11 +14,7 @@ class RelationFilterTest extends TestCase
 {
     use RefreshDatabase;
 
-    /**
-     * @test
-     * @return void
-     */
-    public function it_filter_created_and_apply_success(): void
+    public function test_filter_created_and_apply_success(): void
     {
         $shelf = Shelf::factory()->create();
 
@@ -58,11 +54,7 @@ class RelationFilterTest extends TestCase
         $filter->apply($query);
     }
 
-    /**
-     * @test
-     * @return void
-     */
-    public function it_filter_methods_success(): void
+    public function test_filter_methods_success(): void
     {
         $shelf = Shelf::factory()->create();
 

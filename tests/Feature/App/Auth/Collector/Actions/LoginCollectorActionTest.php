@@ -26,11 +26,7 @@ class LoginCollectorActionTest extends TestCase
         ]);
     }
 
-    /**
-     * @test
-     * @return void
-     */
-    public function it_login_collector_success(): void
+    public function test_login_collector_success(): void
     {
         $action = app(LoginCollectorAction::class);
 
@@ -42,11 +38,7 @@ class LoginCollectorActionTest extends TestCase
         $this->assertArrayNotHasKey('not_verified', $actionData);
     }
 
-    /**
-     * @test
-     * @return void
-     */
-    public function it_login_collector_password_fail(): void
+    public function test_login_collector_password_fail(): void
     {
         $action = app(LoginCollectorAction::class);
 
@@ -58,11 +50,7 @@ class LoginCollectorActionTest extends TestCase
         $this->assertArrayHasKey('error', $actionData);
     }
 
-    /**
-     * @test
-     * @return void
-     */
-    public function it_login_user_remember_success(): void
+    public function test_login_user_remember_success(): void
     {
         $action = app(LoginCollectorAction::class);
 

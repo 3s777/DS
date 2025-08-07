@@ -16,6 +16,7 @@ use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Event;
 use Illuminate\Support\Facades\Queue;
 use Illuminate\Support\Facades\Storage;
+use PHPUnit\Framework\Attributes\Test;
 use Tests\TestCase;
 
 class CreateAdminActionTest extends TestCase
@@ -36,11 +37,7 @@ class CreateAdminActionTest extends TestCase
         $this->withoutExceptionHandling();
     }
 
-    /**
-     * @test
-     * @return void
-     */
-    public function it_user_created_success(): void
+    public function testUserCreatedSuccess(): void
     {
         Queue::fake();
         Storage::fake('images');
@@ -76,11 +73,7 @@ class CreateAdminActionTest extends TestCase
         Queue::assertPushed(GenerateSmallThumbnailsJob::class, 2);
     }
 
-    /**
-     * @test
-     * @return void
-     */
-    public function it_registered_event_and_listeners_dispatched(): void
+    public function testRegisteredEventAndListenersDispatched(): void
     {
         Event::fake([
             Registered::class,
@@ -110,12 +103,9 @@ class CreateAdminActionTest extends TestCase
         Event::assertDispatched(Verified::class);
     }
 
-    /**
-     * @test
-     * @return void
-     */
+
     //    TODO test exception without HTTP
-    //    public function it_handle_user_exception_sent(): void
+    //    public function test_handle_user_exception_sent(): void
     //    {
     //        Exceptions::fake();
     //

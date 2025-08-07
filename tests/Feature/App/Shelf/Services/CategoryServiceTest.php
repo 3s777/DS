@@ -28,11 +28,7 @@ class CategoryServiceTest extends TestCase
         $this->user = User::factory()->create();
     }
 
-    /**
-     * @test
-     * @return void
-     */
-    public function it_category_created_success(): void
+    public function test_category_created_success(): void
     {
         $this->assertDatabaseMissing('categories', [
             'slug' => Str::slug($this->request['name'])
@@ -51,11 +47,7 @@ class CategoryServiceTest extends TestCase
         ]);
     }
 
-    /**
-     * @test
-     * @return void
-     */
-    public function it_category_updated_success(): void
+    public function test_category_updated_success(): void
     {
         $createRequest = new Request($this->request);
 
@@ -83,11 +75,7 @@ class CategoryServiceTest extends TestCase
         $this->assertSame($updatedCategory->slug, $this->request['slug']);
     }
 
-    /**
-     * @test
-     * @return void
-     */
-    public function it_category_model_null_after_deleting_success(): void
+    public function test_category_model_null_after_deleting_success(): void
     {
         $categoryService = app(CategoryService::class);
 

@@ -39,11 +39,7 @@ class CreateCollectorActionTest extends TestCase
         $this->withoutExceptionHandling();
     }
 
-    /**
-     * @test
-     * @return void
-     */
-    public function it_user_created_success(): void
+    public function test_user_created_success(): void
     {
         Queue::fake();
         Storage::fake('images');
@@ -79,11 +75,7 @@ class CreateCollectorActionTest extends TestCase
         Queue::assertPushed(GenerateSmallThumbnailsJob::class, 2);
     }
 
-    /**
-     * @test
-     * @return void
-     */
-    public function it_registered_event_and_listeners_dispatched(): void
+    public function test_registered_event_and_listeners_dispatched(): void
     {
         Event::fake([
             Registered::class,
@@ -113,12 +105,8 @@ class CreateCollectorActionTest extends TestCase
         Event::assertDispatched(Verified::class);
     }
 
-    /**
-     * @test
-     * @return void
-     */
     //    TODO test exception without HTTP
-    //    public function it_handle_user_exception_sent(): void
+    //    public function test_handle_user_exception_sent(): void
     //    {
     //        Exceptions::fake();
     //

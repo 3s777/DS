@@ -13,11 +13,7 @@ class AbstractFilterTest extends TestCase
 {
     use RefreshDatabase;
 
-    /**
-     * @test
-     * @return void
-     */
-    public function it_filter_created_success(): void
+    public function test_filter_created_success(): void
     {
         $request = Request::create('/', 'GET', [
             'filters' => [
@@ -66,11 +62,7 @@ class AbstractFilterTest extends TestCase
         $this->assertSame($filter, $view->getData()['filter']);
     }
 
-    /**
-     * @test
-     * @return void
-     */
-    public function it_filter_created_with_placeholder_array_success(): void
+    public function test_filter_created_with_placeholder_array_success(): void
     {
         $filter = new class (
             'test-title',
@@ -102,11 +94,7 @@ class AbstractFilterTest extends TestCase
         $this->assertSame('test-placeholder-to', $filter->placeholder('to'));
     }
 
-    /**
-     * @test
-     * @return void
-     */
-    public function it_filter_created_without_additional_parameters_success(): void
+    public function test_filter_created_without_additional_parameters_success(): void
     {
         $filter = new class (
             'test-title',

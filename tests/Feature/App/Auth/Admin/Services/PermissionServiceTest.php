@@ -27,11 +27,7 @@ class PermissionServiceTest extends TestCase
         $this->user = User::factory()->create();
     }
 
-    /**
-     * @test
-     * @return void
-     */
-    public function it_permission_created_success(): void
+    public function test_permission_created_success(): void
     {
         $this->assertDatabaseMissing('permissions', [
             'name' => $this->request['name']
@@ -50,11 +46,7 @@ class PermissionServiceTest extends TestCase
         ]);
     }
 
-    /**
-     * @test
-     * @return void
-     */
-    public function it_permission_updated_success(): void
+    public function test_permission_updated_success(): void
     {
         $createRequest = new Request($this->request);
 

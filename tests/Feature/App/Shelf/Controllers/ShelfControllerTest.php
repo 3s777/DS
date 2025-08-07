@@ -16,6 +16,7 @@ use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Queue;
 use Illuminate\Support\Facades\Storage;
+use PHPUnit\Framework\Attributes\Test;
 use Tests\TestCase;
 
 // TODO: add policy tests
@@ -51,11 +52,7 @@ class ShelfControllerTest extends TestCase
             ->assertRedirectToRoute('admin.login');
     }
 
-    /**
-     * @test
-     * @return void
-     */
-    public function it_pages_success(): void
+    public function test_pages_success(): void
     {
         $this->checkNotAuthRedirect('index');
         $this->checkNotAuthRedirect('create');
@@ -65,11 +62,7 @@ class ShelfControllerTest extends TestCase
         $this->checkNotAuthRedirect('destroy', 'delete', [$this->shelf->id]);
     }
 
-    /**
-     * @test
-     * @return void
-     */
-    public function it_index_success(): void
+    public function test_index_success(): void
     {
         $this->actingAs($this->user)
             ->get(action([ShelfController::class, 'index']))
@@ -78,11 +71,7 @@ class ShelfControllerTest extends TestCase
             ->assertViewIs('admin.shelf.shelf.index');
     }
 
-    /**
-     * @test
-     * @return void
-     */
-    public function it_create_success(): void
+    public function test_create_success(): void
     {
         $this->actingAs($this->user)
             ->get(action([ShelfController::class, 'create']))
@@ -91,11 +80,7 @@ class ShelfControllerTest extends TestCase
             ->assertViewIs('admin.shelf.shelf.create');
     }
 
-    /**
-     * @test
-     * @return void
-     */
-    public function it_edit_success(): void
+    public function test_edtest_success(): void
     {
         $this->actingAs($this->user)
             ->get(action([ShelfController::class, 'edit'], [$this->shelf->id]))
@@ -104,11 +89,7 @@ class ShelfControllerTest extends TestCase
             ->assertViewIs('admin.shelf.shelf.edit');
     }
 
-    /**
-     * @test
-     * @return void
-     */
-    public function it_store_success(): void
+    public function test_store_success(): void
     {
 
         $this->actingAs($this->user)
@@ -121,11 +102,7 @@ class ShelfControllerTest extends TestCase
         ]);
     }
 
-    /**
-     * @test
-     * @return void
-     */
-    public function it_store_with_image_success(): void
+    public function test_store_with_image_success(): void
     {
         Queue::fake();
         Storage::fake('images');
@@ -146,11 +123,7 @@ class ShelfControllerTest extends TestCase
         Queue::assertPushed(GenerateSmallThumbnailsJob::class, 2);
     }
 
-    /**
-     * @test
-     * @return void
-     */
-    public function it_validation_name_fail(): void
+    public function test_validation_name_fail(): void
     {
         $this->app['session']->setPreviousUrl(route('admin.shelves.create'));
 
@@ -167,11 +140,7 @@ class ShelfControllerTest extends TestCase
         ]);
     }
 
-    /**
-     * @test
-     * @return void
-     */
-    public function it_validation_featured_image_fail(): void
+    public function test_validation_featured_image_fail(): void
     {
         $this->app['session']->setPreviousUrl(route('admin.shelves.create'));
 
@@ -183,11 +152,7 @@ class ShelfControllerTest extends TestCase
             ->assertRedirectToRoute('admin.shelves.create');
     }
 
-    /**
-     * @test
-     * @return void
-     */
-    public function it_update_success(): void
+    public function test_update_success(): void
     {
         $this->request['name'] = 'newName';
 
@@ -207,11 +172,7 @@ class ShelfControllerTest extends TestCase
         ]);
     }
 
-    /**
-     * @test
-     * @return void
-     */
-    public function it_delete_success(): void
+    public function test_delete_success(): void
     {
         $this->actingAs($this->user)
             ->delete(action([ShelfController::class, 'destroy'], [$this->shelf->id]))
@@ -224,11 +185,7 @@ class ShelfControllerTest extends TestCase
         ]);
     }
 
-    /**
-     * @test
-     * @return void
-     */
-    public function it_fail_wrong_depended_get_for_select(): void
+    public function test_fail_wrong_depended_get_for_select(): void
     {
         $this->actingAs($this->user)
             ->post(action([ShelfController::class, 'getForSelect'], ['depended' => ['wrong_field_id' => $this->user->id]]))
@@ -239,11 +196,7 @@ class ShelfControllerTest extends TestCase
             ->assertOk();
     }
 
-    /**
-     * @test
-     * @return void
-     */
-    public function it_success_get_for_select(): void
+    public function test_success_get_for_select(): void
     {
         $collector = Collector::factory()->create();
         $shelf = Shelf::factory()->create(['collector_id' => $collector->id]);

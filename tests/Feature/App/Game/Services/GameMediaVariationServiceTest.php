@@ -34,11 +34,7 @@ class GameMediaVariationServiceTest extends TestCase
         $this->user = User::factory()->create();
     }
 
-    /**
-     * @test
-     * @return void
-     */
-    public function it_game_media_variation_created_success(): void
+    public function test_game_media_variation_created_success(): void
     {
         Queue::fake();
         Storage::fake('images');
@@ -72,11 +68,7 @@ class GameMediaVariationServiceTest extends TestCase
     }
 
 
-    /**
-     * @test
-     * @return void
-     */
-    public function it_game_media_variation_updated_success(): void
+    public function test_game_media_variation_updated_success(): void
     {
         Queue::fake();
         Storage::fake('images');
@@ -121,11 +113,7 @@ class GameMediaVariationServiceTest extends TestCase
         Queue::assertPushed(GenerateSmallThumbnailsJob::class, 2);
     }
 
-    /**
-     * @test
-     * @return void
-     */
-    public function it_game_media_variation_main_updated_success(): void
+    public function test_game_media_variation_main_updated_success(): void
     {
         $gameMedia = GameMedia::factory()->create();
 

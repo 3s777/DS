@@ -39,11 +39,7 @@ class UpdateAdminActionTest extends TestCase
         $this->withoutExceptionHandling();
     }
 
-    /**
-     * @test
-     * @return void
-     */
-    public function it_user_created_success(): void
+    public function test_user_created_success(): void
     {
         Queue::fake();
         Storage::fake('images');

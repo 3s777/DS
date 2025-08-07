@@ -60,57 +60,33 @@ class GameDeveloperFilterTest extends TestCase
         return $this->gameDevelopers;
     }
 
-    /**
-     * @test
-     * @return void
-     */
-    public function it_success_search_filtered_response(): void
+    public function test_success_search_filtered_response(): void
     {
         $this->searchFilter();
     }
 
-    /**
-     * @test
-     * @return void
-     */
-    public function it_success_dates_from_filtered_response(): void
+    public function test_success_dates_from_filtered_response(): void
     {
         $this->datesFromFilter();
     }
 
-    /**
-     * @test
-     * @return void
-     */
-    public function it_success_dates_to_filtered_response(): void
+    public function test_success_dates_to_filtered_response(): void
     {
         $this->datesToFilter();
     }
 
 
-    /**
-     * @test
-     * @return void
-     */
-    public function it_success_dates_filtered_response(): void
+    public function test_success_dates_filtered_response(): void
     {
         $this->datesFilter();
     }
 
-    /**
-     * @test
-     * @return void
-     */
-    public function it_success_user_filtered_response(): void
+    public function test_success_user_filtered_response(): void
     {
         $this->userFilter();
     }
 
-    /**
-     * @test
-     * @return void
-     */
-    public function it_should_validation_filters_fail(): void
+    public function test_should_validation_filters_fail(): void
     {
         $request = [
             'filters' => [
@@ -125,11 +101,7 @@ class GameDeveloperFilterTest extends TestCase
             ->assertRedirectToRoute('admin.game-developers.index');
     }
 
-    /**
-     * @test
-     * @return void
-     */
-    public function it_success_sorted_response(): void
+    public function test_success_sorted_response(): void
     {
         $this->checkSortOrder('id');
         $this->checkSortOrder('name');

@@ -74,21 +74,13 @@ class CollectibleControllerTest extends TestCase
             ->assertRedirectToRoute('admin.login');
     }
 
-    /**
-     * @test
-     * @return void
-     */
-    public function it_pages_success(): void
+    public function test_pages_success(): void
     {
         $this->checkNotAuthRedirect('index');
         $this->checkNotAuthRedirect('edit', 'get', [$this->collectible->id]);
     }
 
-    /**
-     * @test
-     * @return void
-     */
-    public function it_index_success(): void
+    public function test_index_success(): void
     {
         $this->actingAs($this->user)
             ->get(action([CollectibleController::class, 'index']))
@@ -97,11 +89,7 @@ class CollectibleControllerTest extends TestCase
             ->assertViewIs('admin.shelf.collectible.index');
     }
 
-    /**
-     * @test
-     * @return void
-     */
-    public function it_edit_success(): void
+    public function test_edtest_success(): void
     {
         $class = Relation::getMorphedModel($this->collectible->collectable->getMorphClass());
         $type = strtolower(CollectibleTypeEnum::tryFrom($class)->name);
@@ -113,11 +101,7 @@ class CollectibleControllerTest extends TestCase
             ->assertViewIs('admin.shelf.collectible.'.$type.'.edit');
     }
 
-    /**
-     * @test
-     * @return void
-     */
-    public function it_delete_success(): void
+    public function test_delete_success(): void
     {
         $this->actingAs($this->user)
             ->delete(action([CollectibleController::class, 'destroy'], [$this->collectible->id]))
@@ -127,11 +111,7 @@ class CollectibleControllerTest extends TestCase
         $this->assertSoftDeleted($this->collectible);
     }
 
-    /**
-     * @test
-     * @return void
-     */
-    public function it_deleted_with_sale_success(): void
+    public function test_deleted_with_sale_success(): void
     {
         $request = CreateCollectibleGameRequest::factory()->hasSale()->hasKitConditions()->create();
 
@@ -152,11 +132,7 @@ class CollectibleControllerTest extends TestCase
         $this->assertSoftDeleted($sale);
     }
 
-    /**
-     * @test
-     * @return void
-     */
-    public function it_deleted_with_auction_success(): void
+    public function test_deleted_with_auction_success(): void
     {
         $request = CreateCollectibleGameRequest::factory()->hasAuction()->hasKitConditions()->create();
 

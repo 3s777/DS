@@ -44,11 +44,7 @@ class PageCategoryControllerTest extends TestCase
             ->assertRedirectToRoute('admin.login');
     }
 
-    /**
-     * @test
-     * @return void
-     */
-    public function it_pages_success(): void
+    public function test_pages_success(): void
     {
         $this->checkNotAuthRedirect('index');
         $this->checkNotAuthRedirect('create');
@@ -58,11 +54,7 @@ class PageCategoryControllerTest extends TestCase
         $this->checkNotAuthRedirect('destroy', 'delete', [$this->pageCategory->slug]);
     }
 
-    /**
-     * @test
-     * @return void
-     */
-    public function it_index_success(): void
+    public function test_index_success(): void
     {
         $this->actingAs($this->user)
             ->get(action([PageCategoryController::class, 'index']))
@@ -71,11 +63,7 @@ class PageCategoryControllerTest extends TestCase
             ->assertViewIs('admin.page.category.index');
     }
 
-    /**
-     * @test
-     * @return void
-     */
-    public function it_create_success(): void
+    public function test_create_success(): void
     {
         $this->actingAs($this->user)
             ->get(action([PageCategoryController::class, 'create']))
@@ -84,11 +72,7 @@ class PageCategoryControllerTest extends TestCase
             ->assertViewIs('admin.page.category.create');
     }
 
-    /**
-     * @test
-     * @return void
-     */
-    public function it_edit_success(): void
+    public function test_edtest_success(): void
     {
         $this->actingAs($this->user)
             ->get(action([PageCategoryController::class, 'edit'], [$this->pageCategory->slug]))
@@ -97,11 +81,7 @@ class PageCategoryControllerTest extends TestCase
             ->assertViewIs('admin.page.category.edit');
     }
 
-    /**
-     * @test
-     * @return void
-     */
-    public function it_store_success(): void
+    public function test_store_success(): void
     {
         $this->actingAs($this->user)
             ->post(action([PageCategoryController::class, 'store']), $this->request)
@@ -113,11 +93,7 @@ class PageCategoryControllerTest extends TestCase
         ]);
     }
 
-    /**
-     * @test
-     * @return void
-     */
-    public function it_validation_name_fail(): void
+    public function test_validation_name_fail(): void
     {
         $this->app['session']->setPreviousUrl(route('admin.page-categories.create'));
 
@@ -139,11 +115,7 @@ class PageCategoryControllerTest extends TestCase
         ]);
     }
 
-    /**
-     * @test
-     * @return void
-     */
-    public function it_update_success(): void
+    public function test_update_success(): void
     {
         $this->request['name'] = 'newName';
 
@@ -163,11 +135,7 @@ class PageCategoryControllerTest extends TestCase
         ]);
     }
 
-    /**
-     * @test
-     * @return void
-     */
-    public function it_update_validation_fail(): void
+    public function test_update_validation_fail(): void
     {
         $this->app['session']->setPreviousUrl(route('admin.page-categories.edit', $this->pageCategory->slug));
 
@@ -193,11 +161,7 @@ class PageCategoryControllerTest extends TestCase
             ->assertRedirectToRoute('admin.page-categories.edit', $this->pageCategory->slug);
     }
 
-    /**
-     * @test
-     * @return void
-     */
-    public function it_delete_success(): void
+    public function test_delete_success(): void
     {
         $this->actingAs($this->user)
             ->delete(action([PageCategoryController::class, 'destroy'], [$this->pageCategory->slug]))

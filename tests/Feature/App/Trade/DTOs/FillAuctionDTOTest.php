@@ -19,22 +19,14 @@ class FillAuctionDTOTest extends TestCase
         $this->request = CreateAuctionRequestFactory::new()->create();
     }
 
-    /**
-     * @test
-     * @return void
-     */
-    public function it_instance_created_from_create_request_success(): void
+    public function test_instance_created_from_create_request_success(): void
     {
         $data = FillAuctionDTO::fromRequest(new Request($this->request));
 
         $this->assertInstanceOf(FillAuctionDTO::class, $data);
     }
 
-    /**
-     * @test
-     * @return void
-     */
-    public function it_instance_created_success(): void
+    public function test_instance_created_success(): void
     {
         $data = FillAuctionDTO::make(
             collectible_id: $this->request['collectible_id'],

@@ -35,11 +35,7 @@ class RegisterControllerTest extends TestCase
         );
     }
 
-    /**
-     * @test
-     * @return void
-     */
-    public function it_page_success(): void
+    public function test_page_success(): void
     {
         $this->get(action([RegisterController::class, 'page']))
             ->assertOk()
@@ -47,21 +43,13 @@ class RegisterControllerTest extends TestCase
             ->assertViewIs('content.auth-collector.register');
     }
 
-    /**
-     * @test
-     * @return void
-     */
-    public function it_validation_success(): void
+    public function test_validation_success(): void
     {
         $this->postRequest()
             ->assertValid();
     }
 
-    /**
-     * @test
-     * @return void
-     */
-    public function it_should_fail_validation_on_password_confirm(): void
+    public function test_should_fail_validation_on_password_confirm(): void
     {
         $this->request['password'] = '123';
         $this->request['password_confirmation'] = '1234';
@@ -70,11 +58,7 @@ class RegisterControllerTest extends TestCase
             ->assertInvalid(['password']);
     }
 
-    /**
-     * @test
-     * @return void
-     */
-    public function it_should_fail_validation_on_password(): void
+    public function test_should_fail_validation_on_password(): void
     {
         $this->request['password'] = '123';
         $this->request['password_confirmation'] = '123';
@@ -83,11 +67,7 @@ class RegisterControllerTest extends TestCase
             ->assertInvalid(['password']);
     }
 
-    /**
-     * @test
-     * @return void
-     */
-    public function it_should_fail_validation_on_unique_email(): void
+    public function test_should_fail_validation_on_unique_email(): void
     {
         CollectorFactory::new()->create([
             'email' => $this->request['email']
@@ -101,11 +81,7 @@ class RegisterControllerTest extends TestCase
             ->assertInvalid(['email']);
     }
 
-    /**
-     * @test
-     * @return void
-     */
-    public function it_should_fail_validation_on_unique_username(): void
+    public function test_should_fail_validation_on_unique_username(): void
     {
         CollectorFactory::new()->create([
             'name' => $this->request['name']
@@ -119,11 +95,7 @@ class RegisterControllerTest extends TestCase
             ->assertInvalid(['name']);
     }
 
-    /**
-     * @test
-     * @return void
-     */
-    public function it_redirect_to_login(): void
+    public function test_redirect_to_login(): void
     {
         $response = $this->post(
             action([RegisterController::class, 'handle']),
@@ -137,11 +109,7 @@ class RegisterControllerTest extends TestCase
         $this->followRedirects($response)->assertSee(__('auth.register_verify'));
     }
 
-    /**
-     * @test
-     * @return void
-     */
-    public function it_only_guest_success(): void
+    public function test_only_guest_success(): void
     {
         $password = '123456789';
 

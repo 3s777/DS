@@ -18,22 +18,14 @@ class LoginAdminDTOTest extends TestCase
         $this->request = LoginAdminRequest::factory()->create();
     }
 
-    /**
-     * @test
-     * @return void
-     */
-    public function it_instance_created_from_login_request_success(): void
+    public function test_instance_created_from_login_request_success(): void
     {
         $data = LoginAdminDTO::fromRequest(new LoginAdminRequest($this->request));
 
         $this->assertInstanceOf(LoginAdminDTO::class, $data);
     }
 
-    /**
-     * @test
-     * @return void
-     */
-    public function it_instance_created_success(): void
+    public function test_instance_created_success(): void
     {
         $data = LoginAdminDTO::make(
             $this->request['email'],

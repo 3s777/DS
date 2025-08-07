@@ -28,11 +28,7 @@ class AuctionServiceTest extends TestCase
         $this->request = CreateAuctionRequestFactory::new()->create();
     }
 
-    /**
-     * @test
-     * @return void
-     */
-    public function it_sale_success(): void
+    public function test_sale_success(): void
     {
         $this->assertDatabaseMissing('auctions', [
             'collectible_id' => $this->request['collectible_id']
@@ -62,11 +58,7 @@ class AuctionServiceTest extends TestCase
         $this->assertSame($auction->self_delivery, $this->request['self_delivery']);
     }
 
-    /**
-     * @test
-     * @return void
-     */
-    public function it_sale_updated_success(): void
+    public function test_sale_updated_success(): void
     {
         $auctionService = app(AuctionService::class);
 
@@ -109,11 +101,7 @@ class AuctionServiceTest extends TestCase
         $this->assertSame($updatedAuction->finished_at->format('Y-m-d H:i'), '2026-10-03 10:15');
     }
 
-    /**
-     * @test
-     * @return void
-     */
-    public function it_auction_created_and_updated_with_country_success(): void
+    public function test_auction_created_and_updated_with_country_success(): void
     {
         $countries = Country::factory(3)->create();
         $auctionService = app(AuctionService::class);

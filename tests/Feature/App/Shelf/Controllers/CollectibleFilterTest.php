@@ -89,164 +89,92 @@ class CollectibleFilterTest extends TestCase
         return $this->collectibles;
     }
 
-    /**
-     * @test
-     * @return void
-     */
-    public function it_success_search_filtered_response(): void
+    public function test_success_search_filtered_response(): void
     {
         $this->searchFilter(createAttributes: $this->attributes);
     }
 
-    /**
-     * @test
-     * @return void
-     */
-    public function it_success_dates_from_filtered_response(): void
+    public function test_success_dates_from_filtered_response(): void
     {
         $this->datesFromFilter(createAttributes: $this->attributes);
     }
 
-    /**
-     * @test
-     * @return void
-     */
-    public function it_success_dates_to_filtered_response(): void
+    public function test_success_dates_to_filtered_response(): void
     {
         $this->datesToFilter(createAttributes: $this->attributes);
     }
 
-    /**
-     * @test
-     * @return void
-     */
-    public function it_success_dates_filtered_response(): void
+    public function test_success_dates_filtered_response(): void
     {
         $this->datesFilter(createAttributes: $this->attributes);
     }
 
-    /**
-     * @test
-     * @return void
-     */
-    public function it_success_released_at_from_filtered_response(): void
+    public function test_success_released_at_from_filtered_response(): void
     {
         $this->datesFromFilter('purchased_dates', 'purchased_at', createAttributes: $this->attributes);
     }
 
-    /**
-     * @test
-     * @return void
-     */
-    public function it_success_released_at_to_filtered_response(): void
+    public function test_success_released_at_to_filtered_response(): void
     {
         $this->datesToFilter('purchased_dates', 'purchased_at', createAttributes: $this->attributes);
     }
 
-    /**
-     * @test
-     * @return void
-     */
-    public function it_success_released_at_filtered_response(): void
+    public function test_success_released_at_filtered_response(): void
     {
         $this->datesFilter('purchased_dates', 'purchased_at', createAttributes: $this->attributes);
     }
 
-    /**
-     * @test
-     * @return void
-     */
-    public function it_success_user_filtered_response(): void
+    public function test_success_user_filtered_response(): void
     {
         $this->userFilter(createAttributes: $this->attributes);
     }
 
-    /**
-     * @test
-     * @return void
-     */
-    public function it_success_collector_filtered_response(): void
+    public function test_success_collector_filtered_response(): void
     {
         $this->userFilter('collector', 'collector_id', Collector::class, createAttributes: $this->attributes);
     }
 
-    /**
-     * @test
-     * @return void
-     */
-    public function it_success_search_seller_filtered_response(): void
+    public function test_success_search_seller_filtered_response(): void
     {
         $this->searchFilter('seller', 'seller', createAttributes: $this->attributes);
     }
 
-    /**
-     * @test
-     * @return void
-     */
-    public function it_success_search_additional_field_filtered_response(): void
+    public function test_success_search_additional_field_filtered_response(): void
     {
         $this->searchFilter('additional_field', 'additional_field', createAttributes: $this->attributes);
     }
 
-    /**
-     * @test
-     * @return void
-     */
-    public function it_success_kit_score_filtered_response(): void
+    public function test_success_kit_score_filtered_response(): void
     {
         $this->rangeFilter('kit_score', 'kit_score', createAttributes: $this->attributes);
     }
 
-    /**
-     * @test
-     * @return void
-     */
-    public function it_success_kit_score_from_filtered_response(): void
+    public function test_success_kit_score_from_filtered_response(): void
     {
         $this->rangeFromFilter('kit_score', 'kit_score', createAttributes: $this->attributes);
     }
 
-    /**
-     * @test
-     * @return void
-     */
-    public function it_success_kit_score_to_filtered_response(): void
+    public function test_success_kit_score_to_filtered_response(): void
     {
         $this->rangeToFilter('kit_score', 'kit_score', createAttributes: $this->attributes);
     }
 
-    /**
-     * @test
-     * @return void
-     */
-    public function it_success_purchase_price_filtered_response(): void
+    public function test_success_purchase_price_filtered_response(): void
     {
         $this->rangeFilter('purchase_price', 'purchase_price', createAttributes: $this->attributes);
     }
 
-    /**
-     * @test
-     * @return void
-     */
-    public function it_success_purchase_price_from_filtered_response(): void
+    public function test_success_purchase_price_from_filtered_response(): void
     {
         $this->rangeFromFilter('purchase_price', 'purchase_price', createAttributes: $this->attributes);
     }
 
-    /**
-     * @test
-     * @return void
-     */
-    public function it_success_purchase_price_to_filtered_response(): void
+    public function test_success_purchase_price_to_filtered_response(): void
     {
         $this->rangeToFilter('purchase_price', 'purchase_price', createAttributes: $this->attributes);
     }
 
-    /**
-     * @test
-     * @return void
-     */
-    public function it_success_sale_price_filtered_response(): void
+    public function test_success_sale_price_filtered_response(): void
     {
         $models = $this->getFactory()
             ->has(Sale::factory()->state([
@@ -274,11 +202,7 @@ class CollectibleFilterTest extends TestCase
         $this->baseAssertion($request, $expectedModel, $models);
     }
 
-    /**
-     * @test
-     * @return void
-     */
-    public function it_success_sale_price_from_filtered_response(): void
+    public function test_success_sale_price_from_filtered_response(): void
     {
         $models = $this->getFactory()
             ->has(Sale::factory()->state([
@@ -305,11 +229,7 @@ class CollectibleFilterTest extends TestCase
         $this->baseAssertion($request, $expectedModel, $models);
     }
 
-    /**
-     * @test
-     * @return void
-     */
-    public function it_success_sale_price_to_filtered_response(): void
+    public function test_success_sale_price_to_filtered_response(): void
     {
         $models = $this->getFactory()
             ->has(Sale::factory()->state([
@@ -336,11 +256,7 @@ class CollectibleFilterTest extends TestCase
         $this->baseAssertion($request, $expectedModel, $models);
     }
 
-    /**
-     * @test
-     * @return void
-     */
-    public function it_success_auction_finished_at_filtered_response(): void
+    public function test_success_auction_finished_at_filtered_response(): void
     {
         $this->datesRelationFilter(
             Auction::class,
@@ -351,11 +267,7 @@ class CollectibleFilterTest extends TestCase
         );
     }
 
-    /**
-     * @test
-     * @return void
-     */
-    public function it_success_auction_finished_at_from_filtered_response(): void
+    public function test_success_auction_finished_at_from_filtered_response(): void
     {
         $this->datesRelationFromFilter(
             Auction::class,
@@ -366,11 +278,7 @@ class CollectibleFilterTest extends TestCase
         );
     }
 
-    /**
-     * @test
-     * @return void
-     */
-    public function it_success_auction_finished_at_to_filtered_response(): void
+    public function test_success_auction_finished_at_to_filtered_response(): void
     {
         $this->datesRelationToFilter(
             Auction::class,
@@ -383,11 +291,7 @@ class CollectibleFilterTest extends TestCase
 
 
 
-    /**
-     * @test
-     * @return void
-     */
-    public function it_success_category_filtered_response(): void
+    public function test_success_category_filtered_response(): void
     {
         $expectedCategory = Category::factory()->create([
             'model' => 'test'
@@ -417,11 +321,7 @@ class CollectibleFilterTest extends TestCase
             ->assertDontSee($this->getModels()->pluck('name')->toArray());
     }
 
-    /**
-     * @test
-     * @return void
-     */
-    public function it_success_target_filtered_response(): void
+    public function test_success_target_filtered_response(): void
     {
         $this->valueFilter(
             'target',
@@ -430,11 +330,7 @@ class CollectibleFilterTest extends TestCase
         );
     }
 
-    /**
-     * @test
-     * @return void
-     */
-    public function it_success_condition_filtered_response(): void
+    public function test_success_condition_filtered_response(): void
     {
         $this->valueFilter(
             'condition',
@@ -444,11 +340,7 @@ class CollectibleFilterTest extends TestCase
         );
     }
 
-    /**
-     * @test
-     * @return void
-     */
-    public function it_should_validation_filters_fail(): void
+    public function test_should_validation_filters_fail(): void
     {
         $request = [
             'filters' => [
@@ -494,11 +386,7 @@ class CollectibleFilterTest extends TestCase
             ->assertRedirectToRoute('admin.collectibles.index');
     }
 
-    /**
-     * @test
-     * @return void
-     */
-    public function it_success_sorted_response(): void
+    public function test_success_sorted_response(): void
     {
         $this->checkSortOrder('id');
         $this->checkSortOrder('name');

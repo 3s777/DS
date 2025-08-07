@@ -37,11 +37,7 @@ class SaleCastTest extends TestCase
         $this->category = Category::factory()->create(['model' => Relation::getMorphAlias(GameMediaVariation::class)]);
     }
 
-    /**
-     * @test
-     * @return void
-     */
-    public function it_sale_success(): void
+    public function test_sale_success(): void
     {
         $country = Country::factory()->create();
 

@@ -37,11 +37,7 @@ class AuctionCastTest extends TestCase
         $this->category = Category::factory()->create(['model' => Relation::getMorphAlias(GameMediaVariation::class)]);
     }
 
-    /**
-     * @test
-     * @return void
-     */
-    public function it_auction_success(): void
+    public function test_auction_success(): void
     {
         $country = Country::factory()->create();
 

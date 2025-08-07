@@ -8,12 +8,8 @@ use Tests\TestCase;
 
 class PriceTest extends TestCase
 {
-    /**
-     * @test
-     * @return void
-     */
 
-    public function it_all(): void
+    public function test_all(): void
     {
         $price = PriceValueObject::make(10000);
 

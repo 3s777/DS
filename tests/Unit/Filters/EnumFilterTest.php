@@ -14,11 +14,7 @@ class EnumFilterTest extends TestCase
 {
     use RefreshDatabase;
 
-    /**
-     * @test
-     * @return void
-     */
-    public function it_filter_created_and_apply_success(): void
+    public function test_filter_created_and_apply_success(): void
     {
         $request = Request::create('/', 'GET', [
             'filters' => [
@@ -56,11 +52,7 @@ class EnumFilterTest extends TestCase
         $filter->apply($query);
     }
 
-    /**
-     * @test
-     * @return void
-     */
-    public function it_filter_apply_with_array_success(): void
+    public function test_filter_apply_with_array_success(): void
     {
         $request = Request::create('/', 'GET', [
             'filters' => [
@@ -100,11 +92,7 @@ class EnumFilterTest extends TestCase
         $filter->apply($query);
     }
 
-    /**
-     * @test
-     * @return void
-     */
-    public function it_filter_methods_success(): void
+    public function test_filter_methods_success(): void
     {
         $request = Request::create('/', 'GET', [
             'filters' => [
@@ -128,11 +116,7 @@ class EnumFilterTest extends TestCase
         $this->assertSame(ConditionEnum::tryFrom('new')->name(), $filter->preparedValues());
     }
 
-    /**
-     * @test
-     * @return void
-     */
-    public function it_filter_preparedValues_with_array_success(): void
+    public function test_filter_preparedValues_with_array_success(): void
     {
         $request = Request::create('/', 'GET', [
             'filters' => [
@@ -155,11 +139,7 @@ class EnumFilterTest extends TestCase
         ], $filter->preparedValues());
     }
 
-    /**
-     * @test
-     * @return void
-     */
-    public function it_filter_with_callbackPreparedValues_success(): void
+    public function test_filter_with_callbackPreparedValues_success(): void
     {
         $request = Request::create('/', 'GET', [
             'filters' => [

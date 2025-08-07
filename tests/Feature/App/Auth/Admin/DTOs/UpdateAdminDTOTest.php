@@ -18,22 +18,14 @@ class UpdateAdminDTOTest extends TestCase
         $this->request = CreateAdminRequest::factory()->create();
     }
 
-    /**
-     * @test
-     * @return void
-     */
-    public function it_instance_created_from_form_request_success(): void
+    public function test_instance_created_from_form_request_success(): void
     {
         $data = UpdateUserDTO::fromRequest(new CreateAdminRequest($this->request));
 
         $this->assertInstanceOf(UpdateUserDTO::class, $data);
     }
 
-    /**
-     * @test
-     * @return void
-     */
-    public function it_instance_created_success(): void
+    public function test_instance_created_success(): void
     {
 
         $data = UpdateUserDTO::make(

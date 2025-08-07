@@ -18,11 +18,7 @@ class FillGameMediaDTOTest extends TestCase
         $this->request = CreateGameMediaRequest::factory()->create();
     }
 
-    /**
-     * @test
-     * @return void
-     */
-    public function it_instance_created_from_create_request_success(): void
+    public function test_instance_created_from_create_request_success(): void
     {
         $data = FillGameMediaDTO::fromRequest(new CreateGameMediaRequest($this->request));
 
@@ -30,11 +26,7 @@ class FillGameMediaDTOTest extends TestCase
     }
 
 
-    /**
-     * @test
-     * @return void
-     */
-    public function it_instance_created_success(): void
+    public function test_instance_created_success(): void
     {
         $data = FillGameMediaDTO::make(
             name: $this->request['name'],

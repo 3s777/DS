@@ -18,22 +18,14 @@ class FillPageCategoryDTOTest extends TestCase
         $this->request = CreatePageCategoryRequest::factory()->create();
     }
 
-    /**
-     * @test
-     * @return void
-     */
-    public function it_instance_created_from_create_request_success(): void
+    public function test_instance_created_from_create_request_success(): void
     {
         $data = FillPageCategoryDTO::fromRequest(new CreatePageCategoryRequest($this->request));
 
         $this->assertInstanceOf(FillPageCategoryDTO::class, $data);
     }
 
-    /**
-     * @test
-     * @return void
-     */
-    public function it_instance_created_success(): void
+    public function test_instance_created_success(): void
     {
         $data = FillPageCategoryDTO::make(
             name: $this->request['name'],

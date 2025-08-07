@@ -14,11 +14,7 @@ class DatesFilterTest extends TestCase
 {
     use RefreshDatabase;
 
-    /**
-     * @test
-     * @return void
-     */
-    public function it_filter_created_and_apply_success(): void
+    public function test_filter_created_and_apply_success(): void
     {
         $request = Request::create('/', 'GET', [
             'filters' => [
@@ -66,11 +62,7 @@ class DatesFilterTest extends TestCase
         $filter->apply($query);
     }
 
-    /**
-     * @test
-     * @return void
-     */
-    public function it_filter_apply_with_relation_success(): void
+    public function test_filter_apply_with_relation_success(): void
     {
         $request = Request::create('/', 'GET', [
             'filters' => [
@@ -128,11 +120,7 @@ class DatesFilterTest extends TestCase
         $filter->apply($query);
     }
 
-    /**
-     * @test
-     * @return void
-     */
-    public function it_filter_methods_success(): void
+    public function test_filter_methods_success(): void
     {
         $request = Request::create('/', 'GET', [
             'filters' => [
@@ -164,11 +152,7 @@ class DatesFilterTest extends TestCase
     }
 
 
-    /**
-     * @test
-     * @return void
-     */
-    public function it_filter_only_from_success(): void
+    public function test_filter_only_from_success(): void
     {
         $request = Request::create('/', 'GET', [
             'filters' => [
@@ -217,11 +201,7 @@ class DatesFilterTest extends TestCase
         $filter->apply($query);
     }
 
-    /**
-     * @test
-     * @return void
-     */
-    public function it_filter_only_to_success(): void
+    public function test_filter_only_to_success(): void
     {
         $request = Request::create('/', 'GET', [
             'filters' => [
@@ -270,11 +250,7 @@ class DatesFilterTest extends TestCase
         $filter->apply($query);
     }
 
-    /**
-     * @test
-     * @return void
-     */
-    public function it_filter_without_additional_parameters_success(): void
+    public function test_filter_without_additional_parameters_success(): void
     {
         $request = Request::create('/', 'GET', [
             'filters' => [

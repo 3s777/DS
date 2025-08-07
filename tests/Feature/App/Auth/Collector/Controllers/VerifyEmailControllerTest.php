@@ -14,11 +14,7 @@ class VerifyEmailControllerTest extends TestCase
 {
     use RefreshDatabase;
 
-    /**
-     * @test
-     * @return void
-     */
-    public function it_page_success(): void
+    public function test_page_success(): void
     {
         $this->get(action([VerifyEmailController::class, 'page']))
             ->assertOk()
@@ -26,11 +22,7 @@ class VerifyEmailControllerTest extends TestCase
             ->assertViewIs('content.auth-collector.verify');
     }
 
-    /**
-     * @test
-     * @return void
-     */
-    public function it_verification_notification_sent(): void
+    public function test_verification_notification_sent(): void
     {
         //        Queue::fake();
 
@@ -47,11 +39,7 @@ class VerifyEmailControllerTest extends TestCase
         Notification::assertSentTo([$collector], VerifyEmailCollectorNotification::class);
     }
 
-    /**
-     * @test
-     * @return void
-     */
-    public function it_verification_notification_fail(): void
+    public function test_verification_notification_fail(): void
     {
         $collector = CollectorFactory::new()->create();
 
@@ -62,11 +50,7 @@ class VerifyEmailControllerTest extends TestCase
         Notification::assertNothingSent();
     }
 
-    /**
-     * @test
-     * @return void
-     */
-    public function it_get_verify_confirmation_success(): void
+    public function test_get_verify_confirmation_success(): void
     {
         $request = [
             'email_verified_at' => null
@@ -90,11 +74,7 @@ class VerifyEmailControllerTest extends TestCase
         $this->assertAuthenticatedAs($collector);
     }
 
-    /**
-     * @test
-     * @return void
-     */
-    public function it_get_wrong_email_verification_fail(): void
+    public function test_get_wrong_email_verification_fail(): void
     {
         $request = [
             'email_verified_at' => null
@@ -117,11 +97,7 @@ class VerifyEmailControllerTest extends TestCase
         $this->assertGuest('collector');
     }
 
-    /**
-     * @test
-     * @return void
-     */
-    public function it_get_wrong_id_verification_fail(): void
+    public function test_get_wrong_id_verification_fail(): void
     {
         $request = [
             'email_verified_at' => null

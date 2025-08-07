@@ -24,11 +24,7 @@ class AsyncSelectByQueryViewModelTest extends TestCase
         $this->user->assignRole('super_admin');
     }
 
-    /**
-     * @test
-     * @return void
-     */
-    public function it_success_get_select(): void
+    public function test_success_get_select(): void
     {
         Shelf::factory()->create(['name' => 'TestName']);
         Shelf::factory()->create(['name' => 'PestNaming']);
@@ -58,11 +54,7 @@ class AsyncSelectByQueryViewModelTest extends TestCase
         );
     }
 
-    /**
-     * @test
-     * @return void
-     */
-    public function it_success_get_select_depended(): void
+    public function test_success_get_select_depended(): void
     {
         Shelf::factory()->create(['name' => 'TestName', 'collector_id' => $this->collector->id]);
         Shelf::factory(3)->create(['collector_id' => $this->collector->id]);
@@ -88,11 +80,7 @@ class AsyncSelectByQueryViewModelTest extends TestCase
         );
     }
 
-    /**
-     * @test
-     * @return void
-     */
-    public function it_fail_get_select_wrong_depended(): void
+    public function test_fail_get_select_wrong_depended(): void
     {
         Shelf::factory()->create(['name' => 'TestName', 'collector_id' => $this->collector->id]);
         Shelf::factory(3)->create(['collector_id' => $this->collector->id]);

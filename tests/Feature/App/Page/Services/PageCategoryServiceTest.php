@@ -29,11 +29,7 @@ class PageCategoryServiceTest extends TestCase
         $this->user = User::factory()->create();
     }
 
-    /**
-     * @test
-     * @return void
-     */
-    public function it_page_category_created_success(): void
+    public function test_page_category_created_success(): void
     {
         $this->assertDatabaseMissing('page_categories', [
             'slug' => Str::slug($this->request['name'])
@@ -55,11 +51,7 @@ class PageCategoryServiceTest extends TestCase
     }
 
 
-    /**
-     * @test
-     * @return void
-     */
-    public function it_page_category_updated_success(): void
+    public function test_page_category_updated_success(): void
     {
         $this->request['user_id'] = $this->user->id;
 

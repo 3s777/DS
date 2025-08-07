@@ -10,11 +10,7 @@ class ApiGamesDTOTest extends TestCase
 {
     use RefreshDatabase;
 
-    /**
-     * @test
-     * @return void
-     */
-    public function it_instance_created_success(): void
+    public function test_instance_created_success(): void
     {
         $data = ApiGamesDTO::make(
             'game name',

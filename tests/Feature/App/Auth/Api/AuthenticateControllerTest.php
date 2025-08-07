@@ -14,11 +14,7 @@ final class AuthenticateControllerTest extends TestCase
     use RefreshDatabase;
     use ApiRequests;
 
-    /**
-     * @test
-     * @return void
-     */
-    public function it_successful_authenticate(): void
+    public function test_successful_authenticate(): void
     {
         $response = $this->tokenRequest();
 
@@ -46,11 +42,7 @@ final class AuthenticateControllerTest extends TestCase
         );
     }
 
-    /**
-     * @test
-     * @return void
-     */
-    public function it_failed_authenticate(): void
+    public function test_failed_authenticate(): void
     {
         $response = $this->tokenRequest(true);
 
@@ -66,11 +58,7 @@ final class AuthenticateControllerTest extends TestCase
 
     }
 
-    /**
-     * @test
-     * @return void
-     */
-    public function it_expired_token(): void
+    public function test_expired_token(): void
     {
         $response = $this->tokenRequest();
 
@@ -95,11 +83,7 @@ final class AuthenticateControllerTest extends TestCase
             );
     }
 
-    /**
-     * @test
-     * @return void
-     */
-    public function it_token_is_invalid(): void
+    public function test_token_is_invalid(): void
     {
         $this
             ->withToken('eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c')
@@ -116,11 +100,7 @@ final class AuthenticateControllerTest extends TestCase
             );
     }
 
-    /**
-     * @test
-     * @return void
-     */
-    public function it_successful_logout(): void
+    public function test_successful_logout(): void
     {
         $response = $this->tokenRequest();
 
@@ -132,11 +112,7 @@ final class AuthenticateControllerTest extends TestCase
             ->assertNoContent();
     }
 
-    /**
-     * @test
-     * @return void
-     */
-    public function it_token_in_blacklist(): void
+    public function test_token_in_blacklist(): void
     {
         $response = $this->tokenRequest();
 
@@ -153,11 +129,7 @@ final class AuthenticateControllerTest extends TestCase
             ->assertUnauthorized();
     }
 
-    /**
-     * @test
-     * @return void
-     */
-    public function it_token_refreshed_successful(): void
+    public function test_token_refreshed_successful(): void
     {
         $response = $this->tokenRequest();
 

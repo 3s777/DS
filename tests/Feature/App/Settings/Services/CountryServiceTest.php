@@ -28,11 +28,7 @@ class CountryServiceTest extends TestCase
         $this->user = User::factory()->create();
     }
 
-    /**
-     * @test
-     * @return void
-     */
-    public function it_country_created_success(): void
+    public function test_country_created_success(): void
     {
         $this->assertDatabaseMissing('countries', [
             'slug' => Str::slug($this->request['name'])
@@ -51,11 +47,7 @@ class CountryServiceTest extends TestCase
         ]);
     }
 
-    /**
-     * @test
-     * @return void
-     */
-    public function it_country_updated_success(): void
+    public function test_country_updated_success(): void
     {
 
         $createRequest = new Request($this->request);

@@ -10,11 +10,7 @@ class HasSlugTest extends TestCase
 {
     use RefreshDatabase;
 
-    /**
-     * @test
-     * @return void
-     */
-    public function it_success_create_from_name_slug(): void
+    public function test_success_create_from_name_slug(): void
     {
         KitItem::create(['name' => 'Test Name']);
 
@@ -23,11 +19,7 @@ class HasSlugTest extends TestCase
         ]);
     }
 
-    /**
-     * @test
-     * @return void
-     */
-    public function it_success_add_slug(): void
+    public function test_success_add_slug(): void
     {
         KitItem::create(['name' => 'Test Name', 'slug' => 'Test Slug']);
 
@@ -36,11 +28,7 @@ class HasSlugTest extends TestCase
         ]);
     }
 
-    /**
-     * @test
-     * @return void
-     */
-    public function it_success_update_slug(): void
+    public function test_success_update_slug(): void
     {
         $kitItem = KitItem::create(['name' => 'Test Name', 'slug' => 'Test Slug']);
 
@@ -54,11 +42,7 @@ class HasSlugTest extends TestCase
         $this->assertSame($kitItem->slug, 'new-test-slug');
     }
 
-    /**
-     * @test
-     * @return void
-     */
-    public function it_success_generate_unique_slug(): void
+    public function test_success_generate_unique_slug(): void
     {
         $kitItems = KitItem::factory(5)->create(['name' => 'Test Name', 'slug' => 'Test Slug']);
 

@@ -18,22 +18,14 @@ class UpdateCollectorDTOTest extends TestCase
         $this->request = CreateCollectorRequest::factory()->create();
     }
 
-    /**
-     * @test
-     * @return void
-     */
-    public function it_instance_created_from_form_request_success(): void
+    public function test_instance_created_from_form_request_success(): void
     {
         $data = UpdateCollectorDTO::fromRequest(new CreateCollectorRequest($this->request));
 
         $this->assertInstanceOf(UpdateCollectorDTO::class, $data);
     }
 
-    /**
-     * @test
-     * @return void
-     */
-    public function it_instance_created_success(): void
+    public function test_instance_created_success(): void
     {
 
         $data = UpdateCollectorDTO::make(

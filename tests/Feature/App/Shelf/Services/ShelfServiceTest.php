@@ -36,11 +36,7 @@ class ShelfServiceTest extends TestCase
         $this->collector = Collector::factory()->create();
     }
 
-    /**
-     * @test
-     * @return void
-     */
-    public function it_shelf_created_success(): void
+    public function test_shelf_created_success(): void
     {
         Queue::fake();
         Storage::fake('images');
@@ -69,11 +65,7 @@ class ShelfServiceTest extends TestCase
     }
 
 
-    /**
-     * @test
-     * @return void
-     */
-    public function it_shelf_updated_success(): void
+    public function test_shelf_updated_success(): void
     {
         Queue::fake();
         Storage::fake('images');

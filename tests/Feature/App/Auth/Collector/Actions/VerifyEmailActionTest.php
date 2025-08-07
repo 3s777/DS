@@ -13,11 +13,7 @@ class VerifyEmailActionTest extends TestCase
 {
     use RefreshDatabase;
 
-    /**
-     * @test
-     * @return void
-     */
-    public function it_verification_notification_sent_success(): void
+    public function test_verification_notification_sent_success(): void
     {
         $request = [
             'email_verified_at' => null
@@ -32,11 +28,7 @@ class VerifyEmailActionTest extends TestCase
         $this->assertNotNull($verificatedCollector->email_verified_at);
     }
 
-    /**
-     * @test
-     * @return void
-     */
-    public function it_verification_event_success(): void
+    public function test_verification_event_success(): void
     {
         Event::fake();
 

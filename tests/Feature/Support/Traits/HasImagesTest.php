@@ -32,11 +32,7 @@ class HasImagesTest extends TestCase
         $this->gameMedia = GameMedia::factory()->create();
     }
 
-    /**
-     * @test
-     * @return void
-     */
-    public function it_success_add_images_with_thumbnails(): void
+    public function test_success_add_images_with_thumbnails(): void
     {
         Queue::fake();
 
@@ -61,11 +57,7 @@ class HasImagesTest extends TestCase
         $this->gameMedia->forceDelete();
     }
 
-    /**
-     * @test
-     * @return void
-     */
-    public function it_success_delete_images(): void
+    public function test_success_delete_images(): void
     {
         $path1 = $this->gameMedia->addImagesWithThumbnail(
             UploadedFile::fake()->image('photo1.jpg'),
@@ -90,11 +82,7 @@ class HasImagesTest extends TestCase
         $this->gameMedia->forceDelete();
     }
 
-    /**
-     * @test
-     * @return void
-     */
-    public function it_success_get_images(): void
+    public function test_success_get_images(): void
     {
         $path1 = $this->gameMedia->addImagesWithThumbnail(
             UploadedFile::fake()->image('photo1.jpg'),
@@ -111,11 +99,7 @@ class HasImagesTest extends TestCase
         $this->gameMedia->forceDelete();
     }
 
-    /**
-     * @test
-     * @return void
-     */
-    public function it_success_update_images(): void
+    public function test_success_update_images(): void
     {
         $path1 = $this->gameMedia->addImagesWithThumbnail(
             UploadedFile::fake()->image('photo1.jpg'),
@@ -134,11 +118,7 @@ class HasImagesTest extends TestCase
         $this->gameMedia->forceDelete();
     }
 
-    /**
-     * @test
-     * @return void
-     */
-    public function it_success_update_images_with_delete(): void
+    public function test_success_update_images_with_delete(): void
     {
         $path1 = $this->gameMedia->addImagesWithThumbnail(
             UploadedFile::fake()->image('photo1.jpg'),

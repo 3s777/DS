@@ -32,11 +32,7 @@ class HasFeaturedImageTest extends TestCase
         $this->user = UserFactory::new()->create();
     }
 
-    /**
-     * @test
-     * @return void
-     */
-    public function it_success_fake_upload_and_queue_featured_image(): void
+    public function test_success_fake_upload_and_queue_featured_image(): void
     {
         Queue::fake();
         Storage::fake('images');
@@ -61,11 +57,7 @@ class HasFeaturedImageTest extends TestCase
         $gameDeveloper->forceDelete();
     }
 
-    /**
-     * @test
-     * @return void
-     */
-    public function it_success_get_featured_image_path(): void
+    public function test_success_get_featured_image_path(): void
     {
         Storage::fake('images');
 
@@ -84,11 +76,7 @@ class HasFeaturedImageTest extends TestCase
         $this->assertSame($imagePathInfo['dirname'].'/'.$imagePathInfo['filename'].'.webp', $pathWebp);
     }
 
-    /**
-     * @test
-     * @return void
-     */
-    public function it_success_uploads_and_generate_featured_image(): void
+    public function test_success_uploads_and_generate_featured_image(): void
     {
         $gameDeveloper = GameDeveloperFactory::new()->create();
 
@@ -124,11 +112,7 @@ class HasFeaturedImageTest extends TestCase
         $this->storage->assertMissing($imagePathInfo['dirname']);
     }
 
-    /**
-     * @test
-     * @return void
-     */
-    public function it_success_queue_count_featured_image_sizes(): void
+    public function test_success_queue_count_featured_image_sizes(): void
     {
         Queue::fake();
         Storage::fake('images');
@@ -144,11 +128,7 @@ class HasFeaturedImageTest extends TestCase
         Queue::assertPushed(GenerateSmallThumbnailsJob::class, count($gameDeveloper->thumbnailSizes()));
     }
 
-    /**
-     * @test
-     * @return void
-     */
-    public function it_success_update_uploads_and_generate_featured_image(): void
+    public function test_success_update_uploads_and_generate_featured_image(): void
     {
         Queue::fake();
         Storage::fake('images');
@@ -170,11 +150,7 @@ class HasFeaturedImageTest extends TestCase
     }
 
 
-    /**
-     * @test
-     * @return void
-     */
-    public function it_success_delete_uploads_with_empty_update_thumbnail(): void
+    public function test_success_delete_uploads_with_empty_update_thumbnail(): void
     {
         Queue::fake();
         Storage::fake('images');
@@ -193,11 +169,7 @@ class HasFeaturedImageTest extends TestCase
         $this->assertEmpty($newPath);
     }
 
-    /**
-     * @test
-     * @return void
-     */
-    public function it_success_delete_uploads_thumbnail(): void
+    public function test_success_delete_uploads_thumbnail(): void
     {
         Queue::fake();
         Storage::fake('images');

@@ -28,11 +28,7 @@ class RoleServiceTest extends TestCase
         $this->user = User::factory()->create();
     }
 
-    /**
-     * @test
-     * @return void
-     */
-    public function it_role_created_success(): void
+    public function test_role_created_success(): void
     {
         $this->assertDatabaseMissing('roles', [
             'name' => $this->request['name']
@@ -51,11 +47,7 @@ class RoleServiceTest extends TestCase
         ]);
     }
 
-    /**
-     * @test
-     * @return void
-     */
-    public function it_role_updated_success(): void
+    public function test_role_updated_success(): void
     {
         $createRequest = new Request($this->request);
 
@@ -84,11 +76,7 @@ class RoleServiceTest extends TestCase
         $this->assertSame($updatedRole->guard_name, $this->request['guard_name']);
     }
 
-    /**
-     * @test
-     * @return void
-     */
-    public function it_role_with_permission_updated_success(): void
+    public function test_role_with_permission_updated_success(): void
     {
         $this->artisan('db:seed', ['--class' => PermissionsTestSeeder::class]);
 

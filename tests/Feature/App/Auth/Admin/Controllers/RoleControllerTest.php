@@ -47,11 +47,7 @@ class RoleControllerTest extends TestCase
             ->assertRedirectToRoute('admin.login');
     }
 
-    /**
-     * @test
-     * @return void
-     */
-    public function it_pages_only_auth_success(): void
+    public function test_pages_only_auth_success(): void
     {
         $this->checkNotAuthRedirect('index');
         $this->checkNotAuthRedirect('create');
@@ -61,11 +57,7 @@ class RoleControllerTest extends TestCase
         $this->checkNotAuthRedirect('destroy', 'delete', [$this->role->id]);
     }
 
-    /**
-     * @test
-     * @return void
-     */
-    public function it_index_success(): void
+    public function test_index_success(): void
     {
         $this->actingAs($this->user)
             ->get(action([RoleController::class, 'index']))
@@ -74,11 +66,7 @@ class RoleControllerTest extends TestCase
             ->assertViewIs('admin.user.role.index');
     }
 
-    /**
-     * @test
-     * @return void
-     */
-    public function it_create_success(): void
+    public function test_create_success(): void
     {
         $this->actingAs($this->user)
             ->get(action([RoleController::class, 'create']))
@@ -87,11 +75,7 @@ class RoleControllerTest extends TestCase
             ->assertViewIs('admin.user.role.create');
     }
 
-    /**
-     * @test
-     * @return void
-     */
-    public function it_edit_success(): void
+    public function test_edtest_success(): void
     {
         $this->actingAs($this->user)
             ->get(action([RoleController::class, 'edit'], [$this->role->id]))
@@ -100,11 +84,7 @@ class RoleControllerTest extends TestCase
             ->assertViewIs('admin.user.role.edit');
     }
 
-    /**
-     * @test
-     * @return void
-     */
-    public function it_store_success(): void
+    public function test_store_success(): void
     {
         $this->request['permissions_admin'] = ['entity.*', 'entity.create', 'entity.edit', 'entity.delete'];
 
@@ -121,11 +101,7 @@ class RoleControllerTest extends TestCase
         ]);
     }
 
-    /**
-     * @test
-     * @return void
-     */
-    public function it_store_guard_collector_success(): void
+    public function test_store_guard_collector_success(): void
     {
         $this->request['guard_name'] = 'collector';
         $this->request['permissions_admin'] = ['entity.*', 'entity.create', 'entity.edit', 'entity.delete'];
@@ -145,11 +121,7 @@ class RoleControllerTest extends TestCase
         ]);
     }
 
-    /**
-     * @test
-     * @return void
-     */
-    public function it_has_wildcard_permissions_success(): void
+    public function test_has_wildcard_permissions_success(): void
     {
         $this->request['permissions_admin'] = ['entity.*'];
 
@@ -166,11 +138,7 @@ class RoleControllerTest extends TestCase
         ]);
     }
 
-    /**
-     * @test
-     * @return void
-     */
-    public function it_validation_name_and_guard_fail(): void
+    public function test_validation_name_and_guard_fail(): void
     {
         $this->app['session']->setPreviousUrl(route('admin.roles.create'));
 
@@ -188,11 +156,7 @@ class RoleControllerTest extends TestCase
         ]);
     }
 
-    /**
-     * @test
-     * @return void
-     */
-    public function it_validation_permission_fail(): void
+    public function test_validation_permission_fail(): void
     {
         $this->app['session']->setPreviousUrl(route('admin.roles.create'));
 
@@ -208,11 +172,7 @@ class RoleControllerTest extends TestCase
         ]);
     }
 
-    /**
-     * @test
-     * @return void
-     */
-    public function it_update_success(): void
+    public function test_update_success(): void
     {
         $this->request['name'] = 'newName';
         $this->request['permissions_admin'] = ['entity.edit', 'entity.delete'];
@@ -240,11 +200,7 @@ class RoleControllerTest extends TestCase
     }
 
 
-    /**
-     * @test
-     * @return void
-     */
-    public function it_update_with_locale_success(): void
+    public function test_update_with_locale_success(): void
     {
         $this->request['name'] = 'newName';
         $this->request['display_name'] = 'ТестРус';
@@ -282,11 +238,7 @@ class RoleControllerTest extends TestCase
         ]);
     }
 
-    /**
-     * @test
-     * @return void
-     */
-    public function it_delete_success(): void
+    public function test_delete_success(): void
     {
         $this->actingAs($this->user)
             ->delete(action([RoleController::class, 'destroy'], [$this->role->id]))

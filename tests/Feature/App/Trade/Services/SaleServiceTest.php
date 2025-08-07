@@ -29,11 +29,7 @@ class SaleServiceTest extends TestCase
         $this->request = CreateSaleRequestFactory::new()->create();
     }
 
-    /**
-     * @test
-     * @return void
-     */
-    public function it_sale_success(): void
+    public function test_sale_success(): void
     {
         $this->assertDatabaseMissing('sales', [
             'collectible_id' => $this->request['collectible_id']
@@ -62,11 +58,7 @@ class SaleServiceTest extends TestCase
         $this->assertSame($sale->self_delivery, $this->request['self_delivery']);
     }
 
-    /**
-     * @test
-     * @return void
-     */
-    public function it_sale_updated_success(): void
+    public function test_sale_updated_success(): void
     {
         $saleService = app(SaleService::class);
 
@@ -109,11 +101,7 @@ class SaleServiceTest extends TestCase
         $this->assertSame($updatedSale->self_delivery, $this->request['self_delivery']);
     }
 
-    /**
-     * @test
-     * @return void
-     */
-    public function it_sale_created_and_updated_with_country_success(): void
+    public function test_sale_created_and_updated_with_country_success(): void
     {
         $countries = Country::factory(3)->create();
         $saleService = app(SaleService::class);

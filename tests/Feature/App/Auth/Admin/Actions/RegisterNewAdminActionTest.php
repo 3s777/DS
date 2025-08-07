@@ -32,11 +32,7 @@ class RegisterNewAdminActionTest extends TestCase
         Role::create(['name' => config('settings.default_role'), 'display_name' => 'User']);
     }
 
-    /**
-     * @test
-     * @return void
-     */
-    public function it_user_created_success(): void
+    public function test_user_created_success(): void
     {
         $this->assertDatabaseMissing('users', [
             'email' => $this->request['email']
@@ -56,11 +52,7 @@ class RegisterNewAdminActionTest extends TestCase
         ]);
     }
 
-    /**
-     * @test
-     * @return void
-     */
-    public function it_registered_event_and_listeners_dispatched(): void
+    public function test_registered_event_and_listeners_dispatched(): void
     {
         Event::fake([
             Registered::class,
@@ -82,11 +74,7 @@ class RegisterNewAdminActionTest extends TestCase
         );
     }
 
-    /**
-     * @test
-     * @return void
-     */
-    public function it_notification_sent(): void
+    public function test_notification_sent(): void
     {
         $action = app(RegisterNewUserContract::class);
 

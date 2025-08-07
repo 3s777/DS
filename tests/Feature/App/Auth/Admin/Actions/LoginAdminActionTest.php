@@ -26,11 +26,7 @@ class LoginAdminActionTest extends TestCase
         ]);
     }
 
-    /**
-     * @test
-     * @return void
-     */
-    public function it_login_user_success(): void
+    public function test_login_user_success(): void
     {
         $action = app(LoginAdminAction::class);
 
@@ -42,11 +38,7 @@ class LoginAdminActionTest extends TestCase
         $this->assertArrayNotHasKey('not_verified', $actionData);
     }
 
-    /**
-     * @test
-     * @return void
-     */
-    public function it_login_user_password_fail(): void
+    public function test_login_user_password_fail(): void
     {
         $action = app(LoginAdminAction::class);
 
@@ -58,11 +50,7 @@ class LoginAdminActionTest extends TestCase
         $this->assertArrayHasKey('error', $actionData);
     }
 
-    /**
-     * @test
-     * @return void
-     */
-    public function it_login_user_remember_success(): void
+    public function test_login_user_remember_success(): void
     {
         $action = app(LoginAdminAction::class);
 

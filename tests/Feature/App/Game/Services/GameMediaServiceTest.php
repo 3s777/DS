@@ -39,11 +39,7 @@ class GameMediaServiceTest extends TestCase
         $this->user = User::factory()->create();
     }
 
-    /**
-     * @test
-     * @return void
-     */
-    public function it_game_created_success(): void
+    public function test_game_created_success(): void
     {
         Queue::fake();
         Storage::fake('images');
@@ -103,11 +99,7 @@ class GameMediaServiceTest extends TestCase
     }
 
 
-    /**
-     * @test
-     * @return void
-     */
-    public function it_game_updated_success(): void
+    public function test_game_updated_success(): void
     {
         Queue::fake();
         Storage::fake('images');

@@ -18,11 +18,7 @@ class FillKitItemDTOTest extends TestCase
         $this->request = CreateKitItemRequest::factory()->create();
     }
 
-    /**
-     * @test
-     * @return void
-     */
-    public function it_instance_created_from_create_request_success(): void
+    public function test_instance_created_from_create_request_success(): void
     {
         $data = FillKitItemDTO::fromRequest(new CreateKitItemRequest($this->request));
 
@@ -30,11 +26,7 @@ class FillKitItemDTOTest extends TestCase
     }
 
 
-    /**
-     * @test
-     * @return void
-     */
-    public function it_instance_created_success(): void
+    public function test_instance_created_success(): void
     {
         $data = FillKitItemDTO::make(
             name: $this->request['name'],

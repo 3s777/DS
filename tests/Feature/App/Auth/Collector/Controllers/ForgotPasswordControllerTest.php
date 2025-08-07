@@ -20,22 +20,14 @@ class ForgotPasswordControllerTest extends TestCase
         ];
     }
 
-    /**
-     * @test
-     * @return void
-     */
-    public function it_page_success(): void
+    public function test_page_success(): void
     {
         $this->get(action([ForgotPasswordController::class, 'page']))
             ->assertOk()
             ->assertViewIs('content.auth-collector.forgot-password');
     }
 
-    /**
-     * @test
-     * @return void
-     */
-    public function it_handle_success(): void
+    public function test_handle_success(): void
     {
         $collector = CollectorFactory::new()->create($this->testingCredentials());
 
@@ -45,11 +37,7 @@ class ForgotPasswordControllerTest extends TestCase
         Notification::assertSentTo([$collector], ResetPasswordCollectorNotification::class);
     }
 
-    /**
-     * @test
-     * @return void
-     */
-    public function it_handle_fail(): void
+    public function test_handle_fail(): void
     {
         $this->assertDatabaseMissing('collectors', $this->testingCredentials());
 

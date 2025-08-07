@@ -34,11 +34,7 @@ class RegisterNewCollectorActionTest extends TestCase
         ]);
     }
 
-    /**
-     * @test
-     * @return void
-     */
-    public function it_collector_created_success(): void
+    public function test_collector_created_success(): void
     {
         $this->assertDatabaseMissing('collectors', [
             'email' => $this->request['email']
@@ -58,11 +54,7 @@ class RegisterNewCollectorActionTest extends TestCase
         ]);
     }
 
-    /**
-     * @test
-     * @return void
-     */
-    public function it_registered_event_and_listeners_dispatched(): void
+    public function test_registered_event_and_listeners_dispatched(): void
     {
         Event::fake([
             Registered::class,
@@ -84,11 +76,7 @@ class RegisterNewCollectorActionTest extends TestCase
         );
     }
 
-    /**
-     * @test
-     * @return void
-     */
-    public function it_notification_sent(): void
+    public function test_notification_sent(): void
     {
         $action = app(RegisterNewCollectorAction::class);
 

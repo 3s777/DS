@@ -15,11 +15,7 @@ class SorterTest extends TestCase
 {
     use RefreshDatabase;
 
-    /**
-     * @test
-     * @return void
-     */
-    public function it_sorted_success(): void
+    public function test_sorted_success(): void
     {
         $request = Request::create('/', 'GET', [
             'sort' => 'test-key',
@@ -54,11 +50,7 @@ class SorterTest extends TestCase
         $sorter->run($query);
     }
 
-    /**
-     * @test
-     * @return void
-     */
-    public function it_sorted_desc_success(): void
+    public function test_sorted_desc_success(): void
     {
         $request = Request::create('/', 'GET', [
             'sort' => 'test-key',
@@ -94,11 +86,7 @@ class SorterTest extends TestCase
         $sorter->run($query);
     }
 
-    /**
-     * @test
-     * @return void
-     */
-    public function it_sorted_with_translations_success(): void
+    public function test_sorted_with_translations_success(): void
     {
         $request = Request::create('/', 'GET', [
             'sort' => 'name',
@@ -135,11 +123,7 @@ class SorterTest extends TestCase
         $sorter->run($query);
     }
 
-    /**
-     * @test
-     * @return void
-     */
-    public function it_sortData_success(): void
+    public function test_sortData_success(): void
     {
         $request = Request::create('/', 'GET', [
             'sort' => 'test-key',
@@ -158,11 +142,7 @@ class SorterTest extends TestCase
         $this->assertSame($sortData['order']->value(), 'desc');
     }
 
-    /**
-     * @test
-     * @return void
-     */
-    public function it_key_success(): void
+    public function test_key_success(): void
     {
         $request = Request::create('/', 'GET', [
             'sort' => 'test-key',
@@ -178,11 +158,7 @@ class SorterTest extends TestCase
         $this->assertSame($sorter->key(), 'sort');
     }
 
-    /**
-     * @test
-     * @return void
-     */
-    public function it_order_success(): void
+    public function test_order_success(): void
     {
         $request = Request::create('/', 'GET', [
             'sort' => 'test-key',
@@ -198,11 +174,7 @@ class SorterTest extends TestCase
         $this->assertSame($sorter->order(), 'order');
     }
 
-    /**
-     * @test
-     * @return void
-     */
-    public function it_columns_success(): void
+    public function test_columns_success(): void
     {
         $request = Request::create('/', 'GET', [
             'sort' => 'test-key',

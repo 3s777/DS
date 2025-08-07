@@ -20,11 +20,7 @@ class FillGameMediaVariationDTOTest extends TestCase
         $this->request = CreateGameMediaVariationRequest::factory()->create();
     }
 
-    /**
-     * @test
-     * @return void
-     */
-    public function it_instance_created_from_create_request_success(): void
+    public function test_instance_created_from_create_request_success(): void
     {
         $data = FillGameMediaVariationDTO::fromRequest(new CreateGameMediaRequest($this->request));
 
@@ -32,11 +28,7 @@ class FillGameMediaVariationDTOTest extends TestCase
     }
 
 
-    /**
-     * @test
-     * @return void
-     */
-    public function it_instance_created_success(): void
+    public function test_instance_created_success(): void
     {
         $data = FillGameMediaVariationDTO::make(
             name: $this->request['name'],

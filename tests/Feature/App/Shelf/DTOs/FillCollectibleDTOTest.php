@@ -18,11 +18,7 @@ class FillCollectibleDTOTest extends TestCase
         $this->request = CreateCollectibleGameRequest::factory()->hasKitConditions()->create();
     }
 
-    /**
-     * @test
-     * @return void
-     */
-    public function it_instance_created_from_create_request_success(): void
+    public function test_instance_created_from_create_request_success(): void
     {
         $data = FillCollectibleDTO::fromRequest(new CreateCollectibleGameRequest($this->request));
 
@@ -30,11 +26,7 @@ class FillCollectibleDTOTest extends TestCase
     }
 
 
-    /**
-     * @test
-     * @return void
-     */
-    public function it_instance_created_success(): void
+    public function test_instance_created_success(): void
     {
         $data = FillCollectibleDTO::make(
             name: $this->request['name'],

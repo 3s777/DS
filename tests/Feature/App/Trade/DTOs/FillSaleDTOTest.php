@@ -19,22 +19,14 @@ class FillSaleDTOTest extends TestCase
         $this->request = CreateSaleRequestFactory::new()->create();
     }
 
-    /**
-     * @test
-     * @return void
-     */
-    public function it_instance_created_from_create_request_success(): void
+    public function test_instance_created_from_create_request_success(): void
     {
         $data = FillSaleDTO::fromRequest(new Request($this->request));
 
         $this->assertInstanceOf(FillSaleDTO::class, $data);
     }
 
-    /**
-     * @test
-     * @return void
-     */
-    public function it_instance_created_success(): void
+    public function test_instance_created_success(): void
     {
         $data = FillSaleDTO::make(
             collectible_id: $this->request['collectible_id'],

@@ -74,11 +74,7 @@ class CollectibleServiceTest extends TestCase
         $this->country = Country::factory()->create();
     }
 
-    /**
-     * @test
-     * @return void
-     */
-    public function it_collectible_success(): void
+    public function test_collectible_success(): void
     {
         Queue::fake();
         Storage::fake('images');
@@ -113,11 +109,7 @@ class CollectibleServiceTest extends TestCase
         Queue::assertPushed(GenerateSmallThumbnailsJob::class, 2);
     }
 
-    /**
-     * @test
-     * @return void
-     */
-    public function it_collectible_with_auction_created_success(): void
+    public function test_collectible_with_auction_created_success(): void
     {
         $this->assertDatabaseMissing('collectibles', [
             'name' => $this->request['name']
@@ -141,11 +133,7 @@ class CollectibleServiceTest extends TestCase
         $this->assertSame($collectible->auction->step->value(), $collectible->auction_data->step()->value());
     }
 
-    /**
-     * @test
-     * @return void
-     */
-    public function it_collectible_with_sale_created_success(): void
+    public function test_collectible_with_sale_created_success(): void
     {
         $this->assertDatabaseMissing('collectibles', [
             'name' => $this->request['name']
@@ -173,11 +161,7 @@ class CollectibleServiceTest extends TestCase
         $this->assertTrue($collectible->sale_data->self_delivery());
     }
 
-    /**
-     * @test
-     * @return void
-     */
-    public function it_collectible_updated_success(): void
+    public function test_collectible_updated_success(): void
     {
         Queue::fake();
         Storage::fake('images');
@@ -224,11 +208,7 @@ class CollectibleServiceTest extends TestCase
         Queue::assertPushed(GenerateSmallThumbnailsJob::class, 2);
     }
 
-    /**
-     * @test
-     * @return void
-     */
-    public function it_collectible_change_trade_target_updated_success(): void
+    public function test_collectible_change_trade_target_updated_success(): void
     {
         $collectibleService = app(CollectibleService::class);
 
@@ -271,11 +251,7 @@ class CollectibleServiceTest extends TestCase
         $this->assertSame($updatedCollectible->sale->price->value(), $updatedCollectible->sale_data->price()->value());
     }
 
-    /**
-     * @test
-     * @return void
-     */
-    public function it_collectible_change_not_trade_target_updated_success(): void
+    public function test_collectible_change_not_trade_target_updated_success(): void
     {
         $collectibleService = app(CollectibleService::class);
 

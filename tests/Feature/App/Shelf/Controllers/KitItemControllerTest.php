@@ -44,11 +44,7 @@ class KitItemControllerTest extends TestCase
             ->assertRedirectToRoute('admin.login');
     }
 
-    /**
-     * @test
-     * @return void
-     */
-    public function it_pages_success(): void
+    public function test_pages_success(): void
     {
         $this->checkNotAuthRedirect('index');
         $this->checkNotAuthRedirect('create');
@@ -58,11 +54,7 @@ class KitItemControllerTest extends TestCase
         $this->checkNotAuthRedirect('destroy', 'delete', [$this->kitItem->slug]);
     }
 
-    /**
-     * @test
-     * @return void
-     */
-    public function it_index_success(): void
+    public function test_index_success(): void
     {
         $this->actingAs($this->user)
             ->get(action([KitItemController::class, 'index']))
@@ -71,11 +63,7 @@ class KitItemControllerTest extends TestCase
             ->assertViewIs('admin.shelf.kit-item.index');
     }
 
-    /**
-     * @test
-     * @return void
-     */
-    public function it_create_success(): void
+    public function test_create_success(): void
     {
         $this->actingAs($this->user)
             ->get(action([KitItemController::class, 'create']))
@@ -84,11 +72,7 @@ class KitItemControllerTest extends TestCase
             ->assertViewIs('admin.shelf.kit-item.create');
     }
 
-    /**
-     * @test
-     * @return void
-     */
-    public function it_edit_success(): void
+    public function test_edtest_success(): void
     {
         $this->actingAs($this->user)
             ->get(action([KitItemController::class, 'edit'], [$this->kitItem->slug]))
@@ -97,11 +81,7 @@ class KitItemControllerTest extends TestCase
             ->assertViewIs('admin.shelf.kit-item.edit');
     }
 
-    /**
-     * @test
-     * @return void
-     */
-    public function it_store_success(): void
+    public function test_store_success(): void
     {
         $this->actingAs($this->user)
             ->post(action([KitItemController::class, 'store']), $this->request)
@@ -113,11 +93,7 @@ class KitItemControllerTest extends TestCase
         ]);
     }
 
-    /**
-     * @test
-     * @return void
-     */
-    public function it_validation_name_fail(): void
+    public function test_validation_name_fail(): void
     {
         $this->app['session']->setPreviousUrl(route('admin.kit-items.create'));
 
@@ -133,11 +109,7 @@ class KitItemControllerTest extends TestCase
         ]);
     }
 
-    /**
-     * @test
-     * @return void
-     */
-    public function it_update_success(): void
+    public function test_update_success(): void
     {
         $this->request['name'] = 'newName';
 
@@ -157,11 +129,7 @@ class KitItemControllerTest extends TestCase
         ]);
     }
 
-    /**
-     * @test
-     * @return void
-     */
-    public function it_delete_success(): void
+    public function test_delete_success(): void
     {
         $this->actingAs($this->user)
             ->delete(action([KitItemController::class, 'destroy'], [$this->kitItem->slug]))

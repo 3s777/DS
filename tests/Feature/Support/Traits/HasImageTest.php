@@ -37,11 +37,7 @@ class HasImageTest extends TestCase
         $this->app->bind(ImagesManager::class, MediaLibraryImageManager::class);
     }
 
-    /**
-     * @test
-     * @return void
-     */
-    public function it_success_add_original_image_with_thumbnail(): void
+    public function test_success_add_original_image_with_thumbnail(): void
     {
         Queue::fake();
 
@@ -60,11 +56,7 @@ class HasImageTest extends TestCase
         $this->gameDeveloper->forceDelete();
     }
 
-    /**
-     * @test
-     * @return void
-     */
-    public function it_success_generate_media_path(): void
+    public function test_success_generate_media_path(): void
     {
         $path = $this->gameDeveloper->generateMediaPath('test.jpg');
 
@@ -79,11 +71,7 @@ class HasImageTest extends TestCase
         );
     }
 
-    /**
-     * @test
-     * @return void
-     */
-    public function it_success_generate_full_sizes(): void
+    public function test_success_generate_full_sizes(): void
     {
         Queue::fake();
         Storage::fake('images');
@@ -95,11 +83,7 @@ class HasImageTest extends TestCase
         Queue::assertPushed(GenerateThumbnailJob::class, 3);
     }
 
-    /**
-     * @test
-     * @return void
-     */
-    public function it_success_generate_thumbnails(): void
+    public function test_success_generate_thumbnails(): void
     {
         Queue::fake();
         Storage::fake('images');
@@ -111,11 +95,7 @@ class HasImageTest extends TestCase
         Queue::assertPushed(GenerateSmallThumbnailsJob::class, 2);
     }
 
-    /**
-     * @test
-     * @return void
-     */
-    public function it_success_image_manager(): void
+    public function test_success_image_manager(): void
     {
         $this->assertInstanceOf(ImagesManager::class, $this->gameDeveloper->imageManager());
     }

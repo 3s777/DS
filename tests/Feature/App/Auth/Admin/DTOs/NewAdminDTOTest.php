@@ -19,22 +19,14 @@ class NewAdminDTOTest extends TestCase
         $this->request = RegisterAdminRequest::factory()->create();
     }
 
-    /**
-     * @test
-     * @return void
-     */
-    public function it_instance_created_from_register_request_success(): void
+    public function test_instance_created_from_register_request_success(): void
     {
         $data = NewAdminDTO::fromRequest(new RegisterAdminRequest($this->request));
 
         $this->assertInstanceOf(NewAdminDTO::class, $data);
     }
 
-    /**
-     * @test
-     * @return void
-     */
-    public function it_instance_created_from_create_request_success(): void
+    public function test_instance_created_from_create_request_success(): void
     {
         $data = NewAdminDTO::fromRequest(new CreateAdminRequest($this->request));
 
@@ -42,11 +34,7 @@ class NewAdminDTOTest extends TestCase
     }
 
 
-    /**
-     * @test
-     * @return void
-     */
-    public function it_instance_created_success(): void
+    public function test_instance_created_success(): void
     {
         $data = NewAdminDTO::make(
             $this->request['name'],

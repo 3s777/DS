@@ -18,11 +18,7 @@ class FillPermissionDTOTest extends TestCase
         $this->request = CreatePermissionRequest::factory()->create();
     }
 
-    /**
-     * @test
-     * @return void
-     */
-    public function it_instance_created_from_create_request_success(): void
+    public function test_instance_created_from_create_request_success(): void
     {
         $data = FillPermissionDTO::fromRequest(new CreatePermissionRequest($this->request));
 
@@ -30,11 +26,7 @@ class FillPermissionDTOTest extends TestCase
     }
 
 
-    /**
-     * @test
-     * @return void
-     */
-    public function it_instance_created_success(): void
+    public function test_instance_created_success(): void
     {
         $data = FillPermissionDTO::make(
             name: $this->request['name'],

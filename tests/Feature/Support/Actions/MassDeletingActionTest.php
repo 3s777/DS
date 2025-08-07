@@ -28,11 +28,7 @@ class MassDeletingActionTest extends TestCase
         $this->modelsIds = implode(',', $modelsIdsArray);
     }
 
-    /**
-     * @test
-     * @return void
-     */
-    public function it_mass_deleting_success(): void
+    public function test_mass_deleting_success(): void
     {
         $action = app(MassDeletingAction::class);
 
@@ -49,11 +45,7 @@ class MassDeletingActionTest extends TestCase
         }
     }
 
-    /**
-     * @test
-     * @return void
-     */
-    public function it_mass_force_deleting_success(): void
+    public function test_mass_force_deleting_success(): void
     {
         $undeletedModels = GameDeveloper::factory()
             ->for(User::factory()->create())

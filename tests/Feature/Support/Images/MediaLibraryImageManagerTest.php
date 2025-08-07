@@ -36,20 +36,12 @@ class MediaLibraryImageManagerTest extends TestCase
         $this->imagesManager = app(ImagesManager::class, ['model' => $this->gameDeveloper]);
     }
 
-    /**
-     * @test
-     * @return void
-     */
-    public function it_success_instance(): void
+    public function test_success_instance(): void
     {
         $this->assertInstanceOf(MediaLibraryImageManager::class, $this->imagesManager);
     }
 
-    /**
-     * @test
-     * @return void
-     */
-    public function it_success_add(): void
+    public function test_success_add(): void
     {
         $path = $this->imagesManager->add(UploadedFile::fake()->image('photo1.jpg'), 'featured_image');
         Storage::disk('images')->assertExists($path);
@@ -61,11 +53,7 @@ class MediaLibraryImageManagerTest extends TestCase
         $this->gameDeveloper->forceDelete();
     }
 
-    /**
-     * @test
-     * @return void
-     */
-    public function it_success_delete(): void
+    public function test_success_delete(): void
     {
         $path = $this->imagesManager->add(UploadedFile::fake()->image('photo1.jpg'), 'featured_image');
 
@@ -78,11 +66,7 @@ class MediaLibraryImageManagerTest extends TestCase
         $this->gameDeveloper->forceDelete();
     }
 
-    /**
-     * @test
-     * @return void
-     */
-    public function it_success_delete_featured_image(): void
+    public function test_success_delete_featured_image(): void
     {
         $path = $this->imagesManager->add(UploadedFile::fake()->image('photo1.jpg'), 'featured_image');
 
@@ -95,11 +79,7 @@ class MediaLibraryImageManagerTest extends TestCase
         $this->gameDeveloper->forceDelete();
     }
 
-    /**
-     * @test
-     * @return void
-     */
-    public function it_success_get_featured_image_path(): void
+    public function test_success_get_featured_image_path(): void
     {
         $path = $this->imagesManager->add(UploadedFile::fake()->image('photo1.jpg'), 'featured_image');
         Storage::disk('images')->assertExists($path);
@@ -112,11 +92,7 @@ class MediaLibraryImageManagerTest extends TestCase
         $this->gameDeveloper->forceDelete();
     }
 
-    /**
-     * @test
-     * @return void
-     */
-    public function it_success_get_images_path(): void
+    public function test_success_get_images_path(): void
     {
         $gameMedia = GameMedia::factory()->create();
         $imagesManager = app(ImagesManager::class, ['model' => $gameMedia]);

@@ -33,22 +33,14 @@ class ResetPasswordControllerTest extends TestCase
         $this->password_confirmation = '123456789q';
     }
 
-    /**
-     * @test
-     * @return void
-     */
-    public function it_page_success(): void
+    public function test_page_success(): void
     {
         $this->get(action([ResetPasswordController::class, 'page'], ['token' => $this->token]))
             ->assertOk()
             ->assertViewIs('content.auth.reset-password');
     }
 
-    /**
-     * @test
-     * @return void
-     */
-    public function it_password_reset_success(): void
+    public function test_password_reset_success(): void
     {
         Password::shouldReceive('reset')
             ->once()
@@ -70,11 +62,7 @@ class ResetPasswordControllerTest extends TestCase
         $response->assertRedirect(action([LoginController::class, 'page']));
     }
 
-    /**
-     * @test
-     * @return void
-     */
-    public function it_handle_success(): void
+    public function test_handle_success(): void
     {
 
         $response = $this->post(action([ResetPasswordController::class, 'handle']), [
@@ -89,11 +77,7 @@ class ResetPasswordControllerTest extends TestCase
         $this->assertTrue(Hash::check('new_password', $this->user->fresh()->password));
     }
 
-    /**
-     * @test
-     * @return void
-     */
-    public function it_token_fail(): void
+    public function test_token_fail(): void
     {
         $response = $this->post(action([ResetPasswordController::class, 'handle']), [
             'email' => $this->user->email,

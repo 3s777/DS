@@ -30,11 +30,7 @@ class LoginControllerTest extends TestCase
         ];
     }
 
-    /**
-     * @test
-     * @return void
-     */
-    public function it_page_success(): void
+    public function test_page_success(): void
     {
         $this->get(action([LoginController::class, 'page']))
             ->assertOk()
@@ -43,11 +39,7 @@ class LoginControllerTest extends TestCase
 
     }
 
-    /**
-     * @test
-     * @return void
-     */
-    public function it_only_guest_success(): void
+    public function test_only_guest_success(): void
     {
         $this->post(action([LoginController::class, 'handle']), $this->request);
 
@@ -55,11 +47,7 @@ class LoginControllerTest extends TestCase
             ->assertRedirect('/');
     }
 
-    /**
-     * @test
-     * @return void
-     */
-    public function it_handle_success(): void
+    public function test_handle_success(): void
     {
         $response = $this->post(action([LoginController::class, 'handle']), $this->request);
 
@@ -69,11 +57,7 @@ class LoginControllerTest extends TestCase
         $this->assertAuthenticatedAs($this->user);
     }
 
-    /**
-     * @test
-     * @return void
-     */
-    public function it_handle_fail(): void
+    public function test_handle_fail(): void
     {
         $request = [
             'email' => 'test@notexist.com',
@@ -86,11 +70,7 @@ class LoginControllerTest extends TestCase
         $this->assertGuest();
     }
 
-    /**
-     * @test
-     * @return void
-     */
-    public function it_not_verified_fail(): void
+    public function test_not_verified_fail(): void
     {
         $user = UserFactory::new()->create([
             'password' => bcrypt($this->password),
@@ -108,11 +88,7 @@ class LoginControllerTest extends TestCase
         $this->assertGuest();
     }
 
-    /**
-     * @test
-     * @return void
-     */
-    public function it_logout_success(): void
+    public function test_logout_success(): void
     {
         $user = UserFactory::new()->create();
 
@@ -121,11 +97,7 @@ class LoginControllerTest extends TestCase
         $this->assertGuest();
     }
 
-    /**
-     * @test
-     * @return void
-     */
-    public function it_logout_guest_middleware_fail(): void
+    public function test_logout_guest_middleware_fail(): void
     {
         $this->delete(action([LoginController::class, 'logout']))
             ->assertRedirectToRoute('home');

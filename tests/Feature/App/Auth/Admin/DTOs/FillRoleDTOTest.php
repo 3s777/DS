@@ -20,11 +20,7 @@ class FillRoleDTOTest extends TestCase
         $this->request['permissions_collector'] = ['entity_collector.*', 'entity_collector.create', 'entity_collector.edit', 'entity_collector.delete'];
     }
 
-    /**
-     * @test
-     * @return void
-     */
-    public function it_instance_created_from_create_request_success(): void
+    public function test_instance_created_from_create_request_success(): void
     {
         $data = FillRoleDTO::fromRequest(new CreateRoleRequest($this->request));
 
@@ -32,11 +28,7 @@ class FillRoleDTOTest extends TestCase
     }
 
 
-    /**
-     * @test
-     * @return void
-     */
-    public function it_instance_created_success(): void
+    public function test_instance_created_success(): void
     {
         $data = FillRoleDTO::make(
             name: $this->request['name'],

@@ -18,22 +18,14 @@ class FillShelfDTOTest extends TestCase
         $this->request = CreateShelfRequest::factory()->create();
     }
 
-    /**
-     * @test
-     * @return void
-     */
-    public function it_instance_created_from_create_request_success(): void
+    public function test_instance_created_from_create_request_success(): void
     {
         $data = FillShelfDTO::fromRequest(new CreateShelfRequest($this->request));
 
         $this->assertInstanceOf(FillShelfDTO::class, $data);
     }
 
-    /**
-     * @test
-     * @return void
-     */
-    public function it_instance_created_success(): void
+    public function test_instance_created_success(): void
     {
         $data = FillShelfDTO::make(
             name: $this->request['name'],

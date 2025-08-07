@@ -42,11 +42,7 @@ class UpdateCollectorActionTest extends TestCase
         $this->withoutExceptionHandling();
     }
 
-    /**
-     * @test
-     * @return void
-     */
-    public function it_collector_created_success(): void
+    public function test_collector_created_success(): void
     {
         Queue::fake();
         Storage::fake('images');

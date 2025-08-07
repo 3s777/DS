@@ -49,11 +49,7 @@ class GamePlatformControllerTest extends TestCase
             ->assertRedirectToRoute('admin.login');
     }
 
-    /**
-     * @test
-     * @return void
-     */
-    public function it_pages_success(): void
+    public function test_pages_success(): void
     {
         $this->checkNotAuthRedirect('index');
         $this->checkNotAuthRedirect('create');
@@ -63,11 +59,7 @@ class GamePlatformControllerTest extends TestCase
         $this->checkNotAuthRedirect('destroy', 'delete', [$this->gamePlatform->slug]);
     }
 
-    /**
-     * @test
-     * @return void
-     */
-    public function it_index_success(): void
+    public function test_index_success(): void
     {
         $this->actingAs($this->user)
             ->get(action([GamePlatformController::class, 'index']))
@@ -76,11 +68,7 @@ class GamePlatformControllerTest extends TestCase
             ->assertViewIs('admin.game.platform.index');
     }
 
-    /**
-     * @test
-     * @return void
-     */
-    public function it_create_success(): void
+    public function test_create_success(): void
     {
         $this->actingAs($this->user)
             ->get(action([GamePlatformController::class, 'create']))
@@ -89,11 +77,7 @@ class GamePlatformControllerTest extends TestCase
             ->assertViewIs('admin.game.platform.create');
     }
 
-    /**
-     * @test
-     * @return void
-     */
-    public function it_edit_success(): void
+    public function test_edtest_success(): void
     {
         $this->actingAs($this->user)
             ->get(action([GamePlatformController::class, 'edit'], [$this->gamePlatform->slug]))
@@ -102,11 +86,7 @@ class GamePlatformControllerTest extends TestCase
             ->assertViewIs('admin.game.platform.edit');
     }
 
-    /**
-     * @test
-     * @return void
-     */
-    public function it_store_success(): void
+    public function test_store_success(): void
     {
         $this->actingAs($this->user)
             ->post(action([GamePlatformController::class, 'store']), $this->request)
@@ -118,11 +98,7 @@ class GamePlatformControllerTest extends TestCase
         ]);
     }
 
-    /**
-     * @test
-     * @return void
-     */
-    public function it_store_with_image_success(): void
+    public function test_store_with_image_success(): void
     {
         Queue::fake();
         Storage::fake('images');
@@ -143,11 +119,7 @@ class GamePlatformControllerTest extends TestCase
         Queue::assertPushed(GenerateSmallThumbnailsJob::class, 2);
     }
 
-    /**
-     * @test
-     * @return void
-     */
-    public function it_validation_name_fail(): void
+    public function test_validation_name_fail(): void
     {
         $this->app['session']->setPreviousUrl(route('admin.game-platforms.create'));
 
@@ -163,11 +135,7 @@ class GamePlatformControllerTest extends TestCase
         ]);
     }
 
-    /**
-     * @test
-     * @return void
-     */
-    public function it_validation_featured_image_fail(): void
+    public function test_validation_featured_image_fail(): void
     {
         $this->app['session']->setPreviousUrl(route('admin.game-platforms.create'));
 
@@ -179,11 +147,7 @@ class GamePlatformControllerTest extends TestCase
             ->assertRedirectToRoute('admin.game-platforms.create');
     }
 
-    /**
-     * @test
-     * @return void
-     */
-    public function it_update_success(): void
+    public function test_update_success(): void
     {
         $this->request['name'] = 'newName';
 
@@ -203,11 +167,7 @@ class GamePlatformControllerTest extends TestCase
         ]);
     }
 
-    /**
-     * @test
-     * @return void
-     */
-    public function it_delete_success(): void
+    public function test_delete_success(): void
     {
         $this->actingAs($this->user)
             ->delete(action([GamePlatformController::class, 'destroy'], [$this->gamePlatform->slug]))

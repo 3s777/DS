@@ -33,11 +33,7 @@ class PageServiceTest extends TestCase
         $this->user = User::factory()->create();
     }
 
-    /**
-     * @test
-     * @return void
-     */
-    public function it_page_created_success(): void
+    public function test_page_created_success(): void
     {
         Queue::fake();
         Storage::fake('images');
@@ -64,11 +60,7 @@ class PageServiceTest extends TestCase
         Queue::assertPushed(GenerateSmallThumbnailsJob::class, 2);
     }
 
-    /**
-     * @test
-     * @return void
-     */
-    public function it_category_updated_success(): void
+    public function test_category_updated_success(): void
     {
         Queue::fake();
         Storage::fake('images');

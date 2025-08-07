@@ -48,11 +48,7 @@ class GameControllerTest extends TestCase
             ->assertRedirectToRoute('admin.login');
     }
 
-    /**
-     * @test
-     * @return void
-     */
-    public function it_pages_success(): void
+    public function test_pages_success(): void
     {
         $this->checkNotAuthRedirect('index');
         $this->checkNotAuthRedirect('create');
@@ -62,11 +58,7 @@ class GameControllerTest extends TestCase
         $this->checkNotAuthRedirect('destroy', 'delete', [$this->game->slug]);
     }
 
-    /**
-     * @test
-     * @return void
-     */
-    public function it_index_success(): void
+    public function test_index_success(): void
     {
         $this->actingAs($this->user)
             ->get(action([GameController::class, 'index']))
@@ -75,11 +67,7 @@ class GameControllerTest extends TestCase
             ->assertViewIs('admin.game.game.index');
     }
 
-    /**
-     * @test
-     * @return void
-     */
-    public function it_create_success(): void
+    public function test_create_success(): void
     {
         $this->actingAs($this->user)
             ->get(action([GameController::class, 'create']))
@@ -88,11 +76,7 @@ class GameControllerTest extends TestCase
             ->assertViewIs('admin.game.game.create');
     }
 
-    /**
-     * @test
-     * @return void
-     */
-    public function it_edit_success(): void
+    public function test_edtest_success(): void
     {
         $this->actingAs($this->user)
             ->get(action([GameController::class, 'edit'], [$this->game->slug]))
@@ -101,11 +85,7 @@ class GameControllerTest extends TestCase
             ->assertViewIs('admin.game.game.edit');
     }
 
-    /**
-     * @test
-     * @return void
-     */
-    public function it_store_success(): void
+    public function test_store_success(): void
     {
         $this->actingAs($this->user)
             ->post(action([GameController::class, 'store']), $this->request)
@@ -117,11 +97,7 @@ class GameControllerTest extends TestCase
         ]);
     }
 
-    /**
-     * @test
-     * @return void
-     */
-    public function it_store_with_image_success(): void
+    public function test_store_with_image_success(): void
     {
         Queue::fake();
         Storage::fake('images');
@@ -142,11 +118,7 @@ class GameControllerTest extends TestCase
         Queue::assertPushed(GenerateSmallThumbnailsJob::class, 2);
     }
 
-    /**
-     * @test
-     * @return void
-     */
-    public function it_validation_name_fail(): void
+    public function test_validation_name_fail(): void
     {
         $this->app['session']->setPreviousUrl(route('admin.games.create'));
 
@@ -178,11 +150,7 @@ class GameControllerTest extends TestCase
         ]);
     }
 
-    /**
-     * @test
-     * @return void
-     */
-    public function it_validation_featured_image_fail(): void
+    public function test_validation_featured_image_fail(): void
     {
         $this->app['session']->setPreviousUrl(route('admin.games.create'));
 
@@ -194,11 +162,7 @@ class GameControllerTest extends TestCase
             ->assertRedirectToRoute('admin.games.create');
     }
 
-    /**
-     * @test
-     * @return void
-     */
-    public function it_update_success(): void
+    public function test_update_success(): void
     {
         $this->request['name'] = 'newName';
 
@@ -218,11 +182,7 @@ class GameControllerTest extends TestCase
         ]);
     }
 
-    /**
-     * @test
-     * @return void
-     */
-    public function it_update_validation_fail(): void
+    public function test_update_validation_fail(): void
     {
         $this->app['session']->setPreviousUrl(route('admin.games.edit', $this->game->slug));
 
@@ -258,11 +218,7 @@ class GameControllerTest extends TestCase
             ->assertRedirectToRoute('admin.games.edit', $this->game->slug);
     }
 
-    /**
-     * @test
-     * @return void
-     */
-    public function it_delete_success(): void
+    public function test_delete_success(): void
     {
         $this->actingAs($this->user)
             ->delete(action([GameController::class, 'destroy'], [$this->game->slug]))

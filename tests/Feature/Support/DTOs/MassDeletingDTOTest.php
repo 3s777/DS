@@ -9,11 +9,7 @@ class MassDeletingDTOTest extends TestCase
 {
     use RefreshDatabase;
 
-    /**
-     * @test
-     * @return void
-     */
-    public function it_instance_created_success(): void
+    public function test_instance_created_success(): void
     {
         $data = MassDeletingDTO::make(
             'Domain\Game\Models\GameDeveloper',

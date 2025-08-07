@@ -12,11 +12,7 @@ final class CollectorsControllerTest extends TestCase
     use RefreshDatabase;
     use ApiRequests;
 
-    /**
-     * @test
-     * @return void
-     */
-    public function it_successful_index_response(): void
+    public function test_successful_index_response(): void
     {
         $token = $this->tokenRequest()->json('data.id');
 

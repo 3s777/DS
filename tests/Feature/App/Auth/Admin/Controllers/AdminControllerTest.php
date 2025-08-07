@@ -54,11 +54,7 @@ class AdminControllerTest extends TestCase
             ->assertRedirectToRoute('admin.login');
     }
 
-    /**
-     * @test
-     * @return void
-     */
-    public function it_pages_only_auth_success(): void
+    public function test_pages_only_auth_success(): void
     {
         $this->checkNotAuthRedirect('index');
         $this->checkNotAuthRedirect('create');
@@ -69,11 +65,7 @@ class AdminControllerTest extends TestCase
         $this->checkNotAuthRedirect('destroy', 'delete', [$this->authUser->slug]);
     }
 
-    /**
-     * @test
-     * @return void
-     */
-    public function it_index_success(): void
+    public function test_index_success(): void
     {
         $this->actingAs($this->authUser)
             ->get(action([AdminController::class, 'index']))
@@ -82,11 +74,7 @@ class AdminControllerTest extends TestCase
             ->assertViewIs('admin.user.user.index');
     }
 
-    /**
-     * @test
-     * @return void
-     */
-    public function it_create_success(): void
+    public function test_create_success(): void
     {
         $this->actingAs($this->authUser)
             ->get(action([AdminController::class, 'create']))
@@ -95,11 +83,7 @@ class AdminControllerTest extends TestCase
             ->assertViewIs('admin.user.user.create');
     }
 
-    /**
-     * @test
-     * @return void
-     */
-    public function it_edit_success(): void
+    public function test_edtest_success(): void
     {
         $this->actingAs($this->authUser)
             ->get(action([AdminController::class, 'edit'], [$this->testingUser->slug]))
@@ -108,11 +92,7 @@ class AdminControllerTest extends TestCase
             ->assertViewIs('admin.user.user.edit');
     }
 
-    /**
-     * @test
-     * @return void
-     */
-    public function it_store_success(): void
+    public function test_store_success(): void
     {
         Queue::fake();
         Storage::fake('images');
@@ -134,11 +114,7 @@ class AdminControllerTest extends TestCase
         Queue::assertPushed(GenerateSmallThumbnailsJob::class, 2);
     }
 
-    /**
-     * @test
-     * @return void
-     */
-    public function it_show_success(): void
+    public function test_show_success(): void
     {
         $this->actingAs($this->authUser)
             ->get(action([AdminController::class, 'show'], [$this->testingUser->slug]))
@@ -147,11 +123,7 @@ class AdminControllerTest extends TestCase
             ->assertViewIs('admin.user.user.show');
     }
 
-    /**
-     * @test
-     * @return void
-     */
-    public function it_update_success(): void
+    public function test_update_success(): void
     {
         Permission::create(['name' => 'test', 'display_name' => 'Test']);
         Role::create(['name' => 'superadmin', 'display_name' => 'Super Admin']);
@@ -185,11 +157,7 @@ class AdminControllerTest extends TestCase
         ]);
     }
 
-    /**
-     * @test
-     * @return void
-     */
-    public function it_delete_success(): void
+    public function test_delete_success(): void
     {
         $this->actingAs($this->authUser)
             ->delete(action([AdminController::class, 'destroy'], [$this->testingUser->slug]))
@@ -202,11 +170,7 @@ class AdminControllerTest extends TestCase
         ]);
     }
 
-    /**
-     * @test
-     * @return void
-     */
-    public function it_has_wildcard_permissions_via_role_success(): void
+    public function test_has_wildcard_permissions_via_role_success(): void
     {
         $role = Role::where('name', config('settings.default_role'))->first();
 
@@ -221,11 +185,7 @@ class AdminControllerTest extends TestCase
         $this->assertTrue($user->hasAllPermissions(['entity.create', 'entity.edit', 'entity.delete']));
     }
 
-    /**
-     * @test
-     * @return void
-     */
-    public function it_create_validation_fail(): void
+    public function test_create_validation_fail(): void
     {
         $this->app['session']->setPreviousUrl(route('admin.users.create'));
 
@@ -245,11 +205,7 @@ class AdminControllerTest extends TestCase
         ]);
     }
 
-    /**
-     * @test
-     * @return void
-     */
-    public function it_update_validation_fail(): void
+    public function test_update_validation_fail(): void
     {
         $this->app['session']->setPreviousUrl(route('admin.users.edit', [$this->testingUser->slug]));
 

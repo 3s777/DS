@@ -19,22 +19,14 @@ class NewCollectorDTOTest extends TestCase
         $this->request = RegisterCollectorRequest::factory()->create();
     }
 
-    /**
-     * @test
-     * @return void
-     */
-    public function it_instance_created_from_register_request_success(): void
+    public function test_instance_created_from_register_request_success(): void
     {
         $data = NewCollectorDTO::fromRequest(new RegisterCollectorRequest($this->request));
 
         $this->assertInstanceOf(NewCollectorDTO::class, $data);
     }
 
-    /**
-     * @test
-     * @return void
-     */
-    public function it_instance_created_from_create_request_success(): void
+    public function test_instance_created_from_create_request_success(): void
     {
         $data = NewCollectorDTO::fromRequest(new CreateCollectorRequest($this->request));
 
@@ -42,11 +34,7 @@ class NewCollectorDTOTest extends TestCase
     }
 
 
-    /**
-     * @test
-     * @return void
-     */
-    public function it_instance_created_success(): void
+    public function test_instance_created_success(): void
     {
         $data = NewCollectorDTO::make(
             $this->request['name'],

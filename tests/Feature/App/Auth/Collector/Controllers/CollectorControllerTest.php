@@ -63,11 +63,7 @@ class CollectorControllerTest extends TestCase
             ->assertRedirectToRoute('admin.login');
     }
 
-    /**
-     * @test
-     * @return void
-     */
-    public function it_pages_only_auth_success(): void
+    public function test_pages_only_auth_success(): void
     {
         $this->checkNotAuthRedirect('index');
         $this->checkNotAuthRedirect('create');
@@ -78,11 +74,7 @@ class CollectorControllerTest extends TestCase
         $this->checkNotAuthRedirect('destroy', 'delete', [$this->authUser->slug]);
     }
 
-    /**
-     * @test
-     * @return void
-     */
-    public function it_index_success(): void
+    public function test_index_success(): void
     {
         $this->actingAs($this->authUser)
             ->get(action([CollectorController::class, 'index']))
@@ -91,11 +83,7 @@ class CollectorControllerTest extends TestCase
             ->assertViewIs('admin.user.collector.index');
     }
 
-    /**
-     * @test
-     * @return void
-     */
-    public function it_create_success(): void
+    public function test_create_success(): void
     {
         $this->actingAs($this->authUser)
             ->get(action([CollectorController::class, 'create']))
@@ -104,11 +92,7 @@ class CollectorControllerTest extends TestCase
             ->assertViewIs('admin.user.collector.create');
     }
 
-    /**
-     * @test
-     * @return void
-     */
-    public function it_edit_success(): void
+    public function test_edtest_success(): void
     {
         $this->actingAs($this->authUser)
             ->get(action([CollectorController::class, 'edit'], [$this->testingCollector->slug]))
@@ -117,11 +101,7 @@ class CollectorControllerTest extends TestCase
             ->assertViewIs('admin.user.collector.edit');
     }
 
-    /**
-     * @test
-     * @return void
-     */
-    public function it_store_success(): void
+    public function test_store_success(): void
     {
         Queue::fake();
         Storage::fake('images');
@@ -143,11 +123,7 @@ class CollectorControllerTest extends TestCase
         Queue::assertPushed(GenerateSmallThumbnailsJob::class, 2);
     }
 
-    /**
-     * @test
-     * @return void
-     */
-    public function it_show_success(): void
+    public function test_show_success(): void
     {
         $this->actingAs($this->authUser)
             ->get(action([CollectorController::class, 'show'], [$this->testingCollector->slug]))
@@ -156,11 +132,7 @@ class CollectorControllerTest extends TestCase
             ->assertViewIs('admin.user.collector.show');
     }
 
-    /**
-     * @test
-     * @return void
-     */
-    public function it_update_success(): void
+    public function test_update_success(): void
     {
         Permission::create(['name' => 'test', 'display_name' => 'Test', 'guard_name' => 'collector']);
         Role::create(['name' => 'superadmin', 'display_name' => 'Super Admin', 'guard_name' => 'collector']);
@@ -194,11 +166,7 @@ class CollectorControllerTest extends TestCase
         ]);
     }
 
-    /**
-     * @test
-     * @return void
-     */
-    public function it_delete_success(): void
+    public function test_delete_success(): void
     {
         $this->actingAs($this->authUser)
             ->delete(action([CollectorController::class, 'destroy'], [$this->testingCollector->slug]))
@@ -211,11 +179,7 @@ class CollectorControllerTest extends TestCase
         ]);
     }
 
-    /**
-     * @test
-     * @return void
-     */
-    public function it_has_wildcard_permissions_via_role_success(): void
+    public function test_has_wildcard_permissions_via_role_success(): void
     {
         $role = Role::where('name', config('settings.default_collector_role'))->first();
 
@@ -230,11 +194,7 @@ class CollectorControllerTest extends TestCase
         $this->assertTrue($collector->hasAllPermissions(['entity.create', 'entity.edit', 'entity.delete']));
     }
 
-    /**
-     * @test
-     * @return void
-     */
-    public function it_create_validation_fail(): void
+    public function test_create_validation_fail(): void
     {
         $this->app['session']->setPreviousUrl(route('admin.users.create'));
 
@@ -254,11 +214,7 @@ class CollectorControllerTest extends TestCase
         ]);
     }
 
-    /**
-     * @test
-     * @return void
-     */
-    public function it_update_validation_fail(): void
+    public function test_update_validation_fail(): void
     {
         $this->app['session']->setPreviousUrl(route('admin.collectors.edit', [$this->testingCollector->slug]));
 

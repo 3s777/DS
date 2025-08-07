@@ -11,11 +11,7 @@ use TypeError;
 
 class SaleValueObjectTest extends TestCase
 {
-    /**
-     * @test
-     * @return void
-     */
-    public function it_all(): void
+    public function test_all(): void
     {
         $sale = SaleValueObject::make(
             100,
@@ -46,11 +42,7 @@ class SaleValueObjectTest extends TestCase
         ], $sale->raw());
     }
 
-    /**
-     * @test
-     * @return void
-     */
-    public function it_price_type_fail(): void
+    public function test_price_type_fail(): void
     {
         $this->expectException(TypeError::class);
         SaleValueObject::make(
@@ -61,11 +53,7 @@ class SaleValueObjectTest extends TestCase
         );
     }
 
-    /**
-     * @test
-     * @return void
-     */
-    public function it_quantity_type_fail(): void
+    public function test_quantity_type_fail(): void
     {
         $this->expectException(TypeError::class);
         SaleValueObject::make(

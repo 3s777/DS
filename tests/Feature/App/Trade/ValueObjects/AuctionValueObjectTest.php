@@ -11,12 +11,8 @@ use TypeError;
 
 class AuctionValueObjectTest extends TestCase
 {
-    /**
-     * @test
-     * @return void
-     */
 
-    public function it_all(): void
+    public function test_all(): void
     {
         $auction = AuctionValueObject::make(
             100,
@@ -34,11 +30,7 @@ class AuctionValueObjectTest extends TestCase
         $this->assertSame('2024-10-03 10:25', $auction->finished_at());
     }
 
-    /**
-     * @test
-     * @return void
-     */
-    public function it_price_type_fail(): void
+    public function test_price_type_fail(): void
     {
         $this->expectException(TypeError::class);
         SaleValueObject::make(

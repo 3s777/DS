@@ -9,11 +9,7 @@ class PagesControllerTest extends TestCase
 {
     use RefreshDatabase;
 
-    /**
-     * @test
-     * @return void
-     */
-    public function it_page_search_success(): void
+    public function test_page_search_success(): void
     {
         $this->get(route('search'))
             ->assertOk()
@@ -21,11 +17,7 @@ class PagesControllerTest extends TestCase
             ->assertViewIs('content.search.index');
     }
 
-    /**
-     * @test
-     * @return void
-     */
-    public function it_page_feed_success(): void
+    public function test_page_feed_success(): void
     {
         $this->get(route('feed'))
             ->assertOk()
@@ -33,11 +25,7 @@ class PagesControllerTest extends TestCase
             ->assertViewIs('content.feed.index');
     }
 
-    /**
-     * @test
-     * @return void
-     */
-    public function it_page_game_carrier_success(): void
+    public function test_page_game_carrier_success(): void
     {
         $this->get(route('game-carrier'))
             ->assertOk()
@@ -45,11 +33,7 @@ class PagesControllerTest extends TestCase
             ->assertViewIs('content.game-carrier.index');
     }
 
-    /**
-     * @test
-     * @return void
-     */
-    public function it_page_ui_success(): void
+    public function test_page_ui_success(): void
     {
         $this->get(route('ui'))
             ->assertOk()
@@ -57,11 +41,7 @@ class PagesControllerTest extends TestCase
             ->assertViewIs('content.ui.index');
     }
 
-    /**
-     * @test
-     * @return void
-     */
-    public function it_page_qa_success(): void
+    public function test_page_qa_success(): void
     {
         $this->get(route('qa'))
             ->assertOk()

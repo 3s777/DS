@@ -48,11 +48,7 @@ class GameMediaVariationControllerTest extends TestCase
             ->assertRedirectToRoute('admin.login');
     }
 
-    /**
-     * @test
-     * @return void
-     */
-    public function it_pages_success(): void
+    public function test_pages_success(): void
     {
         $this->checkNotAuthRedirect('index');
         $this->checkNotAuthRedirect('create');
@@ -62,11 +58,7 @@ class GameMediaVariationControllerTest extends TestCase
         $this->checkNotAuthRedirect('destroy', 'delete', [$this->gameMediaVariation->slug]);
     }
 
-    /**
-     * @test
-     * @return void
-     */
-    public function it_index_success(): void
+    public function test_index_success(): void
     {
         $this->actingAs($this->user)
             ->get(action([GameMediaVariationController::class, 'index']))
@@ -75,11 +67,7 @@ class GameMediaVariationControllerTest extends TestCase
             ->assertViewIs('admin.game.variation.index');
     }
 
-    /**
-     * @test
-     * @return void
-     */
-    public function it_create_success(): void
+    public function test_create_success(): void
     {
         $this->actingAs($this->user)
             ->get(action([GameMediaVariationController::class, 'create']))
@@ -88,11 +76,7 @@ class GameMediaVariationControllerTest extends TestCase
             ->assertViewIs('admin.game.variation.create');
     }
 
-    /**
-     * @test
-     * @return void
-     */
-    public function it_edit_success(): void
+    public function test_edtest_success(): void
     {
         $this->actingAs($this->user)
             ->get(action([GameMediaVariationController::class, 'edit'], [$this->gameMediaVariation->slug]))
@@ -101,11 +85,7 @@ class GameMediaVariationControllerTest extends TestCase
             ->assertViewIs('admin.game.variation.edit');
     }
 
-    /**
-     * @test
-     * @return void
-     */
-    public function it_store_success(): void
+    public function test_store_success(): void
     {
         $this->actingAs($this->user)
             ->post(action([GameMediaVariationController::class, 'store']), $this->request)
@@ -117,11 +97,7 @@ class GameMediaVariationControllerTest extends TestCase
         ]);
     }
 
-    /**
-     * @test
-     * @return void
-     */
-    public function it_store_with_image_success(): void
+    public function test_store_with_image_success(): void
     {
         Queue::fake();
         Storage::fake('images');
@@ -142,11 +118,7 @@ class GameMediaVariationControllerTest extends TestCase
         Queue::assertPushed(GenerateSmallThumbnailsJob::class, 2);
     }
 
-    /**
-     * @test
-     * @return void
-     */
-    public function it_validation_fail(): void
+    public function test_validation_fail(): void
     {
         $this->app['session']->setPreviousUrl(route('admin.game-media-variations.create'));
 
@@ -176,11 +148,7 @@ class GameMediaVariationControllerTest extends TestCase
         ]);
     }
 
-    /**
-     * @test
-     * @return void
-     */
-    public function it_validation_featured_image_fail(): void
+    public function test_validation_featured_image_fail(): void
     {
         $this->app['session']->setPreviousUrl(route('admin.game-media-variations.create'));
 
@@ -192,11 +160,7 @@ class GameMediaVariationControllerTest extends TestCase
             ->assertRedirectToRoute('admin.game-media-variations.create');
     }
 
-    /**
-     * @test
-     * @return void
-     */
-    public function it_update_success(): void
+    public function test_update_success(): void
     {
         $this->request['name'] = 'newName';
 
@@ -216,11 +180,7 @@ class GameMediaVariationControllerTest extends TestCase
         ]);
     }
 
-    /**
-     * @test
-     * @return void
-     */
-    public function it_update_validation_fail(): void
+    public function test_update_validation_fail(): void
     {
         $this->app['session']->setPreviousUrl(route('admin.game-media-variations.edit', $this->gameMediaVariation->slug));
 
@@ -252,11 +212,7 @@ class GameMediaVariationControllerTest extends TestCase
             ->assertRedirectToRoute('admin.game-media-variations.edit', $this->gameMediaVariation->slug);
     }
 
-    /**
-     * @test
-     * @return void
-     */
-    public function it_delete_success(): void
+    public function test_delete_success(): void
     {
         $this->actingAs($this->user)
             ->delete(action([GameMediaVariationController::class, 'destroy'], [$this->gameMediaVariation->slug]))

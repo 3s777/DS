@@ -18,11 +18,7 @@ class FillGameDTOTest extends TestCase
         $this->request = CreateGameRequest::factory()->create();
     }
 
-    /**
-     * @test
-     * @return void
-     */
-    public function it_instance_created_from_create_request_success(): void
+    public function test_instance_created_from_create_request_success(): void
     {
         $data = FillGameDTO::fromRequest(new CreateGameRequest($this->request));
 
@@ -30,11 +26,7 @@ class FillGameDTOTest extends TestCase
     }
 
 
-    /**
-     * @test
-     * @return void
-     */
-    public function it_instance_created_success(): void
+    public function test_instance_created_success(): void
     {
         $data = FillGameDTO::make(
             name: $this->request['name'],

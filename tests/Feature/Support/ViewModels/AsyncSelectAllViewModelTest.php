@@ -25,11 +25,7 @@ class AsyncSelectAllViewModelTest extends TestCase
         $this->user->assignRole('super_admin');
     }
 
-    /**
-     * @test
-     * @return void
-     */
-    public function it_success_get_select_depended(): void
+    public function test_success_get_select_depended(): void
     {
         $shelves = Shelf::factory(3)->create(['collector_id' => $this->collector->id]);
 
@@ -53,11 +49,7 @@ class AsyncSelectAllViewModelTest extends TestCase
         );
     }
 
-    /**
-     * @test
-     * @return void
-     */
-    public function it_fail_get_select_wrong_depended(): void
+    public function test_fail_get_select_wrong_depended(): void
     {
         Shelf::factory(3)->create(['collector_id' => $this->collector->id]);
 
