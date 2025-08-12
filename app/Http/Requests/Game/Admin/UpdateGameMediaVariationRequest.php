@@ -2,7 +2,6 @@
 
 namespace App\Http\Requests\Game\Admin;
 
-use Domain\Game\Models\GameMedia;
 use Domain\Game\Models\GameMediaVariation;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;

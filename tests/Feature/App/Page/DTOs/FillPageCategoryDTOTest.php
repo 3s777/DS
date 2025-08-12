@@ -35,4 +35,3 @@ class FillPageCategoryDTOTest extends TestCase
         $this->assertInstanceOf(FillPageCategoryDTO::class, $data);
     }
 }
-

@@ -22,8 +22,7 @@ final readonly class JWT
     public function __construct(
         private string $secret,
         private Encoder $encoder = new JoseEncoder()
-    )
-    {
+    ) {
     }
 
     public function create(string $id, bool $refresh = false): string
@@ -77,12 +76,12 @@ final readonly class JWT
             )
         );
 
-//        $configuration->withValidationConstraints(
-//            new SignedWith(
-//                new Sha256(),
-//                $key
-//            )
-//        );
+        //        $configuration->withValidationConstraints(
+        //            new SignedWith(
+        //                new Sha256(),
+        //                $key
+        //            )
+        //        );
 
         if (!$configuration->validator()->validate($parsedToken, ...$configuration->validationConstraints())) {
             throw new JWTValidatorException('Validation failed');

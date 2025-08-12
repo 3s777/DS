@@ -6,7 +6,6 @@ use Symfony\Component\HttpFoundation\Response;
 
 class TokenResponse extends ApiResponse
 {
-
     public function type(): string
     {
         return 'token';

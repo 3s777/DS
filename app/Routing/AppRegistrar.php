@@ -3,7 +3,6 @@
 namespace App\Routing;
 
 use App\Contracts\RouteRegistrar;
-use App\Http\Controllers\Api\DocumentationController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\PageController;
 use Illuminate\Contracts\Routing\Registrar;

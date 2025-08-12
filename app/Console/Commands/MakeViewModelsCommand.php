@@ -3,9 +3,9 @@
 namespace App\Console\Commands;
 
 use App\Console\BaseCommand;
-use Illuminate\Console\Command;
 use Illuminate\Contracts\Console\PromptsForMissingInput;
 use Illuminate\Support\Facades\File;
+
 use function Laravel\Prompts\text;
 use function Laravel\Prompts\confirm;
 
@@ -40,7 +40,7 @@ class MakeViewModelsCommand extends BaseCommand implements PromptsForMissingInpu
             "{{ query }}" => $query
         ];
 
-        if(!File::exists(base_path("src/Domain/$this->domain/ViewModels"))) {
+        if (!File::exists(base_path("src/Domain/$this->domain/ViewModels"))) {
             File::makeDirectory(base_path("src/Domain/$this->domain/ViewModels"));
             File::makeDirectory(base_path("src/Domain/$this->domain/ViewModels/Admin/"));
         }
@@ -79,16 +79,14 @@ class MakeViewModelsCommand extends BaseCommand implements PromptsForMissingInpu
     {
         $query = "return $this->model::query()
             ->select('$databaseModel.id', '$databaseModel.name', '$databaseModel.slug', '$databaseModel.created_at',";
-        if($isUser)
-        {
+        if ($isUser) {
             $query .= " 'users.name as user_name')
             ->leftJoin('users', 'users.id', '=', '$databaseModel.user_id')";
         } else {
             $query .= ")";
         }
 
-        if($isFilters)
-        {
+        if ($isFilters) {
             $query .= "
             ->filteredAdmin()
             ->sorted()";

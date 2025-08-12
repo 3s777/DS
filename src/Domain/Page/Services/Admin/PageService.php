@@ -1,10 +1,9 @@
 <?php
+
 namespace Domain\Page\Services\Admin;
 
 use Domain\Page\DTOs\FillPageDTO;
 use Domain\Page\Models\Page;
-use Domain\Shelf\DTOs\FillCategoryDTO;
-use Domain\Shelf\Models\Category;
 use Illuminate\Support\HigherOrderTapProxy;
 use Support\Exceptions\CrudException;
 use Support\Transaction;

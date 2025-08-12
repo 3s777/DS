@@ -3,9 +3,9 @@
 namespace App\Console\Commands;
 
 use App\Console\BaseCommand;
-use Illuminate\Console\Command;
 use Illuminate\Contracts\Console\PromptsForMissingInput;
 use Illuminate\Support\Facades\File;
+
 use function Laravel\Prompts\text;
 use function Laravel\Prompts\confirm;
 
@@ -74,7 +74,7 @@ class MakeViewsCommand extends BaseCommand implements PromptsForMissingInput
             "{{ kebabModelWithoutDomain }}" => $kebabModelWithoutDomain,
         ];
 
-        if(!File::exists(base_path("resources/views/admin/{$domainNames['kebabDomain']}/{$modelNames['langModel']}"))) {
+        if (!File::exists(base_path("resources/views/admin/{$domainNames['kebabDomain']}/{$modelNames['langModel']}"))) {
             File::makeDirectory(base_path("resources/views/admin/{$domainNames['kebabDomain']}/{$modelNames['langModel']}"));
         }
 
@@ -84,7 +84,7 @@ class MakeViewsCommand extends BaseCommand implements PromptsForMissingInput
         $this->createFile();
 
         $this->outputFilePath = base_path("resources/views/admin/{$domainNames['kebabDomain']}/{$modelNames['langModel']}/index.blade.php");
-        if($isFilters) {
+        if ($isFilters) {
             $this->setStubContent('base-admin-layout.index-filter');
         } else {
             $this->setStubContent('base-admin-layout.index');
@@ -92,8 +92,8 @@ class MakeViewsCommand extends BaseCommand implements PromptsForMissingInput
         $this->createFromStub($replace);
         $this->createFile();
 
-        if($isFilters) {
-            if(!File::exists(base_path("resources/views/admin/{$domainNames['kebabDomain']}/{$modelNames['langModel']}/partials"))) {
+        if ($isFilters) {
+            if (!File::exists(base_path("resources/views/admin/{$domainNames['kebabDomain']}/{$modelNames['langModel']}/partials"))) {
                 File::makeDirectory(base_path("resources/views/admin/{$domainNames['kebabDomain']}/{$modelNames['langModel']}/partials"));
             }
 
@@ -120,16 +120,15 @@ class MakeViewsCommand extends BaseCommand implements PromptsForMissingInput
         bool $isSlug,
         bool $isUser,
         bool $isUpdate = false,
-    ): array
-    {
+    ): array {
         $slug = '';
-        if($isSlug) {
+        if ($isSlug) {
             $slug = '<x-grid.col xl="4" ls="6" ml="12" lg="6" md="6" sm="12">
                     <x-ui.form.group>
                         <x-ui.form.input-text
                             :placeholder="__(\'common.slug\')"';
 
-            if($isUpdate) {
+            if ($isUpdate) {
                 $slug .=  '
                             :value="$'.$camelModel.'->slug"';
             }
@@ -144,14 +143,14 @@ class MakeViewsCommand extends BaseCommand implements PromptsForMissingInput
         }
 
         $user = '';
-        if($isUser) {
+        if ($isUser) {
             $user = '<x-grid.col xl="4" ls="6" ml="12" lg="6" md="6" sm="12">
                     <x-ui.form.group>
                         <x-ui.select.async
                             name="user"
                             select-name="user_id"';
 
-            if($isUpdate) {
+            if ($isUpdate) {
                 $user .=  '
                             :selected="$selectedUser"';
             }

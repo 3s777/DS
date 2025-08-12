@@ -3,7 +3,6 @@
 namespace App\Console\Commands\Api;
 
 use App\Console\BaseCommand;
-use Database\Seeders\Api\GameToStagingSeeder;
 use Database\Seeders\Api\GamePlatformToStagingSeeder;
 use Illuminate\Contracts\Console\PromptsForMissingInput;
 

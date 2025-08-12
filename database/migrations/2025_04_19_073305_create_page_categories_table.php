@@ -6,8 +6,7 @@ use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 use Domain\Auth\Models\User;
 
-return new class extends Migration
-{
+return new class () extends Migration {
     public function up(): void
     {
         Schema::create('page_categories', function (Blueprint $table) {
@@ -31,7 +30,7 @@ return new class extends Migration
 
     public function down(): void
     {
-        if(!app()->isProduction()) {
+        if (!app()->isProduction()) {
             Schema::dropIfExists('page_categories');
         }
     }

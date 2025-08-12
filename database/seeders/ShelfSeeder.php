@@ -53,10 +53,9 @@ class ShelfSeeder extends Seeder
                                 ->for(GamePlatformManufacturer::factory()->for($user, 'user'), 'game_platform_manufacturer')
                                 ->for($user, 'user'), 'platforms')
                             ->has(GameMediaVariation::factory(3)
-                                ->has(KitItem::factory(rand(1, 3))->for($user, 'user'), 'kitItems'), 'variations'
-                            , 'gameMedia')
+                                ->has(KitItem::factory(rand(1, 3))->for($user, 'user'), 'kitItems'), 'variations', 'gameMedia')
                             ->for($user, 'user')
-//                    ->for($user, 'user')
+                        //                    ->for($user, 'user')
                     )
             ]);
 

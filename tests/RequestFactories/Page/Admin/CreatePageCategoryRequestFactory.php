@@ -14,4 +14,3 @@ class CreatePageCategoryRequestFactory extends RequestFactory
         ];
     }
 }
-

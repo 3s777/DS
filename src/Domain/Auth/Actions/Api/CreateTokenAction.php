@@ -12,8 +12,7 @@ class CreateTokenAction
     public function __construct(
         private JWT $jwt,
         private Factory $auth
-    )
-    {
+    ) {
     }
 
     public function handle(AuthenticateDto $dto): ?array

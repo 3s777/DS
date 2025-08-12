@@ -13,7 +13,6 @@ use Illuminate\Contracts\View\View;
 use Illuminate\Foundation\Application;
 use Illuminate\Http\RedirectResponse;
 
-
 class ProfileController extends Controller
 {
     public function show(): View|Application|Factory|\Illuminate\Contracts\Foundation\Application
@@ -29,13 +28,12 @@ class ProfileController extends Controller
     public function updateSettings(
         UpdateCollectorProfileRequest $request,
         CollectorProfileService $profileService
-    ): RedirectResponse
-    {
+    ): RedirectResponse {
         $profileService->update(UpdateCollectorProfileDTO::fromRequest($request));
 
         flash()->info(__('user.profile.updated'));
 
-        if($request->input('new_password')) {
+        if ($request->input('new_password')) {
             flash()->info(__('user.profile.updated').'. '.__('auth.password_updated'));
         }
 

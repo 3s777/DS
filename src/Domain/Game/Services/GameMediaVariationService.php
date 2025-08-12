@@ -2,9 +2,7 @@
 
 namespace Domain\Game\Services;
 
-use Domain\Game\DTOs\FillGameMediaDTO;
 use Domain\Game\DTOs\FillGameMediaVariationDTO;
-use Domain\Game\Models\GameMedia;
 use Domain\Game\Models\GameMediaVariation;
 use Illuminate\Support\Facades\DB;
 use Support\Exceptions\CrudException;

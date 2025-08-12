@@ -2,12 +2,10 @@
 
 namespace Domain\Game\Models;
 
-use App\Contracts\HasProperties;
 use Database\Factories\Game\GameMediaFactory;
 use Domain\Auth\Models\User;
 use Domain\Game\FilterRegistrars\Admin\GameMediaFilterRegistrar as AdminGameMediaFilterRegistrar;
 use Domain\Game\FilterRegistrars\Public\GameMediaFilterRegistrar;
-use Domain\Game\Models\Traits\GameProperties;
 use Domain\Game\QueryBuilders\GameMediaQueryBuilder;
 use Domain\Shelf\Contracts\Mediable;
 use Domain\Shelf\Models\Collectible;

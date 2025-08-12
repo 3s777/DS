@@ -31,8 +31,7 @@ trait HasFilters
         string $filterName = 'search',
         string $field = 'name',
         array $createAttributes = []
-    ): void
-    {
+    ): void {
         $createAttributes[$field] = 'search test';
         $expectedModel = $this->getFactory()
             ->create($createAttributes);
@@ -52,8 +51,7 @@ trait HasFilters
         string $field,
         bool $multiple = false,
         array $createAttributes = []
-    ): void
-    {
+    ): void {
         $createAttributes[$field] = 'search test';
 
         $expectedModel = $this->getFactory()
@@ -81,8 +79,7 @@ trait HasFilters
         string $filterName,
         string $field,
         array $createAttributes = []
-    ): void
-    {
+    ): void {
         $createAttributes[$field] = true;
 
         $expectedModel = $this->getFactory()
@@ -221,8 +218,7 @@ trait HasFilters
         string $filterName = 'dates',
         string $field = 'created_at',
         array $createAttributes = []
-    ): void
-    {
+    ): void {
         $createAttributes[$field] = Carbon::yesterday();
         $models = $this->getFactory()
             ->count(10)
@@ -245,8 +241,7 @@ trait HasFilters
         string $filterName = 'dates',
         string $field = 'created_at',
         array $createAttributes = []
-    ): void
-    {
+    ): void {
         $createAttributes[$field] = Carbon::tomorrow();
         $models = $this->getFactory()
             ->count(10)
@@ -290,8 +285,7 @@ trait HasFilters
         string $filterName,
         string $field,
         array $createAttributes = []
-    ): void
-    {
+    ): void {
         $createAttributes[$field] = fn () => rand(1, 5);
         $models = $this->getFactory()
             ->count(10)
@@ -317,8 +311,7 @@ trait HasFilters
         string $filterName,
         string $field,
         array $createAttributes = []
-    ): void
-    {
+    ): void {
         $createAttributes[$field] = fn () => rand(1, 5);
         $models = $this->getFactory()
             ->count(10)
@@ -343,8 +336,7 @@ trait HasFilters
         string $filterName,
         string $field,
         array $createAttributes = []
-    ): void
-    {
+    ): void {
         $createAttributes[$field] = fn () => rand(5, 10);
         $models = $this->getFactory()
             ->count(10)

@@ -8,7 +8,6 @@ use Tests\TestCase;
 
 class PriceTest extends TestCase
 {
-
     public function test_all(): void
     {
         $price = PriceValueObject::make(10000);

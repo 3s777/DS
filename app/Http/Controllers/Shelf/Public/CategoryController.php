@@ -7,10 +7,8 @@ use Domain\Shelf\Contracts\CategorySearchFactoryContract;
 use Domain\Shelf\Models\Category;
 use Illuminate\Http\Request;
 
-
 class CategoryController extends Controller
 {
-
     public function __construct(Category $category)
     {
         //        $this->authorizeResource(KitItem::class, 'kit-item');

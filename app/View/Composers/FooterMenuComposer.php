@@ -6,7 +6,7 @@ use App\Menu\Menu;
 use App\Menu\MenuItem;
 use Illuminate\View\View;
 
-final class  FooterMenuComposer
+final class FooterMenuComposer
 {
     public function compose(View $view): void
     {

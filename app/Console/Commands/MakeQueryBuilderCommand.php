@@ -3,11 +3,10 @@
 namespace App\Console\Commands;
 
 use App\Console\BaseCommand;
-use Illuminate\Console\Command;
 use Illuminate\Contracts\Console\PromptsForMissingInput;
 use Illuminate\Support\Facades\File;
+
 use function Laravel\Prompts\text;
-use function Laravel\Prompts\confirm;
 
 class MakeQueryBuilderCommand extends BaseCommand implements PromptsForMissingInput
 {
@@ -33,7 +32,7 @@ class MakeQueryBuilderCommand extends BaseCommand implements PromptsForMissingIn
             "{{ model }}" => $this->model,
         ];
 
-        if(!File::exists(base_path("src/Domain/$this->domain/QueryBuilders"))) {
+        if (!File::exists(base_path("src/Domain/$this->domain/QueryBuilders"))) {
             File::makeDirectory(base_path("src/Domain/$this->domain/QueryBuilders"));
         }
 

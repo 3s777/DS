@@ -16,10 +16,10 @@ final class AdminSidebarMenuComposer
             ->add(
                 MenuItem::make(
                     route('admin.users.show', ['user' => auth()->user()->slug ]),
-                    trans_choice('user.profile.profiles',1),
+                    trans_choice('user.profile.profiles', 1),
                     'profile'
-                    )
                 )
+            )
             ->add(
                 MenuGroup::make()
                 ->setLabel(trans_choice('shelf.shelves', 2))

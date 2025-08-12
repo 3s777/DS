@@ -11,16 +11,16 @@ final class CollectorsController
     public function index(CollectorsViewModel $viewModel)
     {
         $col = $viewModel->collectors();
-//
-//        $col->getCollection()->transform(fn(Collector $collector) => new ApiData(
-//            'collector',
-//                $collector->getKey(),
-//            $collector->toArray()
-//        ));
+        //
+        //        $col->getCollection()->transform(fn(Collector $collector) => new ApiData(
+        //            'collector',
+        //                $collector->getKey(),
+        //            $collector->toArray()
+        //        ));
 
 
 
-        $col->getCollection()->transform(fn(Collector $collector) => (new CollectorsTransformer($collector)));
+        $col->getCollection()->transform(fn (Collector $collector) => (new CollectorsTransformer($collector)));
 
         return $col;
     }

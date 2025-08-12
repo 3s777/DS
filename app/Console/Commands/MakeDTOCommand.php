@@ -3,9 +3,9 @@
 namespace App\Console\Commands;
 
 use App\Console\BaseCommand;
-use Illuminate\Console\Command;
 use Illuminate\Contracts\Console\PromptsForMissingInput;
 use Illuminate\Support\Facades\File;
+
 use function Laravel\Prompts\text;
 use function Laravel\Prompts\confirm;
 
@@ -47,7 +47,7 @@ class MakeDTOCommand extends BaseCommand implements PromptsForMissingInput
             "{{ attributesNames }}" => $attributesNames
         ];
 
-        if(!File::exists(base_path("src/Domain/$this->domain/DTOs"))) {
+        if (!File::exists(base_path("src/Domain/$this->domain/DTOs"))) {
             File::makeDirectory(base_path("src/Domain/$this->domain/DTOs"));
         }
 
@@ -65,32 +65,31 @@ class MakeDTOCommand extends BaseCommand implements PromptsForMissingInput
         bool $isUser,
         bool $isFeaturedImage,
         bool $isImages
-    ): string
-    {
+    ): string {
         $attributes = "public string \$name,";
 
-        if($isSlug) {
+        if ($isSlug) {
             $attributes .=  "
         public ?string \$slug = null,";
         }
 
-        if($isDescription) {
+        if ($isDescription) {
             $attributes .=  "
         public ?string \$description = null,";
         }
 
-        if($isUser) {
+        if ($isUser) {
             $attributes .=  "
         public ?int \$user_id = null,";
         }
 
-        if($isFeaturedImage) {
+        if ($isFeaturedImage) {
             $attributes .=  "
         public ?UploadedFile \$featured_image = null,
         public ?bool \$featured_image_uploaded = null,";
         }
 
-        if($isImages) {
+        if ($isImages) {
             $attributes .=  "
         public ?array \$images = null,
         public ?string \$images_delete = null,";
@@ -105,32 +104,31 @@ class MakeDTOCommand extends BaseCommand implements PromptsForMissingInput
         bool $isUser,
         bool $isFeaturedImage,
         bool $isImages
-    ): string
-    {
+    ): string {
         $attributesNames = "'name',";
 
-        if($isSlug) {
+        if ($isSlug) {
             $attributesNames .= "
             'slug',";
         }
 
-        if($isDescription) {
+        if ($isDescription) {
             $attributesNames .= "
             'description',";
         }
 
-        if($isUser) {
+        if ($isUser) {
             $attributesNames .= "
             'user_id',";
         }
 
-        if($isFeaturedImage) {
+        if ($isFeaturedImage) {
             $attributesNames .= "
             'featured_image',
             'featured_image_uploaded',";
         }
 
-        if($isImages) {
+        if ($isImages) {
             $attributesNames .= "
             'images',
             'images_delete',";

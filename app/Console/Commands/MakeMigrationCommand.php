@@ -3,8 +3,8 @@
 namespace App\Console\Commands;
 
 use App\Console\BaseCommand;
-use Illuminate\Console\Command;
 use Illuminate\Contracts\Console\PromptsForMissingInput;
+
 use function Laravel\Prompts\confirm;
 use function Laravel\Prompts\text;
 
@@ -49,7 +49,8 @@ class MakeMigrationCommand extends BaseCommand implements PromptsForMissingInput
             $isDescription,
             $isUser,
             $isSoftDelete,
-            $isImages, $isTranslatable
+            $isImages,
+            $isTranslatable
         );
 
         $this->outputFilePath = database_path("migrations/$migrationFileName");
@@ -70,8 +71,7 @@ class MakeMigrationCommand extends BaseCommand implements PromptsForMissingInput
         bool $isSoftDelete,
         bool $isImages,
         bool $isTranslatable
-    ): array
-    {
+    ): array {
         $fieldName = $jsonName ? '$table->jsonb(\'name\');' : '$table->string(\'name\');';
         $fieldSlug = $isSlug ? '$table->string(\'slug\')->unique();' : '';
         $fieldFeaturedImage = $isFeaturedImage ? '$table->string(\'featured_image\')->nullable();' : '';
@@ -84,7 +84,7 @@ class MakeMigrationCommand extends BaseCommand implements PromptsForMissingInput
         $fieldSoftDelete = $isSoftDelete ? '$table->softDeletes();' : '';
         $fieldImages = $isImages ? '$table->text(\'images\')->nullable();' : '';
 
-        if($isTranslatable && $isDescription) {
+        if ($isTranslatable && $isDescription) {
             $fieldDescription = '$table->jsonb(\'description\')->nullable();';
         }
 

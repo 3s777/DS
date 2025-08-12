@@ -4,9 +4,7 @@ namespace Domain\Game\Services;
 
 use Domain\Game\DTOs\FillGameMediaDTO;
 use Domain\Game\DTOs\FillGameMediaVariationDTO;
-use Domain\Game\Models\Game;
 use Domain\Game\Models\GameMedia;
-use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\HigherOrderTapProxy;
 use Support\Exceptions\CrudException;
@@ -17,7 +15,7 @@ class GameMediaService
 {
     private function createMainVariationDTO(GameMedia $gameMedia, FillGameMediaDTO $data): FillGameMediaVariationDTO
     {
-        if($gameMedia->getImages()) {
+        if ($gameMedia->getImages()) {
             $variationImages = array_map(function ($value) {
                 return(Storage::disk('images')->path($value));
             }, $gameMedia->getImages());
@@ -45,42 +43,42 @@ class GameMediaService
         return Transaction::run(
             function () use ($data) {
 
-            $gameMedia = GameMedia::create([
-                'name' => $data->name,
-                'slug' => $data->slug,
-                'released_at' => $data->released_at,
-                'user_id' => $data->user_id,
-                'description' => $data->description,
-                'alternative_names'  => explode('||', $data->alternative_names),
-                'barcodes'  => explode('||', $data->barcodes),
-                'article_number' => $data->article_number,
-            ]);
+                $gameMedia = GameMedia::create([
+                    'name' => $data->name,
+                    'slug' => $data->slug,
+                    'released_at' => $data->released_at,
+                    'user_id' => $data->user_id,
+                    'description' => $data->description,
+                    'alternative_names'  => explode('||', $data->alternative_names),
+                    'barcodes'  => explode('||', $data->barcodes),
+                    'article_number' => $data->article_number,
+                ]);
 
-            $gameMedia->addFeaturedImageWithThumbnail(
-                $data->featured_image,
-                ['small', 'medium']
-            );
+                $gameMedia->addFeaturedImageWithThumbnail(
+                    $data->featured_image,
+                    ['small', 'medium']
+                );
 
-            if ($data->images) {
-                foreach ($data->images as $key => $image) {
-                    $gameMedia->addImagesWithThumbnail(
-                        $image,
-                        ['small', 'medium'],
-                    );
+                if ($data->images) {
+                    foreach ($data->images as $key => $image) {
+                        $gameMedia->addImagesWithThumbnail(
+                            $image,
+                            ['small', 'medium'],
+                        );
+                    }
                 }
-            }
 
-            $gameMedia->games()->sync($data->games);
-            $gameMedia->genres()->sync($data->genres);
-            $gameMedia->platforms()->sync($data->platforms);
-            $gameMedia->developers()->sync($data->developers);
-            $gameMedia->publishers()->sync($data->publishers);
-            $gameMedia->kitItems()->sync($data->kit_items);
+                $gameMedia->games()->sync($data->games);
+                $gameMedia->genres()->sync($data->genres);
+                $gameMedia->platforms()->sync($data->platforms);
+                $gameMedia->developers()->sync($data->developers);
+                $gameMedia->publishers()->sync($data->publishers);
+                $gameMedia->kitItems()->sync($data->kit_items);
 
-            $variationService = new GameMediaVariationService();
-            $variationService->create($this->createMainVariationDTO($gameMedia, $data));
+                $variationService = new GameMediaVariationService();
+                $variationService->create($this->createMainVariationDTO($gameMedia, $data));
 
-            return $gameMedia;
+                return $gameMedia;
 
             },
             function (Throwable $e) {
@@ -94,39 +92,39 @@ class GameMediaService
         return Transaction::run(
             function () use ($gameMedia, $data) {
 
-            $gameMedia->updateFeaturedImage(
-                $data->featured_image,
-                $data->featured_image_uploaded,
-                ['small', 'medium']
-            );
+                $gameMedia->updateFeaturedImage(
+                    $data->featured_image,
+                    $data->featured_image_uploaded,
+                    ['small', 'medium']
+                );
 
-            $gameMedia->updateImages(
-                $data->images,
-                $data->images_delete,
-                ['small', 'medium']
-            );
+                $gameMedia->updateImages(
+                    $data->images,
+                    $data->images_delete,
+                    ['small', 'medium']
+                );
 
-            $gameMedia->fill(
-                [
-                    'name' => $data->name,
-                    'slug' => $data->slug,
-                    'released_at' => $data->released_at,
-                    'user_id' => $data->user_id ?? $gameMedia->user_id,
-                    'description' => $data->description,
-                    'alternative_names'  => explode('||', $data->alternative_names),
-                    'barcodes'  => explode('||', $data->barcodes),
-                    'article_number' => $data->article_number,
-                ]
-            )->save();
+                $gameMedia->fill(
+                    [
+                        'name' => $data->name,
+                        'slug' => $data->slug,
+                        'released_at' => $data->released_at,
+                        'user_id' => $data->user_id ?? $gameMedia->user_id,
+                        'description' => $data->description,
+                        'alternative_names'  => explode('||', $data->alternative_names),
+                        'barcodes'  => explode('||', $data->barcodes),
+                        'article_number' => $data->article_number,
+                    ]
+                )->save();
 
-            $gameMedia->games()->sync($data->games);
-            $gameMedia->genres()->sync($data->genres);
-            $gameMedia->platforms()->sync($data->platforms);
-            $gameMedia->developers()->sync($data->developers);
-            $gameMedia->publishers()->sync($data->publishers);
-            $gameMedia->kitItems()->sync($data->kit_items);
+                $gameMedia->games()->sync($data->games);
+                $gameMedia->genres()->sync($data->genres);
+                $gameMedia->platforms()->sync($data->platforms);
+                $gameMedia->developers()->sync($data->developers);
+                $gameMedia->publishers()->sync($data->publishers);
+                $gameMedia->kitItems()->sync($data->kit_items);
 
-            return $gameMedia;
+                return $gameMedia;
 
             },
             function (Throwable $e) {

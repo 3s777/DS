@@ -3,8 +3,8 @@
 namespace App\Console\Commands;
 
 use App\Console\BaseCommand;
-use Illuminate\Console\Command;
 use Illuminate\Contracts\Console\PromptsForMissingInput;
+
 use function Laravel\Prompts\text;
 use function Laravel\Prompts\confirm;
 
@@ -46,7 +46,7 @@ class MakeControllerCommand extends BaseCommand implements PromptsForMissingInpu
         ];
 
         $this->outputFilePath = base_path("app/Http/Controllers/$this->domain/Admin/{$this->model}Controller.php");
-        if($isMassDelete) {
+        if ($isMassDelete) {
             $this->setStubContent('base-admin-controller.mass-delete');
         } else {
             $this->setStubContent('base-admin-controller');

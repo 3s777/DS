@@ -17,7 +17,7 @@ class PageCategoryIndexViewModel extends ViewModel
                 'page_categories.created_at',
                 'page_categories.parent_id',
                 'users.name as user_name',
-//                'parent.name->ru as parent_name',
+                //                'parent.name->ru as parent_name',
             )
             ->leftJoin('users', 'users.id', '=', 'page_categories.user_id')
 //            ->leftJoin('page_categories as parent', 'parent.id', '=', 'page_categories.parent_id')

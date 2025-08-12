@@ -24,7 +24,7 @@ class GamePublisherSeederCommand extends BaseCommand implements PromptsForMissin
 
         ApiStagingData::query()
             ->where('data_type', 'game')
-            ->chunkById(100, function (Collection $games) use($publisherSeeder, $bar) {
+            ->chunkById(100, function (Collection $games) use ($publisherSeeder, $bar) {
                 foreach ($games as $game) {
                     if (isset($game['data']['publishers'])) {
                         foreach ($game['data']['publishers'] as $publisher) {

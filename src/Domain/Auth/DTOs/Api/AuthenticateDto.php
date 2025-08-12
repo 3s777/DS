@@ -12,8 +12,7 @@ final readonly class AuthenticateDto
         private string $email,
         #[SensitiveParameter]
         private string $password
-    )
-    {
+    ) {
         //
     }
 

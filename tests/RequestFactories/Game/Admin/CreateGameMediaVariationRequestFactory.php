@@ -3,7 +3,6 @@
 namespace Tests\RequestFactories\Game\Admin;
 
 use Domain\Game\Models\GameMedia;
-use Domain\Game\Observers\GameMediaVariationObserver;
 use Domain\Shelf\Models\KitItem;
 use Worksome\RequestFactories\RequestFactory;
 

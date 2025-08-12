@@ -3,7 +3,6 @@
 namespace Database\Factories\Shelf;
 
 use Domain\Auth\Models\User;
-use Domain\Game\Models\GameMedia;
 use Domain\Shelf\Contracts\Collectable;
 use Domain\Shelf\Enums\ConditionEnum;
 use Domain\Shelf\Enums\TargetEnum;
@@ -77,14 +76,14 @@ class CollectibleFactory extends Factory
 //                $className = Relation::getMorphedModel($attributes['collectable_type']);
 //                return $className::factory()->has(KitItem::factory(rand(1,3)));
 //            },
-            'mediable_type' => function(array $attributes) {
+            'mediable_type' => function (array $attributes) {
                 $collectable = $this->getCollectableModel(
                     $attributes['collectable_type'],
                     $attributes['collectable_id']
                 );
                 return $collectable->getMediableType();
             },
-            'mediable_id' => function(array $attributes) {
+            'mediable_id' => function (array $attributes) {
 
                 $collectable = $this->getCollectableModel(
                     $attributes['collectable_type'],

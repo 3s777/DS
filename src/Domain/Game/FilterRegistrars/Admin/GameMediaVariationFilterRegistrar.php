@@ -47,7 +47,7 @@ class GameMediaVariationFilterRegistrar implements FilterRegistrar
                 trans_choice('user.choose', 1)
             ),
             'is_main' => BooleanFilter::make(
-                trans_choice('common.main',1),
+                trans_choice('common.main', 1),
                 'is_main',
                 'game_media_variations',
                 'is_main'

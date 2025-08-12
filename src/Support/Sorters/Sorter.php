@@ -37,7 +37,7 @@ class Sorter
             $model = $query->getModel();
             $tableName = $model->getTable();
 
-            if(
+            if (
                 in_array(HasTranslations::class, class_uses($model))
                 && in_array($sortData['key']->value(), $model->translatable)
             ) {

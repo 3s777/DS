@@ -10,15 +10,14 @@ final readonly class CollectorsTransformer implements Arrayable
 {
     public function __construct(
         private Collector $collector
-    )
-    {
+    ) {
     }
 
     public function toArray(): array
     {
         return (new ApiData(
-           'collectors',
-           $this->collector->getKey(),
+            'collectors',
+            $this->collector->getKey(),
             [
                 'id' => $this->collector->getKey(),
                 'name' => $this->collector->name,

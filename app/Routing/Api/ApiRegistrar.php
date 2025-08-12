@@ -20,7 +20,7 @@ final class ApiRegistrar implements RouteRegistrar
             Route::post('/authenticate', [AuthenticateController::class, 'authenticate'])->name('authenticate');
             Route::delete('/authenticate', [AuthenticateController::class, 'logout'])->name('logout')->middleware('auth:jwt', TokenBlacklistMiddleware::class);
             Route::put('/authenticate', [AuthenticateController::class, 'refresh'])->name('refresh');
-//            Route::post('/register', AuthenticateController::class)->name('authenticate');
+            //            Route::post('/register', AuthenticateController::class)->name('authenticate');
             Route::get('/collectors', [CollectorsController::class, 'index'])
                 ->name('collectors.index')
                 ->middleware('auth:jwt', TokenBlacklistMiddleware::class);
@@ -30,9 +30,9 @@ final class ApiRegistrar implements RouteRegistrar
 
         });
 
-//        Route::get('/test-dump', function() {
-//            dump('Test message to Buggregator');
-//            dd(['test' => 'array']);
-//        });
+        //        Route::get('/test-dump', function() {
+        //            dump('Test message to Buggregator');
+        //            dd(['test' => 'array']);
+        //        });
     }
 }

@@ -3,9 +3,9 @@
 namespace App\Console\Commands;
 
 use App\Console\BaseCommand;
-use Illuminate\Console\Command;
 use Illuminate\Contracts\Console\PromptsForMissingInput;
 use Illuminate\Support\Facades\File;
+
 use function Laravel\Prompts\text;
 use function Laravel\Prompts\confirm;
 
@@ -52,7 +52,7 @@ class MakeServiceCommand extends BaseCommand implements PromptsForMissingInput
 
         $replace = array_merge($replace, $replaceImages);
 
-        if(!File::exists(base_path("src/Domain/$this->domain/Services"))) {
+        if (!File::exists(base_path("src/Domain/$this->domain/Services"))) {
             File::makeDirectory(base_path("src/Domain/$this->domain/Services"));
             File::makeDirectory(base_path("src/Domain/$this->domain/Services/Admin/"));
         }
@@ -71,22 +71,21 @@ class MakeServiceCommand extends BaseCommand implements PromptsForMissingInput
         bool $isDescription,
         bool $isUser,
         bool $isUpdate = false
-    ): string
-    {
+    ): string {
         $fields = "'name' => \$data->name,";
 
-        if($isSlug) {
+        if ($isSlug) {
             $fields .= "
                     'slug' => \$data->slug,";
         }
 
-        if($isDescription) {
+        if ($isDescription) {
             $fields .= "
                     'description' => \$data->description,";
         }
 
-        if($isUser) {
-            if($isUpdate) {
+        if ($isUser) {
+            if ($isUpdate) {
                 $fields .= "
                     'user_id' => \$data->user_id ?? \${$camelModel}->user_id,";
             } else {

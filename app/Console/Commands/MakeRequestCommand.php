@@ -3,8 +3,8 @@
 namespace App\Console\Commands;
 
 use App\Console\BaseCommand;
-use Illuminate\Console\Command;
 use Illuminate\Contracts\Console\PromptsForMissingInput;
+
 use function Laravel\Prompts\text;
 use function Laravel\Prompts\confirm;
 
@@ -53,7 +53,7 @@ class MakeRequestCommand extends BaseCommand implements PromptsForMissingInput
         $this->createFromStub($replace);
         $this->createFile();
 
-        if($withUpdate) {
+        if ($withUpdate) {
             $updateReplace = $this->makeUpdateReplace($modelNames, $replace, $isFeaturedImage, $isImages, $isSlug);
 
             $this->outputFilePath = base_path("app/Http/Requests/$this->domain/Admin/Update{$this->model}Request.php");
@@ -62,7 +62,7 @@ class MakeRequestCommand extends BaseCommand implements PromptsForMissingInput
             $this->createFile();
         }
 
-        if($isFilters) {
+        if ($isFilters) {
             $this->outputFilePath = base_path("app/Http/Requests/$this->domain/Admin/Filter{$this->model}Request.php");
             $this->setStubContent('base-admin-request.filters');
             $this->createFromStub($replace);
@@ -78,8 +78,7 @@ class MakeRequestCommand extends BaseCommand implements PromptsForMissingInput
         bool $isUser,
         bool $isFeaturedImage,
         bool $isImages
-    ): array
-    {
+    ): array {
         $requestName = "Create{$this->model}Request";
         $namespace = "App\Http\Requests\\$this->domain\Admin";
         $importModel = "use Domain\\$this->domain\Models\\$this->model;";

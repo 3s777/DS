@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
@@ -21,8 +22,8 @@ class DocumentationController extends Controller
             data: File::get(resource_path('openapi/v1_bundle.yaml')),
             json: true,
         );
-//        return Response::file(resource_path("openapi/v1.yaml"), [
-//            'Content-Type' => 'text/yaml',
-//        ]);
+        //        return Response::file(resource_path("openapi/v1.yaml"), [
+        //            'Content-Type' => 'text/yaml',
+        //        ]);
     }
 }

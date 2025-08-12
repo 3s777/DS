@@ -3,8 +3,6 @@
 namespace Database\Seeders\Api;
 
 use App\Models\ApiStagingData;
-use Illuminate\Database\Seeder;
-use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Http;
 
 class GameDeveloperToStagingSeeder extends BaseApiSeeder
@@ -14,26 +12,25 @@ class GameDeveloperToStagingSeeder extends BaseApiSeeder
      */
     public function run(int $page): void
     {
-            $response = Http::get($this->host . "/developers?key=$this->key&page=$page");
+        $response = Http::get($this->host . "/developers?key=$this->key&page=$page");
 
-            foreach ($response->json('results') as $developer) {
+        foreach ($response->json('results') as $developer) {
 
-                if (!ApiStagingData::where('data_id', $developer['id'])
-                    ->where('data_type', 'game_developer')
-                    ->exists())
-                {
-                    $response = Http::get($this->host . '/developers/' . $developer['id'] . '?key='.$this->key);
+            if (!ApiStagingData::where('data_id', $developer['id'])
+                ->where('data_type', 'game_developer')
+                ->exists()) {
+                $response = Http::get($this->host . '/developers/' . $developer['id'] . '?key='.$this->key);
 
-                    $currentDeveloper = $response->json();
-                    ApiStagingData::query()->firstOrCreate([
-                        'data' => $currentDeveloper,
-                        'data_id' => $developer['id'],
-                        'data_type' => 'game_developer'
-                    ]);
-                }
+                $currentDeveloper = $response->json();
+                ApiStagingData::query()->firstOrCreate([
+                    'data' => $currentDeveloper,
+                    'data_id' => $developer['id'],
+                    'data_type' => 'game_developer'
+                ]);
             }
+        }
 
-            sleep(2);
+        sleep(2);
 
     }
 
@@ -41,8 +38,7 @@ class GameDeveloperToStagingSeeder extends BaseApiSeeder
     {
         if (!ApiStagingData::query()->where('data_id', $id)
             ->where('data_type', 'game_developer')
-            ->exists())
-        {
+            ->exists()) {
             $response = Http::get($this->host . '/developers/' . $id . '?key='.$this->key);
 
             $currentDeveloper = $response->json();

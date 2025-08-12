@@ -3,8 +3,6 @@
 namespace Domain\Game\Observers;
 
 use Domain\Game\Models\GameMediaVariation;
-use Domain\Shelf\Enums\TargetEnum;
-use Domain\Shelf\Models\Category;
 
 class GameMediaVariationObserver
 {

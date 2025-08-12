@@ -20,7 +20,8 @@ class TokenBlacklistMiddleware
 
         if ($token && cache()->has('blacklist_token_' . $token)) {
             throw new AuthenticationException(
-                'Unauthenticated.', ['jwt']
+                'Unauthenticated.',
+                ['jwt']
             );
         }
 

@@ -15,21 +15,21 @@ trait HasSorters
             'sort' => $sortName
         ];
 
-//        $m = $this->getModels()->sortBy($field ?? $sortName);
-//
-//        $m2 = $this->getModels()->sortBy($field ?? $sortName)
-//            ->flatMap(fn ($item) => [$item->{$attribute ?? $sortName}])
-//            ->toArray();
-//
-//        foreach ($m as $s) {
-//            dump($s->name);
-//        }
-//        dump('Разделяем _______________');
-//        foreach ($m2 as $s) {
-//            dump($s);
-//        }
+        //        $m = $this->getModels()->sortBy($field ?? $sortName);
+        //
+        //        $m2 = $this->getModels()->sortBy($field ?? $sortName)
+        //            ->flatMap(fn ($item) => [$item->{$attribute ?? $sortName}])
+        //            ->toArray();
+        //
+        //        foreach ($m as $s) {
+        //            dump($s->name);
+        //        }
+        //        dump('Разделяем _______________');
+        //        foreach ($m2 as $s) {
+        //            dump($s);
+        //        }
 
-//        dump($this->getModels());
+        //        dump($this->getModels());
 
         $this->actingAs($this->getUser())
             ->get(action($this->getAction(), $request))

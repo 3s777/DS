@@ -8,7 +8,6 @@ use Spatie\ViewModels\ViewModel;
 
 class BookSearchFactory implements CategorySearchFactoryContract
 {
-
     public function view(): string
     {
         return 'book';

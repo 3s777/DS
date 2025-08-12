@@ -3,14 +3,14 @@
 namespace App\Console\Commands;
 
 use App\Console\BaseCommand;
-use Illuminate\Console\Command;
 use Illuminate\Contracts\Console\PromptsForMissingInput;
+
 use function Laravel\Prompts\text;
 use function Laravel\Prompts\confirm;
 
 class MakeModelCommand extends BaseCommand implements PromptsForMissingInput
 {
-//    protected $signature = 'ds:model {name} {--m|migration} {--f|factory}';
+    //    protected $signature = 'ds:model {name} {--m|migration} {--f|factory}';
     protected $signature = 'ds:model {name}';
 
     protected $description = 'New Model with Migration and Factory';
@@ -80,7 +80,7 @@ class MakeModelCommand extends BaseCommand implements PromptsForMissingInput
         $this->createFromStub($resultReplace);
         $this->createFile();
 
-        if($isMigration) {
+        if ($isMigration) {
             $this->call('ds:migration', [
                 'name' => $name,
                 '--is-child' => true,
@@ -95,7 +95,7 @@ class MakeModelCommand extends BaseCommand implements PromptsForMissingInput
             ]);
         }
 
-        if($isFactory) {
+        if ($isFactory) {
             $this->call('ds:factory', [
                 'name' => $name,
                 '--is-child' => true,
@@ -107,7 +107,7 @@ class MakeModelCommand extends BaseCommand implements PromptsForMissingInput
             ]);
         }
 
-        if($isController) {
+        if ($isController) {
             $this->call('ds:controller', [
                 'name' => $name,
                 '--is-child' => true,
@@ -117,7 +117,7 @@ class MakeModelCommand extends BaseCommand implements PromptsForMissingInput
             ]);
         }
 
-        if($isRequest) {
+        if ($isRequest) {
             $this->call('ds:request', [
                 'name' => $name,
                 '--is-child' => true,
@@ -132,7 +132,7 @@ class MakeModelCommand extends BaseCommand implements PromptsForMissingInput
             ]);
         }
 
-        if($isDTO) {
+        if ($isDTO) {
             $this->call('ds:dto', [
                 'name' => $name,
                 '--is-child' => true,
@@ -145,7 +145,7 @@ class MakeModelCommand extends BaseCommand implements PromptsForMissingInput
             ]);
         }
 
-        if($isViewModels) {
+        if ($isViewModels) {
             $this->call('ds:vmodel', [
                 'name' => $name,
                 '--is-child' => true,
@@ -155,7 +155,7 @@ class MakeModelCommand extends BaseCommand implements PromptsForMissingInput
             ]);
         }
 
-        if($isService) {
+        if ($isService) {
             $this->call('ds:service', [
                 'name' => $name,
                 '--is-child' => true,
@@ -168,7 +168,7 @@ class MakeModelCommand extends BaseCommand implements PromptsForMissingInput
             ]);
         }
 
-        if($isViews) {
+        if ($isViews) {
             $this->call('ds:views', [
                 'name' => $name,
                 '--is-child' => true,
@@ -183,7 +183,7 @@ class MakeModelCommand extends BaseCommand implements PromptsForMissingInput
             ]);
         }
 
-        if($isFilters) {
+        if ($isFilters) {
             $this->call('ds:filter-registrar', [
                 'name' => $name,
                 '--is-child' => true,
@@ -198,7 +198,7 @@ class MakeModelCommand extends BaseCommand implements PromptsForMissingInput
             ]);
         }
 
-        if($isTests) {
+        if ($isTests) {
             $this->call('ds:tests', [
                 'name' => $name,
                 '--is-child' => true,
@@ -255,18 +255,18 @@ class MakeModelCommand extends BaseCommand implements PromptsForMissingInput
         ];
     }
 
-    private function makeSlug(bool $isSlug = false):array
+    private function makeSlug(bool $isSlug = false): array
     {
         $importSlugTrait = $isSlug ? "use Support\Traits\Models\HasSlug;" : "";
         $slugTrait = $isSlug ? "use HasSlug;" : "";
 
         return [
             '{{ importSlugTrait }}' => $importSlugTrait,
-            '{{ slugTrait }}' =>$slugTrait,
+            '{{ slugTrait }}' => $slugTrait,
         ];
     }
 
-    private function makeImportFactory(bool $isFactory = false):array
+    private function makeImportFactory(bool $isFactory = false): array
     {
         $importFactoryTrait = $isFactory ? "use Illuminate\Database\Eloquent\Factories\HasFactory;" : "";
         $factoryTrait = $isFactory ? "use HasFactory;" : "";
@@ -332,11 +332,10 @@ class MakeModelCommand extends BaseCommand implements PromptsForMissingInput
 
     private function makeClass(
         bool $isFeaturedImage = false
-    ): string
-    {
+    ): string {
         $class = "class $this->model extends Model";
 
-        if($isFeaturedImage) {
+        if ($isFeaturedImage) {
             $class .= " implements HasMedia";
         }
 
@@ -350,33 +349,32 @@ class MakeModelCommand extends BaseCommand implements PromptsForMissingInput
         bool $isFeaturedImage = false,
         bool $isImages = false,
         bool $isUser = false
-    ): string
-    {
+    ): string {
         $fillable = "protected \$fillable = [
         'name',";
 
-        if($isSlug) {
-            $fillable.= "
+        if ($isSlug) {
+            $fillable .= "
         'slug',";
         }
 
-        if($isDescription) {
-            $fillable.= "
+        if ($isDescription) {
+            $fillable .= "
         'description',";
         }
 
-        if($isUser) {
-            $fillable.= "
+        if ($isUser) {
+            $fillable .= "
         'user_id',";
         }
 
-        if($isFeaturedImage) {
-            $fillable.= "
+        if ($isFeaturedImage) {
+            $fillable .= "
         'featured_image',";
         }
 
-        if($isImages) {
-            $fillable.= "
+        if ($isImages) {
+            $fillable .= "
         'images',";
         }
 
@@ -390,12 +388,12 @@ class MakeModelCommand extends BaseCommand implements PromptsForMissingInput
     {
         $casts = "protected \$casts = [";
 
-        if($isDescription) {
+        if ($isDescription) {
             $casts .= "
         'description' => CleanHtml::class.':custom',";
         }
 
-        if($isImages) {
+        if ($isImages) {
             $casts .= "
         'images' => 'array',";
         }

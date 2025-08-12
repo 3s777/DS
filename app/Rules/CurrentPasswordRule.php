@@ -21,7 +21,7 @@ class CurrentPasswordRule implements ValidationRule
      */
     public function validate(string $attribute, mixed $value, Closure $fail): void
     {
-        if($value) {
+        if ($value) {
             if (!Hash::check($value, $this->user->password)) {
                 $fail('auth.error.credentials')->translate();
             }

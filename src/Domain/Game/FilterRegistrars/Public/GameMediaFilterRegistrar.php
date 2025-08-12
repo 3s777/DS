@@ -4,10 +4,8 @@ namespace Domain\Game\FilterRegistrars\Public;
 
 use App\Contracts\FilterRegistrar;
 use App\Filters\DatesFilter;
-use App\Filters\RelationFilter;
 use App\Filters\RelationMultipleFilter;
 use App\Filters\SearchFilter;
-use Domain\Auth\Models\User;
 use Domain\Game\Models\Game;
 use Domain\Game\Models\GameDeveloper;
 use Domain\Game\Models\GameGenre;

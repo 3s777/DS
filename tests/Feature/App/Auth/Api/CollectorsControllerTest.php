@@ -18,12 +18,12 @@ final class CollectorsControllerTest extends TestCase
 
         Collector::factory(2)->create();
 
-//        $this->withToken($token)->getJson(
-//            route('api.collectors.index')
-//        );
+        //        $this->withToken($token)->getJson(
+        //            route('api.collectors.index')
+        //        );
 
-//        dd($this->withToken($token)
-//            ->getJson(route('api.collectors.index')));
+        //        dd($this->withToken($token)
+        //            ->getJson(route('api.collectors.index')));
 
         $response = $this->withToken($token)
             ->getJson(route('api.collectors.index'));

@@ -28,7 +28,7 @@ class GameMediaVariationController extends Controller
 {
     public function __construct()
     {
-//        $this->authorizeResource(GameMediaVariation::class, 'game_media_variation');
+        //        $this->authorizeResource(GameMediaVariation::class, 'game_media_variation');
     }
 
     public function index(FilterGameMediaVariationRequest $request): View|Application|Factory|\Illuminate\Contracts\Foundation\Application
@@ -124,11 +124,11 @@ class GameMediaVariationController extends Controller
 
     public function getForSelectByMedia(Request $request): AsyncSelectAllViewModel
     {
-//        return new AsyncSelectByQueryViewModel(
-//            $request->input('query'),
-//            GameMediaVariation::class,
-//            trans_choice('collectible.variation.choose', 2)
-//        );
+        //        return new AsyncSelectByQueryViewModel(
+        //            $request->input('query'),
+        //            GameMediaVariation::class,
+        //            trans_choice('collectible.variation.choose', 2)
+        //        );
 
 
 

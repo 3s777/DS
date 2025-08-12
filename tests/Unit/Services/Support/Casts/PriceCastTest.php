@@ -10,7 +10,6 @@ use Domain\Game\Models\GameMedia;
 use Domain\Game\Models\GameMediaVariation;
 use Domain\Shelf\Models\Category;
 use Domain\Shelf\Models\Collectible;
-use Domain\Trade\Enums\ShippingEnum;
 use Illuminate\Database\Eloquent\Relations\Relation;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Support\ValueObjects\PriceValueObject;

@@ -3,9 +3,9 @@
 namespace App\Console\Commands;
 
 use App\Console\BaseCommand;
-use Illuminate\Console\Command;
 use Illuminate\Contracts\Console\PromptsForMissingInput;
 use Illuminate\Support\Facades\File;
+
 use function Laravel\Prompts\text;
 use function Laravel\Prompts\confirm;
 
@@ -49,7 +49,7 @@ use App\Filters\RelationFilter;" : "";
             "{{ user }}" => $user
         ];
 
-        if(!File::exists(base_path("src/Domain/$this->domain/FilterRegistrars"))) {
+        if (!File::exists(base_path("src/Domain/$this->domain/FilterRegistrars"))) {
             File::makeDirectory(base_path("src/Domain/$this->domain/FilterRegistrars"));
         }
 

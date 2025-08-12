@@ -5,9 +5,6 @@ namespace Domain\Auth\Services;
 use Domain\Auth\DTOs\FillRoleDTO;
 use Domain\Auth\Exceptions\UserCreateEditException;
 use Domain\Auth\Models\Role;
-use Domain\Shelf\DTOs\FillCategoryDTO;
-use Domain\Shelf\Models\Category;
-use Support\Exceptions\CrudException;
 use Support\Transaction;
 use Throwable;
 
@@ -27,7 +24,7 @@ class RoleService
 
                 $permissions = $data->permissions_admin;
 
-                if($role->guard_name === 'collector') {
+                if ($role->guard_name === 'collector') {
                     $permissions = $data->permissions_collector;
                 }
 
@@ -63,7 +60,7 @@ class RoleService
 
                 $permissions = $data->permissions_admin;
 
-                if($role->guard_name === 'collector') {
+                if ($role->guard_name === 'collector') {
                     $permissions = $data->permissions_collector;
                 }
 

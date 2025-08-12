@@ -8,8 +8,7 @@ class RefreshTokenAction
 {
     public function __construct(
         private JWT $jwt,
-    )
-    {
+    ) {
     }
 
     public function handle(string $refreshToken): ?array

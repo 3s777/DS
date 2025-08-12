@@ -58,7 +58,7 @@ class BaseCommand extends Command
 
     protected function createFile()
     {
-        (new Filesystem)->put(
+        (new Filesystem())->put(
             $this->outputFilePath,
             $this->stubContent
         );
@@ -66,7 +66,7 @@ class BaseCommand extends Command
 
     protected function setStubContent(string $stubName): string
     {
-        $this->stubContent = (new Filesystem)->get(base_path('stubs/'.$stubName.'.stub'));
+        $this->stubContent = (new Filesystem())->get(base_path('stubs/'.$stubName.'.stub'));
         return $this->stubContent;
     }
 }

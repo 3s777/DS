@@ -56,20 +56,20 @@ class AuthCollectorRegistrar implements RouteRegistrar
                     ->whereIn('locale', config('app.available_locales'))
                     ->controller(ProfileController::class)
                     ->middleware('auth:collector')
-                    ->group(function() {
-                    Route::get('/profile', 'show')->name('profile');
-                    Route::get('/profile/settings', 'settings')->name('profile.settings');
-                    Route::put('/profile/settings', 'updateSettings')->name('profile.settings.update');
-                    Route::get('/profile/confidential', 'confidential')->name('profile.confidential');
-                    Route::delete('/profile/delete', 'delete')->name('profile.delete');
-                });
+                    ->group(function () {
+                        Route::get('/profile', 'show')->name('profile');
+                        Route::get('/profile/settings', 'settings')->name('profile.settings');
+                        Route::put('/profile/settings', 'updateSettings')->name('profile.settings.update');
+                        Route::get('/profile/confidential', 'confidential')->name('profile.confidential');
+                        Route::delete('/profile/delete', 'delete')->name('profile.delete');
+                    });
 
                 Route::prefix('{locale}')
                     ->whereIn('locale', config('app.available_locales'))
                     ->controller(PublicCollectorController::class)
 //                    ->middleware('auth:collector')
                     ->middleware(['remove.locale'])
-                    ->group(function() {
+                    ->group(function () {
                         Route::get('/collectors', 'index')->name('collectors');
                         Route::get('/collector/{collector}', 'show')->name('collector');
                         Route::get('/collector/{collector}/collection', 'showCollection')->name('collector.collection');

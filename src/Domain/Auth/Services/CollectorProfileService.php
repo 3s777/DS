@@ -7,7 +7,6 @@ use Domain\Auth\Exceptions\UserCreateEditException;
 use Domain\Auth\Models\Collector;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\HigherOrderTapProxy;
-use Support\Exceptions\CrudException;
 use Support\Transaction;
 use Throwable;
 
@@ -15,7 +14,8 @@ class CollectorProfileService
 {
     public function update(UpdateCollectorProfileDTO $data): Collector|HigherOrderTapProxy
     {
-        return Transaction::run(function () use ($data) {
+        return Transaction::run(
+            function () use ($data) {
 
                 $collector = auth('collector')->user();
 

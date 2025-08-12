@@ -2,7 +2,6 @@
 
 namespace App\Http\Requests\Shelf\Admin;
 
-use Domain\Game\Models\GameMedia;
 use Domain\Game\Models\GameMediaVariation;
 use Domain\Shelf\Enums\ConditionEnum;
 use Domain\Shelf\Enums\TargetEnum;

@@ -3,8 +3,8 @@
 namespace App\Console\Commands;
 
 use App\Console\BaseCommand;
-use Illuminate\Console\Command;
 use Illuminate\Contracts\Console\PromptsForMissingInput;
+
 use function Laravel\Prompts\{confirm, text};
 
 class MakeFactoryCommand extends BaseCommand implements PromptsForMissingInput
@@ -51,8 +51,7 @@ class MakeFactoryCommand extends BaseCommand implements PromptsForMissingInput
         bool $isDescription,
         bool $isUser,
         bool $isTranslatable
-    ): array
-    {
+    ): array {
         $factoryNamespace = "Database\Factories\\$this->domain";
         $factoryModel = "protected \$model = $this->model::class;";
         $namespacedModel = "Domain\\$this->domain\Models\\$this->model";
@@ -80,32 +79,31 @@ class MakeFactoryCommand extends BaseCommand implements PromptsForMissingInput
         bool $isDescription = false,
         bool $isUser = false,
         bool $isTranslatable = false,
-    ): string
-    {
+    ): string {
         $definition = "public function definition(): array
     {
         return [";
 
-        if($jsonName) {
-            $definition.= "
+        if ($jsonName) {
+            $definition .= "
             'name' => \$this->translations(['en', 'ru'], [fake()->name(), fake()->name()]),";
         } else {
-            $definition.= "
+            $definition .= "
             'name' => fake()->name(),";
         }
 
-        if($isDescription && $isTranslatable) {
-            $definition.= "
+        if ($isDescription && $isTranslatable) {
+            $definition .= "
             'description' => \$this->translations(['en', 'ru'], [fake()->text(), fake()->text()]),";
         }
 
-        if($isDescription && !$isTranslatable) {
-            $definition.= "
+        if ($isDescription && !$isTranslatable) {
+            $definition .= "
             'description' => fake()->text(200),";
         }
 
-        if($isUser) {
-            $definition.= "
+        if ($isUser) {
+            $definition .= "
             'user_id' => User::factory(),";
         }
 

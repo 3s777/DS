@@ -3,11 +3,11 @@
 namespace App\Console\Commands;
 
 use App\Console\BaseCommand;
-use Illuminate\Console\Command;
 use Illuminate\Contracts\Console\PromptsForMissingInput;
+use Illuminate\Support\Facades\File;
+
 use function Laravel\Prompts\text;
 use function Laravel\Prompts\confirm;
-use Illuminate\Support\Facades\File;
 
 class MakeTestsCommand extends BaseCommand implements PromptsForMissingInput
 {
@@ -45,7 +45,7 @@ class MakeTestsCommand extends BaseCommand implements PromptsForMissingInput
             "{{ databaseModel }}" => $modelNames['databaseModel']
         ];
 
-        if(!File::exists(base_path("tests/Feature/App/$this->domain/"))) {
+        if (!File::exists(base_path("tests/Feature/App/$this->domain/"))) {
             File::makeDirectory(base_path("tests/Feature/App/$this->domain"));
             File::makeDirectory(base_path("tests/Feature/App/$this->domain/Controllers"));
             File::makeDirectory(base_path("tests/Feature/App/$this->domain/DTOs"));
@@ -68,7 +68,7 @@ class MakeTestsCommand extends BaseCommand implements PromptsForMissingInput
         $this->createFromStub($replace);
         $this->createFile();
 
-        if($isFilters) {
+        if ($isFilters) {
             $this->outputFilePath = base_path("tests/Feature/App/$this->domain/Controllers/{$this->model}FilterTest.php");
             $this->setStubContent('tests/filter');
             $this->createFromStub($replace);

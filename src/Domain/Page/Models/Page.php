@@ -1,4 +1,5 @@
 <?php
+
 namespace Domain\Page\Models;
 
 use Database\Factories\Page\PageFactory;

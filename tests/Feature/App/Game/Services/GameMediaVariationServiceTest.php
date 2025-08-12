@@ -2,7 +2,6 @@
 
 namespace App\Game\Services;
 
-use App\Http\Requests\Auth\Admin\CreateAdminRequest;
 use App\Http\Requests\Game\Admin\CreateGameMediaVariationRequest;
 use App\Jobs\GenerateSmallThumbnailsJob;
 use App\Jobs\GenerateThumbnailJob;
@@ -106,7 +105,7 @@ class GameMediaVariationServiceTest extends TestCase
 
         $this->assertSame($updatedGameMediaVariation->slug, $this->request['slug']);
         $this->assertSame($updatedGameMediaVariation->description, $this->request['description']);
-        $this->assertSame($updatedGameMediaVariation->barcodes, explode('||',$this->request['barcodes']));
+        $this->assertSame($updatedGameMediaVariation->barcodes, explode('||', $this->request['barcodes']));
         $this->assertSame($updatedGameMediaVariation->gameMedia->id, $this->request['game_media_id']);
 
         Queue::assertPushed(GenerateThumbnailJob::class, 3);

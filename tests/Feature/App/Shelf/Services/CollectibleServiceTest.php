@@ -7,7 +7,6 @@ use App\Jobs\GenerateSmallThumbnailsJob;
 use App\Jobs\GenerateThumbnailJob;
 use Domain\Auth\Models\Collector;
 use Domain\Auth\Models\User;
-use Domain\Game\Models\GameMedia;
 use Domain\Game\Models\GameMediaVariation;
 use Domain\Settings\Models\Country;
 use Domain\Shelf\DTOs\FillCollectibleDTO;

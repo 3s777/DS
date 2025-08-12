@@ -15,7 +15,7 @@ class MediaLibraryImageManager implements ImagesManager
 
     public function add(string|UploadedFile $image, ?string $collectionName): string
     {
-        if(is_string($image)) {
+        if (is_string($image)) {
             $media = $this->model->addMedia($image)
                 ->preservingOriginal()
                 ->toMediaCollection($collectionName, $this->model->getStorageDisk());

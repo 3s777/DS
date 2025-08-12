@@ -16,8 +16,7 @@ abstract class ApiResponse implements Responsable, Arrayable
 
     public function __construct(
         private readonly ResponseFactory $response
-    )
-    {
+    ) {
     }
 
     abstract public function type(): string;

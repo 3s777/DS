@@ -23,9 +23,9 @@ class ShelfRegistrar extends BaseRouteRegistrar implements RouteRegistrar
                     Route::controller(PublicCategoryController::class)
                         ->middleware(['remove.locale'])
                         ->group(function () {
-                        Route::get('/category/{category}', 'show')->name('category.show');
-                        Route::get('/category/{category}/variations', 'variations')->name('category.variations');
-                    });
+                            Route::get('/category/{category}', 'show')->name('category.show');
+                            Route::get('/category/{category}/variations', 'variations')->name('category.variations');
+                        });
                 });
 
                 Route::as('admin.')->prefix('{locale}')

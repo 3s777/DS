@@ -4,7 +4,6 @@ namespace App\Game\DTOs;
 
 use App\Http\Requests\Game\Admin\CreateGameMediaRequest;
 use App\Http\Requests\Game\Admin\CreateGameMediaVariationRequest;
-use Domain\Game\DTOs\FillGameMediaDTO;
 use Domain\Game\DTOs\FillGameMediaVariationDTO;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;

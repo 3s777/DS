@@ -11,7 +11,6 @@ use TypeError;
 
 class AuctionValueObjectTest extends TestCase
 {
-
     public function test_all(): void
     {
         $auction = AuctionValueObject::make(

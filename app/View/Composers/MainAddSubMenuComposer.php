@@ -7,7 +7,7 @@ use App\Menu\MenuItem;
 use Domain\Shelf\Models\Category;
 use Illuminate\View\View;
 
-final class  MainAddSubMenuComposer
+final class MainAddSubMenuComposer
 {
     public function compose(View $view): void
     {

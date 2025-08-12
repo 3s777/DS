@@ -4,7 +4,7 @@ namespace Support\Enums;
 
 enum ApiErrorCode: string
 {
-    case  TOKEN_EXPIRED = 'token_expired';
+    case TOKEN_EXPIRED = 'token_expired';
 
     case TOKEN_INVALID = 'token_invalid';
 

@@ -17,7 +17,7 @@ class OpenApiBuildCommand extends Command
 
         $yamlData = Yaml::dump($data, 10, 2);
 
-        (new Filesystem)->put(
+        (new Filesystem())->put(
             resource_path('openapi/v1_build.yaml'),
             $yamlData
         );
@@ -103,11 +103,11 @@ class OpenApiBuildCommand extends Command
 
     private function generateFile(string $path, string $content, bool $replace = true): void
     {
-        if(!$replace && File::exists($path)) {
+        if (!$replace && File::exists($path)) {
             return;
         }
 
-        if(!File::exists(dirname($path))) {
+        if (!File::exists(dirname($path))) {
             File::makeDirectory(dirname($path), recursive: true);
         }
 
@@ -134,7 +134,7 @@ class OpenApiBuildCommand extends Command
 
             $prefix = $name;
 
-            if(strtolower($parameters['method']) !== 'index' && strtolower($name) !== strtolower($parameters['method'])) {
+            if (strtolower($parameters['method']) !== 'index' && strtolower($name) !== strtolower($parameters['method'])) {
                 $prefix = $parameters['method'] === '__invoke' ? $name : ($name . ucfirst($parameters['method']));
             }
 
@@ -161,7 +161,7 @@ class OpenApiBuildCommand extends Command
 
             $uses[] = 'use App\\Http\\Responses\\Api\\' . $prefix . 'Responder;';
 
-            if($parameters['withFormRequest']) {
+            if ($parameters['withFormRequest']) {
                 $this->generateFile(
                     app_path('Dto/' . $prefix . 'Dto.php'),
                     $this->makeStub('dto', [

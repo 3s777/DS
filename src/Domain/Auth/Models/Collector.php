@@ -35,7 +35,6 @@ use Support\Traits\Models\HasFeaturedImage;
 use Support\Traits\Models\HasImage;
 use Support\Traits\Models\HasSlug;
 
-
 class Collector extends Authenticatable implements MustVerifyEmail, HasLocalePreference, HasMedia, Auditable
 {
     use HasApiTokens;
@@ -94,7 +93,7 @@ class Collector extends Authenticatable implements MustVerifyEmail, HasLocalePre
     protected function username(): Attribute
     {
         return Attribute::make(
-            get: fn() => '@'.$this->name
+            get: fn () => '@'.$this->name
         );
     }
 

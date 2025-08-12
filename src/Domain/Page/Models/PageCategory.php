@@ -4,7 +4,6 @@ namespace Domain\Page\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
-use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Support\Traits\Models\HasSlug;
 use Spatie\Translatable\HasTranslations;
@@ -13,7 +12,6 @@ use Database\Factories\Page\PageCategoryFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Domain\Auth\Models\User;
 use Support\Traits\Models\HasUser;
-
 use Illuminate\Database\Eloquent\Model;
 
 class PageCategory extends Model

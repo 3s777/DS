@@ -6,7 +6,6 @@ use App\Contracts\RouteRegistrar;
 use App\Http\Controllers\Page\Admin\PageCategoryController;
 use App\Http\Controllers\Page\Admin\PageController;
 use App\Http\Controllers\Page\Public\RulesController;
-use App\Http\Controllers\Page\Public\RulesController as PublicPageController;
 use Illuminate\Contracts\Routing\Registrar;
 use Illuminate\Support\Facades\Route;
 
@@ -32,7 +31,7 @@ class PageRegistrar extends BaseRouteRegistrar implements RouteRegistrar
                     ->whereIn('locale', config('app.available_locales'))
                     ->middleware(['remove.locale'])
                     ->controller(RulesController::class)
-                    ->group(function() {
+                    ->group(function () {
                         Route::get('/rules/{page}', 'show')->name('rules.show');
                         Route::get('/qa', 'qa')->name('qa');
                     });

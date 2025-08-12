@@ -11,9 +11,9 @@ use Domain\Auth\Models\User;
  */
 class PageCategoryFactory extends Factory
 {
-     protected $model = PageCategory::class;
+    protected $model = PageCategory::class;
 
-     public function definition(): array
+    public function definition(): array
     {
         return [
             'name' => $this->translations(['en', 'ru'], [fake()->name(), fake()->name()]),

@@ -16,7 +16,6 @@ use Illuminate\Foundation\Application;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Routing\Redirector;
 
-
 class PageCategoryController extends Controller
 {
     public function __construct()

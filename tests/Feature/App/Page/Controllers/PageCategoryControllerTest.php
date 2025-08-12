@@ -174,5 +174,3 @@ class PageCategoryControllerTest extends TestCase
         ]);
     }
 }
-
-

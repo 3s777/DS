@@ -10,8 +10,7 @@ final readonly class ApiData implements Arrayable
         private string $type,
         private int|string $id,
         private array $attributes
-    )
-    {
+    ) {
     }
 
     public function getType(): string

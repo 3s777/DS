@@ -9,7 +9,6 @@ use Spatie\ViewModels\ViewModel;
 
 class GameMediaSearchFactory implements CategorySearchFactoryContract
 {
-
     public function view(): string
     {
         return 'content.category.game.index';
