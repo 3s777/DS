@@ -3,7 +3,7 @@
     'action' => request()->url()
 ])
 
-<x-ui.form action="{{ $action }}" :get="true">
+<x-ui.form action="{{ $action }}" {{ $attributes }} :get="true">
     @if(request('sort'))
         <input name="sort" type="hidden" value="{{ request('sort') }}">
         <input name="order" type="hidden" value="{{ request('order') }}">

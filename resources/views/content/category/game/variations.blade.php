@@ -1,4 +1,7 @@
-<x-layouts.main title="Search" filters="content.category.game.filters" :search-placeholder="__('game.media.search')">
+<x-layouts.main
+    title="Search"
+    filters="content.category.game.filters"
+    :search-placeholder="__('game.media.search')">
 
     <x-slot:mainFilters>
         @include('content.category.game.filters-variation')

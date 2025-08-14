@@ -39,10 +39,29 @@
     @push('scripts')
         <script>
             document.addEventListener('alpine:init', () => {
-                Alpine.store('filtersSearchValue', '{{ request('filters.search') }}');
                 Alpine.store('mainFilters', {
-                    hide: true,
-                });
+                        hide: true,
+                        value: '{{ request('filters.search') }}',
+                        defaultAction: '{{ request()->url() }}',
+                        selectedMediaType: '',
+                        getFiltersAction() {
+                            console.log(`${this.defaultAction}/${this.selectedMediaType.value}`);
+                            return this.selectedMediaType
+                                ? `${this.defaultAction}/${this.selectedMediaType.value}`
+                                : this.defaultAction;
+                        }
+                    }
+                );
+                Alpine.store('filtersSearchValue', '{{ request('filters.search') }}');
+                // Alpine.store('filtersMediaType', {
+                //     currentAction: '',
+                //     setAction(action) {
+                //         this.currentAction = action;
+                //     }
+                // });
+                // Alpine.store('mainFilters', {
+                //     hide: true,
+                // });
             })
         </script>
     @endpush

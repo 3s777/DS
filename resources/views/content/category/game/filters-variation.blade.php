@@ -1,5 +1,5 @@
-<x-common.filters.form>
-        <x-grid.col xl="3" lg="4"  md="6" sm="12">
+<x-common.filters.form x-bind:action="$store.mainFilters.getFiltersAction()">
+        <x-grid.col xl="3" lg="4" md="6" sm="12">
             <x-ui.form.group>
                 <x-common.filters.dates />
             </x-ui.form.group>
