@@ -6,6 +6,7 @@ use Domain\Game\ViewModels\Public\GameMediaIndexViewModel;
 use Domain\Game\ViewModels\Public\GameVariationsIndexViewModel;
 use Domain\Shelf\Contracts\CategorySearchFactoryContract;
 use Spatie\ViewModels\ViewModel;
+use Domain\Shelf\Models\Category;
 
 class GameMediaSearchFactory implements CategorySearchFactoryContract
 {
@@ -19,13 +20,13 @@ class GameMediaSearchFactory implements CategorySearchFactoryContract
         return 'content.category.game.variations';
     }
 
-    public function data(): ViewModel
+    public function data(Category $category): ViewModel
     {
-        return new GameMediaIndexViewModel();
+        return new GameMediaIndexViewModel($category);
     }
 
-    public function variations(): GameVariationsIndexViewModel
+    public function variations(Category $category): GameVariationsIndexViewModel
     {
-        return new GameVariationsIndexViewModel();
+        return new GameVariationsIndexViewModel($category);
     }
 }

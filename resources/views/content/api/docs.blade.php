@@ -1,4 +1,4 @@
-<x-layouts.main title="Api Documentation v1" :search="false">
+<x-layouts.main :search="false">
     <x-grid.container>
         <x-ui.title indent="normal">
             Api Documentation v1

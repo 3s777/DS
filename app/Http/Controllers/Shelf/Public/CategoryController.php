@@ -20,7 +20,7 @@ class CategoryController extends Controller
            'model' => $category->model
         ]);
 
-        return view($factory->view(), $factory->data());
+        return view($factory->view(), $factory->data($category));
     }
 
     public function variations(Request $request, Category $category)
@@ -29,7 +29,7 @@ class CategoryController extends Controller
             'model' => $category->model
         ]);
 
-        return view($factory->viewVariations(), $factory->variations());
+        return view($factory->viewVariations(), $factory->variations($category));
     }
 
 }

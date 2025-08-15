@@ -3,13 +3,21 @@
 namespace Domain\Game\ViewModels\Public;
 
 use Domain\Game\Models\GameMediaVariation;
+use Domain\Shelf\Models\Category;
 use Spatie\ViewModels\ViewModel;
 
 class GameVariationsIndexViewModel extends ViewModel
 {
-    public function __construct()
+    public Category $category;
+
+    public function __construct(Category $category = null)
     {
-        //
+        $this->category = $category;
+    }
+
+    public function category(): Category
+    {
+        return $this->category;
     }
 
     public function variations()

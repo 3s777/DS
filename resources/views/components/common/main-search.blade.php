@@ -1,6 +1,8 @@
-@aware([
+@props([
     'searchPlaceholder' => __('common.default_search_placeholder'),
-    'hideFilters' => false
+    'hideFilters' => false,
+    'mediaRoute' => false,
+    'variationRoute' => false
 ])
 
 <div
@@ -21,18 +23,18 @@
 
                 <x-libraries.choices
                     x-model="$store.mainFilters.selectedMediaType"
-                    @change="$store.mainFilters.getFiltersAction()"
+{{--                    @change="$store.mainFilters.getFiltersAction()"--}}
                     class="media-type"
                     id="media-type"
                     name="filters[media-type-search]"
                     error="media-type">
 
                     <x-ui.form.option
-                        value="">
+                        value="{{ $mediaRoute }}">
                         По носителю
                     </x-ui.form.option>
                     <x-ui.form.option
-                        value="variations">
+                        value="{{ $variationRoute }}">
                         По вариации
                     </x-ui.form.option>
                 </x-libraries.choices>

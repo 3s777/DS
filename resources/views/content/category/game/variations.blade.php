@@ -1,7 +1,11 @@
-<x-layouts.main
-    title="Search"
-    filters="content.category.game.filters"
-    :search-placeholder="__('game.media.search')">
+<x-layouts.main>
+    <x-slot:search>
+        <x-common.main-search
+            :search-placeholder="__('game.media.search')"
+            :media-route="route('category.show', ['category' => $category->slug])"
+            :variation-route="route('category.variations', ['category' => $category->slug])"
+        />
+    </x-slot:search>
 
     <x-slot:mainFilters>
         @include('content.category.game.filters-variation')

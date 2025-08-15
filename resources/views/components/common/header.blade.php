@@ -1,5 +1,5 @@
 @aware([
-    'search' => true,
+    'search' => false,
 ])
 
 <header class="header" x-data>
@@ -25,8 +25,14 @@
             </div>
 
             @if($search)
-                <x-common.main-search class="header__search" />
+                <div class="header__search">
+                    {{ $search }}
+                </div>
             @endif
+
+{{--            @if($search)--}}
+{{--                <x-common.main-search class="header__search" />--}}
+{{--            @endif--}}
         </div>
     </div>
 </header>
@@ -47,7 +53,7 @@
                         getFiltersAction() {
                             console.log(`${this.defaultAction}/${this.selectedMediaType.value}`);
                             return this.selectedMediaType
-                                ? `${this.defaultAction}/${this.selectedMediaType.value}`
+                                ? this.selectedMediaType.value
                                 : this.defaultAction;
                         }
                     }

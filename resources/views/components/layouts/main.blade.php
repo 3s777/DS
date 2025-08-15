@@ -1,7 +1,6 @@
 @props([
     'title' => '',
-    'search' => true,
-    'searchPlaceholder' => false,
+    'search' => false,
     'mainFilters' => false,
     'hideFilters' => false
 ])
@@ -16,6 +15,12 @@
     </head>
     <body class="body {{ session()->get('color.theme') }}">
         <x-common.header>
+            @if($search)
+                <x-slot:search>
+                    {{ $search }}
+                </x-slot:search>
+            @endif
+
             @if(!$hideFilters)
                 <x-common.main-filters>
                     {{ $mainFilters }}
