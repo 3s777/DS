@@ -4,6 +4,7 @@
     &__form {
         display: flex;
         justify-content: space-between;
+        align-items: center;
         padding: 13px 16px 13px 20px;
         border: 2px solid transparent;
         border-radius: $small-border-radius;

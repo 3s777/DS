@@ -10,6 +10,10 @@ use Domain\Shelf\Models\Category;
 
 class GameMediaSearchFactory implements CategorySearchFactoryContract
 {
+    public function __construct(private Category $category)
+    {
+
+    }
     public function view(): string
     {
         return 'content.category.game.index';
@@ -20,13 +24,13 @@ class GameMediaSearchFactory implements CategorySearchFactoryContract
         return 'content.category.game.variations';
     }
 
-    public function data(Category $category): ViewModel
+    public function data(): ViewModel
     {
-        return new GameMediaIndexViewModel($category);
+        return new GameMediaIndexViewModel($this->category);
     }
 
-    public function variations(Category $category): GameVariationsIndexViewModel
+    public function variations(): GameVariationsIndexViewModel
     {
-        return new GameVariationsIndexViewModel($category);
+        return new GameVariationsIndexViewModel($this->category);
     }
 }

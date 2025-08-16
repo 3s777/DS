@@ -20,8 +20,10 @@ class CategoryServiceProvider extends ServiceProvider
     public function register(): void
     {
         $this->app->bind(CategorySearchFactoryContract::class, function (Application $app, array $parameters) {
-            return match($parameters['model']) {
-                'game_media_variation' => new GameMediaSearchFactory(),
+            $category = $parameters['category'];
+
+            return match($category->model) {
+                'game_media_variation' => new GameMediaSearchFactory($category),
                 'test' => new BookSearchFactory()
             };
         });

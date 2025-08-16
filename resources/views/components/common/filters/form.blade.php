@@ -8,7 +8,7 @@
         <input name="sort" type="hidden" value="{{ request('sort') }}">
         <input name="order" type="hidden" value="{{ request('order') }}">
     @endif
-    <x-common.filters.hidden-search bind-value="$store.filtersSearchValue" />
+    <x-common.filters.hidden-search bind-value="$store.mainFilters.searchInput" />
     <x-grid type="container">
 
     {{ $slot }}

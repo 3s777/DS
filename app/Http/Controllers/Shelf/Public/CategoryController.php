@@ -17,19 +17,19 @@ class CategoryController extends Controller
     public function show(Request $request, Category $category)
     {
         $factory = app()->make(CategorySearchFactoryContract::class, [
-           'model' => $category->model
+           'category' => $category,
         ]);
 
-        return view($factory->view(), $factory->data($category));
+        return view($factory->view(), $factory->data());
     }
 
     public function variations(Request $request, Category $category)
     {
         $factory = app()->make(CategorySearchFactoryContract::class, [
-            'model' => $category->model
+            'category' => $category,
         ]);
 
-        return view($factory->viewVariations(), $factory->variations($category));
+        return view($factory->viewVariations(), $factory->variations());
     }
 
 }
