@@ -1,6 +1,7 @@
 @props([
     'searchPlaceholder' => __('common.default_search_placeholder'),
     'hideFilters' => false,
+    'mediaType' => true,
     'mediaRoute' => false,
     'variationRoute' => false
 ])
@@ -17,31 +18,32 @@
                 x-model="$store.mainFilters.searchInput"
                 class="main-search__input"
                 method="GET"
+                x-bind:action="$store.mainFilters.getFiltersAction()"
                 wrapper-class="main-search__input-search"
                 link="{{ route('search') }}"
                 :placeholder="$searchPlaceholder">
 
-                <div class="main-search__type">
-                    <x-libraries.choices
-                        x-model="$store.mainFilters.selectedMediaType"
-                        {{--                    @change="$store.mainFilters.getFiltersAction()"--}}
-                        class="media-type"
-                        id="media-type"
-                        name="filters[media-type-search]"
-                        error="media-type">
-                        <x-ui.form.option
-                            value="{{ $mediaRoute }}">
-                            {{ __('filters.by_medias') }}
-                        </x-ui.form.option>
-                        <x-ui.form.option
-                            value="{{ $variationRoute }}">
-                            {{ __('filters.by_variations') }}
-                        </x-ui.form.option>
-                    </x-libraries.choices>
-                </div>
+                @if($mediaType)
+                    <div class="main-search__type">
+                        <x-libraries.choices
+                            x-model="$store.mainFilters.selectedMediaType"
+                            {{--                    @change="$store.mainFilters.getFiltersAction()"--}}
+                            class="main-search__media-type"
+                            id="main-search__media-type"
+                            name="filters[media-type-search]"
+                            error="main-search__media-type">
+                            <x-ui.form.option
+                                value="{{ $mediaRoute }}">
+                                {{ __('filters.by_medias') }}
+                            </x-ui.form.option>
+                            <x-ui.form.option
+                                value="{{ $variationRoute }}">
+                                {{ __('filters.by_variations') }}
+                            </x-ui.form.option>
+                        </x-libraries.choices>
+                    </div>
+                @endif
             </x-ui.input-search>
-
-
 
             @if(!$hideFilters)
                 <x-ui.form.button
@@ -56,19 +58,20 @@
                 </x-ui.form.button>
             @endif
         </div>
-
 </div>
 
 @push('scripts')
-    <script type="module">
-        const mediaType = document.querySelector('.media-type');
-        new Choices(mediaType, {
-            itemSelectText: '',
-            removeItems: false,
-            removeItemButton: false,
-            searchEnabled: false,
-        });
-    </script>
+    @if($mediaType)
+        <script type="module">
+            const mediaType = document.querySelector('.main-search__media-type');
+            new Choices(mediaType, {
+                itemSelectText: '',
+                removeItems: false,
+                removeItemButton: false,
+                searchEnabled: false,
+            });
+        </script>
+    @endif
 
     <script>
         document.addEventListener('alpine:init', () => {
@@ -84,8 +87,6 @@
                     }
                 }
             );
-
-            {{--Alpine.store('filtersSearchValue', '{{ request('filters.search') }}');--}}
         })
     </script>
 @endpush

@@ -1,5 +1,6 @@
-@aware([
+@props([
     'search' => false,
+    'mainFilters' => false
 ])
 
 <header class="header" x-data>
@@ -33,6 +34,6 @@
     </div>
 </header>
 
-@if($search)
-    {{ $slot }}
+@if($mainFilters)
+    {{ $mainFilters }}
 @endif

@@ -1,8 +1,7 @@
 @props([
     'title' => '',
     'search' => false,
-    'mainFilters' => false,
-    'hideFilters' => false
+    'mainFilters' => false
 ])
 
 <!doctype html>
@@ -19,12 +18,14 @@
                 <x-slot:search>
                     {{ $search }}
                 </x-slot:search>
-            @endif
 
-            @if(!$hideFilters)
-                <x-common.main-filters>
-                    {{ $mainFilters }}
-                </x-common.main-filters>
+                @if($mainFilters)
+                    <x-slot:mainFilters>
+                        <x-common.main-filters>
+                            {{ $mainFilters }}
+                        </x-common.main-filters>
+                    </x-slot:mainFilters>
+                @endif
             @endif
         </x-common.header>
 
