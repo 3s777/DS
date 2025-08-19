@@ -7,6 +7,7 @@ use App\Jobs\GenerateSmallThumbnailsJob;
 use App\Jobs\GenerateThumbnailJob;
 use Domain\Auth\Actions\CreateCollectorAction;
 use Domain\Auth\DTOs\NewCollectorDTO;
+use Domain\Auth\Exceptions\UserCreateEditException;
 use Domain\Auth\Models\Collector;
 use Domain\Auth\Models\Role;
 use Illuminate\Auth\Events\Registered;
@@ -39,6 +40,9 @@ class CreateCollectorActionTest extends TestCase
         $this->withoutExceptionHandling();
     }
 
+    /**
+     * @throws UserCreateEditException
+     */
     public function test_user_created_success(): void
     {
         Queue::fake();
@@ -75,6 +79,9 @@ class CreateCollectorActionTest extends TestCase
         Queue::assertPushed(GenerateSmallThumbnailsJob::class, 2);
     }
 
+    /**
+     * @throws UserCreateEditException
+     */
     public function test_registered_event_and_listeners_dispatched(): void
     {
         Event::fake([

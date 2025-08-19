@@ -1,7 +1,6 @@
 <x-layouts.main :hide-filters="true">
     <x-slot:search>
         <x-common.main-search
-            :media-type="false"
             :search-placeholder="__('game.media.search')"
             :media-route="route('category.show', ['category' => $category->slug])"
             :variation-route="route('category.variations', ['category' => $category->slug])"
