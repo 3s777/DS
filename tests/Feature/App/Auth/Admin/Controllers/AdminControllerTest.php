@@ -83,7 +83,7 @@ class AdminControllerTest extends TestCase
             ->assertViewIs('admin.user.user.create');
     }
 
-    public function test_edtest_success(): void
+    public function test_edit_success(): void
     {
         $this->actingAs($this->authUser)
             ->get(action([AdminController::class, 'edit'], [$this->testingUser->slug]))

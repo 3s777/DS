@@ -72,7 +72,7 @@ class KitItemControllerTest extends TestCase
             ->assertViewIs('admin.shelf.kit-item.create');
     }
 
-    public function test_edtest_success(): void
+    public function test_edit_success(): void
     {
         $this->actingAs($this->user)
             ->get(action([KitItemController::class, 'edit'], [$this->kitItem->slug]))

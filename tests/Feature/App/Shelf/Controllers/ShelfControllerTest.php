@@ -79,7 +79,7 @@ class ShelfControllerTest extends TestCase
             ->assertViewIs('admin.shelf.shelf.create');
     }
 
-    public function test_edtest_success(): void
+    public function test_edit_success(): void
     {
         $this->actingAs($this->user)
             ->get(action([ShelfController::class, 'edit'], [$this->shelf->id]))

@@ -89,7 +89,7 @@ class CollectibleControllerTest extends TestCase
             ->assertViewIs('admin.shelf.collectible.index');
     }
 
-    public function test_edtest_success(): void
+    public function test_edit_success(): void
     {
         $class = Relation::getMorphedModel($this->collectible->collectable->getMorphClass());
         $type = strtolower(CollectibleTypeEnum::tryFrom($class)->name);

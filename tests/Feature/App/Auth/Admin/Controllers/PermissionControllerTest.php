@@ -72,7 +72,7 @@ class PermissionControllerTest extends TestCase
             ->assertViewIs('admin.user.permission.create');
     }
 
-    public function test_edtest_success(): void
+    public function test_edit_success(): void
     {
         $this->actingAs($this->user)
             ->get(action([PermissionController::class, 'edit'], [$this->permission->id]))

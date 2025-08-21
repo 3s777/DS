@@ -72,7 +72,7 @@ class CategoryControllerTest extends TestCase
             ->assertViewIs('admin.shelf.category.create');
     }
 
-    public function test_edtest_success(): void
+    public function test_edit_success(): void
     {
         $this->actingAs($this->user)
             ->get(action([CategoryController::class, 'edit'], [$this->category->slug]))

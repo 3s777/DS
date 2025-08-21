@@ -92,7 +92,7 @@ class CollectorControllerTest extends TestCase
             ->assertViewIs('admin.user.collector.create');
     }
 
-    public function test_edtest_success(): void
+    public function test_edit_success(): void
     {
         $this->actingAs($this->authUser)
             ->get(action([CollectorController::class, 'edit'], [$this->testingCollector->slug]))

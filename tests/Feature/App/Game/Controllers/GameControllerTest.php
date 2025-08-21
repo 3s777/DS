@@ -76,7 +76,7 @@ class GameControllerTest extends TestCase
             ->assertViewIs('admin.game.game.create');
     }
 
-    public function test_edtest_success(): void
+    public function test_edit_success(): void
     {
         $this->actingAs($this->user)
             ->get(action([GameController::class, 'edit'], [$this->game->slug]))

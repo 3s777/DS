@@ -4,6 +4,7 @@ namespace App\Auth\Collector\Controllers;
 
 use App\Http\Controllers\Auth\Public\Collector\ProfileController;
 use App\Http\Requests\Auth\Admin\CreateCollectorRequest;
+use App\Http\Requests\Auth\Public\UpdateCollectorProfileRequest;
 use Database\Factories\Auth\CollectorFactory;
 use Domain\Auth\Models\Collector;
 use Illuminate\Foundation\Testing\RefreshDatabase;
@@ -15,7 +16,7 @@ class ProfileControllerTest extends TestCase
 
     protected Collector $authCollector;
     protected Collector $testingCollector;
-//    protected array $request;
+    protected array $request;
 
     public function setUp(): void
     {
@@ -25,7 +26,7 @@ class ProfileControllerTest extends TestCase
 
         $this->testingCollector = CollectorFactory::new()->create();
 
-//        $this->request = CreateCollectorRequest::factory()->create();
+        $this->request = UpdateCollectorProfileRequest::factory()->create();
     }
 
     public function checkNotAuthRedirect(
@@ -55,12 +56,6 @@ class ProfileControllerTest extends TestCase
             ->assertViewIs('content.profile.index');
     }
 
-//    public function test_not_auth_failed(): void
-//    {
-//        $this->get(action([ProfileController::class, 'show']))
-//            ->assertRedirectToRoute('collector.login');
-//    }
-
     public function test_settings_success(): void
     {
         $this->actingAs($this->authCollector, 'collector')
@@ -79,5 +74,23 @@ class ProfileControllerTest extends TestCase
             ->assertOk()
             ->assertSee(__('user.profile.settings_confidential'))
             ->assertViewIs('content.profile.confidential');
+    }
+
+    public function test_update_success(): void
+    {
+        $this->actingAs($this->authCollector, 'collector')
+            ->put(route('profile.settings.update'), $this->request)
+            ->assertRedirectToRoute('profile.settings')
+            ->assertSessionHas('helper_flash_message', __('user.profile.updated'));
+
+//        $user = User::where('name', 'newname')->first();
+//        $this->assertTrue($user->hasAllPermissions(['entity.edit', 'entity.delete', 'test']));
+//        $this->assertTrue($user->hasAllRoles([config('settings.default_role'), 'superadmin']));
+//        $this->assertFalse($user->hasRole('editor'));
+//
+//        $this->assertDatabaseHas('users', [
+//            'name' => 'newname',
+//            'first_name' => 'New First Name'
+//        ]);
     }
 }

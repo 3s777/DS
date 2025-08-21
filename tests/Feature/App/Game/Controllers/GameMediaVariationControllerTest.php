@@ -76,7 +76,7 @@ class GameMediaVariationControllerTest extends TestCase
             ->assertViewIs('admin.game.variation.create');
     }
 
-    public function test_edtest_success(): void
+    public function test_edit_success(): void
     {
         $this->actingAs($this->user)
             ->get(action([GameMediaVariationController::class, 'edit'], [$this->gameMediaVariation->slug]))

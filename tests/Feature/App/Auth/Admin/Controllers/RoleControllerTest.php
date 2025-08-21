@@ -75,7 +75,7 @@ class RoleControllerTest extends TestCase
             ->assertViewIs('admin.user.role.create');
     }
 
-    public function test_edtest_success(): void
+    public function test_edit_success(): void
     {
         $this->actingAs($this->user)
             ->get(action([RoleController::class, 'edit'], [$this->role->id]))
