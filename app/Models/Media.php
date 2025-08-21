@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Carbon\Carbon;
+use Domain\Auth\Models\Collector;
 use Domain\Auth\Models\User;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Spatie\MediaLibrary\MediaCollections\Models\Media as BaseMedia;
@@ -17,8 +18,14 @@ class Media extends BaseMedia
         parent::boot();
 
         static::creating(function ($model) {
+            if (auth('collector')->user()) {
+                $model->userable_id = auth('collector')->user()->id;
+                $model->userable_type = Collector::class;
+            }
+
             if (auth()->user()) {
-                $model->user()->associate(auth()->user()) ;
+                $model->userable_id = auth()->user()->id;
+                $model->userable_type = User::class;
             }
 
             $modelCreatedDate = Carbon::make($model->model->created_at);
