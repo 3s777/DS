@@ -26,7 +26,7 @@ return new class () extends Migration {
             $table->json('responsive_images');
             $table->string('dirname');
             $table->unsignedInteger('order_column')->nullable()->index();
-            $table->nullableMorphs('userable');
+            $table->nullableMorphs('user');
 
             $table->nullableTimestamps();
         });

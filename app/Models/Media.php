@@ -6,6 +6,7 @@ use Carbon\Carbon;
 use Domain\Auth\Models\Collector;
 use Domain\Auth\Models\User;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\MorphTo;
 use Spatie\MediaLibrary\MediaCollections\Models\Media as BaseMedia;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
@@ -18,14 +19,12 @@ class Media extends BaseMedia
         parent::boot();
 
         static::creating(function ($model) {
-            if (auth('collector')->user()) {
-                $model->userable_id = auth('collector')->user()->id;
-                $model->userable_type = Collector::class;
+            if (auth()->check() && request()->route()->named('admin.*')) {
+                $model->user()->associate(auth()->user());
             }
 
-            if (auth()->user()) {
-                $model->userable_id = auth()->user()->id;
-                $model->userable_type = User::class;
+            if (auth()->guard('collector')->check() && !request()->route()->named('admin.*')) {
+                $model->user()->associate(auth('collector')->user());
             }
 
             $modelCreatedDate = Carbon::make($model->model->created_at);
@@ -38,9 +37,9 @@ class Media extends BaseMedia
         });
     }
 
-    public function user(): BelongsTo
+    public function user(): MorphTo
     {
-        return $this->belongsTo(User::class);
+        return $this->morphTo();
     }
 
 }
