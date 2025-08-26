@@ -10,7 +10,7 @@ use App\Http\Requests\MassDeletingRequest;
 use Domain\Auth\Actions\CreateAdminAction;
 use Domain\Auth\Actions\UpdateAdminAction;
 use Domain\Auth\DTOs\NewAdminDTO;
-use Domain\Auth\DTOs\UpdateUserDTO;
+use Domain\Auth\DTOs\UpdateAdminDTO;
 use Domain\Auth\Models\User;
 use Domain\Auth\ViewModels\Admin\AdminIndexViewModel;
 use Domain\Auth\ViewModels\Admin\AdminUpdateViewModel;
@@ -70,7 +70,7 @@ class AdminController extends Controller
 
     public function update(UpdateAdminRequest $request, User $user, UpdateAdminAction $action): RedirectResponse
     {
-        $action(UpdateUserDTO::fromRequest($request), $user);
+        $action(UpdateAdminDTO::fromRequest($request), $user);
 
         flash()->info(__('user.updated'));
 

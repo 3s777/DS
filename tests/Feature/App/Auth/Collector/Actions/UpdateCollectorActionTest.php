@@ -10,6 +10,7 @@ use Domain\Auth\Actions\CreateCollectorAction;
 use Domain\Auth\Actions\UpdateCollectorAction;
 use Domain\Auth\DTOs\NewCollectorDTO;
 use Domain\Auth\DTOs\UpdateCollectorDTO;
+use Domain\Auth\Exceptions\UserCreateEditException;
 use Domain\Auth\Models\Collector;
 use Domain\Auth\Models\Permission;
 use Domain\Auth\Models\Role;
@@ -42,7 +43,7 @@ class UpdateCollectorActionTest extends TestCase
         $this->withoutExceptionHandling();
     }
 
-    public function test_collector_created_success(): void
+    public function test_collector_updated_success(): void
     {
         Queue::fake();
         Storage::fake('images');
@@ -109,4 +110,48 @@ class UpdateCollectorActionTest extends TestCase
     }
 
     //    TODO test exception without HTTP
+
+
+    /**
+     * @throws UserCreateEditException
+     */
+    public function test_handle_user_exception_sent(): void
+    {
+
+        $createAction = app(CreateCollectorAction::class);
+
+        $createAction(NewCollectorDTO::make(
+            $this->request['name'],
+            $this->request['email'],
+            $this->request['password'],
+            $this->request['language'],
+            $this->request['roles'],
+            $this->request['first_name'],
+            $this->request['slug'],
+            $this->request['description'],
+            null,
+            null,
+        ));
+
+        $collector = Collector::where('email', $this->request['email'])->first();
+
+
+        $action = app(UpdateCollectorAction::class);
+
+        $this->assertThrows(
+            fn () => (
+            $action(UpdateCollectorDTO::make(
+                $this->request['name'],
+                'wrong email',
+                $this->request['language'],
+                ['wrong_role']
+            ), $collector)),
+            UserCreateEditException::class
+        );
+
+
+        $this->assertDatabaseMissing('collectors', [
+            'email' => 'wrong email'
+        ]);
+    }
 }

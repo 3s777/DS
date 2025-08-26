@@ -6,53 +6,51 @@ use Domain\Auth\DTOs\NewCollectorDTO;
 use Domain\Auth\Exceptions\UserCreateEditException;
 use Domain\Auth\Models\Collector;
 use Illuminate\Auth\Events\Registered;
-use Illuminate\Support\Facades\DB;
+use Support\Transaction;
 use Throwable;
 
 class CreateCollectorAction
 {
     public function __invoke(NewCollectorDTO $data): ?Collector
     {
-        try {
-            DB::beginTransaction();
+        return Transaction::run(
+            function () use ($data) {
+                $collector = Collector::create([
+                    'name' => $data->name,
+                    'email' => $data->email,
+                    'password' => bcrypt($data->password),
+                    'language' => $data->language,
+                    'first_name' => $data->first_name,
+                    'slug' => $data->slug,
+                    'description' => $data->description
+                ]);
 
-            $collector = Collector::create([
-                'name' => $data->name,
-                'email' => $data->email,
-                'password' => bcrypt($data->password),
-                'language' => $data->language,
-                'first_name' => $data->first_name,
-                'slug' => $data->slug,
-                'description' => $data->description
-            ]);
+                event(new Registered($collector));
 
-            event(new Registered($collector));
+                if ($data->is_verified) {
+                    $verifyAction = app(VerifyEmailAction::class);
+                    $verifyAction($collector);
+                }
 
-            if ($data->is_verified) {
-                $verifyAction = app(VerifyEmailAction::class);
-                $verifyAction($collector);
-            }
-
-            $collector->audit(
-                'changeRole',
-                [],
-                ['roles' => $data->roles]
-            );
-
-            $collector->syncRoles($data->roles);
-
-            if ($data->featured_image) {
-                $collector->addFeaturedImageWithThumbnail(
-                    $data->featured_image,
-                    ['small', 'medium']
+                $collector->audit(
+                    'changeRole',
+                    [],
+                    ['roles' => $data->roles]
                 );
+
+                $collector->syncRoles($data->roles);
+
+                if ($data->featured_image) {
+                    $collector->addFeaturedImageWithThumbnail(
+                        $data->featured_image,
+                        ['small', 'medium']
+                    );
+                }
+                return $collector;
+            },
+            function (Throwable $e) {
+                throw new UserCreateEditException($e->getMessage());
             }
-
-            DB::commit();
-
-            return $collector;
-        } catch (Throwable $e) {
-            throw new UserCreateEditException($e->getMessage());
-        }
+        );
     }
 }

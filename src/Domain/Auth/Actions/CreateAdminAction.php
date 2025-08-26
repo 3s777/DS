@@ -7,15 +7,14 @@ use Domain\Auth\Exceptions\UserCreateEditException;
 use Domain\Auth\Models\User;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Support\Facades\DB;
+use Support\Transaction;
 use Throwable;
 
 class CreateAdminAction
 {
     public function __invoke(NewAdminDTO $data): ?User
     {
-        try {
-            DB::beginTransaction();
-
+        return Transaction::run(function () use ($data) {
             $user = User::create([
                 'name' => $data->name,
                 'email' => $data->email,
@@ -48,11 +47,11 @@ class CreateAdminAction
                 );
             }
 
-            DB::commit();
-
             return $user;
-        } catch (Throwable $e) {
-            throw new UserCreateEditException($e->getMessage());
-        }
+        },
+        function (Throwable $e) {
+                throw new UserCreateEditException($e->getMessage());
+            }
+        );
     }
 }

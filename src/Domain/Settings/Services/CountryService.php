@@ -6,47 +6,44 @@ use Domain\Settings\DTOs\FillCountryDTO;
 use Domain\Settings\Models\Country;
 use Illuminate\Support\Facades\DB;
 use Support\Exceptions\CrudException;
+use Support\Transaction;
 use Throwable;
 
 class CountryService
 {
     public function create(FillCountryDTO $data): Country
     {
-        try {
-            DB::beginTransaction();
+        return Transaction::run(
+            function () use ($data) {
+                $country = Country::create([
+                    'name' => $data->name,
+                    'slug' => $data->slug,
+                ]);
 
-            $country = Country::create([
-                'name' => $data->name,
-                'slug' => $data->slug,
-            ]);
-
-            DB::commit();
-
-            return $country;
-
-        } catch (Throwable $e) {
-            throw new CrudException($e->getMessage());
-        }
+                return $country;
+            },
+            function (Throwable $e) {
+                throw new CrudException($e->getMessage());
+            }
+        );
     }
 
     public function update(Country $country, FillCountryDTO $data): Country
     {
-        try {
-            DB::beginTransaction();
+        return Transaction::run(
+            function () use ($country, $data) {
+                $country->fill(
+                    [
+                        'name' => $data->name,
+                        'slug' => $data->slug,
+                    ]
+                )->save();
 
-            $country->fill(
-                [
-                    'name' => $data->name,
-                    'slug' => $data->slug,
-                ]
-            )->save();
-
-            DB::commit();
-
-            return $country;
-
-        } catch (Throwable $e) {
-            throw new CrudException($e->getMessage());
-        }
+                return $country;
+            },
+            function (Throwable $e) {
+                throw new CrudException($e->getMessage());
+            }
+        );
     }
 }

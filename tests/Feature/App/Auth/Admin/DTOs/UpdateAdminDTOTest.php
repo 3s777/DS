@@ -3,7 +3,7 @@
 namespace App\Auth\Admin\DTOs;
 
 use App\Http\Requests\Auth\Admin\CreateAdminRequest;
-use Domain\Auth\DTOs\UpdateUserDTO;
+use Domain\Auth\DTOs\UpdateAdminDTO;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
@@ -20,15 +20,15 @@ class UpdateAdminDTOTest extends TestCase
 
     public function test_instance_created_from_form_request_success(): void
     {
-        $data = UpdateUserDTO::fromRequest(new CreateAdminRequest($this->request));
+        $data = UpdateAdminDTO::fromRequest(new CreateAdminRequest($this->request));
 
-        $this->assertInstanceOf(UpdateUserDTO::class, $data);
+        $this->assertInstanceOf(UpdateAdminDTO::class, $data);
     }
 
     public function test_instance_created_success(): void
     {
 
-        $data = UpdateUserDTO::make(
+        $data = UpdateAdminDTO::make(
             $this->request['name'],
             $this->request['email'],
             $this->request['language'],
@@ -43,6 +43,6 @@ class UpdateAdminDTOTest extends TestCase
             $this->request['is_verified'],
         );
 
-        $this->assertInstanceOf(UpdateUserDTO::class, $data);
+        $this->assertInstanceOf(UpdateAdminDTO::class, $data);
     }
 }

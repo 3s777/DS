@@ -15,6 +15,7 @@ use Illuminate\Auth\Events\Verified;
 use Illuminate\Auth\Listeners\SendEmailVerificationNotification;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Event;
+use Illuminate\Support\Facades\Exceptions;
 use Illuminate\Support\Facades\Queue;
 use Illuminate\Support\Facades\Storage;
 use Tests\TestCase;
@@ -112,27 +113,26 @@ class CreateCollectorActionTest extends TestCase
         Event::assertDispatched(Verified::class);
     }
 
-    //    TODO test exception without HTTP
-    //    public function test_handle_user_exception_sent(): void
-    //    {
-    //        Exceptions::fake();
-    //
-    //        $this->expectException(UserCreateEditException::class);
-    //
-    //        $action = app(CreateUserAction::class);
-    //
-    //        $action(NewUserDTO::make(
-    //            $this->request['name'],
-    //            $this->request['email'],
-    //            null,
-    //            $this->request['language_id'],
-    //        ));
-    //
-    //        Exceptions::assertReported(UserCreateEditException::class);
-    //
-    //
-    //        $this->assertDatabaseMissing('users', [
-    //            'email' => $this->request['email']
-    //        ]);
-    //    }
+    public function test_handle_user_exception_sent(): void
+    {
+
+        $action = app(CreateCollectorAction::class);
+
+        $this->assertThrows(
+            fn () => (
+            $action(NewCollectorDTO::make(
+                $this->request['name'],
+                $this->request['email'],
+                'password',
+                $this->request['language'],
+                roles: ['wrong_role']
+            ))),
+            UserCreateEditException::class
+        );
+
+
+        $this->assertDatabaseMissing('collectors', [
+            'email' => $this->request['email'],
+        ]);
+    }
 }

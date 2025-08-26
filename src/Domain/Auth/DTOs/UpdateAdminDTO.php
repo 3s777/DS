@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Http\UploadedFile;
 use Support\Traits\Makeable;
 
-final readonly class UpdateUserDTO
+final readonly class UpdateAdminDTO
 {
     use Makeable;
 

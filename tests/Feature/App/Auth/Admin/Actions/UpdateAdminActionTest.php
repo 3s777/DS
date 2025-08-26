@@ -9,7 +9,8 @@ use Database\Seeders\PermissionsTestSeeder;
 use Domain\Auth\Actions\CreateAdminAction;
 use Domain\Auth\Actions\UpdateAdminAction;
 use Domain\Auth\DTOs\NewAdminDTO;
-use Domain\Auth\DTOs\UpdateUserDTO;
+use Domain\Auth\DTOs\UpdateAdminDTO;
+use Domain\Auth\Exceptions\UserCreateEditException;
 use Domain\Auth\Models\Permission;
 use Domain\Auth\Models\Role;
 use Domain\Auth\Models\User;
@@ -73,7 +74,7 @@ class UpdateAdminActionTest extends TestCase
 
         $updateAction = app(UpdateAdminAction::class);
 
-        $updateAction(UpdateUserDTO::make(
+        $updateAction(UpdateAdminDTO::make(
             'newName',
             'newEmail@email.com',
             $this->request['language'],
@@ -104,5 +105,45 @@ class UpdateAdminActionTest extends TestCase
         Event::assertDispatched(Verified::class);
     }
 
-    //    TODO test exception without HTTP
+    /**
+     * @throws UserCreateEditException
+     */
+    public function test_handle_user_exception_sent(): void
+    {
+
+        $createAction = app(CreateAdminAction::class);
+
+        $createAction(NewAdminDTO::make(
+            $this->request['name'],
+            $this->request['email'],
+            $this->request['password'],
+            $this->request['language'],
+            $this->request['roles'],
+            $this->request['first_name'],
+            $this->request['slug'],
+            $this->request['description'],
+            null,
+            null,
+        ));
+
+        $admin = User::where('email', $this->request['email'])->first();
+
+        $action = app(UpdateAdminAction::class);
+
+        $this->assertThrows(
+            fn () => (
+            $action(UpdateAdminDTO::make(
+                $this->request['name'],
+                'wrong email',
+                $this->request['language'],
+                ['wrong_role']
+            ), $admin)),
+            UserCreateEditException::class
+        );
+
+
+        $this->assertDatabaseMissing('users', [
+            'email' => 'wrong email'
+        ]);
+    }
 }

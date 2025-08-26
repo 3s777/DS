@@ -7,6 +7,7 @@ use App\Jobs\GenerateSmallThumbnailsJob;
 use App\Jobs\GenerateThumbnailJob;
 use Domain\Auth\Actions\CreateAdminAction;
 use Domain\Auth\DTOs\NewAdminDTO;
+use Domain\Auth\Exceptions\UserCreateEditException;
 use Domain\Auth\Models\Role;
 use Domain\Auth\Models\User;
 use Illuminate\Auth\Events\Registered;
@@ -14,6 +15,7 @@ use Illuminate\Auth\Events\Verified;
 use Illuminate\Auth\Listeners\SendEmailVerificationNotification;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Event;
+use Illuminate\Support\Facades\Exceptions;
 use Illuminate\Support\Facades\Queue;
 use Illuminate\Support\Facades\Storage;
 use PHPUnit\Framework\Attributes\Test;
@@ -103,28 +105,38 @@ class CreateAdminActionTest extends TestCase
         Event::assertDispatched(Verified::class);
     }
 
+    public function test_handle_user_exception_sent(): void
+    {
+//        Exceptions::fake();
+//
+//        $this->expectException(UserCreateEditException::class);
 
-    //    TODO test exception without HTTP
-    //    public function test_handle_user_exception_sent(): void
-    //    {
-    //        Exceptions::fake();
-    //
-    //        $this->expectException(UserCreateEditException::class);
-    //
-    //        $action = app(CreateUserAction::class);
-    //
-    //        $action(NewUserDTO::make(
-    //            $this->request['name'],
-    //            $this->request['email'],
-    //            null,
-    //            $this->request['language_id'],
-    //        ));
-    //
-    //        Exceptions::assertReported(UserCreateEditException::class);
-    //
-    //
-    //        $this->assertDatabaseMissing('users', [
-    //            'email' => $this->request['email']
-    //        ]);
-    //    }
+        $action = app(CreateAdminAction::class);
+
+        $this->assertThrows(
+            fn () => (
+            $action(NewAdminDTO::make(
+                $this->request['name'],
+                $this->request['email'],
+                'password',
+                $this->request['language'],
+                roles: ['wrong_role']
+            ))),
+            UserCreateEditException::class
+        );
+
+//        $action(NewAdminDTO::make(
+//            $this->request['name'],
+//            'wrong email',
+//            'password',
+//            $this->request['language'],
+//            roles: ['wrong_role']
+//        ));
+//
+//        Exceptions::assertReported(UserCreateEditException::class);
+
+        $this->assertDatabaseMissing('users', [
+            'email' => $this->request['email'],
+        ]);
+    }
 }
