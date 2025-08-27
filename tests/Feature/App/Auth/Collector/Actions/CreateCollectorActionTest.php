@@ -30,6 +30,8 @@ class CreateCollectorActionTest extends TestCase
     {
         parent::setUp();
 
+        Storage::fake('images');
+
         $this->request = CreateCollectorRequest::factory()->create();
 
         Role::create([

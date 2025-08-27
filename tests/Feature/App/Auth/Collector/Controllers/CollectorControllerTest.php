@@ -33,6 +33,8 @@ class CollectorControllerTest extends TestCase
     {
         parent::setUp();
 
+        Storage::fake('images');
+
         $this->app->make(PermissionRegistrar::class)->forgetCachedPermissions();
 
         $this->authUser = UserFactory::new()->create();
@@ -104,7 +106,7 @@ class CollectorControllerTest extends TestCase
     public function test_store_success(): void
     {
         Queue::fake();
-        Storage::fake('images');
+//        Storage::fake('images');
 
         $this->actingAs($this->authUser)
             ->post(action([CollectorController::class, 'store']), $this->request)
@@ -134,6 +136,8 @@ class CollectorControllerTest extends TestCase
 
     public function test_update_success(): void
     {
+//        Storage::fake('images');
+
         Permission::create(['name' => 'test', 'display_name' => 'Test', 'guard_name' => 'collector']);
         Role::create(['name' => 'superadmin', 'display_name' => 'Super Admin', 'guard_name' => 'collector']);
         $role = Role::where('name', config('settings.default_collector_role'))->first();
@@ -181,6 +185,8 @@ class CollectorControllerTest extends TestCase
 
     public function test_has_wildcard_permissions_via_role_success(): void
     {
+//        Storage::fake('images');
+
         $role = Role::where('name', config('settings.default_collector_role'))->first();
 
         $role->givePermissionTo('entity.*');

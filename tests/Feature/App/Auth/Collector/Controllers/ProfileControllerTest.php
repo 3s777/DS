@@ -8,6 +8,7 @@ use App\Http\Requests\Auth\Public\UpdateCollectorProfileRequest;
 use Database\Factories\Auth\CollectorFactory;
 use Domain\Auth\Models\Collector;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Support\Facades\Storage;
 use Tests\TestCase;
 
 class ProfileControllerTest extends TestCase
@@ -21,6 +22,8 @@ class ProfileControllerTest extends TestCase
     public function setUp(): void
     {
         parent::setUp();
+
+        Storage::fake('images');
 
         $this->authCollector = CollectorFactory::new()->create();
 

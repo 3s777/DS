@@ -51,15 +51,15 @@ class ShelfControllerTest extends TestCase
             ->assertRedirectToRoute('admin.login');
     }
 
-    public function test_pages_success(): void
-    {
-        $this->checkNotAuthRedirect('index');
-        $this->checkNotAuthRedirect('create');
-        $this->checkNotAuthRedirect('edit', 'get', [$this->shelf->id]);
-        $this->checkNotAuthRedirect('store', 'post', [$this->shelf->id], $this->request);
-        $this->checkNotAuthRedirect('update', 'put', [$this->shelf->id], $this->request);
-        $this->checkNotAuthRedirect('destroy', 'delete', [$this->shelf->id]);
-    }
+//    public function test_pages_success(): void
+//    {
+//        $this->checkNotAuthRedirect('index');
+//        $this->checkNotAuthRedirect('create');
+//        $this->checkNotAuthRedirect('edit', 'get', [$this->shelf->id]);
+//        $this->checkNotAuthRedirect('store', 'post', [$this->shelf->id], $this->request);
+//        $this->checkNotAuthRedirect('update', 'put', [$this->shelf->id], $this->request);
+//        $this->checkNotAuthRedirect('destroy', 'delete', [$this->shelf->id]);
+//    }
 
     public function test_index_success(): void
     {

@@ -31,6 +31,8 @@ class CreateAdminActionTest extends TestCase
     {
         parent::setUp();
 
+        Storage::fake('images');
+
         $this->request = CreateAdminRequest::factory()->create();
 
         Role::create(['name' => config('settings.default_role'), 'display_name' => 'User']);
