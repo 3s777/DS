@@ -8,6 +8,7 @@ use App\Http\Requests\Auth\Public\UpdateCollectorProfileRequest;
 use Database\Factories\Auth\CollectorFactory;
 use Domain\Auth\Models\Collector;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Storage;
 use Tests\TestCase;
 
@@ -86,14 +87,43 @@ class ProfileControllerTest extends TestCase
             ->assertRedirectToRoute('profile.settings')
             ->assertSessionHas('helper_flash_message', __('user.profile.updated'));
 
-//        $user = User::where('name', 'newname')->first();
-//        $this->assertTrue($user->hasAllPermissions(['entity.edit', 'entity.delete', 'test']));
-//        $this->assertTrue($user->hasAllRoles([config('settings.default_role'), 'superadmin']));
-//        $this->assertFalse($user->hasRole('editor'));
-//
-//        $this->assertDatabaseHas('users', [
-//            'name' => 'newname',
-//            'first_name' => 'New First Name'
-//        ]);
+        $this->assertSame($this->authCollector->first_name, $this->request['first_name']);
+        $this->assertNotSame($this->authCollector->name, $this->request['name']);
+        $this->assertNotSame($this->authCollector->email, $this->request['email']);
+        $this->assertSame($this->authCollector->description, $this->request['description']);
+        $this->assertSame($this->authCollector->language, $this->request['language']);
+        $this->assertNotSame($this->authCollector->password, $this->request['password']);
+
+        $this->assertDatabaseHas('collectors', [
+            'first_name' => $this->request['first_name']
+        ]);
+    }
+
+    public function test_update_password_failed(): void
+    {
+        $this->request['current_password'] = 'wrong_password';
+        $this->request['new_password'] = 'new_password';
+        $this->request['new_password_confirmation'] = 'new_password';
+
+        $this->actingAs($this->authCollector, 'collector')
+            ->put(route('profile.settings.update'), $this->request)
+            ->assertInvalid(['current_password'])
+            ->assertRedirectToRoute('profile.settings');
+    }
+
+    public function test_update_password_success(): void
+    {
+        $this->request['current_password'] = '123456789q';
+        $this->request['new_password'] = '123456789qq';
+        $this->request['new_password_confirmation'] = '123456789qq';
+
+        $authCollector = CollectorFactory::new()->create(['password' => bcrypt('123456789q')]);
+
+        $this->actingAs($authCollector, 'collector')
+            ->put(route('profile.settings.update'), $this->request)
+            ->assertRedirectToRoute('profile.settings')
+            ->assertSessionHas('helper_flash_message', __('user.profile.updated').'. '.__('auth.password_updated'));
+
+        $this->assertTrue(Hash::check('123456789qq', $authCollector->password));
     }
 }

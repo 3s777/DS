@@ -14,7 +14,7 @@ class UpdateCollectorProfileRequestFactory extends RequestFactory
            'name' => $this->faker->regexify('[a-z0-9.]{7}'),
            'first_name' => $this->faker->name,
            'password' => '123456789q',
-            'language' => 'en',
+           'language' => 'en',
            'description' => $this->faker->text(200),
            'featured_image' => UploadedFile::fake()->image('photo1.jpg'),
            'featured_image_uploaded' => $this->faker->name,

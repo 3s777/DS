@@ -10,6 +10,7 @@ use Illuminate\Validation\Rules\Password;
 
 class UpdateCollectorProfileRequest extends FormRequest
 {
+    protected $redirectRoute = 'profile.settings';
     /**
      * Determine if the user is authorized to make this request.
      */
@@ -26,10 +27,6 @@ class UpdateCollectorProfileRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'password' => [
-                'nullable',
-                Password::min(8)->letters()
-            ],
             'language' => [
                 'required',
                 'string',
