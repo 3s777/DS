@@ -1,7 +1,15 @@
+# Collection accounting application
+
+- Laravel 12
+- PostgreSQL
+- Redis
+- Vite
+- Scss
+- AlpineJs
+
 # Installation
 
 - composer install
-- php artisan shop:install
 - make .env and .env.testing from .env.example
-
-# Deploy
+- php artisan ds:install
+- php artisan ds:refresh
