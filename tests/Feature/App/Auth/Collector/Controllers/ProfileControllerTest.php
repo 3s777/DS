@@ -5,10 +5,14 @@ namespace App\Auth\Collector\Controllers;
 use App\Http\Controllers\Auth\Public\Collector\ProfileController;
 use App\Http\Requests\Auth\Admin\CreateCollectorRequest;
 use App\Http\Requests\Auth\Public\UpdateCollectorProfileRequest;
+use App\Jobs\GenerateSmallThumbnailsJob;
+use App\Jobs\GenerateThumbnailJob;
 use Database\Factories\Auth\CollectorFactory;
 use Domain\Auth\Models\Collector;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Queue;
 use Illuminate\Support\Facades\Storage;
 use Tests\TestCase;
 
@@ -125,5 +129,43 @@ class ProfileControllerTest extends TestCase
             ->assertSessionHas('helper_flash_message', __('user.profile.updated').'. '.__('auth.password_updated'));
 
         $this->assertTrue(Hash::check('123456789qq', $authCollector->password));
+    }
+
+    public function test_update_validation_fail(): void
+    {
+        $this->request['language'] = 'unknown';
+        $this->request['first_name'] = ['fake', 'fake 2'];
+
+        $this->actingAs($this->authCollector, 'collector')
+            ->put(
+                action(
+                    [ProfileController::class, 'updateSettings']
+                ),
+                $this->request
+            )
+            ->assertInvalid(['first_name', 'language'])
+            ->assertRedirectToRoute('profile.settings');
+    }
+
+    public function test_update_with_image_success(): void
+    {
+        Queue::fake();
+        Storage::fake('images');
+
+        $this->request['featured_image'] = UploadedFile::fake()->image('photo1.jpg');
+
+        $this->actingAs($this->authCollector, 'collector')
+            ->put(
+                action(
+                    [ProfileController::class, 'updateSettings']
+                ),
+                $this->request
+            )
+            ->assertRedirectToRoute('profile.settings')
+            ->assertSessionHas('helper_flash_message', __('user.profile.updated'));
+
+        Queue::assertPushed(GenerateThumbnailJob::class, 3);
+
+        Queue::assertPushed(GenerateSmallThumbnailsJob::class, 2);
     }
 }
