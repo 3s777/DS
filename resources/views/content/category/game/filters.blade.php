@@ -25,19 +25,19 @@
 
         <x-grid.col xl="6" lg="4" md="6" sm="12">
             <x-ui.form.group>
-                <x-common.filters.relation-multiple-async name="developers" select-name="developers[]" route="select-game-developers" />
+                <x-common.filters.relation-multiple-async name="developers" select-name="filters[developers][]" route="select-game-developers" />
             </x-ui.form.group>
         </x-grid.col>
 
         <x-grid.col xl="6" lg="4" md="6" sm="12">
             <x-ui.form.group>
-                <x-common.filters.relation-multiple-async name="publishers" select-name="publishers[]" route="select-game-publishers" />
+                <x-common.filters.relation-multiple-async name="publishers" select-name="filters[publishers][]" route="select-game-publishers" />
             </x-ui.form.group>
         </x-grid.col>
 
         <x-grid.col xl="6" lg="4" md="6" sm="12">
             <x-ui.form.group>
-                <x-common.filters.relation-multiple-async name="games" select-name="games[]" route="select-games" />
+                <x-common.filters.relation-multiple-async name="games" select-name="filters[games][]" route="select-games" />
             </x-ui.form.group>
         </x-grid.col>
 

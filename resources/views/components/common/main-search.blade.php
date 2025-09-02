@@ -77,6 +77,7 @@
         document.addEventListener('alpine:init', () => {
             Alpine.store('mainFilters', {
                     hide: true,
+                    isVariation: false,
                     searchInput: '{{ request('filters.search') }}',
                     defaultAction: '{{ request()->url() }}',
                     selectedMediaType: '{{ url()->current() }}',

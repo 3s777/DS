@@ -1,16 +1,17 @@
-@props([
-    'name',
-    'route',
-    'placeholder',
-    'selectName' => 'filters['.$name.']'
-])
+{{--@props([--}}
+{{--    'name',--}}
+{{--    'route',--}}
+{{--    'placeholder',--}}
+{{--    'selectName' => 'filters['.$name.']',--}}
+{{--    'filter' => $filter ?? get_filter($name)--}}
+{{--])--}}
 
 <x-ui.select.async
-    :selected="get_filter($name)->relatedModel"
+    :selected="$filter->relatedModel"
     :show-old="false"
     :name="$name"
     :select-name="$name"
-    :label="$placeholder ?? get_filter($name)->placeholder()"
-    defaultOption="{{ get_filter($name)->title() }}"
+    :label="$placeholder ?? $filter->placeholder()"
+    defaultOption="{{ $filter->title() }}"
     selectName="{{ $selectName }}"
     :route="$route" />

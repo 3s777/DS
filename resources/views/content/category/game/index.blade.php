@@ -9,7 +9,17 @@
 
     <x-slot:mainFilters>
         @include('content.category.game.filters')
+{{--        <template x-if="$store.mainFilters.selectedMediaType === {{ route('category.show', ['category' => $category->slug]) }}">--}}
+
+{{--           sdf--}}
+{{--            @include('content.category.game.filters')--}}
+{{--        </template>--}}
+
+{{--        <template x-if="activeComponent === 'settings'">--}}
+            @include('content.category.game.filters-variation')
+{{--        </template>--}}
     </x-slot:mainFilters>
+
 
     <x-grid.container>
         <x-common.content class="search">

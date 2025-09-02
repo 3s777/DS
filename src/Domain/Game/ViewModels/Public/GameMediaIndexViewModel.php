@@ -2,6 +2,7 @@
 
 namespace Domain\Game\ViewModels\Public;
 
+use Domain\Game\FilterRegistrars\Public\GameMediaVariationFilterRegistrar;
 use Domain\Game\Models\GameMedia;
 use Domain\Shelf\Models\Category;
 use Spatie\ViewModels\ViewModel;
@@ -18,6 +19,11 @@ class GameMediaIndexViewModel extends ViewModel
     public function category(): Category
     {
         return $this->category;
+    }
+
+    public function variationFilters(): array
+    {
+        return (new GameMediaVariationFilterRegistrar())->filtersList();
     }
 
     public function gameMedias()

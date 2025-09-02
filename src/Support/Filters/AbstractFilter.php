@@ -101,7 +101,6 @@ abstract class AbstractFilter implements Stringable
 
     public function requestValue(string $index = null, mixed $default = null): mixed
     {
-
         return request(
             'filters.' . $this->key() . ($index ? ".$index" : ""),
             $default

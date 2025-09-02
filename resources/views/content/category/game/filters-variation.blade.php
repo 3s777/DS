@@ -41,9 +41,10 @@
             </x-ui.form.group>
         </x-grid.col>
 
+
         <x-grid.col xl="6" lg="4" md="6" sm="12">
             <x-ui.form.group>
-                <x-common.filters.relation-async name="media" route="game-media.select" />
+                <x-common.filters.relation-async :filter="$variationFilters['media']" name="media" route="game-media.select" />
             </x-ui.form.group>
         </x-grid.col>
 
@@ -61,3 +62,4 @@
 
         <x-slot:buttons></x-slot:buttons>
     </x-common.filters.form>
+
