@@ -69,6 +69,6 @@ class RelationFilter extends AbstractFilter
     public function view(): string
     {
         //        return 'components.common.filters.search';
-        return '';
+        return 'xcv';
     }
 }
