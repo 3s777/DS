@@ -1,13 +1,14 @@
 @props([
     'name' => 'dates',
-    'direction' => 'from'
+    'direction' => 'from',
+    'filter' => $filter ?? get_filter($name)
 ])
 
 <x-ui.form.datepicker {{ $attributes->class([
             'filters__'.$name
         ])
     }}
-    placeholder="{{ get_filter($name)->placeholder($direction) }}"
+    placeholder="{{ $filter->placeholder($direction) }}"
     id="filters_{{ $name }}_{{ $direction }}"
     name="filters[{{ $name }}][{{ $direction }}]"
     value="{{ request('filters.'.$name.'.'.$direction) }}">

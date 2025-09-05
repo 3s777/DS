@@ -1,8 +1,9 @@
 @props([
     'name',
-    'options' => get_filter($name)->options(),
+    'filter' => $filter ?? get_filter($name),
+    'options' => $filter->options(),
     'multiple' => false,
-    'placeholder' => get_filter($name)->placeholder(),
+    'placeholder' => $filter->placeholder(),
     'valueMethod' => false,
 ])
 
@@ -14,5 +15,5 @@
     :multiple="$multiple"
     :valueMethod="$valueMethod"
     :options="$options"
-    default-option="{{ get_filter($name)->title() }}"
+    default-option="{{ $filter->title() }}"
     :label="$placeholder" />

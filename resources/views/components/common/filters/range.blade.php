@@ -1,6 +1,7 @@
 @props([
     'name',
-    'placeholder' => get_filter($name)->placeholder()
+    'filter' => $filter ?? get_filter($name),
+    'placeholder' => $filter->placeholder()
 ])
 
 <div class="filter-range">

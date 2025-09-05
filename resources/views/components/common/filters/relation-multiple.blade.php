@@ -2,14 +2,15 @@
     'name',
     'options',
     'placeholder',
-    'selectName' => 'filters['.$name.'][]'
+    'selectName' => 'filters['.$name.'][]',
+    'filter' => $filter ?? get_filter($name)
 ])
 
 <x-ui.select.data-multiple
     :name="$name"
     select-name="{{ $selectName }}"
-    :options="$options ?? get_filter($name)->getPreparedOptions()"
-    :label="$placeholder ?? get_filter($name)->placeholder()"
-    default-option="{{ get_filter($name)->title() }}"
-    :selected="get_filter($name)->preparedSelected()"
+    :options="$options ?? $filter->getPreparedOptions()"
+    :label="$placeholder ?? $filter->placeholder()"
+    default-option="{{ $filter->title() }}"
+    :selected="$filter->preparedSelected()"
 />

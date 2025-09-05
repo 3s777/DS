@@ -2,15 +2,16 @@
     'name',
     'route',
     'placeholder',
-    'selectName' => 'filters['.$name.'][]'
+    'selectName' => 'filters['.$name.'][]',
+    'filter' => $filter ?? get_filter($name)
 ])
 
 <x-ui.select.async-multiple
-    :selected="get_filter($name)->preparedSelected()"
+    :selected="$filter->preparedSelected()"
     :show-old="false"
     :name="$name"
     select-name="{{ $selectName }}"
-    :label="$placeholder ?? get_filter($name)->placeholder()"
-    defaultOption="{{ get_filter($name)->title() }}"
+    :label="$placeholder ?? $filter->placeholder()"
+    defaultOption="{{ $filter->title() }}"
     :route="$route">
 </x-ui.select.async-multiple>
