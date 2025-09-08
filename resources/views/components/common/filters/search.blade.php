@@ -1,9 +1,3 @@
-@props([
-    'name',
-    'filter' => $filter ?? get_filter($name),
-    'placeholder' => $filter->placeholder()
-])
-
 <x-ui.form.input-text
     :placeholder="$placeholder"
     :id="$name"

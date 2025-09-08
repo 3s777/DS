@@ -6,18 +6,19 @@ use Closure;
 use Illuminate\Contracts\View\View;
 use Illuminate\View\Component;
 use Support\Filters\AbstractFilter;
-use Support\Filters\FilterManager;
 
 class RelationAsync extends Component
 {
     public function __construct(
         public string $name,
         public string $route,
-        public AbstractFilter $filter,
-        public string $placeholder = '',
-        public string $selectName = '',
+        public ?AbstractFilter $filter = null,
+        public ?string $placeholder = null,
+        public ?string $selectName = null,
     ) {
-
+        $this->filter = $filter ?? get_filter($name);
+        $this->placeholder = $placeholder ?? $this->filter->placeholder();
+        $this->selectName = $selectName ?? 'filters['.$name.']';
     }
 
     public function render(): View|Closure|string

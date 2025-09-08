@@ -1,9 +1,3 @@
-@props([
-    'name' => 'dates',
-    'direction' => 'from',
-    'filter' => $filter ?? get_filter($name)
-])
-
 <x-ui.form.datepicker {{ $attributes->class([
             'filters__'.$name
         ])
@@ -13,4 +7,3 @@
     name="filters[{{ $name }}][{{ $direction }}]"
     value="{{ request('filters.'.$name.'.'.$direction) }}">
 </x-ui.form.datepicker>
-

@@ -7,23 +7,23 @@ use Illuminate\Contracts\View\View;
 use Illuminate\View\Component;
 use Support\Filters\AbstractFilter;
 
-class Enum extends Component
+class RelationMultiple extends Component
 {
     public function __construct(
         public string $name,
-        public ?AbstractFilter $filter = null,
         public ?array $options = null,
-        public bool $multiple = true,
+        public ?AbstractFilter $filter = null,
         public ?string $placeholder = null,
-        public bool $valueMethod = false
+        public ?string $selectName = null,
     ) {
         $this->filter = $filter ?? get_filter($name);
-        $this->options = $this->filter->options();
         $this->placeholder = $placeholder ?? $this->filter->placeholder();
+        $this->selectName = $selectName ?? 'filters['.$name.']';
+        $this->options = $options ?? $this->filter->getPreparedOptions();
     }
 
     public function render(): View|Closure|string
     {
-        return view('components.common.filters.enum');
+        return view('components.common.filters.relation-multiple');
     }
 }

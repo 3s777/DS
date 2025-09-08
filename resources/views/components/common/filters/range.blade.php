@@ -1,9 +1,3 @@
-@props([
-    'name',
-    'filter' => $filter ?? get_filter($name),
-    'placeholder' => $filter->placeholder()
-])
-
 <div class="filter-range">
     <div class="filter-range__label">{{ $placeholder }}</div>
     <div class="filter-range__inner">

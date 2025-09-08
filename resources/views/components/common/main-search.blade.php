@@ -15,10 +15,11 @@
 
         <div class="main-search__header">
             <x-ui.input-search
+                x-ref="filterSearchForm"
                 x-model="$store.mainFilters.searchInput"
                 class="main-search__input"
                 method="GET"
-                x-bind:action="$store.mainFilters.getFiltersAction()"
+{{--                x-bind:action="$store.mainFilters.getFiltersAction()"--}}
                 wrapper-class="main-search__input-search"
                 link="{{ route('search') }}"
                 :placeholder="$searchPlaceholder">
@@ -27,7 +28,11 @@
                     <div class="main-search__type">
                         <x-libraries.choices
                             x-model="$store.mainFilters.selectedMediaType"
-                            {{--                    @change="$store.mainFilters.getFiltersAction()"--}}
+{{--                            @change="window.location.href = $store.mainFilters.selectedMediaType.value"--}}
+                            @change="
+                            $refs.filterSearchForm.action = $store.mainFilters.selectedMediaType.value
+                            $refs.filterSearchForm.submit();
+                            "
                             class="main-search__media-type"
                             id="main-search__media-type"
                             name="filters[media-type-search]"
@@ -88,6 +93,7 @@
                     }
                 }
             );
+            // console.log(Alpine.store('mainFilters').selectedMediaType);
         })
     </script>
 @endpush

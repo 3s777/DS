@@ -1,4 +1,5 @@
-<x-common.filters.form x-bind:action="$store.mainFilters.getFiltersAction()">
+{{--<x-common.filters.form x-bind:action="$store.mainFilters.getFiltersAction()">--}}
+    <x-common.filters.form>
         <x-grid.col xl="3" lg="4" md="6" sm="12">
             <x-ui.form.group>
                 <x-common.filters.dates />
@@ -44,7 +45,7 @@
 
         <x-grid.col xl="6" lg="4" md="6" sm="12">
             <x-ui.form.group>
-                <x-common.filters.relation-async :filter="$variationFilters['media']" name="media" route="game-media.select" />
+                <x-common.filters.relation-async name="media" route="game-media.select" />
             </x-ui.form.group>
         </x-grid.col>
 
