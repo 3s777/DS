@@ -3,8 +3,8 @@
 namespace App\Game\Services;
 
 use App\Http\Requests\Game\Admin\CreateGameMediaVariationRequest;
-use App\Jobs\GenerateSmallThumbnailsJob;
-use App\Jobs\GenerateThumbnailJob;
+use App\Jobs\Support\GenerateSmallThumbnailsJob;
+use App\Jobs\Support\GenerateThumbnailJob;
 use Domain\Auth\Models\User;
 use Domain\Game\DTOs\FillGameMediaVariationDTO;
 use Domain\Game\Models\GameMedia;

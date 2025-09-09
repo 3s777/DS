@@ -6,7 +6,6 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Auth\Admin\CreateCollectorRequest;
 use App\Http\Requests\Auth\Admin\FilterCollectorRequest;
 use App\Http\Requests\Auth\Admin\UpdateCollectorRequest;
-use App\Http\Requests\MassDeletingRequest;
 use Domain\Auth\Actions\CreateCollectorAction;
 use Domain\Auth\Actions\UpdateCollectorAction;
 use Domain\Auth\DTOs\NewCollectorDTO;
@@ -23,6 +22,7 @@ use Illuminate\Support\Facades\Gate;
 use Support\Actions\MassDeletingAction;
 use Support\DTOs\MassDeletingDTO;
 use Support\Exceptions\MassDeletingException;
+use Support\MassDeletingRequest;
 use Support\ViewModels\AsyncSelectByQueryViewModel;
 
 class CollectorController extends Controller

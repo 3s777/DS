@@ -3,7 +3,6 @@
 namespace Domain\Auth\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
-use App\Models\Image;
 use Database\Factories\Auth\UserFactory;
 use Domain\Auth\FilterRegitrars\Admin\AdminFilterRegistrar;
 use Domain\Auth\Notifications\ResetPasswordAdminNotification;
@@ -22,6 +21,7 @@ use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 use Laravel\Scout\Searchable;
 use Mews\Purifier\Casts\CleanHtml;
+use Models\Image;
 use OwenIt\Auditing\Auditable as HasAuditable;
 use OwenIt\Auditing\Contracts\Auditable;
 use Spatie\MediaLibrary\HasMedia;

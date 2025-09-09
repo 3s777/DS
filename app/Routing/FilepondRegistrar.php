@@ -3,7 +3,7 @@
 namespace App\Routing;
 
 use App\Contracts\RouteRegistrar;
-use App\Http\Controllers\FilePondController;
+use App\Http\Controllers\Temp\FilePondController;
 use Illuminate\Contracts\Routing\Registrar;
 use Illuminate\Support\Facades\Route;
 

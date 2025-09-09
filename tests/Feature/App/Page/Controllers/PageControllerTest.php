@@ -4,8 +4,8 @@ namespace App\Page\Controllers;
 
 use App\Http\Controllers\Page\Admin\PageController;
 use App\Http\Requests\Page\Admin\CreatePageRequest;
-use App\Jobs\GenerateSmallThumbnailsJob;
-use App\Jobs\GenerateThumbnailJob;
+use App\Jobs\Support\GenerateSmallThumbnailsJob;
+use App\Jobs\Support\GenerateThumbnailJob;
 use Database\Factories\Auth\UserFactory;
 use Database\Factories\Page\PageFactory;
 use Domain\Auth\Models\Role;

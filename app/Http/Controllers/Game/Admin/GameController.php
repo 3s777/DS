@@ -6,7 +6,6 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Game\Admin\CreateGameRequest;
 use App\Http\Requests\Game\Admin\FilterGameRequest;
 use App\Http\Requests\Game\Admin\UpdateGameRequest;
-use App\Http\Requests\MassDeletingRequest;
 use Domain\Game\DTOs\FillGameDTO;
 use Domain\Game\Models\Game;
 use Domain\Game\Services\GameService;
@@ -22,6 +21,7 @@ use Illuminate\Routing\Redirector;
 use Support\Actions\MassDeletingAction;
 use Support\DTOs\MassDeletingDTO;
 use Support\Exceptions\MassDeletingException;
+use Support\MassDeletingRequest;
 use Support\ViewModels\AsyncSelectByQueryViewModel;
 
 class GameController extends Controller

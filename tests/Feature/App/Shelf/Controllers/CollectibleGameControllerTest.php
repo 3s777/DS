@@ -4,8 +4,8 @@ namespace App\Shelf\Controllers;
 
 use App\Http\Controllers\Shelf\Admin\CollectibleGameController;
 use App\Http\Requests\Shelf\Admin\CreateCollectibleGameRequest;
-use App\Jobs\GenerateSmallThumbnailsJob;
-use App\Jobs\GenerateThumbnailJob;
+use App\Jobs\Support\GenerateSmallThumbnailsJob;
+use App\Jobs\Support\GenerateThumbnailJob;
 use Database\Factories\Auth\UserFactory;
 use Database\Factories\Shelf\CollectibleFactory;
 use Domain\Auth\Models\Role;

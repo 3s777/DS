@@ -1,14 +1,11 @@
 <?php
 
-namespace App\Models;
+namespace Support\Models;
 
 use Carbon\Carbon;
-use Domain\Auth\Models\Collector;
-use Domain\Auth\Models\User;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\MorphTo;
 use Spatie\MediaLibrary\MediaCollections\Models\Media as BaseMedia;
-use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class Media extends BaseMedia
 {

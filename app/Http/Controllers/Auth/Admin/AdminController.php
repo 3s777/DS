@@ -6,7 +6,6 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Auth\Admin\CreateAdminRequest;
 use App\Http\Requests\Auth\Admin\FilterAdminRequest;
 use App\Http\Requests\Auth\Admin\UpdateAdminRequest;
-use App\Http\Requests\MassDeletingRequest;
 use Domain\Auth\Actions\CreateAdminAction;
 use Domain\Auth\Actions\UpdateAdminAction;
 use Domain\Auth\DTOs\NewAdminDTO;
@@ -23,6 +22,7 @@ use Illuminate\Support\Facades\Gate;
 use Support\Actions\MassDeletingAction;
 use Support\DTOs\MassDeletingDTO;
 use Support\Exceptions\MassDeletingException;
+use Support\MassDeletingRequest;
 use Support\ViewModels\AsyncSelectByQueryViewModel;
 
 class AdminController extends Controller

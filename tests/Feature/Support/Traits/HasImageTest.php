@@ -3,8 +3,8 @@
 namespace Feature\Support\Traits;
 
 use App\Contracts\ImagesManager;
-use App\Jobs\GenerateSmallThumbnailsJob;
-use App\Jobs\GenerateThumbnailJob;
+use App\Jobs\Support\GenerateSmallThumbnailsJob;
+use App\Jobs\Support\GenerateThumbnailJob;
 use Carbon\Carbon;
 use Database\Factories\Auth\UserFactory;
 use Database\Factories\Game\GameDeveloperFactory;

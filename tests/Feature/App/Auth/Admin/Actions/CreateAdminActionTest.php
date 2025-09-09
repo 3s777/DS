@@ -3,8 +3,8 @@
 namespace App\Auth\Admin\Actions;
 
 use App\Http\Requests\Auth\Admin\CreateAdminRequest;
-use App\Jobs\GenerateSmallThumbnailsJob;
-use App\Jobs\GenerateThumbnailJob;
+use App\Jobs\Support\GenerateSmallThumbnailsJob;
+use App\Jobs\Support\GenerateThumbnailJob;
 use Domain\Auth\Actions\CreateAdminAction;
 use Domain\Auth\DTOs\NewAdminDTO;
 use Domain\Auth\Exceptions\UserCreateEditException;
@@ -15,10 +15,8 @@ use Illuminate\Auth\Events\Verified;
 use Illuminate\Auth\Listeners\SendEmailVerificationNotification;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Event;
-use Illuminate\Support\Facades\Exceptions;
 use Illuminate\Support\Facades\Queue;
 use Illuminate\Support\Facades\Storage;
-use PHPUnit\Framework\Attributes\Test;
 use Tests\TestCase;
 
 class CreateAdminActionTest extends TestCase

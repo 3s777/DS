@@ -3,7 +3,6 @@
 namespace App\Http\Controllers\Shelf\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\MassDeletingRequest;
 use App\Http\Requests\Shelf\Admin\CreateKitItemRequest;
 use App\Http\Requests\Shelf\Admin\GetKitItemConditionRequest;
 use App\Http\Requests\Shelf\Admin\UpdateKitItemRequest;
@@ -21,6 +20,7 @@ use Illuminate\Routing\Redirector;
 use Support\Actions\MassDeletingAction;
 use Support\DTOs\MassDeletingDTO;
 use Support\Exceptions\MassDeletingException;
+use Support\MassDeletingRequest;
 
 class KitItemController extends Controller
 {

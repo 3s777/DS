@@ -4,7 +4,7 @@ namespace App\Routing;
 
 use App\Contracts\RouteRegistrar;
 use App\Http\Controllers\Settings\Admin\CountryController;
-use App\Http\Controllers\Settings\ColorThemeController;
+use App\Http\Controllers\Settings\Public\ColorThemeController;
 use Illuminate\Contracts\Routing\Registrar;
 use Illuminate\Support\Facades\Route;
 

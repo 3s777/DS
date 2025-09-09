@@ -4,8 +4,8 @@ namespace App\Game\Controllers;
 
 use App\Http\Controllers\Game\Admin\GamePlatformManufacturerController;
 use App\Http\Requests\Game\Admin\CreateGamePlatformManufacturerRequest;
-use App\Jobs\GenerateSmallThumbnailsJob;
-use App\Jobs\GenerateThumbnailJob;
+use App\Jobs\Support\GenerateSmallThumbnailsJob;
+use App\Jobs\Support\GenerateThumbnailJob;
 use Database\Factories\Auth\UserFactory;
 use Database\Factories\Game\GamePlatformManufacturerFactory;
 use Domain\Auth\Models\Role;

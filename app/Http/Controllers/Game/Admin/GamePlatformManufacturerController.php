@@ -5,7 +5,6 @@ namespace App\Http\Controllers\Game\Admin;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Game\Admin\CreateGamePlatformManufacturerRequest;
 use App\Http\Requests\Game\Admin\UpdateGamePlatformManufacturerRequest;
-use App\Http\Requests\MassDeletingRequest;
 use Domain\Game\Models\GamePlatformManufacturer;
 use Domain\Game\ViewModels\Admin\GamePlatformManufacturerIndexViewModel;
 use Domain\Game\ViewModels\Admin\GamePlatformManufacturerUpdateViewModel;
@@ -17,6 +16,7 @@ use Illuminate\Routing\Redirector;
 use Support\Actions\MassDeletingAction;
 use Support\DTOs\MassDeletingDTO;
 use Support\Exceptions\MassDeletingException;
+use Support\MassDeletingRequest;
 
 class GamePlatformManufacturerController extends Controller
 {

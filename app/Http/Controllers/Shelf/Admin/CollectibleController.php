@@ -3,7 +3,6 @@
 namespace App\Http\Controllers\Shelf\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\MassDeletingRequest;
 use App\Http\Requests\Shelf\Admin\FilterCollectibleRequest;
 use App\Http\Requests\Shelf\Admin\GetCollectibleMediaRequest;
 use Domain\Shelf\Enums\CollectibleTypeEnum;
@@ -19,6 +18,7 @@ use Illuminate\Http\RedirectResponse;
 use Support\Actions\MassDeletingAction;
 use Support\DTOs\MassDeletingDTO;
 use Support\Exceptions\MassDeletingException;
+use Support\MassDeletingRequest;
 
 class CollectibleController extends Controller
 {

@@ -6,7 +6,6 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Game\Admin\CreateGamePublisherRequest;
 use App\Http\Requests\Game\Admin\FilterGamePublisherRequest;
 use App\Http\Requests\Game\Admin\UpdateGamePublisherRequest;
-use App\Http\Requests\MassDeletingRequest;
 use Domain\Game\Models\GamePublisher;
 use Domain\Game\ViewModels\Admin\GamePublisherIndexViewModel;
 use Domain\Game\ViewModels\Admin\GamePublisherUpdateViewModel;
@@ -19,6 +18,7 @@ use Illuminate\Routing\Redirector;
 use Support\Actions\MassDeletingAction;
 use Support\DTOs\MassDeletingDTO;
 use Support\Exceptions\MassDeletingException;
+use Support\MassDeletingRequest;
 use Support\ViewModels\AsyncSelectByQueryViewModel;
 
 class GamePublisherController extends Controller

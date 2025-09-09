@@ -4,8 +4,8 @@ namespace App\Game\Services;
 
 use App\Http\Requests\Auth\Admin\CreateAdminRequest;
 use App\Http\Requests\Game\Admin\CreateGameRequest;
-use App\Jobs\GenerateSmallThumbnailsJob;
-use App\Jobs\GenerateThumbnailJob;
+use App\Jobs\Support\GenerateSmallThumbnailsJob;
+use App\Jobs\Support\GenerateThumbnailJob;
 use Domain\Auth\Models\User;
 use Domain\Game\DTOs\FillGameDTO;
 use Domain\Game\Models\Game;

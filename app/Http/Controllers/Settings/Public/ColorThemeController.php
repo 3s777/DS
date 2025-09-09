@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Settings;
+namespace App\Http\Controllers\Settings\Public;
 
 use App\Http\Controllers\Controller;
 use Domain\Settings\Enums\ColorThemeEnum;

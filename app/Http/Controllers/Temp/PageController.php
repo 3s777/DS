@@ -1,8 +1,9 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Temp;
 
-use Domain\Shelf\ViewModel\CollectibleUpdateViewModel;
+use App\Http\Controllers\Controller;
+use Domain\Shelf\ViewModels\CollectibleUpdateViewModel;
 
 class PageController extends Controller
 {

@@ -3,7 +3,6 @@
 namespace Feature\Support\Images;
 
 use App\Contracts\ImagesManager;
-use App\Models\Media;
 use Database\Factories\Auth\UserFactory;
 use Database\Factories\Game\GameDeveloperFactory;
 use Domain\Auth\Models\User;
@@ -13,6 +12,7 @@ use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Storage;
 use Support\Images\MediaLibraryImageManager;
+use Support\Models\Media;
 use Tests\TestCase;
 
 class MediaLibraryImageManagerTest extends TestCase

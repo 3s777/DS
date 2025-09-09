@@ -3,7 +3,6 @@
 namespace App\Http\Controllers\Shelf\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\MassDeletingRequest;
 use App\Http\Requests\Shelf\Admin\CreateCategoryRequest;
 use App\Http\Requests\Shelf\Admin\UpdateCategoryRequest;
 use Domain\Shelf\DTOs\FillCategoryDTO;
@@ -19,6 +18,7 @@ use Illuminate\Routing\Redirector;
 use Support\Actions\MassDeletingAction;
 use Support\DTOs\MassDeletingDTO;
 use Support\Exceptions\MassDeletingException;
+use Support\MassDeletingRequest;
 
 class CategoryController extends Controller
 {

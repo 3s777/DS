@@ -3,10 +3,9 @@
 namespace App\Auth\Collector\Controllers;
 
 use App\Http\Controllers\Auth\Public\Collector\ProfileController;
-use App\Http\Requests\Auth\Admin\CreateCollectorRequest;
 use App\Http\Requests\Auth\Public\UpdateCollectorProfileRequest;
-use App\Jobs\GenerateSmallThumbnailsJob;
-use App\Jobs\GenerateThumbnailJob;
+use App\Jobs\Support\GenerateSmallThumbnailsJob;
+use App\Jobs\Support\GenerateThumbnailJob;
 use Database\Factories\Auth\CollectorFactory;
 use Domain\Auth\Models\Collector;
 use Illuminate\Foundation\Testing\RefreshDatabase;

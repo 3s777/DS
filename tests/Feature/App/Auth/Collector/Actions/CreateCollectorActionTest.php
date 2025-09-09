@@ -3,8 +3,8 @@
 namespace App\Auth\Collector\Actions;
 
 use App\Http\Requests\Auth\Admin\CreateCollectorRequest;
-use App\Jobs\GenerateSmallThumbnailsJob;
-use App\Jobs\GenerateThumbnailJob;
+use App\Jobs\Support\GenerateSmallThumbnailsJob;
+use App\Jobs\Support\GenerateThumbnailJob;
 use Domain\Auth\Actions\CreateCollectorAction;
 use Domain\Auth\DTOs\NewCollectorDTO;
 use Domain\Auth\Exceptions\UserCreateEditException;
@@ -15,7 +15,6 @@ use Illuminate\Auth\Events\Verified;
 use Illuminate\Auth\Listeners\SendEmailVerificationNotification;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Event;
-use Illuminate\Support\Facades\Exceptions;
 use Illuminate\Support\Facades\Queue;
 use Illuminate\Support\Facades\Storage;
 use Tests\TestCase;

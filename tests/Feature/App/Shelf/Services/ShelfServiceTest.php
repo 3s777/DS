@@ -4,8 +4,8 @@ namespace App\Shelf\Services;
 
 use App\Http\Requests\Auth\Admin\CreateAdminRequest;
 use App\Http\Requests\Shelf\Admin\CreateShelfRequest;
-use App\Jobs\GenerateSmallThumbnailsJob;
-use App\Jobs\GenerateThumbnailJob;
+use App\Jobs\Support\GenerateSmallThumbnailsJob;
+use App\Jobs\Support\GenerateThumbnailJob;
 use Domain\Auth\Models\Collector;
 use Domain\Auth\Models\User;
 use Domain\Shelf\DTOs\FillShelfDTO;

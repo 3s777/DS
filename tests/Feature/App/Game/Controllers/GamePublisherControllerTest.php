@@ -4,8 +4,8 @@ namespace App\Game\Controllers;
 
 use App\Http\Controllers\Game\Admin\GamePublisherController;
 use App\Http\Requests\Game\Admin\CreateGamePublisherRequest;
-use App\Jobs\GenerateSmallThumbnailsJob;
-use App\Jobs\GenerateThumbnailJob;
+use App\Jobs\Support\GenerateSmallThumbnailsJob;
+use App\Jobs\Support\GenerateThumbnailJob;
 use Database\Factories\Auth\UserFactory;
 use Database\Factories\Game\GamePublisherFactory;
 use Domain\Auth\Models\Role;

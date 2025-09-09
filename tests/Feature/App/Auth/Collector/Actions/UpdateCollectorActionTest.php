@@ -3,8 +3,8 @@
 namespace App\Auth\Collector\Actions;
 
 use App\Http\Requests\Auth\Admin\CreateCollectorRequest;
-use App\Jobs\GenerateSmallThumbnailsJob;
-use App\Jobs\GenerateThumbnailJob;
+use App\Jobs\Support\GenerateSmallThumbnailsJob;
+use App\Jobs\Support\GenerateThumbnailJob;
 use Database\Seeders\PermissionsTestSeeder;
 use Domain\Auth\Actions\CreateCollectorAction;
 use Domain\Auth\Actions\UpdateCollectorAction;

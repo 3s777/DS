@@ -3,10 +3,10 @@
 namespace App\Console\Commands\Api;
 
 use App\Console\BaseCommand;
-use App\Models\ApiStagingData;
 use Database\Seeders\Api\GameDeveloperToStagingSeeder;
 use Illuminate\Contracts\Console\PromptsForMissingInput;
 use Illuminate\Support\Collection;
+use Models\ApiStagingData;
 
 class GameDeveloperSeederCommand extends BaseCommand implements PromptsForMissingInput
 {

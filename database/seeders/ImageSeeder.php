@@ -2,9 +2,9 @@
 
 namespace Database\Seeders;
 
-use App\Models\Image;
 use Domain\Auth\Models\User;
 use Illuminate\Database\Seeder;
+use Models\Image;
 
 class ImageSeeder extends Seeder
 {

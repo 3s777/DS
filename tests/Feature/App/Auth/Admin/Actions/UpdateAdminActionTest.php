@@ -3,8 +3,8 @@
 namespace App\Auth\Admin\Actions;
 
 use App\Http\Requests\Auth\Admin\CreateAdminRequest;
-use App\Jobs\GenerateSmallThumbnailsJob;
-use App\Jobs\GenerateThumbnailJob;
+use App\Jobs\Support\GenerateSmallThumbnailsJob;
+use App\Jobs\Support\GenerateThumbnailJob;
 use Database\Seeders\PermissionsTestSeeder;
 use Domain\Auth\Actions\CreateAdminAction;
 use Domain\Auth\Actions\UpdateAdminAction;

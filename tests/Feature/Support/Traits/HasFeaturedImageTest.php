@@ -2,8 +2,8 @@
 
 namespace Support\Traits;
 
-use App\Jobs\GenerateSmallThumbnailsJob;
-use App\Jobs\GenerateThumbnailJob;
+use App\Jobs\Support\GenerateSmallThumbnailsJob;
+use App\Jobs\Support\GenerateThumbnailJob;
 use Database\Factories\Auth\UserFactory;
 use Database\Factories\Game\GameDeveloperFactory;
 use Domain\Auth\Models\User;

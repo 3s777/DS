@@ -5,7 +5,6 @@ namespace App\Http\Controllers\Game\Admin;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Game\Admin\CreateGameGenreRequest;
 use App\Http\Requests\Game\Admin\UpdateGameGenreRequest;
-use App\Http\Requests\MassDeletingRequest;
 use Domain\Game\Models\GameGenre;
 use Domain\Game\ViewModels\Admin\GameGenreIndexViewModel;
 use Domain\Game\ViewModels\Admin\GameGenreUpdateViewModel;
@@ -17,6 +16,7 @@ use Illuminate\Routing\Redirector;
 use Support\Actions\MassDeletingAction;
 use Support\DTOs\MassDeletingDTO;
 use Support\Exceptions\MassDeletingException;
+use Support\MassDeletingRequest;
 
 class GameGenreController extends Controller
 {

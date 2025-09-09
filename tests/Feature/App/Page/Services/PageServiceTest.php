@@ -3,8 +3,8 @@
 namespace App\Page\Services;
 
 use App\Http\Requests\Page\Admin\CreatePageRequest;
-use App\Jobs\GenerateSmallThumbnailsJob;
-use App\Jobs\GenerateThumbnailJob;
+use App\Jobs\Support\GenerateSmallThumbnailsJob;
+use App\Jobs\Support\GenerateThumbnailJob;
 use Domain\Auth\Models\User;
 use Domain\Page\DTOs\FillPageDTO;
 use Domain\Page\Models\Page;

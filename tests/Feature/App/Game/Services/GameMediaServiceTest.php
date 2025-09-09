@@ -4,8 +4,8 @@ namespace App\Game\Services;
 
 use App\Http\Requests\Auth\Admin\CreateAdminRequest;
 use App\Http\Requests\Game\Admin\CreateGameMediaRequest;
-use App\Jobs\GenerateSmallThumbnailsJob;
-use App\Jobs\GenerateThumbnailJob;
+use App\Jobs\Support\GenerateSmallThumbnailsJob;
+use App\Jobs\Support\GenerateThumbnailJob;
 use Domain\Auth\Models\User;
 use Domain\Game\DTOs\FillGameMediaDTO;
 use Domain\Game\Models\Game;

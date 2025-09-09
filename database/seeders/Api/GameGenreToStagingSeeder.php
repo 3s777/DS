@@ -2,8 +2,8 @@
 
 namespace Database\Seeders\Api;
 
-use App\Models\ApiStagingData;
 use Illuminate\Support\Facades\Http;
+use Models\ApiStagingData;
 
 class GameGenreToStagingSeeder extends BaseApiSeeder
 {

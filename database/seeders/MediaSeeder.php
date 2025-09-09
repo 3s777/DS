@@ -2,8 +2,8 @@
 
 namespace Database\Seeders;
 
-use App\Models\Media;
 use Illuminate\Database\Seeder;
+use Models\Media;
 
 class MediaSeeder extends Seeder
 {

@@ -2,7 +2,6 @@
 
 namespace Domain\Auth\Models;
 
-use App\Models\Image;
 use Database\Factories\Auth\CollectorFactory;
 use Domain\Auth\FilterRegitrars\Admin\CollectorFilterRegistrar as AdminCollectorFilterRegistrar;
 use Domain\Auth\FilterRegitrars\Public\CollectorFilterRegistrar;
@@ -24,6 +23,7 @@ use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 use Laravel\Scout\Searchable;
 use Mews\Purifier\Casts\CleanHtml;
+use Models\Image;
 use OwenIt\Auditing\Auditable as HasAuditable;
 use OwenIt\Auditing\Contracts\Auditable;
 use Spatie\MediaLibrary\HasMedia;

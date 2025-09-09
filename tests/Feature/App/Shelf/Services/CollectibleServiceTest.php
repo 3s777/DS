@@ -3,8 +3,8 @@
 namespace App\Shelf\Services;
 
 use App\Http\Requests\Shelf\Admin\CreateCollectibleGameRequest;
-use App\Jobs\GenerateSmallThumbnailsJob;
-use App\Jobs\GenerateThumbnailJob;
+use App\Jobs\Support\GenerateSmallThumbnailsJob;
+use App\Jobs\Support\GenerateThumbnailJob;
 use Domain\Auth\Models\Collector;
 use Domain\Auth\Models\User;
 use Domain\Game\Models\GameMediaVariation;
