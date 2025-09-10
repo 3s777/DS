@@ -2,11 +2,11 @@
 
 namespace Domain\Game\Factories;
 
-use Domain\Game\ViewModels\Public\GameMediaIndexViewModel;
-use Domain\Game\ViewModels\Public\GameVariationsIndexViewModel;
+use Domain\Game\ViewModels\GameMediaIndexViewModel;
+use Domain\Game\ViewModels\GameVariationsIndexViewModel;
 use Domain\Shelf\Contracts\CategorySearchFactoryContract;
-use Spatie\ViewModels\ViewModel;
 use Domain\Shelf\Models\Category;
+use Spatie\ViewModels\ViewModel;
 
 class GameMediaSearchFactory implements CategorySearchFactoryContract
 {

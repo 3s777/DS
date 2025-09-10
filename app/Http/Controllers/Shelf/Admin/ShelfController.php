@@ -2,15 +2,15 @@
 
 namespace App\Http\Controllers\Shelf\Admin;
 
+use Admin\Shelf\DTOs\FillShelfDTO;
+use Admin\Shelf\Services\ShelfService;
+use Admin\Shelf\ViewModels\ShelfIndexViewModel;
+use Admin\Shelf\ViewModels\ShelfUpdateViewModel;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Shelf\Admin\CreateShelfRequest;
 use App\Http\Requests\Shelf\Admin\FilterShelfRequest;
 use App\Http\Requests\Shelf\Admin\UpdateShelfRequest;
-use Domain\Shelf\DTOs\FillShelfDTO;
 use Domain\Shelf\Models\Shelf;
-use Domain\Shelf\Services\ShelfService;
-use Domain\Shelf\ViewModels\ShelfIndexViewModel;
-use Domain\Shelf\ViewModels\ShelfUpdateViewModel;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
 use Illuminate\Foundation\Application;

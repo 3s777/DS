@@ -2,12 +2,12 @@
 
 namespace App\Http\Controllers\Game\Admin;
 
+use Admin\Game\ViewModels\GamePlatformManufacturerIndexViewModel;
+use Admin\Game\ViewModels\GamePlatformManufacturerUpdateViewModel;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Game\Admin\CreateGamePlatformManufacturerRequest;
 use App\Http\Requests\Game\Admin\UpdateGamePlatformManufacturerRequest;
 use Domain\Game\Models\GamePlatformManufacturer;
-use Domain\Game\ViewModels\Admin\GamePlatformManufacturerIndexViewModel;
-use Domain\Game\ViewModels\Admin\GamePlatformManufacturerUpdateViewModel;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
 use Illuminate\Foundation\Application;

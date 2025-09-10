@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers\Temp;
 
+use Admin\Shelf\ViewModels\CollectibleUpdateViewModel;
 use App\Http\Controllers\Controller;
-use Domain\Shelf\ViewModels\CollectibleUpdateViewModel;
 
 class PageController extends Controller
 {

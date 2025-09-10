@@ -2,16 +2,16 @@
 
 namespace App\Http\Controllers\Game\Admin;
 
+use Admin\Game\Services\GameService;
+use Admin\Game\ViewModels\GameIndexViewModel;
+use Admin\Game\ViewModels\GamesForAutocompleteViewModel;
+use Admin\Game\ViewModels\GameUpdateViewModel;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Game\Admin\CreateGameRequest;
 use App\Http\Requests\Game\Admin\FilterGameRequest;
 use App\Http\Requests\Game\Admin\UpdateGameRequest;
-use Domain\Game\DTOs\FillGameDTO;
 use Domain\Game\Models\Game;
-use Domain\Game\Services\GameService;
-use Domain\Game\ViewModels\Admin\GameIndexViewModel;
-use Domain\Game\ViewModels\Admin\GamesForAutocompleteViewModel;
-use Domain\Game\ViewModels\Admin\GameUpdateViewModel;
+use Admin\Game\DTOs\FillGameDTO;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
 use Illuminate\Foundation\Application;

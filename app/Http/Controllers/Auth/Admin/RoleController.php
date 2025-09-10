@@ -2,14 +2,14 @@
 
 namespace App\Http\Controllers\Auth\Admin;
 
+use Admin\Auth\DTOs\FillRoleDTO;
+use Admin\Auth\Services\RoleService;
+use Admin\Auth\ViewModels\RoleIndexViewModel;
+use Admin\Auth\ViewModels\RoleUpdateViewModel;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Auth\Admin\CreateRoleRequest;
 use App\Http\Requests\Auth\Admin\UpdateRoleRequest;
-use Domain\Auth\DTOs\FillRoleDTO;
 use Domain\Auth\Models\Role;
-use Domain\Auth\Services\RoleService;
-use Domain\Auth\ViewModels\Admin\RoleIndexViewModel;
-use Domain\Auth\ViewModels\Admin\RoleUpdateViewModel;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
 use Illuminate\Foundation\Application;

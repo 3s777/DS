@@ -2,8 +2,8 @@
 
 namespace Domain\Game\Factories;
 
+use Admin\Shelf\ViewModels\CategoryIndexViewModel;
 use Domain\Shelf\Contracts\CategorySearchFactoryContract;
-use Domain\Shelf\ViewModels\CategoryIndexViewModel;
 use Spatie\ViewModels\ViewModel;
 
 class BookSearchFactory implements CategorySearchFactoryContract

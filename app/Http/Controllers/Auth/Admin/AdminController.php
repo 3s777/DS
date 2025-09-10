@@ -2,17 +2,17 @@
 
 namespace App\Http\Controllers\Auth\Admin;
 
+use Admin\Auth\Actions\CreateAdminAction;
+use Admin\Auth\Actions\UpdateAdminAction;
+use Admin\Auth\DTOs\UpdateAdminDTO;
+use Admin\Auth\ViewModels\AdminIndexViewModel;
+use Admin\Auth\ViewModels\AdminUpdateViewModel;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Auth\Admin\CreateAdminRequest;
 use App\Http\Requests\Auth\Admin\FilterAdminRequest;
 use App\Http\Requests\Auth\Admin\UpdateAdminRequest;
-use Domain\Auth\Actions\CreateAdminAction;
-use Domain\Auth\Actions\UpdateAdminAction;
 use Domain\Auth\DTOs\NewAdminDTO;
-use Domain\Auth\DTOs\UpdateAdminDTO;
 use Domain\Auth\Models\User;
-use Domain\Auth\ViewModels\Admin\AdminIndexViewModel;
-use Domain\Auth\ViewModels\Admin\AdminUpdateViewModel;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
 use Illuminate\Foundation\Application;

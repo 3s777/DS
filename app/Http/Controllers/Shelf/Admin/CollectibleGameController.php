@@ -2,13 +2,13 @@
 
 namespace App\Http\Controllers\Shelf\Admin;
 
+use Admin\Shelf\DTOs\FillCollectibleDTO;
+use Admin\Shelf\Services\CollectibleService;
+use Admin\Shelf\ViewModels\CollectibleUpdateViewModel;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Shelf\Admin\CreateCollectibleGameRequest;
 use App\Http\Requests\Shelf\Admin\UpdateCollectibleGameRequest;
-use Domain\Shelf\DTOs\FillCollectibleDTO;
 use Domain\Shelf\Models\Collectible;
-use Domain\Shelf\Services\CollectibleService;
-use Domain\Shelf\ViewModels\CollectibleUpdateViewModel;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
 use Illuminate\Foundation\Application;

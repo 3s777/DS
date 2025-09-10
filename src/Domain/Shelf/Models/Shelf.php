@@ -2,9 +2,9 @@
 
 namespace Domain\Shelf\Models;
 
+use Admin\Shelf\FilterRegistrars\ShelfFilterRegistrar;
 use Database\Factories\Shelf\ShelfFactory;
 use Domain\Auth\Models\Collector;
-use Domain\Shelf\FilterRegistrars\ShelfFilterRegistrar;
 use Domain\Shelf\QueryBuilders\ShelfQueryBuilder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -16,8 +16,8 @@ use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
 use Spatie\Translatable\HasTranslations;
 use Support\Traits\Models\HasCollector;
-use Support\Traits\Models\HasImage;
 use Support\Traits\Models\HasFeaturedImage;
+use Support\Traits\Models\HasImage;
 
 class Shelf extends Model implements HasMedia
 {

@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Page\Public;
 
 use App\Http\Controllers\Controller;
 use Domain\Page\Models\Page;
-use Domain\Page\ViewModels\Public\QaViewModel;
+use Domain\Page\ViewModels\QaViewModel;
 
 class RulesController extends Controller
 {

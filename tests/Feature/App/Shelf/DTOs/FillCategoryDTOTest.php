@@ -2,8 +2,8 @@
 
 namespace App\Shelf\DTOs;
 
+use Admin\Shelf\DTOs\FillCategoryDTO;
 use App\Http\Requests\Shelf\Admin\CreateCategoryRequest;
-use Domain\Shelf\DTOs\FillCategoryDTO;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 

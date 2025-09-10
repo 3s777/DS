@@ -7,7 +7,6 @@ use App\Http\Requests\Game\Admin\CreateGameMediaRequest;
 use App\Jobs\Support\GenerateSmallThumbnailsJob;
 use App\Jobs\Support\GenerateThumbnailJob;
 use Domain\Auth\Models\User;
-use Domain\Game\DTOs\FillGameMediaDTO;
 use Domain\Game\Models\Game;
 use Domain\Game\Models\GameDeveloper;
 use Domain\Game\Models\GameGenre;
@@ -15,12 +14,13 @@ use Domain\Game\Models\GameMedia;
 use Domain\Game\Models\GameMediaVariation;
 use Domain\Game\Models\GamePlatform;
 use Domain\Game\Models\GamePublisher;
-use Domain\Game\Services\GameMediaService;
+use Admin\Game\DTOs\FillGameMediaDTO;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Http\Request;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Queue;
 use Illuminate\Support\Facades\Storage;
+use Admin\Game\Services\GameMediaService;
 use Tests\TestCase;
 
 class GameMediaServiceTest extends TestCase

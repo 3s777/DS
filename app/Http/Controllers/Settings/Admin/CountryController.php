@@ -2,14 +2,14 @@
 
 namespace App\Http\Controllers\Settings\Admin;
 
+use Admin\Settings\DTOs\FillCountryDTO;
+use Admin\Settings\Services\CountryService;
+use Admin\Settings\ViewModels\CountryIndexViewModel;
+use Admin\Settings\ViewModels\CountryUpdateViewModel;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Settings\Admin\CreateCountryRequest;
 use App\Http\Requests\Settings\Admin\UpdateCountryRequest;
-use Domain\Settings\DTOs\FillCountryDTO;
 use Domain\Settings\Models\Country;
-use Domain\Settings\Services\CountryService;
-use Domain\Settings\ViewModels\CountryIndexViewModel;
-use Domain\Settings\ViewModels\CountryUpdateViewModel;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
 use Illuminate\Foundation\Application;

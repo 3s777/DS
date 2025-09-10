@@ -3,7 +3,7 @@
 namespace App\Page\DTOs;
 
 use App\Http\Requests\Page\Admin\CreatePageRequest;
-use Domain\Page\DTOs\FillPageDTO;
+use Admin\Page\DTOs\FillPageDTO;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 

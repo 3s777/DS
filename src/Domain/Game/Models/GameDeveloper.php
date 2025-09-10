@@ -4,8 +4,8 @@ namespace Domain\Game\Models;
 
 use Database\Factories\Game\GameDeveloperFactory;
 use Domain\Auth\Models\User;
-use Domain\Game\FilterRegistrars\Admin\GameDeveloperFilterRegistrar;
 use Domain\Game\QueryBuilders\GameDeveloperQueryBuilder;
+use Admin\Game\FilterRegistrars\GameDeveloperFilterRegistrar;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;

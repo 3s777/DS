@@ -2,14 +2,14 @@
 
 namespace App\Http\Controllers\Shelf\Admin;
 
+use Admin\Shelf\DTOs\FillCategoryDTO;
+use Admin\Shelf\Services\CategoryService;
+use Admin\Shelf\ViewModels\CategoryIndexViewModel;
+use Admin\Shelf\ViewModels\CategoryUpdateViewModel;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Shelf\Admin\CreateCategoryRequest;
 use App\Http\Requests\Shelf\Admin\UpdateCategoryRequest;
-use Domain\Shelf\DTOs\FillCategoryDTO;
 use Domain\Shelf\Models\Category;
-use Domain\Shelf\Services\CategoryService;
-use Domain\Shelf\ViewModels\CategoryIndexViewModel;
-use Domain\Shelf\ViewModels\CategoryUpdateViewModel;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
 use Illuminate\Foundation\Application;

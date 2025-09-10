@@ -2,15 +2,15 @@
 
 namespace App\Shelf\Services;
 
+use Admin\Shelf\DTOs\FillShelfDTO;
+use Admin\Shelf\Services\ShelfService;
 use App\Http\Requests\Auth\Admin\CreateAdminRequest;
 use App\Http\Requests\Shelf\Admin\CreateShelfRequest;
 use App\Jobs\Support\GenerateSmallThumbnailsJob;
 use App\Jobs\Support\GenerateThumbnailJob;
 use Domain\Auth\Models\Collector;
 use Domain\Auth\Models\User;
-use Domain\Shelf\DTOs\FillShelfDTO;
 use Domain\Shelf\Models\Shelf;
-use Domain\Shelf\Services\ShelfService;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Http\Request;
 use Illuminate\Http\UploadedFile;

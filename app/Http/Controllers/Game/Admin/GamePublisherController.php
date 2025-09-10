@@ -2,13 +2,13 @@
 
 namespace App\Http\Controllers\Game\Admin;
 
+use Admin\Game\ViewModels\GamePublisherIndexViewModel;
+use Admin\Game\ViewModels\GamePublisherUpdateViewModel;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Game\Admin\CreateGamePublisherRequest;
 use App\Http\Requests\Game\Admin\FilterGamePublisherRequest;
 use App\Http\Requests\Game\Admin\UpdateGamePublisherRequest;
 use Domain\Game\Models\GamePublisher;
-use Domain\Game\ViewModels\Admin\GamePublisherIndexViewModel;
-use Domain\Game\ViewModels\Admin\GamePublisherUpdateViewModel;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
 use Illuminate\Foundation\Application;

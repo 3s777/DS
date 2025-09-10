@@ -40,7 +40,8 @@
             "Database\\Seeders\\": "database/seeders/",
             "Domain\\": "src/Domain/",
             "Services\\": "src/Services/",
-            "Support\\": "src/Support/"
+            "Support\\": "src/Support/",
+            "Admin\\": "src/Admin/"
         },
         "files": [
             "src/Support/helpers.php"

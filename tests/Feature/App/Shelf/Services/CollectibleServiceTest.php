@@ -2,6 +2,8 @@
 
 namespace App\Shelf\Services;
 
+use Admin\Shelf\DTOs\FillCollectibleDTO;
+use Admin\Shelf\Services\CollectibleService;
 use App\Http\Requests\Shelf\Admin\CreateCollectibleGameRequest;
 use App\Jobs\Support\GenerateSmallThumbnailsJob;
 use App\Jobs\Support\GenerateThumbnailJob;
@@ -9,12 +11,10 @@ use Domain\Auth\Models\Collector;
 use Domain\Auth\Models\User;
 use Domain\Game\Models\GameMediaVariation;
 use Domain\Settings\Models\Country;
-use Domain\Shelf\DTOs\FillCollectibleDTO;
 use Domain\Shelf\Enums\TargetEnum;
 use Domain\Shelf\Models\Category;
 use Domain\Shelf\Models\Collectible;
 use Domain\Shelf\Models\Shelf;
-use Domain\Shelf\Services\CollectibleService;
 use Domain\Trade\Enums\ReservationEnum;
 use Domain\Trade\Enums\ShippingEnum;
 use Domain\Trade\Models\Auction;

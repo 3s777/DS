@@ -5,16 +5,16 @@ namespace App\Http\Controllers\Page\Admin;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Page\Admin\CreatePageCategoryRequest;
 use App\Http\Requests\Page\Admin\UpdatePageCategoryRequest;
-use Domain\Page\DTOs\FillPageCategoryDTO;
 use Domain\Page\Models\PageCategory;
-use Domain\Page\Services\Admin\PageCategoryService;
-use Domain\Page\ViewModels\Admin\PageCategoryIndexViewModel;
-use Domain\Page\ViewModels\Admin\PageCategoryUpdateViewModel;
+use Admin\Page\DTOs\FillPageCategoryDTO;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
 use Illuminate\Foundation\Application;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Routing\Redirector;
+use Admin\Page\Services\PageCategoryService;
+use Admin\Page\ViewModels\PageCategoryIndexViewModel;
+use Admin\Page\ViewModels\PageCategoryUpdateViewModel;
 
 class PageCategoryController extends Controller
 {

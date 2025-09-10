@@ -2,14 +2,14 @@
 
 namespace App\Http\Controllers\Shelf\Admin;
 
+use Admin\Shelf\ViewModels\CollectibleIndexViewModel;
+use Admin\Shelf\ViewModels\CollectibleMediaViewModel;
+use Admin\Shelf\ViewModels\CollectibleUpdateViewModel;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Shelf\Admin\FilterCollectibleRequest;
 use App\Http\Requests\Shelf\Admin\GetCollectibleMediaRequest;
 use Domain\Shelf\Enums\CollectibleTypeEnum;
 use Domain\Shelf\Models\Collectible;
-use Domain\Shelf\ViewModels\CollectibleIndexViewModel;
-use Domain\Shelf\ViewModels\CollectibleMediaViewModel;
-use Domain\Shelf\ViewModels\CollectibleUpdateViewModel;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
 use Illuminate\Database\Eloquent\Relations\Relation;

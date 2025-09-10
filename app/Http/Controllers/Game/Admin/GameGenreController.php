@@ -2,12 +2,12 @@
 
 namespace App\Http\Controllers\Game\Admin;
 
+use Admin\Game\ViewModels\GameGenreIndexViewModel;
+use Admin\Game\ViewModels\GameGenreUpdateViewModel;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Game\Admin\CreateGameGenreRequest;
 use App\Http\Requests\Game\Admin\UpdateGameGenreRequest;
 use Domain\Game\Models\GameGenre;
-use Domain\Game\ViewModels\Admin\GameGenreIndexViewModel;
-use Domain\Game\ViewModels\Admin\GameGenreUpdateViewModel;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
 use Illuminate\Foundation\Application;

@@ -2,11 +2,13 @@
 
 namespace Domain\Shelf\Models;
 
+use Admin\Shelf\FilterRegistrars\CollectibleFilterRegistrar;
 use Database\Factories\Shelf\CollectibleFactory;
 use Domain\Auth\Models\Collector;
 use Domain\Auth\Models\User;
+use Domain\Shelf\Casts\Auction as AuctionCast;
 use Domain\Shelf\Casts\Properties;
-use Domain\Shelf\FilterRegistrars\CollectibleFilterRegistrar;
+use Domain\Shelf\Casts\Sale as SaleCast;
 use Domain\Shelf\Observers\CollectibleObserver;
 use Domain\Shelf\QueryBuilders\CollectibleQueryBuilder;
 use Domain\Trade\Models\Auction;
@@ -18,19 +20,16 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Database\Eloquent\Relations\MorphTo;
-use Illuminate\Database\Eloquent\Relations\MorphToMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Mews\Purifier\Casts\CleanHtml;
 use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
 use Spatie\Translatable\HasTranslations;
 use Support\Casts\Price;
+use Support\Traits\Models\HasFeaturedImage;
 use Support\Traits\Models\HasImage;
 use Support\Traits\Models\HasImages;
-use Support\Traits\Models\HasFeaturedImage;
 use Support\Traits\Models\HasUser;
-use Domain\Shelf\Casts\Auction as AuctionCast;
-use Domain\Shelf\Casts\Sale as SaleCast;
 
 #[ObservedBy([CollectibleObserver::class])]
 class Collectible extends Model implements HasMedia

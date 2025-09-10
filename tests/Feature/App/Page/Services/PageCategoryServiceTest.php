@@ -5,12 +5,12 @@ namespace App\Page\Services;
 use App\Http\Requests\Auth\Admin\CreateAdminRequest;
 use App\Http\Requests\Page\Admin\CreatePageCategoryRequest;
 use Domain\Auth\Models\User;
-use Domain\Page\DTOs\FillPageCategoryDTO;
 use Domain\Page\Models\PageCategory;
-use Domain\Page\Services\Admin\PageCategoryService;
+use Admin\Page\DTOs\FillPageCategoryDTO;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
+use Admin\Page\Services\PageCategoryService;
 use Tests\TestCase;
 
 class PageCategoryServiceTest extends TestCase

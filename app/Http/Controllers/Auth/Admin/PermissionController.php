@@ -2,13 +2,13 @@
 
 namespace App\Http\Controllers\Auth\Admin;
 
+use Admin\Auth\DTOs\FillPermissionDTO;
+use Admin\Auth\Services\PermissionService;
+use Admin\Auth\ViewModels\PermissionIndexViewModel;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Auth\Admin\CreatePermissionRequest;
 use App\Http\Requests\Auth\Admin\UpdatePermissionRequest;
-use Domain\Auth\DTOs\FillPermissionDTO;
 use Domain\Auth\Models\Permission;
-use Domain\Auth\Services\PermissionService;
-use Domain\Auth\ViewModels\Admin\PermissionIndexViewModel;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
 use Illuminate\Foundation\Application;

@@ -2,16 +2,16 @@
 
 namespace App\Http\Controllers\Shelf\Admin;
 
+use Admin\Shelf\DTOs\FillKitItemDTO;
+use Admin\Shelf\Services\KitItemService;
+use Admin\Shelf\ViewModels\KitItemConditionViewModel;
+use Admin\Shelf\ViewModels\KitItemIndexViewModel;
+use Admin\Shelf\ViewModels\KitItemUpdateViewModel;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Shelf\Admin\CreateKitItemRequest;
 use App\Http\Requests\Shelf\Admin\GetKitItemConditionRequest;
 use App\Http\Requests\Shelf\Admin\UpdateKitItemRequest;
-use Domain\Shelf\DTOs\FillKitItemDTO;
 use Domain\Shelf\Models\KitItem;
-use Domain\Shelf\Services\KitItemService;
-use Domain\Shelf\ViewModels\KitItemConditionViewModel;
-use Domain\Shelf\ViewModels\KitItemIndexViewModel;
-use Domain\Shelf\ViewModels\KitItemUpdateViewModel;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
 use Illuminate\Foundation\Application;

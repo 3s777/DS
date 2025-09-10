@@ -6,15 +6,15 @@ use App\Http\Requests\Page\Admin\CreatePageRequest;
 use App\Jobs\Support\GenerateSmallThumbnailsJob;
 use App\Jobs\Support\GenerateThumbnailJob;
 use Domain\Auth\Models\User;
-use Domain\Page\DTOs\FillPageDTO;
 use Domain\Page\Models\Page;
-use Domain\Page\Services\Admin\PageService;
+use Admin\Page\DTOs\FillPageDTO;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Http\Request;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Queue;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
+use Admin\Page\Services\PageService;
 use Tests\TestCase;
 
 class PageServiceTest extends TestCase

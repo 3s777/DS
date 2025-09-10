@@ -5,16 +5,16 @@ namespace App\Http\Controllers\Page\Admin;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Page\Admin\CreatePageRequest;
 use App\Http\Requests\Page\Admin\UpdatePageRequest;
-use Domain\Page\DTOs\FillPageDTO;
 use Domain\Page\Models\Page;
-use Domain\Page\Services\Admin\PageService;
-use Domain\Page\ViewModels\Admin\PageIndexViewModel;
-use Domain\Page\ViewModels\Admin\PageUpdateViewModel;
+use Admin\Page\DTOs\FillPageDTO;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
 use Illuminate\Foundation\Application;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Routing\Redirector;
+use Admin\Page\Services\PageService;
+use Admin\Page\ViewModels\PageIndexViewModel;
+use Admin\Page\ViewModels\PageUpdateViewModel;
 
 class PageController extends Controller
 {

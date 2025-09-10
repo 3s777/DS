@@ -3,13 +3,13 @@
 namespace Domain\Auth\Models;
 
 use Database\Factories\Auth\CollectorFactory;
-use Domain\Auth\FilterRegitrars\Admin\CollectorFilterRegistrar as AdminCollectorFilterRegistrar;
-use Domain\Auth\FilterRegitrars\Public\CollectorFilterRegistrar;
+use Domain\Auth\FilterRegitrars\CollectorFilterRegistrar;
 use Domain\Auth\Notifications\ResetPasswordCollectorNotification;
 use Domain\Auth\Notifications\VerifyEmailCollectorNotification;
 use Domain\Auth\QueryBuilders\CollectorQueryBuilder;
 use Domain\Shelf\Models\Collectible;
 use Domain\Shelf\Models\Shelf;
+use Admin\Auth\FilterRegistrars\CollectorFilterRegistrar as AdminCollectorFilterRegistrar;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Contracts\Translation\HasLocalePreference;
 use Illuminate\Database\Eloquent\Casts\Attribute;
@@ -23,7 +23,7 @@ use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 use Laravel\Scout\Searchable;
 use Mews\Purifier\Casts\CleanHtml;
-use Models\Image;
+use Support\Models\Image;
 use OwenIt\Auditing\Auditable as HasAuditable;
 use OwenIt\Auditing\Contracts\Auditable;
 use Spatie\MediaLibrary\HasMedia;

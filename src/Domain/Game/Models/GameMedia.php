@@ -4,12 +4,12 @@ namespace Domain\Game\Models;
 
 use Database\Factories\Game\GameMediaFactory;
 use Domain\Auth\Models\User;
-use Domain\Game\FilterRegistrars\Admin\GameMediaFilterRegistrar as AdminGameMediaFilterRegistrar;
-use Domain\Game\FilterRegistrars\Public\GameMediaFilterRegistrar;
+use Domain\Game\FilterRegistrars\GameMediaFilterRegistrar;
 use Domain\Game\QueryBuilders\GameMediaQueryBuilder;
 use Domain\Shelf\Contracts\Mediable;
 use Domain\Shelf\Models\Collectible;
 use Domain\Shelf\Models\KitItem;
+use Admin\Game\FilterRegistrars\GameMediaFilterRegistrar as AdminGameMediaFilterRegistrar;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;

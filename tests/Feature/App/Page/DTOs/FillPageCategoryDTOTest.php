@@ -3,7 +3,7 @@
 namespace App\Page\DTOs;
 
 use App\Http\Requests\Page\Admin\CreatePageCategoryRequest;
-use Domain\Page\DTOs\FillPageCategoryDTO;
+use Admin\Page\DTOs\FillPageCategoryDTO;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 

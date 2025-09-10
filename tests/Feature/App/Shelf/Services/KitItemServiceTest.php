@@ -2,11 +2,11 @@
 
 namespace App\Shelf\Services;
 
+use Admin\Shelf\DTOs\FillKitItemDTO;
+use Admin\Shelf\Services\KitItemService;
 use App\Http\Requests\Shelf\Admin\CreateKitItemRequest;
 use Domain\Auth\Models\User;
-use Domain\Shelf\DTOs\FillKitItemDTO;
 use Domain\Shelf\Models\KitItem;
-use Domain\Shelf\Services\KitItemService;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;

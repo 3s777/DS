@@ -7,18 +7,18 @@ use App\Http\Requests\Game\Admin\CreateGameRequest;
 use App\Jobs\Support\GenerateSmallThumbnailsJob;
 use App\Jobs\Support\GenerateThumbnailJob;
 use Domain\Auth\Models\User;
-use Domain\Game\DTOs\FillGameDTO;
 use Domain\Game\Models\Game;
 use Domain\Game\Models\GameDeveloper;
 use Domain\Game\Models\GameGenre;
 use Domain\Game\Models\GamePlatform;
 use Domain\Game\Models\GamePublisher;
-use Domain\Game\Services\GameService;
+use Admin\Game\DTOs\FillGameDTO;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Http\Request;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Queue;
 use Illuminate\Support\Facades\Storage;
+use Admin\Game\Services\GameService;
 use Tests\TestCase;
 
 class GameServiceTest extends TestCase

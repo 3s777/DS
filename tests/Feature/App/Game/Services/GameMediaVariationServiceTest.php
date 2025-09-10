@@ -6,15 +6,15 @@ use App\Http\Requests\Game\Admin\CreateGameMediaVariationRequest;
 use App\Jobs\Support\GenerateSmallThumbnailsJob;
 use App\Jobs\Support\GenerateThumbnailJob;
 use Domain\Auth\Models\User;
-use Domain\Game\DTOs\FillGameMediaVariationDTO;
 use Domain\Game\Models\GameMedia;
 use Domain\Game\Models\GameMediaVariation;
-use Domain\Game\Services\GameMediaVariationService;
+use Admin\Game\DTOs\FillGameMediaVariationDTO;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Http\Request;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Queue;
 use Illuminate\Support\Facades\Storage;
+use Admin\Game\Services\GameMediaVariationService;
 use Tests\TestCase;
 
 class GameMediaVariationServiceTest extends TestCase

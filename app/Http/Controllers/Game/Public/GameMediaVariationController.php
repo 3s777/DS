@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Game\Public;
 
 use App\Http\Controllers\Controller;
 use Domain\Game\Models\GameMediaVariation;
-use Domain\Game\ViewModels\Public\GameVariationShowViewModel;
+use Domain\Game\ViewModels\GameVariationShowViewModel;
 
 class GameMediaVariationController extends Controller
 {

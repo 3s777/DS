@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Auth\Public\Collector;
 
 use App\Http\Controllers\Controller;
 use Domain\Auth\Models\Collector;
-use Domain\Auth\ViewModels\Public\CollectorsViewModel;
+use Domain\Auth\ViewModels\CollectorsViewModel;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
 use Illuminate\Foundation\Application;

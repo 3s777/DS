@@ -2,8 +2,8 @@
 
 namespace App\Shelf\DTOs;
 
+use Admin\Shelf\DTOs\FillCollectibleDTO;
 use App\Http\Requests\Shelf\Admin\CreateCollectibleGameRequest;
-use Domain\Shelf\DTOs\FillCollectibleDTO;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 

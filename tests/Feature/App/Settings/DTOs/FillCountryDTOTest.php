@@ -2,8 +2,8 @@
 
 namespace App\Settings\DTOs;
 
+use Admin\Settings\DTOs\FillCountryDTO;
 use App\Http\Requests\Settings\Admin\CreateCountryRequest;
-use Domain\Settings\DTOs\FillCountryDTO;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 

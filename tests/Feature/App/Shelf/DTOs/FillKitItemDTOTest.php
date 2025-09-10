@@ -2,8 +2,8 @@
 
 namespace App\Shelf\DTOs;
 
+use Admin\Shelf\DTOs\FillKitItemDTO;
 use App\Http\Requests\Shelf\Admin\CreateKitItemRequest;
-use Domain\Shelf\DTOs\FillKitItemDTO;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 

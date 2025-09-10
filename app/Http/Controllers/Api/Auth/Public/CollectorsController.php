@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Api\Auth\Public;
 
 use App\Http\Responses\Transformers\CollectorsTransformer;
 use Domain\Auth\Models\Collector;
-use Domain\Auth\ViewModels\Public\CollectorsViewModel;
+use Domain\Auth\ViewModels\CollectorsViewModel;
 
 final class CollectorsController
 {

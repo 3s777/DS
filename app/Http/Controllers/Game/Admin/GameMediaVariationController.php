@@ -2,15 +2,15 @@
 
 namespace App\Http\Controllers\Game\Admin;
 
+use Admin\Game\Services\GameMediaVariationService;
+use Admin\Game\ViewModels\GameMediaVariationIndexViewModel;
+use Admin\Game\ViewModels\GameMediaVariationUpdateViewModel;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Game\Admin\CreateGameMediaVariationRequest;
 use App\Http\Requests\Game\Admin\FilterGameMediaVariationRequest;
 use App\Http\Requests\Game\Admin\UpdateGameMediaVariationRequest;
-use Domain\Game\DTOs\FillGameMediaVariationDTO;
 use Domain\Game\Models\GameMediaVariation;
-use Domain\Game\Services\GameMediaVariationService;
-use Domain\Game\ViewModels\Admin\GameMediaVariationIndexViewModel;
-use Domain\Game\ViewModels\Admin\GameMediaVariationUpdateViewModel;
+use Admin\Game\DTOs\FillGameMediaVariationDTO;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
 use Illuminate\Foundation\Application;

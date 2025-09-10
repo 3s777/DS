@@ -2,17 +2,17 @@
 
 namespace App\Http\Controllers\Auth\Admin;
 
+use Admin\Auth\Actions\CreateCollectorAction;
+use Admin\Auth\Actions\UpdateCollectorAction;
+use Admin\Auth\DTOs\UpdateCollectorDTO;
+use Admin\Auth\ViewModels\CollectorIndexViewModel;
+use Admin\Auth\ViewModels\CollectorUpdateViewModel;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Auth\Admin\CreateCollectorRequest;
 use App\Http\Requests\Auth\Admin\FilterCollectorRequest;
 use App\Http\Requests\Auth\Admin\UpdateCollectorRequest;
-use Domain\Auth\Actions\CreateCollectorAction;
-use Domain\Auth\Actions\UpdateCollectorAction;
 use Domain\Auth\DTOs\NewCollectorDTO;
-use Domain\Auth\DTOs\UpdateCollectorDTO;
 use Domain\Auth\Models\Collector;
-use Domain\Auth\ViewModels\Admin\CollectorIndexViewModel;
-use Domain\Auth\ViewModels\Admin\CollectorUpdateViewModel;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
 use Illuminate\Foundation\Application;
@@ -24,6 +24,7 @@ use Support\DTOs\MassDeletingDTO;
 use Support\Exceptions\MassDeletingException;
 use Support\MassDeletingRequest;
 use Support\ViewModels\AsyncSelectByQueryViewModel;
+
 
 class CollectorController extends Controller
 {

@@ -2,15 +2,15 @@
 
 namespace App\Http\Controllers\Game\Admin;
 
+use Admin\Game\Services\GameMediaService;
+use Admin\Game\ViewModels\GameMediaIndexViewModel;
+use Admin\Game\ViewModels\GameMediaUpdateViewModel;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Game\Admin\CreateGameMediaRequest;
 use App\Http\Requests\Game\Admin\FilterGameMediaRequest;
 use App\Http\Requests\Game\Admin\UpdateGameMediaRequest;
-use Domain\Game\DTOs\FillGameMediaDTO;
 use Domain\Game\Models\GameMedia;
-use Domain\Game\Services\GameMediaService;
-use Domain\Game\ViewModels\Admin\GameMediaIndexViewModel;
-use Domain\Game\ViewModels\Admin\GameMediaUpdateViewModel;
+use Admin\Game\DTOs\FillGameMediaDTO;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
 use Illuminate\Foundation\Application;

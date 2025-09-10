@@ -2,11 +2,11 @@
 
 namespace App\Shelf\Services;
 
+use Admin\Shelf\DTOs\FillCategoryDTO;
+use Admin\Shelf\Services\CategoryService;
 use App\Http\Requests\Shelf\Admin\CreateCategoryRequest;
 use Domain\Auth\Models\User;
-use Domain\Shelf\DTOs\FillCategoryDTO;
 use Domain\Shelf\Models\Category;
-use Domain\Shelf\Services\CategoryService;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
