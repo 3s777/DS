@@ -2,7 +2,7 @@
 
 namespace Admin\Auth\Actions;
 
-use App\Http\Requests\Auth\Admin\CreateAdminRequest;
+use App\Admin\Http\Requests\Auth\CreateAdminRequest;
 use App\Jobs\Support\GenerateSmallThumbnailsJob;
 use App\Jobs\Support\GenerateThumbnailJob;
 use Domain\Auth\DTOs\NewAdminDTO;

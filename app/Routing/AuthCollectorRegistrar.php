@@ -2,15 +2,15 @@
 
 namespace App\Routing;
 
+use App\Admin\Http\Controllers\Auth\CollectorController;
 use App\Contracts\RouteRegistrar;
-use App\Http\Controllers\Auth\Admin\CollectorController;
-use App\Http\Controllers\Auth\Public\Collector\ForgotPasswordController;
-use App\Http\Controllers\Auth\Public\Collector\LoginController;
-use App\Http\Controllers\Auth\Public\Collector\ProfileController;
-use App\Http\Controllers\Auth\Public\Collector\RegisterController;
-use App\Http\Controllers\Auth\Public\Collector\ResetPasswordController;
-use App\Http\Controllers\Auth\Public\Collector\VerifyEmailController;
-use App\Http\Controllers\Auth\Public\Collector\CollectorController as PublicCollectorController;
+use App\Http\Controllers\Auth\Collector\CollectorController as PublicCollectorController;
+use App\Http\Controllers\Auth\Collector\ForgotPasswordController;
+use App\Http\Controllers\Auth\Collector\LoginController;
+use App\Http\Controllers\Auth\Collector\ProfileController;
+use App\Http\Controllers\Auth\Collector\RegisterController;
+use App\Http\Controllers\Auth\Collector\ResetPasswordController;
+use App\Http\Controllers\Auth\Collector\VerifyEmailController;
 use Illuminate\Contracts\Routing\Registrar;
 use Illuminate\Support\Facades\Route;
 

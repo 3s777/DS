@@ -2,7 +2,7 @@
 
 namespace Admin\Auth\Controllers;
 
-use App\Http\Controllers\Auth\Admin\CollectorController;
+use App\Admin\Http\Controllers\Auth\CollectorController;
 use Database\Factories\Auth\CollectorFactory;
 use Domain\Auth\Models\Role;
 use Domain\Auth\Models\User;

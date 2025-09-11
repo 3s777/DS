@@ -2,8 +2,8 @@
 
 namespace Admin\Auth\Controllers;
 
-use App\Http\Controllers\Auth\Admin\RoleController;
-use App\Http\Requests\Auth\Admin\CreateRoleRequest;
+use App\Admin\Http\Controllers\Auth\RoleController;
+use App\Admin\Http\Requests\Auth\CreateRoleRequest;
 use Database\Factories\Auth\RoleFactory;
 use Database\Factories\Auth\UserFactory;
 use Database\Seeders\PermissionsTestSeeder;

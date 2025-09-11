@@ -3,7 +3,7 @@
 namespace Domain\Auth\Models;
 
 use Database\Factories\Auth\CollectorFactory;
-use Domain\Auth\FilterRegitrars\CollectorFilterRegistrar;
+use Domain\Auth\FilterRegistrars\CollectorFilterRegistrar;
 use Domain\Auth\Notifications\ResetPasswordCollectorNotification;
 use Domain\Auth\Notifications\VerifyEmailCollectorNotification;
 use Domain\Auth\QueryBuilders\CollectorQueryBuilder;

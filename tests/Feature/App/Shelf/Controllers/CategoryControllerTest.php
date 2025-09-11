@@ -2,15 +2,11 @@
 
 namespace App\Shelf\Controllers;
 
-use App\Http\Controllers\Shelf\Admin\CategoryController;
-use App\Http\Requests\Shelf\Admin\CreateCategoryRequest;
-use Database\Factories\Auth\UserFactory;
+use App\Http\Controllers\Shelf\CategoryController;
 use Database\Factories\Shelf\CategoryFactory;
-use Domain\Auth\Models\Role;
 use Domain\Auth\Models\User;
 use Domain\Shelf\Models\Category;
 use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Support\Str;
 use Tests\TestCase;
 
 class CategoryControllerTest extends TestCase
@@ -25,130 +21,22 @@ class CategoryControllerTest extends TestCase
     {
         parent::setUp();
 
-        $this->user = UserFactory::new()->create();
-        Role::create(['name' => config('settings.super_admin_role'), 'display_name' => 'SuperAdmin']);
-        $this->user->assignRole('super_admin');
-
-        $this->category = CategoryFactory::new()->create();
-
-        $this->request = CreateCategoryRequest::factory()->create(['model' => 'game_media']);
+        $this->category = CategoryFactory::new()->create(['model' => 'game_media_variation']);
     }
 
-    public function checkNotAuthRedirect(
-        string $action,
-        string $method = 'get',
-        array $params = [],
-        array $request = []
-    ): void {
-        $this->{$method}(action([CategoryController::class, $action], $params), $request)
-            ->assertRedirectToRoute('admin.login');
-    }
-
-    public function test_pages_success(): void
+    public function test_show_success(): void
     {
-        $this->checkNotAuthRedirect('index');
-        $this->checkNotAuthRedirect('create');
-        $this->checkNotAuthRedirect('edit', 'get', [$this->category->slug]);
-        $this->checkNotAuthRedirect('store', 'post');
-        $this->checkNotAuthRedirect('update', 'put', [$this->category->slug], $this->request);
-        $this->checkNotAuthRedirect('destroy', 'delete', [$this->category->slug]);
-    }
-
-    public function test_index_success(): void
-    {
-        $this->actingAs($this->user)
-            ->get(action([CategoryController::class, 'index']))
+        $this->get(action([CategoryController::class, 'show'], ['category' => $this->category]))
             ->assertOk()
-            ->assertSee(__('collectible.category.list'))
-            ->assertViewIs('admin.shelf.category.index');
+            ->assertSee(__('game.media.list'))
+            ->assertViewIs('content.category.game.index');
     }
 
-    public function test_create_success(): void
+    public function test_variations_success(): void
     {
-        $this->actingAs($this->user)
-            ->get(action([CategoryController::class, 'create']))
+        $this->get(action([CategoryController::class, 'variations'], ['category' => $this->category]))
             ->assertOk()
-            ->assertSee(__('collectible.category.add'))
-            ->assertViewIs('admin.shelf.category.create');
-    }
-
-    public function test_edit_success(): void
-    {
-        $this->actingAs($this->user)
-            ->get(action([CategoryController::class, 'edit'], [$this->category->slug]))
-            ->assertOk()
-            ->assertSee($this->category->name)
-            ->assertViewIs('admin.shelf.category.edit');
-    }
-
-    public function test_store_success(): void
-    {
-
-        $this->actingAs($this->user)
-            ->post(action([CategoryController::class, 'store']), $this->request)
-            ->assertRedirectToRoute('admin.categories.index')
-            ->assertSessionHas('helper_flash_message', __('collectible.category.created'));
-
-        $this->assertDatabaseHas('categories', [
-            'slug' => Str::slug($this->request['name'])
-        ]);
-    }
-
-    public function test_validation_name_fail(): void
-    {
-
-        $this->app['session']->setPreviousUrl(route('admin.categories.create'));
-
-        $this->request['name'] = '';
-
-        $this->actingAs($this->user)
-            ->post(action([CategoryController::class, 'store']), $this->request)
-            ->assertInvalid(['name'])
-            ->assertRedirectToRoute('admin.categories.create');
-
-        $this->assertDatabaseMissing('categories', [
-            'slug' => Str::slug($this->request['name'])
-        ]);
-    }
-
-    public function test_update_success(): void
-    {
-        $this->request['name'] = 'newName';
-        $this->request['description'] = 'new Description';
-
-        $this->actingAs($this->user)
-            ->put(
-                action(
-                    [CategoryController::class, 'update'],
-                    [$this->category->slug]
-                ),
-                $this->request
-            )
-            ->assertRedirectToRoute('admin.categories.index')
-            ->assertSessionHas('helper_flash_message', __('collectible.category.updated'));
-
-        $this->assertDatabaseHas('categories', [
-            'slug' => Str::slug($this->request['name']),
-        ]);
-
-        $updatedCategory = Category::where(['slug' => Str::slug($this->request['name'])])->first();
-
-        $this->assertSame('new Description', $updatedCategory->description);
-    }
-
-    public function test_delete_success(): void
-    {
-        $this->actingAs($this->user)
-            ->delete(action([CategoryController::class, 'destroy'], [$this->category->slug]))
-            ->assertRedirectToRoute('admin.categories.index')
-            ->assertSessionHas('helper_flash_message', __('collectible.category.deleted'));
-
-        $this->assertDatabaseMissing('categories', [
-            'slug' => Str::slug($this->request['name']),
-            'deleted_at' => null
-        ]);
-
-        $this->category->refresh();
-        $this->assertNull($this->category->model);
+            ->assertSee(__('game.variation.list'))
+            ->assertViewIs('content.category.game.variations');
     }
 }

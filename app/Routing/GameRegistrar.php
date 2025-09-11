@@ -2,16 +2,16 @@
 
 namespace App\Routing;
 
+use App\Admin\Http\Controllers\Game\GameController;
+use App\Admin\Http\Controllers\Game\GameDeveloperController;
+use App\Admin\Http\Controllers\Game\GameGenreController;
+use App\Admin\Http\Controllers\Game\GameMediaController;
+use App\Admin\Http\Controllers\Game\GameMediaVariationController;
+use App\Admin\Http\Controllers\Game\GamePlatformController;
+use App\Admin\Http\Controllers\Game\GamePlatformManufacturerController;
+use App\Admin\Http\Controllers\Game\GamePublisherController;
 use App\Contracts\RouteRegistrar;
-use App\Http\Controllers\Game\Admin\GameController;
-use App\Http\Controllers\Game\Admin\GameDeveloperController;
-use App\Http\Controllers\Game\Admin\GameGenreController;
-use App\Http\Controllers\Game\Admin\GameMediaController;
-use App\Http\Controllers\Game\Admin\GameMediaVariationController;
-use App\Http\Controllers\Game\Public\GameMediaVariationController as PublicVariationController;
-use App\Http\Controllers\Game\Admin\GamePlatformController;
-use App\Http\Controllers\Game\Admin\GamePlatformManufacturerController;
-use App\Http\Controllers\Game\Admin\GamePublisherController;
+use App\Http\Controllers\Game\GameMediaVariationController as PublicVariationController;
 use Illuminate\Contracts\Routing\Registrar;
 use Illuminate\Support\Facades\Route;
 
@@ -40,7 +40,7 @@ class GameRegistrar extends BaseRouteRegistrar implements RouteRegistrar
                 });
 
                 Route::as('admin.')->prefix('{locale}')->whereIn('locale', config('app.available_locales'))->group(function () {
-                    Route::prefix('admin')->middleware(['auth', 'verified', 'remove.locale'])->group(function () {
+                    Route::prefix('admin')->middleware(['auth:admin', 'verified', 'remove.locale'])->group(function () {
                         $this->massDelete('game-medias', GameMediaController::class);
                         Route::resource('game-medias', GameMediaController::class);
 

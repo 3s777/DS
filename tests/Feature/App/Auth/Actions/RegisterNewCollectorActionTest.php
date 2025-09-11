@@ -2,7 +2,7 @@
 
 namespace App\Auth\Actions;
 
-use App\Http\Requests\Auth\Public\RegisterCollectorRequest;
+use App\Http\Requests\Auth\RegisterCollectorRequest;
 use Domain\Auth\Actions\RegisterNewCollectorAction;
 use Domain\Auth\DTOs\NewCollectorDTO;
 use Domain\Auth\Models\Collector;

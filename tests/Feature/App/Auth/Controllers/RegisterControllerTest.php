@@ -2,9 +2,9 @@
 
 namespace App\Auth\Controllers;
 
-use App\Http\Controllers\Auth\Public\Admin\LoginController;
-use App\Http\Controllers\Auth\Public\Admin\RegisterController;
-use App\Http\Requests\Auth\Public\RegisterAdminRequest;
+use App\Http\Controllers\Auth\Admin\LoginController;
+use App\Http\Controllers\Auth\Admin\RegisterController;
+use App\Http\Requests\Auth\RegisterAdminRequest;
 use Database\Factories\Auth\UserFactory;
 use Domain\Auth\Models\Role;
 use Domain\Auth\Models\User;

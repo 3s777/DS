@@ -3,7 +3,7 @@
 namespace Admin\Auth\Actions;
 
 use Admin\Auth\DTOs\UpdateAdminDTO;
-use App\Http\Requests\Auth\Admin\CreateAdminRequest;
+use App\Admin\Http\Requests\Auth\CreateAdminRequest;
 use App\Jobs\Support\GenerateSmallThumbnailsJob;
 use App\Jobs\Support\GenerateThumbnailJob;
 use Database\Seeders\PermissionsTestSeeder;

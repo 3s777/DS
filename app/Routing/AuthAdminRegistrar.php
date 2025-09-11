@@ -2,15 +2,15 @@
 
 namespace App\Routing;
 
+use App\Admin\Http\Controllers\Auth\AdminController;
+use App\Admin\Http\Controllers\Auth\PermissionController;
+use App\Admin\Http\Controllers\Auth\RoleController;
 use App\Contracts\RouteRegistrar;
-use App\Http\Controllers\Auth\Admin\AdminController;
-use App\Http\Controllers\Auth\Admin\PermissionController;
-use App\Http\Controllers\Auth\Admin\RoleController;
-use App\Http\Controllers\Auth\Public\Admin\ForgotPasswordController;
-use App\Http\Controllers\Auth\Public\Admin\LoginController;
-use App\Http\Controllers\Auth\Public\Admin\RegisterController;
-use App\Http\Controllers\Auth\Public\Admin\ResetPasswordController;
-use App\Http\Controllers\Auth\Public\Admin\VerifyEmailController;
+use App\Http\Controllers\Auth\Admin\ForgotPasswordController;
+use App\Http\Controllers\Auth\Admin\LoginController;
+use App\Http\Controllers\Auth\Admin\RegisterController;
+use App\Http\Controllers\Auth\Admin\ResetPasswordController;
+use App\Http\Controllers\Auth\Admin\VerifyEmailController;
 use Illuminate\Contracts\Routing\Registrar;
 use Illuminate\Support\Facades\Route;
 

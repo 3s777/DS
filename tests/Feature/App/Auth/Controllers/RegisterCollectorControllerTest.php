@@ -2,9 +2,9 @@
 
 namespace App\Auth\Controllers;
 
-use App\Http\Controllers\Auth\Public\Collector\LoginController;
-use App\Http\Controllers\Auth\Public\Collector\RegisterController;
-use App\Http\Requests\Auth\Public\RegisterCollectorRequest;
+use App\Http\Controllers\Auth\Collector\LoginController;
+use App\Http\Controllers\Auth\Collector\RegisterController;
+use App\Http\Requests\Auth\RegisterCollectorRequest;
 use Database\Factories\Auth\CollectorFactory;
 use Domain\Auth\Models\Role;
 use Illuminate\Foundation\Testing\RefreshDatabase;

@@ -2,7 +2,7 @@
 
 namespace App\Auth\Controllers;
 
-use App\Http\Controllers\Auth\Public\Admin\VerifyEmailController;
+use App\Http\Controllers\Auth\Admin\VerifyEmailController;
 use Database\Factories\Auth\UserFactory;
 use Domain\Auth\Notifications\VerifyEmailAdminNotification;
 use Illuminate\Foundation\Testing\RefreshDatabase;

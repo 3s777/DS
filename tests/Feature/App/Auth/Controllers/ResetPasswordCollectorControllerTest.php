@@ -2,8 +2,8 @@
 
 namespace App\Auth\Controllers;
 
-use App\Http\Controllers\Auth\Public\Collector\LoginController;
-use App\Http\Controllers\Auth\Public\Collector\ResetPasswordController;
+use App\Http\Controllers\Auth\Collector\LoginController;
+use App\Http\Controllers\Auth\Collector\ResetPasswordController;
 use Database\Factories\Auth\CollectorFactory;
 use Domain\Auth\Models\Collector;
 use Illuminate\Foundation\Testing\RefreshDatabase;

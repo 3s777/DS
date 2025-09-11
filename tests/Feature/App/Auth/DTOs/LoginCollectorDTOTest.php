@@ -2,7 +2,7 @@
 
 namespace App\Auth\Admin\DTOs;
 
-use App\Http\Requests\Auth\Public\LoginCollectorRequest;
+use App\Http\Requests\Auth\LoginCollectorRequest;
 use Domain\Auth\DTOs\LoginCollectorDTO;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;

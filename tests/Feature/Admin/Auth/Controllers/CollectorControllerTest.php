@@ -2,9 +2,9 @@
 
 namespace Admin\Auth\Controllers;
 
-use App\Http\Controllers\Auth\Admin\AdminController;
-use App\Http\Controllers\Auth\Admin\CollectorController;
-use App\Http\Requests\Auth\Admin\CreateCollectorRequest;
+use App\Admin\Http\Controllers\Auth\AdminController;
+use App\Admin\Http\Controllers\Auth\CollectorController;
+use App\Admin\Http\Requests\Auth\CreateCollectorRequest;
 use App\Jobs\Support\GenerateSmallThumbnailsJob;
 use App\Jobs\Support\GenerateThumbnailJob;
 use Database\Factories\Auth\CollectorFactory;

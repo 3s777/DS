@@ -3,7 +3,7 @@
 namespace Admin\Auth\Actions;
 
 use Admin\Auth\DTOs\UpdateCollectorDTO;
-use App\Http\Requests\Auth\Admin\CreateCollectorRequest;
+use App\Admin\Http\Requests\Auth\CreateCollectorRequest;
 use App\Jobs\Support\GenerateSmallThumbnailsJob;
 use App\Jobs\Support\GenerateThumbnailJob;
 use Database\Seeders\PermissionsTestSeeder;

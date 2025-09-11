@@ -2,10 +2,10 @@
 
 namespace App\Routing;
 
+use App\Admin\Http\Controllers\Page\PageCategoryController;
+use App\Admin\Http\Controllers\Page\PageController;
 use App\Contracts\RouteRegistrar;
-use App\Http\Controllers\Page\Admin\PageCategoryController;
-use App\Http\Controllers\Page\Admin\PageController;
-use App\Http\Controllers\Page\Public\RulesController;
+use App\Http\Controllers\Page\RulesController;
 use Illuminate\Contracts\Routing\Registrar;
 use Illuminate\Support\Facades\Route;
 

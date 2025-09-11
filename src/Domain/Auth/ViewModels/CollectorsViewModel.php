@@ -2,7 +2,7 @@
 
 namespace Domain\Auth\ViewModels;
 
-use Domain\Auth\FilterRegitrars\CollectorFilterRegistrar;
+use Domain\Auth\FilterRegistrars\CollectorFilterRegistrar;
 use Domain\Auth\Models\Collector;
 use Domain\Shelf\Enums\TargetEnum;
 use Illuminate\Database\Eloquent\Builder;

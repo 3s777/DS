@@ -2,8 +2,8 @@
 
 namespace App\Auth\Controllers;
 
-use App\Http\Controllers\Auth\Public\Admin\LoginController;
-use App\Http\Controllers\Auth\Public\Admin\ResetPasswordController;
+use App\Http\Controllers\Auth\Admin\LoginController;
+use App\Http\Controllers\Auth\Admin\ResetPasswordController;
 use Database\Factories\Auth\UserFactory;
 use Domain\Auth\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;

@@ -2,7 +2,7 @@
 
 namespace Admin\Auth\Controllers;
 
-use App\Http\Controllers\Auth\Admin\AdminController;
+use App\Admin\Http\Controllers\Auth\AdminController;
 use Database\Factories\Auth\UserFactory;
 use Domain\Auth\Models\Role;
 use Domain\Auth\Models\User;

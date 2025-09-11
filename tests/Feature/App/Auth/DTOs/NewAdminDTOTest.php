@@ -2,8 +2,8 @@
 
 namespace App\Auth\DTOs;
 
-use App\Http\Requests\Auth\Admin\CreateAdminRequest;
-use App\Http\Requests\Auth\Public\RegisterAdminRequest;
+use App\Admin\Http\Requests\Auth\CreateAdminRequest;
+use App\Http\Requests\Auth\RegisterAdminRequest;
 use Domain\Auth\DTOs\NewAdminDTO;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;

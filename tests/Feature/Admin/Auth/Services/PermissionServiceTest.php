@@ -3,7 +3,7 @@
 namespace Admin\Auth\Services;
 
 use Admin\Auth\DTOs\FillPermissionDTO;
-use App\Http\Requests\Auth\Admin\CreatePermissionRequest;
+use App\Admin\Http\Requests\Auth\CreatePermissionRequest;
 use Domain\Auth\Models\Permission;
 use Domain\Auth\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;

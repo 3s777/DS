@@ -2,8 +2,8 @@
 
 namespace App\Auth\Admin\DTOs;
 
-use App\Http\Requests\Auth\Admin\CreateCollectorRequest;
 use Admin\Auth\DTOs\UpdateCollectorDTO;
+use App\Admin\Http\Requests\Auth\CreateCollectorRequest;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 

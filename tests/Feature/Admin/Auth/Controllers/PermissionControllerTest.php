@@ -2,9 +2,9 @@
 
 namespace Admin\Auth\Controllers;
 
-use App\Http\Controllers\Auth\Admin\PermissionController;
-use App\Http\Requests\Auth\Admin\CreatePermissionRequest;
-use App\Http\Requests\Auth\Admin\UpdatePermissionRequest;
+use App\Admin\Http\Controllers\Auth\PermissionController;
+use App\Admin\Http\Requests\Auth\CreatePermissionRequest;
+use App\Admin\Http\Requests\Auth\UpdatePermissionRequest;
 use Database\Factories\Auth\PermissionFactory;
 use Database\Factories\Auth\UserFactory;
 use Domain\Auth\Models\Permission;

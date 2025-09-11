@@ -2,13 +2,13 @@
 
 namespace App\Routing;
 
+use App\Admin\Http\Controllers\Shelf\CategoryController;
+use App\Admin\Http\Controllers\Shelf\CollectibleController;
+use App\Admin\Http\Controllers\Shelf\CollectibleGameController;
+use App\Admin\Http\Controllers\Shelf\KitItemController;
+use App\Admin\Http\Controllers\Shelf\ShelfController;
 use App\Contracts\RouteRegistrar;
-use App\Http\Controllers\Shelf\Admin\CategoryController;
-use App\Http\Controllers\Shelf\Public\CategoryController as PublicCategoryController;
-use App\Http\Controllers\Shelf\Admin\CollectibleController;
-use App\Http\Controllers\Shelf\Admin\CollectibleGameController;
-use App\Http\Controllers\Shelf\Admin\KitItemController;
-use App\Http\Controllers\Shelf\Admin\ShelfController;
+use App\Http\Controllers\Shelf\CategoryController as PublicCategoryController;
 use Illuminate\Contracts\Routing\Registrar;
 use Illuminate\Support\Facades\Route;
 

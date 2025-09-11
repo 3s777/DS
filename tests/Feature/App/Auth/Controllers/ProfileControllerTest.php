@@ -2,8 +2,8 @@
 
 namespace App\Auth\Controllers;
 
-use App\Http\Controllers\Auth\Public\Collector\ProfileController;
-use App\Http\Requests\Auth\Public\UpdateCollectorProfileRequest;
+use App\Http\Controllers\Auth\Collector\ProfileController;
+use App\Http\Requests\Auth\UpdateCollectorProfileRequest;
 use App\Jobs\Support\GenerateSmallThumbnailsJob;
 use App\Jobs\Support\GenerateThumbnailJob;
 use Database\Factories\Auth\CollectorFactory;

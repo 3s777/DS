@@ -2,7 +2,7 @@
 
 namespace App\Providers;
 
-use App\View\Composers\AdminSidebarMenuComposer;
+use App\Admin\Composers\SidebarMenuComposer;
 use App\View\Composers\FooterMenuComposer;
 use App\View\Composers\MainAddSubMenuComposer;
 use App\View\Composers\MainMenuComposer;
@@ -10,8 +10,8 @@ use App\View\Composers\MainSubMenuComposer;
 use App\View\Composers\ProfileMenuComposer;
 use App\View\Composers\RulesMenuComposer;
 use Illuminate\Foundation\Vite;
-use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\View;
+use Illuminate\Support\ServiceProvider;
 
 class ViewServiceProvider extends ServiceProvider
 {
@@ -30,7 +30,7 @@ class ViewServiceProvider extends ServiceProvider
     {
         Vite::macro('image', fn ($asset) => $this->asset("resources/images/$asset"));
 
-        View::composer('admin.menu', AdminSidebarMenuComposer::class);
+        View::composer('admin.menu', SidebarMenuComposer::class);
         View::composer('content.profile.menu', ProfileMenuComposer::class);
         View::composer('content.rules.menu', RulesMenuComposer::class);
         View::composer('components.common.main-menu', MainMenuComposer::class);

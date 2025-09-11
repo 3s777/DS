@@ -2,9 +2,9 @@
 
 namespace App\Routing;
 
+use App\Admin\Http\Controllers\Settings\CountryController;
 use App\Contracts\RouteRegistrar;
-use App\Http\Controllers\Settings\Admin\CountryController;
-use App\Http\Controllers\Settings\Public\ColorThemeController;
+use App\Http\Controllers\Settings\ColorThemeController;
 use Illuminate\Contracts\Routing\Registrar;
 use Illuminate\Support\Facades\Route;
 

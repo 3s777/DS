@@ -2,7 +2,7 @@
 
 namespace App\Auth\Actions;
 
-use App\Http\Requests\Auth\Public\RegisterAdminRequest;
+use App\Http\Requests\Auth\RegisterAdminRequest;
 use Domain\Auth\Contracts\RegisterNewUserContract;
 use Domain\Auth\DTOs\NewAdminDTO;
 use Domain\Auth\Models\Role;

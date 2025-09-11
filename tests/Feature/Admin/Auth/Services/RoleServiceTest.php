@@ -3,7 +3,7 @@
 namespace Admin\Auth\Services;
 
 use Admin\Auth\DTOs\FillRoleDTO;
-use App\Http\Requests\Auth\Admin\CreateRoleRequest;
+use App\Admin\Http\Requests\Auth\CreateRoleRequest;
 use Database\Seeders\PermissionsTestSeeder;
 use Domain\Auth\Models\Role;
 use Domain\Auth\Models\User;

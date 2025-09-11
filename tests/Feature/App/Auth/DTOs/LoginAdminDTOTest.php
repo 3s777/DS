@@ -2,7 +2,7 @@
 
 namespace App\Auth\DTOs;
 
-use App\Http\Requests\Auth\Public\LoginAdminRequest;
+use App\Http\Requests\Auth\LoginAdminRequest;
 use Domain\Auth\DTOs\LoginAdminDTO;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;

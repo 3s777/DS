@@ -2,8 +2,8 @@
 
 namespace Admin\Auth\Controllers;
 
-use App\Http\Controllers\Auth\Admin\AdminController;
-use App\Http\Requests\Auth\Admin\CreateAdminRequest;
+use App\Admin\Http\Controllers\Auth\AdminController;
+use App\Admin\Http\Requests\Auth\CreateAdminRequest;
 use App\Jobs\Support\GenerateSmallThumbnailsJob;
 use App\Jobs\Support\GenerateThumbnailJob;
 use Database\Factories\Auth\UserFactory;
