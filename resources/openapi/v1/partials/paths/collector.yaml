@@ -2,6 +2,8 @@ get:
   tags:
     - Collectors
   operationId: 'CollectorsShow'
+  security:
+    - jwt: []
   summary: 'Show Collector profile'
   parameters:
     - name: 'slug'

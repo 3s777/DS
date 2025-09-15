@@ -10,7 +10,7 @@ final class CollectorsController
 {
     public function index(CollectorsViewModel $viewModel)
     {
-        $col = $viewModel->collectors();
+        $collectors = $viewModel->collectors();
         //
         //        $col->getCollection()->transform(fn(Collector $collector) => new ApiData(
         //            'collector',
@@ -20,8 +20,8 @@ final class CollectorsController
 
 
 
-        $col->getCollection()->transform(fn (Collector $collector) => (new CollectorsTransformer($collector)));
+        $collectors->getCollection()->transform(fn (Collector $collector) => (new CollectorsTransformer($collector)));
 
-        return $col;
+        return $collectors;
     }
 }

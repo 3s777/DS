@@ -2,6 +2,8 @@ get:
   tags:
     - Collectors
   operationId: 'CollectorsIndex'
+  security:
+    - jwt: []
   summary: 'Collectors listing'
   parameters:
     - name: 'filters[search]'

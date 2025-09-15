@@ -19,7 +19,7 @@ class DocumentationController extends Controller
     public function contentV1(): JsonResponse
     {
         return new JsonResponse(
-            data: File::get(resource_path('openapi/v1_bundle.yaml')),
+            data: File::get(resource_path('openapi/v1/v1_bundle.yaml')),
             json: true,
         );
         //        return Response::file(resource_path("openapi/v1.yaml"), [

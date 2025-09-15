@@ -4,24 +4,25 @@ namespace App\Http\Responses\Transformers;
 
 use App\Http\Responses\Api\ApiData;
 use Domain\Auth\Models\Collector;
+use Domain\Auth\Models\User;
 use Illuminate\Contracts\Support\Arrayable;
 
-final readonly class CollectorsTransformer implements Arrayable
+final readonly class ProfileCollectorTransformer implements Arrayable
 {
     public function __construct(
-        private Collector $collector
+        private User $user
     ) {
     }
 
     public function toArray(): array
     {
         return (new ApiData(
-            'collectors',
-            $this->collector->getKey(),
+            'collector',
+            $this->user->getKey(),
             [
-                'id' => $this->collector->getKey(),
-                'name' => $this->collector->name,
-                'slug' => $this->collector->slug
+                'id' => $this->user->getKey(),
+                'name' => $this->user->name,
+                'slug' => $this->user->slug
             ]
         ))->toArray();
     }

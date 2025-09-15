@@ -4,7 +4,7 @@ info:
   description: DS api
   version: 1.0.0
 servers:
-  - url: http://127.0.0.1:8000/api
+  - url: http://127.0.0.1:8000/api/v1
     description: Local API server
 tags:
   - name: Authenticate
@@ -97,6 +97,8 @@ paths:
       tags:
         - Collectors
       operationId: CollectorsIndex
+      security:
+        - jwt: []
       summary: Collectors listing
       parameters:
         - name: filters[search]
@@ -123,6 +125,8 @@ paths:
       tags:
         - Collectors
       operationId: CollectorsShow
+      security:
+        - jwt: []
       summary: Show Collector profile
       parameters:
         - name: slug
@@ -185,7 +189,7 @@ components:
       properties:
         id:
           type: integer
-        nameg:
+        name:
           type: string
         slug:
           type: string
