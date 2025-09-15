@@ -2,8 +2,8 @@
 
 namespace App\Auth\Controllers;
 
-use App\Http\Controllers\Auth\Collector\LoginController;
-use App\Http\Controllers\Auth\Collector\RegisterController;
+use App\Http\Controllers\Auth\LoginCollectorController;
+use App\Http\Controllers\Auth\RegisterCollectorController;
 use App\Http\Requests\Auth\RegisterCollectorRequest;
 use Database\Factories\Auth\CollectorFactory;
 use Domain\Auth\Models\Role;
@@ -30,14 +30,14 @@ class RegisterCollectorControllerTest extends TestCase
     private function postRequest(): TestResponse
     {
         return $this->post(
-            action([RegisterController::class, 'handle']),
+            action([RegisterCollectorController::class, 'handle']),
             $this->request
         );
     }
 
     public function test_page_success(): void
     {
-        $this->get(action([RegisterController::class, 'page']))
+        $this->get(action([RegisterCollectorController::class, 'page']))
             ->assertOk()
             ->assertSee(__('auth.register'))
             ->assertViewIs('content.auth-collector.register');
@@ -98,7 +98,7 @@ class RegisterCollectorControllerTest extends TestCase
     public function test_redirect_to_login(): void
     {
         $response = $this->post(
-            action([RegisterController::class, 'handle']),
+            action([RegisterCollectorController::class, 'handle']),
             $this->request
         );
 
@@ -122,9 +122,9 @@ class RegisterCollectorControllerTest extends TestCase
             'password' => $password,
         ];
 
-        $this->post(action([LoginController::class, 'handle']), $request);
+        $this->post(action([LoginCollectorController::class, 'handle']), $request);
 
-        $this->get(action([RegisterController::class, 'page']))
+        $this->get(action([RegisterCollectorController::class, 'page']))
             ->assertRedirect('/');
     }
 }

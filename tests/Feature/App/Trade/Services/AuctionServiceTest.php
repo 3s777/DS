@@ -12,7 +12,7 @@ use Illuminate\Database\Eloquent\Relations\MorphToMany;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Http\Request;
 use Support\ValueObjects\PriceValueObject;
-use Tests\RequestFactories\Trade\CreateAuctionRequestFactory;
+use Tests\RequestFactories\App\Trade\CreateAuctionRequestFactory;
 use Tests\TestCase;
 
 class AuctionServiceTest extends TestCase

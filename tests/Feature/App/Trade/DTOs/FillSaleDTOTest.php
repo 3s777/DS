@@ -5,7 +5,7 @@ namespace App\Trade\DTOs;
 use Domain\Trade\DTOs\FillSaleDTO;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Http\Request;
-use Tests\RequestFactories\Trade\CreateSaleRequestFactory;
+use Tests\RequestFactories\App\Trade\CreateSaleRequestFactory;
 use Tests\TestCase;
 
 class FillSaleDTOTest extends TestCase

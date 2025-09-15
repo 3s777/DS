@@ -13,7 +13,7 @@ use Illuminate\Database\Eloquent\Relations\MorphToMany;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Http\Request;
 use Support\ValueObjects\PriceValueObject;
-use Tests\RequestFactories\Trade\CreateSaleRequestFactory;
+use Tests\RequestFactories\App\Trade\CreateSaleRequestFactory;
 use Tests\TestCase;
 
 class SaleServiceTest extends TestCase

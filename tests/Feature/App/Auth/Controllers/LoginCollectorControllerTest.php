@@ -2,7 +2,7 @@
 
 namespace App\Auth\Controllers;
 
-use App\Http\Controllers\Auth\Collector\LoginController;
+use App\Http\Controllers\Auth\LoginCollectorController;
 use Database\Factories\Auth\CollectorFactory;
 use Domain\Auth\Models\Collector;
 use Illuminate\Foundation\Testing\RefreshDatabase;
@@ -32,7 +32,7 @@ class LoginCollectorControllerTest extends TestCase
 
     public function test_page_success(): void
     {
-        $this->get(action([LoginController::class, 'page']))
+        $this->get(action([LoginCollectorController::class, 'page']))
             ->assertOk()
             ->assertSee(__('auth.login'))
             ->assertViewIs('content.auth-collector.login');
@@ -41,15 +41,15 @@ class LoginCollectorControllerTest extends TestCase
 
     public function test_only_guest_success(): void
     {
-        $this->post(action([LoginController::class, 'handle']), $this->request);
+        $this->post(action([LoginCollectorController::class, 'handle']), $this->request);
 
-        $this->get(action([LoginController::class, 'page']))
+        $this->get(action([LoginCollectorController::class, 'page']))
             ->assertRedirect('/');
     }
 
     public function test_handle_success(): void
     {
-        $response = $this->post(action([LoginController::class, 'handle']), $this->request);
+        $response = $this->post(action([LoginCollectorController::class, 'handle']), $this->request);
 
         $response->assertValid()
             ->assertRedirectToRoute('search');
@@ -64,7 +64,7 @@ class LoginCollectorControllerTest extends TestCase
             'password' => str()->random(10),
         ];
 
-        $this->post(action([LoginController::class, 'handle']), $request)
+        $this->post(action([LoginCollectorController::class, 'handle']), $request)
             ->assertSessionHas('helper_flash_message', __('auth.error.credentials'));
 
         $this->assertGuest();
@@ -82,7 +82,7 @@ class LoginCollectorControllerTest extends TestCase
             'password' => $this->password
         ];
 
-        $this->post(action([LoginController::class, 'handle']), $request)
+        $this->post(action([LoginCollectorController::class, 'handle']), $request)
             ->assertRedirectToRoute('collector.verification.notice');
 
         $this->assertGuest('collector');
@@ -92,14 +92,14 @@ class LoginCollectorControllerTest extends TestCase
     {
         $collector = CollectorFactory::new()->create();
 
-        $this->actingAs($collector)->delete(action([LoginController::class, 'logout']));
+        $this->actingAs($collector)->delete(action([LoginCollectorController::class, 'logout']));
 
         $this->assertGuest('collector');
     }
 
     public function test_logout_guest_middleware_fail(): void
     {
-        $this->delete(action([LoginController::class, 'logout']))
+        $this->delete(action([LoginCollectorController::class, 'logout']))
             ->assertRedirectToRoute('home');
     }
 

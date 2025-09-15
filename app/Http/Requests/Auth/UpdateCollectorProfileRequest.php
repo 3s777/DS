@@ -7,7 +7,7 @@ use Illuminate\Contracts\Validation\ValidationRule;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
 use Illuminate\Validation\Rules\Password;
-use Tests\RequestFactories\Auth\Public\UpdateCollectorProfileRequestFactory;
+use Tests\RequestFactories\App\Auth\UpdateCollectorProfileRequestFactory;
 
 class UpdateCollectorProfileRequest extends FormRequest
 {

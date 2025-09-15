@@ -3,7 +3,7 @@
 namespace App\Http\Requests\Auth;
 
 use Illuminate\Foundation\Http\FormRequest;
-use Tests\RequestFactories\Auth\Public\LoginCollectorRequestFactory;
+use Tests\RequestFactories\App\Auth\LoginCollectorRequestFactory;
 
 class LoginCollectorRequest extends FormRequest
 {

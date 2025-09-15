@@ -7,7 +7,7 @@ use Domain\Auth\Models\Collector;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
 use Illuminate\Validation\Rules\Password;
-use Tests\RequestFactories\Auth\Public\RegisterCollectorRequestFactory;
+use Tests\RequestFactories\App\Auth\RegisterCollectorRequestFactory;
 
 class RegisterCollectorRequest extends FormRequest
 {

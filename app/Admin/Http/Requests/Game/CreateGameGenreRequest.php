@@ -5,7 +5,7 @@ namespace App\Admin\Http\Requests\Game;
 use Domain\Game\Models\GameGenre;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
-use Tests\RequestFactories\Game\Admin\CreateGameGenreRequestFactory;
+use Tests\RequestFactories\Admin\Game\CreateGameGenreRequestFactory;
 
 class CreateGameGenreRequest extends FormRequest
 {

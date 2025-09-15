@@ -5,7 +5,7 @@ namespace App\Admin\Http\Requests\Shelf;
 use Domain\Shelf\Models\Category;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
-use Tests\RequestFactories\Shelf\Admin\CreateCategoryRequestFactory;
+use Tests\RequestFactories\Admin\Shelf\CreateCategoryRequestFactory;
 
 class CreateCategoryRequest extends FormRequest
 {

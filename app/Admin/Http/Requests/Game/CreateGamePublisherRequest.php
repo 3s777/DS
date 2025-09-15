@@ -5,7 +5,7 @@ namespace App\Admin\Http\Requests\Game;
 use Domain\Game\Models\GamePublisher;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
-use Tests\RequestFactories\Game\Admin\CreateGamePublisherRequestFactory;
+use Tests\RequestFactories\Admin\Game\CreateGamePublisherRequestFactory;
 
 class CreateGamePublisherRequest extends FormRequest
 {

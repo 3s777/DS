@@ -2,8 +2,8 @@
 
 namespace App\Auth\Controllers;
 
-use App\Http\Controllers\Auth\Admin\LoginController;
-use App\Http\Controllers\Auth\Admin\RegisterController;
+use App\Http\Controllers\Auth\LoginAdminController;
+use App\Http\Controllers\Auth\RegisterAdminController;
 use App\Http\Requests\Auth\RegisterAdminRequest;
 use Database\Factories\Auth\UserFactory;
 use Domain\Auth\Models\Role;
@@ -31,7 +31,7 @@ class RegisterControllerTest extends TestCase
     private function postRequest(): TestResponse
     {
         return $this->post(
-            action([RegisterController::class, 'handle']),
+            action([RegisterAdminController::class, 'handle']),
             $this->request
         );
     }
@@ -43,7 +43,7 @@ class RegisterControllerTest extends TestCase
 
     public function test_page_success(): void
     {
-        $this->get(action([RegisterController::class, 'page']))
+        $this->get(action([RegisterAdminController::class, 'page']))
             ->assertOk()
             ->assertSee(__('auth.register'))
             ->assertViewIs('content.auth.register');
@@ -104,7 +104,7 @@ class RegisterControllerTest extends TestCase
     public function test_redirect_to_login(): void
     {
         $response = $this->post(
-            action([RegisterController::class, 'handle']),
+            action([RegisterAdminController::class, 'handle']),
             $this->request
         );
 
@@ -128,9 +128,9 @@ class RegisterControllerTest extends TestCase
             'password' => $password,
         ];
 
-        $this->post(action([LoginController::class, 'handle']), $request);
+        $this->post(action([LoginAdminController::class, 'handle']), $request);
 
-        $this->get(action([RegisterController::class, 'page']))
+        $this->get(action([RegisterAdminController::class, 'page']))
             ->assertRedirect('/');
     }
 }

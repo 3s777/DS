@@ -4,13 +4,13 @@ namespace App\Routing;
 
 use App\Admin\Http\Controllers\Auth\CollectorController;
 use App\Contracts\RouteRegistrar;
-use App\Http\Controllers\Auth\Collector\CollectorController as PublicCollectorController;
-use App\Http\Controllers\Auth\Collector\ForgotPasswordController;
-use App\Http\Controllers\Auth\Collector\LoginController;
-use App\Http\Controllers\Auth\Collector\ProfileController;
-use App\Http\Controllers\Auth\Collector\RegisterController;
-use App\Http\Controllers\Auth\Collector\ResetPasswordController;
-use App\Http\Controllers\Auth\Collector\VerifyEmailController;
+use App\Http\Controllers\Auth\CollectorController as PublicCollectorController;
+use App\Http\Controllers\Auth\ForgotPasswordCollectorController;
+use App\Http\Controllers\Auth\LoginCollectorController;
+use App\Http\Controllers\Auth\ProfileController;
+use App\Http\Controllers\Auth\RegisterCollectorController;
+use App\Http\Controllers\Auth\ResetPasswordCollectorController;
+use App\Http\Controllers\Auth\VerifyEmailCollectorController;
 use Illuminate\Contracts\Routing\Registrar;
 use Illuminate\Support\Facades\Route;
 
@@ -23,28 +23,28 @@ class AuthCollectorRegistrar implements RouteRegistrar
                 Route::as('collector.')->prefix('{locale}')->whereIn('locale', config('app.available_locales'))->group(function () {
                     Route::post('/select-collectors', [CollectorController::class, 'getForSelect'])->name('select-collectors');
 
-                    Route::controller(LoginController::class)->group(function () {
+                    Route::controller(LoginCollectorController::class)->group(function () {
                         Route::get('/login', 'page')->middleware('guest:collector')->name('login');
                         Route::post('/login', 'handle')->middleware('guest:collector', 'throttle:auth')->name('login.handle');
                         Route::delete('/logout', 'logout')->name('logout');
                     });
 
-                    Route::controller(RegisterController::class)->group(function () {
+                    Route::controller(RegisterCollectorController::class)->group(function () {
                         Route::get('/register', 'page')->middleware('guest:collector')->name('register');
                         Route::post('/register', 'handle')->middleware('guest:collector', 'throttle:auth')->name('register.handle');
                     });
 
-                    Route::controller(ForgotPasswordController::class)->group(function () {
+                    Route::controller(ForgotPasswordCollectorController::class)->group(function () {
                         Route::get('/forgot-password', 'page')->middleware('guest:collector')->name('forgot');
                         Route::post('/forgot-password', 'handle')->middleware('guest:collector')->name('forgot.handle');
                     });
 
-                    Route::controller(ResetPasswordController::class)->group(function () {
+                    Route::controller(ResetPasswordCollectorController::class)->group(function () {
                         Route::get('/reset-password/{token}', 'page')->middleware('guest:collector', 'remove.locale')->name('password.reset');
                         Route::post('/reset-password', 'handle')->middleware('guest:collector')->name('password.handle');
                     });
 
-                    Route::controller(VerifyEmailController::class)->group(function () {
+                    Route::controller(VerifyEmailCollectorController::class)->group(function () {
                         Route::get('/email/verify', 'page')->name('verification.notice');
                         Route::get('/email/verify/{id}/{hash}', 'handle')->middleware(['remove.locale'])->name('verification.verify');
                         Route::post('/email/verification-notification', 'sendVerifyNotification')->middleware(['throttle:6,1'])->name('verification.send');

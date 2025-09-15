@@ -2,8 +2,8 @@
 
 namespace App\Auth\Controllers;
 
-use App\Http\Controllers\Auth\Collector\LoginController;
-use App\Http\Controllers\Auth\Collector\ResetPasswordController;
+use App\Http\Controllers\Auth\LoginCollectorController;
+use App\Http\Controllers\Auth\ResetPasswordCollectorController;
 use Database\Factories\Auth\CollectorFactory;
 use Domain\Auth\Models\Collector;
 use Illuminate\Foundation\Testing\RefreshDatabase;
@@ -35,7 +35,7 @@ class ResetPasswordCollectorControllerTest extends TestCase
 
     public function test_page_success(): void
     {
-        $this->get(action([ResetPasswordController::class, 'page'], ['token' => $this->token]))
+        $this->get(action([ResetPasswordCollectorController::class, 'page'], ['token' => $this->token]))
             ->assertOk()
             ->assertViewIs('content.auth-collector.reset-password');
     }
@@ -62,21 +62,21 @@ class ResetPasswordCollectorControllerTest extends TestCase
         //        $response->assertRedirect(action([LoginController::class, 'page']));
 
 
-        $response = $this->post(action([ResetPasswordController::class, 'handle']), [
+        $response = $this->post(action([ResetPasswordCollectorController::class, 'handle']), [
             'email' => $this->collector->email,
             'password' => 'new_password',
             'password_confirmation' => 'new_password',
             'token' => $this->token,
         ]);
 
-        $response->assertRedirect(action([LoginController::class, 'page']));
+        $response->assertRedirect(action([LoginCollectorController::class, 'page']));
 
         $this->assertTrue(Hash::check('new_password', $this->collector->fresh()->password));
     }
 
     public function test_token_fail(): void
     {
-        $response = $this->post(action([ResetPasswordController::class, 'handle']), [
+        $response = $this->post(action([ResetPasswordCollectorController::class, 'handle']), [
             'email' => $this->collector->email,
             'password' => $this->password,
             'password_confirmation' => $this->password_confirmation,

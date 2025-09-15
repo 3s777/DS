@@ -5,7 +5,7 @@ namespace App\Admin\Http\Requests\Settings;
 use Domain\Shelf\Models\Category;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
-use Tests\RequestFactories\Settings\Admin\CreateCountryRequestFactory;
+use Tests\RequestFactories\Admin\Settings\CreateCountryRequestFactory;
 
 class CreateCountryRequest extends FormRequest
 {

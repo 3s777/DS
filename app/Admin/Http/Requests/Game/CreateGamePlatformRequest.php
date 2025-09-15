@@ -6,7 +6,7 @@ use Domain\Game\Enums\GamePlatformTypeEnum;
 use Domain\Game\Models\GamePlatform;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
-use Tests\RequestFactories\Game\Admin\CreateGamePlatformRequestFactory;
+use Tests\RequestFactories\Admin\Game\CreateGamePlatformRequestFactory;
 
 class CreateGamePlatformRequest extends FormRequest
 {

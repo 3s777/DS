@@ -2,7 +2,7 @@
 
 namespace App\Auth\Controllers;
 
-use App\Http\Controllers\Auth\Collector\ForgotPasswordController;
+use App\Http\Controllers\Auth\ForgotPasswordCollectorController;
 use Database\Factories\Auth\CollectorFactory;
 use Domain\Auth\Notifications\ResetPasswordCollectorNotification;
 use Illuminate\Foundation\Testing\RefreshDatabase;
@@ -22,7 +22,7 @@ class ForgotPasswordCollectorControllerTest extends TestCase
 
     public function test_page_success(): void
     {
-        $this->get(action([ForgotPasswordController::class, 'page']))
+        $this->get(action([ForgotPasswordCollectorController::class, 'page']))
             ->assertOk()
             ->assertViewIs('content.auth-collector.forgot-password');
     }
@@ -31,7 +31,7 @@ class ForgotPasswordCollectorControllerTest extends TestCase
     {
         $collector = CollectorFactory::new()->create($this->testingCredentials());
 
-        $this->post(action([ForgotPasswordController::class, 'handle']), $this->testingCredentials())
+        $this->post(action([ForgotPasswordCollectorController::class, 'handle']), $this->testingCredentials())
             ->assertRedirectToRoute('collector.forgot');
 
         Notification::assertSentTo([$collector], ResetPasswordCollectorNotification::class);
@@ -41,7 +41,7 @@ class ForgotPasswordCollectorControllerTest extends TestCase
     {
         $this->assertDatabaseMissing('collectors', $this->testingCredentials());
 
-        $this->post(action([ForgotPasswordController::class, 'handle']), $this->testingCredentials())
+        $this->post(action([ForgotPasswordCollectorController::class, 'handle']), $this->testingCredentials())
             ->assertRedirectToRoute('collector.forgot');
 
         Notification::assertNothingSent();

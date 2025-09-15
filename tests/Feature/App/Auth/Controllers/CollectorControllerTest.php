@@ -2,7 +2,7 @@
 
 namespace App\Auth\Controllers;
 
-use App\Http\Controllers\Auth\Collector\CollectorController;
+use App\Http\Controllers\Auth\CollectorController;
 use Database\Factories\Auth\CollectorFactory;
 use Domain\Auth\Models\Collector;
 use Domain\Auth\Models\User;

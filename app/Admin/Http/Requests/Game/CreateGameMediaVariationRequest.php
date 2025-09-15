@@ -5,8 +5,7 @@ namespace App\Admin\Http\Requests\Game;
 use Domain\Game\Models\GameMedia;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
-use Tests\RequestFactories\Game\Admin\CreateGameDeveloperRequestFactory;
-use Tests\RequestFactories\Game\Admin\CreateGameMediaVariationRequestFactory;
+use Tests\RequestFactories\Admin\Game\CreateGameMediaVariationRequestFactory;
 
 class CreateGameMediaVariationRequest extends FormRequest
 {

@@ -2,8 +2,8 @@
 
 namespace App\Auth\Controllers;
 
-use App\Http\Controllers\Auth\Admin\LoginController;
-use App\Http\Controllers\Auth\Admin\ResetPasswordController;
+use App\Http\Controllers\Auth\LoginAdminController;
+use App\Http\Controllers\Auth\ResetPasswordAdminController;
 use Database\Factories\Auth\UserFactory;
 use Domain\Auth\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
@@ -35,7 +35,7 @@ class ResetPasswordControllerTest extends TestCase
 
     public function test_page_success(): void
     {
-        $this->get(action([ResetPasswordController::class, 'page'], ['token' => $this->token]))
+        $this->get(action([ResetPasswordAdminController::class, 'page'], ['token' => $this->token]))
             ->assertOk()
             ->assertViewIs('content.auth.reset-password');
     }
@@ -52,34 +52,34 @@ class ResetPasswordControllerTest extends TestCase
             ])
             ->andReturn(Password::PASSWORD_RESET);
 
-        $response = $this->post(action([ResetPasswordController::class, 'handle']), [
+        $response = $this->post(action([ResetPasswordAdminController::class, 'handle']), [
             'email' => $this->user->email,
             'password' => $this->password,
             'password_confirmation' => $this->password_confirmation,
             'token' => $this->token
         ]);
 
-        $response->assertRedirect(action([LoginController::class, 'page']));
+        $response->assertRedirect(action([LoginAdminController::class, 'page']));
     }
 
     public function test_handle_success(): void
     {
 
-        $response = $this->post(action([ResetPasswordController::class, 'handle']), [
+        $response = $this->post(action([ResetPasswordAdminController::class, 'handle']), [
             'email' => $this->user->email,
             'password' => 'new_password',
             'password_confirmation' => 'new_password',
             'token' => $this->token,
         ]);
 
-        $response->assertRedirect(action([LoginController::class, 'page']));
+        $response->assertRedirect(action([LoginAdminController::class, 'page']));
 
         $this->assertTrue(Hash::check('new_password', $this->user->fresh()->password));
     }
 
     public function test_token_fail(): void
     {
-        $response = $this->post(action([ResetPasswordController::class, 'handle']), [
+        $response = $this->post(action([ResetPasswordAdminController::class, 'handle']), [
             'email' => $this->user->email,
             'password' => $this->password,
             'password_confirmation' => $this->password_confirmation,

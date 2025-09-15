@@ -5,7 +5,7 @@ namespace App\Admin\Http\Requests\Shelf;
 use Domain\Shelf\Models\KitItem;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
-use Tests\RequestFactories\Shelf\Admin\CreateKitItemRequestFactory;
+use Tests\RequestFactories\Admin\Shelf\CreateKitItemRequestFactory;
 
 class CreateKitItemRequest extends FormRequest
 {

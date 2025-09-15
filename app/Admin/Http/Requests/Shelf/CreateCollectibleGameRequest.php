@@ -11,7 +11,7 @@ use Domain\Trade\Enums\ShippingEnum;
 use Illuminate\Database\Eloquent\Relations\Relation;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
-use Tests\RequestFactories\Shelf\Admin\CreateCollectibleGameRequestFactory;
+use Tests\RequestFactories\Admin\Shelf\CreateCollectibleGameRequestFactory;
 
 class CreateCollectibleGameRequest extends FormRequest
 {

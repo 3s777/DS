@@ -6,7 +6,7 @@ use Domain\Game\Models\GameMedia;
 use Domain\Game\Models\GameMediaVariation;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
-use Tests\RequestFactories\Game\Admin\CreateGameMediaRequestFactory;
+use Tests\RequestFactories\Admin\Game\CreateGameMediaRequestFactory;
 
 class CreateGameMediaRequest extends FormRequest
 {

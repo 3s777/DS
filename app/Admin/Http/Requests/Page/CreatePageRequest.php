@@ -5,7 +5,7 @@ namespace App\Admin\Http\Requests\Page;
 use Domain\Page\Models\Page;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
-use Tests\RequestFactories\Page\Admin\CreatePageRequestFactory;
+use Tests\RequestFactories\Admin\Page\CreatePageRequestFactory;
 
 class CreatePageRequest extends FormRequest
 {

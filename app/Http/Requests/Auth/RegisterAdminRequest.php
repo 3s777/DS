@@ -7,7 +7,7 @@ use Domain\Auth\Models\User;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
 use Illuminate\Validation\Rules\Password;
-use Tests\RequestFactories\Auth\Public\RegisterAdminRequestFactory;
+use Tests\RequestFactories\App\Auth\RegisterAdminRequestFactory;
 
 class RegisterAdminRequest extends FormRequest
 {

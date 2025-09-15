@@ -2,7 +2,7 @@
 
 namespace App\Auth\Controllers;
 
-use App\Http\Controllers\Auth\Collector\VerifyEmailController;
+use App\Http\Controllers\Auth\VerifyEmailCollectorController;
 use Database\Factories\Auth\CollectorFactory;
 use Domain\Auth\Notifications\VerifyEmailCollectorNotification;
 use Illuminate\Foundation\Testing\RefreshDatabase;
@@ -16,7 +16,7 @@ class VerifyEmailCollectorControllerTest extends TestCase
 
     public function test_page_success(): void
     {
-        $this->get(action([VerifyEmailController::class, 'page']))
+        $this->get(action([VerifyEmailCollectorController::class, 'page']))
             ->assertOk()
             ->assertSee(__('auth.verify'))
             ->assertViewIs('content.auth-collector.verify');
@@ -32,7 +32,7 @@ class VerifyEmailCollectorControllerTest extends TestCase
 
         $collector = CollectorFactory::new()->create($request);
 
-        $this->post(action([VerifyEmailController::class, 'sendVerifyNotification']), ['email' => $collector->email])
+        $this->post(action([VerifyEmailCollectorController::class, 'sendVerifyNotification']), ['email' => $collector->email])
             ->assertRedirectToRoute('collector.verification.notice')
             ->assertSessionHas('helper_flash_message', __('auth.verify_retry_send'));
 
@@ -43,7 +43,7 @@ class VerifyEmailCollectorControllerTest extends TestCase
     {
         $collector = CollectorFactory::new()->create();
 
-        $this->post(action([VerifyEmailController::class, 'sendVerifyNotification']), ['email' => $collector->email])
+        $this->post(action([VerifyEmailCollectorController::class, 'sendVerifyNotification']), ['email' => $collector->email])
             ->assertRedirectToRoute('collector.verification.notice')
             ->assertSessionHas('helper_flash_message', __('auth.verified'));
 

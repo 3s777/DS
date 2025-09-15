@@ -2,7 +2,7 @@
 
 namespace App\Auth\Controllers;
 
-use App\Http\Controllers\Auth\Admin\ForgotPasswordController;
+use App\Http\Controllers\Auth\ForgotPasswordAdminController;
 use Database\Factories\Auth\UserFactory;
 use Domain\Auth\Notifications\ResetPasswordAdminNotification;
 use Illuminate\Foundation\Testing\RefreshDatabase;
@@ -22,7 +22,7 @@ class ForgotPasswordControllerTest extends TestCase
 
     public function test_page_success(): void
     {
-        $this->get(action([ForgotPasswordController::class, 'page']))
+        $this->get(action([ForgotPasswordAdminController::class, 'page']))
             ->assertOk()
             ->assertViewIs('content.auth.forgot-password');
     }
@@ -31,7 +31,7 @@ class ForgotPasswordControllerTest extends TestCase
     {
         $user = UserFactory::new()->create($this->testingCredentials());
 
-        $this->post(action([ForgotPasswordController::class, 'handle']), $this->testingCredentials())
+        $this->post(action([ForgotPasswordAdminController::class, 'handle']), $this->testingCredentials())
             ->assertRedirectToRoute('admin.forgot');
 
         Notification::assertSentTo([$user], ResetPasswordAdminNotification::class);
@@ -41,7 +41,7 @@ class ForgotPasswordControllerTest extends TestCase
     {
         $this->assertDatabaseMissing('users', $this->testingCredentials());
 
-        $this->post(action([ForgotPasswordController::class, 'handle']), $this->testingCredentials())
+        $this->post(action([ForgotPasswordAdminController::class, 'handle']), $this->testingCredentials())
             ->assertRedirectToRoute('admin.forgot');
 
         Notification::assertNothingSent();

@@ -2,7 +2,7 @@
 
 namespace App\Auth\Controllers;
 
-use App\Http\Controllers\Auth\Admin\LoginController;
+use App\Http\Controllers\Auth\LoginAdminController;
 use Database\Factories\Auth\UserFactory;
 use Domain\Auth\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
@@ -32,7 +32,7 @@ class LoginControllerTest extends TestCase
 
     public function test_page_success(): void
     {
-        $this->get(action([LoginController::class, 'page']))
+        $this->get(action([LoginAdminController::class, 'page']))
             ->assertOk()
             ->assertSee(__('auth.login'))
             ->assertViewIs('content.auth.login');
@@ -41,15 +41,15 @@ class LoginControllerTest extends TestCase
 
     public function test_only_guest_success(): void
     {
-        $this->post(action([LoginController::class, 'handle']), $this->request);
+        $this->post(action([LoginAdminController::class, 'handle']), $this->request);
 
-        $this->get(action([LoginController::class, 'page']))
+        $this->get(action([LoginAdminController::class, 'page']))
             ->assertRedirect('/');
     }
 
     public function test_handle_success(): void
     {
-        $response = $this->post(action([LoginController::class, 'handle']), $this->request);
+        $response = $this->post(action([LoginAdminController::class, 'handle']), $this->request);
 
         $response->assertValid()
             ->assertRedirectToRoute('search');
@@ -64,7 +64,7 @@ class LoginControllerTest extends TestCase
             'password' => str()->random(10),
         ];
 
-        $this->post(action([LoginController::class, 'handle']), $request)
+        $this->post(action([LoginAdminController::class, 'handle']), $request)
             ->assertSessionHas('helper_flash_message', __('auth.error.credentials'));
 
         $this->assertGuest();
@@ -82,7 +82,7 @@ class LoginControllerTest extends TestCase
             'password' => $this->password
         ];
 
-        $this->post(action([LoginController::class, 'handle']), $request)
+        $this->post(action([LoginAdminController::class, 'handle']), $request)
             ->assertRedirectToRoute('admin.verification.notice');
 
         $this->assertGuest();
@@ -92,14 +92,14 @@ class LoginControllerTest extends TestCase
     {
         $user = UserFactory::new()->create();
 
-        $this->actingAs($user)->delete(action([LoginController::class, 'logout']));
+        $this->actingAs($user)->delete(action([LoginAdminController::class, 'logout']));
 
         $this->assertGuest();
     }
 
     public function test_logout_guest_middleware_fail(): void
     {
-        $this->delete(action([LoginController::class, 'logout']))
+        $this->delete(action([LoginAdminController::class, 'logout']))
             ->assertRedirectToRoute('home');
     }
 

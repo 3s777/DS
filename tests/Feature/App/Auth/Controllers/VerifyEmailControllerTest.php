@@ -2,7 +2,7 @@
 
 namespace App\Auth\Controllers;
 
-use App\Http\Controllers\Auth\Admin\VerifyEmailController;
+use App\Http\Controllers\Auth\VerifyEmailAdminController;
 use Database\Factories\Auth\UserFactory;
 use Domain\Auth\Notifications\VerifyEmailAdminNotification;
 use Illuminate\Foundation\Testing\RefreshDatabase;
@@ -16,7 +16,7 @@ class VerifyEmailControllerTest extends TestCase
 
     public function test_page_success(): void
     {
-        $this->get(action([VerifyEmailController::class, 'page']))
+        $this->get(action([VerifyEmailAdminController::class, 'page']))
             ->assertOk()
             ->assertSee(__('auth.verify'))
             ->assertViewIs('content.auth.verify');
@@ -32,7 +32,7 @@ class VerifyEmailControllerTest extends TestCase
 
         $user = UserFactory::new()->create($request);
 
-        $this->post(action([VerifyEmailController::class, 'sendVerifyNotification']), ['email' => $user->email])
+        $this->post(action([VerifyEmailAdminController::class, 'sendVerifyNotification']), ['email' => $user->email])
             ->assertRedirectToRoute('admin.verification.notice')
             ->assertSessionHas('helper_flash_message', __('auth.verify_retry_send'));
 
@@ -45,7 +45,7 @@ class VerifyEmailControllerTest extends TestCase
     {
         $user = UserFactory::new()->create();
 
-        $this->post(action([VerifyEmailController::class, 'sendVerifyNotification']), ['email' => $user->email])
+        $this->post(action([VerifyEmailAdminController::class, 'sendVerifyNotification']), ['email' => $user->email])
             ->assertRedirectToRoute('admin.verification.notice')
             ->assertSessionHas('helper_flash_message', __('auth.verified'));
 

@@ -5,7 +5,7 @@ namespace App\Admin\Http\Requests\Shelf;
 use Domain\Shelf\Models\Shelf;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
-use Tests\RequestFactories\Shelf\Admin\CreateShelfRequestFactory;
+use Tests\RequestFactories\Admin\Shelf\CreateShelfRequestFactory;
 
 class CreateShelfRequest extends FormRequest
 {

@@ -3,7 +3,7 @@
 namespace App\Http\Requests\Auth;
 
 use Illuminate\Foundation\Http\FormRequest;
-use Tests\RequestFactories\Auth\Public\LoginAdminRequestFactory;
+use Tests\RequestFactories\App\Auth\LoginAdminRequestFactory;
 
 class LoginAdminRequest extends FormRequest
 {
