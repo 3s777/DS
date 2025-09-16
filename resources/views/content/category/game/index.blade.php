@@ -1,4 +1,4 @@
-<x-layouts.main :hide-filters="true">
+<x-layouts.main>
     <x-slot:search>
         <x-common.main-search
             :search-placeholder="__('game.media.search')"
@@ -157,7 +157,7 @@
             <div class="search__pagination">
                 {{ $gameMedias->links('pagination::default') }}
             </div>
-            
+
         </x-common.content>
     </x-grid.container>
 </x-layouts.main>

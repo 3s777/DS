@@ -77,6 +77,7 @@ return [
     'additional_fields' => 'Дополнительное поле|Дополнительные поля',
     'sale' => 'Продажа',
     'auction' => 'Аукцион',
+    'exchange' => 'Обмен',
     'trade' => 'Торговля',
     'for_collection' => 'В коллекцию',
     'for_sale' => 'Продать',

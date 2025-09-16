@@ -1,27 +1,18 @@
-@props([
-    'add' => false,
-    'wishlist' => false,
-    'sale' => false,
-    'auction' => false,
-    'exchange' => false,
-    'favorite' => false,
-])
-
 <div
     {{ $attributes->class([
             'counter-buttons',
             'counter-buttons_'.$type => $type,
         ])
     }}>
-    @if($add)
+    @if($collection)
         <x-ui.form.button
             class="counter-buttons__badge {{ $buttonClass }}"
             tag="a"
-            link="/"
+            link="{{ $collectionLink }}"
             only-icon="true"
             size="small"
             color="dark"
-            title="{{ __('На полках') }}">
+            title="{{ __('shelf.on') }}">
             <x-slot:icon>
                 <x-svg.check></x-svg.check>
             </x-slot:icon>
@@ -31,7 +22,7 @@
                     type="number"
                     align="standard"
                     color="success">
-                    {{ $add }}
+                    {{ $collection }}
                 </x-ui.badge>
             </x-slot:badge>
         </x-ui.form.button>
@@ -41,11 +32,11 @@
         <x-ui.form.button
             class="counter-buttons__badge {{ $buttonClass }}"
             tag="a"
-            link="/"
+            link="{{ $wishlistLink }}"
             only-icon="true"
             size="small"
             color="dark"
-            title="{{ __('Желают') }}">
+            title="{{ __('common.wishful') }}">
             <x-slot:icon>
                 <x-svg.wishlist></x-svg.wishlist>
             </x-slot:icon>
@@ -65,11 +56,11 @@
         <x-ui.form.button
             class="counter-buttons__badge {{ $buttonClass }}"
             tag="a"
-            link="/"
+            link="{{ $saleLink }}"
             only-icon="true"
             size="small"
             color="dark"
-            title="{{ __('Продажа') }}">
+            title="{{ __('common.sale') }}">
             <x-slot:icon>
                 <x-svg.dollar></x-svg.dollar>
             </x-slot:icon>
@@ -89,11 +80,11 @@
         <x-ui.form.button
             class="counter-buttons__badge {{ $buttonClass }}"
             tag="a"
-            link="/"
+            link="{{ $auctionLink }}"
             only-icon="true"
             size="small"
             color="dark"
-            title="{{ __('Аукционы') }}">
+            title="{{ __('common.auction') }}">
             <x-slot:icon>
                 <x-svg.auction></x-svg.auction>
             </x-slot:icon>
@@ -113,11 +104,11 @@
         <x-ui.form.button
             class="counter-buttons__badge {{ $buttonClass }}"
             tag="a"
-            link="/"
+            link="{{ $exchangeLink }}"
             only-icon="true"
             size="small"
             color="dark"
-            title="{{ __('Обмен') }}">
+            title="{{ __('common.exchange') }}">
             <x-slot:icon>
                 <x-svg.exchange></x-svg.exchange>
             </x-slot:icon>
@@ -137,7 +128,7 @@
         <x-ui.form.button
             class="counter-buttons__badge {{ $buttonClass }}"
             tag="a"
-            link="/"
+            link="{{ $favoriteLink }}"
             only-icon="true"
             size="small"
             color="dark"

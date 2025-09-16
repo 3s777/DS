@@ -1,5 +1,12 @@
-<x-layouts.main title="{{ __('user.collector.list') }}" :hide-filters="true" :search-placeholder="__('user.collector.enter_name')">
+<x-layouts.main title="{{ __('user.collector.list') }}">
 
+    <x-slot:search>
+        <x-common.main-search
+            :search-placeholder="__('user.collector.enter_name')"
+            :media-type="false"
+            :hide-filters="true"
+        />
+    </x-slot:search>
 
     <x-grid.container>
         <x-common.content>
@@ -48,16 +55,29 @@
                                 </div>
                             </div>
 
+{{--                            @foreach($collector->subscribers as $subscriber)--}}
+{{--                                {{ $subscriber->name }}--}}
+{{--                            @endforeach--}}
+
+                            @foreach($collector->subscriptions as $subscription)
+                                {{ $subscription->name }}
+                            @endforeach
+
                             <x-common.counter-buttons
                                 type="light"
                                 class="collector-preview__buttons collector-search__preview-buttons"
                                 button-class="collector-preview__button collector-search__preview-button"
                                 badge-class="collector-preview__badge collector-search__preview-badge"
-                                add="{{ $collector->collection }}"
+                                collection="{{ $collector->collection }}"
                                 wishlist="50"
                                 sale="{{ $collector->sale }}"
                                 auction="{{ $collector->auction }}"
                                 exchange="{{ $collector->exchange }}"
+                                collection-link="{{ route('collector.collection', ['collector' => $collector->slug]) }}"
+                                sale-link="{{ route('collector.sale', ['collector' => $collector->slug]) }}"
+                                auction-link="{{ route('collector.auction', ['collector' => $collector->slug]) }}"
+                                exchange-link="{{ route('collector.exchange', ['collector' => $collector->slug]) }}"
+                                wishlist-link="{{ route('collector.wishlist', ['collector' => $collector->slug]) }}"
                             />
                         </div>
                     </x-ui.card>

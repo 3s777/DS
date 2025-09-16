@@ -14,6 +14,7 @@ use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Contracts\Translation\HasLocalePreference;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Database\Eloquent\Relations\MorphMany;
@@ -174,5 +175,25 @@ class Collector extends Authenticatable implements MustVerifyEmail, HasLocalePre
     public function collectibles(): HasMany
     {
         return $this->hasMany(Collectible::class);
+    }
+
+    public function subscriptions(): BelongsToMany
+    {
+        return $this->belongsToMany(
+            Collector::class,
+            'collector_subscriptions',
+            'subscriber_id',
+            'target_collector_id'
+        );
+    }
+
+    public function subscribers(): BelongsToMany
+    {
+        return $this->belongsToMany(
+            Collector::class,
+            'collector_subscriptions',
+            'target_collector_id',
+            'subscriber_id',
+        );
     }
 }
