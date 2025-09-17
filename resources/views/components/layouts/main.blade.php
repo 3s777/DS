@@ -8,7 +8,7 @@
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
     <head>
         <x-common.meta />
-
+        @livewireStyles
         @vite(['resources/scss/app.scss'])
 
     </head>
@@ -41,7 +41,11 @@
 
         @vite(['resources/js/app.js'])
 
+        @livewireScriptConfig
+
         @stack('scripts')
+
+
 
         <script type="module">
             Fancybox.defaults.l10n = {

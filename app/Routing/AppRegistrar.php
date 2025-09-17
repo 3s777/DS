@@ -5,17 +5,20 @@ namespace App\Routing;
 use App\Contracts\RouteRegistrar;
 use App\Http\Controllers\Temp\HomeController;
 use App\Http\Controllers\Temp\PageController;
+use App\Livewire\Counter;
+use App\Livewire\CreatePost;
 use Illuminate\Contracts\Routing\Registrar;
 use Illuminate\Support\Facades\Route;
+use Livewire\Livewire;
 
 class AppRegistrar implements RouteRegistrar
 {
     public function map(Registrar $registrar): void
     {
-
         Route::middleware('web')
             ->group(function () {
-
+                Route::get('/counter', Counter::class);
+                Route::get('{locale}/posts/create', CreatePost::class)->name('yy');
                 Route::get('/{locale?}', HomeController::class)->whereIn('locale', config('app.available_locales'))->name('home');
 
                 Route::prefix('{locale}')->whereIn('locale', config('app.available_locales'))->group(function () {

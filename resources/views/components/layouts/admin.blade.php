@@ -6,7 +6,7 @@
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
     <head>
         <x-common.meta />
-
+        @livewireStyles
         @vite(['resources/scss/admin.scss'])
     </head>
     <body class="body {{ session()->get('color.theme') }}">
@@ -37,6 +37,8 @@
         <x-common.mobile-main-menu />
 
         @stack('modals')
+
+        @livewireScriptConfig
 
         @vite(['resources/js/app.js'])
         @vite(['resources/js/scripts.js'])

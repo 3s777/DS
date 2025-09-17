@@ -17,6 +17,8 @@
                     {{ __('user.collector.list') }}
                 @endif
             </x-ui.title>
+            <livewire:counter>sdf</livewire:counter>
+            <livewire:create-post></livewire:create-post>
             @if(!$collectors->isEmpty())
                 <div class="collector-search__list">
                 @foreach($collectors as $collector)
@@ -47,18 +49,19 @@
                                         <a href="{{ route('collector', $collector->slug) }}">{{ '@'.$collector->name }}</a>
                                     </div>
                                     <div class="collector-preview__subscribe">
-                                        <x-ui.form.button class="collector-preview__subscribe-button" size="small">Подписаться</x-ui.form.button>
+                                        <livewire:subscribe-button :collector="$collector"></livewire:subscribe-button>
                                         <x-ui.form.button class="collector-preview__button-message" tag="a" href="{{ route('collectors') }}" only-icon="true" size="small" title="Написать сообщение">
                                             <x-svg.message class="collector-preview__message-icon"></x-svg.message>
                                         </x-ui.form.button>
                                     </div>
                                 </div>
                             </div>
-
-{{--                            @foreach($collector->subscribers as $subscriber)--}}
-{{--                                {{ $subscriber->name }}--}}
-{{--                            @endforeach--}}
-
+<div>Подписчики {{ $collector->followers_count }}</div>
+                            @foreach($collector->subscribers as $subscriber)
+                                {{ $subscriber->name }}
+                            @endforeach
+<br> <br>
+                            <div>Подписки {{ $collector->follow_count }}</div>
                             @foreach($collector->subscriptions as $subscription)
                                 {{ $subscription->name }}
                             @endforeach

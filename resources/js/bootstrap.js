@@ -34,15 +34,24 @@ window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 import Choices from "choices.js";
 window.Choices = Choices;
 
+import { Livewire, Alpine } from '../../vendor/livewire/livewire/dist/livewire.esm';
+// import persist from '@alpinejs/persist'
+//
+// Alpine.plugin(persist)
 
-import Alpine from 'alpinejs'
-import persist from '@alpinejs/persist'
+// window.Alpine = Alpine
 
-Alpine.plugin(persist)
+Livewire.start()
 
-window.Alpine = Alpine
 
-Alpine.start()
+// import Alpine from 'alpinejs'
+// import persist from '@alpinejs/persist'
+//
+// Alpine.plugin(persist)
+//
+// window.Alpine = Alpine
+//
+// Alpine.start()
 
 
 import EditorJS from '@editorjs/editorjs';

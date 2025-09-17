@@ -26,9 +26,12 @@ class CollectorsViewModel extends ViewModel
                 },
                 'collectibles as exchange' => function (Builder $query) {
                     $query->where('target', TargetEnum::Exchange);
-                }
+                },
+                'subscriptions as follow_count',
+                'subscribers as followers_count'
             ])
             ->filtered(app(CollectorFilterRegistrar::class)->filtersList())
+            ->orderBy('id')
             ->paginate(12);
 
 //        Если необходимо включить кэширование.

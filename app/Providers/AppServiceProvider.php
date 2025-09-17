@@ -3,6 +3,7 @@
 namespace App\Providers;
 
 use App\Guards\JWTGuard;
+use App\Http\Middleware\Localization;
 use Domain\Auth\JWT;
 use Domain\Game\Models\GameDeveloper;
 use Domain\Game\Models\Policies\GameDeveloperPolicy;
@@ -11,7 +12,9 @@ use Illuminate\Database\Eloquent\Relations\Relation;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Gate;
+use Illuminate\Support\Facades\Route;
 use Illuminate\Support\ServiceProvider;
+use Livewire\Livewire;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -81,6 +84,12 @@ class AppServiceProvider extends ServiceProvider
                 $app[JWT::class],
                 Auth::createUserProvider($config['provider'])
             );
+        });
+
+        Livewire::setUpdateRoute(function ($handle) {
+            return Route::post('{locale}/livewire/update', $handle)
+                ->whereIn('locale', config('app.available_locales'))
+                ->middleware(['web']);
         });
     }
 }
