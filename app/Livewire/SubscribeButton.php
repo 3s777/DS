@@ -9,6 +9,7 @@ class SubscribeButton extends Component
 {
 
     public Collector $collector;
+    public bool $isSubscribed = false;
 
     public function mount($collector) {
         $this->collector = $collector;
@@ -16,6 +17,7 @@ class SubscribeButton extends Component
 
     public function subscribe() {
         $this->collector->subscribers()->attach(auth('collector')->user());
+        $this->isSubscribed = true;
     }
 
     public function render()
