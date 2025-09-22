@@ -17,8 +17,6 @@
                     {{ __('user.collector.list') }}
                 @endif
             </x-ui.title>
-            <livewire:counter>sdf</livewire:counter>
-            <livewire:create-post></livewire:create-post>
             @if(!$collectors->isEmpty())
                 <div class="collector-search__list">
                 @foreach($collectors as $collector)
@@ -48,12 +46,17 @@
                                     <div class="collector-preview__nickname">
                                         <a href="{{ route('collector', $collector->slug) }}">{{ '@'.$collector->name }}</a>
                                     </div>
-                                    <div class="collector-preview__subscribe">
-                                        <livewire:subscribe-button :collector="$collector"></livewire:subscribe-button>
-                                        <x-ui.form.button class="collector-preview__button-message" tag="a" href="{{ route('collectors') }}" only-icon="true" size="small" title="Написать сообщение">
-                                            <x-svg.message class="collector-preview__message-icon"></x-svg.message>
-                                        </x-ui.form.button>
-                                    </div>
+                                    @auth('collector')
+                                        <div class="collector-preview__subscribe">
+                                            <livewire:subscribe-button
+                                                :collector="$collector"
+                                                :is-subscribed="auth('collector')->user()->subscriptions->contains($collector)"
+                                            ></livewire:subscribe-button>
+                                            <x-ui.form.button class="collector-preview__button-message" tag="a" href="{{ route('collectors') }}" only-icon="true" size="small" title="Написать сообщение">
+                                                <x-svg.message class="collector-preview__message-icon"></x-svg.message>
+                                            </x-ui.form.button>
+                                        </div>
+                                    @endauth
                                 </div>
                             </div>
 <div>Подписчики {{ $collector->followers_count }}</div>
@@ -182,6 +185,8 @@
                     {{ __('common.sorry') }}. {{ __('common.not_found') }}
                 </x-common.missing>
             @endif
+
+
         </x-common.content>
     </x-grid.container>
 </x-layouts.main>

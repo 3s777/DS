@@ -18,14 +18,14 @@ return new class extends Migration
                 ->cascadeOnDelete()
                 ->cascadeOnUpdate();
 
-            $table->foreignId('target_collector_id')
+            $table->foreignId('collector_id')
                 ->constrained('collectors')
                 ->cascadeOnDelete()
                 ->cascadeOnUpdate();
 
             $table->timestamps();
 
-            $table->unique(['subscriber_id', 'target_collector_id']);
+            $table->unique(['subscriber_id', 'collector_id']);
         });
     }
 

@@ -183,7 +183,7 @@ class Collector extends Authenticatable implements MustVerifyEmail, HasLocalePre
             Collector::class,
             'collector_subscriptions',
             'subscriber_id',
-            'target_collector_id'
+            'collector_id'
         );
     }
 
@@ -192,7 +192,7 @@ class Collector extends Authenticatable implements MustVerifyEmail, HasLocalePre
         return $this->belongsToMany(
             Collector::class,
             'collector_subscriptions',
-            'target_collector_id',
+            'collector_id',
             'subscriber_id',
         );
     }
