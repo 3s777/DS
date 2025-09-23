@@ -4,6 +4,30 @@
             'counter-buttons_'.$type => $type,
         ])
     }}>
+
+    @if($subscribers)
+        <x-ui.form.button
+            class="counter-buttons__badge {{ $buttonClass }}"
+            tag="div"
+            only-icon="true"
+            size="small"
+            color="dark"
+            title="{{ __('common.subscribers') }}">
+            <x-slot:icon>
+                <x-svg.users></x-svg.users>
+            </x-slot:icon>
+            <x-slot:badge>
+                <x-ui.badge
+                    class="counter-buttons__badge {{ $badgeClass }}"
+                    type="number"
+                    align="standard"
+                    color="success">
+                    {{ $subscribers }}
+                </x-ui.badge>
+            </x-slot:badge>
+        </x-ui.form.button>
+    @endif
+
     @if($collection)
         <x-ui.form.button
             class="counter-buttons__badge {{ $buttonClass }}"

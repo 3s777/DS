@@ -18,6 +18,7 @@ class CounterButtons extends Component
         public ?int $wishlist = null,
         public ?int $exchange = null,
         public ?int $favorite = null,
+        public ?int $subscribers = null,
         public string $collectionLink = '#',
         public string $saleLink = '#',
         public string $auctionLink = '#',

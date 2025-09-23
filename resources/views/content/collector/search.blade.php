@@ -59,21 +59,13 @@
                                     @endauth
                                 </div>
                             </div>
-<div>Подписчики {{ $collector->followers_count }}</div>
-                            @foreach($collector->subscribers as $subscriber)
-                                {{ $subscriber->name }}
-                            @endforeach
-<br> <br>
-                            <div>Подписки {{ $collector->follow_count }}</div>
-                            @foreach($collector->subscriptions as $subscription)
-                                {{ $subscription->name }}
-                            @endforeach
 
                             <x-common.counter-buttons
                                 type="light"
                                 class="collector-preview__buttons collector-search__preview-buttons"
                                 button-class="collector-preview__button collector-search__preview-button"
                                 badge-class="collector-preview__badge collector-search__preview-badge"
+                                subscribers="{{ $collector->subscribers_count }}"
                                 collection="{{ $collector->collection }}"
                                 wishlist="50"
                                 sale="{{ $collector->sale }}"

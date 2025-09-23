@@ -13,7 +13,7 @@ class CollectorsViewModel extends ViewModel
     public function collectors()
     {
         return Collector::query()->select(['id', 'slug', 'name', 'first_name'])
-            ->with(['media', 'subscribers', 'subscriptions'])
+            ->with(['media'])
             ->withCount([
                 'collectibles as collection' => function (Builder $query) {
                     $query->where('target', TargetEnum::Collection);
@@ -27,8 +27,8 @@ class CollectorsViewModel extends ViewModel
                 'collectibles as exchange' => function (Builder $query) {
                     $query->where('target', TargetEnum::Exchange);
                 },
-                'subscriptions as follow_count',
-                'subscribers as followers_count'
+                'subscriptions as subscriptions_count',
+                'subscribers as subscribers_count'
             ])
             ->filtered(app(CollectorFilterRegistrar::class)->filtersList())
             ->orderBy('id')
