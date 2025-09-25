@@ -11,9 +11,11 @@ class SubscribeButton extends Component
 
     public Collector $collector;
     public bool $isSubscribed = false;
+    public string $test ='sdfsdf';
 
     public function mount($collector) {
         $this->collector = $collector;
+        $this->test = 'sf';
 
         if(!Auth::guard('collector')->check()) {
             return $this->redirect('login');
@@ -25,6 +27,8 @@ class SubscribeButton extends Component
         $this->collector->subscribers()->attach(auth('collector')->user());
         $this->isSubscribed = true;
 
+        $this->dispatch('subscribed', collector_id: $this->collector->id);
+
         return $this->isSubscribed;
     }
 
@@ -32,6 +36,8 @@ class SubscribeButton extends Component
     {
         $this->collector->subscribers()->detach(auth('collector')->user());
         $this->isSubscribed = false;
+
+        $this->dispatch('unsubscribed', collector_id: $this->collector->id);
 
         return $this->isSubscribed;
     }

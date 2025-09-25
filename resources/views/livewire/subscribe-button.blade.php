@@ -8,4 +8,6 @@
             Подписаться
         </x-ui.form.button>
     @endif
+        <div x-text="$wire.test">www</div>
+        <span wire:loading>Saving...</span>
 </div>

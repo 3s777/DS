@@ -2,19 +2,24 @@
 
 namespace App\Livewire;
 
-use Domain\Page\Models\Page;
 use Livewire\Component;
+//use App\Models\Post;
 
 class CreatePost extends Component
 {
-    public $title;
+    public $title = '';
+
+    public $content = '';
 
     public function save()
     {
+//        Post::create(
+//            $this->only(['title', 'content'])
+//        );
 
+        session()->flash('status', 'Post successfully updated.');
 
-        return to_route('yy')
-            ->with('status', 'Post created!');
+        return $this->redirect('/');
     }
 
     public function render()

@@ -18,9 +18,10 @@
             </x-slot:icon>
             <x-slot:badge>
                 <x-ui.badge
-                    class="counter-buttons__badge {{ $badgeClass }}"
+                    class="counter-buttons__badge counter-buttons__badge-collector-count {{ $badgeClass }}"
                     type="number"
                     align="standard"
+                    data-subscribers="{{ $subscribers }}"
                     color="success">
                     {{ $subscribers }}
                 </x-ui.badge>

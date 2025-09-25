@@ -1,7 +1,7 @@
 <form wire:submit="save">
-    <label for="title">Title:</label>
+    <input type="text" wire:model="title">
 
-    <input type="text" id="title" wire:model="title">
+    <input type="text" wire:model="content">
 
     <button type="submit">Save</button>
 </form>

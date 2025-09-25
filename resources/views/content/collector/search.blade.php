@@ -17,6 +17,7 @@
                     {{ __('user.collector.list') }}
                 @endif
             </x-ui.title>
+            <livewire:create-post></livewire:create-post>
             @if(!$collectors->isEmpty())
                 <div class="collector-search__list">
                 @foreach($collectors as $collector)
@@ -46,12 +47,15 @@
                                     <div class="collector-preview__nickname">
                                         <a href="{{ route('collector', $collector->slug) }}">{{ '@'.$collector->name }}</a>
                                     </div>
+
                                     @auth('collector')
                                         <div class="collector-preview__subscribe">
                                             <livewire:subscribe-button
                                                 :collector="$collector"
                                                 :is-subscribed="auth('collector')->user()->subscriptions->contains($collector)"
-                                            ></livewire:subscribe-button>
+                                            >
+
+                                            </livewire:subscribe-button>
                                             <x-ui.form.button class="collector-preview__button-message" tag="a" href="{{ route('collectors') }}" only-icon="true" size="small" title="Написать сообщение">
                                                 <x-svg.message class="collector-preview__message-icon"></x-svg.message>
                                             </x-ui.form.button>
@@ -62,6 +66,7 @@
 
                             <x-common.counter-buttons
                                 type="light"
+                                id="collector_{{ $collector->id }}"
                                 class="collector-preview__buttons collector-search__preview-buttons"
                                 button-class="collector-preview__button collector-search__preview-button"
                                 badge-class="collector-preview__badge collector-search__preview-badge"
@@ -181,4 +186,40 @@
 
         </x-common.content>
     </x-grid.container>
+    @push('scripts')
+        <script>
+            function collectorsCounter() {
+                const parentSubscribersCounter = document.querySelector('#collector_'+event.collector_id+' .counter-buttons__badge-collector-count');
+
+                if(parentSubscribersCounter) {
+                    const subscribersCounter = parentSubscribersCounter ? parentSubscribersCounter.dataset.subscribers : null;
+                    const currentSubscribers = parseInt(subscribersCounter);
+                    const newSubscribers = Math.max(0, currentSubscribers + 1);
+                    parentSubscribersCounter.setAttribute('data-subscribers', newSubscribers);
+                    parentSubscribersCounter.textContent = newSubscribers;
+                }
+            }
+
+            document.addEventListener('livewire:init', () => {
+                Livewire.on('subscribed', (event) => {
+                    collectorsCounter();
+
+
+                });
+                Livewire.on('unsubscribed', (event) => {
+                    const parentSubscribersCounter = document.querySelector('#collector_'+event.collector_id+' .counter-buttons__badge-collector-count');
+
+                    if(parentSubscribersCounter) {
+                        const subscribersCounter = parentSubscribersCounter ? parentSubscribersCounter.dataset.subscribers : null;
+                        const currentSubscribers = parseInt(subscribersCounter);
+                        const newSubscribers = Math.max(0, currentSubscribers - 1);
+                        parentSubscribersCounter.setAttribute('data-subscribers', newSubscribers);
+                        parentSubscribersCounter.textContent = newSubscribers;
+                    }
+
+                });
+            });
+        </script>
+        @endpush
 </x-layouts.main>
+
