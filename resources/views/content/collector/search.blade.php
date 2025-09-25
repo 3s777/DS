@@ -188,13 +188,17 @@
     </x-grid.container>
     @push('scripts')
         <script>
-            function collectorsCounter() {
+            function collectorsCounter(event, decrease=false) {
                 const parentSubscribersCounter = document.querySelector('#collector_'+event.collector_id+' .counter-buttons__badge-collector-count');
 
                 if(parentSubscribersCounter) {
                     const subscribersCounter = parentSubscribersCounter ? parentSubscribersCounter.dataset.subscribers : null;
                     const currentSubscribers = parseInt(subscribersCounter);
-                    const newSubscribers = Math.max(0, currentSubscribers + 1);
+                    if(decrease) {
+                        const newSubscribers = Math.max(0, currentSubscribers - 1);
+                    } else {
+                        const newSubscribers = Math.max(0, currentSubscribers + 1);
+                    }
                     parentSubscribersCounter.setAttribute('data-subscribers', newSubscribers);
                     parentSubscribersCounter.textContent = newSubscribers;
                 }
@@ -202,20 +206,12 @@
 
             document.addEventListener('livewire:init', () => {
                 Livewire.on('subscribed', (event) => {
-                    collectorsCounter();
+                    collectorsCounter(event);
 
 
                 });
                 Livewire.on('unsubscribed', (event) => {
-                    const parentSubscribersCounter = document.querySelector('#collector_'+event.collector_id+' .counter-buttons__badge-collector-count');
-
-                    if(parentSubscribersCounter) {
-                        const subscribersCounter = parentSubscribersCounter ? parentSubscribersCounter.dataset.subscribers : null;
-                        const currentSubscribers = parseInt(subscribersCounter);
-                        const newSubscribers = Math.max(0, currentSubscribers - 1);
-                        parentSubscribersCounter.setAttribute('data-subscribers', newSubscribers);
-                        parentSubscribersCounter.textContent = newSubscribers;
-                    }
+                    collectorsCounter(event, true);
 
                 });
             });
