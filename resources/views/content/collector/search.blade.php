@@ -17,7 +17,7 @@
                     {{ __('user.collector.list') }}
                 @endif
             </x-ui.title>
-            <livewire:create-post></livewire:create-post>
+
             @if(!$collectors->isEmpty())
                 <div class="collector-search__list">
                 @foreach($collectors as $collector)
@@ -51,10 +51,7 @@
                                     @auth('collector')
                                         <div class="collector-preview__subscribe">
                                             <livewire:subscribe-button
-                                                :collector="$collector"
-                                                :is-subscribed="auth('collector')->user()->subscriptions->contains($collector)"
-                                            >
-
+                                                :collector="$collector">
                                             </livewire:subscribe-button>
                                             <x-ui.form.button class="collector-preview__button-message" tag="a" href="{{ route('collectors') }}" only-icon="true" size="small" title="Написать сообщение">
                                                 <x-svg.message class="collector-preview__message-icon"></x-svg.message>
@@ -188,31 +185,26 @@
     </x-grid.container>
     @push('scripts')
         <script>
-            function collectorsCounter(event, decrease=false) {
-                const parentSubscribersCounter = document.querySelector('#collector_'+event.collector_id+' .counter-buttons__badge-collector-count');
+            function collectorsCounter(event, decrease = false) {
+                const counterElement = document.querySelector(`#collector_${event.collector_id} .counter-buttons__badge-collector-count`);
 
-                if(parentSubscribersCounter) {
-                    const subscribersCounter = parentSubscribersCounter ? parentSubscribersCounter.dataset.subscribers : null;
-                    const currentSubscribers = parseInt(subscribersCounter);
-                    if(decrease) {
-                        const newSubscribers = Math.max(0, currentSubscribers - 1);
-                    } else {
-                        const newSubscribers = Math.max(0, currentSubscribers + 1);
-                    }
-                    parentSubscribersCounter.setAttribute('data-subscribers', newSubscribers);
-                    parentSubscribersCounter.textContent = newSubscribers;
-                }
+                if (!counterElement?.dataset.subscribers) return;
+
+                const currentSubscribers = parseInt(counterElement.dataset.subscribers);
+                const newSubscribers = decrease
+                    ? Math.max(0, currentSubscribers - 1)
+                    : currentSubscribers + 1;
+
+                counterElement.dataset.subscribers = newSubscribers;
+                counterElement.textContent = newSubscribers;
             }
 
             document.addEventListener('livewire:init', () => {
                 Livewire.on('subscribed', (event) => {
                     collectorsCounter(event);
-
-
                 });
                 Livewire.on('unsubscribed', (event) => {
                     collectorsCounter(event, true);
-
                 });
             });
         </script>

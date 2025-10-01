@@ -1,0 +1,14 @@
+.subscribe-button {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+
+    &__loader {
+        line-height: 1;
+
+        circle {
+            line-height: 0;
+            fill: $opposite-main;
+        }
+    }
+}

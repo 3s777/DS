@@ -4,18 +4,20 @@ namespace App\Livewire;
 
 use Domain\Auth\Models\Collector;
 use Illuminate\Support\Facades\Auth;
+use Livewire\Attributes\Locked;
 use Livewire\Component;
 
 class SubscribeButton extends Component
 {
 
     public Collector $collector;
+    #[Locked]
     public bool $isSubscribed = false;
-    public string $test ='sdfsdf';
 
     public function mount($collector) {
         $this->collector = $collector;
-        $this->test = 'sf';
+
+        $this->isSubscribed = auth('collector')->user()->subscriptions->contains($collector);
 
         if(!Auth::guard('collector')->check()) {
             return $this->redirect('login');
