@@ -17,29 +17,42 @@ class SubscribeButton extends Component
     public function mount($collector) {
         $this->collector = $collector;
 
-        $this->isSubscribed = auth('collector')->user()->subscriptions->contains($collector);
+        $this->isSubscribed = auth('collector')->user()
+            ->subscriptions()
+            ->where('collector_id', $collector->id)
+            ->exists();
+    }
 
+    public function boot() {
         if(!Auth::guard('collector')->check()) {
-            return $this->redirect('login');
+            $this->redirect('login');
         }
     }
 
-    public function subscribe(): ?bool
+    public function subscribe(): bool
     {
-        $this->collector->subscribers()->attach(auth('collector')->user());
-        $this->isSubscribed = true;
+        $user = auth('collector')->user();
 
-        $this->dispatch('subscribed', collector_id: $this->collector->id);
+        if ($user->id === $this->collector->id) {
+            return false;
+        }
+
+        if (!$this->isSubscribed) {
+            $this->collector->subscribers()->attach(auth('collector')->user());
+            $this->isSubscribed = true;
+            $this->dispatch('subscribed', collector_id: $this->collector->id);
+        }
 
         return $this->isSubscribed;
     }
 
-    public function unsubscribe(): ?bool
+    public function unsubscribe(): bool
     {
-        $this->collector->subscribers()->detach(auth('collector')->user());
-        $this->isSubscribed = false;
-
-        $this->dispatch('unsubscribed', collector_id: $this->collector->id);
+        if ($this->isSubscribed) {
+            $this->collector->subscribers()->detach(auth('collector')->user());
+            $this->isSubscribed = false;
+            $this->dispatch('unsubscribed', collector_id: $this->collector->id);
+        }
 
         return $this->isSubscribed;
     }

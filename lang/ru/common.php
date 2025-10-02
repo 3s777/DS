@@ -109,5 +109,7 @@ return [
     'show' => 'Показать',
     'show_all' => 'Показать полностью',
     'change_data' => 'Изменить информацию',
-    'subscribers' => 'Подписчики'
+    'subscribers' => 'Подписчики',
+    'subscribe' => 'Подписаться',
+    'unsubscribe' => 'Отписаться'
 ];

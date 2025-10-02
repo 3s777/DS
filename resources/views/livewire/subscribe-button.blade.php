@@ -1,11 +1,11 @@
 <div class="subscribe-button">
     @if($isSubscribed)
         <x-ui.form.button wire:click="unsubscribe" class="collector-preview__subscribe-button" size="small" color="cancel">
-            Отписаться
+            {{ __('common.unsubscribe') }}
         </x-ui.form.button>
     @else
         <x-ui.form.button wire:click="subscribe" class="collector-preview__subscribe-button" size="small">
-            Подписаться
+            {{ __('common.subscribe') }}
         </x-ui.form.button>
     @endif
     <span wire:loading class="subscribe-button__loader">

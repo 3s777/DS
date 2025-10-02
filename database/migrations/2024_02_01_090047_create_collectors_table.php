@@ -22,6 +22,10 @@ return new class () extends Migration {
             $table->string('featured_image')->nullable();
             $table->boolean('is_banned')->nullable();
             $table->string('language')->default('en');
+            $table->float('rating', 3, 2)
+                ->default(0);
+            $table->smallInteger('rating_count')
+                ->default(0);
             $table->rememberToken();
             $table->timestamps();
             $table->softDeletes();
