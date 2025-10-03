@@ -22,7 +22,7 @@
                 <div class="collector-search__list">
                 @foreach($collectors as $collector)
                     <x-ui.card class="collector-preview collector-search__preview" size="small">
-                        <a href="" class="collector-preview__rating" title="Рейтинг пользователя">9.5/10</a>
+                        <a href="" class="collector-preview__rating" title="Рейтинг пользователя">{{ $collector->rating }}/10</a>
                         <div class="collector-preview__item">
                             <div class="collector-preview__main">
                                 @if($collector->getFeaturedImagePath())

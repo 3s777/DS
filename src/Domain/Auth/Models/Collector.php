@@ -66,7 +66,9 @@ class Collector extends Authenticatable implements MustVerifyEmail, HasLocalePre
         'first_name',
         'featured_image',
         'description',
-        'email_verified_at'
+        'email_verified_at',
+        'rating',
+        'rating_count'
     ];
 
     /**

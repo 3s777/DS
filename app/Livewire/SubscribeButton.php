@@ -3,6 +3,7 @@
 namespace App\Livewire;
 
 use Domain\Auth\Models\Collector;
+use Domain\Auth\Services\CollectorSubscriptionService;
 use Illuminate\Support\Facades\Auth;
 use Livewire\Attributes\Locked;
 use Livewire\Component;
@@ -29,16 +30,13 @@ class SubscribeButton extends Component
         }
     }
 
-    public function subscribe(): bool
+    public function subscribe(CollectorSubscriptionService $service): bool
     {
-        $user = auth('collector')->user();
-
-        if ($user->id === $this->collector->id) {
-            return false;
+        if($this->isSubscribed) {
+            return true;
         }
 
-        if (!$this->isSubscribed) {
-            $this->collector->subscribers()->attach(auth('collector')->user());
+        if($service->subscribe($this->collector)) {
             $this->isSubscribed = true;
             $this->dispatch('subscribed', collector_id: $this->collector->id);
         }
@@ -46,10 +44,13 @@ class SubscribeButton extends Component
         return $this->isSubscribed;
     }
 
-    public function unsubscribe(): bool
+    public function unsubscribe(CollectorSubscriptionService $service): bool
     {
-        if ($this->isSubscribed) {
-            $this->collector->subscribers()->detach(auth('collector')->user());
+        if (!$this->isSubscribed) {
+            return false;
+        }
+
+        if($service->unsubscribe($this->collector)) {
             $this->isSubscribed = false;
             $this->dispatch('unsubscribed', collector_id: $this->collector->id);
         }

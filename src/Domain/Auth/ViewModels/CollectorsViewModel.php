@@ -12,7 +12,13 @@ class CollectorsViewModel extends ViewModel
 {
     public function collectors()
     {
-        return Collector::query()->select(['id', 'slug', 'name', 'first_name'])
+        return Collector::query()->select([
+            'id',
+            'slug',
+            'name',
+            'first_name',
+            'rating',
+            ])
             ->with(['media'])
             ->withCount([
                 'collectibles as collection' => function (Builder $query) {
