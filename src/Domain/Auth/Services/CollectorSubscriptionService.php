@@ -23,7 +23,9 @@ class CollectorSubscriptionService
      */
     public function subscribe(Collector $collector, Collector $subscriber = null): bool|HigherOrderTapProxy
     {
+
         $subscriber = $subscriber ?? $this->subscriber;
+//        dd($subscriber);
 
         if (!$subscriber || $subscriber->id === $collector->id) {
             return false;

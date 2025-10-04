@@ -17,8 +17,6 @@ class AppRegistrar implements RouteRegistrar
     {
         Route::middleware('web')
             ->group(function () {
-                Route::get('/counter', Counter::class);
-                Route::get('{locale}/posts/create', CreatePost::class)->name('yy');
                 Route::get('/{locale?}', HomeController::class)->whereIn('locale', config('app.available_locales'))->name('home');
 
                 Route::prefix('{locale}')->whereIn('locale', config('app.available_locales'))->group(function () {

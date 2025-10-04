@@ -18,15 +18,18 @@ class SubscribeButton extends Component
     public function mount($collector) {
         $this->collector = $collector;
 
-        $this->isSubscribed = auth('collector')->user()
-            ->subscriptions()
-            ->where('collector_id', $collector->id)
-            ->exists();
+        if(Auth::guard('collector')->check()) {
+            $this->isSubscribed = auth('collector')->user()
+                ->subscriptions()
+                ->where('collector_id', $collector->id)
+                ->exists();
+        }
     }
 
-    public function boot() {
-        if(!Auth::guard('collector')->check()) {
-            $this->redirect('login');
+    public function hydrate()
+    {
+        if (!Auth::guard('collector')->check()) {
+            $this->redirectRoute('collector.login');
         }
     }
 

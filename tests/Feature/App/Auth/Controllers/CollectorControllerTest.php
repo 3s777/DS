@@ -3,6 +3,7 @@
 namespace App\Auth\Controllers;
 
 use App\Http\Controllers\Auth\CollectorController;
+use App\Livewire\SubscribeButton;
 use Database\Factories\Auth\CollectorFactory;
 use Domain\Auth\Models\Collector;
 use Domain\Auth\Models\User;
@@ -31,7 +32,7 @@ class CollectorControllerTest extends TestCase
         $this->testingCollector = CollectorFactory::new()->create();
     }
 
-    public function test_search_success(): void
+    public function testSearchSuccess(): void
     {
         $this->get(action([CollectorController::class, 'index']))
             ->assertOk()
@@ -39,7 +40,17 @@ class CollectorControllerTest extends TestCase
             ->assertViewIs('content.collector.search');
     }
 
-    public function test_show_success(): void
+    public function testSubscribeButtonExistsOnThePage(): void
+    {
+        $this->get(action([CollectorController::class, 'index']))
+            ->assertDontSeeLivewire(SubscribeButton::class);
+
+        $this->actingAs($this->authCollector, 'collector')
+            ->get(action([CollectorController::class, 'index']))
+            ->assertSeeLivewire(SubscribeButton::class);
+    }
+
+    public function testShowSuccess(): void
     {
         $this->get(action([CollectorController::class, 'show'], $this->testCollector->slug))
             ->assertOk()
@@ -47,7 +58,7 @@ class CollectorControllerTest extends TestCase
             ->assertViewIs('content.collector.index');
     }
 
-    public function test_collection_success(): void
+    public function testCollectionSuccess(): void
     {
         $this->get(action([CollectorController::class, 'showCollection'], $this->testCollector->slug))
             ->assertOk()
@@ -55,7 +66,7 @@ class CollectorControllerTest extends TestCase
             ->assertViewIs('content.collector.collection');
     }
 
-    public function test_sale_success(): void
+    public function testSaleSuccess(): void
     {
         $this->get(action([CollectorController::class, 'showSale'], $this->testCollector->slug))
             ->assertOk()
@@ -63,7 +74,7 @@ class CollectorControllerTest extends TestCase
             ->assertViewIs('content.collector.sale');
     }
 
-    public function test_auction_success(): void
+    public function testAuctionSuccess(): void
     {
         $this->get(action([CollectorController::class, 'showAuction'], $this->testCollector->slug))
             ->assertOk()
@@ -71,7 +82,7 @@ class CollectorControllerTest extends TestCase
             ->assertViewIs('content.collector.auction');
     }
 
-    public function test_wishlist_success(): void
+    public function testWishlistSuccess(): void
     {
         $this->get(action([CollectorController::class, 'showWishlist'], $this->testCollector->slug))
             ->assertOk()
@@ -79,7 +90,7 @@ class CollectorControllerTest extends TestCase
             ->assertViewIs('content.collector.wishlist');
     }
 
-    public function test_exchange_success(): void
+    public function testExchangeSuccess(): void
     {
         $this->get(action([CollectorController::class, 'showExchange'], $this->testCollector->slug))
             ->assertOk()
@@ -87,7 +98,7 @@ class CollectorControllerTest extends TestCase
             ->assertViewIs('content.collector.exchange');
     }
 
-    public function test_blog_success(): void
+    public function testBlogSuccess(): void
     {
         $this->get(action([CollectorController::class, 'showBlog'], $this->testCollector->slug))
             ->assertOk()
