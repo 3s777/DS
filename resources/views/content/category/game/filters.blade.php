@@ -14,13 +14,13 @@
 
         <x-grid.col xl="6" lg="4" md="6" sm="12">
             <x-ui.form.group>
-                <x-common.filters.relation-multiple name="genres" />
+                <x-common.filters.relation-multiple name="genres" select-name="filters[genres][]"/>
             </x-ui.form.group>
         </x-grid.col>
 
         <x-grid.col xl="6" lg="4" md="6" sm="12">
             <x-ui.form.group>
-                <x-common.filters.relation-multiple name="platforms" />
+                <x-common.filters.relation-multiple name="platforms" select-name="filters[platforms][]"/>
             </x-ui.form.group>
         </x-grid.col>
 
