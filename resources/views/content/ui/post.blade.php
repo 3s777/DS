@@ -11,46 +11,51 @@
             </p>
 
             <a href="{{ asset('/storage/test.jpg') }}" data-fancybox data-caption="Single image">
-                <picture class="image image_standard image_align_left ui__image_1">
-                    <source
-                        type="image/webp"
-                        srcset="
-                                        {{ asset('/storage/test-300.webp') }} 300w,
-                                        {{ asset('/storage/test-650.webp') }} 650w,
-                                        {{ asset('/storage/test-800.webp') }} 800w,
-                                        {{ asset('/storage/test-1200.webp') }} 1200w,
-                                        {{ asset('/storage/test-1500.webp') }} 1500w,
-                                        {{ asset('/storage/test.webp') }} 3000w,
-                                    "
-                        sizes="
-                                        (max-width: 700px) 280px,
-                                        (max-width: 1000px) 740px,
-                                        (max-width: 1900px) 1500px,
-                                        100vw
-                                    "
-                    />
-                    <img
-                        src="{{ asset('/storage/test.jpg') }}"
-                        srcset="
-                                        {{ asset('/storage/test-300.jpg') }} 300w,
-                                        {{ asset('/storage/test-650.jpg') }} 650w,
-                                        {{ asset('/storage/test-800.jpg') }} 800w,
-                                        {{ asset('/storage/test-1200.jpg') }} 1200w,
-                                        {{ asset('/storage/test-1jpg') }} 1500w,
-                                        {{ asset('/storage/test.jpg') }} 3000w,
-                                    "
-                        sizes="
-                                        (max-width: 700px) 280px,
-                                        (max-width: 1000px) 740px,
-                                        (max-width: 1900px) 1500px,
-                                        100vw
-                                    "
-                        loading="lazy"
-                        decoding="async"
-                        alt="Test image"
-                        title="Test image"
-                    />
-                </picture>
+                <x-ui.image
+                    class="image image_standard image_align_left ui__image_1"
+                    caption="Test Caption"
+                    src="{{ Vite::image('620_1.jpg') }}"
+                    src-full="{{ Vite::image('620_1.jpg') }}" />
+{{--                <picture class="image image_standard image_align_left ui__image_1">--}}
+{{--                    <source--}}
+{{--                        type="image/webp"--}}
+{{--                        srcset="--}}
+{{--                                        {{ asset('/storage/test-300.webp') }} 300w,--}}
+{{--                                        {{ asset('/storage/test-650.webp') }} 650w,--}}
+{{--                                        {{ asset('/storage/test-800.webp') }} 800w,--}}
+{{--                                        {{ asset('/storage/test-1200.webp') }} 1200w,--}}
+{{--                                        {{ asset('/storage/test-1500.webp') }} 1500w,--}}
+{{--                                        {{ asset('/storage/test.webp') }} 3000w,--}}
+{{--                                    "--}}
+{{--                        sizes="--}}
+{{--                                        (max-width: 700px) 280px,--}}
+{{--                                        (max-width: 1000px) 740px,--}}
+{{--                                        (max-width: 1900px) 1500px,--}}
+{{--                                        100vw--}}
+{{--                                    "--}}
+{{--                    />--}}
+{{--                    <img--}}
+{{--                        src="{{ asset('/storage/test.jpg') }}"--}}
+{{--                        srcset="--}}
+{{--                                        {{ asset('/storage/test-300.jpg') }} 300w,--}}
+{{--                                        {{ asset('/storage/test-650.jpg') }} 650w,--}}
+{{--                                        {{ asset('/storage/test-800.jpg') }} 800w,--}}
+{{--                                        {{ asset('/storage/test-1200.jpg') }} 1200w,--}}
+{{--                                        {{ asset('/storage/test-1jpg') }} 1500w,--}}
+{{--                                        {{ asset('/storage/test.jpg') }} 3000w,--}}
+{{--                                    "--}}
+{{--                        sizes="--}}
+{{--                                        (max-width: 700px) 280px,--}}
+{{--                                        (max-width: 1000px) 740px,--}}
+{{--                                        (max-width: 1900px) 1500px,--}}
+{{--                                        100vw--}}
+{{--                                    "--}}
+{{--                        loading="lazy"--}}
+{{--                        decoding="async"--}}
+{{--                        alt="Test image"--}}
+{{--                        title="Test image"--}}
+{{--                    />--}}
+{{--                </picture>--}}
             </a>
 
             <p>
@@ -59,46 +64,51 @@
             </p>
 
             <div class="image image_standard image_align_right ui__image_2">
-                <picture>
-                    <source
-                        type="image/webp"
-                        srcset="
-                                        {{ asset('/storage/test-300.webp') }} 300w,
-                                        {{ asset('/storage/test-650.webp') }} 650w,
-                                        {{ asset('/storage/test-800.webp') }} 800w,
-                                        {{ asset('/storage/test-1200.webp') }} 1200w,
-                                        {{ asset('/storage/test-1500.webp') }} 1500w,
-                                        {{ asset('/storage/test.webp') }} 3000w,
-                                    "
-                        sizes="
-                                        (max-width: 700px) 280px,
-                                        (max-width: 1000px) 740px,
-                                        (max-width: 1900px) 1500px,
-                                        100vw
-                                    "
-                    />
-                    <img
-                        src="{{ asset('/storage/test.jpg') }}"
-                        srcset="
-                                        {{ asset('/storage/test-300.jpg') }} 300w,
-                                        {{ asset('/storage/test-650.jpg') }} 650w,
-                                        {{ asset('/storage/test-800.jpg') }} 800w,
-                                        {{ asset('/storage/test-1200.jpg') }} 1200w,
-                                        {{ asset('/storage/test-1jpg') }} 1500w,
-                                        {{ asset('/storage/test.jpg') }} 3000w,
-                                    "
-                        sizes="
-                                        (max-width: 700px) 280px,
-                                        (max-width: 1000px) 740px,
-                                        (max-width: 1900px) 1500px,
-                                        100vw
-                                    "
-                        loading="lazy"
-                        decoding="async"
-                        alt="Test image"
-                        title="Test image"
-                    />
-                </picture>
+                <x-ui.image
+
+                    caption="Test Caption"
+                    src="{{ Vite::image('620_1.jpg') }}"
+                    src-full="{{ Vite::image('620_1.jpg') }}" />
+{{--                <picture>--}}
+{{--                    <source--}}
+{{--                        type="image/webp"--}}
+{{--                        srcset="--}}
+{{--                                        {{ asset('/storage/test-300.webp') }} 300w,--}}
+{{--                                        {{ asset('/storage/test-650.webp') }} 650w,--}}
+{{--                                        {{ asset('/storage/test-800.webp') }} 800w,--}}
+{{--                                        {{ asset('/storage/test-1200.webp') }} 1200w,--}}
+{{--                                        {{ asset('/storage/test-1500.webp') }} 1500w,--}}
+{{--                                        {{ asset('/storage/test.webp') }} 3000w,--}}
+{{--                                    "--}}
+{{--                        sizes="--}}
+{{--                                        (max-width: 700px) 280px,--}}
+{{--                                        (max-width: 1000px) 740px,--}}
+{{--                                        (max-width: 1900px) 1500px,--}}
+{{--                                        100vw--}}
+{{--                                    "--}}
+{{--                    />--}}
+{{--                    <img--}}
+{{--                        src="{{ asset('/storage/test.jpg') }}"--}}
+{{--                        srcset="--}}
+{{--                                        {{ asset('/storage/test-300.jpg') }} 300w,--}}
+{{--                                        {{ asset('/storage/test-650.jpg') }} 650w,--}}
+{{--                                        {{ asset('/storage/test-800.jpg') }} 800w,--}}
+{{--                                        {{ asset('/storage/test-1200.jpg') }} 1200w,--}}
+{{--                                        {{ asset('/storage/test-1jpg') }} 1500w,--}}
+{{--                                        {{ asset('/storage/test.jpg') }} 3000w,--}}
+{{--                                    "--}}
+{{--                        sizes="--}}
+{{--                                        (max-width: 700px) 280px,--}}
+{{--                                        (max-width: 1000px) 740px,--}}
+{{--                                        (max-width: 1900px) 1500px,--}}
+{{--                                        100vw--}}
+{{--                                    "--}}
+{{--                        loading="lazy"--}}
+{{--                        decoding="async"--}}
+{{--                        alt="Test image"--}}
+{{--                        title="Test image"--}}
+{{--                    />--}}
+{{--                </picture>--}}
                 <div class="image__caption">Image description</div>
             </div>
             {{--                    <img--}}
@@ -171,48 +181,52 @@
                 Lorem ipsum dolor sit amet, consectetur adipisicing elit. Alias aliquam, assumenda corporis delectus dolor, dolore dolores dolorum ea eligendi ex fuga inventore magni, molestias odio quas saepe similique sunt tenetur.
             </p>
 
+{{--            <x-ui.image--}}
 
-            <picture>
-                <source
-                    type="image/webp"
-                    srcset="
-                                        {{ asset('/storage/test-300.webp') }} 300w,
-                                        {{ asset('/storage/test-650.webp') }} 650w,
-                                        {{ asset('/storage/test-800.webp') }} 800w,
-                                        {{ asset('/storage/test-1200.webp') }} 1200w,
-                                        {{ asset('/storage/test-1500.webp') }} 1500w,
-                                        {{ asset('/storage/test.webp') }} 3000w,
-                                    "
-                    sizes="
-                                        (max-width: 700px) 280px,
-                                        (max-width: 1000px) 740px,
-                                        (max-width: 1900px) 1500px,
-                                        100vw
-                                    "
-                />
-                <img
-                    class="image image_standard image_align_center ui__image_3"
-                    src="{{ asset('/storage/test.jpg') }}"
-                    srcset="
-                                        {{ asset('/storage/test-300.jpg') }} 300w,
-                                        {{ asset('/storage/test-650.jpg') }} 650w,
-                                        {{ asset('/storage/test-800.jpg') }} 800w,
-                                        {{ asset('/storage/test-1200.jpg') }} 1200w,
-                                        {{ asset('/storage/test-1jpg') }} 1500w,
-                                        {{ asset('/storage/test.jpg') }} 3000w,
-                                    "
-                    sizes="
-                                        (max-width: 700px) 280px,
-                                        (max-width: 1000px) 740px,
-                                        (max-width: 1900px) 1500px,
-                                        100vw
-                                    "
-                    loading="lazy"
-                    decoding="async"
-                    alt="Test image"
-                    title="Test image"
-                />
-            </picture>
+{{--                caption="Test Caption"--}}
+{{--                src="{{ Vite::image('620_1.jpg') }}"--}}
+{{--                src-full="{{ Vite::image('620_1.jpg') }}" />--}}
+{{--            <picture>--}}
+{{--                <source--}}
+{{--                    type="image/webp"--}}
+{{--                    srcset="--}}
+{{--                                        {{ asset('/storage/test-300.webp') }} 300w,--}}
+{{--                                        {{ asset('/storage/test-650.webp') }} 650w,--}}
+{{--                                        {{ asset('/storage/test-800.webp') }} 800w,--}}
+{{--                                        {{ asset('/storage/test-1200.webp') }} 1200w,--}}
+{{--                                        {{ asset('/storage/test-1500.webp') }} 1500w,--}}
+{{--                                        {{ asset('/storage/test.webp') }} 3000w,--}}
+{{--                                    "--}}
+{{--                    sizes="--}}
+{{--                                        (max-width: 700px) 280px,--}}
+{{--                                        (max-width: 1000px) 740px,--}}
+{{--                                        (max-width: 1900px) 1500px,--}}
+{{--                                        100vw--}}
+{{--                                    "--}}
+{{--                />--}}
+{{--                <img--}}
+{{--                    class="image image_standard image_align_center ui__image_3"--}}
+{{--                    src="{{ asset('/storage/test.jpg') }}"--}}
+{{--                    srcset="--}}
+{{--                                        {{ asset('/storage/test-300.jpg') }} 300w,--}}
+{{--                                        {{ asset('/storage/test-650.jpg') }} 650w,--}}
+{{--                                        {{ asset('/storage/test-800.jpg') }} 800w,--}}
+{{--                                        {{ asset('/storage/test-1200.jpg') }} 1200w,--}}
+{{--                                        {{ asset('/storage/test-1jpg') }} 1500w,--}}
+{{--                                        {{ asset('/storage/test.jpg') }} 3000w,--}}
+{{--                                    "--}}
+{{--                    sizes="--}}
+{{--                                        (max-width: 700px) 280px,--}}
+{{--                                        (max-width: 1000px) 740px,--}}
+{{--                                        (max-width: 1900px) 1500px,--}}
+{{--                                        100vw--}}
+{{--                                    "--}}
+{{--                    loading="lazy"--}}
+{{--                    decoding="async"--}}
+{{--                    alt="Test image"--}}
+{{--                    title="Test image"--}}
+{{--                />--}}
+{{--            </picture>--}}
             <p>
                 Lorem ipsum dolor sit amet, consectetur adipisicing elit. Alias aliquam, assumenda corporis delectus dolor, dolore dolores dolorum ea eligendi ex fuga inventore magni, molestias odio quas saepe similique sunt tenetur.
                 Lorem ipsum dolor sit amet, consectetur adipisicing elit. Alias aliquam, assumenda corporis delectus dolor, dolore dolores dolorum ea eligendi ex fuga inventore magni, molestias odio quas saepe similique sunt tenetur.
