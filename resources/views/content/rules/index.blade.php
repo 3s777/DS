@@ -1,4 +1,4 @@
-<x-layouts.main title="{{ __('Users') }}">
+<x-layouts.main title="{{ __('common.qa') }}">
     <x-grid.container>
         <x-common.content class="rules" :collapsable="false">
             <x-slot:sidebar>

@@ -7,9 +7,9 @@
         {{ $title }}
     </x-ui.title>
 
-    <div class="content__title-buttons carrier__title-buttons">
+    <div class="content__title-buttons variation__title-buttons">
         <x-ui.form.button
-            class="carrier__title-button"
+            class="variation__title-button"
             tag="a"
             link="/"
             size="small"
@@ -22,7 +22,7 @@
                 {{ __('На полках') }}
                 <x-slot:badge>
                     <x-ui.badge
-                        class="carrier__title-badge"
+                        class="variation__title-badge"
                         type="number"
                         align="standard"
                         color="success">
@@ -32,7 +32,7 @@
         </x-ui.form.button>
 
         <x-ui.form.button
-            class="carrier__title-button"
+            class="variation__title-button"
             tag="a"
             link="/"
             size="small"
@@ -45,7 +45,7 @@
             {{ __('Желают') }}
             <x-slot:badge>
                 <x-ui.badge
-                    class="carrier__title-badge"
+                    class="variation__title-badge"
                     type="number"
                     align="standard"
                     color="success">
@@ -55,7 +55,7 @@
         </x-ui.form.button>
 
         <x-ui.form.button
-            class="carrier__title-button"
+            class="variation__title-button"
             tag="a"
             link="/"
             size="small"
@@ -68,7 +68,7 @@
             {{ __('Продажа') }}
             <x-slot:badge>
                 <x-ui.badge
-                    class="carrier__title-badge"
+                    class="variation__title-badge"
                     type="number"
                     align="standard"
                     color="success">
@@ -78,7 +78,7 @@
         </x-ui.form.button>
 
         <x-ui.form.button
-            class="carrier__title-button"
+            class="variation__title-button"
             tag="a"
             link="/"
             size="small"
@@ -91,7 +91,7 @@
             {{ __('Аукционы') }}
             <x-slot:badge>
                 <x-ui.badge
-                    class="carrier__title-badge"
+                    class="variation__title-badge"
                     type="number"
                     align="standard"
                     color="success">
@@ -101,7 +101,7 @@
         </x-ui.form.button>
 
         <x-ui.form.button
-            class="carrier__title-button"
+            class="variation__title-button"
             tag="a"
             link="/"
             size="small"
@@ -114,7 +114,7 @@
             {{ __('Обмен') }}
             <x-slot:badge>
                 <x-ui.badge
-                    class="carrier__title-badge"
+                    class="variation__title-badge"
                     type="number"
                     align="standard"
                     color="success">
@@ -124,7 +124,7 @@
         </x-ui.form.button>
 
         <x-ui.form.button
-            class="carrier__title-button"
+            class="variation__title-button"
             tag="a"
             link="/"
             size="small"
@@ -137,7 +137,7 @@
             {{ __('В избранном') }}
             <x-slot:badge>
                 <x-ui.badge
-                    class="carrier__title-badge"
+                    class="variation__title-badge"
                     type="number"
                     align="standard"
                     color="success">

@@ -15,6 +15,6 @@ class GameMediaVariationController extends Controller
 
     public function show(GameMediaVariation $gameMediaVariation)
     {
-        return view('content.variation.game', new GameVariationShowViewModel($gameMediaVariation));
+        return view('content.variation.game.index', new GameVariationShowViewModel($gameMediaVariation));
     }
 }

@@ -1,8 +1,8 @@
-<div class="carrier__add-buttons">
+<div class="variation__add-buttons">
     <x-libraries.choices
         x-model="form"
         class="choices-select-1"
-        wrapper-class="choices-block_color_success carrier__add-select"
+        wrapper-class="choices-block_color_success variation__add-select"
         id="select-test"
         name="select-test"
         show-label=""
@@ -91,3 +91,36 @@
         </x-slot:icon>
     </x-ui.form.button>
 </div>
+@push('scripts')
+    <script>
+        const addButtonsAttributes = () => {
+            return {
+                form: 'add',
+                currentForm(form) {
+                    return form = form.value ? form.value : form;
+                },
+                activateButton(buttonForm) {
+                    if (this.currentForm(this.form) === buttonForm) {
+                        return 'button_submit';
+                    }
+                },
+                setForm(form) {
+                    this.form = form;
+                    choices1.setChoiceByValue(form);
+                }
+            }
+        }
+
+        function initButtonChoices() {
+            const element1 = document.querySelector('.choices-select-1');
+            const choices1 = new Choices(element1, {
+                itemSelectText: '',
+                searchEnabled: false,
+                shouldSort: false,
+                allowHTML: true,
+                noResultsText: '{{ __('Не найдено') }}',
+                noChoicesText: '{{ __('Больше ничего нет') }}',
+            });
+        }
+    </script>
+@endpush

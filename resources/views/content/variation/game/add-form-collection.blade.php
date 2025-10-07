@@ -1,4 +1,4 @@
-<div class="carrier__add-form">
+<div class="variation__add-form">
 
     <div x-cloak x-show="currentForm(form) == 'add'">
         <x-ui.title indent="normal">{{ __('Добавить в коллекцию') }}</x-ui.title>
@@ -165,7 +165,7 @@
         <x-grid.col xl="6" lg="6" md="6" sm="12">
             <x-ui.form.group>
                 <x-ui.star-rating
-                    class="carrier__add-rating"
+                    class="variation__add-rating"
                     title="Диск"
                     name="disk">
                 </x-ui.star-rating>
@@ -176,7 +176,7 @@
         <x-grid.col xl="6" lg="6" md="6" sm="12">
             <x-ui.form.group>
                 <x-ui.star-rating
-                    class="carrier__add-rating"
+                    class="variation__add-rating"
                     title="Мануал"
                     name="manual">
                 </x-ui.star-rating>
@@ -188,7 +188,7 @@
         <x-grid.col xl="6" lg="6" md="6" sm="12">
             <x-ui.form.group>
                 <x-ui.star-rating
-                    class="carrier__add-rating"
+                    class="variation__add-rating"
                     title="Коробка"
                     name="box">
                 </x-ui.star-rating>
@@ -198,7 +198,7 @@
         <x-grid.col xl="6" lg="6" md="6" sm="12">
             <x-ui.form.group>
                 <x-ui.star-rating
-                    class="carrier__add-rating"
+                    class="variation__add-rating"
                     title="Обложка"
                     name="cover">
                 </x-ui.star-rating>
@@ -243,7 +243,7 @@
         <x-grid.col lg="12" xl="12" md="12" sm="12">
             <x-ui.form.group>
                 <x-ui.accordion>
-                <x-ui.accordion.item class="carrier__additional-fields" color="light">
+                <x-ui.accordion.item class="variation__additional-fields" color="light">
 
                     <x-ui.accordion.title>Дополнительные поля</x-ui.accordion.title>
                     <x-ui.accordion.content>

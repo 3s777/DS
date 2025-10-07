@@ -1,9 +1,9 @@
-<div class="carrier__modals">
-    <x-ui.modal x-data id="carrier_video1" tag="section"  ::class="$store.modal.hide ? '' : 'modal_show'">
+<div class="variation__modals">
+    <x-ui.modal x-data id="variation_video1" tag="section"  ::class="$store.modal.hide ? '' : 'modal_show'">
         <x-ui.modal.content
-            x-on:click.outside="$store.modal.hide = true, handleClick(carrier_video1)">
+            x-on:click.outside="$store.modal.hide = true, handleClick(variation_video1)">
 
-            <x-ui.modal.close x-on:click="$store.modal.hide = true, handleClick(carrier_video1)">
+            <x-ui.modal.close x-on:click="$store.modal.hide = true, handleClick(variation_video1)">
             </x-ui.modal.close>
 
             <x-ui.modal.header>
@@ -17,11 +17,11 @@
         </x-ui.modal.content>
     </x-ui.modal>
 
-    <x-ui.modal x-data id="carrier_video2" tag="section"  ::class="$store.modal1.hide ? '' : 'modal_show'">
+    <x-ui.modal x-data id="variation_video2" tag="section"  ::class="$store.modal1.hide ? '' : 'modal_show'">
         <x-ui.modal.content
-            x-on:click.outside="$store.modal1.hide = true, handleClick(carrier_video2)">
+            x-on:click.outside="$store.modal1.hide = true, handleClick(variation_video2)">
 
-            <x-ui.modal.close x-on:click="$store.modal1.hide = true, handleClick(carrier_video2)">
+            <x-ui.modal.close x-on:click="$store.modal1.hide = true, handleClick(variation_video2)">
             </x-ui.modal.close>
 
             <x-ui.modal.header>
@@ -35,10 +35,10 @@
         </x-ui.modal.content>
     </x-ui.modal>
 
-    <x-ui.modal x-data id="carrier_video3" tag="section" ::class="$store.modal2.hide ? '' : 'modal_show'">
+    <x-ui.modal x-data id="variation_video3" tag="section" ::class="$store.modal2.hide ? '' : 'modal_show'">
         <x-ui.modal.content
-            x-on:click.outside="$store.modal2.hide = true, handleClick(carrier_video3)">
-            <x-ui.modal.close x-on:click="$store.modal2.hide = true, handleClick(carrier_video3)">
+            x-on:click.outside="$store.modal2.hide = true, handleClick(variation_video3)">
+            <x-ui.modal.close x-on:click="$store.modal2.hide = true, handleClick(variation_video3)">
             </x-ui.modal.close>
 
             <x-ui.modal.header>

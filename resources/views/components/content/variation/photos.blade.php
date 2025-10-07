@@ -4,7 +4,7 @@
 
 <x-ui.card style="overflow: hidden;">
     <div>
-        <x-libraries.swiper type="full" class="carrier__swiper-main">
+        <x-libraries.swiper type="full" class="variation__swiper-main">
 
             <x-libraries.swiper.slide >
                 <x-ui.responsive-image
@@ -40,3 +40,31 @@
         </x-libraries.swiper>
     </div>
 </x-ui.card>
+
+@push('scripts')
+    <script type="module">
+        const swiperFull = new Swiper('.swiper__full', {
+            direction: 'horizontal',
+            slidesPerView: 1,
+            pagination: {
+                el: '.swiper-pagination_2',
+                clickable: true
+            },
+            navigation: {
+                nextEl: '.swiper-button-next',
+                prevEl: '.swiper-button-prev',
+            },
+
+            breakpoints: {
+                1024: {
+                    slidesPerView: 1,
+                },
+
+                576: {
+                    slidesPerView: 2,
+                    spaceBetween: 16,
+                },
+            }
+        });
+    </script>
+@endpush

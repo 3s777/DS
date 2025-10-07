@@ -1,7 +1,7 @@
 <x-ui.card>
     <x-ui.title indent="normal">Другие издания</x-ui.title>
 
-    <x-libraries.swiper class="carrier__swiper-relative" id="swiper_relative">
+    <x-libraries.swiper class="variation__swiper-relative" id="swiper_relative">
 
         <x-libraries.swiper.slide>
             <a href="/">
@@ -13,7 +13,7 @@
                     alt="Test image"
                     title="Test image"
                 />
-                <span class="carrier__relative-link">Xbox One 505550</span>
+                <span class="variation__relative-link">Xbox One 505550</span>
             </a>
         </x-libraries.swiper.slide>
         <x-libraries.swiper.slide>
@@ -26,7 +26,7 @@
                     alt="Test image"
                     title="Test image"
                 />
-                <span class="carrier__relative-link">Коллекционное издание Xbox One 505550 Xbox One 505550</span>
+                <span class="variation__relative-link">Коллекционное издание Xbox One 505550 Xbox One 505550</span>
             </a>
         </x-libraries.swiper.slide>
         <x-libraries.swiper.slide>
@@ -39,7 +39,7 @@
                     alt="Test image"
                     title="Test image"
                 />
-                <span class="carrier__relative-link" >Тест Xbox One 505550</span>
+                <span class="variation__relative-link" >Тест Xbox One 505550</span>
             </a>
         </x-libraries.swiper.slide>
         <x-libraries.swiper.slide>
@@ -52,7 +52,7 @@
                     alt="Test image"
                     title="Test image"
                 />
-                <span class="carrier__relative-link">Playstation 4 Test Test</span>
+                <span class="variation__relative-link">Playstation 4 Test Test</span>
             </a>
         </x-libraries.swiper.slide>
         <x-libraries.swiper.slide>
@@ -65,7 +65,7 @@
                     alt="Test image"
                     title="Test image"
                 />
-                <span class="carrier__relative-link">Test test test test test dfsdafsdafsdfasdf</span>
+                <span class="variation__relative-link">Test test test test test dfsdafsdafsdfasdf</span>
             </a>
         </x-libraries.swiper.slide>
 
@@ -74,3 +74,29 @@
 
     </x-libraries.swiper>
 </x-ui.card>
+
+@push('scripts')
+    <script type="module">
+        const swiper = new Swiper('#swiper_relative', {
+            direction: 'horizontal',
+            spaceBetween: 16,
+            slidesPerView: 1,
+            pagination: {
+                el: '.swiper-pagination_1',
+                clickable: true
+            },
+            navigation: {
+                nextEl: '.swiper-button-next',
+                prevEl: '.swiper-button-prev',
+            },
+            breakpoints: {
+                768: {
+                    slidesPerView: 3,
+                },
+                576: {
+                    slidesPerView: 2,
+                },
+            }
+        });
+    </script>
+@endpush
