@@ -5,6 +5,7 @@ namespace Domain\Game\ViewModels;
 use Domain\Game\FilterRegistrars\GameMediaVariationFilterRegistrar;
 use Domain\Game\Models\GameMedia;
 use Domain\Shelf\Models\Category;
+use Illuminate\Database\Eloquent\Relations\MorphMany;
 use Spatie\ViewModels\ViewModel;
 
 class GameMediaIndexViewModel extends ViewModel
@@ -45,10 +46,14 @@ class GameMediaIndexViewModel extends ViewModel
                 'publishers:id,name',
                 'variations' => function ($query) {
                     $query->select(['id','slug','name','game_media_id','article_number','barcodes','is_main'])
-                        ->with(['media'])
+                        ->with(['media' => function(MorphMany $query) {
+                            $query->featured();
+                        }])
                         ->orderBy('is_main', 'DESC');
                 },
-                'media'
+                'media' => function(MorphMany $query) {
+                    $query->featured();
+                }
             ])
             ->filtered()
             ->sorted()

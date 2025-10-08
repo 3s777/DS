@@ -1,13 +1,20 @@
-<x-layouts.main title="Game Carrier">
+<x-layouts.main title="{{ $gameMediaVariation->name }}">
     <x-grid.container>
 
         <x-common.content class="variation">
 
-            <x-content.variation.title :title="$gameMediaVariation->name" />
+            <x-content.variation.title :title="$gameMediaVariation->name">
+                <x-content.variation.counters
+                    :collection="$gameMediaVariation->collection_count"
+                    :sale="$gameMediaVariation->sale_count"
+                    :auction="$gameMediaVariation->auction_count"
+                    :exchange="$gameMediaVariation->exchange_count"
+                />
+            </x-content.variation.title>
 
             <div class="variation__grid">
                 <div class="variation__photo">
-                    <x-content.variation.photos :model="$gameMediaVariation" />
+                    <x-content.variation.photos :variation ="$gameMediaVariation" />
                 </div>
 
                 <div class="variation__buttons">

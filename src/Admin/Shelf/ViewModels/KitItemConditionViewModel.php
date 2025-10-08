@@ -4,9 +4,7 @@ namespace Admin\Shelf\ViewModels;
 
 use Illuminate\Support\Facades\Blade;
 use Spatie\ViewModels\ViewModel;
-
-use const Domain\Shelf\ViewModels\CollectibleTypeEnum;
-use const Domain\Shelf\ViewModels\value;
+use Domain\Shelf\Enums\CollectibleTypeEnum;
 
 class KitItemConditionViewModel extends ViewModel
 {

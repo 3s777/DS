@@ -72,11 +72,11 @@
                         button-class="vertical-variation__button"
                         badge-class="vertical-variation__badge"
                         type="light"
-                        add="12"
+                        :collection="$variation->collection_count"
                         wishlist="50"
-                        sale="5"
-                        auction="25"
-                        exchange="2"
+                        :sale="$variation->sale_count"
+                        :auction="$variation->auction_count"
+                        :exchange="$variation->exchange_count"
                         favorite="153"
                     />
                 </div>

@@ -18,6 +18,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\MorphMany;
+use Illuminate\Database\Eloquent\Relations\MorphOne;
 use Illuminate\Database\Eloquent\Relations\MorphToMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Mews\Purifier\Casts\CleanHtml;
@@ -25,6 +26,7 @@ use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
 use Spatie\Translatable\HasTranslations;
 use Support\Casts\ArrayWithoutUnicode;
+use Support\Models\Media;
 use Support\Traits\Models\HasFeaturedImage;
 use Support\Traits\Models\HasImage;
 use Support\Traits\Models\HasImages;
@@ -60,7 +62,7 @@ class GameMediaVariation extends Model implements HasMedia, HasProperties, Colle
     ];
 
     protected $casts = [
-        'description' => CleanHtml::class.':custom',
+        'description' => CleanHtml::class . ':custom',
         'alternative_names' => ArrayWithoutUnicode::class,
         'barcodes' => ArrayWithoutUnicode::class,
         'images' => 'array',

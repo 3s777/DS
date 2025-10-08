@@ -3,7 +3,11 @@
 namespace Domain\Game\ViewModels;
 
 use Domain\Game\Models\GameMediaVariation;
+use Domain\Shelf\Enums\TargetEnum;
 use Domain\Shelf\Models\Category;
+use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Relations\MorphMany;
+use Illuminate\Database\Eloquent\Relations\MorphTo;
 use Spatie\ViewModels\ViewModel;
 
 class GameVariationsIndexViewModel extends ViewModel
@@ -32,18 +36,23 @@ class GameVariationsIndexViewModel extends ViewModel
                 'game_media_variations.barcodes'
             )
             ->with([
-//                'games:id,name',
-//                'genres:id,name',
-//                'platforms:id,name',
-//                'developers:id,name',
-//                'publishers:id,name',
-//                'variations' => function($query) {
-//                    $query->select(['id','slug','name','game_media_id','article_number','barcodes','is_main'])
-//                        ->with(['media'])
-//                        ->orderBy('is_main', 'DESC');
-//                },
-
-                'media'
+                'media' => function(MorphMany $query) {
+                    $query->featured();
+                }
+            ])
+            ->withCount([
+                'collectibles as collection_count' => function(Builder $query) {
+                    $query->where('target', TargetEnum::Collection->value);
+                },
+                'collectibles as sale_count' => function(Builder $query) {
+                    $query->where('target', TargetEnum::Sale->value);
+                },
+                'collectibles as auction_count' => function(Builder $query) {
+                    $query->where('target', TargetEnum::Auction->value);
+                },
+                'collectibles as exchange_count' => function(Builder $query) {
+                    $query->where('target', TargetEnum::Exchange->value);
+                },
             ])
             ->filtered()
             ->sorted()

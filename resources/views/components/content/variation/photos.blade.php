@@ -1,5 +1,5 @@
 @props([
-    'model'
+    'variation'
 ])
 
 <x-ui.card style="overflow: hidden;">
@@ -8,28 +8,28 @@
 
             <x-libraries.swiper.slide >
                 <x-ui.responsive-image
-                    :model="$model"
+                    :model="$variation"
                     :image-sizes="['small', 'medium', 'large']"
-                    :path="$model->getFeaturedImagePath()"
+                    :path="$variation->getFeaturedImagePath()"
                     :placeholder="true"
                     :wrapper="true"
                     wrapper-class=""
                     sizes="(max-width: 768px) 604px, (max-width: 1400px) 604px, 604px">
-                    <x-slot:img class="swiper__img" alt="{{ $model->name }}" title="{{ $model->name }}"></x-slot:img>
+                    <x-slot:img class="swiper__img" alt="{{ $variation->name }}" title="{{ $variation->name }}"></x-slot:img>
                 </x-ui.responsive-image>
             </x-libraries.swiper.slide>
 
-            @foreach($model->getImages() as $image)
+            @foreach($variation->getImages() as $image)
                 <x-libraries.swiper.slide>
                     <x-ui.responsive-image
-                        :model="$model"
+                        :model="$variation"
                         :image-sizes="['small', 'medium', 'large']"
                         :path="$image"
                         :placeholder="true"
                         :wrapper="true"
                         wrapper-class=""
                         sizes="(max-width: 768px) 604px, (max-width: 1400px) 604px, 604px">
-                        <x-slot:img class="swiper__img" alt="{{ $model->name }}" title="{{ $model->name }}"></x-slot:img>
+                        <x-slot:img class="swiper__img" alt="{{ $variation->name }}" title="{{ $variation->name }}"></x-slot:img>
                     </x-ui.responsive-image>
                 </x-libraries.swiper.slide>
             @endforeach

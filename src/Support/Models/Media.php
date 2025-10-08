@@ -3,6 +3,8 @@
 namespace Support\Models;
 
 use Carbon\Carbon;
+use Illuminate\Database\Eloquent\Attributes\Scope;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\MorphTo;
 use Spatie\MediaLibrary\MediaCollections\Models\Media as BaseMedia;
@@ -32,6 +34,24 @@ class Media extends BaseMedia
                 .$modelCreatedDate->format('m').'/'
                 .$mediaPath['filename'].'/';
         });
+    }
+
+    #[Scope]
+    protected function featured(Builder $query): Builder
+    {
+        return $query->select([
+                'media.id',
+                'media.model_type',
+                'media.model_id',
+                'media.collection_name',
+                'media.created_at',
+                'media.file_name',
+                'media.disk',
+                'media.generated_conversions'
+            ]
+        )
+            ->where('collection_name', 'featured_image')
+            ->limit(1);
     }
 
     public function user(): MorphTo
