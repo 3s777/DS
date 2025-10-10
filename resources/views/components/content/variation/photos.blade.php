@@ -4,8 +4,10 @@
 
 <x-ui.card style="overflow: hidden;">
     <div>
-        <x-libraries.swiper type="full" class="variation__swiper-main">
-
+        <x-libraries.swiper
+            type="full"
+            id="variation-main-gallery"
+            :class="empty($variation->getImages()) ? 'variation__swiper-main_empty' : 'variation__swiper-main'" >
             <x-libraries.swiper.slide >
                 <x-ui.responsive-image
                     :model="$variation"
@@ -34,20 +36,20 @@
                 </x-libraries.swiper.slide>
             @endforeach
 
-            <x-slot:pagination class="swiper-pagination_2"></x-slot:pagination>
+            <x-slot:pagination class="swiper-pagination_main-gallery"></x-slot:pagination>
             <x-slot:navigation></x-slot:navigation>
 
         </x-libraries.swiper>
     </div>
 </x-ui.card>
 
-@push('scripts')
+@pushif(empty(!$variation->getImages()), 'scripts')
     <script type="module">
-        const swiperFull = new Swiper('.swiper__full', {
+        const swiperFull = new Swiper('#variation-main-gallery', {
             direction: 'horizontal',
             slidesPerView: 1,
             pagination: {
-                el: '.swiper-pagination_2',
+                el: '.swiper-pagination_main-gallery',
                 clickable: true
             },
             navigation: {
@@ -67,4 +69,6 @@
             }
         });
     </script>
-@endpush
+@endpushif
+
+

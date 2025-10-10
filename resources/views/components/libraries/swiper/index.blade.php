@@ -1,16 +1,16 @@
 @props([
-    'id' => false,
+    'wrapperClass' => false,
     'type' => 'carousel',
     'pagination' => false,
-    'navigation' => false
+    'navigation' => false,
 ])
 
-<div
-    {{ $attributes->class([
-            'swiper',
+<div class="swiper @if($wrapperClass) {{ $wrapperClass }} @endif">
+    <div
+        {{ $attributes->class([
+            'swiper__'.$type => $type,
         ])
     }}>
-    <div class="swiper__{{ $type }}" id="{{ $id }}">
         <div class="swiper-wrapper">
             {{ $slot }}
         </div>

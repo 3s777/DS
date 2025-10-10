@@ -51,6 +51,18 @@
     &__swiper-main {
         padding-bottom: 32px;
     }
+    &__swiper-main_empty {
+        padding-bottom: 0;
+
+        & .swiper-button-prev {
+            display: none;
+        }
+
+        & .swiper-button-next {
+            display: none;
+        }
+    }
+
 
     &__swiper-main .swiper-horizontal>.swiper-pagination-bullets,
     &__swiper-main .swiper-pagination-bullets.swiper-pagination-horizontal {

@@ -14,7 +14,7 @@
 
             <div class="variation__grid">
                 <div class="variation__photo">
-                    <x-content.variation.photos :variation ="$gameMediaVariation" />
+                    <x-content.variation.photos :variation="$gameMediaVariation" />
                 </div>
 
                 <div class="variation__buttons">
