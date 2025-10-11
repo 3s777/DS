@@ -118,11 +118,11 @@ class GameMediaVariation extends Model implements HasMedia, HasProperties, Colle
             'extra_small' => ['100', '100'],
             'small' => ['220', '220'],
             'medium' => ['500', '500'],
-            'full_preview' => ['550', '550'],
+            'full_preview_550' => ['550', '550'],
             'full_preview_300' => ['300', '300'],
             'full_preview_400' => ['400', '400'],
-            'full_preview_600' => ['600', '600'],
-            'full_preview_1200' => ['1200', '1200'],
+            'full_preview_604' => ['604', '604'],
+            'full_preview_1208' => ['1208', '1208'],
             'large' => ['1000', '1000'],
         ];
     }

@@ -1,4 +1,6 @@
 .responsive-image {
+    width: 100%;
+
     &__wrapper {
         position: relative;
         display: flex;
@@ -10,5 +12,9 @@
         aspect-ratio: 1 / 1;
         overflow: hidden;
         line-height: 0;
+    }
+
+    &__img {
+        width: 100%;
     }
 }

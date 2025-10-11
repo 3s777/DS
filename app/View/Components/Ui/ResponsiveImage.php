@@ -15,6 +15,7 @@ class ResponsiveImage extends Component
 {
     public array $imgPathInfo;
 
+    // TODO: add cache for $storage->exist
     public function __construct(
         public Model $model,
         public array $imageSizes,
@@ -27,6 +28,8 @@ class ResponsiveImage extends Component
         public string $wrapperClass = ''
     ) {
         $this->imgPathInfo = pathinfo($this->path);
+
+        $this->imageSizes = Arr::only($this->model->thumbnailSizes(), $this->imageSizes);
     }
 
     public function fallbackSource(): string
@@ -35,6 +38,7 @@ class ResponsiveImage extends Component
     }
 
     /*    Check thumbnail sizes images by path and create if not isset */
+    // TODO create 2048 webp image
     public function checkAndCreateImageSizes(array $imageSizes): void
     {
         $storage = Storage::disk('images');
@@ -59,26 +63,19 @@ class ResponsiveImage extends Component
     {
         $storage = Storage::disk('images');
 
-
         if (!$this->path && !$this->placeholder) {
             return false;
         }
 
-        if (!$storage->exists($this->path)) {
-            return false;
-        }
-
-        return true;
+        return !$this->path || $storage->exists($this->path);
     }
 
     public function render(): View|Closure|string
     {
-        $imageSizesFiltered = Arr::only($this->model->thumbnailSizes(), $this->imageSizes);
-
         if ($this->path) {
-            $this->checkAndCreateImageSizes($imageSizesFiltered);
+            $this->checkAndCreateImageSizes($this->imageSizes);
         }
 
-        return view('components.ui.responsive-image', compact(['imageSizesFiltered']));
+        return view('components.ui.responsive-image');
     }
 }
