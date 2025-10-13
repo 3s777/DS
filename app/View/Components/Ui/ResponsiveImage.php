@@ -43,12 +43,27 @@ class ResponsiveImage extends Component
     {
         $storage = Storage::disk('images');
 
+        $manager = new ImageManager(new Driver());
+
+        if (!$storage->exists($this->imgPathInfo['dirname'].'/webp/'.$this->imgPathInfo['filename'].'.webp')) {
+
+            $mainWebpImageDir = $this->imgPathInfo['dirname'] . '/webp/';
+            $storage->makeDirectory($mainWebpImageDir);
+
+            $mainImage = $manager->read($storage->path($this->path));
+
+            $mainImage
+                ->scaleDown('2048')
+                ->toWebp(config('images.webp_quality'))
+                ->save($storage->path($mainWebpImageDir . '/' . $this->imgPathInfo['filename'] . '.webp'));
+        }
+
         foreach ($imageSizes as $size) {
             if (!$storage->exists($this->imgPathInfo['dirname'].'/webp/'.$size[0].'x'.$size[1].'/'.$this->imgPathInfo['filename'].'.webp')) {
+
                 $webpImageDir = $this->imgPathInfo['dirname'].'/webp/'.$size[0].'x'.$size[1];
                 $storage->makeDirectory($webpImageDir);
 
-                $manager = new ImageManager(new Driver());
                 $image = $manager->read($storage->path($this->path));
 
                 $image
