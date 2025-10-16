@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Storage;
 use Illuminate\View\Component;
 use Intervention\Image\Drivers\Gd\Driver;
 use Intervention\Image\ImageManager;
+use Support\Facades\Image;
 
 class ResponsiveImage extends Component
 {
@@ -38,19 +39,19 @@ class ResponsiveImage extends Component
     }
 
     /*    Check thumbnail sizes images by path and create if not isset */
-    // TODO create 2048 webp image
     public function checkAndCreateImageSizes(array $imageSizes): void
     {
         $storage = Storage::disk('images');
 
-        $manager = new ImageManager(new Driver());
+//        $manager = new ImageManager(new Driver());
+//        $manager = new Image();
 
         if (!$storage->exists($this->imgPathInfo['dirname'].'/webp/'.$this->imgPathInfo['filename'].'.webp')) {
 
             $mainWebpImageDir = $this->imgPathInfo['dirname'] . '/webp/';
             $storage->makeDirectory($mainWebpImageDir);
 
-            $mainImage = $manager->read($storage->path($this->path));
+            $mainImage = Image::read($storage->path($this->path));
 
             $mainImage
                 ->scaleDown('2048')
@@ -64,7 +65,7 @@ class ResponsiveImage extends Component
                 $webpImageDir = $this->imgPathInfo['dirname'].'/webp/'.$size[0].'x'.$size[1];
                 $storage->makeDirectory($webpImageDir);
 
-                $image = $manager->read($storage->path($this->path));
+                $image = Image::read($storage->path($this->path));
 
                 $image
                     ->scaleDown($size[0], $size[1])

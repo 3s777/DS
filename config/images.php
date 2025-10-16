@@ -1,5 +1,7 @@
 <?php
 
+use Intervention\Image\Drivers\Gd\Driver;
+
 return [
     'driver' => 'media_library',
     'disk' => 'images',
@@ -9,5 +11,6 @@ return [
         '100x100',
         '300x300',
         '1000x1000'
-    ]
+    ],
+    'intervention_driver' => Driver::class
 ];
