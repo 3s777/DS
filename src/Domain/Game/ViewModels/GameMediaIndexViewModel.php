@@ -5,7 +5,7 @@ namespace Domain\Game\ViewModels;
 use Domain\Game\FilterRegistrars\GameMediaVariationFilterRegistrar;
 use Domain\Game\Models\GameMedia;
 use Domain\Shelf\Models\Category;
-use Illuminate\Database\Eloquent\Relations\MorphMany;
+use Illuminate\Contracts\Database\Eloquent\Builder;
 use Spatie\ViewModels\ViewModel;
 
 class GameMediaIndexViewModel extends ViewModel
@@ -44,16 +44,33 @@ class GameMediaIndexViewModel extends ViewModel
                 'platforms:id,name',
                 'developers:id,name',
                 'publishers:id,name',
-                'variations' => function ($query) {
+                'variations' => function (Builder $query) {
                     $query->select(['id','slug','name','game_media_id','article_number','barcodes','is_main'])
-                        ->with(['media' => function(MorphMany $query) {
-                            $query->featured();
-                        }])
+//                        ->with(['media' => function(MorphMany $query) {
+//                            $query->select([
+//                                    'media.id',
+//                                    'media.model_type',
+//                                    'media.model_id',
+//                                    'media.collection_name',
+//                                    'media.created_at',
+//                                    'media.file_name',
+//                                    'media.disk',
+//                                    'media.generated_conversions'
+//                                ]
+//                            )
+//                                ->where('collection_name', 'featured_image');
+//                        }])
+                        ->with([
+                            'media' => function(Builder $query) {
+                                $query->featured();
+                            }
+                        ])
                         ->orderBy('is_main', 'DESC');
                 },
-                'media' => function(MorphMany $query) {
+                'media' => function(Builder $query) {
                     $query->featured();
                 }
+//            'media'
             ])
             ->filtered()
             ->sorted()

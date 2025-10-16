@@ -5,9 +5,7 @@ namespace Domain\Game\ViewModels;
 use Domain\Game\Models\GameMediaVariation;
 use Domain\Shelf\Enums\TargetEnum;
 use Domain\Shelf\Models\Category;
-use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\Relations\MorphMany;
-use Illuminate\Database\Eloquent\Relations\MorphTo;
+use Illuminate\Contracts\Database\Eloquent\Builder;
 use Spatie\ViewModels\ViewModel;
 
 class GameVariationsIndexViewModel extends ViewModel
@@ -36,7 +34,7 @@ class GameVariationsIndexViewModel extends ViewModel
                 'game_media_variations.barcodes'
             )
             ->with([
-                'media' => function(MorphMany $query) {
+                'media' => function(Builder $query) {
                     $query->featured();
                 }
             ])

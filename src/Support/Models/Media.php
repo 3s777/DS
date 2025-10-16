@@ -4,7 +4,7 @@ namespace Support\Models;
 
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Attributes\Scope;
-use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Contracts\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\MorphTo;
 use Spatie\MediaLibrary\MediaCollections\Models\Media as BaseMedia;
@@ -50,8 +50,7 @@ class Media extends BaseMedia
                 'media.generated_conversions'
             ]
         )
-            ->where('collection_name', 'featured_image')
-            ->limit(1);
+        ->where('collection_name', 'featured_image');
     }
 
     public function user(): MorphTo
