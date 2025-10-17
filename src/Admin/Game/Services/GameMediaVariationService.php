@@ -4,13 +4,14 @@ namespace Admin\Game\Services;
 
 use Domain\Game\Models\GameMediaVariation;
 use Admin\Game\DTOs\FillGameMediaVariationDTO;
+use Illuminate\Support\HigherOrderTapProxy;
 use Support\Exceptions\CrudException;
 use Support\Transaction;
 use Throwable;
 
 class GameMediaVariationService
 {
-    public function create(FillGameMediaVariationDTO $data): GameMediaVariation
+    public function create(FillGameMediaVariationDTO $data): HigherOrderTapProxy|GameMediaVariation
     {
         return Transaction::run(
             function () use ($data) {

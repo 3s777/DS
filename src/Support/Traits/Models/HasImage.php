@@ -72,17 +72,17 @@ trait HasImage
 
     public function generateFullSizes(string $imageFullPath): void
     {
-        // Generate full image 2048, 100% quality
-        GenerateThumbnailJob::dispatch(
-            $imageFullPath,
-            2048,
-            false
-        );
+//        // Generate full image 2048, 100% quality
+//        GenerateThumbnailJob::dispatch(
+//            $imageFullPath,
+//            config('images.full_size'),
+//            false
+//        );
 
         // Generate original extension image 1200, 80% quality for webp alternative
         GenerateThumbnailJob::dispatch(
             $imageFullPath,
-            1200,
+            config('images.fallback_size'),
             false,
             config('images.fallback_quality'),
             'fallback'
@@ -91,7 +91,7 @@ trait HasImage
         // Generate webp image 75 quality full size
         GenerateThumbnailJob::dispatch(
             $imageFullPath,
-            2048,
+            config('images.full_size'),
             true,
             config('images.webp_quality')
         );

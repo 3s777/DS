@@ -8,8 +8,8 @@ use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Support\Facades\Storage;
-use Intervention\Image\Drivers\Gd\Driver;
-use Intervention\Image\ImageManager;
+use Support\Facades\Image;
+use Support\Services\ThumbnailService;
 
 class GenerateSmallThumbnailsJob implements ShouldQueue
 {
@@ -26,22 +26,22 @@ class GenerateSmallThumbnailsJob implements ShouldQueue
     ) {
     }
 
-    public function handle(): void
+    public function handle(ThumbnailService $service): void
     {
-        $thumbnailStorage = Storage::disk('images');
-        $imagePathInfo = pathinfo($this->imageFullPath);
-
-        $manager = new ImageManager(new Driver());
-        $image = $manager->read($thumbnailStorage->path($this->imageFullPath));
-
-        //        $thumbImage = clone $image;
-        //        $thumbImage
-        //            ->scaleDown($this->width, $this->height)
-        //            ->save($thumbnailStorage->path($this->originalThumbDir.'/'.$imagePathInfo['filename'].'.'.$imagePathInfo['extension']));
-
-        $image
-            ->scaleDown($this->width)
-            ->toWebp(config('images.webp_quality'))
-            ->save($thumbnailStorage->path($this->webpThumbDir.'/'.$imagePathInfo['filename'].'.webp'));
+        $service->generateSmallWebp($this->imageFullPath, $this->webpThumbDir, $this->width, $this->height);
+//        $thumbnailStorage = Storage::disk('images');
+//        $imagePathInfo = pathinfo($this->imageFullPath);
+//
+//        $image = Image::read($thumbnailStorage->path($this->imageFullPath));
+//
+//        //        $thumbImage = clone $image;
+//        //        $thumbImage
+//        //            ->scaleDown($this->width, $this->height)
+//        //            ->save($thumbnailStorage->path($this->originalThumbDir.'/'.$imagePathInfo['filename'].'.'.$imagePathInfo['extension']));
+//
+//        $image
+//            ->scaleDown($this->width)
+//            ->toWebp(config('images.webp_quality'))
+//            ->save($thumbnailStorage->path($this->webpThumbDir.'/'.$imagePathInfo['filename'].'.webp'));
     }
 }
