@@ -3,7 +3,9 @@
 @endif
 
 @if(!$path && $placeholder)
-    <x-ui.image-placeholder></x-ui.image-placeholder>
+    <div class="responsive-image__placeholder">
+        <x-ui.image-placeholder></x-ui.image-placeholder>
+    </div>
 @else
     <picture {{ $attributes->class([
         'responsive-image'

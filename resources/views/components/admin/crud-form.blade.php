@@ -55,6 +55,7 @@
                                 @if($model->getFeaturedImagePath())
                                     <x-slot:uploaded-featured-image>
                                         <x-ui.responsive-image
+                                            class="responsive-image_full-width"
                                             :model="$model"
                                             :image-sizes="['small', 'medium', 'large']"
                                             :path="$model->getFeaturedImagePath()"
