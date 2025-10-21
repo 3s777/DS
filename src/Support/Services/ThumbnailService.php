@@ -26,15 +26,17 @@ class ThumbnailService
 
         $image = Image::read($storage->path($fullPath));
 
+        //
         return $image
-            ->scaleDown($width, $height)
+            ->scale(width: $width)
+//            ->scaleDown($width, $height)
             ->toWebp(config('images.webp_quality'))
             ->save($storage->path($thumbDir.'/'.$imagePathInfo['filename'].'.webp'));
     }
 
     public function generateFullSize(
         string $fullPath,
-        int $width,
+        ?int $width = null,
         bool $isWebp = false,
         int $quality = 100,
         ?string $prefix = null,
@@ -49,7 +51,7 @@ class ThumbnailService
         $image = Image::read($storage->path($fullPath));
 
         if ($width) {
-            $image->scaleDown($width);
+            $image->scale($width);
         }
 
         if ($isWebp) {

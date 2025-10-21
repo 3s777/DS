@@ -4,7 +4,7 @@
     border: 2px solid $base-main;
     overflow: hidden;
     background: $base-light-like-transparent;
-    border-radius: $small-border-radius;
+    border-radius: $border-radius;
     transition: $base-transition;
 
     &:hover &__info {
@@ -68,7 +68,9 @@
     }
 
     &__thumbnail-inner {
-        border-radius: 0 0 $small-border-radius $small-border-radius;
+        .responsive-image {
+            border-radius: 0 0 $small-border-radius $small-border-radius;
+        }
     }
 
     &__info {

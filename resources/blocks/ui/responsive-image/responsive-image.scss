@@ -14,17 +14,7 @@
         width: 100%;
     }
 
-    &__placeholder {
-        position: relative;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        border-radius: 8px;
-        background-color: $base-dark;
-        color: $font-main-50;
-        aspect-ratio: 1 / 1;
-        overflow: hidden;
-        line-height: 0;
+    &_placeholder {
     }
 
     &__img {

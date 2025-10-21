@@ -14,8 +14,6 @@
                     :image-sizes="['full_preview_1208', 'full_preview_604', 'full_preview_550', 'full_preview_400', 'full_preview_300']"
                     :path="$variation->getFeaturedImagePath()"
                     :placeholder="true"
-                    :wrapper="true"
-                    wrapper-class=""
                     sizes="(max-width: 350px) 300px,
                         (max-width: 400px) 400px,
                         (max-width: 575px) 550px,
@@ -35,8 +33,6 @@
                         :image-sizes="['full_preview_1208', 'full_preview_604', 'full_preview_550', 'full_preview_400', 'full_preview_300']"
                         :path="$image"
                         :placeholder="true"
-                        :wrapper="true"
-                        wrapper-class=""
                         sizes="(max-width: 350px) 300px,
                             (max-width: 400px) 400px,
                             (max-width: 575px) 550px,

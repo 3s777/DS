@@ -76,8 +76,6 @@
                                                                 :image-sizes="['extra_small','small']"
                                                                 :path="$variation->getFeaturedImagePath()"
                                                                 :placeholder="true"
-                                                                :wrapper="true"
-                                                                wrapper-class="horizontal-variation__featured-inner"
                                                                 sizes="(max-width: 768px) 100px, (max-width: 1400px) 100px, 100px">
                                                                 <x-slot:img alt="{{ $variation->name }}" title="{{ $variation->name }}"></x-slot:img>
                                                             </x-ui.responsive-image>
