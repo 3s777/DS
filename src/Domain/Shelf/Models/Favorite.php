@@ -20,10 +20,12 @@ class Favorite extends Model
     protected function imagesDir(): string
     {
         // TODO: Implement imagesDir() method.
+        // TODO: Implement imagesDir() method.
     }
 
     public function thumbnailSizes(): array
     {
-        // TODO: Implement thumbnailSizes() method.
+        // TODO: Implement thumbnailSizes() method 1.
+        // TODO: Implement thumbnailSizes() method 1.
     }
 }
