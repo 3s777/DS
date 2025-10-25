@@ -1,9 +1,5 @@
-{{--@if($wrapper)--}}
-{{--    <div class="responsive-image__wrapper {{ $wrapperClass }}">--}}
-{{--@endif--}}
-
 @if(!$path && $placeholder)
-    <div class="responsive-image__placeholder">
+    <div class="responsive-image responsive-image_placeholder">
         <x-ui.image-placeholder></x-ui.image-placeholder>
     </div>
 @else
@@ -33,7 +29,3 @@
         />
     </picture>
 @endif
-
-{{--@if($wrapper)--}}
-{{--    </div>--}}
-{{--@endif--}}

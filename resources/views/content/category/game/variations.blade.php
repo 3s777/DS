@@ -34,16 +34,16 @@
                 <div class="search__item vertical-variation">
                     <div class="vertical-variation__thumbnail">
                         <a href="{{ route('game.variation.show', $variation->slug) }}">
-                            <x-ui.responsive-image
-                                :model="$variation"
-                                :image-sizes="['extra_small','small', 'medium']"
-                                :path="$variation->getFeaturedImagePath()"
-                                :placeholder="true"
-                                :wrapper="true"
-                                wrapper-class="vertical-variation__thumbnail-inner"
-                                sizes="(max-width: 768px) 260px, (max-width: 1400px) 260px, 260px">
-                                <x-slot:img alt="{{ $variation->name }}" title="{{ $variation->name }}"></x-slot:img>
-                            </x-ui.responsive-image>
+                            <div class="vertical-variation__thumbnail-inner">
+                                <x-ui.responsive-image
+                                    :model="$variation"
+                                    :image-sizes="['extra_small','small', 'medium']"
+                                    :path="$variation->getFeaturedImagePath()"
+                                    :placeholder="true"
+                                    sizes="(max-width: 768px) 260px, (max-width: 1400px) 260px, 260px">
+                                    <x-slot:img alt="{{ $variation->name }}" title="{{ $variation->name }}"></x-slot:img>
+                                </x-ui.responsive-image>
+                            </div>
                         </a>
                     </div>
 

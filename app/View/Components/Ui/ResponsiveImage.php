@@ -8,7 +8,6 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\View\Component;
-use Support\Facades\Image;
 use Support\Services\ThumbnailService;
 
 class ResponsiveImage extends Component
@@ -16,7 +15,6 @@ class ResponsiveImage extends Component
     public array $imgPathInfo;
 
     // TODO: add cache for $storage->exist
-    // Remove wrapper in the future if it doesn't come in handy
     public function __construct(
         public Model $model,
         public array $imageSizes,
@@ -25,8 +23,6 @@ class ResponsiveImage extends Component
         public bool $placeholder = true,
         public ?int $width = null,
         public ?int $height = null,
-//        public bool $wrapper = false,
-//        public string $wrapperClass = ''
     ) {
         $this->imgPathInfo = pathinfo($this->path);
 
@@ -44,9 +40,6 @@ class ResponsiveImage extends Component
     {
         $storage = Storage::disk('images');
         $service = new ThumbnailService();
-
-//        $manager = new ImageManager(new Driver());
-//        $manager = new Image();
 
         if (!$storage->exists($this->imgPathInfo['dirname'].'/webp/'.$this->imgPathInfo['filename'].'.webp')) {
 
@@ -67,13 +60,6 @@ class ResponsiveImage extends Component
                 config('images.fallback_quality'),
                 'fallback'
             );
-
-//            $mainImage = Image::read($storage->path($this->path));
-//
-//            $mainImage
-//                ->scaleDown(config('images.full_size'))
-//                ->toWebp(config('images.webp_quality'))
-//                ->save($storage->path($mainWebpImageDir . '/' . $this->imgPathInfo['filename'] . '.webp'));
         }
 
         foreach ($imageSizes as $size) {
@@ -81,16 +67,6 @@ class ResponsiveImage extends Component
 
                 $webpThumbDir = $this->imgPathInfo['dirname'].'/webp/'.$size[0].'x'.$size[1];
                 $service->generateSmallWebp($this->path, $webpThumbDir, $size[0], $size[1]);
-
-//                $webpImageDir = $this->imgPathInfo['dirname'].'/webp/'.$size[0].'x'.$size[1];
-//                $storage->makeDirectory($webpImageDir);
-//
-//                $image = Image::read($storage->path($this->path));
-//
-//                $image
-//                    ->scaleDown($size[0], $size[1])
-//                    ->toWebp(config('images.webp_quality'))
-//                    ->save($storage->path($webpImageDir.'/'.$this->imgPathInfo['filename'].'.webp'));
             }
         }
     }

@@ -8,7 +8,6 @@ use Intervention\Image\Image as InterventionImage;
 
 class ThumbnailService
 {
-    // TODO Add methods for scale and scaleDown and decide which one to use
     public function generateSmallWebp(
         string $fullPath,
         string $thumbDir,
@@ -27,15 +26,17 @@ class ThumbnailService
 
         $image = Image::read($storage->path($fullPath));
 
+        //
         return $image
-            ->scaleDown($width, $height)
+            ->scale(width: $width)
+//            ->scaleDown($width, $height)
             ->toWebp(config('images.webp_quality'))
             ->save($storage->path($thumbDir.'/'.$imagePathInfo['filename'].'.webp'));
     }
 
     public function generateFullSize(
         string $fullPath,
-        int $width,
+        ?int $width = null,
         bool $isWebp = false,
         int $quality = 100,
         ?string $prefix = null,
@@ -51,7 +52,6 @@ class ThumbnailService
 
         if ($width) {
             $image->scale($width);
-//            $image->scaleDown($width);
         }
 
         if ($isWebp) {
