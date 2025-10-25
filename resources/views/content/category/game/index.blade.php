@@ -44,8 +44,6 @@
                                 :image-sizes="['large','medium', 'full_preview_300', 'small']"
                                 :path="$media->getFeaturedImagePath()"
                                 :placeholder="true"
-                                :wrapper="true"
-                                wrapper-class="media-card__featured-inner"
                                 sizes="(max-width: 768px) 500px, (max-width: 1400px) 300px, 300px">
                                 <x-slot:img alt="{{ $media->name }}" title="{{ $media->name }}"></x-slot:img>
                             </x-ui.responsive-image>
@@ -70,18 +68,18 @@
                                             @endif
                                                 <div href="#" class="horizontal-variation__inner">
                                                     <div class="horizontal-variation__featured">
-                                                        <a href="{{ route('game.variation.show', $variation->slug) }}">
-                                                            <x-ui.responsive-image
-                                                                :model="$variation"
-                                                                :image-sizes="['extra_small','small']"
-                                                                :path="$variation->getFeaturedImagePath()"
-                                                                :placeholder="true"
-                                                                :wrapper="true"
-                                                                wrapper-class="horizontal-variation__featured-inner"
-                                                                sizes="(max-width: 768px) 100px, (max-width: 1400px) 100px, 100px">
-                                                                <x-slot:img alt="{{ $variation->name }}" title="{{ $variation->name }}"></x-slot:img>
-                                                            </x-ui.responsive-image>
-                                                        </a>
+                                                        <div class="horizontal-variation__featured-inner">
+                                                            <a href="{{ route('game.variation.show', $variation->slug) }}">
+                                                                <x-ui.responsive-image
+                                                                    :model="$variation"
+                                                                    :image-sizes="['extra_small','small']"
+                                                                    :path="$variation->getFeaturedImagePath()"
+                                                                    :placeholder="true"
+                                                                    sizes="(max-width: 768px) 100px, (max-width: 1400px) 100px, 100px">
+                                                                    <x-slot:img alt="{{ $variation->name }}" title="{{ $variation->name }}"></x-slot:img>
+                                                                </x-ui.responsive-image>
+                                                            </a>
+                                                        </div>
                                                     </div>
                                                     <div class="horizontal-variation__content">
                                                         <div class="horizontal-variation__title">

@@ -8,6 +8,7 @@ use Intervention\Image\Image as InterventionImage;
 
 class ThumbnailService
 {
+    // TODO Add methods for scale and scaleDown and decide which one to use
     public function generateSmallWebp(
         string $fullPath,
         string $thumbDir,
@@ -49,7 +50,8 @@ class ThumbnailService
         $image = Image::read($storage->path($fullPath));
 
         if ($width) {
-            $image->scaleDown($width);
+            $image->scale($width);
+//            $image->scaleDown($width);
         }
 
         if ($isWebp) {

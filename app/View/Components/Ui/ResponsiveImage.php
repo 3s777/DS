@@ -16,6 +16,7 @@ class ResponsiveImage extends Component
     public array $imgPathInfo;
 
     // TODO: add cache for $storage->exist
+    // Remove wrapper in the future if it doesn't come in handy
     public function __construct(
         public Model $model,
         public array $imageSizes,
@@ -24,8 +25,8 @@ class ResponsiveImage extends Component
         public bool $placeholder = true,
         public ?int $width = null,
         public ?int $height = null,
-        public bool $wrapper = false,
-        public string $wrapperClass = ''
+//        public bool $wrapper = false,
+//        public string $wrapperClass = ''
     ) {
         $this->imgPathInfo = pathinfo($this->path);
 
