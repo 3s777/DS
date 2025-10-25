@@ -44,8 +44,6 @@
                                 :image-sizes="['large','medium', 'full_preview_300', 'small']"
                                 :path="$media->getFeaturedImagePath()"
                                 :placeholder="true"
-                                :wrapper="true"
-                                wrapper-class="media-card__featured-inner"
                                 sizes="(max-width: 768px) 500px, (max-width: 1400px) 300px, 300px">
                                 <x-slot:img alt="{{ $media->name }}" title="{{ $media->name }}"></x-slot:img>
                             </x-ui.responsive-image>
